@@ -226,12 +226,11 @@ let Workpackage = {
 
 
         $('.ht_crr_datatable').on('click', '.edit', function () {
-            // instruction_reset();
-            // save_changes_button();
-            // let uuid_htcrr = $('#uuid_htcrr').val();
+            $('.btn-success').removeClass('add-htcrr');
+            $('.btn-success').removeClass('add');
+            $('.btn-success').addClass('edit-htcrr');
 
             let uuid_htcrr = $(this).data('uuid_htcrr');
-            // alert(triggeruuid3);
 
             $.ajax({
                 headers: {
@@ -245,13 +244,8 @@ let Workpackage = {
                     document.getElementById('position').value = data.position;
                     document.getElementById('installation').value = data.installation_mhrs;
                     document.getElementById('removal').value = data.removal_mhrs;
-                    // document.getElementById('uuid').value = data.uuid;
-                    // if (data.is_rii == 1) {
-                    //     $("#is_rii").prop("checked", true);
-                    // }
-                    // else if (data.is_rii == 0) {
-                    //     $("#is_rii").prop("checked", false);
-                    // }
+                    document.getElementById('htcrr_uuid').value = data.uuid;
+
 
                     $.ajax({
                         url: '/get-items/',
@@ -297,97 +291,51 @@ let Workpackage = {
             });
 
         });
-        $('.modal-footer').on('click', '.edit-instruction', function () {
-            let taskcard_uuid = $('#uuid_taskcard').val();
-            let eo_uuid = $('input[name=uuid]').val();
-            let work_area = $('#work_area').val();
-            let manhour = $('input[name=manhour]').val();
-            let performa = $('input[name=performa]').val();
-            let helper_quantity = $('input[name=helper_quantity]').val();
-            let engineer_quantity = $('input[name=engineer_quantity]').val();
-            let sequence = $('input[name=sequence]').val();
+        $('.modal-footer').on('click', '.edit-htcrr', function () {
+            let htcrr_uuid = $('#htcrr_uuid').val();
+            let pn = $('#item').val();
+            let position = $('input[name=position]').val();
+            let removal = $('input[name=removal]').val();
+            let installation = $('input[name=installation]').val();
+            let description = $('#description').val();
             let otr_certification = $('#otr_certification').val();
-            if (document.getElementById("is_rii").checked) {
-                is_rii = 1;
-            } else {
-                is_rii = 0;
-            }
+            let mhrs = $('input[name=mhrs]').val();
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/taskcard-eo/' + taskcard_uuid + '/eo-instruction/' + eo_uuid + '/',
+                url: '/htcrr/' + htcrr_uuid + '/',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    work_area: work_area,
-                    estimation_manhour: manhour,
-                    performance_factor: performa,
-                    helper_quantity: helper_quantity,
-                    engineer_quantity: engineer_quantity,
-                    sequence: sequence,
+                    part_number: pn,
+                    description: description,
                     skill_id: otr_certification,
-                    is_rii: is_rii,
+                    estimation_manhour: mhrs,
+                    position: position,
+                    removal_manhour_estimation: removal,
+                    installation_manhour_estimation: installation,
+                    project_id: project_uuid,
                 },
                 success: function (data) {
                     if (data.errors) {
-                        // if (data.errors.item_id) {
-                        //     $('#material-error').html(data.errors.item_id[0]);
-                        // }
 
-                        // if (data.errors.quantity) {
-                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
-                        // }
-
-                        if (data.errors.work_area) {
-                            $('#work_area-error').html(data.errors.work_area[0]);
-                        }
-
-                        if (data.errors.performance_factor) {
-                            $('#performa-error').html(data.errors.performance_factor[0]);
-                        }
-
-                        if (data.errors.estimation_manhour) {
-                            $('#manhour-error').html(data.errors.estimation_manhour[0]);
-                        }
-
-                        if (data.errors.helper_quantity) {
-                            $('#helper_quantity-error').html(data.errors.helper_quantity[0]);
-                        }
-
-                        if (data.errors.engineer_quantity) {
-                            $('#engineer_quantity-error').html(data.errors.engineer_quantity[0]);
-                        }
-
-                        if (data.errors.sequence) {
-                            $('#sequence-error').html(data.errors.sequence[0]);
-                        }
-
-                        if (data.errors.skill_id) {
-                            $('#otr_certification-error').html(data.errors.skill_id[0]);
-                        }
-
-                        document.getElementById('work_area').value = work_area;
-                        document.getElementById('engineer_quantity').value = engineer_quantity;
-                        document.getElementById('manhour').value = manhour;
-                        document.getElementById('performa').value = performa;
-                        document.getElementById('helper_quantity').value = helper_quantity;
-                        document.getElementById('skill_id').value = otr_certification;
-                        document.getElementById('sequence').value = sequence;
-                        // document.getElementById('material').value = material;
-                        // document.getElementById('quantity').value = quantity;
 
                     } else {
 
-                        toastr.success('Instruction has been created.', 'Success', {
+                        toastr.success('HTCRR has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        let table = $('.instruction_datatable').mDatatable();
+                        let table = $('.ht_crr_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
-                        $('#modal_instruction').modal('hide');
+                        $('#modal_ht_crr').modal('hide');
+                        $('.btn-success').removeClass('edit-htcrr');
+                        $('.btn-success').addClass('add-htcrr');
+
                     }
                 }
             });

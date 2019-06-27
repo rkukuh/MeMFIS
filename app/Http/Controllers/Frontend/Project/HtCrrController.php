@@ -116,9 +116,42 @@ class HtCrrController extends Controller
      * @param  \App\Models\HtCrr  $htCrr
      * @return \Illuminate\Http\Response
      */
-    public function update(HtCrrUpdate $request, HtCrr $htCrr)
+    public function update(HtCrrUpdate $request, HtCrr $htcrr)
     {
-        //
+        // dd($request->all());
+        $request->merge(['part_number' => Item::where('id',$request->part_number)->first()->code]);
+        $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
+        $request->merge(['type_id' => Type::ofHtCrrType()->where('code','parent')->first()->id]);
+        $htcrr->update($request->all());
+
+        if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+            $htcrr->skills()->detach();
+            $htcrr->skills()->attach(Type::where('code','electrical')->first()->id);
+            $htcrr->skills()->attach(Type::where('code','radio')->first()->id);
+            $htcrr->skills()->attach(Type::where('code','instrument')->first()->id);
+        }
+        else{
+            if(sizeof($htcrr->skills) > 1 ){
+                $htcrr->skills()->detach();
+            }
+            $htcrr->skills()->sync($request->skill_id);
+        }
+
+        $parent_id = $htcrr->id;
+
+        $htcrr = HtCrr::where('parent_id', $parent_id)->where('type_id', Type::ofHtCrrType()->where('code','removal')->first()->id)->first();
+        $htcrr->position = $request->position;
+        $htcrr->part_number = $request->part_number;
+        $htcrr->estimation_manhour = $request->removal_manhour_estimation;
+        $htcrr->save();
+
+
+        $htcrr = HtCrr::where('parent_id', $parent_id)->where('type_id', Type::ofHtCrrType()->where('code','installation')->first()->id)->first();
+        $htcrr->position = $request->position;
+        $htcrr->estimation_manhour = $request->installation_manhour_estimation;
+        $htcrr->save();
+
+        return response()->json($htcrr);
     }
 
     /**
