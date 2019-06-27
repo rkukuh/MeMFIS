@@ -48,6 +48,12 @@ $factory->afterCreating(JobCard::class, function ($jobcard, $faker) {
         $jobcard->helpers()->save(Employee::get()->random());
     }
 
+    // Inspection
+
+    for ($i = 0; $i < rand(1, 3); $i++) {
+        $jobcard->inspections()->save(factory(Inspection::class)->make());
+    }
+
     // Predecessor
 
     if (JobCard::count()) {
@@ -66,11 +72,5 @@ $factory->afterCreating(JobCard::class, function ($jobcard, $faker) {
             'status_id' => Status::ofJobCard()->where('code', 'open')->first()
         ])
     );
-
-    // Inspection
-
-    for ($i = 0; $i < rand(1, 3); $i++) {
-        $jobcard->inspections()->save(factory(Inspection::class)->make());
-    }
     
 });
