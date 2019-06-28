@@ -48,6 +48,22 @@ $factory->afterCreating(JobCard::class, function ($jobcard, $faker) {
         $jobcard->helpers()->save(Employee::get()->random());
     }
 
+    // Inspection
+
+    for ($i = 0; $i < rand(1, 3); $i++) {
+        $jobcard->inspections()->save(factory(Inspection::class)->make());
+    }
+
+    // Predecessor
+
+    if (JobCard::count()) {
+        for ($i = 1; $i <= rand(1, JobCard::count()); $i++) {
+            $jobcard->predecessors()->save(JobCard::get()->random(), [
+                'order' => $i
+            ]);
+        }
+    }
+
     // Progress
 
     $jobcard->progresses()->save(
@@ -57,10 +73,14 @@ $factory->afterCreating(JobCard::class, function ($jobcard, $faker) {
         ])
     );
 
-    // Inspection
+    // Successor
 
-    for ($i = 0; $i < rand(1, 3); $i++) {
-        $jobcard->inspections()->save(factory(Inspection::class)->make());
+    if (JobCard::count()) {
+        for ($i = 1; $i <= rand(1, JobCard::count()); $i++) {
+            $jobcard->successors()->save(JobCard::get()->random(), [
+                'order' => $i
+            ]);
+        }
     }
     
 });
