@@ -208,25 +208,4 @@ class JobCardEngineerController extends Controller
         //
     }
 
-    /**
-     * Search the specified resource from storage.
-     *
-     * @param  \App\Models\JobCard  $jobCard
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'number' => 'required|exists:jobcards,number'
-          ]);
-
-          if ($validator->fails()) {
-            return
-            redirect()->route('frontend.jobcard-engineer.index')->withErrors($validator)->withInput();
-          }
-
-        $search = JobCard::where('number',$request->number)->first();
-
-        return redirect()->route('frontend.jobcard.edit',$search->uuid);
-    }
 }
