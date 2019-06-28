@@ -385,7 +385,7 @@
                 <ul>
                     <li>
                       <img
-                          @if(sizeof($jobCard->defectcards) <> 0)
+                          @if(isset($jobCard->defectcards))
                           src="./img/check.png"
                           @else
                           src="./img/check-box-empty.png"
@@ -394,7 +394,7 @@
                     </li>
                     <li style="margin-left:12px;">
                       <img
-                          @if(sizeof($jobCard->defectcards) == 0)
+                          @if(isset($jobCard->defectcards))
                           src="./img/check-box-empty.png"
                           @else
                           src="./img/check.png"

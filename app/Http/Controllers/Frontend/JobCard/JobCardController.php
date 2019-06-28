@@ -157,13 +157,8 @@ class JobCardController extends Controller
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
                 $dateClosed = $jobCard->progresses->last()->created_at;
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
-                $rii_at = $jobCard->approvals->get(1)->created_at;
-
             }else{
                 $dateClosed = "-";
-                $rii_by = "-";
-                $rii_at = "-";
             }
             if(sizeof($jobCard->approvals)==0){
                 $inspected_by = "-";
@@ -174,6 +169,15 @@ class JobCardController extends Controller
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
+            if(sizeof($jobCard->approvals)==1 or sizeof($jobCard->approvals)==0){
+                $rii_by = "-";
+                $rii_at = "-";
+            }
+            else{
+                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_at = $jobCard->approvals->get(1)->created_at;
+            }
+
             if(sizeof($jobCard->progresses)==0){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
@@ -181,6 +185,7 @@ class JobCardController extends Controller
                 $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
                 $accomplished_at =  $jobCard->progresses->last()->created_at;
             }
+
             if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
                 $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
             }else{
@@ -485,7 +490,7 @@ class JobCardController extends Controller
             }else{
                 $prepared_by ="-";
             }
-            
+
             $pdf = \PDF::loadView('frontend/form/preliminaryinspection-one',[
                     'jobCard' => $jobCard,
                     'username' => $username,

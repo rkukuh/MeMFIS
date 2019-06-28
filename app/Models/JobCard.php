@@ -72,6 +72,36 @@ class JobCard extends MemfisModel
     }
 
     /**
+     * Many-to-Many (self-join): A job card may have none or many predecessor.
+     *
+     * This function will retrieve predecessor's parent.
+     * See: JobCard's predecessors() method for the inverse
+     *
+     * @return mixed
+     */
+    public function predecessor_parent()
+    {
+        return $this->belongsToMany(JobCard::class, 'jobcard_predecessor', 'previous', 'jobcard_id')
+                    ->withPivot('order')
+                    ->withTrashed();
+    }
+
+    /**
+     * Many-to-Many (self-join): A job card may have none or many predecessor.
+     *
+     * This function will retrieve all the job card's predecessors.
+     * See: JobCard's predecessor_parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function predecessors()
+    {
+        return $this->belongsToMany(JobCard::class, 'jobcard_predecessor', 'jobcard_id', 'previous')
+                    ->withPivot('order')
+                    ->withTimestamps();
+    }
+
+    /**
      * Polymorphic: An entity can have zero or many progresses.
      *
      * This function will get all JobCard's progresses.
@@ -108,6 +138,36 @@ class JobCard extends MemfisModel
     public function statuses()
     {
         return $this->morphMany(Status::class, 'statusable');
+    }
+
+    /**
+     * Many-to-Many (self-join): A job card may have none or many successor.
+     *
+     * This function will retrieve successor's parent.
+     * See: JobCard's successors() method for the inverse
+     *
+     * @return mixed
+     */
+    public function successor_parent()
+    {
+        return $this->belongsToMany(JobCard::class, 'jobcard_successor', 'next', 'jobcard_id')
+                    ->withPivot('order')
+                    ->withTrashed();
+    }
+
+    /**
+     * Many-to-Many (self-join): A job card may have none or many successor.
+     *
+     * This function will retrieve all the job card's successors.
+     * See: JobCard's successor_parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function successors()
+    {
+        return $this->belongsToMany(JobCard::class, 'jobcard_successor', 'jobcard_id', 'next')
+                    ->withPivot('order')
+                    ->withTimestamps();
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\Type;
 use App\Models\HtCrr;
 use App\Models\Project;
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\HtCrrStore;
 use App\Http\Requests\Frontend\HtCrrUpdate;
@@ -40,6 +41,8 @@ class HtCrrController extends Controller
      */
     public function store(HtCrrStore $request)
     {
+        $number = HtCrr::count();
+        $request->merge(['code' => DocumentNumber::generate('JCRI-',$number)]);
         $request->merge(['part_number' => Item::where('id',$request->part_number)->first()->code]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
         $request->merge(['type_id' => Type::ofHtCrrType()->where('code','parent')->first()->id]);
@@ -57,6 +60,7 @@ class HtCrrController extends Controller
         $parent_id = $htcrr->id;
 
         $htcrr = HtCrr::create([
+            'code' => DocumentNumber::generate('JREM-',$number),
             'parent_id' => $parent_id,
             'type_id' => Type::ofHtCrrType()->where('code','removal')->first()->id,
             'project_id' => $request->project_id,
@@ -66,6 +70,7 @@ class HtCrrController extends Controller
         ]);
 
         $htcrr = HtCrr::create([
+            'code' => DocumentNumber::generate('JINS-', $number),
             'parent_id' => $parent_id,
             'type_id' => Type::ofHtCrrType()->where('code','installation')->first()->id,
             'project_id' => $request->project_id,

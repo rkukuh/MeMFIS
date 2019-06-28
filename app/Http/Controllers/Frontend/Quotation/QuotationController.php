@@ -14,6 +14,7 @@ use App\Models\Progress;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\QuotationStore;
 use App\Http\Requests\Frontend\QuotationUpdate;
@@ -72,6 +73,7 @@ class QuotationController extends Controller
 
         array_push($attentions, $contact);
 
+        $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::count())]);
         $request->merge(['attention' => json_encode($attentions)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
         $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
@@ -221,7 +223,7 @@ class QuotationController extends Controller
         foreach($project->workpackages as $wp){
             foreach($wp->taskcards as $tc){
                 $jobcard = JobCard::create([
-                    'number' => 'JC-DUM-'.md5(uniqid(rand(), true)),
+                    'number' => DocumentNumber::generate('JC-', JobCard::count()),
                     'taskcard_id' => $tc->id,
                     'quotation_id' => $quotation->id,
                     'data_taskcard' => $tc->toJson(),
