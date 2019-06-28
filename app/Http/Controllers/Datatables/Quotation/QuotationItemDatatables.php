@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Datatables\Quotation;
 
-use App\Models\Item;
 use App\Models\ListUtil;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
@@ -17,19 +16,24 @@ class QuotationItemDatatables extends Controller
      */
     public function routine(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
+        $materials = [];
+
+        $taskcards = $workPackage->taskcards()->with('type')
         ->whereHas('type', function ($query) {
             $query->where('of', 'taskcard-type-routine');
         })->get();
 
-        dd($workPackages);
+        foreach($taskcards as $taskcard){
+            $items = $taskcard->materials;
+            foreach($items as $item){
+                array_push($materials, $item);
+            }
+        }
 
-        $items = Item::with('unit', 'journal','categories')
-        ->whereHas('categories', function ($query) {
-            $query->where('code','<>','tool');
-        })->get();
-
-        $data = $alldata = json_decode($items);
+        // if( empty($materials) ){
+        //     $materials = null;
+        // }
+        $data = $alldata = $materials;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -125,19 +129,21 @@ class QuotationItemDatatables extends Controller
      */
     public function non_routine(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
+        $materials = [];
+
+        $taskcards = $workPackage->taskcards()->with('type')
         ->whereHas('type', function ($query) {
             $query->where('of', 'taskcard-type-non-routine');
         })->get();
 
-        dd($workPackages);
+        foreach($taskcards as $taskcard){
+            $items = $taskcard->materials;
+            foreach($items as $item){
+                array_push($materials, $item);
+            }
+        }
 
-        $items = Item::with('unit', 'journal','categories')
-        ->whereHas('categories', function ($query) {
-            $query->where('code','<>','tool');
-        })->get();
-
-        $data = $alldata = json_decode($items);
+        $data = $alldata = $materials;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

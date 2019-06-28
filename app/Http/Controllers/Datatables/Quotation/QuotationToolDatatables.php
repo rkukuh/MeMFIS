@@ -17,19 +17,21 @@ class QuotationToolDatatables extends Controller
      */
     public function routine(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
+        $tools = [];
+
+        $taskcards = $workPackage->taskcards()->with('type')
         ->whereHas('type', function ($query) {
             $query->where('of', 'taskcard-type-routine');
         })->get();
 
-        dd($workPackages);
+        foreach($taskcards as $taskcard){
+            $items = $taskcard->tools;
+            foreach($items as $item){
+                array_push($tools, $item);
+            }
+        }
 
-        $items = Item::with('unit', 'journal','categories')
-        ->whereHas('categories', function ($query) {
-            $query->where('code', 'tool');
-        })->get();
-
-        $data = $alldata = json_decode($items);
+        $data = $alldata = $tools;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -125,18 +127,21 @@ class QuotationToolDatatables extends Controller
      */
     public function non_routine(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
+        $tools = [];
+
+        $taskcards = $workPackage->taskcards()->with('type')
         ->whereHas('type', function ($query) {
             $query->where('of', 'taskcard-type-non-routine');
         })->get();
 
-        dd($workPackages);
-        $items = $workPackage->taskcards->items()->with('unit', 'journal','categories')
-        ->whereHas('categories', function ($query) {
-            $query->where('code', 'tool');
-        })->get();
+        foreach($taskcards as $taskcard){
+            $items = $taskcard->tools;
+            foreach($items as $item){
+                array_push($tools, $item);
+            }
+        }
 
-        $data = $alldata = json_decode($items);
+        $data = $alldata = $tools;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
