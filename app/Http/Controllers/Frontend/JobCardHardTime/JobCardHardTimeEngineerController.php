@@ -118,15 +118,9 @@ class JobCardHardTimeEngineerController extends Controller
                 'closed' => $this->statuses->where('code','removal-closed')->first(),
             ]);
         }
-        // else if($this->statuses->where('id',$htcrr_removal->progresses->last()->status_id)->first()->code == "removal-closed"){
-        //     return view('frontend.job-card-hard-time.engineer.progress.installation.progress-open', [
-        //         'htcrr' => $htcrr_removal,
-        //         'status' => $this->statuses->where('code','installation-open')->first(),
-        //     ]);
-        // }
         else if ($this->statuses->where('id',$htcrr_installation->progresses->last()->status_id)->first()->code == "installation-open") {
             return view('frontend.job-card-hard-time.engineer.progress.installation.progress-open', [
-                'htcrr' => $htcrr,
+                'htcrr' => $htcrr_installation,
                 'status' => $this->statuses->where('code','installation-open')->first(),
             ]);
         }
@@ -153,11 +147,6 @@ class JobCardHardTimeEngineerController extends Controller
                 'htcrr' => $htcrr_installation,
             ]);
         }
-        // else{
-        //     return view('frontend.job-card-hard-time.engineer.progress.installation.progress-close', [
-        //         'htcrr' => $htcrr,
-        //     ]);
-        // }
     }
 
     /**
@@ -194,17 +183,12 @@ class JobCardHardTimeEngineerController extends Controller
                 'progressed_by' => Auth::id()
             ]));
 
-            $htcrr_installation = HtCrr::where('parent_id',$htcrr->id)->where('type_id',Type::ofHtCrrType()->where('code','installation')->first()->id);
+            $htcrr_installation = HtCrr::where('parent_id',$htcrr->parent_id)->where('type_id',Type::ofHtCrrType()->where('code','installation')->first()->id)->first();
 
             $htcrr_installation->progresses()->save(new Progress([
                 'status_id' =>  Status::where('code','installation-open')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
-
-            // $htcrr->approvals()->save(new Approval([
-            //     'approvable_id' => $htcrr->id,
-            //     'approved_by' => Auth::id(),
-            // ]));
 
             return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
         }
@@ -232,11 +216,6 @@ class JobCardHardTimeEngineerController extends Controller
                 'reason_text' =>  $request->note,
                 'progressed_by' => Auth::id()
             ]));
-
-            // $htcrr->approvals()->save(new Approval([
-            //     'approvable_id' => $htcrr->id,
-            //     'approved_by' => Auth::id(),
-            // ]));
 
             return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
         }
