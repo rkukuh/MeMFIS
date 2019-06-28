@@ -60,7 +60,6 @@
                                         @include('frontend.project.hm.facility.index')
                                     </div>
 
-
                                     @include('frontend.project.hm.modal.material.eo')
                                     @include('frontend.project.hm.modal.tool.eo')
                                     @include('frontend.project.hm.modal.material.routine-si')
