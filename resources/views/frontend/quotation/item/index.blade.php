@@ -36,7 +36,7 @@
                                 </div>
                         </div>
 
-                        <div class="tools_datatable" id="scrolling_both"></div>
+                        <div class="routine_tools_datatable" id="scrolling_both"></div>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                             </div>
                         </div>
 
-                        <div class="materials_datatable" id="scrolling_both"></div>
+                        <div class="routine_materials_datatable" id="scrolling_both"></div>
                     </div>
                 </div>
             </div>
@@ -126,7 +126,7 @@
                             </div>
                         </div>
 
-                        <div class="materials_datatable" id="scrolling_both"></div>
+                        <div class="non_routine_materials_datatable" id="scrolling_both"></div>
                     </div>
                 </div>
             </div>
@@ -171,7 +171,7 @@
                             </div>
                         </div>
 
-                        <div class="materials_datatable" id="scrolling_both"></div>
+                        <div class="non_routine_materials_datatable" id="scrolling_both"></div>
                     </div>
                 </div>
             </div>
