@@ -46,7 +46,7 @@
     #content{
       margin-top:150px;
     }
-    
+
     #content .jobcard-info fieldset legend{
       font-size: 20px;
       font-weight: bold;
@@ -101,7 +101,7 @@
       font-weight: bold;
       font-size: 14px;
     }
-    
+
     #content5 .body{
       width: 100%;
       border-left:  4px solid  #d4d7db;
@@ -360,7 +360,7 @@
     </div>
   </div>
 
-  <div id="content4"> 
+  <div id="content4">
     <div class="container">
       <table width="100%" cellpadding="8" class="table-mt">
         <tr>
@@ -386,7 +386,7 @@
                 <ul>
                   <li>
                     <img
-                      @if(sizeof($jobCard->defectcards) <> 0)
+                      @if(isset($jobCard->defectcards))
                       src="./img/check.png"
                       @else
                       src="./img/check-box-empty.png"
@@ -395,7 +395,7 @@
                   </li>
                   <li style="margin-left:12px;">
                       <img
-                      @if(sizeof($jobCard->defectcards) == 0)
+                      @if(isset($jobCard->defectcards))
                       src="./img/check-box-empty.png"
                       @else
                       src="./img/check.png"
@@ -421,12 +421,12 @@
           <td width="4%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="28%" valign="top">Yemimul</td>
-          <td width="33%" valign="top" align="center">Status : 
+          <td width="33%" valign="top" align="center">Status :
             <span>
               {{$lastStatus}}
             </span>
           </td>
-          <td width="34%" valign="top" align="right">Data Close : 
+          <td width="34%" valign="top" align="right">Data Close :
             <span>
               {{$dateClosed}}
             </span>
