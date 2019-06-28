@@ -74,6 +74,8 @@ class TaskCardEOController extends Controller
     {
         $this->decoder($request);
 
+        $request->merge(['number' => DocumentNumber::generate('TENO-', TaskCard::count())]);
+
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
 

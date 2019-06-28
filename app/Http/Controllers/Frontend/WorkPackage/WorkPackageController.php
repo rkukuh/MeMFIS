@@ -50,6 +50,8 @@ class WorkPackageController extends Controller
      */
     public function store(WorkPackageStore $request)
     {
+        $request->merge(['code' => DocumentNumber::generate('WPCK-', WorkPackage::count())]);
+
         $workpackage = WorkPackage::create($request->all());
 
         if ($workpackage->is_template == 0 && $request->project_uuid) {
