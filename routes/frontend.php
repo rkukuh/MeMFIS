@@ -73,6 +73,22 @@ Route::name('frontend.')->group(function () {
         Route::resource('general-license', 'GeneralLicenseController');
         Route::resource('employee-license', 'EmployeeLicenseController');
 
+        /** Jobcard EO */
+
+        Route::view('/jobcard-eo-mechanic', 'frontend.job-card-eo.mechanic.index')->name('jobcard-eo.mechanic.index');
+        Route::view('/jobcard-eo-mechanic-progress-open', 'frontend.job-card-eo.mechanic.progress-open')->name('jobcard-eo.mechanic.progress-open');
+        Route::view('/jobcard-eo-mechanic-progress-resume', 'frontend.job-card-eo.mechanic.progress-resume')->name('jobcard-eo.mechanic.progress-resume');
+        Route::view('/jobcard-eo-mechanic-progress-pause', 'frontend.job-card-eo.mechanic.progress-pause')->name('jobcard-eo.mechanic.progress-pause');
+
+        Route::view('/jobcard-eo-engineer', 'frontend.job-card-eo.engineer.index')->name('jobcard-eo.engineer.index');
+        Route::view('/jobcard-eo-engineer-progress-open', 'frontend.job-card-eo.engineer.progress-open')->name('jobcard-eo.engineer.progress-open');
+        Route::view('/jobcard-eo-engineer-progress-resume', 'frontend.job-card-eo.engineer.progress-resume')->name('jobcard-eo.engineer.progress-resume');
+        Route::view('/jobcard-eo-engineer-progress-pause', 'frontend.job-card-eo.engineer.progress-pause')->name('jobcard-eo.engineer.progress-pause');
+
+        Route::view('/jobcard-eo-ppc', 'frontend.job-card-eo-ppc.index')->name('jobcard-eo.ppc.index');
+
+
+
     });
 
 });

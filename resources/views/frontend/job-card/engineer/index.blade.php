@@ -105,9 +105,9 @@
 
 @push('footer-scripts')
 <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card/index.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card/item/index.js') }}"></script>
-<script src="{{ asset('js/frontend/job-card/tool/index.js') }}"></script>
+<script src="{{ asset('js/frontend/job-card-eo/index.js') }}"></script>
+<script src="{{ asset('js/frontend/job-card-eo/item/index.js') }}"></script>
+<script src="{{ asset('js/frontend/job-card-eo/tool/index.js') }}"></script>
 <script>
     $("#number").focus();
 </script>
