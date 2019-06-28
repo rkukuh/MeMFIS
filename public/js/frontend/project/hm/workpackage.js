@@ -1,5 +1,6 @@
 let Workpackage = {
     init: function () {
+        
         $('.ht_crr_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -90,7 +91,7 @@ let Workpackage = {
                 filterable: !1,
                 template: function (t, e, i) {
                     return (
-                        '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
+                        '<button data-toggle="modal" data-target="#modal_material_htcrr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material_htcrr" title="Material" data-uuid=' +
                         t.uuid +
                         '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
                     );
@@ -104,7 +105,7 @@ let Workpackage = {
                 filterable: !1,
                 template: function (t, e, i) {
                     return (
-                        '<button data-toggle="modal" data-target="#modal_tool_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+                        '<button data-toggle="modal" data-target="#modal_tool_htcrr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool_htcrr" title="Tool" data-uuid=' +
                         t.uuid +
                         '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                     );
@@ -129,6 +130,41 @@ let Workpackage = {
                 }
             }
             ]
+        });
+
+        let material_htcrr_datatables_init = true;
+        let triggeruuid = "";
+        let htcrr_materials = $('.ht_crr_datatable').on('click', '.material_htcrr', function () {
+            if (material_htcrr_datatables_init == true) {
+                material_htcrr_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                htcrr_material(triggeruuid);
+                $('#m_datatable_material_htcrr').DataTable().ajax.reload();
+            }
+            else {
+                let table = $('#m_datatable_material_htcrr').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                htcrr_material(triggeruuid);
+                $('#m_datatable_material_htcrr').DataTable().ajax.reload();
+            }
+        });
+
+        let tool_htcrr_datatables_init = true;
+        let htcrr_tools = $('.ht_crr_datatable').on('click', '.tool_htcrr', function () {
+            if (tool_htcrr_datatables_init == true) {
+                tool_htcrr_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                htcrr_tool(triggeruuid);
+                $('#m_datatable_tool_htcrr').DataTable().ajax.reload();
+            }
+            else {
+                let table = $('#m_datatable_tool_htcrr').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                htcrr_tool(triggeruuid);
+                $('#m_datatable_tool_htcrr').DataTable().ajax.reload();
+            }
         });
 
         $('.modal-footer').on('click', '.add-htcrr', function () {
@@ -479,6 +515,195 @@ let Workpackage = {
             });
         });
     }
+};
+function htcrr_tool(triggeruuid) {
+    $("#m_datatable_tool_htcrr").DataTable({
+        "dom": '<"top"f>rt<"bottom">pl',
+        responsive: !0,
+        searchDelay: 500,
+        processing: !0,
+        serverSide: !0,
+        lengthMenu: [5, 10, 25, 50 ],
+        pageLength:5,
+        ajax: "/datatables/project/"+triggeruuid+"/tools",
+        columns: [
+            {
+                data: "name"
+            },
+            {
+                data: "pivot.quantity"
+            },
+            {
+                data: "pivot.unit"
+            },
+            {
+                data: "pivot.note"
+            },
+            {
+                data: "Actions"
+            }
+        ],
+        columnDefs: [
+            {
+                targets: -1,
+                orderable: !1,
+                render: function (a, e, t, n) {
+                      return '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-item" data-uuid="' + t.uuid + '" href="#"title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                }
+            },
+
+        ]
+    })
+
+    $('<button type="button" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm item_modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.htcrr-tool-body .dataTables_filter');
+
+    $('.paging_simple_numbers').addClass('pull-left');
+    $('.dataTables_length').addClass('pull-right');
+    $('.dataTables_info').addClass('pull-left');
+    $('.dataTables_info').addClass('margin-info');
+    $('.paging_simple_numbers').addClass('padding-datatable');
+
+    $('.dataTable').on('click', '.delete-item', function () {
+      let triggeruuiditem = $(this).data('uuid');
+      swal({
+          title: 'Sure want to remove?',
+          type: 'question',
+          confirmButtonText: 'Yes, REMOVE',
+          confirmButtonColor: '#d33',
+          cancelButtonText: 'Cancel',
+          showCancelButton: true,
+      })
+      .then(result => {
+          if (result.value) {
+              $.ajax({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                          'content'
+                      )
+                  },
+                  type: 'DELETE',
+                  url: '/taskcard-eo/eo-instruction/'+triggeruuid+'/'+triggeruuiditem + '/item',
+                  success: function (data) {
+                      toastr.success('Item has been deleted.', 'Deleted', {
+                          timeOut: 5000
+                      }
+                  );
+
+                  $('#m_datatable_tool_htcrr').DataTable().ajax.reload();
+
+                  },
+                  error: function (jqXhr, json, errorThrown) {
+                      let errorsHtml = '';
+                      let errors = jqXhr.responseJSON;
+
+                      $.each(errors.errors, function (index, value) {
+                          $('#delete-error').html(value);
+                      });
+                  }
+              });
+          }
+      });
+    });
+
+    $('.item-body').on('click', '.item_modal', function () {
+        $('#add_modal_material').modal('show');
+    });
+
+};
+
+function htcrr_material(triggeruuid) {
+    $("#m_datatable_material_htcrr").DataTable({
+        "dom": '<"top"f>rt<"bottom">pl',
+        responsive: !0,
+        searchDelay: 500,
+        processing: !0,
+        serverSide: !0,
+        lengthMenu: [5, 10, 25, 50 ],
+        pageLength:5,
+        ajax: "/datatables/project/"+triggeruuid+"/materials",
+        columns: [
+            {
+                data: "name"
+            },
+            {
+                data: "pivot.quantity"
+            },
+            {
+                data: "pivot.unit"
+            },
+            {
+                data: "pivot.note"
+            },
+            {
+                data: "Actions"
+            }
+        ],
+        columnDefs: [
+            {
+                targets: -1,
+                orderable: !1,
+                render: function (a, e, t, n) {
+                      return '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-item" data-uuid="' + t.uuid + '" href="#"title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                }
+            },
+
+        ]
+    })
+
+    $('<button type="button" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm item_modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.htcrr-item-body .dataTables_filter');
+
+    $('.paging_simple_numbers').addClass('pull-left');
+    $('.dataTables_length').addClass('pull-right');
+    $('.dataTables_info').addClass('pull-left');
+    $('.dataTables_info').addClass('margin-info');
+    $('.paging_simple_numbers').addClass('padding-datatable');
+
+    $('.dataTable').on('click', '.delete-item', function () {
+      let triggeruuiditem = $(this).data('uuid');
+      swal({
+          title: 'Sure want to remove?',
+          type: 'question',
+          confirmButtonText: 'Yes, REMOVE',
+          confirmButtonColor: '#d33',
+          cancelButtonText: 'Cancel',
+          showCancelButton: true,
+      })
+      .then(result => {
+          if (result.value) {
+              $.ajax({
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                          'content'
+                      )
+                  },
+                  type: 'DELETE',
+                  url: '/taskcard-eo/eo-instruction/'+triggeruuid+'/'+triggeruuiditem + '/item',
+                  success: function (data) {
+                      toastr.success('Item has been deleted.', 'Deleted', {
+                          timeOut: 5000
+                      }
+                  );
+
+                  $('#m_datatable_material_htcrr').DataTable().ajax.reload();
+
+                  },
+                  error: function (jqXhr, json, errorThrown) {
+                      let errorsHtml = '';
+                      let errors = jqXhr.responseJSON;
+
+                      $.each(errors.errors, function (index, value) {
+                          $('#delete-error').html(value);
+                      });
+                  }
+              });
+          }
+      });
+    });
+
+    $('.item-body').on('click', '.item_modal', function () {
+        $('#add_modal_material').modal('show');
+    });
+
 };
 
 jQuery(document).ready(function () {
