@@ -387,21 +387,21 @@
                 <ul>
                   <li>
                     <img
-                      @if(sizeof($jobCard->defectcards) <> 0)
-                      src="./img/check.png"
-                      @else
-                      src="./img/check-box-empty.png"
-                      @endif
-                      alt="" width="10"> <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                        @if(sizeof($jobCard->defectcards) <> 0)
+                        src="./img/check.png"
+                        @else
+                        src="./img/check-box-empty.png"
+                        @endif
+                    alt="" width="10"> <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                   </li>
                   <li style="margin-left:12px;">
-                      <img
-                      @if(sizeof($jobCard->defectcards) == 0)
-                      src="./img/check-box-empty.png"
-                      @else
-                      src="./img/check.png"
-                      @endif
-                   alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                    <img
+                        @if(sizeof($jobCard->defectcards) == 0)
+                        src="./img/check.png"
+                        @else
+                        src="./img/check-box-empty.png"
+                        @endif
+                     alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
                   </li>
                 </ul>
               </div>
