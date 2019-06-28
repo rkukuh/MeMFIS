@@ -605,8 +605,8 @@ function htcrr_tool(triggeruuid) {
       });
     });
 
-    $('.item-body').on('click', '.item_modal', function () {
-        $('#add_modal_material').modal('show');
+    $('.htcrr-item-body').on('click', '.item_modal', function () {
+        $('#add_material_modal').modal('show');
     });
 
 };
@@ -700,8 +700,8 @@ function htcrr_material(triggeruuid) {
       });
     });
 
-    $('.item-body').on('click', '.item_modal', function () {
-        $('#add_modal_material').modal('show');
+    $('.htcrr-tool-body').on('click', '.item_modal', function () {
+        $('#add_tool_modal').modal('show');
     });
 
 };
