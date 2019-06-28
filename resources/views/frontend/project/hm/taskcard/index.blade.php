@@ -22,5 +22,7 @@
         @include('frontend.project.hm.taskcard.nonroutine.si.modal')
         @include('frontend.project.hm.taskcard.nonroutine.htcrr.modal')
         @include('frontend.project.hm.taskcard.nonroutine.htcrr.workshop-task')
+        @include('frontend.project.hm.modal.material.htcrr')
+        @include('frontend.project.hm.modal.tool.htcrr')
     </div>
 </div>

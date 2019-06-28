@@ -630,7 +630,6 @@
 {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/employee.js')}}"></script> --}}
 <script>
     let project_uuid = '{{ $project->uuid }}';
-    let workpackage_uuid = '{{ $workPackage->uuid }}';
     let mhrs_pfrm_factor = '{{ $mhrs_pfrm_factor }}';
 
     if($('#employee_airframe ').length > 1){
