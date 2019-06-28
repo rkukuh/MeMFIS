@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Frontend\JobCardHardTime;
 
 use Auth;
+use Validator;
+use App\Models\HtCrr;
 use App\Models\Status;
-use App\Models\JobCard;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,7 @@ class JobCardHardTimeController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.job-card-hard-time.index');
     }
 
     /**
@@ -61,9 +62,20 @@ class JobCardHardTimeController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $jobCard)
+    public function edit(HtCrr $htcrr)
     {
-       //
+        //TODO Validasi User'skill with JobCard Skill
+
+        // foreach($htcrr->helpers as $helper){
+        //     $helper->userID .= $helper->user->id;
+        // }
+
+        // if($htcrr->helpers->where('userID',Auth::id())->first() == null){
+            return redirect()->route('frontend.jobcard-hardtime-engineer.edit',$htcrr->uuid);
+        // }
+        // else{
+        //     return redirect()->route('frontend.jobcard-mechanic.edit',$htcrr->uuid);
+        // }
     }
 
     /**
@@ -87,6 +99,28 @@ class JobCardHardTimeController extends Controller
     public function destroy(JobCard $jobCard)
     {
         //
+    }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\JobCard  $jobCard
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'code' => 'required|exists:htcrr,code'
+          ]);
+
+          if ($validator->fails()) {
+            return
+            redirect()->route('frontend.jobcard.hardtime.index')->withErrors($validator)->withInput();
+          }
+
+        $search = HtCrr::where('code',$request->code)->first();
+
+        return redirect()->route('frontend.jobcard.hardtime.edit',$search->uuid);
     }
 
     /**
