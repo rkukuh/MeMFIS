@@ -61,8 +61,6 @@ class DummyDataSeeder extends Seeder
         $this->call(Approvals::class);
         $this->call(Progresses::class);
         $this->call(Inspections::class);
-        $this->call(Predecessors::class);
-        $this->call(Successors::class);
 
         /** LICENSE */
 
