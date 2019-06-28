@@ -65,6 +65,7 @@ class JobCardController extends Controller
      */
     public function edit(JobCard $jobcard)
     {
+        //TODO Validasi User'skill with JobCard Skill
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;
         }
@@ -75,7 +76,6 @@ class JobCardController extends Controller
         else{
             return redirect()->route('frontend.jobcard-mechanic.edit',$jobcard->uuid);
         }
-
     }
 
     /**
