@@ -163,6 +163,13 @@ class JobCardHardTimeEngineerController extends Controller
                 'status_id' =>  $this->statuses->where('code','removal-progress')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
+
+            $htcrr_removal = HtCrr::find($htcrr->parent_id);
+            $htcrr_removal->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','removal-progress')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+
             return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'removal-pending'){
@@ -170,6 +177,12 @@ class JobCardHardTimeEngineerController extends Controller
                 'status_id' =>  $this->statuses->where('code','removal-pending')->first()->id,
                 'reason_id' =>  Type::ofHtCrrPauseReason()->where('uuid',$request->pause)->first()->id,
                 'reason_text' =>  $request->reason,
+                'progressed_by' => Auth::id()
+            ]));
+
+            $htcrr_removal = HtCrr::find($htcrr->parent_id);
+            $htcrr_removal->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','removal-pending')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
 
@@ -183,10 +196,22 @@ class JobCardHardTimeEngineerController extends Controller
                 'progressed_by' => Auth::id()
             ]));
 
-            $htcrr_installation = HtCrr::where('parent_id',$htcrr->parent_id)->where('type_id',Type::ofHtCrrType()->where('code','installation')->first()->id)->first();
+            $htcrr_removal = HtCrr::find($htcrr->parent_id);
+            $htcrr_removal->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','removal-closed')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
 
+
+            $htcrr_installation = HtCrr::where('parent_id',$htcrr->parent_id)->where('type_id',Type::ofHtCrrType()->where('code','installation')->first()->id)->first();
             $htcrr_installation->progresses()->save(new Progress([
                 'status_id' =>  Status::where('code','installation-open')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+
+            $htcrr_installation = HtCrr::find($htcrr->parent_id);
+            $htcrr_installation->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','installation-open')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
 
@@ -197,6 +222,13 @@ class JobCardHardTimeEngineerController extends Controller
                 'status_id' =>  $this->statuses->where('code','installation-progress')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
+
+            $htcrr_installation = HtCrr::find($htcrr->parent_id);
+            $htcrr_installation->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','installation-progress')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+
             return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'installation-pending'){
@@ -207,6 +239,12 @@ class JobCardHardTimeEngineerController extends Controller
                 'progressed_by' => Auth::id()
             ]));
 
+            $htcrr_installation = HtCrr::find($htcrr->parent_id);
+            $htcrr_installation->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','installation-pending')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+
             return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'installation-closed'){
@@ -214,6 +252,12 @@ class JobCardHardTimeEngineerController extends Controller
                 'status_id' =>  $this->statuses->where('code','installation-closed')->first()->id,
                 'reason_id' =>  Type::ofHtCrrCloseReason()->where('uuid',$request->accomplishment)->first()->id,
                 'reason_text' =>  $request->note,
+                'progressed_by' => Auth::id()
+            ]));
+
+            $htcrr_installation = HtCrr::find($htcrr->parent_id);
+            $htcrr_installation->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','installation-closed')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
 
