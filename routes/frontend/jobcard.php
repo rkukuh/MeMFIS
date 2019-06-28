@@ -19,20 +19,20 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['jobcard-engineer' => 'jobcard']
             ]);
 
-            Route::post('jobcard-engineer', 'JobCardEngineerController@search')->name('engineer.jobcard.search');
-
             Route::resource('jobcard-mechanic', 'JobCardMechanicController', [
                 'parameters' => ['jobcard-mechanic' => 'jobcard']
             ]);
 
-            Route::post('jobcard-mechanic/', 'JobCardMechanicController@search')->name('mechanic.jobcard.search');
 
             Route::name('jobcard.')->group(function () {
 
                 Route::prefix('jobcard')->group(function () {
 
                     /** Transaction */
-                    Route::get('/{jobCard}/print', 'JobCardController@print');
+                    Route::get('/{jobCard}/print', 'JobCardController@print')->name('print');
+                    Route::get('/{jobcard}/edit', 'JobCardController@edit')->name('edit');
+                    Route::get('/', 'JobCardController@index')->name('index');
+                    Route::post('jobcard-search/', 'JobCardController@search')->name('search');
                 });
 
             });

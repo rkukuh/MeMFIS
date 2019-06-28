@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\JobCard;
 
 use Auth;
 use App\User;
+use Validator;
 use App\Models\Status;
 use App\Models\JobCard;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class JobCardController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.job-card.index');
     }
 
     /**
@@ -62,9 +63,19 @@ class JobCardController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $jobCard)
+    public function edit(JobCard $jobcard)
     {
-       //
+        foreach($jobcard->helpers as $helper){
+            $helper->userID .= $helper->user->id;
+        }
+
+        if($jobcard->helpers->where('userID',Auth::id())->first() == null){
+            return redirect()->route('frontend.jobcard-engineer.edit',$jobcard->uuid);
+        }
+        else{
+            return redirect()->route('frontend.jobcard-mechanic.edit',$jobcard->uuid);
+        }
+
     }
 
     /**
@@ -88,6 +99,28 @@ class JobCardController extends Controller
     public function destroy(JobCard $jobCard)
     {
         //
+    }
+
+     /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\JobCard  $jobCard
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'number' => 'required|exists:jobcards,number'
+          ]);
+
+          if ($validator->fails()) {
+            return
+            redirect()->route('frontend.jobcard.index')->withErrors($validator)->withInput();
+          }
+
+        $search = JobCard::where('number',$request->number)->first();
+
+        return redirect()->route('frontend.jobcard.edit',$search->uuid);
     }
 
     /**
