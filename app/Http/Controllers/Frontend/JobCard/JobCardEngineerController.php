@@ -52,7 +52,7 @@ class JobCardEngineerController extends Controller
      */
     public function index()
     {
-        return view('frontend.job-card.engineer.index');
+        //
     }
 
     /**
@@ -157,7 +157,7 @@ class JobCardEngineerController extends Controller
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
-            return redirect()->route('frontend.jobcard-engineer.index')->with($this->sucess_notification);
+            return redirect()->route('frontend.jobcard.index')->with($this->sucess_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
             $jobcard->progresses()->save(new Progress([
@@ -167,13 +167,13 @@ class JobCardEngineerController extends Controller
                 'progressed_by' => Auth::id()
             ]));
 
-            return redirect()->route('frontend.jobcard-engineer.index')->with($this->sucess_notification);
+            return redirect()->route('frontend.jobcard.index')->with($this->sucess_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
 
             foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
                 if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
-                    return redirect()->route('frontend.jobcard-engineer.index')->with($this->error_notification);
+                    return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
                 }
             }
 
@@ -188,16 +188,11 @@ class JobCardEngineerController extends Controller
                 }
             }
 
-            // $jobcard->approvals()->save(new Approval([
-            //     'approvable_id' => $jobcard->id,
-            //     'approved_by' => Auth::id(),
-            // ]));
-
             if($request->discrepancy == 1){
                 return redirect()->route('frontend.discrepancy.jobcard.engineer.discrepancy',$jobcard->uuid);
             }
             else{
-                return redirect()->route('frontend.jobcard-engineer.index')->with($this->sucess_notification);
+                return redirect()->route('frontend.jobcard.index')->with($this->sucess_notification);
             }
         }
     }
@@ -232,6 +227,6 @@ class JobCardEngineerController extends Controller
 
         $search = JobCard::where('number',$request->number)->first();
 
-        return redirect()->route('frontend.jobcard-engineer.edit',$search->uuid);
+        return redirect()->route('frontend.jobcard.edit',$search->uuid);
     }
 }
