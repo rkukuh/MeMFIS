@@ -42,6 +42,6 @@ class CreateTaskcardworkpackagesuccessorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taskcardworkpackagesuccessors');
+        Schema::dropIfExists('taskcard_workpackage_successors');
     }
 }
