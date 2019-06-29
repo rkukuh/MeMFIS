@@ -141,7 +141,6 @@ class JobCardHardTimeEngineerController extends Controller
             ]);
         }
         else if($this->statuses->where('id',$htcrr->progresses->last()->status_id)->first()->code == "installation-closed"){
-            dd($htcrr->progresses->pluck('status_id'));
             return view('frontend.job-card-hard-time.engineer.progress.installation.progress-close', [
                 'htcrr' => $htcrr,
             ]);
