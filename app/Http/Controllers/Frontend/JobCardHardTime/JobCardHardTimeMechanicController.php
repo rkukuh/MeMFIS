@@ -28,10 +28,10 @@ class JobCardHardTimeMechanicController extends Controller
 
     public function __construct()
     {
-        $this->statuses = Status::ofJobCard()->get();
-        $this->break = Type::ofJobCardPauseReason()->where('code','break-time')->first()->uuid;
-        $this->waiting = Type::ofJobCardPauseReason()->where('code','waiting-material')->first()->uuid;
-        $this->other = Type::ofJobCardPauseReason()->where('code','other')->first()->uuid;
+        $this->statuses = Status::ofHtCrr()->get();
+        $this->break = Type::ofHtCrrPauseReason()->where('code','break-time')->first()->uuid;
+        $this->waiting = Type::ofHtCrrPauseReason()->where('code','waiting-material')->first()->uuid;
+        $this->other = Type::ofHtCrrPauseReason()->where('code','other')->first()->uuid;
         $this->accomplished = Type::ofJobCardCloseReason()->where('code','accomplished')->first()->uuid;
         $this->notification = $notification = array(
             'message' => "JobCard's status has been updated",
@@ -47,7 +47,7 @@ class JobCardHardTimeMechanicController extends Controller
      */
     public function index()
     {
-        return view('frontend.job-card-hard-time.mechanic.index');
+        //
     }
 
     /**
@@ -74,10 +74,10 @@ class JobCardHardTimeMechanicController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JobCard  $jobCard
+     * @param  \App\Models\HrCrr  $htcrr
      * @return \Illuminate\Http\Response
      */
-    public function show(JobCard $jobcard)
+    public function show(HtCrr $htcrr)
     {
         //
     }
@@ -85,10 +85,10 @@ class JobCardHardTimeMechanicController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobCard  $jobCard
+     * @param  \App\Models\HrCrr  $htcrr
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $jobcard)
+    public function edit(HtCrr $htcrr)
     {
         if ($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open") {
             return view('frontend.job-card-hard-time.mechanic.progress-open', [
@@ -141,7 +141,7 @@ class JobCardHardTimeMechanicController extends Controller
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
-            return redirect()->route('frontend.jobcard-mechanic.index')->with($this->notification);
+            return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
             $jobcard->progresses()->save(new Progress([
@@ -150,7 +150,7 @@ class JobCardHardTimeMechanicController extends Controller
                 'reason_text' =>  $request->reason,
                 'progressed_by' => Auth::id()
             ]));
-            return redirect()->route('frontend.jobcard-mechanic.index')->with($this->notification);
+            return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
             $jobcard->progresses()->save(new Progress([
@@ -164,7 +164,7 @@ class JobCardHardTimeMechanicController extends Controller
                 return redirect()->route('frontend.discrepancy.jobcard.mechanic.discrepancy',$jobcard->uuid);
             }
             else{
-                return redirect()->route('frontend.jobcard-mechanic.index')->with($this->notification);
+                return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
             }
 
         }
@@ -180,27 +180,4 @@ class JobCardHardTimeMechanicController extends Controller
     {
         //
     }
-
-    /**
-     * Search the specified resource from storage.
-     *
-     * @param  \App\Models\JobCard  $jobCard
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'code' => 'required|exists:htcrr,code'
-          ]);
-
-          if ($validator->fails()) {
-            return
-            redirect()->route('frontend.jobcard-hardtime-mechanic.index')->withErrors($validator)->withInput();
-          }
-
-        $search = HtCrr::where('code',$request->code)->first();
-
-        return redirect()->route('frontend.jobcard-hardtime-mechanic.edit',$search->uuid);
-    }
-
 }

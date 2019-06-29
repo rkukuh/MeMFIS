@@ -52,7 +52,7 @@ class JobCardMechanicController extends Controller
      */
     public function index()
     {
-        return view('frontend.job-card.mechanic.index');
+        //
     }
 
     /**
@@ -99,9 +99,9 @@ class JobCardMechanicController extends Controller
             $helper->userID .= $helper->user->id;
         }
 
-        if($jobcard->helpers->where('userID',Auth::id())->first() == null){
-            return redirect()->route('frontend.jobcard-mechanic.index')->with($this->error_notification);
-        }
+        // if($jobcard->helpers->where('userID',Auth::id())->first() == null){
+        //     return redirect()->route('frontend.jobcard-mechanic.index')->with($this->error_notification);
+        // }
 
         $progresses = $jobcard->progresses->where('progressed_by',Auth::id());
 
@@ -117,7 +117,7 @@ class JobCardMechanicController extends Controller
                     'status' => $this->statuses->where('code','open')->first(),
                 ]);
             }else{
-                return redirect()->route('frontend.jobcard-mechanic.index')->with($this->error_notification);
+                return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
             }
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "progress"){
@@ -166,13 +166,13 @@ class JobCardMechanicController extends Controller
     {
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open"){
-                return redirect()->route('frontend.jobcard-mechanic.index')->with($this->error_notification);
+                return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
             }else{
                 $jobcard->progresses()->save(new Progress([
                     'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                     'progressed_by' => Auth::id()
                 ]));
-                return redirect()->route('frontend.jobcard-mechanic.index')->with($this->sucess_notification);
+                return redirect()->route('frontend.jobcard.index')->with($this->sucess_notification);
             }
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
@@ -182,7 +182,7 @@ class JobCardMechanicController extends Controller
                 'reason_text' =>  $request->reason,
                 'progressed_by' => Auth::id()
             ]));
-            return redirect()->route('frontend.jobcard-mechanic.index')->with($this->sucess_notification);
+            return redirect()->route('frontend.jobcard.index')->with($this->sucess_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
             $jobcard->progresses()->save(new Progress([
@@ -196,7 +196,7 @@ class JobCardMechanicController extends Controller
                 return redirect()->route('frontend.discrepancy.jobcard.mechanic.discrepancy',$jobcard->uuid);
             }
             else{
-                return redirect()->route('frontend.jobcard-mechanic.index')->with($this->sucess_notification);
+                return redirect()->route('frontend.jobcard.index')->with($this->sucess_notification);
             }
 
         }
@@ -211,28 +211,6 @@ class JobCardMechanicController extends Controller
     public function destroy(JobCard $jobcard)
     {
         //
-    }
-
-    /**
-     * Search the specified resource from storage.
-     *
-     * @param  \App\Models\JobCard  $jobCard
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'number' => 'required|exists:jobcards,number'
-          ]);
-
-          if ($validator->fails()) {
-            return
-            redirect()->route('frontend.jobcard-mechanic.index')->withErrors($validator)->withInput();
-          }
-
-        $search = JobCard::where('number',$request->number)->first();
-
-        return redirect()->route('frontend.jobcard-mechanic.edit',$search->uuid);
     }
 
 }

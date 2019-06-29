@@ -379,7 +379,7 @@
                 <ul>
                   <li>
                     <img
-                        @if(isset($jobCard->defectcards))
+                        @if(sizeof($jobCard->defectcards) <> 0)
                         src="./img/check.png"
                         @else
                         src="./img/check-box-empty.png"
@@ -388,10 +388,10 @@
                   </li>
                   <li style="margin-left:12px;">
                     <img
-                        @if(isset($jobCard->defectcards))
-                        src="./img/check-box-empty.png"
-                        @else
+                        @if(sizeof($jobCard->defectcards) == 0)
                         src="./img/check.png"
+                        @else
+                        src="./img/check-box-empty.png"
                         @endif
                      alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
                   </li>
@@ -402,7 +402,7 @@
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
               <span>
-                @if(empty($jobCard->defectcards))
+                @if(sizeof($jobCard->defectcards) <> 0)
                     {{$jobCard->defectcards->first()->code}}
                 @endif
               </span>
