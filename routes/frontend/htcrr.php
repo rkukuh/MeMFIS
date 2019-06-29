@@ -37,20 +37,20 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['jobcard-hardtime-engineer' => 'htcrr']
             ]);
 
-            Route::post('jobcard-hardtime-engineer', 'JobCardHardTimeEngineerController@search')->name('engineer.jobcard.hardtime.search');
-
             Route::resource('jobcard-hardtime-mechanic', 'JobCardHardTimeMechanicController', [
                 'parameters' => ['jobcard-hardtime-mechanic' => 'htcrr']
             ]);
 
-            Route::post('jobcard-hardtime-mechanic/', 'JobCardHardTimeMechanicController@search')->name('mechanic.jobcard.hardtime.search');
 
             Route::name('jobcard.hardtime.')->group(function () {
 
                 Route::prefix('jobcard-hardtime')->group(function () {
 
                     /** Transaction */
-                    Route::get('/{jobCard}/print', 'JobCardHardTimeController@print')->name('print');
+                    Route::get('/', 'JobCardHardTimeController@index')->name('index');
+                    Route::get('/{htcrr}/edit', 'JobCardHardTimeController@edit')->name('edit');
+                    Route::get('/{htcrr}/print', 'JobCardHardTimeController@print')->name('print');
+                    Route::post('/search', 'JobCardHardTimeController@search')->name('search');
 
                 });
 

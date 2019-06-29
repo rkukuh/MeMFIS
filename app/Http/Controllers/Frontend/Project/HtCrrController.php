@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Frontend\Project;
 
+use Auth;
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\HtCrr;
+use App\Models\Status;
 use App\Models\Project;
+use App\Models\Progress;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\HtCrrStore;
@@ -48,6 +51,11 @@ class HtCrrController extends Controller
         $request->merge(['type_id' => Type::ofHtCrrType()->where('code','parent')->first()->id]);
         $htcrr = HtCrr::create($request->all());
 
+        $htcrr->progresses()->save(new Progress([
+            'status_id' =>  Status::where('code','removal-open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
+
         if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
             $htcrr->skills()->attach(Type::where('code','electrical')->first()->id);
             $htcrr->skills()->attach(Type::where('code','radio')->first()->id);
@@ -68,6 +76,11 @@ class HtCrrController extends Controller
             'estimation_manhour' => $request->removal_manhour_estimation,
             'part_number' => $request->part_number,
         ]);
+
+        $htcrr->progresses()->save(new Progress([
+            'status_id' =>  Status::where('code','removal-open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
 
         $htcrr = HtCrr::create([
             'code' => DocumentNumber::generate('JINS-', $number),

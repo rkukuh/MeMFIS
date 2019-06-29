@@ -52,7 +52,7 @@
                                 <div class="col-xl-12 order-2 order-xl-1">
                                     <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
                                         <div class="col-md-4">
-                                            <form method="POST" action="{{route('frontend.mechanic.jobcard.hardtime.search')}}">
+                                            <form method="POST" action="{{route('frontend.jobcard.hardtime.search')}}">
                                                 {!! csrf_field() !!}
                                                 <div class="m-input-icon m-input-icon--left">
                                                     <input type="text" class="form-control m-input" id="code" name="code" placeholder="Search...">
