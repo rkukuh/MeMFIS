@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\ReleaseToService;
 
 use Auth;
 use App\Models\RTS;
+use App\Models\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\RTSStore;
 use App\Http\Requests\Frontend\RTSUpdate;
@@ -25,9 +26,14 @@ class RTSController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Project $project)
     {
-        return view('frontend.rts.create');
+        if(RTS::where('project_id',$project)->first() <> null){
+            $this->edit(RTS::where('project_id',$project)->first()->uuid);
+        }
+        else{
+            return view('frontend.rts.create');
+        }
     }
 
     /**
@@ -64,7 +70,7 @@ class RTSController extends Controller
      */
     public function edit(RTS $rts)
     {
-        //
+        return view('frontend.rts.edit');
     }
 
     /**
