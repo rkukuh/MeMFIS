@@ -58,7 +58,7 @@ class ProjectWorkPackage extends Pivot
     }
 
     /**
-     * One-Way: A Project' WorkPackages must have a project assigned to.
+     * One-Way: A Project's WorkPackages must have a project assigned to.
      *
      * @return mixed
      */
@@ -68,7 +68,7 @@ class ProjectWorkPackage extends Pivot
     }
 
     /**
-     * One-Way: A Project' WorkPackages must have a workpackage assigned to.
+     * One-Way: A Project's WorkPackages must have a workpackage assigned to.
      *
      * @return mixed
      */
