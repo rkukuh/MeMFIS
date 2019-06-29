@@ -150,6 +150,20 @@ class Employee extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A HTCRR may have zero or many helper.
+     *
+     * This function will retrieve all the HTCRRs of a helper.
+     * See: HtCrr's helpers() method for the inverse
+     *
+     * @return mixed
+     */
+    public function htcrr()
+    {
+        return $this->belongsToMany(HtCrr::class, 'employee_htcrr', 'employee_id', 'htcrr_id')
+                    ->withTimestamps();;
+    }
+
+    /**
      * One-to-Many: An HT/CRR may have one remover.
      *
      * This function will retrieve all the HT/CRRs of a given remover.

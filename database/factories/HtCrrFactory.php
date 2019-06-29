@@ -72,6 +72,12 @@ $factory->state(HtCrr::class, 'installation', function ($faker) {
 
 $factory->afterCreating(HtCrr::class, function ($htcrr, $faker) {
 
+    // Helper (Employee)
+
+    for ($i = 0; $i < rand(1, 3); $i++) {
+        $htcrr->helpers()->save(Employee::get()->random());
+    }
+
     // Item
 
     if ($faker->boolean) {
