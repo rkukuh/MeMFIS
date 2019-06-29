@@ -13,7 +13,7 @@ class CreateTaskcardworkpackagepredecessorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('taskcardworkpackagepredecessors', function (Blueprint $table) {
+        Schema::create('taskcard_workpackage_predecessors', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateTaskcardworkpackagepredecessorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taskcardworkpackagepredecessors');
+        Schema::dropIfExists('taskcard_workpackage_predecessors');
     }
 }
