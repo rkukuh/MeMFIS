@@ -32,7 +32,12 @@ class RTSController extends Controller
             $this->edit(RTS::where('project_id',$project)->first()->uuid);
         }
         else{
-            return view('frontend.rts.create');
+            $projects = Project::all();
+            $rts = RTS::where('project_id',$project->id)->first();
+            return view('frontend.rts.create', [
+                'rts' => $rts,
+                'projects' => $projects
+            ]);
         }
     }
 
@@ -68,9 +73,15 @@ class RTSController extends Controller
      * @param  \App\Models\RTS  $rts
      * @return \Illuminate\Http\Response
      */
-    public function edit(RTS $rts)
+    public function edit(Project $project)
     {
-        return view('frontend.rts.edit');
+        $projects = Project::all();
+        $rts = RTS::where('project_id',$project->id)->first();
+
+        return view('frontend.rts.edit', [
+            'rts' => $rts,
+            'projects' => $projects
+        ]);
     }
 
     /**

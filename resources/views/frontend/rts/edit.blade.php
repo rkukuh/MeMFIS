@@ -49,12 +49,12 @@
                                             Project No @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select2')
-                                        @slot('id', 'project')
-                                        @slot('text', 'Project Number')
-                                        @slot('name', 'project')
-                                        @slot('id_error', 'project')
-                                        @endcomponent
+                                        <select name="project" id="project" class="form-control m-select2" style="width:100%">
+                                            @foreach ($projects as $project)
+                                                <option value="{{$project->id}}" @if($project->id == $project_id) selected @endif>{{$project->code}}</option>
+                                            @endforeach
+                                        </select>
+
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
@@ -254,8 +254,8 @@
 <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
 <script>
-  
-    
+
+
 </script>
 
 @endpush
