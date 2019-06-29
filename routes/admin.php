@@ -88,6 +88,10 @@ Route::name('admin.')->group(function () {
         Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
         Route::resource('project-workpackage-facility', 'ProjectWorkPackageFacilityController');
 
+        /** WORKPACKAGE's TASKCARDS */
+
+        Route::resource('taskcard-workpackage', 'TaskCardWorkPackageController');
+
     });
 
 });

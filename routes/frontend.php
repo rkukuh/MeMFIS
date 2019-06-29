@@ -85,8 +85,6 @@ Route::name('frontend.')->group(function () {
 
         Route::view('/jobcard-eo-ppc', 'frontend.job-card-eo-ppc.index')->name('jobcard-eo.ppc.index');
 
-
-
     });
 
 });
