@@ -6,6 +6,7 @@ use App\Models\TaskCard;
 use App\Models\WorkPackage;
 use App\Models\TaskCardWorkPackageSuccessor;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\TaskCardWorkPackagePredecessor;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class TaskCardWorkPackage extends Pivot
@@ -15,6 +16,19 @@ class TaskCardWorkPackage extends Pivot
     protected $table = 'taskcard_workpackage';
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-to-Many: A WorkPackage's TaskCard may have one or many predecessor.
+     *
+     * This function will retrieve all the predecessor of a WorkPackage's TaskCard.
+     * See: TaskCardWorkPackagePredecessor's header() method for the inverse
+     *
+     * @return mixed
+     */
+    public function predecessors()
+    {
+        return $this->hasMany(TaskCardWorkPackagePredecessor::class, 'taskcard_workpackage_id');
+    }
 
     /**
      * One-to-Many: A WorkPackage's TaskCard may have one or many successor.
