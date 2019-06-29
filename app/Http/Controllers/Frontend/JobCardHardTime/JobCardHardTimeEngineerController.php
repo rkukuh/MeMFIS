@@ -73,10 +73,10 @@ class JobCardHardTimeEngineerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JobCard  $jobCard
+     * @param  \App\Models\HtCrr  $htcrr
      * @return \Illuminate\Http\Response
      */
-    public function show(JobCard $jobCard)
+    public function show(HtCrr $htcrr)
     {
         //
     }
@@ -84,13 +84,11 @@ class JobCardHardTimeEngineerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobCard  $jobCard
+     * @param  \App\Models\HtCrr  $htcrr
      * @return \Illuminate\Http\Response
      */
     public function edit(HtCrr $htcrr)
     {
-        // $progresses = $jobcard->progresses->where('progressed_by',Auth::id());
-
         $htcrr_removal = HtCrr::where('parent_id',$htcrr->id)->where('type_id',Type::ofHtCrrType()->where('code','removal')->first()->id)->first();
         $htcrr_installation = HtCrr::where('parent_id',$htcrr->id)->where('type_id',Type::ofHtCrrType()->where('code','installation')->first()->id)->first();
 

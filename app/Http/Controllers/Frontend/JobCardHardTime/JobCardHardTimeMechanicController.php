@@ -28,10 +28,10 @@ class JobCardHardTimeMechanicController extends Controller
 
     public function __construct()
     {
-        $this->statuses = Status::ofJobCard()->get();
-        $this->break = Type::ofJobCardPauseReason()->where('code','break-time')->first()->uuid;
-        $this->waiting = Type::ofJobCardPauseReason()->where('code','waiting-material')->first()->uuid;
-        $this->other = Type::ofJobCardPauseReason()->where('code','other')->first()->uuid;
+        $this->statuses = Status::ofHtCrr()->get();
+        $this->break = Type::ofHtCrrPauseReason()->where('code','break-time')->first()->uuid;
+        $this->waiting = Type::ofHtCrrPauseReason()->where('code','waiting-material')->first()->uuid;
+        $this->other = Type::ofHtCrrPauseReason()->where('code','other')->first()->uuid;
         $this->accomplished = Type::ofJobCardCloseReason()->where('code','accomplished')->first()->uuid;
         $this->notification = $notification = array(
             'message' => "JobCard's status has been updated",
@@ -74,10 +74,10 @@ class JobCardHardTimeMechanicController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JobCard  $jobCard
+     * @param  \App\Models\HrCrr  $htcrr
      * @return \Illuminate\Http\Response
      */
-    public function show(JobCard $jobcard)
+    public function show(HtCrr $htcrr)
     {
         //
     }
@@ -85,10 +85,10 @@ class JobCardHardTimeMechanicController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobCard  $jobCard
+     * @param  \App\Models\HrCrr  $htcrr
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $jobcard)
+    public function edit(HtCrr $htcrr)
     {
         if ($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open") {
             return view('frontend.job-card-hard-time.mechanic.progress-open', [
