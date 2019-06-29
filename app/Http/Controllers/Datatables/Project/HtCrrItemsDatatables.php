@@ -19,13 +19,17 @@ class HtCrrItemsDatatables extends Controller
     public function material(HtCrr $htCrr)
     {
         //TODO API used is API's Datatables Metronic. FIX search Datatables API because not work
-
-        foreach($htCrr->materials as $material){
-            $unit_id = $material->pivot->unit_id;
-            $material->pivot->unit .= Unit::find($unit_id)->name;
+        if (isset($htCrr->materials)) {
+            foreach ($htCrr->materials as $material) {
+                $unit_id = $material->pivot->unit_id;
+                $material->pivot->unit .= Unit::find($unit_id)->name;
+            }
+            $htCrr->materials = json_decode($htCrr->materials);
+        }else{
+            $htCrr->materials = [] ;
         }
 
-        $data = $alldata = json_decode($htCrr->materials);
+        $data = $alldata = $htCrr->materials;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -123,13 +127,17 @@ class HtCrrItemsDatatables extends Controller
     public function tool(HtCrr $htCrr)
     {
         //TODO API used is API's Datatables Metronic. FIX search Datatables API because not work
-
-        foreach($htCrr->tools as $tool){
-            $unit_id = $tool->pivot->unit_id;
-            $tool->pivot->unit .= Unit::find($unit_id)->name;
+        if(isset($htCrr->tools)){
+            foreach ($htCrr->tools as $tool) {
+                $unit_id = $tool->pivot->unit_id;
+                $tool->pivot->unit .= Unit::find($unit_id)->name;
+            }
+            $htCrr->tools = json_decode($htCrr->tools);
+        }else{
+            $htCrr->tools = [] ;
         }
 
-        $data = $alldata = json_decode($htCrr->tools);
+        $data = $alldata = $htCrr->tools;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
