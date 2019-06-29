@@ -15,7 +15,23 @@ class CreateTaskcardworkpackagesuccessorsTable extends Migration
     {
         Schema::create('taskcard_workpackage_successors', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->unsignedInteger('taskcard_workpackage_id');
+            $table->unsignedInteger('next');
+            $table->integer('order');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('taskcard_workpackage_id')
+                    ->references('id')->on('taskcard_workpackage')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+
+            $table->foreign('next')
+                    ->references('id')->on('taskcards')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
