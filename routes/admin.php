@@ -92,6 +92,7 @@ Route::name('admin.')->group(function () {
 
         Route::resource('taskcard-workpackage', 'TaskCardWorkPackageController');
         Route::resource('taskcard-workpackage-successor', 'TaskCardWorkPackageSuccessorController');
+        Route::resource('taskcard-workpackage-predecessor', 'TaskCardWorkPackagePredecessorController');
 
     });
 

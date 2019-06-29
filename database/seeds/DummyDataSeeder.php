@@ -101,5 +101,6 @@ class DummyDataSeeder extends Seeder
 
         $this->call(TaskCardWorkPackages::class);
         $this->call(TaskCardWorkPackageSuccessors::class);
+        $this->call(TaskCardWorkPackagePredecessors::class);
     }
 }
