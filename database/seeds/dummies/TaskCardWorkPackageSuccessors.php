@@ -17,7 +17,7 @@ class TaskCardWorkPackageSuccessors extends Seeder
         for ($i = 1; $i <= TaskCardWorkPackage::count(); $i++) {
             $taskcard_workpackage = TaskCardWorkPackage::find($i);
 
-            for ($j = 1; $j <= rand(1, TaskCard::count()); $j++) {
+            for ($j = 1; $j <= rand(1, 5); $j++) {
                 $taskcard_workpackage->successors()->create([
                     'next' => TaskCard::get()->random()->id,
                     'order' => $j,
