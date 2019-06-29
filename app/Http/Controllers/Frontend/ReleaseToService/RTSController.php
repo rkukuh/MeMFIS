@@ -36,6 +36,7 @@ class RTSController extends Controller
             $rts = RTS::where('project_id',$project->id)->first();
             return view('frontend.rts.create', [
                 'rts' => $rts,
+                'projec' => $project,
                 'projects' => $projects
             ]);
         }
@@ -80,6 +81,7 @@ class RTSController extends Controller
 
         return view('frontend.rts.edit', [
             'rts' => $rts,
+            'projec' => $project,
             'projects' => $projects
         ]);
     }

@@ -51,7 +51,7 @@
 
                                         <select name="project" id="project" class="form-control m-select2" style="width:100%">
                                             @foreach ($projects as $project)
-                                                <option value="{{$project->id}}" @if($project->id == $project_id) selected @endif>{{$project->code}}</option>
+                                                <option value="{{$project->id}}" @if($project->id == $projec->id) selected @endif>{{$project->code}}</option>
                                             @endforeach
                                         </select>
 
