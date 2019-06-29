@@ -100,7 +100,7 @@ class DummyDataSeeder extends Seeder
         /** WORKPACKAGE's TASKCARDS */
 
         $this->call(TaskCardWorkPackages::class);
-        $this->call(TaskCardWorkPackageSuccessors::class);
         $this->call(TaskCardWorkPackagePredecessors::class);
+        $this->call(TaskCardWorkPackageSuccessors::class);
     }
 }

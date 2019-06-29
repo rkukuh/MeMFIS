@@ -100,7 +100,7 @@ class DatabaseSeeder extends Seeder
         /** WORKPACKAGE's TASKCARDS */
 
         $this->call(TaskCardWorkPackagesTableSeeder::class);
-        $this->call(TaskCardWorkPackageSuccessorsTableSeeder::class);
+        $this->call(TaskCardWorkPackagePredecessorsTableSeeder::class);
         $this->call(TaskCardWorkPackageSuccessorsTableSeeder::class);
     }
 }
