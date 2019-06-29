@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTaskcardworkpackagesuccessorsTable extends Migration
+class CreateTaskCardWorkPackageSuccessorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -22,7 +22,7 @@ class CreateTaskcardworkpackagesuccessorsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('taskcard_workpackage_id')
+            $table->foreign('taskcard_workpackage_id', 'taskcard_successor')
                     ->references('id')->on('taskcard_workpackage')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
