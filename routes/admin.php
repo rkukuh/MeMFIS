@@ -91,8 +91,8 @@ Route::name('admin.')->group(function () {
         /** WORKPACKAGE's TASKCARDS */
 
         Route::resource('taskcard-workpackage', 'TaskCardWorkPackageController');
-        Route::resource('taskcard-workpackage-successor', 'TaskCardWorkPackageSuccessorController');
         Route::resource('taskcard-workpackage-predecessor', 'TaskCardWorkPackagePredecessorController');
+        Route::resource('taskcard-workpackage-successor', 'TaskCardWorkPackageSuccessorController');
 
     });
 
