@@ -38,7 +38,7 @@ class OldDataController extends Controller
 
     public function taskCardsCNImport()
     {
-        Excel::import(new TaskCardsCNimport, $this->import_directory . 'taskcards-cn.xlsx');
+        // Excel::import(new TaskCardsCNimport, $this->import_directory . 'taskcards-cn.xlsx');
     }
 
     public function userImport()
