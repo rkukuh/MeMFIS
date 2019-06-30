@@ -147,7 +147,15 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return view('frontend.customer.show', compact('customer'));
+        $documents = Type::ofDocument()->get();
+        $websites = Type::ofWebsite()->get();
+        $attentions = json_decode($customer->attention);
+        return view('frontend.customer.show', [
+            'customer' => $customer,
+            'attentions' => $attentions,
+            'websites' => $websites,
+            'documents' => $documents
+        ]);
     }
 
     /**
