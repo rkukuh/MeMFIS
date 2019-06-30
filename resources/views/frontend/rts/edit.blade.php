@@ -49,7 +49,7 @@
                                             Project No @include('frontend.common.label.required')
                                         </label>
 
-                                        <select name="project" id="project" class="form-control m-select2" style="width:100%">
+                                        <select name="project" id="project" class="form-control m-select2" style="width:100%" disabled>
                                             @foreach ($projects as $project)
                                                 <option value="{{$project->id}}" @if($project->id == $projec->id) selected @endif>{{$project->code}}</option>
                                             @endforeach

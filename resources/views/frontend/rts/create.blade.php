@@ -49,7 +49,7 @@
                                             Project No @include('frontend.common.label.required')
                                         </label>
 
-                                        <select name="project" id="project" class="form-control m-select2" style="width:100%">
+                                        <select name="project" id="project" class="form-control m-select2" style="width:100%" disabled>
                                             @foreach ($projects as $project)
                                                 <option value="{{$project->id}}" @if($project->id == $projec->id) selected @endif>{{$project->code}}</option>
                                             @endforeach
@@ -94,6 +94,21 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <label class="form-control-label">
+                                            Aircraft Total Time @include('frontend.common.label.optional')
+                                        </label>
+
+                                        @component('frontend.common.input.text')
+                                        @slot('id', 'work_performed')
+                                        @slot('text', 'Work Performed')
+                                        @slot('name', 'work_performed')
+                                        @slot('id_error', 'work_performed')
+                                        @endcomponent
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <label class="form-control-label">
                                             Work Performed @include('frontend.common.label.optional')
                                         </label>
 
@@ -110,10 +125,10 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         @component('frontend.common.input.textarea')
                                         @slot('rows', '5')
-                                        @slot('id', 'work_performed')
+                                        @slot('id', 'work_performed_addtional')
                                         @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed')
-                                        @slot('id_error', 'work_performed')
+                                        @slot('name', 'work_performed_addtional')
+                                        @slot('id_error', 'work_performed_addtional')
                                         @slot('placeholder','Optional')
                                         @endcomponent
                                     </div>
@@ -144,6 +159,7 @@
                                         @slot('id', 'exceptions')
                                         @slot('name', 'exceptions')
                                         @slot('text', 'xceptions')
+                                        @slot('disabled', 'disabled')
                                         @endcomponent
                                     </div>
                                 </div>
