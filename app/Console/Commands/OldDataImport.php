@@ -39,7 +39,7 @@ class OldDataImport extends Command
     public function handle()
     {
         ini_set('memory_limit', '-1');
-        
+
         $this->line('Importing: Engine');
         app()->make(OldDataController::class)->engines();
 
@@ -48,9 +48,12 @@ class OldDataImport extends Command
 
         $this->line('Importing: Material and Tool');
         app()->make(OldDataController::class)->materialsAndTools();
-        
+
         $this->line('Importing: Task Card for Boeing');
         app()->make(OldDataController::class)->taskCardsBoeingImport();
+
+        $this->line('Importing: Task Card for CN');
+        app()->make(OldDataController::class)->taskCardsCNImport();
 
         $this->line('Importing: Employee, and create their user account');
         app()->make(OldDataController::class)->userImport();

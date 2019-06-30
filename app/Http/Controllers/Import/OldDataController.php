@@ -9,6 +9,7 @@ use App\Imports\PersonnelsImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Imports\TaskCardsBoeingImport;
+use App\Imports\TaskCardsCNimport;
 use App\Imports\MaterialsAndToolsImport;
 
 class OldDataController extends Controller
@@ -29,10 +30,15 @@ class OldDataController extends Controller
     {
         // Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'materials-tools.xlsx');
     }
-    
+
     public function taskCardsBoeingImport()
     {
         // Excel::import(new TaskCardsBoeingImport, $this->import_directory . 'taskcards-boeing-737.xlsx');
+    }
+
+    public function taskCardsCNImport()
+    {
+        Excel::import(new TaskCardsCNimport, $this->import_directory . 'taskcards-cn.xlsx');
     }
 
     public function userImport()
