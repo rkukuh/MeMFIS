@@ -19,7 +19,7 @@ class CreateQuotationWorkPackageItemsTable extends Migration
             $table->unsignedInteger('quotation_workpackage_id');
             $table->unsignedInteger('item_id');
             $table->double('quantity');
-            $table->unsignedInteger('unit_id');
+            $table->unsignedInteger('unit_id')->nullable();
             $table->unsignedInteger('price_id')->nullable();
             $table->double('price_amount')->nullable();
             $table->double('subtotal')->nullable();
