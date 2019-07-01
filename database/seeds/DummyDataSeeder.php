@@ -90,17 +90,21 @@ class DummyDataSeeder extends Seeder
         $this->call(DefectCards::class);
         $this->call(RTSs::class);
         
-        /** PROJECT'S WORKPACKAGES */
+        /** PROJECT'S WORKPACKAGEs */
 
         $this->call(ProjectWorkPackages::class);
         $this->call(ProjectWorkPackageEngineers::class);
         $this->call(ProjectWorkPackageManhours::class);
         $this->call(ProjectWorkPackageFacilities::class);
 
-        /** WORKPACKAGE's TASKCARDS */
+        /** WORKPACKAGE's TASKCARDs */
 
         $this->call(TaskCardWorkPackages::class);
         $this->call(TaskCardWorkPackagePredecessors::class);
         $this->call(TaskCardWorkPackageSuccessors::class);
+
+        /** QUOTATION's WORKPACKAGEs */
+
+        $this->call(QuotationWorkPackages::class);
     }
 }
