@@ -28,7 +28,7 @@ class OldDataController extends Controller
 
     public function materialsAndTools()
     {
-        // Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'materials-tools.xlsx');
+        Excel::import(new MaterialsAndToolsImport, $this->import_directory . 'materials-tools.xlsx');
     }
 
     public function taskCardsBoeingImport()
@@ -38,7 +38,7 @@ class OldDataController extends Controller
 
     public function taskCardsCNImport()
     {
-        Excel::import(new TaskCardsCNimport, $this->import_directory . 'tc-cn.xlsx');
+        Excel::import(new TaskCardsCNimport, $this->import_directory . 'tc-cn-235.xlsx');
     }
 
     public function userImport()

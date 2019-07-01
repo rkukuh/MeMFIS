@@ -23,16 +23,8 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
     {
 
         /** Set the workarea */
-
         switch ($row['task_type']) {
-            case 'DISCARD':
-                $task_type = Type::ofTaskCardTask()
-                                    ->where('name', 'discard')->first()->id;
-                break;
-            case 'FUNCTIONAL':
-                $task_type = Type::ofTaskCardTask()
-                                    ->where('name', 'functional')->first()->id;
-                break;
+            
             case 'GENERAL VISUAL':
                 $task_type = Type::ofTaskCardTask()
                                     ->where('name', 'General Visual')->first()->id;
@@ -69,9 +61,16 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                 $task_type = Type::ofTaskCardTask()
                                     ->where('name', 'Visual Inspection')->first()->id;
                 break;
+            case 'VISUAL':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Visual')->first()->id;
+                break;
+                case 'DISCARD':
+            $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Discard')->first()->id;
+                break;
             default:
                 $task_type = null;
-
         }
 
         /** Set the workarea */
@@ -121,6 +120,10 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                 $work_area = Type::ofWorkArea()
                                     ->where('name', 'RIGHT ENGINE')->first()->id;
                 break;
+            case 'FUNCTIONAL':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Functional')->first()->id;
+                break;
             default:
                 $work_area = null;
 
@@ -140,6 +143,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
             'is_rii' => $row['is_rii'],
             'source' => $row['source'],
             'effectivity' => $row['effectivity'],
+            'ata' => $row['ata'],
             'reference' => $row['reference'],
             'version' => json_encode(explode(';',$row['version'])),
             'description' => $row['description'],
@@ -159,7 +163,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
         // - Table: taskcard_zone
         $zones = [];
         if($row['zone']){
-            foreach (explode(' ',$row['zone']) as $zone_name ) {
+            foreach (explode(';',$row['zone']) as $zone_name ) {
                 foreach ($airplanes as $airplane) {
                     if(isset($zone_name)){
                         $zone = Zone::firstOrCreate(
@@ -205,8 +209,8 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
         // - Table: thresholds
         if($row['threshold']){
             foreach (explode(';',$row['threshold']) as $threshold ) {
-                $e = explode(' ',$threshold);
-                $threshold_type = Type::ofMaintenanceCycle()->where('name', 'like', '%' . $e[1] . '%')->first()->id;
+                $e = explode('-',$threshold);
+                $threshold_type = Type::ofMaintenanceCycle()->where('code', 'like', '%' . $e[1] . '%')->first()->id;
                 $taskcard->thresholds()->save(new Threshold([
                     'amount' => $e[0],
                     'type_id' => $threshold_type,
@@ -216,8 +220,8 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
         // - Table: repeats
         if($row['repeat']){
             foreach (explode(';',$row['repeat']) as $threshold ) {
-                $e = explode(' ',$threshold);
-                $threshold_type = Type::ofMaintenanceCycle()->where('name', 'like', '%' . $e[1] . '%')->first()->id;
+                $e = explode('-',$threshold);
+                $threshold_type = Type::ofMaintenanceCycle()->where('code', 'like', '%' . $e[1] . '%')->first()->id;
                 $taskcard->repeats()->save(new Repeat([
                     'amount' => $e[0],
                     'type_id' => $threshold_type,

@@ -122,7 +122,13 @@ class TypesOfTaskCardTask extends Seeder
 
         Type::create([
             'code' => 'discard',
-            'name' => 'DISCARD',
+            'name' => 'Discard',
+            'of'  => 'taskcard-task',
+        ]);
+
+        Type::create([
+            'code' => 'visual',
+            'name' => 'Visual',
             'of'  => 'taskcard-task',
         ]);
 
