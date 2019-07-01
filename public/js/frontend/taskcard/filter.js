@@ -204,46 +204,6 @@ $('.filter').on('change', function () {
     });
 });
 
-let dateIssued = {
-    init: function () {
-        $('#date_issued').select2({
-            placeholder: 'Select a date issued '
-        });
-    }
-};
-
-let jcNo = {
-    init: function () {
-        $('#task_card_no').select2({
-            placeholder: 'Select a Task Card Number '
-        });
-    }
-};
-
-let projectNo = {
-    init: function () {
-        $('#project_no').select2({
-            placeholder: 'Select a Project Number '
-        });
-    }
-};
-
-let jobcardStatus = {
-    init: function () {
-        $('#status_jobcard').select2({
-            placeholder: 'Select a Job Card Status '
-        });
-    }
-};
-
-$('select[name="date_issued"]').append('<option value="asc">Ascending</option>');
-$('select[name="task_card_no"]').append('<option value="asc">Ascending</option>');
-$('select[name="project_no"]').append('<option value="asc">Ascending</option>');
-
-$('select[name="date_issued"]').append('<option value="desc">Descending</option>');
-$('select[name="task_card_no"]').append('<option value="desc">Descending</option>');
-$('select[name="project_no"]').append('<option value="desc">Descending</option>');
-
 $(document).ready(function () {
     $.ajax({
         url: '/get-takcard-non-routine-types/',
@@ -253,16 +213,9 @@ $(document).ready(function () {
             $.each(data, function (key, value) {
                 $('#taskcard_routine_type').append(
                     '<option value="' + key + '">' + value + '</option>'
-                ).trigger('change');
+                ).trigger('init');
             });
         }
     });
 });
 
-
-$(document).ready(function () {
-    dateIssued.init();
-    jcNo.init();
-    projectNo.init();
-    jobcardStatus.init();
-});
