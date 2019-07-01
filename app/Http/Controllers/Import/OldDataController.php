@@ -6,10 +6,10 @@ use App\Imports\UsersImport;
 use App\Imports\EnginesImport;
 use App\Imports\WorkAreasImport;
 use App\Imports\PersonnelsImport;
+use App\Imports\TaskCardsCNimport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Imports\TaskCardsBoeingImport;
-use App\Imports\TaskCardsCNimport;
 use App\Imports\MaterialsAndToolsImport;
 
 class OldDataController extends Controller
@@ -39,6 +39,11 @@ class OldDataController extends Controller
     public function taskCardsCNImport()
     {
         Excel::import(new TaskCardsCNimport, $this->import_directory . 'tc-cn-235.xlsx');
+    }
+
+    public function taskCardsCNItemImport()
+    {
+        Excel::import(new TaskCardsCNItemimport, $this->import_directory . 'tc-cn.xlsx');
     }
 
     public function userImport()

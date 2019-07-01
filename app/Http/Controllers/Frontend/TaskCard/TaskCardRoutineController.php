@@ -9,8 +9,8 @@ use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Threshold;
 use App\Models\Repeat;
+use App\Helpers\DocumentNumber;
 use Illuminate\Support\Facades\Storage;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardRoutineStore;
 use App\Http\Requests\Frontend\TaskCardRoutineUpdate;
@@ -78,8 +78,6 @@ class TaskCardRoutineController extends Controller
                 ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
             );
         }
-
-        $request->merge(['number' => DocumentNumber::generate('TROU-', TaskCard::count())]);
 
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
