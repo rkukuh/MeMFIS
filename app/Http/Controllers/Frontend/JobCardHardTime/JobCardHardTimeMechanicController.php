@@ -23,7 +23,8 @@ class JobCardHardTimeMechanicController extends Controller
     protected $waiting;
     protected $other;
     protected $accomplished;
-    protected $notification;
+    protected $sucess_notification;
+    protected $error_notification;
 
 
     public function __construct()
@@ -33,10 +34,15 @@ class JobCardHardTimeMechanicController extends Controller
         $this->waiting = Type::ofHtCrrPauseReason()->where('code','waiting-material')->first()->uuid;
         $this->other = Type::ofHtCrrPauseReason()->where('code','other')->first()->uuid;
         $this->accomplished = Type::ofHtCrrCloseReason()->where('code','accomplished')->first()->uuid;
-        $this->notification = $notification = array(
+        $this->sucess_notification = array(
             'message' => "JobCard's status has been updated",
             'title' => "Success",
             'alert-type' => "success"
+        );
+        $this->error_notification = array(
+            'message' => "JobCard's status can't updated",
+            'title' => "Danger",
+            'alert-type' => "error"
         );
     }
 
@@ -94,7 +100,7 @@ class JobCardHardTimeMechanicController extends Controller
             $helper->userID .= $helper->user->id;
         }
 
-        $progresses = $jobcard->progresses->where('progressed_by',Auth::id());
+        $progresses = $htcrr->progresses->where('progressed_by',Auth::id());
 
         foreach($progresses as $progress){
             $progress->status .= Status::where('id',$progress->status_id)->first()->name;
@@ -172,12 +178,15 @@ class JobCardHardTimeMechanicController extends Controller
     public function update(JobCardUpdate $request, HtCrr $htcrr)
     {
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'removal-open'){
-            $htcrr->progresses()->save(new Progress([
-                'status_id' =>  $this->statuses->where('code','removal-progress')->first()->id,
-                'progressed_by' => Auth::id()
-            ]));
-
-            return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
+            if($this->statuses->where('id',$htcrr->progresses->last()->status_id)->first()->code == "removal-open"){
+                return redirect()->route('frontend.jobcard.hardtime.index')->with($this->error_notification);
+            }else{
+                $htcrr->progresses()->save(new Progress([
+                    'status_id' =>  $this->statuses->where('code','removal-progress')->first()->id,
+                    'progressed_by' => Auth::id()
+                ]));
+                return redirect()->route('frontend.jobcard.hardtime.index')->with($this->sucess_notification);
+            }
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'removal-pending'){
             $htcrr->progresses()->save(new Progress([
@@ -187,7 +196,7 @@ class JobCardHardTimeMechanicController extends Controller
                 'progressed_by' => Auth::id()
             ]));
 
-            return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
+            return redirect()->route('frontend.jobcard.hardtime.index')->with($this->sucess_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'removal-closed'){
             $htcrr->progresses()->save(new Progress([
@@ -202,7 +211,7 @@ class JobCardHardTimeMechanicController extends Controller
                 'progressed_by' => Auth::id()
             ]));
 
-            return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
+            return redirect()->route('frontend.jobcard.hardtime.index')->with($this->sucess_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'installation-open'){
             $htcrr->progresses()->save(new Progress([
@@ -210,7 +219,7 @@ class JobCardHardTimeMechanicController extends Controller
                 'progressed_by' => Auth::id()
             ]));
 
-            return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
+            return redirect()->route('frontend.jobcard.hardtime.index')->with($this->sucess_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'installation-pending'){
             $htcrr->progresses()->save(new Progress([
@@ -220,7 +229,7 @@ class JobCardHardTimeMechanicController extends Controller
                 'progressed_by' => Auth::id()
             ]));
 
-            return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
+            return redirect()->route('frontend.jobcard.hardtime.index')->with($this->sucess_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'installation-closed'){
             $htcrr->progresses()->save(new Progress([
@@ -230,7 +239,7 @@ class JobCardHardTimeMechanicController extends Controller
                 'progressed_by' => Auth::id()
             ]));
 
-            return redirect()->route('frontend.jobcard.hardtime.index')->with($this->notification);
+            return redirect()->route('frontend.jobcard.hardtime.index')->with($this->sucess_notification);
         }
     }
 

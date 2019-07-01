@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Frontend\JobCardHardTime;
 use Auth;
 use Validator;
 use App\Models\Type;
-use App\Models\Status;
 use App\Models\HtCrr;
+use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Approval;
 use App\Models\Progress;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -89,11 +90,11 @@ class JobCardHardTimeEngineerController extends Controller
      */
     public function edit(HtCrr $htcrr)
     {
+        $employees = Employee::all();
         $progresses = $htcrr->progresses->where('progressed_by',Auth::id());
         $htcrr_removal = HtCrr::where('parent_id',$htcrr->id)->where('type_id',Type::ofHtCrrType()->where('code','removal')->first()->id)->first();
         $htcrr_installation = HtCrr::where('parent_id',$htcrr->id)->where('type_id',Type::ofHtCrrType()->where('code','installation')->first()->id)->first();
-
-        if ($progresses->count() == 0 and $this->statuses->where('id',$htcrr->progresses->last()->status_id)->first()->code == "removal-open") {
+        if ($progresses->count() == 0 and $this->statuses->where('id',$htcrr->progresses->first()->status_id)->first()->code == "removal-open") {
             return view('frontend.job-card-hard-time.engineer.progress.removal.progress-open', [
                 'htcrr' => $htcrr,
                 'status' => $this->statuses->where('code','removal-open')->first(),
