@@ -4,11 +4,11 @@ namespace App\Imports;
 
 use App\Models\Unit;
 use App\Models\Item;
-use App\Models\Category;
+use App\Models\TaskCard;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class MaterialsAndToolsImport implements ToModel, WithHeadingRow
+class TaskCardsCNItemimport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -17,6 +17,8 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
+
+
         /** Set the unit of measurement */
 
         switch ($row['um']) {
@@ -127,51 +129,17 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
                 $unit = null;
         }
 
-        /** Set the category */
+        $item = Item::where('code',$row['part_number'])->first()->id;
+        $taskcard = TaskCard::where('number',$row['taskcard_number'])->first();
 
-        switch ($row['categories']) {
-            case 'CONS':
-                $category = Category::ofItem()
-                                    ->where('name', 'Consumable')->first()->id;
-                break;
-            case 'RAWMAT':
-                $category = Category::ofItem()
-                                    ->where('name', 'Raw Material')->first()->id;
-                break;
-            case 'RAW':
-                $category = Category::ofItem()
-                                    ->where('name', 'Raw Material')->first()->id;
-                break;
-            case 'TOOLS':
-                $category = Category::ofItem()
-                                    ->where('name', 'Tool')->first()->id;
-                break;
-            case 'TOOL':
-            $category = Category::ofItem()
-                                ->where('name', 'Tool')->first()->id;
-                break;
-            case 'COMP':
-                $category = Category::ofItem()
-                                    ->where('name', 'Component')->first()->id;
-                break;
-            case 'BDP':
-                $category = Category::ofItem()
-                                    ->where('name', 'Consumable')->first()->id;
-                break;
-            default:
-                $category = Category::ofItem()
-                                    ->where('name', 'Consumable')->first()->id;
-        }
 
-        $item = new Item([
-            'code'      => $row['material'],
-            'name'      => $row['material_description'],
-            'unit_id'   => $unit,
-            'is_stock'  => true,
+        $taskcard->items()->attach($taskcard->id, [
+            'item_id' => $item,
+            'unit_id' => $unit,
+            'note' => $row['description'],
+            'quantity' => $row['qty'],
         ]);
 
-        $item->save();
 
-        $item->categories()->sync($category);
     }
 }

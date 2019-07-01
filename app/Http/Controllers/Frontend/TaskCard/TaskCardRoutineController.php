@@ -9,8 +9,8 @@ use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Threshold;
 use App\Models\Repeat;
+use App\Helpers\DocumentNumber;
 use Illuminate\Support\Facades\Storage;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardRoutineStore;
 use App\Http\Requests\Frontend\TaskCardRoutineUpdate;
@@ -79,8 +79,6 @@ class TaskCardRoutineController extends Controller
             );
         }
 
-        $request->merge(['number' => DocumentNumber::generate('TROU-', TaskCard::count())]);
-
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
 
@@ -100,7 +98,7 @@ class TaskCardRoutineController extends Controller
 
             }
 
-            if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+            if(Type::where('id',$request->skill_id)->where('of','taskcard-skill')->first()->code == 'eri'){
                 $taskcard->skills()->attach(Type::where('code','electrical')->first()->id);
                 $taskcard->skills()->attach(Type::where('code','radio')->first()->id);
                 $taskcard->skills()->attach(Type::where('code','instrument')->first()->id);

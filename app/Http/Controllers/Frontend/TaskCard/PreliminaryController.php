@@ -56,7 +56,6 @@ class PreliminaryController extends Controller
     public function store(PreliminaryStore $request)
     {
         $this->decoder($request);
-        $request->merge(['number' => DocumentNumber::generate('TPRE-', TaskCard::count())]);
 
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);

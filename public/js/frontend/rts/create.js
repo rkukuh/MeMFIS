@@ -25,12 +25,13 @@ let ReleaseToService = {
                     } else {
                         console.log("empty");
                     }
-    
+
                 }
             });
         });
 
         let simpan = $('.footer').on('click', '.add-rts', function () {
+            alert('s');
 
             let project_id = $('#project').val();
             let applicability_airplane = $('#applicability_airplane').val();

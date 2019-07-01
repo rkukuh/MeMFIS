@@ -222,13 +222,52 @@ class QuotationController extends Controller
         $project = Project::find($quotation->project_id);
         foreach($project->workpackages as $wp){
             foreach($wp->taskcards as $tc){
+
+                if(Type::where('id',$tc->type_id)->first()->code == "basic"){
+                    $tc_code = 'BSC';
+                }
+                else if(Type::where('id',$tc->type_id)->first()->code == "sip"){
+                    $tc_code = 'SIP';
+                }
+                else if(Type::where('id',$tc->type_id)->first()->code == "cpcp"){
+                    $tc_code = 'CPC';
+                }
+                else if(Type::where('id',$tc->type_id)->first()->code == "cmr"){
+                    $tc_code = 'CMR';
+                }
+                else if(Type::where('id',$tc->type_id)->first()->code == "awl"){
+                    $tc_code = 'AWL';
+                }
+                else if(Type::where('id',$tc->type_id)->first()->code == "ad"){
+                    $tc_code = 'ADT';
+                }
+                else if(Type::where('id',$tc->type_id)->first()->code == "sb"){
+                    $tc_code = 'SBU';
+                }
+                else if(Type::where('id',$tc->type_id)->first()->code == "ea"){
+                    $tc_code = 'ENA';
+                }
+                else if(Type::where('id',$tc->type_id)->first()->code == "eo"){
+                    $tc_code = 'ENO';
+                }
+                else if(Type::where('id',$tc->type_id)->first()->code == "si"){
+                    $tc_code = 'SIT';
+                }
+                else if(Type::where('id',$tc->type_id)->first()->code == "preliminary"){
+                    $tc_code = 'PRE';
+                }
+                else{
+                    $tc_code = 'DUM';
+                }
+
                 $jobcard = JobCard::create([
-                    'number' => DocumentNumber::generate('JC-', JobCard::count()),
+                    'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::count()),
                     'taskcard_id' => $tc->id,
                     'quotation_id' => $quotation->id,
                     'data_taskcard' => $tc->toJson(),
                     'data_taskcard_items' => $tc->items->toJson(),
-                ]);                    // // echo $tc->title.'<br>';
+                ]);
+                // // echo $tc->title.'<br>';
                 // foreach($tc->items as $item){
                 //     echo $item->name.'<br>';
                 // }
@@ -240,8 +279,8 @@ class QuotationController extends Controller
                 ]));
 
             }
-        }
 
+        }
 
 
         return response()->json($quotation);
