@@ -56,7 +56,7 @@ class HtCrrController extends Controller
             'progressed_by' => Auth::id()
         ]));
 
-        if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+        if(Type::where('id',$request->skill_id)->where('of','taskcard-skill')->first()->code == 'eri'){
             $htcrr->skills()->attach(Type::where('code','electrical')->first()->id);
             $htcrr->skills()->attach(Type::where('code','radio')->first()->id);
             $htcrr->skills()->attach(Type::where('code','instrument')->first()->id);
@@ -142,7 +142,7 @@ class HtCrrController extends Controller
         $request->merge(['type_id' => Type::ofHtCrrType()->where('code','parent')->first()->id]);
         $htcrr->update($request->all());
 
-        if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+        if(Type::where('id',$request->skill_id)->where('of','taskcard-skill')->first()->code == 'eri'){
             $htcrr->skills()->detach();
             $htcrr->skills()->attach(Type::where('code','electrical')->first()->id);
             $htcrr->skills()->attach(Type::where('code','radio')->first()->id);
