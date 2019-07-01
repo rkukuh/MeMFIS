@@ -79,8 +79,6 @@ class TaskCardRoutineController extends Controller
             );
         }
 
-        $request->merge(['number' => DocumentNumber::generate('TROU-', TaskCard::count())]);
-
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
 
