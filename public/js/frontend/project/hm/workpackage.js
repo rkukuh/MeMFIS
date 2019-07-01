@@ -700,7 +700,7 @@ function htcrr_material(triggeruuid) {
       });
     });
 
-    $('.htcrr-tool-body').on('click', '.item_modal', function () {
+    $('.htcrr-item-body').on('click', '.item_modal', function () {
         $('#add_tool_modal').modal('show');
     });
 

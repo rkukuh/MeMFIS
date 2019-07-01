@@ -25,59 +25,51 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
         /** Set the workarea */
 
         switch ($row['task_type']) {
-            case 'RESTORE':
+            case 'DISCARD':
                 $task_type = Type::ofTaskCardTask()
-                                    ->where('name', 'Restore')->first()->id;
+                                    ->where('name', 'discard')->first()->id;
                 break;
-            case 'INSPECTION - DETAILED':
+            case 'FUNCTIONAL':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'functional')->first()->id;
+                break;
+            case 'GENERAL VISUAL':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'General Visual')->first()->id;
+                break;
+            case 'GENERAL VISUAL INSPECTION':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'General Visual Inspection')->first()->id;
+                break;
+            case 'INSPECTION':
                 $task_type = Type::ofTaskCardTask()
                                     ->where('name', 'Inspection')->first()->id;
-                break;
-            case 'INSPECTION - GEN VISUAL':
-                $task_type = Type::ofTaskCardTask()
-                                    ->where('name', 'Inspection')->first()->id;
-                break;
-            case 'SERVICE':
-                $task_type = Type::ofTaskCardTask()
-                                    ->where('name', 'Service')->first()->id;
                 break;
             case 'LUBRICATE':
                 $task_type = Type::ofTaskCardTask()
                                     ->where('name', 'Lubrication')->first()->id;
                 break;
+            case 'OPERATIONAL':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Operational')->first()->id;
+                break;
+            case 'RS':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'RS')->first()->id;
+                break;
+            case 'SV':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'SV')->first()->id;
+                break;
             case 'VISUAL CHECK':
                 $task_type = Type::ofTaskCardTask()
                                     ->where('name', 'Visual Check')->first()->id;
                 break;
-            // case 'DISCARD':
-            //     $task_type = Type::ofTaskCardTask()
-            //                         ->where('name', 'Restore')->first()->id;
-            //     break;
-            // case 'OPERATIONAL':
-            //     $task_type = Type::ofTaskCardTask()
-            //                         ->where('name', 'Restore')->first()->id;
-            //     break;
-            // case 'FUNCTIONAL':
-            //     $task_type = Type::ofTaskCardTask()
-            //                         ->where('name', 'Restore')->first()->id;
-            //     break;
-            // case 'GENERAL VISUAL':
-            //     $task_type = Type::ofTaskCardTask()
-            //                         ->where('name', 'Restore')->first()->id;
-            //     break;
-            // case 'ZONAL (GV)':
-            //     $task_type = Type::ofTaskCardTask()
-            //                         ->where('name', 'Restore')->first()->id;
-            //     break;
-            // case 'DETAILED':
-            //     $task_type = Type::ofTaskCardTask()
-            //                         ->where('name', 'Restore')->first()->id;
-            //     break;
-            // case 'SPECIAL DETAILED':
-            //     $task_type = Type::ofTaskCardTask()
-            //                         ->where('name', 'Restore')->first()->id;
-            // break;
-                default:
+            case 'VISUAL INSPECTION':
+                $task_type = Type::ofTaskCardTask()
+                                    ->where('name', 'Visual Inspection')->first()->id;
+                break;
+            default:
                 $task_type = null;
 
         }
@@ -129,66 +121,6 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                 $work_area = Type::ofWorkArea()
                                     ->where('name', 'RIGHT ENGINE')->first()->id;
                 break;
-            // case 'CREW CABIN':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'MAIN EE CTR':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'FWD AIRSTAIR':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'FWD CARGO':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'FT CARGO':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'ENGINE #1':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'ENGINE #2':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'ENGINE #1':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'MULTIPLE':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'L WING LE':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'R WING LE':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'TAIL CONE':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'LEFT CARGO':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'EMERG DOORS':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-            //     break;
-            // case 'DOORS':
-            //     $work_area = Type::ofWorkArea()
-            //                         ->where('name', 'AC DIST BAY')->first()->id;
-                break;
             default:
                 $work_area = null;
 
@@ -196,8 +128,6 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
 
         $taskcard_type = Type::ofTaskCardTypeRoutine()
         ->where('name', 'Basic')->first()->id;
-
-
 
         $taskcard =  new TaskCard([
             'number' => $row['number'],
@@ -210,6 +140,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
             'is_rii' => $row['is_rii'],
             'source' => $row['source'],
             'effectivity' => $row['effectivity'],
+            'reference' => $row['reference'],
             'version' => json_encode(explode(';',$row['version'])),
             'description' => $row['description'],
         ]);
@@ -219,7 +150,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
 
         // TODO: M-M values:
         // - Table: aircraft_taskcard
-        $airplanes = Aircraft::where('name','B737-300')->orwhere('name','B737-400')->orwhere('name','B737-500')->get();
+        $airplanes = Aircraft::where('name','CN-235')->get();
 
         foreach($airplanes as $airplane){
             $taskcard->aircrafts()->attach($airplane->id);
@@ -258,28 +189,41 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
             $taskcard->accesses()->attach($accesses);
         }
 
+        if ($row['skill']) {
+            $skill_id = Type::where('name','LIKE','%'.$row['skill'].'%')->where('of','taskcard-skill')->first()->id;
+            if(Type::where('id',$skill_id)->first()->code == 'eri'){
+                $taskcard->skills()->attach(Type::where('code','electrical')->first()->id);
+                $taskcard->skills()->attach(Type::where('code','radio')->first()->id);
+                $taskcard->skills()->attach(Type::where('code','instrument')->first()->id);
+            }
+            else{
+                $taskcard->skills()->attach($skill_id);
+            }
+        }
+
+
         // - Table: thresholds
-        // if($row['threshold']){
-        //     foreach (explode(';',$row['threshold']) as $threshold ) {
-        //         $e = explode(' ',$threshold);
-        //         $threshold_type = Type::ofMaintenanceCycle()->where('name', 'like', '%' . $e[1] . '%')->first()->id;
-        //         $taskcard->thresholds()->save(new Threshold([
-        //             'amount' => $e[0],
-        //             'type_id' => $threshold_type,
-        //         ]));
-        //     }
-        // }
+        if($row['threshold']){
+            foreach (explode(';',$row['threshold']) as $threshold ) {
+                $e = explode(' ',$threshold);
+                $threshold_type = Type::ofMaintenanceCycle()->where('name', 'like', '%' . $e[1] . '%')->first()->id;
+                $taskcard->thresholds()->save(new Threshold([
+                    'amount' => $e[0],
+                    'type_id' => $threshold_type,
+                ]));
+            }
+        }
         // - Table: repeats
-        // if($row['repeat']){
-            // foreach (explode(';',$row['repeat']) as $threshold ) {
-            //     $e = explode(' ',$threshold);
-            //     $threshold_type = Type::ofMaintenanceCycle()->where('name', 'like', '%' . $e[1] . '%')->first()->id;
-            //     $taskcard->repeats()->save(new Repeat([
-            //         'amount' => $e[0],
-            //         'type_id' => $threshold_type,
-            //     ]));
-            // }
-        // }
+        if($row['repeat']){
+            foreach (explode(';',$row['repeat']) as $threshold ) {
+                $e = explode(' ',$threshold);
+                $threshold_type = Type::ofMaintenanceCycle()->where('name', 'like', '%' . $e[1] . '%')->first()->id;
+                $taskcard->repeats()->save(new Repeat([
+                    'amount' => $e[0],
+                    'type_id' => $threshold_type,
+                ]));
+            }
+        }
 
     }
 }

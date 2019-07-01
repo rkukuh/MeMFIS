@@ -21,7 +21,6 @@
 
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
-                @include('frontend.project.hm.item.item.index')
 
             </div>
         </div>
@@ -51,7 +50,6 @@
                     <strong> Total : {{ $materialCount }} material(s) </strong>
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
-                @include('frontend.project.hm.item.item.index')
 
             </div>
         </div>
@@ -82,7 +80,6 @@
                     <strong> Total : {{ $toolCount }} tool(s) </strong>
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
-                @include('frontend.project.hm.item.item.index')
 
             </div>
         </div>
@@ -113,8 +110,6 @@
                     <strong> Total : {{ $materialCount }} material(s) </strong>
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
-                @include('frontend.project.hm.item.item.index')
-
             </div>
         </div>
 
@@ -131,6 +126,5 @@
     <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
-
+    <script src="{{ asset('js/frontend/functions/fill-combobox/') }}"></script>
 @endpush
