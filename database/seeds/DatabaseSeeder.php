@@ -106,5 +106,6 @@ class DatabaseSeeder extends Seeder
         /** QUOTATION's WORKPACKAGEs */
 
         $this->call(QuotationWorkPackagesTableSeeder::class);
+        $this->call(QuotationWorkPackageItemsTableSeeder::class);
     }
 }

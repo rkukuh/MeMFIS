@@ -70,6 +70,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Pivots\ProjectWorkPackage::class => Policies\ProjectWorkPackagePolicy::class,
         Models\Pivots\TaskCardWorkPackage::class => Policies\TaskCardWorkPackagePolicy::class,
         Models\Pivots\QuotationWorkPackage::class => Policies\QuotationWorkPackagePolicy::class,
+        Models\QuotationWorkPackageItem::class => Policies\QuotationWorkPackageItemPolicy::class,
         Models\ProjectWorkPackageManhour::class => Policies\ProjectWorkPackageManhourPolicy::class,
         Models\ProjectWorkPackageEngineer::class => Policies\ProjectWorkPackageEngineerPolicy::class,
         Models\ProjectWorkPackageFacility::class => Policies\ProjectWorkPackageFacilityPolicy::class,

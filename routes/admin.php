@@ -97,6 +97,7 @@ Route::name('admin.')->group(function () {
         /** QUOTATION's WORKPACKAGEs */
 
         Route::resource('quotation-workpackage', 'QuotationWorkPackageController');
+        Route::resource('quotation-workpackage-item', 'QuotationWorkPackageItemController');
 
     });
 

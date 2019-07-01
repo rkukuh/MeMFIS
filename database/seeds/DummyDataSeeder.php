@@ -106,5 +106,6 @@ class DummyDataSeeder extends Seeder
         /** QUOTATION's WORKPACKAGEs */
 
         $this->call(QuotationWorkPackages::class);
+        $this->call(QuotationWorkPackageItems::class);
     }
 }
