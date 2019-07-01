@@ -7,6 +7,7 @@ use App\Imports\EnginesImport;
 use App\Imports\WorkAreasImport;
 use App\Imports\PersonnelsImport;
 use App\Imports\TaskCardsCNimport;
+use App\Imports\TaskCardsCNItemimport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Imports\TaskCardsBoeingImport;
@@ -43,7 +44,8 @@ class OldDataController extends Controller
 
     public function taskCardsCNItemImport()
     {
-        Excel::import(new TaskCardsCNItemimport, $this->import_directory . 'tc-cn.xlsx');
+        Excel::import(new TaskCardsCNItemimport, $this->import_directory . 'cn-item-tc.xlsx');
+        Excel::import(new TaskCardsCNItemimport, $this->import_directory . 'cn-tool-tc.xlsx');
     }
 
     public function userImport()
