@@ -11,6 +11,7 @@ use App\Models\Progress;
 use App\Models\Approval;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 
 class DiscrepancyEngineerController extends Controller
