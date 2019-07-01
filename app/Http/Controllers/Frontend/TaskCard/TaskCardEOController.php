@@ -167,7 +167,7 @@ class TaskCardEOController extends Controller
         $this->decoder($request);
 
         if ($taskCard->update($request->all())) {
-            if(Type::where('id',$request->skill_id)->where('of','taskcard-skill')->first()->code == 'eri'){
+            if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
                 $taskCard->skills()->detach();
                 $taskCard->skills()->attach(Type::where('code','electrical')->first()->id);
                 $taskCard->skills()->attach(Type::where('code','radio')->first()->id);

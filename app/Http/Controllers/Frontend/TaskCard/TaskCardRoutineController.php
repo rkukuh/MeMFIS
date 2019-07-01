@@ -100,7 +100,7 @@ class TaskCardRoutineController extends Controller
 
             }
 
-            if(Type::where('id',$request->skill_id)->where('of','taskcard-skill')->first()->code == 'eri'){
+            if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
                 $taskcard->skills()->attach(Type::where('code','electrical')->first()->id);
                 $taskcard->skills()->attach(Type::where('code','radio')->first()->id);
                 $taskcard->skills()->attach(Type::where('code','instrument')->first()->id);
@@ -278,7 +278,7 @@ class TaskCardRoutineController extends Controller
 
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
-            if(Type::where('id',$request->skill_id)->where('of','taskcard-skill')->first()->code == 'eri'){
+            if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
                 $taskCard->skills()->detach();
                 $taskCard->skills()->attach(Type::where('code','electrical')->first()->id);
                 $taskCard->skills()->attach(Type::where('code','radio')->first()->id);
