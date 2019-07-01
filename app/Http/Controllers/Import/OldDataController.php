@@ -33,12 +33,12 @@ class OldDataController extends Controller
 
     public function taskCardsBoeingImport()
     {
-        // Excel::import(new TaskCardsBoeingImport, $this->import_directory . 'taskcards-boeing-737.xlsx');
+        // Excel::import(new TaskCardsBoeingImport, $this->import_directory . 'tc-cn.xlsx');
     }
 
     public function taskCardsCNImport()
     {
-        // Excel::import(new TaskCardsCNimport, $this->import_directory . 'taskcards-cn.xlsx');
+        Excel::import(new TaskCardsCNimport, $this->import_directory . 'tc-cn.xlsx');
     }
 
     public function userImport()
