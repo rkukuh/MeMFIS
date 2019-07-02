@@ -44,7 +44,7 @@ class HtCrrController extends Controller
      */
     public function store(HtCrrStore $request)
     {
-        $number = HtCrr::count();
+        $number = HtCrr::count()+1;
         $request->merge(['code' => DocumentNumber::generate('JCRI-',$number)]);
         $request->merge(['part_number' => Item::where('id',$request->part_number)->first()->code]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
