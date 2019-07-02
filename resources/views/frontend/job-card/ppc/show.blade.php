@@ -155,7 +155,7 @@
                                                     Work Area
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{$jobcard->taskcard->work_area}}
+                                                    {{$jobcard->taskcard->workarea->name}}
                                                 </td>
                                             </tr>
                                             <tr>
