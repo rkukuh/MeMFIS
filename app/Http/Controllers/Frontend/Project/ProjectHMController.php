@@ -51,7 +51,7 @@ class ProjectHMController extends Controller
      */
     public function store(ProjectHMStore $request)
     {
-        $request->merge(['code' => DocumentNumber::generate('PROJ-', TaskCard::count())]);
+        $request->merge(['code' => DocumentNumber::generate('PROJ-', Project::count()+1)]);
 
         $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
 

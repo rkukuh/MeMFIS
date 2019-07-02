@@ -22,9 +22,8 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
 
-        /** Set the workarea */
+        /** Set the task type */
         switch ($row['task_type']) {
-            
             case 'GENERAL VISUAL':
                 $task_type = Type::ofTaskCardTask()
                                     ->where('name', 'General Visual')->first()->id;
@@ -74,8 +73,9 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
         }
 
         /** Set the workarea */
-
-        switch ($row['work_area']) {
+        $work_areas = explode(';',$row['work_area']);
+        
+        switch ($work_areas[0]) {
             case 'PASS CABIN':
                 $work_area = Type::ofWorkArea()
                                     ->where('name', 'PASS CABIN')->first()->id;
@@ -120,17 +120,54 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                 $work_area = Type::ofWorkArea()
                                     ->where('name', 'RIGHT ENGINE')->first()->id;
                 break;
-            case 'FUNCTIONAL':
-                $task_type = Type::ofTaskCardTask()
-                                    ->where('name', 'Functional')->first()->id;
-                break;
             default:
-                $work_area = null;
+                $work_area = Type::ofWorkArea()
+                    ->where('name','like', $work_areas[0])->first()->id;
 
         }
 
-        $taskcard_type = Type::ofTaskCardTypeRoutine()
-        ->where('name', 'Basic')->first()->id;
+        switch($row['type'] ){
+            case 'BASIC':
+                $taskcard_type = Type::ofTaskCardTypeRoutine()
+                        ->where('name', 'Basic')->first()->id;
+            break;
+            case 'CPCP':
+                $taskcard_type = Type::ofTaskCardTypeRoutine()
+                        ->where('name', 'CPCP')->first()->id;
+            break;
+            case 'SIP':
+                $taskcard_type = Type::ofTaskCardTypeRoutine()
+                        ->where('name', 'SIP')->first()->id;
+            break;
+            case 'AD':
+                $taskcard_type = Type::ofTaskCardTypeNonRoutine()
+                        ->where('code', 'ad')->first()->id;
+            break;
+            case 'SB':
+                $taskcard_type = Type::ofTaskCardTypeNonRoutine()
+                        ->where('code', 'sb')->first()->id;
+            break;
+            case 'EO':
+                $taskcard_type = Type::ofTaskCardTypeNonRoutine()
+                        ->where('code', 'eo')->first()->id;
+            break;
+            case 'EA':
+                $taskcard_type = Type::ofTaskCardTypeNonRoutine()
+                        ->where('code', 'ea')->first()->id;
+            break;
+            case 'CMR':
+                $taskcard_type = Type::ofTaskCardTypeNonRoutine()
+                        ->where('code', 'cmr')->first()->id;
+            break;
+            case 'AWL':
+                $taskcard_type = Type::ofTaskCardTypeNonRoutine()
+                        ->where('code', 'awl')->first()->id;
+            break;
+            default:
+                $taskcard_type = Type::ofTaskCardTypeRoutine()
+                    ->where('name', 'Basic')->first()->id;
+        }
+       
 
         $taskcard =  new TaskCard([
             'number' => $row['number'],

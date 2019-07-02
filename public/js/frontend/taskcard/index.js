@@ -86,7 +86,7 @@ let TaskCard = {
                 },
                 {
                     field: 'pesawat',
-                    title: 'A/C Applicability',
+                    title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
 
@@ -104,7 +104,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'work_area',
+                    field: 'workarea_name',
                     title: 'Work Area',
                     sortable: 'asc',
                     filterable: !1,
