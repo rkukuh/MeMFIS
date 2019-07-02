@@ -157,23 +157,25 @@ class ProjectHMWorkPackageController extends Controller
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         $edit = true;
 
-        // $employees = Employee::all();
+        $employees = Employee::all();
         $facilities = Facility::all();
         
         $materialCount = $workPackage->items->count();
         $toolCount = $workPackage->tools->count();
         return view('frontend.project.hm.workpackage.index',[
-            'facilities' => $facilities,
-            'workPackage' => $workPackage,
-            'total_mhrs' => $total_mhrs,
-            'total_pfrm_factor' => $total_pfrm_factor,
             'edit' => $edit,
             'project' => $project,
-            'engineer_skills' => $engineer_skills,
-            'project_workpackage' => $project_workpackage,
-            'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
-            'materialCount' => $materialCount,
+            'employees' => $employees,
             'toolCount' => $toolCount,
+            'total_mhrs' => $total_mhrs,
+            'facilities' => $facilities,
+            'engineer_skills' => $skills,
+            'workPackage' => $workPackage,
+            'skills' => json_encode($skills),
+            'materialCount' => $materialCount,
+            'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
+            'total_pfrm_factor' => $total_pfrm_factor,
+            'project_workpackage' => $project_workpackage,
         ]);
     }
 
