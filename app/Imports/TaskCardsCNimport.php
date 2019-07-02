@@ -22,9 +22,8 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
 
-        /** Set the workarea */
+        /** Set the task type */
         switch ($row['task_type']) {
-            
             case 'GENERAL VISUAL':
                 $task_type = Type::ofTaskCardTask()
                                     ->where('name', 'General Visual')->first()->id;
@@ -120,12 +119,9 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                 $work_area = Type::ofWorkArea()
                                     ->where('name', 'RIGHT ENGINE')->first()->id;
                 break;
-            case 'FUNCTIONAL':
-                $task_type = Type::ofTaskCardTask()
-                                    ->where('name', 'Functional')->first()->id;
-                break;
             default:
-                $work_area = null;
+                $work_area = Type::ofWorkArea()
+                    ->where('name', $row['work_area'])->first()->id;
 
         }
 
