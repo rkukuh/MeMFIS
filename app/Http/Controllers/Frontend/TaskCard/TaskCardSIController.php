@@ -8,7 +8,7 @@ use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Threshold;
 use Illuminate\Support\Facades\Storage;
-
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardSIStore;
 use App\Http\Requests\Frontend\TaskCardSIUpdate;
@@ -63,8 +63,6 @@ class TaskCardSIController extends Controller
                 ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
             );
         }
-
-        $request->merge(['number' => DocumentNumber::generate('TSIT-', TaskCard::count())]);
 
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
@@ -170,6 +168,7 @@ class TaskCardSIController extends Controller
                 ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
             );
         }
+
         if ($taskCard->update($request->all())) {
             if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
                 $taskCard->skills()->detach();

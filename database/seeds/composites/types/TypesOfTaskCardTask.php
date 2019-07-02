@@ -67,12 +67,6 @@ class TypesOfTaskCardTask extends Seeder
         ]);
 
         Type::create([
-            'code' => 'operational',
-            'name' => 'Operational',
-            'of'  => 'taskcard-task',
-        ]);
-
-        Type::create([
             'code' => 'functional',
             'name' => 'Functional',
             'of'  => 'taskcard-task',
@@ -87,6 +81,54 @@ class TypesOfTaskCardTask extends Seeder
         Type::create([
             'code' => 'detailed-instruction',
             'name' => 'Detailed Instruction',
+            'of'  => 'taskcard-task',
+        ]);
+
+        Type::create([
+            'code' => 'general-visual',
+            'name' => 'General Visual',
+            'of'  => 'taskcard-task',
+        ]);
+
+        Type::create([
+            'code' => 'general-visual-inspection',
+            'name' => 'General Visual Inspection',
+            'of'  => 'taskcard-task',
+        ]);
+
+        Type::create([
+            'code' => 'visual-inspection',
+            'name' => 'Visual Inspection',
+            'of'  => 'taskcard-task',
+        ]);
+
+        Type::create([
+            'code' => 'operational',
+            'name' => 'Operational',
+            'of'  => 'taskcard-task',
+        ]);
+
+        Type::create([
+            'code' => 'rs',
+            'name' => 'RS',
+            'of'  => 'taskcard-task',
+        ]);
+
+        Type::create([
+            'code' => 'sv',
+            'name' => 'SV',
+            'of'  => 'taskcard-task',
+        ]);
+
+        Type::create([
+            'code' => 'discard',
+            'name' => 'Discard',
+            'of'  => 'taskcard-task',
+        ]);
+
+        Type::create([
+            'code' => 'visual',
+            'name' => 'Visual',
             'of'  => 'taskcard-task',
         ]);
 

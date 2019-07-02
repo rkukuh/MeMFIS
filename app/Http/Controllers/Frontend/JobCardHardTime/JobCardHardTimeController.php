@@ -66,16 +66,17 @@ class JobCardHardTimeController extends Controller
     {
         //TODO Validasi User'skill with JobCard Skill
 
-        // foreach($htcrr->helpers as $helper){
-        //     $helper->userID .= $helper->user->id;
-        // }
+        foreach($htcrr->helpers as $helper){
+            $helper->userID .= $helper->user->id;
+        }
 
-        // if($htcrr->helpers->where('userID',Auth::id())->first() == null){
+        if($htcrr->helpers->where('userID',Auth::id())->first() == null){
             return redirect()->route('frontend.jobcard-hardtime-engineer.edit',$htcrr->uuid);
-        // }
-        // else{
-        //     return redirect()->route('frontend.jobcard-mechanic.edit',$htcrr->uuid);
-        // }
+        }
+        else{
+
+            return redirect()->route('frontend.jobcard-hardtime-mechanic.edit',$htcrr->uuid);
+        }
     }
 
     /**

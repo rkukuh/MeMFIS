@@ -49,23 +49,20 @@
                                             Project No @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select2')
-                                        @slot('id', 'project')
-                                        @slot('text', 'Project Number')
-                                        @slot('name', 'project')
-                                        @slot('id_error', 'project')
-                                        @endcomponent
+                                        <select name="project" id="project" class="form-control m-select2" style="width:100%" disabled>
+                                            @foreach ($projects as $project)
+                                                <option value="{{$project->id}}" @if($project->id == $projec->id) selected @endif>{{$project->code}}</option>
+                                            @endforeach
+                                        </select>
+
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                             A/C Type @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select2')
-                                        @slot('text', 'Applicability Airplane')
-                                        @slot('id', 'applicability_airplane')
-                                        @slot('name', 'applicability_airplane')
-                                        @slot('id_error', 'applicability-airplane')
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', $project->aircraft->name)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -88,11 +85,23 @@
                                             A/C Reg @include('frontend.common.label.required')
                                         </label>
 
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', $project->aircraft_register)
+                                        @endcomponent
+                                    </div>
+                                </div>
+
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <label class="form-control-label">
+                                            Aircraft Total Time @include('frontend.common.label.optional')
+                                        </label>
+
                                         @component('frontend.common.input.text')
-                                        @slot('text', 'Aircraft Register')
-                                        @slot('id', 'aircraft_register')
-                                        @slot('name', 'aircraft_register')
-                                        @slot('id_error', 'aircraft_register')
+                                        @slot('id', 'work_performed')
+                                        @slot('text', 'Work Performed')
+                                        @slot('name', 'work_performed')
+                                        @slot('id_error', 'work_performed')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -111,24 +120,15 @@
                                         @endcomponent
                                     </div>
                                 </div>
+
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                        @component('frontend.common.input.text')
-                                        @slot('id', 'work_performed')
+                                        @component('frontend.common.input.textarea')
+                                        @slot('rows', '5')
+                                        @slot('id', 'work_performed_addtional')
                                         @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed')
-                                        @slot('id_error', 'work_performed')
-                                        @slot('placeholder','Optional')
-                                        @endcomponent
-                                    </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        @component('frontend.common.input.text')
-                                        @slot('id', 'work_performed')
-                                        @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed')
-                                        @slot('id_error', 'work_performed')
+                                        @slot('name', 'work_performed_addtional')
+                                        @slot('id_error', 'work_performed_addtional')
                                         @slot('placeholder','Optional')
                                         @endcomponent
                                     </div>
@@ -159,6 +159,7 @@
                                         @slot('id', 'exceptions')
                                         @slot('name', 'exceptions')
                                         @slot('text', 'xceptions')
+                                        @slot('disabled', 'disabled')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -246,7 +247,7 @@
 <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
+{{-- <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script> --}}
 
 <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
@@ -254,8 +255,8 @@
 <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
 <script>
-  
-    
+
+
 </script>
 
 @endpush

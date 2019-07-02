@@ -23,7 +23,7 @@ class JobCardEngineerController extends Controller
     protected $waiting;
     protected $other;
     protected $accomplished;
-    protected $sucess_notification;
+    protected $success_notification;
     protected $error_notification;
 
     public function __construct()
@@ -33,7 +33,7 @@ class JobCardEngineerController extends Controller
         $this->waiting = Type::ofJobCardPauseReason()->where('code','waiting-material')->first()->uuid;
         $this->other = Type::ofJobCardPauseReason()->where('code','other')->first()->uuid;
         $this->accomplished = Type::ofJobCardCloseReason()->where('code','accomplished')->first()->uuid;
-        $this->sucess_notification = array(
+        $this->success_notification = array(
                             'message' => "JobCard's status has been updated",
                             'title' => "Success",
                             'alert-type' => "success"
@@ -157,7 +157,7 @@ class JobCardEngineerController extends Controller
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
-            return redirect()->route('frontend.jobcard.index')->with($this->sucess_notification);
+            return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
             $jobcard->progresses()->save(new Progress([
@@ -167,7 +167,7 @@ class JobCardEngineerController extends Controller
                 'progressed_by' => Auth::id()
             ]));
 
-            return redirect()->route('frontend.jobcard.index')->with($this->sucess_notification);
+            return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
 
@@ -192,7 +192,7 @@ class JobCardEngineerController extends Controller
                 return redirect()->route('frontend.discrepancy.jobcard.engineer.discrepancy',$jobcard->uuid);
             }
             else{
-                return redirect()->route('frontend.jobcard.index')->with($this->sucess_notification);
+                return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
             }
         }
     }

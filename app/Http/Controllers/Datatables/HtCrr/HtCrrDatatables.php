@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\HtCrr;
 
+use App\Models\Type;
 use App\Models\Unit;
 use App\Models\HtCrr;
 use App\Models\TaskCard;
@@ -18,7 +19,8 @@ class HtCrrDatatables extends Controller
      */
     public function index()
     {
-        $HtCrr=HtCrr::with('project')->get();
+        $HtCrr=HtCrr::with('project')->where('parent_id',null)->get();
+        // $HtCrrs=HtCrr::where('parent_id',null)->get();
 
         foreach($HtCrr as $data){
             if(isset($data->skills) ){
@@ -32,6 +34,16 @@ class HtCrrDatatables extends Controller
                     $data->skill_name .= '';
                 }
             }
+        }
+        foreach($HtCrr as $data){
+            $removal =HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','removal')->first()->id)->first()->estimation_manhour;
+
+            $data->removal.= $removal;
+
+            $installation =HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','installation')->first()->id)->first()->estimation_manhour;
+
+            $data->installation.= $installation;
+
         }
 
         $data = $alldata = json_decode($HtCrr);

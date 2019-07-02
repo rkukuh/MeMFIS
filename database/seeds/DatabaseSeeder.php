@@ -90,11 +90,22 @@ class DatabaseSeeder extends Seeder
         $this->call(DefectCardsTableSeeder::class);
         $this->call(RTSTableSeeder::class);
         
-        /** PROJECT'S WORKPACKAGES */
+        /** PROJECT'S WORKPACKAGEs */
 
         $this->call(ProjectWorkPackagesTableSeeder::class);
         $this->call(ProjectWorkPackageEngineersTableSeeder::class);
         $this->call(ProjectWorkPackageManhoursTableSeeder::class);
         $this->call(ProjectWorkPackageFacilitiesTableSeeder::class);
+
+        /** WORKPACKAGE's TASKCARDs */
+
+        $this->call(TaskCardWorkPackagesTableSeeder::class);
+        $this->call(TaskCardWorkPackagePredecessorsTableSeeder::class);
+        $this->call(TaskCardWorkPackageSuccessorsTableSeeder::class);
+
+        /** QUOTATION's WORKPACKAGEs */
+
+        $this->call(QuotationWorkPackagesTableSeeder::class);
+        $this->call(QuotationWorkPackageItemsTableSeeder::class);
     }
 }

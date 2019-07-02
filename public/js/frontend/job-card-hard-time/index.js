@@ -5,110 +5,7 @@ let JobCard = {
             return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
         };
 
-        $('.job_card_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/jobcard-htcrr',
-
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !1,
-                serverSorting: !1
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'code',
-                    title: 'HTCRR No.',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                            return '<a href="/jobcard-hardtime-ppc/'+t.uuid+'">' + t.code + "</a>"
-                    }
-                },
-                {
-                    field: 'project.code',
-                    title: 'Project No',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'part_number',
-                    title: 'Part Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'skill_name',
-                    title: 'Skill',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'removal_manhour_estimation',
-                    title: 'Removal Manhour Est',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'installation_manhour_estimation',
-                    title: 'Installation Manhour Est',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'unit',
-                    title: 'Status',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-print"></i>' +
-                            '</a>'
-                        );
-                    }
-                }
-            ]
-        });
-
-        $('.job_card_engineer_datatable').mDatatable({
+        $('.job_card_htcrr_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -179,13 +76,13 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'removal_manhour_estimation',
+                    field: 'removal',
                     title: 'Removal Manhour Est',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'installation_manhour_estimation',
+                    field: 'installation',
                     title: 'Installation Manhour Est',
                     sortable: 'asc',
                     filterable: !1,
