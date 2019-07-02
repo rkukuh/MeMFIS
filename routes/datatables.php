@@ -466,6 +466,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'ReleaseToServiceDatatables@index')->name('all');
+                Route::get('/progress', 'ReleaseToServiceDatatables@progress')->name('progress');
                 Route::post('/filter/', 'ReleaseToServiceDatatables@filter')->name('filter');
 
 
