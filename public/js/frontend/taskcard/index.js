@@ -104,7 +104,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'work_area',
+                    field: 'workarea_name',
                     title: 'Work Area',
                     sortable: 'asc',
                     filterable: !1,
