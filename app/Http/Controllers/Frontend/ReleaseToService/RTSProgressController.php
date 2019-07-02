@@ -28,7 +28,18 @@ class RTSProgressController extends Controller
      */
     public function create(Project $project)
     {
-      //
+        if(RTS::where('project_id',$project)->first() <> null){
+            $this->edit(RTS::where('project_id',$project)->first()->uuid);
+        }
+        else{
+            $projects = Project::all();
+            $rts = RTS::where('project_id',$project->id)->first();
+            return view('frontend.rts.create', [
+                'rts' => $rts,
+                'projec' => $project,
+                'projects' => $projects
+            ]);
+        }
     }
 
     /**
@@ -39,7 +50,11 @@ class RTSProgressController extends Controller
      */
     public function store(RTSStore $request)
     {
-      //
+        $request->merge(['work_performed' => join("|", $request->work_performed)]);
+
+        $project = RTS::create($request->all());
+
+        return response()->json($project);
     }
 
     /**
@@ -61,7 +76,14 @@ class RTSProgressController extends Controller
      */
     public function edit(Project $project)
     {
-       //
+        $projects = Project::all();
+        $rts = RTS::where('project_id',$project->id)->first();
+
+        return view('frontend.rts.edit', [
+            'rts' => $rts,
+            'projec' => $project,
+            'projects' => $projects
+        ]);
     }
 
     /**
@@ -84,7 +106,9 @@ class RTSProgressController extends Controller
      */
     public function destroy(RTS $rts)
     {
-        //
+        $rts->delete();
+
+        return response()->json($rts);
     }
 
     /**
