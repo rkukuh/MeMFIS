@@ -44,7 +44,7 @@
     }
 
     #content{
-      margin-top:150px;
+      margin-top:168px;
     }
 
     #content .jobcard-info fieldset legend{
@@ -143,7 +143,7 @@
 <body>
 
   <header id="header">
-    <img src="./img/form/printoutjobcardcpcp/HeaderJobCardCPCP.jpg" alt=""width="100%">
+    <img src="./img/form/printoutjobcardcpcp/HeaderJobCardCPCP.png" alt=""width="100%">
   </header>
   <footer style="margin-top:14px;">
     <div class="container">
