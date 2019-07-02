@@ -73,8 +73,9 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
         }
 
         /** Set the workarea */
-
-        switch ($row['work_area']) {
+        $work_areas = explode(';',$row['work_area']);
+        
+        switch ($work_areas[0]) {
             case 'PASS CABIN':
                 $work_area = Type::ofWorkArea()
                                     ->where('name', 'PASS CABIN')->first()->id;
@@ -121,7 +122,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                 break;
             default:
                 $work_area = Type::ofWorkArea()
-                    ->where('name', $row['work_area'])->first()->id;
+                    ->where('name','like', $work_areas[0])->first()->id;
 
         }
 
