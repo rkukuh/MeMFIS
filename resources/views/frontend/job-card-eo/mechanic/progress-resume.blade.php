@@ -284,7 +284,7 @@
 
                             <table border="1px" width="100%" style="margin-top:10px">
                                 <tr>
-                                    <td align="center" style="background-color:beige;padding:10px;"><b>Accomplishment Record</b></td>
+                                    <td align="center" style="background-color:beige;padding:10px;"><b>ACCOMPLISHMENT RECORD</b></td>
                                 </tr>
                             </table>
 
@@ -318,7 +318,7 @@
                                 <div class="col-sm-9 col-md-9 col-lg-9 mt-4">
                                     <table border="1px" width="100%" style="margin-top:10px">
                                         <tr>
-                                            <td align="center" style="background-color:beige;padding:10px;" colspan="3"><b>Entered IN</b></td>
+                                            <td align="center" style="background-color:beige;padding:10px;" colspan="3"><b>ENTERED IN</b></td>
                                         </tr>
                                         <tr height="80">
                                             <td align="center">
