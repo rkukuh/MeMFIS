@@ -18,6 +18,12 @@ class TaskCardDatatables extends Controller
     {
         $data = $alldata = TaskCard::with('type','aircrafts','task')->get();
 
+        foreach($alldata as $taskcard){
+            if(isset($taskcard->workarea) ){
+                $taskcard->workarea_name .= $taskcard->workarea->name;
+            }
+        }
+
         foreach($alldata as $item){
             if(isset($item->aircrafts) ){
                 for($index = 0; sizeof($item->aircrafts) > $index; $index++){
