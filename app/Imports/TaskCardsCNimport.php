@@ -129,8 +129,48 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
 
         }
 
-        $taskcard_type = Type::ofTaskCardTypeRoutine()
-        ->where('name', 'Basic')->first()->id;
+        switch($row['type'] ){
+            case 'BASIC':
+                $taskcard_type = Type::ofTaskCardTypeRoutine()
+                        ->where('name', 'Basic')->first()->id;
+            break;
+            case 'CPCP':
+                $taskcard_type = Type::ofTaskCardTypeRoutine()
+                        ->where('name', 'CPCP')->first()->id;
+            break;
+            case 'SIP':
+                $taskcard_type = Type::ofTaskCardTypeRoutine()
+                        ->where('name', 'SIP')->first()->id;
+            break;
+            case 'AD':
+                $taskcard_type = Type::ofTaskCardTypeNonRoutine()
+                        ->where('code', 'ad')->first()->id;
+            break;
+            case 'SB':
+                $taskcard_type = Type::ofTaskCardTypeNonRoutine()
+                        ->where('code', 'sb')->first()->id;
+            break;
+            case 'EO':
+                $taskcard_type = Type::ofTaskCardTypeNonRoutine()
+                        ->where('code', 'eo')->first()->id;
+            break;
+            case 'EA':
+                $taskcard_type = Type::ofTaskCardTypeNonRoutine()
+                        ->where('code', 'ea')->first()->id;
+            break;
+            case 'CMR':
+                $taskcard_type = Type::ofTaskCardTypeNonRoutine()
+                        ->where('code', 'cmr')->first()->id;
+            break;
+            case 'AWL':
+                $taskcard_type = Type::ofTaskCardTypeNonRoutine()
+                        ->where('code', 'awl')->first()->id;
+            break;
+            default:
+                $taskcard_type = Type::ofTaskCardTypeRoutine()
+                    ->where('name', 'Basic')->first()->id;
+        }
+       
 
         $taskcard =  new TaskCard([
             'number' => $row['number'],
