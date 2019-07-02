@@ -81,18 +81,23 @@ Route::name('admin.')->group(function () {
         Route::resource('purchase-order', 'PurchaseRequestController');
         Route::resource('purchase-request', 'PurchaseOrderController');
 
-        /** PROJECT'S WORKPACKAGE */
+        /** PROJECT'S WORKPACKAGEs */
 
         Route::resource('project-workpackage', 'ProjectWorkPackageController');
         Route::resource('project-workpackage-manhour', 'ProjectWorkPackageManhourController');
         Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
         Route::resource('project-workpackage-facility', 'ProjectWorkPackageFacilityController');
 
-        /** WORKPACKAGE's TASKCARDS */
+        /** WORKPACKAGE's TASKCARDs */
 
         Route::resource('taskcard-workpackage', 'TaskCardWorkPackageController');
         Route::resource('taskcard-workpackage-predecessor', 'TaskCardWorkPackagePredecessorController');
         Route::resource('taskcard-workpackage-successor', 'TaskCardWorkPackageSuccessorController');
+
+        /** QUOTATION's WORKPACKAGEs */
+
+        Route::resource('quotation-workpackage', 'QuotationWorkPackageController');
+        Route::resource('quotation-workpackage-item', 'QuotationWorkPackageItemController');
 
     });
 

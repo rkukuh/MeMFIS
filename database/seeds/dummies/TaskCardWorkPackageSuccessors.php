@@ -14,7 +14,7 @@ class TaskCardWorkPackageSuccessors extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= TaskCardWorkPackage::count(); $i++) {
+        for ($i = 1; $i <= (TaskCardWorkPackage::count() / 10); $i++) {
             $taskcard_workpackage = TaskCardWorkPackage::find($i);
 
             for ($j = 1; $j <= rand(1, 5); $j++) {
