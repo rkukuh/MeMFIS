@@ -65,7 +65,7 @@
 
                                                         @foreach ($customers as $customer)
                                                             <option value="{{ $customer->uuid }}"
-                                                                @if ($customer->id == $project->aircraft_id) selected @endif>
+                                                                @if ($customer->id == $project->customer_id) selected @endif>
                                                                 {{ $customer->name }}
                                                             </option>
                                                         @endforeach
@@ -290,7 +290,7 @@
 @push('footer-scripts')
     <script>
         let project_uuid = '{{ $project->uuid }}';
-        
+
     </script>
 
 
