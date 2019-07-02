@@ -309,7 +309,7 @@
                     <tr>
                         <td width="8%" align="center" valign="top">{{$i++}}</td>
                         <td width="42%" align="left" valign="top">{{$jobRequest[$a]->pivot->description}}</td>
-                        <td width="16%" align="center" valign="top">{{$jobRequest[$a]->pivot->discount_value}}</td>
+                        <td width="16%" align="center" valign="top"></td>
                         <td width="17%" align="center" valign="top"></td>
                         <td width="17%" align="right" valign="top"></td>
                     </tr>
