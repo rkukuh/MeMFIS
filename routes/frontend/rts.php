@@ -14,6 +14,9 @@ Route::name('frontend.')->group(function () {
             Route::resource('rts', 'RTSController', [
                 'parameters' => ['rts' => 'rts']
             ]);
+            Route::resource('rts-progress', 'RTSProgressController', [
+                'parameters' => ['rts' => 'rts']
+            ]);
 
             Route::name('rts.')->group(function () {
 
