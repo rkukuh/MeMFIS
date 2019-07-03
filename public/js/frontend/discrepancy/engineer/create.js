@@ -51,6 +51,9 @@ let Discrepancy = {
                 },
                 success: function (data) {
                     if (data.errors) {
+                        if (data.errors.propose) {
+                            $('#propose-error').html(data.errors.propose[0]);
+                        }
                         // if (data.errors.name) {
                         //     $('#name-error').html(data.errors.name[0]);
                         // }

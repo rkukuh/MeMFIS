@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class DiscrepancyStore extends FormRequest
 {
@@ -24,7 +26,23 @@ class DiscrepancyStore extends FormRequest
     public function rules()
     {
         return [
-            //
+            'propose' => 'required',
         ];
+    }
+     /**
+     * Set custom validation error message
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'project_id.required' => 'The work order field is required.',
+            'requested_at.required' => 'The request date field is required.',
+        ];
+    }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }
