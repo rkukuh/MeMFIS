@@ -8,8 +8,9 @@
                 </button>
             </div>
             <div class="modal-body">
+                <input type="hidden" name="htcrr_uuid" id="htcrr_uuid">
                 <div class="form-group m-form__group row ">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                         <label class="form-control-label">
                             CRI No @include('frontend.common.label.required')
                         </label>
@@ -21,16 +22,16 @@
                             @slot('id_error', 'cri')
                         @endcomponent
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <label class="form-control-label">
                             P/N @include('frontend.common.label.required')
                         </label>
 
-                        @component('frontend.common.input.number')
+                        @component('frontend.common.input.select2')
                             @slot('text', 'Part Number')
-                            @slot('id', 'code')
-                            @slot('name', 'code')
-                            @slot('id_error', 'code')
+                            @slot('id', 'item')
+                            @slot('name', 'item')
+                            @slot('id_error', 'item')
                         @endcomponent
                     </div>
                 </div>
@@ -40,9 +41,10 @@
                             Description @include('frontend.common.label.required')
                         </label>
 
-                        @component('frontend.common.input.text')
+                        @component('frontend.common.input.textarea')
                             @slot('text', 'Description')
                             @slot('id', 'description')
+                            @slot('rows', '3')
                             @slot('name', 'description')
                             @slot('id_error', 'description')
                         @endcomponent
@@ -73,20 +75,46 @@
                             @slot('id_error', 'mhrs')
                         @endcomponent
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
                         <label class="form-control-label">
-                            Installation Mhrs @include('frontend.common.label.required')
+                            Position @include('frontend.common.label.required')
                         </label>
 
-                        @component('frontend.common.input.select2')
-                            @slot('text', 'Installaton')
-                            @slot('id', 'installaton')
-                            @slot('name', 'installaton')
-                            @slot('id_error', 'installaton')
+                        @component('frontend.common.input.text')
+                            @slot('text', 'position')
+                            @slot('id', 'position')
+                            @slot('name', 'position')
+                            @slot('id_error', 'position')
                         @endcomponent
                     </div>
                 </div>
                 <div class="form-group m-form__group row ">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            Est. Removal Mhrs @include('frontend.common.label.required')
+                        </label>
+
+                        @component('frontend.common.input.number')
+                            @slot('text', 'removal')
+                            @slot('id', 'removal')
+                            @slot('name', 'removal')
+                            @slot('id_error', 'removal')
+                        @endcomponent
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="form-control-label">
+                            Est. Installation Mhrs @include('frontend.common.label.required')
+                        </label>
+
+                        @component('frontend.common.input.number')
+                            @slot('text', 'Installaton')
+                            @slot('id', 'installation')
+                            @slot('name', 'installation')
+                            @slot('id_error', 'installation')
+                        @endcomponent
+                    </div>
+                </div>
+                <div class="form-group m-form__group row hidden">
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <label class="form-control-label">
                             Removal By @include('frontend.common.label.required')
@@ -114,7 +142,7 @@
                     </div>
                 </div>
                 <div class="form-group m-form__group row ">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                         <label class="form-control-label">
                             Engineer By @include('frontend.common.label.required')
                         </label>
@@ -126,16 +154,16 @@
                             @slot('id_error', 'engineer_by')
                         @endcomponent
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                         <label class="form-control-label">
                             RII Required? @include('frontend.common.label.optional')
                         </label>
 
                         @component('frontend.common.input.checkbox')
                             @slot('text', 'Required')
-                            @slot('id', 'rii')
-                            @slot('name', 'rii')
-                            @slot('id_error', 'installaton')
+                            @slot('id', 'is_rii')
+                            @slot('name', 'is_rii')
+                            @slot('id_error', 'is_rii')
                         @endcomponent
                     </div>
                 </div>
@@ -143,13 +171,16 @@
             <div class="modal-footer">
                 <div class="flex">
                     <div class="action-buttons">
-                        <div class="flex">
-                            <div class="action-buttons">
-                                @component('frontend.common.buttons.close')
-                                    @slot('text', 'Close')
-                                @endcomponent
-                            </div>
-                        </div>
+                        @component('frontend.common.buttons.submit')
+                            @slot('class', 'add-htcrr')
+                            @slot('type', 'button')
+                        @endcomponent
+
+                        @include('frontend.common.buttons.reset')
+
+                        @component('frontend.common.buttons.close')
+                            @slot('text', 'Close')
+                        @endcomponent
                     </div>
                 </div>
             </div>
@@ -160,4 +191,6 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
 @endpush

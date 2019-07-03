@@ -13,6 +13,10 @@ class DummyDataSeeder extends Seeder
     {
         ini_set('memory_limit', '-1');
 
+        /** USER and ACL/RBAC */
+
+        $this->call(Users::class);
+
         /** INITIAL DATA */
 
         $this->call(Types::class);
@@ -54,6 +58,9 @@ class DummyDataSeeder extends Seeder
         $this->call(Addresses::class);
         $this->call(Documents::class);
         $this->call(Thresholds::class);
+        $this->call(Approvals::class);
+        $this->call(Progresses::class);
+        $this->call(Inspections::class);
 
         /** LICENSE */
 
@@ -81,12 +88,24 @@ class DummyDataSeeder extends Seeder
         $this->call(GoodsReceiveds::class);
         $this->call(HtCrrs::class);
         $this->call(DefectCards::class);
+        $this->call(RTSs::class);
         
-        /** PROJECT'S WORKPACKAGES */
+        /** PROJECT'S WORKPACKAGEs */
 
         $this->call(ProjectWorkPackages::class);
         $this->call(ProjectWorkPackageEngineers::class);
         $this->call(ProjectWorkPackageManhours::class);
         $this->call(ProjectWorkPackageFacilities::class);
+
+        /** WORKPACKAGE's TASKCARDs */
+
+        $this->call(TaskCardWorkPackages::class);
+        $this->call(TaskCardWorkPackagePredecessors::class);
+        $this->call(TaskCardWorkPackageSuccessors::class);
+
+        /** QUOTATION's WORKPACKAGEs */
+
+        $this->call(QuotationWorkPackages::class);
+        $this->call(QuotationWorkPackageItems::class);
     }
 }

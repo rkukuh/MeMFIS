@@ -9,9 +9,9 @@ class Storage extends MemfisModel
     protected $fillable = [
         'code',
         'name',
+        'is_active',
         'description',
         'account_code',
-        'is_active',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

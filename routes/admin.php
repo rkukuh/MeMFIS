@@ -35,6 +35,9 @@ Route::name('admin.')->group(function () {
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
         Route::resource('threshold', 'ThresholdController');
+        Route::resource('approval', 'ApprovalController');
+        Route::resource('progress', 'ProgressController');
+        Route::resource('inspection', 'InspectionController');
 
         /** MASTER */
 
@@ -65,6 +68,7 @@ Route::name('admin.')->group(function () {
 
         /** TRANSACTION */
 
+        Route::resource('rts', 'RTSController');
         Route::resource('htcrr', 'HtCrrController');
         Route::resource('project', 'ProjectController');
         Route::resource('jobcard', 'JobCardController');
@@ -77,12 +81,23 @@ Route::name('admin.')->group(function () {
         Route::resource('purchase-order', 'PurchaseRequestController');
         Route::resource('purchase-request', 'PurchaseOrderController');
 
-        /** PROJECT'S WORKPACKAGE */
+        /** PROJECT'S WORKPACKAGEs */
 
         Route::resource('project-workpackage', 'ProjectWorkPackageController');
         Route::resource('project-workpackage-manhour', 'ProjectWorkPackageManhourController');
         Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
         Route::resource('project-workpackage-facility', 'ProjectWorkPackageFacilityController');
+
+        /** WORKPACKAGE's TASKCARDs */
+
+        Route::resource('taskcard-workpackage', 'TaskCardWorkPackageController');
+        Route::resource('taskcard-workpackage-predecessor', 'TaskCardWorkPackagePredecessorController');
+        Route::resource('taskcard-workpackage-successor', 'TaskCardWorkPackageSuccessorController');
+
+        /** QUOTATION's WORKPACKAGEs */
+
+        Route::resource('quotation-workpackage', 'QuotationWorkPackageController');
+        Route::resource('quotation-workpackage-item', 'QuotationWorkPackageItemController');
 
     });
 

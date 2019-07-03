@@ -1,380 +1,528 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <style>
-        td {
-            font-size: 12px;
-            /* text-align:center; */
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
+<style>
+    html,body{
+      padding: 0;
+      margin: 0;
+      font-size: 12px;
+    }
+
+    header {
+      position: fixed;
+      top: 0cm;
+      left: 0cm;
+      right: 0cm;
+      height: 3cm;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0cm;
+      left: 0cm;
+      right: 0cm;
+      height: 1.4cm;
+    }
+    ul li{
+      display: inline-block;
+    }
+
+    table{
+      border-collapse: collapse;
+    }
+
+    #head{
+        top:0px;
+        left: 520px;
+        position: absolute;
+        color:white;
+    }
+
+    .container{
+      width: 100%;
+      margin: 0 36px;
+    }
+
+    .barcode{
+      margin-left:70px;
+      margin-top: -12px;
+    }
+
+    #content{
+        width:100%;
+        height:190px;
+        background:#efefef;
+        margin-top:130px;
+    }
+
+    #content2{
+        width: 100%;
+        height: 200px;
+        margin-top: 12px;
+    }
+
+    #content3 {
+        margin-top:-80px;
+    }
+    #content3 .head{
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    #content3 .body{
+      width: 100%;
+      border-left:  2px solid  #d4d7db;
+      border-right:  2px solid  #d4d7db;
+      border-bottom:  2px solid  #d4d7db;
+    }
+
+    #content3-next {
+        margin-top:142px;
+    }
+    #content3-next .head{
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    #content3-next .body{
+      width: 100%;
+      min-height: 300px;
+      border-left:  2px solid  #d4d7db;
+      border-right:  2px solid  #d4d7db;
+      border-bottom:  2px solid  #d4d7db;
+    }
+
+    #content4 {
+        margin-top:12px;
+    }
+
+    #content5{
+        height:60px;
+        width:100%;
+        padding-top: 20px;
+        margin-top: 20px;
+    }
+
+
+    .page_break { page-break-before: always; }
+
+
+    footer .num:after { content: counter(page); }
+    
+</style>
 <body>
-    <table width="100%" style="margin: 0px;">
-        <tr>
-            <td width="30%">
-                <center>
-                    <!-- <img src="img/LogoMMF.png" alt="logo" height="100%" style="margin-bottom:-20px"> -->
-                    <h2>QUOTATION</h2>
-                </center>
-            </td>
-            <td width="40%">
-                <center>
-                    <!-- <img src="img/LogoMMF.png" alt="logo" height="100%" style="margin-bottom:-20px"> -->
-                    <!-- <h3>PRELIMINARY INSPECTION</h3> -->
-                </center>
-            </td>
-            <td width="30%">
-                <center>
-                    <img src="img/LogoMMF.png" alt="logo" height="80px">
-                    <!-- <h3>PRELIMINARY INSPECTION</h3> -->
-                </center>
-                JUANDA INTERNATIONAL AIRPORT <br> SURABAYA - 61253
-                <br>
-                Phone : +62-31-8686482
-                <br>
-                Fax : +62-31-8686500
-                <br>
-                Email : marketing@ptmmf.co.id
-                <br>
-                Web Site : www.ptmmf.co.id
-            </td>
-        </tr>
-    </table>
-    _____________________________________________________________________________________________
 
-    <table width="100%">
-        <tr>
-            <td width="10%">
-                To.
-            </td>
-            <td width="37%">
-                : Nam Air
-            </td>
-            <td width="13%">
-            </td>
-            <td width="10%">
-                From
-            </td>
-            <td width="30%">
-                : Marketing
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
-                Tlp./Fax
-            </td>
-            <td width="37%">
-                : +62-21-55913989/55913986
-            </td>
-            <td width="13%">
-            </td>
-            <td width="15%">
-                Quotation No.
-            </td>
-            <td width="25%">
-                <b>: QN/179/MMF-R1</b>
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
-                Attn
-            </td>
-            <td width="37%">
-                : Bp.Romdani
-            </td>
-            <td width="13%">
-            </td>
-            <td width="15%">
-                Date
-            </td>
-            <td width="25%">
-                :July 30,2016
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
-                Ref
-            </td>
-            <td width="37%">
-                : WO. 1974/PPC/VII/18/ATR72-600
-            </td>
-            <td width="13%">
-            </td>
-            <td width="15%">
-                Currency
-            </td>
-            <td width="25%">
-                :IDR
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
-                Address
-            </td>
-            <td rowspan="2" width="37%">
-                :Lt.3 jl. Marsekal Suryadarma No 1 Kec. Neglasari, Tanggerang, Banten
-            </td>
-            <td width="13%">
-            </td>
-            <td width="15%">
-                P. Center
-            </td>
-            <td width="25%">
-                :MMF01
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
-            </td>
-            <td width="13%">
-            </td>
-            <td width="15%">
-                valid Until
-            </td>
-            <td width="25%">
-                :August 10, 2018
-            </td>
-        </tr>
-        <tr>
-            <td colspan="5" height="10"></td>
-        </tr>
-    </table>
-    <table width="100%">
-        <tr>
-            <td width="10%">
-                Subject
-            </td>
-            <td width="90%">
-                <b>: Loan hangar space and Man Power Assist for Support Replacement engine # 2
-                    for Aircraft ATR72-600/PK-NYW Nam Air</b>
-            </td>
-        </tr>
-    </table>
-    <table width="100%">
-        <tr>
-            <td colspan="5" height="10"></td>
-        </tr>
-        <tr>
-            <td width="10%">
-            </td>
-            <td width="5%">
-            </td>
-            <td width="5%">
-            </td>
+    <header>
+        <img src="./img/form/printoutquotation/HeaderQuotation.png" alt=""width="100%">
+        <div id="head">
+            <div style="margin-right:20px;text-align:left;">
+                <h1 style="font-size:34px;">QUOTATION</h1>
+                <div style="font-size:14px;letter-spacing:1px;margin-top:-15px">
+                    <table width="100%">
+                        <tr>
+                            <td width="20%" valign="top">QN No.</td>
+                            <td width="1%" valign="top">:</td>
+                            <td width="79%" valign="top">{{$quotation->number}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </header>
 
-            <td width="60%">
-                <u>Description </u>
-            </td>
-            <td width="20%">
-                <u>Cost </u>
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
+    <footer style="margin-top:14px;">
+        <span style="margin-left:6px">Created By : Name ; {{$quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span><span style="position:absolute; right:20px;" class="num">PAGE </span>
+        <img src="./img/form/printoutquotation/FooterQuotation.png" width="100%" alt="" >
+    </footer>
 
-            </td>
-            <td width="5%">1.
-            </td>
-            <td width="5%" colspan="2">
-                Lead hangar space and 2 Man Power Assist for support Replace Engine #02
-                ATR72-600 PL-NYW Nam Air 28-31 Juli 2018
+    <div id="content">
+        <div class="container">
+            <table width="100%" cellpadding="1" style="margin-top:20px;">
+                <tr>
+                    <td width="33%" rowspan="5" valign="top">
+                       <span style="line-height:20px;">
+                            PT. MERPATI MAINTANANCE FACILITY <br> JUANDA INTERNASIONAL AIRPORT <br> JL. RAYA JUANDA NO.16 <br>
+                            BETRO,SEDATI SIDOARJO JAWA TIMUR <br> INDONESIA 61253 <br>
+                            <span style="line-height:20px;">TELP &nbsp; : 031-8686481</span> <br>
+                            <span style="line-height:20px;">FAX &nbsp;&nbsp; : 031-8686500</span> <br>
+                       </span>
+                    </td>
+                    <th width="9%" valign="top">
+                        To
+                    </th>
+                    <td width="1%" valign="top">
+                        :
+                    </td>
+                    <td width="23%" valign="top">
+                        {{$quotation->customer->name}}
+                    </td>
+                    <td width="33%" rowspan="5" align="center">
+                            <div class="barcode">
+                                {!!DNS2D::getBarcodeHTML($quotation->number, 'QRCODE',5.6,5.6)!!}
+                            </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="9%" valign="top">
+                        Telp/Fax
+                    </th>
+                    <td width="1%" valign="top">
+                        :
+                    </td>
+                    <td width="23%" valign="top">
+                        031-8686481/031-8686482
+                    </td>
+                </tr>
+                <tr>
+                    <th width="9%" valign="top">
+                        Address
+                    </th>
+                    <td width="1%" valign="top">
+                        :
+                    </td>
+                    <td width="23%" valign="top">
+                        JL. RAYA INDONESIA
+                    </td>
+                </tr>
+                <tr>
+                    <th width="9%" valign="top">
+                        Attn
+                    </th>
+                    <td width="1%" valign="top">
+                        :
+                    </td>
+                    <td width="23%" valign="top">
+                        @if($attention)
+                        {{ $attention->name }}
+                        @else
+                        -
+                        @endif
+                    </td>
+                </tr>
+                <tr>
+                    <th width="9%" valign="top">
+                        Ref WO
+                    </th>
+                    <td width="1%" valign="top">
+                        :
+                    </td>
+                    <td width="23%" valign="top">
+                        {{$quotation->project->no_wo}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="content2">
+        <div class="container">
+            <table width="100%" cellpadding="4">
+                <tr>
+                    <th width="14%" valign="top">Date</th>
+                    <td width="1%" valign="top">:</td>
+                    <td width="35%" valign="top">{{$quotation->created_at}}</td>
+                    <th width="14%" valign="top">Project No</th>
+                    <td width="1%" valign="top">:</td>
+                    <td width="35%" valign="top">{{$quotation->project->code}}</td>
+                </tr>
+                <tr>
+                    <th width="14%" valign="top">Currency</th>
+                    <td width="1%" valign="top">:</td>
+                    <td width="35%" valign="top">{{$quotation->currency->name}}</td>
+                    <th width="14%" valign="top">A/C Type</th>
+                    <td width="1%" valign="top">:</td>
+                    <td width="35%" valign="top">{{$quotation->project->aircraft->name}}</td>
+                </tr>
+                <tr>
+                    <th width="14%" valign="top">Exchange Rate</th>
+                    <td width="1%" valign="top">:</td>
+                    <td width="35%" valign="top">{{$quotation->exchange_rate}}</td>
+                    <th width="14%" valign="top">A/C Reg.</th>
+                    <td width="1%" valign="top">:</td>
+                    <td width="35%" valign="top">{{$quotation->project->aircraft_register}}</td>
+                </tr>
+                <tr>
+                    <th width="14%" valign="top">Valid Until</th>
+                    <td width="1%" valign="top">:</td>
+                    <td width="35%" valign="top">{{$quotation->valid_until}}</td>
+                    <th width="14%" valign="top">A/C Serial No.</th>
+                    <td width="1%" valign="top">:</td>
+                    <td width="35%" valign="top">{{$quotation->project->aircraft_sn}}</td>
+                </tr>
+                <tr>
+                    <th width="14%" valign="top">Subject</th>
+                    <td width="1%" valign="top">:</td>
+                    <td width="35%" valign="top">{{$quotation->project->title}}</td>
+                    <td width="14%" valign="top"></td>
+                    <td width="1%" valign="top"></td>
+                    <td width="35%" valign="top"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="content3">
+        <div class="container">
+            <div class="head">
+                <table width="100%" border="1" cellpadding="4">
+                    <tr style="background:#f7dd16;">
+                        <td width="8%" align="center">No</td>
+                        <td width="42%" align="center">Description</td>
+                        <td width="16%" align="center">Sub Total</td>
+                        <td width="17%" align="center">Disc %</td>
+                        <td width="17%" align="center">Total</td>
+                    </tr>
+                </table>
+            </div>
+            @if(sizeof($quotation->workpackages->toArray()) == 2)
+                <div class="body" style="min-height:120px">
+            @else
+                <div class="body" style="height: 458px;">
+            @endif
+                <table width="100%" cellpadding="4">
+                    @php
+                        $i = 1;
+                        $subtotal = $total = 0;
+                        $jobRequest = $quotation->workpackages;
+                    @endphp
+                    @for($a = 0 ; $a<=3 && $a < sizeof($jobRequest); $a++)
+                    @php
+                    if($jobRequest[$a]->pivot->discount_value == null && $jobRequest[$a]->pivot->discount_type == null){
+                        $total = $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138;
+                        $subtotal = $subtotal + $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate ;
+                    }
+                    else{
+                        if($jobRequest[$a]->pivot->discount_type ==  'amount'){
+                            $total = $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138 - $jobRequest[$a]->pivot->discount_value;
+                            $subtotal = $subtotal + $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138 - $jobRequest[$a]->pivot->discount_value;
+                        }
+                        else if($jobRequest[$a]->pivot->discount_type == 'percentage'){
+                            $total = $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138 - ((($jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138)*$jobRequest[$a]->pivot->discount_value)/100);
+                            $subtotal = $subtotal + $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138 - ((($jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138)*$jobRequest[$a]->pivot->discount_value)/100);
+                        }
+                    }
+                    @endphp
+                    @endphp
+                    <tr>
+                        <td width="8%" align="center" valign="top">{{$i++}}</td>
+                        <td width="42%" align="left" valign="top">{{$jobRequest[$a]->pivot->description}}</td>
+                        <td width="16%" align="center" valign="top">{{$jobRequest[$a]->pivot->discount_value}}</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top"></td>
+                    </tr>
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$a]->pivot->manhour_total}} x {{ number_format($jobRequest[$a]->pivot->manhour_rate) }}</td>
+                        <td width="16%" align="center" valign="top"> Rp. {{ number_format($jobRequest[$a]->pivot->manhour_total*$jobRequest[$a]->pivot->manhour_rate) }}</td>
+                        
+                        @if($jobRequest[$a]->pivot->discount_value == null && $jobRequest[$a]->pivot->discount_type == null)
+                        <td width="17%" align="center" valign="top"></td>
+                        @else
+                            @if($jobRequest[$a]->pivot->discount_type ==  'amount')
+                            <td width="17%" align="center" valign="top">{{ number_format($jobRequest[$a]->pivot->discount_value) }}</td>
+                            @elseif($jobRequest[$a]->pivot->discount_type == 'percentage'){
+                            <td width="17%" align="center" valign="top">{{ $jobRequest[$a]->pivot->discount_value }}%</td>
+                            @endif
+                        @endif
+                        <td width="17%" align="right" valign="top">Rp. {{ number_format($subtotal   ) }}</td>
+                    </tr>
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Material Price</td>
+                        <td width="16%" align="center" valign="top">$2.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$2.500</td>
+                    </tr>
+                    <tr>
+                        <td width="8%" align="center" valign="top"></td>
+                        <td width="42%" align="left" valign="top">- Facilities Price</td>
+                        <td width="16%" align="center" valign="top">$2.500</td>
+                        <td width="17%" align="center" valign="top"></td>
+                        <td width="17%" align="right" valign="top">$2.500</td>
+                    </tr>
+                    @endfor
+                </table>
+            </div>
+        </div>
+    </div>
+    @if(sizeof($quotation->workpackages->toArray())==2)
+    <div id="content4">
+        <div class="container">
+            <table width="100%" cellpadding="3">
+                <tr>
+                    <th width="50%" rowspan="6" valign="top">Term & Condition <br></th>
+                    <td width="25%" valign="top" align="left">Total</td>
+                    <td width="25%" valign="top" align="right">Rp. {{$quotation->subtotal}}</td>
+                </tr>
+                <tr>
+                    <td width="25%" valign="top" align="left">Disc</td>
+                    <td width="25%" valign="top" align="right">$ / %</td>
+                </tr>
+                <tr>
+                    <td width="25%" valign="top" align="left">Delivery Cost</td>
+                    <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }}</td>
+                </tr>
+                <tr>
+                    <td width="25%" valign="top" align="left">Other Cost(if available)</td>
+                    <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }} <hr width="100%"></td>
+                </tr>
+                <tr>
+                    <th width="25%" valign="top" align="left">Grand Total in USD</th>
+                    <th width="25%" valign="top" align="right">$2.100.000</th>
+                </tr>
+                <tr>
+                    <th width="25%" valign="top" align="left">Grand Total in Rupiah</th>
+                    <th width="25%" valign="top" align="right">Rp. {{$quotation->grandtotal}}</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="content5">
+        <div class="container">
+            <table width="100%">
+                <tr>
+                    <th width="50%" align="center">
+                        Actnowledge by,
+                    </th>
+                    <th width="50%" align="center">
+                        Approved by,
+                    </th>
+                </tr>
+            </table>
+            <table style="margin-top:80px;" width="100%">
+                <tr>
+                    <td width="50%" align="center">
+                        <b> EDDY SIREGAR</b><br>
+                        Marketing Manager
+                    </td>
+                    <td width="50%" align="center">
+                        <b> EDDY SIREGAR </b><br>
+                        Sriwijaya Air
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    @endif
 
-            </td>
-            <td width="20%">
-                3.992.00
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
+    @if(sizeof($quotation->workpackages->toArray())!=2)
+    <div class="page_break">
+        <div id="content3-next">
+            <div class="container">
+                <div class="head">
+                    <table width="100%" border="1" cellpadding="4">
+                        <tr style="background:#f7dd16;">
+                            <td width="8%" align="center">No</td>
+                            <td width="42%" align="center">Description</td>
+                            <td width="16%" align="center">Sub Total</td>
+                            <td width="17%" align="center">Disc %</td>
+                            <td width="17%" align="center">Total</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="body">
+                    <table width="100%" cellpadding="4">
+                        @php
+                            $i = $a+1;
+                            $jobRequest = $quotation->workpackages;
 
-            </td>
-            <td width="5%">2.
-            </td>
-            <td width="5%" colspan="2">
-                Additional Cost(if any)
+                        @endphp
+                        @for($b = 4 ;$b<(sizeof($jobRequest->toArray())); $b++)
+                        <tr>
+                            <td width="8%" align="center" valign="top">{{$i++}}</td>
+                            <td width="42%" align="left" valign="top">{{$jobRequest[$b]->pivot->description}}</td>
+                            <td width="16%" align="center" valign="top">{{$jobRequest[$b]->pivot->discount_value}}</td>
+                            <td width="17%" align="center" valign="top"></td>
+                            <td width="17%" align="right" valign="top"></td>
+                        </tr>
+                        <tr>
+                            <td width="8%" align="center" valign="top"></td>
+                            <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$b]->pivot->manhour_total}} x {{$jobRequest[$b]->pivot->manhour_rate}}</td>
+                            <td width="16%" align="center" valign="top">{{$jobRequest[$b]->pivot->manhour_total*$jobRequest[$b]->pivot->manhour_rate}}</td>
+                            <td width="17%" align="center" valign="top"></td>
+                            <td width="17%" align="right" valign="top">$22.500</td>
+                        </tr>
+                        <tr>
+                            <td width="8%" align="center" valign="top"></td>
+                            <td width="42%" align="left" valign="top">- Material Price</td>
+                            <td width="16%" align="center" valign="top">$2.500</td>
+                            <td width="17%" align="center" valign="top"></td>
+                            <td width="17%" align="right" valign="top">$2.500</td>
+                        </tr>
+                        <tr>
+                            <td width="8%" align="center" valign="top"></td>
+                            <td width="42%" align="left" valign="top">- Facilities Price</td>
+                            <td width="16%" align="center" valign="top">$2.500</td>
+                            <td width="17%" align="center" valign="top"></td>
+                            <td width="17%" align="right" valign="top">$2.500</td>
+                        </tr>
+                        @endfor
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="content4">
+            <div class="container">
+                <table width="100%" cellpadding="3">
+                    <tr>
+                        <th width="50%" rowspan="6" valign="top">Term & Condition <br></th>
+                        <td width="25%" valign="top" align="left">Total</td>
+                        <td width="25%" valign="top" align="right">$25.000</td>
+                    </tr>
+                    <tr>
+                        <td width="25%" valign="top" align="left">Disc</td>
+                        <td width="25%" valign="top" align="right">$ / %</td>
+                    </tr>
+                    <tr>
+                        <td width="25%" valign="top" align="left">Delivery Cost</td>
+                        <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }}</td>
+                    </tr>
+                    <tr>
+                        <td width="25%" valign="top" align="left">Other Cost(if available)</td>
+                        <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }} <hr width="100%"></td>
+                    </tr>
+                    <tr>
+                        <th width="25%" valign="top" align="left">Grand Total in USD</th>
+                        <th width="25%" valign="top" align="right">$2.100.000</th>
+                    </tr>
+                    <tr>
+                        <th width="25%" valign="top" align="left">Grand Total in Rupiah</th>
+                        <th width="25%" valign="top" align="right">Rp. 2.321.000.000</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="content5">
+            <div class="container">
+                <table width="100%">
+                    <tr>
+                        <th width="50%" align="center">
+                            Actnowledge by,
+                        </th>
+                        <th width="50%" align="center">
+                            Approved by,
+                        </th>
+                    </tr>
+                </table>
+                <table style="margin-top:80px;" width="100%">
+                    <tr>
+                        <td width="50%" align="center">
+                            <b> EDDY SIREGAR</b><br>
+                            Marketing Manager
+                        </td>
+                        <td width="50%" align="center">
+                            <b> EDDY SIREGAR </b><br>
+                            Sriwijaya Air
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    @endif
 
-            </td>
-            <td width="20%">
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
-
-            </td>
-            <td width="5%">
-            </td>
-            <td width="5%">a.
-            </td>
-            <td width="60%">
-                Labour defect finding and labour components shop visit
-            </td>
-            <td width="20%">
-                To be advice
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
-
-            </td>
-            <td width="5%">
-            </td>
-            <td width="5%">b.
-            </td>
-            <td width="60%">
-                Materials (raw Material and consumable)
-            </td>
-            <td width="20%">
-                To be advice
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
-
-            </td>
-            <td width="5%">
-            </td>
-            <td width="5%">c.
-            </td>
-            <td width="60%">
-                Components/ spare part supply
-            </td>
-            <td width="20%">
-                <i>by Sriwijaya Ait/ TBA</i>
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
-
-            </td>
-            <td width="5%">
-            </td>
-            <td width="5%">d.
-            </td>
-            <td width="60%">
-                Ground Handling
-            </td>
-            <td width="20%">
-                To be advice
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
-
-            </td>
-            <td width="5%">
-            </td>
-            <td width="5%">e.
-            </td>
-            <td width="60%">
-                The other cost
-            </td>
-            <td width="20%">
-                To be advice
-            </td>
-        </tr>
-        <tr>
-            <td width="10%" colspan="4">
-            </td>
-            <td width="20%">
-                ________________
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
-            </td>
-            <td width="5%" colspan="2">
-            </td>
-            <td width="60%">
-                <b>Total Cost (USD)</b>
-            </td>
-            <td width="20%">
-                3.992,00
-            </td>
-        </tr>
-        <tr>
-            <td width="10%">
-            </td>
-            <td width="5%" colspan="2">
-            </td>
-            <td width="60%">
-                <b>Total Cost in Rupiah Currency (IDR)</b>
-            </td>
-            <td width="20%">
-                57.796.176
-            </td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <td colspan="2"><b><u>Term and Condition</u></b></td>
-        </tr>
-        <tr>
-            <td>- Quotation should be approved
-            </td>
-        </tr>
-        <tr>
-            <td>- Currency 1 USD = IDR 14.478 (per. 24-31 Juli 2018)
-            </td>
-        </tr>
-        <tr>
-            <td>- Exclude tax 10%
-            </td>
-        </tr>
-        <tr>
-            <td>- T.A.T : 3 Work days
-            </td>
-        </tr>
-        <tr>
-            <td>- <b> Payment methode :</b>
-            </td>
-        </tr>
-        <tr>
-            <td>- <b><i>"Cah after received"</i></b>
-            </td>
-        </tr>
-        <tr>
-            <td>- Account Rupiah No : 888.000.868.8 Bank BNI 46 Cab. Sidoarjo
-            </td>
-        </tr>
-    </table>
-    <br>
-    <table>
-        <tr>
-            <td colspan="3">
-                <center>
-                    <b>
-                        If a dispute arises in the implementation of this Quotation, it will be resolved by
-                        deleberation but if both
-                        parties may not reach the deliberations within 30 calendar days, either party is entitied to
-                        submit a settlement
-                        through the indonesian National Arbitration Board (BANI) upon proceeding. both parties agree tu
-                        use English language
-                        and ear the cost together with equal composition.
-                        The BANI award will be declared as final and binding on both parties "
-                    </b>
-                </center>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <center>Acknowledged by,<br><br><br><br><b><u>EDDY SIREGAR</u></b><br>Marketing Manager</center>
-
-            </td>
-            <td></td>
-            <td>
-                <center>Approved by,,<br><br><br><br><b><u>R O M D A N I</u></b><br>Direlek Nam Air</center>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3">
-                <center><i>
-                        Trusted Reliable Partner MRO
-                    </i>
-                </center>
-            </td>
-        </tr>
-    </table>
 </body>
 </html>

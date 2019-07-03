@@ -13,13 +13,13 @@ class CurrenciesTableSeeder extends Seeder
     public function run()
     {
         Currency::create([
-            'code'   => 'IDR',
+            'code'   => 'idr',
             'name'   => 'Rupiah',
             'symbol' => 'Rp',
         ]);
 
         Currency::create([
-            'code'   => 'USD',
+            'code'   => 'usd',
             'name'   => 'US Dollar',
             'symbol' => '$',
         ]);

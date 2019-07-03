@@ -1,18 +1,19 @@
 <?php
 
 use App\Models\Type;
+use App\Models\TaskCard;
 use App\Models\EOInstruction;
 use Faker\Generator as Faker;
 
 $factory->define(EOInstruction::class, function (Faker $faker) {
 
     return [
-        'skill_id' => function () {
-            if (Type::ofTaskCardSkill()->count()) {
-                return Type::ofTaskCardSkill()->get()->random()->id;
+        'taskcard_id' => function () {
+            if (TaskCard::count()) {
+                return TaskCard::get()->random()->id;
             }
 
-            return factory(Type::class)->states('taskcard-skill')->create()->id;
+            return factory(TaskCard::class)->states('eo')->create()->id;
         },
         'work_area' => function () {
             if (Type::ofWorkArea()->count()) {

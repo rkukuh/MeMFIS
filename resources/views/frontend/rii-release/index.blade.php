@@ -67,11 +67,6 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                    @component('frontend.common.buttons.create')
-                                    @slot('text', 'Task Release')
-                                    @slot('href', route('frontend.rii-release.create') )
-                                    @endcomponent
-
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
                             </div>
@@ -88,5 +83,5 @@
 @endsection
 
 @push('footer-scripts')
-<script src="{{ asset('js/frontend/rii-release/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/rii-release/job-card/index.js')}}"></script>
 @endpush

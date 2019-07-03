@@ -8,7 +8,13 @@ class ProjectWorkPackageFacility extends MemfisModel
 {
     protected $table = 'project_workpackage_facilities';
     
-    protected $fillable = ['facility_id'];
+    protected $fillable = [
+        'project_workpackage_id',
+        'facility_id',
+        'price_id',
+        'price_amount',
+        'note',
+    ];
 
     /*************************************** RELATIONSHIP ****************************************/
 
@@ -33,5 +39,15 @@ class ProjectWorkPackageFacility extends MemfisModel
     public function header()
     {
         return $this->belongsTo(ProjectWorkPackage::class, 'project_workpackage_id');
+    }
+
+    /**
+     * One-Way: A Project WorkPackage Facitlity must have a rental price assigned to.
+     *
+     * @return mixed
+     */
+    public function price()
+    {
+        return $this->belongsTo(Price::class);
     }
 }

@@ -6,6 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
+    header {
+      position: fixed;
+      top: 0cm;
+      left: 0cm;
+      right: 0cm;
+      height: 3cm;
+    }
+    footer {
+      position: fixed;
+      bottom: 0cm;
+      left: 0cm;
+      right: 0cm;
+      height: 1cm;
+    }
     html,body{
       padding: 0;
       margin: 0;
@@ -30,7 +44,7 @@
     }
 
     #content{
-      margin-top:27px;
+      margin-top:150px;
     }
     
     #content .jobcard-info fieldset legend{
@@ -65,7 +79,7 @@
     }
 
     #content5{
-      margin-top:9px;
+      margin-top:15px;
     }
 
     #content4 .table-mt{
@@ -90,36 +104,54 @@
     
     #content5 .body{
       width: 100%;
-      height: 138px;
       border-left:  4px solid  #d4d7db;
       border-right:  4px solid  #d4d7db;
       border-bottom:  4px solid  #d4d7db;
     }
 
     #content5 .body table tr td{
-      position: relative;
       border-left: 1px solid  #d4d7db;
     }
 
-    #content5 .body .body-date{
-      position: absolute; 
-      top:108px; 
-      left:15px;
+    #content6{
+      margin-top:150px;
     }
 
-    #content5 .body .body-name{
-      position: absolute;
-      top: 88px; 
-      width: 100%;
-      text-align: center;
+    #content6 .table-mt tr td{
+      border-left:  1px solid  #d4d7db;
+      border-right:  1px solid  #d4d7db;
+      border-top:  1px solid  #d4d7db;
+      border-bottom:  1px solid  #d4d7db;
     }
+
+    #content7{
+      margin-top:15px;
+    }
+
+    #content7 .table-mt tr td{
+      border-left:  1px solid  #d4d7db;
+      border-right:  1px solid  #d4d7db;
+      border-top:  1px solid  #d4d7db;
+      border-bottom:  1px solid  #d4d7db;
+    }
+
+
+    .page_break { page-break-before: always; }
+    /* <div class="page_break"></div> */
+
   </style>
 </head>
 <body>
   
-  <div id="header">
-    <img src="./img/HeaderJobCardRoutine.png" alt=""width="100%">
-  </div>
+  <header id="header">
+    <img src="./img/form/printoutjobcardroutine/HeaderJobCardRoutine.png" alt=""width="100%">
+  </header>
+  <footer style="margin-top:14px;">
+    <div class="container">
+      <span style="margin-left:6px">Issued By : Name PPC;Timestamp &nbsp;&nbsp;&nbsp;&nbsp; Printed By : Name;Timestamp</span>
+    </div>
+    <img src="./img/form/printoutjobcardroutine/FooterJobCardRoutine.png" width="100%" alt="" >
+  </footer>
 
   <div id="content">
     <ul>
@@ -246,20 +278,8 @@
   <div id="content4"> 
     <div class="container">
       <table width="100%" cellpadding="8" class="table-mt">
-        <tr style="background: #d4d7db;">
-          <th width="50%" align="center">Material</th>
-          <th width="50%" align="center">Tools</th>
-        </tr>
         <tr>
-          <td height="15%" valign="top">
-           <span>Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum earum temporibus repellendus ratione, nesciunt consectetur accusantium a aliquam ipsa architecto quam itaque, cupiditate commodi iure voluptates quaerat. Blanditiis, velit fuga. </span>
-          </td>
-          <td height="15%" valign="top">
-            <span>Lorem Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis iste blanditiis repellendus minima iusto laborum nihil eaque cum? Veritatis eligendi est adipisci, exercitationem eaque in repellendus odio incidunt error doloribus?</span>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" height="35" valign="top">
+          <td colspan="2" height="55" valign="top">
               Accomplishment Record : <br><br>
               <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, iusto esse similique quod ducimus cupiditate voluptate voluptatem reprehenderit molestias facere earum quidem non harum dolore expedita at illo dolores odio!</span>
           </td>
@@ -307,48 +327,77 @@
           <tr>
             <td width="33%" align="center">Accomplished By</td>
             <td width="33%" align="center">Inspected By</td>
-            <td width="34%" align="center">Rii By</td>
+            <td width="34%" align="center">RII By</td>
           </tr>
         </table>
       </div>
       <div class="body">
         <table width="100%">
           <tr>
-            <td width="33%" height="65%">
-              <div class="body-name">Ibnu Pratama</div>
-
-              <div class="body-date">
-                  Date : <span>(Date & Time)</span>
-              </div>
+            <td width="33%" height="46%" align="center" valign="bottom">
+              <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
+              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
             </td>
-            <td width="33%" height="65%">
-              <div class="body-name">Ibnu Pratama</div>
-
-              <div class="body-date">
-                  Date : <span>(Date & Time)</span>
-              </div>
+            <td width="33%" height="46%" align="center" valign="bottom">
+              <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
+              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
             </td>
-            <td width="34%" height="65%">
-              <div class="body-name">Ibnu Pratama</div>
-
-              <div class="body-date">
-                  Date : <span>(Date & Time)</span>
-              </div>
+            <td width="34%" height="46%" align="center" valign="bottom">
+              <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
+              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
             </td>
           </tr>
         </table>
       </div>
-      <table width="100%" style="margin-top: 12px;">
-        <tr>
-          <td width="8%">Issued By</td>
-          <td width="1%">:</td>
-          <td width="91%">Name PPC</td>
-        </tr>
-      </table>
     </div>
   </div>
-  <div style="margin-top:14px;">
-    <img src="./img/FooterJobCardRoutine.jpg" width="100%" alt="" srcset="">
+  <div class="page_break">
+    <div id="content6">
+      <div class="container">
+        <table width="100%" cellpadding="8" border="1"class="table-mt">
+          <tr style="background: #d4d7db;">
+            <th colspan="5" align="center">Material(s)</th>
+          </tr>
+          <tr style="background: #d4d7db;">
+            <th width="2%" align="center">No</th>
+            <th width="18%" align="center">Part Number</th>
+            <th width="50%" align="center">Item Description</th>
+            <th width="15%" align="center">Qty</th>
+            <th width="15%" align="center">Unit</th>
+          </tr>
+          <tr>
+            <td align="center" valign="top" width="2%">asd</td>
+            <td align="center" valign="top" width="18%">asd</td>
+            <td align="left" valign="top" width="50%">asd</td>
+            <td align="center" valign="top" width="15%">asd</td>
+            <td align="center" valign="top" width="15%">asd</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div id="content7">
+      <div class="container">
+        <table width="100%" cellpadding="8" border="1"class="table-mt">
+          <tr style="background: #d4d7db;">
+            <th colspan="5" align="center">Tool(s)</th>
+          </tr>
+          <tr style="background: #d4d7db;">
+            <th width="2%" align="center">No</th>
+            <th width="18%" align="center">Part Number</th>
+            <th width="50%" align="center">Item Description</th>
+            <th width="15%" align="center">Qty</th>
+            <th width="15%" align="center">Unit</th>
+          </tr>
+          <tr>
+            <td align="center" valign="top" width="2%">asd</td>
+            <td align="center" valign="top" width="18%">asd</td>
+            <td align="left" valign="top" width="50%">asd</td>
+            <td align="center" valign="top" width="15%">asd</td>
+            <td align="center" valign="top" width="15%">asd</td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
 </body>
 </html>

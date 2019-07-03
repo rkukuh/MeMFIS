@@ -28,6 +28,17 @@ class Status extends MemfisModel
     }
 
     /**
+     * Scope a query to only include category of defect card.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfDefectCard(Builder $query)
+    {
+        return $query->where('of', 'defectcard');
+    }
+
+    /**
      * Scope a query to only include category of employment.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -36,6 +47,17 @@ class Status extends MemfisModel
     public function scopeOfEmployment(Builder $query)
     {
         return $query->where('of', 'employment');
+    }
+
+    /**
+     * Scope a query to only include category of HTCRR.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfHtCrr(Builder $query)
+    {
+        return $query->where('of', 'htcrr');
     }
 
     /**
@@ -61,6 +83,17 @@ class Status extends MemfisModel
     }
 
     /**
+     * Scope a query to only include category of project.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfProject(Builder $query)
+    {
+        return $query->where('of', 'project');
+    }
+
+    /**
      * Scope a query to only include category of quotation.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -79,6 +112,8 @@ class Status extends MemfisModel
      * This function will get all of the owning statusable models.
      * See:
      * - JobCard's statuses() method for the inverse
+     *
+     * @return mixed
      */
     public function statusable()
     {

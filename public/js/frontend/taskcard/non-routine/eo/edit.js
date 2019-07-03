@@ -659,6 +659,7 @@ let TaskCard = {
             let quantity = $('input[name=quantity_item]').val();
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
+            let remark_item = $('#remark_item').val();
 
             $.ajax({
                 headers: {
@@ -671,6 +672,7 @@ let TaskCard = {
                     item_id: material,
                     quantity: quantity,
                     unit_id: unit_material,
+                    note: remark_item,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -966,6 +968,8 @@ let TaskCard = {
             let quantity = $('input[name=quantity]').val();
             let tool = $('#tool').val();
             let unit_tool = $('#unit_tool').val();
+            let remark_tool = $('#remark_tool').val();
+
 
             $.ajax({
                 headers: {
@@ -978,6 +982,7 @@ let TaskCard = {
                     item_id: tool,
                     quantity: quantity,
                     unit_id: unit_tool,
+                    note: remark_tool,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -1240,6 +1245,8 @@ $('.footer').on('click', '.add-taskcard', function () {
         repeat_amount[i] = $(this).val();
     });
     repeat_amount = repeat_amount.filter(Boolean);
+    let internal_number = { internal_number: $('input[name=company_number]').val() };
+    let internal_numberJSON = JSON.stringify(internal_number);
 
     let data = new FormData();
     data.append("title", $('input[name=title]').val());
@@ -1253,13 +1260,13 @@ $('.footer').on('click', '.add-taskcard', function () {
     data.append("scheduled_priority_id", $('#scheduled_priority_id').val());
     data.append("scheduled_priority_type", $('input[name=prior_to]:checked').val());
     if ($('input[name=prior_to]:checked').val() == 'date') {
-        data.append("scheduled_priority_amount", $('#date').val());
+        data.append("scheduled_priority_text", $('#date').val());
     }
     else if ($('input[name=prior_to]:checked').val() == 'hour') {
-        data.append("scheduled_priority_amount", $('#hour').val());
+        data.append("scheduled_priority_text", $('#hour').val());
     }
     else if ($('input[name=prior_to]:checked').val() == 'cycle') {
-        data.append("scheduled_priority_amount", $('#cycle').val());
+        data.append("scheduled_priority_text", $('#cycle').val());
     }
     data.append("recurrence_id", $('#recurrence_id').val());
     data.append("recurrence_amount", $('input[name=recurrence]').val());
@@ -1271,6 +1278,7 @@ $('.footer').on('click', '.add-taskcard', function () {
     data.append("threshold_amount", JSON.stringify(threshold_amount));
     data.append("repeat_amount", JSON.stringify(repeat_amount));
     data.append("category_id", $('#category').val());
+    data.append("additionals",  internal_numberJSON);
     data.append("fileInput", document.getElementById('taskcard').files[0]);
     data.append('_method', 'PUT');
 

@@ -58,13 +58,14 @@ let Customer = {
                 },
             ]
         });
+        
         $('.customer_address_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer/'+ customer_uuid +'/address',
+                        url: '/datatables/customer/'+ customer_uuid +'/addresses',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -761,7 +762,7 @@ let Customer = {
             });
 
             let type_phone_array = [];
-            $('#phone ').each(function (i) {
+            $('input[name^=phone_array]').each(function (i) {
                 type_phone_array[i] = $('input[name="group-phone[' + i + '][type_phone]"]:checked').val();
             });
 
@@ -782,7 +783,7 @@ let Customer = {
             });
 
             let email_array = [];
-            $('#email ').each(function (i) {
+            $('input[name^=email_array]').each(function (i) {
                 email_array[i] = document.getElementsByName('group-email[' + i + '][email]')[0].value;
             });
 
@@ -803,14 +804,11 @@ let Customer = {
                 attn_name_array[i] = $('input[name="attn-name"]')[i].value;
             });
 
-            
             let attn_position_array = [];
             $('input[name="attn-position"]').each(function (i) {
                 attn_position_array[i] = $('input[name="attn-position"]')[i].value;
             });
-            console.log(attn_position_array);
             attn_position_array.pop();
-            console.log(attn_position_array);
             
             let attn_phone_array = [];
             $('input[name="attn-phone"]').each(function (i) {
@@ -867,10 +865,15 @@ let Customer = {
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
-                            document.getElementById('name').value = name;
-                        }
+                        $.each(data.errors, function (key, value) {
+                            var name = $("input[name='"+key+"']");
+                            if(key.indexOf(".") != -1){
+                              var arr = key.split(".");
+                              name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
+                            }
+                            name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
+                          }); 
+
                     } else {
                         $('#modal_customer').modal('hide');
 
@@ -887,6 +890,45 @@ let Customer = {
             });
         });
 
+        $('.modal-footer').on('click', '.add-address', function () {
+            let address = $('#address-modal').val();
+            let address_type = $('#address_type').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'POST',
+                url: '/customer/' + customer_uuid + '/addresses',data: {
+                    _token: $('input[name=_token]').val(),
+                    address:address,
+                    address_type: address_type
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        $.each(data.errors, function (key, value) {
+                            var name = $("input[name='"+key+"']");
+                            if(key.indexOf(".") != -1){
+                              var arr = key.split(".");
+                              name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
+                            }
+                            name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
+                          }); 
+                    } else {
+                        $('#modal_address').modal('hide');
+
+                        let table = $('.customer_address_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                            timeOut: 5000
+                        });
+                    }
+                }
+            });
+        });
     }
 };
 

@@ -1,10 +1,5 @@
 <?php
 
-Route::get('/quotation-doc', function () {
-    $pdf = \PDF::loadView('frontend/form/quotation');
-    return $pdf->stream();
-});
-
 Route::get('/preliminary', function () {
     $pdf = \PDF::loadView('frontend/form/preliminary');
     return $pdf->stream();
@@ -102,6 +97,11 @@ Route::get('/jobcard-basic', function () {
     return $pdf->stream();
 });
 
+Route::get('/jobcard-cri', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_cri');
+    return $pdf->stream();
+});
+
 Route::get('/preliminaryinspection-one', function () {
     $pdf = \PDF::loadView('frontend/form/preliminaryinspection-one');
     return $pdf->stream();
@@ -113,6 +113,22 @@ Route::get('/preliminaryinspection-two', function () {
 });
 
 Route::get('/quotation-doc2', function () {
-    $pdf = \PDF::loadView('frontend/form/quotation2');
+    $pdf = \PDF::loadView('frontend/form/quotation');
+    return $pdf->stream();
+});
+
+Route::get('/dc-summary', function () {
+    $pdf = \PDF::loadView('frontend/form/dc_summary');
+    return $pdf->stream();
+});
+
+Route::get('/dc-page1', function () {
+    $pdf = \PDF::loadView('frontend/form/dc_page1');
+    return $pdf->stream();
+});
+
+Route::get('/dc-page2', function () {
+    $pdf = \PDF::loadView('frontend/form/dc_page2');
+    $pdf->setPaper('A4', 'landscape');
     return $pdf->stream();
 });

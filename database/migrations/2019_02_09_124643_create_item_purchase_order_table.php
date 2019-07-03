@@ -14,6 +14,7 @@ class CreateItemPurchaseOrderTable extends Migration
     public function up()
     {
         Schema::create('item_purchase_order', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('purchase_order_id');
             $table->unsignedInteger('item_id');
             $table->double('quantity');

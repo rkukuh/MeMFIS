@@ -54,34 +54,34 @@
   <div id="content">
     <div class="image">
         <img src="./img/RTS-Certificate.jpg" alt="">
-    </div>  
+    </div>
     <div class="kotak">
-      <h2>CERTIFICATE RELEASE TO SERVICE</h2>
+      <h2>CERTIFICATE OF RELEASE TO SERVICE</h2>
       <table width="100%">
         <tr width="100%">
-          <td width="40%">Project Refrence</td>
-          <td width="1%">:</td>
-          <td width="59%"><span>generate</span></td>
+          <td width="40%" valign="top">Project Refrence</td>
+          <td width="1%" valign="top">:</td>
+          <td width="59%" valign="top"><span>generate</span></td>
         </tr>
         <tr width="100%">
-          <td width="40%">Aircraft Type / MSN</td>
-          <td width="1%">:</td>
-          <td width="59%"><span>generate</span></td>
+          <td width="40%" valign="top">Aircraft Type / MSN</td>
+          <td width="1%" valign="top">:</td>
+          <td width="59%" valign="top"><span>generate</span></td>
         </tr>
         <tr width="100%">
-          <td width="40%">Nasionality / Registration Mark</td>
-          <td width="1%">:</td>
-          <td width="59%"><span>generate</span></td>
+          <td width="40%" valign="top">Nasionality / Registration Mark</td>
+          <td width="1%" valign="top">:</td>
+          <td width="59%" valign="top"><span>generate</span></td>
         </tr>
         <tr width="100%">
-          <td width="40%">Aircarft Total Time</td>
-          <td width="1%">:</td>
-          <td width="59%"><span>generate</span></td>
+          <td width="40%" valign="top">Aircarft Total Time</td>
+          <td width="1%" valign="top">:</td>
+          <td width="59%" valign="top"><span>generate</span></td>
         </tr>
         <tr width="100%">
-          <td width="40%">Work Performed</td>
-          <td width="1%">:</td>
-          <td width="59%"><span>generate</span></td>
+          <td width="40%" valign="top">Work Performed</td>
+          <td width="1%" valign="top">:</td>
+          <td width="59%" valign="top"><span>generate</span></td>
         </tr>
         <tr width="100%">
           <td width="30%"></td>
@@ -90,7 +90,7 @@
             <div style="margin-top:-15px;">
               <ul style="margin-left:-40px;">
                 <li>-</li>
-                <li>free text</li>
+                <li>{{ $rts->work_performed[0] }}</li>
               </ul>
               <ul style="margin-top:-12px;margin-left:-40px;">
                 <li>-</li>
@@ -106,35 +106,35 @@
       </table>
       <table width="100%" cellspacing="9" style="margin-top:-6px" class="table2">
         <tr width="100%">
-          <td width="40%">Work Data/CAMP Refrence</td>
-          <td width="1%">:</td>
-          <td width="59%"><span>free text</span></td>
+          <td width="40%" valign="top">Work Data/CAMP Refrence</td>
+          <td width="1%" valign="top">:</td>
+          <td width="59%" valign="top"><span>free text</span></td>
         </tr>
         <tr width="100%">
-          <td width="40%">Exceptions</td>
-          <td width="1%">:</td>
-          <td width="59%"><span>free text</span></td>
+          <td width="40%" valign="top">Exceptions</td>
+          <td width="1%" valign="top">:</td>
+          <td width="59%" valign="top"><span>free text</span></td>
         </tr>
       </table>
       <p style="text-align:left;padding:5px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit id pariatur quas totam et nesciunt? Sunt quibusdam doloremque praesentium, corporis minima nostrum veniam! Atque, aliquid a ab unde ex minus?</p>
       <table width="100%">
         <tr width="100%">
-          <td width="18%">Name</td>
-          <td width="1%">:</td>
-          <td width="82%">Username Login</td>
+          <td width="18%" valign="top">Name</td>
+          <td width="1%" valign="top">:</td>
+          <td width="82%" valign="top">Username Login</td>
         </tr>
         <tr width="100%">
-          <td width="18%">Date / Time</td>
-          <td width="1%">:</td>
-          <td width="82%">General Sesuai date create</td>
+          <td width="18%" valign="top">Date / Time</td>
+          <td width="1%" valign="top">:</td>
+          <td width="82%" valign="top">General Sesuai date create</td>
         </tr>
       </table>
       <p style="text-align:left;font-size: 14px;padding-left:5px;">For and behalf of PT. Merpati Maintanance Facility</p>
       <table width="100%" style="margin-top:-4px;">
         <tr width="100%">
-          <td width="18%">Approval</td>
-          <td width="1%">:</td>
-          <td width="82%">
+          <td width="18%" valign="top">Approval</td>
+          <td width="1%" valign="top">:</td>
+          <td width="82%" valign="top">
             <div class="checkbox">
               <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Indonesia DGCA No :</span><span>145D-093</span>
             </div>

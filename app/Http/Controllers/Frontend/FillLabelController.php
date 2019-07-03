@@ -48,9 +48,9 @@ class FillLabelController extends Controller
      */
     public function project($project)
     {
-        $vendor = PurchaseOrder::with('vendor')->where('uuid',$vendor)->first();
+        $project = Project::with('quotations')->where('id',$project)->first();
 
-        return json_encode($vendor);
+        return response()->json($project);
 
     }
 

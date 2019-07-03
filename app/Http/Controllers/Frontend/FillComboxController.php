@@ -14,6 +14,7 @@ use App\Models\Project;
 use App\Models\License;
 use App\Models\Storage;
 use App\Models\Journal;
+use App\Models\Facility;
 use App\Models\Customer;
 use App\Models\Aircraft;
 use App\Models\Category;
@@ -103,8 +104,7 @@ class FillComboxController extends Controller
      */
     public function units()
     {
-        $units = Unit::ofQuantity()
-                     ->selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
+        $units = Unit::selectRaw('id, CONCAT(name, " (", symbol ,")") as name')
                      ->pluck('name', 'id');
 
         return json_encode($units);
@@ -302,7 +302,7 @@ class FillComboxController extends Controller
      */
     public function taskcardRelationship()
     {
-        $taskcard_relationships = Taskcard::pluck('title', 'id');
+        $taskcard_relationships = Taskcard::pluck('number', 'id');
 
         return json_encode($taskcard_relationships);
 
@@ -315,10 +315,10 @@ class FillComboxController extends Controller
      */
     public function item()
     {
-        $items = Item::pluck('name', 'id');
+        $items = Item::with('categories')
+                 ->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
 
-        return json_encode($items);
-
+        return $items;
     }
 
     /**
@@ -598,7 +598,7 @@ class FillComboxController extends Controller
     {
         $items = Item::with('categories')
                 ->whereHas('categories', function ($query) {
-                    $query->where('code', 'raw');
+                    $query->where('code', 'raw')->orWhere('code', 'cons')->orWhere('code', 'comp')->orWhere('code', 'service')->orWhere('code', 'facility');
                 })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
 
         return $items;
@@ -640,6 +640,18 @@ class FillComboxController extends Controller
         return json_encode($work_order);
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function facility()
+    {
+        $facilities = Facility::pluck('name', 'id');
+
+        return json_encode($facilities);
+
+    }
 
     /**
      * Display a listing of testing resource.
@@ -668,4 +680,5 @@ class FillComboxController extends Controller
         return json_encode($customerLevel);
 
     }
+
 }

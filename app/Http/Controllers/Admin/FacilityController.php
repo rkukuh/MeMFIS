@@ -59,7 +59,7 @@ class FacilityController extends Controller
      */
     public function edit(Facility $facility)
     {
-        //
+        return response()->json($facility);
     }
 
     /**

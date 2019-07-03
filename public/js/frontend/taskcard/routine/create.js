@@ -55,7 +55,7 @@ let TaskCard = {
         });
 
         $('.footer').on('click', '.add-taskcard', function () {
-
+            let status = true;
             let access = [];
             let i = 0;
             $("#access").val().forEach(function(entry) {
@@ -85,12 +85,24 @@ let TaskCard = {
 
             let threshold_type = [];
             $('select[name^="threshold_type"]').each(function(i) {
-                threshold_type[i] = $(this).val();
+                // if($(this).val() == 'Select'){
+                //     $(this).siblings(".select2-container").css('border', '5px solid red');
+                //     status = false;
+                // }else{
+                //     $(this).siblings(".select2-container").css('border', '2px grey');
+                    threshold_type[i] = $(this).val();
+                // }
             });
 
             let repeat_type = [];
             $('select[name^="repeat_type"]').each(function(i) {
-                repeat_type[i] = $(this).val();
+                // if($(this).val() == 'Select'){
+                //     $(this).siblings(".select2-container").css('border', '5px solid red');
+                //     status = false;
+                // }else{
+                //     $(this).siblings(".select2-container").css('border', '2px grey');
+                    repeat_type[i] = $(this).val();
+                // }
             });
 
             let threshold_amount = [];
@@ -109,6 +121,12 @@ let TaskCard = {
                 is_rii = 0;
             }
 
+            // if(status == false){
+            //     return $status;
+            // }
+            let internal_number = { internal_number: $('input[name=company_number]').val() };
+            let internal_numberJSON = JSON.stringify(internal_number);
+
             let data = new FormData();
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());
@@ -120,6 +138,7 @@ let TaskCard = {
             data.append( "performance_factor", $('input[name=performa]').val());
             data.append( "helper_quantity", $('input[name=helper_quantity]').val());
             data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
+            data.append( "ata", $('input[name=ata]').val());
             data.append( "work_area", $('#work_area').val());
             data.append( "access", JSON.stringify(access));
             data.append( "zone", JSON.stringify(zone));
@@ -132,6 +151,7 @@ let TaskCard = {
             data.append( "repeat_type", JSON.stringify(repeat_type));
             data.append( "threshold_amount", JSON.stringify(threshold_amount));
             data.append( "repeat_amount", JSON.stringify(repeat_amount));
+            data.append( "additionals",  internal_numberJSON);
             data.append( "is_rii", is_rii);
             data.append( "fileInput", document.getElementById('taskcard').files[0]);
 

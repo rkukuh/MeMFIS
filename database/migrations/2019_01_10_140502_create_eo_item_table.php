@@ -14,10 +14,12 @@ class CreateEoItemTable extends Migration
     public function up()
     {
         Schema::create('eo_item', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('eo_id');
             $table->unsignedInteger('item_id');
             $table->double('quantity');
             $table->unsignedInteger('unit_id');
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -27,6 +27,7 @@ class CreateQuotationsTable extends Migration
             $table->double('exchange_rate');
             $table->double('subtotal')->nullable();
             $table->json('charge')->nullable();
+            $table->integer('ppn')->nullable();
             $table->double('grandtotal')->nullable();
             $table->unsignedInteger('scheduled_payment_type')->nullable();
             $table->json('scheduled_payment_amount')->nullable();
@@ -57,6 +58,7 @@ class CreateQuotationsTable extends Migration
                     ->onDelete('restrict');
 
             $table->index('number');
+            $table->index('title');
         });
     }
 

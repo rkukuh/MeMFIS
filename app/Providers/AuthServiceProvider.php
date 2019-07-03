@@ -15,6 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Models\Fax::class => Policies\FaxPolicy::class,
+        Models\RTS::class => Policies\RTSPolicy::class,
         Models\User::class => Policies\UserPolicy::class,
         Models\Type::class => Policies\TypePolicy::class,
         Models\Unit::class => Policies\UnitPolicy::class,
@@ -48,10 +49,13 @@ class AuthServiceProvider extends ServiceProvider
         Models\Document::class => Policies\DocumentPolicy::class,
         Models\Language::class => Policies\LanguagePolicy::class,
         Models\Facility::class => Policies\FacilityPolicy::class,
+        Models\Approval::class => Policies\ApprovalPolicy::class,
+        Models\Progress::class => Policies\ProgressPolicy::class,
         Models\Quotation::class => Policies\QuotationPolicy::class,
         Models\Threshold::class => Policies\ThresholdPolicy::class,
         Models\Department::class => Policies\DepartmentPolicy::class,
         Models\DefectCard::class => Policies\DefectCardPolicy::class,
+        Models\Inspection::class => Policies\InspectionPolicy::class,
         Models\WorkPackage::class => Policies\WorkPackagePolicy::class,
         Models\Manufacturer::class => Policies\ManufacturerPolicy::class,
         Models\Certification::class => Policies\CertificationPolicy::class,
@@ -63,10 +67,15 @@ class AuthServiceProvider extends ServiceProvider
         Models\PurchaseRequest::class => Policies\PurchaseRequestPolicy::class,
         Models\OTRCertification::class => Policies\OTRCertificationPolicy::class,
         Models\CertificationEmployee::class => Policies\CertificationEmployeePolicy::class,
+        Models\Pivots\ProjectWorkPackage::class => Policies\ProjectWorkPackagePolicy::class,
+        Models\Pivots\TaskCardWorkPackage::class => Policies\TaskCardWorkPackagePolicy::class,
+        Models\Pivots\QuotationWorkPackage::class => Policies\QuotationWorkPackagePolicy::class,
+        Models\QuotationWorkPackageItem::class => Policies\QuotationWorkPackageItemPolicy::class,
         Models\ProjectWorkPackageManhour::class => Policies\ProjectWorkPackageManhourPolicy::class,
-        Models\Pivots\ProjectWorkPackage::class => Policies\Pivots\ProjectWorkPackagePolicy::class,
         Models\ProjectWorkPackageEngineer::class => Policies\ProjectWorkPackageEngineerPolicy::class,
         Models\ProjectWorkPackageFacility::class => Policies\ProjectWorkPackageFacilityPolicy::class,
+        Models\TaskCardWorkPackageSuccessor::class => Policies\TaskCardWorkPackageSuccessorPolicy::class,
+        Models\TaskCardWorkPackagePredecessor::class => Policies\TaskCardWorkPackagePredecessorPolicy::class,
     ];
 
     /**

@@ -1,6 +1,6 @@
 <button
     id="{{ $id or '' }}"
-    type="{{ $type or 'submit' }}"
+    type="{{ $type or 'button' }}"
     name="{{ $name or 'submit' }}"
     value="{{ $value or '' }}"
     class="btn
@@ -12,7 +12,7 @@
 >
 
     <span>
-        <i class="fa {{ $icon or 'fa-save' }}"></i>
+        <i class="fa {{ $icon or 'fa-check-circle' }}"></i>
 
         <span>{{ $text or 'Release Task' }}</span>
     </span>

@@ -59,99 +59,13 @@
                 </div>
         </div>
     </div>
-    <div class="col-sm-12 col-md-12 col-lg-12">
-        <table>
-            <tr>
-                <td>
-                    <label class="form-control-label">
-                        Inspector @include('frontend.common.label.required')
-                    </label>
-                </td>
-                <td>
-                    @component('frontend.common.input.number')
-                        @slot('text', 'inspector')
-                        @slot('id', 'inspector')
-                        @slot('input_append', '%')
-                        @slot('name', 'inspector')
-                        @slot('id_error', 'inspector')
-                    @endcomponent
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label class="form-control-label">
-                        Engineer @include('frontend.common.label.required')
-                    </label>
-                </td>
-                <td>
-                    @component('frontend.common.input.number')
-                        @slot('text', 'engineer')
-                        @slot('id', 'engineer')
-                        @slot('input_append', '%')
-                        @slot('name', 'engineer')
-                        @slot('id_error', 'engineer')
-                    @endcomponent
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label class="form-control-label">
-                        Mechanic @include('frontend.common.label.required')
-                    </label>
-                </td>
-                <td>
-                    @component('frontend.common.input.number')
-                        @slot('text', 'mechanic')
-                        @slot('id', 'mechanic')
-                        @slot('input_append', '%')
-                        @slot('name', 'mechanic')
-                        @slot('id_error', 'mechanic')
-                    @endcomponent
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label class="form-control-label">
-                        Supporting @include('frontend.common.label.required')
-                    </label>
-                </td>
-                <td>
-                    @component('frontend.common.input.number')
-                        @slot('text', 'supporting')
-                        @slot('id', 'supporting')
-                        @slot('input_append', '%')
-                        @slot('name', 'supporting')
-                        @slot('id_error', 'supporting')
-                    @endcomponent
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label class="form-control-label">
-                        Total
-                    </label>
-                </td>
-                <td>
-                    @component('frontend.common.input.number')
-                        @slot('text', 'supporting')
-                        @slot('id', 'supporting')
-                        @slot('input_append', '%')
-                        @slot('name', 'supporting')
-                        @slot('value', '100')
-                        @slot('disabled', 'disabled')
-                        @slot('id_error', 'supporting')
-                    @endcomponent
-                </td>
-            </tr>
-        </table>
-    </div>
     <div class="col-sm-12 col-md-12 col-lg-12 footer">
         <div class="flex">
             <div class="action-buttons">
                 @component('frontend.common.buttons.submit')
                     @slot('type','button')
-                    @slot('id', 'add-project')
-                    @slot('class', 'add-project')
+                    @slot('id', 'add-manhour')
+                    @slot('class', 'add-manhour')
                 @endcomponent
 
                 @include('frontend.common.buttons.reset')
@@ -174,17 +88,20 @@
             let project_prfm_factor = $('#perfoma').val();
             let total  = project_prfm_factor*total_mhrs;
             document.getElementById('total').innerHTML = total.toFixed(2);
+            let performa = 0;
 
         });
         $("#default").change(function() {
             if(this.checked) {
                 let total  = ($('#default').val()*total_mhrs);
+                performa = $('#default').val();
                 document.getElementById('perfoma').value = $('#default').val();
                 $("#perfoma").prop('disabled', true);
                 document.getElementById('total').innerHTML = total.toFixed(2);
             }
             else{
                 let total  = (1.6*total_mhrs);
+                performa = 1.6;
                 document.getElementById('perfoma').value = 1.6;
                 $("#perfoma").prop('disabled', false);
                 document.getElementById('total').innerHTML = total.toFixed(2);

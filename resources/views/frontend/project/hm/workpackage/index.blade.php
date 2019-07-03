@@ -30,7 +30,7 @@
                                             <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">Taskcard List(s)</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#m_tabs_tool_material">Tool and Material</a>
+                                            <a class="nav-link" data-toggle="tab" href="#m_tabs_tool_material">Material & Tool Taskcard List</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#m_tabs_enginner">Engineer Team</a>
@@ -59,7 +59,6 @@
                                     <div class="tab-pane" id="m_tabs_facility" role="tabpanel">
                                         @include('frontend.project.hm.facility.index')
                                     </div>
-
 
                                     @include('frontend.project.hm.modal.material.eo')
                                     @include('frontend.project.hm.modal.tool.eo')
@@ -97,4 +96,6 @@
     <script>
         let workPackage_uuid = '{{ $workPackage->uuid }}';
     </script>
+    <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
+
 @endpush

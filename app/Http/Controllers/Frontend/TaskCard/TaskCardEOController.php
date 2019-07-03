@@ -10,7 +10,7 @@ use App\Models\TaskCard;
 use App\Models\Category;
 use App\Models\Threshold;
 use Illuminate\Support\Facades\Storage;
-
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardEOStore;
 use App\Http\Requests\Frontend\TaskCardEOUpdate;
@@ -59,7 +59,7 @@ class TaskCardEOController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.nonroutine.eo.create', [
+        return view('frontend.task-card.nonroutine.eo.create', [
             'MaintenanceCycles' => $this->maintenanceCycle,
         ]);
     }
@@ -118,7 +118,7 @@ class TaskCardEOController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        return view('frontend.taskcard.nonroutine.eo.show',[
+        return view('frontend.task-card.nonroutine.eo.show',[
             'taskcard' => $taskCard
         ]);
     }
@@ -138,7 +138,7 @@ class TaskCardEOController extends Controller
         }
 
 
-        return view('frontend.taskcard.nonroutine.eo.edit',[
+        return view('frontend.task-card.nonroutine.eo.edit',[
             'tasks' => $this->task,
             'types' => $this->type,
             'taskCard' => $taskCard,
@@ -165,6 +165,18 @@ class TaskCardEOController extends Controller
         $this->decoder($request);
 
         if ($taskCard->update($request->all())) {
+            if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+                $taskCard->skills()->detach();
+                $taskCard->skills()->attach(Type::where('code','electrical')->first()->id);
+                $taskCard->skills()->attach(Type::where('code','radio')->first()->id);
+                $taskCard->skills()->attach(Type::where('code','instrument')->first()->id);
+            }
+            else{
+                if(sizeof($taskCard->skills) > 1 ){
+                    $taskCard->skills()->detach();
+                }
+                $taskCard->skills()->sync($request->skill_id);
+            }
             $taskCard->aircrafts()->sync($request->applicability_airplane);
             if($taskCard->thresholds)$taskCard->thresholds()->delete();
             if($taskCard->repeats)$taskCard->repeats()->delete();

@@ -61,10 +61,33 @@ class Item extends MemfisModel implements HasMedia
      *
      * This function will get all of the categories that are assigned to this item.
      * See: Category's items() method for the inverse
+     *
+     * @return mixed
      */
     public function categories()
     {
         return $this->morphToMany(Category::class, 'categorizable');
+    }
+
+    /**
+     * Many-to-Many: A defect card may have zero or many item.
+     *
+     * This function will retrieve all the defect cards of an item.
+     * See: DefectCard's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function defectcards()
+    {
+        return $this->belongsToMany(DefectCard::class, 'defectcard_item', 'item_id', 'defectcard_id')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id',
+                        'ipc_ref',
+                        'sn_on',
+                        'sn_off'
+                    )
+                    ->withTimestamps();
     }
 
     /**
@@ -80,7 +103,8 @@ class Item extends MemfisModel implements HasMedia
         return $this->belongsToMany(TaskCard::class, 'eo_item', 'item_id', 'eo_id')
                     ->withPivot(
                         'quantity',
-                        'unit_id'
+                        'unit_id',
+                        'note'
                     )
                     ->withTimestamps();
     }
@@ -106,6 +130,25 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
+     * Many-to-Many: An HTCRR may have one or many item.
+     *
+     * This function will retrieve all the HTCRR of an item.
+     * See: HtCrr's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function htcrr()
+    {
+        return $this->belongsToMany(HtCrr::class)
+                    ->withPivot(
+                        'quantity',
+                        'unit_id',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many: An item may have zero or one account code (journal).
      *
      * This function will retrieve the account code (journal) of an item.
@@ -122,6 +165,8 @@ class Item extends MemfisModel implements HasMedia
      * One-to-Many: A manufacturer can create zero or many items.
      *
      * This function will get a manufacturer of an item.
+     *
+     * @return mixed
      */
     public function manufacturer()
     {
@@ -133,6 +178,8 @@ class Item extends MemfisModel implements HasMedia
      *
      * This function will get all of the item's prices.
      * See: Price's priceable() method for the inverse
+     *
+     * @return mixed
      */
     public function prices()
     {
@@ -150,7 +197,11 @@ class Item extends MemfisModel implements HasMedia
     public function projects()
     {
         return $this->belongsToMany(Project::class)
-                    ->withPivot('quantity')
+                    ->withPivot(
+                        'quantity',
+                        'unit_id',
+                        'note'
+                    )
                     ->withTimestamps();
     }
 
@@ -210,7 +261,7 @@ class Item extends MemfisModel implements HasMedia
         return $this->belongsToMany(Quotation::class)
                     ->withPivot(
                         'taskcard_id',
-                        'pricelist_unit',
+                        'pricelist_unit_id',
                         'pricelist_price',
                         'subtotal',
                         'note'
@@ -246,7 +297,8 @@ class Item extends MemfisModel implements HasMedia
         return $this->belongsToMany(TaskCard::class, 'item_taskcard', 'item_id', 'taskcard_id')
                     ->withPivot(
                         'quantity',
-                        'unit_id'
+                        'unit_id',
+                        'note'
                     )
                     ->withTimestamps();
     }
@@ -255,6 +307,8 @@ class Item extends MemfisModel implements HasMedia
      * One-Way 1-1: An item must have initial unit.
      *
      * This function will get a unit of a given item.
+     *
+     * @return mixed
      */
     public function unit()
     {

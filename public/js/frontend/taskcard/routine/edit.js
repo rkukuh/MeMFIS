@@ -13,7 +13,6 @@ let TaskCard = {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
-
                             return dataSet;
                         }
                     }
@@ -43,7 +42,12 @@ let TaskCard = {
                     }
                 }
             },
-            columns: [
+            columns: [{
+                field: 'code',
+                title: 'PN',
+                sortable: 'asc',
+                filterable: !1,
+                },
                 {
                     field: 'name',
                     title: 'Tool',
@@ -59,6 +63,12 @@ let TaskCard = {
                 {
                     field: 'pivot.unit',
                     title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.note',
+                    title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -296,6 +306,12 @@ let TaskCard = {
             },
             columns: [
                 {
+                    field: 'code',
+                    title: 'PN',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'name',
                     title: 'Material',
                     sortable: 'asc',
@@ -310,6 +326,12 @@ let TaskCard = {
                 {
                     field: 'pivot.unit',
                     title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.note',
+                    title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -474,9 +496,10 @@ let TaskCard = {
         });
 
         $('.add-item').on('click', function () {
-            let quantity = $('input[name=quantity_item]').val();
+            let quantity = $('#quantity_material').val();
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
+            let remark_material = $('#remark_material').val();
 
             $.ajax({
                 headers: {
@@ -489,6 +512,7 @@ let TaskCard = {
                     item_id: material,
                     quantity: quantity,
                     unit_id: unit_material,
+                    note: remark_material,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -500,7 +524,7 @@ let TaskCard = {
                             $('#quantity_item-error').html(data.errors.quantity[0]);
                         }
                         document.getElementById('material').value = material;
-                        document.getElementById('quantity').value = quantity;
+                        document.getElementById('quantity_item').value = quantity;
 
                     } else {
 
@@ -519,9 +543,10 @@ let TaskCard = {
             });
         });
         $('.add-tool').on('click', function () {
-            let quantity = $('input[name=quantity]').val();
+            let quantity = $('#quantity_tool').val();
             let tool = $('#tool').val();
             let unit_tool = $('#unit_tool').val();
+            let remark_tool = $('#remark_tool').val();
 
             $.ajax({
                 headers: {
@@ -534,6 +559,7 @@ let TaskCard = {
                     item_id: tool,
                     quantity: quantity,
                     unit_id: unit_tool,
+                    note: remark_tool,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -545,7 +571,7 @@ let TaskCard = {
                             $('#quantity-error').html(data.errors.quantity[0]);
                         }
                         document.getElementById('tool').value = tool;
-                        document.getElementById('quantity').value = quantity;
+                        document.getElementById('quantity_tool').value = quantity;
                     } else {
 
                         toastr.success('Tool has been created.', 'Success', {
@@ -684,7 +710,7 @@ let TaskCard = {
 
 
         $('.footer').on('click', '.edit-taskcard', function () {
-
+            let status = true;
             let access = [];
             let i = 0;
             $("#access").val().forEach(function(entry) {
@@ -714,13 +740,25 @@ let TaskCard = {
 
             let threshold_type = [];
             $('select[name^="threshold_type"]').each(function(i) {
-                threshold_type[i] = $(this).val();
+                // if($(this).val() == 'Select'){
+                    // $(this).siblings(".select2-container").css('border', '5px solid red');
+                    // status = false;
+                // }else{
+                    // $(this).siblings(".select2-container").css('border', '2px grey');
+                    threshold_type[i] = $(this).val();
+                // }
             });
             threshold_type = threshold_type.filter(Boolean);
 
             let repeat_type = [];
             $('select[name^="repeat_type"]').each(function(i) {
-                repeat_type[i] = $(this).val();
+                // if($(this).val() == 'Select'){
+                    // $(this).siblings(".select2-container").css('border', '5px solid red');
+                    // status = false;
+                // }else{
+                    // $(this).siblings(".select2-container").css('border', '2px grey');
+                    repeat_type[i] = $(this).val();
+                // }
             });
             repeat_type = repeat_type.filter(Boolean);
 
@@ -741,6 +779,12 @@ let TaskCard = {
             } else {
                 is_rii = 0;
             }
+
+            if(status == false){
+                return $status;
+            }
+            let internal_number = { internal_number: $('input[name=company_number]').val() };
+            let internal_numberJSON = JSON.stringify(internal_number);
 
             let data = new FormData();
             data.append("title", $('input[id=title]').val());
@@ -766,6 +810,7 @@ let TaskCard = {
             data.append("threshold_amount", JSON.stringify(threshold_amount));
             data.append("repeat_amount", JSON.stringify(repeat_amount));
             data.append("is_rii", is_rii);
+            data.append("additionals",  internal_numberJSON);
             data.append("fileInput", document.getElementById('taskcard').files[0]);
             data.append('_method', 'PUT');
 

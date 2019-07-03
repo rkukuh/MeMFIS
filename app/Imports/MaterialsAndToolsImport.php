@@ -103,6 +103,10 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
                 $unit = Unit::ofQuantity()
                             ->where('name', 'Roll')->first()->id;
                 break;
+            case 'ROLL':
+                $unit = Unit::ofQuantity()
+                            ->where('name', 'Roll')->first()->id;
+                break;
             case 'L':
                 $unit = Unit::ofWeight()
                             ->where('name', 'Liter')->first()->id;
@@ -134,9 +138,17 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
                 $category = Category::ofItem()
                                     ->where('name', 'Raw Material')->first()->id;
                 break;
+            case 'RAW':
+                $category = Category::ofItem()
+                                    ->where('name', 'Raw Material')->first()->id;
+                break;
             case 'TOOLS':
                 $category = Category::ofItem()
                                     ->where('name', 'Tool')->first()->id;
+                break;
+            case 'TOOL':
+            $category = Category::ofItem()
+                                ->where('name', 'Tool')->first()->id;
                 break;
             case 'COMP':
                 $category = Category::ofItem()

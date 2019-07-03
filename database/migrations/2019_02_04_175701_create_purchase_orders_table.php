@@ -31,8 +31,6 @@ class CreatePurchaseOrdersTable extends Migration
             $table->unsignedInteger('top_type');
             $table->integer('top_day_amount')->nullable();
             $table->timestamp('top_start_at')->nullable();
-            $table->unsignedInteger('approved_by')->nullable();
-            $table->timestamp('approved_at')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

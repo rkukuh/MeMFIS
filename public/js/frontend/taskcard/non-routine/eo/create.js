@@ -88,15 +88,15 @@ let TaskCard = {
             // let manual_affected_id = $('#manual_affected_id').val();
 
             // let prior_to = $('input[name="prior_to"]:checked').val();
-            // let scheduled_priority_amount = '';
+            // let scheduled_priority_text = '';
             // if(prior_to == 'date'){
-            //     scheduled_priority_amount = $('#date').val();
+            //     scheduled_priority_text = $('#date').val();
             // }
             // else if (prior_to == 'hour'){
-            //     scheduled_priority_amount = $('#hour').val();
+            //     scheduled_priority_text = $('#hour').val();
             // }
             // else if(prior_to == 'cycle'){
-            //     scheduled_priority_amount = $('#cycle').val();
+            //     scheduled_priority_text = $('#cycle').val();
 
             // }
 
@@ -131,6 +131,8 @@ let TaskCard = {
             $('input[name^="repeat_amount"]').each(function(i) {
                 repeat_amount[i] = $(this).val();
             });
+            let internal_number = { internal_number: $('input[name=company_number]').val() };
+            let internal_numberJSON = JSON.stringify(internal_number);
 
             let data = new FormData();
             data.append( "title", $('input[name=title]').val());
@@ -144,14 +146,15 @@ let TaskCard = {
             data.append( "scheduled_priority_id", $('#scheduled_priority_id').val());
             data.append( "scheduled_priority_type", $('input[name=prior_to]:checked').val());
             if($('input[name=prior_to]:checked').val() == 'date'){
-                data.append( "scheduled_priority_amount", $('#date').val());
+                data.append( "scheduled_priority_text", $('#date').val());
             }
             else if ($('input[name=prior_to]:checked').val() == 'hour'){
-                data.append( "scheduled_priority_amount", $('#hour').val());
+                data.append( "scheduled_priority_text", $('#hour').val());
             }
             else if($('input[name=prior_to]:checked').val() == 'cycle'){
-                data.append( "scheduled_priority_amount", $('#cycle').val());
+                data.append( "scheduled_priority_text", $('#cycle').val());
             }
+            data.append( "additionals",  internal_numberJSON);
             data.append( "recurrence_id", $('#recurrence_id').val());
             data.append( "recurrence_amount", $('input[name=recurrence]').val());
             data.append( "recurrence_type", $('#recurrence-select').val());
@@ -175,8 +178,8 @@ let TaskCard = {
                 data: data,
                 url: '/taskcard-eo',
 
-                //     // scheduled_priority_amount: prior_to_hour,
-                //     // scheduled_priority_amount: prior_to_cycle,
+                //     // scheduled_priority_text: prior_to_hour,
+                //     // scheduled_priority_text: prior_to_cycle,
                 // },
                 success: function (response) {
                     if (response.errors) {

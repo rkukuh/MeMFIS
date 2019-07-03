@@ -110,9 +110,9 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
                                                 </li>
-                                                <li class="nav-item">
+                                                <!-- <li class="nav-item">
                                                     <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool(s) & Material(s)</a>
-                                                </li>
+                                                </li> -->
                                             </ul>
 
                                             <div class="tab-content">
@@ -126,11 +126,11 @@
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Work Package Summary')
-                                                                @slot('href', route('frontend.summary.workpackage-summary') )
+                                                                @slot('href', route('frontend.summary.workpackage', $workPackage->uuid) )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Routine Summary')
-                                                                @slot('href', route('frontend.summary.routine-summary') )
+                                                                @slot('href', route('frontend.summary.routine', $workPackage->uuid) )
                                                             @endcomponent
                                                             </div>
                                                         </div>
@@ -146,23 +146,23 @@
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Work Package Summary')
-                                                                @slot('href', route('frontend.summary.workpackage-summary') )
+                                                                @slot('href', route('frontend.summary.workpackage', $workPackage->uuid) )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Non-routine Summary')
-                                                                @slot('href', route('frontend.summary.nonroutine-summary') )
+                                                                @slot('href', route('frontend.summary.nonroutine', $workPackage->uuid) )
                                                             @endcomponent
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
+                                                <!-- <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
                                                     @include('frontend.workpackage.item.index')
-                                                </div>
+                                                </div> -->
                                             </div>
 
-                                            @include('frontend.workpackage.modal.material.eo')
-                                            @include('frontend.workpackage.modal.tool.eo')
+                                            <!-- @include('frontend.workpackage.modal.material.eo') -->
+                                            <!-- @include('frontend.workpackage.modal.tool.eo') -->
                                             @include('frontend.workpackage.modal.material.routine-si')
                                             @include('frontend.workpackage.modal.tool.routine-si')
                                             @include('frontend.workpackage.modal.sequence')
@@ -242,5 +242,4 @@
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 
     <script src="{{ asset('js/frontend/workpackage/modal/datatables.js')}}"></script>
-
 @endpush

@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
 use App\Models\WorkPackage;
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Frontend\ProjectHMStore;
@@ -50,6 +51,8 @@ class ProjectHMController extends Controller
      */
     public function store(ProjectHMStore $request)
     {
+        $request->merge(['code' => DocumentNumber::generate('PROJ-', Project::count()+1)]);
+
         $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
 
         $project = Project::create($request->all());
@@ -85,6 +88,7 @@ class ProjectHMController extends Controller
      */
     public function edit(Project $project)
     {
+        $attention = $project->quotations;
         return view('frontend.project.hm.edit',[
             'project' => $project,
             'aircrafts' => $this->aircrafts,

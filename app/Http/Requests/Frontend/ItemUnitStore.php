@@ -32,7 +32,7 @@ class ItemUnitStore extends FormRequest
             'unit_id' => [
                 'required',
                 Rule::exists('units', 'id')->where(function ($query) {
-                    $query->whereIn('type_id', (new Unit())->ofQuantity()->get());
+                    $query->whereIn('type_id', (new Unit())->get());
                 }),
             ],
         ];
@@ -50,7 +50,7 @@ class ItemUnitStore extends FormRequest
         ];
     }
 
-    protected function failedValidation(Validator $validator) { 
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()])); 
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }

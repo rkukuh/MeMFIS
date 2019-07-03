@@ -4,6 +4,16 @@ Route::name('testing.')->group(function () {
 
     Route::group(['prefix' => '_test'], function () {
 
+        Route::get('/docnum', function () {
+
+            echo App\Helpers\DocumentNumber::generate('TC-', App\Models\TaskCard::count());
+            echo "\n";
+            echo App\Helpers\DocumentNumber::generate('JC-', App\Models\JobCard::count());
+            echo "\n";
+            echo App\Helpers\DocumentNumber::generate('WP-', App\Models\WorkPackage::count());
+
+        });
+
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
         Route::view('/taskcard-wip', 'frontend/testing/taskcard-wip')->name('taskcard');

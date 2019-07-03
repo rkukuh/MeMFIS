@@ -36,6 +36,8 @@ class Email extends MemfisModel
      * See:
      * - Customer's emails() method for the inverse
      * - Employee's emails() method for the inverse
+     *
+     * @return mixed
      */
     public function emailable()
     {

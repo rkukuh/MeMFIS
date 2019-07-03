@@ -16,7 +16,13 @@ class TaskCardDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = TaskCard::with('type','aircrafts','task','skill')->get();
+        $data = $alldata = TaskCard::with('type','aircrafts','task')->get();
+
+        foreach($alldata as $taskcard){
+            if(isset($taskcard->workarea) ){
+                $taskcard->workarea_name .= $taskcard->workarea->name;
+            }
+        }
 
         foreach($alldata as $item){
             if(isset($item->aircrafts) ){
@@ -27,6 +33,20 @@ class TaskCardDatatables extends Controller
                     else{
                     $item->pesawat .= $item->aircrafts[$index]->name.", ";
                     }
+                }
+            }
+        }
+
+        foreach($alldata as $item){
+            if(isset($item->skills) ){
+                if(sizeof($item->skills) == 3){
+                    $item->skill .= "ERI";
+                }
+                else if(sizeof($item->skills) == 1){
+                    $item->skill .= $item->skills[0]->name;
+                }
+                else{
+                    $item->skill .= '';
                 }
             }
         }
@@ -129,63 +149,63 @@ class TaskCardDatatables extends Controller
     {
         // dd($request->taskcard_routine_type);
 
-        if(empty($request->taskcard_routine_type) ){
-            dd('empty');
-            $data = $alldata = TaskCard::with('type','aircrafts','task')->get();
-            // $data = $alldata = json_decode(TaskCard::with('type','aircrafts')->get());
+        $TaskCard = TaskCard::with('task','aircrafts','skills','type');
 
-            foreach($alldata as $item){
-                if(isset($item->aircrafts) ){
-                    for($index = 0; sizeof($item->aircrafts) > $index; $index++){
-                        if(sizeof($item->aircrafts)-1 == $index){
-                        $item->pesawat .= $item->aircrafts[$index]->name;
-                        }
-                        else{
-                        $item->pesawat .= $item->aircrafts[$index]->name.", ";
-                        }
+        if (!empty($request->task_type_id)) {
+            $TaskCard->whereHas('task', function ($query) use ($request) {
+                $query->where('task_id', $request->task_type_id);
+            });
+        }
+        if (!empty($request->aircrafts)) {
+            $TaskCard->whereHas('aircrafts', function ($query) use ($request) {
+                $query->whereIn('aircraft_id', $request->aircrafts);
+            });
+        }
+        if (!empty($request->skills)) {
+            $TaskCard->whereHas('skills', function ($query) use ($request) {
+                $query->where('skill_id', $request->skills);
+            });
+        }
+        if (!empty($request->taskcard_routine_type)) {
+            $TaskCard->whereHas('type', function ($query) use ($request) {
+                $query->whereIn('type_id', $request->taskcard_routine_type);
+            });
+        }
+        // if (!empty($request->task_card_no)) {
+        //     $TaskCard->orderBy('number', $request->task_card_no);
+        // }
+        $TaskCard = $TaskCard->get();
+
+        foreach($TaskCard as $item){
+            if(isset($item->aircrafts) ){
+                for($index = 0; sizeof($item->aircrafts) > $index; $index++){
+                    if(sizeof($item->aircrafts)-1 == $index){
+                    $item->pesawat .= $item->aircrafts[$index]->name;
+                    }
+                    else{
+                    $item->pesawat .= $item->aircrafts[$index]->name.", ";
                     }
                 }
             }
         }
-        else{
-            // dd('non empty');
 
-            // $data = $alldata = TaskCard::with('type','aircrafts','task')->whereHas('type', function ($query) {
-            //     $query->wherein('code', 'basic');
-            // })->get();
-            $data = $alldata = TaskCard::with('type','aircrafts')->get();
-            // dd($data);
-
-            // foreach($alldata as $item){
-            //     if(isset($item->aircrafts) ){
-            //         for($index = 0; sizeof($item->aircrafts) > $index; $index++){
-            //             if(sizeof($item->aircrafts)-1 == $index){
-            //             $item->pesawat .= $item->aircrafts[$index]->name;
-            //             }
-            //             else{
-            //             $item->pesawat .= $item->aircrafts[$index]->name.", ";
-            //             }
-            //         }
-            //     }
-            // }
+        foreach($TaskCard as $item){
+            if(isset($item->skills) ){
+                if(sizeof($item->skills) == 3){
+                    $item->skill .= "ERI";
+                }
+                else if(sizeof($item->skills) == 1){
+                    $item->skill .= $item->skills[0]->name;
+                }
+                else{
+                    $item->skill .= '';
+                }
+            }
         }
 
-        // $data = $alldata = TaskCard::with('type','aircrafts','task')->where('title','TaskCard Basic Dummy #1052128240')->tget();
-        // // $data = $alldata = json_decode(TaskCard::with('type','aircrafts')->get());
+        // dd($TaskCard->get());
 
-        // foreach($alldata as $item){
-        //     if(isset($item->aircrafts) ){
-        //         for($index = 0; sizeof($item->aircrafts) > $index; $index++){
-        //             if(sizeof($item->aircrafts)-1 == $index){
-        //             $item->pesawat .= $item->aircrafts[$index]->name;
-        //             }
-        //             else{
-        //             $item->pesawat .= $item->aircrafts[$index]->name.", ";
-        //             }
-        //         }
-        //     }
-        // }
-        $data = $alldata = json_decode($alldata);
+        $data = $alldata = json_decode($TaskCard);
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])

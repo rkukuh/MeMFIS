@@ -14,6 +14,7 @@ class CreateStationTaskcardTable extends Migration
     public function up()
     {
         Schema::create('station_taskcard', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('taskcard_id');
             $table->unsignedInteger('station_id');
             $table->timestamps();

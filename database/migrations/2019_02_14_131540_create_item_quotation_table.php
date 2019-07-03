@@ -14,10 +14,11 @@ class CreateItemQuotationTable extends Migration
     public function up()
     {
         Schema::create('item_quotation', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('item_id');
             $table->unsignedInteger('quotation_id');
             $table->unsignedInteger('taskcard_id');
-            $table->unsignedInteger('pricelist_unit');
+            $table->unsignedInteger('pricelist_unit_id');
             $table->double('pricelist_price');
             $table->double('subtotal');
             $table->text('note')->nullable();
@@ -39,7 +40,7 @@ class CreateItemQuotationTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('pricelist_unit')
+            $table->foreign('pricelist_unit_id')
                     ->references('id')->on('units')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');

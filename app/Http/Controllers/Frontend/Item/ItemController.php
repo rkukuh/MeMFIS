@@ -21,7 +21,7 @@ class ItemController extends Controller
     public function __construct()
     {
         $this->tags = Tag::getWithType('item');
-        $this->units = Unit::ofQuantity()->get();
+        $this->units = Unit::all();
         $this->manufacturers = Manufacturer::all();
         $this->categories = Category::ofItem()->where('code','<>','tool')->get();
     }

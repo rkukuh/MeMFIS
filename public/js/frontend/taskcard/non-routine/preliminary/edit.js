@@ -63,6 +63,12 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
+                    field: 'pivot.note',
+                    title: 'Remark',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'actions',
                     sortable: !1,
                     overflow: 'visible',
@@ -137,6 +143,12 @@ let TaskCard = {
                 {
                     field: 'pivot.unit',
                     title: 'Unit name',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.note',
+                    title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -393,6 +405,7 @@ let TaskCard = {
             let quantity = $('input[name=quantity_item]').val();
             let material = $('#material').val();
             let unit_material = $('#unit_material').val();
+            let remark_material = $('#remark_material').val();
 
             $.ajax({
                 headers: {
@@ -405,6 +418,7 @@ let TaskCard = {
                     item_id: material,
                     quantity: quantity,
                     unit_id: unit_material,
+                    note: remark_material,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -442,6 +456,7 @@ let TaskCard = {
             let quantity = $('input[name=quantity]').val();
             let tool = $('#tool').val();
             let unit_tool = $('#unit_tool').val();
+            let remark_tool = $('#remark_tool').val();
 
             $.ajax({
                 headers: {
@@ -454,6 +469,7 @@ let TaskCard = {
                     item_id: tool,
                     quantity: quantity,
                     unit_id: unit_tool,
+                    note: remark_tool,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -699,6 +715,8 @@ let TaskCard = {
                 repeat_amount[i] = $(this).val();
             });
             repeat_amount = repeat_amount.filter(Boolean);
+            let internal_number = { internal_number: $('input[name=company_number]').val() };
+            let internal_numberJSON = JSON.stringify(internal_number);
 
             var data = new FormData();
             data.append( "title", $('input[name=title]').val());
@@ -709,6 +727,8 @@ let TaskCard = {
             data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
             data.append( "helper_quantity", $('input[name=helper_quantity]').val());
             data.append( "description", $('#instruction').val());
+            data.append(" additionals",  internal_numberJSON);
+
             data.append('_method', 'PUT');
 
             $.ajax({

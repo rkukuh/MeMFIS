@@ -20,8 +20,6 @@ class CreatePurchaseRequestsTable extends Migration
             $table->unsignedInteger('type_id');
             $table->timestamp('requested_at')->nullable();
             $table->timestamp('required_at')->nullable();
-            $table->unsignedInteger('approved_by')->nullable();
-            $table->timestamp('approved_at')->nullable();
             $table->unsignedInteger('project_id')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();

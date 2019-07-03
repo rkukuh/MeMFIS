@@ -1,14 +1,12 @@
 let locale = 'id';
 let IDRformatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 });
-let USDformatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'usd', minimumFractionDigits: 2, maximumFractionDigits: 2 });
-let numberFormat = new Intl.NumberFormat('id', { maximumSignificantDigits: 3 });
-let total = 0;
+let USDformatter = new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+let numberFormat = new Intl.NumberFormat(locale, { maximumFractionDigits: 3 });
 let quotation = $('#quotation_uuid').val();
+let exchange_rate = $('#exchange').val();
 var DatatableAutoColumnHideDemo = function () {
 
   var demo = function () {
-    console.log(quotation);
-
     $('.summary_datatable').mDatatable({
       data: {
         type: 'remote',
@@ -18,7 +16,8 @@ var DatatableAutoColumnHideDemo = function () {
             url: '/datatables/quotation/' + quotation + '/job-request',
             map: function (raw) {
               let dataSet = raw;
-
+              let total = subtotal = 0;
+             
               if (typeof raw.data !== 'undefined') {
                 dataSet = raw.data;
               }
@@ -57,8 +56,6 @@ var DatatableAutoColumnHideDemo = function () {
 
 
       },
-
-
       columns: [
         {
           field: 'code',
@@ -77,7 +74,7 @@ var DatatableAutoColumnHideDemo = function () {
               );
             }else{
               return (t.pivot.description + '<br>' +
-                '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x ' + USDformatter.format(t.pivot.manhour_rate) + '<br>' +
+                '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x $ ' + USDformatter.format(t.pivot.manhour_rate) + '<br>' +
                 '- Material Price'
               );
             }
@@ -86,16 +83,15 @@ var DatatableAutoColumnHideDemo = function () {
           field: 'ShipCity',
           title: 'Cost',
           template: function (a) {
-            document.getElementById("sub_total").innerHTML = IDRformatter.format(total);
-            $("#sub_total").attr("value", total);
+            
             if(currency == 1){
-              return ('Cost<br>' +
+              return ('<br>' +
                 IDRformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
                 ' 138'
               );
             }else{
-              return ('Cost<br>' +
-                USDformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
+              return ('<br>' +
+                '$ '+USDformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
                 ' 138'
               );
             }
@@ -124,7 +120,7 @@ var DatatableAutoColumnHideDemo = function () {
                     );
                   }else{
                     return (
-                      USDformatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                      '$ '+USDformatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
                       t.uuid +
                       '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                     );
@@ -147,40 +143,89 @@ var DatatableAutoColumnHideDemo = function () {
           sortable: 'asc',
           filterable: !1,
           template: function (t, e, i) {
+            total = 0;
             if(t.pivot.discount_value == null && t.pivot.discount_type == null){
-                total = total + t.pivot.manhour_total * t.pivot.manhour_rate + 138;
+                total = t.pivot.manhour_total * t.pivot.manhour_rate + 138;
+                subtotal = subtotal + t.pivot.manhour_total * t.pivot.manhour_rate ;
+                if(currency == 1){
+                  document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
+                  document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
+                  $("#grand_total_rupiah").attr("value", subtotal);
+                  $("#sub_total").attr("value", subtotal);
+                }else{
+                  let totalRupiah = subtotal * exchange_rate; 
+                      document.getElementById("sub_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      document.getElementById("grand_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      $("#grand_total").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
+                      $("#grand_total_rupiah").attr("value", totalRupiah);
+                }
                 if(currency == 1){ 
                     return (
                       IDRformatter.format(total)
                     );
                   }else{
                     return (
-                      USDformatter.format(total)
+                      "$"+USDformatter.format(total * exchange_rate)
                     );
                   }
             }
             else{
                 if(t.pivot.discount_type ==  'amount'){
-                    total = total + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
+                    total = t.pivot.manhour_total * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
+                    subtotal = subtotal + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
+                    if(currency == 1){
+                      document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
+                      $("#grand_total_rupiah").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+                    }else{
+                      let totalRupiah = subtotal * exchange_rate; 
+                      document.getElementById("sub_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      document.getElementById("grand_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      $("#grand_total").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
+                      $("#grand_total_rupiah").attr("value", totalRupiah);
+                    }
                     if(currency == 1){ 
                       return (
                         IDRformatter.format(total)
                       );
                     }else{
                       return (
-                        USDformatter.format(total)
+                        "$"+USDformatter.format(total * exchange_rate)
                       );
                     }
                 }
                 else if(t.pivot.discount_type == 'percentage'){
-                    total = total + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - (((t.pivot.manhour_total * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
+                    total = t.pivot.manhour_total * t.pivot.manhour_rate + 138 - (((t.pivot.manhour_total * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
+                    subtotal = subtotal + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - (((t.pivot.manhour_total * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
+                    if(currency == 1){
+                      document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
+                      $("#grand_total_rupiah").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+                    }else{
+                      let totalRupiah = subtotal * exchange_rate; 
+                      document.getElementById("sub_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      document.getElementById("grand_total").innerHTML = "$ "+USDformatter.format(subtotal);
+                      $("#grand_total").attr("value", subtotal);
+                      $("#sub_total").attr("value", subtotal);
+
+                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
+                      $("#grand_total_rupiah").attr("value", totalRupiah);
+                    }
                     if(currency == 1){ 
                       return (
                         IDRformatter.format(total)
                       );
                     }else{
                       return (
-                        USDformatter.format(total)
+                       "$"+USDformatter.format(total * exchange_rate)
                       );
                     }
                 }
@@ -189,7 +234,27 @@ var DatatableAutoColumnHideDemo = function () {
         },
       ],
     });
+    let value = [];
+    let inputs = $(".charge");
+    let currency = $("#currency").val();
+    let exchange_rate = $("#exchange").val();
+    let grandTotal = grandTotalRupiah = 0;
+    //get all values
+    for (let i = 0; i < inputs.length; i++) {
+        value[i] = parseInt($(inputs[i]).val());
+    }
+    const arrSum = arr => arr.reduce((a, b) => a + b, 0);
+    let subTotal = $('#sub_total').attr("value");
+    grandTotal = parseInt(subTotal) + parseInt(arrSum(value));
 
+    if(currency !== 1){
+        grandTotalRupiah = ( parseInt(subTotal) + parseInt(arrSum(value)) ) * exchange_rate;
+    }
+                
+    $('#grand_total').attr("value", grandTotal);
+    $('#grand_total_rupiah').attr("value", grandTotalRupiah);
+    $('#grand_total').html("$ "+USDformatter.format(grandTotal));
+    $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
   };
 
   return {

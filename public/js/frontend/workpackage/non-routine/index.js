@@ -57,10 +57,34 @@ let NonRoutineWorkpackage = {
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
+                            return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
+                        }
+                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
+                            return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
+                        }
+                        else if(t.type.code == "si"){
+                            return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
+                        }
+                        else if(t.type.code == "preliminary"){
+                            return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
+                        } else {
+                            return (
+                                'dummy'
+                            );
+                        }
+                    }
                 },
                 {
                     field: 'task.name',
                     title: 'Task',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'Manhour',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -225,10 +249,34 @@ let NonRoutineWorkpackage = {
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
+                            return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
+                        }
+                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
+                            return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
+                        }
+                        else if(t.type.code == "si"){
+                            return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
+                        }
+                        else if(t.type.code == "preliminary"){
+                            return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
+                        } else {
+                            return (
+                                'dummy'
+                            );
+                        }
+                    }
                 },
                 {
                     field: 'task.name',
                     title: 'Task',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'Manhour',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -393,10 +441,34 @@ let NonRoutineWorkpackage = {
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
+                            return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
+                        }
+                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
+                            return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
+                        }
+                        else if(t.type.code == "si"){
+                            return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
+                        }
+                        else if(t.type.code == "preliminary"){
+                            return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
+                        } else {
+                            return (
+                                'dummy'
+                            );
+                        }
+                    }
                 },
                 {
                     field: 'task.name',
                     title: 'Task',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'Manhour',
                     sortable: 'asc',
                     filterable: !1,
                 },

@@ -35,6 +35,8 @@ class Document extends MemfisModel
      * See:
      * - Customer's documents() method for the inverse
      * - Employee's documents() method for the inverse
+     *
+     * @return mixed
      */
     public function documentable()
     {

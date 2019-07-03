@@ -9,7 +9,7 @@ let Quotation = {
                 exchange_rate.val(1);
                 exchange_rate.attr("readonly", true);
             } else {
-                exchange_rate.val('');
+                exchange_rate.val(1);
                 exchange_rate.attr("readonly", false);
             }
         });
@@ -25,7 +25,6 @@ let Quotation = {
                     $('#project_title').html(data.title);
                     $('#name').html(data.customer.name);
                     $('#customer_id').val(data.customer.uuid);
-                    // alert(data.customer.uuid);
                     $.ajax({
                         url: '/label/get-customer/' + data.customer.uuid,
                         type: 'GET',
@@ -68,25 +67,6 @@ let Quotation = {
                                     });
                                 }
                             }
-
-
-                            // $('#project_number').html(data.code);
-                            // $('#project_title').html(data.title);
-                            // $('#name').html(data.customer.name);
-                            // $('#customer_id').val(data.customer.uuid);
-
-                            // if(workpackage_datatables_init == true){
-                            //     workpackage_datatables_init = false;
-                            //     workpackage(data.uuid);
-                            // }
-                            // else{
-                            //     let table = $('.workpackage_datatable').mDatatable();
-                            //     table.destroy();
-                            //     workpackage(data.uuid);
-                            //     table = $('.workpackage_datatable').mDatatable();
-                            //     table.originalDataSet = [];
-                            //     table.reload();
-                            // }
                         }
                     });
                     if (workpackage_datatables_init == true) {
@@ -179,10 +159,25 @@ let Quotation = {
         $('select[name="scheduled_payment_type"]').on('change', function () {
             let type = this.options[this.selectedIndex].innerHTML;
             if(type === "By Date"){
-                $.each($('#scheduled_payment '), function (key, value) {
-                    value[key].addClass("scheduledPayment");
+                $.each($('#scheduled_payment '), function () {
+                    $(this).addClass("scheduledPayment");
+                    $(this).val("");
+                    $(this).datetimepicker({
+                        format: "yyyy-mm-dd",
+                        todayHighlight: !0,
+                        autoclose: !0,
+                        startView: 2,
+                        minView: 2,
+                        forceParse: 0,
+                        pickerPosition: "bottom-left"
+                    });
                 });
-                $('input[name="scheduled_payment"]').addClass("scheduledPayment");
+            }else{
+                $.each($('#scheduled_payment '), function () {
+                    $(this).val("");
+                    $(this).removeClass("scheduledPayment");
+                    $(this).datetimepicker( "remove" );
+                });
             }
         });
 
@@ -193,9 +188,17 @@ let Quotation = {
             let attention_email = $('#email').val();
             let attention_address = $('#address').val();
             let scheduled_payment_array = [];
-            $('#scheduled_payment ').each(function (i) {
-                scheduled_payment_array[i] = $('input[name="group-scheduled_payment[' + i + '][scheduled_payment]"]').val();
-            });
+            let type = $('#scheduled_payment_type').children("option:selected").html();
+            if(type === "By Date"){
+                $('select[name^=scheduled_payment] ').each(function (i) {
+                    scheduled_payment_array[i] = $(this).val();
+                });
+            }else{
+                $('#scheduled_payment ').each(function (i) {
+                    scheduled_payment_array[i] = parseInt($(this).val());
+                });
+            }
+            scheduled_payment_array.pop();
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
@@ -213,6 +216,8 @@ let Quotation = {
             data.append("attention_email", attention_email);
             data.append("attention_address", attention_address);
             data.append("total", 0.000000);
+            data.append("subtotal", 0.000000);
+            data.append("grandtotal", 0.000000);
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());
             data.append("top_description", $('#term_and_condition').val());
