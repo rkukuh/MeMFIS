@@ -94,14 +94,6 @@
                                         </tr>
                                         <tr>
                                             <td width="30%" style="background-color:beige;padding:10px;">
-                                                Inspection Type
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
                                                 Company Task No
                                             </td>
                                             <td width="70%" style="text-align:center">
@@ -125,7 +117,7 @@
                                                 Inspection Type
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->task->name}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -224,7 +216,7 @@
                                                 </td>
                                                 <td width="70%" style="text-align:center">
                                                 @if(isset($jobcard->helpers))
-                                                    @foreach($jobcard->helpers as $helper)    
+                                                    @foreach($jobcard->helpers as $helper)
                                                     <div class="row">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <select name="helper" style="width:100%" class="form-control m-select2">
@@ -233,7 +225,7 @@
                                                                 <option value="{{ $employee->code }}" @if($employee->code == $helper->code) selected @endif>{{ $employee->first_name }}</option>
                                                                 @endforeach
                                                             </select>
-                                                            
+
                                                         </div>
                                                     </div>
                                                     @endforeach
@@ -343,7 +335,7 @@
 <script src="{{ asset('js/frontend/functions/fill-combobox/helper.js')}}"></script>
 @endif
 <script src="{{ asset('js/frontend/functions/select2/helper.js')}}"></script>
-<!-- 
+<!--
     <script>
         $( document ).ready(function() {
         let helpers = {!! $jobcard->helpers !!}
@@ -352,7 +344,7 @@
         $('select[name^=helper]').select2().trigger('change');
         // $('select[name^=helper] option[value='+helpers[key].code+']').attr('selected','selected');
         });
-        
+
     </script> -->
     <script>
         $( document ).ready(function() {
@@ -361,7 +353,7 @@
             });
         console.log($('.helper').length);
         });
-        
+
     </script>
 
 

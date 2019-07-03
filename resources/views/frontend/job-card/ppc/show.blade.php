@@ -94,14 +94,6 @@
                                             </tr>
                                             <tr>
                                                 <td width="30%" style="background-color:beige;padding:10px;">
-                                                    Inspection Type
-                                                </td>
-                                                <td width="70%" style="text-align:center">
-                                                    Generated
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="30%" style="background-color:beige;padding:10px;">
                                                     Company Task No
                                                 </td>
                                                 <td width="70%" style="text-align:center">
@@ -125,7 +117,7 @@
                                                     Inspection Type
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    Generated
+                                                    {{$jobcard->taskcard->task->name}}
                                                 </td>
                                             </tr>
                                             <tr>
