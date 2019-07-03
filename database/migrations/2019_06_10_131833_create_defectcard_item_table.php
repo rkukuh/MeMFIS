@@ -19,9 +19,9 @@ class CreateDefectcardItemTable extends Migration
             $table->unsignedInteger('item_id');
             $table->integer('quantity');
             $table->unsignedInteger('unit_id');
-            $table->string('ipc_ref');
-            $table->string('sn_on');
-            $table->string('sn_off');
+            $table->string('ipc_ref')->nullable();
+            $table->string('sn_on')->nullable();
+            $table->string('sn_off')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -77,13 +77,13 @@ let summaryroutine = {
 
             },
             {
-                field: 'description',
+                field: 'pivot.note',
                 title: 'Remarks',
                 sortable: 'asc',
                 filterable: !1,
                 template: function (t) {
-                    if (t.description) {
-                        data = strtrunc(t.description, 50);
+                    if (t.pivot.note) {
+                        data = strtrunc(t.pivot.note, 50);
                         return (
                             '<p>' + data + '</p>'
                         );
@@ -180,13 +180,13 @@ let summaryroutine = {
 
                 },
                 {
-                    field: 'description',
+                    field: 'pivot.note',
                     title: 'Remarks',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
+                        if (t.pivot.note) {
+                            data = strtrunc(t.pivot.note, 50);
                             return (
                                 '<p>' + data + '</p>'
                             );
@@ -283,13 +283,13 @@ let summaryroutine = {
 
             },
             {
-                field: 'description',
+                field: 'pivot.note',
                 title: 'Remarks',
                 sortable: 'asc',
                 filterable: !1,
                 template: function (t) {
-                    if (t.description) {
-                        data = strtrunc(t.description, 50);
+                    if (t.pivot.note) {
+                        data = strtrunc(t.pivot.note, 50);
                         return (
                             '<p>' + data + '</p>'
                         );
@@ -386,13 +386,13 @@ let summaryroutine = {
 
             },
             {
-                field: 'description',
+                field: 'pivot.note',
                 title: 'Remarks',
                 sortable: 'asc',
                 filterable: !1,
                 template: function (t) {
-                    if (t.description) {
-                        data = strtrunc(t.description, 50);
+                    if (t.pivot.note) {
+                        data = strtrunc(t.pivot.note, 50);
                         return (
                             '<p>' + data + '</p>'
                         );
@@ -489,13 +489,13 @@ let summaryroutine = {
 
             },
             {
-                field: 'description',
+                field: 'pivot.note',
                 title: 'Remarks',
                 sortable: 'asc',
                 filterable: !1,
                 template: function (t) {
-                    if (t.description) {
-                        data = strtrunc(t.description, 50);
+                    if (t.pivot.note) {
+                        data = strtrunc(t.pivot.note, 50);
                         return (
                             '<p>' + data + '</p>'
                         );
@@ -592,13 +592,13 @@ let summaryroutine = {
 
             },
             {
-                field: 'description',
+                field: 'pivot.note',
                 title: 'Remarks',
                 sortable: 'asc',
                 filterable: !1,
                 template: function (t) {
-                    if (t.description) {
-                        data = strtrunc(t.description, 50);
+                    if (t.pivot.note) {
+                        data = strtrunc(t.pivot.note, 50);
                         return (
                             '<p>' + data + '</p>'
                         );
@@ -695,13 +695,13 @@ let summaryroutine = {
 
             },
             {
-                field: 'description',
+                field: 'pivot.note',
                 title: 'Remarks',
                 sortable: 'asc',
                 filterable: !1,
                 template: function (t) {
-                    if (t.description) {
-                        data = strtrunc(t.description, 50);
+                    if (t.pivot.note) {
+                        data = strtrunc(t.pivot.note, 50);
                         return (
                             '<p>' + data + '</p>'
                         );
@@ -798,13 +798,13 @@ let summaryroutine = {
 
             },
             {
-                field: 'description',
+                field: 'pivot.note',
                 title: 'Remarks',
                 sortable: 'asc',
                 filterable: !1,
                 template: function (t) {
-                    if (t.description) {
-                        data = strtrunc(t.description, 50);
+                    if (t.pivot.note) {
+                        data = strtrunc(t.pivot.note, 50);
                         return (
                             '<p>' + data + '</p>'
                         );
