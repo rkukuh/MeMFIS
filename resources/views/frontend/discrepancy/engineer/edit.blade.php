@@ -200,13 +200,12 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                RII
                                             </label>
 
                                             @component('frontend.common.input.checkbox')
                                                 @slot('id', 'is_rii')
                                                 @slot('name', 'is_rii')
-                                                @slot('text', 'IS RII?')
+                                                @slot('text', 'RII?')
                                                 @if ($discrepancy->is_rii == 1)
                                                         @slot('checked', 'checked')
                                                     @endif

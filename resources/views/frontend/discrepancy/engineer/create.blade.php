@@ -197,14 +197,13 @@
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                RII
+                                            <label class="form-control-label">   
                                             </label>
 
                                             @component('frontend.common.input.checkbox')
                                                 @slot('id', 'is_rii')
                                                 @slot('name', 'is_rii')
-                                                @slot('text', 'IS RII?')
+                                                @slot('text', 'RII?')
                                             @endcomponent
                                         </div>
                                     </div>
