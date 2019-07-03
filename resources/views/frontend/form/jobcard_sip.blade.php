@@ -434,7 +434,17 @@
         <tr>
           <td width="3%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
-          <td width="96%" valign="top">Yemimul</td>
+          <td width="96%" valign="top">
+              @php
+               $a = sizeof($helpers->toArray());
+              @endphp
+              @for ($i = 0; $i < $a-1; $i++)
+                {{$helpers[$i]->first_name}},&nbsp;
+              @endfor
+              @for ($i = $a-1; $i < $a; $i++)
+                {{$helpers[$i]->first_name}}
+              @endfor
+          </td>
         </tr>
       </table>
     </div>
