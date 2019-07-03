@@ -162,7 +162,7 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
@@ -219,7 +219,7 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
@@ -276,7 +276,7 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
@@ -333,7 +333,7 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
@@ -389,7 +389,7 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
@@ -446,7 +446,7 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
@@ -503,7 +503,7 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
@@ -559,7 +559,7 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
