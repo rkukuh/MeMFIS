@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\RTSStore;
 use App\Http\Requests\Frontend\RTSUpdate;
 
-class RTSController extends Controller
+class RTSProgressController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class RTSController extends Controller
      */
     public function index()
     {
-        return view('frontend.rts.index');
+        return view('frontend.rts.progress');
     }
 
     /**
@@ -28,7 +28,18 @@ class RTSController extends Controller
      */
     public function create(Project $project)
     {
-        //
+        if(RTS::where('project_id',$project)->first() <> null){
+            $this->edit(RTS::where('project_id',$project)->first()->uuid);
+        }
+        else{
+            $projects = Project::all();
+            $rts = RTS::where('project_id',$project->id)->first();
+            return view('frontend.rts.create', [
+                'rts' => $rts,
+                'projec' => $project,
+                'projects' => $projects
+            ]);
+        }
     }
 
     /**
@@ -39,7 +50,11 @@ class RTSController extends Controller
      */
     public function store(RTSStore $request)
     {
-      //
+        $request->merge(['work_performed' => join("|", $request->work_performed)]);
+
+        $project = RTS::create($request->all());
+
+        return response()->json($project);
     }
 
     /**
@@ -50,7 +65,7 @@ class RTSController extends Controller
      */
     public function show(RTS $rts)
     {
-        //
+        return view('frontend.rts.show');
     }
 
     /**
@@ -61,7 +76,14 @@ class RTSController extends Controller
      */
     public function edit(Project $project)
     {
-       //
+        $projects = Project::all();
+        $rts = RTS::where('project_id',$project->id)->first();
+
+        return view('frontend.rts.edit', [
+            'rts' => $rts,
+            'projec' => $project,
+            'projects' => $projects
+        ]);
     }
 
     /**
@@ -84,7 +106,9 @@ class RTSController extends Controller
      */
     public function destroy(RTS $rts)
     {
-        //
+        $rts->delete();
+
+        return response()->json($rts);
     }
 
     /**

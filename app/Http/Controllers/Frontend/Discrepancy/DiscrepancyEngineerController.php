@@ -47,7 +47,7 @@ class DiscrepancyEngineerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->merge(['code' => DocumentNumber::generate('JDEF-', TaskCard::count())]);
+        $request->merge(['code' => DocumentNumber::generate('JDEF-', DefectCard::count()+1)]);
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
         $defectcard = DefectCard::create($request->all());
 

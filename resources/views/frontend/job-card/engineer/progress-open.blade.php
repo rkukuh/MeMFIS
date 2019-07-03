@@ -204,6 +204,7 @@
                                                 {{$jobcard->taskcard->Description}}
                                             </td>
                                         </tr>
+                                        @if($jobcard->taskcard->helper_quantity != 0)
                                         <tr>
                                             <td width="30%" style="background-color:beige;padding:10px;">
                                                 Helper
@@ -212,42 +213,46 @@
                                                 {{$jobcard->taskcard->helper_quantity}}
                                             </td>
                                         </tr>
+                                        @endif
 
                                     </table>
-                                    <table border="1px" width="100%" style="margin-top:10px">
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Helper
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                            @if(isset($jobcard->helpers))
-                                                @foreach($jobcard->helpers as $helper)    
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <select name="helper" style="width:100%" class="form-control m-select2">
-                                                            <option value=""></option>
-                                                            @foreach($employees as $employee)
-                                                            <option value="{{ $employee->code }}" @if($employee->code == $helper->code) selected @endif>{{ $employee->first_name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        
+                                    @if($jobcard->taskcard->helper_quantity != 0)
+                                        <table border="1px" width="100%" style="margin-top:10px">
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Helper
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                @if(isset($jobcard->helpers))
+                                                    @foreach($jobcard->helpers as $helper)    
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <select name="helper" style="width:100%" class="form-control m-select2">
+                                                                <option value=""></option>
+                                                                @foreach($employees as $employee)
+                                                                <option value="{{ $employee->code }}" @if($employee->code == $helper->code) selected @endif>{{ $employee->first_name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                @endforeach
-                                            @else
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('text', 'helper')
-                                                            @slot('name', 'helper')
-                                                            @slot('id_error', 'helper')
-                                                        @endcomponent
+                                                    @endforeach
+                                                @else
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            @component('frontend.common.input.select2')
+                                                                @slot('text', 'helper')
+                                                                @slot('name', 'helper')
+                                                                @slot('id_error', 'helper')
+                                                            @endcomponent
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            @endif
-                                            </td>
-                                        </tr>
-                                    </table>
+                                                @endif
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    @endif
+
                                 </div>
                             </div>
                             <div class="form-group m-form__group row">

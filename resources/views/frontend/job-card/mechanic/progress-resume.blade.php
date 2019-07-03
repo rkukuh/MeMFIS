@@ -204,6 +204,7 @@
                                                 {{$jobcard->taskcard->Description}}
                                             </td>
                                         </tr>
+                                        @if($jobcard->taskcard->helper_quantity != 0)
                                         <tr>
                                             <td width="30%" style="background-color:beige;padding:10px;">
                                                 Helper
@@ -212,7 +213,7 @@
                                                 {{$jobcard->taskcard->helper_quantity}}
                                             </td>
                                         </tr>
-
+                                        @endif
                                     </table>
                                 </div>
                             </div>
