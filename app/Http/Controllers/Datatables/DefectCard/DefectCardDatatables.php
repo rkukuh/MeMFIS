@@ -30,12 +30,12 @@ class DefectCardDatatables extends Controller
         }
 
         foreach($DefectCard as $jobcard){
-            if(isset($jobcard->taskcard->skills) ){
-                if(sizeof($jobcard->taskcard->skills) == 3){
+            if(isset($jobcard->jobcard->taskcard->skills) ){
+                if(sizeof($jobcard->jobcard->taskcard->skills) == 3){
                     $jobcard->skill .= "ERI";
                 }
-                else if(sizeof($jobcard->taskcard->skills) == 1){
-                    $jobcard->skill .= $jobcard->taskcard->skills[0]->name;
+                else if(sizeof($jobcard->jobcard->taskcard->skills) == 1){
+                    $jobcard->skill .= $jobcard->jobcard->taskcard->skills[0]->name;
                 }
                 else{
                     $jobcard->skill .= '';
