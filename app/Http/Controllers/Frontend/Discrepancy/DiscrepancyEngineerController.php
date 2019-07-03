@@ -81,7 +81,21 @@ class DiscrepancyEngineerController extends Controller
      */
     public function show(DefectCard $discrepancy)
     {
-        return view('frontend.discrepancy.engineer.show');
+        $propose_corrections = array();
+        foreach($discrepancy->propose_corrections as $i => $defectcard){
+            $propose_corrections[$i] =  $defectcard->code;
+        }
+
+        $propose_correction_text = '';
+        foreach($discrepancy->propose_corrections as $i => $defectcard){
+            $propose_correction_text =  $defectcard->pivot->propose_correction_text;
+        }
+
+        return view('frontend.discrepancy.engineer.show', [
+            'discrepancy' => $discrepancy,
+            'propose_corrections' => $propose_corrections,
+            'propose_correction_text' => $propose_correction_text,
+        ]);
     }
 
     /**
