@@ -13,6 +13,9 @@ use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\DiscrepancyStore;
+use App\Http\Requests\Frontend\DiscrepancyUpdate;
+
 
 class DiscrepancyEngineerController extends Controller
 {
@@ -45,7 +48,7 @@ class DiscrepancyEngineerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DiscrepancyStore $request)
     {
         $request->merge(['code' => DocumentNumber::generate('JDEF-', DefectCard::count()+1)]);
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
@@ -116,7 +119,7 @@ class DiscrepancyEngineerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,DefectCard $discrepancy)
+    public function update(DiscrepancyUpdate $request,DefectCard $discrepancy)
     {
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
 

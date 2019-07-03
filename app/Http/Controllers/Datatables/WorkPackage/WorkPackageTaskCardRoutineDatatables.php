@@ -21,6 +21,21 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
                                         $query->where('name', 'Basic');
                                     })
                                     ->get();
+
+        foreach($workPackages as $taskcard){
+            if(isset($taskcard->skills) ){
+                if(sizeof($taskcard->skills) == 3){
+                    $taskcard->skill .= "ERI";
+                }
+                else if(sizeof($taskcard->skills) == 1){
+                    $taskcard->skill .= $taskcard->skills[0]->name;
+                }
+                else{
+                    $taskcard->skill .= '';
+                }
+            }
+        }
+
         $data = $alldata = json_decode($workPackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -122,6 +137,21 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
                                     ->whereHas('type', function ($query) {
                                         $query->where('name', 'SIP');
                                     })->get();
+
+        foreach($workPackages as $taskcard){
+            if(isset($taskcard->skills) ){
+                if(sizeof($taskcard->skills) == 3){
+                    $taskcard->skill .= "ERI";
+                }
+                else if(sizeof($taskcard->skills) == 1){
+                    $taskcard->skill .= $taskcard->skills[0]->name;
+                }
+                else{
+                    $taskcard->skill .= '';
+                }
+            }
+        }
+
         $data = $alldata = json_decode($workPackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -223,6 +253,21 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
                                     ->whereHas('type', function ($query) {
                                         $query->where('name', 'CPCP');
                                     })->get();
+
+        foreach($workPackages as $taskcard){
+            if(isset($taskcard->skills) ){
+                if(sizeof($taskcard->skills) == 3){
+                    $taskcard->skill .= "ERI";
+                }
+                else if(sizeof($taskcard->skills) == 1){
+                    $taskcard->skill .= $taskcard->skills[0]->name;
+                }
+                else{
+                    $taskcard->skill .= '';
+                }
+            }
+        }
+
         $data = $alldata = json_decode($workPackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

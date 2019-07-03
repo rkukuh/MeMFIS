@@ -237,7 +237,7 @@ class WorkPackageTaskCardRoutineSummaryDatatables extends Controller
         $items =[];
         foreach($workPackage->taskcards as $taskcard){
             if($taskcard->type->code == 'basic'){
-                foreach($taskcard->items as $item){
+                foreach($taskcard->materials as $item){
                     $item->tackcard_number .= $taskcard->number;
                     $item->unit_name .= $item->unit->name;
                     array_push($items, $item);
