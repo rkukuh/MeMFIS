@@ -137,6 +137,7 @@ class JobCardController extends Controller
 
         if($jobCard->taskcard->type->code == "basic"){
             $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -188,12 +189,14 @@ class JobCardController extends Controller
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         }
         elseif($jobCard->taskcard->type->code == "sip"){
             $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -245,12 +248,14 @@ class JobCardController extends Controller
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         }
         elseif($jobCard->taskcard->type->code == "cpcp"){
             $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -302,12 +307,14 @@ class JobCardController extends Controller
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         }
         elseif (($jobCard->taskcard->type->code == "ad") or ($jobCard->taskcard->type->code == "sb")) {
             $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -359,11 +366,13 @@ class JobCardController extends Controller
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();        }
         elseif(($jobCard->taskcard->type->code == "eo") or ($jobCard->taskcard->type->code == "ea")){
             $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -415,12 +424,14 @@ class JobCardController extends Controller
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         }
         elseif(($jobCard->taskcard->type->code == "cmr") or ($jobCard->taskcard->type->code == "awl")){
             $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -472,12 +483,14 @@ class JobCardController extends Controller
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         }
         elseif($jobCard->taskcard->type->code == "si"){
             $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -529,11 +542,14 @@ class JobCardController extends Controller
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         }
         elseif($jobCard->taskcard->type->code == "preliminary"){
+            $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -585,7 +601,8 @@ class JobCardController extends Controller
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         // } else {
