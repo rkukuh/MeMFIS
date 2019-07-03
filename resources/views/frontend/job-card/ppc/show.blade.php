@@ -73,7 +73,7 @@
                                                     A/C Type
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    Generated
+                                                    {{$jobcard->quotation->project->aircraft->name}}
                                                 </td>
                                             </tr>
                                             <tr>
