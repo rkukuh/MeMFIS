@@ -100,7 +100,7 @@
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Total Manhour MPD</span>
-                                <span class="m--font-accent">{{ number_format($total_manhor_taskcard) }}</span>
+                                <span class="m--font-accent">{{ number_format($total_manhour_taskcard,2) }}</span>
                             </div>
                         </div>
                     </div>

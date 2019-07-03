@@ -24,10 +24,10 @@ class SummaryRoutineTaskcardController extends Controller
     public function basic(Quotation $quotation, WorkPackage $workPackage)
     {
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'Basic')->count('uuid');
-        $total_manhor_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'Basic')->sum('estimation_manhour');
+        $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'Basic')->sum('estimation_manhour');
         return view('frontend.quotation.taskcard.routine.basic.basic-summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'total_manhour_taskcard' => $total_manhour_taskcard,
             'quotation' => $quotation,
             'workPackage' => $workPackage
         ]);
@@ -42,11 +42,11 @@ class SummaryRoutineTaskcardController extends Controller
     public function cpcp(Quotation $quotation, WorkPackage $workPackage)
     {
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'CPCP')->count('uuid');
-        $total_manhor_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'CPCP')->sum('estimation_manhour');
+        $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'CPCP')->sum('estimation_manhour');
 
         return view('frontend.quotation.taskcard.routine.cpcp.cpcp-summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'total_manhour_taskcard' => $total_manhour_taskcard,
             'quotation' => $quotation,
             'workPackage' => $workPackage
         ]);
@@ -61,11 +61,11 @@ class SummaryRoutineTaskcardController extends Controller
     public function sip(Quotation $quotation, WorkPackage $workPackage)
     {
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'SIP')->count('uuid');
-        $total_manhor_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'SIP')->sum('estimation_manhour');
+        $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'SIP')->sum('estimation_manhour');
 
         return view('frontend.quotation.taskcard.routine.sip.sip-summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'total_manhour_taskcard' => $total_manhour_taskcard,
             'quotation' => $quotation,
             'workPackage' => $workPackage
         ]);

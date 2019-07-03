@@ -246,11 +246,11 @@ class WorkPackageController extends Controller
                 ->count();
 
         $total_taskcard  = $workPackage->taskcards->count('uuid');
-        $total_manhor_taskcard  = $workPackage->taskcards->sum('estimation_manhour');
+        $total_manhour_taskcard  = $workPackage->taskcards->sum('estimation_manhour');
 
         return view('frontend.workpackage.summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'total_manhour_taskcard' => $total_manhour_taskcard,
             'workPackage' => $workPackage,
             'basic' => $basic,
             'sip' => $sip,
