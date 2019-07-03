@@ -64,12 +64,20 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                 $task_type = Type::ofTaskCardTask()
                                     ->where('name', 'Visual')->first()->id;
                 break;
-                case 'DISCARD':
+            case 'DISCARD':
             $task_type = Type::ofTaskCardTask()
                                     ->where('name', 'Discard')->first()->id;
                 break;
+            case 'FUNCTIONAL':
+                $task_type = Type::ofTaskCardTask()
+                                        ->where('name', 'Functional')->first()->id;
+                    break;
             default:
-                $task_type = null;
+                $task_type = Type::ofTaskCardTask()
+                    ->where('name', 'LIKE', $row['task_type'])->first()->id;
+                    if(empty($task_type){
+                        $task_type = null;
+                    }
         }
 
         /** Set the workarea */
