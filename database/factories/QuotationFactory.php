@@ -62,6 +62,7 @@ $factory->define(Quotation::class, function (Faker $faker) {
 
             return $faker->randomElement([null, json_encode($charges)]);
         },
+        'ppn' => $faker->randomElement([null, 10]),
         'grandtotal' => rand(101, 200) * 1000000,
         'scheduled_payment_type' => function () {
             if (Type::ofScheduledPayment()->count()) {

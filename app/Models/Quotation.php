@@ -19,6 +19,7 @@ class Quotation extends MemfisModel
         'exchange_rate',
         'subtotal',
         'charge',
+        'ppn',
         'grandtotal',
         'title',
         'scheduled_payment_type',

@@ -77,6 +77,12 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
+                    field: 'skill',
+                    title: 'Skill',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'task.name',
                     title: 'Task',
                     sortable: 'asc',
@@ -269,6 +275,12 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
+                    field: 'skill',
+                    title: 'Skill',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'task.name',
                     title: 'Task',
                     sortable: 'asc',
@@ -459,6 +471,12 @@ let NonRoutineWorkpackage = {
                             );
                         }
                     }
+                },
+                {
+                    field: 'skill',
+                    title: 'Skill',
+                    sortable: 'asc',
+                    filterable: !1,
                 },
                 {
                     field: 'task.name',

@@ -74,6 +74,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row align-items-center">
+                                <div class="col-xl-12 order-2 order-xl-1">
+                                    <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
+                                        <div class="col-md-12">
+                                            <div class="job_card_engineer_datatable" id="scrolling_both"></div>
+
+                                            @include('frontend.job-card.engineer.tool.index')
+                                            @include('frontend.job-card.engineer.item.index')
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,6 +96,9 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/job-card/index.js') }}"></script>
+    <script src="{{ asset('js/frontend/job-card/item/index.js') }}"></script>
+    <script src="{{ asset('js/frontend/job-card/tool/index.js') }}"></script>
+
     <script>
         $("#number").focus();
     </script>
