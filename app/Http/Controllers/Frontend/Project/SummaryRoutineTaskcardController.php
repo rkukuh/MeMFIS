@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\WorkPackage;
+namespace App\Http\Controllers\Frontend\Project;
 
 use App\Models\Aircraft;
 use App\Models\Project;
@@ -42,7 +42,7 @@ class SummaryRoutineTaskcardController extends Controller
         $otr = array_count_values($skills);
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'Basic')->count('uuid');
         $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'Basic')->sum('estimation_manhour');
-        return view('frontend.workpackage.routine.basic.basic-summary',[
+        return view('frontend.project.hm.taskcard.routine.basic.basic-summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
             'otr' => $otr,
@@ -79,7 +79,7 @@ class SummaryRoutineTaskcardController extends Controller
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'CPCP')->count('uuid');
         $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'CPCP')->sum('estimation_manhour');
 
-        return view('frontend.workpackage.routine.cpcp.cpcp-summary',[
+        return view('frontend.project.hm.taskcard.routine.cpcp.cpcp-summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
             'otr' => $otr,
@@ -117,7 +117,7 @@ class SummaryRoutineTaskcardController extends Controller
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'SIP')->count('uuid');
         $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'SIP')->sum('estimation_manhour');
 
-        return view('frontend.workpackage.routine.sip.sip-summary',[
+        return view('frontend.project.hm.taskcard.routine.sip.sip-summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
             'otr' => $otr,
@@ -191,7 +191,7 @@ class SummaryRoutineTaskcardController extends Controller
         }
         $otr = array_count_values($skills);
 
-        return view('frontend.workpackage.routine.summary',[
+        return view('frontend.project.hm.taskcard.routine.summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
             'workPackage' => $workPackage,

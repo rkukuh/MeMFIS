@@ -28,7 +28,7 @@
                 @component('frontend.common.label.data-info')
                     @slot('id', 'total_mhrs')
                     @slot('name', 'total_mhrs')
-                    @slot('text', $total_mhrs)
+                    @slot('text', $project_workpackage->total_manhours_with_performance_factor)
                 @endcomponent
 
             </div>

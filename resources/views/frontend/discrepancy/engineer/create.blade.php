@@ -234,6 +234,7 @@
                                     </div>
                                     <fieldset class="border p-2">
                                         <legend class="w-auto">Propose Correction</legend>
+                                        <div class="form-control-feedback text-danger" id="propose-error"></div>
 
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-4 col-md-4 col-lg-4">

@@ -42,11 +42,11 @@ class SummaryNonRoutineTaskcardController extends Controller
         }
         $otr = array_count_values($skills);
         $total_taskcard  = $workPackage->taskcards->load('type')->whereIn('type.code', ['ad','sb'])->count('uuid');
-        $total_manhor_taskcard  = $workPackage->taskcards->load('type')->whereIn('type.code', ['ad','sb'])->sum('estimation_manhour');
+        $total_manhour_taskcard  = $workPackage->taskcards->load('type')->whereIn('type.code', ['ad','sb'])->sum('estimation_manhour');
 
         return view('frontend.workpackage.nonroutine.adsb.ad-sb-summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'total_manhour_taskcard' => $total_manhour_taskcard,
             'otr' => $otr,
             'workPackage' => $workPackage
         ]);
@@ -79,11 +79,11 @@ class SummaryNonRoutineTaskcardController extends Controller
         }
         $otr = array_count_values($skills);
         $total_taskcard  = $workPackage->taskcards->load('type')->whereIn('type.code', ['cmr','awl'])->count('uuid');
-        $total_manhor_taskcard  = $workPackage->taskcards->load('type')->whereIn('type.code', ['cmr','awl'])->sum('estimation_manhour');
+        $total_manhour_taskcard  = $workPackage->taskcards->load('type')->whereIn('type.code', ['cmr','awl'])->sum('estimation_manhour');
 
         return view('frontend.workpackage.nonroutine.cmrawl.cmr-awl-summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'total_manhour_taskcard' => $total_manhour_taskcard,
             'otr' => $otr,
             'workPackage' => $workPackage
         ]);
@@ -116,11 +116,11 @@ class SummaryNonRoutineTaskcardController extends Controller
         }
         $otr = array_count_values($skills);
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.code', 'si')->count('uuid');
-        $total_manhor_taskcard  = $workPackage->taskcards->load('type')->where('type.code', 'si')->sum('estimation_manhour');
+        $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.code', 'si')->sum('estimation_manhour');
 
         return view('frontend.workpackage.nonroutine.si.si-summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'total_manhour_taskcard' => $total_manhour_taskcard,
             'otr' => $otr,
             'workPackage' => $workPackage
         ]);
@@ -192,11 +192,11 @@ class SummaryNonRoutineTaskcardController extends Controller
         $otr = array_count_values($skills);
 
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-non-routine')->count('uuid');
-        $total_manhor_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-non-routine')->sum('estimation_manhour');
+        $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-non-routine')->sum('estimation_manhour');
 
         return view('frontend.workpackage.nonroutine.summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'total_manhour_taskcard' => $total_manhour_taskcard,
             'workPackage' => $workPackage,
             'adsb' => $adsb,
             'cmrawl' => $cmrawl,
