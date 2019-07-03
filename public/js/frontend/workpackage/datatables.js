@@ -233,12 +233,10 @@ let Datatables = {
                     taskcard: $(this).data('uuid'),
                 },
                 success: function (data) {
-                    if (data.errors) {
-                        // if (data.errors.name) {
-                        //     $('#name-error').html(data.errors.name[0]);
-
-                        //     document.getElementById('name').value = name;
-                        // }
+                    if (data.title == "Danger") {
+                        toastr.error('Task card alrady exists!', 'Error',  {
+                            timeOut: 5000
+                        });
                     } else {
                         $('#modal_basic').modal('hide');
 
