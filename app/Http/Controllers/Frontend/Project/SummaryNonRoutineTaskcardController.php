@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\WorkPackage;
+namespace App\Http\Controllers\Frontend\Project;
 
 use App\Models\Aircraft;
 use App\Models\Project;
@@ -44,7 +44,7 @@ class SummaryNonRoutineTaskcardController extends Controller
         $total_taskcard  = $workPackage->taskcards->load('type')->whereIn('type.code', ['ad','sb'])->count('uuid');
         $total_manhour_taskcard  = $workPackage->taskcards->load('type')->whereIn('type.code', ['ad','sb'])->sum('estimation_manhour');
 
-        return view('frontend.workpackage.nonroutine.adsb.ad-sb-summary',[
+        return view('frontend.project.hm.taskcardnonroutine.adsb.ad-sb-summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
             'otr' => $otr,
@@ -81,7 +81,7 @@ class SummaryNonRoutineTaskcardController extends Controller
         $total_taskcard  = $workPackage->taskcards->load('type')->whereIn('type.code', ['cmr','awl'])->count('uuid');
         $total_manhour_taskcard  = $workPackage->taskcards->load('type')->whereIn('type.code', ['cmr','awl'])->sum('estimation_manhour');
 
-        return view('frontend.workpackage.nonroutine.cmrawl.cmr-awl-summary',[
+        return view('frontend.project.hm.taskcardnonroutine.cmrawl.cmr-awl-summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
             'otr' => $otr,
@@ -118,7 +118,7 @@ class SummaryNonRoutineTaskcardController extends Controller
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.code', 'si')->count('uuid');
         $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.code', 'si')->sum('estimation_manhour');
 
-        return view('frontend.workpackage.nonroutine.si.si-summary',[
+        return view('frontend.project.hm.taskcardnonroutine.si.si-summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
             'otr' => $otr,
@@ -194,7 +194,7 @@ class SummaryNonRoutineTaskcardController extends Controller
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-non-routine')->count('uuid');
         $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-non-routine')->sum('estimation_manhour');
 
-        return view('frontend.workpackage.nonroutine.summary',[
+        return view('frontend.project.hm.taskcardnonroutine.summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
             'workPackage' => $workPackage,
