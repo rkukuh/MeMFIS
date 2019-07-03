@@ -97,7 +97,7 @@
                         <div class="m-widget_content-items">
                             <div class="m-widget_content-item">
                                 <span>Total MPD</span>
-                                <span class="m--font-accent">{{ number_format($total_manhor_taskcard) }}</span>
+                                <span class="m--font-accent">{{ number_format($total_manhour_taskcard) }}</span>
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Performance Factor</span>
@@ -105,7 +105,7 @@
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Total</span>
-                                <span>{{ number_format($total_manhor_taskcard) }}</span>
+                                <span>{{ number_format($total_manhour_taskcard) }}</span>
                             </div>
                         </div>
                     </div>
