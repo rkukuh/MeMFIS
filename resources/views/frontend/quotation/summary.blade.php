@@ -67,6 +67,30 @@
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
             <div class="m--align-left" style="padding-top:15px">
+                PPN
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            @component('frontend.common.input.checkbox')
+                @slot('id', 'default')
+                @slot('name', 'default')
+                @slot('value', 0.1)
+                @slot('text', 'TaskCard Performance Factor')
+                @slot('style_div','margin-top:10px')
+                @slot('help_text','If Checked, Project will use TaskCard Performance Factor')
+                @slot('icon', 'fa-info-circle m--font-info')
+            @endcomponent
+        </div>
+        <div class="col-sm-1 col-md-1 col-lg-1">
+        </div>
+        <div class="col-sm-1 col-md-1 col-lg-1">
+        </div>
+    </div>
+    <div class="form-group m-form__group row">
+        <div class="col-sm-5 col-md-5 col-lg-5">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="m--align-left" style="padding-top:15px">
                 Total in Rupiah
             </div>
         </div>
