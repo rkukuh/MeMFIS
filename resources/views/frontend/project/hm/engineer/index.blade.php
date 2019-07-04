@@ -695,7 +695,8 @@
             let mhrs = total_mhrs * 1.6;
             tat =  mhrs / divider;
         }
-        $('#tat').val(tat);
+
+        $('#tat').val(new Intl.NumberFormat('en-IN', { maximumFractionDigits: 2 }).format(tat));
     });
 
     </script>
