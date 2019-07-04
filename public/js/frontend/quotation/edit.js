@@ -378,6 +378,15 @@ let Quotation = {
         });
         
         $('.footer').on('click', '.add-quotation', function () {
+            let is_ppn =  $('#is_ppn').prop("checked");
+            let ppn = 0;
+            if(is_ppn){
+                ppn = $('#grand_total').attr("value") * 1.1;
+                is_ppn = 1;
+            }else{
+                ppn = $('#grand_total').attr("value") * 0.1;
+                is_ppn = 0;
+            }
             let attention_name = $('#attention').val();
             let attention_phone = $('#phone').val();
             let attention_fax = $('#fax').val();
@@ -395,7 +404,22 @@ let Quotation = {
                 });
             }
             scheduled_payment_array.pop();
+            let charge = [];
+            let chargeInputs = $('input[name^="charge"]');
+            //get all values
+            for (let i = 0; i < chargeInputs.length; i++) {
+                charge[i] = parseInt($(chargeInputs[i]).val());
+            }
+            charge.pop();
+            let chargeType = [];
+            //get all values
+            $("select[name^=charge_type]").each(function() {
+                chargeType.push($(this).children("option:selected").val());
+              });
+            chargeType.pop();
+
             let data = new FormData();
+            data.append("chargeType", JSON.stringify(chargeType));
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
             data.append("requested_at", $('#date').val());
@@ -418,22 +442,9 @@ let Quotation = {
             data.append("subtotal", $('#sub_total').attr("value"));
             data.append("grandtotal", $('#grand_total').attr("value"));
             data.append("title", $('#title').val());
-
-            var charge = [];
-            var chargeInputs = $('input[name^="charge"]');
-            //get all values
-            for (var i = 0; i < chargeInputs.length; i++) {
-                charge[i] = parseInt($(chargeInputs[i]).val());
-            }
-            charge.pop();
+            data.append("ppn", ppn);
+            data.append("is_ppn",is_ppn);
             data.append("charge", JSON.stringify(charge));
-            var chargeType = [];
-            //get all values
-            $("select[name^=charge_type]").each(function() {
-                chargeType.push($(this).children("option:selected").val());
-              });
-              chargeType.pop();
-            data.append("chargeType", JSON.stringify(chargeType));
             data.append('_method', 'PUT');
 
             $.ajax({
