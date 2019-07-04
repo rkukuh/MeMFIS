@@ -379,8 +379,6 @@ let Quotation = {
         
         $('.footer').on('click', '.add-quotation', function () {
             let is_ppn =  $('#is_ppn').prop("checked");
-            console.log($('#is_ppn'));
-            console.log($('#is_ppn').prop("checked"));
             let ppn = 0;
             if(is_ppn){
                 ppn = $('#grand_total').attr("value") * 1.1;
@@ -389,7 +387,6 @@ let Quotation = {
                 ppn = $('#grand_total').attr("value") * 0.1;
                 is_ppn = 0;
             }
-            console.log(ppn);
             let attention_name = $('#attention').val();
             let attention_phone = $('#phone').val();
             let attention_fax = $('#fax').val();
