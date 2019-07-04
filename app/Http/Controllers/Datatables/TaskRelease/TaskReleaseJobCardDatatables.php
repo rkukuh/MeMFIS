@@ -85,8 +85,8 @@ class TaskReleaseJobCardDatatables extends Controller
             $customer->customer_name .= $customer->quotation->customer;
         }
 
-        $data = $alldata = json_decode($JobCard->where('status','Closed'));
-
+        $data = $alldata = json_decode(collect(array_values($JobCard->where('status','Closed')->all())));
+        // dd($data);
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
