@@ -73,7 +73,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Discrepenct No
+                                                Sequence No
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -114,11 +114,17 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Sequence No
+                                                Skill
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @if(sizeof($discrepancy->jobcard->taskcard->skills) == 3)
+                                                    @slot('text', 'ERI')
+                                                @elseif(sizeof($discrepancy->jobcard->taskcard->skills) == 1)
+                                                    @slot('text', $discrepancy->jobcard->taskcard->skills[0]->name)
+                                                @else
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @endif
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -186,18 +192,11 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Skill
+                                                Attachment @include('frontend.common.label.optional')
                                             </label>
+                                            <br>
 
-                                            @component('frontend.common.label.data-info')
-                                                @if(sizeof($discrepancy->jobcard->taskcard->skills) == 3)
-                                                    @slot('text', 'ERI')
-                                                @elseif(sizeof($discrepancy->jobcard->taskcard->skills) == 1)
-                                                    @slot('text', $discrepancy->jobcard->taskcard->skills[0]->name)
-                                                @else
-                                                    @include('frontend.common.label.data-info-nodata')
-                                                @endif
-                                            @endcomponent
+                                            <input type="file" id="file" multiple name="name">
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -211,16 +210,6 @@
                                                     @slot('checked', 'checked')
                                                 @endif
                                             @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Attachment @include('frontend.common.label.optional')
-                                            </label>
-                                            <br>
-
-                                            <input type="file" id="file" multiple name="name">
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
