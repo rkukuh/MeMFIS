@@ -379,37 +379,6 @@ let Workpackage = {
             });
 
         });
-        $('.footer').on('click', '.add-manhour', function () {
-            let manhour = total_mhrs;
-            let performa_used = performa;
-            let total = $('#total').html();
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                url: '/project-hm/' + project_uuid + '/workpackage/' + workpackage_uuid + '/manhoursPropotion',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    manhour: manhour,
-                    performa_used: performa_used,
-                    total: total,
-                },
-                success: function (data) {
-                    if (data.errors) {
-                    } else {
-
-                        toastr.success('Manhours Propotion has been created.', 'Success', {
-                            timeOut: 5000
-                        });
-
-                        // window.location.href = '/discrepancy/' + data.uuid + '/edit';
-
-                    }
-                }
-            });
-        });
 
         $('.footer').on('click', '.add-engineer', function () {
             let engineer_qty = [], engineer_skills = [], engineer = [];

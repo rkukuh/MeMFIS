@@ -71,9 +71,15 @@ class WorkPackageController extends Controller
      */
     public function addTaskCard(Request $request, WorkPackage $workPackage)
     {
-        $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
+        $tc = TaskCard::where('uuid', $request->taskcard)->first();
+        $exists = $workPackage->taskcards->contains($tc->id);
+        if($exists){
+            return response()->json(['title' => "Danger"]);
+        }else{
+            $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
 
-        return response()->json($workPackage);
+            return response()->json($workPackage);
+        }
     }
 
     /**
@@ -246,11 +252,11 @@ class WorkPackageController extends Controller
                 ->count();
 
         $total_taskcard  = $workPackage->taskcards->count('uuid');
-        $total_manhor_taskcard  = $workPackage->taskcards->sum('estimation_manhour');
+        $total_manhour_taskcard  = $workPackage->taskcards->sum('estimation_manhour');
 
         return view('frontend.workpackage.summary',[
             'total_taskcard' => $total_taskcard,
-            'total_manhor_taskcard' => $total_manhor_taskcard,
+            'total_manhour_taskcard' => $total_manhour_taskcard,
             'workPackage' => $workPackage,
             'basic' => $basic,
             'sip' => $sip,

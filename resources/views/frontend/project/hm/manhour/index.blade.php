@@ -59,7 +59,7 @@
                 </div>
         </div>
     </div>
-    <div class="col-sm-12 col-md-12 col-lg-12 footer">
+    <div class="col-sm-12 col-md-12 col-lg-12 footer-manhour">
         <div class="flex">
             <div class="action-buttons">
                 @component('frontend.common.buttons.submit')
@@ -90,6 +90,36 @@
             document.getElementById('total').innerHTML = total.toFixed(2);
             let performa = 0;
 
+            $('.footer-manhour').on('click', '.add-manhour', function () {
+            let manhour = total_mhrs;
+            let performa_used = performa;
+            let total = $('#total').html();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/project-hm/' + project_uuid + '/workpackage/' + workPackage_uuid + '/manhoursPropotion',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    manhour: manhour,
+                    performa_used: performa_used,
+                    total: total,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+
+                        toastr.success('Manhours Propotion has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        // window.location.href = '/discrepancy/' + data.uuid + '/edit';
+
+                    }
+                }
+            });
+        });
         });
         $("#default").change(function() {
             if(this.checked) {

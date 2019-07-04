@@ -7,7 +7,7 @@ let DefectCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/defectcard/project',
+                        url: '/datatables/defectcard/',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -102,7 +102,7 @@ let DefectCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.taskcard.skill.name',
+                    field: 'skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
