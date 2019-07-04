@@ -46,9 +46,10 @@ class JobCardDatatables extends Controller
 
             $count_user = $jobcard->progresses->groupby('progressed_by')->count()-1;
 
+            $status = [];
             foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
                 if(Status::ofJobCard()->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
-                    $jobcard->status .= 'Pending';
+                    array_push($status, 'Pending');
                 }
             }
 
@@ -69,18 +70,15 @@ class JobCardDatatables extends Controller
             elseif($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
                 $jobcard->status .= 'Closed';
             }
-            elseif($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','progress')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+            elseif(sizeof($status) == $count_user and $count_user <> 0){
+                $jobcard->status .= 'Pending';
+            }
+            elseif(sizeof($status) <> $count_user and $count_user <> 0){
                 $jobcard->status .= 'Progress';
             }
             elseif($jobcard->progresses->count()==1){
                 $jobcard->status .= 'Open';
             }
-            // elseif($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','progress')->first()->id)->groupby('progressed_by')->count() == $count_user){
-            //     $jobcard->status .= 'Progress';
-            // }
-            // else{
-            //     $jobcard->status .= 'Progress';
-            // }
         }
 
         $data = $alldata = json_decode($JobCard);
