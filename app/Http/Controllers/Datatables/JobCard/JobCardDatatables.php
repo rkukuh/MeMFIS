@@ -62,7 +62,7 @@ class JobCardDatatables extends Controller
                     $jobcard->status .= 'Waiting for RII';
                 }
             }
-            elseif($jobcard->taskcard->is_rii == 0 and sizeof($jobcard->approvals)==1 and Status::ofJobCard()->where('id',$jobcard->progresses->last()->status_id)->first()->code == "closed"){
+            elseif($jobcard->taskcard->is_rii == 0 and sizeof($jobcard->approvals)==1){
                 if($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
                     $jobcard->status .= 'Released';
                 }
