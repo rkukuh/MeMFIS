@@ -13,6 +13,9 @@ use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\DiscrepancyStore;
+use App\Http\Requests\Frontend\DiscrepancyUpdate;
+
 
 class DiscrepancyEngineerController extends Controller
 {
@@ -45,7 +48,7 @@ class DiscrepancyEngineerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DiscrepancyStore $request)
     {
         $request->merge(['code' => DocumentNumber::generate('JDEF-', DefectCard::count()+1)]);
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
@@ -81,7 +84,21 @@ class DiscrepancyEngineerController extends Controller
      */
     public function show(DefectCard $discrepancy)
     {
-        return view('frontend.discrepancy.engineer.show');
+        $propose_corrections = array();
+        foreach($discrepancy->propose_corrections as $i => $defectcard){
+            $propose_corrections[$i] =  $defectcard->code;
+        }
+
+        $propose_correction_text = '';
+        foreach($discrepancy->propose_corrections as $i => $defectcard){
+            $propose_correction_text =  $defectcard->pivot->propose_correction_text;
+        }
+
+        return view('frontend.discrepancy.engineer.show', [
+            'discrepancy' => $discrepancy,
+            'propose_corrections' => $propose_corrections,
+            'propose_correction_text' => $propose_correction_text,
+        ]);
     }
 
     /**
@@ -116,7 +133,7 @@ class DiscrepancyEngineerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,DefectCard $discrepancy)
+    public function update(DiscrepancyUpdate $request,DefectCard $discrepancy)
     {
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
 

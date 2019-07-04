@@ -73,7 +73,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Discrepenct No
+                                                Sequence No
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -113,7 +113,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Sequence No
+                                                Skill
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -173,33 +173,21 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Skill
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                RII
-                                            </label>
-
-                                            @component('frontend.common.input.checkbox')
-                                                @slot('id', 'is_rii')
-                                                @slot('name', 'is_rii')
-                                                @slot('text', 'IS RII?')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 Attachment @include('frontend.common.label.optional')
                                             </label>
                                             <br>
 
                                             <input type="file" id="file" multiple name="name">
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                            </label>
+
+                                            @component('frontend.common.input.checkbox')
+                                                @slot('id', 'is_rii')
+                                                @slot('name', 'is_rii')
+                                                @slot('text', 'RII?')
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">

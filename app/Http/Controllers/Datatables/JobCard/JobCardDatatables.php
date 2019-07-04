@@ -42,6 +42,44 @@ class JobCardDatatables extends Controller
         foreach($JobCard as $taskcard){
             $taskcard->task_name .= $taskcard->taskcard->type;
         }
+        foreach($JobCard as $jobcard){
+
+            $count_user = $jobcard->progresses->groupby('progressed_by')->count()-1;
+
+            $status = [];
+            foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
+                if(Status::ofJobCard()->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
+                    array_push($status, 'Pending');
+                }
+            }
+
+
+            if($jobcard->taskcard->is_rii == 1 and $jobcard->approvals->count()==2){
+                $jobcard->status .= 'Released';
+            }
+            elseif($jobcard->taskcard->is_rii == 1 and $jobcard->approvals->count()==1){
+                if($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+                    $jobcard->status .= 'Waiting for RII';
+                }
+            }
+            elseif($jobcard->taskcard->is_rii == 0 and sizeof($jobcard->approvals)==1){
+                if($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+                    $jobcard->status .= 'Released';
+                }
+            }
+            elseif($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+                $jobcard->status .= 'Closed';
+            }
+            elseif(sizeof($status) == $count_user and $count_user <> 0){
+                $jobcard->status .= 'Pending';
+            }
+            elseif(sizeof($status) <> $count_user and $count_user <> 0){
+                $jobcard->status .= 'Progress';
+            }
+            elseif($jobcard->progresses->count()==1){
+                $jobcard->status .= 'Open';
+            }
+        }
 
         $data = $alldata = json_decode($JobCard);
 

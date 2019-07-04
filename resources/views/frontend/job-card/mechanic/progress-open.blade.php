@@ -94,14 +94,6 @@
                                         </tr>
                                         <tr>
                                             <td width="30%" style="background-color:beige;padding:10px;">
-                                                Inspection Type
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
                                                 Company Task No
                                             </td>
                                             <td width="70%" style="text-align:center">
@@ -125,7 +117,7 @@
                                                 Inspection Type
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->task->name}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -217,6 +209,62 @@
                                     </table>
                                 </div>
                             </div>
+
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <table class="table table-striped table-bordered second" width="100%" cellpadding="4">
+                                        <tr>
+                                            <td colspan="5" align="center"><b>Material(s) Required</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="5%" align="center"><b>No</b></td>
+                                            <td width="20%" align="center"><b>Part Number</b></td>
+                                            <td width="50%" align="center"><b>Item Description</b></td>
+                                            <td width="10%" align="center"><b>Qty</b></td>
+                                            <td width="15%" align="center"><b>Unit</b></td>
+                                        </tr>
+                                        @php
+                                        $i=1;
+                                        @endphp
+                                        @foreach ($materials as $material)
+                                        <tr>
+                                            <td width="5%" align="center" valign="top">{{$i++}}</td>
+                                            <td width="20%" align="center" valign="top">{{$material->code}}</td>
+                                            <td width="50%" valign="top">{{$material->name}}</td>
+                                            <td width="10%" align="center" valign="top">{{$material->pivot->quantity}}</td>
+                                            <td width="15%" align="center" valign="top">{{App\Models\Unit::find($material->pivot->unit_id)->name}}</td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <table class="table table-striped table-bordered second" width="100%" cellpadding="4">
+                                        <tr>
+                                            <td colspan="5" align="center"><b>Tool(s) Required / Special Tooling</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="5%" align="center"><b>No</b></td>
+                                            <td width="20%" align="center"><b>Part Number</b></td>
+                                            <td width="50%" align="center"><b>Item Description</b></td>
+                                            <td width="10%" align="center"><b>Qty</b></td>
+                                            <td width="15%" align="center"><b>Unit</b></td>
+                                        </tr>
+                                        @php
+                                        $j=1;
+                                        @endphp
+                                        @foreach ($tools as $tool)
+                                        <tr>
+                                            <td width="5%" align="center" valign="top">{{$j++}}</td>
+                                            <td width="20%" align="center" valign="top">{{$tool->code}}</td>
+                                            <td width="50%" valign="top">{{$tool->name}}</td>
+                                            <td width="10%" align="center" valign="top">{{$tool->pivot->quantity}}</td>
+                                            <td width="15%" align="center" valign="top">{{App\Models\Unit::find($tool->pivot->unit_id)->name}}</td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </div>
+
                             <div class="form-group m-form__group row">
                                 <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                     <div class="flex">

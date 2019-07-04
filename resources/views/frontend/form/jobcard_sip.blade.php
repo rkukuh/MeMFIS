@@ -18,7 +18,7 @@
       bottom: 0cm;
       left: 0cm;
       right: 0cm;
-      height: 1cm;
+      height: 1.5cm;
     }
     html,body{
       padding: 0;
@@ -67,19 +67,19 @@
     }
 
     #content2{
-      margin-top:-36px;
+      margin-top:-30px;
     }
 
-    #content3, #content4{
-      margin-top:5px;
+    #content3{
+      margin-top:7px;
     }
 
     #content3 .table1{
       padding-left: 7px;
     }
 
-    #content5{
-      margin-top:15px;
+    #content4, #content5{
+      margin-top:20px;
     }
 
     #content4 .table-mt{
@@ -313,17 +313,17 @@
   <div id="content3">
     <div class="container">
       <table width="100%" class="table1">
-        <tr>
-          <td width="25%">Skill</td>
-          <td width="25%" align="center">Work Area</td>
-          <td width="25%" align="center">Est. Mhrs</td>
-          <td width="25%" align="right">Actual Mhrs</td>
-        </tr>
+          <tr>
+              <td width="17%">Skill</td>
+              <td width="47%" align="center">Work Area</td>
+              <td width="15%" align="center">Mhrs Estimation</td>
+              <td width="20%" align="right">Actual Mhrs</td>
+          </tr>
       </table>
       <div style="width:100%;min-height:20px;border: 3px solid #d4d7db;border-radius: 10px;">
         <table width="100%" cellpadding="10">
           <tr>
-            <td width="25%" valign="top">
+            <td width="18%" valign="top">
                 @if(sizeof($jobCard->taskcard->skills) == 3)
                   ERI
                 @elseif(sizeof($jobCard->taskcard->skills) == 1)
@@ -332,21 +332,21 @@
                   -
                 @endif
             </td>
-            <td width="25%" align="center" valign="top">
-              @if($jobCard->taskcard->work_area)
-                {{$jobCard->taskcard->work_area}}
+            <td width="47%" align="center" valign="top">
+              @if($jobCard->taskcard->workarea->name)
+                {{$jobCard->taskcard->workarea->name}}
               @else
                 -
               @endif
             </td>
-            <td width="25%" align="center" valign="top">
+            <td width="15%" align="center" valign="top">
               @if($jobCard->taskcard->estimation_manhour)
               {{$jobCard->taskcard->estimation_manhour}}
               @else
                 -
               @endif
             </td>
-            <td width="25%" align="right" valign="top">
+            <td width="20%" align="right" valign="top">
               generate
               {{-- @if()
               @else
@@ -380,30 +380,45 @@
             <div style="position: absolute;">
               Discrepancy Found :
             </div>
-            <center>
-              <div style="margin-left:100px;margin-top:12px;">
-                <ul>
-                  <li>
-                    <img
-                        @if(sizeof($jobCard->defectcards) <> 0)
-                        src="./img/check.png"
-                        @else
-                        src="./img/check-box-empty.png"
-                        @endif
-                    alt="" width="10"> <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
-                  </li>
-                  <li style="margin-left:12px;">
-                    <img
-                        @if(sizeof($jobCard->defectcards) == 0)
-                        src="./img/check.png"
-                        @else
-                        src="./img/check-box-empty.png"
-                        @endif
-                     alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
-                  </li>
-                </ul>
-              </div>
-            </center>
+            @if($lastStatus=="OPEN")
+              <center>
+                <div style="margin-left:100px;margin-top:12px;">
+                  <ul>
+                    <li>
+                      <img  src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                    </li>
+                    <li style="margin-left:12px;">
+                      <img src="./img/check-box-empty.png" alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                    </li>
+                  </ul>
+                </div>
+              </center>
+            @else
+              <center>
+                <div style="margin-left:100px;margin-top:12px;">
+                  <ul>
+                    <li>
+                      <img
+                          @if(sizeof($jobCard->defectcards) <> 0)
+                          src="./img/check.png"
+                          @else
+                          src="./img/check-box-empty.png"
+                          @endif
+                      alt="" width="10"> <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                    </li>
+                    <li style="margin-left:12px;">
+                      <img
+                          @if(sizeof($jobCard->defectcards) == 0)
+                          src="./img/check.png"
+                          @else
+                          src="./img/check-box-empty.png"
+                          @endif
+                      alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                    </li>
+                  </ul>
+                </div>
+              </center>
+            @endif
           </td>
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
@@ -417,18 +432,18 @@
       </table>
       <table width="100%" style="margin-top: 12px;">
         <tr>
-          <td width="4%" valign="top">Helper </td>
+          <td width="3%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
-          <td width="28%" valign="top">Yemimul</td>
-          <td width="33%" valign="top" align="center">Status :
-              <span>
-                {{$lastStatus}}
-              </span>
-          </td>
-          <td width="34%" valign="top" align="right">Data Close :
-            <span>
-              {{$dateClosed}}
-            </span>
+          <td width="96%" valign="top">
+              @php
+               $a = sizeof($helpers->toArray());
+              @endphp
+              @for ($i = 0; $i < $a-1; $i++)
+                {{$helpers[$i]->first_name}},&nbsp;
+              @endfor
+              @for ($i = $a-1; $i < $a; $i++)
+                {{$helpers[$i]->first_name}}
+              @endfor
           </td>
         </tr>
       </table>
@@ -449,17 +464,23 @@
       <div class="body">
         <table width="100%">
           <tr>
-            <td width="33%" height="46%" align="center" valign="bottom">
+            <td width="33%" height="100" align="center" valign="bottom">
               <div style="width:100%;height:20px;text-align:center">{{$accomplished_by}}</div>
               <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$accomplished_at}}</span></div>
             </td>
-            <td width="33%" height="46%" align="center" valign="bottom">
+            <td width="33%" height="100" align="center" valign="bottom">
               <div style="width:100%;height:20px;text-align:center">{{$inspected_by}}</div>
               <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$inspected_at}}</span></div>
             </td>
-            <td width="34%" height="46%" align="center" valign="bottom">
+            <td width="34%" height="100" align="center" valign="bottom"
+            @if($rii_status==0) 
+              style="background:grey"
+            @endif
+            >
+            @if($rii_status==1)
               <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
               <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$rii_at}}</span></div>
+            @endif
             </td>
           </tr>
         </table>

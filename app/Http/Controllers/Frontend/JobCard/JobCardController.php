@@ -136,6 +136,8 @@ class JobCardController extends Controller
         })->first();
 
         if($jobCard->taskcard->type->code == "basic"){
+            $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -161,12 +163,12 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
-                $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->last()->created_at;
+                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
+                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
             if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
@@ -186,11 +188,15 @@ class JobCardController extends Controller
                     'inspected_at' => $inspected_at,
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by
+                    'prepared_by' => $prepared_by,
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         }
         elseif($jobCard->taskcard->type->code == "sip"){
+            $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -216,12 +222,12 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
-                $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->last()->created_at;
+                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
+                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
             if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
@@ -241,11 +247,15 @@ class JobCardController extends Controller
                     'inspected_at' => $inspected_at,
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by
+                    'prepared_by' => $prepared_by,
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         }
         elseif($jobCard->taskcard->type->code == "cpcp"){
+            $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -271,12 +281,12 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
-                $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->last()->created_at;
+                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
+                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
             if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
@@ -296,11 +306,15 @@ class JobCardController extends Controller
                     'inspected_at' => $inspected_at,
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by
+                    'prepared_by' => $prepared_by,
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         }
         elseif (($jobCard->taskcard->type->code == "ad") or ($jobCard->taskcard->type->code == "sb")) {
+            $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -326,12 +340,12 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
-                $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->last()->created_at;
+                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
+                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
             if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
@@ -351,10 +365,14 @@ class JobCardController extends Controller
                     'inspected_at' => $inspected_at,
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by
+                    'prepared_by' => $prepared_by,
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();        }
         elseif(($jobCard->taskcard->type->code == "eo") or ($jobCard->taskcard->type->code == "ea")){
+            $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -380,12 +398,12 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
-                $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->last()->created_at;
+                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
+                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
             if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
@@ -405,11 +423,15 @@ class JobCardController extends Controller
                     'inspected_at' => $inspected_at,
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by
+                    'prepared_by' => $prepared_by,
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         }
         elseif(($jobCard->taskcard->type->code == "cmr") or ($jobCard->taskcard->type->code == "awl")){
+            $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -435,12 +457,12 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
-                $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->last()->created_at;
+                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
+                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
             if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
@@ -460,11 +482,15 @@ class JobCardController extends Controller
                     'inspected_at' => $inspected_at,
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by
+                    'prepared_by' => $prepared_by,
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         }
         elseif($jobCard->taskcard->type->code == "si"){
+            $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -490,12 +516,12 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
-                $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->last()->created_at;
+                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
+                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
             if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
@@ -515,11 +541,15 @@ class JobCardController extends Controller
                     'inspected_at' => $inspected_at,
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by
+                    'prepared_by' => $prepared_by,
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         }
         elseif($jobCard->taskcard->type->code == "preliminary"){
+            $rii_status = $jobCard->taskcard->is_rii;
+            $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -545,12 +575,12 @@ class JobCardController extends Controller
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)==0){
+            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
-                $accomplished_by =  User::find($jobCard->progresses->last()->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->last()->created_at;
+                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
+                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
             if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
@@ -570,7 +600,9 @@ class JobCardController extends Controller
                     'inspected_at' => $inspected_at,
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by
+                    'prepared_by' => $prepared_by,
+                    'rii_status' => $rii_status,
+                    'helpers' => $helpers
                     ]);
             return $pdf->stream();
         // } else {

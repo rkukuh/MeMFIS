@@ -73,7 +73,7 @@
                                                     A/C Type
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    Generated
+                                                    {{$jobcard->quotation->project->aircraft->name}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -90,14 +90,6 @@
                                                 </td>
                                                 <td width="70%" style="text-align:center">
                                                     {{$jobcard->quotation->project->aircraft_sn}}
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="30%" style="background-color:beige;padding:10px;">
-                                                    Inspection Type
-                                                </td>
-                                                <td width="70%" style="text-align:center">
-                                                    Generated
                                                 </td>
                                             </tr>
                                             <tr>
@@ -125,7 +117,7 @@
                                                     Inspection Type
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    Generated
+                                                    {{$jobcard->taskcard->task->name}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -155,7 +147,7 @@
                                                     Work Area
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{$jobcard->taskcard->work_area}}
+                                                    {{$jobcard->taskcard->workarea->name}}
                                                 </td>
                                             </tr>
                                             <tr>
