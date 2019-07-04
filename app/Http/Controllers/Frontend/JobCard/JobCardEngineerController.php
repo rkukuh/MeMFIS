@@ -188,7 +188,7 @@ class JobCardEngineerController extends Controller
             }
 
             foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
-                if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed"){
+                if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed" and $this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "open"){
                     $jobcard->progresses()->save(new Progress([
                         'status_id' =>  $this->statuses->where('code','closed')->first()->id,
                         'reason_id' =>  Type::ofJobCardCloseReason()->where('uuid',$request->accomplishment)->first()->id,
