@@ -158,9 +158,9 @@
         </div>
         <div class="col-sm-5 col-md-5 col-lg-5">
             @component('frontend.common.input.checkbox')
-                @slot('id', 'ppn')
-                @slot('name', 'ppn')
-                @slot('value', 0.1)
+                @slot('id', 'is_ppn')
+                @slot('name', 'is_ppn')
+                @slot('value', 1.1)
                 @slot('text', 'Include 10% PPN')
                 @slot('style_div','margin-top:15px')
                 @slot('help_text','If Checked, 10% tax rate would be charged')

@@ -687,10 +687,13 @@
         $('.engineer_qty').each(function(){
             engineer_qty = engineer_qty + parseInt($(this).val());
         });
+        let divider = engineer_qty * 6.5;
         if($('#default').prop("checked")){
-            tat = parseInt(mhrs_pfrm_factor) / engineer_qty * 6,5;
+            let mhrs = parseInt(mhrs_pfrm_factor);
+            tat = mhrs / divider;
         }else{
-            tat = total_mhrs * 1.6 / engineer_qty * 6,5;
+            let mhrs = total_mhrs * 1.6;
+            tat =  mhrs / divider;
         }
         $('#tat').val(tat);
     });

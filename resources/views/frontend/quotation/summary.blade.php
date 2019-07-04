@@ -72,12 +72,12 @@
         </div>
         <div class="col-sm-3 col-md-3 col-lg-3">
             @component('frontend.common.input.checkbox')
-                @slot('id', 'default')
-                @slot('name', 'default')
-                @slot('value', 0.1)
-                @slot('text', 'TaskCard Performance Factor')
-                @slot('style_div','margin-top:10px')
-                @slot('help_text','If Checked, Project will use TaskCard Performance Factor')
+                @slot('id', 'is_ppn')
+                @slot('name', 'is_ppn')
+                @slot('value', 1.1)
+                @slot('text', 'Include 10% PPN')
+                @slot('style_div','margin-top:15px')
+                @slot('help_text','If Checked, 10% tax rate would be charged')
                 @slot('icon', 'fa-info-circle m--font-info')
             @endcomponent
         </div>
