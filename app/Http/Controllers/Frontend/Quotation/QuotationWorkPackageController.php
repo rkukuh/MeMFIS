@@ -112,7 +112,7 @@ class QuotationWorkPackageController extends Controller
      */
     public function update(Request $request, Quotation $quotation, WorkPackage $workPackage)
     {
-        return response()->json($quotation->workpackages()->updateExistingPivot($quotation, ['manhour_total'=>$request->manhour_total,'manhour_rate'=>$request->manhour_rate,'description'=>$request->description]));
+        return response()->json($quotation->workpackages()->updateExistingPivot($workPackage, ['manhour_total'=>$request->manhour_total,'manhour_rate'=>$request->manhour_rate,'description'=>$request->description]));
     }
 
     /**

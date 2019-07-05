@@ -196,5 +196,5 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/quotation/workpackage/taskcard/non-routine/index.js')}}"></script>
-    <script src="{{ asset('js/frontend/project/hm/workpackage.js')}}"></script>
+
 @endpush

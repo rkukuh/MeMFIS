@@ -89,6 +89,13 @@ let RoutineWorkpackage = {
 
             ]
         });
+        $('#m_accordion_1_item_1_head').on('click', function () {
+            let table = $('.basic_datatable').mDatatable();
+
+            table.originalDataSet = [];
+            table.reload();
+        });
+
         $('.sip_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -172,6 +179,13 @@ let RoutineWorkpackage = {
                 },
             ]
         });
+        $('#m_accordion_1_item_2_head').on('click', function () {
+            let table = $('.sip_datatable').mDatatable();
+
+            table.originalDataSet = [];
+            table.reload();
+        });
+
         $('.cpcp_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -254,6 +268,12 @@ let RoutineWorkpackage = {
                     }
                 },
             ]
+        });
+        $('#m_accordion_1_item_3_head').on('click', function () {
+            let table = $('.cpcp_datatable').mDatatable();
+
+            table.originalDataSet = [];
+            table.reload();
         });
     }
 };

@@ -15,7 +15,7 @@ $('.nav-item').on('click','#engineer_team_tab',function() {
 
 let Workpackage = {
     init: function () {
-        
+
         $('.ht_crr_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -147,7 +147,14 @@ let Workpackage = {
             ]
         });
 
-        
+        $('#m_accordion_2_item_4_head').on('click', function () {
+            let table = $('.ht_crr_datatable').mDatatable();
+
+            table.originalDataSet = [];
+            table.reload();
+        });
+
+
 
         let material_htcrr_datatables_init = true;
         let triggeruuid = "";
