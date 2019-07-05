@@ -91,6 +91,13 @@ let NonRoutineWorkpackage = {
                 // }
             ]
         });
+        $('#m_accordion_2_item_1_head').on('click', function () {
+            let table = $('.ad-sb_datatable').mDatatable();
+
+            table.originalDataSet = [];
+            table.reload();
+        });
+
         $('.cmr-awl_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -182,6 +189,13 @@ let NonRoutineWorkpackage = {
                 // }
             ]
         });
+        $('#m_accordion_2_item_2_head').on('click', function () {
+            let table = $('.cmr-awl_datatable').mDatatable();
+
+            table.originalDataSet = [];
+            table.reload();
+        });
+
         $('.si_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -272,6 +286,12 @@ let NonRoutineWorkpackage = {
                 //     }
                 // }
             ]
+        });
+        $('#m_accordion_2_item_3_head').on('click', function () {
+            let table = $('.si_datatable').mDatatable();
+
+            table.originalDataSet = [];
+            table.reload();
         });
 
         $('.workshop_task_datatable').mDatatable({
