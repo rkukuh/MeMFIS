@@ -46,7 +46,7 @@
     #content{
       margin-top:168px;
     }
-    
+
     #content .jobcard-info fieldset legend{
       font-size: 20px;
       font-weight: bold;
@@ -101,7 +101,7 @@
       font-weight: bold;
       font-size: 14px;
     }
-    
+
     #content5 .body{
       width: 100%;
       border-left:  4px solid  #d4d7db;
@@ -141,7 +141,7 @@
   </style>
 </head>
 <body>
-  
+
 
   <header id="header">
     <img src="./img/form/printoutjobcardbasic/HeaderJobCardBasic.png" alt=""width="100%">
@@ -223,7 +223,7 @@
                                 {{json_decode($jobCard->taskcard->additionals)->internal_number}}
                             @else
                                 -
-                            @endif  
+                            @endif
                         </td>
                         <td width="20%">A/C S/N</td>
                         <td width="1%">:</td>
@@ -361,7 +361,7 @@
     </div>
   </div>
 
-  <div id="content4"> 
+  <div id="content4">
     <div class="container">
       <table width="100%" cellpadding="8" class="table-mt">
         <tr>
@@ -440,12 +440,14 @@
               @php
               $a = sizeof($helpers->toArray());
               @endphp
-              @for ($i = 0; $i < $a-1; $i++)
-                {{$helpers[$i]->first_name}},&nbsp;
-              @endfor
-              @for ($i = $a-1; $i < $a; $i++)
-                {{$helpers[$i]->first_name}}
-              @endfor
+              @if($a >0)
+                @for ($i = 0; $i < $a-1; $i++)
+                  {{$helpers[$i]->first_name}},&nbsp;
+                @endfor
+                @for ($i = $a-1; $i < $a; $i++)
+                    {{$helpers[$i]->first_name}}
+                @endfor
+              @endif
           </td>
         </tr>
       </table>
@@ -475,7 +477,7 @@
               <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$inspected_at}}</span></div>
             </td>
             <td width="34%" height="100" align="center" valign="bottom"
-            @if($rii_status==0) 
+            @if($rii_status==0)
               style="background:grey"
             @endif
             >
