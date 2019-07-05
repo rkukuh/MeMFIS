@@ -27,7 +27,7 @@
                                 <div class="px-2 py-2">
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">Taskcard List(s)</a>
+                                            <a class="nav-link" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">Taskcard List(s)</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#m_tabs_manhour">Manhours Propotion</a>
@@ -36,12 +36,12 @@
                                             <a class="nav-link" data-toggle="tab" href="#m_tabs_facility">Facility Used</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#m_tabs_enginner" id="engineer_team_tab">Engineer Team</a>
+                                            <a class="nav-link active show" data-toggle="tab" href="#m_tabs_enginner" id="engineer_team_tab">Engineer Team</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="tab-content">
-                                    <div class="tab-pane active show" id="m_tabs_taskcard" role="tabpanel">
+                                    <div class="tab-pane" id="m_tabs_taskcard" role="tabpanel">
                                         @include('frontend.project.hm.taskcard.index')
                                     </div>
                                     <div class="tab-pane" id="m_tabs_manhour" role="tabpanel">
@@ -50,7 +50,7 @@
                                     <div class="tab-pane" id="m_tabs_facility" role="tabpanel">
                                         @include('frontend.project.hm.facility.index')
                                     </div>
-                                    <div class="tab-pane" id="m_tabs_enginner" role="tabpanel">
+                                    <div class="tab-pane active show" id="m_tabs_enginner" role="tabpanel">
                                         @include('frontend.project.hm.engineer.index')
                                     </div>
 
@@ -66,7 +66,9 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @include('frontend.common.buttons.back')
+                                                    @component('frontend.common.buttons.back')
+                                                        @slot('href', route('frontend.project-hm.edit', ['project' => $project->uuid]))
+                                                    @endcomponent
                                                 </div>
                                             </div>
                                         </div>

@@ -66,7 +66,7 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project, WorkPackage $workPackage)
+    public function show(Project $project, WorkPackage $workPackage,Request $request)
     {
         $mhrs_pfrm_factor = $skills = $subset = [];
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
@@ -102,7 +102,12 @@ class ProjectHMWorkPackageController extends Controller
         $materialCount = $workPackage->items->count();
         $toolCount = $workPackage->tools->count();
 
-        return view('frontend.project.hm.workpackage.index',[
+        if ($request->anyChanges) {
+            $view = 'frontend.project.hm.workpackage.index-engineerteam';
+        }else{
+            $view = 'frontend.project.hm.workpackage.index';
+        }
+        return view($view,[
             'edit' => $edit,
             'project' => $project,
             'employees' => $employees,
@@ -125,7 +130,7 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project, WorkPackage $workPackage)
+    public function edit(Project $project, WorkPackage $workPackage,Request $request)
     {
         $mhrs_pfrm_factor = $engineer_skills = $skills = $subset = [];
             
@@ -162,7 +167,13 @@ class ProjectHMWorkPackageController extends Controller
         
         $materialCount = $workPackage->items->count();
         $toolCount = $workPackage->tools->count();
-        return view('frontend.project.hm.workpackage.index',[
+
+        if ($request->anyChanges) {
+            $view = 'frontend.project.hm.workpackage.index-engineerteam';
+        }else{
+            $view = 'frontend.project.hm.workpackage.index';
+        }
+        return view($view,[
             'edit' => $edit,
             'project' => $project,
             'employees' => $employees,

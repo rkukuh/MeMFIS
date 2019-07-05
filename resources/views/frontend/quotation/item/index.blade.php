@@ -102,7 +102,7 @@
             <div class="m-accordion__item-content">
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
-                        <h1>Non Routine Material(S) List</h1>
+                        <h1>Non Routine Tool(S) List</h1>
                         <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                             <div class="row align-items-center">
                                 <div class="col-xl-6 order-2 order-xl-1">
@@ -126,7 +126,7 @@
                             </div>
                         </div>
 
-                        <div class="non_routine_materials_datatable" id="scrolling_both"></div>
+                        <div class="non_routine_tools_datatable" id="scrolling_both"></div>
                     </div>
                 </div>
             </div>
