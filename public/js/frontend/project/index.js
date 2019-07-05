@@ -216,8 +216,6 @@ let Aircraft = {
         });
 
 
-
-
 jQuery(document).ready(function () {
     Aircraft.init();
 });

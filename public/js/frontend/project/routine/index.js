@@ -1,3 +1,24 @@
+$('#m_accordion_1_item_1_basic_index').on('click', function () {
+    let table = $('.basic_datatable').mDatatable();
+
+    table.originalDataSet = [];
+    table.reload();
+});
+
+$('#m_accordion_1_item_2_sip_index').on('click', function () {
+    let table = $('.sip_datatable').mDatatable();
+
+    table.originalDataSet = [];
+    table.reload();
+});
+
+$('#m_accordion_1_item_3_cpcp_index').on('click', function () {
+    let table = $('.cpcp_datatable').mDatatable();
+
+    table.originalDataSet = [];
+    table.reload();
+});
+
 let RoutineWorkpackage = {
     init: function () {
         $('.basic_datatable').mDatatable({
@@ -91,12 +112,7 @@ let RoutineWorkpackage = {
                 // }
             ]
         });
-        $('#m_accordion_1_item_1_head').on('click', function () {
-            let table = $('.basic_datatable').mDatatable();
-
-            table.originalDataSet = [];
-            table.reload();
-        });
+        
 
         $('.sip_datatable').mDatatable({
             data: {
@@ -189,12 +205,6 @@ let RoutineWorkpackage = {
                 // }
             ]
         });
-        $('#m_accordion_1_item_2_head').on('click', function () {
-            let table = $('.sip_datatable').mDatatable();
-
-            table.originalDataSet = [];
-            table.reload();
-        });
 
         $('.cpcp_datatable').mDatatable({
             data: {
@@ -286,12 +296,6 @@ let RoutineWorkpackage = {
                 //     }
                 // }
             ]
-        });
-        $('#m_accordion_1_item_3_head').on('click', function () {
-            let table = $('.cpcp_datatable').mDatatable();
-
-            table.originalDataSet = [];
-            table.reload();
         });
     }
 };

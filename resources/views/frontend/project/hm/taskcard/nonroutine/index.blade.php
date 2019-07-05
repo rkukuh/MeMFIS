@@ -205,7 +205,5 @@
 </div>
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/workpackage/non-routine/index.js')}}"></script>
-    <!-- <script src="{{ asset('js/frontend/project/hm/workpackage.js')}}"></script> -->
-
+    <script src="{{ asset('js/frontend/project/non-routine/index.js')}}"></script>
 @endpush

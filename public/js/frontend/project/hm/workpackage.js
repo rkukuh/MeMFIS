@@ -147,15 +147,6 @@ let Workpackage = {
             ]
         });
 
-        $('#m_accordion_2_item_4_head').on('click', function () {
-            let table = $('.ht_crr_datatable').mDatatable();
-
-            table.originalDataSet = [];
-            table.reload();
-        });
-
-
-
         let material_htcrr_datatables_init = true;
         let triggeruuid = "";
         let htcrr_materials = $('.ht_crr_datatable').on('click', '.material_htcrr', function () {
