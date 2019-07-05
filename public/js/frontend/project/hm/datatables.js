@@ -247,6 +247,7 @@ let Datatables = {
                         });
 
                         let table = $('.basic_datatable').mDatatable();
+                        anyChanges = true;                         console.log(anyChanges);
 
                         table.originalDataSet = [];
                         table.reload();
@@ -281,6 +282,7 @@ let Datatables = {
                         });
 
                         let table = $('.sip_datatable').mDatatable();
+                        anyChanges = true;                         console.log(anyChanges);
 
                         table.originalDataSet = [];
                         table.reload();
@@ -315,6 +317,7 @@ let Datatables = {
                         });
 
                         let table = $('.cpcp_datatable').mDatatable();
+                        anyChanges = true;                         console.log(anyChanges);
 
                         table.originalDataSet = [];
                         table.reload();
@@ -349,6 +352,7 @@ let Datatables = {
                         });
 
                         let table = $('.ad-sb_datatable').mDatatable();
+                        anyChanges = true;                         console.log(anyChanges);
 
                         table.originalDataSet = [];
                         table.reload();
@@ -383,7 +387,7 @@ let Datatables = {
                         });
 
                         let table = $('.si_datatable').mDatatable();
-
+                        anyChanges = true;                         console.log(anyChanges);
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -417,6 +421,7 @@ let Datatables = {
                         });
 
                         let table = $('.cmr-awl_datatable').mDatatable();
+                        anyChanges = true;                         console.log(anyChanges);
 
                         table.originalDataSet = [];
                         table.reload();
