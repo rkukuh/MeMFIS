@@ -1,5 +1,4 @@
 <a
-    {{-- href="{{ $href or '' }}" --}}
     id={{ $id or '' }}
     name={{ $name or '' }}
     class="btn
