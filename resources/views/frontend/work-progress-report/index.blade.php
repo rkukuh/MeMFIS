@@ -72,8 +72,8 @@
 
                         </div>
                         <div class="col-lg-12">
-                                @include('frontend.work-progress-report.filter')
-                            </div>
+                            @include('frontend.work-progress-report.filter')
+                        </div>
                         <div class="work_progress_report_datatable" id="scrolling_both"></div>
                     </div>
                 </div>
