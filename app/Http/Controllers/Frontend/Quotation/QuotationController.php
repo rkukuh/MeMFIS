@@ -100,23 +100,15 @@ class QuotationController extends Controller
 
                     $quotation_workpackage = QuotationWorkPackage::where('quotation_id',$quotation->id)->where('workpackage_id',$workpackage->id)->first();
 
-                    // if(!is_object(Item::find($item->item_id)->prices->get($customer))){
-                    //     $price_id = Item::find($item->item_id)->prices->get($customer)->id;
-                    // }
-                    // else{
-                    //     $price_id = null;
-                    // }
-                    $result = Item::find($item->item_id)->prices->get($customer);
-                    if ($result) {
-                        $price_id = Item::find($item->item_id)->prices->get($customer)->id;
+                    if (Item::findOrFail($item->id)->prices->get($customer)) {
+                        $price_id = Item::find($item->id)->prices->get($customer)->id;
                     } else {
                         $price_id = null;
                     }
-                    
                     $quotation_workpackage->items()->create([
-                        'item_id' => $item->item_id,
-                        'quantity' => $item->quantity,
-                        'unit_id' => $item->unit_id,
+                        'item_id' => $item->id,
+                        'quantity' => $item->pivot->quantity,
+                        'unit_id' => $item->pivot->unit_id,
                         'price_id' => $price_id,
                     ]);
                 }
