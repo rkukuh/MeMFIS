@@ -59,9 +59,7 @@
 
                         @include('frontend.common.buttons.reset')
 
-                        @component('frontend.common.buttons.back')
-                            @slot('href', route('frontend.quotation.edit', ['quotation' => $quotation->uuid]))
-                        @endcomponent
+                        @include('frontend.common.buttons.back')
                     </div>
                 </div>
             </div>

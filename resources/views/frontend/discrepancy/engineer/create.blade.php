@@ -196,7 +196,7 @@
                                             <input type="file" id="file" multiple name="name">
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">   
+                                            <label class="form-control-label">
                                             </label>
 
                                             @component('frontend.common.input.checkbox')
@@ -356,9 +356,8 @@
 
                                                     @include('frontend.common.buttons.reset')
 
-                                                    @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.item.index'))
-                                                    @endcomponent
+                                                    @include('frontend.common.buttons.back')
+
                                                 </div>
                                             </div>
                                         </div>

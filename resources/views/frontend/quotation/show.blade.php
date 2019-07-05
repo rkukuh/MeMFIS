@@ -447,7 +447,7 @@
                                                             <div class="m--align-left" style="padding-top:15px">
                                                                 <div class="form-group m-form__group row">
                                                                     <div class="col-sm-6 col-md-6 col-lg-6 m--align-right">
-                                                                            Total in 
+                                                                            Total in
                                                                     </div>
                                                                     <div class="col-sm-6 col-md-6 col-lg-6 m--align-left p-0" id="currency_symbol">
                                                                             {{ $quotation->currency->name }}
@@ -476,7 +476,7 @@
                                                         <div class="m--align-left" style="padding-top:15px">
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-6 col-md-6 col-lg-6 m--align-right">
-                                                                        Total in 
+                                                                        Total in
                                                                 </div>
                                                                 <div class="col-sm-6 col-md-6 col-lg-6 m--align-left p-0">
                                                                         Rupiah
@@ -509,9 +509,7 @@
 
                                                 @include('frontend.common.buttons.reset')
 
-                                                @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.quotation.index'))
-                                                @endcomponent
+                                                @include('frontend.common.buttons.back')
                                             </div>
                                         </div>
                                     </div>

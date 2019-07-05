@@ -146,9 +146,8 @@
                                         @slot('icon','fa-print')
                                     @endcomponent
 
-                                    @component('frontend.common.buttons.back')
-                                        @slot('href', route('frontend.receiving-inspection-report.index'))
-                                    @endcomponent
+                                    @include('frontend.common.buttons.back')
+
                                 </div>
                             </div>
                         </div>

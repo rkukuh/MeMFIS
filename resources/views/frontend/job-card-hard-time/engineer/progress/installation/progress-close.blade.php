@@ -185,9 +185,8 @@
                                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                                             <div class="flex">
                                                                 <div class="action-buttons">
-                                                                    @component('frontend.common.buttons.back')
-                                                                        @slot('href', route('frontend.workpackage.index'))
-                                                                    @endcomponent
+                                                                    @include('frontend.common.buttons.back')
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -514,9 +513,8 @@
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <div class="action-buttons d-flex flex-row-reverse">
-                                                                @component('frontend.common.buttons.back')
-                                                                    @slot('href', route('frontend.item.index'))
-                                                                @endcomponent
+                                                                @include('frontend.common.buttons.back')
+
                                                             </div>
                                                         </div>
                                                     </div>

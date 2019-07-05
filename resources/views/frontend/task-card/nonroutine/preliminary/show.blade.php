@@ -163,9 +163,8 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.taskcard.index'))
-                                                    @endcomponent
+                                                    @include('frontend.common.buttons.back')
+
                                                 </div>
                                             </div>
                                         </div>

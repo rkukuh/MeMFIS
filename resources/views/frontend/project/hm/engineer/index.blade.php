@@ -56,7 +56,7 @@
                     @slot('value', 'Airframe')
                 @endcomponent
         </div>
-        @endif 
+        @endif
         @if(in_array('Powerplant / Engine',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -113,7 +113,7 @@
                 @slot('value', 'Powerplant')
             @endcomponent
         </div>
-        @endif 
+        @endif
         @if(in_array('Electrical',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -170,7 +170,7 @@
                 @slot('value', 'Electrical')
             @endcomponent
         </div>
-        @endif 
+        @endif
         @if(in_array('Radio',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -228,7 +228,7 @@
                     @slot('value', 'Radio')
                 @endcomponent
         </div>
-        @endif 
+        @endif
         @if(in_array('Instrument',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -285,7 +285,7 @@
                     @slot('value', 'Instrument')
                 @endcomponent
         </div>
-        @endif 
+        @endif
         @if(in_array('Cabin Maintenance',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -341,7 +341,7 @@
                 @slot('value', 'Cabin Maintenance')
             @endcomponent
         </div>
-        @endif 
+        @endif
         @if(in_array('Run-Up',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -398,7 +398,7 @@
                 @slot('value', 'Run-Up')
             @endcomponent
         </div>
-        @endif 
+        @endif
         @if(in_array('Repair',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -456,7 +456,7 @@
                 @slot('value', 'Repair')
             @endcomponent
         </div>
-        @endif 
+        @endif
         @if(in_array('Repainting',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -513,7 +513,7 @@
                 @slot('value', 'Repainting')
             @endcomponent
         </div>
-        @endif 
+        @endif
         @if(in_array('NDI / NDT',$engineer_skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -598,7 +598,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col-sm-12 col-md-12 col-lg-12 footer">
         <div class="flex">
             <div class="action-buttons">
@@ -610,9 +610,8 @@
 
                 @include('frontend.common.buttons.reset')
 
-                @component('frontend.common.buttons.back')
-                    @slot('href', route('frontend.workpackage.index'))
-                @endcomponent
+                @include('frontend.common.buttons.back')
+
 
             </div>
         </div>
