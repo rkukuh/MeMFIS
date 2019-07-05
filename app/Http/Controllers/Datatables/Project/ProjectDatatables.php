@@ -26,7 +26,7 @@ class ProjectDatatables extends Controller
                 $project->status .= 'Quotation Approved';
             }
             else{
-                $project->status .= '?';
+                $project->status .= (sizeof($project->approvals->toArray())).'?'; // *Find bug size of approve
             }
         }
 
