@@ -221,6 +221,9 @@ let Datatables = {
             $('#si_datatable').DataTable().ajax.reload();
         });
 
+        let material_datatables_init = true;
+        let tool_datatables_init = true;
+
         $('#basic_datatable').on('click', '.select-basic', function () {
             $.ajax({
                 headers: {
@@ -252,7 +255,7 @@ let Datatables = {
                             });
 
                             let table = $('.basic_datatable').mDatatable();
-                            anyChanges = true;                         
+                            anyChanges = true;
 
                             table.originalDataSet = [];
                             table.reload();
@@ -293,7 +296,7 @@ let Datatables = {
                             });
 
                             let table = $('.sip_datatable').mDatatable();
-                            anyChanges = true;                         
+                            anyChanges = true;
 
                             table.originalDataSet = [];
                             table.reload();
@@ -334,7 +337,7 @@ let Datatables = {
                             });
 
                             let table = $('.cpcp_datatable').mDatatable();
-                            anyChanges = true;                         
+                            anyChanges = true;
 
                             table.originalDataSet = [];
                             table.reload();
@@ -375,7 +378,7 @@ let Datatables = {
                             });
 
                             let table = $('.ad-sb_datatable').mDatatable();
-                            anyChanges = true;                         
+                            anyChanges = true;
 
                             table.originalDataSet = [];
                             table.reload();
@@ -416,7 +419,7 @@ let Datatables = {
                             });
 
                             let table = $('.si_datatable').mDatatable();
-                            anyChanges = true;                         
+                            anyChanges = true;
                             table.originalDataSet = [];
                             table.reload();
                         }
@@ -456,7 +459,7 @@ let Datatables = {
                             });
 
                             let table = $('.cmr-awl_datatable').mDatatable();
-                            anyChanges = true;                         
+                            anyChanges = true;
 
                             table.originalDataSet = [];
                             table.reload();
