@@ -91,6 +91,12 @@ let Workpackage = {
                     }
                 },
                 {
+                    field: 'created_by',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
