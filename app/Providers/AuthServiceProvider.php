@@ -68,6 +68,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\OTRCertification::class => Policies\OTRCertificationPolicy::class,
         Models\Pivots\QuotationTaskCard::class => Policies\QuotationTaskCardPolicy::class,
         Models\CertificationEmployee::class => Policies\CertificationEmployeePolicy::class,
+        Models\QuotationTaskCardItem::class => Policies\QuotationTaskCardItemPolicy::class,
         Models\Pivots\ProjectWorkPackage::class => Policies\ProjectWorkPackagePolicy::class,
         Models\Pivots\TaskCardWorkPackage::class => Policies\TaskCardWorkPackagePolicy::class,
         Models\Pivots\QuotationWorkPackage::class => Policies\QuotationWorkPackagePolicy::class,
