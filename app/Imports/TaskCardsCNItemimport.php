@@ -20,6 +20,7 @@ class TaskCardsCNItemimport implements ToModel, WithHeadingRow
 
 
         /** Set the unit of measurement */
+        // dump($row['um']);
 
         switch ($row['um']) {
             case 'EA':
@@ -130,16 +131,19 @@ class TaskCardsCNItemimport implements ToModel, WithHeadingRow
         }
 
         $item = Item::where('code',$row['part_number'])->first();
-        dump($row['part_number']);
+        ($row['part_number']);
         $taskcard = TaskCard::where('number',$row['taskcard_number'])->first();
+        if(isset($taskcard) && isset($item) ){
+            $taskcard->items()->attach($taskcard->id, [
+                'item_id' => $item->id,
+                'unit_id' => $unit,
+                'note' => $row['description'],
+                'quantity' => $row['qty'],
+            ]);
+            if(empty($item)){ dump($item); }
+            if(empty($taskcard)){ dump($taskcard); }
+        }
 
-
-        $taskcard->items()->attach($taskcard->id, [
-            'item_id' => $item->id,
-            'unit_id' => $unit,
-            'note' => $row['description'],
-            'quantity' => $row['qty'],
-        ]);
 
 
     }
