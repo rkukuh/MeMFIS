@@ -21,7 +21,6 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-
         /** Set the task type */
         switch ($row['task_type']) {
             case 'GENERAL VISUAL':
@@ -73,12 +72,16 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                                         ->where('name', 'Functional')->first();
                     break;
             default:
+            if(empty($row['task_type'])){
+                $work_area = null;
+            }else{
                 $task_type = Type::ofTaskCardTask()
-                    ->where('name', 'LIKE', $row['task_type'])->firstOrCreate([
+                    ->where('name', 'like', $row['task_type'])->firstOrCreate([
                         'code'  => str_slug($row['task_type']),
                         'name'  => strtoupper($row['task_type']),
-                        'of'    => 'taskcard-task',
+                        'of'    => 'taskcard-task'
                     ]);
+            }
         }
 
         /** Set the workarea */
@@ -129,16 +132,19 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                                     ->where('name', 'RIGHT ENGINE')->first();
                 break;
             default:
+            if(empty($row['work_area'])){
+                $work_area = null;
+            }else{
                 $work_area = Type::ofWorkArea()
-                    ->where('name','like', $row['work_area'])->firstOrCreate([
+                    ->where('name', 'like', $row['work_area'])->firstOrCreate([
                         'code'  => str_slug($row['work_area']),
                         'name'  => strtoupper($row['work_area']),
-                        'of'    => 'work-area',
+                        'of'    => 'work-area'
                     ]);
-
+            }
         }
 
-        switch($row['type'] ){
+        switch($row['type']){
             case 'BASIC':
                 $taskcard_type = Type::ofTaskCardTypeRoutine()
                         ->where('name', 'Basic')->first();
@@ -176,11 +182,19 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                         ->where('code', 'awl')->first();
             break;
             default:
+            if(empty($row['task_type'])){
+                $work_area = null;
+            }else{
                 $taskcard_type = Type::ofTaskCardTypeRoutine()
                     ->where('name', 'Basic')->first();
+            }
         }
-       
-
+        $additionals = [];
+        if( $row['company_task']) {
+            $additionals["company_task"] = $row['company_task'];
+        }else{
+            $additionals["company_task"] = null;
+        }
         $taskcard =  new TaskCard([
             'number' => $row['number'],
             'title' => $row['title'],
@@ -191,11 +205,14 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
             'estimation_manhour' => $row['manhours'],
             'is_rii' => $row['is_rii'],
             'source' => $row['source'],
+            'helper_quantity' => $row['helper_quantity'],
+            'engineer_quantity' => $row['engineer_quantity'],
             'effectivity' => $row['effectivity'],
             'ata' => $row['ata'],
             'reference' => $row['reference'],
             'version' => json_encode(explode(';',$row['version'])),
             'description' => $row['description'],
+            'additionals' => json_encode($additionals)
         ]);
 
         $taskcard->save();
@@ -242,7 +259,6 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
             $taskcard->accesses()->attach($accesses);
         }
 
-        dump($row['number']);
         if ($row['skill']) {
             $skill_id = Type::where('name','LIKE','%'.$row['skill'].'%')->where('of','taskcard-skill')->first()->id;
             if(Type::where('id',$skill_id)->first()->code == 'eri'){
@@ -254,7 +270,6 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                 $taskcard->skills()->attach($skill_id);
             }
         }
-
 
         // - Table: thresholds
         if($row['threshold']){
@@ -275,8 +290,8 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                 $taskcard->repeats()->save(new Repeat([
                     'amount' => $e[0],
                     'type_id' => $threshold_type,
-                ]));
-            }
+                    ]));
+                }
         }
 
     }
