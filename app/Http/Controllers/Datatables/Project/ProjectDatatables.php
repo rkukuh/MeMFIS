@@ -35,7 +35,12 @@ class ProjectDatatables extends Controller
             $project->aircraft_type.= $project->aircraft->name;
         }
         foreach($projects as $project){
-            $project->created_by.= User::find($project->audits->first()->user_id)->name;
+            if($project->audits->first()->user_id ==  null){
+                $project->created_by.= "System";
+
+            }else{
+                $project->created_by.= User::find($project->audits->first()->user_id)->name;
+            }
         }
 
         $data = $alldata = json_decode($projects);
