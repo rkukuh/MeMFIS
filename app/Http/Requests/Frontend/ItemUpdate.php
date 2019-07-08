@@ -37,12 +37,7 @@ class ItemUpdate extends FormRequest
                     $query->where('of', 'item');
                 }),
             ],
-            'unit_id' => [
-                'required',
-                Rule::exists('units', 'id')->where(function ($query) {
-                    $query->whereIn('type_id', (new Unit())->get());
-                }),
-            ],
+            'unit_id' => 'required|exists:units,id',
             'ppn_amount' => 'nullable|integer|min:0',
         ];
     }
