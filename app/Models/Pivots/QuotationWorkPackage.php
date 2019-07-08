@@ -17,9 +17,9 @@ class QuotationWorkPackage extends Pivot
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A Quotation's WorkPackages may have one or many item.
+     * One-to-Many: A Quotation's WorkPackage may have one or many item.
      *
-     * This function will retrieve all the item of a Quotation's WorkPackages.
+     * This function will retrieve all the item of a Quotation's WorkPackage.
      * See: QuotationWorkPackageItem's header() method for the inverse
      *
      * @return mixed
