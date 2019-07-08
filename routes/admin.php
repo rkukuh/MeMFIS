@@ -99,6 +99,10 @@ Route::name('admin.')->group(function () {
         Route::resource('quotation-workpackage', 'QuotationWorkPackageController');
         Route::resource('quotation-workpackage-item', 'QuotationWorkPackageItemController');
 
+        /** QUOTATION's TASKCARDs */
+
+        Route::resource('quotation-taskcard', 'QuotationTaskCardController');
+
     });
 
 });
