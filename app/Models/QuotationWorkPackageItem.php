@@ -23,10 +23,10 @@ class QuotationWorkPackageItem extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A Quotation's WorkPackages may have one or many item.
+     * One-to-Many: A Quotation's WorkPackage may have one or many item.
      *
      * This function will retrieve the header of a Quotation's WorkPackage.
-     * See: Quotation WorkPackage's items() method for the inverse
+     * See: QuotationWorkPackage's items() method for the inverse
      *
      * @return mixed
      */
@@ -36,7 +36,7 @@ class QuotationWorkPackageItem extends MemfisModel
     }
 
     /**
-     * One-Way: A Quotation WorkPackage Item must have an item assigned to.
+     * One-Way: A Quotation's WorkPackage's Item must have an item assigned to.
      *
      * @return mixed
      */
@@ -46,7 +46,7 @@ class QuotationWorkPackageItem extends MemfisModel
     }
 
     /**
-     * One-Way: A Quotation WorkPackage Item must have a rental price assigned to.
+     * One-Way: A Quotation's WorkPackage's Item must have a rental price assigned to.
      *
      * @return mixed
      */

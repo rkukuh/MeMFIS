@@ -435,15 +435,17 @@
           <td width="3%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="96%" valign="top">
-              @php
-               $a = sizeof($helpers->toArray());
-              @endphp
-              @for ($i = 0; $i < $a-1; $i++)
-                {{$helpers[$i]->first_name}},&nbsp;
-              @endfor
-              @for ($i = $a-1; $i < $a; $i++)
+            @php
+            $a = sizeof($helpers->toArray());
+            @endphp
+            @if($a >0)
+            @for ($i = 0; $i < $a-1; $i++)
+            {{$helpers[$i]->first_name}},&nbsp;
+            @endfor
+            @for ($i = $a-1; $i < $a; $i++)
                 {{$helpers[$i]->first_name}}
-              @endfor
+            @endfor
+            @endif
           </td>
         </tr>
       </table>
@@ -473,7 +475,7 @@
               <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$inspected_at}}</span></div>
             </td>
             <td width="34%" height="100" align="center" valign="bottom"
-            @if($rii_status==0) 
+            @if($rii_status==0)
               style="background:grey"
             @endif
             >

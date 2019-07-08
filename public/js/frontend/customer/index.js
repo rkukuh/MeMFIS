@@ -43,7 +43,7 @@ let Customer = {
             },
             columns: [{
                     field: 'name',
-                    title: 'Name',
+                    title: 'Customer Name',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {

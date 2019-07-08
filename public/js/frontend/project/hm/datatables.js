@@ -221,6 +221,9 @@ let Datatables = {
             $('#si_datatable').DataTable().ajax.reload();
         });
 
+        let material_datatables_init = true;
+        let tool_datatables_init = true;
+
         $('#basic_datatable').on('click', '.select-basic', function () {
             $.ajax({
                 headers: {
@@ -240,16 +243,23 @@ let Datatables = {
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
-                        $('#modal_basic').modal('hide');
+                        if (data.title == "Danger") {
+                            toastr.error('Task card alrady exists!', 'Error',  {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $('#modal_basic').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
-                            timeOut: 5000
-                        });
+                            toastr.success('Task Card has been added.', 'Success',  {
+                                timeOut: 5000
+                            });
 
-                        let table = $('.basic_datatable').mDatatable();
+                            let table = $('.basic_datatable').mDatatable();
+                            anyChanges = true;
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
                     }
                 }
             });
@@ -274,16 +284,23 @@ let Datatables = {
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
-                        $('#modal_sip').modal('hide');
+                        if (data.title == "Danger") {
+                            toastr.error('Task card alrady exists!', 'Error',  {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $('#modal_sip').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
-                            timeOut: 5000
-                        });
+                            toastr.success('Task Card has been added.', 'Success',  {
+                                timeOut: 5000
+                            });
 
-                        let table = $('.sip_datatable').mDatatable();
+                            let table = $('.sip_datatable').mDatatable();
+                            anyChanges = true;
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
                     }
                 }
             });
@@ -308,16 +325,23 @@ let Datatables = {
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
-                        $('#modal_cpcp').modal('hide');
+                        if (data.title == "Danger") {
+                            toastr.error('Task card alrady exists!', 'Error',  {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $('#modal_cpcp').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
-                            timeOut: 5000
-                        });
+                            toastr.success('Task Card has been added.', 'Success',  {
+                                timeOut: 5000
+                            });
 
-                        let table = $('.cpcp_datatable').mDatatable();
+                            let table = $('.cpcp_datatable').mDatatable();
+                            anyChanges = true;
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
                     }
                 }
             });
@@ -342,16 +366,23 @@ let Datatables = {
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
-                        $('#modal_ad_sb').modal('hide');
+                        if (data.title == "Danger") {
+                            toastr.error('Task card alrady exists!', 'Error',  {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $('#modal_ad_sb').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
-                            timeOut: 5000
-                        });
+                            toastr.success('Task Card has been added.', 'Success',  {
+                                timeOut: 5000
+                            });
 
-                        let table = $('.ad-sb_datatable').mDatatable();
+                            let table = $('.ad-sb_datatable').mDatatable();
+                            anyChanges = true;
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
                     }
                 }
             });
@@ -376,16 +407,22 @@ let Datatables = {
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
-                        $('#modal_si').modal('hide');
+                        if (data.title == "Danger") {
+                            toastr.error('Task card alrady exists!', 'Error',  {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $('#modal_si').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
-                            timeOut: 5000
-                        });
+                            toastr.success('Task Card has been added.', 'Success',  {
+                                timeOut: 5000
+                            });
 
-                        let table = $('.si_datatable').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
+                            let table = $('.si_datatable').mDatatable();
+                            anyChanges = true;
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
                     }
                 }
             });
@@ -410,16 +447,23 @@ let Datatables = {
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
-                        $('#modal_cmr_awl').modal('hide');
+                        if (data.title == "Danger") {
+                            toastr.error('Task card alrady exists!', 'Error',  {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $('#modal_cmr_awl').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
-                            timeOut: 5000
-                        });
+                            toastr.success('Task Card has been added.', 'Success',  {
+                                timeOut: 5000
+                            });
 
-                        let table = $('.cmr-awl_datatable').mDatatable();
+                            let table = $('.cmr-awl_datatable').mDatatable();
+                            anyChanges = true;
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
                     }
                 }
             });

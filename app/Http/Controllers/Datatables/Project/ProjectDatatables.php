@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\Project;
 
+use App\User;
 use App\Models\Project;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
@@ -26,7 +27,19 @@ class ProjectDatatables extends Controller
                 $project->status .= 'Quotation Approved';
             }
             else{
-                $project->status .= '?';
+                $project->status .= (sizeof($project->approvals->toArray())).'?'; // *Find bug size of approve
+            }
+        }
+
+        foreach($projects as $project){
+            $project->aircraft_type.= $project->aircraft->name;
+        }
+        foreach($projects as $project){
+            if($project->audits->first()->user_id ==  null){
+                $project->created_by.= "System";
+
+            }else{
+                $project->created_by.= User::find($project->audits->first()->user_id)->name;
             }
         }
 

@@ -327,9 +327,7 @@
                                                     @slot('class', 'release')
                                                 @endcomponent
 
-                                                @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.riirelease-jobcard.rii-release.index'))
-                                                @endcomponent
+                                                @include('frontend.common.buttons.back')
                                             </div>
                                         </div>
                                     </div>

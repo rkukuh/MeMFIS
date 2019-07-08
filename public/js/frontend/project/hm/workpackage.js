@@ -1,6 +1,21 @@
+
+
+$('.nav-item').on('click','#engineer_team_tab',function() {
+    if(anyChanges){
+        let csrf = $('meta[name="csrf-token"]').attr('content');
+        let url = '/project-hm/' + project_uuid  + '/workpackage/' + workPackage_uuid;
+        let form = $('<form action="' + url + '" method="GET">' +
+        '<input type="hidden" name="anyChanges" value="' + anyChanges + '" />' +
+        '<input name="_token" value="'+csrf+'" type="hidden">' +
+        '</form>');
+        $('body').append(form);
+        form.submit();
+    }
+});
+
 let Workpackage = {
     init: function () {
-        
+
         $('.ht_crr_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -672,6 +687,8 @@ function htcrr_material(triggeruuid) {
     $('.htcrr-item-body').on('click', '.item_modal', function () {
         $('#add_tool_modal').modal('show');
     });
+
+
 
 };
 

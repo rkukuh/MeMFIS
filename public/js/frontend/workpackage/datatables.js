@@ -240,7 +240,7 @@ let Datatables = {
                     } else {
                         $('#modal_basic').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
+                        toastr.success('Task Card has been added.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -274,7 +274,7 @@ let Datatables = {
                     } else {
                         $('#modal_sip').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
+                        toastr.success('Task Card has been added.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -308,7 +308,7 @@ let Datatables = {
                     } else {
                         $('#modal_cpcp').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
+                        toastr.success('Task Card has been added.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -342,7 +342,7 @@ let Datatables = {
                     } else {
                         $('#modal_ad_sb').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
+                        toastr.success('Task Card has been added.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -376,7 +376,7 @@ let Datatables = {
                     } else {
                         $('#modal_si').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
+                        toastr.success('Task Card has been added.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -410,7 +410,7 @@ let Datatables = {
                     } else {
                         $('#modal_cmr_awl').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
+                        toastr.success('Task Card has been added.', 'Success',  {
                             timeOut: 5000
                         });
 

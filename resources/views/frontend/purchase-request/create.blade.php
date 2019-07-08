@@ -136,7 +136,7 @@
                                                         <label class="form-control-label">
                                                             Description @include('frontend.common.label.optional')
                                                         </label>
-            
+
                                                         @component('frontend.common.input.textarea')
                                                             @slot('rows', '10')
                                                             @slot('id', 'description')
@@ -158,9 +158,7 @@
 
                                                     @include('frontend.common.buttons.reset')
 
-                                                    @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.item.index'))
-                                                    @endcomponent
+                                                    @include('frontend.common.buttons.back')
                                                 </div>
                                             </div>
                                         </div>

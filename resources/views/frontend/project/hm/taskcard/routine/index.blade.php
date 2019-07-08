@@ -1,15 +1,15 @@
-<div id="m_accordion_1" class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg m-accordion--toggle-arrow" role="tablist">                      
+<div id="m_accordion_1" class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg m-accordion--toggle-arrow" role="tablist">
 
-    <!--begin::Item-->              
+    <!--begin::Item-->
     <div class="m-accordion__item ">
-        <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="  false">
+        <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_1_item_1_basic_index" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="  false">
             <span class="m-accordion__item-icon"></span>
             <span class="m-accordion__item-title">Basic</span>
-                    
-            <span class="m-accordion__item-mode"></span>     
+
+            <span class="m-accordion__item-mode"></span>
         </div>
 
-        <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_1_head" data-parent="#m_accordion_1"> 
+        <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_1_basic_index" data-parent="#m_accordion_1">
             <div class="m-accordion__item-content">
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
@@ -48,18 +48,18 @@
             </div>
         </div>
     </div>
-    <!--end::Item--> 
+    <!--end::Item-->
 
-    <!--begin::Item--> 
+    <!--begin::Item-->
     <div class="m-accordion__item ">
-        <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_2_head" data-toggle="collapse" href="#m_accordion_1_item_2_body" aria-expanded="    false">
+        <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_2_sip_index" data-toggle="collapse" href="#m_accordion_1_item_2_body" aria-expanded="    false">
             <span class="m-accordion__item-icon"></span>
             <span class="m-accordion__item-title">Structure Inspection Program</span>
-                    
-            <span class="m-accordion__item-mode"></span>     
+
+            <span class="m-accordion__item-mode"></span>
         </div>
 
-        <div class="m-accordion__item-body collapse" id="m_accordion_1_item_2_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_2_head" data-parent="#m_accordion_1"> 
+        <div class="m-accordion__item-body collapse" id="m_accordion_1_item_2_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_2_sip_index" data-parent="#m_accordion_1">
             <div class="m-accordion__item-content">
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
@@ -98,21 +98,21 @@
                 </div>
             </div>
         </div>
-    </div>   
-    <!--end::Item--> 
+    </div>
+    <!--end::Item-->
 
-    <!--begin::Item--> 
+    <!--begin::Item-->
     <div class="m-accordion__item ">
-        <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_3_head" data-toggle="collapse" href="#m_accordion_1_item_3_body" aria-expanded="    false">
+        <div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_3_cpcp_index" data-toggle="collapse" href="#m_accordion_1_item_3_body" aria-expanded="    false">
             <span class="m-accordion__item-icon"></span>
             <span class="m-accordion__item-title">Corrotion Prevention and Control Programs</span>
-                    
-            <span class="m-accordion__item-mode"></span>     
+
+            <span class="m-accordion__item-mode"></span>
         </div>
 
-        <div class="m-accordion__item-body collapse" id="m_accordion_1_item_3_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_3_head" data-parent="#m_accordion_1"> 
+        <div class="m-accordion__item-body collapse" id="m_accordion_1_item_3_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_3_cpcp_index" data-parent="#m_accordion_1">
             <div class="m-accordion__item-content">
-                
+
             <div class="m-portlet m-portlet--mobile">
                 <div class="m-portlet__body">
                 <h1>Corrotion Prevention and Control Programs</h1>
@@ -149,13 +149,13 @@
                 </div>
             </div>
             </div>
-        </div>                       
+        </div>
     </div>
-    <!--end::Item-->    
+    <!--end::Item-->
 
 </div>
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/workpackage/routine/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/project/routine/index.js')}}"></script>
     <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush

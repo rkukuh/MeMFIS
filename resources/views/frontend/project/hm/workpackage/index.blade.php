@@ -30,13 +30,13 @@
                                             <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">Taskcard List(s)</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#m_tabs_enginner">Engineer Team</a>
-                                        </li>
-                                        <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#m_tabs_manhour">Manhours Propotion</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#m_tabs_facility">Facility Used</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#m_tabs_enginner" id="engineer_team_tab">Engineer Team</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -44,14 +44,14 @@
                                     <div class="tab-pane active show" id="m_tabs_taskcard" role="tabpanel">
                                         @include('frontend.project.hm.taskcard.index')
                                     </div>
-                                    <div class="tab-pane" id="m_tabs_enginner" role="tabpanel">
-                                        @include('frontend.project.hm.engineer.index')
-                                    </div>
                                     <div class="tab-pane" id="m_tabs_manhour" role="tabpanel">
                                         @include('frontend.project.hm.manhour.index')
                                     </div>
                                     <div class="tab-pane" id="m_tabs_facility" role="tabpanel">
                                         @include('frontend.project.hm.facility.index')
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_enginner" role="tabpanel">
+                                        @include('frontend.project.hm.engineer.index')
                                     </div>
 
                                     @include('frontend.project.hm.modal.material.eo')
@@ -66,9 +66,7 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.project-hm.edit', ['project' => $project->uuid]))
-                                                    @endcomponent
+                                                    @include('frontend.common.buttons.back')
                                                 </div>
                                             </div>
                                         </div>
@@ -89,8 +87,10 @@
 @push('footer-scripts')
     <script>
         let workPackage_uuid = '{{ $workPackage->uuid }}';
+        let anyChanges = false;
     </script>
-    <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/workpackage.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/modal/datatables.js') }}"></script>
 
 @endpush

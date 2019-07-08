@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Quotation;
 
 use Auth;
+use App\Models\Item;
 use App\Models\Type;
 use App\Models\Status;
 use App\Models\Project;
@@ -16,6 +17,7 @@ use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\QuotationWorkPackage;
 use App\Http\Requests\Frontend\QuotationStore;
 use App\Http\Requests\Frontend\QuotationUpdate;
 
@@ -85,10 +87,45 @@ class QuotationController extends Controller
             $quotation->workpackages()->attach(WorkPackage::where('uuid',$workpackage->uuid)->first()->id);
         }
 
-        // $quotation->progresses()->save(new Progress([
-        //     'status_id' =>  Status::ofQuotation()->where('code','open')->first()->id,
-        //     'progressed_by' => Auth::id()
-        // ]));
+        $quotation->progresses()->save(new Progress([
+            'status_id' =>  Status::ofQuotation()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
+
+        // TODO generate item workpackage
+        $customer = Customer::find($request->customer_id)->levels->last()->score;
+        $project = Project::find($request->project_id);
+            foreach($project->workpackages as $workpackage){
+                foreach($workpackage->items as $item){
+
+                    $quotation_workpackage = QuotationWorkPackage::where('quotation_id',$quotation->id)->where('workpackage_id',$workpackage->id)->first();
+
+                    if (Item::findOrFail($item->id)->prices->get($customer)) {
+                        $price_id = Item::find($item->id)->prices->get($customer)->id;
+                    } else {
+                        $price_id = null;
+                    }
+                    $quotation_workpackage->items()->create([
+                        'item_id' => $item->id,
+                        'quantity' => $item->pivot->quantity,
+                        'unit_id' => $item->pivot->unit_id,
+                        'price_id' => $price_id,
+                    ]);
+                }
+            }
+
+        // TODO generate item taskcard
+        // $customer = Customer::find($request->customer_id)->levets->last()->score;
+        // $project = Project::find($request->project_id);
+        //     foreach($project->workpackages as $workpackages){
+        //         foreach($workpackages->taskcards as $taskcard){
+        //             foreach($taskcard->items as $item){
+
+        //             }
+        //         }
+        //     }
+
+
 
         return response()->json($quotation);
     }

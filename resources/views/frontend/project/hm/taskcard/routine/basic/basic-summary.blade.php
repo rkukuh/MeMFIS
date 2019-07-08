@@ -120,14 +120,14 @@
                     <div id="m_accordion_1" class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg m-accordion--toggle-arrow" role="tablist">
 
                         <div class="m-accordion__item ">
-                            <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
+                            <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_1_item_1_basic_summary" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
                                 <span class="m-accordion__item-title"> <h1>Tool(s) Taskcard List</h1></span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
 
-                            <div class="m-accordion__item-body collapse show" id="m_accordion_1_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_1_head" data-parent="#m_accordion_1">
+                            <div class="m-accordion__item-body collapse show" id="m_accordion_1_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_1_basic_summary" data-parent="#m_accordion_1">
 
                                 <div class="m-portlet m-portlet--mobile">
                                     <div class="m-portlet__body">
@@ -209,9 +209,8 @@
                 <div class="m-portlet__body">
                     <div class="flex">
                         <div class="action-buttons">
-                            @component('frontend.common.buttons.back')                            
-                            @slot('href', route('frontend.workpackage.edit',['id' => $workPackage->uuid]))
-                            @endcomponent
+                            @include('frontend.common.buttons.back')
+
                         </div>
                     </div>
                 </div>

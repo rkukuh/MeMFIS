@@ -26,7 +26,7 @@ class ItemUnitUpdate extends FormRequest
     public function rules()
     {
         return [
-            // 
+            //
         ];
     }
 

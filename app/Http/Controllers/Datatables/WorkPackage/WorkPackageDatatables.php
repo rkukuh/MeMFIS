@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\WorkPackage;
 
+use App\User;
 use App\Models\WorkPackage;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
@@ -16,7 +17,17 @@ class WorkPackageDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(WorkPackage::with('aircraft')->get());
+        $workpackages = WorkPackage::with('aircraft')->get();
+
+        foreach($workpackages as $workpackage){
+            if($workpackage->audits->first()->user_id == null){
+                $workpackage->created_by.= "System";
+            }else{
+                $workpackage->created_by.= User::find($workpackage->audits->first()->user_id)->name;
+            }
+        }
+
+        $data = $alldata = json_decode($workpackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
