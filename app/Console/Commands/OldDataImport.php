@@ -55,7 +55,7 @@ class OldDataImport extends Command
         $this->line('Importing: Task Card for CN');
         app()->make(OldDataController::class)->taskCardsCNImport();
 
-        $this->line('Syncing: Task Card item for CN');
+        $this->line('Syncing: Task Card\'s Item for CN');
         app()->make(OldDataController::class)->taskCardsCNItemImport();
 
         $this->line('Importing: Employee, and create their user account');
