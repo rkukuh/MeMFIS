@@ -85,6 +85,28 @@ Route::name('frontend.')->group(function () {
 
         Route::view('/jobcard-eo-ppc', 'frontend.job-card-eo-ppc.index')->name('jobcard-eo.ppc.index');
 
+        /** Work Progress Report */
+        
+        Route::view('/work-progress-report', 'frontend.work-progress-report.index')->name('work-progress-report.index');
+        Route::view('/work-progress-report/show', 'frontend.work-progress-report.show')->name('work-progress-report.show');
+
+        /** Additional Task */
+
+        Route::view('/additional-task', 'frontend.project.additional.index')->name('additional-task.index');
+        Route::view('/additional-task/create', 'frontend.project.additional.create')->name('additional-task.create');
+        Route::view('/additional-task/edit', 'frontend.project.additional.edit')->name('additional-task.edit');
+        Route::view('/additional-task/show', 'frontend.project.additional.show')->name('additional-task.show');
+        Route::view('/additional-task/summary', 'frontend.project.additional.summary')->name('additional-task.summary');
+
+         /** Purchase Request */
+
+         Route::view('/purchase-request/general/create', 'frontend.purchase-request.general.create')->name('purchase-request.general.create');
+         Route::view('/purchase-request/general/edit', 'frontend.purchase-request.general.edit')->name('purchase-request.general.edit');
+         Route::view('/purchase-request/general/show', 'frontend.purchase-request.general.show')->name('purchase-request.general.show');
+
+         Route::view('/purchase-request/project/create', 'frontend.purchase-request.project.create')->name('purchase-request.project.create');
+         Route::view('/purchase-request/project/edit', 'frontend.purchase-request.project.edit')->name('purchase-request.project.edit');
+         Route::view('/purchase-request/project/show', 'frontend.purchase-request.project.show')->name('purchase-request.project.show');
     });
 
 });
