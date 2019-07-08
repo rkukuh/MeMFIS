@@ -42,7 +42,14 @@ let Aircraft = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
+                    field: 'created_at',
+                    title: 'Date',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'code',
                     title: 'Code',
                     sortable: 'asc',
@@ -54,6 +61,24 @@ let Aircraft = {
                 {
                     field: 'title',
                     title: 'Title',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'no_wo',
+                    title: 'WO No',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'customer.name',
+                    title: 'Customer',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'aircraft_type',
+                    title: 'AC Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -70,14 +95,14 @@ let Aircraft = {
                     filterable: !1,
                 },
                 {
-                    field: 'customer.name',
-                    title: 'Customer',
+                    field: 'status',
+                    title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'status',
-                    title: 'Status',
+                    field: 'created_by',
+                    title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
                 },
