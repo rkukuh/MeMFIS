@@ -78,7 +78,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                 $task_type = Type::ofTaskCardTask()
                     ->where('name', 'like', $row['task_type'])->firstOrCreate([
                         'code'  => str_slug($row['task_type']),
-                        'name'  => strtoupper($row['task_type']),
+                        'name'  => mb_strtoupper($row['task_type']),
                         'of'    => 'taskcard-task'
                     ]);
             }
@@ -138,7 +138,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                 $work_area = Type::ofWorkArea()
                     ->where('name', 'like', $row['work_area'])->firstOrCreate([
                         'code'  => str_slug($row['work_area']),
-                        'name'  => strtoupper($row['work_area']),
+                        'name'  => mb_strtoupper($row['work_area']),
                         'of'    => 'work-area'
                     ]);
             }
