@@ -93,4 +93,6 @@
     </script>
     <script src="{{ asset('js/frontend/project/hm/workpackage.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
+    <script src="{{ asset('js/frontend/workpackage/modal/successor.js') }}"></script>
+    <script src="{{ asset('js/frontend/workpackage/modal/predecessor.js') }}"></script>
 @endpush

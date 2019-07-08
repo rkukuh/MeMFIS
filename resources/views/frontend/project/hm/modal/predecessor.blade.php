@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="predecessor-body">
+            <div class="modal-body">
                 <table class="table table-striped table-bordered table-hover table-checkable" id="predecessor_datatable">
                     <thead>
                         <tr>
