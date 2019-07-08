@@ -20,7 +20,11 @@ class WorkPackageDatatables extends Controller
         $workpackages = WorkPackage::with('aircraft')->get();
 
         foreach($workpackages as $workpackage){
+            if($workpackage->audits->first()->user_id == null){
+                $workpackage->created_by.= "System";
+            }else{
                 $workpackage->created_by.= User::find($workpackage->audits->first()->user_id)->name;
+            }
         }
 
         $data = $alldata = json_decode($workpackages);
