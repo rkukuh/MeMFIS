@@ -17,7 +17,14 @@ class CustomerDatatables extends Controller
     public function index()
     {
         $customers = Customer::with('term_of_payment','phones','addresses')->get();
+        foreach($customers as $customer){
+            if(sizeOf($customer->levels) > 0){
+                $customer->level.= $customer->levels->last()->name;
+            }else{
+                $customer->level.= '';
+            }
 
+        }
         $data = $alldata = json_decode($customers);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
