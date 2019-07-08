@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="predecessor-body">
                 <table class="table table-striped table-bordered table-hover table-checkable" id="predecessor_datatable">
                     <thead>
                         <tr>
@@ -15,6 +15,7 @@
                             <th>Title</th>
                             <th>WorkArea</th>
                             <th>Manhour</th>
+                            <th>Order</th>
                             <th></th>
                         </tr>
                     </thead>
