@@ -130,7 +130,6 @@ class TaskCardsCNItemimport implements ToModel, WithHeadingRow
         }
 
         $item = Item::where('code',$row['part_number'])->first();
-        dump($row['part_number']);
         $taskcard = TaskCard::where('number',$row['taskcard_number'])->first();
 
 
