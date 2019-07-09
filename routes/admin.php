@@ -99,9 +99,9 @@ Route::name('admin.')->group(function () {
         Route::resource('quotation-workpackage', 'QuotationWorkPackageController');
         Route::resource('quotation-workpackage-item', 'QuotationWorkPackageItemController');
 
-        /** QUOTATION's TASKCARDs */
+        /** QUOTATION's WORKPACKAGE's TASKCARD's */
         
-        // 
+        Route::resource('quotation-workpackage-taskcard-item', 'QuotationWorkPackageTaskCardItemController');
 
     });
 

@@ -108,8 +108,8 @@ class DummyDataSeeder extends Seeder
         $this->call(QuotationWorkPackages::class);
         $this->call(QuotationWorkPackageItems::class);
 
-        /** QUOTATION's TASKCARDs */
+        /** QUOTATION's WORKPACKAGE's TASKCARD's */
         
-        // 
+        $this->call(QuotationWorkPackageTaskCardItems::class);
     }
 }
