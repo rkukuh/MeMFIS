@@ -19,7 +19,6 @@ class CreateQuotationsTable extends Migration
             $table->string('number')->nullable();
             $table->string('title')->nullable();
             $table->unsignedInteger('project_id');
-            $table->unsignedInteger('customer_id');
             $table->json('attention')->nullable();
             $table->timestamp('requested_at')->nullable();
             $table->timestamp('valid_until')->nullable();
@@ -37,11 +36,6 @@ class CreateQuotationsTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('customer_id')
-                    ->references('id')->on('customers')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
 
             $table->foreign('project_id')
                     ->references('id')->on('projects')
