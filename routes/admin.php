@@ -101,7 +101,7 @@ Route::name('admin.')->group(function () {
 
         /** QUOTATION's TASKCARDs */
         
-        Route::resource('quotation-taskcard-item', 'QuotationTaskCardItemController');
+        // 
 
     });
 
