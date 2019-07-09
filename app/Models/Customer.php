@@ -112,19 +112,6 @@ class Customer extends MemfisModel
     }
 
     /**
-     * One-to-Many: A quotation may have one customer.
-     *
-     * This function will retrieve all the quotations of a customer.
-     * See: Quotation's customer() method for the inverse
-     *
-     * @return mixed
-     */
-    public function quotations()
-    {
-        return $this->hasMany(Quotation::class);
-    }
-
-    /**
      * Polymorphic: A customer can have zero or many websites.
      *
      * This function will get all of the customer's websites.
