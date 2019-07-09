@@ -110,6 +110,6 @@ class DummyDataSeeder extends Seeder
 
         /** QUOTATION's TASKCARDs */
         
-        $this->call(QuotationTaskCardItems::class);
+        // 
     }
 }
