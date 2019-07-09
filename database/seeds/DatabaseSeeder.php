@@ -109,8 +109,7 @@ class DatabaseSeeder extends Seeder
         $this->call(QuotationWorkPackageItemsTableSeeder::class);
 
         /** QUOTATION's TASKCARDs */
-
-        $this->call(QuotationTaskCardsTableSeeder::class);
+        
         $this->call(QuotationTaskCardItemsTableSeeder::class);
     }
 }
