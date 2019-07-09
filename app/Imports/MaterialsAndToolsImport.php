@@ -18,7 +18,7 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         /** Set the unit of measurement */
-
+        // dump($row['um']);
         switch ($row['um']) {
             case 'EA':
                 $unit = Unit::ofQuantity()
@@ -130,7 +130,7 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
         /** Set the category */
 
         switch ($row['categories']) {
-            case 'CONS':
+            case 'CONSUMABLE':
                 $category = Category::ofItem()
                                     ->where('name', 'Consumable')->first()->id;
                 break;
@@ -138,7 +138,7 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
                 $category = Category::ofItem()
                                     ->where('name', 'Raw Material')->first()->id;
                 break;
-            case 'RAW':
+            case 'RAW MATERIAL':
                 $category = Category::ofItem()
                                     ->where('name', 'Raw Material')->first()->id;
                 break;

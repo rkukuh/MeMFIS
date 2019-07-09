@@ -15,6 +15,7 @@
                             <th>Title</th>
                             <th>WorkArea</th>
                             <th>Manhour</th>
+                            <th>Order</th>
                             <th></th>
                         </tr>
                     </thead>
