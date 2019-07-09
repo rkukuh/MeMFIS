@@ -85,7 +85,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
         }
 
         /** Set the workarea */
-        
+
         switch ($row['work_area']) {
             case 'PASS CABIN':
                 $work_area = Type::ofWorkArea()
@@ -192,8 +192,8 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
         $additionals = [];
         if( $row['company_task']) {
             $additionals["company_task"] = $row['company_task'];
-        }else{
-            $additionals["company_task"] = null;
+        // }else{
+        //     $additionals["company_task"] = "";
         }
         $taskcard =  new TaskCard([
             'number' => $row['number'],

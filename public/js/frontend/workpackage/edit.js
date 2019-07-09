@@ -42,6 +42,8 @@ let Workpackage = {
         let triggeruuid ="";
         let material_datatables_init = true;
         let tool_datatables_init = true;
+        let predecessor_datatables_init = true;
+        let successor_datatables_init = true;
 
         //Basic taskcard Datatable
         $('.basic_datatable').on('click', '.material', function () {
@@ -146,6 +148,21 @@ let Workpackage = {
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+        });
+        $('.basic_datatable').on('click', '.tool', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                tool_tc(triggeruuid);
+                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                table.destroy();
+                taskcard_uuid = $(this).data('tc_uuid');
+                tool_tc(taskcard_uuid);
                 $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
             }
         });
