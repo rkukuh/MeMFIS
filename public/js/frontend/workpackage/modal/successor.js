@@ -1,5 +1,5 @@
 let SucessorDatatables = {
-    init: function () {
+    init: function (taskCard_uuid) {
         $("#successor_datatable").DataTable({
             "dom": '<"top"f>rt<"bottom">pl',
             responsive: !0,
@@ -8,7 +8,7 @@ let SucessorDatatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 5,
-            ajax: "/datatables/taskcard-routine/basic/modal",
+            ajax: "/datatables/workpackage/"+workPackage_uuid+"/taskcard/"+taskCard_uuid+"/successor",
             columns: [
                 {
                     data: "number"
@@ -45,5 +45,10 @@ let SucessorDatatables = {
 };
 
 jQuery(document).ready(function () {
-    SucessorDatatables.init();
+    $(".successor-modal").on('click', function() {
+        alert("success");
+        let taskCard_uuid = $(this).data('tc_uuid');
+        console.log(taskCard_uuid);
+        SucessorDatatables.init(taskCard_uuid);
+    });
 });
