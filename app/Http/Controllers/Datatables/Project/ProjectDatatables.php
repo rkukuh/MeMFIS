@@ -157,7 +157,11 @@ class ProjectDatatables extends Controller
      */
     public function workpackage(Project $project)
     {
-        $data = $alldata = json_decode($project->workpackages);
+        $workpackages = $project->workpackages;
+        foreach($workpackages as $workpackage){
+            $workpackage->ac_type = $workpackage->aircraft->name;
+        }
+        $data = $alldata = json_decode($workpackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
