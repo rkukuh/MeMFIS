@@ -189,12 +189,14 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                     ->where('name', 'Basic')->first();
             }
         }
-        $additionals = [];
         if( $row['company_task']) {
+            $additionals = [];
             $additionals["company_task"] = $row['company_task'];
-        // }else{
-        //     $additionals["company_task"] = "";
+            $additionals =  json_encode($additionals);
+        }else{
+            $additionals = null;
         }
+
         $taskcard =  new TaskCard([
             'number' => $row['number'],
             'title' => $row['title'],
@@ -212,7 +214,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
             'reference' => $row['reference'],
             'version' => json_encode(explode(';',$row['version'])),
             'description' => $row['description'],
-            'additionals' => json_encode($additionals)
+            'additionals' => $additionals
         ]);
 
         $taskcard->save();
