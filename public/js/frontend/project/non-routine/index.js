@@ -1,6 +1,5 @@
 $('#m_accordion_2_item_1_head').on('click', function () {
     let table = $('.ad-sb_datatable').mDatatable();
-    console.log("reload");
 
     table.originalDataSet = [];
     table.reload();
@@ -8,7 +7,6 @@ $('#m_accordion_2_item_1_head').on('click', function () {
 
 $('#m_accordion_2_item_2_head').on('click', function () {
     let table = $('.cmr-awl_datatable').mDatatable();
-    console.log("reload");
 
     table.originalDataSet = [];
     table.reload();
@@ -16,7 +14,6 @@ $('#m_accordion_2_item_2_head').on('click', function () {
 
 $('#m_accordion_2_item_3_head').on('click', function () {
     let table = $('.si_datatable').mDatatable();
-    console.log("reload");
 
     table.originalDataSet = [];
     table.reload();
@@ -24,7 +21,6 @@ $('#m_accordion_2_item_3_head').on('click', function () {
 
 $('#m_accordion_2_item_4_head').on('click', function () {
     let table = $('.ht_crr_datatable').mDatatable();
-    console.log("reload");
 
     table.originalDataSet = [];
     table.reload();
@@ -202,18 +198,18 @@ let NonRoutineWorkpackage = {
 
                 }
             },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                //             t.id +
-                //             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            t.id +
+                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
@@ -374,18 +370,18 @@ let NonRoutineWorkpackage = {
 
                     }
                 },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                //             t.id +
-                //             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            t.id +
+                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
@@ -581,18 +577,18 @@ let NonRoutineWorkpackage = {
 
                 }
             },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                //             t.id +
-                //             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            t.id +
+                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 

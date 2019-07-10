@@ -41,7 +41,6 @@ let RoutineWorkpackage = {
                                 dataSet = raw.data;
                             }
 
-                            console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -219,18 +218,18 @@ let RoutineWorkpackage = {
 
                 }
             },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                //             t.id +
-                //             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            t.id +
+                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
@@ -427,18 +426,18 @@ let RoutineWorkpackage = {
 
                     }
                 },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                //             t.id +
-                //             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            t.id +
+                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
@@ -634,18 +633,18 @@ let RoutineWorkpackage = {
 
                 }
             },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                //             t.id +
-                //             '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
+                            t.id +
+                            '>\t\t\t\t\t\t\t<i class="la la-search"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
     }
