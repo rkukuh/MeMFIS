@@ -14,11 +14,11 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
 
 /** Scopes, Interfaces, Facades, Helpers  **/
+use App\Models\Employee;
 use App\Scopes\OrderByColumn;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\Employee;
 
 class User extends Authenticatable implements Auditable, HasMedia
 {
