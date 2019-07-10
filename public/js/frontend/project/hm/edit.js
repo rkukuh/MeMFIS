@@ -267,7 +267,7 @@ let Project = {
                 }
             });
         });
-        
+
         $('select[name="customer"]').on('change', function () {
             let customer_uuid = this.options[this.selectedIndex].value;
             $("#name").html(customer_uuid.text);
@@ -319,9 +319,9 @@ let Project = {
                         }
                     } else {
                         console.log("empty");
-        
+
                     }
-        
+
                 }
             });
         });
@@ -382,7 +382,7 @@ let Project = {
             });
         });
 
-        
+
     }
 };
 
