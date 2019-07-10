@@ -54,4 +54,14 @@ class QuotationWorkPackageItem extends MemfisModel
     {
         return $this->belongsTo(Price::class);
     }
+
+    /**
+     * One-Way: A Quotation's WorkPackage's TaskCard's Item must have a unit assigned to.
+     *
+     * @return mixed
+     */
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
 }

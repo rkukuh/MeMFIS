@@ -3,7 +3,7 @@
     <head>
         @include('frontend.include._header')
     </head>
-    <body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile
+    <Body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile
                     m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas
                     m-footer--push m-aside--offcanvas-default">
         <div class="m-grid m-grid--hor m-grid--root m-page">
@@ -58,5 +58,5 @@
             @endif
         </script>
         @stack('footer-scripts')
-    </body>
+    </Body>
 </html>

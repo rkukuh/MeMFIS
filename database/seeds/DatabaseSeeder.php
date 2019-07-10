@@ -108,9 +108,8 @@ class DatabaseSeeder extends Seeder
         $this->call(QuotationWorkPackagesTableSeeder::class);
         $this->call(QuotationWorkPackageItemsTableSeeder::class);
 
-        /** QUOTATION's TASKCARDs */
-
-        $this->call(QuotationTaskCardsTableSeeder::class);
-        $this->call(QuotationTaskCardItemsTableSeeder::class);
+        /** QUOTATION's WORKPACKAGE's TASKCARD's */
+        
+        $this->call(QuotationWorkPackageTaskCardItemsTableSeeder::class);
     }
 }

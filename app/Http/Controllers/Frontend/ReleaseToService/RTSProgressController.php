@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Frontend\ReleaseToService;
 
 use Auth;
 use App\Models\RTS;
+use App\Models\Status;
 use App\Models\Project;
+use App\Models\Progress;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\RTSStore;
 use App\Http\Requests\Frontend\RTSUpdate;
@@ -50,11 +52,17 @@ class RTSProgressController extends Controller
      */
     public function store(RTSStore $request)
     {
-        $request->merge(['work_performed' => join("|", $request->work_performed)]);
+        $request->merge(['work_performed' => $request->work_performed.'. '.$request->work_performed_addtional ]);
 
-        $project = RTS::create($request->all());
+        $rts = RTS::create($request->all());
 
-        return response()->json($project);
+        $project = Project::find($request->project_id);
+        $project->progresses()->save(new Progress([
+            'status_id' =>  Status::where('code','rts')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
+
+        return response()->json($rts);
     }
 
     /**
@@ -76,14 +84,7 @@ class RTSProgressController extends Controller
      */
     public function edit(Project $project)
     {
-        $projects = Project::all();
-        $rts = RTS::where('project_id',$project->id)->first();
-
-        return view('frontend.rts.edit', [
-            'rts' => $rts,
-            'projec' => $project,
-            'projects' => $projects
-        ]);
+        //
     }
 
     /**

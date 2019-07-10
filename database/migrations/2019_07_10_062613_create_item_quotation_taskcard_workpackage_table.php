@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuotationTaskCardItemsTable extends Migration
+class CreateItemQuotationTaskcardWorkpackageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateQuotationTaskCardItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('quotation_taskcard_items', function (Blueprint $table) {
+        Schema::create('item_quotation_taskcard_workpackage', function (Blueprint $table) {
             $table->increments('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('taskcard_workpackage_id');
-            $table->unsignedInteger('item_id');
+            $table->unsignedInteger('quotation_id')->nullable();
+            $table->unsignedInteger('workpackage_id')->nullable();
+            $table->unsignedInteger('taskcard_id')->nullable();
+            $table->unsignedInteger('item_id')->nullable();
             $table->double('quantity');
             $table->unsignedInteger('unit_id')->nullable();
             $table->unsignedInteger('price_id')->nullable();
@@ -27,8 +29,18 @@ class CreateQuotationTaskCardItemsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('taskcard_workpackage_id')
-                    ->references('id')->on('taskcard_workpackage')
+            $table->foreign('quotation_id')
+                    ->references('id')->on('quotations')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('workpackage_id')
+                    ->references('id')->on('workpackages')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('taskcard_id')
+                    ->references('id')->on('taskcards')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
@@ -56,6 +68,6 @@ class CreateQuotationTaskCardItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quotation_taskcard_items');
+        Schema::dropIfExists('item_quotation_taskcard_workpackage');
     }
 }

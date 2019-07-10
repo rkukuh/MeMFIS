@@ -43,12 +43,3 @@ let SucessorDatatables = {
 
     }
 };
-
-jQuery(document).ready(function () {
-    $(".successor-modal").on('click', function() {
-        alert("success");
-        let taskCard_uuid = $(this).data('tc_uuid');
-        console.log(taskCard_uuid);
-        SucessorDatatables.init(taskCard_uuid);
-    });
-});

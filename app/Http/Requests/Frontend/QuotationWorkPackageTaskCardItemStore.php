@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class QuotationTaskCardItemStore extends FormRequest
+class QuotationWorkPackageTaskCardItemStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

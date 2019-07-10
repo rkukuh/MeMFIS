@@ -62,7 +62,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $project->aircraft->name)
+                                            @slot('text', $projec->aircraft->name)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -97,11 +97,11 @@
                                             Aircraft Total Time @include('frontend.common.label.optional')
                                         </label>
 
-                                        @component('frontend.common.input.text')
-                                        @slot('id', 'work_performed')
-                                        @slot('text', 'Work Performed')
-                                        @slot('name', 'work_performed')
-                                        @slot('id_error', 'work_performed')
+                                        @component('frontend.common.input.number')
+                                        @slot('id', 'total_time')
+                                        @slot('text', 'Total Time')
+                                        @slot('name', 'total_time')
+                                        @slot('id_error', 'total_time')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -116,6 +116,8 @@
                                         @slot('id', 'work_performed')
                                         @slot('text', 'Work Performed')
                                         @slot('name', 'work_performed')
+                                        @slot('value', $projec->quotations->first()->title)
+                                        @slot('editable', 'readonly')
                                         @slot('id_error', 'work_performed')
                                         @endcomponent
                                     </div>
@@ -228,11 +230,11 @@
 </div>
 @endsection
 
-@push('header-scripts')
-
-@endpush
-
 @push('footer-scripts')
+
+<script>
+    let project_uuid = '{{$project->uuid}}';
+</script>
 <script src="{{ asset('js/frontend/rts/create.js') }}"></script>
 <script src="{{ asset('js/frontend/rts/form-reset.js') }}"></script>
 

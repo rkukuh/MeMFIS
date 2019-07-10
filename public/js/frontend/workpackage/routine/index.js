@@ -18,7 +18,6 @@ let RoutineWorkpackage = {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
-                            console.log(dataSet);
 
                             return dataSet;
                         }
@@ -110,33 +109,33 @@ let RoutineWorkpackage = {
                         return ''
                     }
                 },
-                // {
-                //     field: 'material',
-                //     title: 'Material',
-                //     sortable: 'asc',
-                //     filterable: !1,
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                //             t.uuid +
-                //             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
-                //         );
-                //     }
+                {
+                    field: 'material',
+                    title: 'Material',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_material_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                        );
+                    }
 
-                // },
-                // {
-                //     field: 'tool',
-                //     title: 'Tool',
-                //     sortable: 'asc',
-                //     filterable: !1,
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_tool_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                //             t.uuid +
-                //             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                //         );
-                //     }
-                // },
+                },
+                {
+                    field: 'tool',
+                    title: 'Tool',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_tool_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                },
                 {
                     field: 'sequence',
                     title: 'Sequence',
@@ -164,7 +163,7 @@ let RoutineWorkpackage = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor-modal " data-toggle="modal"  data-tc_uuid="' + t.uuid + '" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                        return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor-modal predecessor" data-toggle="modal"  data-tc_uuid="' + t.uuid + '" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                     }
                 },
                 {
@@ -173,7 +172,7 @@ let RoutineWorkpackage = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor-modal" data-toggle="modal"  data-tc_uuid="' + t.uuid + '" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor-modal successor" data-toggle="modal"  data-tc_uuid="' + t.uuid + '" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                     }
                 },
                 {
@@ -316,33 +315,33 @@ let RoutineWorkpackage = {
                         return ''
                     }
                 },
-                // {
-                //     field: 'material',
-                //     title: 'Material',
-                //     sortable: 'asc',
-                //     filterable: !1,
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                //             t.uuid +
-                //             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
-                //         );
-                //     }
+                {
+                    field: 'material',
+                    title: 'Material',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_material_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                        );
+                    }
 
-                // },
-                // {
-                //     field: 'tool',
-                //     title: 'Tool',
-                //     sortable: 'asc',
-                //     filterable: !1,
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_tool_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                //             t.uuid +
-                //             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                //         );
-                //     }
-                // },
+                },
+                {
+                    field: 'tool',
+                    title: 'Tool',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_tool_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                },
                 {
                     field: 'sequence',
                     title: 'Sequence',
@@ -522,33 +521,33 @@ let RoutineWorkpackage = {
                         return ''
                     }
                 },
-                // {
-                //     field: 'material',
-                //     title: 'Material',
-                //     sortable: 'asc',
-                //     filterable: !1,
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                //             t.uuid +
-                //             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
-                //         );
-                //     }
+                {
+                    field: 'material',
+                    title: 'Material',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_material_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                        );
+                    }
 
-                // },
-                // {
-                //     field: 'tool',
-                //     title: 'Tool',
-                //     sortable: 'asc',
-                //     filterable: !1,
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<button data-toggle="modal" data-target="#modal_tool_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                //             t.uuid +
-                //             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                //         );
-                //     }
-                // },
+                },
+                {
+                    field: 'tool',
+                    title: 'Tool',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_tool_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                },
                 {
                     field: 'sequence',
                     title: 'Sequence',
