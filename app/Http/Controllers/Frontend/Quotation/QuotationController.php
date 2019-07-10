@@ -79,7 +79,6 @@ class QuotationController extends Controller
         $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::count()+1)]);
         $request->merge(['attention' => json_encode($attentions)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
-        $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
 
         $quotation = Quotation::create($request->all());
         $project = Project::where('id',$request->project_id)->first();
@@ -215,7 +214,6 @@ class QuotationController extends Controller
         $request->merge(['charge' => json_encode($charges)]);
         // $request->merge(['scheduled_payment_amount' => json_encode($request->scheduled_payment_amount)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
-        $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
         $quotation->update($request->all());
 
         return response()->json($quotation);
