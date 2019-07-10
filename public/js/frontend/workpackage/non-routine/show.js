@@ -423,7 +423,7 @@ let NonRoutineWorkpackageShow = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_material_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
                         );
@@ -437,7 +437,7 @@ let NonRoutineWorkpackageShow = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_tool_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_tool_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );

@@ -51,14 +51,14 @@ let Workpackage = {
                 material_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                let table = $('#m_datatable_material_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
@@ -164,29 +164,14 @@ let Workpackage = {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                let table = $('#m_datatable_tool_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
-            }
-        });
-        $('.basic_datatable').on('click', '.tool', function () {
-            if(predecessor_datatables_init == true){
-                predecessor_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
-                tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
-                table.destroy();
-                taskcard_uuid = $(this).data('tc_uuid');
-                tool_tc(taskcard_uuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
@@ -204,14 +189,14 @@ let Workpackage = {
                 material_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                let table = $('#m_datatable_material_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
@@ -220,14 +205,14 @@ let Workpackage = {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                let table = $('#m_datatable_tool_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
@@ -283,14 +268,14 @@ let Workpackage = {
                 material_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                let table = $('#m_datatable_material_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
@@ -299,14 +284,14 @@ let Workpackage = {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                let table = $('#m_datatable_tool_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
@@ -519,14 +504,14 @@ let Workpackage = {
                 material_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 material_tc_si(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                let table = $('#m_datatable_material_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 material_tc_si(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
@@ -535,14 +520,14 @@ let Workpackage = {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 tool_tc_si(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                let table = $('#m_datatable_tool_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 tool_tc_si(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
