@@ -8,6 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                <input type="hidden" name="tc_uuid" value="">
                 <table class="table table-striped table-bordered table-hover table-checkable" id="predecessor_datatable">
                     <thead>
                         <tr>

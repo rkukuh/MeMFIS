@@ -1,5 +1,5 @@
 function material_tc(triggeruuid) {
-    $("#m_datatable_material_routine_si_wp").DataTable({
+    $("#m_datatable_material_taskcard_wp").DataTable({
         "dom": '<"top"f>rt<"bottom">pl',
         responsive: !0,
         searchDelay: 500,
@@ -37,7 +37,7 @@ function material_tc(triggeruuid) {
 };
 
 function tool_tc(triggeruuid) {
-    $("#m_datatable_tool_routine_si_wp").DataTable({
+    $("#m_datatable_tool_taskcard_wp").DataTable({
         "dom": '<"top"f>rt<"bottom">pl',
         responsive: !0,
         searchDelay: 500,
@@ -75,7 +75,7 @@ function tool_tc(triggeruuid) {
 };
 
 function material_tc_si(triggeruuid) {
-    $("#m_datatable_material_routine_si_wp").DataTable({
+    $("#m_datatable_material_taskcard_wp").DataTable({
         "dom": '<"top"f>rt<"bottom">pl',
         responsive: !0,
         searchDelay: 500,
@@ -113,7 +113,7 @@ function material_tc_si(triggeruuid) {
 };
 
 function tool_tc_si(triggeruuid) {
-    $("#m_datatable_tool_routine_si_wp").DataTable({
+    $("#m_datatable_tool_taskcard_wp").DataTable({
         "dom": '<"top"f>rt<"bottom">pl',
         responsive: !0,
         searchDelay: 500,

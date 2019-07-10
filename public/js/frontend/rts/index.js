@@ -59,6 +59,9 @@ let TaskCard = {
                     title: 'Project Title',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return '<a href="/rts/'+t.rts.uuid+'/">' + t.title + "</a>"
+                    }
                 },
                 {
                     field: 'customer_name',
@@ -79,12 +82,12 @@ let TaskCard = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/rts/'+t.uuid+'/project" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'+
+                            // '<a href="/rts/'+t.uuid+'/project" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            //     '<i class="la la-pencil"></i>' +
+                            // '</a>' +
+                            // '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                            //     '<i class="la la-trash"></i>' +
+                            // '</a>'+
                             '<a href="rts/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'

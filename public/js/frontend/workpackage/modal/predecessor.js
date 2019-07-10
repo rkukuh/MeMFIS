@@ -1,5 +1,5 @@
 let PredecessorDatatables = {
-    init: function () {
+    init: function (taskCard_uuid) {
         $("#predecessor_datatable").DataTable({
             "dom": '<"top"f>rt<"bottom">pl',
             responsive: !0,
@@ -8,7 +8,7 @@ let PredecessorDatatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 5,
-            ajax: "/datatables/taskcard-routine/basic/modal",
+            ajax: "/datatables/workpackage/"+workPackage_uuid+"/taskcard/"+taskCard_uuid+"/predecessor",
             columns: [
                 {
                     data: "number"
@@ -44,6 +44,3 @@ let PredecessorDatatables = {
     }
 };
 
-jQuery(document).ready(function () {
-    PredecessorDatatables.init();
-});

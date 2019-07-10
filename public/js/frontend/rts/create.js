@@ -31,16 +31,16 @@ let ReleaseToService = {
         });
 
         let simpan = $('.footer').on('click', '.add-rts', function () {
-            alert('s');
 
             let project_id = $('#project').val();
-            let applicability_airplane = $('#applicability_airplane').val();
             let date = $('#date').val();
-            let aircraft_register = $('#aircraft_register').val();
-            let work_performed = [];
-            $.each($("input[name='work_performed']"), function () {
-                work_performed.push($(this).val());
-            });
+            let total_time = $('#total_time').val();
+            let work_performed = $('#work_performed').val();
+            let work_performed_addtional = $('#work_performed_addtional').val();
+            // let work_performed = [];
+            // $.each($("input[name='work_performed']"), function () {
+            //     work_performed.push($(this).val());
+            // });
             let work_data = $('#work_data').val();
             let exceptions = $('#exceptions').val();
 
@@ -48,20 +48,26 @@ let ReleaseToService = {
             $.each($("input[name='approval[]']:checked"), function () {
                 approval.push($(this).val());
             });
+            // let approval;
+            // if (document.getElementById("is_rii").checked) {
+            //     approval = 1;
+            // } else {
+            //     approval = 0;
+            // }
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'POST',
-                url: '/rts',
+                url: '/rts/'+project_uuid+'/project',
                 data: {
                     _token: $('input[name=_token]').val(),
                     project_id: project_id,
-                    applicability_airplane: applicability_airplane,
-                    date: date,
-                    aircraft_register: aircraft_register,
+                    // date: date,
+                    aircraft_total_time:total_time,
                     work_performed:work_performed,
+                    work_performed_addtional:work_performed_addtional,
                     work_data: work_data,
                     exceptions:exceptions,
                     approval:approval,
@@ -83,7 +89,7 @@ let ReleaseToService = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/discrepancy/' + data.uuid + '/edit';
+                        window.location.href = '/rts/' + data.uuid + '/print';
 
                     }
                 }
