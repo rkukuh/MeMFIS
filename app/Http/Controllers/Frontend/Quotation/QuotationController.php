@@ -93,7 +93,7 @@ class QuotationController extends Controller
         ]));
 
         // TODO generate item workpackage
-        $customer = Customer::find($request->customer_id)->levels->last()->score;
+        $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
         $project = Project::find($request->project_id);
             foreach($project->workpackages as $workpackage){
                 foreach($workpackage->items as $item){
@@ -115,7 +115,7 @@ class QuotationController extends Controller
             }
 
         // TODO generate item taskcard
-        $customer = Customer::find($request->customer_id)->levets->last()->score;
+        $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
         $project = Project::find($request->project_id);
             foreach($project->workpackages as $workpackages){
                 foreach($workpackages->taskcards as $taskcard){
