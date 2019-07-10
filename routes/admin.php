@@ -101,7 +101,7 @@ Route::name('admin.')->group(function () {
 
         /** QUOTATION's WORKPACKAGE's TASKCARD's */
         
-        Route::resource('quotation-workpackage-taskcard-item', 'QuotationWorkPackageTaskCardItemController');
+        Route::resource('qtn-wp-tc-item', 'QuotationWorkPackageTaskCardItemController');
 
     });
 
