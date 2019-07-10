@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Project;
 
+use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\Project;
 use App\Models\Aircraft;
@@ -287,9 +288,13 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function destroy(Project $project, WorkPackage $workPackage)
     {
-        $project->workpackages()->detach($workPackage);
+        // $project_workpackage = ProjectWorkPackage::where('project_id', $project->id)->where('workpackage_id',$workPackage->id)->first();
+        // $project_workpackage->delete();
+        $project->workpackages()->updateExistingPivot($workPackage,[
+            'deleted_at' => Carbon::now()
+        ]);
 
-        return response()->json($project);
+        return response()->json($project_workpackage);
     }
 
     /**

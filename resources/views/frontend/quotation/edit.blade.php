@@ -504,7 +504,6 @@
                     </div>
                     @component('frontend.common.input.hidden')
                         @slot('id', 'attentions-val')
-                        @slot('value', $quotation->customer->attention)
                     @endcomponent
                     @component('frontend.common.input.hidden')
                         @slot('id', 'attention-val')

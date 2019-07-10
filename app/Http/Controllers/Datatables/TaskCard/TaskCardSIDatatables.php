@@ -218,6 +218,12 @@ class TaskCardSIDatatables extends Controller
                 $query->where('code', 'si');
             })->get();
 
+            foreach($taskcards as $taskcard){
+                if($taskcard->workarea){
+                    $taskcard->work_area = $taskcard->workarea->name;
+                }
+            }
+
             $alldata = json_decode( $taskcards, true);
 
             $data = [];

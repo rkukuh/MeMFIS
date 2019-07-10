@@ -133,7 +133,7 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function sip(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
+        $workPackages = $workPackage->taskcards()->with('type','task')
                                     ->whereHas('type', function ($query) {
                                         $query->where('name', 'SIP');
                                     })->get();
@@ -249,7 +249,7 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function cpcp(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
+        $workPackages = $workPackage->taskcards()->with('type','task')
                                     ->whereHas('type', function ($query) {
                                         $query->where('name', 'CPCP');
                                     })->get();
