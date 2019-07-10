@@ -50,7 +50,14 @@ class RTSController extends Controller
      */
     public function show(RTS $rts)
     {
-        //
+        $projects = Project::all();
+        $project = Project::find($rts->project_id);
+
+        return view('frontend.rts.edit', [
+            'rts' => $rts,
+            'projec' => $project,
+            'projects' => $projects
+        ]);
     }
 
     /**

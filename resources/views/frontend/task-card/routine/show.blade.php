@@ -68,7 +68,9 @@
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', json_decode($taskcard->additionals)->internal_number))
+                                                {{-- @if(isset($taskcard->additionals)) --}}
+                                                    @slot('text', json_decode($taskcard->additionals)->internal_number)
+                                                {{-- @endif --}}
                                                 @endcomponent
                                             @endif
                                         </div>

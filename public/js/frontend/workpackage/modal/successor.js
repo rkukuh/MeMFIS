@@ -1,5 +1,5 @@
 let SucessorDatatables = {
-    init: function () {
+    init: function (taskCard_uuid) {
         $("#successor_datatable").DataTable({
             "dom": '<"top"f>rt<"bottom">pl',
             responsive: !0,
@@ -8,7 +8,7 @@ let SucessorDatatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 5,
-            ajax: "/datatables/taskcard-routine/basic/modal",
+            ajax: "/datatables/workpackage/"+workPackage_uuid+"/taskcard/"+taskCard_uuid+"/successor",
             columns: [
                 {
                     data: "number"
@@ -21,6 +21,9 @@ let SucessorDatatables = {
                 },
                 {
                     data: "estimation_manhour"
+                },
+                {
+                    data: "order"
                 },
                 {
                     data: "Actions"
@@ -36,11 +39,7 @@ let SucessorDatatables = {
 
             ]
         })
-        // $('<button type="button" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm item_modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.item-body .dataTables_filter');
+        $('<button type="button" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm item_modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.modal-body .dataTables_filter');
 
     }
 };
-
-jQuery(document).ready(function () {
-    SucessorDatatables.init();
-});

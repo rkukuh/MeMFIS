@@ -66,9 +66,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\EmployeeLicense::class => Policies\EmployeeLicensePolicy::class,
         Models\PurchaseRequest::class => Policies\PurchaseRequestPolicy::class,
         Models\OTRCertification::class => Policies\OTRCertificationPolicy::class,
-        Models\Pivots\QuotationTaskCard::class => Policies\QuotationTaskCardPolicy::class,
         Models\CertificationEmployee::class => Policies\CertificationEmployeePolicy::class,
-        Models\QuotationTaskCardItem::class => Policies\QuotationTaskCardItemPolicy::class,
         Models\Pivots\ProjectWorkPackage::class => Policies\ProjectWorkPackagePolicy::class,
         Models\Pivots\TaskCardWorkPackage::class => Policies\TaskCardWorkPackagePolicy::class,
         Models\Pivots\QuotationWorkPackage::class => Policies\QuotationWorkPackagePolicy::class,
@@ -78,6 +76,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\ProjectWorkPackageFacility::class => Policies\ProjectWorkPackageFacilityPolicy::class,
         Models\TaskCardWorkPackageSuccessor::class => Policies\TaskCardWorkPackageSuccessorPolicy::class,
         Models\TaskCardWorkPackagePredecessor::class => Policies\TaskCardWorkPackagePredecessorPolicy::class,
+        Models\QuotationWorkPackageTaskCardItem::class => Policies\QuotationWorkPackageTaskCardItemPolicy::class,
     ];
 
     /**

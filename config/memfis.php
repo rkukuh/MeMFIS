@@ -27,6 +27,13 @@ return [
         'projects' => 15,
         'purchase-orders' => 15,
         'purchase-requests' => 15,
+        'quotation' => [
+            'workpackage' => [
+                'taskcard' => [
+                    'items' => 15,
+                ]
+            ]
+        ],
         'quotations' => 15,
         'schools' => 15,
         'statuses' => 15,

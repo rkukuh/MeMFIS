@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class QuotationTaskCardsTableSeeder extends Seeder
+class QuotationWorkPackageTaskCardItemsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -23,7 +23,8 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('rts')->group(function () {
 
                     Route::get('/{rts}/print', 'RTSController@print');
-                    Route::get('/{project}/project', 'RTSController@create')->name('project.create');
+                    Route::get('/{project}/project', 'RTSProgressController@create')->name('project.create');
+                    Route::post('/{project}/project', 'RTSProgressController@store')->name('project.store');
 
                 });
 

@@ -28,15 +28,8 @@ $factory->define(Quotation::class, function (Faker $faker) {
 
             return factory(Project::class)->create()->id;
         },
-        'customer_id' => function () {
-            if (Customer::count()) {
-                return Customer::get()->random()->id;
-            }
-
-            return factory(Customer::class)->create()->id;
-        },
         'attention' => function (array $quotation) {
-            return Customer::find($quotation['customer_id'])->attention;
+            return Customer::get()->random()->attention;
         },
         'requested_at' => $faker->randomElement([null, Carbon::now()]),
         'valid_until' => $faker->randomElement([null, Carbon::now()]),
