@@ -85,7 +85,30 @@ let Workpackage = {
                         $('#taskcard_sequence').modal('hide');
 
                         let table = $('.basic_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
 
+                        table = $('.basic_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.sip_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.cpcp_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.ad-sb_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.cmr-awl_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.si_datatable').mDatatable();
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -168,6 +191,14 @@ let Workpackage = {
         });
 
         //SIP taskcard Datatable
+        $('.sip_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
         $('.sip_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
                 material_datatables_init = false;
@@ -239,6 +270,14 @@ let Workpackage = {
 
 
         //CPCP taskcard Datatable
+        $('.cpcp_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
         $('.cpcp_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
                 material_datatables_init = false;
@@ -309,6 +348,14 @@ let Workpackage = {
         });
 
         //ad-sb_datatable taskcard Datatable
+        $('.ad-sb_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
         $('.ad-sb_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
                 material_datatables_init = false;
@@ -381,6 +428,14 @@ let Workpackage = {
         });
 
         //cmr-awl_datatable taskcard Datatable
+        $('.cmr-awl_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
         $('.cmr-awl_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
                 material_datatables_init = false;
@@ -451,6 +506,14 @@ let Workpackage = {
         });
 
         //SI taskcard Datatable
+        $('.si_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
         $('.si_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
                 material_datatables_init = false;
