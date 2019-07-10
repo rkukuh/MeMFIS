@@ -61,6 +61,36 @@ let Workpackage = {
                 $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
         });
+        $('.basic_datatable').on('click', '.predecessor', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#predecessor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+        });
+        $('.basic_datatable').on('click', '.successor', function () {
+            if(successor_datatables_init == true){
+                successor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#successor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+        });
 
         $('.modal-footer').on('click', '.sequence', function () {
             triggeruuid = $('input[name=uuid]').val();

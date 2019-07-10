@@ -311,7 +311,7 @@ class WorkPackageDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function predecessorModal(WorkPackage $WorkPackage, TaskCard $taskcard){
+    public function predecessorModal(WorkPackage $workPackage,TaskCard $taskcard){
         function filterArray( $array, $allowed = [] ) {
             return array_filter(
                 $array,
@@ -383,7 +383,8 @@ class WorkPackageDatatables extends Controller
             'title'     => true,
             'work_area'     => true,
             'estimation_manhour'     => true,
-            'uuid'     => true,
+            'uuidTaskcard'     => true,
+            'order'     => true,
             'Actions'      => true,
         ];
 
@@ -395,7 +396,16 @@ class WorkPackageDatatables extends Controller
         }
 
         // get all raw data
-        $taskcards  = TaskCardWorkPackage::where('taskcard_id', $taskcard->id)->where('workpackage_id',$WorkPackage->id)->with('predecessors')->first();
+        $taskcards  = TaskCardWorkPackage::with('taskcard')->where('taskcard_id', $taskcard->id)->where('workpackage_id',$workPackage->id)->with('predecessors')->first();
+
+        foreach($taskcards->predecessors as $taskcard){
+                $TaskCard = TaskCard::find($taskcard->previous);
+                $taskcard->number .= $TaskCard->number;
+                $taskcard->title .= $TaskCard->title;
+                $taskcard->work_area .= $TaskCard->workarea->name;
+                $taskcard->estimation_manhour .= $TaskCard->estimation_manhour;
+                $taskcard->uuidTaskcard .= $TaskCard->uuid;
+        }
 
         $alldata = json_decode( $taskcards->predecessors, true);
 
@@ -481,7 +491,7 @@ class WorkPackageDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function successorModal(WorkPackage $WorkPackage, TaskCard $taskcard){
+    public function successorModal(WorkPackage $workPackage, TaskCard $taskcard){
         function filterArray( $array, $allowed = [] ) {
             return array_filter(
                 $array,
@@ -553,7 +563,8 @@ class WorkPackageDatatables extends Controller
             'title'     => true,
             'work_area'     => true,
             'estimation_manhour'     => true,
-            'uuid'     => true,
+            'uuidTaskcard'     => true,
+            'order'     => true,
             'Actions'      => true,
         ];
 
@@ -565,7 +576,15 @@ class WorkPackageDatatables extends Controller
         }
 
         // get all raw data
-        $taskcards  = TaskCardWorkPackage::where('taskcard_id', $taskcard->id)->where('workpackage_id',$WorkPackage->id)->with('successors')->first();
+        $taskcards  = TaskCardWorkPackage::with('taskcard')->where('taskcard_id', $taskcard->id)->where('workpackage_id',$workPackage->id)->with('successors')->first();
+        foreach($taskcards->successors as $taskcard){
+                $TaskCard = TaskCard::find($taskcard->next);
+                $taskcard->number .= $TaskCard->number;
+                $taskcard->title .= $TaskCard->title;
+                $taskcard->work_area .= $TaskCard->workarea->name;
+                $taskcard->estimation_manhour .= $TaskCard->estimation_manhour;
+                $taskcard->uuidTaskcard .= $TaskCard->uuid;
+        }
 
         $alldata = json_decode( $taskcards->successors, true);
 

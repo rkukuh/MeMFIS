@@ -1,5 +1,4 @@
-let PredecessorDatatables = {
-    init: function (taskCard_uuid) {
+function predecessor_tc(triggeruuid) {
         $("#predecessor_datatable").DataTable({
             "dom": '<"top"f>rt<"bottom">pl',
             responsive: !0,
@@ -8,7 +7,7 @@ let PredecessorDatatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 5,
-            ajax: "/datatables/workpackage/"+workPackage_uuid+"/taskcard/"+taskCard_uuid+"/predecessor",
+            ajax: "/datatables/workpackage/"+workPackage_uuid+"/taskcard/"+triggeruuid+"/predecessor",
             columns: [
                 {
                     data: "number"
@@ -40,7 +39,5 @@ let PredecessorDatatables = {
             ]
         })
         $('<button type="button" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm item_modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.modal-body .dataTables_filter');
-
-    }
 };
 
