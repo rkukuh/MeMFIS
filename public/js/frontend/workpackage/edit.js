@@ -341,39 +341,6 @@ let Workpackage = {
             document.getElementById('sequence').value = sequence;
 
         });
-        $('.ad-sb_datatable').on('click', '.material', function () {
-            if(material_datatables_init == true){
-                material_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
-                alert(triggeruuid);
-                material_tc_eo(triggeruuid);
-                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#m_datatable_material_eo_wp').DataTable();
-                table.destroy();
-                triggeruuid = $(this).data('uuid');
-                material_tc_eo(triggeruuid);
-                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
-            }
-        });
-
-        $('.ad-sb_datatable').on('click', '.tool', function () {
-            if(tool_datatables_init == true){
-                tool_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
-                alert(triggeruuid);
-                tool_tc_eo(triggeruuid);
-                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#m_datatable_tool_eo_wp').DataTable();
-                table.destroy();
-                triggeruuid = $(this).data('uuid');
-                tool_tc_eo(triggeruuid);
-                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
-            }
-        });
 
         $('.ad-sb_datatable').on('click', '.mandatory', function () {
             triggeruuid = $(this).data('uuid');
@@ -420,37 +387,6 @@ let Workpackage = {
             document.getElementById('uuid').value = triggeruuid;
             document.getElementById('sequence').value = sequence;
 
-        });
-        $('.cmr-awl_datatable').on('click', '.material', function () {
-            if(material_datatables_init == true){
-                material_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
-                material_tc_eo(triggeruuid);
-                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#m_datatable_material_eo_wp').DataTable();
-                table.destroy();
-                triggeruuid = $(this).data('uuid');
-                material_tc_eo(triggeruuid);
-                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
-            }
-        });
-
-        $('.cmr-awl_datatable').on('click', '.tool', function () {
-            if(tool_datatables_init == true){
-                tool_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
-                tool_tc_eo(triggeruuid);
-                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#m_datatable_tool_eo_wp').DataTable();
-                table.destroy();
-                triggeruuid = $(this).data('uuid');
-                tool_tc_eo(triggeruuid);
-                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
-            }
         });
 
         $('.cmr-awl_datatable').on('click', '.mandatory', function () {

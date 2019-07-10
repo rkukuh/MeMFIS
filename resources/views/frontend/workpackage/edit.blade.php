@@ -161,8 +161,6 @@
                                                 </div> -->
                                             </div>
 
-                                            @include('frontend.workpackage.modal.material.eo')
-                                            @include('frontend.workpackage.modal.tool.eo')
                                             @include('frontend.workpackage.modal.material.taskcard')
                                             @include('frontend.workpackage.modal.tool.taskcard')
                                             @include('frontend.workpackage.modal.sequence')
