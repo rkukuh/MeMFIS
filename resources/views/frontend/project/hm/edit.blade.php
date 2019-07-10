@@ -203,7 +203,7 @@
                                                             </span>
                                                         </button>
 
-                                                        <button data-target="#modal_blank_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
+                                                        <button data-target="#modal_blank_project" data-toggle="modal" type="button" class="m-btn btn btn-primary modal_blank_project" >
                                                             <span>
                                                                 <i class="la la-plus-circle"></i>
                                                             <span>Blank Work Package</span>
@@ -289,7 +289,6 @@
 @push('footer-scripts')
     <script>
         let project_uuid = '{{ $project->uuid }}';
-
     </script>
 
 

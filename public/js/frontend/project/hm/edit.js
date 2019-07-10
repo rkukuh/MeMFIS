@@ -230,13 +230,20 @@ let Project = {
             });
         });
 
+        
+        $(".modal_blank_project").on("click", function() {
+            let aircraft_val = $("#applicability_airplane").val();
+            let aircraft_text = $("#applicability_airplane option:selected").text();
+            $("#aircraft_type_modal").html(aircraft_text);
+            $("#aircraft_type_modal").val(aircraft_val);
+        });
+
         $('.add-blank-workpackage').on('click', function () {
             let registerForm = $('#BlankWorkpackageForm');
             let applicability_airplane = $('#applicability_airplane').val();
             let title = $('#title').val();
+            let description_modal = $('#description_modal').val();
             let is_template = 0;
-            console.log(applicability_airplane);
-            console.log(title);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -248,7 +255,8 @@ let Project = {
                     title: title,
                     aircraft_id: applicability_airplane,
                     is_template: is_template,
-                    project_uuid: project_uuid,
+                    description: description_modal,
+                    project_uuid: project_uuid
                 },
                 success: function (data) {
                     if (data.errors) {
