@@ -65,6 +65,7 @@ let Workpackage = {
             if(predecessor_datatables_init == true){
                 predecessor_datatables_init = false;
                 triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
                 predecessor_tc(triggeruuid);
                 $('#predecessor_datatable').DataTable().ajax.reload();
             }
@@ -72,6 +73,7 @@ let Workpackage = {
                 let table = $('#predecessor_datatable').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
                 predecessor_tc(triggeruuid);
                 $('#predecessor_datatable').DataTable().ajax.reload();
             }
@@ -80,6 +82,7 @@ let Workpackage = {
             if(successor_datatables_init == true){
                 successor_datatables_init = false;
                 triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
                 successor_tc(triggeruuid);
                 $('#successor_datatable').DataTable().ajax.reload();
             }
@@ -87,10 +90,23 @@ let Workpackage = {
                 let table = $('#successor_datatable').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
                 successor_tc(triggeruuid);
                 $('#successor_datatable').DataTable().ajax.reload();
             }
         });
+
+
+        // $('.modal-body').on('click', '.add-predecessor-modal', function () {
+        //     alert('predecessor');
+
+        // });
+        // $('.modal-body').on('click', '.add-successor-modal', function () {
+        //     alert('successor');
+
+        // });
+
+        //
 
         $('.modal-footer').on('click', '.sequence', function () {
             triggeruuid = $('input[name=uuid]').val();
