@@ -29,6 +29,8 @@
 
 @push('footer-scripts')
 <script>
+let IDRformatter = new Intl.NumberFormat('id', { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
     let facilityDatatable = {
         init:function () {
         let datatable = $('.facility_datatable').mDatatable({
@@ -101,6 +103,11 @@
             }, {
                 field: "price_amount",
                 title: "Price",
+                template: function (t, e, i) {
+                    return (
+                        IDRformatter.format(t.price_amount)
+                    );
+            }
             }, {
                 field: "note",
                 title: "Marketing Note",
@@ -217,9 +224,17 @@
         }
     };
 
+    
+
 
 jQuery(document).ready(function () {
     facilityDatatable.init();
+    $("#tabs_facility").on("click", function() {
+        let table = $('.facility_datatable').mDatatable();
+
+        table.originalDataSet = [];
+        table.reload();
+    });
 });
 </script>]
 @endpush
