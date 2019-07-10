@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\QuotationWorkPackageTaskCardItem;
 use Illuminate\Database\Seeder;
+use App\Models\QuotationWorkPackageTaskCardItem;
 
 class QuotationWorkPackageTaskCardItems extends Seeder
 {
@@ -12,6 +12,6 @@ class QuotationWorkPackageTaskCardItems extends Seeder
      */
     public function run()
     {
-        //
+        factory(QuotationWorkPackageTaskCardItem::class, config('memfis.dummies.quotation.workpackage.taskcard.items'))->create();
     }
 }

@@ -15,7 +15,49 @@ class CreateItemQuotationTaskcardWorkpackageTable extends Migration
     {
         Schema::create('item_quotation_taskcard_workpackage', function (Blueprint $table) {
             $table->increments('id');
+            $table->char('uuid', 36)->unique();
+            $table->unsignedInteger('quotation_id')->nullable();
+            $table->unsignedInteger('workpackage_id')->nullable();
+            $table->unsignedInteger('taskcard_id')->nullable();
+            $table->unsignedInteger('item_id')->nullable();
+            $table->double('quantity');
+            $table->unsignedInteger('unit_id')->nullable();
+            $table->unsignedInteger('price_id')->nullable();
+            $table->double('price_amount')->nullable();
+            $table->double('subtotal')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('quotation_id')
+                    ->references('id')->on('quotations')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('workpackage_id')
+                    ->references('id')->on('workpackages')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('taskcard_id')
+                    ->references('id')->on('taskcards')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('item_id')
+                    ->references('id')->on('items')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('unit_id')
+                    ->references('id')->on('units')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('price_id')
+                    ->references('id')->on('prices')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
