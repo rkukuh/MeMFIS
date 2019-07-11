@@ -13,7 +13,7 @@ class TaskCardWorkPackagePredecessorStore extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

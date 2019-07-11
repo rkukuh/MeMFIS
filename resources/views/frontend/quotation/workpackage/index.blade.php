@@ -32,7 +32,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#m_tabs_tool_material">Material & Tool Taskcard List</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item" id="tabs_facility">
                                         <a class="nav-link" data-toggle="tab" href="#m_tabs_facility">Facility</a>
                                     </li>
                                 </ul>

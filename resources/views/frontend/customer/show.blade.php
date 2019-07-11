@@ -85,12 +85,19 @@
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-5 col-md-5 col-lg-5">
+                                            @if(isset($customer->levels[0]))
                                                 @component('frontend.common.label.data-info')
                                                     @slot('text', 'customer_level')
                                                     @slot('name', 'customer_level')
                                                     @slot('text', $customer->levels[0]->name)
-                                                    @slot('value', $customer->name)
                                                 @endcomponent
+                                            @else
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', 'customer_level')
+                                                    @slot('name', 'customer_level')
+                                                    @slot('text', '-')
+                                                @endcomponent
+                                            @endif
                                             </div>
                                             <div class="col-sm-7 col-md-7 col-lg-7">
                                                 @component('frontend.common.label.data-info')

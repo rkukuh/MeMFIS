@@ -17,10 +17,10 @@ use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
-use App\Models\Pivots\QuotationTaskCard;
 use App\Models\Pivots\QuotationWorkPackage;
 use App\Http\Requests\Frontend\QuotationStore;
 use App\Http\Requests\Frontend\QuotationUpdate;
+use App\Models\QuotationWorkPackageTaskCardItem;
 
 class QuotationController extends Controller
 {
@@ -93,7 +93,7 @@ class QuotationController extends Controller
         ]));
 
         // TODO generate item workpackage
-        $customer = Customer::find($request->customer_id)->levels->last()->score;
+        $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
         $project = Project::find($request->project_id);
             foreach($project->workpackages as $workpackage){
                 foreach($workpackage->items as $item){
@@ -115,24 +115,27 @@ class QuotationController extends Controller
             }
 
         // TODO generate item taskcard
-        $customer = Customer::find($request->customer_id)->levets->last()->score;
+        $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
         $project = Project::find($request->project_id);
             foreach($project->workpackages as $workpackages){
                 foreach($workpackages->taskcards as $taskcard){
                     foreach($taskcard->items as $item){
                         // $quotation_taskcard_item = QuotationTaskCard::where('quotation_id',$quotation->id)->where('workpackage_id',$workpackage->id)->first();
 
-                        // if (Item::findOrFail($item->id)->prices->get($customer)) {
-                        //     $price_id = Item::find($item->id)->prices->get($customer)->id;
-                        // } else {
-                        //     $price_id = null;
-                        // }
-                        // $quotation_taskcard_item->items()->create([
-                        //     'item_id' => $item->id,
-                        //     'quantity' => $item->pivot->quantity,
-                        //     'unit_id' => $item->pivot->unit_id,
-                        //     'price_id' => $price_id,
-                        // ]);
+                        if (Item::findOrFail($item->id)->prices->get($customer)) {
+                            $price_id = Item::find($item->id)->prices->get($customer)->id;
+                        } else {
+                            $price_id = null;
+                        }
+                        QuotationWorkPackageTaskCardItem::create([
+                            'quotation_id' => $quotation->id,
+                            'workpackage_id' => $workpackages->id,
+                            'taskcard_id' => $taskcard->id,
+                            'item_id' => $item->id,
+                            'quantity' => $item->pivot->quantity,
+                            'unit_id' => $item->pivot->unit_id,
+                            'price_id' => $price_id,
+                        ]);
                     }
                 }
             }

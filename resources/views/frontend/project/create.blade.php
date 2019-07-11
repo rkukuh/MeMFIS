@@ -16,7 +16,7 @@
                     -
                 </li>
                 <li class="m-nav__item">
-                    <a href="{{ route('frontend.quotation.index') }}" class="m-nav__link">
+                    <a href="{{ route('frontend.project.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Project
                             </span>
