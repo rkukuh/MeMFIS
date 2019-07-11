@@ -29,9 +29,9 @@
                                 </label>
                                 @component('frontend.common.input.select2')
                                     @slot('text', 'Unit')
-                                    @slot('name', 'unit')
-                                    @slot('id', 'unit')
-                                    @slot('id_error', 'unit')
+                                    @slot('name', 'unit_id')
+                                    @slot('id', 'unit_id')
+                                    @slot('id_error', 'unit_id')
                                 @endcomponent
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                                 @component('frontend.common.input.number')
                                     @slot('name', 'price')
                                     @slot('id', 'price')
-                                    @slot('text', 'Type')
+                                    @slot('text', 'Price')
                                     @slot('id_error', 'price')
                                 @endcomponent
                             </div>
@@ -65,7 +65,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-unit')
+                                    @slot('class', 'add-item-price')
                                     @slot('type', 'button')
                                 @endcomponent
 
