@@ -19,7 +19,7 @@ class QuotationDatatables extends Controller
      */
     public function index()
     {
-        $quotations = Quotation::with('customer','project')->get();
+        $quotations = Quotation::with('project')->get();
 
         foreach($quotations as $quotation){
             if(!empty($quotation->approvals->toArray())){
@@ -28,6 +28,7 @@ class QuotationDatatables extends Controller
                 $quotation->status .= '';
 
             }
+            $quotation->customer = $quotation->project->customer;
         }
         $data = $alldata = json_decode($quotations);
 
@@ -125,7 +126,28 @@ class QuotationDatatables extends Controller
      */
     public function jobRequest(Quotation $quotation)
     {
-        $data = $alldata = json_decode($quotation->workpackages);
+        $workpackages = $quotation->workpackages;
+        $wp_id = [];
+        foreach($workpackages as $workPackage){
+            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+            ->where('workpackage_id',$workPackage->id)
+            ->first();
+            $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
+            // dd($project_workpackage);
+            
+            if($project_workpackage){            
+            $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
+            ->with('facility')
+            ->sum('price_amount');
+            $workPackage->facilityz_price_amount = $ProjectWorkPackageFacility;
+
+            // dd($workPackage->facilitiess);
+            }
+        }
+
+        // dd($wp_id);
+        
+        $data = $alldata = json_decode($workpackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

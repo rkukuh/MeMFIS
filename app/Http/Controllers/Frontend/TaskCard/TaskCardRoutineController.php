@@ -257,6 +257,7 @@ class TaskCardRoutineController extends Controller
             'skills' => $this->skill,
             'taskcards' => $this->taskcard,
             'MaintenanceCycles' => $this->maintenanceCycle,
+            'additionals' => json_decode($taskCard->additionals)
         ]);
 
     }

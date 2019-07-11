@@ -16,9 +16,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 order-1 order-xl-2 m--align-right">
+                    <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
                         @component('frontend.common.buttons.create-new')
                             @slot('text', 'AD/SB')
+                            @slot('class', 'btn-add')
                             @slot('data_target', '#modal_ad_sb')
                             @endcomponent
                         @component('frontend.common.buttons.summary')
@@ -52,9 +53,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 order-1 order-xl-2 m--align-right">
+                    <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
                         @component('frontend.common.buttons.create-new')
                             @slot('text', 'CMR/AWL')
+                            @slot('class', 'btn-add')
                             @slot('data_target', '#modal_cmr_awl')
                             @endcomponent
                         @component('frontend.common.buttons.summary')
@@ -89,9 +91,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-6 order-1 order-xl-2 m--align-right">
+                    <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
                         @component('frontend.common.buttons.create-new')
                             @slot('text', 'Special Instruction')
+                            @slot('class', 'btn-add')
                             @slot('data_target', '#modal_si')
                             @endcomponent
                         @component('frontend.common.buttons.summary')

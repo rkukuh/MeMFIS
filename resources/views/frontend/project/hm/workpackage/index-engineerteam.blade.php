@@ -53,14 +53,13 @@
                                     <div class="tab-pane active show" id="m_tabs_enginner" role="tabpanel">
                                         @include('frontend.project.hm.engineer.index')
                                     </div>
-
-                                    @include('frontend.project.hm.modal.material.eo')
-                                    @include('frontend.project.hm.modal.tool.eo')
+                                    
                                     @include('frontend.project.hm.modal.material.routine-si')
                                     @include('frontend.project.hm.modal.tool.routine-si')
                                     @include('frontend.project.hm.modal.sequence')
                                     @include('frontend.project.hm.modal.predecessor')
                                     @include('frontend.project.hm.modal.successor')
+
 
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
@@ -93,6 +92,4 @@
     </script>
     <script src="{{ asset('js/frontend/project/hm/workpackage.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
-    <script src="{{ asset('js/frontend/workpackage/modal/successor.js') }}"></script>
-    <script src="{{ asset('js/frontend/workpackage/modal/predecessor.js') }}"></script>
 @endpush

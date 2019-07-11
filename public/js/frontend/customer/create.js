@@ -5,7 +5,7 @@ let Customer = {
             let name = $('input[name=name]').val();
             let payment_term =  $('input[name=term_of_payment]').val();
             let account_code = $('#account_code').val();
-            let level = $('#customer-level').val();
+            let level = $('select[name="customer-level"]').val();
             let ai = 0;
 
             let phone_array = [];
@@ -175,7 +175,8 @@ let Customer = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/customer/' + data.uuid + '/edit';
+                        // window.location.href = '/customer/' + data.uuid + '/edit';
+                        window.location.href = '/customer';
 
                     }
                 }

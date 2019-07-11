@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Datatables\Quotation;
 
+use App\Models\Unit;
 use App\Models\Item;
+use App\Models\TaskCard;
 use App\Models\ListUtil;
+use App\Models\Quotation;
 use App\Models\WorkPackage;
+use App\Models\QuotationWorkPackageTaskCardItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,10 +19,11 @@ class QuotationToolDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function routine(WorkPackage $workPackage)
+    public function routine(Quotation $quotation, WorkPackage $workPackage)
     {
-        $tools = [];
+        $tools = $routinetools = [];
 
+        // Get tools from non-routine taskcards -
         $taskcards = $workPackage->taskcards()->with('type')
         ->whereHas('type', function ($query) {
             $query->where('of', 'taskcard-type-routine');
@@ -30,8 +35,30 @@ class QuotationToolDatatables extends Controller
                 array_push($tools, $item);
             }
         }
+        // -Get tools from non-routine taskcards
 
-        $data = $alldata = $tools;
+        foreach($tools as $tool){
+            $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
+            ->where('quotation_id', $quotation->id)
+            ->where('item_id', $tool->id)
+            ->get();
+            if(sizeof($items) > 0){
+                foreach($items as $item){
+                    array_push($routinetools, $item);
+                }
+            }
+        }
+
+        foreach($routinetools as $routinetool){
+            $routinetool->tc .= TaskCard::find($routinetool->taskcard_id)->number;
+            $routinetool->pn .= Item::find($routinetool->item_id)->code;
+            $routinetool->title .= Item::find($routinetool->item_id)->name;
+            $routinetool->unit_tool .= Unit::find($routinetool->unit_id)->name;
+            $routinetool->unitPrice .= null;
+        }
+
+
+        $data = $alldata = $routinetools;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -125,10 +152,11 @@ class QuotationToolDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function non_routine(WorkPackage $workPackage)
+    public function non_routine(Quotation $quotation, WorkPackage $workPackage)
     {
-        $tools = [];
+        $tools = $nonroutinetools = [];
 
+        // Get tools from non-routine taskcards -
         $taskcards = $workPackage->taskcards()->with('type')
         ->whereHas('type', function ($query) {
             $query->where('of', 'taskcard-type-non-routine');
@@ -140,8 +168,31 @@ class QuotationToolDatatables extends Controller
                 array_push($tools, $item);
             }
         }
+        // -Get tools from non-routine taskcards
+        // dd($tools);
 
-        $data = $alldata = $tools;
+        foreach($tools as $tool){
+            $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
+            ->where('quotation_id', $quotation->id)
+            ->where('item_id', $tool->id)
+            ->get();
+            if(sizeof($items) > 0){
+                foreach($items as $item){
+                    array_push($nonroutinetools, $item);
+                }
+            }
+        }
+
+        foreach($nonroutinetools as $nonroutinetool){
+            $nonroutinetool->tc .= TaskCard::find($nonroutinetool->taskcard_id)->number;
+            $nonroutinetool->pn .= Item::find($nonroutinetool->item_id)->code;
+            $nonroutinetool->title .= Item::find($nonroutinetool->item_id)->name;
+            $nonroutinetool->unit_tool .= Unit::find($nonroutinetool->unit_id)->name;
+            $nonroutinetool->unitPrice .= null;
+        }
+
+
+        $data = $alldata = $nonroutinetools;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Project;
 
+use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\Project;
 use App\Models\Aircraft;
@@ -102,6 +103,7 @@ class ProjectHMWorkPackageController extends Controller
         $materialCount = $workPackage->items->count();
         $toolCount = $workPackage->tools->count();
 
+        // dd($project_workpackage);
         if ($request->anyChanges) {
             $view = 'frontend.project.hm.workpackage.index-engineerteam';
         }else{
@@ -120,7 +122,7 @@ class ProjectHMWorkPackageController extends Controller
             'materialCount' => $materialCount,
             'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
             'total_pfrm_factor' => $total_pfrm_factor,
-            'project_workpackage' => $project_workpackage,
+            'project_workpackage' => $project_workpackage
         ]);
     }
 
@@ -287,7 +289,11 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function destroy(Project $project, WorkPackage $workPackage)
     {
-        $project->workpackages()->detach($workPackage);
+        // $project_workpackage = ProjectWorkPackage::where('project_id', $project->id)->where('workpackage_id',$workPackage->id)->first();
+        // $project_workpackage->delete();
+        $project->workpackages()->updateExistingPivot($workPackage,[
+            'deleted_at' => Carbon::now()
+        ]);
 
         return response()->json($project);
     }

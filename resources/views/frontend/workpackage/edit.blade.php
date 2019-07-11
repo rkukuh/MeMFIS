@@ -161,13 +161,13 @@
                                                 </div> -->
                                             </div>
 
-                                            @include('frontend.workpackage.modal.material.eo')
-                                            @include('frontend.workpackage.modal.tool.eo')
                                             @include('frontend.workpackage.modal.material.taskcard')
                                             @include('frontend.workpackage.modal.tool.taskcard')
                                             @include('frontend.workpackage.modal.sequence')
                                             @include('frontend.workpackage.modal.predecessor')
                                             @include('frontend.workpackage.modal.successor')
+                                            @include('frontend.workpackage.modal.create-predecessor')
+                                            @include('frontend.workpackage.modal.create-successor')
 
                                         </div>
                                     </div>
@@ -232,6 +232,10 @@
 
     <script src="{{ asset('js/frontend/functions/select2/aircraft.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/series.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/taskcard-predecessor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/taskcard-successor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard.js') }}"></script>
 
     <script src="{{ asset('js/frontend/workpackage/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/workpackage/modal/successor.js') }}"></script>

@@ -31,7 +31,7 @@ class Website extends MemfisModel
     /**
      * Polymorphic: An entity can have zero or many websites.
      *
-     * This function will get all of the owning addressable models.
+     * This function will get all of the owning websiteable models.
      * See:
      * - Customer's websites() method for the inverse
      * - Employee's websites() method for the inverse

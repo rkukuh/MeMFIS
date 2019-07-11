@@ -18,7 +18,7 @@ $('.workpackage_datatable').mDatatable({
                     if (typeof raw.data !== 'undefined') {
                         dataSet = raw.data;
                     }
-
+                    
                     return dataSet;
                 }
             }
@@ -63,7 +63,7 @@ $('.workpackage_datatable').mDatatable({
             }
         },
         {
-            field: 'aircraft.name',
+            field: 'ac_type',
             title: 'A/C Type',
             sortable: 'asc',
             filterable: !1,

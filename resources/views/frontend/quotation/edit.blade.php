@@ -86,7 +86,7 @@
                                                             @endcomponent
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" id="customer_id" name="customer_id" value="{{ $quotation->customer->uuid }}">
+                                                    <input type="hidden" id="customer_id" name="customer_id" value="{{ $quotation->project->customer->uuid }}">
 
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -504,7 +504,6 @@
                     </div>
                     @component('frontend.common.input.hidden')
                         @slot('id', 'attentions-val')
-                        @slot('value', $quotation->customer->attention)
                     @endcomponent
                     @component('frontend.common.input.hidden')
                         @slot('id', 'attention-val')

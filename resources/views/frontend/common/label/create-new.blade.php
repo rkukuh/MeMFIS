@@ -2,7 +2,8 @@
     class="m-badge
            {{ $color or '' }}
            m-badge--{{ $length or 'wide' }}
-           m-badge--{{ $type or 'rounded' }}"
+           m-badge--{{ $type or 'rounded' }}
+            {{$class or ''}}"
     style="{{ $style or '' }}">
 
     <i class="{{ $icon or 'la la-file-o' }}"></i>

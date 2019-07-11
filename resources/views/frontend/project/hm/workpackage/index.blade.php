@@ -54,13 +54,13 @@
                                         @include('frontend.project.hm.engineer.index')
                                     </div>
 
-                                    @include('frontend.project.hm.modal.material.eo')
-                                    @include('frontend.project.hm.modal.tool.eo')
                                     @include('frontend.project.hm.modal.material.routine-si')
                                     @include('frontend.project.hm.modal.tool.routine-si')
                                     @include('frontend.project.hm.modal.sequence')
                                     @include('frontend.project.hm.modal.predecessor')
                                     @include('frontend.project.hm.modal.successor')
+                                    @include('frontend.project.hm.modal.create-predecessor')
+                                    @include('frontend.project.hm.modal.create-successor')
 
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
@@ -93,6 +93,10 @@
     <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/modal/datatables.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/workpackage/modal/successor.js') }}"></script>
-    <script src="{{ asset('js/frontend/workpackage/modal/predecessor.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/modal/successor.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/modal/predecessor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/taskcard-predecessor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/taskcard-successor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard.js') }}"></script>
+
 @endpush

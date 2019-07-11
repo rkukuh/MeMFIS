@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\WorkPackage;
 
-use App\Models\TaskCardWorkPackageSuccessor;
+use App\Models\TaskCard;
+use App\Models\WorkPackage;
+use App\Models\Pivots\TaskCardWorkPackage;
 use App\Http\Controllers\Controller;
+use App\Models\TaskCardWorkPackageSuccessor;
 use App\Http\Requests\Frontend\TaskCardWorkPackageSuccessorStore;
 use App\Http\Requests\Frontend\TaskCardWorkPackageSuccessorUpdate;
 
@@ -35,9 +38,16 @@ class TaskCardWorkPackageSuccessorController extends Controller
      * @param  \App\Http\Requests\Frontend\TaskCardWorkPackageSuccessorStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TaskCardWorkPackageSuccessorStore $request)
+    public function store(WorkPackage $WorkPackage, TaskCard $taskcard,TaskCardWorkPackageSuccessorStore $request)
     {
-        //
+        $taskcard_workpackage  = TaskCardWorkPackage::where('taskcard_id', $taskcard->id)->where('workpackage_id',$WorkPackage->id)->with('successors')->first();
+
+        $taskcard_workpackage->successors()->create([
+            'next' => TaskCard::where('uuid',$request->previous)->first()->id,
+            'order' => $request->order,
+        ]);
+
+        return response()->json($taskcard_workpackage);
     }
 
     /**
@@ -82,6 +92,8 @@ class TaskCardWorkPackageSuccessorController extends Controller
      */
     public function destroy(TaskCardWorkPackageSuccessor $taskCardWorkPackageSuccessor)
     {
-        //
+        $taskCardWorkPackageSuccessor->delete();
+
+        return response()->json($taskCardWorkPackageSuccessor);
     }
 }
