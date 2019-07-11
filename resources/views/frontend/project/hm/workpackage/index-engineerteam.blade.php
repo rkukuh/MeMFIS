@@ -62,6 +62,7 @@
                                     @include('frontend.project.hm.modal.predecessor')
                                     @include('frontend.project.hm.modal.successor')
 
+
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
@@ -93,6 +94,4 @@
     </script>
     <script src="{{ asset('js/frontend/project/hm/workpackage.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
-    <script src="{{ asset('js/frontend/workpackage/modal/successor.js') }}"></script>
-    <script src="{{ asset('js/frontend/workpackage/modal/predecessor.js') }}"></script>
 @endpush
