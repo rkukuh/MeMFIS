@@ -383,7 +383,7 @@ class WorkPackageDatatables extends Controller
             'title'     => true,
             'work_area'     => true,
             'estimation_manhour'     => true,
-            'uuidTaskcard'     => true,
+            'uuid'     => true,
             'order'     => true,
             'Actions'      => true,
         ];
@@ -404,7 +404,6 @@ class WorkPackageDatatables extends Controller
                 $taskcard->title .= $TaskCard->title;
                 $taskcard->work_area .= $TaskCard->workarea->name;
                 $taskcard->estimation_manhour .= $TaskCard->estimation_manhour;
-                $taskcard->uuidTaskcard .= $TaskCard->uuid;
         }
 
         $alldata = json_decode( $taskcards->predecessors, true);
@@ -563,7 +562,7 @@ class WorkPackageDatatables extends Controller
             'title'     => true,
             'work_area'     => true,
             'estimation_manhour'     => true,
-            'uuidTaskcard'     => true,
+            'uuid'     => true,
             'order'     => true,
             'Actions'      => true,
         ];
@@ -583,7 +582,6 @@ class WorkPackageDatatables extends Controller
                 $taskcard->title .= $TaskCard->title;
                 $taskcard->work_area .= $TaskCard->workarea->name;
                 $taskcard->estimation_manhour .= $TaskCard->estimation_manhour;
-                $taskcard->uuidTaskcard .= $TaskCard->uuid;
         }
 
         $alldata = json_decode( $taskcards->successors, true);

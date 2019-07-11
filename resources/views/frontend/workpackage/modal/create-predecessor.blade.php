@@ -1,6 +1,6 @@
 <div class="modal fade" id="add_modal_predecessor"  role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 @include('frontend.common.label.create-new')
@@ -18,7 +18,7 @@
                     <input type="hidden" class="form-control form-control-danger m-input" name="uuid-predecessor" id="uuid-predecessor">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
                                     Taskcard @include('frontend.common.label.required')
                                 </label>
@@ -30,7 +30,9 @@
                                     @slot('id_error', 'taskcard_predecessor')
                                 @endcomponent
                             </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                        </div>
+                        <div class="form-group m-form__group row ">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
                                     Order @include('frontend.common.label.required')
                                 </label>

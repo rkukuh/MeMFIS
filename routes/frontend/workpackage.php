@@ -34,10 +34,18 @@ Route::name('frontend.')->group(function () {
                     Route::get('/{workPackage}/summary/non-routine', 'SummaryNonRoutineTaskcardController@summary')->name('summary.nonroutine');
                     Route::get('/{workPackage}/summary/', 'WorkPackageController@summary')->name('summary.workpackage');
                 });
-                
+
                 /** Transaction: Item */
                 Route::post('/{workPackage}/item', 'WorkPackageItemsController@store')->name('item.workpackage');
                 Route::delete('/{workPackage}/{item}/item/', 'WorkPackageItemsController@destroy')->name('item.workpackage.delete');
+
+                /** Transaction: Predecessor */
+                Route::post('/{WorkPackage}/taskcard/{taskcard}/predecessor/', 'TaskCardWorkPackagePredecessorController@store')->name('create.predecessor.workpackage');
+                Route::delete('/{taskCardWorkPackagePredecessor}/predecessor/', 'TaskCardWorkPackagePredecessorController@destroy')->name('delete.predecessor.workpackage');
+
+                /** Transaction: Successor */
+                Route::post('/{WorkPackage}/taskcard/{taskcard}/successor/', 'TaskCardWorkPackageSuccessorController@store')->name('create.successor.workpackage');
+                Route::delete('/{taskCardWorkPackagePredecessor}/successor/', 'TaskCardWorkPackageSuccessorController@destroy')->name('delete.successor.workpackage');
 
             });
 
