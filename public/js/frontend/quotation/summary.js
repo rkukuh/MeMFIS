@@ -87,12 +87,12 @@ var DatatableAutoColumnHideDemo = function () {
             if(currency == 1){
               return ('<br>' +
                 IDRformatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate) + '<br>' +
-                ' 138'
+                IDRformatter.format(a.facilityz_price_amount)
               );
             }else{
               return ('<br>' +
-                '$ '+USDformatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate) + '<br>' +
-                ' 138'
+                '$ '+ USDformatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate) + '<br>' +
+                '$ '+ USDformatter.format(a.facilityz_price_amount)
               );
             }
           }
@@ -145,17 +145,17 @@ var DatatableAutoColumnHideDemo = function () {
           template: function (t, e, i) {
             total = 0;
             if(t.pivot.discount_value == null && t.pivot.discount_type == null){
-                total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + 138;
+                total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilityz_price_amount;
                 subtotal = subtotal + total;
             }
             else{
                 if(t.pivot.discount_type ==  'amount'){
-                    total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
+                    total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilityz_price_amount - t.pivot.discount_value;
                     subtotal = subtotal + total;
                     
                 }
                 else if(t.pivot.discount_type == 'percentage'){
-                    total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + 138 - (((t.total_manhours_with_performance_factor * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
+                    total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilityz_price_amount - (((t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilityz_price_amount)*t.pivot.discount_value)/100);
                     subtotal = subtotal + total;
                 }
             }

@@ -138,9 +138,10 @@ class QuotationDatatables extends Controller
             if($project_workpackage){            
             $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
             ->with('facility')
-            ->get();
+            ->sum('price_amount');
+            $workPackage->facilityz_price_amount = $ProjectWorkPackageFacility;
 
-            // dd($ProjectWorkPackageFacility);
+            // dd($workPackage->facilitiess);
             }
         }
 
