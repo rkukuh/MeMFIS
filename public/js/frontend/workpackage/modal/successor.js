@@ -39,4 +39,87 @@ function successor_tc(triggeruuid) {
             ]
         })
         $('<button type="button" data-toggle="modal" data-target="#add_modal_successor" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm add-successor-modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.modal-body .dataTables_filter');
+
+        $('.dataTable').on('click', '.delete-successor', function () {
+            let triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/workpackage/'+triggeruuid+'/successor ',
+                        success: function (data) {
+                            toastr.success('Predecessor has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                            }
+                        );
+
+                        $('#successor_datatable').DataTable().ajax.reload();
+
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errorsHtml = '';
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+            });
+          });
 };
+
+let simpan = $('.modal-footer').on('click', '.add-successor', function () {
+    let tcuuid =$('#uuid-successor').val();
+    let taskcard_successor =$('#taskcard_successor').val();
+    let order_successor = $('input[name=order_successor]').val();
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'post',
+        url: '/workpackage/'+workPackage_uuid+'/taskcard/'+tcuuid+'/successor ',
+        data: {
+            _token: $('input[name=_token]').val(),
+            previous: taskcard_successor,
+            order: order_successor,
+        },
+        success: function (data) {
+            if (data.errors) {
+                // if (data.errors.name) {
+                //     $('#name-error').html(data.errors.name[0]);
+
+                // }
+                // if (data.errors.symbol) {
+                //     $('#symbol-error').html(data.errors.symbol[0]);
+
+                // }
+
+            } else {
+                $('#add_modal_successor').modal('hide');
+
+                toastr.success('Predecessor has been created.', 'Success', {
+                    timeOut: 5000
+                });
+
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+        }
+    });
+});
+

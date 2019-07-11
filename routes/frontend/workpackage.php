@@ -45,7 +45,7 @@ Route::name('frontend.')->group(function () {
 
                 /** Transaction: Successor */
                 Route::post('/{WorkPackage}/taskcard/{taskcard}/successor/', 'TaskCardWorkPackageSuccessorController@store')->name('create.successor.workpackage');
-                Route::delete('/{taskCardWorkPackagePredecessor}/successor/', 'TaskCardWorkPackageSuccessorController@destroy')->name('delete.successor.workpackage');
+                Route::delete('/{taskCardWorkPackageSuccessor}/successor/', 'TaskCardWorkPackageSuccessorController@destroy')->name('delete.successor.workpackage');
 
             });
 
