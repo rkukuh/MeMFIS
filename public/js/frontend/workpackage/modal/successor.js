@@ -83,7 +83,7 @@ function successor_tc(triggeruuid) {
           });
 };
 
-let simpan = $('.modal-footer').on('click', '.add-successor', function () {
+$('.modal-footer').on('click', '.add-successor', function () {
     let tcuuid =$('#uuid-successor').val();
     let taskcard_successor =$('#taskcard_successor').val();
     let order_successor = $('input[name=order_successor]').val();

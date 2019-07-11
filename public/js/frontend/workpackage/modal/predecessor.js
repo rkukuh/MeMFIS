@@ -84,7 +84,7 @@ function predecessor_tc(triggeruuid) {
 
 };
 
-let simpan = $('.modal-footer').on('click', '.add-predecessor', function () {
+$('.modal-footer').on('click', '.add-predecessor', function () {
     let tcuuid =$('#uuid-predecessor').val();
     let taskcard_predecessor =$('#taskcard_predecessor').val();
     let order_predecessor = $('input[name=order_predecessor]').val();
