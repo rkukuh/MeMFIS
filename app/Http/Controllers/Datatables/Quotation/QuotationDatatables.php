@@ -126,7 +126,27 @@ class QuotationDatatables extends Controller
      */
     public function jobRequest(Quotation $quotation)
     {
-        $data = $alldata = json_decode($quotation->workpackages);
+        $workpackages = $quotation->workpackages;
+        $wp_id = [];
+        foreach($workpackages as $workPackage){
+            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+            ->where('workpackage_id',$workPackage->id)
+            ->first();
+            $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
+            // dd($project_workpackage);
+            
+            if($project_workpackage){            
+            $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
+            ->with('facility')
+            ->get();
+
+            // dd($ProjectWorkPackageFacility);
+            }
+        }
+
+        // dd($wp_id);
+        
+        $data = $alldata = json_decode($workpackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

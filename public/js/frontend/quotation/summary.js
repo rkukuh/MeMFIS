@@ -69,12 +69,12 @@ var DatatableAutoColumnHideDemo = function () {
           template: function (t) {
             if(currency == 1){
               return (t.pivot.description + '<br>' +
-                '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x ' + IDRformatter.format(t.pivot.manhour_rate) + '<br>' +
+                '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x ' + IDRformatter.format(t.pivot.manhour_rate) + '<br>' +
                 '- Facility Price : '
               );
             }else{
               return (t.pivot.description + '<br>' +
-                '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x $ ' + USDformatter.format(t.pivot.manhour_rate) + '<br>' +
+                '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x $ ' + USDformatter.format(t.pivot.manhour_rate) + '<br>' +
                 '- Facility Price : '
               );
             }
@@ -86,12 +86,12 @@ var DatatableAutoColumnHideDemo = function () {
             
             if(currency == 1){
               return ('<br>' +
-                IDRformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
+                IDRformatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate) + '<br>' +
                 ' 138'
               );
             }else{
               return ('<br>' +
-                '$ '+USDformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
+                '$ '+USDformatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate) + '<br>' +
                 ' 138'
               );
             }
@@ -145,17 +145,17 @@ var DatatableAutoColumnHideDemo = function () {
           template: function (t, e, i) {
             total = 0;
             if(t.pivot.discount_value == null && t.pivot.discount_type == null){
-                total = t.pivot.manhour_total * t.pivot.manhour_rate + 138;
+                total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + 138;
                 subtotal = subtotal + total;
             }
             else{
                 if(t.pivot.discount_type ==  'amount'){
-                    total = t.pivot.manhour_total * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
+                    total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
                     subtotal = subtotal + total;
                     
                 }
                 else if(t.pivot.discount_type == 'percentage'){
-                    total = t.pivot.manhour_total * t.pivot.manhour_rate + 138 - (((t.pivot.manhour_total * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
+                    total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + 138 - (((t.total_manhours_with_performance_factor * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
                     subtotal = subtotal + total;
                 }
             }
