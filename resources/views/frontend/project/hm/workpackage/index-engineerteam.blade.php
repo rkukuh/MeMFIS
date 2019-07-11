@@ -53,9 +53,7 @@
                                     <div class="tab-pane active show" id="m_tabs_enginner" role="tabpanel">
                                         @include('frontend.project.hm.engineer.index')
                                     </div>
-
-                                    @include('frontend.project.hm.modal.material.eo')
-                                    @include('frontend.project.hm.modal.tool.eo')
+                                    
                                     @include('frontend.project.hm.modal.material.routine-si')
                                     @include('frontend.project.hm.modal.tool.routine-si')
                                     @include('frontend.project.hm.modal.sequence')
