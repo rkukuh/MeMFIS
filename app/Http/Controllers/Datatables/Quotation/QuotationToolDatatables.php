@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\ListUtil;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
+use App\Models\QuotationWorkPackageTaskCardItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
