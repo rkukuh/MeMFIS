@@ -30,7 +30,7 @@ return [
         'quotation' => [
             'workpackage' => [
                 'taskcard' => [
-                    'items' => 15,
+                    'items' => 150,
                 ]
             ]
         ],
