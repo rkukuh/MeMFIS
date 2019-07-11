@@ -204,8 +204,7 @@ class FillComboxController extends Controller
      */
     public function taskcard()
     {
-        $taskcards = Category::ofItem()
-                              ->pluck('name', 'id');
+        $taskcards = TaskCard::selectRaw('uuid, CONCAT(number, " | ", title) as title')->pluck('title', 'uuid');
 
         return json_encode($taskcards);
 
