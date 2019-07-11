@@ -19,7 +19,7 @@ class QuotationDatatables extends Controller
      */
     public function index()
     {
-        $quotations = Quotation::with('customer','project')->get();
+        $quotations = Quotation::with('project')->get();
 
         foreach($quotations as $quotation){
             if(!empty($quotation->approvals->toArray())){
@@ -28,6 +28,7 @@ class QuotationDatatables extends Controller
                 $quotation->status .= '';
 
             }
+            $quotation->customer = $quotation->project->customer;
         }
         $data = $alldata = json_decode($quotations);
 
