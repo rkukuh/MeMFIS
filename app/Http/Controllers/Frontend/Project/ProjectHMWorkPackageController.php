@@ -103,6 +103,7 @@ class ProjectHMWorkPackageController extends Controller
         $materialCount = $workPackage->items->count();
         $toolCount = $workPackage->tools->count();
 
+        // dd($project_workpackage);
         if ($request->anyChanges) {
             $view = 'frontend.project.hm.workpackage.index-engineerteam';
         }else{
@@ -121,7 +122,7 @@ class ProjectHMWorkPackageController extends Controller
             'materialCount' => $materialCount,
             'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
             'total_pfrm_factor' => $total_pfrm_factor,
-            'project_workpackage' => $project_workpackage,
+            'project_workpackage' => $project_workpackage
         ]);
     }
 
@@ -294,7 +295,7 @@ class ProjectHMWorkPackageController extends Controller
             'deleted_at' => Carbon::now()
         ]);
 
-        return response()->json($project_workpackage);
+        return response()->json($project);
     }
 
     /**
