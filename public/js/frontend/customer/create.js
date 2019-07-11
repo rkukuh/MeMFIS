@@ -176,6 +176,7 @@ let Customer = {
                         });
 
                         // window.location.href = '/customer/' + data.uuid + '/edit';
+                        window.location.href = '/customer';
 
                     }
                 }
