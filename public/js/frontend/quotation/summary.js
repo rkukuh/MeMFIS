@@ -21,7 +21,7 @@ var DatatableAutoColumnHideDemo = function () {
               if (typeof raw.data !== 'undefined') {
                 dataSet = raw.data;
               }
-
+              console.log(dataSet);
               return dataSet;
             }
           }
@@ -70,12 +70,12 @@ var DatatableAutoColumnHideDemo = function () {
             if(currency == 1){
               return (t.pivot.description + '<br>' +
                 '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x ' + IDRformatter.format(t.pivot.manhour_rate) + '<br>' +
-                '- Material Price'
+                '- Facility Price : '
               );
             }else{
               return (t.pivot.description + '<br>' +
                 '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x $ ' + USDformatter.format(t.pivot.manhour_rate) + '<br>' +
-                '- Material Price'
+                '- Facility Price : '
               );
             }
           }
