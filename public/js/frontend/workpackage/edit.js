@@ -39,6 +39,19 @@ let Workpackage = {
 
         });
 
+
+        $('.b-t-n').on('click', '.btn-add', function () {
+            if($("#predecessorBtn").length == 0) {
+              } else {
+                $('.add-predecessor-modal').remove();
+              }
+            if($("#successorBtn").length == 0) {
+              } else {
+                $('.add-successor-modal').remove();
+              }
+        });
+
+
         let triggeruuid ="";
         let material_datatables_init = true;
         let tool_datatables_init = true;

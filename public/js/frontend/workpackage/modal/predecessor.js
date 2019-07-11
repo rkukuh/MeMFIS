@@ -38,7 +38,7 @@ function predecessor_tc(triggeruuid) {
 
             ]
         })
-        $('<button type="button" data-toggle="modal" data-target="#add_modal_predecessor" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm add-predecessor-modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.modal-body .dataTables_filter');
+        $('<button type="button" data-toggle="modal" data-target="#add_modal_predecessor" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm add-predecessor-modal" id="predecessorBtn" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.modal-body .dataTables_filter');
 
         $('.dataTable').on('click', '.delete-predecessor', function () {
             let triggeruuid = $(this).data('uuid');
