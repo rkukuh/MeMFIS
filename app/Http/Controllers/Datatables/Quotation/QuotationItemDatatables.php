@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Datatables\Quotation;
 
 use App\Models\ListUtil;
 use App\Models\WorkPackage;
+use App\Models\Quotation;
+use App\Models\QuotationWorkPackageTaskCardItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,10 +16,11 @@ class QuotationItemDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function routine(WorkPackage $workPackage)
+    public function routine(Quotation $quotation, WorkPackage $workPackage)
     {
-        $materials = [];
-
+        $routinematerials = $materials = [];
+        
+        // Get Items from routine taskcards -
         $taskcards = $workPackage->taskcards()->with('type')
         ->whereHas('type', function ($query) {
             $query->where('of', 'taskcard-type-routine');
@@ -29,11 +32,24 @@ class QuotationItemDatatables extends Controller
                 array_push($materials, $item);
             }
         }
+        // -Get Items from routine taskcards 
+
+        foreach($materials as $material){
+            $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
+            ->where('quotation_id', $quotation->id)
+            ->where('item_id', $material->id)
+            ->get();
+            if(sizeof($items) > 0){
+                foreach($items as $item){
+                    array_push($routinematerials, $item);
+                }
+            }
+        }
 
         // if( empty($materials) ){
         //     $materials = null;
         // }
-        $data = $alldata = $materials;
+        $data = $alldata = $routinematerials;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -127,10 +143,11 @@ class QuotationItemDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function non_routine(WorkPackage $workPackage)
+    public function non_routine(Quotation $quotation, WorkPackage $workPackage)
     {
-        $materials = [];
+        $nonroutinematerials = $materials = [];
 
+        // Get Items from non-routine taskcards -
         $taskcards = $workPackage->taskcards()->with('type')
         ->whereHas('type', function ($query) {
             $query->where('of', 'taskcard-type-non-routine');
@@ -142,8 +159,21 @@ class QuotationItemDatatables extends Controller
                 array_push($materials, $item);
             }
         }
+        // -Get Items from non-routine taskcards 
 
-        $data = $alldata = $materials;
+        foreach($materials as $material){
+            $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
+            ->where('quotation_id', $quotation->id)
+            ->where('item_id', $material->id)
+            ->get();
+            if(sizeof($items) > 0){
+                foreach($items as $item){
+                    array_push($nonroutinematerials, $item);
+                }
+            }
+        }
+
+        $data = $alldata = $nonroutinematerials;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
