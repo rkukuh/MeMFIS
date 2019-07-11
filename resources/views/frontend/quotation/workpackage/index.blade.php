@@ -43,6 +43,7 @@
                                     </div>
                                     <div class="tab-pane" id="m_tabs_tool_material" role="tabpanel">
                                         @include('frontend.quotation.item.index')
+                                        @include('frontend.quotation.workpackage.modal')
                                     </div>
                                     <div class="tab-pane" id="m_tabs_facility" role="tabpanel">
                                         @include('frontend.quotation.facility.index')

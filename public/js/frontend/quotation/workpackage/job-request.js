@@ -46,60 +46,47 @@ let JobRequest = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
+                    field: 'tc',
+                    title: 'TaskCard',
+                    sortable: !1,
+                },
+                {
                     field: 'code',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'name',
+                    field: 'title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
+                    field: 'quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit.name',
+                    field: 'unit_material',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
 
                 },
                 {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'unit_price',
+                    field: 'unitPrice',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return '100000';
-                    }
                 },
                 {
-                    field: 'selling_price',
+                    field: 'price',
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="number" style="width:100px;">');
-
-                    }
                 },
                 {
                     field: 'sub_total',
@@ -107,7 +94,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return t.pivot.quantity*100000;
+                        return t.quantity*t.price;
                     }
                 },
                 {
@@ -115,22 +102,20 @@ let JobRequest = {
                     title: 'Marketing Notes',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="text" style="width:100px;">');
-                    }
+                    width:150,
                 },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
-                //                 '<i class="la la-trash"></i>' +
-                //             '</a>'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
@@ -177,59 +162,46 @@ let JobRequest = {
                     }
                 }
             },
-            columns: [{
-                    field: 'code',
+            columns: [
+                {
+                    field: 'tc',
+                    title: 'TaskCard',
+                    sortable: !1,
+                },
+                {
+                    field: 'pn',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'name',
+                    field: 'title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
+                    field: 'quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit.name',
+                    field: 'unit_tool',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'unit_price',
+                    field: 'unitPrice',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return '100000';
-                    }
                 },
                 {
-                    field: 'selling_price',
+                    field: 'price_amount',
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="number">');
-
-                    }
                 },
                 {
                     field: 'sub_total',
@@ -237,9 +209,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        total = total+t.pivot.quantity*100000;
-
-                        return t.pivot.quantity*100000;
+                        return t.quantity*t.price_amount;
                     }
                 },
                 {
@@ -247,22 +217,21 @@ let JobRequest = {
                     title: 'Marketing Notes',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="text">');
-                    }
+                    width:150,
+
                 },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                //                 '<i class="la la-trash"></i>' +
-                //             '</a>'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
@@ -309,59 +278,46 @@ let JobRequest = {
                     }
                 }
             },
-            columns: [{
-                    field: 'code',
+            columns: [
+                {
+                    field: 'tc',
+                    title: 'TaskCard',
+                    sortable: !1,
+                },
+                {
+                    field: 'pn',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'name',
+                    field: 'title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
+                    field: 'quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit.name',
+                    field: 'unit_tool',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'unit_price',
+                    field: 'unitPrice',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return '100000';
-                    }
                 },
                 {
-                    field: 'selling_price',
+                    field: 'price',
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="number">');
-
-                    }
                 },
                 {
                     field: 'sub_total',
@@ -369,9 +325,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        total = total+t.pivot.quantity*100000;
-
-                        return t.pivot.quantity*100000;
+                        return t.quantity*t.price;
                     }
                 },
                 {
@@ -379,22 +333,20 @@ let JobRequest = {
                     title: 'Marketing Notes',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="text">');
-                    }
+                    width:150,
                 },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                //                 '<i class="la la-trash"></i>' +
-                //             '</a>'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
@@ -441,60 +393,47 @@ let JobRequest = {
                     }
                 }
             },
-            columns: [{
-                    field: 'code',
+            columns: [
+                {
+                    field: 'tc',
+                    title: 'TaskCard',
+                    sortable: !1,
+                },
+                {
+                    field: 'pn',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'name',
+                    field: 'title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
+                    field: 'quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit.name',
+                    field: 'unit_material',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
 
                 },
                 {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'unit_price',
+                    field: 'unitPrice',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return '100000';
-                    }
                 },
                 {
-                    field: 'selling_price',
+                    field: 'price',
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="number" style="width:100px;">');
-
-                    }
                 },
                 {
                     field: 'sub_total',
@@ -502,7 +441,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return t.pivot.quantity*100000;
+                        return t.quantity*t.price;
                     }
                 },
                 {
@@ -510,26 +449,24 @@ let JobRequest = {
                     title: 'Marketing Notes',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="text" style="width:100px;">');
-                    }
+                    width:150,
                 },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
-                //                 '<i class="la la-trash"></i>' +
-                //             '</a>'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
-        
+
 
         $('.action-buttons').on('click', '.add-job-request', function() {
 

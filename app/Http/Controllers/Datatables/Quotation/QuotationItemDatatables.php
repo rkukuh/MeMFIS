@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Datatables\Quotation;
 
+use App\Models\Unit;
+use App\Models\Item;
+use App\Models\TaskCard;
 use App\Models\ListUtil;
 use App\Models\WorkPackage;
 use App\Models\Quotation;
@@ -19,7 +22,7 @@ class QuotationItemDatatables extends Controller
     public function routine(Quotation $quotation, WorkPackage $workPackage)
     {
         $routinematerials = $materials = [];
-        
+
         // Get Items from routine taskcards -
         $taskcards = $workPackage->taskcards()->with('type')
         ->whereHas('type', function ($query) {
@@ -32,7 +35,7 @@ class QuotationItemDatatables extends Controller
                 array_push($materials, $item);
             }
         }
-        // -Get Items from routine taskcards 
+        // -Get Items from routine taskcards
 
         foreach($materials as $material){
             $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
@@ -46,9 +49,14 @@ class QuotationItemDatatables extends Controller
             }
         }
 
-        // if( empty($materials) ){
-        //     $materials = null;
-        // }
+        foreach($routinematerials as $routinematerial){
+            $routinematerial->tc .= TaskCard::find($routinematerial->taskcard_id)->number;
+            $routinematerial->pn .= Item::find($routinematerial->item_id)->code;
+            $routinematerial->title .= Item::find($routinematerial->item_id)->name;
+            $routinematerial->unit_material .= Unit::find($routinematerial->unit_id)->name;
+            $routinematerial->unitPrice .= null;
+        }
+
         $data = $alldata = $routinematerials;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -159,7 +167,7 @@ class QuotationItemDatatables extends Controller
                 array_push($materials, $item);
             }
         }
-        // -Get Items from non-routine taskcards 
+        // -Get Items from non-routine taskcards
 
         foreach($materials as $material){
             $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
@@ -171,6 +179,14 @@ class QuotationItemDatatables extends Controller
                     array_push($nonroutinematerials, $item);
                 }
             }
+        }
+
+        foreach($nonroutinematerials as $nonroutinematerial){
+            $nonroutinematerial->tc .= TaskCard::find($nonroutinematerial->taskcard_id)->number;
+            $nonroutinematerial->pn .= Item::find($nonroutinematerial->item_id)->code;
+            $nonroutinematerial->title .= Item::find($nonroutinematerial->item_id)->name;
+            $nonroutinematerial->unit_material .= Unit::find($nonroutinematerial->unit_id)->name;
+            $nonroutinematerial->unitPrice .= null;
         }
 
         $data = $alldata = $nonroutinematerials;

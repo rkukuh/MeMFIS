@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Datatables\Quotation;
 
+use App\Models\Unit;
 use App\Models\Item;
+use App\Models\TaskCard;
 use App\Models\ListUtil;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
@@ -20,7 +22,7 @@ class QuotationToolDatatables extends Controller
     public function routine(Quotation $quotation, WorkPackage $workPackage)
     {
         $tools = $routinetools = [];
-        
+
         // Get tools from non-routine taskcards -
         $taskcards = $workPackage->taskcards()->with('type')
         ->whereHas('type', function ($query) {
@@ -33,7 +35,7 @@ class QuotationToolDatatables extends Controller
                 array_push($tools, $item);
             }
         }
-        // -Get tools from non-routine taskcards 
+        // -Get tools from non-routine taskcards
 
         foreach($tools as $tool){
             $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
@@ -46,6 +48,15 @@ class QuotationToolDatatables extends Controller
                 }
             }
         }
+
+        foreach($routinetools as $routinetool){
+            $routinetool->tc .= TaskCard::find($routinetool->taskcard_id)->number;
+            $routinetool->pn .= Item::find($routinetool->item_id)->code;
+            $routinetool->title .= Item::find($routinetool->item_id)->name;
+            $routinetool->unit_tool .= Unit::find($routinetool->unit_id)->name;
+            $routinetool->unitPrice .= null;
+        }
+
 
         $data = $alldata = $routinetools;
 
@@ -157,7 +168,7 @@ class QuotationToolDatatables extends Controller
                 array_push($tools, $item);
             }
         }
-        // -Get tools from non-routine taskcards 
+        // -Get tools from non-routine taskcards
 
         foreach($tools as $tool){
             $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
@@ -170,6 +181,15 @@ class QuotationToolDatatables extends Controller
                 }
             }
         }
+
+        foreach($nonroutinetools as $nonroutinetool){
+            $nonroutinetool->tc .= TaskCard::find($nonroutinetool->taskcard_id)->number;
+            $nonroutinetool->pn .= Item::find($nonroutinetool->item_id)->code;
+            $nonroutinetool->title .= Item::find($nonroutinetool->item_id)->name;
+            $nonroutinetool->unit_tool .= Unit::find($nonroutinetool->unit_id)->name;
+            $nonroutinetool->unitPrice .= null;
+        }
+
 
         $data = $alldata = $nonroutinetools;
 
