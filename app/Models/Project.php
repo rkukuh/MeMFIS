@@ -161,6 +161,7 @@ class Project extends MemfisModel
                         'total_manhours',
                         'total_manhours_with_performance_factor'
                     )
+                    ->wherePivot('deleted_at', null)
                     ->withTimestamps();
     }
 }

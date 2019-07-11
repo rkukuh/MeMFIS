@@ -255,12 +255,12 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{quotation}/workpackage/{workPackage}/facilities', 'QuotationDatatables@facilities')->name('all-facilities');
 
                 /** Item */
-                Route::get('/{workPackage}/item/routine', 'QuotationItemDatatables@routine')->name('item.routine');
-                Route::get('/{workPackage}/item/non-routine', 'QuotationItemDatatables@non_routine')->name('item.non_routine');
+                Route::get('/{quotation}/workPackage/{workPackage}/item/routine', 'QuotationItemDatatables@routine')->name('item.routine');
+                Route::get('/{quotation}/workPackage/{workPackage}/item/non-routine', 'QuotationItemDatatables@non_routine')->name('item.non_routine');
 
                 /** Tool */
-                Route::get('/{workPackage}/tool/routine', 'QuotationToolDatatables@routine')->name('tool.routine');
-                Route::get('/{workPackage}/tool/non-routine', 'QuotationToolDatatables@non_routine')->name('tool.non_routine');
+                Route::get('/{quotation}/workPackage/{workPackage}/tool/routine', 'QuotationToolDatatables@routine')->name('tool.routine');
+                Route::get('/{quotation}/workPackage/{workPackage}/tool/non-routine', 'QuotationToolDatatables@non_routine')->name('tool.non_routine');
 
             });
 

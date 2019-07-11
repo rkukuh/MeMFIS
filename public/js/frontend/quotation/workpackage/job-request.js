@@ -9,7 +9,7 @@ let JobRequest = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation/'+workPackage_uuid+'/item/routine',
+                        url: '/datatables/quotation/'+quotation_uuid+'/workPackage/'+workPackage_uuid+'/item/routine',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -140,7 +140,7 @@ let JobRequest = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation/'+workPackage_uuid+'/tool/routine',
+                        url: '/datatables/quotation/'+quotation_uuid+'/workPackage/'+workPackage_uuid+'/tool/routine',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -272,7 +272,7 @@ let JobRequest = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation/'+workPackage_uuid+'/tool/non-routine',
+                        url: '/datatables/quotation/'+quotation_uuid+'/workPackage/'+workPackage_uuid+'/tool/non-routine',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -404,7 +404,7 @@ let JobRequest = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation/'+workPackage_uuid+'/item/non-routine',
+                        url: '/datatables/quotation/'+quotation_uuid+'/workPackage/'+workPackage_uuid+'/item/non-routine',
                         map: function (raw) {
                             let dataSet = raw;
 
