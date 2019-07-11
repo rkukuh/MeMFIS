@@ -169,6 +169,7 @@ class QuotationToolDatatables extends Controller
             }
         }
         // -Get tools from non-routine taskcards
+        // dd($tools);
 
         foreach($tools as $tool){
             $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)

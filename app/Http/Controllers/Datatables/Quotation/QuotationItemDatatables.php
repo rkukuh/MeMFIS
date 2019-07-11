@@ -160,7 +160,6 @@ class QuotationItemDatatables extends Controller
         ->whereHas('type', function ($query) {
             $query->where('of', 'taskcard-type-non-routine');
         })->get();
-
         foreach($taskcards as $taskcard){
             $items = $taskcard->materials;
             foreach($items as $item){
@@ -168,7 +167,6 @@ class QuotationItemDatatables extends Controller
             }
         }
         // -Get Items from non-routine taskcards
-
         foreach($materials as $material){
             $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
             ->where('quotation_id', $quotation->id)

@@ -17,7 +17,7 @@ let JobRequest = {
                                 dataSet = raw.data;
                             }
 
-                            console.log(dataSet);
+                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -133,7 +133,7 @@ let JobRequest = {
                                 dataSet = raw.data;
                             }
 
-                            console.log(dataSet);
+                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -249,7 +249,7 @@ let JobRequest = {
                                 dataSet = raw.data;
                             }
 
-                            console.log(dataSet);
+                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -364,7 +364,7 @@ let JobRequest = {
                                 dataSet = raw.data;
                             }
 
-                            console.log(dataSet);
+                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -567,6 +567,20 @@ let JobRequest = {
 
                         table.originalDataSet = [];
                         table.reload();
+
+                        table = $('.routine_materials_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.non_routine_tools_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.non_routine_materials_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
                     }
                 }
             });
@@ -625,58 +639,113 @@ let JobRequest = {
             });
         });
 
-        $('.modal-footer').on('click', '.add-item-price', function () {
-            let quantity = $('input[name=qty]').val();
-            let price_amount = $('input[name=price]').val();
-            let unit_id =$('#unit_id').val();
-            let note =$('#note').val();
-            let triggerid = $('input[name=uuid]').val();
+        $('.non_routine_materials_datatable').on('click','.edit-item-price', function edit () {
+            // save_changes_button();
 
+            let triggerid = $(this).data('uuid');
+            // alert(triggerid);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: 'put',
-                url: '/qtn-wp-tc-item/' + triggerid,
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    quantity: quantity,
-                    unit_id: unit_id,
-                    price_amount: price_amount,
-                    note: note
-                },
+                type: 'get',
+                url: '/qtn-wp-tc-item/' + triggerid + '/edit',
                 success: function (data) {
-                    if (data.errors) {
-                        // if (data.errors.name) {
-                        //     $('#name-error').html(data.errors.name[0]);
+                    document.getElementById('uuid').value = data.uuid;
+                    document.getElementById('qty').value = data.quantity;
+                    document.getElementById('price').value = data.price_amount;
+                    document.getElementById('note').value = data.note;
+                    $.ajax({
+                        url: '/get-units/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (unit) {
+                            $('select[name="unit_id"]').empty();
 
-                        // }
-                        // if (data.errors.symbol) {
-                        //     $('#symbol-error').html(data.errors.symbol[0]);
+                            $.each(unit, function (key, value) {
+                                if(key == data.unit_id){
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '" selected>' + value + '</option>'
+                                    );
+                                }
+                                else{
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '">' + value + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
 
-                        // }
-                        // if (data.errors.type) {
-                        //     $('#type-error').html(data.errors.type[0]);
+                    // $('.btn-success').addClass('update');
+                    // $('.btn-success').removeClass('add');
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    // this are default for ajax errors
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
 
-                        // }
-
-                    } else {
-                        // save_changes_button();
-                        // unit_reset();
-                        $('#modal_item_price').modal('hide');
-
-                        toastr.success('Selling Price has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
-
-                        let table = $('.routine_materials_datatable').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
+                    $.each(errors.errors, function (index, value) {
+                        $('#kategori-error').html(value);
+                    });
                 }
             });
         });
+
+        $('.non_routine_tools_datatable').on('click','.edit-item-price', function edit () {
+            // save_changes_button();
+
+            let triggerid = $(this).data('uuid');
+            // alert(triggerid);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/qtn-wp-tc-item/' + triggerid + '/edit',
+                success: function (data) {
+                    document.getElementById('uuid').value = data.uuid;
+                    document.getElementById('qty').value = data.quantity;
+                    document.getElementById('price').value = data.price_amount;
+                    document.getElementById('note').value = data.note;
+                    $.ajax({
+                        url: '/get-units/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (unit) {
+                            $('select[name="unit_id"]').empty();
+
+                            $.each(unit, function (key, value) {
+                                if(key == data.unit_id){
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '" selected>' + value + '</option>'
+                                    );
+                                }
+                                else{
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '">' + value + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
+
+                    // $('.btn-success').addClass('update');
+                    // $('.btn-success').removeClass('add');
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    // this are default for ajax errors
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#kategori-error').html(value);
+                    });
+                }
+            });
+        });
+
+
 
         $('.action-buttons').on('click', '.add-job-request', function() {
 
