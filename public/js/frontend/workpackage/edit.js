@@ -39,6 +39,19 @@ let Workpackage = {
 
         });
 
+
+        $('.b-t-n').on('click', '.btn-add', function () {
+            if($("#predecessorBtn").length == 0) {
+              } else {
+                $('.add-predecessor-modal').remove();
+              }
+            if($("#successorBtn").length == 0) {
+              } else {
+                $('.add-successor-modal').remove();
+              }
+        });
+
+
         let triggeruuid ="";
         let material_datatables_init = true;
         let tool_datatables_init = true;
@@ -59,6 +72,40 @@ let Workpackage = {
                 triggeruuid = $(this).data('uuid');
                 material_tc(triggeruuid);
                 $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
+            }
+        });
+        $('.basic_datatable').on('click', '.predecessor', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#predecessor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+        });
+        $('.basic_datatable').on('click', '.successor', function () {
+            if(successor_datatables_init == true){
+                successor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#successor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
             }
         });
 
@@ -176,14 +223,6 @@ let Workpackage = {
         });
 
         //SIP taskcard Datatable
-        $('.sip_datatable').on('click', '.sequence', function () {
-            triggeruuid = $(this).data('uuid');
-            sequence = $(this).data('sequence');
-
-            document.getElementById('uuid').value = triggeruuid;
-            document.getElementById('sequence').value = sequence;
-
-        });
         $('.sip_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
                 material_datatables_init = false;
@@ -199,7 +238,49 @@ let Workpackage = {
                 $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
         });
+        $('.sip_datatable').on('click', '.predecessor', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#predecessor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+        });
+        $('.sip_datatable').on('click', '.successor', function () {
+            if(successor_datatables_init == true){
+                successor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#successor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+        });
 
+        $('.sip_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
         $('.sip_datatable').on('click', '.tool', function () {
             if(tool_datatables_init == true){
                 tool_datatables_init = false;
@@ -262,6 +343,40 @@ let Workpackage = {
             document.getElementById('uuid').value = triggeruuid;
             document.getElementById('sequence').value = sequence;
 
+        });
+        $('.cpcp_datatable').on('click', '.predecessor', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#predecessor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+        });
+        $('.cpcp_datatable').on('click', '.successor', function () {
+            if(successor_datatables_init == true){
+                successor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#successor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
         });
         $('.cpcp_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
@@ -341,7 +456,40 @@ let Workpackage = {
             document.getElementById('sequence').value = sequence;
 
         });
-
+        $('.ad-sb_datatable').on('click', '.predecessor', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#predecessor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+        });
+        $('.ad-sb_datatable').on('click', '.successor', function () {
+            if(successor_datatables_init == true){
+                successor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#successor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+        });
         $('.ad-sb_datatable').on('click', '.mandatory', function () {
             triggeruuid = $(this).data('uuid');
             mandatory = $(this).data('mandatory');
@@ -388,7 +536,40 @@ let Workpackage = {
             document.getElementById('sequence').value = sequence;
 
         });
-
+        $('.cmr-awl_datatable').on('click', '.predecessor', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#predecessor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+        });
+        $('.cmr-awl_datatable').on('click', '.successor', function () {
+            if(successor_datatables_init == true){
+                successor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#successor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+        });
         $('.cmr-awl_datatable').on('click', '.mandatory', function () {
             triggeruuid = $(this).data('uuid');
             mandatory = $(this).data('mandatory');
@@ -434,6 +615,40 @@ let Workpackage = {
             document.getElementById('uuid').value = triggeruuid;
             document.getElementById('sequence').value = sequence;
 
+        });
+        $('.si_datatable').on('click', '.predecessor', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#predecessor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+        });
+        $('.si_datatable').on('click', '.successor', function () {
+            if(successor_datatables_init == true){
+                successor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#successor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
         });
         $('.si_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
