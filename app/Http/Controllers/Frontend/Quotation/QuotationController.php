@@ -368,10 +368,30 @@ class QuotationController extends Controller
                 $totalCharge =  $totalCharge +  $charge->amount;
             }
         }
+
+        $workpackages = $quotation->workpackages;
+        $wp_id = [];
+        foreach($workpackages as $workPackage){
+            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+            ->where('workpackage_id',$workPackage->id)
+            ->first();
+            $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
+
+            if($project_workpackage){
+            $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
+            ->with('facility')
+            ->sum('price_amount');
+            $workPackage->facilities_price_amount = $ProjectWorkPackageFacility;
+
+            $workPackage->mat_tool_price = QuotationWorkPackageTaskCardItem::where('quotation_id',$quotation->id)->where('workpackage_id',$workPackage->id)->sum('subtotal');
+            }
+        }
+
         // dd($totalCharge);
         $pdf = \PDF::loadView('frontend/form/quotation',[
                 'username' => $username,
                 'quotation' => $quotation,
+                'workpackages' => $workpackages,
                 'totalCharge' => $totalCharge,
                 'attention' => json_decode($quotation->attention)
                 ]);

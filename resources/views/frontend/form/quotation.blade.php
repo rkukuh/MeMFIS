@@ -113,7 +113,7 @@
 
 
     footer .num:after { content: counter(page); }
-    
+
 </style>
 <body>
 
@@ -159,7 +159,7 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{$quotation->customer->name}}
+                        {{$quotation->project->customer->name}}
                     </td>
                     <td width="33%" rowspan="5" align="center">
                             <div class="barcode">
@@ -303,7 +303,7 @@
                         //     $total = $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138 - ((($jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138)*$jobRequest[$a]->pivot->discount_value)/100);
                         //     $subtotal = $subtotal + $jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138 - ((($jobRequest[$a]->pivot->manhour_total * $jobRequest[$a]->pivot->manhour_rate + 138)*$jobRequest[$a]->pivot->discount_value)/100);
                         // }
-                        
+
                     }
                     @endphp
                     <tr>
@@ -323,7 +323,7 @@
                         <td width="8%" align="center" valign="top"></td>
                         <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$a]->pivot->manhour_total}} x {{ number_format($jobRequest[$a]->pivot->manhour_rate) }}</td>
                         <td width="16%" align="center" valign="top"> {{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->pivot->manhour_total*$jobRequest[$a]->pivot->manhour_rate) }}</td>
-                        
+
                         @if($jobRequest[$a]->pivot->discount_value == null && $jobRequest[$a]->pivot->discount_type == null)
                         <td width="17%" align="center" valign="top"></td>
                         @else
@@ -448,7 +448,7 @@
                                     {{$jobRequest[$b]->pivot->description}}
                                 @else
                                     No Description
-                                @endif    
+                                @endif
                             </td>
                             <td width="16%" align="center" valign="top"></td>
                             <td width="17%" align="center" valign="top"></td>
@@ -458,7 +458,7 @@
                             <td width="8%" align="center" valign="top"></td>
                             <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$b]->pivot->manhour_total}} x {{ number_format($jobRequest[$b]->pivot->manhour_rate)}}</td>
                             <td width="16%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$b]->pivot->manhour_total*$jobRequest[$b]->pivot->manhour_rate)}}</td>
-                            
+
                             @if($jobRequest[$b]->pivot->discount_value == null && $jobRequest[$a]->pivot->discount_type == null)
                             <td width="17%" align="center" valign="top"></td>
                             @else
