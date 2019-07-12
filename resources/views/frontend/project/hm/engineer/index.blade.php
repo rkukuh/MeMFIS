@@ -1,3 +1,6 @@
+{{-- @if(!empty($project_workpackage->engineers))
+    {{ dd("onok") }}
+@endif --}}
 <div class="form-group m-form__group row px-4 pb-4">
     <div class="col-sm-12 col-md-12 col-lg-12">
         @if(in_array('Airframe',$engineer_skills))
@@ -25,7 +28,9 @@
                         @slot('class', 'engineer_qty')
                         @slot('id_error', 'airframe_qty')
                         @slot('input_append', 'person')
+                        @if(!empty($engineer))
                         @slot('value', $engineer->quantity)
+                        @endif
                         @slot('min',0)
                     @endcomponent
                 </div>
@@ -82,7 +87,9 @@
                         @slot('class', 'engineer_qty')
                         @slot('id_error', 'powerplant_qty')
                         @slot('input_append', 'person')
+                        @if(!empty($engineer))
                         @slot('value', $engineer->quantity)
+                        @endif
                         @slot('min',0)
                     @endcomponent
                 </div>
@@ -139,7 +146,9 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'electrical_qty')
                             @slot('input_append', 'person')
+                            @if(!empty($engineer))
                             @slot('value', $engineer->quantity)
+                            @endif
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -196,7 +205,9 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'radio_qty')
                             @slot('input_append', 'person')
+                            @if(!empty($engineer))
                             @slot('value', $engineer->quantity)
+                            @endif
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -218,7 +229,9 @@
                         @slot('class', 'engineer_qty')
                         @slot('id_error', 'radio_qty')
                         @slot('input_append', 'person')
+                        @if(!empty($engineer))
                         @slot('value', $engineer->quantity)
+                        @endif
                         @slot('min',0)
                     @endcomponent
                 </div>
@@ -254,7 +267,9 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'instrument_qty')
                             @slot('input_append', 'person')
+                            @if(!empty($engineer))
                             @slot('value', $engineer->quantity)
+                            @endif
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -311,7 +326,9 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'cabin_qty')
                             @slot('input_append', 'person')
+                            @if(!empty($engineer))
                             @slot('value', $engineer->quantity)
+                            @endif
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -367,7 +384,9 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'runup_qty')
                             @slot('input_append', 'person')
+                            @if(!empty($engineer))
                             @slot('value', $engineer->quantity)
+                            @endif
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -424,7 +443,9 @@
                             @slot('name', 'repair_qty')
                             @slot('id_error', 'repair_qty')
                             @slot('input_append', 'person')
+                            @if(!empty($engineer))
                             @slot('value', $engineer->quantity)
+                            @endif
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -446,7 +467,9 @@
                     @slot('class', 'engineer_qty')
                     @slot('id_error', 'repair_qty')
                     @slot('input_append', 'person')
+                    @if(!empty($engineer))
                     @slot('value', $engineer->quantity)
+                    @endif
                     @slot('min',0)
                 @endcomponent
             </div>
@@ -482,7 +505,9 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'repainting_qty')
                             @slot('input_append', 'person')
+                            @if(!empty($engineer))
                             @slot('value', $engineer->quantity)
+                            @endif
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -539,7 +564,9 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'ndi_ndt_qty')
                             @slot('input_append', 'person')
+                            @if(!empty($engineer))
                             @slot('value', $engineer->quantity)
+                            @endif
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -561,7 +588,9 @@
                     @slot('class', 'engineer_qty')
                     @slot('id_error', 'ndi_ndt_qty')
                     @slot('input_append', 'person')
+                    @if(!empty($engineer))
                     @slot('value', $engineer->quantity)
+                    @endif
                     @slot('min',0)
                 @endcomponent
             </div>
