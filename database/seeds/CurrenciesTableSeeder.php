@@ -25,12 +25,12 @@ class CurrenciesTableSeeder extends Seeder
 
         for($index=0; $index < sizeof($name) ; $index++){
             Currency::create([
-                'code'   => $name[$index],
-                'name'   => $code[$index],
+                'code'   => strtolower($code[$index]),
+                'name'   => $name[$index],
                 'symbol' => $symbol[$index],
             ]);
         }
-        
+
         // Currency::create([
         //     'code'   => 'idr',
         //     'name'   => 'Rupiah',
