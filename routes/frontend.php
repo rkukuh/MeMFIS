@@ -86,7 +86,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/jobcard-eo-ppc', 'frontend.job-card-eo-ppc.index')->name('jobcard-eo.ppc.index');
 
         /** Work Progress Report */
-        
+
         Route::view('/work-progress-report', 'frontend.work-progress-report.index')->name('work-progress-report.index');
         Route::view('/work-progress-report/show', 'frontend.work-progress-report.show')->name('work-progress-report.show');
 
@@ -107,6 +107,11 @@ Route::name('frontend.')->group(function () {
          Route::view('/purchase-request/project/create', 'frontend.purchase-request.project.create')->name('purchase-request.project.create');
          Route::view('/purchase-request/project/edit', 'frontend.purchase-request.project.edit')->name('purchase-request.project.edit');
          Route::view('/purchase-request/project/show', 'frontend.purchase-request.project.show')->name('purchase-request.project.show');
+
+        /** QUOTATION's WORKPACKAGE's TASKCARD's */
+
+         Route::resource('qtn-wp-tc-item', 'QuotationWorkPackageTaskCardItemController');
+
     });
 
 });

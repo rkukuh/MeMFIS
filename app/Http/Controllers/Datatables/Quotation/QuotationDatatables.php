@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Datatables\Quotation;
 
-use App\Models\Pivots\ProjectWorkPackage;
-use App\Models\ProjectWorkPackageFacility;
 use App\Models\ListUtil;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
+use App\Models\Pivots\ProjectWorkPackage;
+use App\Models\ProjectWorkPackageFacility;
+use App\Models\QuotationWorkPackageTaskCardItem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -126,7 +127,26 @@ class QuotationDatatables extends Controller
      */
     public function jobRequest(Quotation $quotation)
     {
-        $data = $alldata = json_decode($quotation->workpackages);
+        $workpackages = $quotation->workpackages;
+        $wp_id = [];
+        foreach($workpackages as $workPackage){
+            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+            ->where('workpackage_id',$workPackage->id)
+            ->first();
+            $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
+            
+            if($project_workpackage){            
+            $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
+            ->with('facility')
+            ->sum('price_amount');
+            $workPackage->facilities_price_amount = $ProjectWorkPackageFacility;
+
+            $workPackage->mat_tool_price = QuotationWorkPackageTaskCardItem::where('quotation_id',$quotation->id)->where('workpackage_id',$workPackage->id)->sum('subtotal');
+            }
+        }
+
+        
+        $data = $alldata = json_decode($workpackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

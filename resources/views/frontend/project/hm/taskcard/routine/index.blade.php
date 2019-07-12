@@ -29,9 +29,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-6 order-1 order-xl-2 m--align-right">
+                                <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
                                     @component('frontend.common.buttons.create-new')
                                         @slot('text', 'Basic')
+                                        @slot('class', 'btn-add')
                                         @slot('data_target', '#modal_basic')
                                     @endcomponent
                                     @component('frontend.common.buttons.summary')
@@ -79,9 +80,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-6 order-1 order-xl-2 m--align-right">
+                                <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
                                     @component('frontend.common.buttons.create-new')
                                         @slot('text', 'SIP')
+                                        @slot('class', 'btn-add')
                                         @slot('data_target', '#modal_sip')
                                     @endcomponent
                                     @component('frontend.common.buttons.summary')
@@ -131,9 +133,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-6 order-1 order-xl-2 m--align-right">
+                            <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
                                 @component('frontend.common.buttons.create-new')
                                     @slot('text', 'CPCP')
+                                    @slot('class', 'btn-add')
                                     @slot('data_target', '#modal_cpcp')
                                 @endcomponent
                                 @component('frontend.common.buttons.summary')

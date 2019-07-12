@@ -43,6 +43,7 @@
                                     </div>
                                     <div class="tab-pane" id="m_tabs_tool_material" role="tabpanel">
                                         @include('frontend.quotation.item.index')
+                                        @include('frontend.quotation.workpackage.modal')
                                     </div>
                                     <div class="tab-pane" id="m_tabs_facility" role="tabpanel">
                                         @include('frontend.quotation.facility.index')
@@ -67,4 +68,7 @@
         let quotation_uuid = '{{ $quotation->uuid }}';
     </script>
     <script src="{{ asset('js/frontend/quotation/workpackage/job-request.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+
 @endpush

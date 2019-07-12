@@ -57,9 +57,9 @@ class QuotationWorkPackageTaskCardItemController extends Controller
      * @param  \App\Models\QuotationWorkPackageTaskCardItem  $quotationWorkPackageTaskCardItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(QuotationWorkPackageTaskCardItem $quotationWorkPackageTaskCardItem)
+    public function edit(QuotationWorkPackageTaskCardItem $qtn_wp_tc_item)
     {
-        //
+        return response()->json($qtn_wp_tc_item);
     }
 
     /**
@@ -69,9 +69,13 @@ class QuotationWorkPackageTaskCardItemController extends Controller
      * @param  \App\Models\QuotationWorkPackageTaskCardItem  $quotationWorkPackageTaskCardItem
      * @return \Illuminate\Http\Response
      */
-    public function update(QuotationWorkPackageTaskCardItemUpdate $request, QuotationWorkPackageTaskCardItem $quotationWorkPackageTaskCardItem)
+    public function update(QuotationWorkPackageTaskCardItemUpdate $request, QuotationWorkPackageTaskCardItem $qtn_wp_tc_item)
     {
-        //
+        $request->merge(['subtotal' => $request->quantity*$request->price_amount]);
+
+        $qtn_wp_tc_item->update($request->all());
+
+        return response()->json($qtn_wp_tc_item);
     }
 
     /**

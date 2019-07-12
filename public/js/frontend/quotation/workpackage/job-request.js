@@ -17,7 +17,7 @@ let JobRequest = {
                                 dataSet = raw.data;
                             }
 
-                            console.log(dataSet);
+                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -46,60 +46,47 @@ let JobRequest = {
                     }
                 }
             },
-            columns: [{
-                    field: 'code',
+            columns: [
+                {
+                    field: 'tc',
+                    title: 'TaskCard',
+                    sortable: !1,
+                },
+                {
+                    field: 'pn',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'name',
+                    field: 'title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
+                    field: 'quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit.name',
+                    field: 'unit_material',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
 
                 },
                 {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'unit_price',
+                    field: 'unitPrice',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return '100000';
-                    }
                 },
                 {
-                    field: 'selling_price',
+                    field: 'price_amount',
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="number" style="width:100px;">');
-
-                    }
                 },
                 {
                     field: 'sub_total',
@@ -107,7 +94,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return t.pivot.quantity*100000;
+                        return t.quantity*t.price_amount;
                     }
                 },
                 {
@@ -115,22 +102,20 @@ let JobRequest = {
                     title: 'Marketing Notes',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="text" style="width:100px;">');
-                    }
+                    width:150,
                 },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
-                //                 '<i class="la la-trash"></i>' +
-                //             '</a>'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
@@ -148,7 +133,7 @@ let JobRequest = {
                                 dataSet = raw.data;
                             }
 
-                            console.log(dataSet);
+                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -177,59 +162,46 @@ let JobRequest = {
                     }
                 }
             },
-            columns: [{
-                    field: 'code',
+            columns: [
+                {
+                    field: 'tc',
+                    title: 'TaskCard',
+                    sortable: !1,
+                },
+                {
+                    field: 'pn',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'name',
+                    field: 'title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
+                    field: 'quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit.name',
+                    field: 'unit_tool',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'unit_price',
+                    field: 'unitPrice',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return '100000';
-                    }
                 },
                 {
-                    field: 'selling_price',
+                    field: 'price_amount',
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="number">');
-
-                    }
                 },
                 {
                     field: 'sub_total',
@@ -237,9 +209,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        total = total+t.pivot.quantity*100000;
-
-                        return t.pivot.quantity*100000;
+                        return t.quantity*t.price_amount;
                     }
                 },
                 {
@@ -247,22 +217,21 @@ let JobRequest = {
                     title: 'Marketing Notes',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="text">');
-                    }
+                    width:150,
+
                 },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                //                 '<i class="la la-trash"></i>' +
-                //             '</a>'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
@@ -280,7 +249,7 @@ let JobRequest = {
                                 dataSet = raw.data;
                             }
 
-                            console.log(dataSet);
+                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -309,59 +278,46 @@ let JobRequest = {
                     }
                 }
             },
-            columns: [{
-                    field: 'code',
+            columns: [
+                {
+                    field: 'tc',
+                    title: 'TaskCard',
+                    sortable: !1,
+                },
+                {
+                    field: 'pn',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'name',
+                    field: 'title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
+                    field: 'quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit.name',
+                    field: 'unit_tool',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'unit_price',
+                    field: 'unitPrice',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return '100000';
-                    }
                 },
                 {
-                    field: 'selling_price',
+                    field: 'price_amount',
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="number">');
-
-                    }
                 },
                 {
                     field: 'sub_total',
@@ -369,9 +325,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        total = total+t.pivot.quantity*100000;
-
-                        return t.pivot.quantity*100000;
+                        return t.quantity*t.price_amount;
                     }
                 },
                 {
@@ -379,22 +333,20 @@ let JobRequest = {
                     title: 'Marketing Notes',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="text">');
-                    }
+                    width:150,
                 },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                //                 '<i class="la la-trash"></i>' +
-                //             '</a>'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
@@ -412,7 +364,7 @@ let JobRequest = {
                                 dataSet = raw.data;
                             }
 
-                            console.log(dataSet);
+                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -441,60 +393,47 @@ let JobRequest = {
                     }
                 }
             },
-            columns: [{
-                    field: 'code',
+            columns: [
+                {
+                    field: 'tc',
+                    title: 'TaskCard',
+                    sortable: !1,
+                },
+                {
+                    field: 'pn',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'name',
+                    field: 'title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Tool Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'pivot.quantity',
+                    field: 'quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit.name',
+                    field: 'unit_material',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
 
                 },
                 {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'unit_price',
+                    field: 'unitPrice',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return '100000';
-                    }
                 },
                 {
-                    field: 'selling_price',
+                    field: 'price_amount',
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="number" style="width:100px;">');
-
-                    }
                 },
                 {
                     field: 'sub_total',
@@ -502,7 +441,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return t.pivot.quantity*100000;
+                        return t.quantity*t.price_amount;
                     }
                 },
                 {
@@ -510,26 +449,303 @@ let JobRequest = {
                     title: 'Marketing Notes',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return ('<input type="text" style="width:100px;">');
-                    }
+                    width:150,
                 },
-                // {
-                //     field: 'Actions',
-                //     sortable: !1,
-                //     overflow: 'visible',
-                //     template: function (t, e, i) {
-                //         return (
-                //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
-                //                 '<i class="la la-trash"></i>' +
-                //             '</a>'
-                //         );
-                //     }
-                // }
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
             ]
         });
 
-        
+        $('.routine_tools_datatable').on('click','.edit-item-price', function edit () {
+            // save_changes_button();
+
+            let triggerid = $(this).data('uuid');
+            // alert(triggerid);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/qtn-wp-tc-item/' + triggerid + '/edit',
+                success: function (data) {
+                    document.getElementById('uuid').value = data.uuid;
+                    document.getElementById('qty').value = data.quantity;
+                    document.getElementById('price').value = data.price_amount;
+                    document.getElementById('note').value = data.note;
+                    $.ajax({
+                        url: '/get-units/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (unit) {
+                            $('select[name="unit_id"]').empty();
+
+                            $.each(unit, function (key, value) {
+                                if(key == data.unit_id){
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '" selected>' + value + '</option>'
+                                    );
+                                }
+                                else{
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '">' + value + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
+
+                    // $('.btn-success').addClass('update');
+                    // $('.btn-success').removeClass('add');
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    // this are default for ajax errors
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#kategori-error').html(value);
+                    });
+                }
+            });
+        });
+
+        $('.modal-footer').on('click', '.add-item-price', function () {
+            let quantity = $('input[name=qty]').val();
+            let price_amount = $('input[name=price]').val();
+            let unit_id =$('#unit_id').val();
+            let note =$('#note').val();
+            let triggerid = $('input[name=uuid]').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/qtn-wp-tc-item/' + triggerid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    quantity: quantity,
+                    unit_id: unit_id,
+                    price_amount: price_amount,
+                    note: note
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        // }
+                        // if (data.errors.symbol) {
+                        //     $('#symbol-error').html(data.errors.symbol[0]);
+
+                        // }
+                        // if (data.errors.type) {
+                        //     $('#type-error').html(data.errors.type[0]);
+
+                        // }
+
+                    } else {
+                        // save_changes_button();
+                        // unit_reset();
+                        $('#modal_item_price').modal('hide');
+
+                        toastr.success('Selling Price has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.routine_tools_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.routine_materials_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.non_routine_tools_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.non_routine_materials_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $('.routine_materials_datatable').on('click','.edit-item-price', function edit () {
+            // save_changes_button();
+
+            let triggerid = $(this).data('uuid');
+            // alert(triggerid);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/qtn-wp-tc-item/' + triggerid + '/edit',
+                success: function (data) {
+                    document.getElementById('uuid').value = data.uuid;
+                    document.getElementById('qty').value = data.quantity;
+                    document.getElementById('price').value = data.price_amount;
+                    document.getElementById('note').value = data.note;
+                    $.ajax({
+                        url: '/get-units/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (unit) {
+                            $('select[name="unit_id"]').empty();
+
+                            $.each(unit, function (key, value) {
+                                if(key == data.unit_id){
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '" selected>' + value + '</option>'
+                                    );
+                                }
+                                else{
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '">' + value + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
+
+                    // $('.btn-success').addClass('update');
+                    // $('.btn-success').removeClass('add');
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    // this are default for ajax errors
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#kategori-error').html(value);
+                    });
+                }
+            });
+        });
+
+        $('.non_routine_materials_datatable').on('click','.edit-item-price', function edit () {
+            // save_changes_button();
+
+            let triggerid = $(this).data('uuid');
+            // alert(triggerid);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/qtn-wp-tc-item/' + triggerid + '/edit',
+                success: function (data) {
+                    document.getElementById('uuid').value = data.uuid;
+                    document.getElementById('qty').value = data.quantity;
+                    document.getElementById('price').value = data.price_amount;
+                    document.getElementById('note').value = data.note;
+                    $.ajax({
+                        url: '/get-units/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (unit) {
+                            $('select[name="unit_id"]').empty();
+
+                            $.each(unit, function (key, value) {
+                                if(key == data.unit_id){
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '" selected>' + value + '</option>'
+                                    );
+                                }
+                                else{
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '">' + value + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
+
+                    // $('.btn-success').addClass('update');
+                    // $('.btn-success').removeClass('add');
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    // this are default for ajax errors
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#kategori-error').html(value);
+                    });
+                }
+            });
+        });
+
+        $('.non_routine_tools_datatable').on('click','.edit-item-price', function edit () {
+            // save_changes_button();
+
+            let triggerid = $(this).data('uuid');
+            // alert(triggerid);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/qtn-wp-tc-item/' + triggerid + '/edit',
+                success: function (data) {
+                    document.getElementById('uuid').value = data.uuid;
+                    document.getElementById('qty').value = data.quantity;
+                    document.getElementById('price').value = data.price_amount;
+                    document.getElementById('note').value = data.note;
+                    $.ajax({
+                        url: '/get-units/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (unit) {
+                            $('select[name="unit_id"]').empty();
+
+                            $.each(unit, function (key, value) {
+                                if(key == data.unit_id){
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '" selected>' + value + '</option>'
+                                    );
+                                }
+                                else{
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '">' + value + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
+
+                    // $('.btn-success').addClass('update');
+                    // $('.btn-success').removeClass('add');
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    // this are default for ajax errors
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#kategori-error').html(value);
+                    });
+                }
+            });
+        });
+
+
 
         $('.action-buttons').on('click', '.add-job-request', function() {
 
