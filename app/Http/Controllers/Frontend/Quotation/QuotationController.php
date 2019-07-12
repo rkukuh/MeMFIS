@@ -389,8 +389,6 @@ class QuotationController extends Controller
             }
         }
 
-        dd($workpackages);
-
         // dd($totalCharge);
         $pdf = \PDF::loadView('frontend/form/quotation',[
                 'username' => $username,
