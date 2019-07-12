@@ -71,6 +71,8 @@ class QuotationWorkPackageTaskCardItemController extends Controller
      */
     public function update(QuotationWorkPackageTaskCardItemUpdate $request, QuotationWorkPackageTaskCardItem $qtn_wp_tc_item)
     {
+        $request->merge(['subtotal' => $request->quantity*$request->price_amount]);
+
         $qtn_wp_tc_item->update($request->all());
 
         return response()->json($qtn_wp_tc_item);
