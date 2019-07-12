@@ -377,9 +377,9 @@ class QuotationController extends Controller
             $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
-            if($project_workpackage){    
+            if($project_workpackage){
                 $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
-    
+
                 $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
                 ->with('facility')
                 ->sum('price_amount');
@@ -388,6 +388,7 @@ class QuotationController extends Controller
                 $workPackage->mat_tool_price = QuotationWorkPackageTaskCardItem::where('quotation_id',$quotation->id)->where('workpackage_id',$workPackage->id)->sum('subtotal');
             }
         }
+        // dd($workpackages);
         // dd($totalCharge);
         $pdf = \PDF::loadView('frontend/form/quotation',[
                 'username' => $username,
