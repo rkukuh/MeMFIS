@@ -271,6 +271,9 @@ class ProjectHMWorkPackageController extends Controller
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
             ->where('workpackage_id',$workpackage->id)
             ->first();
+        if(sizeof($project_workpackage->facilities) > 0){
+            $project_workpackage->facilities()->delete();
+        }
         foreach($request->facility_array as $facility){
             $facility = Facility::where('uuid', $facility)->first()->id;
             $project_workpackage->facilities()->create([
