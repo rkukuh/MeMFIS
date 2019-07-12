@@ -646,7 +646,7 @@ class FillComboxController extends Controller
      */
     public function facility()
     {
-        $facilities = Facility::pluck('name', 'id');
+        $facilities = Facility::pluck('name', 'uuid');
 
         return json_encode($facilities);
 
