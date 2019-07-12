@@ -135,7 +135,7 @@ let Quotation = {
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
                                     '<i class="la la-trash"></i>' +
                                 '</a>'+
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Delete" data-id="' + t.uuid + '">' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +
                                     '<i class="la la-check"></i>' +
                                 '</a>'+
                                 '<a href="quotation/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
@@ -215,7 +215,7 @@ let Quotation = {
                         type: 'POST',
                         url: '/quotation/' + quotation_uuid + '/approve',
                         success: function (data) {
-                            toastr.success('Quotation has been deleted.', 'Deleted', {
+                            toastr.success('Quotation has been approved.', 'Approved', {
                                     timeOut: 5000
                                 }
                             );
