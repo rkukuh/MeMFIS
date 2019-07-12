@@ -542,7 +542,7 @@
 <script>
     let project_id = '{{  $quotation->project->uuid }}';
     let quotation_uuid = '{{  $quotation->uuid }}';
-    let currency = '{{  $quotation->currency_id }}';
+    let currency = '{{  $quotation->currency }}';
 
     function myFunction(object) {
         // var numItems = $('.project').length
