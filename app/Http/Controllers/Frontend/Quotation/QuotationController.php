@@ -17,6 +17,8 @@ use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\ProjectWorkPackage;
+use App\Models\ProjectWorkPackageFacility;
 use App\Models\Pivots\QuotationWorkPackage;
 use App\Http\Requests\Frontend\QuotationStore;
 use App\Http\Requests\Frontend\QuotationUpdate;
@@ -386,6 +388,8 @@ class QuotationController extends Controller
             $workPackage->mat_tool_price = QuotationWorkPackageTaskCardItem::where('quotation_id',$quotation->id)->where('workpackage_id',$workPackage->id)->sum('subtotal');
             }
         }
+
+        dd($workpackages);
 
         // dd($totalCharge);
         $pdf = \PDF::loadView('frontend/form/quotation',[
