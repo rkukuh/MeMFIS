@@ -286,7 +286,7 @@
                     @php
                         $i = 1;
                         $subtotal = $total = 0;
-                        $jobRequest = $quotation->workpackages;
+                        $jobRequest = $workpackages;
                     @endphp
                     @for($a = 0 ; $a<=3 && $a < sizeof($jobRequest); $a++)
                     @php
@@ -349,7 +349,7 @@
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
                         <td width="42%" align="left" valign="top">- Facilities Price</td>
-                        <td width="16%" align="center" valign="top">$2.500</td>
+                    <td width="16%" align="center" valign="top">{{$jobRequest[$a]->facilities_price_amount}}</td>
                         <td width="17%" align="center" valign="top"></td>
                         <td width="17%" align="right" valign="top">$2.500</td>
                     </tr>
