@@ -15,7 +15,6 @@ Route::name('testing.')->group(function () {
         });
         Route::get('/unit-validation', function () {
             $tc = App\Models\TaskCard::find(573);
-            $i = App\Models\Item::find(1);
             $unit =  App\Models\Unit::where('name','Assembly')->first()->id;
             $qty = 1.5;
             $tc_i = $tc->items->last();
