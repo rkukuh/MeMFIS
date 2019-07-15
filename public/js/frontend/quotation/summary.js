@@ -1,7 +1,3 @@
-let locale = 'id';
-let IDRformatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 });
-let ForeignFormatter = new Intl.NumberFormat(locale, { style: 'currency', currency: currency.code , minimumFractionDigits: 2, maximumFractionDigits: 2 });
-let numberFormat = new Intl.NumberFormat(locale, { maximumFractionDigits: 3 });
 let quotation = $('#quotation_uuid').val();
 let exchange_rate = $('#exchange').val();
 var DatatableAutoColumnHideDemo = function () {

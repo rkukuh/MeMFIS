@@ -77,11 +77,6 @@ let Quotation = {
 // jQuery(document).ready(function () {
 //   Quotation.init();
 // });
-// untuk formatting angka pada kolom cost
-let locale = 'id';
-let IDRformatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 });
-let USDformatter = new Intl.NumberFormat(locale, { style: 'currency', currency: currencyCode, minimumFractionDigits: 2, maximumFractionDigits: 2 });
-let numberFormat = new Intl.NumberFormat('id', { maximumSignificantDigits: 3 });
 let total = 0;
 let quotation = $('#quotation_uuid').val();
 let exchange_rate = parseInt($('#exchange_rate').attr('value'));
