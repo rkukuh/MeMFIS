@@ -146,7 +146,7 @@
                 <tr>
                     <td width="33%" rowspan="5" valign="top">
                        <span style="line-height:20px;">
-                            PT. MERPATI MAINTANANCE FACILITY <br> JUANDA INTERNASIONAL AIRPORT <br> JL. RAYA JUANDA NO.16 <br>
+                            PT. MERPATI MAINTENANCE FACILITY <br> JUANDA INTERNATIONAL AIRPORT <br> JL. RAYA JUANDA NO.16 <br>
                             BETRO,SEDATI SIDOARJO JAWA TIMUR <br> INDONESIA 61253 <br>
                             <span style="line-height:20px;">TELP &nbsp; : 031-8686481</span> <br>
                             <span style="line-height:20px;">FAX &nbsp;&nbsp; : 031-8686500</span> <br>
