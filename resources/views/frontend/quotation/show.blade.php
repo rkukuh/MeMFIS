@@ -546,6 +546,8 @@
     let currency = '{{  $quotation->currency_id }}';
     let currencyCode = '{{  $quotation->currency->code }}';
 </script>
+<script src="{{ asset('js/custom.js') }}"></script>
+
 <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/workpackage/show.js') }}"></script>

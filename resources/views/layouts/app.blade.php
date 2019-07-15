@@ -71,6 +71,5 @@
         </main>
     </div>
     @stack('footer-scripts')
-    <script src="{{ asset('js/custome.js') }}"></script>
 </body>
 </html>
