@@ -212,7 +212,8 @@ class WorkPackageDatatables extends Controller
         $columnsDefault = [
             'code'     => true,
             'title'     => true,
-            'aircraft_id'     => true,
+            'description'     => true,
+            'aircraft'     => true,
             'uuid'     => true,
             'Actions'      => true,
         ];
@@ -225,9 +226,13 @@ class WorkPackageDatatables extends Controller
         }
 
         // get all raw data
-        $workpackage = WorkPackage::with('aircraft')->get();
+        $workpackages = WorkPackage::with('aircraft')->get();
 
-        $alldata = json_decode( $workpackage, true);
+        foreach($workpackages as $workpackage){
+            $workpackage->aircraft_name = $workpackage->aircraft->name;
+        }
+
+        $alldata = json_decode( $workpackages, true);
 
         $data = [];
         // internal use; filter selected columns only from raw data
