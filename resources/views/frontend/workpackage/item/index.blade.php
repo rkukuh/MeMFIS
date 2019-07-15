@@ -1,6 +1,6 @@
 <div class="m-portlet m-portlet--mobile">
   <div class="m-portlet__body">
-      <h1>General Tool(S) List</h1>
+      <h1>Tool List</h1>
       <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
           <div class="row align-items-center">
               <div class="col-xl-6 order-2 order-xl-1">
@@ -36,7 +36,7 @@
 </div>
 <div class="m-portlet m-portlet--mobile">
   <div class="m-portlet__body">
-      <h1>General Material(S) List</h1>
+      <h1>Material List</h1>
       <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
           <div class="row align-items-center">
               <div class="col-xl-6 order-2 order-xl-1">
