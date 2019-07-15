@@ -18,8 +18,8 @@ Route::name('testing.')->group(function () {
             $i = App\Models\Item::find(1);
             // Tube
             // dd($i->units);
-            $unit =  App\Models\Unit::where('name','Each')->first()->id;
-            $qty = 4;
+            $unit =  App\Models\Unit::where('name','Assembly')->first()->id;
+            $qty = 1.5;
             // dd($unit);
             $tc_i = $tc->items->last();
             // dd($tc_i->pivot);
@@ -30,15 +30,45 @@ Route::name('testing.')->group(function () {
                 else{
                     dd('lolos');
                 }
+            }else if($unit == $tc->items->last()->unit_id){
+                // dump($tc->items->last()->pivot->unit_id); // unit yang dibutuhkan taskcard
+                // dd($tc->items->last()->unit_id); // unit primary
+                $qty_uom = $tc->items->last()->units->where('uom.unit_id',$tc->items->last()->pivot->unit_id)->first()->uom->quantity; // quantity conversi
+                $qty_pri = 1/$qty_uom;
+                $result = $qty_pri*$qty;
+                // dd($result);
+
+                if($result > $tc_i->pivot->quantity){
+                    dd('melebihi');
+                }
+                else{
+                    dd('lolos');
+                }
             }else{
-                // dd($tc->items->last()->unit_id);
-                // dd($tc->items->last()->pivot->unit_id);
+                // dd($tc->items->last());
+                // dd($tc->items->last()->unit_id); // unit primary
+                // dd($tc->items->last()->pivot->unit_id); // unit yang dibutuhkan taskcard
+                // dd($tc->items->last()->pivot->quantity); // qty yang dibutuhkan taskcard
+
                 // dd($tc->items->last()->units->where('uom.unit_id',$tc->items->last()->pivot->unit_id)->first()->uom->quantity);
-                $pembagian = 1/$tc->items->last()->units->where('uom.unit_id',$tc->items->last()->pivot->unit_id)->first()->uom->quantity;
-                $perkalian = $pembagian*$tc->items->last()->units->where('uom.unit_id',$unit)->first()->uom->quantity;
+                // dd($tc->items->last()->units); //unit conversi
+
+
+                $qty_uom2 = $tc->items->last()->units->where('uom.unit_id',$unit)->first()->uom->quantity; // quantity conversi
+                // $qty_pri2 = 1/$qty_uom2;
+                $result2 = $qty_uom2*$qty;
+                // dd($result);
+
+                $qty_uom = $tc->items->last()->units->where('uom.unit_id',$tc->items->last()->pivot->unit_id)->first()->uom->quantity; // quantity conversi
+                $qty_pri = 1/$qty_uom;
+                $result = $qty_pri*$result2;
+
+
+                // $pembagian = 1/$tc->items->last()->units->where('uom.unit_id',$tc->items->last()->pivot->unit_id)->first()->uom->quantity;
+                // $perkalian = $pembagian*$tc->items->last()->units->where('uom.unit_id',$unit)->first()->uom->quantity;
 
                 // dd($perkalian);
-                if($perkalian > $tc_i->pivot->quantity){
+                if($result > $tc_i->pivot->quantity){
                     dd('melebihi');
                 }
                 else{
