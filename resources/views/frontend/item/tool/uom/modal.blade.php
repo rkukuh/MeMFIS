@@ -34,27 +34,38 @@
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <label class="form-control-label">
-                                        Quantity @include('frontend.common.label.required')
-                                    </label>
-
-                                    @component('frontend.common.input.number')
-                                        @slot('text', 'Quantity')
-                                        @slot('id', 'uom_quantity')
-                                        @slot('name', 'uom_quantity')
-                                        @slot('id_error', 'uom_quantity')
-                                    @endcomponent
-                                </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Unit @include('frontend.common.label.required')
                                 </label>
 
-                                @component('frontend.common.input.select2')
-                                    @slot('text', 'Unit')
-                                    @slot('id', 'item_unit_id')
-                                    @slot('name', 'item_unit_id')
-                                    @slot('id_error', 'item_unit')
+                                <div class="row">
+                                    <div class="col-1">
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', '1')
+                                            @slot('padding','10')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-11">
+                                        @component('frontend.common.input.select2')
+                                            @slot('text', 'Unit')
+                                            @slot('id', 'item_unit_id')
+                                            @slot('name', 'item_unit_id')
+                                            @slot('id_error', 'item_unit')
+                                        @endcomponent
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Quantity @include('frontend.common.label.required')
+                                </label>
+
+                                @component('frontend.common.input.number')
+                                    @slot('text', 'Quantity')
+                                    @slot('id', 'uom_quantity')
+                                    @slot('name', 'uom_quantity')
+                                    @slot('input_append', $item->unit->symbol)
+                                    @slot('id_error', 'uom_quantity')
                                 @endcomponent
                             </div>
                         </div>
