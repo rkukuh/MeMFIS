@@ -67,7 +67,6 @@ class QuotationController extends Controller
      */
     public function store(QuotationStore $request)
     {
-        $attentions = [];
         $contact = [];
 
         $contact['name']     = $request->attention_name;
@@ -76,10 +75,8 @@ class QuotationController extends Controller
         $contact['fax'] = $request->attention_fax;
         $contact['email'] = $request->attention_email;
 
-        array_push($attentions, $contact);
-
         $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::count()+1)]);
-        $request->merge(['attention' => json_encode($attentions)]);
+        $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
         $quotation = Quotation::create($request->all());
@@ -196,7 +193,6 @@ class QuotationController extends Controller
     public function update(QuotationUpdate $request, Quotation $quotation)
     {
         $attention = [];
-        $contact = [];
 
         $attention['name']     = $request->attention_name;
         $attention['phone'] = $request->attention_phone;
@@ -204,7 +200,6 @@ class QuotationController extends Controller
         $attention['fax'] = $request->attention_fax;
         $attention['email'] = $request->attention_email;
 
-        // array_push($attention, $contact);
         $request->charge = json_decode($request->charge);
         $request->chargeType = json_decode($request->chargeType);
         $charge = [];
