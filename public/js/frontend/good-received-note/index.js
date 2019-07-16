@@ -43,6 +43,12 @@ let Grn = {
             },
             columns: [
                 {
+                    field: 'received_at',
+                    title: 'Date',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'number',
                     title: 'GRN Number',
                     sortable: 'asc',
@@ -50,12 +56,6 @@ let Grn = {
                     template: function (t) {
                         return '<a href="/goods-received/'+t.uuid+'">' + t.number + "</a>"
                     }
-                },
-                {
-                    field: 'received_at',
-                    title: 'Date',
-                    sortable: 'asc',
-                    filterable: !1,
                 },
                 {
                     field: 'purchase_order.number',
@@ -76,8 +76,14 @@ let Grn = {
                     filterable: !1,
                 },
                 {
+                    field: 'purchase_order.number',
+                    title: 'Status',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'approved_by.first_name',
-                    title: 'Approved By',
+                    title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
                 },
