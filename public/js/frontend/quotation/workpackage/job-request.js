@@ -479,6 +479,7 @@ let JobRequest = {
                 url: '/qtn-wp-tc-item/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('uuid').value = data.uuid;
+                    document.getElementById('tc-uuid').value = data.taskcard_id;
                     document.getElementById('qty').value = data.quantity;
                     document.getElementById('price').value = data.price_amount;
                     document.getElementById('note').value = data.note;
@@ -523,6 +524,7 @@ let JobRequest = {
             let quantity = $('input[name=qty]').val();
             let price_amount = $('input[name=price]').val();
             let unit_id =$('#unit_id').val();
+            let tc_uuid =$('#tc-uuid').val();
             let note =$('#note').val();
             let triggerid = $('input[name=uuid]').val();
 
@@ -535,6 +537,7 @@ let JobRequest = {
                 data: {
                     _token: $('input[name=_token]').val(),
                     quantity: quantity,
+                    tc_uuid: tc_uuid,
                     unit_id: unit_id,
                     price_amount: price_amount,
                     note: note
