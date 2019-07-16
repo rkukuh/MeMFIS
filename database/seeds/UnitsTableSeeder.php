@@ -22,8 +22,20 @@ class UnitsTableSeeder extends Seeder
         ]);
 
         Unit::create([
+            'name' => 'Centimeter Square',
+            'symbol' => 'cm2',
+            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
+        ]);
+
+        Unit::create([
             'name' => 'Meter',
             'symbol' => 'm',
+            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Meter Square',
+            'symbol' => 'm2',
             'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
         ]);
 
