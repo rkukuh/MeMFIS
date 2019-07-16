@@ -1,4 +1,4 @@
-let AdditionalTaskCreate = {
+let AdditionalTaskShow = {
     init: function () {
         function strtrunc(str, max, add) {
             add = add || '...';
@@ -344,5 +344,5 @@ let AdditionalTaskCreate = {
 };
 
 jQuery(document).ready(function () {
-    AdditionalTaskCreate.init();
+    AdditionalTaskShow.init();
 });
