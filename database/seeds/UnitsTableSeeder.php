@@ -46,7 +46,7 @@ class UnitsTableSeeder extends Seeder
         ]);
 
         Unit::create([
-            'name' => 'Foot',
+            'name' => 'Feet',
             'symbol' => 'ft',
             'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
         ]);
