@@ -67,6 +67,7 @@
         let project_uuid = '{{  $quotation->project->uuid }}';
         let quotation_uuid = '{{ $quotation->uuid }}';
     </script>
+    <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/workpackage/job-request.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>

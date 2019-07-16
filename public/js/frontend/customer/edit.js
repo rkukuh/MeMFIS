@@ -829,25 +829,25 @@ let Customer = {
             attn_phone_array.pop();
 
             let attn_position_array = [];
-            $('#attn-position ').each(function (i) {
+            $('input[name^=attn-position]').each(function (i) {
                 attn_position_array[i] = $(this).val();
             });
             attn_position_array.pop();
 
             let attn_name_array = [];
-            $('#attn-name ').each(function (i) {
+            $('input[name^=attn-name]').each(function (i) {
                 attn_name_array[i] = $(this).val();
             });
             attn_name_array.pop();
 
             let attn_ext_array = [];
-            $('#attn-ext ').each(function (i) {
+            $('input[name^=attn-ext]').each(function (i) {
                 attn_ext_array[i] = $(this).val();
             });
             attn_ext_array.pop();
 
             let attn_fax_array = [];
-            $('#attn-fax ').each(function (i) {
+            $('input[name^=attn-fax]').each(function (i) {
                 attn_fax_array[i] = $(this).val();
             });
             attn_fax_array.pop();

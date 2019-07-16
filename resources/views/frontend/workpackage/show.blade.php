@@ -98,7 +98,7 @@
                                                     <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool(s) & Material(s)</a>
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">Material & Tool</a>
                                                 </li>
                                             </ul>
 

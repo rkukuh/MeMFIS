@@ -14,7 +14,7 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
-                                    Job Description @include('frontend.common.label.required')
+                                    Job Quotation Subject @include('frontend.common.label.required')
                                 </label>
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')

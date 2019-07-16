@@ -439,7 +439,7 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <label class="form-control-label">
-                                            Description @include('frontend.common.label.required')
+                                            Quotation Subject @include('frontend.common.label.required')
                                         </label>
 
                                         @component('frontend.common.input.textarea')
@@ -543,6 +543,7 @@
     let project_id = '{{  $quotation->project->uuid }}';
     let quotation_uuid = '{{  $quotation->uuid }}';
     let currency = '{{  $quotation->currency }}';
+    let currencyCode = '{{  $quotation->currency->code }}';
 
     function myFunction(object) {
         // var numItems = $('.project').length
@@ -666,6 +667,7 @@
 <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
+<script src="{{ asset('js/custom.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
 

@@ -78,7 +78,7 @@ let Customer = {
                 },
                 {
                     field: 'level',
-                    title: 'Level',
+                    title: 'Pricing Level',
                     sortable: 'asc',
                     filterable: !1,
                 },

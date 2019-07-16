@@ -81,12 +81,18 @@ let JobRequest = {
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return IDRformatter.format(t.unitPrice);
+                    }
                 },
                 {
                     field: 'price_amount',
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return IDRformatter.format(t.price_amount);
+                    }
                 },
                 {
                     field: 'sub_total',
@@ -94,7 +100,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return t.quantity*t.price_amount;
+                        return IDRformatter.format(t.quantity*t.price_amount);
                     }
                 },
                 {
@@ -196,6 +202,9 @@ let JobRequest = {
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return IDRformatter.format(t.unitPrice);
+                    }
                 },
                 {
                     field: 'price_amount',
@@ -209,7 +218,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return t.quantity*t.price_amount;
+                        return IDRformatter.format(t.quantity*t.price_amount);
                     }
                 },
                 {
@@ -312,6 +321,9 @@ let JobRequest = {
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return IDRformatter.format(t.unitPrice);
+                    }
                 },
                 {
                     field: 'price_amount',
@@ -325,7 +337,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return t.quantity*t.price_amount;
+                        return IDRformatter.format(t.quantity*t.price_amount);
                     }
                 },
                 {
@@ -428,6 +440,9 @@ let JobRequest = {
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return IDRformatter.format(t.unitPrice);
+                    }
                 },
                 {
                     field: 'price_amount',
@@ -441,7 +456,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return t.quantity*t.price_amount;
+                        return IDRformatter.format(t.quantity*t.price_amount);
                     }
                 },
                 {

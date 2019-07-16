@@ -65,7 +65,7 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-5 col-md-5 col-lg-5">
                                         <label class="form-control-label">
-                                            Level Customer @include('frontend.common.label.required')
+                                            Pricing Level @include('frontend.common.label.required')
                                         </label>
                                     </div>
                                     <div class="col-sm-7 col-md-7 col-lg-7">

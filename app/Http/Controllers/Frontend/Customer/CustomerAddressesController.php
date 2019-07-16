@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\Customer;
 
 use App\Models\Customer;
 use App\Models\Address;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -37,9 +38,10 @@ class CustomerAddressesController extends Controller
      */
     public function store(Customer $customer, Request $request)
     {
+        $address_type = Type::where('of','address')->where('name','Work')->first();
         $customer->addresses()->save(new Address([
             'address' => $request->address,
-            'type_id' => $request->address_type,    
+            'type_id' => $address_type->id    
         ]));
         return response()->json($request);
     }
