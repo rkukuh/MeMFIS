@@ -8,6 +8,7 @@
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
                 @component('frontend.common.label.data-info')
+                    @slot('id', 'total_mhrs')
                     @slot('text', $total_mhrs)
                 @endcomponent
             </div>
@@ -90,36 +91,50 @@
             let performa = 0;
 
             $('.footer-manhour').on('click', '.add-manhour', function () {
-            let manhour = total_mhrs;
-            let performa_used = performa;
-            let total = $('#total').html();
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                url: '/project-hm/' + project_uuid + '/workpackage/' + workPackage_uuid + '/manhoursPropotion',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    manhour: manhour,
-                    performa_used: performa_used,
-                    total: total,
-                },
-                success: function (data) {
-                    if (data.errors) {
-                    } else {
+                let manhour = total_mhrs;
+                let performa_used = performa;
+                let total = $('#total').html();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'post',
+                    url: '/project-hm/' + project_uuid + '/workpackage/' + workPackage_uuid + '/manhoursPropotion',
+                    data: {
+                        _token: $('input[name=_token]').val(),
+                        manhour: manhour,
+                        performa_used: performa_used,
+                        total: total,
+                    },
+                    success: function (data) {
+                        if (data.errors) {
+                        } else {
 
-                        toastr.success('Manhours Propotion has been created.', 'Success', {
-                            timeOut: 5000
-                        });
+                            toastr.success('Manhours Propotion has been created.', 'Success', {
+                                timeOut: 5000
+                            });
 
-                        // window.location.href = '/discrepancy/' + data.uuid + '/edit';
+                            // window.location.href = '/discrepancy/' + data.uuid + '/edit';
 
+                        }
                     }
+                });
+            });
+            $(".nav-item").on("click", ".m_tabs_manhour",function() {
+                if(anyChanges){
+                    $.ajax({
+                    url: "/project-hm/workpackage/"+workPackage_uuid+"/getManhours",
+                    method: "get",
+                    success: function(dataFetched){
+                        $('#total_mhrs').html(dataFetched.total_mhrs);
+                        $('#total').html(dataFetched.mhrs_pfrm_factor);
+                    },
+                    });
                 }
             });
         });
-        });
+
+
         $("#default").change(function() {
             if(this.checked) {
                 let total  = ($('#default').val()*total_mhrs);

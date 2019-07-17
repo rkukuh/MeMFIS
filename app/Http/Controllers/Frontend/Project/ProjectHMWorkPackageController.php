@@ -134,7 +134,7 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function edit(Project $project, WorkPackage $workPackage,Request $request)
     {
-        $mhrs_pfrm_factor = $engineer_skills = $skills = $subset = [];
+        $mhrs_pfrm_factor = $skills = $subset = [];
             
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
@@ -386,5 +386,23 @@ class ProjectHMWorkPackageController extends Controller
             'otr' => $otr,
             'si' => $si,
         ]);
+    }
+
+    /**
+     * Sent updated manhours on that workpackage
+     *
+     * @param  \App\Models\WorkPackage  $workPackage
+     */
+    public function getManhours(WorkPackage $workPackage){
+        $data = $mhrs_pfrm_factor = [];
+        foreach($workPackage->taskcards as $taskcard){
+            array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
+        }
+        $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
+        $data["total_mhrs"] = $workPackage->taskcards->sum('estimation_manhour');
+        $data["mhrs_pfrm_factor"] = $workPackage->taskcards->sum('estimation_manhour') * 1.6;
+        $data["mhrs_tc_pfrm_factor"]  = $mhrs_pfrm_factor;
+
+        return response()->json($data);
     }
 }
