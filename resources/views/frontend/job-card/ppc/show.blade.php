@@ -155,7 +155,7 @@
                                                     Sequence
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    Generated
+                                                    {{$jobcard->taskcard->sequence}}
                                                 </td>
                                             </tr>
                                             <tr>

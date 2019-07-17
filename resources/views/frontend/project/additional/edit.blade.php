@@ -232,6 +232,6 @@
 
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/frontend/project/additional/create.js')}}"></script>
+    <script src="{{ asset('js/frontend/project/additional/edit.js')}}"></script>
 @endpush
 

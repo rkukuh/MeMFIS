@@ -63,7 +63,7 @@ let Project = {
                     }
                 },
                 {
-                    field: 'aircrafts',
+                    field: 'aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
@@ -119,7 +119,7 @@ let Project = {
                     data: "title"
                 },
                 {
-                    data: "aircraft_id"
+                    data: "aircraft.name"
                 },
                 {
                     data: "Actions"

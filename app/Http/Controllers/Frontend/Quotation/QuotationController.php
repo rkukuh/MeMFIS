@@ -17,6 +17,8 @@ use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\ProjectWorkPackage;
+use App\Models\ProjectWorkPackageFacility;
 use App\Models\Pivots\QuotationWorkPackage;
 use App\Http\Requests\Frontend\QuotationStore;
 use App\Http\Requests\Frontend\QuotationUpdate;
@@ -65,7 +67,6 @@ class QuotationController extends Controller
      */
     public function store(QuotationStore $request)
     {
-        $attentions = [];
         $contact = [];
 
         $contact['name']     = $request->attention_name;
@@ -74,10 +75,8 @@ class QuotationController extends Controller
         $contact['fax'] = $request->attention_fax;
         $contact['email'] = $request->attention_email;
 
-        array_push($attentions, $contact);
-
         $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::count()+1)]);
-        $request->merge(['attention' => json_encode($attentions)]);
+        $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
         $quotation = Quotation::create($request->all());
@@ -194,7 +193,6 @@ class QuotationController extends Controller
     public function update(QuotationUpdate $request, Quotation $quotation)
     {
         $attention = [];
-        $contact = [];
 
         $attention['name']     = $request->attention_name;
         $attention['phone'] = $request->attention_phone;
@@ -202,7 +200,6 @@ class QuotationController extends Controller
         $attention['fax'] = $request->attention_fax;
         $attention['email'] = $request->attention_email;
 
-        // array_push($attention, $contact);
         $request->charge = json_decode($request->charge);
         $request->chargeType = json_decode($request->chargeType);
         $charge = [];
@@ -368,10 +365,30 @@ class QuotationController extends Controller
                 $totalCharge =  $totalCharge +  $charge->amount;
             }
         }
+
+        $workpackages = $quotation->workpackages;
+        $wp_id = [];
+        foreach($workpackages as $workPackage){
+            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+            ->where('workpackage_id',$workPackage->id)
+            ->first();
+            if($project_workpackage){
+                $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
+
+                $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
+                ->with('facility')
+                ->sum('price_amount');
+                $workPackage->facilities_price_amount = $ProjectWorkPackageFacility;
+
+                $workPackage->mat_tool_price = QuotationWorkPackageTaskCardItem::where('quotation_id',$quotation->id)->where('workpackage_id',$workPackage->id)->sum('subtotal');
+            }
+        }
+        // dd($workpackages);
         // dd($totalCharge);
         $pdf = \PDF::loadView('frontend/form/quotation',[
                 'username' => $username,
                 'quotation' => $quotation,
+                'workpackages' => $workpackages,
                 'totalCharge' => $totalCharge,
                 'attention' => json_decode($quotation->attention)
                 ]);

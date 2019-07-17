@@ -13,6 +13,45 @@ Route::name('testing.')->group(function () {
             echo App\Helpers\DocumentNumber::generate('WP-', App\Models\WorkPackage::count());
 
         });
+        Route::get('/unit-validation', function () {
+            $tc = App\Models\TaskCard::find(573);
+            $unit =  App\Models\Unit::where('name','Assembly')->first()->id;
+            $qty = 1.5;
+            $tc_i = $tc->items->last();
+            if($tc_i->pivot->unit_id == $unit){
+                if($qty > $tc_i->pivot->quantity){
+                    dd('melebihi');
+                }
+                else{
+                    dd('lolos');
+                }
+            }else if($unit == $tc->items->last()->unit_id){
+                $qty_uom = $tc->items->last()->units->where('uom.unit_id',$tc->items->last()->pivot->unit_id)->first()->uom->quantity; // quantity conversi
+                $qty_pri = 1/$qty_uom;
+                $result = $qty_pri*$qty;
+                if($result > $tc_i->pivot->quantity){
+                    dd('melebihi');
+                }
+                else{
+                    dd('lolos');
+                }
+            }else{
+                $qty_uom2 = $tc->items->last()->units->where('uom.unit_id',$unit)->first()->uom->quantity; // quantity conversi
+                $result2 = $qty_uom2*$qty;
+                $qty_uom = $tc->items->last()->units->where('uom.unit_id',$tc->items->last()->pivot->unit_id)->first()->uom->quantity; // quantity conversi
+                $qty_pri = 1/$qty_uom;
+                $result = $qty_pri*$result2;
+                if($result > $tc_i->pivot->quantity){
+                    dd('melebihi');
+                }
+                else{
+                    dd('lolos');
+                }
+            }
+
+            // dd($tc->items->last()->pivot->quantity);
+            // echo 'tes';
+        });
 
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');

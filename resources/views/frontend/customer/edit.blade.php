@@ -73,7 +73,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-5 col-md-5 col-lg-5">
                                                 <label class="form-control-label">
-                                                    Level Customer @include('frontend.common.label.required')
+                                                    Pricing Level @include('frontend.common.label.required')
                                                 </label>
                                             </div>
                                             <div class="col-sm-7 col-md-7 col-lg-7">
@@ -958,7 +958,6 @@
                                                             </label>
 
                                                             @component('frontend.common.input.text')
-                                                                @slot('text', 'John Wick')
                                                                 @slot('name', 'attn-name')
                                                                 @slot('value', $attention->name)
                                                             @endcomponent
@@ -1046,7 +1045,6 @@
                                                         </label>
 
                                                         @component('frontend.common.input.text')
-                                                            @slot('text', 'John Wick')
                                                             @slot('name', 'attn-name')
                                                         @endcomponent
                                                     </div>
@@ -1056,7 +1054,6 @@
                                                         </label>
 
                                                         @component('frontend.common.input.text')
-                                                            @slot('text', 'Purchasing')
                                                             @slot('name', 'attn-position')
                                                         @endcomponent
                                                     </div>
@@ -1128,7 +1125,6 @@
                                                     </label>
 
                                                     @component('frontend.common.input.text')
-                                                        @slot('text', 'John Wick')
                                                         @slot('name', 'attn-name')
                                                     @endcomponent
                                                 </div>
@@ -1257,8 +1253,6 @@
         });
     }
 </script>
-
-<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
 
 <script src="{{ asset('js/frontend/common/account-code.js') }}"></script>
 <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>

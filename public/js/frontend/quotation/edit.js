@@ -9,7 +9,7 @@ let Quotation = {
                 GTotal = IDRformatter.format(document.getElementById("grand_total_rupiah").innerHTML);
                 document.getElementById("grand_total_rupiah").innerHTML = GTotal;
             }else{
-                GTotal = USDformatter.format(document.getElementById("grand_total").innerHTML);
+                GTotal = ForeignFormatter.format(document.getElementById("grand_total").innerHTML);
                 document.getElementById("grand_total").innerHTML = GTotal;
                 GTotal = IDRformatter.format(document.getElementById("grand_total_rupiah").innerHTML);
                 document.getElementById("grand_total_rupiah").innerHTML = GTotal;
@@ -170,7 +170,7 @@ let Quotation = {
                         
             $('#grand_total').attr("value", grandTotal);
             $('#grand_total_rupiah').attr("value", grandTotalRupiah);
-            $('#grand_total').html("$ "+USDformatter.format(grandTotal));
+            $('#grand_total').html("$ "+ForeignFormatter.format(grandTotal));
             $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
         });
 
@@ -251,7 +251,7 @@ let Quotation = {
                         
             $('#grand_total').attr("value", grandTotal);
             $('#grand_total_rupiah').attr("value", grandTotalRupiah);
-            $('#grand_total').html("$ "+USDformatter.format(grandTotal));
+            $('#grand_total').html("$ "+ForeignFormatter.format(grandTotal));
             $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
         });
 

@@ -98,10 +98,10 @@
 <body>
 
     <header id="header">
-        <img src="./img/form/printoutdc-summary/HeaderDefectCard.png" alt=""width="100%">
+        <img src="./img/form/printoutdefect-card/HeaderDefectCard1.png" alt=""width="100%">
     </header>
     <footer style="margin-top:14px;">
-        <img src="./img/form/printoutdc-summary/FooterDefectCard.png" width="100%" alt="" >
+        <img src="./img/form/printoutdefect-card/FooterDefectCard.png" width="100%" alt="" >
     </footer>
 
     <div id="content">

@@ -133,9 +133,10 @@ class QuotationDatatables extends Controller
             $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
-            $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
             
             if($project_workpackage){            
+            $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
+
             $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
             ->with('facility')
             ->sum('price_amount');

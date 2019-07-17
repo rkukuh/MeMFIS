@@ -29,7 +29,6 @@
 
 @push('footer-scripts')
 <script>
-let IDRformatter = new Intl.NumberFormat('id', { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
     let facilityDatatable = {
         init:function () {

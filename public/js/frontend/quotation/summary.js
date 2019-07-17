@@ -1,7 +1,3 @@
-let locale = 'id';
-let IDRformatter = new Intl.NumberFormat(locale, { style: 'currency', currency: 'idr', minimumFractionDigits: 2, maximumFractionDigits: 2 });
-let USDformatter = new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-let numberFormat = new Intl.NumberFormat(locale, { maximumFractionDigits: 3 });
 let quotation = $('#quotation_uuid').val();
 let exchange_rate = $('#exchange').val();
 var DatatableAutoColumnHideDemo = function () {
@@ -67,15 +63,14 @@ var DatatableAutoColumnHideDemo = function () {
           width: '700px',
 
           template: function (t) {
-            if(currency == 1){
+            if(currency.id == 1){
               return (t.pivot.description + '<br>' +
-                '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x ' + IDRformatter.format(t.pivot.manhour_rate) + '<br>' +
-                '- Facility Price : <br>' +
-                '- Material & Tool Price : ' 
+                '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x ' + IDRformatter.format(t.pivot.manhour_rate) + '<br>' +
+                '- Facility Price : '
               );
             }else{
               return (t.pivot.description + '<br>' +
-                '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x $ ' + USDformatter.format(t.pivot.manhour_rate) + '<br>' +
+                '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x $ ' + ForeignFormatter.format(t.pivot.manhour_rate) + '<br>' +
                 '- Facility Price : <br>' +
                 '- Material & Tool Price : ' 
               );
@@ -86,7 +81,7 @@ var DatatableAutoColumnHideDemo = function () {
           title: 'Cost',
           template: function (a) {
             
-            if(currency == 1){
+            if(currency.id == 1){
               return ('<br>' +
                 IDRformatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate) + '<br>' +
                 IDRformatter.format(a.facilities_price_amount) + '<br>' +
@@ -94,9 +89,9 @@ var DatatableAutoColumnHideDemo = function () {
               );
             }else{
               return ('<br>' +
-                '$ '+ USDformatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate) + '<br>' +
-                '$ '+ USDformatter.format(a.facilities_price_amount) + '<br>' +
-                '$ '+ USDformatter.format(a.mat_tool_price) + '<br>' 
+                ForeignFormatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate) + '<br>' +
+                ForeignFormatter.format(a.facilities_price_amount) + '<br>' +
+                ForeignFormatter.format(a.mat_tool_price) + '<br>' 
               );
             }
           }
@@ -116,7 +111,7 @@ var DatatableAutoColumnHideDemo = function () {
             }
             else{
                 if(t.pivot.discount_type ==  'amount'){
-                  if(currency == 1){
+                  if(currency.id == 1){
                     return (
                       IDRformatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
                       t.uuid +
@@ -124,7 +119,7 @@ var DatatableAutoColumnHideDemo = function () {
                     );
                   }else{
                     return (
-                      '$ '+USDformatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                      oreignFormatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
                       t.uuid +
                       '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                     );
@@ -164,7 +159,7 @@ var DatatableAutoColumnHideDemo = function () {
                 }
             }
 
-            if(currency == 1){
+            if(currency.id == 1){
               document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
               document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
               $("#grand_total_rupiah").attr("value", subtotal);
@@ -174,15 +169,15 @@ var DatatableAutoColumnHideDemo = function () {
               );
             }else{
               let totalRupiah = subtotal * exchange_rate; 
-              document.getElementById("sub_total").innerHTML = "$ "+USDformatter.format(subtotal);
-              document.getElementById("grand_total").innerHTML = "$ "+USDformatter.format(subtotal);
+              document.getElementById("sub_total").innerHTML = ForeignFormatter.format(subtotal);
+              document.getElementById("grand_total").innerHTML = ForeignFormatter.format(subtotal);
               $("#grand_total").attr("value", subtotal);
               $("#sub_total").attr("value", subtotal);
 
               document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
               $("#grand_total_rupiah").attr("value", totalRupiah);
               return (
-                "$"+USDformatter.format(total)
+                ForeignFormatter.format(total)
               );
             }
           }
@@ -208,7 +203,7 @@ var DatatableAutoColumnHideDemo = function () {
                 
     $('#grand_total').attr("value", grandTotal);
     $('#grand_total_rupiah').attr("value", grandTotalRupiah);
-    $('#grand_total').html("$ "+USDformatter.format(grandTotal));
+    $('#grand_total').html(ForeignFormatter.format(grandTotal));
     $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
   };
 

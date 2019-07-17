@@ -358,7 +358,7 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <label class="form-control-label">
-                                            Description @include('frontend.common.label.required')
+                                            Quotation Subject @include('frontend.common.label.required')
                                         </label>
 
                                         @component('frontend.common.label.data-info')
@@ -546,6 +546,8 @@
     let currency = '{{  $quotation->currency_id }}';
     let currencyCode = '{{  $quotation->currency->code }}';
 </script>
+<script src="{{ asset('js/custom.js') }}"></script>
+
 <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/workpackage/show.js') }}"></script>
