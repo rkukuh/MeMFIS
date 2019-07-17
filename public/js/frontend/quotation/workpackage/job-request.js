@@ -557,10 +557,9 @@ let JobRequest = {
                 },
                 success: function (data) {
                     if (data.errors) {
-                        // if (data.errors.name) {
-                        //     $('#name-error').html(data.errors.name[0]);
-
-                        // }
+                        if (data.errors.quantity) {
+                            $('#qty-limit-error').html(data.errors.quantity[0]);
+                        }
                         // if (data.errors.symbol) {
                         //     $('#symbol-error').html(data.errors.symbol[0]);
 
