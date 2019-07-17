@@ -14,6 +14,57 @@ Route::name('testing.')->group(function () {
 
         });
 
+        Route::get('/manhour', function () {
+            // $t1 = Carbon\Carbon::parse('2016-07-05 12:29:16');
+            // $t2 = Carbon\Carbon::parse('2016-07-03 13:30:10');
+            // $diff = $t1->diff($t2);
+            // dd($diff);
+            // dd('manhoour');
+            $statuses = App\Models\Status::ofJobCard()->get();
+            $jobcard = App\Models\JobCard::find(1);
+            foreach($jobcard->helpers as $helper){
+                $helper->userID .= $helper->user->id;
+            }
+            // dd($jobcard->progresses->sortBy('created_at'));
+            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+                // if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed" and $this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "open"){
+                //     // dump($statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code);
+
+                //     }
+                    // $jobcard->progresses()->save(new Progress([
+                    //     'status_id' =>  $this->statuses->where('code','closed')->first()->id,
+                    //     'reason_id' =>  Type::ofJobCardCloseReason()->where('uuid',$request->accomplishment)->first()->id,
+                    //     'reason_text' =>  $request->note,
+                    //     'progressed_by' =>  $key
+                    // ]));
+                    $date1 = null;
+                    foreach($values as $value){
+                        if($statuses->where('id',$value->status_id)->first()->code <> "open"){
+
+
+                            if($jobcard->helpers->where('userID',$key)->first() == null){
+                                // dump($jobcard->id);
+                                // dump($value->created_at);
+
+                                // dump($key);
+                                dump($date1);
+                                if($date1 <> null){
+                                    // dump('tes');
+                                    $t1 = Carbon\Carbon::parse($date1);
+                                    $t2 = Carbon\Carbon::parse($value->created_at);
+                                    $diff = $t1->diff($t2);
+                                    dump($diff);
+                                }
+                                $date1 = $value->created_at;
+                                $date2 = $value->created_at;
+                                dump($date2);
+                                dump('-------------------------');
+                            }
+                        }
+
+                    }
+            }
+       });
 
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
