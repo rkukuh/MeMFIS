@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\JobCard;
 use Auth;
 use App\User;
 use Validator;
+use Carbon\Carbon;
 use App\Models\Status;
 use App\Models\JobCard;
 use Illuminate\Http\Request;
@@ -131,9 +132,51 @@ class JobCardController extends Controller
      */
     public function print($jobCard)
     {
-        $jobCard = JobCard::with('taskcard','quotation')->whereHas('taskcard', function ($query) use ($jobCard) {
-            $query->where('uuid',$jobCard);
-        })->first();
+
+        $statuses = Status::ofJobCard()->get();
+        $jobcard = JobCard::where('uuid',$jobCard)->first();
+        foreach($jobcard->helpers as $helper){
+            $helper->userID .= $helper->user->id;
+        }
+        $manhours = null;
+        foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            $date1 = null;
+            foreach($values as $value){
+                if($statuses->where('id',$value->status_id)->first()->code <> "open"){
+                    if($jobcard->helpers->where('userID',$key)->first() == null){
+                        if($date1 <> null){
+                            $t1 = Carbon::parse($date1);
+                            $t2 = Carbon::parse($value->created_at);
+                            $diff = $t1->diffInSeconds($t2);
+                            $manhours = $manhours + $diff;
+                        }
+                        $date1 = $value->created_at;
+                    }
+                }
+
+            }
+        }
+        $manhours = $manhours/3600;
+        $manhours_break = null;
+        foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            for($i=0; $i<sizeOf($values->toArray()); $i++){
+                if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
+                    if($jobcard->helpers->where('userID',$key)->first() == null){
+                        if($date1 <> null){
+                            $t2 = Carbon::parse($values[$i]->created_at);
+                            $t3 = Carbon::parse($values[$i+1]->created_at);
+                            $diff = $t2->diffInSeconds($t3);
+                            $manhours_break = $manhours_break + $diff;
+                        }
+                    }
+                }
+            }
+        }
+        $manhours_break = $manhours_break/3600;
+        $actual_manhours =number_format($manhours-$manhours_break, 2);
+
+
+        $jobCard = JobCard::with('taskcard','quotation')->where('uuid',$jobCard)->first();
 
         if($jobCard->taskcard->type->code == "basic"){
             $rii_status = $jobCard->taskcard->is_rii;
@@ -190,7 +233,8 @@ class JobCardController extends Controller
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
                     'rii_status' => $rii_status,
-                    'helpers' => $helpers
+                    'helpers' => $helpers,
+                    'actual_manhours'=> $actual_manhours
                     ]);
             return $pdf->stream();
         }
@@ -249,7 +293,8 @@ class JobCardController extends Controller
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
                     'rii_status' => $rii_status,
-                    'helpers' => $helpers
+                    'helpers' => $helpers,
+                    'actual_manhours'=> $actual_manhours
                     ]);
             return $pdf->stream();
         }
@@ -308,7 +353,8 @@ class JobCardController extends Controller
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
                     'rii_status' => $rii_status,
-                    'helpers' => $helpers
+                    'helpers' => $helpers,
+                    'actual_manhours'=> $actual_manhours
                     ]);
             return $pdf->stream();
         }
@@ -367,7 +413,8 @@ class JobCardController extends Controller
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
                     'rii_status' => $rii_status,
-                    'helpers' => $helpers
+                    'helpers' => $helpers,
+                    'actual_manhours'=> $actual_manhours
                     ]);
             return $pdf->stream();        }
         elseif(($jobCard->taskcard->type->code == "eo") or ($jobCard->taskcard->type->code == "ea")){
@@ -425,7 +472,8 @@ class JobCardController extends Controller
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
                     'rii_status' => $rii_status,
-                    'helpers' => $helpers
+                    'helpers' => $helpers,
+                    'actual_manhours'=> $actual_manhours
                     ]);
             return $pdf->stream();
         }
@@ -484,7 +532,8 @@ class JobCardController extends Controller
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
                     'rii_status' => $rii_status,
-                    'helpers' => $helpers
+                    'helpers' => $helpers,
+                    'actual_manhours'=> $actual_manhours
                     ]);
             return $pdf->stream();
         }
@@ -543,7 +592,8 @@ class JobCardController extends Controller
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
                     'rii_status' => $rii_status,
-                    'helpers' => $helpers
+                    'helpers' => $helpers,
+                    'actual_manhours'=> $actual_manhours
                     ]);
             return $pdf->stream();
         }
@@ -602,7 +652,8 @@ class JobCardController extends Controller
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
                     'rii_status' => $rii_status,
-                    'helpers' => $helpers
+                    'helpers' => $helpers,
+                    'actual_manhours'=> $actual_manhours
                     ]);
             return $pdf->stream();
         // } else {
