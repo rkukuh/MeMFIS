@@ -162,15 +162,18 @@ class JobCardEngineerController extends Controller
      */
     public function update(JobCardUpdate $request, JobCard $jobcard)
     {
-        $helpers = Employee::whereIn('code',$request->helper)->pluck('id');
 
-        $jobcard->helpers()->sync($helpers);
-        
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             $jobcard->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
+
+            if($request->helper){
+                $helpers = Employee::whereIn('code',$request->helper)->pluck('id');
+                $jobcard->helpers()->sync($helpers);
+            }
+
             return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
