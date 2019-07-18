@@ -39,9 +39,6 @@ Route::name('testing.')->group(function () {
                 }
             }
             $manhours = $manhours/3600;
-            dump(number_format($manhours, 2));
-            dump('*************************************************************************************************');
-
             $manhours_break = null;
             foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
                 for($i=0; $i<sizeOf($values->toArray()); $i++){
@@ -58,8 +55,7 @@ Route::name('testing.')->group(function () {
                 }
             }
             $manhours_break = $manhours_break/3600;
-            dump(number_format($manhours_break, 2));
-            dump('actual manhour '.number_format($manhours-$manhours_break, 2));
+            $actual_manhours =number_format($manhours-$manhours_break, 2);
 
 
        });
