@@ -162,6 +162,10 @@ class JobCardEngineerController extends Controller
      */
     public function update(JobCardUpdate $request, JobCard $jobcard)
     {
+        $helpers = Employee::whereIn('code',$request->helper)->pluck('id');
+
+        $jobcard->helpers()->sync($helpers);
+        
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             $jobcard->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
