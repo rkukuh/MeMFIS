@@ -133,7 +133,7 @@
 <script src="{{ asset('js/frontend/functions/select2/taskcard-routine-type.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script>
 
-<script src="{{ asset('js/frontend/job-card/filter.js') }}"></script>
+{{-- <script src="{{ asset('js/frontend/job-card/filter.js') }}"></script> --}}
 
 
 @endpush
