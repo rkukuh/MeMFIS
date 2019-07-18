@@ -15,6 +15,12 @@ Route::name('testing.')->group(function () {
         });
 
         Route::get('/manhour', function () {
+//             $hours = 2;
+//             $minutes = 2400;
+//             $now  = Carbon\Carbon::now();
+//             dump($now);
+// $days = $now->diffInMinutes($now->copy()->addHours($hours)->addMinutes($minutes));
+// dd($days);
             // $t1 = Carbon\Carbon::parse('2016-07-05 12:29:16');
             // $t2 = Carbon\Carbon::parse('2016-07-03 13:30:10');
             // $diff = $t1->diff($t2);
@@ -26,6 +32,7 @@ Route::name('testing.')->group(function () {
                 $helper->userID .= $helper->user->id;
             }
             // dd($jobcard->progresses->sortBy('created_at'));
+            $manhours = null;
             foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
                 // if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed" and $this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "open"){
                 //     // dump($statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code);
@@ -47,23 +54,30 @@ Route::name('testing.')->group(function () {
                                 // dump($value->created_at);
 
                                 // dump($key);
-                                dump($date1);
+                                // dump($date1);
                                 if($date1 <> null){
                                     // dump('tes');
                                     $t1 = Carbon\Carbon::parse($date1);
                                     $t2 = Carbon\Carbon::parse($value->created_at);
-                                    $diff = $t1->diff($t2);
-                                    dump($diff);
+                                    // $diff = $t1->diff($t2);
+                                    $diff = $t1->diffInSeconds($t2);
+                                    // dump($diff);
+                                    $manhours = $manhours + $diff;
+                                    // dump(gmdate("H:i:s", $diff));
                                 }
                                 $date1 = $value->created_at;
-                                $date2 = $value->created_at;
-                                dump($date2);
-                                dump('-------------------------');
+                                // $date2 = $value->created_at;
+                                // dump($date2);
+                                // dump('-------------------------');
                             }
                         }
 
                     }
-            }
+                }
+                // dump($manhours);
+                $manhours = $manhours/3600;
+                dump(number_format($manhours, 2));
+
        });
 
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
