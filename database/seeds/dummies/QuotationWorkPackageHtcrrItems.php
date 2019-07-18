@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\QuotationWorkPackageHtcrrItem;
 use Illuminate\Database\Seeder;
+use App\Models\QuotationWorkPackageHtcrrItem;
 
 class QuotationWorkPackageHtcrrItems extends Seeder
 {
@@ -12,6 +12,6 @@ class QuotationWorkPackageHtcrrItems extends Seeder
      */
     public function run()
     {
-        //
+        factory(QuotationWorkPackageHtcrrItem::class, config('memfis.dummies.quotation.workpackage.htcrr.items'))->create();
     }
 }

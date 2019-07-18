@@ -31,6 +31,9 @@ return [
             'workpackage' => [
                 'taskcard' => [
                     'items' => 150,
+                ],
+                'htcrr' => [
+                    'items' => 150,
                 ]
             ]
         ],
