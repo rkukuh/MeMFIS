@@ -111,5 +111,9 @@ class DatabaseSeeder extends Seeder
         /** QUOTATION's WORKPACKAGE's TASKCARD's */
         
         $this->call(QuotationWorkPackageTaskCardItemsTableSeeder::class);
+
+        /** QUOTATION's WORKPACKAGE's HT/CRR's */
+
+        $this->call(QuotationWorkPackageHtcrrItemsTableSeeder::class);
     }
 }
