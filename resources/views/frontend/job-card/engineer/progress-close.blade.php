@@ -139,6 +139,14 @@
                                                 Est. Mhrs
                                             </td>
                                             <td width="70%" style="text-align:center">
+                                                {{$jobcard->actual}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                Actual. Mhrs
+                                            </td>
+                                            <td width="70%" style="text-align:center">
                                                 {{$jobcard->taskcard->estimation_manhour}}
                                             </td>
                                         </tr>
