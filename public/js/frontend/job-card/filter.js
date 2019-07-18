@@ -250,7 +250,7 @@ $(document).ready(function () {
             });
         }
     });
-    $('#taskcard_routine_type').select2().trigger('change');
+    $('#taskcard_routine_type').select2();
 });
 
 $(document).ready(function () {
