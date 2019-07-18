@@ -347,11 +347,7 @@
               @endif
             </td>
             <td width="20%" align="right" valign="top">
-              generate
-              {{-- @if()
-              @else
-                -
-              @endif --}}
+                {{$actual_manhours}}
             </td>
           </tr>
         </table>

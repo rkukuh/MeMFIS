@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_item_price" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_item_price" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -20,7 +20,7 @@
                                     @slot('text', 'Quantity')
                                     @slot('name', 'qty')
                                     @slot('id', 'qty')
-                                    @slot('id_error', 'qty')
+                                    @slot('id_error', 'qty-limit')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">

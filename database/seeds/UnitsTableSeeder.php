@@ -144,12 +144,6 @@ class UnitsTableSeeder extends Seeder
         ]);
 
         Unit::create([
-            'name' => 'Roll',
-            'symbol' => 'rol',
-            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
-        ]);
-
-        Unit::create([
             'name' => 'Sheet',
             'symbol' => 'sht',
             'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,

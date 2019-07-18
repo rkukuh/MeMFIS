@@ -13,43 +13,6 @@ Route::name('testing.')->group(function () {
             echo App\Helpers\DocumentNumber::generate('WP-', App\Models\WorkPackage::count());
 
         });
-        Route::get('/unit-validation', function () {
-            $tc = App\Models\TaskCard::find(573);
-            $i = App\Models\Item::find(1);
-            // Tube
-            // dd($i->units);
-            $unit =  App\Models\Unit::where('name','Each')->first()->id;
-            $qty = 4;
-            // dd($unit);
-            $tc_i = $tc->items->last();
-            // dd($tc_i->pivot);
-            if($tc_i->pivot->unit_id == $unit){
-                if($qty > $tc_i->pivot->quantity){
-                    dd('melebihi');
-                }
-                else{
-                    dd('lolos');
-                }
-            }else{
-                // dd($tc->items->last()->unit_id);
-                // dd($tc->items->last()->pivot->unit_id);
-                // dd($tc->items->last()->units->where('uom.unit_id',$tc->items->last()->pivot->unit_id)->first()->uom->quantity);
-                $pembagian = 1/$tc->items->last()->units->where('uom.unit_id',$tc->items->last()->pivot->unit_id)->first()->uom->quantity;
-                $perkalian = $pembagian*$tc->items->last()->units->where('uom.unit_id',$unit)->first()->uom->quantity;
-
-                // dd($perkalian);
-                if($perkalian > $tc_i->pivot->quantity){
-                    dd('melebihi');
-                }
-                else{
-                    dd('lolos');
-                }
-
-            }
-
-            // dd($tc->items->last()->pivot->quantity);
-            // echo 'tes';
-        });
 
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
