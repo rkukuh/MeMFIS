@@ -137,7 +137,7 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'actual',
                     title: 'Actual. Mhrs',
                     sortable: 'asc',
                     filterable: !1,
@@ -295,7 +295,7 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'actual',
                     title: 'Actual. Mhrs',
                     sortable: 'asc',
                     filterable: !1,

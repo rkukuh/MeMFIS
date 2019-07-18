@@ -109,6 +109,12 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
+                    field: 'actual',
+                    title: 'Actual. Mhrs',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'status',
                     title: 'Status',
                     sortable: 'asc',
