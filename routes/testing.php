@@ -14,52 +14,6 @@ Route::name('testing.')->group(function () {
 
         });
 
-        Route::get('/manhour', function () {
-            $statuses = App\Models\Status::ofJobCard()->get();
-            $jobcard = App\Models\JobCard::find(1);
-            foreach($jobcard->helpers as $helper){
-                $helper->userID .= $helper->user->id;
-            }
-            $manhours = null;
-            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                $date1 = null;
-                foreach($values as $value){
-                    if($statuses->where('id',$value->status_id)->first()->code <> "open"){
-                        if($jobcard->helpers->where('userID',$key)->first() == null){
-                            if($date1 <> null){
-                                $t1 = Carbon\Carbon::parse($date1);
-                                $t2 = Carbon\Carbon::parse($value->created_at);
-                                $diff = $t1->diffInSeconds($t2);
-                                $manhours = $manhours + $diff;
-                            }
-                            $date1 = $value->created_at;
-                        }
-                    }
-
-                }
-            }
-            $manhours = $manhours/3600;
-            $manhours_break = null;
-            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                for($i=0; $i<sizeOf($values->toArray()); $i++){
-                    if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
-                        if($jobcard->helpers->where('userID',$key)->first() == null){
-                            if($date1 <> null){
-                                $t2 = Carbon\Carbon::parse($values[$i]->created_at);
-                                $t3 = Carbon\Carbon::parse($values[$i+1]->created_at);
-                                $diff = $t2->diffInSeconds($t3);
-                                $manhours_break = $manhours_break + $diff;
-                            }
-                        }
-                    }
-                }
-            }
-            $manhours_break = $manhours_break/3600;
-            $actual_manhours =number_format($manhours-$manhours_break, 2);
-
-
-       });
-
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
         Route::view('/taskcard-wip', 'frontend/testing/taskcard-wip')->name('taskcard');
