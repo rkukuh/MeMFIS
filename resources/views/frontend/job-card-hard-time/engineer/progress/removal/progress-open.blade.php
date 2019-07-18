@@ -140,6 +140,8 @@
                                                                         </td>
                                                                     </tr>
                                                             </table>
+                                                            <form method="POST" action="{{route('frontend.jobcard-hardtime-engineer.update',$htcrr->uuid)}}">
+
                                                             <table class="mt-3" border="1px" width="100%">
                                                                     <tr>
                                                                         <td width="30%" style="background-color:beige;padding:10px;">
@@ -147,10 +149,9 @@
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.text')
-                                                                                @slot('text', 'title')
-                                                                                @slot('id', 'title')
-                                                                                @slot('name', 'title')
-                                                                                @slot('id_error', 'title')
+                                                                                @slot('id', 'item_sn_removal')
+                                                                                @slot('name', 'item_sn_removal')
+                                                                                @slot('id_error', 'item_sn_removal')
                                                                             @endcomponent
                                                                         </td>
                                                                     </tr>
@@ -161,8 +162,8 @@
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.textarea')
                                                                                 @slot('rows', '5')
-                                                                                @slot('id', 'description')
-                                                                                @slot('name', 'description')
+                                                                                @slot('id', 'description_removal')
+                                                                                @slot('name', 'description_removal')
                                                                                 @slot('text', 'Description')
                                                                             @endcomponent
                                                                         </td>
@@ -173,10 +174,11 @@
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.checkbox')
-                                                                                @slot('id', 'is_rii')
-                                                                                @slot('name', 'is_rii')
+                                                                                @slot('id', 'is_rii_removal')
+                                                                                @slot('name', 'is_rii_removal')
                                                                                 @slot('text', 'IS RII?')
                                                                                 @slot('size', '2')
+                                                                                @slot('value', 1)
                                                                                 @slot('style_div', 'margin-top:20px; padding:0;')
                                                                                 @slot('padding_left', '0')
                                                                             @endcomponent
@@ -190,7 +192,6 @@
                                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                                             <div class="flex">
                                                                 <div class="action-buttons">
-                                                                    <form method="POST" action="{{route('frontend.jobcard-hardtime-engineer.update',$htcrr->uuid)}}">
                                                                         {{method_field('PATCH')}}
                                                                         {!! csrf_field() !!}
                                                                         <input type="hidden" name="progress" value="{{$status->uuid}}">
@@ -279,8 +280,8 @@
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.checkbox')
-                                                                                @slot('id', 'is_rii')
-                                                                                @slot('name', 'is_rii')
+                                                                                @slot('id', 'is_rii_installtation')
+                                                                                @slot('name', 'is_rii_installtation')
                                                                                 @slot('text', 'IS RII?')
                                                                                 @if($htcrr->position == 1)
                                                                                     @slot('checked', 'checked')
@@ -299,9 +300,8 @@
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.text')
-                                                                                @slot('text', 'title')
-                                                                                @slot('id', 'title')
-                                                                                @slot('name', 'title')
+                                                                                @slot('id', 'item_pn_installtation')
+                                                                                @slot('name', 'item_pn_installtation')
                                                                                 @slot('id_error', 'title')
                                                                             @endcomponent
                                                                         </td>
@@ -312,9 +312,8 @@
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.text')
-                                                                                @slot('text', 'title')
-                                                                                @slot('id', 'title')
-                                                                                @slot('name', 'title')
+                                                                                @slot('id', 'item_sn_installtation')
+                                                                                @slot('name', 'item_sn_installtation')
                                                                                 @slot('id_error', 'title')
                                                                             @endcomponent
                                                                         </td>
@@ -326,8 +325,8 @@
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.textarea')
                                                                                 @slot('rows', '5')
-                                                                                @slot('id', 'description')
-                                                                                @slot('name', 'description')
+                                                                                @slot('id', 'description_installtation')
+                                                                                @slot('name', 'description_installtation')
                                                                                 @slot('text', 'Description')
                                                                             @endcomponent
                                                                         </td>

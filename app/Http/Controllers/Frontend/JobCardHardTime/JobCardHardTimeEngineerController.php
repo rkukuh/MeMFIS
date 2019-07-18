@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\JobCardHardTime;
 
 use Auth;
 use Validator;
+use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\HtCrr;
 use App\Models\Status;
@@ -98,8 +99,6 @@ class JobCardHardTimeEngineerController extends Controller
     {
         $employees = Employee::all();
         $progresses = $htcrr->progresses->where('progressed_by',Auth::id());
-        $htcrr_removal = HtCrr::where('parent_id',$htcrr->id)->where('type_id',Type::ofHtCrrType()->where('code','removal')->first()->id)->first();
-        $htcrr_installation = HtCrr::where('parent_id',$htcrr->id)->where('type_id',Type::ofHtCrrType()->where('code','installation')->first()->id)->first();
         if ($progresses->count() == 0 and $this->statuses->where('id',$htcrr->progresses->first()->status_id)->first()->code == "removal-open") {
             return view('frontend.job-card-hard-time.engineer.progress.removal.progress-open', [
                 'htcrr' => $htcrr,
@@ -108,7 +107,11 @@ class JobCardHardTimeEngineerController extends Controller
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "removal-progress"){
+            $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
+
+            // dd($htcrr_removal);
             return view('frontend.job-card-hard-time.engineer.progress.removal.progress-resume', [
+                'htcrr_removal' => $htcrr_removal,
                 'break' => $this->break,
                 'waiting' => $this->waiting,
                 'other' => $this->other,
@@ -166,11 +169,13 @@ class JobCardHardTimeEngineerController extends Controller
     public function update(JobCardUpdate $request, HtCrr $htcrr)
     {
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'removal-open'){
+            $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
+            $htcrr_removal->update(['serial_number' => $request->item_sn_removal, 'description' => $request->description_removal, 'is_rii' => $request->is_rii_removal, 'conducted_by' => Auth::id() , 'conducted_at' => Carbon::now() ]);
+            
             $htcrr->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','removal-progress')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
-
             return redirect()->route('frontend.jobcard.hardtime.index')->with($this->success_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'removal-pending'){
@@ -214,6 +219,8 @@ class JobCardHardTimeEngineerController extends Controller
                 'status_id' =>  $this->statuses->where('code','installation-progress')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
+
+            $htcrr_installation = $htcrr->childs()->where('type_id', Type::where('code','installation')->where('of','htcrr-type')->first()->id)->first();
 
             return redirect()->route('frontend.jobcard.hardtime.index')->with($this->success_notification);
         }
