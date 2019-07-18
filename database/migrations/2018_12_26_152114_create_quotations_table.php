@@ -17,6 +17,7 @@ class CreateQuotationsTable extends Migration
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('number')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('title')->nullable();
             $table->unsignedBigInteger('project_id');
             $table->json('attention')->nullable();

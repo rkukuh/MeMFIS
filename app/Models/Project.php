@@ -9,6 +9,7 @@ class Project extends MemfisModel
 {
     protected $fillable = [
         'code',
+        'parent_id',
         'title',
         'customer_id',
         'aircraft_id',
@@ -43,6 +44,19 @@ class Project extends MemfisModel
     public function approvals()
     {
         return $this->morphMany(Approval::class, 'approvable');
+    }
+
+    /**
+     * One-to-Many (self-join): A Project may have none or many sub-project.
+     *
+     * This function will retrieve the sub-project of a project, if any.
+     * See: Project's parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function childs()
+    {
+        return $this->hasMany(Project::class, 'parent_id');
     }
 
     /**
@@ -88,6 +102,19 @@ class Project extends MemfisModel
                         'note'
                     )
                     ->withTimestamps();
+    }
+
+    /**
+     * One-to-Many (self-join): A Project may have none or many sub-project.
+     *
+     * This function will retrieve the parent of a sub-project.
+     * See: Project's childs() method for the inverse
+     *
+     * @return mixed
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Project::class, 'parent_id');
     }
 
     /**

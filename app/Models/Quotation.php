@@ -8,6 +8,7 @@ class Quotation extends MemfisModel
 {
     protected $fillable = [
         'number',
+        'parent_id',
         'project_id',
         'attention',
         'requested_at',
@@ -44,6 +45,19 @@ class Quotation extends MemfisModel
     public function approvals()
     {
         return $this->morphMany(Approval::class, 'approvable');
+    }
+
+    /**
+     * One-to-Many (self-join): A Quotation may have none or many sub-quotation.
+     *
+     * This function will retrieve the sub-quotation of a quotation, if any.
+     * See: Quotation's parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function childs()
+    {
+        return $this->hasMany(Quotation::class, 'parent_id');
     }
 
     /**
@@ -91,6 +105,19 @@ class Quotation extends MemfisModel
     public function jobcards()
     {
         return $this->hasMany(JobCard::class);
+    }
+
+    /**
+     * One-to-Many (self-join): A Quotation may have none or many sub-quotation.
+     *
+     * This function will retrieve the parent of a sub-quotation.
+     * See: Quotation's childs() method for the inverse
+     *
+     * @return mixed
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Quotation::class, 'parent_id');
     }
 
     /**

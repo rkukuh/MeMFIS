@@ -18,6 +18,7 @@ $factory->define(Project::class, function (Faker $faker) {
 
     return [
         'code' => 'PRJ-DUM-' . $number,
+        'parent_id' => null,
         'title' => 'Project Dummy #' . $number,
         'customer_id' => function () {
             if (Customer::count()) {

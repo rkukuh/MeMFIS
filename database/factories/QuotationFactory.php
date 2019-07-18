@@ -21,6 +21,7 @@ $factory->define(Quotation::class, function (Faker $faker) {
 
     return [
         'number' => 'QTN-DUM-' . $number,
+        'parent_id' => null,
         'project_id' => function () {
             if (Project::count()) {
                 return Project::get()->random()->id;
