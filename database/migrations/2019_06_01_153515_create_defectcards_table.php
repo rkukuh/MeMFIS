@@ -18,6 +18,7 @@ class CreateDefectcardsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
             $table->unsignedBigInteger('jobcard_id');
+            $table->unsignedBigInteger('project_additional_id')->nullable();
             $table->integer('engineer_quantity');
             $table->integer('helper_quantity');
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
@@ -29,6 +30,11 @@ class CreateDefectcardsTable extends Migration
 
             $table->foreign('jobcard_id')
                     ->references('id')->on('jobcards')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('project_additional_id')
+                    ->references('id')->on('projects')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 

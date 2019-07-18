@@ -73,6 +73,19 @@ class Project extends MemfisModel
     }
 
     /**
+     * One-to-Many: A Project (additional) may have zero or many Defect Cards.
+     *
+     * This function will retrieve all the Defect Cards of a given project (additional).
+     * See: DefectCard's project() method for the inverse
+     *
+     * @return mixed
+     */
+    public function defectcards()
+    {
+        return $this->hasMany(DefectCard::class, 'project_additional_id');
+    }
+
+    /**
      * One-to-Many: An HT/CRR may have none or many project.
      *
      * This function will retrieve all the HT/CRRs of a given Project.

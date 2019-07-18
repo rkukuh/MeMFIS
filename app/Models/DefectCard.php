@@ -11,6 +11,7 @@ class DefectCard extends MemfisModel
     protected $fillable = [
         'code',
         'jobcard_id',
+        'project_additional_id',
         'engineer_quantity',
         'helper_quantity',
         'estimation_manhour',
@@ -80,6 +81,19 @@ class DefectCard extends MemfisModel
     public function progresses()
     {
         return $this->morphMany(Progress::class, 'progressable');
+    }
+
+    /**
+     * One-to-Many: A Project (additional) may have zero or many Defect Cards.
+     *
+     * This function will retrieve the project (additional) of a given Defect Card.
+     * See: Project's defectcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function project_additional()
+    {
+        return $this->belongsTo(Project::class, 'project_additional_id');
     }
 
     /**
