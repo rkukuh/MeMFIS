@@ -74,7 +74,7 @@
                         <div class="col-lg-12">
                                 @include('frontend.job-card.filter')
                             </div>
-                        <div class="job_card_datatable" id="scrolling_both"></div>
+                        <div class="job_card_datatable_ppc" id="scrolling_both"></div>
 
                         @include('frontend.job-card.engineer.tool.index')
                         @include('frontend.job-card.engineer.item.index')
