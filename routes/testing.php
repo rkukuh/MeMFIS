@@ -15,68 +15,95 @@ Route::name('testing.')->group(function () {
         });
 
         Route::get('/manhour', function () {
-//             $hours = 2;
-//             $minutes = 2400;
-//             $now  = Carbon\Carbon::now();
-//             dump($now);
-// $days = $now->diffInMinutes($now->copy()->addHours($hours)->addMinutes($minutes));
-// dd($days);
-            // $t1 = Carbon\Carbon::parse('2016-07-05 12:29:16');
-            // $t2 = Carbon\Carbon::parse('2016-07-03 13:30:10');
-            // $diff = $t1->diff($t2);
-            // dd($diff);
-            // dd('manhoour');
             $statuses = App\Models\Status::ofJobCard()->get();
             $jobcard = App\Models\JobCard::find(1);
             foreach($jobcard->helpers as $helper){
                 $helper->userID .= $helper->user->id;
             }
-            // dd($jobcard->progresses->sortBy('created_at'));
             $manhours = null;
             foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                // if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed" and $this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "open"){
-                //     // dump($statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code);
-
-                //     }
-                    // $jobcard->progresses()->save(new Progress([
-                    //     'status_id' =>  $this->statuses->where('code','closed')->first()->id,
-                    //     'reason_id' =>  Type::ofJobCardCloseReason()->where('uuid',$request->accomplishment)->first()->id,
-                    //     'reason_text' =>  $request->note,
-                    //     'progressed_by' =>  $key
-                    // ]));
                     $date1 = null;
                     foreach($values as $value){
                         if($statuses->where('id',$value->status_id)->first()->code <> "open"){
-
-
                             if($jobcard->helpers->where('userID',$key)->first() == null){
-                                // dump($jobcard->id);
-                                // dump($value->created_at);
-
-                                // dump($key);
-                                // dump($date1);
                                 if($date1 <> null){
-                                    // dump('tes');
                                     $t1 = Carbon\Carbon::parse($date1);
                                     $t2 = Carbon\Carbon::parse($value->created_at);
-                                    // $diff = $t1->diff($t2);
                                     $diff = $t1->diffInSeconds($t2);
-                                    // dump($diff);
                                     $manhours = $manhours + $diff;
-                                    // dump(gmdate("H:i:s", $diff));
                                 }
                                 $date1 = $value->created_at;
-                                // $date2 = $value->created_at;
-                                // dump($date2);
-                                // dump('-------------------------');
                             }
                         }
 
                     }
                 }
-                // dump($manhours);
                 $manhours = $manhours/3600;
                 dump(number_format($manhours, 2));
+                dump('*************************************************************************************************');
+
+                $manhours_break = null;
+                foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+                    // if($this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed" and $this->statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "open"){
+                    //     // dump($statuses->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code);
+
+                    //     }
+                        // $jobcard->progresses()->save(new Progress([
+                        //     'status_id' =>  $this->statuses->where('code','closed')->first()->id,
+                        //     'reason_id' =>  Type::ofJobCardCloseReason()->where('uuid',$request->accomplishment)->first()->id,
+                        //     'reason_text' =>  $request->note,
+                        //     'progressed_by' =>  $key
+                        // ]));
+                        // $date1 = null;
+                        for($i=0; $i<sizeOf($values->toArray()); $i++){
+                            if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
+                                if($jobcard->helpers->where('userID',$key)->first() == null){
+                                    if($date1 <> null){
+                                        // $t1 = Carbon\Carbon::parse($date1);
+                                        $t2 = Carbon\Carbon::parse($values[$i]->created_at);
+                                        $t3 = Carbon\Carbon::parse($values[$i+1]->created_at);
+                                        $diff = $t2->diffInSeconds($t3);
+                                        $manhours_break = $manhours_break + $diff;
+                                    }
+                                    // $date1 = $values[$i]->created_at;
+                                }
+                                // dump($values[$i]);
+                            }
+                        }
+                        // foreach($values as $value){
+                        //     if($statuses->where('id',$value->status_id)->first()->code <> "open"){
+
+
+                        //         if($jobcard->helpers->where('userID',$key)->first() == null){
+                        //             // dump($jobcard->id);
+                        //             // dump($value->created_at);
+
+                        //             // dump($key);
+                        //             dump($date1);
+                        //             if($date1 <> null){
+                        //                 // dump('tes');
+                        //                 $t1 = Carbon\Carbon::parse($date1);
+                        //                 $t2 = Carbon\Carbon::parse($value->created_at);
+                        //                 // $diff = $t1->diff($t2);
+                        //                 $diff = $t1->diffInSeconds($t2);
+                        //                 dump($diff);
+                        //                 $manhours_break = $manhours_break + $diff;
+                        //                 // dump(gmdate("H:i:s", $diff));
+                        //             }
+                        //             $date1 = $value->created_at;
+                        //             $date2 = $value->created_at;
+                        //             dump($date2);
+                        //             dump('-------------------------');
+                        //         }
+                        //     }
+
+                        // }
+                    }
+                    // dump($manhours_break);
+                    $manhours_break = $manhours_break/3600;
+                    dump(number_format($manhours_break, 2));
+                    dump('actual manhour '.number_format($manhours-$manhours_break, 2));
+
 
        });
 
