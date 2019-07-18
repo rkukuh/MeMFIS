@@ -9,7 +9,7 @@ class CreateProjectorStatusesTable extends Migration
     public function up()
     {
         Schema::create('projector_statuses', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('projector_name');
             $table->string('stream')->nullable();
             $table->boolean('has_received_all_events')->default(false);

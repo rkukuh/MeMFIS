@@ -14,9 +14,9 @@ class CreateEmployeeJobcardTable extends Migration
     public function up()
     {
         Schema::create('employee_jobcard', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('jobcard_id');
-            $table->unsignedInteger('employee_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('jobcard_id');
+            $table->unsignedBigInteger('employee_id');
             $table->timestamps();
             $table->softDeletes();
 

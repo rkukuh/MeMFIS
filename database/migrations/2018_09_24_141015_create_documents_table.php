@@ -14,10 +14,10 @@ class CreateDocumentsTable extends Migration
     public function up()
     {
         Schema::create('documents', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
-            $table->unsignedInteger('type_id');
+            $table->unsignedBigInteger('type_id');
             $table->morphs('documentable');
             $table->timestamps();
             $table->softDeletes();

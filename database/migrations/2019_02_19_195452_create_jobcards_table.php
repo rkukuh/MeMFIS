@@ -14,11 +14,11 @@ class CreateJobcardsTable extends Migration
     public function up()
     {
         Schema::create('jobcards', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
-            $table->unsignedInteger('taskcard_id');
-            $table->unsignedInteger('quotation_id');
+            $table->unsignedBigInteger('taskcard_id');
+            $table->unsignedBigInteger('quotation_id');
             $table->json('data_taskcard');
             $table->json('data_taskcard_items')->nullable();
             $table->timestamps();

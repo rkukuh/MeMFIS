@@ -14,11 +14,11 @@ class CreateProjectWorkPackageEngineersTable extends Migration
     public function up()
     {
         Schema::create('project_workpackage_engineers', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('project_workpackage_id');
-            $table->unsignedInteger('skill_id');
-            $table->unsignedInteger('engineer_id');
+            $table->unsignedBigInteger('project_workpackage_id');
+            $table->unsignedBigInteger('skill_id');
+            $table->unsignedBigInteger('engineer_id');
             $table->integer('quantity');
             $table->timestamps();
             $table->softDeletes();

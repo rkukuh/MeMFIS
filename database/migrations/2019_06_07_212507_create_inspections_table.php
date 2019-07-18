@@ -14,10 +14,10 @@ class CreateInspectionsTable extends Migration
     public function up()
     {
         Schema::create('inspections', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->morphs('inspectable');
-            $table->unsignedInteger('inspected_by');
+            $table->unsignedBigInteger('inspected_by');
             $table->boolean('is_rii');
             $table->text('note')->nullable();
             $table->timestamps();

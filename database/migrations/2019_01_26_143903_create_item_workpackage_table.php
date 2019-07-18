@@ -14,11 +14,11 @@ class CreateItemWorkPackageTable extends Migration
     public function up()
     {
         Schema::create('item_workpackage', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('workpackage_id');
-            $table->unsignedInteger('item_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('workpackage_id');
+            $table->unsignedBigInteger('item_id');
             $table->double('quantity');
-            $table->unsignedInteger('unit_id');
+            $table->unsignedBigInteger('unit_id');
             $table->timestamps();
             $table->softDeletes();
 

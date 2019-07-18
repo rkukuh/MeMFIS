@@ -14,9 +14,9 @@ class CreateEmployeeHtcrrTable extends Migration
     public function up()
     {
         Schema::create('employee_htcrr', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('htcrr_id');
-            $table->unsignedInteger('employee_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('htcrr_id');
+            $table->unsignedBigInteger('employee_id');
             $table->timestamps();
             $table->softDeletes();
 

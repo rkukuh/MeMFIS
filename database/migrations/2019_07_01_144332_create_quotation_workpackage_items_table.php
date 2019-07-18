@@ -14,13 +14,13 @@ class CreateQuotationWorkPackageItemsTable extends Migration
     public function up()
     {
         Schema::create('quotation_workpackage_items', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('quotation_workpackage_id');
-            $table->unsignedInteger('item_id');
+            $table->unsignedBigInteger('quotation_workpackage_id');
+            $table->unsignedBigInteger('item_id');
             $table->double('quantity');
-            $table->unsignedInteger('unit_id')->nullable();
-            $table->unsignedInteger('price_id')->nullable();
+            $table->unsignedBigInteger('unit_id')->nullable();
+            $table->unsignedBigInteger('price_id')->nullable();
             $table->double('price_amount')->nullable();
             $table->double('subtotal')->nullable();
             $table->string('note')->nullable();

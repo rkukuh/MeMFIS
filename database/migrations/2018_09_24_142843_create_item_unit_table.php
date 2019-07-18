@@ -14,9 +14,9 @@ class CreateItemUnitTable extends Migration
     public function up()
     {
         Schema::create('item_unit', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('item_id');
-            $table->unsignedInteger('unit_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('unit_id');
             $table->double('quantity', 8, 2);
             $table->timestamps();
             $table->softDeletes();

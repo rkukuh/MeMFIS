@@ -14,9 +14,9 @@ class CreateTaskcardWorkPackageTable extends Migration
     public function up()
     {
         Schema::create('taskcard_workpackage', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('taskcard_id');
-            $table->unsignedInteger('workpackage_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('taskcard_id');
+            $table->unsignedBigInteger('workpackage_id');
             $table->integer('sequence')->nullable();
             $table->boolean('is_mandatory')->default(false);
             $table->timestamps();
