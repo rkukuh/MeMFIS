@@ -109,21 +109,22 @@ class JobCardHardTimeEngineerController extends Controller
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "removal-progress"){
             $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
 
-            // dd($htcrr_removal);
             return view('frontend.job-card-hard-time.engineer.progress.removal.progress-resume', [
-                'htcrr_removal' => $htcrr_removal,
                 'break' => $this->break,
                 'waiting' => $this->waiting,
                 'other' => $this->other,
                 'accomplished' => $this->accomplished,
                 'htcrr' => $htcrr,
+                'htcrr_removal' => $htcrr_removal,
                 'pending' => $this->statuses->where('code','removal-pending')->first(),
                 'closed' => $this->statuses->where('code','removal-closed')->first(),
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "removal-pending"){
+            $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
             return view('frontend.job-card-hard-time.engineer.progress.removal.progress-pause', [
                 'htcrr' => $htcrr,
+                'htcrr_removal' => $htcrr_removal,
                 'open' => $this->statuses->where('code','removal-open')->first(),
                 'closed' => $this->statuses->where('code','removal-closed')->first(),
             ]);

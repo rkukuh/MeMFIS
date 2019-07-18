@@ -151,7 +151,7 @@
                                                                                 @slot('name', 'item_sn_removal')
                                                                                 @slot('id_error', 'item_sn_removal')
                                                                                 @slot('value', $htcrr_removal->serial_number)
-                                                                                @endcomponent
+                                                                            @endcomponent
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
