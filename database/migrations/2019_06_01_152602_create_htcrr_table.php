@@ -14,17 +14,17 @@ class CreateHtcrrTable extends Migration
     public function up()
     {
         Schema::create('htcrr', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
-            $table->unsignedInteger('parent_id')->nullable();
-            $table->unsignedInteger('type_id');
-            $table->unsignedInteger('project_id');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('type_id');
+            $table->unsignedBigInteger('project_id');
             $table->string('position')->nullable();
             $table->string('serial_number')->nullable();
             $table->string('part_number')->nullable();
             $table->timestamp('conducted_at')->nullable();
-            $table->unsignedInteger('conducted_by')->nullable();
+            $table->unsignedBigInteger('conducted_by')->nullable();
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->boolean('is_rii')->nullable();
             $table->text('description')->nullable();

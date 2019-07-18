@@ -14,13 +14,13 @@ class CreateProgressesTable extends Migration
     public function up()
     {
         Schema::create('progresses', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->morphs('progressable');
-            $table->unsignedInteger('status_id');
-            $table->unsignedInteger('reason_id')->nullable();
+            $table->unsignedBigInteger('status_id');
+            $table->unsignedBigInteger('reason_id')->nullable();
             $table->string('reason_text')->nullable();
-            $table->unsignedInteger('progressed_by');
+            $table->unsignedBigInteger('progressed_by');
             $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();

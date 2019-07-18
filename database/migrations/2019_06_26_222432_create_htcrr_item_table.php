@@ -14,11 +14,11 @@ class CreateHtcrrItemTable extends Migration
     public function up()
     {
         Schema::create('htcrr_item', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('htcrr_id');
-            $table->unsignedInteger('item_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('htcrr_id');
+            $table->unsignedBigInteger('item_id');
             $table->double('quantity');
-            $table->unsignedInteger('unit_id');
+            $table->unsignedBigInteger('unit_id');
             $table->string('note')->nullable();
             $table->timestamps();
             $table->softDeletes();

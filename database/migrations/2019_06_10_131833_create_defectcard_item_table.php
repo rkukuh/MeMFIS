@@ -14,11 +14,11 @@ class CreateDefectcardItemTable extends Migration
     public function up()
     {
         Schema::create('defectcard_item', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('defectcard_id');
-            $table->unsignedInteger('item_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('defectcard_id');
+            $table->unsignedBigInteger('item_id');
             $table->integer('quantity');
-            $table->unsignedInteger('unit_id');
+            $table->unsignedBigInteger('unit_id');
             $table->string('ipc_ref')->nullable();
             $table->string('sn_on')->nullable();
             $table->string('sn_off')->nullable();

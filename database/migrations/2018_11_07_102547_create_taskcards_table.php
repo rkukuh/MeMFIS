@@ -14,15 +14,15 @@ class CreateTaskcardsTable extends Migration
     public function up()
     {
         Schema::create('taskcards', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
 
             /** BASIC / GENERAL */
             $table->string('number');
             $table->string('title');
-            $table->unsignedInteger('type_id')->nullable();
-            $table->unsignedInteger('task_id')->nullable();
-            $table->unsignedInteger('work_area')->nullable();
+            $table->unsignedBigInteger('type_id')->nullable();
+            $table->unsignedBigInteger('task_id')->nullable();
+            $table->unsignedBigInteger('work_area')->nullable();
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->integer('engineer_quantity')->nullable();
             $table->integer('helper_quantity')->nullable();
@@ -40,14 +40,14 @@ class CreateTaskcardsTable extends Migration
             /** EO Header */
             $table->string('revision')->nullable();
             $table->string('reference')->nullable();
-            $table->unsignedInteger('category_id')->nullable();
-            $table->unsignedInteger('scheduled_priority_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('scheduled_priority_id')->nullable();
             $table->string('scheduled_priority_text')->nullable();
             $table->string('scheduled_priority_type')->nullable();
-            $table->unsignedInteger('recurrence_id')->nullable();
+            $table->unsignedBigInteger('recurrence_id')->nullable();
             $table->integer('recurrence_amount')->nullable();
             $table->string('recurrence_type')->nullable();
-            $table->unsignedInteger('manual_affected_id')->nullable();
+            $table->unsignedBigInteger('manual_affected_id')->nullable();
             $table->string('manual_affected_text')->nullable();
 
             /** SI */

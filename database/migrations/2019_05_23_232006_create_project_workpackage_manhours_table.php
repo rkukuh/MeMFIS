@@ -14,10 +14,10 @@ class CreateProjectworkpackagemanhoursTable extends Migration
     public function up()
     {
         Schema::create('project_workpackage_manhours', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('project_workpackage_id');
-            $table->unsignedInteger('engineer_type_id');
+            $table->unsignedBigInteger('project_workpackage_id');
+            $table->unsignedBigInteger('engineer_type_id');
             $table->integer('proportion_amount');
             $table->timestamps();
             $table->softDeletes();

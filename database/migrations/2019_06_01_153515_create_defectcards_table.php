@@ -14,10 +14,10 @@ class CreateDefectcardsTable extends Migration
     public function up()
     {
         Schema::create('defectcards', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
-            $table->unsignedInteger('jobcard_id');
+            $table->unsignedBigInteger('jobcard_id');
             $table->integer('engineer_quantity');
             $table->integer('helper_quantity');
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();

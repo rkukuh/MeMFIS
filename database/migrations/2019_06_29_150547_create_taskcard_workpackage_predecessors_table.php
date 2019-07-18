@@ -14,10 +14,10 @@ class CreateTaskCardWorkPackagePredecessorsTable extends Migration
     public function up()
     {
         Schema::create('taskcard_workpackage_predecessors', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('taskcard_workpackage_id');
-            $table->unsignedInteger('previous');
+            $table->unsignedBigInteger('taskcard_workpackage_id');
+            $table->unsignedBigInteger('previous');
             $table->integer('order');
             $table->timestamps();
             $table->softDeletes();

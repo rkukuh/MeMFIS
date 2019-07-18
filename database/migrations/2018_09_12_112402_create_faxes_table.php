@@ -14,10 +14,10 @@ class CreateFaxesTable extends Migration
     public function up()
     {
         Schema::create('faxes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
-            $table->unsignedInteger('type_id');
+            $table->unsignedBigInteger('type_id');
             $table->boolean('is_active')->default(true);
             $table->morphs('faxable');
             $table->timestamps();

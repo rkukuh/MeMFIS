@@ -14,9 +14,9 @@ class CreateRtsTable extends Migration
     public function up()
     {
         Schema::create('rts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('project_id');
+            $table->unsignedBigInteger('project_id');
             $table->unsignedDecimal('aircraft_total_time', 8, 2)->nullable();
             $table->text('work_performed')->nullable();
             $table->text('work_data')->nullable();

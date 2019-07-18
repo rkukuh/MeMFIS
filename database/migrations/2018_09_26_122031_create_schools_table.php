@@ -14,11 +14,11 @@ class CreateSchoolsTable extends Migration
     public function up()
     {
         Schema::create('schools', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');
-            $table->unsignedInteger('degree')->nullable();
+            $table->unsignedBigInteger('degree')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

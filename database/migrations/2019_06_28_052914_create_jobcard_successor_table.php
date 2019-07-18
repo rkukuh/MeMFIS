@@ -14,9 +14,9 @@ class CreateJobcardSuccessorTable extends Migration
     public function up()
     {
         Schema::create('jobcard_successor', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('jobcard_id');
-            $table->unsignedInteger('next');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('jobcard_id');
+            $table->unsignedBigInteger('next');
             $table->integer('order');
             $table->timestamps();
             $table->softDeletes();

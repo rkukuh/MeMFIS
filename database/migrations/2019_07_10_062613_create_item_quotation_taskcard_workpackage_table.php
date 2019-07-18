@@ -14,15 +14,15 @@ class CreateItemQuotationTaskcardWorkpackageTable extends Migration
     public function up()
     {
         Schema::create('item_quotation_taskcard_workpackage', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('quotation_id')->nullable();
-            $table->unsignedInteger('workpackage_id')->nullable();
-            $table->unsignedInteger('taskcard_id')->nullable();
-            $table->unsignedInteger('item_id')->nullable();
+            $table->unsignedBigInteger('quotation_id')->nullable();
+            $table->unsignedBigInteger('workpackage_id')->nullable();
+            $table->unsignedBigInteger('taskcard_id')->nullable();
+            $table->unsignedBigInteger('item_id')->nullable();
             $table->double('quantity');
-            $table->unsignedInteger('unit_id')->nullable();
-            $table->unsignedInteger('price_id')->nullable();
+            $table->unsignedBigInteger('unit_id')->nullable();
+            $table->unsignedBigInteger('price_id')->nullable();
             $table->double('price_amount')->nullable();
             $table->double('subtotal')->nullable();
             $table->string('note')->nullable();

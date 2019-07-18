@@ -5,7 +5,7 @@ let JobCard = {
             return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
         };
 
-        $('.job_card_datatable').mDatatable({
+        $('.job_card_datatable_ppc').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -154,7 +154,7 @@ let JobCard = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'
                         );
@@ -312,7 +312,7 @@ let JobCard = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'
                         );

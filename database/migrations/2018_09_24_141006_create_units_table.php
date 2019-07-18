@@ -14,11 +14,11 @@ class CreateUnitsTable extends Migration
     public function up()
     {
         Schema::create('units', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('name');
             $table->string('symbol');
-            $table->unsignedInteger('type_id')->nullable();
+            $table->unsignedBigInteger('type_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

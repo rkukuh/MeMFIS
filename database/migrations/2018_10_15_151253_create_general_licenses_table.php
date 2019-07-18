@@ -16,10 +16,10 @@ class CreateGeneralLicensesTable extends Migration
         /** The details of "Employee-License", for General License */
 
         Schema::create('general_licenses', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('employee_license_id');
-            $table->unsignedInteger('aviation_degree');
+            $table->unsignedBigInteger('employee_license_id');
+            $table->unsignedBigInteger('aviation_degree');
             $table->string('aviation_degree_no');
             $table->string('exam_no')->nullable();
             $table->timestamp('exam_date')->nullable();

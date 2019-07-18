@@ -14,10 +14,10 @@ class CreateThresholdsTable extends Migration
     public function up()
     {
         Schema::create('thresholds', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->morphs('thresholdable');
-            $table->unsignedInteger('type_id');
+            $table->unsignedBigInteger('type_id');
             $table->integer('amount');
             $table->timestamps();
             $table->softDeletes();

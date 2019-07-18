@@ -16,9 +16,9 @@ class CreateOtrCertificationsTable extends Migration
         /** The details of "Employee-License", for OTR Certification */
 
         Schema::create('otr_certifications', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('employee_license_id');
+            $table->unsignedBigInteger('employee_license_id');
             $table->string('stamp_no');
             $table->timestamps();
 

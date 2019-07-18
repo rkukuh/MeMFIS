@@ -14,9 +14,9 @@ class CreateEOInstructionSkillTable extends Migration
     public function up()
     {
         Schema::create('eo_instruction_skill', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('eo_instruction_id');
-            $table->unsignedInteger('skill_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('eo_instruction_id');
+            $table->unsignedBigInteger('skill_id');
             $table->timestamps();
             $table->softDeletes();
 

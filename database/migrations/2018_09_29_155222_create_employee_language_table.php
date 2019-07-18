@@ -14,13 +14,13 @@ class CreateEmployeeLanguageTable extends Migration
     public function up()
     {
         Schema::create('employee_language', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('employee_id');
-            $table->unsignedInteger('language_id');
-            $table->unsignedInteger('reading_level')->nullable();
-            $table->unsignedInteger('speaking_level')->nullable();
-            $table->unsignedInteger('writing_level')->nullable();
-            $table->unsignedInteger('understanding_level')->nullable();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('language_id');
+            $table->unsignedBigInteger('reading_level')->nullable();
+            $table->unsignedBigInteger('speaking_level')->nullable();
+            $table->unsignedBigInteger('writing_level')->nullable();
+            $table->unsignedBigInteger('understanding_level')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

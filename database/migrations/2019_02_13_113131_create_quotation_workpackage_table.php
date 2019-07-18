@@ -14,9 +14,9 @@ class CreateQuotationWorkPackageTable extends Migration
     public function up()
     {
         Schema::create('quotation_workpackage', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('quotation_id');
-            $table->unsignedInteger('workpackage_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('quotation_id');
+            $table->unsignedBigInteger('workpackage_id');
             $table->double('manhour_total')->nullable();
             $table->double('manhour_rate')->nullable();
             $table->string('discount_type')->nullable();

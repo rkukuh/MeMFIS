@@ -14,10 +14,10 @@ class CreateNationalitiesTable extends Migration
     public function up()
     {
         Schema::create('nationalities', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('nationality');
-            $table->unsignedInteger('country_id');
+            $table->unsignedBigInteger('country_id');
             $table->timestamps();
             $table->softDeletes();
 

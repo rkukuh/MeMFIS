@@ -14,11 +14,11 @@ class CreateItemStorageTable extends Migration
     public function up()
     {
         Schema::create('item_storage', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('item_id');
-            $table->unsignedInteger('storage_id');
-            $table->unsignedInteger('min')->default(0);
-            $table->unsignedInteger('max')->default(0);
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('storage_id');
+            $table->unsignedBigInteger('min')->default(0);
+            $table->unsignedBigInteger('max')->default(0);
             $table->timestamps();
             $table->softDeletes();
 

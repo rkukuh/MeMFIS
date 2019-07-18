@@ -14,9 +14,9 @@ class CreateCertificationEmployeeTable extends Migration
     public function up()
     {
         Schema::create('certification_employee', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('certification_id');
-            $table->unsignedInteger('employee_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('certification_id');
+            $table->unsignedBigInteger('employee_id');
             $table->string('number');
             $table->timestamp('issued_at')->nullable();
             $table->timestamp('valid_until')->nullable();

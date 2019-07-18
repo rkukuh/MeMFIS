@@ -14,9 +14,9 @@ class CreateTaskcardRelationsTable extends Migration
     public function up()
     {
         Schema::create('taskcard_relations', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('taskcard_id');
-            $table->unsignedInteger('related_to');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('taskcard_id');
+            $table->unsignedBigInteger('related_to');
             $table->timestamps();
             $table->softDeletes();
 
