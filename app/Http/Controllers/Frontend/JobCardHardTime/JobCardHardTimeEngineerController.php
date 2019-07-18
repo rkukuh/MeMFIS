@@ -230,9 +230,8 @@ class JobCardHardTimeEngineerController extends Controller
             return redirect()->route('frontend.jobcard.hardtime.index')->with($this->success_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'installation-open'){
-            // dd($request);
             $htcrr_installation = $htcrr->childs()->where('type_id', Type::where('code','installation')->where('of','htcrr-type')->first()->id)->first();
-            dd($htcrr_installation->update(['serial_number' => $request->item_sn_installation, 'description' => $request->description_installation, 'is_rii' => $request->is_rii_installation, 'conducted_by' => Auth::id() , 'conducted_at' => Carbon::now(), 'part_number' => $request->item_pn_installation ]));
+            $htcrr_installation->update(['serial_number' => $request->item_sn_installation, 'description' => $request->description_installation, 'is_rii' => $request->is_rii_installation, 'conducted_by' => Auth::id() , 'conducted_at' => Carbon::now(), 'part_number' => $request->item_pn_installation ]);
             
             $htcrr->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','installation-progress')->first()->id,
