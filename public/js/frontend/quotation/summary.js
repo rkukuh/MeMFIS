@@ -160,8 +160,8 @@ var DatatableAutoColumnHideDemo = function () {
             }
 
             if(currency.id == 1){
-              document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
-              document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
+              $("#sub_total").html(IDRformatter.format(subtotal));
+              $("#grand_total_rupiah").html(IDRformatter.format(subtotal));
               $("#grand_total_rupiah").attr("value", subtotal);
               $("#sub_total").attr("value", subtotal);
               return (
@@ -169,12 +169,12 @@ var DatatableAutoColumnHideDemo = function () {
               );
             }else{
               let totalRupiah = subtotal * exchange_rate; 
-              document.getElementById("sub_total").innerHTML = ForeignFormatter.format(subtotal);
-              document.getElementById("grand_total").innerHTML = ForeignFormatter.format(subtotal);
+              $("#sub_total").html(ForeignFormatter.format(subtotal));
+              $("#grand_total").html(ForeignFormatter.format(subtotal));
               $("#grand_total").attr("value", subtotal);
               $("#sub_total").attr("value", subtotal);
 
-              document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
+              $("#grand_total_rupiah").html(IDRformatter.format(totalRupiah));
               $("#grand_total_rupiah").attr("value", totalRupiah);
               return (
                 ForeignFormatter.format(total)
