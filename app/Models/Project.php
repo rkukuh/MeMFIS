@@ -76,7 +76,7 @@ class Project extends MemfisModel
      * One-to-Many: A Project (additional) may have zero or many Defect Cards.
      *
      * This function will retrieve all the Defect Cards of a given project (additional).
-     * See: DefectCard's project() method for the inverse
+     * See: DefectCard's project_additional() method for the inverse
      *
      * @return mixed
      */
