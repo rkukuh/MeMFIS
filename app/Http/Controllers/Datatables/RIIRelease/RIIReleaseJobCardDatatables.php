@@ -87,10 +87,12 @@ class RIIReleaseJobCardDatatables extends Controller
                     if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
                         if($jobcard->helpers->where('userID',$key)->first() == null){
                             if($date1 <> null){
-                                $t2 = Carbon::parse($values[$i]->created_at);
-                                $t3 = Carbon::parse($values[$i+1]->created_at);
-                                $diff = $t2->diffInSeconds($t3);
-                                $manhours_break = $manhours_break + $diff;
+                                if($i+1 < sizeOf($values->toArray())){
+                                    $t2 = Carbon::parse($values[$i]->created_at);
+                                    $t3 = Carbon::parse($values[$i+1]->created_at);
+                                    $diff = $t2->diffInSeconds($t3);
+                                    $manhours_break = $manhours_break + $diff;
+                                }
                             }
                         }
                     }
