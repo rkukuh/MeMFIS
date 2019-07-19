@@ -141,10 +141,10 @@
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.text')
-                                                                                @slot('text', 'title')
-                                                                                @slot('id', 'title')
-                                                                                @slot('name', 'title')
-                                                                                @slot('id_error', 'title')
+                                                                                @slot('id', 'item_sn_removal')
+                                                                                @slot('name', 'item_sn_removal')
+                                                                                @slot('id_error', 'item_sn_removal')
+                                                                                @slot('value', $htcrr_removal->serial_number)
                                                                             @endcomponent
                                                                         </td>
                                                                     </tr>
@@ -155,9 +155,9 @@
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.textarea')
                                                                                 @slot('rows', '5')
-                                                                                @slot('id', 'description')
-                                                                                @slot('name', 'description')
-                                                                                @slot('text', 'Description')
+                                                                                @slot('id', 'description_removal')
+                                                                                @slot('name', 'description_removal')
+                                                                                @slot('value', $htcrr_removal->description)
                                                                             @endcomponent
                                                                         </td>
                                                                     </tr>
@@ -167,10 +167,13 @@
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.checkbox')
-                                                                                @slot('id', 'is_rii')
-                                                                                @slot('name', 'is_rii')
+                                                                                @slot('id', 'is_rii_removal')
+                                                                                @slot('name', 'is_rii_removal')
                                                                                 @slot('text', 'IS RII?')
+                                                                                @if($htcrr_removal->is_null)
                                                                                 @slot('checked', 'checked')
+                                                                                @endif
+                                                                                @slot('value', 1)
                                                                                 @slot('size', '2')
                                                                                 @slot('style_div', 'margin-top:20px; padding:0;')
                                                                                 @slot('padding_left', '0')
@@ -455,10 +458,13 @@
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.checkbox')
-                                                                                @slot('id', 'is_rii')
-                                                                                @slot('name', 'is_rii')
+                                                                                @slot('id', 'is_rii_installation')
+                                                                                @slot('name', 'is_rii_installation')
                                                                                 @slot('text', 'IS RII?')
+                                                                                @if($htcrr_installation->is_null)
                                                                                 @slot('checked', 'checked')
+                                                                                @endif
+                                                                                @slot('value', 1)
                                                                                 @slot('size', '2')
                                                                                 @slot('style_div', 'margin-top:20px; padding:0;')
                                                                                 @slot('padding_left', '0')
@@ -473,10 +479,10 @@
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.text')
-                                                                                @slot('text', 'title')
-                                                                                @slot('id', 'title')
-                                                                                @slot('name', 'title')
-                                                                                @slot('id_error', 'title')
+                                                                                @slot('id', 'item_pn_installation')
+                                                                                @slot('name', 'item_pn_installation')
+                                                                                @slot('id_error', 'item_pn_installation')
+                                                                                @slot('value', $htcrr_installation->part_number)
                                                                             @endcomponent
                                                                         </td>
                                                                     </tr>
@@ -486,10 +492,10 @@
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.text')
-                                                                                @slot('text', 'title')
-                                                                                @slot('id', 'title')
-                                                                                @slot('name', 'title')
-                                                                                @slot('id_error', 'title')
+                                                                                @slot('id', 'item_sn_installation')
+                                                                                @slot('name', 'item_sn_installation')
+                                                                                @slot('id_error', 'item_sn_installation')
+                                                                                @slot('value', $htcrr_installation->serial_number)
                                                                             @endcomponent
                                                                         </td>
                                                                     </tr>
@@ -500,9 +506,9 @@
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.textarea')
                                                                                 @slot('rows', '5')
-                                                                                @slot('id', 'description')
-                                                                                @slot('name', 'description')
-                                                                                @slot('text', 'Description')
+                                                                                @slot('id', 'description_installation')
+                                                                                @slot('name', 'description_installation')
+                                                                                @slot('value', $htcrr_installation->description)
                                                                             @endcomponent
                                                                         </td>
                                                                     </tr>

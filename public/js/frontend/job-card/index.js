@@ -137,7 +137,7 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'actual',
                     title: 'Actual. Mhrs',
                     sortable: 'asc',
                     filterable: !1,
@@ -295,7 +295,7 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'actual',
                     title: 'Actual. Mhrs',
                     sortable: 'asc',
                     filterable: !1,
@@ -324,7 +324,7 @@ let JobCard = {
 
         let material_datatables_init = true;
         let triggeruuid ="";
-        let material = $('.job_card_datatable').on('click', '.material', function () {
+        let material = $('.job_card_datatable_ppc').on('click', '.material', function () {
             if(material_datatables_init == true){
                 material_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
@@ -342,7 +342,7 @@ let JobCard = {
 
         let tool_datatables_init = true;
         let triggeruuid2 ="";
-        let tool = $('.job_card_datatable').on('click', '.tool', function () {
+        let tool = $('.job_card_datatable_ppc').on('click', '.tool', function () {
             if(tool_datatables_init == true){
                 tool_datatables_init = false;
                 triggeruuid2 = $(this).data('uuid');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\JobCard;
 
+use Carbon\Carbon;
 use App\Models\Unit;
 use App\Models\JobCard;
 use App\Models\TaskCard;
@@ -22,6 +23,8 @@ class JobCardDatatables extends Controller
         $JobCard=JobCard::with('taskcard')->get();
 
         foreach($JobCard as $taskcard){
+            $taskcard->task_name .= $taskcard->taskcard->task;
+            $taskcard->task_name .= $taskcard->taskcard->type;
             if(isset($taskcard->taskcard->skills) ){
                 if(sizeof($taskcard->taskcard->skills) == 3){
                     $taskcard->skill_name .= "ERI";
@@ -33,52 +36,85 @@ class JobCardDatatables extends Controller
                     $taskcard->skill_name .= '';
                 }
             }
-        }
 
-        foreach($JobCard as $taskcard){
-            $taskcard->task_name .= $taskcard->taskcard->task;
-        }
-
-        foreach($JobCard as $taskcard){
-            $taskcard->task_name .= $taskcard->taskcard->type;
-        }
-        foreach($JobCard as $jobcard){
-
-            $count_user = $jobcard->progresses->groupby('progressed_by')->count()-1;
+            $count_user = $taskcard->progresses->groupby('progressed_by')->count()-1;
 
             $status = [];
-            foreach($jobcard->progresses->groupby('progressed_by') as $key => $value){
-                if(Status::ofJobCard()->where('id',$jobcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
+            foreach($taskcard->progresses->groupby('progressed_by') as $key => $value){
+                if(Status::ofJobCard()->where('id',$taskcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
                     array_push($status, 'Pending');
                 }
             }
 
-
-            if($jobcard->taskcard->is_rii == 1 and $jobcard->approvals->count()==2){
-                $jobcard->status .= 'Released';
+            if($taskcard->taskcard->is_rii == 1 and $taskcard->approvals->count()==2){
+                $taskcard->status .= 'Released';
             }
-            elseif($jobcard->taskcard->is_rii == 1 and $jobcard->approvals->count()==1){
-                if($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-                    $jobcard->status .= 'Waiting for RII';
+            elseif($taskcard->taskcard->is_rii == 1 and $taskcard->approvals->count()==1){
+                if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+                    $taskcard->status .= 'Waiting for RII';
                 }
             }
-            elseif($jobcard->taskcard->is_rii == 0 and sizeof($jobcard->approvals)==1){
-                if($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-                    $jobcard->status .= 'Released';
+            elseif($taskcard->taskcard->is_rii == 0 and sizeof($taskcard->approvals)==1){
+                if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+                    $taskcard->status .= 'Released';
                 }
             }
-            elseif($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-                $jobcard->status .= 'Closed';
+            elseif($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+                $taskcard->status .= 'Closed';
             }
             elseif(sizeof($status) == $count_user and $count_user <> 0){
-                $jobcard->status .= 'Pending';
+                $taskcard->status .= 'Pending';
             }
             elseif(sizeof($status) <> $count_user and $count_user <> 0){
-                $jobcard->status .= 'Progress';
+                $taskcard->status .= 'Progress';
             }
-            elseif($jobcard->progresses->count()==1){
-                $jobcard->status .= 'Open';
+            elseif($taskcard->progresses->count()==1){
+                $taskcard->status .= 'Open';
             }
+
+            $statuses = Status::ofJobCard()->get();
+            $jobcard = JobCard::where('uuid',$taskcard->uuid)->first();
+            foreach($jobcard->helpers as $helper){
+                $helper->userID .= $helper->user->id;
+            }
+            $manhours = 0;
+            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+                $date1 = null;
+                foreach($values as $value){
+                    if($statuses->where('id',$value->status_id)->first()->code <> "open"){
+                        if($jobcard->helpers->where('userID',$key)->first() == null){
+                            if($date1 <> null){
+                                $t1 = Carbon::parse($date1);
+                                $t2 = Carbon::parse($value->created_at);
+                                $diff = $t1->diffInSeconds($t2);
+                                $manhours = $manhours + $diff;
+                            }
+                            $date1 = $value->created_at;
+                        }
+                    }
+
+                }
+            }
+            $manhours = $manhours/3600;
+            $manhours_break = 0;
+            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+                for($i=0; $i<sizeOf($values->toArray()); $i++){
+                    if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
+                        if($jobcard->helpers->where('userID',$key)->first() == null){
+                            if($date1 <> null){
+                                $t2 = Carbon::parse($values[$i]->created_at);
+                                $t3 = Carbon::parse($values[$i+1]->created_at);
+                                $diff = $t2->diffInSeconds($t3);
+                                $manhours_break = $manhours_break + $diff;
+                            }
+                        }
+                    }
+                }
+            }
+            $manhours_break = $manhours_break/3600;
+            $actual_manhours =number_format($manhours-$manhours_break, 2);
+            $taskcard->actual .= $actual_manhours;
+
         }
 
         $data = $alldata = json_decode($JobCard);

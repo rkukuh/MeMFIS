@@ -11,6 +11,7 @@ class DefectCard extends MemfisModel
     protected $fillable = [
         'code',
         'jobcard_id',
+        'project_additional_id',
         'engineer_quantity',
         'helper_quantity',
         'estimation_manhour',
@@ -83,6 +84,19 @@ class DefectCard extends MemfisModel
     }
 
     /**
+     * One-to-Many: A Project (additional) may have zero or many Defect Cards.
+     *
+     * This function will retrieve the project (additional) of a given Defect Card.
+     * See: Project's defectcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function project_additional()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    /**
      * One-to-Many: A defect card may have zero or many propose correction.
      *
      * This function will retrieve all propose corrections of a defect card.
@@ -95,6 +109,19 @@ class DefectCard extends MemfisModel
         return $this->belongsToMany(Type::class, 'defectcard_propose_correction', 'defectcard_id', 'propose_correction_id')
                     ->withPivot('propose_correction_text')
                     ->withTimestamps();;
+    }
+
+    /**
+     * One-to-Many: A Quotation (additional) may have zero or many Defect Cards.
+     *
+     * This function will retrieve the quotation (additional) of a given Defect Card.
+     * See: Quotation's defectcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotation_additional()
+    {
+        return $this->belongsTo(Quotation::class);
     }
 
     /*************************************** ACCESSOR ****************************************/

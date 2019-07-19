@@ -123,6 +123,12 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
+                    field: 'actual',
+                    title: 'Actual. Mhrs',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'status',
                     title: 'Status',
                     sortable: 'asc',
@@ -133,7 +139,13 @@ let RiiRelease = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-
+                        if(t.status == 'RII RELEASED'){
+                            return (
+                                '<a href="/jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-external-link"></i>' +
+                                '</a>'
+                            );
+                        }else{
                             return (
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check-circle"></i>' +
@@ -142,6 +154,7 @@ let RiiRelease = {
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
+                        }
                     }
                 }
             ]

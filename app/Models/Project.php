@@ -9,6 +9,7 @@ class Project extends MemfisModel
 {
     protected $fillable = [
         'code',
+        'parent_id',
         'title',
         'customer_id',
         'aircraft_id',
@@ -46,6 +47,19 @@ class Project extends MemfisModel
     }
 
     /**
+     * One-to-Many (self-join): A Project may have none or many sub-project.
+     *
+     * This function will retrieve the sub-project of a project, if any.
+     * See: Project's parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function childs()
+    {
+        return $this->hasMany(Project::class, 'parent_id');
+    }
+
+    /**
      * One-to-Many: A project must have a customer
      *
      * This function will retrieve the customer of a project.
@@ -56,6 +70,19 @@ class Project extends MemfisModel
     public function customer()
     {
         return $this->belongsTo(Customer::class);
+    }
+
+    /**
+     * One-to-Many: A Project (additional) may have zero or many Defect Cards.
+     *
+     * This function will retrieve all the Defect Cards of a given project (additional).
+     * See: DefectCard's project_additional() method for the inverse
+     *
+     * @return mixed
+     */
+    public function defectcards()
+    {
+        return $this->hasMany(DefectCard::class, 'project_additional_id');
     }
 
     /**
@@ -88,6 +115,19 @@ class Project extends MemfisModel
                         'note'
                     )
                     ->withTimestamps();
+    }
+
+    /**
+     * One-to-Many (self-join): A Project may have none or many sub-project.
+     *
+     * This function will retrieve the parent of a sub-project.
+     * See: Project's childs() method for the inverse
+     *
+     * @return mixed
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Project::class, 'parent_id');
     }
 
     /**

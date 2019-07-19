@@ -8,6 +8,7 @@ class Quotation extends MemfisModel
 {
     protected $fillable = [
         'number',
+        'parent_id',
         'project_id',
         'attention',
         'requested_at',
@@ -47,6 +48,19 @@ class Quotation extends MemfisModel
     }
 
     /**
+     * One-to-Many (self-join): A Quotation may have none or many sub-quotation.
+     *
+     * This function will retrieve the sub-quotation of a quotation, if any.
+     * See: Quotation's parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function childs()
+    {
+        return $this->hasMany(Quotation::class, 'parent_id');
+    }
+
+    /**
      * One-to-Many: A quotation may have one currency.
      *
      * This function will retrieve the currency of a quotation.
@@ -57,6 +71,19 @@ class Quotation extends MemfisModel
     public function currency()
     {
         return $this->belongsTo(Currency::class);
+    }
+
+    /**
+     * One-to-Many: A Quotation (additional) may have zero or many Defect Cards.
+     *
+     * This function will retrieve all the Defect Cards of a given quotation (additional).
+     * See: DefectCard's quotation_additional() method for the inverse
+     *
+     * @return mixed
+     */
+    public function defectcards()
+    {
+        return $this->hasMany(DefectCard::class, 'quotation_additional_id');
     }
 
     /**
@@ -91,6 +118,19 @@ class Quotation extends MemfisModel
     public function jobcards()
     {
         return $this->hasMany(JobCard::class);
+    }
+
+    /**
+     * One-to-Many (self-join): A Quotation may have none or many sub-quotation.
+     *
+     * This function will retrieve the parent of a sub-quotation.
+     * See: Quotation's childs() method for the inverse
+     *
+     * @return mixed
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Quotation::class, 'parent_id');
     }
 
     /**

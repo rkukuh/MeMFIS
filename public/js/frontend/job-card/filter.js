@@ -39,9 +39,9 @@ $('.filter').on('change', function () {
             status_jobcard: status_jobcard,
         },
         success: function(response) {
-            let table = $('.job_card_datatable').mDatatable();
+            let table = $('.job_card_datatable_ppc').mDatatable();
             table.destroy();
-            table = $('.job_card_datatable').mDatatable({
+            table = $('.job_card_datatable_ppc').mDatatable({
                 data: {
                     type: "local",
                     source: response,
@@ -114,7 +114,7 @@ $('.filter').on('change', function () {
                                     '<p>' + data + '</p>'
                                 );
                             }
-    
+
                             return ''
                         }
                     },
@@ -136,7 +136,7 @@ $('.filter').on('change', function () {
                                 '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
                             );
                         }
-    
+
                     },
                     {
                         field: '2',
@@ -175,7 +175,7 @@ $('.filter').on('change', function () {
                         overflow: 'visible',
                         template: function (t, e, i) {
                             return (
-                                '<a href="jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                '<a href="jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                     '<i class="la la-print"></i>' +
                                 '</a>'
                             );
@@ -250,7 +250,7 @@ $(document).ready(function () {
             });
         }
     });
-    $('#taskcard_routine_type').select2().trigger('change');
+    $('#taskcard_routine_type').select2();
 });
 
 $(document).ready(function () {
