@@ -103,6 +103,18 @@ let Quotation = {
 
                 },
                 {
+                    field: '',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: '',
+                    title: 'Quotation Type',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'status',
                     title: 'Status',
                     sortable: 'asc',

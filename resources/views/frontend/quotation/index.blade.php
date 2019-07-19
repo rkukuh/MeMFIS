@@ -65,10 +65,21 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        @component('frontend.common.buttons.create')
-                                            @slot('text', 'Quotation')
-                                            @slot('href', route('frontend.quotation.create') )
-                                        @endcomponent
+                                        <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
+                                            <a href="{{route('frontend.quotation.create')}}" class="m-btn btn btn-primary">
+                                                <span>
+                                                    <i class="la la-plus-circle"></i>
+                                                <span>Quotation Project</span>
+                                                </span>
+                                            </a>
+                                            <button type="button" class="btn btn-primary m-btn m-btn--pill-last" data-target="#modal_additional_quotation" data-toggle="modal">
+                                                <span>
+                                                    <i class="la la-plus-circle"></i>
+                                                <span>Additional Task Quotation</span>
+                                                </span>
+                                            </button>
+                                            @include('frontend.quotation.additional.modal-project')
+                                        </div>
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
