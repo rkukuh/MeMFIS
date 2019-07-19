@@ -193,6 +193,8 @@
                                             <hr>
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                                                    @include('frontend.goods-received-note.modal')
                                                     <div class="purchase_order_datatable" id="purchase_order_datatable"></div>
                                                 </div>
                                             </div>
@@ -231,5 +233,9 @@
     <script src="{{ asset('js/frontend/good-received-note/create.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/ref-date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
 
 @endpush
