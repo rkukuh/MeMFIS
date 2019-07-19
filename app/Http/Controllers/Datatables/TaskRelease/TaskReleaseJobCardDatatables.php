@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\TaskRelease;
 
+use Carbon\Carbon;
 use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\ListUtil;
@@ -19,9 +20,7 @@ class TaskReleaseJobCardDatatables extends Controller
     {
         $JobCard=JobCard::with('taskcard','quotation')->get();
 
-        // foreach($JobCard as $status){
-        //     $status->status .= Status::find($status->progresses->last()->status_id)->name;
-        // }
+
 
         foreach($JobCard as $jobcard){
 
@@ -33,19 +32,12 @@ class TaskReleaseJobCardDatatables extends Controller
                     array_push($status, 'Pending');
                 }
             }
-
-
             if($jobcard->taskcard->is_rii == 1 and $jobcard->approvals->count()==2){
-                $jobcard->status .= 'Released';
+                $jobcard->status .= 'RII Released';
             }
-            elseif($jobcard->taskcard->is_rii == 1 and $jobcard->approvals->count()==1){
+            elseif(sizeof($jobcard->approvals)==1 and Status::ofJobCard()->where('id',$jobcard->progresses->last()->status_id)->first()->code == "closed"){
                 if($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-                    $jobcard->status .= 'Waiting for RII';
-                }
-            }
-            elseif($jobcard->taskcard->is_rii == 0 and sizeof($jobcard->approvals)==1 and Status::ofJobCard()->where('id',$jobcard->progresses->last()->status_id)->first()->code == "closed"){
-                if($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-                    $jobcard->status .= 'Released';
+                    $jobcard->status .= 'Task Released';
                 }
             }
             elseif($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
@@ -60,8 +52,53 @@ class TaskReleaseJobCardDatatables extends Controller
             elseif($jobcard->progresses->count()==1){
                 $jobcard->status .= 'Open';
             }
+
         }
 
+        foreach($JobCard as $Jobcard){
+            $statuses = Status::ofJobCard()->get();
+            $jobcard = JobCard::where('uuid',$Jobcard->uuid)->first();
+            foreach($jobcard->helpers as $helper){
+                $helper->userID .= $helper->user->id;
+            }
+            $manhours = 0;
+            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+                $date1 = null;
+                foreach($values as $value){
+                    if($statuses->where('id',$value->status_id)->first()->code <> "open"){
+                        if($jobcard->helpers->where('userID',$key)->first() == null){
+                            if($date1 <> null){
+                                $t1 = Carbon::parse($date1);
+                                $t2 = Carbon::parse($value->created_at);
+                                $diff = $t1->diffInSeconds($t2);
+                                $manhours = $manhours + $diff;
+                            }
+                            $date1 = $value->created_at;
+                        }
+                    }
+
+                }
+            }
+            $manhours = $manhours/3600;
+            $manhours_break = 0;
+            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+                for($i=0; $i<sizeOf($values->toArray()); $i++){
+                    if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
+                        if($jobcard->helpers->where('userID',$key)->first() == null){
+                            if($date1 <> null){
+                                $t2 = Carbon::parse($values[$i]->created_at);
+                                $t3 = Carbon::parse($values[$i+1]->created_at);
+                                $diff = $t2->diffInSeconds($t3);
+                                $manhours_break = $manhours_break + $diff;
+                            }
+                        }
+                    }
+                }
+            }
+            $manhours_break = $manhours_break/3600;
+            $actual_manhours =number_format($manhours-$manhours_break, 2);
+            $Jobcard->actual .= $actual_manhours;
+        }
 
         foreach($JobCard as $aircraft){
             $aircraft->aircraft_name .= $aircraft->quotation->project->aircraft->name;
@@ -85,7 +122,7 @@ class TaskReleaseJobCardDatatables extends Controller
             $customer->customer_name .= $customer->quotation->customer;
         }
 
-        $data = $alldata = json_decode(collect(array_values($JobCard->where('status','Closed')->all())));
+        $data = $alldata = json_decode(collect(array_values($JobCard->whereIn('status',['Closed','Task Released','RII Released'])->all())));
         // dd($data);
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

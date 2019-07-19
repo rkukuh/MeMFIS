@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\JobCard;
 
 use Auth;
 use Validator;
+use carbon\Carbon;
 use App\Models\Type;
 use App\Models\Status;
 use App\Models\JobCard;
@@ -95,6 +96,48 @@ class JobCardEngineerController extends Controller
      */
     public function edit(JobCard $jobcard)
     {
+        $statuses = Status::ofJobCard()->get();
+        $jobcard = JobCard::where('uuid',$jobcard->uuid)->first();
+        foreach($jobcard->helpers as $helper){
+            $helper->userID .= $helper->user->id;
+        }
+        $manhours = 0;
+        foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            $date1 = null;
+            foreach($values as $value){
+                if($statuses->where('id',$value->status_id)->first()->code <> "open"){
+                    if($jobcard->helpers->where('userID',$key)->first() == null){
+                        if($date1 <> null){
+                            $t1 = Carbon::parse($date1);
+                            $t2 = Carbon::parse($value->created_at);
+                            $diff = $t1->diffInSeconds($t2);
+                            $manhours = $manhours + $diff;
+                        }
+                        $date1 = $value->created_at;
+                    }
+                }
+
+            }
+        }
+        $manhours = $manhours/3600;
+        $manhours_break = 0;
+        foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            for($i=0; $i<sizeOf($values->toArray()); $i++){
+                if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
+                    if($jobcard->helpers->where('userID',$key)->first() == null){
+                        if($date1 <> null){
+                            $t2 = Carbon::parse($values[$i]->created_at);
+                            $t3 = Carbon::parse($values[$i+1]->created_at);
+                            $diff = $t2->diffInSeconds($t3);
+                            $manhours_break = $manhours_break + $diff;
+                        }
+                    }
+                }
+            }
+        }
+        $manhours_break = $manhours_break/3600;
+        $actual =number_format($manhours-$manhours_break, 2);
+
         $progresses = $jobcard->progresses->where('progressed_by',Auth::id());
         $employees = Employee::all();
         foreach($progresses as $progress){
@@ -141,6 +184,7 @@ class JobCardEngineerController extends Controller
                 'materials' => $jobcard->taskcard->materials,
                 'tools' => $jobcard->taskcard->tools,
                 'progresses' => $progresses,
+                'actual' => $actual,
             ]);
         }
         else{
@@ -162,15 +206,18 @@ class JobCardEngineerController extends Controller
      */
     public function update(JobCardUpdate $request, JobCard $jobcard)
     {
-        $helpers = Employee::whereIn('code',$request->helper)->pluck('id');
 
-        $jobcard->helpers()->sync($helpers);
-        
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             $jobcard->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
+
+            if($request->helper){
+                $helpers = Employee::whereIn('code',$request->helper)->pluck('id');
+                $jobcard->helpers()->sync($helpers);
+            }
+
             return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
         }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
