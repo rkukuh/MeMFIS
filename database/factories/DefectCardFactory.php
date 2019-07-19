@@ -8,6 +8,7 @@ use App\Models\JobCard;
 use App\Models\Project;
 use App\Models\Approval;
 use App\Models\Progress;
+use App\Models\Quotation;
 use App\Models\DefectCard;
 use Faker\Generator as Faker;
 
@@ -18,7 +19,8 @@ $factory->define(DefectCard::class, function (Faker $faker) {
     return [
         'code' => 'DC-DUM-' . $number,
         'jobcard_id' => JobCard::get()->random()->id,
-        // 'project_additional_id' => null,
+        'project_additional_id' => null,
+        'quotation_additional_id' => null,
         'engineer_quantity' => rand(1, 10),
         'helper_quantity' => rand(10, 100),
         'estimation_manhour' => $faker->randomFloat(2, 0, 9999),
@@ -81,6 +83,8 @@ $factory->afterCreating(DefectCard::class, function ($defectcard, $faker) {
 
     if ($faker->boolean) {
         $defectcard->project_additional()->associate(Project::get()->random());
+        $defectcard->quotation_additional()->associate(Quotation::get()->random());
+        
         $defectcard->save();
     }
 

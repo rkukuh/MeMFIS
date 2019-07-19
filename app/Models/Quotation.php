@@ -74,6 +74,19 @@ class Quotation extends MemfisModel
     }
 
     /**
+     * One-to-Many: A Quotation (additional) may have zero or many Defect Cards.
+     *
+     * This function will retrieve all the Defect Cards of a given quotation (additional).
+     * See: DefectCard's quotation_additional() method for the inverse
+     *
+     * @return mixed
+     */
+    public function defectcards()
+    {
+        return $this->hasMany(DefectCard::class, 'quotation_additional_id');
+    }
+
+    /**
      * Many-to-Many: A quotation may have zero or many item.
      *
      * This function will retrieve all the items of a quotation.

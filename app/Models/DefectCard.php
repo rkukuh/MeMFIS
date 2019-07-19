@@ -93,7 +93,7 @@ class DefectCard extends MemfisModel
      */
     public function project_additional()
     {
-        return $this->belongsTo(Project::class, 'project_additional_id');
+        return $this->belongsTo(Project::class);
     }
 
     /**
@@ -109,6 +109,19 @@ class DefectCard extends MemfisModel
         return $this->belongsToMany(Type::class, 'defectcard_propose_correction', 'defectcard_id', 'propose_correction_id')
                     ->withPivot('propose_correction_text')
                     ->withTimestamps();;
+    }
+
+    /**
+     * One-to-Many: A Quotation (additional) may have zero or many Defect Cards.
+     *
+     * This function will retrieve the quotation (additional) of a given Defect Card.
+     * See: Quotation's defectcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotation_additional()
+    {
+        return $this->belongsTo(Quotation::class);
     }
 
     /*************************************** ACCESSOR ****************************************/
