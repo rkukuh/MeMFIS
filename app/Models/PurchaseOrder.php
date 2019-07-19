@@ -22,8 +22,6 @@ class PurchaseOrder extends MemfisModel
         'top_type',
         'top_day_amount',
         'top_start_at',
-        'approved_by',
-        'approved_at',
         'description',
     ];
 
@@ -32,22 +30,21 @@ class PurchaseOrder extends MemfisModel
         'valid_until', 
         'ship_at', 
         'top_start_at',
-        'approved_at'
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A purchase order may have approver.
+     * Polymorphic: An entity can have zero or many approvals.
      *
-     * This function will retrieve the approver of a purchase order.
-     * See: Employee's purchase_order_approved() method for the inverse
+     * This function will get all Quotation's approvals.
+     * See: Approvals's approvable() method for the inverse
      *
      * @return mixed
      */
-    public function approvedBy()
+    public function approvals()
     {
-        return $this->belongsTo(Employee::class, 'approved_by');
+        return $this->morphMany(Approval::class, 'approvable');
     }
 
     /**

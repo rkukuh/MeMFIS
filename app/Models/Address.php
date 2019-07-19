@@ -7,7 +7,7 @@ use App\MemfisModel;
 class Address extends MemfisModel
 {
     protected $fillable = [
-        'addresss',
+        'address',
         'latitude',
         'longitude',
         'type_id',
@@ -37,6 +37,8 @@ class Address extends MemfisModel
      * See:
      * - Customer's addresses() method for the inverse
      * - Employee's addresses() method for the inverse
+     *
+     * @return mixed
      */
     public function addressable()
     {

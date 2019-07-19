@@ -14,9 +14,9 @@ class CreateEmployeeLicenseTable extends Migration
     public function up()
     {
         Schema::create('employee_license', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('employee_id');
-            $table->unsignedInteger('license_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('license_id');
             $table->string('number');
             $table->timestamp('issued_at')->nullable();
             $table->timestamp('valid_until')->nullable();

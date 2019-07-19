@@ -22,6 +22,11 @@
       border-collapse: collapse;
     }
 
+    .container{
+      width: 100%;
+      margin: 0 43px;
+    }
+
     #header .rir-number{
       height: 50px;
       width: 300px;
@@ -29,17 +34,17 @@
       margin-top: 80px;
     }
 
+    #content{
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
     #content .checkbox{
       height: 15px;
       width: 100%;
     }
-
     #content2, #content3{
       margin-left: 45px;
-    }
-
-    #content2{
-      margin-top:-20px;
     }
 
     #content3 h3,{
@@ -103,45 +108,40 @@
   </div>
 
   <div id="content">
-    <ul>
+    {{-- <ul>
       <li>
-          <table width="80%" cellpadding="3">
+          <table width="80%" cellpadding="3" border="1">
               <tr>
-                <td width="30%">Purchase Order No.</td>
-                <td width="32%">
-                  : <span>001/PO-MMF/PJ/05/19</span>
-                </td>
-                <td width="43%">
-                  <span>Status :</span>
-                </td>
+                <td width="22%" valign="top">Purchase Order No.</td>
+                <td width="1%" valign="top">:</td>
+                <td width="31%" valign="top">001/PO-MMF/PJ/05/19</td>
+                <td width="46%" valign="top" colspan="2">Status :</td>
               </tr>
               <tr>
-                <td width="30%">Supplier</td>
-                <td width="32%">
-                  : <span>Nasgor Hotel</span>
-                </td>
-                <td width="5%">
+                <td width="22%" valign="top">Supplier</td>
+                <td width="1%" valign="top">:</td>
+                <td width="31%" valign="top">Nasgor Hotel</td>
+                <td width="5%" valign="top">
                   <div class="checkbox">
                     <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Purchase</span>
                   </div>
                 </td>
-                <td width="37%">
+                <td width="41%" valign="top">
                   <div class="checkbox">
                     <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Repair</span>
                   </div>
                 </td>
               </tr>
               <tr>
-                <td width="30%">Delivery Document</td>
-                <td width="32%">
-                  : <span>001/DO-blabla</span>
-                </td>
-                <td width="5%">
+                <td width="22%" valign="top">Delivery Document</td>
+                <td width="1%" valign="top">:</td>
+                <td width="31%" valign="top">001/DO-blabla</td>
+                <td width="5%" valign="top">
                   <div class="checkbox">
                     <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Serviceable</span>
                   </div>
                 </td>
-                <td width="37%">
+                <td width="41%" valign="top">
                   <div class="checkbox">
                     <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Unserviceable</span>
                   </div>
@@ -154,45 +154,90 @@
             {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',4.5,4.5)!!}
         </div>
       </li>
-    </ul>
+    </ul> --}}
+    <div class="container">
+      <table width="100%" cellpadding="3">
+        <tr>
+          <td valign="top" width="15%">Purchase Order No.</td>
+          <td valign="top" width="1%">:</td>
+          <td valign="top" width="20%">001/PO-MMF/PJ/05/19</td>
+          <td valign="top" width="30%" colspan="2">Status :</td>
+          <td rowspan="3"  width="34%" style="position:relative">
+            <div style="position:absolute;top:-28px;right:12px;">
+                {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',4.5,4.5)!!}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" width="15%">Supplier</td>
+          <td valign="top" width="1%">:</td>
+          <td valign="top" width="20%">Nasgor Hotel</td>
+          <td valign="top" width="15%">
+            <div class="checkbox">
+              <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Purchase</span>
+            </div>
+          </td>
+          <td valign="top" width="15%">
+            <div class="checkbox">
+              <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Repair</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" width="15%">Delivery Document</td>
+          <td valign="top" width="1%">:</td>
+          <td valign="top" width="20%">001/DO-blabla</td>
+          <td valign="top" width="15%">
+            <div class="checkbox">
+              <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Serviceable</span>
+            </div>
+          </td>
+          <td valign="top" width="15%">
+            <div class="checkbox">
+              <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Unserviceable</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
 
   <div id="content2">
     <table width="93%" border="1" cellpadding="3">
         <tr width="100%"style="background:#eaeaea">
-            <th width="7%">No</th>
-            <th width="14%">Part Number</th>
-            <th width="14%">Serial Number</th>
-            <th width="62%">Item Description</th>
-            <th width="7%">Qty</th>
+            <th width="7%" align="center">No</th>
+            <th width="14%" align="center">Part Number</th>
+            <th width="14%" align="center">Serial Number</th>
+            <th width="62%" align="center">Item Description</th>
+            <th width="7%" align="center">Qty</th>
         </tr>
         <tr>
-            <td>1</td>
-            <td>$100</td>
-            <td>January</td>
-            <td>$100</td>
-            <td>January</td>
+            <td valign="top" align="center">1</td>
+            <td valign="top">$100</td>
+            <td valign="top">January</td>
+            <td valign="top">$100</td>
+            <td valign="top">January</td>
         </tr>
         <tr>
-            <td>2</td>
-            <td>$100</td>
-            <td>January</td>
-            <td>$100</td>
-            <td>January</td>
+            <td valign="top" align="center">2</td>
+            <td valign="top">$100</td>
+            <td valign="top">January</td>
+            <td valign="top">$100</td>
+            <td valign="top">January</td>
         </tr>
         <tr>
-            <td>3</td>
-            <td>$100</td>
-            <td>January</td>
-            <td>$100</td>
-            <td>January</td>
+            <td valign="top" align="center">3</td>
+            <td valign="top">$100</td>
+            <td valign="top">January</td>
+            <td valign="top">$100</td>
+            <td valign="top">January</td>
         </tr>
         <tr>
-            <td>4</td>
-            <td>$100</td>
-            <td>January</td>
-            <td>$100</td>
-            <td>January</td>
+            <td valign="top" align="center">4</td>
+            <td valign="top">$100</td>
+            <td valign="top">January</td>
+            <td valign="top">$100</td>
+            <td valign="top">January</td>
         </tr>
     </table>
   </div>

@@ -33,10 +33,12 @@ class Phone extends MemfisModel
     /**
      * Polymorphic: An entity can have zero or many phones.
      *
-     * This function will get all of the owning addressable models.
+     * This function will get all of the owning phoneable models.
      * See:
      * - Customer's phones() method for the inverse
      * - Employee's phones() method for the inverse
+     *
+     * @return mixed
      */
     public function phoneable()
     {

@@ -42,28 +42,45 @@ let Customer = {
                 }
             },
             columns: [{
-                    field: 'code',
-                    title: 'Code',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<a href="/customer/'+t.uuid+'">' + t.code + "</a>"
-                    }
-                },
-                {
                     field: 'name',
-                    title: 'Name',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'payment_term',
-                    title: 'Term of Payment',
+                    title: 'Customer Name',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return t.payment_term+" Hari"
+                        return '<a href="/customer/'+t.uuid+'">' + t.name + "</a>"
                     }
+                },
+                {
+                    field: 'addresses',
+                    title: 'Address',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if(t.addresses[0]){
+                            return t.addresses[0].address
+                        }else{
+                            return ""
+                        }
+                    }
+                },
+                {
+                    field: 'phones',
+                    title: 'Phones',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if(t.phones[0]){
+                            return t.phones[0].number
+                        }else{
+                            return ""
+                        }
+                    }
+                },
+                {
+                    field: 'level',
+                    title: 'Pricing Level',
+                    sortable: 'asc',
+                    filterable: !1,
                 },
                 {
                     field: 'Actions',

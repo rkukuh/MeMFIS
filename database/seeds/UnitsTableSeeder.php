@@ -22,8 +22,20 @@ class UnitsTableSeeder extends Seeder
         ]);
 
         Unit::create([
+            'name' => 'Centimeter Square',
+            'symbol' => 'cm2',
+            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
+        ]);
+
+        Unit::create([
             'name' => 'Meter',
             'symbol' => 'm',
+            'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
+        ]);
+
+        Unit::create([
+            'name' => 'Meter Square',
+            'symbol' => 'm2',
             'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
         ]);
 
@@ -46,7 +58,7 @@ class UnitsTableSeeder extends Seeder
         ]);
 
         Unit::create([
-            'name' => 'Foot',
+            'name' => 'Feet',
             'symbol' => 'ft',
             'type_id' => Type::ofUnit()->where('code', 'dimension')->first()->id,
         ]);
@@ -128,12 +140,6 @@ class UnitsTableSeeder extends Seeder
         Unit::create([
             'name' => 'Bottle',
             'symbol' => 'btl',
-            'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
-        ]);
-
-        Unit::create([
-            'name' => 'Roll',
-            'symbol' => 'rol',
             'type_id' => Type::ofUnit()->where('code', 'quantity')->first()->id,
         ]);
 

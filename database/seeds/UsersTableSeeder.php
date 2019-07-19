@@ -1,6 +1,7 @@
 <?php
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
@@ -23,5 +24,11 @@ class UsersTableSeeder extends Seeder
         $user->assignRole(
             Role::where('name', 'admin')->first()
         );
+
+        $user->employee()->create([
+            'code' => 'SU-' . Carbon::now()->timestamp,
+            'first_name' => 'Super',
+            'last_name'  => 'Admin',
+        ]);
     }
 }

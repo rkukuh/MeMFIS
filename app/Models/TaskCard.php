@@ -14,7 +14,6 @@ class TaskCard extends MemfisModel
         'title',
         'type_id',
         'task_id',
-        'skill_id',
         'work_area',
         'estimation_manhour',
         'engineer_quantity',
@@ -26,20 +25,22 @@ class TaskCard extends MemfisModel
         'sequence',
         'stringer',
         'version',
+        'tat',
         'description',
+        'additionals',
 
         /** EO Header */
         'revision',
         'reference',
         'category_id',
         'scheduled_priority_id',
-        'scheduled_priority_amount',
+        'scheduled_priority_text',
         'scheduled_priority_type',
         'recurrence_id',
         'recurrence_amount',
         'recurrence_type',
         'manual_affected_id',
-        'manual_affected',
+        'manual_affected_text',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
@@ -98,7 +99,8 @@ class TaskCard extends MemfisModel
         return $this->belongsToMany(Item::class, 'item_taskcard', 'taskcard_id', 'item_id')
                     ->withPivot(
                         'quantity',
-                        'unit_id'
+                        'unit_id',
+                        'note'
                     )
                     ->withTimestamps();
     }
@@ -149,6 +151,8 @@ class TaskCard extends MemfisModel
      *
      * This function will get all of the task card's repeats.
      * See: Repeat's repeatable() method for the inverse
+     *
+     * @return mixed
      */
     public function repeats()
     {
@@ -156,16 +160,17 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * One-to-Many: A task card may have one skill.
+     * Many-to-Many: A task card may have zero or many skill.
      *
-     * This function will retrieve the skill of a task card.
-     * See: Type's skill() method for the inverse
+     * This function will retrieve all the skills of a task card.
+     * See: Type's skill_taskcards() method for the inverse
      *
      * @return mixed
      */
-    public function skill()
+    public function skills()
     {
-        return $this->belongsTo(Type::class);
+        return $this->belongsToMany(Type::class, 'skill_taskcard', 'taskcard_id', 'skill_id')
+                    ->withTimestamps();;
     }
 
     /**
@@ -186,7 +191,7 @@ class TaskCard extends MemfisModel
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve the type of a task card.
-     * See: Type's taskcards() method for the inverse
+     * See: Type's type_taskcards() method for the inverse
      *
      * @return mixed
      */
@@ -199,7 +204,7 @@ class TaskCard extends MemfisModel
      * One-to-Many: A task card may have zero or many task.
      *
      * This function will retrieve the task of a task card.
-     * See: Type's taskcard_tasks() method for the inverse
+     * See: Type's task_taskcards() method for the inverse
      *
      * @return mixed
      */
@@ -213,10 +218,25 @@ class TaskCard extends MemfisModel
      *
      * This function will get all of the task card's thresholds.
      * See: Threshold's thresholdable() method for the inverse
+     *
+     * @return mixed
      */
     public function thresholds()
     {
         return $this->morphMany(Threshold::class, 'thresholdable');
+    }
+
+    /**
+     * One-to-Many: A task card may have one workarea.
+     *
+     * This function will retrieve the workarea of a task card.
+     * See: Type's workarea() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workarea()
+    {
+        return $this->belongsTo(Type::class, 'work_area');
     }
 
     /**
@@ -260,7 +280,9 @@ class TaskCard extends MemfisModel
      */
     public function getMaterialsAttribute()
     {
-        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'raw')->all()));
+        return collect(array_values($this->items->load('unit')
+                                                ->whereIn('categories.0.code', ['raw', 'cons', 'comp'])
+                                                ->all()));
     }
 
     /**

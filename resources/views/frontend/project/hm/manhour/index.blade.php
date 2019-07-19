@@ -8,6 +8,7 @@
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
                 @component('frontend.common.label.data-info')
+                    @slot('id', 'total_mhrs')
                     @slot('text', $total_mhrs)
                 @endcomponent
             </div>
@@ -59,106 +60,19 @@
                 </div>
         </div>
     </div>
-    <div class="col-sm-12 col-md-12 col-lg-12">
-        <table>
-            <tr>
-                <td>
-                    <label class="form-control-label">
-                        Inspector @include('frontend.common.label.required')
-                    </label>
-                </td>
-                <td>
-                    @component('frontend.common.input.number')
-                        @slot('text', 'inspector')
-                        @slot('id', 'inspector')
-                        @slot('input_append', '%')
-                        @slot('name', 'inspector')
-                        @slot('id_error', 'inspector')
-                    @endcomponent
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label class="form-control-label">
-                        Engineer @include('frontend.common.label.required')
-                    </label>
-                </td>
-                <td>
-                    @component('frontend.common.input.number')
-                        @slot('text', 'engineer')
-                        @slot('id', 'engineer')
-                        @slot('input_append', '%')
-                        @slot('name', 'engineer')
-                        @slot('id_error', 'engineer')
-                    @endcomponent
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label class="form-control-label">
-                        Mechanic @include('frontend.common.label.required')
-                    </label>
-                </td>
-                <td>
-                    @component('frontend.common.input.number')
-                        @slot('text', 'mechanic')
-                        @slot('id', 'mechanic')
-                        @slot('input_append', '%')
-                        @slot('name', 'mechanic')
-                        @slot('id_error', 'mechanic')
-                    @endcomponent
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label class="form-control-label">
-                        Supporting @include('frontend.common.label.required')
-                    </label>
-                </td>
-                <td>
-                    @component('frontend.common.input.number')
-                        @slot('text', 'supporting')
-                        @slot('id', 'supporting')
-                        @slot('input_append', '%')
-                        @slot('name', 'supporting')
-                        @slot('id_error', 'supporting')
-                    @endcomponent
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label class="form-control-label">
-                        Total
-                    </label>
-                </td>
-                <td>
-                    @component('frontend.common.input.number')
-                        @slot('text', 'supporting')
-                        @slot('id', 'supporting')
-                        @slot('input_append', '%')
-                        @slot('name', 'supporting')
-                        @slot('value', '100')
-                        @slot('disabled', 'disabled')
-                        @slot('id_error', 'supporting')
-                    @endcomponent
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="col-sm-12 col-md-12 col-lg-12 footer">
+    <div class="col-sm-12 col-md-12 col-lg-12 footer-manhour">
         <div class="flex">
             <div class="action-buttons">
                 @component('frontend.common.buttons.submit')
                     @slot('type','button')
-                    @slot('id', 'add-project')
-                    @slot('class', 'add-project')
+                    @slot('id', 'add-manhour')
+                    @slot('class', 'add-manhour')
                 @endcomponent
 
                 @include('frontend.common.buttons.reset')
 
-                @component('frontend.common.buttons.back')
-                    @slot('href', route('frontend.workpackage.index'))
-                @endcomponent
+                @include('frontend.common.buttons.back')
+
             </div>
         </div>
     </div>
@@ -174,17 +88,64 @@
             let project_prfm_factor = $('#perfoma').val();
             let total  = project_prfm_factor*total_mhrs;
             document.getElementById('total').innerHTML = total.toFixed(2);
+            let performa = 0;
 
+            $('.footer-manhour').on('click', '.add-manhour', function () {
+                let manhour = total_mhrs;
+                let performa_used = performa;
+                let total = $('#total').html();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'post',
+                    url: '/project-hm/' + project_uuid + '/workpackage/' + workPackage_uuid + '/manhoursPropotion',
+                    data: {
+                        _token: $('input[name=_token]').val(),
+                        manhour: manhour,
+                        performa_used: performa_used,
+                        total: total,
+                    },
+                    success: function (data) {
+                        if (data.errors) {
+                        } else {
+
+                            toastr.success('Manhours Propotion has been created.', 'Success', {
+                                timeOut: 5000
+                            });
+
+                            // window.location.href = '/discrepancy/' + data.uuid + '/edit';
+
+                        }
+                    }
+                });
+            });
+            $(".nav-item").on("click", ".m_tabs_manhour",function() {
+                if(anyChanges){
+                    $.ajax({
+                    url: "/project-hm/workpackage/"+workPackage_uuid+"/getManhours",
+                    method: "get",
+                    success: function(dataFetched){
+                        $('#total_mhrs').html(dataFetched.total_mhrs);
+                        $('#total').html(dataFetched.mhrs_pfrm_factor);
+                    },
+                    });
+                }
+            });
         });
+
+
         $("#default").change(function() {
             if(this.checked) {
                 let total  = ($('#default').val()*total_mhrs);
+                performa = $('#default').val();
                 document.getElementById('perfoma').value = $('#default').val();
                 $("#perfoma").prop('disabled', true);
                 document.getElementById('total').innerHTML = total.toFixed(2);
             }
             else{
                 let total  = (1.6*total_mhrs);
+                performa = 1.6;
                 document.getElementById('perfoma').value = 1.6;
                 $("#perfoma").prop('disabled', false);
                 document.getElementById('total').innerHTML = total.toFixed(2);

@@ -24,6 +24,7 @@ $factory->define(Type::class, function (Faker $faker) {
             'regulator',
             'work-area',
             'capability',
+            'htcrr-type',
             'eligibility',
             'school-degree',
             'taskcard-task',
@@ -32,6 +33,8 @@ $factory->define(Type::class, function (Faker $faker) {
             'purchase-request',
             'scheduled-payment',
             'maintenance-cycle',
+            'htcrr-pause-reason',
+            'htcrr-close-reason',
             'jobcard-pause-reason',
             'jobcard-close-reason',
             'taskcard-type-routine',
@@ -58,6 +61,7 @@ $factory->state(Type::class, 'document', ['of' => 'document']);
 $factory->state(Type::class, 'regulator', ['of' => 'regulator']);
 $factory->state(Type::class, 'work-area', ['of' => 'work-area']);
 $factory->state(Type::class, 'capability', ['of' => 'capability']);
+$factory->state(Type::class, 'htcrr-type', ['of' => 'htcrr-type']);
 $factory->state(Type::class, 'eligibility', ['of' => 'eligibility']);
 $factory->state(Type::class, 'school-degree', ['of' => 'school-degree']);
 $factory->state(Type::class, 'taskcard-task', ['of' => 'taskcard-task']);
@@ -66,6 +70,8 @@ $factory->state(Type::class, 'aviation-degree', ['of' => 'aviation-degree']);
 $factory->state(Type::class, 'purchase-request', ['of' => 'purchase-request']);
 $factory->state(Type::class, 'scheduled-payment', ['of' => 'scheduled-payment']);
 $factory->state(Type::class, 'maintenance-cycle', ['of' => 'maintenance-cycle']);
+$factory->state(Type::class, 'htcrr-pause-reason', ['of' => 'htcrr-pause-reason']);
+$factory->state(Type::class, 'htcrr-close-reason', ['of' => 'htcrr-close-reason']);
 $factory->state(Type::class, 'jobcard-pause-reason', ['of' => 'jobcard-pause-reason']);
 $factory->state(Type::class, 'jobcard-close-reason', ['of' => 'jobcard-close-reason']);
 $factory->state(Type::class, 'taskcard-type-routine', ['of' => 'taskcard-type-routine']);

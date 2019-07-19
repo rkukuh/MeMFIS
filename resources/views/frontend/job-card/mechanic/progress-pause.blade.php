@@ -57,7 +57,7 @@
                                                 Job Card No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                JC 012122
+                                                {{$jobcard->number}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -65,7 +65,7 @@
                                                 Task Card No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                TC 212212
+                                                {{$jobcard->taskcard->number}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -73,7 +73,7 @@
                                                 A/C Type
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->project->aircraft->name}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -81,7 +81,7 @@
                                                 A/C Reg
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->project->aircraft_register}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -89,15 +89,7 @@
                                                 A/C Serial Number
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Inspection Type
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->project->aircraft_sn}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -105,7 +97,11 @@
                                                 Company Task No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                @if(isset(json_decode($jobcard->taskcard->additionals)->internal_number))
+                                                    {{json_decode($jobcard->taskcard->additionals)->internal_number}}
+                                                @else
+                                                    -
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -113,7 +109,7 @@
                                                 Project No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->project->code}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -121,7 +117,7 @@
                                                 Inspection Type
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->task->name}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -129,7 +125,13 @@
                                                 Skill
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                @if(sizeof($jobcard->taskcard->skills) == 3)
+                                                    ERI
+                                                @elseif(sizeof($jobcard->taskcard->skills) == 1)
+                                                    {{$jobcard->taskcard->skills[0]->name}}
+                                                @else
+                                                    -
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -137,7 +139,7 @@
                                                 Est. Mhrs
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->estimation_manhour}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -145,7 +147,9 @@
                                                 Work Area
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                @if(isset($jobcard->taskcard->workarea->name))
+                                                    {{$jobcard->taskcard->workarea->name}}
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -153,7 +157,7 @@
                                                 Sequence
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->sequence}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -161,7 +165,11 @@
                                                 RII
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                @if($jobcard->taskcard->is_rii == 1)
+                                                    Yes
+                                                @else
+                                                    No
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -169,7 +177,7 @@
                                                 Reference
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->reference}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -177,7 +185,7 @@
                                                 Title
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->title}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -185,29 +193,84 @@
                                                 Description
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->taskcard->Description}}
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Helper
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-
                                     </table>
                                 </div>
                             </div>
+
                             <div class="form-group m-form__group row">
-                                <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                    <div class="flex">
-                                        <div class="action-buttons">
-                                            @include('frontend.common.buttons.resume')
-                                            @include('frontend.common.buttons.close')
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <table class="table table-striped table-bordered second" width="100%" cellpadding="4">
+                                        <tr>
+                                            <td colspan="5" align="center"><b>Material(s) Required</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="5%" align="center"><b>No</b></td>
+                                            <td width="20%" align="center"><b>Part Number</b></td>
+                                            <td width="50%" align="center"><b>Item Description</b></td>
+                                            <td width="10%" align="center"><b>Qty</b></td>
+                                            <td width="15%" align="center"><b>Unit</b></td>
+                                        </tr>
+                                        @php
+                                        $i=1;
+                                        @endphp
+                                        @foreach ($materials as $material)
+                                        <tr>
+                                            <td width="5%" align="center" valign="top">{{$i++}}</td>
+                                            <td width="20%" align="center" valign="top">{{$material->code}}</td>
+                                            <td width="50%" valign="top">{{$material->name}}</td>
+                                            <td width="10%" align="center" valign="top">{{$material->pivot->quantity}}</td>
+                                            <td width="15%" align="center" valign="top">{{App\Models\Unit::find($material->pivot->unit_id)->name}}</td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <table class="table table-striped table-bordered second" width="100%" cellpadding="4">
+                                        <tr>
+                                            <td colspan="5" align="center"><b>Tool(s) Required / Special Tooling</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="5%" align="center"><b>No</b></td>
+                                            <td width="20%" align="center"><b>Part Number</b></td>
+                                            <td width="50%" align="center"><b>Item Description</b></td>
+                                            <td width="10%" align="center"><b>Qty</b></td>
+                                            <td width="15%" align="center"><b>Unit</b></td>
+                                        </tr>
+                                        @php
+                                        $j=1;
+                                        @endphp
+                                        @foreach ($tools as $tool)
+                                        <tr>
+                                            <td width="5%" align="center" valign="top">{{$j++}}</td>
+                                            <td width="20%" align="center" valign="top">{{$tool->code}}</td>
+                                            <td width="50%" valign="top">{{$tool->name}}</td>
+                                            <td width="10%" align="center" valign="top">{{$tool->pivot->quantity}}</td>
+                                            <td width="15%" align="center" valign="top">{{App\Models\Unit::find($tool->pivot->unit_id)->name}}</td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
+                            </div>
+
+                            <hr class="mt-4">
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="action-buttons d-flex flex-row-reverse">
+                                        <form method="POST" action="{{route('frontend.discrepancy.jobcard.mechanic.discrepancy.create',$jobcard->uuid)}}">
+                                            {!! csrf_field() !!}
                                             @include('frontend.common.buttons.found')
-                                        </div>
+                                        </form>
+
+                                        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed mr-2" method="POST" action="{{route('frontend.jobcard-mechanic.update',$jobcard->uuid)}}" id="WorkpackageForm">
+                                            {{method_field('PATCH')}}
+                                            {!! csrf_field() !!}
+                                            <input type="hidden" name="progress" value="{{$open->uuid}}">
+
+                                            @include('frontend.common.buttons.resume')
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -224,101 +287,6 @@
                             <div class="m-portlet__head-title">
                                 <h3 class="m-portlet__head-text">
                                     Job Card Progress Timeline
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="m-portlet__body">
-                        <div class="m-scrollable" data-scrollable="true" data-height="380" data-mobile-height="300">
-                            <div class="m-timeline-2">
-                                <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
-                                    <div class="m-timeline-2__item">
-                                        <span class="m-timeline-2__item-time">10:00</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-danger"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text  m--padding-top-5">
-                                            Lorem ipsum dolor sit amit,consectetur eiusmdd tempor<br>
-                                            incididunt ut labore et dolore magna
-                                        </div>
-                                    </div>
-                                    <div class="m-timeline-2__item m--margin-top-30">
-                                        <span class="m-timeline-2__item-time">12:45</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-success"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text m-timeline-2__item-text--bold">
-                                            AEOL Meeting With
-                                        </div>
-                                        <div class="m-list-pics m-list-pics--sm m--padding-left-20">
-                                            <a href="#"><img src="assets/app/media/img/users/100_4.jpg" title=""></a>
-                                            <a href="#"><img src="assets/app/media/img/users/100_13.jpg" title=""></a>
-                                            <a href="#"><img src="assets/app/media/img/users/100_11.jpg" title=""></a>
-                                            <a href="#"><img src="assets/app/media/img/users/100_14.jpg" title=""></a>
-                                        </div>
-                                    </div>
-                                    <div class="m-timeline-2__item m--margin-top-30">
-                                        <span class="m-timeline-2__item-time">14:00</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-brand"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text m--padding-top-5">
-                                            Make Deposit <a href="#" class="m-link m-link--brand m--font-bolder">USD 700</a> To ESL.
-                                        </div>
-                                    </div>
-                                    <div class="m-timeline-2__item m--margin-top-30">
-                                        <span class="m-timeline-2__item-time">16:00</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-warning"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text m--padding-top-5">
-                                            Lorem ipsum dolor sit amit,consectetur eiusmdd tempor<br>
-                                            incididunt ut labore et dolore magna elit enim at minim<br>
-                                            veniam quis nostrud
-                                        </div>
-                                    </div>
-                                    <div class="m-timeline-2__item m--margin-top-30">
-                                        <span class="m-timeline-2__item-time">17:00</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-info"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text m--padding-top-5">
-                                            Placed a new order in <a href="#" class="m-link m-link--brand m--font-bolder">SIGNATURE MOBILE</a> marketplace.
-                                        </div>
-                                    </div>
-                                    <div class="m-timeline-2__item m--margin-top-30">
-                                        <span class="m-timeline-2__item-time">16:00</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-brand"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text m--padding-top-5">
-                                            Lorem ipsum dolor sit amit,consectetur eiusmdd tempor<br>
-                                            incididunt ut labore et dolore magna elit enim at minim<br>
-                                            veniam quis nostrud
-                                        </div>
-                                    </div>
-                                    <div class="m-timeline-2__item m--margin-top-30">
-                                        <span class="m-timeline-2__item-time">17:00</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-danger"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text m--padding-top-5">
-                                            Received a new feedback on <a href="#" class="m-link m-link--brand m--font-bolder">FinancePro App</a> product.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="m-portlet  m-portlet--full-height ">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                                <h3 class="m-portlet__head-text">
-                                    Your Progress Timeline
                                 </h3>
                             </div>
                         </div>

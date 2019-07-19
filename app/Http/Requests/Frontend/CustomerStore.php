@@ -28,7 +28,24 @@ class CustomerStore extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',
+            'name' => 'required|min:3|max:50',
+            'phone_array.*' => 'required',
+            'phone_array' => 'array|min:1',
+            'email_array.*' => 'required',
+            'email_array' => 'array|min:1',
+        ];
+    }
+
+    /**
+     * Set custom validation error message
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'phone_array.*.required' => 'The phone field is required.',
+            'email_array.*.required' => 'The email field is required.',
         ];
     }
 
@@ -47,7 +64,7 @@ class CustomerStore extends FormRequest
         });
     }
 
-    protected function failedValidation(Validator $validator) { 
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()])); 
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }

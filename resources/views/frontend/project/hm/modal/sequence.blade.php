@@ -42,7 +42,7 @@
                                         @slot('type', 'button')
                                     @endcomponent
                                     @component('frontend.common.buttons.reset')
-                                        @slot('class', 'reset-sequance')
+                                        @slot('class', 'reset-sequence')
                                     @endcomponent
                                 @include('frontend.common.buttons.close')
                             </div>

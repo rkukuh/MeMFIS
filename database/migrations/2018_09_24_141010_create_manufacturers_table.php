@@ -14,7 +14,7 @@ class CreateManufacturersTable extends Migration
     public function up()
     {
         Schema::create('manufacturers', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');

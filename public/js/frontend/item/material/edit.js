@@ -64,7 +64,7 @@ let Item = {
                     filterable: !1,
                     template: function (t) {
                         let unit = $("#unit_id option:selected").text();
-                        return '1'+unit+' = '+t.uom.quantity+' '+t.name
+                        return +t.uom.quantity+' '+unit+' = 1'+t.name
                     }
                 },
                 {

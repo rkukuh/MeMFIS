@@ -67,9 +67,9 @@
 
                                             @component('frontend.common.label.data-info')
                                                 @foreach ($aircrafts as $aircraft)
-                                                    @if ($aircraft->id == $workPackage->aircraft_id)  
+                                                    @if ($aircraft->id == $workPackage->aircraft_id)
                                                         @slot('text', $aircraft->name)
-                                                    @endif   
+                                                    @endif
                                                 @endforeach
                                             @endcomponent
                                         </div>
@@ -98,7 +98,7 @@
                                                     <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool(s) & Material(s)</a>
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">Material & Tool</a>
                                                 </li>
                                             </ul>
 
@@ -110,11 +110,11 @@
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Work Package Summary')
-                                                                @slot('href', route('frontend.summary.workpackage-summary') )
+                                                                @slot('href', route('frontend.workPackage.summary.workpackage', $workPackage->uuid) )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Routine Summary')
-                                                                @slot('href', route('frontend.summary.routine-summary') )
+                                                                @slot('href', route('frontend.workPackage.summary.routine', $workPackage->uuid) )
                                                             @endcomponent
                                                             </div>
                                                         </div>
@@ -127,11 +127,11 @@
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Work Package Summary')
-                                                                @slot('href', route('frontend.summary.workpackage-summary') )
+                                                                @slot('href', route('frontend.workPackage.summary.workpackage', $workPackage->uuid) )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Non-routine Summary')
-                                                                @slot('href', route('frontend.summary.nonroutine-summary') )
+                                                                @slot('href', route('frontend.workPackage.summary.nonroutine', $workPackage->uuid) )
                                                             @endcomponent
                                                             </div>
                                                         </div>
@@ -149,9 +149,7 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
-                                                @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.workpackage.index'))
-                                                @endcomponent
+                                                @include('frontend.common.buttons.back')
                                             </div>
                                         </div>
                                     </div>

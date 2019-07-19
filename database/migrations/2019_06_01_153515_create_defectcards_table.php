@@ -14,16 +14,16 @@ class CreateDefectcardsTable extends Migration
     public function up()
     {
         Schema::create('defectcards', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->string('code');
-            $table->unsignedInteger('jobcard_id');
+            $table->string('code')->nullable();
+            $table->unsignedBigInteger('jobcard_id');
+            $table->unsignedBigInteger('project_additional_id')->nullable();
+            $table->unsignedBigInteger('quotation_additional_id')->nullable();
             $table->integer('engineer_quantity');
             $table->integer('helper_quantity');
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->boolean('is_rii');
-            $table->unsignedInteger('propose_correction_id')->nullable();
-            $table->string('propose_correction_other')->nullable();
             $table->text('complaint')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
@@ -34,10 +34,17 @@ class CreateDefectcardsTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('propose_correction_id')
-                    ->references('id')->on('types')
+            $table->foreign('project_additional_id')
+                    ->references('id')->on('projects')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
+
+            $table->foreign('quotation_additional_id')
+                    ->references('id')->on('quotations')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->index('code');
         });
     }
 

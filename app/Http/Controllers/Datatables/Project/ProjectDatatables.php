@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\Project;
 
+use App\User;
 use App\Models\Project;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
@@ -16,7 +17,33 @@ class ProjectDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(Project::with('aircraft','customer')->get());
+        $projects = Project::with('aircraft','customer')->get();
+        foreach($projects as $project){
+            if(empty($project->approvals->toArray())){
+                $project->status .= 'Project Open';
+            }elseif(sizeof($project->approvals->toArray()) == 1){
+                $project->status .= 'Project Approved';
+            }elseif(sizeof($project->approvals->toArray()) == 2){
+                $project->status .= 'Quotation Approved';
+            }
+            else{
+                $project->status .= (sizeof($project->approvals->toArray())).'?'; // *Find bug size of approve
+            }
+        }
+
+        foreach($projects as $project){
+            $project->aircraft_type.= $project->aircraft->name;
+        }
+        foreach($projects as $project){
+            if($project->audits->first()->user_id ==  null){
+                $project->created_by.= "System";
+
+            }else{
+                $project->created_by.= User::find($project->audits->first()->user_id)->name;
+            }
+        }
+
+        $data = $alldata = json_decode($projects);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -130,7 +157,11 @@ class ProjectDatatables extends Controller
      */
     public function workpackage(Project $project)
     {
-        $data = $alldata = json_decode($project->workpackages);
+        $workpackages = $project->workpackages;
+        foreach($workpackages as $workpackage){
+            $workpackage->ac_type = $workpackage->aircraft->name;
+        }
+        $data = $alldata = json_decode($workpackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

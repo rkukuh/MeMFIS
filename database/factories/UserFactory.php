@@ -1,7 +1,9 @@
 <?php
 
 use App\User;
+use App\Models\Employee;
 use Faker\Generator as Faker;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
 $factory->define(User::class, function (Faker $faker)
@@ -15,5 +17,21 @@ $factory->define(User::class, function (Faker $faker)
         'password' => Hash::make('rahasia'),
         'remember_token' => str_random(10),
     ];
+
+});
+
+/** CALLBACKS */
+
+$factory->afterCreating(User::class, function ($user, $faker) {
+
+    $user->assignRole(
+        Role::where('name', 'dummy')->first()
+    );
+
+    $user->employee()->save(factory(Employee::class)->make([
+        'first_name' => $user->name,
+        'middle_name' => null,
+        'last_name' => null,
+    ]));
 
 });

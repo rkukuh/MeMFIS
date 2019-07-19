@@ -14,12 +14,12 @@ class CreateWorkPackagesTable extends Migration
     public function up()
     {
         Schema::create('workpackages', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
             $table->string('title');
             $table->boolean('is_template');
-            $table->unsignedInteger('aircraft_id');
+            $table->unsignedBigInteger('aircraft_id');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

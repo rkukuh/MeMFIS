@@ -41,13 +41,6 @@ $factory->define(TaskCard::class, function (Faker $faker) {
 
             return factory(Type::class)->states('taskcard-task')->create()->id;
         },
-        'skill_id' => function () {
-            if (Type::ofTaskCardSkill()->count()) {
-                return Type::ofTaskCardSkill()->get()->random()->id;
-            }
-
-            return factory(Type::class)->states('taskcard-skill')->create()->id;
-        },
         'work_area' => function () {
             if (Type::ofWorkArea()->count()) {
                 return Type::ofWorkArea()->get()->random()->id;
@@ -68,7 +61,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'sequence' => $faker->randomElement([null, rand(1, 10)]),
         'stringer' => function () use ($faker) {
             $stringers = [];
-            
+
             for ($i = 0; $i < rand(2, 5); $i++) {
                 $stringers[] = $faker->numberBetween(100, 999);
             }
@@ -77,14 +70,22 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         },
         'version' => function () use ($faker) {
             $versions = [];
-            
+
             for ($i = 0; $i < rand(2, 5); $i++) {
                 $versions[] = rand(1, 9) . '.' . rand(1, 9);
             }
 
             return $faker->randomElement([null, json_encode($versions)]);
         },
+        'ata' => null,
         'description' => $faker->paragraph(rand(10, 20)),
+        'additionals' => function () use ($faker) {
+            $additionals = [
+                'internal_number' => 'TC-INT-DUM-' . $faker->unixTime()
+            ];
+
+            return $faker->randomElement([null, json_encode($additionals)]);
+        }
 
         // 'otr_certification_id' => null,  // TODO: Refactor its entity name
     ];
@@ -135,7 +136,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
             return factory(Category::class)->states('taskcard-eo')->create()->id;
         },
         'scheduled_priority_id' => $scheduled_priority->id,
-        'scheduled_priority_amount' => function () use ($scheduled_priority, $scheduled_priority_type) {
+        'scheduled_priority_text' => function () use ($scheduled_priority, $scheduled_priority_type) {
             if ($scheduled_priority->code == 'prior-to') {
                 if ($scheduled_priority_type == 'date') {
                     return Carbon::now();
@@ -169,7 +170,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
             }
         },
         'manual_affected_id' => $manual_affected->id,
-        'manual_affected' => function () use ($manual_affected, $faker) {
+        'manual_affected_text' => function () use ($manual_affected, $faker) {
             if ($manual_affected->code == 'other') {
                 return $faker->text;
             } else {
@@ -177,7 +178,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
             }
         },
 
-        // These attributes are filled on 'taskcard_eo' table
+        // These attributes are filled on 'eo_instructions' table
         'work_area' => null,
         'estimation_manhour' => null,
         'engineer_quantity' => null,
@@ -251,10 +252,45 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 
 $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $faker) {
 
+    // Item
+
+    for ($i = 1; $i <= rand(2, 5); $i++) {
+        if (Item::count()) {
+            $item = Item::get()->random();
+        } else {
+            $item = factory(Item::class)->create();
+        }
+
+        if (Unit::count()) {
+            $unit = Unit::get()->random();
+        } else {
+            $unit = factory(Unit::class)->create();
+        }
+
+        $taskcard->items()->attach($item, [
+            'quantity' => rand(1, 10),
+            'unit_id' => $unit->id,
+            'note' => $faker->randomElement([null, $faker->text]),
+        ]);
+    }
+
     // Related-to
 
     if ($faker->boolean) {
         $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
+    }
+
+    // SKill
+
+    for ($i = 1; $i <= rand(1, 3); $i++) {
+        if (Type::ofTaskCardSkill()->count()) {
+            $skill = Type::ofTaskCardSkill()->get()->random();
+        }
+        else {
+            $skill = factory(Type::class)->states('taskcard-skill')->create();
+        }
+    
+        $taskcard->skills()->attach($skill);
     }
 
     // Threshold and Repeat
@@ -268,6 +304,58 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
             factory(Repeat::class, rand(1, 2))->make()
         );
     }
+
+});
+
+$factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker) {
+
+    // EO Instruction
+
+    $taskcard->eo_instructions()->saveMany(
+        factory(EOInstruction::class, rand(5, 10))->make()
+    );
+
+    foreach ($taskcard->eo_instructions as $eo_instruction) {
+
+        // Item
+
+        for ($i = 1; $i <= rand(2, 5); $i++) {
+            if (Item::count()) {
+                $item = Item::get()->random();
+            } else {
+                $item = factory(Item::class)->create();
+            }
+
+            if (Unit::count()) {
+                $unit = Unit::get()->random();
+            } else {
+                $unit = factory(Unit::class)->create();
+            }
+
+            $eo_instruction->items()->attach($item, [
+                'quantity' => rand(1, 10),
+                'unit_id' => $unit->id,
+                'note' => $faker->randomElement([null, $faker->text]),
+            ]);
+        }
+
+        // SKill
+
+        for ($i = 1; $i <= rand(1, 3); $i++) {
+            if (Type::ofTaskCardSkill()->count()) {
+                $skill = Type::ofTaskCardSkill()->get()->random();
+            }
+            else {
+                $skill = factory(Type::class)->states('taskcard-skill')->create();
+            }
+        
+            $eo_instruction->skills()->attach($skill);
+        }
+    }
+
+});
+
+$factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker) {
 
     // Item
 
@@ -287,59 +375,21 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
         $taskcard->items()->attach($item, [
             'quantity' => rand(1, 10),
             'unit_id' => $unit->id,
+            'note' => $faker->randomElement([null, $faker->text]),
         ]);
     }
 
-});
+    // SKill
 
-$factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker) {
-
-    $taskcard->eo_instructions()->saveMany(
-        factory(EOInstruction::class, rand(5, 10))->make()
-    );
-
-    foreach ($taskcard->eo_instructions as $eo_instruction) {
-        for ($i = 1; $i <= rand(2, 5); $i++) {
-            if (Item::count()) {
-                $item = Item::get()->random();
-            } else {
-                $item = factory(Item::class)->create();
-            }
-
-            if (Unit::count()) {
-                $unit = Unit::get()->random();
-            } else {
-                $unit = factory(Unit::class)->create();
-            }
-
-            $eo_instruction->items()->attach($item, [
-                'quantity' => rand(1, 10),
-                'unit_id' => $unit->id,
-            ]);
+    for ($i = 1; $i <= rand(1, 3); $i++) {
+        if (Type::ofTaskCardSkill()->count()) {
+            $skill = Type::ofTaskCardSkill()->get()->random();
         }
-    }
-
-});
-
-$factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker) {
-
-    for ($i = 1; $i <= rand(2, 5); $i++) {
-        if (Item::count()) {
-            $item = Item::get()->random();
-        } else {
-            $item = factory(Item::class)->create();
+        else {
+            $skill = factory(Type::class)->states('taskcard-skill')->create();
         }
-
-        if (Unit::count()) {
-            $unit = Unit::get()->random();
-        } else {
-            $unit = factory(Unit::class)->create();
-        }
-
-        $taskcard->items()->attach($item, [
-            'quantity' => rand(1, 10),
-            'unit_id' => $unit->id,
-        ]);
+    
+        $taskcard->skills()->attach($skill);
     }
 
 });

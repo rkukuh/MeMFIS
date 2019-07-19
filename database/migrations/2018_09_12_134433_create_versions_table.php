@@ -14,14 +14,16 @@ class CreateVersionsTable extends Migration
     public function up()
     {
         Schema::create('versions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
-            $table->longText('change_log');
+            $table->longText('change_log')->nullable();
             $table->timestamp('versioned_at')->nullable();
             $table->morphs('versionable');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('number');
         });
     }
 

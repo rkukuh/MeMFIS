@@ -2,7 +2,7 @@
     <div class="m-portlet__body">
         <div class="form-group m-form__group row ">
 
-            <input type="hidden" id="uuid" name="uuid" value="{{$project->uuid}}">
+            <input type="hidden" id="uuid" name="uuid" value="{{$project}}">
 
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <label class="form-control-label">
@@ -14,6 +14,9 @@
                     @slot('id', 'description')
                     @slot('rows', '5')
                     @slot('id_error', 'description')
+                    @if(isset($job_request))
+                    @slot('value',$job_request->pivot->description)
+                    @endif
                 @endcomponent
             </div>
         </div>
@@ -23,9 +26,9 @@
                     Total Manhours @include('frontend.common.label.required')
                 </label>
                 @component('frontend.common.label.data-info')
-                    @slot('text', $total_mhrs)
                     @slot('id', 'total_mhrs')
                     @slot('name', 'total_mhrs')
+                    @slot('text', $project_workpackage->total_manhours_with_performance_factor)
                 @endcomponent
 
             </div>
@@ -38,6 +41,9 @@
                     @slot('name', 'rate')
                     @slot('id', 'rate')
                     @slot('id_error', 'rate')
+                    @if(isset($job_request))
+                    @slot('value',$job_request->pivot->manhour_rate)
+                    @endif
                 @endcomponent
             </div>
         </div>
@@ -53,9 +59,7 @@
 
                         @include('frontend.common.buttons.reset')
 
-                        @component('frontend.common.buttons.back')
-                            @slot('href', route('frontend.quotation.edit', ['quotation' => $quotation->uuid]))
-                        @endcomponent
+                        @include('frontend.common.buttons.back')
                     </div>
                 </div>
             </div>

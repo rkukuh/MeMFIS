@@ -14,13 +14,13 @@ class CreateStoragesTable extends Migration
     public function up()
     {
         Schema::create('storages', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');
-            $table->text('description')->nullable();
-            $table->unsignedInteger('account_code')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->text('description')->nullable();
+            $table->unsignedBigInteger('account_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

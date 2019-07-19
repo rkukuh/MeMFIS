@@ -65,6 +65,12 @@ let NonRoutineWorkpackage = {
                     filterable: !1,
                 },
                 {
+                    field: 'estimation_manhour',
+                    title: 'Manhour',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'description',
                     title: 'Description',
                     sortable: 'asc',
@@ -80,83 +86,15 @@ let NonRoutineWorkpackage = {
                         return ''
                     }
                 },
-                {
-                    field: 'material',
-                    title: 'Material',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_material_eo" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
-                        );
-                    }
-
-                },
-                {
-                    field: 'tool',
-                    title: 'Tool',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_tool_eo" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        );
-                    }
-                },
-                {
-                    field: 'sequence',
-                    title: 'Sequence',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        );
-                    }
-                },
-                {
-                    field: 'predecessor',
-                    title: 'Predecessor',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill " data-toggle="modal" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
-                    }
-                },
-                {
-                    field: 'successor',
-                    title: 'Successor',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="modal" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
-                    }
-                },
-                {
-                    field: 'mandatory',
-                    title: 'Mandatory',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'+
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
-                        );
-                    }
-                },
-
             ]
         });
+        $('#m_accordion_2_item_1_head').on('click', function () {
+            let table = $('.ad-sb_datatable').mDatatable();
+
+            table.originalDataSet = [];
+            table.reload();
+        });
+
         $('.cmr-awl_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -217,6 +155,12 @@ let NonRoutineWorkpackage = {
                     filterable: !1,
                 },
                 {
+                    field: 'estimation_manhour',
+                    title: 'Manhour',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'description',
                     title: 'Description',
                     sortable: 'asc',
@@ -231,95 +175,15 @@ let NonRoutineWorkpackage = {
 
                         return ''
                     }
-                },
-                {
-                    field: 'material',
-                    title: 'Material',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_material_eo" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
-                        );
-                    }
-
-                },
-                {
-                    field: 'tool',
-                    title: 'Tool',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_tool_eo" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        );
-                    }
-                },
-                {
-                    field: 'sequence',
-                    title: 'Sequence',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        );
-                    }
-                },
-                {
-                    field: 'predecessor',
-                    title: 'Predecessor',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill " data-toggle="modal" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
-                    }
-                },
-                {
-                    field: 'successor',
-                    title: 'Successor',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="modal" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
-                    }
-                },
-                {
-                    field: 'mandatory',
-                    title: 'Mandatory',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'+
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
-                        );
-                    }
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
-                }
-            ]
+                },            ]
         });
+        $('#m_accordion_2_item_2_head').on('click', function () {
+            let table = $('.cmr-awl_datatable').mDatatable();
+
+            table.originalDataSet = [];
+            table.reload();
+        });
+
         $('.si_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -380,6 +244,12 @@ let NonRoutineWorkpackage = {
                     filterable: !1,
                 },
                 {
+                    field: 'estimation_manhour',
+                    title: 'Manhour',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'description',
                     title: 'Description',
                     sortable: 'asc',
@@ -395,94 +265,134 @@ let NonRoutineWorkpackage = {
                         return ''
                     }
                 },
-                {
-                    field: 'material',
-                    title: 'Material',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
-                        );
-                    }
-
-                },
-                {
-                    field: 'tool',
-                    title: 'Tool',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_tool_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        );
-                    }
-                },
-                {
-                    field: 'sequence',
-                    title: 'Sequence',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        );
-                    }
-                },
-                {
-                    field: 'predecessor',
-                    title: 'Predecessor',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill " data-toggle="modal" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
-                    }
-                },
-                {
-                    field: 'successor',
-                    title: 'Successor',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="modal" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
-                    }
-                },
-                {
-                    field: 'mandatory',
-                    title: 'Mandatory',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'+
-                            '<button data-toggle="modal" data-target="#modal_customer" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Details" data-id=' +
-                            t.id +
-                            'title="Delete"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
-                        );
-                    }
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
-                }
             ]
         });
+        $('#m_accordion_2_item_3_head').on('click', function () {
+            let table = $('.si_datatable').mDatatable();
+
+            table.originalDataSet = [];
+            table.reload();
+        });
+
+        $('.ht_crr_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/project/' + project_uuid + '/htcrr/',
+                        map: function (raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [{
+                field: 'code',
+                title: 'CRI No',
+                sortable: !1,
+            },
+            {
+                field: 'part_number',
+                title: 'P/N',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'description',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'position',
+                title: 'Position',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'removal_manhour_estimation',
+                title: 'Removal Mhrs Est.',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'estimation_manhour',
+                title: 'Installation Mhrs Est.',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'skill_name',
+                title: 'Skill',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'material',
+                title: 'Material',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                    return (
+                        '<button data-toggle="modal" data-target="#modal_material_htcrr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material_htcrr" title="Material" data-uuid=' +
+                        t.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                    );
+                }
+
+            },
+            {
+                field: 'tool',
+                title: 'Tool',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                    return (
+                        '<button data-toggle="modal" data-target="#modal_tool_htcrr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool_htcrr" title="Tool" data-uuid=' +
+                        t.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    );
+                }
+            },
+            ]
+        });
+        $('#m_accordion_2_item_4_head').on('click', function () {
+            let table = $('.ht_crr_datatable').mDatatable();
+
+            table.originalDataSet = [];
+            table.reload();
+        });
+
     }
 };
 

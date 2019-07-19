@@ -28,42 +28,22 @@
 
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '3')
-                                                @slot('id', 'address')
-                                                @slot('name', 'address')
+                                                @slot('id', 'address-modal')
+                                                @slot('name', 'address-modal')
                                                 @slot('text', 'Address')
                                             @endcomponent
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <label class="form-control-label">
-                                                    Type @include('frontend.common.label.required')
-                                                </label>
-    
-                                                @component('frontend.common.input.select2')
-                                                    @slot('text', 'Addres Type')
-                                                    @slot('id', 'address_type')
-                                                    @slot('name', 'address_type')
-                                                    @slot('id_error', 'address_type')
-                                                    @slot('style', 'width:100%')
-                                                @endcomponent
-                                            </div>
-                                        </div>
-                                       
-
-                                <div id="map"></div>
-
-
                         </div>
                         <div class="modal-footer">
                             <div class="flex">
                                 <div class="action-buttons">
                                         @component('frontend.common.buttons.submit')
-                                            @slot('class', 'add-item')
+                                            @slot('class', 'add-address')
                                             @slot('type', 'button')
                                         @endcomponent
                                         @component('frontend.common.buttons.reset')
-                                            @slot('class', 'reset-item')
+                                            @slot('class', 'reset-address')
                                         @endcomponent
                                     @include('frontend.common.buttons.close')
                                 </div>

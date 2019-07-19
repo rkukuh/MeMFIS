@@ -333,9 +333,8 @@
             @component('frontend.common.buttons.reset')
                 @slot('name', 'reset')
             @endcomponent
-            @component('frontend.common.buttons.back')
-                @slot('name', 'back')
-            @endcomponent
+            @include('frontend.common.buttons.back')
+
 		            	</div>
 					</div>
 				</div>

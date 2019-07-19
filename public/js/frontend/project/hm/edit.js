@@ -63,7 +63,7 @@ let Project = {
                     }
                 },
                 {
-                    field: 'aircrafts',
+                    field: 'aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
@@ -119,7 +119,7 @@ let Project = {
                     data: "title"
                 },
                 {
-                    data: "aircraft_id"
+                    data: "aircraft.name"
                 },
                 {
                     data: "Actions"
@@ -230,13 +230,20 @@ let Project = {
             });
         });
 
+        
+        $(".modal_blank_project").on("click", function() {
+            let aircraft_val = $("#applicability_airplane").val();
+            let aircraft_text = $("#applicability_airplane option:selected").text();
+            $("#aircraft_type_modal").html(aircraft_text);
+            $("#aircraft_type_modal").val(aircraft_val);
+        });
+
         $('.add-blank-workpackage').on('click', function () {
             let registerForm = $('#BlankWorkpackageForm');
             let applicability_airplane = $('#applicability_airplane').val();
             let title = $('#title').val();
+            let description_modal = $('#description_modal').val();
             let is_template = 0;
-            console.log(applicability_airplane);
-            console.log(title);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -248,7 +255,8 @@ let Project = {
                     title: title,
                     aircraft_id: applicability_airplane,
                     is_template: is_template,
-                    project_uuid: project_uuid,
+                    description: description_modal,
+                    project_uuid: project_uuid
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -268,64 +276,6 @@ let Project = {
             });
         });
 
-        $(document).ready(function() {
-            let customer_uuid = $('#customer')[0].value;
-            $("#name").html(customer_uuid.text);
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'GET',
-                dataType: "json",
-                url: '/label/get-customer/'+customer_uuid,
-                success: function (respone) {
-                    if (respone) {
-                        let res = JSON.parse(respone);
-                            $('select[name="attention"]').empty();
-                            $('select[name="phone"]').empty();
-                            $('select[name="email"]').empty();
-                            $('select[name="fax"]').empty();
-                            $('select[name="address"]').empty();
-                            for (var i = 0; i < res.length; i++) {
-                                if(res[i].name){
-                                    $('select[name="attention"]').append(
-                                        '<option value="' + res[i].name + '">' + res[i].name + '</option>'
-                                    );
-                                }
-                                if(res[i].address){
-                                    $('select[name="attention"]').append(
-                                        '<option value="' + res[i].address + '">' + res[i].address + '</option>'
-                                    );
-                                }
-                                if(res[i].fax){
-                                    $('select[name="attention"]').append(
-                                        '<option value="' + res[i].fax + '">' + res[i].fax + '</option>'
-                                    );
-                                }
-                                if(res[i].phones){
-                                    $.each(res[i].phones, function (value) {
-                                        $('select[name="phone"]').append(
-                                            '<option value="' + res[i].phones[value] + '">' + res[i].phones[value] + '</option>'
-                                        );
-                                    });
-                                }
-                                if(res[i].emails){
-                                    $.each(res[i].emails, function (value) {
-                                        $('select[name="email"]').append(
-                                            '<option value="' + res[i].emails[value] + '">' + res[i].emails[value] + '</option>'
-                                        );
-                                    });
-                                }
-                        }
-                    } else {
-                        console.log("empty");
-        
-                    }
-        
-                }
-            });
-        });
-        
         $('select[name="customer"]').on('change', function () {
             let customer_uuid = this.options[this.selectedIndex].value;
             $("#name").html(customer_uuid.text);
@@ -377,9 +327,9 @@ let Project = {
                         }
                     } else {
                         console.log("empty");
-        
+
                     }
-        
+
                 }
             });
         });
@@ -440,7 +390,7 @@ let Project = {
             });
         });
 
-        
+
     }
 };
 

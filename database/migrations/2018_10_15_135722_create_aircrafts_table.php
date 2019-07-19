@@ -14,11 +14,11 @@ class CreateAircraftsTable extends Migration
     public function up()
     {
         Schema::create('aircrafts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');
-            $table->unsignedInteger('manufacturer_id');
+            $table->unsignedBigInteger('manufacturer_id');
             $table->timestamps();
             $table->softDeletes();
 

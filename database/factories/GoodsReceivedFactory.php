@@ -5,19 +5,18 @@ use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Storage;
 use App\Models\Employee;
+use App\Models\Approval;
 use App\Models\GoodsReceived;
 use App\Models\PurchaseOrder;
 use Faker\Generator as Faker;
 
 $factory->define(GoodsReceived::class, function (Faker $faker) {
 
-    $is_approved = false;
     $number = $faker->unixTime();
-    $plate_no = strtoupper($faker->randomLetter) . ' ' . $faker->numberBetween($min = 1000, $max = 9999) . ' ' . strtoupper($faker->randomLetter) . strtoupper($faker->randomLetter);
-
-    if ($faker->boolean) {
-        $is_approved = true;
-    }
+    $plate_no = strtoupper($faker->randomLetter) . ' ' 
+                . $faker->numberBetween(1000, 9999) . ' ' 
+                . strtoupper($faker->randomLetter) 
+                . strtoupper($faker->randomLetter);
 
     return [
         'number' => 'GRN-DUM-' . $number,
@@ -30,7 +29,7 @@ $factory->define(GoodsReceived::class, function (Faker $faker) {
         },
         'received_at' => $faker->randomElement([null, Carbon::now()]),
         'vehicle_no' => $faker->randomElement([null, $plate_no]),
-        'container_no' => $faker->randomElement([null, 'CON-' . $faker->numberBetween($min = 1000, $max = 9999)]),
+        'container_no' => $faker->randomElement([null, 'CON-' . $faker->numberBetween(1000, 9999)]),
         'purchase_order_id' => function () {
             if (PurchaseOrder::count()) {
                 return PurchaseOrder::get()->random()->id;
@@ -44,20 +43,6 @@ $factory->define(GoodsReceived::class, function (Faker $faker) {
             }
 
             return factory(Storage::class)->create()->id;
-        },
-        'approved_by' => function () use ($is_approved) {
-            if ($is_approved) {
-                if (Employee::count()) {
-                    return Employee::get()->random()->id;
-                }
-    
-                return factory(Employee::class)->create()->id;
-            }
-        },
-        'approved_at' => function () use ($is_approved, $faker) {
-            if ($is_approved) {
-                return Carbon::now();
-            }
         },
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];
@@ -93,6 +78,12 @@ $factory->afterCreating(GoodsReceived::class, function ($goods_received, $faker)
                 'note' => $faker->randomElement([null, $faker->sentence]),
             ]);
         }
+    }
+    
+    // Approval
+
+    if ($faker->boolean) {
+        $goods_received->approvals()->save(factory(Approval::class)->make());
     }
 
 });

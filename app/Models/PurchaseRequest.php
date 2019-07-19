@@ -11,8 +11,6 @@ class PurchaseRequest extends MemfisModel
         'type_id',
         'requested_at',
         'required_at',
-        'approved_by',
-        'approved_at',
         'project_id',
         'description',
     ];
@@ -20,22 +18,21 @@ class PurchaseRequest extends MemfisModel
     protected $dates = [
         'requested_at', 
         'required_at', 
-        'approved_at'
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A purchase request may have approver.
+     * Polymorphic: An entity can have zero or many approvals.
      *
-     * This function will retrieve the approver of a purchase request.
-     * See: Employee's purchase_request_approved() method for the inverse
+     * This function will get all Quotation's approvals.
+     * See: Approvals's approvable() method for the inverse
      *
      * @return mixed
      */
-    public function approvedBy()
+    public function approvals()
     {
-        return $this->belongsTo(Employee::class, 'approved_by');
+        return $this->morphMany(Approval::class, 'approvable');
     }
 
     /**

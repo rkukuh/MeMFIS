@@ -208,11 +208,19 @@ class WorkPackageItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function material($workPackage)
+    public function material(WorkPackage $workPackage)
     {
-        $workPackage = WorkPackage::with('taskcards.items')->where('uuid',$workPackage)->first();
+        $items =[];
 
-        $data = $alldata = json_decode($workPackage->taskcards);
+        foreach($workPackage->taskcards as $taskcard){
+            foreach($taskcard->materials as $item){
+                $item->tackcard_number .= $taskcard->number;
+                $item->unit_name .= $item->unit->name;
+                array_push($items, $item);
+            }
+        }
+
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -306,13 +314,19 @@ class WorkPackageItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tool($workPackage)
+    public function tool(WorkPackage $workPackage)
     {
-        $workPackage = WorkPackage::with('taskcards.items')->where('uuid',$workPackage)->first();
+        $items =[];
 
-        $data = $alldata = json_decode($workPackage);
+        foreach($workPackage->taskcards as $taskcard){
+            foreach($taskcard->materials as $item){
+                $item->tackcard_number .= $taskcard->number;
+                $item->unit_name .= $item->unit->name;
+                array_push($items, $item);
+            }
+        }
 
-        dd($data);
+        $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

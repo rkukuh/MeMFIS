@@ -16,10 +16,10 @@ class CreateAmelsTable extends Migration
         /** The details of "Employee-License", for AMEL: Rating */
 
         Schema::create('amels', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('employee_license_id');
-            $table->unsignedInteger('rating');
+            $table->unsignedBigInteger('employee_license_id');
+            $table->unsignedBigInteger('rating');
             $table->timestamps();
             $table->softDeletes();
 

@@ -4,18 +4,26 @@ let Quotation = {
     init: function () {
         let exchange_rate_value = $('input[name=exchange]').val();
         $(document).ready(function () {
-            let GTotal = IDRformatter.format(document.getElementById("grand_total").innerHTML);
-            document.getElementById("grand_total").innerHTML = GTotal;
+            let GTotal = 0;
+            if(currency == 1){
+                GTotal = IDRformatter.format(document.getElementById("grand_total_rupiah").innerHTML);
+                document.getElementById("grand_total_rupiah").innerHTML = GTotal;
+            }else{
+                GTotal = ForeignFormatter.format(document.getElementById("grand_total").innerHTML);
+                document.getElementById("grand_total").innerHTML = GTotal;
+                GTotal = IDRformatter.format(document.getElementById("grand_total_rupiah").innerHTML);
+                document.getElementById("grand_total_rupiah").innerHTML = GTotal;
+            }
         });
 
         $('select[name="currency"]').on('change', function () {
             let exchange_id = this.options[this.selectedIndex].innerHTML;
             let exchange_rate = $('input[name=exchange]');
-            if (exchange_id === "Rupiah (Rp)") {
+            if (exchange_id.includes("Rp")) {
                 exchange_rate.val(1);
                 exchange_rate.attr("readonly", true);
             } else {
-                exchange_rate.val('');
+                exchange_rate.val(1);
                 exchange_rate.attr("readonly", false);
             }
         });
@@ -142,19 +150,28 @@ let Quotation = {
             document.getElementById("workpackage_uuid").value = $(this).data('uuid');
         });
 
-        $('.calculate').on('click', function edit() {
-            var nilai = [];
-            var inputs = $(".extra");
+        $('.calculate').on('click', function calculate_total() {
+            let value = [];
+            let inputs = $(".charge");
+            let currency = $("#currency").val();
+            let exchange_rate = $("#exchange").val();
+            let grandTotal = grandTotalRupiah = 0;
             //get all values
-            for (var i = 0; i < inputs.length; i++) {
-                nilai[i] = parseInt($(inputs[i]).val());
+            for (let i = 0; i < inputs.length; i++) {
+                value[i] = parseInt($(inputs[i]).val());
             }
-            //sum semua nilai pada array
             const arrSum = arr => arr.reduce((a, b) => a + b, 0);
             let subTotal = $('#sub_total').attr("value");
-            let grandTotal = parseInt(subTotal) + parseInt(arrSum(nilai));
+            grandTotal = parseInt(subTotal) + parseInt(arrSum(value));
+
+            if(currency !== 1){
+                grandTotalRupiah = ( parseInt(subTotal) + parseInt(arrSum(value)) ) * exchange_rate;
+            }
+                        
             $('#grand_total').attr("value", grandTotal);
-            $('#grand_total').html(IDRformatter.format(grandTotal));
+            $('#grand_total_rupiah').attr("value", grandTotalRupiah);
+            $('#grand_total').html("$ "+ForeignFormatter.format(grandTotal));
+            $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
         });
 
         $('.action-buttons').on('click', '.discount', function () {
@@ -214,7 +231,28 @@ let Quotation = {
 
             summary.originalDataSet = [];
             summary.reload();
+            
+            let value = [];
+            let inputs = $(".charge");
+            let currency = $("#currency").val();
+            let exchange_rate = $("#exchange").val();
+            let grandTotal = grandTotalRupiah = 0;
+            //get all values
+            for (let i = 0; i < inputs.length; i++) {
+                value[i] = parseInt($(inputs[i]).val());
+            }
+            const arrSum = arr => arr.reduce((a, b) => a + b, 0);
+            let subTotal = $('#sub_total').attr("value");
+            grandTotal = parseInt(subTotal) + parseInt(arrSum(value));
 
+            if(currency !== 1){
+                grandTotalRupiah = ( parseInt(subTotal) + parseInt(arrSum(value)) ) * exchange_rate;
+            }
+                        
+            $('#grand_total').attr("value", grandTotal);
+            $('#grand_total_rupiah').attr("value", grandTotalRupiah);
+            $('#grand_total').html("$ "+ForeignFormatter.format(grandTotal));
+            $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
         });
 
         $('select[name="work-order"]').on('change', function () {
@@ -314,18 +352,74 @@ let Quotation = {
             });
         });
 
+        $('select[name="scheduled_payment_type"]').on('change', function () {
+            let type = this.options[this.selectedIndex].innerHTML;
+            if(type === "By Date"){
+                $.each($('#scheduled_payment '), function () {
+                    $(this).addClass("scheduledPayment");
+                    $(this).val("");
+                    $(this).datetimepicker({
+                        format: "yyyy-mm-dd",
+                        todayHighlight: !0,
+                        autoclose: !0,
+                        startView: 2,
+                        minView: 2,
+                        forceParse: 0,
+                        pickerPosition: "bottom-left"
+                    });
+                });
+            }else{
+                $.each($('#scheduled_payment '), function () {
+                    $(this).val("");
+                    $(this).removeClass("scheduledPayment");
+                    $(this).datetimepicker( "remove" );
+                });
+            }
+        });
+        
         $('.footer').on('click', '.add-quotation', function () {
+            let is_ppn =  $('#is_ppn').prop("checked");
+            let ppn = 0;
+            if(is_ppn){
+                ppn = $('#grand_total').attr("value") * 1.1;
+                is_ppn = 1;
+            }else{
+                ppn = $('#grand_total').attr("value") * 0.1;
+                is_ppn = 0;
+            }
             let attention_name = $('#attention').val();
             let attention_phone = $('#phone').val();
             let attention_fax = $('#fax').val();
             let attention_email = $('#email').val();
             let attention_address = $('#address').val();
             let scheduled_payment_array = [];
-            $('#scheduled_payment ').each(function (i) {
-                scheduled_payment_array[i] = $('input[name="group-scheduled_payment[' + i + '][scheduled_payment]"]').val();
-            });
-            console.log(scheduled_payment_array);
+            let type = $('#scheduled_payment_type').children("option:selected").html();
+            if(type === "By Date"){
+                $('select[name^=scheduled_payment] ').each(function (i) {
+                    scheduled_payment_array[i] = $(this).val();
+                });
+            }else{
+                $('#scheduled_payment ').each(function (i) {
+                    scheduled_payment_array[i] = parseInt($(this).val());
+                });
+            }
+            scheduled_payment_array.pop();
+            let charge = [];
+            let chargeInputs = $('input[name^="charge"]');
+            //get all values
+            for (let i = 0; i < chargeInputs.length; i++) {
+                charge[i] = parseInt($(chargeInputs[i]).val());
+            }
+            charge.pop();
+            let chargeType = [];
+            //get all values
+            $("select[name^=charge_type]").each(function() {
+                chargeType.push($(this).children("option:selected").val());
+              });
+            chargeType.pop();
+
             let data = new FormData();
+            data.append("chargeType", JSON.stringify(chargeType));
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
             data.append("requested_at", $('#date').val());
@@ -335,7 +429,7 @@ let Quotation = {
             data.append("term_of_condition", $('#term_and_condition').val());
             data.append("exchange_rate", $('#exchange').val());
             data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
-            data.append("scheduled_payment_amount", scheduled_payment_array);
+            data.append("scheduled_payment_amount", JSON.stringify(scheduled_payment_array));
             data.append("attention_name", attention_name);
             data.append("attention_phone", attention_phone);
             data.append("attention_fax", attention_fax);
@@ -348,13 +442,8 @@ let Quotation = {
             data.append("subtotal", $('#sub_total').attr("value"));
             data.append("grandtotal", $('#grand_total').attr("value"));
             data.append("title", $('#title').val());
-
-            var charge = [];
-            var chargeInputs = $(".extra");
-            //get all values
-            for (var i = 0; i < chargeInputs.length; i++) {
-                charge[i] = parseInt($(chargeInputs[i]).val());
-            }
+            data.append("ppn", ppn);
+            data.append("is_ppn",is_ppn);
             data.append("charge", JSON.stringify(charge));
             data.append('_method', 'PUT');
 

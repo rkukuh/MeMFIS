@@ -16,7 +16,7 @@ class WorkAreasImport implements ToModel
     {
         return new Type([
             'code'  => str_slug($row[0]),
-            'name'  => strtoupper($row[0]),
+            'name'  => mb_strtoupper($row[0]),
             'of'    => 'work-area',
         ]);
     }

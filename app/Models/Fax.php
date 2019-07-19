@@ -32,10 +32,12 @@ class Fax extends MemfisModel
     /**
      * Polymorphic: An entity can have zero or many faxes.
      *
-     * This function will get all of the owning addressable models.
+     * This function will get all of the owning faxable models.
      * See:
      * - Customer's faxes() method for the inverse
      * - Employee's faxes() method for the inverse
+     *
+     * @return mixed
      */
     public function faxable()
     {

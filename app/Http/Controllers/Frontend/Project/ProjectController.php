@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Frontend\Project;
 
+use Auth;
 use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
+use App\Models\Approval;
 use App\Models\WorkPackage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ProjectHMStore;
@@ -91,6 +93,22 @@ class ProjectController extends Controller
 
         return response()->json($project);
 
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(Project $project)
+    {
+        $project->approvals()->save(new Approval([
+            'approvable_id' => $project->id,
+            'approved_by' => Auth::id(),
+        ]));
+
+        return response()->json($project);
     }
 
 }

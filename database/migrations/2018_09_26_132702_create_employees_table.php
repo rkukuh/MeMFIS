@@ -14,9 +14,10 @@ class CreateEmployeesTable extends Migration
     public function up()
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
+            $table->unsignedBigInteger('user_id');
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
@@ -25,6 +26,11 @@ class CreateEmployeesTable extends Migration
             $table->timestamp('hired_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('user_id')
+                    ->references('id')->on('users')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->index('first_name');
             $table->index('middle_name');

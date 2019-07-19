@@ -1,10 +1,14 @@
 <?php
 
+use App\Models\RTS;
 use App\Models\Unit;
 use App\Models\Item;
+use App\Models\Status;
 use App\Models\Project;
 use App\Models\Customer;
 use App\Models\Aircraft;
+use App\Models\Progress;
+use App\Models\Approval;
 use App\Models\WorkPackage;
 use Faker\Generator as Faker;
 
@@ -14,6 +18,7 @@ $factory->define(Project::class, function (Faker $faker) {
 
     return [
         'code' => 'PRJ-DUM-' . $number,
+        'parent_id' => null,
         'title' => 'Project Dummy #' . $number,
         'customer_id' => function () {
             if (Customer::count()) {
@@ -39,6 +44,12 @@ $factory->define(Project::class, function (Faker $faker) {
 /** CALLBACKS */
 
 $factory->afterCreating(Project::class, function ($project, $faker) {
+
+    // Approval
+
+    if ($faker->boolean) {
+        $project->approvals()->save(factory(Approval::class)->make());
+    }
 
     // Item
 
@@ -66,6 +77,21 @@ $factory->afterCreating(Project::class, function ($project, $faker) {
         }
     }
 
+    // Progress
+
+    $project->progresses()->save(
+        factory(Progress::class)->make([
+            // Set all progress to 'open' to make testing phase easier
+            'status_id' => Status::ofProject()->where('code', 'open')->first()
+        ])
+    );
+
+    // RTS
+
+    if ($faker->boolean) {
+        $project->rts()->save(factory(RTS::class)->make());
+    }
+
     // Work Package
 
     $workpackage = null;
@@ -74,11 +100,13 @@ $factory->afterCreating(Project::class, function ($project, $faker) {
         $workpackage = factory(WorkPackage::class)->create();
 
         $project->workpackages()->save($workpackage, [
+            'tat' => $faker->randomDigitNotNull,
             'performance_factor' => $faker->randomElement([
                 null,
                 (float)(rand(1, 5) * 0.5) // min:1-max:unlimited-step:0,1-eg:1;1,5;2;
             ]),
-            'tat' => $faker->randomDigitNotNull,
+            'total_manhours' => $faker->randomFloat(2, 0, 9999),
+            'total_manhours_with_performance_factor' => $faker->randomFloat(2, 0, 9999) * 2,
         ]);
     }
 

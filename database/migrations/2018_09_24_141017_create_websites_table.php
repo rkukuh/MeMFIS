@@ -14,10 +14,10 @@ class CreateWebsitesTable extends Migration
     public function up()
     {
         Schema::create('websites', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('url');
-            $table->unsignedInteger('type_id');
+            $table->unsignedBigInteger('type_id');
             $table->morphs('websiteable');
             $table->timestamps();
             $table->softDeletes();

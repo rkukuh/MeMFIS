@@ -8,7 +8,7 @@ use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Threshold;
 use Illuminate\Support\Facades\Storage;
-
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardSIStore;
 use App\Http\Requests\Frontend\TaskCardSIUpdate;
@@ -44,7 +44,7 @@ class TaskCardSIController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.nonroutine.si.create', [
+        return view('frontend.task-card.nonroutine.si.create', [
             'MaintenanceCycles' => $this->maintenanceCycle,
         ]);
     }
@@ -58,14 +58,23 @@ class TaskCardSIController extends Controller
     public function store(TaskCardSIStore $request)
     {
         $this->decoder($request);
-
         if($request->work_area){
             $request->work_area = Type::firstOrCreate(
                 ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
             );
         }
+
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
+
+            if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+                $taskcard->skills()->attach(Type::where('code','electrical')->first()->id);
+                $taskcard->skills()->attach(Type::where('code','radio')->first()->id);
+                $taskcard->skills()->attach(Type::where('code','instrument')->first()->id);
+            }
+            else{
+                $taskcard->skills()->attach($request->skill_id);
+            }
 
             if(is_array($request->threshold_amount)){
                 for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
@@ -111,7 +120,7 @@ class TaskCardSIController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        return view('frontend.taskcard.nonroutine.si.show',[
+        return view('frontend.task-card.nonroutine.si.show',[
             'taskCard' => $taskCard
         ]);
     }
@@ -130,7 +139,7 @@ class TaskCardSIController extends Controller
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
         }
-        return view('frontend.taskcard.nonroutine.si.edit', [
+        return view('frontend.task-card.nonroutine.si.edit', [
             'taskcard' => $taskCard,
             'skills' => $this->skill,
             'work_areas' => $this->work_area,
@@ -159,7 +168,20 @@ class TaskCardSIController extends Controller
                 ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
             );
         }
+
         if ($taskCard->update($request->all())) {
+            if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+                $taskCard->skills()->detach();
+                $taskCard->skills()->attach(Type::where('code','electrical')->first()->id);
+                $taskCard->skills()->attach(Type::where('code','radio')->first()->id);
+                $taskCard->skills()->attach(Type::where('code','instrument')->first()->id);
+            }
+            else{
+                if(sizeof($taskCard->skills) > 1 ){
+                    $taskCard->skills()->detach();
+                }
+                $taskCard->skills()->sync($request->skill_id);
+            }
             $taskCard->aircrafts()->sync($request->applicability_airplane);
             if($taskCard->thresholds)$taskCard->thresholds()->delete();
             if($taskCard->repeats)$taskCard->repeats()->delete();

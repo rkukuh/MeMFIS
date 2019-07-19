@@ -6,7 +6,7 @@ let DcProject = {
               source: {
                   read: {
                       method: 'GET',
-                      url: '/datatables/customer',
+                      url: '/datatables/defectcard/project',
                       map: function (raw) {
                           let dataSet = raw;
 
@@ -43,7 +43,7 @@ let DcProject = {
           },
           columns: [
               {
-                  field: 'date',
+                  field: 'created_at',
                   title: 'Date',
                   sortable: 'asc',
                   filterable: !1,
@@ -54,44 +54,41 @@ let DcProject = {
                   sortable: 'asc',
                   filterable: !1,
                   template: function (t) {
-                      return '<a href="/customer/'+t.uuid+'">' + t.code + "</a>"
+                      return '<a href="/project-hm/'+t.jobcard.quotation.project.uuid+'">' + t.jobcard.quotation.project.code + "</a>"
                   }
               },
               {
-                  field: 'code',
+                  field: 'jobcard.quotation.project.no_wo',
                   title: 'Work Order No',
                   sortable: 'asc',
                   filterable: !1,
-                  template: function (t) {
-                      return '<a href="/customer/'+t.uuid+'">' + t.code + "</a>"
-                  }
               },
               {
-                  field: 'name',
+                  field: 'jobcard.quotation.project.title',
                   title: 'Project Title',
                   sortable: 'asc',
                   filterable: !1,
               },
               {
-                  field: 'name',
+                  field: 'jobcard.quotation.project.customer.name',
                   title: 'Customer',
                   sortable: 'asc',
                   filterable: !1,
               },
               {
-                  field: 'payment_term',
+                  field: 'jobcard.quotation.project.aircraft.name',
                   title: 'A/C Type',
                   sortable: 'asc',
                   filterable: !1,
               },
               {
-                  field: 'payment_term',
+                  field: 'jobcard.quotation.project.aircraft_register',
                   title: 'A/C Reg',
                   sortable: 'asc',
                   filterable: !1,
               },
               {
-                  field: 'payment_term',
+                  field: 'jobcard.quotation.project.aircraft_sn',
                   title: 'A/C Serial No',
                   sortable: 'asc',
                   filterable: !1,
@@ -108,7 +105,7 @@ let DcProject = {
                   overflow: 'visible',
                   template: function (t, e, i) {
                       return (
-                          '<a href="defectcard-project/1" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                          '<a href="defectcard-project/'+t.jobcard.quotation.project.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                               '<i class="la la-pencil"></i>' +
                           '</a>'
                       );

@@ -32,10 +32,12 @@ class Email extends MemfisModel
     /**
      * Polymorphic: An entity can have zero or many emails.
      *
-     * This function will get all of the owning addressable models.
+     * This function will get all of the owning emailable models.
      * See:
      * - Customer's emails() method for the inverse
      * - Employee's emails() method for the inverse
+     *
+     * @return mixed
      */
     public function emailable()
     {

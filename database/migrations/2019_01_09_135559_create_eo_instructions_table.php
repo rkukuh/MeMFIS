@@ -14,17 +14,16 @@ class CreateEOInstructionsTable extends Migration
     public function up()
     {
         Schema::create('eo_instructions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('taskcard_id')->nullable();
-            $table->unsignedInteger('skill_id')->nullable();
-            $table->unsignedInteger('work_area')->nullable();
+            $table->unsignedBigInteger('taskcard_id')->nullable();
+            $table->unsignedBigInteger('work_area')->nullable();
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->integer('engineer_quantity')->default(1);
             $table->integer('helper_quantity')->nullable();
             $table->boolean('is_rii')->default(false);
             $table->unsignedDecimal('performance_factor', 8, 2)->nullable();
-            $table->unsignedInteger('sequence')->nullable();
+            $table->unsignedBigInteger('sequence')->nullable();
             $table->longText('description')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
@@ -32,11 +31,6 @@ class CreateEOInstructionsTable extends Migration
 
             $table->foreign('taskcard_id')
                     ->references('id')->on('taskcards')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('skill_id')
-                    ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 

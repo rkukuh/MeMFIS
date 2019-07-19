@@ -18,7 +18,7 @@ $('.workpackage_datatable').mDatatable({
                     if (typeof raw.data !== 'undefined') {
                         dataSet = raw.data;
                     }
-
+                    
                     return dataSet;
                 }
             }
@@ -59,11 +59,11 @@ $('.workpackage_datatable').mDatatable({
             sortable: 'asc',
             filterable: !1,
             template: function (t) {
-                return '<a href="/quotation/'+projectuuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
+                return '<a href="/quotation/'+quotation_uuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
             }
         },
         {
-            field: 'aircraft.name',
+            field: 'ac_type',
             title: 'A/C Type',
             sortable: 'asc',
             filterable: !1,

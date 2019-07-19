@@ -14,11 +14,11 @@ class CreateJournalsTable extends Migration
     public function up()
     {
         Schema::create('journals', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name')->nullable();
-            $table->unsignedInteger('type_id')->nullable();
+            $table->unsignedBigInteger('type_id')->nullable();
             $table->integer('level')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
@@ -28,6 +28,9 @@ class CreateJournalsTable extends Migration
                   ->references('id')->on('types')
                   ->onUpdate('cascade')
                   ->onDelete('restrict');
+
+            $table->index('code');
+            $table->index('name');
         });
     }
 

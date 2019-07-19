@@ -14,8 +14,9 @@ class CreateCustomerLevelTable extends Migration
     public function up()
     {
         Schema::create('customer_level', function (Blueprint $table) {
-            $table->unsignedInteger('customer_id');
-            $table->unsignedInteger('level_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('level_id');
             $table->timestamps();
             $table->softDeletes();
 

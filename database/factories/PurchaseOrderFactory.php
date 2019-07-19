@@ -6,20 +6,15 @@ use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Vendor;
 use App\Models\Currency;
-use App\Models\Employee;
+use App\Models\Approval;
 use App\Models\PurchaseOrder;
 use Faker\Generator as Faker;
 use App\Models\PurchaseRequest;
 
 $factory->define(PurchaseOrder::class, function (Faker $faker) {
 
-    $is_approved = false;
     $number = $faker->unixTime();
     $top_type = Type::ofTermOfPayment()->get()->random()->id;
-
-    if ($faker->boolean) {
-        $is_approved = true;
-    }
 
     return [
         'number' => 'PO-DUM-' . $number,
@@ -63,20 +58,6 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
                 return Carbon::now();
             }
         },
-        'approved_by' => function () use ($is_approved) {
-            if ($is_approved) {
-                if (Employee::count()) {
-                    return Employee::get()->random()->id;
-                }
-    
-                return factory(Employee::class)->create()->id;
-            }
-        },
-        'approved_at' => function () use ($is_approved, $faker) {
-            if ($is_approved) {
-                return Carbon::now();
-            }
-        },
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];
 
@@ -115,6 +96,12 @@ $factory->afterCreating(PurchaseOrder::class, function ($purchase_order, $faker)
                 'note' => $faker->randomElement([null, $faker->sentence]),
             ]);
         }
+    }
+
+    // Approval
+
+    if ($faker->boolean) {
+        $purchase_order->approvals()->save(factory(Approval::class)->make());
     }
 
 });

@@ -205,7 +205,7 @@ let Datatables = {
             ]
         })
 
-        $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left: 60%; color: white;"><span><i class="la la-refresh"></i><span>Reload</span></span> </button>').appendTo('div.dataTables_filter');
+        // $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left: 60%; color: white;"><span><i class="la la-refresh"></i><span>Reload</span></span> </button>').appendTo('div.dataTables_filter');
         $('.paging_simple_numbers').addClass('pull-left');
         $('.dataTables_length').addClass('pull-right');
         $('.dataTables_info').addClass('pull-left');
@@ -233,16 +233,14 @@ let Datatables = {
                     taskcard: $(this).data('uuid'),
                 },
                 success: function (data) {
-                    if (data.errors) {
-                        // if (data.errors.name) {
-                        //     $('#name-error').html(data.errors.name[0]);
-
-                        //     document.getElementById('name').value = name;
-                        // }
+                    if (data.title == "Danger") {
+                        toastr.error('Task card alrady exists!', 'Error',  {
+                            timeOut: 5000
+                        });
                     } else {
                         $('#modal_basic').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
+                        toastr.success('Task Card has been added.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -276,7 +274,7 @@ let Datatables = {
                     } else {
                         $('#modal_sip').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
+                        toastr.success('Task Card has been added.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -310,7 +308,7 @@ let Datatables = {
                     } else {
                         $('#modal_cpcp').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
+                        toastr.success('Task Card has been added.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -344,7 +342,7 @@ let Datatables = {
                     } else {
                         $('#modal_ad_sb').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
+                        toastr.success('Task Card has been added.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -378,7 +376,7 @@ let Datatables = {
                     } else {
                         $('#modal_si').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
+                        toastr.success('Task Card has been added.', 'Success',  {
                             timeOut: 5000
                         });
 
@@ -412,7 +410,7 @@ let Datatables = {
                     } else {
                         $('#modal_cmr_awl').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success',  {
+                        toastr.success('Task Card has been added.', 'Success',  {
                             timeOut: 5000
                         });
 

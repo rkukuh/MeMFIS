@@ -37,13 +37,8 @@ class ItemStore extends FormRequest
                     $query->where('of', 'item');
                 }),
             ],
-            'unit_id' => [
-                'required',
-                Rule::exists('units', 'id')->where(function ($query) {
-                    $query->whereIn('type_id', (new Unit())->ofQuantity()->get());
-                }),
-            ],
-            'ppn_amount' => 'nullable|integer|min:0', 
+            'unit_id' => 'required|exists:units,id',
+            'ppn_amount' => 'nullable|integer|min:0',
         ];
     }
 

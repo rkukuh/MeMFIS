@@ -14,10 +14,11 @@ class CreateItemProjectTable extends Migration
     public function up()
     {
         Schema::create('item_project', function (Blueprint $table) {
-            $table->unsignedInteger('project_id');
-            $table->unsignedInteger('item_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('item_id');
             $table->double('quantity');
-            $table->unsignedInteger('unit_id');
+            $table->unsignedBigInteger('unit_id');
             $table->string('note')->nullable();
             $table->timestamps();
             $table->softDeletes();

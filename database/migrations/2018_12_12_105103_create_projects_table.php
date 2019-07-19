@@ -14,17 +14,23 @@ class CreateProjectsTable extends Migration
     public function up()
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('title');
             $table->string('no_wo');
-            $table->unsignedInteger('customer_id');
-            $table->unsignedInteger('aircraft_id')->nullable();
+            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('aircraft_id')->nullable();
             $table->string('aircraft_register');
             $table->string('aircraft_sn');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('parent_id')
+                    ->references('id')->on('projects')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->foreign('customer_id')
                     ->references('id')->on('customers')
@@ -38,6 +44,7 @@ class CreateProjectsTable extends Migration
 
             $table->index('code');
             $table->index('title');
+            $table->index('no_wo');
         });
     }
 

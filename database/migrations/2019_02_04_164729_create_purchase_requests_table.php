@@ -14,15 +14,13 @@ class CreatePurchaseRequestsTable extends Migration
     public function up()
     {
         Schema::create('purchase_requests', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
-            $table->unsignedInteger('type_id');
+            $table->unsignedBigInteger('type_id');
             $table->timestamp('requested_at')->nullable();
             $table->timestamp('required_at')->nullable();
-            $table->unsignedInteger('approved_by')->nullable();
-            $table->timestamp('approved_at')->nullable();
-            $table->unsignedInteger('project_id')->nullable();
+            $table->unsignedBigInteger('project_id')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

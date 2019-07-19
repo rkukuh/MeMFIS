@@ -16,7 +16,7 @@
                     -
                 </li>
                 <li class="m-nav__item">
-                    <a href="{{ route('frontend.quotation.index') }}" class="m-nav__link">
+                    <a href="{{ route('frontend.project.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Project
                             </span>
@@ -32,7 +32,7 @@
         <div class="col-sm-6 col-md-6 col-lg-6 " onclick="location.href='/project-hm/create';">
             <div class="view third-effect ">
                 <img class="responsive" src="{{ asset('img/project/hm_icon.png') }}" />
-                <h1 class="position bg" style="color:white">Heavy Maintenance</h1>
+                <h1 class="position bg" style="color:white">New Project</h1>
 
                 <div class="mask hand">
                 </div>
@@ -41,7 +41,7 @@
         <div class="col-sm-6 col-md-6 col-lg-6 " onclick="location.href='/project-workshop/create';">
             <div class="view third-effect " style="margin-left:0px">
                 <img class="responsive" src="{{ asset('img/project/workshop_icon.png') }}" />
-                <h1 class="position bg" style="color:white">Workshop</h1>
+                <h1 class="position bg" style="color:white">Additional Task</h1>
                 <div class="mask hand">
                 </div>
             </div>

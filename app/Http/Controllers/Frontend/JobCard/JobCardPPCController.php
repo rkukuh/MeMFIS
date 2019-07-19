@@ -46,9 +46,13 @@ class JobCardPPCController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function show(JobCard $jobCard)
+    public function show(JobCard $jobcard)
     {
-        return view('frontend.job-card.ppc.show');
+        return view('frontend.job-card.ppc.show', [
+            'jobcard' => $jobcard,
+            'materials' => $jobcard->taskcard->materials,
+            'tools' => $jobcard->taskcard->tools,
+        ]);
     }
 
     /**

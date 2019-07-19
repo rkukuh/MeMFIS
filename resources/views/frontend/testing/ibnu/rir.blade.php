@@ -4,7 +4,7 @@
 <div class="m-subheader hidden">
   <div class="d-flex align-items-center">
       <div class="mr-auto">
-          <h3 class="m-subheader__title m-subheader__title--separator">            
+          <h3 class="m-subheader__title m-subheader__title--separator">
             RIR (Receiving Insspection Report)
           </h3>
           <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
@@ -18,7 +18,7 @@
               </li>
               <li class="m-nav__item">
                   <a href="{{ route('frontend.quotation.index') }}" class="m-nav__link">
-                      <span class="m-nav__link-text">                              
+                      <span class="m-nav__link-text">
                         RIR (Receiving Insspection Report)
                       </span>
                   </a>
@@ -120,7 +120,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="form-control-label">
-                                                    Date 
+                                                    Date
                                                 </label>
 
                                                 @component('frontend.common.input.datepicker')
@@ -136,7 +136,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="form-control-label">
-                                                    Status 
+                                                    Status
                                                 </label>
                                                 <div class="m-checkbox-inline">
                                                         @component('frontend.testing.khusnul.checkbox-inline')
@@ -267,7 +267,7 @@
                                                         <label class="form-control-label">
                                                             If Unsatisfactory Explain
                                                         </label>
-        
+
                                                         @component('frontend.common.input.input')
                                                             @slot('name', 'part')
                                                             @slot('placeholder', 'If Unsatisfactory Explain')
@@ -310,7 +310,7 @@
                                                         <label class="form-control-label">
                                                             If Unsatisfactory Explain
                                                         </label>
-        
+
                                                         @component('frontend.common.input.input')
                                                             @slot('name', 'part')
                                                             @slot('placeholder', 'If Unsatisfactory Explain')
@@ -388,7 +388,7 @@
                                                         <label class="form-control-label">
                                                             If Unsatisfactory Explain
                                                         </label>
-        
+
                                                         @component('frontend.common.input.input')
                                                             @slot('name', 'part')
                                                             @slot('placeholder', 'If Unsatisfactory Explain')
@@ -483,7 +483,7 @@
                                                         <label class="form-control-label">
                                                             Delivery Document
                                                         </label>
-        
+
                                                         @component('frontend.common.input.input')
                                                             @slot('name', 'part')
                                                             @slot('placeholder', 'Quantity')
@@ -504,7 +504,7 @@
                                                         <label class="form-control-label">
                                                             Delivery Document
                                                         </label>
-        
+
                                                         @component('frontend.common.input.input')
                                                             @slot('name', 'part')
                                                             @slot('placeholder', 'Quantity')
@@ -527,9 +527,8 @@
 
                                             @include('frontend.common.buttons.reset')
 
-                                            @component('frontend.common.buttons.back')
-                                                @slot('href', '#')
-                                            @endcomponent
+                                            @include('frontend.common.buttons.back')
+
                                         </div>
                                     </div>
                                 </div>

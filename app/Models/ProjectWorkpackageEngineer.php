@@ -12,6 +12,8 @@ class ProjectWorkPackageEngineer extends MemfisModel
     protected $fillable = [
         'skill_id',
         'engineer_id',
+        'quantity',
+        'project_workpackage_id'
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

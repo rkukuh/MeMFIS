@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\Item;
@@ -20,10 +21,7 @@ class CertifiedStaff_AMEL extends Seeder
     {
         /** Create EMPLOYEE */
 
-        $sugiharto = Employee::create([
-            'code' => 'MMF-00002',
-            'first_name' => 'Sugiharto',
-        ]);
+        $sugiharto = Employee::where('user_id', User::where('email', 'sugiharto@ptmmf.co.id')->first()->id)->first();
 
         /** Assign EMPLOYEE to AMEL */
 

@@ -14,12 +14,15 @@ class CreateFacilitiesTable extends Migration
     public function up()
     {
         Schema::create('facilities', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->index('code');
+            $table->index('name');
         });
     }
 

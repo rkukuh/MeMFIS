@@ -14,11 +14,12 @@ class CreateDepartmentEmployeeTable extends Migration
     public function up()
     {
         Schema::create('department_employee', function (Blueprint $table) {
-            $table->unsignedInteger('department_id');
-            $table->unsignedInteger('employee_id');
+            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('employee_id');
             $table->timestamp('joined_at')->nullable();
             $table->timestamp('left_at')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('department_id')
                     ->references('id')->on('departments')

@@ -14,27 +14,20 @@ class CreateGoodsReceivedTable extends Migration
     public function up()
     {
         Schema::create('goods_received', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('number')->nullable();
-            $table->unsignedInteger('received_by');
+            $table->unsignedBigInteger('received_by');
             $table->timestamp('received_at')->nullable();
             $table->string('vehicle_no')->nullable();
             $table->string('container_no')->nullable();
-            $table->unsignedInteger('purchase_order_id');
-            $table->unsignedInteger('storage_id');
-            $table->unsignedInteger('approved_by')->nullable();
-            $table->timestamp('approved_at')->nullable();
+            $table->unsignedBigInteger('purchase_order_id');
+            $table->unsignedBigInteger('storage_id');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('received_by')
-                    ->references('id')->on('employees')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('approved_by')
                     ->references('id')->on('employees')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');

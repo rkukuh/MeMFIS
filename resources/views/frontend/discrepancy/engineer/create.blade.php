@@ -57,7 +57,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', '2/12/2012')
+                                                @slot('text', $jobcard->quotation->project->created_at)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -66,47 +66,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Discrepenct No
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                A/C Reg
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                JC No Refference
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                A/C S/N
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $jobcard->quotation->project->aircraft->name)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -122,14 +82,61 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
+                                                A/C Reg
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $jobcard->quotation->project->aircraft_register)
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                JC No Refference
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $jobcard->number)
+                                            @endcomponent
+                                            <input type="hidden"id="uuid" name="uuid" value="{{$jobcard->uuid}}">
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                A/C S/N
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                            @slot('text', $jobcard->quotation->project->aircraft_sn)
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Skill
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @if(sizeof($jobcard->taskcard->skills) == 3)
+                                                    @slot('text', 'ERI')
+                                                @elseif(sizeof($jobcard->taskcard->skills) == 1)
+                                                    @slot('text', $jobcard->taskcard->skills[0]->name)
+                                                @else
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @endif
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
                                                 Qty Engineer
                                             </label>
 
                                             @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('name', 'ppn_amount')
-                                                    @slot('id_error', 'ppn_amount')
+                                                    @slot('text', 'Engineer Quantity')
+                                                    @slot('id', 'engineer_qty')
+                                                    @slot('name', 'engineer_qty')
+                                                    @slot('id_error', 'engineer_qty')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -149,10 +156,10 @@
                                             </label>
 
                                             @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('name', 'ppn_amount')
-                                                    @slot('id_error', 'ppn_amount')
+                                                    @slot('text', 'Helper Quantity')
+                                                    @slot('id', 'helper_quantity')
+                                                    @slot('name', 'helper_quantity')
+                                                    @slot('id_error', 'helper_quantity')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -163,7 +170,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                            @slot('text', $jobcard->taskcard->work_area)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -172,32 +179,30 @@
                                             </label>
 
                                             @component('frontend.common.input.number')
-                                                    @slot('text', 'PPN')
-                                                    @slot('id', 'ppn_amount')
-                                                    @slot('name', 'ppn_amount')
-                                                    @slot('id_error', 'ppn_amount')
+                                                    @slot('text', 'Manhours')
+                                                    @slot('id', 'manhours')
+                                                    @slot('name', 'manhours')
+                                                    @slot('id_error', 'manhours')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Skill
+                                                Attachment @include('frontend.common.label.optional')
                                             </label>
+                                            <br>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
+                                            <input type="file" id="file" multiple name="name">
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                RII
                                             </label>
 
                                             @component('frontend.common.input.checkbox')
                                                 @slot('id', 'is_rii')
                                                 @slot('name', 'is_rii')
-                                                @slot('text', 'IS RII?')
+                                                @slot('text', 'RII?')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -210,18 +215,22 @@
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
                                                 @slot('multiple', 'multiple')
-                                                @slot('id_error', 'tag')
+                                                @slot('id', 'complaint')
+                                                @slot('name', 'complaint')
+                                                @slot('id_error', 'complaint')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <fieldset class="border p-2">
                                         <legend class="w-auto">Propose Correction</legend>
+                                        <div class="form-control-feedback text-danger" id="propose-error"></div>
 
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'remove')
-                                                    @slot('name', 'remove')
+                                                    @slot('value', 'remove')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '1. REMOVE')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -229,7 +238,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'repair')
-                                                    @slot('name', 'repair')
+                                                    @slot('value', 'repair')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '4. REPAIR')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -237,7 +247,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'test')
-                                                    @slot('name', 'test')
+                                                    @slot('value', 'test')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '7. TEST')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -247,7 +258,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'install')
-                                                    @slot('name', 'install')
+                                                    @slot('value', 'install')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '2. INSTALL')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -255,7 +267,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'replace')
-                                                    @slot('name', 'replace')
+                                                    @slot('value', 'replace')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '5. REPLACE')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -263,7 +276,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'shop_visit')
-                                                    @slot('name', 'shop_visit')
+                                                    @slot('value', 'shop-visit')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '8. SHOP VISIT')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -273,7 +287,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'rectification')
-                                                    @slot('name', 'rectification')
+                                                    @slot('value', 'rectification')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '3. RECTIFICATION')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -281,7 +296,8 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'ndt')
-                                                    @slot('name', 'ndt')
+                                                    @slot('value', 'ndt')
+                                                    @slot('name', 'propose[]')
                                                     @slot('text', '6. NDT')
                                                     @slot('size', '12')
                                                 @endcomponent
@@ -291,18 +307,20 @@
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         @component('frontend.common.input.checkbox')
                                                             @slot('id', 'other')
-                                                            @slot('name', 'other')
+                                                            @slot('value', 'other')
+                                                            @slot('name', 'propose[]')
                                                             @slot('text', '9. Other')
                                                             @slot('size', '12')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         @component('frontend.common.input.textarea')
-                                                            @slot('id', 'code')
-                                                            @slot('text', 'Code')
-                                                            @slot('name', 'code')
+                                                            @slot('id', 'other_text')
+                                                            @slot('text', 'Other')
+                                                            @slot('name', 'other')
+                                                            @slot('disabled', 'disabled')
                                                             @slot('rows', '3')
-                                                            @slot('id_error', 'code')
+                                                            @slot('id_error', 'other')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -318,7 +336,9 @@
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
                                                 @slot('multiple', 'multiple')
-                                                @slot('id_error', 'tag')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('id_error', 'description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -329,16 +349,15 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-item')
-                                                        @slot('class', 'add-item')
-                                                        @slot('text','Save & Approved')
+                                                        @slot('id', 'add-discrepancy')
+                                                        @slot('class', 'add-discrepancy')
+                                                        @slot('text','Save')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
 
-                                                    @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.item.index'))
-                                                    @endcomponent
+                                                    @include('frontend.common.buttons.back')
+
                                                 </div>
                                             </div>
                                         </div>
@@ -372,7 +391,6 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         @component('frontend.common.buttons.create-new')
-                                            @slot('id', 'tool')
                                             @slot('text', 'Tool')
                                             @slot('attribute', 'disabled')
                                             @slot('data_target', '#modal_uom')
@@ -442,6 +460,6 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/job-card/discrepancy/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/job-card/discrepancy/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/engineer/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/form-reset.js') }}"></script>
 @endpush

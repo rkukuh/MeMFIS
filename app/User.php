@@ -11,15 +11,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /** Relationship **/
-use Modules\Blog\Entities\Post;
 use Spatie\MediaLibrary\Models\Media;
 
 /** Scopes, Interfaces, Facades, Helpers  **/
+use App\Models\Employee;
 use App\Scopes\OrderByColumn;
 use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
 
 class User extends Authenticatable implements Auditable, HasMedia
 {
@@ -81,7 +80,18 @@ class User extends Authenticatable implements Auditable, HasMedia
 
     /*************************************** RELATIONSHIP ****************************************/
 
-    // ...
+    /**
+     * One-to-One: An Employee have one User account.
+     *
+     * This function will retrieve an Employee of a given User account.
+     * See: Employee's user() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee()
+    {
+        return $this->hasOne(Employee::class);
+    }
 
     /**************************************** ACCESSOR *******************************************/
 

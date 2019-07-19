@@ -9,8 +9,8 @@ use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Threshold;
 use App\Models\Repeat;
+use App\Helpers\DocumentNumber;
 use Illuminate\Support\Facades\Storage;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\TaskCardRoutineStore;
 use App\Http\Requests\Frontend\TaskCardRoutineUpdate;
@@ -58,11 +58,9 @@ class TaskCardRoutineController extends Controller
      */
     public function create()
     {
-        return view('frontend.taskcard.routine.create', [
+        return view('frontend.task-card.routine.create', [
             'MaintenanceCycles' => $this->maintenanceCycle,
         ]);
-
-        // return view('frontend.taskcard.routine.create');
     }
 
     /**
@@ -73,15 +71,14 @@ class TaskCardRoutineController extends Controller
      */
     public function store(TaskCardRoutineStore $request)
     {
-
         $this->decoder($request);
-        $accesses = [];
-        $zones = [];
+        $accesses = $zones = [];
         if($request->work_area){
             $request->work_area = Type::firstOrCreate(
                 ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
             );
         }
+
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
 
@@ -99,6 +96,15 @@ class TaskCardRoutineController extends Controller
 
                 $taskcard->accesses()->attach($accesses);
 
+            }
+
+            if(Type::where('id',$request->skill_id)->where('of','taskcard-skill')->first()->code == 'eri'){
+                $taskcard->skills()->attach(Type::where('code','electrical')->first()->id);
+                $taskcard->skills()->attach(Type::where('code','radio')->first()->id);
+                $taskcard->skills()->attach(Type::where('code','instrument')->first()->id);
+            }
+            else{
+                $taskcard->skills()->attach($request->skill_id);
             }
 
             if($request->zone){
@@ -187,7 +193,7 @@ class TaskCardRoutineController extends Controller
             $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
         }
 
-        return view('frontend.taskcard.routine.show', [
+        return view('frontend.task-card.routine.show', [
             'taskcard' => $taskCard,
             'types' => $this->type,
             'work_areas' => $this->work_area,
@@ -211,6 +217,7 @@ class TaskCardRoutineController extends Controller
      */
     public function edit(TaskCard $taskCard)
     {
+        // dd($taskCard->skills);
         $aircraft_taskcards = [];
 
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
@@ -235,7 +242,7 @@ class TaskCardRoutineController extends Controller
             $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
         }
 
-        return view('frontend.taskcard.routine.edit', [
+        return view('frontend.task-card.routine.edit', [
             'taskcard' => $taskCard,
             'aircraft_taskcards' => $aircraft_taskcards,
             'access_taskcards' => $access_taskcards,
@@ -250,6 +257,7 @@ class TaskCardRoutineController extends Controller
             'skills' => $this->skill,
             'taskcards' => $this->taskcard,
             'MaintenanceCycles' => $this->maintenanceCycle,
+            'additionals' => json_decode($taskCard->additionals)
         ]);
 
     }
@@ -269,6 +277,18 @@ class TaskCardRoutineController extends Controller
 
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
+            if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+                $taskCard->skills()->detach();
+                $taskCard->skills()->attach(Type::where('code','electrical')->first()->id);
+                $taskCard->skills()->attach(Type::where('code','radio')->first()->id);
+                $taskCard->skills()->attach(Type::where('code','instrument')->first()->id);
+            }
+            else{
+                if(sizeof($taskCard->skills) > 1 ){
+                    $taskCard->skills()->detach();
+                }
+                $taskCard->skills()->sync($request->skill_id);
+            }
 
             if(is_array($request->access)){
                 foreach ($request->access as $access_name ) {

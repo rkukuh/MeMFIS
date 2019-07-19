@@ -14,32 +14,29 @@ class CreateQuotationsTable extends Migration
     public function up()
     {
         Schema::create('quotations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('number')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('title')->nullable();
-            $table->unsignedInteger('project_id');
-            $table->unsignedInteger('customer_id');
+            $table->unsignedBigInteger('project_id');
             $table->json('attention')->nullable();
             $table->timestamp('requested_at')->nullable();
             $table->timestamp('valid_until')->nullable();
-            $table->unsignedInteger('currency_id');
+            $table->unsignedBigInteger('currency_id');
             $table->double('exchange_rate');
             $table->double('subtotal')->nullable();
             $table->json('charge')->nullable();
+            $table->integer('ppn')->nullable();
+            $table->boolean('is_ppn')->nullable();
             $table->double('grandtotal')->nullable();
-            $table->unsignedInteger('scheduled_payment_type')->nullable();
+            $table->unsignedBigInteger('scheduled_payment_type')->nullable();
             $table->json('scheduled_payment_amount')->nullable();
             $table->string('term_of_payment')->nullable();
             $table->text('term_of_condition')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('customer_id')
-                    ->references('id')->on('customers')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
 
             $table->foreign('project_id')
                     ->references('id')->on('projects')
@@ -57,6 +54,7 @@ class CreateQuotationsTable extends Migration
                     ->onDelete('restrict');
 
             $table->index('number');
+            $table->index('title');
         });
     }
 

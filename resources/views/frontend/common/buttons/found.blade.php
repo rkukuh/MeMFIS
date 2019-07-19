@@ -1,4 +1,4 @@
-<a
+<button
     id="{{ $id or '' }}"
     type="{{ $type or 'submit' }}"
     name="{{ $name or 'submit' }}"
@@ -18,4 +18,4 @@
 
         <span>{{ $text or 'Found Discrepancy' }}</span>
     </span>
-</a>
+</button>

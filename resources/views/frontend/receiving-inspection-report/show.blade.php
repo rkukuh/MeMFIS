@@ -4,7 +4,7 @@
 <div class="m-subheader hidden">
   <div class="d-flex align-items-center">
       <div class="mr-auto">
-          <h3 class="m-subheader__title m-subheader__title--separator">            
+          <h3 class="m-subheader__title m-subheader__title--separator">
             RIR (Receiving Insspection Report)
           </h3>
           <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
@@ -18,7 +18,7 @@
               </li>
               <li class="m-nav__item">
                   <a href="{{ route('frontend.quotation.index') }}" class="m-nav__link">
-                      <span class="m-nav__link-text">                              
+                      <span class="m-nav__link-text">
                         RIR (Receiving Insspection Report)
                       </span>
                   </a>
@@ -113,7 +113,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                 <label class="form-control-label">
-                                                    Date 
+                                                    Date
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
@@ -126,7 +126,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <label class="form-control-label">
-                                                        Status 
+                                                        Status
                                                     </label>
                                                 </div>
                                             </div>
@@ -136,26 +136,26 @@
                                                         @slot('name', '1')
                                                         @slot('text','Purchase')
                                                     @endcomponent
-                                                </div> 
+                                                </div>
                                                 <div class="col-sm-3 col-md-3 col-lg-3">
                                                     @component('frontend.common.input.checkbox')
                                                         @slot('name', '2')
                                                         @slot('text','Repair')
                                                     @endcomponent
-                                                </div> 
+                                                </div>
                                                 <div class="col-sm-3 col-md-3 col-lg-3">
                                                     @component('frontend.common.input.checkbox')
                                                         @slot('name', '3')
                                                         @slot('text','Serviceable')
                                                     @endcomponent
-                                                </div> 
+                                                </div>
                                                 <div class="col-sm-3 col-md-3 col-lg-3">
                                                     @component('frontend.common.input.checkbox')
                                                         @slot('name', '4')
                                                         @slot('text','Unserviceable')
                                                     @endcomponent
-                                                </div> 
-                                            </div>   
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -271,7 +271,7 @@
                                                         <label class="form-control-label">
                                                             If Unsatisfactory Explain
                                                         </label>
-        
+
                                                         @component('frontend.common.label.data-info')
                                                           @slot('text', 'Part Number')
                                                         @endcomponent
@@ -315,7 +315,7 @@
                                                         <label class="form-control-label">
                                                             If Unsatisfactory Explain
                                                         </label>
-        
+
                                                         @component('frontend.common.label.data-info')
                                                           @slot('text', 'Part Number')
                                                         @endcomponent
@@ -397,7 +397,7 @@
                                                         <label class="form-control-label">
                                                             If Unsatisfactory Explain
                                                         </label>
-        
+
                                                         @component('frontend.common.label.data-info')
                                                           @slot('text', 'Part Number')
                                                         @endcomponent
@@ -497,7 +497,7 @@
                                                         <label class="form-control-label">
                                                             If Unsatisfactory Explain
                                                         </label>
-        
+
                                                         @component('frontend.common.label.data-info')
                                                           @slot('text', 'Part Number')
                                                         @endcomponent
@@ -535,9 +535,7 @@
 
                                             @include('frontend.common.buttons.reset')
 
-                                            @component('frontend.common.buttons.back')
-                                                @slot('href', route('frontend.receiving-inspection-report.index'))
-                                            @endcomponent
+                                            @include('frontend.common.buttons.back')
                                         </div>
                                     </div>
                                 </div>

@@ -14,17 +14,17 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');
-            $table->unsignedInteger('unit_id');
-            $table->unsignedInteger('manufacturer_id')->nullable();
+            $table->unsignedBigInteger('unit_id');
+            $table->unsignedBigInteger('manufacturer_id')->nullable();
             $table->string('barcode')->nullable();
             $table->boolean('is_ppn')->nullable();
             $table->integer('ppn_amount')->nullable();
             $table->boolean('is_stock')->nullable();
-            $table->unsignedInteger('account_code')->nullable();
+            $table->unsignedBigInteger('account_code')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

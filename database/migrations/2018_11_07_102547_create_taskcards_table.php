@@ -14,16 +14,15 @@ class CreateTaskcardsTable extends Migration
     public function up()
     {
         Schema::create('taskcards', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
 
             /** BASIC / GENERAL */
             $table->string('number');
             $table->string('title');
-            $table->unsignedInteger('type_id')->nullable();
-            $table->unsignedInteger('task_id')->nullable();
-            $table->unsignedInteger('skill_id')->nullable();
-            $table->unsignedInteger('work_area')->nullable();
+            $table->unsignedBigInteger('type_id')->nullable();
+            $table->unsignedBigInteger('task_id')->nullable();
+            $table->unsignedBigInteger('work_area')->nullable();
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->integer('engineer_quantity')->nullable();
             $table->integer('helper_quantity')->nullable();
@@ -31,23 +30,25 @@ class CreateTaskcardsTable extends Migration
             $table->string('source')->nullable();
             $table->string('effectivity')->nullable();
             $table->unsignedDecimal('performance_factor', 8, 2)->nullable();
-            $table->unsignedInteger('sequence')->nullable();
+            $table->integer('sequence')->nullable();
             $table->json('stringer')->nullable(); // for CPCP only
             $table->json('version')->nullable();
+            $table->string('ata')->nullable();
             $table->longText('description')->nullable();
+            $table->json('additionals')->nullable();
 
             /** EO Header */
             $table->string('revision')->nullable();
             $table->string('reference')->nullable();
-            $table->unsignedInteger('category_id')->nullable();
-            $table->unsignedInteger('scheduled_priority_id')->nullable();
-            $table->string('scheduled_priority_amount')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('scheduled_priority_id')->nullable();
+            $table->string('scheduled_priority_text')->nullable();
             $table->string('scheduled_priority_type')->nullable();
-            $table->unsignedInteger('recurrence_id')->nullable();
+            $table->unsignedBigInteger('recurrence_id')->nullable();
             $table->integer('recurrence_amount')->nullable();
             $table->string('recurrence_type')->nullable();
-            $table->unsignedInteger('manual_affected_id')->nullable();
-            $table->string('manual_affected')->nullable();
+            $table->unsignedBigInteger('manual_affected_id')->nullable();
+            $table->string('manual_affected_text')->nullable();
 
             /** SI */
             // Fieldset #1 : SI No (req/1), Title (req/2), A/C Type (req/3), Skill (req/4), RII (req/5), Manhour (req/6), Helper Quantity (opt/7)
@@ -62,11 +63,6 @@ class CreateTaskcardsTable extends Migration
                     ->onDelete('restrict');
 
             $table->foreign('task_id')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('skill_id')
                     ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');

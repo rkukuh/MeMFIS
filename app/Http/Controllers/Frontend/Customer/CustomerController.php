@@ -52,24 +52,35 @@ class CustomerController extends Controller
     public function store(CustomerStore $request)
     {
         $attentions = [];
-
         $level = Level::where('uuid',$request->level)->first();
-        // for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
+        for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
 
-        //     $contact['name']     = $request->attn_name_array[$person];
-        //     $contact['position'] = $request->attn_position_array[$person];
-        //     $contact['phones'] = $request->attn_phone_array[$person];
-        //     $contact['ext'] = $request->attn_ext_array[$person];
-        //     $contact['fax'] = $request->attn_fax_array[$person];
-        //     $contact['emails'] = $request->attn_email_array[$person];
+            $contact['name']     = $request->attn_name_array[$person];
+            $contact['position'] = $request->attn_position_array[$person];
+            $contact['phones'] = $request->attn_phone_array[$person];
+            $contact['ext'] = $request->attn_ext_array[$person];
+            $contact['fax'] = $request->attn_fax_array[$person];
+            $contact['emails'] = $request->attn_email_array[$person];
 
-        //     array_push($attentions, $contact);
-        // }
+            array_push($attentions, $contact);
+        }
 
-        // $request->merge(['attention' => json_encode($attentions)]);
-        // $request->merge(['code' => "auto-generate");
+        $request->merge(['attention' => json_encode($attentions)]);
+        $request->merge(['code' => "auto-generate"]);
         if ($customer = Customer::create($request->all())) {
             $customer->levels()->attach($level);
+
+            if(is_array($request->website_array)){
+                for ($i=0; $i < sizeof($request->website_array) ; $i++) {
+                        if($request->website_type[$i] !== null && isset($request->website_array[$i])){
+                        $website_type = Type::ofWebsite()->where('uuid',$request->type_website_array[$i])->first();
+                        $customer->websites()->save(new Website([
+                            'url' => $request->website_array[$i],
+                            'type_id' => $website_type->id,
+                        ]));
+                    }
+                }
+            }
 
             if(is_array($request->phone_array)){
                 for ($i=0; $i < sizeof($request->phone_array) ; $i++) {
@@ -85,22 +96,12 @@ class CustomerController extends Controller
 
             if(is_array($request->fax_array)){
                 for ($i=0; $i < sizeof($request->fax_array) ; $i++) {
-                    $fax_type = Type::ofFax()->where('code',$request->type_fax_array[$i])->first();
+                    if(isset($request->fax_array[$i])){
+                        $fax_type = Type::ofFax()->where('code',$request->type_fax_array[$i])->first();
 
-                    $customer->faxes()->save(new Fax([
-                        'number' => $request->fax_array[$i],
-                        'type_id' => $fax_type->id,
-                    ]));
-                }
-            }
-
-            if(is_array($request->website_array)){
-                for ($i=0; $i < sizeof($request->website_array) ; $i++) {
-                    if($request->website_type[$i] !== "Select a Website Type"){
-                        $website_type = Type::ofWebsite()->where('uuid',$request->type_website_array[$i])->first();
-                        $customer->websites()->save(new Website([
-                            'url' => $request->website_array[$i],
-                            'type_id' => $website_type->id,
+                        $customer->faxes()->save(new Fax([
+                            'number' => $request->fax_array[$i],
+                            'type_id' => $fax_type->id,
                         ]));
                     }
                 }
@@ -120,7 +121,7 @@ class CustomerController extends Controller
             // if(is_array($request->document_array)){
             if(is_array($request->type_document_array)){
                 for ($i=0; $i < sizeof($request->type_document_array) ; $i++) {
-                    if($request->website_type[$i] !== "Select a Document Type"){
+                    if($request->website_type[$i] !== null && isset($request->document_array[$i])){
                         $document_type = Type::ofDocument()->where('uuid',$request->type_document_array[$i])->first();
 
                         $customer->documents()->save(new Document([
@@ -146,7 +147,15 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return view('frontend.customer.show', compact('customer'));
+        $documents = Type::ofDocument()->get();
+        $websites = Type::ofWebsite()->get();
+        $attentions = json_decode($customer->attention);
+        return view('frontend.customer.show', [
+            'customer' => $customer,
+            'attentions' => $attentions,
+            'websites' => $websites,
+            'documents' => $documents
+        ]);
     }
 
     /**
@@ -159,11 +168,15 @@ class CustomerController extends Controller
     {
         $documents = Type::ofDocument()->get();
         $websites = Type::ofWebsite()->get();
-
+        $attentions = json_decode($customer->attention);
+        $levels = Level::where('of','customer')->get();
+    //    dd($customer->websites);
+    //    dd($levels);
         return view('frontend.customer.edit', [
             'customer' => $customer,
-            'attentions' => json_decode($customer->attention),
+            'attentions' => $attentions,
             'websites' => $websites,
+            'levels' => $levels,
             'documents' => $documents
         ]);
     }
@@ -177,11 +190,10 @@ class CustomerController extends Controller
      */
     public function update(CustomerUpdate $request, Customer $customer)
     {
+        // dd(sizeof($request->email_array));
         $attentions = [];
-
         $level = Level::where('uuid',$request->level)->first();
-        // dd(sizeof($request->attn_name_array));
-        for ($person = 0; $person < sizeof($request->attn_name_array) - 1; $person++) {
+        for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
 
             $contact['name']     = $request->attn_name_array[$person];
             $contact['position'] = $request->attn_position_array[$person];
@@ -194,12 +206,74 @@ class CustomerController extends Controller
         }
 
         $request->merge(['attention' => json_encode($attentions)]);
-        if ($customer->update($request->all())) {
-            $customer->levels()->attach($level);
-            return response()->json($customer);
+        if(is_array($request->website_array)){
+            for ($i=0; $i < sizeof($request->website_array) ; $i++) {
+                if(isset($request->website_array[$i])){
+                    $website_type = Type::ofWebsite()->where('uuid',$request->type_website_array[$i])->first();
+                    $res = $customer->websites()->save(new Website([
+                        'url' => $request->website_array[$i],
+                        'type_id' => $website_type->id,
+                        ]));
+                    }
+            }
         }
+        if ($customer->update($request->all())) {
+            
+            $customer->levels()->attach($level);
 
+            if(is_array($request->phone_array)){
+                $customer->phones()->delete();
+                for ($i=0; $i < sizeof($request->phone_array) ; $i++) {
+                    $phone_type = Type::ofPhone()->where('code',$request->type_phone_array[$i])->first();
+                    $customer->phones()->save(new Phone([
+                        'number' => $request->phone_array[$i],
+                        'ext' => $request->ext_phone_array[$i],
+                        'type_id' => $phone_type->id,
+                    ]));
+                }
+            }
+
+            if(is_array($request->fax_array)){
+                for ($i=0; $i < sizeof($request->fax_array) ; $i++) {
+                    $customer->faxes()->delete();
+                    if(isset($request->fax_array[$i])){
+                        $fax_type = Type::ofFax()->where('code',$request->type_fax_array[$i])->first();
+                        $customer->faxes()->save(new Fax([
+                            'number' => $request->fax_array[$i],
+                            'type_id' => $fax_type->id,
+                        ]));
+                    }
+                }
+            }
+
+            if(is_array($request->email_array)){
+                $customer->emails()->delete();
+                for ($i=0; $i < sizeof($request->email_array) ; $i++) {
+                    $email_type = Type::ofEmail()->where('code',$request->type_email_array[$i])->first();
+                    $res = $customer->emails()->save(new Email([
+                        'address' => $request->email_array[$i],
+                        'type_id' => $email_type->id,
+                    ]));
+                }
+            }
+
+            // if(is_array($request->document_array)){
+            if(is_array($request->type_document_array)){
+                $customer->documents()->delete();
+                for ($i=0; $i < sizeof($request->type_document_array) ; $i++) {
+                    if($request->website_type[$i] !== null && isset($request->document_array[$i])){
+                        $document_type = Type::ofDocument()->where('uuid',$request->type_document_array[$i])->first();
+                        $customer->documents()->save(new Document([
+                            'number' =>' $request->document[$i]',
+                            'type_id' => $document_type->id,
+                        ]));
+                        }
+                }
+            }
+
+        }
         // TODO: Return error message as JSON
+        return response()->json($customer);
         return false;
     }
 

@@ -8,8 +8,8 @@ class Quotation extends MemfisModel
 {
     protected $fillable = [
         'number',
+        'parent_id',
         'project_id',
-        'customer_id',
         'attention',
         'requested_at',
         'valid_until',
@@ -19,7 +19,10 @@ class Quotation extends MemfisModel
         'exchange_rate',
         'subtotal',
         'charge',
+        'ppn',
+        'is_ppn',
         'grandtotal',
+        'title',
         'scheduled_payment_type',
         'scheduled_payment_amount',
         'term_of_payment',
@@ -30,6 +33,32 @@ class Quotation extends MemfisModel
     protected $dates = ['requested_at', 'valid_until'];
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * Polymorphic: An entity can have zero or many approvals.
+     *
+     * This function will get all Quotation's approvals.
+     * See: Approvals's approvable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function approvals()
+    {
+        return $this->morphMany(Approval::class, 'approvable');
+    }
+
+    /**
+     * One-to-Many (self-join): A Quotation may have none or many sub-quotation.
+     *
+     * This function will retrieve the sub-quotation of a quotation, if any.
+     * See: Quotation's parent() method for the inverse
+     *
+     * @return mixed
+     */
+    public function childs()
+    {
+        return $this->hasMany(Quotation::class, 'parent_id');
+    }
 
     /**
      * One-to-Many: A quotation may have one currency.
@@ -45,16 +74,16 @@ class Quotation extends MemfisModel
     }
 
     /**
-     * One-to-Many: A quotation may have one customer.
+     * One-to-Many: A Quotation (additional) may have zero or many Defect Cards.
      *
-     * This function will retrieve the customer of a quotation.
-     * See: Customer's quotations() method for the inverse
+     * This function will retrieve all the Defect Cards of a given quotation (additional).
+     * See: DefectCard's quotation_additional() method for the inverse
      *
      * @return mixed
      */
-    public function customer()
+    public function defectcards()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->hasMany(DefectCard::class, 'quotation_additional_id');
     }
 
     /**
@@ -70,7 +99,7 @@ class Quotation extends MemfisModel
         return $this->belongsToMany(Item::class)
                     ->withPivot(
                         'taskcard_id',
-                        'pricelist_unit',
+                        'pricelist_unit_id',
                         'pricelist_price',
                         'subtotal',
                         'note'
@@ -92,6 +121,19 @@ class Quotation extends MemfisModel
     }
 
     /**
+     * One-to-Many (self-join): A Quotation may have none or many sub-quotation.
+     *
+     * This function will retrieve the parent of a sub-quotation.
+     * See: Quotation's childs() method for the inverse
+     *
+     * @return mixed
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Quotation::class, 'parent_id');
+    }
+
+    /**
      * One-to-Many: A quotation may have one project.
      *
      * This function will retrieve the project of a quotation.
@@ -102,6 +144,19 @@ class Quotation extends MemfisModel
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many progresses.
+     *
+     * This function will get all Quotation's progresses.
+     * See: Progress's progressable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function progresses()
+    {
+        return $this->morphMany(Progress::class, 'progressable');
     }
 
     /**

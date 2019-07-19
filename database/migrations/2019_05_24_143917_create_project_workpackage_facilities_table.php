@@ -14,10 +14,13 @@ class CreateProjectWorkPackageFacilitiesTable extends Migration
     public function up()
     {
         Schema::create('project_workpackage_facilities', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedInteger('project_workpackage_id');
-            $table->unsignedInteger('facility_id');
+            $table->unsignedBigInteger('project_workpackage_id');
+            $table->unsignedBigInteger('facility_id');
+            $table->unsignedBigInteger('price_id')->nullable();
+            $table->double('price_amount')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -28,6 +31,11 @@ class CreateProjectWorkPackageFacilitiesTable extends Migration
 
             $table->foreign('facility_id')
                     ->references('id')->on('facilities')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('price_id')
+                    ->references('id')->on('prices')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

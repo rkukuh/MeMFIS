@@ -20,6 +20,8 @@ class Zone extends MemfisModel
      * This function will get all of the owning zoneable models.
      * See:
      * - Aircraft's zones() method for the inverse
+     *
+     * @return mixed
      */
     public function zoneable()
     {

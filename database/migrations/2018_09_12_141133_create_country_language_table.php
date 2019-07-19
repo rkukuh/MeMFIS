@@ -14,9 +14,11 @@ class CreateCountryLanguageTable extends Migration
     public function up()
     {
         Schema::create('country_language', function (Blueprint $table) {
-            $table->unsignedInteger('country_id');
-            $table->unsignedInteger('language_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('country_id');
+            $table->unsignedBigInteger('language_id');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('country_id')
                     ->references('id')->on('countries')

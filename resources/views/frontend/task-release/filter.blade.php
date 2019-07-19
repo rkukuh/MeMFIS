@@ -98,7 +98,7 @@
 <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script>
 
 
-<script src="{{ asset('js/frontend/task-release/filter.js')}}"></script>
+<script src="{{ asset('js/frontend/task-release/job-card/filter.js')}}"></script>
 
 
 

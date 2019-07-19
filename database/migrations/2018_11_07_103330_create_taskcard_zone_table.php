@@ -14,8 +14,9 @@ class CreateTaskcardZoneTable extends Migration
     public function up()
     {
         Schema::create('taskcard_zone', function (Blueprint $table) {
-            $table->unsignedInteger('taskcard_id');
-            $table->unsignedInteger('zone_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('taskcard_id');
+            $table->unsignedBigInteger('zone_id');
             $table->timestamps();
             $table->softDeletes();
 

@@ -1,97 +1,6 @@
 let Workpackage = {
     init: function () {
-        $('.taskcard_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/customer',
-                        map: function (raw) {
-                            let dataSet = raw;
 
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'title',
-                    title: 'Tittle',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'type_id',
-                    title: 'Type',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                },
-                {
-                    field: 'work_area',
-                    title: 'Area',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                },
-                {
-                    field: 'zone',
-                    title: 'Zone',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                },
-                {
-                    field: 'rii',
-                    title: 'Rii',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                },
-                {
-                    field: 'id',
-                    title: '#',
-                    width: 50,
-                    sortable: !1,
-                    textAlign: 'center',
-                    name: 'sas',
-                    selector: {
-                        class: 'm-checkbox--solid m-checkbox--brand'
-                    }
-                },
-
-            ]
-        });
         $('.nav-tabs').on('click', '.routine', function () {
 
             let basic = $('.basic_datatable').mDatatable();
@@ -130,64 +39,73 @@ let Workpackage = {
 
         });
 
-        // let update = $('.modal-footer').on('click', '.update', function () {
-        //     $('#button').show();
-        //     $('#name-error').html('');
-        //     $('#simpan').text('Perbarui');
 
-        //     let name = $('input[name=name]').val();
-        //     let triggerid = $('input[name=id]').val();
+        $('.b-t-n').on('click', '.btn-add', function () {
+            if($("#predecessorBtn").length == 0) {
+              } else {
+                $('.add-predecessor-modal').remove();
+              }
+            if($("#successorBtn").length == 0) {
+              } else {
+                $('.add-successor-modal').remove();
+              }
+        });
 
-        //     $.ajax({
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         },
-        //         type: 'put',
-        //         url: '/category/' + triggerid,
-        //         data: {
-        //             _token: $('input[name=_token]').val(),
-        //             name: name
-        //         },
-        //         success: function (data) {
-        //             if (data.errors) {
-        //                 if (data.errors.name) {
-        //                     $('#name-error').html(data.errors.name[0]);
-
-        //                     document.getElementById('name').value = name;
-        //                 }
-        //             } else {
-        //                 $('#modal_customer').modal('hide');
-
-        //                 toastr.success('Data berhasil disimpan.', 'Sukses', {
-        //                     timeOut: 5000
-        //                 });
-
-        //                 let table = $('.m_datatable').mDatatable();
-
-        //                 table.originalDataSet = [];
-        //                 table.reload();
-        //             }
-        //         }
-        //     });
-        // });
 
         let triggeruuid ="";
         let material_datatables_init = true;
         let tool_datatables_init = true;
+        let predecessor_datatables_init = true;
+        let successor_datatables_init = true;
+
         //Basic taskcard Datatable
         $('.basic_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
                 material_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                let table = $('#m_datatable_material_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
+            }
+        });
+        $('.basic_datatable').on('click', '.predecessor', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#predecessor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+        });
+        $('.basic_datatable').on('click', '.successor', function () {
+            if(successor_datatables_init == true){
+                successor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#successor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
             }
         });
 
@@ -214,7 +132,30 @@ let Workpackage = {
                         $('#taskcard_sequence').modal('hide');
 
                         let table = $('.basic_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
 
+                        table = $('.basic_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.sip_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.cpcp_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.ad-sb_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.cmr-awl_datatable').mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.si_datatable').mDatatable();
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -270,14 +211,14 @@ let Workpackage = {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                let table = $('#m_datatable_tool_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
@@ -287,30 +228,72 @@ let Workpackage = {
                 material_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                let table = $('#m_datatable_material_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
+            }
+        });
+        $('.sip_datatable').on('click', '.predecessor', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#predecessor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+        });
+        $('.sip_datatable').on('click', '.successor', function () {
+            if(successor_datatables_init == true){
+                successor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#successor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
             }
         });
 
+        $('.sip_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
         $('.sip_datatable').on('click', '.tool', function () {
             if(tool_datatables_init == true){
                 tool_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                let table = $('#m_datatable_tool_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
@@ -350,22 +333,64 @@ let Workpackage = {
             });
 
         });
-        
+
 
         //CPCP taskcard Datatable
+        $('.cpcp_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
+        $('.cpcp_datatable').on('click', '.predecessor', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#predecessor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+        });
+        $('.cpcp_datatable').on('click', '.successor', function () {
+            if(successor_datatables_init == true){
+                successor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#successor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+        });
         $('.cpcp_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
                 material_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                let table = $('#m_datatable_material_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
@@ -374,14 +399,14 @@ let Workpackage = {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                let table = $('#m_datatable_tool_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
@@ -423,40 +448,48 @@ let Workpackage = {
         });
 
         //ad-sb_datatable taskcard Datatable
-        $('.ad-sb_datatable').on('click', '.material', function () {
-            if(material_datatables_init == true){
-                material_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
-                alert(triggeruuid);
-                material_tc_eo(triggeruuid);
-                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
+        $('.ad-sb_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
+        $('.ad-sb_datatable').on('click', '.predecessor', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_material_eo_wp').DataTable();
+                let table = $('#predecessor_datatable').DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
-                material_tc_eo(triggeruuid);
-                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
             }
         });
-
-        $('.ad-sb_datatable').on('click', '.tool', function () {
-            if(tool_datatables_init == true){
-                tool_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
-                alert(triggeruuid);
-                tool_tc_eo(triggeruuid);
-                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
+        $('.ad-sb_datatable').on('click', '.successor', function () {
+            if(successor_datatables_init == true){
+                successor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_tool_eo_wp').DataTable();
+                let table = $('#successor_datatable').DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
-                tool_tc_eo(triggeruuid);
-                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
             }
         });
-
         $('.ad-sb_datatable').on('click', '.mandatory', function () {
             triggeruuid = $(this).data('uuid');
             mandatory = $(this).data('mandatory');
@@ -495,38 +528,48 @@ let Workpackage = {
         });
 
         //cmr-awl_datatable taskcard Datatable
-        $('.cmr-awl_datatable').on('click', '.material', function () {
-            if(material_datatables_init == true){
-                material_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
-                material_tc_eo(triggeruuid);
-                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
+        $('.cmr-awl_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
+        $('.cmr-awl_datatable').on('click', '.predecessor', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_material_eo_wp').DataTable();
+                let table = $('#predecessor_datatable').DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
-                material_tc_eo(triggeruuid);
-                $('#m_datatable_material_eo_wp').DataTable().ajax.reload();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
             }
         });
-
-        $('.cmr-awl_datatable').on('click', '.tool', function () {
-            if(tool_datatables_init == true){
-                tool_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
-                tool_tc_eo(triggeruuid);
-                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
+        $('.cmr-awl_datatable').on('click', '.successor', function () {
+            if(successor_datatables_init == true){
+                successor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_tool_eo_wp').DataTable();
+                let table = $('#successor_datatable').DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
-                tool_tc_eo(triggeruuid);
-                $('#m_datatable_tool_eo_wp').DataTable().ajax.reload();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
             }
         });
-
         $('.cmr-awl_datatable').on('click', '.mandatory', function () {
             triggeruuid = $(this).data('uuid');
             mandatory = $(this).data('mandatory');
@@ -565,19 +608,61 @@ let Workpackage = {
         });
 
         //SI taskcard Datatable
+        $('.si_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
+        $('.si_datatable').on('click', '.predecessor', function () {
+            if(predecessor_datatables_init == true){
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#predecessor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-predecessor').value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $('#predecessor_datatable').DataTable().ajax.reload();
+            }
+        });
+        $('.si_datatable').on('click', '.successor', function () {
+            if(successor_datatables_init == true){
+                successor_datatables_init = false;
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+            else{
+                let table = $('#successor_datatable').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('tc_uuid');
+                document.getElementById('uuid-successor').value = triggeruuid;
+                successor_tc(triggeruuid);
+                $('#successor_datatable').DataTable().ajax.reload();
+            }
+        });
         $('.si_datatable').on('click', '.material', function () {
             if(material_datatables_init == true){
                 material_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 material_tc_si(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                let table = $('#m_datatable_material_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 material_tc_si(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_material_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
@@ -586,14 +671,14 @@ let Workpackage = {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data('uuid');
                 tool_tc_si(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
             else{
-                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                let table = $('#m_datatable_tool_taskcard_wp').DataTable();
                 table.destroy();
                 triggeruuid = $(this).data('uuid');
                 tool_tc_si(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $('#m_datatable_tool_taskcard_wp').DataTable().ajax.reload();
             }
         });
 
@@ -682,6 +767,51 @@ let Workpackage = {
             });
         });
 
+        let simpan = $('.action-buttons').on('click', '.add-workpackage.update', function () {
+            let title = $('input[name=title]').val();
+            let applicability_airplane = $('#applicability_airplane').val();
+            let description = $('#description').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/workpackage/'+workPackage_uuid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    title: title,
+                    aircraft_id: applicability_airplane,
+                    description: description,
+                    is_template:'1',
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.aircraft_id) {
+                            $('#applicability-airplane-error').html(data.errors.aircraft_id[0]);
+                        }
+                        if (data.errors.title) {
+                            $('#title-error').html(data.errors.title[0]);
+                        }
+
+                        // document.getElementById('applicability-airplane').value = applicability-airplane;
+                        // document.getElementById('title').value = title;
+
+                    } else {
+                        // $('#modal_customer').modal('hide');
+
+                        toastr.success('Work Package has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        // let table = $('.m_datatable').mDatatable();
+
+                        // table.originalDataSet = [];
+                        // table.reload();
+                    }
+                }
+            });
+        });
     }
 
 

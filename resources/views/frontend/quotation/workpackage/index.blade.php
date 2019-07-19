@@ -30,9 +30,9 @@
                                         <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">Taskcard List(s)</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#m_tabs_tool_material">General Tool and Material</a>
+                                        <a class="nav-link" data-toggle="tab" href="#m_tabs_tool_material">Material & Tool Taskcard List</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item" id="tabs_facility">
                                         <a class="nav-link" data-toggle="tab" href="#m_tabs_facility">Facility</a>
                                     </li>
                                 </ul>
@@ -43,6 +43,7 @@
                                     </div>
                                     <div class="tab-pane" id="m_tabs_tool_material" role="tabpanel">
                                         @include('frontend.quotation.item.index')
+                                        @include('frontend.quotation.workpackage.modal')
                                     </div>
                                     <div class="tab-pane" id="m_tabs_facility" role="tabpanel">
                                         @include('frontend.quotation.facility.index')
@@ -63,6 +64,12 @@
 @push('footer-scripts')
     <script>
         let workPackage_uuid = '{{ $workPackage->uuid }}';
+        let project_uuid = '{{  $quotation->project->uuid }}';
+        let quotation_uuid = '{{ $quotation->uuid }}';
     </script>
+    <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/workpackage/job-request.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+
 @endpush

@@ -14,11 +14,11 @@ class CreatePhonesTable extends Migration
     public function up()
     {
         Schema::create('phones', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->string('ext')->nullable();
-            $table->unsignedInteger('type_id');
+            $table->unsignedBigInteger('type_id');
             $table->boolean('is_active')->default(true);
             $table->morphs('phoneable');
             $table->timestamps();

@@ -18,7 +18,7 @@ class CustomerAddressesDatatables extends Controller
      */
     public function index(Customer $customer)
     {
-        $addresses= Address::with('type')->where('addressable_id', $customer->id)->get();
+        $addresses = Address::with('type')->where('addressable_id', $customer->id)->get();
 
         $data = $alldata = json_decode($addresses);
 

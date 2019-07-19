@@ -94,6 +94,14 @@
                     </span>
                 </a>
             </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.project.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Project
+                    </span>
+                </a>
+            </li>
             <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
                 <a href="#" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
@@ -106,22 +114,12 @@
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.jobcard-mechanic.index') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.jobcard.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
                                 <span class="m-menu__link-text">
-                                    Mechanic
-                                </span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.jobcard-engineer.index') }}" class="m-menu__link">
-                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
-                                    <span></span>
-                                </i>
-                                <span class="m-menu__link-text">
-                                    Engineer
+                                    Scan Job Card
                                 </span>
                             </a>
                         </li>
@@ -135,32 +133,96 @@
                                 </span>
                             </a>
                         </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.taskrelease-jobcard.task-release.index') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    Task Release
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.riirelease-jobcard.rii-release.index') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                        RII Release
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.project.index') }}" class="m-menu__link m-menu__toggle">
+            <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                <a href="#" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Project
+                        Job Card Hard Time
                     </span>
+                    <i class="m-menu__ver-arrow la la-angle-right"></i>
                 </a>
+                <div class="m-menu__submenu">
+                    <span class="m-menu__arrow"></span>
+                    <ul class="m-menu__subnav">
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.jobcard.hardtime.index') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    Job Card Hard Time Scan
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.jobcard-hardtime-ppc.index') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    PPC
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.task-release.index') }}" class="m-menu__link m-menu__toggle">
+            <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                <a href="#" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Task Release
+                        Job Card EO
                     </span>
+                    <i class="m-menu__ver-arrow la la-angle-right"></i>
                 </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.rii-release.index') }}" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        RII Release
-                    </span>
-                </a>
+                <div class="m-menu__submenu">
+                    <span class="m-menu__arrow"></span>
+                    <ul class="m-menu__subnav">
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.jobcard-eo.index') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    Scan Job Card
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.jobcard-hardtime-ppc.index') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    PPC
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
                 <a href="#" class="m-menu__link m-menu__toggle">
@@ -174,27 +236,7 @@
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.discrepancy.index') }}" class="m-menu__link">
-                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
-                                    <span></span>
-                                </i>
-                                <span class="m-menu__link-text">
-                                    Discrepancy Found
-                                </span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.discrepancy-mechanic.create') }}" class="m-menu__link">
-                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
-                                    <span></span>
-                                </i>
-                                <span class="m-menu__link-text">
-                                    Mechanic
-                                </span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.discrepancy-engineer.create') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.discrepancy-engineer.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -204,7 +246,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.discrepancy-ppc.create') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.discrepancy-ppc.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -267,15 +309,70 @@
                                 </span>
                             </a>
                         </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                                <a href="{{ route('frontend.taskrelease-defectcard.task-release.index') }}" class="m-menu__link">
+                                    <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="m-menu__link-text">
+                                        Task Release
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="m-menu__item" aria-haspopup="true">
+                                <a href="{{ route('frontend.riirelease-defectcard.rii-release.index') }}" class="m-menu__link">
+                                    <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="m-menu__link-text">
+                                            RII Release
+                                    </span>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.release-to-service.index') }}" class="m-menu__link m-menu__toggle">
+            <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                <a href="#" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Release to Service
                     </span>
+                    <i class="m-menu__ver-arrow la la-angle-right"></i>
+                </a>
+                <div class="m-menu__submenu">
+                    <span class="m-menu__arrow"></span>
+                    <ul class="m-menu__subnav">
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.rts-progress.index') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    Progress
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.rts.index') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    RTS
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                <a href="#" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Work Progress Report
+                    </span>
+                    <i class="m-menu__ver-arrow la la-angle-right"></i>
                 </a>
             </li>
             <li class="m-menu__section">

@@ -14,11 +14,12 @@ class CreateGoodsReceivedItemTable extends Migration
     public function up()
     {
         Schema::create('goods_received_item', function (Blueprint $table) {
-            $table->unsignedInteger('goods_received_id');
-            $table->unsignedInteger('item_id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('goods_received_id');
+            $table->unsignedBigInteger('item_id');
             $table->double('quantity');
             $table->double('already_received');
-            $table->unsignedInteger('unit_id');
+            $table->unsignedBigInteger('unit_id');
             $table->string('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
