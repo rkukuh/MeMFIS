@@ -114,26 +114,26 @@
         </div>
     </div>
 </div>
-    
-    
-    @push('footer-scripts')
-    
-    <script src="{{ asset('js/frontend/functions/select2/task-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/task-type.js') }}"></script>
-    
-    <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
-    
-    <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
-    
-    <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
-    
-    <script src="{{ asset('js/frontend/functions/select2/taskcard-routine-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script>
-    
-    <script src="{{ asset('js/frontend/job-card/filter.js') }}"></script>
-    
-    
-    @endpush
+
+
+@push('footer-scripts')
+
+<script src="{{ asset('js/frontend/functions/select2/task-type.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/task-type.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/select2/taskcard-routine-type.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-routine-type.js') }}"></script>
+
+<script src="{{ asset('js/frontend/job-card/filter.js') }}"></script>
+
+
+@endpush
