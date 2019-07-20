@@ -6,12 +6,12 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTaskcardsTable extends Migration
 {
-	/**
+    /**
      * Run the migrations.
      *
      * @return void
      */
-	public function up()
+    public function up()
     {
         Schema::create('taskcards', function (Blueprint $table) {
             $table->bigIncrements('id');
@@ -58,39 +58,39 @@ class CreateTaskcardsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('type_id')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('task_id')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('work_area')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('category_id')
-                    ->references('id')->on('categories')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('categories')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('scheduled_priority_id')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('recurrence_id')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('manual_affected_id')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->index('number');
             $table->index('title');
