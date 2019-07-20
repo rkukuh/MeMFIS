@@ -96,6 +96,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProjectWorkPackageEngineersTableSeeder::class);
         $this->call(ProjectWorkPackageManhoursTableSeeder::class);
         $this->call(ProjectWorkPackageFacilitiesTableSeeder::class);
+        $this->call(ProjectWorkPackageTaskCardsTableSeeder::class);
 
         /** WORKPACKAGE's TASKCARDs */
 
