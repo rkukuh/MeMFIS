@@ -11,7 +11,7 @@ class CreateTaskcardsTable extends Migration
      *
      * @return void
      */
-    public function up()
+	public function up()
     {
         Schema::create('taskcards', function (Blueprint $table) {
             $table->bigIncrements('id');

@@ -11,8 +11,8 @@ class CreateHtcrrItemQuotationWorkpackageTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+	public function up()
+	{
         Schema::create('htcrr_item_quotation_workpackage', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();

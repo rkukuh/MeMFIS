@@ -11,7 +11,7 @@ class CreateItemQuotationTaskcardWorkpackageTable extends Migration
      *
      * @return void
      */
-    public function up()
+	public function up()
     {
         Schema::create('item_quotation_taskcard_workpackage', function (Blueprint $table) {
             $table->bigIncrements('id');
