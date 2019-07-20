@@ -7,6 +7,7 @@ use App\Models\WorkPackage;
 use App\Models\ProjectWorkPackageManhour;
 use App\Models\ProjectWorkPackageEngineer;
 use App\Models\ProjectWorkPackageFacility;
+use App\Models\ProjectWorkPackageTaskCard;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
@@ -65,6 +66,19 @@ class ProjectWorkPackage extends Pivot
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * One-to-Many: A project's workpackages may have one or many taskcard.
+     *
+     * This function will retrieve all the taskcard of a project's workpackages.
+     * See: Project WorkPackage TaskCard's header() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taskcards()
+    {
+        return $this->hasMany(ProjectWorkPackageTaskCard::class, 'project_workpackage_id');
     }
 
     /**
