@@ -4,13 +4,12 @@ namespace App\Models;
 
 use App\MemfisModel;
 
-class QuotationWorkPackageHtcrrItem extends MemfisModel
+class QuotationHtcrrItem extends MemfisModel
 {
-    protected $table = 'htcrr_item_quotation_workpackage';
+    protected $table = 'htcrr_item_quotation';
 
     protected $fillable = [
         'quotation_id',
-        'workpackage_id',
         'htcrr_id',
         'item_id',
         'quantity',
@@ -24,7 +23,7 @@ class QuotationWorkPackageHtcrrItem extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-Way: A Quotation's WorkPackage's HT/CRR's Item must have a ht/crr assigned to.
+     * One-Way: A Quotation's HT/CRR's Item must have a ht/crr assigned to.
      *
      * @return mixed
      */
@@ -34,7 +33,7 @@ class QuotationWorkPackageHtcrrItem extends MemfisModel
     }
 
     /**
-     * One-Way: A Quotation's WorkPackage's HT/CRR's Item must have an item assigned to.
+     * One-Way: A Quotation's HT/CRR's Item must have an item assigned to.
      *
      * @return mixed
      */
@@ -44,7 +43,7 @@ class QuotationWorkPackageHtcrrItem extends MemfisModel
     }
 
     /**
-     * One-Way: A Quotation's WorkPackage's HT/CRR's Item must have a rental price assigned to.
+     * One-Way: A Quotation's HT/CRR's Item must have a rental price assigned to.
      *
      * @return mixed
      */
@@ -54,7 +53,7 @@ class QuotationWorkPackageHtcrrItem extends MemfisModel
     }
 
     /**
-     * One-Way: A Quotation's WorkPackage's HT/CRR's Item must have a quotation assigned to.
+     * One-Way: A Quotation's HT/CRR's Item must have a quotation assigned to.
      *
      * @return mixed
      */
@@ -64,22 +63,12 @@ class QuotationWorkPackageHtcrrItem extends MemfisModel
     }
 
     /**
-     * One-Way: A Quotation's WorkPackage's HT/CRR's Item must have a unit assigned to.
+     * One-Way: A Quotation's HT/CRR's Item must have a unit assigned to.
      *
      * @return mixed
      */
     public function unit()
     {
         return $this->belongsTo(Unit::class);
-    }
-
-    /**
-     * One-Way: A Quotation's WorkPackage's HT/CRR's Item must have a workpackage assigned to.
-     *
-     * @return mixed
-     */
-    public function workpackage()
-    {
-        return $this->belongsTo(WorkPackage::class);
     }
 }

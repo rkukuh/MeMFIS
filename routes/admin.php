@@ -103,9 +103,9 @@ Route::name('admin.')->group(function () {
 
         Route::resource('qtn-wp-tc-item', 'QuotationWorkPackageTaskCardItemController');
 
-        /** QUOTATION's WORKPACKAGE's HT/CRR's */
+        /** QUOTATION's HT/CRR's */
 
-        Route::resource('qtn-wp-htcrr-item', 'QuotationWorkPackageHtcrrItemController');
+        Route::resource('qtn-htcrr-item', 'QuotationHtcrrItemController');
 
     });
 
