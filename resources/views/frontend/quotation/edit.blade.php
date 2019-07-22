@@ -658,6 +658,8 @@
         });
     }
 </script>
+<script src="{{ asset('js/custom.js') }}"></script>
+
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
@@ -666,7 +668,6 @@
 <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
-<script src="{{ asset('js/custom.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
 
