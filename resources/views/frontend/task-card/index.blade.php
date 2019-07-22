@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                             <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
-                                            <a href="{{route('frontend.taskcard-routine.create')}}" class="m-btn btn btn-primary">
+                                                <a href="{{route('frontend.taskcard-routine.create')}}" class="m-btn btn btn-primary">
                                                     <span>
                                                         <i class="la la-plus-circle"></i>
                                                     <span>Routine</span>
@@ -75,35 +75,35 @@
                                                 </a>
 
                                                 <div class="m-btn-group btn-group" role="group">
-                                                <button id="btnGroupDrop1" type="button" class="btn btn-primary m-btn m-btn--pill-last dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span>
-                                                        <i class="la la-plus-circle"></i>
-                                                    <span>Non - Routine</span>
-                                                    </span>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                                    <a class="dropdown-item" href="{{ route('frontend.preliminary.create') }}">
+                                                    <button id="btnGroupDrop1" type="button" class="btn btn-primary m-btn m-btn--pill-last dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <span>
                                                             <i class="la la-plus-circle"></i>
-                                                        <span>Preliminary</span>
+                                                        <span>Non - Routine</span>
                                                         </span>
-                                                    </a>
-                                                    <a class="dropdown-item" href="{{route('frontend.taskcard-eo.create')}}">
-                                                        <span>
-                                                            <i class="la la-plus-circle"></i>
-                                                        <span>Engineering Order</span>
-                                                        </span>
-                                                    </a>
-                                                    <a class="dropdown-item" href="{{route('frontend.taskcard-si.create')}}">
-                                                        <span>
-                                                            <i class="la la-plus-circle"></i>
-                                                        <span>Special Instruction</span>
-                                                        </span>
-                                                    </a>
-                                                </div>
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="{{ route('frontend.preliminary.create') }}">
+                                                            <span>
+                                                                <i class="la la-plus-circle"></i>
+                                                            <span>Preliminary</span>
+                                                            </span>
+                                                        </a>
+                                                        <a class="dropdown-item" href="{{route('frontend.taskcard-eo.create')}}">
+                                                            <span>
+                                                                <i class="la la-plus-circle"></i>
+                                                            <span>Engineering Order</span>
+                                                            </span>
+                                                        </a>
+                                                        <a class="dropdown-item" href="{{route('frontend.taskcard-si.create')}}">
+                                                            <span>
+                                                                <i class="la la-plus-circle"></i>
+                                                            <span>Special Instruction</span>
+                                                            </span>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                            <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
@@ -111,6 +111,7 @@
                             <div class="col-lg-12">
                                 @include('frontend.task-card.filter')
                             </div>
+                            
                             <div class="taskcard_datatable" id="scrolling_both"></div>
                         </div>
                     </div>

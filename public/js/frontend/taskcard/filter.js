@@ -213,7 +213,7 @@ $(document).ready(function () {
             $.each(data, function (key, value) {
                 $('#taskcard_routine_type').append(
                     '<option value="' + key + '">' + value + '</option>'
-                ).trigger('init');
+                ).select2();
             });
         }
     });
