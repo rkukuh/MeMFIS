@@ -16,6 +16,7 @@ use App\Models\Quotation;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
+use App\Models\QuotationHtcrrItem;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\ProjectWorkPackage;
 use App\Models\ProjectWorkPackageFacility;
@@ -113,6 +114,28 @@ class QuotationController extends Controller
                 }
             }
 
+        // TODO generate htcrr item workpackage
+        $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
+        $project = Project::find($request->project_id);
+            foreach($project->htcrr as $htcrr){
+                foreach($htcrr->items as $item){
+
+                    if (Item::findOrFail($item->id)->prices->get($customer)) {
+                        $price_id = Item::find($item->id)->prices->get($customer)->id;
+                    } else {
+                        $price_id = null;
+                    }
+                    QuotationHtcrrItem::create([
+                        'quotation_id' => $quotation->id,
+                        'htcrr_id' => $htcrr->id,
+                        'item_id' => $item->id,
+                        'quantity' => $item->pivot->quantity,
+                        'unit_id' => $item->pivot->unit_id,
+                        'price_id' => $price_id,
+                    ]);
+                }
+            }
+
         // TODO generate item taskcard
         $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
         $project = Project::find($request->project_id);
@@ -193,7 +216,7 @@ class QuotationController extends Controller
     public function update(QuotationUpdate $request, Quotation $quotation)
     {
         $attention = [];
-        
+
         $attention['name']     = $request->attention_name;
         $attention['phone'] = $request->attention_phone;
         $attention['address'] = $request->attention_address;
