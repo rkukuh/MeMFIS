@@ -36,7 +36,8 @@
 @push('footer-scripts')
 <SCript>
     $('.modal-footer').on('click', '.create', function () {
-        window.location.href = '#';
+        let project_uuid =$('#project').val();
+        window.location.href = 'project-hm-additional/create/'+project_uuid+'/';
     });
 </SCript>
 @endpush

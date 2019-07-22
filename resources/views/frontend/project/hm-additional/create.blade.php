@@ -63,7 +63,7 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text', $project->no_wo)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -141,12 +141,12 @@
                                                     <td align="center" width="14%"><b>A/C SN</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
+                                                    <td align="center" valign="top">{{$project->created_at}}</td>
+                                                    <td align="center" valign="top">{{$project->code}}</td>
+                                                    <td align="center" valign="top">{{$project->title}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft->name}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft_register}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft_sn}}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -164,10 +164,10 @@
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active show" id="m_tabs_1_1" role="tabpanel">
-                                                    @include('frontend.project.additional.defect-card.index')
+                                                    @include('frontend.project.hm-additional.defect-card.index')
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
-                                                    @include('frontend.project.additional.material-tool.index')
+                                                    @include('frontend.project.hm-additional.material-tool.index')
                                                 </div>
                                             </div>
                                         </div>
@@ -191,9 +191,9 @@
                                                         @slot('id', 'add-workpackage')
                                                         @slot('class', 'add-workpackage')
                                                     @endcomponent
-    
+
                                                     @include('frontend.common.buttons.reset')
-    
+
                                                     @component('frontend.common.buttons.back')
                                                         @slot('href', route('frontend.workpackage.index'))
                                                     @endcomponent
