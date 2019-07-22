@@ -6,13 +6,13 @@ let Quotation = {
         $(document).ready(function () {
             let GTotal = 0;
             if(currency == 1){
-                GTotal = IDRformatter.format(document.getElementById("grand_total_rupiah").innerHTML);
-                document.getElementById("grand_total_rupiah").innerHTML = GTotal;
+                GTotal = IDRformatter.format($("#grand_total_rupiah").html());
+                $("#grand_total_rupiah").html(GTotal);
             }else{
-                GTotal = ForeignFormatter.format(document.getElementById("grand_total").innerHTML);
-                document.getElementById("grand_total").innerHTML = GTotal;
-                GTotal = IDRformatter.format(document.getElementById("grand_total_rupiah").innerHTML);
-                document.getElementById("grand_total_rupiah").innerHTML = GTotal;
+                GTotal = ForeignFormatter.format($("#grand_total").html());
+                $("#grand_total").html(GTotal);
+                GTotal = IDRformatter.format($("#grand_total_rupiah").html());
+                $("#grand_total_rupiah").html(GTotal);
             }
         });
 
@@ -380,11 +380,12 @@ let Quotation = {
         $('.footer').on('click', '.add-quotation', function () {
             let is_ppn =  $('#is_ppn').prop("checked");
             let ppn = 0;
+            console.log($('#grand_total_rupiah'));
             if(is_ppn){
-                ppn = $('#grand_total').attr("value") * 1.1;
+                ppn = $('#grand_total_rupiah').attr("value") * 1.1;
                 is_ppn = 1;
             }else{
-                ppn = $('#grand_total').attr("value") * 0.1;
+                ppn = $('#grand_total_rupiah').attr("value") * 0.1;
                 is_ppn = 0;
             }
             let attention_name = $('#attention').val();
