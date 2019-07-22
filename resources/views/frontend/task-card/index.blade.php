@@ -111,7 +111,7 @@
                             <div class="col-lg-12">
                                 @include('frontend.task-card.filter')
                             </div>
-                            
+
                             <div class="taskcard_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
@@ -124,5 +124,4 @@
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
     <script src="{{ asset('js/frontend/taskcard/index.js')}}"></script>
-    <script src="{{ asset('js/frontend/taskcard/filter.js')}}"></script>
 @endpush

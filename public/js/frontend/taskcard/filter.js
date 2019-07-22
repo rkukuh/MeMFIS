@@ -206,6 +206,19 @@ $('.filter').on('change', function () {
 
 $(document).ready(function () {
     $.ajax({
+        url: '/get-takcard-routine-types/',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $.each(data, function (key, value) {
+                $('#taskcard_routine_type').append(
+                    '<option value="' + key + '">' + value + '</option>'
+                );
+            });
+        }
+    });
+
+    $.ajax({
         url: '/get-takcard-non-routine-types/',
         type: 'GET',
         dataType: 'json',
@@ -213,9 +226,10 @@ $(document).ready(function () {
             $.each(data, function (key, value) {
                 $('#taskcard_routine_type').append(
                     '<option value="' + key + '">' + value + '</option>'
-                ).select2();
+                );
             });
         }
     });
+
 });
 
