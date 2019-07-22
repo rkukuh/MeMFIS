@@ -749,6 +749,7 @@ let Customer = {
             let payment_term = $('input[name=term_of_payment]').val();
             let account_code = $('#account_code').val();
             let level = $('select[name="customer-level"]').val();
+            let active = $('#active').val();
 
             let phone_array = [];
             $('input[name^=phone_array]').each(function (i) {
@@ -894,7 +895,7 @@ let Customer = {
                     attn_fax_array:attn_fax_array,
                     attn_email_array:attn_email_array,
                     level:level,
-                    // banned: banned
+                    active: active
                 },
                 success: function (data) {
                     if (data.errors) {
