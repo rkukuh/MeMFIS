@@ -23,6 +23,23 @@
       </div>
 
       <div class="facility_datatable" id="scrolling_both"></div>
+      <div class="form-group m-form__group row">
+          <div class="col-sm-12 col-md-12 col-lg-12 footer">
+              <div class="flex">
+                  <div class="action-buttons">
+                      @component('frontend.common.buttons.submit')
+                          @slot('type','button')
+                          @slot('id', 'add-job-request')
+                          @slot('class', 'add-job-request')
+                      @endcomponent
+
+                      @include('frontend.common.buttons.reset')
+
+                      @include('frontend.common.buttons.back')
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
 </div>
 @include('frontend.quotation.facility.modal')
