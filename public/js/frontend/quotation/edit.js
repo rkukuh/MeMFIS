@@ -380,7 +380,6 @@ let Quotation = {
         $('.footer').on('click', '.add-quotation', function () {
             let is_ppn =  $('#is_ppn').prop("checked");
             let ppn = 0;
-            console.log($('#grand_total_rupiah'));
             if(is_ppn){
                 ppn = $('#grand_total_rupiah').attr("value") * 1.1;
                 is_ppn = 1;

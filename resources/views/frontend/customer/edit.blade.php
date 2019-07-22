@@ -822,6 +822,9 @@
                                                     @slot('text', 'Active')
                                                     @slot('name', 'active')
                                                     @slot('id', 'active')
+                                                    @if(empty($customer->banned_at))
+                                                    @slot('checked','checked')
+                                                    @endif
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-7 col-md-7 col-lg-7">
@@ -1001,6 +1004,7 @@
                                                             @component('frontend.common.input.text')
                                                                 @slot('name', 'attn-ext')
                                                                 @slot('text', 'Ext')
+                                                                @slot('value', $attention->ext)
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -1011,6 +1015,7 @@
                                                             @component('frontend.common.input.text')
                                                                 @slot('text', '+62xxxxxxx / 07777777')
                                                                 @slot('name', 'attn-fax')
+                                                                @slot('value', $attention->fax)
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">

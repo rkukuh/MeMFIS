@@ -79,7 +79,7 @@
                                                 <span>Additional Task</span>
                                                 </span>
                                             </button>
-                                            @include('frontend.project.additional.modal')
+                                            @include('frontend.project.hm-additional.modal')
                                         </div>
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -102,4 +102,6 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/action-botton/aircraft.js')}}"></script>
     <script src="{{ asset('js/frontend/project/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 @endpush

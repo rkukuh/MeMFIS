@@ -82,7 +82,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return IDRformatter.format(t.unitPrice);
+                        return ForeignFormatter.format(t.unitPrice);
                     }
                 },
                 {
@@ -91,7 +91,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return IDRformatter.format(t.price_amount);
+                        return ForeignFormatter.format(t.price_amount);
                     }
                 },
                 {
@@ -100,7 +100,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return IDRformatter.format(t.quantity*t.price_amount);
+                        return ForeignFormatter.format(t.quantity*t.price_amount);
                     }
                 },
                 {
@@ -203,7 +203,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return IDRformatter.format(t.unitPrice);
+                        return ForeignFormatter.format(t.unitPrice);
                     }
                 },
                 {
@@ -211,6 +211,9 @@ let JobRequest = {
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.price_amount);
+                    }
                 },
                 {
                     field: 'sub_total',
@@ -218,7 +221,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return IDRformatter.format(t.quantity*t.price_amount);
+                        return ForeignFormatter.format(t.quantity*t.price_amount);
                     }
                 },
                 {
@@ -322,7 +325,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return IDRformatter.format(t.unitPrice);
+                        return ForeignFormatter.format(t.unitPrice);
                     }
                 },
                 {
@@ -330,6 +333,9 @@ let JobRequest = {
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.price_amount);
+                    }
                 },
                 {
                     field: 'sub_total',
@@ -337,7 +343,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return IDRformatter.format(t.quantity*t.price_amount);
+                        return ForeignFormatter.format(t.quantity*t.price_amount);
                     }
                 },
                 {
@@ -441,7 +447,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return IDRformatter.format(t.unitPrice);
+                        return ForeignFormatter.format(t.unitPrice);
                     }
                 },
                 {
@@ -449,6 +455,9 @@ let JobRequest = {
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.price_amount);
+                    }
                 },
                 {
                     field: 'sub_total',
@@ -456,7 +465,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t){
-                        return IDRformatter.format(t.quantity*t.price_amount);
+                        return ForeignFormatter.format(t.quantity*t.price_amount);
                     }
                 },
                 {
