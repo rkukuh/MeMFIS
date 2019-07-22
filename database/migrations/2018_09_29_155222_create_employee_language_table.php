@@ -35,24 +35,24 @@ class CreateEmployeeLanguageTable extends Migration
                     ->onDelete('restrict');
 
             $table->foreign('reading_level')
-                  ->references('id')->on('types')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->foreign('speaking_level')
-                  ->references('id')->on('types')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->foreign('writing_level')
-                  ->references('id')->on('types')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->foreign('understanding_level')
-                  ->references('id')->on('types')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 

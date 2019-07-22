@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemUnitTable extends Migration
+class CreateProjectWorkPackageTaskCardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,22 @@ class CreateItemUnitTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_unit', function (Blueprint $table) {
+        Schema::create('project_workpackage_taskcards', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('item_id');
-            $table->unsignedBigInteger('unit_id');
-            $table->double('quantity', 8, 2);
+            $table->char('uuid', 36)->unique();
+            $table->unsignedBigInteger('project_workpackage_id');
+            $table->unsignedBigInteger('taskcard_id');
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('item_id')
-                    ->references('id')->on('items')
+            $table->foreign('project_workpackage_id')
+                    ->references('id')->on('project_workpackage')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('unit_id')
-                    ->references('id')->on('units')
+            $table->foreign('taskcard_id')
+                    ->references('id')->on('taskcards')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
@@ -40,6 +41,6 @@ class CreateItemUnitTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_unit');
+        Schema::dropIfExists('project_workpackage_taskcards');
     }
 }

@@ -23,14 +23,14 @@ class CreateItemStorageTable extends Migration
             $table->softDeletes();
 
             $table->foreign('item_id')
-                  ->references('id')->on('items')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                    ->references('id')->on('items')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->foreign('storage_id')
-                  ->references('id')->on('storages')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                    ->references('id')->on('storages')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 

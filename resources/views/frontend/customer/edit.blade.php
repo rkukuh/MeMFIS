@@ -85,9 +85,15 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-5 col-md-5 col-lg-5">
                                                 <select name="customer-level" class="form-control select">
-                                                    @foreach($levels as $level)
+                                                    @if(empty($customer->levels))
+                                                        @foreach($levels as $level)
+                                                        <option value="{{ $level->uuid }}" >{{ $level->name }}</option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach($levels as $level)
                                                         <option value="{{ $level->uuid }}" @if($level->uuid == $customer->levels[sizeof($customer->levels) - 1]->uuid ) selected @endif>{{ $level->name }}</option>
-                                                    @endforeach
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                             </div>
                                             <div class="col-sm-7 col-md-7 col-lg-7">
@@ -1036,7 +1042,7 @@
                                                 </div>
                                             @endforeach
                                         @else
-    
+
                                         <div class="repeaterRow">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -1231,7 +1237,7 @@
     $('.select').select2();
         $('.selectWebsite').select2();
         $('.selectDocument').select2();
-        
+
 </script>
 
 <script>

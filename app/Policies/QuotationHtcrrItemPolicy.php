@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\User;
-use App\Models\QuotationWorkPackageHtcrrItem;
+use App\Models\QuotationHtcrrItem;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class QuotationWorkPackageHtcrrItemPolicy
+class QuotationHtcrrItemPolicy
 {
     use HandlesAuthorization;
 
@@ -14,10 +14,10 @@ class QuotationWorkPackageHtcrrItemPolicy
      * Determine whether the user can view the quotation work package htcrr item.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\QuotationWorkPackageHtcrrItem  $quotationWorkPackageHtcrrItem
+     * @param  \App\Models\QuotationHtcrrItem  $quotationHtcrrItem
      * @return mixed
      */
-    public function view(User $user, QuotationWorkPackageHtcrrItem $quotationWorkPackageHtcrrItem)
+    public function view(User $user, QuotationHtcrrItem $quotationHtcrrItem)
     {
         //
     }
@@ -37,10 +37,10 @@ class QuotationWorkPackageHtcrrItemPolicy
      * Determine whether the user can update the quotation work package htcrr item.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\QuotationWorkPackageHtcrrItem  $quotationWorkPackageHtcrrItem
+     * @param  \App\Models\QuotationHtcrrItem  $quotationHtcrrItem
      * @return mixed
      */
-    public function update(User $user, QuotationWorkPackageHtcrrItem $quotationWorkPackageHtcrrItem)
+    public function update(User $user, QuotationHtcrrItem $quotationHtcrrItem)
     {
         //
     }
@@ -49,10 +49,10 @@ class QuotationWorkPackageHtcrrItemPolicy
      * Determine whether the user can delete the quotation work package htcrr item.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\QuotationWorkPackageHtcrrItem  $quotationWorkPackageHtcrrItem
+     * @param  \App\Models\QuotationHtcrrItem  $quotationHtcrrItem
      * @return mixed
      */
-    public function delete(User $user, QuotationWorkPackageHtcrrItem $quotationWorkPackageHtcrrItem)
+    public function delete(User $user, QuotationHtcrrItem $quotationHtcrrItem)
     {
         //
     }
@@ -61,10 +61,10 @@ class QuotationWorkPackageHtcrrItemPolicy
      * Determine whether the user can restore the quotation work package htcrr item.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\QuotationWorkPackageHtcrrItem  $quotationWorkPackageHtcrrItem
+     * @param  \App\Models\QuotationHtcrrItem  $quotationHtcrrItem
      * @return mixed
      */
-    public function restore(User $user, QuotationWorkPackageHtcrrItem $quotationWorkPackageHtcrrItem)
+    public function restore(User $user, QuotationHtcrrItem $quotationHtcrrItem)
     {
         //
     }
@@ -73,10 +73,10 @@ class QuotationWorkPackageHtcrrItemPolicy
      * Determine whether the user can permanently delete the quotation work package htcrr item.
      *
      * @param  \App\User  $user
-     * @param  \App\Models\QuotationWorkPackageHtcrrItem  $quotationWorkPackageHtcrrItem
+     * @param  \App\Models\QuotationHtcrrItem  $quotationHtcrrItem
      * @return mixed
      */
-    public function forceDelete(User $user, QuotationWorkPackageHtcrrItem $quotationWorkPackageHtcrrItem)
+    public function forceDelete(User $user, QuotationHtcrrItem $quotationHtcrrItem)
     {
         //
     }

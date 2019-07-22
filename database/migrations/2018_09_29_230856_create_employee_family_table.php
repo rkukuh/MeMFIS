@@ -32,9 +32,9 @@ class CreateEmployeeFamilyTable extends Migration
                     ->onDelete('restrict');
 
             $table->foreign('relationship_type')
-                  ->references('id')->on('types')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
         });
     }

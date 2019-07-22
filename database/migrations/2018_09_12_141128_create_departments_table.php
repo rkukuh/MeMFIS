@@ -23,9 +23,9 @@ class CreateDepartmentsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('parent_id')
-                  ->references('id')->on('departments')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                    ->references('id')->on('departments')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->index('code');
             $table->index('name');

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHtcrrItemQuotationWorkpackageTable extends Migration
+class CreateHtcrrItemQuotationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateHtcrrItemQuotationWorkpackageTable extends Migration
      */
     public function up()
     {
-        Schema::create('htcrr_item_quotation_workpackage', function (Blueprint $table) {
+        Schema::create('htcrr_item_quotation', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('quotation_id')->nullable();
-            $table->unsignedBigInteger('workpackage_id')->nullable();
             $table->unsignedBigInteger('htcrr_id')->nullable();
             $table->unsignedBigInteger('item_id')->nullable();
             $table->double('quantity');
@@ -30,34 +29,29 @@ class CreateHtcrrItemQuotationWorkpackageTable extends Migration
             $table->softDeletes();
 
             $table->foreign('quotation_id')
-                    ->references('id')->on('quotations')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('workpackage_id')
-                    ->references('id')->on('workpackages')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('quotations')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('htcrr_id')
-                    ->references('id')->on('htcrr')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('htcrr')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('item_id')
-                    ->references('id')->on('items')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('items')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('unit_id')
-                    ->references('id')->on('units')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('units')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('price_id')
-                    ->references('id')->on('prices')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('prices')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 
@@ -68,6 +62,6 @@ class CreateHtcrrItemQuotationWorkpackageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('htcrr_item_quotation_workpackage');
+        Schema::dropIfExists('htcrr_item_quotation');
     }
 }

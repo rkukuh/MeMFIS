@@ -5,18 +5,14 @@ use App\Models\Item;
 use App\Models\Price;
 use App\Models\HtCrr;
 use App\Models\Quotation;
-use App\Models\WorkPackage;
 use Faker\Generator as Faker;
-use App\Models\QuotationWorkPackageHtcrrItem;
+use App\Models\QuotationHtcrrItem;
 
-$factory->define(QuotationWorkPackageHtcrrItem::class, function (Faker $faker) {
+$factory->define(QuotationHtcrrItem::class, function (Faker $faker) {
 
     return [
         'quotation_id' => function () {
             return Quotation::get()->random()->id;
-        },
-        'workpackage_id'=> function (array $data) {
-            return WorkPackage::get()->random()->id;
         },
         'htcrr_id'=> function (array $data) {
             return HtCrr::get()->random()->id;
