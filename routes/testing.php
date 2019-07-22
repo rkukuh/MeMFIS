@@ -14,16 +14,6 @@ Route::name('testing.')->group(function () {
 
         });
 
-        Route::get('/project', function () {
-            $projects = App\Models\Project::with('approvals')->whereHas('approvals')->pluck('title','id');
-
-            // $project = App\Models\Project::with('approvals')->whereHas('approvals')->get();
-            // ->whereHas('approvals', function ($query){
-                //         $query->where('task_id', $request->task_type_id);
-                    // })->get();
-            dd($projects);
-        });
-
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
         Route::view('/taskcard-wip', 'frontend/testing/taskcard-wip')->name('taskcard');
