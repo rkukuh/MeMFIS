@@ -58,6 +58,15 @@ class ProjectHMWorkPackageController extends Controller
     {
         $project->workpackages()->attach(WorkPackage::where('uuid',$request->workpackage)->first()->id);
 
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',WorkPackage::where('uuid',$request->workpackage)->first()->id)->first();
+        // // $workPackage = WorkPackage::where('uuid',$request->workpackage)->first();
+        foreach($project_workpackage->workpackage->taskcards as $taskcard){
+
+            $project_workpackage->taskcards()->create([
+                'taskcard_id' => $taskcard->id,
+            ]);
+        }
+
         return response()->json($project);
     }
 
@@ -135,7 +144,7 @@ class ProjectHMWorkPackageController extends Controller
     public function edit(Project $project, WorkPackage $workPackage,Request $request)
     {
         $mhrs_pfrm_factor = $skills = $subset = [];
-            
+
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
         ->first();
@@ -166,7 +175,7 @@ class ProjectHMWorkPackageController extends Controller
 
         $employees = Employee::all();
         $facilities = Facility::all();
-        
+
         $materialCount = $workPackage->items->count();
         $toolCount = $workPackage->tools->count();
 
@@ -238,7 +247,7 @@ class ProjectHMWorkPackageController extends Controller
                 ]);
             }
         }
-        
+
         return response()->json($project_workpackage);
     }
 
@@ -259,7 +268,7 @@ class ProjectHMWorkPackageController extends Controller
             ]);
 
         return response()->json($project_workpackage);
-        
+
     }
 
     /**
