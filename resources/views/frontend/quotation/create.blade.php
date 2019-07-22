@@ -147,7 +147,7 @@
                                                                                 </label>
 
                                                                                 @component('frontend.common.label.data-info')
-                                                                                    @slot('text', 'XXX')
+                                                                                    @slot('text', 'Customer Name')
                                                                                     @slot('id', 'name')
                                                                                 @endcomponent
                                                                             </div>
@@ -157,7 +157,7 @@
                                                                                 </label>
 
                                                                                 @component('frontend.common.input.select2')
-                                                                                    @slot('text', 'Bp. Romdani')
+                                                                                    @slot('text', 'Ex. Bp. Romdani')
                                                                                     @slot('id', 'attention')
                                                                                     @slot('name', 'attention')
                                                                                 @endcomponent
@@ -199,7 +199,7 @@
                                                                                 </label>
 
                                                                                 @component('frontend.common.input.select2')
-                                                                                    @slot('text', '+62xxxxxxx / 07777777')
+                                                                                    @slot('text', 'example@email.com')
                                                                                     @slot('id', 'email')
                                                                                     @slot('name', 'email')
                                                                                 @endcomponent
@@ -497,6 +497,7 @@
 
     <script type="text/javascript">
         $("#type_website").on('change', function() {
+            
         });
         let simpan = $('.tes').on('click', '.save', function () {
         var usertype=[];
