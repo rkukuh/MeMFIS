@@ -238,7 +238,7 @@ let AdditionalTaskCreate = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/jobcard',
+                        url: '/datatables/defectcard/project/'+project_uuid+'/',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -284,56 +284,56 @@ let AdditionalTaskCreate = {
                     }
                 },
                 {
-                    field: 'number',
+                    field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                            return '<a href="/jobcard-ppc/'+t.uuid+'">' + t.number + "</a>"
-                    }
+                    // template: function (t, e, i) {
+                    //         return '<a href="/jobcard-ppc/'+t.uuid+'">' + t.number + "</a>"
+                    // }
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'code',
                     title: 'Defect Card No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.title',
+                    field: 'jobcard.number',
                     title: 'JC Ref.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.type.name',
+                    field: 'jobcard.number',
                     title: 'TC No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.task.name',
+                    field: 'jobcard.number',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.description',
+                    field: 'jobcard.number',
                     title: 'Mhrs Est.',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if (t.taskcard.description) {
-                            data = strtrunc(t.taskcard.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
+                    // template: function (t) {
+                    //     if (t.taskcard.description) {
+                    //         data = strtrunc(t.taskcard.description, 50);
+                    //         return (
+                    //             '<p>' + data + '</p>'
+                    //         );
+                    //     }
 
-                        return ''
-                    }
+                    //     return ''
+                    // }
                 },
                 {
-                    field: 'taskcard.skill.name',
+                    field: 'jobcard.number',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,

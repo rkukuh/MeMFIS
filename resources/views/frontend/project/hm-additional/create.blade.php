@@ -231,6 +231,9 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let project_uuid = '{{$project->uuid}}'
+    </script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/project/additional/create.js')}}"></script>
 @endpush
