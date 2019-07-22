@@ -10,7 +10,7 @@ let summary = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/tools',
+                        url: '/datatables/workpackage/08a625c2-cd30-4a9c-98da-054a2cbae391/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -49,7 +49,7 @@ let summary = {
             columns: [
             {
                 field: 'tackcard_number',
-                title: 'Taskcard No.',
+                title: 'Defect Card No',
                 sortable: !1,
             },
             {
@@ -59,7 +59,7 @@ let summary = {
             },
             {
                 field: 'name',
-                title: 'Title',
+                title: 'Item Description',
                 sortable: 'asc',
                 filterable: !1,
             },
@@ -113,7 +113,7 @@ let summary = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/materials',
+                        url: '/datatables/workpackage/08a625c2-cd30-4a9c-98da-054a2cbae391/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -152,7 +152,7 @@ let summary = {
             columns: [
             {
                 field: 'tackcard_number',
-                title: 'Taskcard No.',
+                title: 'Defect Card No.',
                 sortable: !1,
             },
             {
@@ -162,7 +162,7 @@ let summary = {
             },
             {
                 field: 'name',
-                title: 'Title',
+                title: 'Item Description',
                 sortable: 'asc',
                 filterable: !1,
             },
