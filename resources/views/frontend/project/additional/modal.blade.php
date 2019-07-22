@@ -10,14 +10,33 @@
             <div class="modal-body" align="left">
                 <div class="form-group m-form__group row">
                     <div class="col-sm-12 col-md-12 col-lg-12">
-                        <select name="type_website" class="form-control selectWebsite">
-                                <option value="">
-                                    Select a Project
-                                </option>
-                        </select>
+                        @component('frontend.common.input.select2')
+                            @slot('id', 'project')
+                            @slot('text', 'Project')
+                            @slot('name', 'project')
+                            @slot('id_error', 'project')
+                        @endcomponent
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="flex">
+                    <div class="action-buttons">
+                        @component('frontend.common.buttons.create-new')
+                            @slot('text', 'Create Additional')
+                            @slot('class', 'create')
+                            @slot('color', 'success')
+                        @endcomponent
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@push('footer-scripts')
+<SCript>
+    $('.modal-footer').on('click', '.create', function () {
+        window.location.href = '#';
+    });
+</SCript>
+@endpush
