@@ -10,10 +10,6 @@
             <div class="modal-body" align="left">
                 <div class="form-group m-form__group row">
                     <div class="col-sm-12 col-md-12 col-lg-12">
-                        <label class="form-control-label">
-                            Project
-                        </label>
-
                         <select name="type_website" class="form-control selectWebsite">
                                 <option value="">
                                     Select a Project
