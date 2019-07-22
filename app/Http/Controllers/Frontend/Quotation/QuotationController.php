@@ -16,6 +16,7 @@ use App\Models\Quotation;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
+use App\Models\QuotationHtcrrItem;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\ProjectWorkPackage;
 use App\Models\ProjectWorkPackageFacility;
