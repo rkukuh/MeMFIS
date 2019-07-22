@@ -822,6 +822,9 @@
                                                     @slot('text', 'Active')
                                                     @slot('name', 'active')
                                                     @slot('id', 'active')
+                                                    @if(empty($customer->banned_at))
+                                                    @slot('checked','checked')
+                                                    @endif
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-7 col-md-7 col-lg-7">
