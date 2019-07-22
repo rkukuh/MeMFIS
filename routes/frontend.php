@@ -90,13 +90,18 @@ Route::name('frontend.')->group(function () {
         Route::view('/work-progress-report', 'frontend.work-progress-report.index')->name('work-progress-report.index');
         Route::view('/work-progress-report/show', 'frontend.work-progress-report.show')->name('work-progress-report.show');
 
-        /** Additional Task */
+        /** Additional Task Project*/
 
         Route::view('/additional-task', 'frontend.project.additional.index')->name('additional-task.index');
         Route::view('/additional-task/create', 'frontend.project.additional.create')->name('additional-task.create');
         Route::view('/additional-task/edit', 'frontend.project.additional.edit')->name('additional-task.edit');
         Route::view('/additional-task/show', 'frontend.project.additional.show')->name('additional-task.show');
         Route::view('/additional-task/summary', 'frontend.project.additional.summary')->name('additional-task.summary');
+
+        /** Additional Task Quotation*/
+        Route::view('/additional-task-qtn/create', 'frontend.quotation.additional.create')->name('additional-task-qtn.create');
+        Route::view('/additional-task-qtn/edit', 'frontend.quotation.additional.edit')->name('additional-task-qtn.edit');
+        Route::view('/additional-task-qtn/show', 'frontend.quotation.additional.show')->name('additional-task-qtn.show');
 
         /** Purchase Request */
 
