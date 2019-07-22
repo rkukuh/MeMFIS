@@ -153,7 +153,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                                @slot('text', 'XXX')
+                                                                                @slot('text', $quotation->project->customer->name)
                                                                                 @slot('id', 'name')
                                                                             @endcomponent
                                                                         </div>
@@ -163,7 +163,6 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                                @slot('text', 'Bp. Romdani')
                                                                                 @slot('id', 'attention')
                                                                                 @slot('name', 'attention')
                                                                             @endcomponent
@@ -205,7 +204,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                                @slot('text', '+62xxxxxxx / 07777777')
+                                                                                @slot('text', 'example@email.com')
                                                                                 @slot('id', 'email')
                                                                                 @slot('name', 'email')
                                                                             @endcomponent
