@@ -92,11 +92,11 @@ Route::name('frontend.')->group(function () {
 
         /** Additional Task */
 
-        Route::view('/additional-task', 'frontend.project.additional.index')->name('additional-task.index');
-        Route::view('/additional-task/create', 'frontend.project.additional.create')->name('additional-task.create');
-        Route::view('/additional-task/edit', 'frontend.project.additional.edit')->name('additional-task.edit');
-        Route::view('/additional-task/show', 'frontend.project.additional.show')->name('additional-task.show');
-        Route::view('/additional-task/summary', 'frontend.project.additional.summary')->name('additional-task.summary');
+        Route::view('/additional-task', 'frontend.project.hm-additional.index')->name('additional-task.index');
+        Route::view('/additional-task/create', 'frontend.project.hm-additional.create')->name('additional-task.create');
+        Route::view('/additional-task/edit', 'frontend.project.hm-additional.edit')->name('additional-task.edit');
+        Route::view('/additional-task/show', 'frontend.project.hm-additional.show')->name('additional-task.show');
+        Route::view('/additional-task/summary', 'frontend.project.hm-additional.summary')->name('additional-task.summary');
 
         /** Purchase Request */
 
