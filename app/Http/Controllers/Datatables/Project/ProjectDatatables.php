@@ -31,18 +31,23 @@ class ProjectDatatables extends Controller
             else{
                 $project->status .= (sizeof($project->approvals->toArray())).'?'; // *Find bug size of approve
             }
-        }
 
-        foreach($projects as $project){
             $project->aircraft_type.= $project->aircraft->name;
-        }
-        foreach($projects as $project){
+
             if($project->audits->first()->user_id ==  null){
                 $project->created_by.= "System";
 
             }else{
                 $project->created_by.= User::find($project->audits->first()->user_id)->name;
             }
+
+            if($project->parent_id ==  null){
+                $project->project_type.= "Project";
+
+            }else{
+                $project->project_type.= "Additional";
+            }
+
         }
 
         $data = $alldata = json_decode($projects);

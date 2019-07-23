@@ -113,6 +113,12 @@ let Aircraft = {
                     filterable: !1,
                 },
                 {
+                    field: 'project_type',
+                    title: 'Project Type',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'created_by',
                     title: 'Created By',
                     sortable: 'asc',

@@ -121,6 +121,12 @@ let Quotation = {
                     filterable: !1,
                 },
                 {
+                    field: 'quotation_type',
+                    title: 'Quotation Type',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',

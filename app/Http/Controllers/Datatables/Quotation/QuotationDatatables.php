@@ -30,6 +30,16 @@ class QuotationDatatables extends Controller
 
             }
             $quotation->customer = $quotation->project->customer;
+
+            if($quotation->parent_id ==  null){
+                $quotation->quotation_type.= "Quotation";
+
+            }else{
+                $quotation->quotation_type.= "Additional";
+            }
+
+            $quotation->RecordID.=$quotation->uuid;
+
         }
         $data = $alldata = json_decode($quotations);
 
@@ -259,8 +269,8 @@ class QuotationDatatables extends Controller
             $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
-            
-            if($project_workpackage){            
+
+            if($project_workpackage){
             $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
 
             $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
@@ -272,7 +282,7 @@ class QuotationDatatables extends Controller
             }
         }
 
-        
+
         $data = $alldata = json_decode($workpackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -372,7 +382,7 @@ class QuotationDatatables extends Controller
         $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
-            
+
         $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
         ->with('facility')
         ->get();
