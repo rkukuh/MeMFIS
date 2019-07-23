@@ -94,20 +94,45 @@ let AdditionalTaskQtnCreate = {
                     filterable: !1,
                 },
                 {
-                    field: 'description',
-                    title: 'Remark',
+                    field: 'estimation_manhour',
+                    title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'Selling Unit Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'Subtotal',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'Marketing Notes',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    // template: function (t, e, i) {
+                    //     return (
+                    //         '<button data-toggle="modal" data-target="#modal_price_list_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price" title="Edit"'+
+                    //         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
+                    //         t.uuid +
+                    //         '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                    //         '<button data-toggle="modal" data-target="#modal_price_list" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill add-price" title="Edit"' +
+                    //         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
+                    //         t.uuid +
+                    //         '>\t\t\t\t\t\t\t<i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    //     );
+                    // }
                 }
             ]
         });
@@ -117,7 +142,7 @@ let AdditionalTaskQtnCreate = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/sip/',
+                        url: '/datatables/workpackage/basic/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -155,15 +180,14 @@ let AdditionalTaskQtnCreate = {
             },
             columns: [{
                     field: 'number',
-                    title: 'Defect Card No.',
+                    title: 'Defect Card No',
                     sortable: !1,
                 },
                 {
                     field: 'title',
                     title: 'P/N No.',
                     sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
+                    filterable: !1,template: function (t, e, i) {
                         if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
                             return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
                         }
@@ -196,39 +220,50 @@ let AdditionalTaskQtnCreate = {
                 },
                 {
                     field: 'estimation_manhour',
-                    title: 'Manhour',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
                 },
                 {
-                    field: 'material',
-                    title: 'Remark',
+                    field: 'estimation_manhour',
+                    title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
-                        );
-                    }
-
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'Charge Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'Subtotal',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'Marketing Notes',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    // template: function (t, e, i) {
+                    //     return (
+                    //         '<button data-toggle="modal" data-target="#modal_price_list_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price" title="Edit"'+
+                    //         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
+                    //         t.uuid +
+                    //         '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                    //         '<button data-toggle="modal" data-target="#modal_price_list" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill add-price" title="Edit"' +
+                    //         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
+                    //         t.uuid +
+                    //         '>\t\t\t\t\t\t\t<i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    //     );
+                    // }
                 }
             ]
         });
@@ -326,9 +361,32 @@ let AdditionalTaskQtnCreate = {
                 },
                 {
                     field: 'taskcard.skill.name',
-                    title: 'Created By',
+                    title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'taskcard.task.name',
+                    title: 'Remark',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    // template: function (t, e, i) {
+                    //     return (
+                    //         '<button data-toggle="modal" data-target="#modal_price_list_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price" title="Edit"'+
+                    //         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
+                    //         t.uuid +
+                    //         '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                    //         '<button data-toggle="modal" data-target="#modal_price_list" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill add-price" title="Edit"' +
+                    //         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
+                    //         t.uuid +
+                    //         '>\t\t\t\t\t\t\t<i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    //     );
+                    // }
                 }
             ]
         });

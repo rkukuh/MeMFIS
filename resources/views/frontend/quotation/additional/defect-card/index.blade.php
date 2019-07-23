@@ -3,6 +3,28 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
             <div class="m-portlet m-portlet--mobile">
                 <div class="m-portlet__body">
+                    <div class="form-group m-form__group row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <label class="form-control-label">
+                                Total Manhours
+                            </label>
+
+                            @component('frontend.common.label.data-info')
+                                @slot('text', 'XXX')
+                                @slot('id', 'name')
+                            @endcomponent
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <label class="form-control-label">
+                                Manhours Rate
+                            </label>
+
+                            @component('frontend.common.label.data-info')
+                                @slot('text', 'XXX')
+                                @slot('id', 'name')
+                            @endcomponent
+                        </div>
+                    </div>
                     <div class="row align-items-center">
     
                         <div class="col-xl-8 order-2 order-xl-1">
