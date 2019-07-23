@@ -99,6 +99,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/additional-task-project/summary', 'frontend.project.additional.summary')->name('additional-task.summary');
 
         /** Additional Task Quotation*/
+        
         Route::view('/additional-task-qtn/create', 'frontend.quotation.additional.create')->name('additional-task-qtn.create');
         Route::view('/additional-task-qtn/edit', 'frontend.quotation.additional.edit')->name('additional-task-qtn.edit');
         Route::view('/additional-task-qtn/show', 'frontend.quotation.additional.show')->name('additional-task-qtn.show');
@@ -112,6 +113,18 @@ Route::name('frontend.')->group(function () {
         Route::view('/purchase-request/project/create', 'frontend.purchase-request.project.create')->name('purchase-request.project.create');
         Route::view('/purchase-request/project/edit', 'frontend.purchase-request.project.edit')->name('purchase-request.project.edit');
         Route::view('/purchase-request/project/show', 'frontend.purchase-request.project.show')->name('purchase-request.project.show');
+
+        /** Material Request */
+
+        Route::view('/material-request', 'frontend.material-request.index')->name('material-request.index');
+
+        Route::view('/material-request/general/create', 'frontend.material-request.general.create')->name('material-request.general.create');
+        Route::view('/material-request/general/edit', 'frontend.material-request.general.edit')->name('material-request.general.edit');
+        Route::view('/material-request/general/show', 'frontend.material-request.general.show')->name('material-request.general.show');
+
+        Route::view('/material-request/project/create', 'frontend.material-request.project.create')->name('material-request.project.create');
+        Route::view('/material-request/project/edit', 'frontend.material-request.project.edit')->name('material-request.project.edit');
+        Route::view('/material-request/project/show', 'frontend.material-request.project.show')->name('material-request.project.show');
 
         /** QUOTATION's WORKPACKAGE's TASKCARD's */
 
