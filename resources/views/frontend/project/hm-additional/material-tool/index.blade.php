@@ -55,7 +55,3 @@
     </div>
 </div>
 
-
-@push('footer-scripts')
-    <script src="{{ asset('js/frontend/project/additional/create.js')}}"></script>
-@endpush

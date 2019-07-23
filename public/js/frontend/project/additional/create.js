@@ -12,9 +12,7 @@ let AdditionalTaskCreate = (function() {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/project/defectcard/2960ff70-883c-41c2-ac74-4505ad2c57c3'
-                        // url: '/datatables/project/defectcard/'+project_uuid+'/',
-
+                        url: '/datatables/project/defectcard/'+project_uuid
                         // map: function (raw) {
                         //     let dataSet = raw;
 
@@ -210,31 +208,9 @@ let AdditionalTaskCreate = (function() {
                             : $("#m_datatable_group_action_form1").collapse("hide");
                       }
                     ),
-                    $("#m_modal_fetch_id_server")
-                      .on("show.bs.modal", function(t) {
-                        console.log(e.checkbox().getSelectedId());
-                        // let n = "";
-                        // let l = "";
-                    //     for (
-                    //       let a = e.checkbox().getSelectedId(),
-                    //         n = document.createDocumentFragment(),
-                    //         l = 0;
-                    //       l < a.length;
-                    //       l++
-                    //     ) {
-                    //       let i = document.createElement("li");
-                    //       i.setAttribute("data-id", a[l]),
-                    //         (i.innerHTML = "Selected record ID: " + a[l]),
-                    //         n.appendChild(i);
-                    //     }
-                    //     $(t.target)
-                    //       .find(".m_datatable_selected_ids")
-                    //       .append(n);
-                      })
-                      .on("hide.bs.modal", function(t) {
-                        $(t.target)
-                          .find(".m_datatable_selected_ids")
-                          .empty();
+                    $(".nav-tabs")
+                      .on("click", ".mat-tool", function() {
+                        let uuids = e.checkbox().getSelectedId();
                       });
                 })();
 

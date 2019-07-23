@@ -197,7 +197,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{project}/workpackage', 'ProjectDatatables@workpackage')->name('workpackage.project');
                 Route::get('/{htcrr}/tools', 'HtCrrItemsDatatables@tool')->name('htcrr.tools.index');
                 Route::get('/{htcrr}/materials', 'HtCrrItemsDatatables@material')->name('htcrr.materials.index');
-
+                Route::POST('/additional/materials', 'AdditionalItemsDatatables@material')->name('additional.materials.index');
+                Route::POST('/additional/tools', 'AdditionalItemsDatatables@tools')->name('additional.tools.index');
             });
 
         });

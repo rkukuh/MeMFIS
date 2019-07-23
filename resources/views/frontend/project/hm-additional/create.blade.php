@@ -162,8 +162,8 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link active show routine" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Defect Card List</a>
                                                 </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_2">Material & Tool List</a>
+                                                <li class="nav-item mat-tool">
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2">Material & Tool List</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
