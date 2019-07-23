@@ -127,9 +127,6 @@ let Quotation = {
                     template: function (t, e, i) {
                         if(t.status == 'Approved'){
                             return (
-                                '<a href="/quotation/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
                                     '<i class="la la-trash"></i>' +
                                 '</a>'+

@@ -128,7 +128,6 @@ class QuotationDatatables extends Controller
     public function jobRequest(Quotation $quotation)
     {
         $workpackages = $quotation->workpackages;
-        $wp_id = [];
         foreach($workpackages as $workPackage){
             $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
             ->where('workpackage_id',$workPackage->id)
