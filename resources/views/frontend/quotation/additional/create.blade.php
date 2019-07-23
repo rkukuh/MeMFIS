@@ -62,12 +62,12 @@
                                                     <td align="center" width="14%"><b>A/C SN</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
+                                                    <td align="center" valign="top">{{$project->created_at}}</td>
+                                                    <td align="center" valign="top">{{$project->code}}</td>
+                                                    <td align="center" valign="top">{{$project->title}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft->name}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft_register}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft_sn}}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -226,7 +226,7 @@
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
-                                                                Date 
+                                                                Date
                                                             </label>
 
                                                             @component('frontend.common.input.datepicker')
@@ -332,7 +332,7 @@
                                                         <div class="form-group m-form__group row">
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                                 <label class="form-control-label">
-                                                                    Scheduled Payment Type 
+                                                                    Scheduled Payment Type
                                                                 </label>
                                                                 <select id="scheduled_payment_type" name="scheduled_payment_type" class="form-control">
                                                                     <option value="">
@@ -465,9 +465,9 @@
                                                         @slot('id', 'add-workpackage')
                                                         @slot('class', 'add-workpackage')
                                                     @endcomponent
-    
+
                                                     @include('frontend.common.buttons.reset')
-    
+
                                                     @component('frontend.common.buttons.back')
                                                         @slot('href', route('frontend.workpackage.index'))
                                                     @endcomponent
