@@ -19,14 +19,16 @@
                                 Manhours Rate
                             </label>
 
-                            @component('frontend.common.label.data-info')
-                                @slot('text', 'XXX')
-                                @slot('id', 'name')
+                            @component('frontend.common.input.number')
+                                @slot('text', 'rate')
+                                @slot('name', 'rate')
+                                @slot('id', 'rate')
+                                @slot('id_error', 'rate')
                             @endcomponent
                         </div>
                     </div>
                     <div class="row align-items-center">
-    
+
                         <div class="col-xl-8 order-2 order-xl-1">
                             <div class="form-group m-form__group row align-items-center">
                                 <div class="col-md-4">
@@ -40,10 +42,10 @@
                             </div>
                         </div>
                         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-    
+
                             <div class="m-separator m-separator--dashed d-xl-none"></div>
                         </div>
-    
+
                     </div>
                     <div class="defect_card_datatable" id="scrolling_both"></div>
                 </div>
