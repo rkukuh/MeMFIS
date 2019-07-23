@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <fieldset class="border p-2">
-                                                <legend class="w-auto">Customer Name (<span>PT. Sejahterah</span>)</legend>
+                                                <legend class="w-auto">Customer Name (<span>{{ $project->customer->name }}</span>)</legend>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <div class="form-group m-form__group row">
@@ -100,7 +100,11 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_number')
-                                                                    @slot('text', 'P-01/HMxxxxx')
+                                                                    @if($attention->fax != 'null')
+                                                                    @slot('text', $attention->fax)
+                                                                    @else
+                                                                    @slot('text', '-')
+                                                                    @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -110,7 +114,7 @@
                                                                     Attn
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text', $attention->name)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -120,7 +124,7 @@
                                                                     Email
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text', $attention->email)
                                                                 @endcomponent
                                                             </div>
                                                         </div>

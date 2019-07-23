@@ -32,8 +32,10 @@ class ProjectHMAdditionalController extends Controller
      */
     public function create(Project $project)
     {
+        $attention = json_decode($project->quotations()->first()->attention);
         return view('frontend.project.hm-additional.create',[
                 'project' => $project,
+                'attention' => $attention
             ]);
     }
 
