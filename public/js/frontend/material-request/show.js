@@ -1,6 +1,6 @@
 let MaterialRequestShow = {
     init: function () {
-        $('.purchase_order_datatable').mDatatable({
+        $('.material_request_project_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {

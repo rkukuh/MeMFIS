@@ -180,7 +180,7 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12">
 
                                             @include('frontend.material-request.modal')
-                                            <div class="purchase_order_datatable" id="purchase_order_datatable"></div>
+                                            <div class="material_request_project_datatable" id="material_request_project_datatable"></div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">

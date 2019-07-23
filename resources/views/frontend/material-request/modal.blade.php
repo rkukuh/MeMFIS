@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_material_request" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modal_material_request_edit" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -67,9 +67,9 @@
 
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
-                                    @slot('id', 'note')
-                                    @slot('name', 'note')
-                                    @slot('text', 'Note')
+                                    @slot('id', 'remark')
+                                    @slot('name', 'remark')
+                                    @slot('text', 'Remark')
                                     @slot('required', 'required')
                                 @endcomponent
                             </div>
