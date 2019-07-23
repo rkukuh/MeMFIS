@@ -29,6 +29,7 @@
                                 @slot('text', 'Create Additional')
                                 @slot('class', 'create')
                                 @slot('color', 'success')
+                                @slot('style', 'border-radius: 60px 60px 60px 60px')
                             @endcomponent
                         </div>
                     </div>
