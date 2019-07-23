@@ -22,15 +22,28 @@
                         @endcomponent
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <div class="flex">
-                    <div class="action-buttons">
-                        @component('frontend.common.buttons.create-new')
-                            @slot('text', 'Create Additional')
-                            @slot('class', 'create')
-                            @slot('color', 'success')
-                        @endcomponent
+                            <label class="form-control-label">
+                                Project
+                            </label>
+    
+                            <select name="type_website" class="form-control selectWebsite">
+                                    <option value="">
+                                        Select a Project
+                                    </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="flex">
+                        <div class="action-buttons">
+                            @component('frontend.common.buttons.create-new')
+                                @slot('text', 'Create Additional')
+                                @slot('class', 'create')
+                                @slot('color', 'success')
+                                @slot('style', 'border-radius: 60px 60px 60px 60px')
+                            @endcomponent
+                        </div>
                     </div>
                 </div>
             </div>
