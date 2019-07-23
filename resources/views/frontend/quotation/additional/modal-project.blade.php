@@ -22,6 +22,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <div class="flex">
+                        <div class="action-buttons">
+                            @component('frontend.common.buttons.create-new')
+                                @slot('text', 'Create Additional')
+                                @slot('class', 'create')
+                                @slot('color', 'success')
+                            @endcomponent
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
