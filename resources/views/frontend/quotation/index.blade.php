@@ -56,7 +56,7 @@
                                             <div class="col-md-2">
                                                 @include('frontend.common.buttons.filter')
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-4 ml-3">
                                                 <div class="m-input-icon m-input-icon--left">
                                                     <input type="text" class="form-control m-input" placeholder="Search..."
                                                         id="generalSearch">
