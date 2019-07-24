@@ -51,7 +51,7 @@ class WorkPackageController extends Controller
      */
     public function store(WorkPackageStore $request)
     {
-        $request->merge(['code' => DocumentNumber::generate('WPCK-', WorkPackage::count()+1)]);
+        $request->merge(['code' => DocumentNumber::generate('WPCK-', WorkPackage::withTrashed()->count()+1)]);
 
         $workpackage = WorkPackage::create($request->all());
 

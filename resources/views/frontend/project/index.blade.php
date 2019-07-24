@@ -87,8 +87,10 @@
                                 </div>
                             </div>
                             @include('frontend.aircraft.modal')
-                            <div class="col-lg-12">
-                                @include('frontend.project.filter')
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    @include('frontend.project.filter')
+                                </div>
                             </div>
                             <div class="project_datatable" id="project_datatable"></div>
                         </div>

@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Material Request Project
+                    Material Request General
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                     <li class="m-nav__item">
                         <a href="{{ route('frontend.material-request.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Material Request Project
+                                Material Request General
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material Request Project
+                                    Material Request General
                                 </h3>
                             </div>
                         </div>
@@ -176,7 +176,7 @@
                                                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                                     @component('frontend.common.buttons.create-new')
                                                                         @slot('text', 'Material')
-                                                                        @slot('data_target', '#modal_item')
+                                                                        @slot('data_target', '#modal_material_request')
                                                                     @endcomponent
                     
                             
@@ -184,8 +184,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {{-- @include('frontend.material-request.general.modal-create') --}}
-                                                        @include('frontend.material-request.general.modal-edit')
+                                                        @include('frontend.material-request.modal')
                                                         <div class="material_request_project_datatable" id="material_request_project_datatable"></div>
                                                     </div>
                                                 </div>
