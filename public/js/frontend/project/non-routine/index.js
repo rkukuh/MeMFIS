@@ -39,7 +39,7 @@ let NonRoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/ad-sb/',
+                        url: '/datatables/project/'+Project_uuid+'/workpackage/'+workPackage_uuid+'/ad-sb/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -219,7 +219,7 @@ let NonRoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/cmr-awl/',
+                        url: '/datatables/project/'+Project_uuid+'/workpackage/'+workPackage_uuid+'/cmr-awl/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -391,7 +391,7 @@ let NonRoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/si/',
+                        url: '/datatables/project/'+Project_uuid+'/workpackage/'+workPackage_uuid+'/si/',
                         map: function (raw) {
                             let dataSet = raw;
 

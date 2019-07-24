@@ -33,7 +33,7 @@ let RoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/basic/',
+                        url: '/datatables/project/'+Project_uuid+'/workpackage/'+workPackage_uuid+'/basic/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -240,7 +240,7 @@ let RoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/sip/',
+                        url: '/datatables/project/'+Project_uuid+'/workpackage/'+workPackage_uuid+'/sip/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -447,7 +447,7 @@ let RoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/cpcp/',
+                        url: '/datatables/project/'+Project_uuid+'/workpackage/'+workPackage_uuid+'/cpcp/',
                         map: function (raw) {
                             let dataSet = raw;
 
