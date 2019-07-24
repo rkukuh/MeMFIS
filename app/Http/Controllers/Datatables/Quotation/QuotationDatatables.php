@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\Quotation;
 
+use App\User;
 use App\Models\ListUtil;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
@@ -38,7 +39,12 @@ class QuotationDatatables extends Controller
                 $quotation->quotation_type.= "Additional";
             }
 
-            $quotation->RecordID.=$quotation->uuid;
+            if($quotation->audits->first()->user_id ==  null){
+                $quotation->created_by.= "System";
+
+            }else{
+                $quotation->created_by.= User::find($quotation->audits->first()->user_id)->name;
+            }
 
         }
         $data = $alldata = json_decode($quotations);

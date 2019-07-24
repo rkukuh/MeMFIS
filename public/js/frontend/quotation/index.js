@@ -103,7 +103,7 @@ let Quotation = {
 
                 },
                 {
-                    field: '',
+                    field: 'created_by',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
