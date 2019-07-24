@@ -14,12 +14,19 @@ Route::name('frontend.')->group(function () {
             Route::resource('quotation', 'QuotationController');
             Route::get('quotation/{project}/project', 'QuotationController@project')->name('quotation.project');
 
+            Route::resource('quotation-additional', 'QuotationAdditionalController',[
+                'parameters' => ['quotation-additional' => 'quotation']
+            ])->except('create');
+
+            Route::get('/quotation-additional/create/{project}','QuotationAdditionalController@create')->name('quotation-additional.create');
+
+
             Route::prefix('quotation')->group(function () {
 
                 Route::get('/{quotation}/print', 'QuotationController@print');
                 Route::post('/{quotation}/workpackage/{workpackage}/discount', 'QuotationController@discount')->name('quotation.discount');
                 Route::post('/{quotation}/approve', 'QuotationController@approve')->name('quotation.approve');
-                
+
                 Route::name('quotation.')->group(function () {
 
                     Route::resource('/{quotation}/workpackage', 'QuotationWorkPackageController', [

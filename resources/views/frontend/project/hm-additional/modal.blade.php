@@ -35,9 +35,10 @@
     </div>
 </div>
 @push('footer-scripts')
-<SCript>
-    $('.modal-footer').on('click', '.create', function () {
-        window.location.href = '#';
-    });
-</SCript>
+    <script>
+        $('.modal-footer').on('click', '.create', function () {
+            let project_uuid =$('#project').val();
+            window.location.href = 'project-hm-additional/create/'+project_uuid+'/';
+        });
+    </script>
 @endpush

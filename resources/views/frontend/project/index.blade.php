@@ -79,7 +79,7 @@
                                                 <span>Additional Task</span>
                                                 </span>
                                             </button>
-                                            @include('frontend.project.additional.modal')
+                                            @include('frontend.project.hm-additional.modal')
                                         </div>
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>

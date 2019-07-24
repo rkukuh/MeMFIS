@@ -21,6 +21,13 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['project-hm' => 'project']
             ]);
 
+            Route::resource('project-hm-additional', 'ProjectHMAdditionalController',[
+                'parameters' => ['project-hm-additional' => 'project']
+            ])->except('create');
+
+            Route::get('/project-hm-additional/create/{project}','ProjectHMAdditionalController@create')->name('project-hm-additional.create');
+
+
             Route::resource('project-workshop', 'ProjectWorkshopController', [
                 'parameters' => ['project-workshop' => 'project']
             ]);
@@ -32,7 +39,7 @@ Route::name('frontend.')->group(function () {
             Route::prefix('project-hm')->group(function () {
 
                 Route::name('project-hm.')->group(function () {
-                    
+
                     Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
                         'parameters' => ['workpackage' => 'workPackage']
                     ]);
