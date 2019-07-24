@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_material_request_edit" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modal_material_request" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

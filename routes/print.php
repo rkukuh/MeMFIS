@@ -132,3 +132,46 @@ Route::get('/dc-page2', function () {
     $pdf->setPaper('A4', 'landscape');
     return $pdf->stream();
 });
+
+
+Route::get('/grn-doc', function () {
+    $pdf = \PDF::loadView('frontend/form/goods_received_note');
+    return $pdf->stream();
+});
+
+Route::get('/purchase-request-general-doc', function () {
+    $pdf = \PDF::loadView('frontend/form/purchase_request_general');
+    return $pdf->stream();
+});
+
+Route::get('/purchase-request-project-doc', function () {
+    $pdf = \PDF::loadView('frontend/form/purchase_request_project');
+    return $pdf->stream();
+});
+
+Route::get('/material-request-project-doc', function () {
+    $pdf = \PDF::loadView('frontend/form/material_request_project');
+    return $pdf->stream();
+});
+
+Route::get('/material-request-general-doc', function () {
+    $pdf = \PDF::loadView('frontend/form/material_request_general');
+    return $pdf->stream();
+});
+
+
+Route::get('/additional-quotation-doc', function () {
+    $pdf = \PDF::loadView('frontend/form/additional_quotation');
+    return $pdf->stream();
+});
+
+
+Route::get('/purchase-order-doc', function () {
+    $pdf = \PDF::loadView('frontend/form/purchase_order');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-eo-doc', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_eo_redesign');
+    return $pdf->stream();
+});
