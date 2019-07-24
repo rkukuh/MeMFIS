@@ -153,7 +153,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                                @slot('text', 'XXX')
+                                                                                @slot('text', $quotation->project->customer->name)
                                                                                 @slot('id', 'name')
                                                                             @endcomponent
                                                                         </div>
@@ -163,7 +163,6 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                                @slot('text', 'Bp. Romdani')
                                                                                 @slot('id', 'attention')
                                                                                 @slot('name', 'attention')
                                                                             @endcomponent
@@ -205,7 +204,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                                @slot('text', '+62xxxxxxx / 07777777')
+                                                                                @slot('text', 'example@email.com')
                                                                                 @slot('id', 'email')
                                                                                 @slot('name', 'email')
                                                                             @endcomponent
@@ -659,6 +658,8 @@
         });
     }
 </script>
+<script src="{{ asset('js/custom.js') }}"></script>
+
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
@@ -667,7 +668,6 @@
 <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
-<script src="{{ asset('js/custom.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
 

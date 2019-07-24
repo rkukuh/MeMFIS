@@ -113,6 +113,12 @@ let Aircraft = {
                     filterable: !1,
                 },
                 {
+                    field: 'project_type',
+                    title: 'Project Type',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'created_by',
                     title: 'Created By',
                     sortable: 'asc',
@@ -125,9 +131,6 @@ let Aircraft = {
                     template: function (t, e, i) {
                         if(t.status == 'Project Approved' || t.status == 'Quotation Approved'){
                             return (
-                                '<a href="/project-hm/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-trash"></i>' +
                                 '</a>'

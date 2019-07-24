@@ -95,6 +95,8 @@
                                             <label class="form-control-label">
                                                 JC No Refference
                                             </label>
+                                            <input type="hidden"id="uuid" name="uuid" value="{{$discrepancy->uuid}}">
+
                                             <input type="hidden"id="jobcard_id" name="jobcard_id" value="{{$discrepancy->jobcard->uuid}}">
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $discrepancy->jobcard->number)
