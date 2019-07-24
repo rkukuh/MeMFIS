@@ -76,7 +76,7 @@ class QuotationController extends Controller
         $contact['fax'] = $request->attention_fax;
         $contact['email'] = $request->attention_email;
 
-        $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::withTrashed()->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
@@ -332,7 +332,7 @@ class QuotationController extends Controller
                 }
 
                 $jobcard = JobCard::create([
-                    'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::count()+1),
+                    'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
                     'taskcard_id' => $tc->id,
                     'quotation_id' => $quotation->id,
                     'data_taskcard' => $tc->toJson(),
