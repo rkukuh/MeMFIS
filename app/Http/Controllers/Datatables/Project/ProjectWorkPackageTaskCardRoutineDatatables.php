@@ -6,8 +6,8 @@ use App\Models\Project;
 use App\Models\ListUtil;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
-use App\Models\ProjectWorkPackage;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\ProjectWorkPackage;
 use App\Models\ProjectWorkPackageTaskCard;
 
 class ProjectWorkPackageTaskCardRoutineDatatables extends Controller
@@ -19,10 +19,26 @@ class ProjectWorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function basic(Project $project, WorkPackage $workPackage)
     {
-        $workPackage_id = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first();
-        $workPackage = ProjectWorkPackageTaskCard::find($workPackage_id);
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first();
+        // dd($workPackage_id);
+        // $workPackages = ProjectWorkPackageTaskCard::where('project_workpackage_id',$project_workpackage_id)->get();
 
-        $workPackages = $workPackage->taskcards()->with('type','task')
+        // $workPackages = $workPackages->with('type','task')
+        // ->whereHas('type', function ($query) {
+        //     $query->where('name', 'Basic');
+        // })
+        // ->get();
+
+        $workPackages = $project_workpackage->taskcards::load('taskcard');
+        dd($workPackages);
+
+        // $workPackage = ProjectWorkPackageTaskCard::where('project_workpackage_id',$workPackage_id)>with('type','task')
+        // ->whereHas('type', function ($query) {
+        //     $query->where('name', 'Basic');
+        // })
+        // ->get();
+
+        $workPackages = $project_workpackage->taskcards->with('type','task')
                                     ->whereHas('type', function ($query) {
                                         $query->where('name', 'Basic');
                                     })

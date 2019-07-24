@@ -6,8 +6,8 @@ use App\Models\Project;
 use App\Models\ListUtil;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
-use App\Models\ProjectWorkPackage;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\ProjectWorkPackage;
 use App\Models\ProjectWorkPackageTaskCard;
 
 class ProjectWorkPackageTaskCardNonRoutineDatatables extends Controller
