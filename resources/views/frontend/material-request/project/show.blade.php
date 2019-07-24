@@ -157,9 +157,46 @@
                                     <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="m-portlet">
+                                                <div class="m-portlet__head">
+                                                    <div class="m-portlet__head-caption">
+                                                        <div class="m-portlet__head-title">
+                                                            <span class="m-portlet__head-icon m--hide">
+                                                                <i class="la la-gear"></i>
+                                                            </span>
 
-                                            @include('frontend.material-request.modal')
-                                            <div class="material_request_project_datatable" id="material_request_project_datatable"></div>
+                                                            @include('frontend.common.label.datalist')
+
+                                                            <h3 class="m-portlet__head-text">
+                                                                Material
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="m-portlet m-portlet--mobile">
+                                                    <div class="m-portlet__body">
+                                                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-xl-8 order-2 order-xl-1">
+                                                                    <div class="form-group m-form__group row align-items-center">
+                                                                        <div class="col-md-4">
+                                                                            <div class="m-input-icon m-input-icon--left">
+                                                                                <input type="text" class="form-control m-input" placeholder="Search..."
+                                                                                    id="generalSearch">
+                                                                                <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                                                    <span><i class="la la-search"></i></span>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @include('frontend.material-request.modal')
+                                                        <div class="material_request_project_datatable" id="material_request_project_datatable"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
