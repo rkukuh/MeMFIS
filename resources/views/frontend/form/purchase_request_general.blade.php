@@ -123,9 +123,9 @@
         <div class="container">
             <table width="100%" cellpadding="6" style="font-size:15px;">
                 <tr>
-                    <td valign="top" width="20%">Project Ref. No</td>
-                    <td valign="top"width="1%">:</td>
-                    <td valign="top" width="47%">PROJ-2019/07/0005</td>
+                    <td valign="top" width="20%"></td>
+                    <td valign="top"width="1%"></td>
+                    <td valign="top" width="47%"></td>
                     <td width="32%" rowspan="4">
                         <div class="barcode">
                             {!!DNS2D::getBarcodeHTML('getbarcode', 'QRCODE',4.5,4.5)!!}
@@ -133,19 +133,19 @@
                     </td>
                 </tr>
                 <tr>
-                    <td valign="top" width="20%">A/C Type</td>
-                    <td valign="top"width="1%">:</td>
-                    <td valign="top" width="47%">CN-235</td>
-                </tr>
-                <tr>
                     <td valign="top" width="20%">Date</td>
                     <td valign="top"width="1%">:</td>
-                    <td valign="top" width="47%">05/07/2019</td>
+                    <td valign="top" width="47%">10/07/2019</td>
                 </tr>
                 <tr>
                     <td valign="top" width="20%">Date Required</td>
                     <td valign="top"width="1%">:</td>
                     <td valign="top" width="47%">10-07-2019</td>
+                </tr>
+                <tr>
+                    <td valign="top" width="20%"></td>
+                    <td valign="top"width="1%"></td>
+                    <td valign="top" width="47%"></td>
                 </tr>
             </table>
         </div>
