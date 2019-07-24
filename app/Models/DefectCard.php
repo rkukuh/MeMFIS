@@ -133,7 +133,9 @@ class DefectCard extends MemfisModel
      */
     public function getMaterialsAttribute()
     {
-        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'raw')->all()));
+        return collect(array_values($this->items->load('unit')
+                                                ->whereIn('categories.0.code', ['raw', 'cons', 'comp'])
+                                                ->all()));
     }
 
     /**

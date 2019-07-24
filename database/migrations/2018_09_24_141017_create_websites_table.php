@@ -23,9 +23,9 @@ class CreateWebsitesTable extends Migration
             $table->softDeletes();
 
             $table->foreign('type_id')
-                  ->references('id')->on('types')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->index('url');
         });

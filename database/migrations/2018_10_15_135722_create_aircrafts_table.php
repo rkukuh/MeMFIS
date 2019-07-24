@@ -23,9 +23,9 @@ class CreateAircraftsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('manufacturer_id')
-                  ->references('id')->on('manufacturers')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                    ->references('id')->on('manufacturers')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->index('code');
             $table->index('name');

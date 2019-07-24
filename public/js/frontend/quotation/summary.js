@@ -119,7 +119,7 @@ var DatatableAutoColumnHideDemo = function () {
                     );
                   }else{
                     return (
-                      foreignFormatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                      ForeignFormatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
                       t.uuid +
                       '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                     );
@@ -160,8 +160,8 @@ var DatatableAutoColumnHideDemo = function () {
             }
 
             if(currency.id == 1){
-              document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
-              document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
+              $("#sub_total").html(IDRformatter.format(subtotal));
+              $("#grand_total_rupiah").html(IDRformatter.format(subtotal));
               $("#grand_total_rupiah").attr("value", subtotal);
               $("#sub_total").attr("value", subtotal);
               return (
@@ -169,12 +169,12 @@ var DatatableAutoColumnHideDemo = function () {
               );
             }else{
               let totalRupiah = subtotal * exchange_rate; 
-              document.getElementById("sub_total").innerHTML = ForeignFormatter.format(subtotal);
-              document.getElementById("grand_total").innerHTML = ForeignFormatter.format(subtotal);
+              $("#sub_total").html(ForeignFormatter.format(subtotal));
+              $("#grand_total").html(ForeignFormatter.format(subtotal));
               $("#grand_total").attr("value", subtotal);
               $("#sub_total").attr("value", subtotal);
 
-              document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
+              $("#grand_total_rupiah").html(IDRformatter.format(totalRupiah));
               $("#grand_total_rupiah").attr("value", totalRupiah);
               return (
                 ForeignFormatter.format(total)

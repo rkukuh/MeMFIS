@@ -1,254 +1,27 @@
-let AdditionalTaskCreate = {
-    init: function () {
-        function strtrunc(str, max, add) {
-            add = add || '...';
-            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
-        };
+let AdditionalTaskCreate = (function() {
+    let t ={
+    // init: function () {
+        // function strtrunc(str, max, add) {
+        //     add = add || '...';
+        //     return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+        // };
 
-        $('.materials_datatable').mDatatable({
+        // $('.defect_card_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/basic/',
-                        map: function (raw) {
-                            let dataSet = raw;
+                        url: '/datatables/project/defectcard/'+project_uuid
+                        // map: function (raw) {
+                        //     let dataSet = raw;
 
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
+                        //     if (typeof raw.data !== 'undefined') {
+                        //         dataSet = raw.data;
+                        //     }
 
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [{
-                    field: 'number',
-                    title: 'Defect Card No',
-                    sortable: !1,
-                },
-                {
-                    field: 'title',
-                    title: 'P/N No.',
-                    sortable: 'asc',
-                    filterable: !1,template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "si"){
-                            return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "preliminary"){
-                            return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
-                        } else {
-                            return (
-                                'dummy'
-                            );
-                        }
-                    }
-                },
-                {
-                    field: 'skill',
-                    title: 'Item Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'task.name',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'estimation_manhour',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Remark',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
-                }
-            ]
-        });
-        $('.tools_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/workpackage/sip/',
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [{
-                    field: 'number',
-                    title: 'Defect Card No.',
-                    sortable: !1,
-                },
-                {
-                    field: 'title',
-                    title: 'P/N No.',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "si"){
-                            return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "preliminary"){
-                            return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
-                        } else {
-                            return (
-                                'dummy'
-                            );
-                        }
-                    }
-                },
-                {
-                    field: 'skill',
-                    title: 'Item Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'task.name',
-                    title: 'Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'estimation_manhour',
-                    title: 'Manhour',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
-                },
-                {
-                    field: 'material',
-                    title: 'Remark',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
-                        );
-                    }
-
-                }
-            ]
-        });
-        $('.defect_card_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/jobcard',
-
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
+                        //     return dataSet;
+                        // }
                     }
                 },
                 pageSize: 10,
@@ -262,86 +35,200 @@ let AdditionalTaskCreate = {
                 footer: !1
             },
             sortable: !0,
-            filterable: !1,
+            // filterable: !1,
             pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
+            // search: {
+            //     input: $('#generalSearch')
+            // },
+            // toolbar: {
+            //     items: {
+            //         pagination: {
+            //             pageSizeSelect: [5, 10, 20, 30, 50, 100]
+            //         }
+            //     }
+            // },
             columns: [
-                {
-                    field: '',
-                    title: '',
-                    filterable: !1,
-                    template: function(e, a, t, n) {
-                        return '\n                        <label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">\n                            <input type="checkbox" value="" class="m-checkable">\n                            <span></span>\n                        </label>';
-                    }
+            {
+                field: "RecordID",
+                title: "#",
+                sortable: !1,
+                width: 40,
+                textAlign: "center",
+                selector: { class: "m-checkbox--solid m-checkbox--brand" }
                 },
+                // { field: "ID", title: "ID", width: 40, template: "{{RecordID}}" },
                 {
-                    field: 'number',
+                    field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                            return '<a href="/jobcard-ppc/'+t.uuid+'">' + t.number + "</a>"
-                    }
+                    // template: function (t, e, i) {
+                    //         return '<a href="/jobcard-ppc/'+t.uuid+'">' + t.number + "</a>"
+                    // }
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'code',
                     title: 'Defect Card No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.title',
+                    field: 'jobcard.number',
                     title: 'JC Ref.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.type.name',
+                    field: 'jobcard.number',
                     title: 'TC No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.task.name',
+                    field: 'jobcard.number',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.description',
+                    field: 'jobcard.number',
                     title: 'Mhrs Est.',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if (t.taskcard.description) {
-                            data = strtrunc(t.taskcard.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
+                    // template: function (t) {
+                    //     if (t.taskcard.description) {
+                    //         data = strtrunc(t.taskcard.description, 50);
+                    //         return (
+                    //             '<p>' + data + '</p>'
+                    //         );
+                    //     }
 
-                        return ''
-                    }
+                    //     return ''
+                    // }
                 },
                 {
-                    field: 'taskcard.skill.name',
+                    field: 'jobcard.number',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
                 }
             ]
-        });
-    }
-};
+        };
+        return {
+
+            init: function() {
+                // !(function() {
+                //         t.search = { input: $("#generalSearch") };
+                //         let e = $("#local_record_selection").mDatatable(t);
+                //         $("#m_form_status").on("change", function() {
+                //           e.search(
+                //             $(this)
+                //               .val()
+                //               .toLowerCase(),
+                //             "Status"
+                //           );
+                //         }),
+                //           $("#m_form_type").on("change", function() {
+                //             e.search(
+                //               $(this)
+                //                 .val()
+                //                 .toLowerCase(),
+                //               "Type"
+                //             );
+                //           }),
+                //           $("#m_form_status,#m_form_type").selectpicker(),
+                //           e.on(
+                //             "m-datatable--on-check m-datatable--on-uncheck m-datatable--on-layout-updated",
+                //             function(t) {
+                //               let a = e.rows(".m-datatable__row--active").nodes().length;
+                //               $("#m_datatable_selected_number").html(a),
+                //                 a > 0
+                //                   ? $("#m_datatable_group_action_form").collapse("show")
+                //                   : $("#m_datatable_group_action_form").collapse("hide");
+                //             }
+                //           ),
+                //           $("#m_modal_fetch_id")
+                //             .on("show.bs.modal", function(t) {
+                //               for (
+                //                 let a = e
+                //                     .rows(".m-datatable__row--active")
+                //                     .nodes()
+                //                     .find('.m-checkbox--single > [type="checkbox"]')
+                //                     .map(function(t, e) {
+                //                       return $(e).val();
+                //                     }),
+                //                   n = document.createDocumentFragment(),
+                //                   l = 0;
+                //                 l < a.length;
+                //                 l++
+                //               ) {
+                //                 let i = document.createElement("li");
+                //                 i.setAttribute("data-id", a[l]),
+                //                   (i.innerHTML = "Selected record ID: " + a[l]),
+                //                   n.appendChild(i);
+                //               }
+                //               $(t.target)
+                //                 .find(".m_datatable_selected_ids")
+                //                 .append(n);
+                //             })
+                //             .on("hide.bs.modal", function(t) {
+                //               $(t.target)
+                //                 .find(".m_datatable_selected_ids")
+                //                 .empty();
+                //             });
+                //       })(),
+                !(function() {
+                  (t.extensions = { checkbox: {} }),
+                    (t.search = { input: $("#generalSearch1") });
+                  let e = $("#defect_card_datatable").mDatatable(t);
+                  $("#m_form_status1").on("change", function() {
+                    e.search(
+                      $(this)
+                        .val()
+                        .toLowerCase(),
+                      "Status"
+                    );
+                  }),
+                    $("#m_form_type1").on("change", function() {
+                      e.search(
+                        $(this)
+                          .val()
+                          .toLowerCase(),
+                        "Type"
+                      );
+                    }),
+                    $("#m_form_status1,#m_form_type1").selectpicker(),
+                    e.on(
+                      "m-datatable--on-click-checkbox m-datatable--on-layout-updated",
+                      function(t) {
+                        let a = e.checkbox().getSelectedId().length;
+                        $("#m_datatable_selected_number1").html(a),
+                          a > 0
+                            ? $("#m_datatable_group_action_form1").collapse("show")
+                            : $("#m_datatable_group_action_form1").collapse("hide");
+                      }
+                    ),
+                    $(".nav-tabs")
+                      .on("click", ".mat-tool", function() {
+                        let uuids = e.checkbox().getSelectedId();
+                      });
+                })();
+
+
+                var datatable = $('.defect_card_datatable').mDatatable();
+
+                $(document).on('click', '.deleteFn', (e) => {
+                    alert('tes');
+                //   e.preventDefault();
+                //   let selected = this.datatable.getSelectedRecords();
+                });
+
+
+            }
+          };
+
+
+})();
 
 jQuery(document).ready(function () {
     AdditionalTaskCreate.init();

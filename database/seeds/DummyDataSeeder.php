@@ -96,6 +96,7 @@ class DummyDataSeeder extends Seeder
         $this->call(ProjectWorkPackageEngineers::class);
         $this->call(ProjectWorkPackageManhours::class);
         $this->call(ProjectWorkPackageFacilities::class);
+        $this->call(ProjectWorkPackageTaskCards::class);
 
         /** WORKPACKAGE's TASKCARDs */
 
@@ -112,8 +113,8 @@ class DummyDataSeeder extends Seeder
         
         $this->call(QuotationWorkPackageTaskCardItems::class);
 
-        /** QUOTATION's WORKPACKAGE's HT/CRR's */
+        /** QUOTATION's HT/CRR's */
         
-        $this->call(QuotationWorkPackageHtcrrItems::class);
+        $this->call(QuotationHtcrrItems::class);
     }
 }

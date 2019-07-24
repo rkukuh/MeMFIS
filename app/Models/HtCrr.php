@@ -164,4 +164,28 @@ class HtCrr extends MemfisModel
     {
         return $this->belongsTo(Type::class);
     }
+
+    /*************************************** ACCESSOR ****************************************/
+
+    /**
+     * Get the task card's item: material.
+     *
+     * @return string
+     */
+    public function getMaterialsAttribute()
+    {
+        return collect(array_values($this->items->load('unit')
+                                                ->whereIn('categories.0.code', ['raw', 'cons', 'comp'])
+                                                ->all()));
+    }
+
+    /**
+     * Get the task card's item: tool.
+     *
+     * @return string
+     */
+    public function getToolsAttribute()
+    {
+        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
+    }
 }

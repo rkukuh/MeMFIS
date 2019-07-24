@@ -22,14 +22,14 @@ class CreateItemUnitTable extends Migration
             $table->softDeletes();
 
             $table->foreign('item_id')
-                  ->references('id')->on('items')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                    ->references('id')->on('items')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->foreign('unit_id')
-                  ->references('id')->on('units')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                    ->references('id')->on('units')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
