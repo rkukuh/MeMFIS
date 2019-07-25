@@ -20,43 +20,31 @@ class ProjectWorkPackageTaskCardRoutineDatatables extends Controller
     public function basic(Project $project, WorkPackage $workPackage)
     {
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first();
-        // dd($workPackage_id);
-        // $workPackages = ProjectWorkPackageTaskCard::where('project_workpackage_id',$project_workpackage_id)->get();
 
-        // $workPackages = $workPackages->with('type','task')
-        // ->whereHas('type', function ($query) {
-        //     $query->where('name', 'Basic');
-        // })
-        // ->get();
+        $taskcards = $project_workpackage->taskcards;
 
-        $workPackages = $project_workpackage->taskcards::load('taskcard');
-        dd($workPackages);
-
-        // $workPackage = ProjectWorkPackageTaskCard::where('project_workpackage_id',$workPackage_id)>with('type','task')
-        // ->whereHas('type', function ($query) {
-        //     $query->where('name', 'Basic');
-        // })
-        // ->get();
-
-        $workPackages = $project_workpackage->taskcards->with('type','task')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'Basic');
-                                    })
-                                    ->get();
-
-        foreach($workPackages as $taskcard){
-            if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
-                }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
-                }
-                else{
-                    $taskcard->skill .= '';
-                }
-            }
+        foreach($taskcards as $taskcard){
+            dump($taskcard->taskcard);
         }
+        dd($taskcards);
+        //                             ->whereHas('type', function ($query) {
+        //                                 $query->where('name', 'Basic');
+        //                             });
+                                    // ->get();
+
+        // foreach($workPackages as $taskcard){
+        //     if(isset($taskcard->skills) ){
+        //         if(sizeof($taskcard->skills) == 3){
+        //             $taskcard->skill .= "ERI";
+        //         }
+        //         else if(sizeof($taskcard->skills) == 1){
+        //             $taskcard->skill .= $taskcard->skills[0]->name;
+        //         }
+        //         else{
+        //             $taskcard->skill .= '';
+        //         }
+        //     }
+        // }
 
         $data = $alldata = json_decode($workPackages);
 

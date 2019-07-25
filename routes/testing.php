@@ -13,6 +13,16 @@ Route::name('testing.')->group(function () {
             echo App\Helpers\DocumentNumber::generate('WP-', App\Models\WorkPackage::count());
 
         });
+        Route::get('/wp', function () {
+
+            $project_workpackage = App\Models\Pivots\ProjectWorkPackage::first();
+
+            $taskcards = $project_workpackage->taskcards;
+
+            foreach($taskcards as $taskcard){
+                dump($taskcard->taskcard);
+            }
+        });
 
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
