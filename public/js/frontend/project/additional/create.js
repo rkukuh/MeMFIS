@@ -113,119 +113,61 @@ let AdditionalTaskCreate = (function() {
                     filterable: !1,
                 }
             ]
-        };
-        return {
+    };
+    return {
 
-            init: function() {
-                // !(function() {
-                //         t.search = { input: $("#generalSearch") };
-                //         let e = $("#local_record_selection").mDatatable(t);
-                //         $("#m_form_status").on("change", function() {
-                //           e.search(
-                //             $(this)
-                //               .val()
-                //               .toLowerCase(),
-                //             "Status"
-                //           );
-                //         }),
-                //           $("#m_form_type").on("change", function() {
-                //             e.search(
-                //               $(this)
-                //                 .val()
-                //                 .toLowerCase(),
-                //               "Type"
-                //             );
-                //           }),
-                //           $("#m_form_status,#m_form_type").selectpicker(),
-                //           e.on(
-                //             "m-datatable--on-check m-datatable--on-uncheck m-datatable--on-layout-updated",
-                //             function(t) {
-                //               let a = e.rows(".m-datatable__row--active").nodes().length;
-                //               $("#m_datatable_selected_number").html(a),
-                //                 a > 0
-                //                   ? $("#m_datatable_group_action_form").collapse("show")
-                //                   : $("#m_datatable_group_action_form").collapse("hide");
-                //             }
-                //           ),
-                //           $("#m_modal_fetch_id")
-                //             .on("show.bs.modal", function(t) {
-                //               for (
-                //                 let a = e
-                //                     .rows(".m-datatable__row--active")
-                //                     .nodes()
-                //                     .find('.m-checkbox--single > [type="checkbox"]')
-                //                     .map(function(t, e) {
-                //                       return $(e).val();
-                //                     }),
-                //                   n = document.createDocumentFragment(),
-                //                   l = 0;
-                //                 l < a.length;
-                //                 l++
-                //               ) {
-                //                 let i = document.createElement("li");
-                //                 i.setAttribute("data-id", a[l]),
-                //                   (i.innerHTML = "Selected record ID: " + a[l]),
-                //                   n.appendChild(i);
-                //               }
-                //               $(t.target)
-                //                 .find(".m_datatable_selected_ids")
-                //                 .append(n);
-                //             })
-                //             .on("hide.bs.modal", function(t) {
-                //               $(t.target)
-                //                 .find(".m_datatable_selected_ids")
-                //                 .empty();
-                //             });
-                //       })(),
-                !(function() {
-                  (t.extensions = { checkbox: {} }),
-                    (t.search = { input: $("#generalSearch1") });
-                  let e = $("#defect_card_datatable").mDatatable(t);
-                  $("#m_form_status1").on("change", function() {
-                    e.search(
-                      $(this)
-                        .val()
-                        .toLowerCase(),
-                      "Status"
-                    );
-                  }),
-                    $("#m_form_type1").on("change", function() {
-                      e.search(
-                        $(this)
-                          .val()
-                          .toLowerCase(),
-                        "Type"
-                      );
-                    }),
-                    $("#m_form_status1,#m_form_type1").selectpicker(),
-                    e.on(
-                      "m-datatable--on-click-checkbox m-datatable--on-layout-updated",
-                      function(t) {
-                        let a = e.checkbox().getSelectedId().length;
-                        $("#m_datatable_selected_number1").html(a),
-                          a > 0
-                            ? $("#m_datatable_group_action_form1").collapse("show")
-                            : $("#m_datatable_group_action_form1").collapse("hide");
-                      }
-                    ),
-                    $(".nav-tabs")
-                      .on("click", ".mat-tool", function() {
-                        let uuids = e.checkbox().getSelectedId();
-                      });
-                })();
+        init: function() {
+            !(function() {
+              (t.extensions = { checkbox: {} }),
+                (t.search = { input: $("#generalSearch1") });
+              let e = $("#defect_card_datatable").mDatatable(t);
+              $("#m_form_status1").on("change", function() {
+                e.search(
+                  $(this)
+                    .val()
+                    .toLowerCase(),
+                  "Status"
+                );
+              }),
+                $("#m_form_type1").on("change", function() {
+                  e.search(
+                    $(this)
+                      .val()
+                      .toLowerCase(),
+                    "Type"
+                  );
+                }),
+                $("#m_form_status1,#m_form_type1").selectpicker(),
+                e.on(
+                  "m-datatable--on-click-checkbox m-datatable--on-layout-updated",
+                  function(t) {
+                    let a = e.checkbox().getSelectedId().length;
+                    $("#m_datatable_selected_number1").html(a),
+                      a > 0
+                        ? $("#m_datatable_group_action_form1").collapse("show")
+                        : $("#m_datatable_group_action_form1").collapse("hide");
+                  }
+                ),
+                $(".nav-tabs")
+                  .on("click", ".mat-tool", function() {
+                    let uuids = e.checkbox().getSelectedId();
+                    additional_materials_get_datatable(uuids);
+                    additional_tools_get_datatable(uuids);
+                  });
+            })();
 
 
-                var datatable = $('.defect_card_datatable').mDatatable();
+            var datatable = $('.defect_card_datatable').mDatatable();
 
-                $(document).on('click', '.deleteFn', (e) => {
-                    alert('tes');
-                //   e.preventDefault();
-                //   let selected = this.datatable.getSelectedRecords();
-                });
+            $(document).on('click', '.deleteFn', (e) => {
+                alert('tes');
+            //   e.preventDefault();
+            //   let selected = this.datatable.getSelectedRecords();
+            });
 
 
-            }
-          };
+        }
+      };
 
 
 })();

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\Project;
 
-use App\Models\Unit;
+use App\Models\DefectCard;
 use App\Models\Project;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
@@ -18,13 +18,14 @@ class AdditionalItemsDatatables extends Controller
     public function material(Request $request)
     {
         $defectcards = DefectCard::whereIn('uuid', $request->uuids)->get();
+        $materials = [];
+        foreach($defectcards as $defectcard){
+            foreach($defectcard->materials as $item){
+                array_push($materials, $item);
+            }
+        }
 
-        // foreach($defectcards->materials as $material){
-        //     $unit_id = $material->pivot->unit_id;
-        //     $material->pivot->unit .= Unit::find($unit_id)->name;
-        // }
-
-        $data = $alldata = json_decode($defectcards->materials);
+        $data = $alldata = $materials;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -119,16 +120,17 @@ class AdditionalItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tool(Request $request)
+    public function tools(Request $request)
     {
         $defectcards = DefectCard::whereIn('uuid', $request->uuids)->get();
-        
-        // foreach($defectcards->tools as $tool){
-        //     $unit_id = $tool->pivot->unit_id;
-        //     $tool->pivot->unit .= Unit::find($unit_id)->name;
-        // }
+        $tools = [];
+        foreach($defectcards as $defectcard){
+            foreach($defectcard->tools as $items){
+                array_push($tools, $items);
+            }
+        }
 
-        $data = $alldata = json_decode($defectcards->tools);
+        $data = $alldata = $tools;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

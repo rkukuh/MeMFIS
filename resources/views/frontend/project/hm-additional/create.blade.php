@@ -170,7 +170,7 @@
                                                 <div class="tab-pane active show" id="m_tabs_1_1" role="tabpanel">
                                                     @include('frontend.project.hm-additional.defect-card.index')
                                                 </div>
-                                                <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
+                                                <div class="tab-pane mat-tool-additional" id="m_tabs_1_2" role="tabpanel">
                                                     @include('frontend.project.hm-additional.material-tool.index')
                                                 </div>
                                             </div>
@@ -240,5 +240,6 @@
     </script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/project/additional/create.js')}}"></script>
+    <script src="{{ asset('js/frontend/project/additional/item.js')}}"></script>
 @endpush
 
