@@ -106,7 +106,7 @@ let TaskCard = {
                 },
                 {
                     field: 'estimation_manhour',
-                    title: 'Manhours',
+                    title: 'Manhours Estimation',
                     sortable: 'asc',
                     filterable: !1,
                 },
