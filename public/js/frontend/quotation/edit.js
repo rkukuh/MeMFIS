@@ -158,19 +158,20 @@ let Quotation = {
             let grandTotal = grandTotalRupiah = 0;
             //get all values
             for (let i = 0; i < inputs.length; i++) {
-                value[i] = parseInt($(inputs[i]).val());
+                value[i] = parseFloat($(inputs[i]).val());
             }
             const arrSum = arr => arr.reduce((a, b) => a + b, 0);
             let subTotal = $('#sub_total').attr("value");
-            grandTotal = parseInt(subTotal) + parseInt(arrSum(value));
+            grandTotal = parseFloat(subTotal) + parseFloat(arrSum(value));
 
             if(currency !== 1){
-                grandTotalRupiah = ( parseInt(subTotal) + parseInt(arrSum(value)) ) * exchange_rate;
+                grandTotalRupiah = ( parseFloat(subTotal) + parseFloat(arrSum(value)) ) * exchange_rate;
             }
                         
             $('#grand_total').attr("value", grandTotal);
             $('#grand_total_rupiah').attr("value", grandTotalRupiah);
             $('#grand_total').html("$ "+ForeignFormatter.format(grandTotal));
+            console.log(grandTotal);
             $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
         });
 
