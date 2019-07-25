@@ -171,7 +171,6 @@ let Quotation = {
             $('#grand_total').attr("value", grandTotal);
             $('#grand_total_rupiah').attr("value", grandTotalRupiah);
             $('#grand_total').html("$ "+ForeignFormatter.format(grandTotal));
-            console.log(grandTotal);
             $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
         });
 
