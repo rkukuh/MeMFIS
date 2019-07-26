@@ -57,7 +57,24 @@ let Employee = {
                     title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
-                    template: "{{first_name}}  {{middle_name}}  {{last_name}}"
+                    template:  function (t) {
+
+                        var employee_name
+
+                        if(t.middle_name == null || t.last_name == null){
+                            if(t.middle_name == null){
+                                employee_name = t.first_name +' '+t.last_name
+                            }
+                            if(t.last_name == null){
+                                employee_name = t.first_name+' '+t.middle_name
+                            }
+                            if(t.middle_name == null && t.last_name == null){
+                                employee_name = t.first_name
+                            }
+                        }
+
+                        return employee_name
+                    }
                 },
                 {
                     field: 'dob',
