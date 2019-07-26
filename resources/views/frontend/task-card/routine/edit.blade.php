@@ -83,7 +83,6 @@
                                             <label class="form-control-label">
                                                 Company Task Number @include('frontend.common.label.optional')
                                             </label>
-
                                             @if (empty($additionals))
                                                 @component('frontend.common.input.text')
                                                     @slot('id', 'company_number')
@@ -96,7 +95,9 @@
                                                     @slot('id', 'company_number')
                                                     @slot('text', 'Company Task Number')
                                                     @slot('name', 'company_number')
+                                                    @if(isset($additionals))
                                                     @slot('value', $additionals->internal_number)
+                                                    @endif
                                                     @slot('id_error', 'company_number')
                                                 @endcomponent
                                             @endif
