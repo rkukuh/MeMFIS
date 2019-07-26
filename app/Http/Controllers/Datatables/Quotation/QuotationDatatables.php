@@ -21,10 +21,13 @@ class QuotationDatatables extends Controller
      */
     public function index()
     {
-        $quotations = Quotation::with('project')->get();
+        $quotations = Quotation::with('project')->withTrashed()->get();
 
         foreach($quotations as $quotation){
-            if(!empty($quotation->approvals->toArray())){
+            if($quotation->deleted_at <> null){
+                $quotation->status .= 'Void';
+            }
+            else if(!empty($quotation->approvals->toArray())){
                 $quotation->status .= 'Approved';
             }else{
                 $quotation->status .= '';
