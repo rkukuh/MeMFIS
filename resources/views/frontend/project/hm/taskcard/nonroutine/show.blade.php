@@ -189,6 +189,6 @@
     </div>
     
     @push('footer-scripts')
-        <script src="{{ asset('js/frontend/project/non-routine/index.js')}}"></script>
+        <script src="{{ asset('js/frontend/project/non-routine/show.js')}}"></script>
     @endpush
     

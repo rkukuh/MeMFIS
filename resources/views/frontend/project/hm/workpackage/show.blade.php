@@ -92,8 +92,8 @@
     <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/modal/datatables.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/project/hm/modal/successor.js') }}"></script>
-    <script src="{{ asset('js/frontend/project/hm/modal/predecessor.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/modal/successor-show.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/modal/predecessor-show.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/taskcard-predecessor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/taskcard-successor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard.js') }}"></script>
