@@ -15,13 +15,28 @@ Route::name('testing.')->group(function () {
         });
         Route::get('/wp', function () {
 
-            $project_workpackage = App\Models\Pivots\ProjectWorkPackage::first();
+            $project_workpackage = App\Models\Pivots\ProjectWorkPackage::where('project_id',1)->pluck('id');
+            $tes = App\Models\ProjectWorkPackageTaskCard::with('taskcard')->whereIn('project_workpackage_id',$project_workpackage->toArray())
+            ->whereHas('taskcard', function ($query) {
+                $query->with('type','task')
+                    ->whereHas('type', function ($query) {
+                        $query->where('name', 'Basic');
+                    });
+                        // $query->where('task_id', $request->task_type_id);
+                //     });
+            })->get();
+            // dd($tes);
 
-            $taskcards = $project_workpackage->taskcards;
-
-            foreach($taskcards as $taskcard){
-                dump($taskcard->taskcard);
+            foreach($tes as $te){
+                dump($te);
             }
+
+            // whereIn
+            // $taskcards = $project_workpackage->taskcards;
+
+            // foreach($taskcards as $taskcard){
+            //     dump($taskcard->taskcard);
+            // }
         });
 
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
