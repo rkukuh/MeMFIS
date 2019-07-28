@@ -13,6 +13,7 @@ class JobCard extends MemfisModel
         'taskcard_id',
         'quotation_id',
         'origin_taskcard',
+        'origin_quotation',
         'origin_taskcard_items',
         'origin_jobcard_helpers',
     ];
