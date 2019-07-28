@@ -72,6 +72,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Company.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCompany(Builder $query)
+    {
+        return $query->where('of', 'company');
+    }
+
+    /**
      * Scope a query to only include type of DefectCard close reason.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -102,6 +113,17 @@ class Type extends MemfisModel
     public function scopeOfDefectCardProposeCorrection(Builder $query)
     {
         return $query->where('of', 'defectcard-propose-correction');
+    }
+
+    /**
+     * Scope a query to only include type of Department.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfDepartment(Builder $query)
+    {
+        return $query->where('of', 'department');
     }
 
     /**
