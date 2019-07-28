@@ -544,7 +544,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/workpackage/'+workPackage_uuid+'/sequence/'+triggeruuid,
+                url: '/project-hm/'+triggeruuid+'/sequence/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     sequence: sequence,
@@ -558,6 +558,31 @@ let Datatables = {
                         $('#taskcard_sequence').modal('hide');
 
                         let table = $('.basic_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.sip_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.cpcp_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.ad-sb_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.cmr-awl_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.si_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -587,7 +612,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                url: '/project-hm/'+triggeruuid+'/mandatory/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     is_mandatory: is_mandatory,
@@ -693,6 +718,14 @@ let Datatables = {
             }
         });
 
+        $('.sip_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
         $('.sip_datatable').on('click', '.mandatory', function () {
             triggeruuid = $(this).data('uuid');
             mandatory = $(this).data('mandatory');
@@ -708,7 +741,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                url: '/project-hm/'+triggeruuid+'/mandatory/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     is_mandatory: is_mandatory,
@@ -729,6 +762,7 @@ let Datatables = {
             });
 
         });
+
 
 
         //CPCP taskcard Datatable
@@ -799,6 +833,14 @@ let Datatables = {
             }
         });
 
+        $('.cpcp_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
         $('.cpcp_datatable').on('click', '.mandatory', function () {
             triggeruuid = $(this).data('uuid');
             mandatory = $(this).data('mandatory');
@@ -814,7 +856,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                url: '/project-hm/'+triggeruuid+'/mandatory/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     is_mandatory: is_mandatory,
@@ -836,43 +878,7 @@ let Datatables = {
 
         });
 
-        $('.ad-sb_datatable').on('click', '.mandatory', function () {
-            triggeruuid = $(this).data('uuid');
-            mandatory = $(this).data('mandatory');
-            if (mandatory == 0){
-                is_mandatory = 1;
-            }
-            else if (mandatory ==  1){
-                is_mandatory = 0;
-            }
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'put',
-                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    is_mandatory: is_mandatory,
-                },
-                success: function (data) {
-                    if (data.errors) {
-                    } else {
-                        toastr.success('Mandatory has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
-
-                        let table = $('.ad-sb_datatable').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
-                }
-            });
-
-        });
-
+        //ADSB
         $('.ad-sb_datatable').on('click', '.predecessor', function () {
             if(predecessor_datatables_init == true){
                 predecessor_datatables_init = false;
@@ -908,7 +914,15 @@ let Datatables = {
             }
         });
 
-        $('.cmr-awl_datatable').on('click', '.mandatory', function () {
+        $('.ad-sb_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
+        $('.ad-sb_datatable').on('click', '.mandatory', function () {
             triggeruuid = $(this).data('uuid');
             mandatory = $(this).data('mandatory');
             if (mandatory == 0){
@@ -923,7 +937,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                url: '/project-hm/'+triggeruuid+'/mandatory/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     is_mandatory: is_mandatory,
@@ -935,7 +949,7 @@ let Datatables = {
                             timeOut: 5000
                         });
 
-                        let table = $('.cmr-awl_datatable').mDatatable();
+                        let table = $('.ad-sb_datatable').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -944,6 +958,8 @@ let Datatables = {
             });
 
         });
+
+        //CMR-AWL
 
         $('.cmr-awl_datatable').on('click', '.predecessor', function () {
             if(predecessor_datatables_init == true){
@@ -978,6 +994,52 @@ let Datatables = {
                 successor_tc(triggeruuid);
                 $('#successor_datatable').DataTable().ajax.reload();
             }
+        });
+
+
+        $('.cmr-awl_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
+        $('.cmr-awl_datatable').on('click', '.mandatory', function () {
+            triggeruuid = $(this).data('uuid');
+            mandatory = $(this).data('mandatory');
+            if (mandatory == 0){
+                is_mandatory = 1;
+            }
+            else if (mandatory ==  1){
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/project-hm/'+triggeruuid+'/mandatory/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_mandatory: is_mandatory,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Mandatory has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cmr-awl_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
         });
 
         //SI taskcard Datatable
@@ -1047,6 +1109,14 @@ let Datatables = {
             }
         });
 
+        $('.si_datatable').on('click', '.sequence', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid').value = triggeruuid;
+            document.getElementById('sequence').value = sequence;
+
+        });
         $('.si_datatable').on('click', '.mandatory', function () {
             triggeruuid = $(this).data('uuid');
             mandatory = $(this).data('mandatory');
@@ -1062,7 +1132,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/workpackage/'+workPackage_uuid+'/mandatory/'+triggeruuid,
+                url: '/project-hm/'+triggeruuid+'/mandatory/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     is_mandatory: is_mandatory,
