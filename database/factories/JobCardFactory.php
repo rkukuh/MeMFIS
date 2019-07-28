@@ -26,8 +26,8 @@ $factory->define(JobCard::class, function (Faker $faker) {
         'number' => 'JC-DUM-' . $number,
         'taskcard_id' => $taskcard->id,
         'quotation_id' => Quotation::get()->random()->id,
-        'data_taskcard' => $taskcard->toJson(),
-        'data_taskcard_items' => $taskcard->items->toJson(),
+        'origin_taskcard' => $taskcard->toJson(),
+        'origin_taskcard_items' => $taskcard->items->toJson(),
     ];
 
 });

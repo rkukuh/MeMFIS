@@ -64,8 +64,8 @@ Route::name('testing.')->group(function () {
                     App\Models\JobCard::create([
                         'number' => 'JC-DUM-'.md5(uniqid(rand(), true)),
                         'taskcard_id' => $tc->id,
-                        'data_taskcard' => $tc->toJson(),
-                        'data_taskcard_items' => $tc->items->toJson(),
+                        'origin_taskcard' => $tc->toJson(),
+                        'origin_taskcard_items' => $tc->items->toJson(),
                     ]);                    // // echo $tc->title.'<br>';
                     // foreach($tc->items as $item){
                     //     echo $item->name.'<br>';
