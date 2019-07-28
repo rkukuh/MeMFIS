@@ -686,6 +686,19 @@ class Type extends MemfisModel
     }
 
     /**
+     * One-to-Many: A Department may have zero or many type.
+     *
+     * This function will retrieve all Departments of a type.
+     * See: Department's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type_departments()
+    {
+        return $this->hasMany(Department::class, 'type_id', 'id');
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many type.
      *
      * This function will retrieve all task cards of a type.

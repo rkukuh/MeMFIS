@@ -16,6 +16,7 @@ return [
         'currencies' => 20,
         'customers' => 20,
         'defectcards' => 20,
+        'departments' => 20,
         'facilities' => 20,
         'goods-received' => 20,
         'htcrr' => 20,
