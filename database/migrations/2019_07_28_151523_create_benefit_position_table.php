@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDepartmentJobTitleTable extends Migration
+class CreateBenefitPositionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,22 @@ class CreateDepartmentJobTitleTable extends Migration
      */
     public function up()
     {
-        Schema::create('department_jobtitle', function (Blueprint $table) {
+        Schema::create('benefit_position', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('department_id');
-            $table->unsignedBigInteger('jobtitle_id');
+            $table->unsignedBigInteger('benefit_id');
+            $table->unsignedBigInteger('position_id');
+            $table->double('min');
+            $table->double('max');
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->foreign('department_id')
-                    ->references('id')->on('departments')
+            $table->foreign('benefit_id')
+                    ->references('id')->on('benefits')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('jobtitle_id')
-                    ->references('id')->on('jobtitles')
+            $table->foreign('position_id')
+                    ->references('id')->on('positions')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
@@ -38,6 +41,6 @@ class CreateDepartmentJobTitleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('department_jobtitle');
+        Schema::dropIfExists('benefit_position');
     }
 }

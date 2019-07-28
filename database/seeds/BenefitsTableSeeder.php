@@ -1,9 +1,8 @@
 <?php
 
-use App\Models\Department;
 use Illuminate\Database\Seeder;
 
-class Departments extends Seeder
+class BenefitsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +11,6 @@ class Departments extends Seeder
      */
     public function run()
     {
-        factory(Department::class, config('memfis.dummies.departments'))->create();
+        //
     }
 }

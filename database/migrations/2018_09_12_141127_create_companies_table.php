@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDepartmentsTable extends Migration
+class CreateCompaniesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateDepartmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
-            $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedBigInteger('type_id')->nullable();
             $table->string('name');
@@ -25,13 +24,8 @@ class CreateDepartmentsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('company_id')
-                    ->references('id')->on('companies')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
             $table->foreign('parent_id')
-                    ->references('id')->on('departments')
+                    ->references('id')->on('companies')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
@@ -52,6 +46,6 @@ class CreateDepartmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('companies');
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class JobTitleStore extends FormRequest
+class BenefitUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

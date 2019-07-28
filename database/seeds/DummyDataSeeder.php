@@ -33,7 +33,6 @@ class DummyDataSeeder extends Seeder
         $this->call(Aircrafts::class);
         $this->call(Languages::class);
         $this->call(Schools::class);
-        $this->call(Departments::class);
         $this->call(Employees::class);
         $this->call(Storages::class);
         $this->call(Items::class);
@@ -42,6 +41,11 @@ class DummyDataSeeder extends Seeder
         $this->call(Customers::class);
         $this->call(Vendors::class);
         $this->call(Facilities::class);
+
+        $this->call(Companies::class);
+        $this->call(Departments::class);
+        $this->call(Benefits::class);
+        $this->call(Positions::class);
 
         /** POLYMORPH */
 

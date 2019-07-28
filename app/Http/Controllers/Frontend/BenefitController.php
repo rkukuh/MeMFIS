@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\JobTitle;
+use App\Models\Benefit;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\JobTitleStore;
-use App\Http\Requests\Frontend\JobTitleUpdate;
+use App\Http\Requests\Frontend\BenefitStore;
+use App\Http\Requests\Frontend\BenefitUpdate;
 
-class JobTitleController extends Controller
+class BenefitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class JobTitleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\JobTitleStore  $request
+     * @param  \App\Http\Requests\Frontend\BenefitStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(JobTitleStore $request)
+    public function store(BenefitStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class JobTitleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\JobTitle  $jobTitle
+     * @param  \App\Models\Benefit  $benefit
      * @return \Illuminate\Http\Response
      */
-    public function show(JobTitle $jobTitle)
+    public function show(Benefit $benefit)
     {
         //
     }
@@ -54,10 +54,10 @@ class JobTitleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\JobTitle  $jobTitle
+     * @param  \App\Models\Benefit  $benefit
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobTitle $jobTitle)
+    public function edit(Benefit $benefit)
     {
         //
     }
@@ -65,11 +65,11 @@ class JobTitleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\JobTitleUpdate  $request
-     * @param  \App\Models\JobTitle  $jobTitle
+     * @param  \App\Http\Requests\Frontend\BenefitUpdate  $request
+     * @param  \App\Models\Benefit  $benefit
      * @return \Illuminate\Http\Response
      */
-    public function update(JobTitleUpdate $request, JobTitle $jobTitle)
+    public function update(BenefitUpdate $request, Benefit $benefit)
     {
         //
     }
@@ -77,10 +77,10 @@ class JobTitleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\JobTitle  $jobTitle
+     * @param  \App\Models\Benefit  $benefit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(JobTitle $jobTitle)
+    public function destroy(Benefit $benefit)
     {
         //
     }

@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Department;
+use App\Models\Position;
 use Illuminate\Database\Seeder;
 
-class Departments extends Seeder
+class Positions extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class Departments extends Seeder
      */
     public function run()
     {
-        factory(Department::class, config('memfis.dummies.departments'))->create();
+        factory(Position::class, config('memfis.dummies.positions'))->create();
     }
 }

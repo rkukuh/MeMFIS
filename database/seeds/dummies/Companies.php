@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\JobTitle;
+use App\Models\Company;
 use Illuminate\Database\Seeder;
 
-class JobTitles extends Seeder
+class Companies extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class JobTitles extends Seeder
      */
     public function run()
     {
-        //
+        factory(Company::class, config('memfis.dummies.companies'))->create();
     }
 }
