@@ -28,6 +28,15 @@ class CreateHtcrrTable extends Migration
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->boolean('is_rii')->nullable();
             $table->text('description')->nullable();
+
+            $table->json('origin_type')->nullable();
+            $table->json('origin_project')->nullable();
+            $table->json('origin_conducted_by')->nullable();
+            $table->json('origin_htcrr')->nullable();
+            $table->json('origin_htcrr_items')->nullable();
+            $table->json('origin_htcrr_skills')->nullable();
+            $table->json('origin_htcrr_helpers')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
 

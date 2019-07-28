@@ -35,10 +35,10 @@ $factory->define(HtCrr::class, function (Faker $faker) {
         'is_rii' => false,
         'description' => $faker->randomElement([null, $faker->text]),
 
-        'origin_htcrr' => null,
-        'origin_item' => null,
-        'origin_unit' => null,
+        'origin_type' => null,
         'origin_project' => null,
+        'origin_conducted_by' => null,
+        'origin_htcrr' => null,
         'origin_htcrr_items' => null,
         'origin_htcrr_skills' => null,
         'origin_htcrr_helpers' => null,
