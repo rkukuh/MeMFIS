@@ -41,4 +41,17 @@ class Company extends MemfisModel
     {
         return $this->belongsTo(Company::class, 'parent_id');
     }
+
+    /**
+     * One-to-Many: A Company may have zero or many type.
+     *
+     * This function will retrieve the type of an Company.
+     * See: Type's type_companys() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
 }
