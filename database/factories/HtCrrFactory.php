@@ -34,6 +34,14 @@ $factory->define(HtCrr::class, function (Faker $faker) {
         'estimation_manhour' => 0,
         'is_rii' => false,
         'description' => $faker->randomElement([null, $faker->text]),
+
+        'origin_type' => null,
+        'origin_project' => null,
+        'origin_conducted_by' => null,
+        'origin_htcrr' => null,
+        'origin_htcrr_items' => null,
+        'origin_htcrr_skills' => null,
+        'origin_htcrr_helpers' => null,
     ];
 
 });

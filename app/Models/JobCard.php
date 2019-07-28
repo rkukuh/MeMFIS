@@ -10,10 +10,13 @@ class JobCard extends MemfisModel
 
     protected $fillable = [
         'number',
-        'taskcard_id',
         'quotation_id',
-        'data_taskcard',
-        'data_taskcard_items',
+        'taskcard_id',
+        
+        'origin_quotation',
+        'origin_taskcard',
+        'origin_taskcard_items',
+        'origin_jobcard_helpers',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
