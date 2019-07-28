@@ -68,7 +68,7 @@
                     <div class="col-sm-5 col-md-5 col-lg-5">
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
-                        <select name="charge_type" class="form-control charge_type">
+                        <select name="charge_type" class="form-control charge_type" style="width:100%">
                             <option value="Shipping Fee">Shipping Fee</option>
                         </select>
                     </div>
@@ -99,8 +99,8 @@
                     <div class="col-sm-5 col-md-5 col-lg-5">
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
-                        <select name="charge_type" class="form-control">
-                            <option value="Shipping Fee">Shipping Fee</option>
+                        <select name="charge_type" class="form-control" style="width:100%">
+                            <option value="Shipping Fee">Shipping Fee=</option>
                         </select>
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">

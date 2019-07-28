@@ -58,6 +58,17 @@ class ProjectHMWorkPackageController extends Controller
     {
         $project->workpackages()->attach(WorkPackage::where('uuid',$request->workpackage)->first()->id);
 
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',WorkPackage::where('uuid',$request->workpackage)->first()->id)->first();
+        // // $workPackage = WorkPackage::where('uuid',$request->workpackage)->first();
+        foreach($project_workpackage->workpackage->taskcards as $taskcard){
+
+            $project_workpackage->taskcards()->create([
+                'taskcard_id' => $taskcard->id,
+                'sequence' => $taskcard->sequence,
+                'is_mandatory' => $taskcard->is_mandatory,
+            ]);
+        }
+
         return response()->json($project);
     }
 
@@ -95,7 +106,6 @@ class ProjectHMWorkPackageController extends Controller
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
-        $edit = false;
 
         //get employees
         $employees = Employee::all();
@@ -103,14 +113,10 @@ class ProjectHMWorkPackageController extends Controller
         $materialCount = $workPackage->items->count();
         $toolCount = $workPackage->tools->count();
 
-        // dd($project_workpackage);
-        if ($request->anyChanges) {
-            $view = 'frontend.project.hm.workpackage.index-engineerteam';
-        }else{
-            $view = 'frontend.project.hm.workpackage.index';
-        }
+
+        $view = 'frontend.project.hm.workpackage.show';
         return view($view,[
-            'edit' => $edit,
+            'edit' => false,
             'project' => $project,
             'employees' => $employees,
             'toolCount' => $toolCount,
@@ -162,7 +168,6 @@ class ProjectHMWorkPackageController extends Controller
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
-        $edit = true;
 
         $employees = Employee::all();
         $facilities = Facility::all();
@@ -176,7 +181,7 @@ class ProjectHMWorkPackageController extends Controller
             $view = 'frontend.project.hm.workpackage.index';
         }
         return view($view,[
-            'edit' => $edit,
+            'edit' => true,
             'project' => $project,
             'employees' => $employees,
             'toolCount' => $toolCount,

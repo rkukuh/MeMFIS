@@ -16,7 +16,7 @@
                             <th>WorkArea</th>
                             <th>Manhour</th>
                             <th>Order</th>
-                            <th></th>
+                            @if($edit)<th></th>@endif
                         </tr>
                     </thead>
                 </table>
