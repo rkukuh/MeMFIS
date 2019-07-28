@@ -18,6 +18,12 @@ class DefectCard extends MemfisModel
         'is_rii',
         'complaint',
         'description',
+
+        'origin_jobcard',
+        'origin_project_additional',
+        'origin_quotation_additional',
+        'origin_defectcard_items',
+        'origin_defectcard_propose_corrections',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
