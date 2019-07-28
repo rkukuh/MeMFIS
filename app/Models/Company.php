@@ -8,8 +8,9 @@ class Company extends MemfisModel
 {
     protected $fillable = [
         'code',
-        'name',
         'parent_id',
+        'type_id',
+        'name',
         'description',
     ];
 
