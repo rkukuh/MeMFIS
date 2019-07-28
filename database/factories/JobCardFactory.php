@@ -28,6 +28,7 @@ $factory->define(JobCard::class, function (Faker $faker) {
         'quotation_id' => Quotation::get()->random()->id,
         'origin_taskcard' => $taskcard->toJson(),
         'origin_taskcard_items' => $taskcard->items->toJson(),
+        'origin_jobcard_helpers' => null,
     ];
 
 });
