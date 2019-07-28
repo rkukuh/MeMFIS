@@ -61,6 +61,28 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Benefit: Base Calculation.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfBenefitBaseCalculation(Builder $query)
+    {
+        return $query->where('of', 'benefit-base-calculation');
+    }
+
+    /**
+     * Scope a query to only include type of Benefit: Prorate Calculation.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfBenefitProrateCalculation(Builder $query)
+    {
+        return $query->where('of', 'benefit-prorate-calculation');
+    }
+
+    /**
      * Scope a query to only include type of Capability.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query

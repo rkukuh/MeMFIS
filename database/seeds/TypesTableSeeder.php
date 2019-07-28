@@ -15,6 +15,8 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfAPERI::class);
         $this->call(TypesOfARC::class);
         $this->call(TypesOfAviationDegree::class);
+        $this->call(TypesOfBenefitBaseCalculation::class);
+        $this->call(TypesOfBenefitProrateCalculation::class);
         $this->call(TypesOfCapability::class);
         $this->call(TypesOfCompany::class);
         $this->call(TypesOfDefectCardCloseReason::class);

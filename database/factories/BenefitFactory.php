@@ -11,8 +11,8 @@ $factory->define(Benefit::class, function (Faker $faker) {
     return [
         'code' => $faker->randomElement([null, 'BENF-DUM-' . $number]),
         'name' => 'Benefit ' . $faker->word,
-        'base_calculation' => null,
-        'prorate_calculation' => null,
+        'base_calculation' => Type::ofBenefitBaseCalculation()->get()->random()->id,
+        'prorate_calculation' => Type::ofBenefitProrateCalculation()->get()->random()->id,
         'description' => $faker->randomElement([null, $faker->text]),
     ];
 
