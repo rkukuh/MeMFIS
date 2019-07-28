@@ -60,6 +60,8 @@ Route::name('frontend.')->group(function () {
                 Route::post('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
                 Route::post('/{project}/workpackage/{workpackage}/facilityUsed','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
                 Route::post('/{project}/workpackage/{workpackage}/manhoursPropotion','ProjectHMWorkPackageController@manhoursPropotion')->name('project-hm.manhoursPropotion.add');
+                Route::put('/{ProjectWorkpackage}/sequence/', 'ProjectHMWorkPackageController@sequence')->name('project-hm.sequence.workpackage');
+                Route::put('/{ProjectWorkpackage}/mandatory/', 'ProjectHMWorkPackageController@mandatory')->name('project-hm.mandatory.workpackage');
 
                 /** Transaction: HTCRR */
 
