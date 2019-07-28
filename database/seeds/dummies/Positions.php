@@ -12,6 +12,6 @@ class Positions extends Seeder
      */
     public function run()
     {
-        //
+        factory(Position::class, config('memfis.dummies.positions'))->create();
     }
 }

@@ -27,6 +27,7 @@ return [
         'languages' => 20,
         'licenses' => 20,
         'levels' => 20,
+        'positions' => 20,
         'projects' => 20,
         'purchase-orders' => 20,
         'purchase-requests' => 20,
