@@ -40,6 +40,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Project::class => Policies\ProjectPolicy::class,
         Models\JobCard::class => Policies\JobCardPolicy::class,
         Models\Station::class => Policies\StationPolicy::class,
+        Models\Company::class => Policies\CompanyPolicy::class,
         Models\Category::class => Policies\CategoryPolicy::class,
         Models\Currency::class => Policies\CurrencyPolicy::class,
         Models\Aircraft::class => Policies\AircraftPolicy::class,

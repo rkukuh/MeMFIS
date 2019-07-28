@@ -52,6 +52,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('user', 'UserController');
         Route::resource('school', 'SchoolController');
         Route::resource('vendor', 'VendorController');
+        Route::resource('company', 'CompanyController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
         Route::resource('language', 'LanguageController');

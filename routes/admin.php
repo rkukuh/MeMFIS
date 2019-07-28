@@ -46,6 +46,7 @@ Route::name('admin.')->group(function () {
         Route::resource('vendor', 'VendorController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
+        Route::resource('company', 'CompanyController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('language', 'LanguageController');
         Route::resource('customer', 'CustomerController');
