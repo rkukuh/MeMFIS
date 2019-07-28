@@ -27,6 +27,24 @@ class Benefit extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A Position may have one or many Benefit.
+     *
+     * This function will retrieve all the Positions of a given Benefit.
+     * See: Position's benefits() method for the inverse
+     *
+     * @return mixed
+     */
+    public function positions()
+    {
+        return $this->belongsToMany(Position::class)
+                    ->withPivot(
+                        'min',
+                        'max'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * One-Way: A Benefit may have zero or one prorate calculation.
      *
      * @return mixed
