@@ -19,24 +19,24 @@ class ProjectWorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function ad_sb(Project $project, WorkPackage $workPackage)
     {
-        $workPackage_id = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first();
-        $workPackage = ProjectWorkPackageTaskCard::find($workPackage_id);
-
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('code', 'ad')->orWhere('code','sb');
-                                    })->get();
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first()->id;
+        $workPackages = ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
+                        ->whereHas('taskcard', function ($query) {
+                            $query->whereHas('type', function ($query) {
+                                    $query->where('code', 'ad')->orWhere('code','sb');
+                                });
+                        })->get();
 
         foreach($workPackages as $taskcard){
-            if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
+            if(isset($taskcard->taskcard->skills) ){
+                if(sizeof($taskcard->taskcard->skills) == 3){
+                    $taskcard->taskcard->skill .= "ERI";
                 }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
+                else if(sizeof($taskcard->taskcard->skills) == 1){
+                    $taskcard->taskcard->skill .= $taskcard->taskcard->skills[0]->name;
                 }
                 else{
-                    $taskcard->skill .= '';
+                    $taskcard->taskcard->skill .= '';
                 }
             }
         }
@@ -138,24 +138,24 @@ class ProjectWorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function cmr_awl(Project $project, WorkPackage $workPackage)
     {
-        $workPackage_id = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first();
-        $workPackage = ProjectWorkPackageTaskCard::find($workPackage_id);
-
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('code', 'cmr')->orWhere('code','awl');
-                                    })->get();
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first()->id;
+        $workPackages = ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
+                        ->whereHas('taskcard', function ($query) {
+                            $query->whereHas('type', function ($query) {
+                                    $query->where('code', 'cmr')->orWhere('code','awl');
+                                });
+                        })->get();
 
         foreach($workPackages as $taskcard){
-            if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
+            if(isset($taskcard->taskcard->skills) ){
+                if(sizeof($taskcard->taskcard->skills) == 3){
+                    $taskcard->taskcard->skill .= "ERI";
                 }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
+                else if(sizeof($taskcard->taskcard->skills) == 1){
+                    $taskcard->taskcard->skill .= $taskcard->taskcard->skills[0]->name;
                 }
                 else{
-                    $taskcard->skill .= '';
+                    $taskcard->taskcard->skill .= '';
                 }
             }
         }
@@ -257,24 +257,24 @@ class ProjectWorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function si(Project $project, WorkPackage $workPackage)
     {
-        $workPackage_id = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first();
-        $workPackage = ProjectWorkPackageTaskCard::find($workPackage_id);
-
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('code', 'si');
-                                    })->get();
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first()->id;
+        $workPackages = ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
+                        ->whereHas('taskcard', function ($query) {
+                            $query->whereHas('type', function ($query) {
+                                    $query->where('code', 'si');
+                                });
+                        })->get();
 
         foreach($workPackages as $taskcard){
-            if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
+            if(isset($taskcard->taskcard->skills) ){
+                if(sizeof($taskcard->taskcard->skills) == 3){
+                    $taskcard->taskcard->skill .= "ERI";
                 }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
+                else if(sizeof($taskcard->taskcard->skills) == 1){
+                    $taskcard->taskcard->skill .= $taskcard->taskcard->skills[0]->name;
                 }
                 else{
-                    $taskcard->skill .= '';
+                    $taskcard->taskcard->skill .= '';
                 }
             }
         }

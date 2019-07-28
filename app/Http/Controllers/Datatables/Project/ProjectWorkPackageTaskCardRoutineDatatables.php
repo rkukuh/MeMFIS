@@ -19,32 +19,27 @@ class ProjectWorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function basic(Project $project, WorkPackage $workPackage)
     {
-        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first();
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first()->id;
+        $workPackages = ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
+                        ->whereHas('taskcard', function ($query) {
+                            $query->whereHas('type', function ($query) {
+                                    $query->where('name', 'Basic');
+                                });
+                        })->get();
 
-        $taskcards = $project_workpackage->taskcards;
-
-        foreach($taskcards as $taskcard){
-            dump($taskcard->taskcard);
+        foreach($workPackages as $taskcard){
+            if(isset($taskcard->taskcard->skills) ){
+                if(sizeof($taskcard->taskcard->skills) == 3){
+                    $taskcard->taskcard->skill .= "ERI";
+                }
+                else if(sizeof($taskcard->taskcard->skills) == 1){
+                    $taskcard->taskcard->skill .= $taskcard->taskcard->skills[0]->name;
+                }
+                else{
+                    $taskcard->taskcard->skill .= '';
+                }
+            }
         }
-        dd($taskcards);
-        //                             ->whereHas('type', function ($query) {
-        //                                 $query->where('name', 'Basic');
-        //                             });
-                                    // ->get();
-
-        // foreach($workPackages as $taskcard){
-        //     if(isset($taskcard->skills) ){
-        //         if(sizeof($taskcard->skills) == 3){
-        //             $taskcard->skill .= "ERI";
-        //         }
-        //         else if(sizeof($taskcard->skills) == 1){
-        //             $taskcard->skill .= $taskcard->skills[0]->name;
-        //         }
-        //         else{
-        //             $taskcard->skill .= '';
-        //         }
-        //     }
-        // }
 
         $data = $alldata = json_decode($workPackages);
 
@@ -143,24 +138,25 @@ class ProjectWorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function sip(Project $project, WorkPackage $workPackage)
     {
-        $workPackage_id = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first();
-        $workPackage = ProjectWorkPackageTaskCard::find($workPackage_id);
 
-        $workPackages = $workPackage->taskcards()->with('type','task')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'SIP');
-                                    })->get();
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first()->id;
+        $workPackages = ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
+                        ->whereHas('taskcard', function ($query) {
+                            $query->whereHas('type', function ($query) {
+                                    $query->where('name', 'SIP');
+                                });
+                        })->get();
 
         foreach($workPackages as $taskcard){
-            if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
+            if(isset($taskcard->taskcard->skills) ){
+                if(sizeof($taskcard->taskcard->skills) == 3){
+                    $taskcard->taskcard->skill .= "ERI";
                 }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
+                else if(sizeof($taskcard->taskcard->skills) == 1){
+                    $taskcard->taskcard->skill .= $taskcard->taskcard->skills[0]->name;
                 }
                 else{
-                    $taskcard->skill .= '';
+                    $taskcard->taskcard->skill .= '';
                 }
             }
         }
@@ -262,24 +258,25 @@ class ProjectWorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function cpcp(Project $project, WorkPackage $workPackage)
     {
-        $workPackage_id = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first();
-        $workPackage = ProjectWorkPackageTaskCard::find($workPackage_id);
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first()->id;
+        $workPackages = ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
+                        ->whereHas('taskcard', function ($query) {
+                            $query->whereHas('type', function ($query) {
+                                    $query->where('name', 'CPCP');
+                                });
+                        })->get();
 
-        $workPackages = $workPackage->taskcards()->with('type','task')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'CPCP');
-                                    })->get();
 
         foreach($workPackages as $taskcard){
-            if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
+            if(isset($taskcard->taskcard->skills) ){
+                if(sizeof($taskcard->taskcard->skills) == 3){
+                    $taskcard->taskcard->skill .= "ERI";
                 }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
+                else if(sizeof($taskcard->taskcard->skills) == 1){
+                    $taskcard->taskcard->skill .= $taskcard->taskcard->skills[0]->name;
                 }
                 else{
-                    $taskcard->skill .= '';
+                    $taskcard->taskcard->skill .= '';
                 }
             }
         }
