@@ -191,7 +191,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
         }
         if( $row['company_task']) {
             $additionals = [];
-            $additionals["company_task"] = $row['company_task'];
+            $additionals["internal_number"] = $row['company_task'];
             $additionals =  json_encode($additionals);
         }else{
             $additionals = null;

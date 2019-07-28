@@ -15,7 +15,7 @@
                             @include('frontend.common.label.show')
 
                             <h3 class="m-portlet__head-text">
-                                Project View
+                                Project View - {{ $workPackage->title }}
                             </h3>
                         </div>
                     </div>

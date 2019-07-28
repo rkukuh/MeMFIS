@@ -26,6 +26,7 @@
                             @slot('text', 'Create Additional')
                             @slot('class', 'create')
                             @slot('color', 'success')
+                            @slot('style', 'border-radius: 60px 60px 60px 60px')
                         @endcomponent
                     </div>
                 </div>
@@ -34,10 +35,10 @@
     </div>
 </div>
 @push('footer-scripts')
-<SCript>
-    $('.modal-footer').on('click', '.create', function () {
-        let project_uuid =$('#project').val();
-        window.location.href = 'project-hm-additional/create/'+project_uuid+'/';
-    });
-</SCript>
+    <script>
+        $('.modal-footer').on('click', '.create', function () {
+            let project_uuid =$('#project').val();
+            window.location.href = 'project-hm-additional/create/'+project_uuid+'/';
+        });
+    </script>
 @endpush

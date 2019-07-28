@@ -222,8 +222,7 @@
 
 @push('footer-scripts')
     <script>
-   let project_uuid = '{{ $project->uuid }}';
-
+    let project_uuid = '{{ $project->uuid }}';
     </script>
 
 
@@ -247,6 +246,6 @@
     {{-- <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script> --}}
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script> --}}
-    <script src="{{ asset('js/frontend/project/hm/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/show.js') }}"></script>
 
 @endpush

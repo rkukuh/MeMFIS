@@ -104,7 +104,6 @@ class ProjectHMWorkPackageController extends Controller
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
-        $edit = false;
 
         //get employees
         $employees = Employee::all();
@@ -112,14 +111,10 @@ class ProjectHMWorkPackageController extends Controller
         $materialCount = $workPackage->items->count();
         $toolCount = $workPackage->tools->count();
 
-        // dd($project_workpackage);
-        if ($request->anyChanges) {
-            $view = 'frontend.project.hm.workpackage.index-engineerteam';
-        }else{
-            $view = 'frontend.project.hm.workpackage.index';
-        }
+        
+        $view = 'frontend.project.hm.workpackage.show';
         return view($view,[
-            'edit' => $edit,
+            'edit' => false,
             'project' => $project,
             'employees' => $employees,
             'toolCount' => $toolCount,
@@ -171,7 +166,6 @@ class ProjectHMWorkPackageController extends Controller
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
-        $edit = true;
 
         $employees = Employee::all();
         $facilities = Facility::all();
@@ -185,7 +179,7 @@ class ProjectHMWorkPackageController extends Controller
             $view = 'frontend.project.hm.workpackage.index';
         }
         return view($view,[
-            'edit' => $edit,
+            'edit' => true,
             'project' => $project,
             'employees' => $employees,
             'toolCount' => $toolCount,

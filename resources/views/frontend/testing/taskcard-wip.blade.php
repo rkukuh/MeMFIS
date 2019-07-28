@@ -189,7 +189,6 @@
             success: function(response) {
                 let table = $('.taskcard_datatable').mDatatable();
 
-
                 table.destroy();
                 table = $('.taskcard_datatable').mDatatable({
                     data: {

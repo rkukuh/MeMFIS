@@ -32,8 +32,10 @@ class ProjectHMAdditionalController extends Controller
      */
     public function create(Project $project)
     {
+        $attention = json_decode($project->quotations()->first()->attention);
         return view('frontend.project.hm-additional.create',[
                 'project' => $project,
+                'attention' => $attention
             ]);
     }
 
@@ -67,11 +69,11 @@ class ProjectHMAdditionalController extends Controller
      */
     public function show(Project $project)
     {
-        // return view('frontend.project.hm.show',[
-        //     'project' => $project,
-        //     'aircrafts' => $this->aircrafts,
-        //     'customers' => $this->customers
-        // ]);
+        return view('frontend.project.hm-additional.show',[
+            'project' => $project,
+            'aircrafts' => $this->aircrafts,
+            'customers' => $this->customers
+        ]);
     }
 
     /**
@@ -82,12 +84,12 @@ class ProjectHMAdditionalController extends Controller
      */
     public function edit(Project $project)
     {
-        // $attention = $project->quotations;
-        // return view('frontend.project.hm.edit',[
-        //     'project' => $project,
-        //     'aircrafts' => $this->aircrafts,
-        //     'customers' => $this->customers
-        // ]);
+        $attention = $project->quotations;
+        return view('frontend.project.hm-additional.edit',[
+            'project' => $project,
+            'aircrafts' => $this->aircrafts,
+            'customers' => $this->customers
+        ]);
     }
 
     /**

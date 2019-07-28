@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <fieldset class="border p-2">
-                                                <legend class="w-auto">Customer Name (<span>PT. Sejahterah</span>)</legend>
+                                                <legend class="w-auto">Customer Name (<span>{{ $project->customer->name }}</span>)</legend>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <div class="form-group m-form__group row">
@@ -100,7 +100,11 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_number')
-                                                                    @slot('text', 'P-01/HMxxxxx')
+                                                                    @if($attention->fax != 'null')
+                                                                    @slot('text', $attention->fax)
+                                                                    @else
+                                                                    @slot('text', '-')
+                                                                    @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -110,7 +114,7 @@
                                                                     Attn
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text', $attention->name)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -120,7 +124,7 @@
                                                                     Email
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text', $attention->email)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -158,15 +162,15 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link active show routine" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Defect Card List</a>
                                                 </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_2">Material & Tool List</a>
+                                                <li class="nav-item mat-tool">
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_2">Material & Tool List</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active show" id="m_tabs_1_1" role="tabpanel">
                                                     @include('frontend.project.hm-additional.defect-card.index')
                                                 </div>
-                                                <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
+                                                <div class="tab-pane mat-tool-additional" id="m_tabs_1_2" role="tabpanel">
                                                     @include('frontend.project.hm-additional.material-tool.index')
                                                 </div>
                                             </div>
@@ -236,5 +240,6 @@
     </script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/project/additional/create.js')}}"></script>
+    <script src="{{ asset('js/frontend/project/additional/item.js')}}"></script>
 @endpush
 

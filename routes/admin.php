@@ -51,9 +51,13 @@ Route::name('admin.')->group(function () {
         Route::resource('customer', 'CustomerController');
         Route::resource('employee', 'EmployeeController');
         Route::resource('facility', 'FacilityController');
-        Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
+
+        Route::resource('company', 'CompanyController');
+        Route::resource('department', 'DepartmentController');
+        Route::resource('benefit', 'BenefitController');
+        Route::resource('position', 'PositionController');
 
         /** LICENSE */
 

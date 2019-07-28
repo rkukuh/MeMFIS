@@ -10,6 +10,9 @@ function material_tc(triggeruuid) {
         ajax: "/datatables/taskcard-routine/"+triggeruuid+"/materials",
         columns: [
             {
+                data: "code"
+            },
+            {
                 data: "name"
             },
             {
@@ -47,6 +50,9 @@ function tool_tc(triggeruuid) {
         pageLength:5,
         ajax: "/datatables/taskcard-routine/"+triggeruuid+"/tools",
         columns: [
+            {
+                data: "code"
+            },
             {
                 data: "name"
             },

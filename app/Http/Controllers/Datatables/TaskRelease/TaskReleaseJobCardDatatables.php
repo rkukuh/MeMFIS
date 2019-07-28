@@ -18,12 +18,26 @@ class TaskReleaseJobCardDatatables extends Controller
      */
     public function index()
     {
-        $JobCard=JobCard::with('taskcard','quotation')->get();
+        $JobCards = JobCard::with('taskcard','quotation')->get();
 
+        foreach($JobCards as $jobcard){
 
+            $jobcard->aircraft_name .= $jobcard->quotation->project->aircraft->name;
+            if(isset($jobcard->taskcard->skills) ){
+                if(sizeof($jobcard->taskcard->skills) == 3){
+                    $jobcard->skill_name .= "ERI";
+                }
+                else if(sizeof($jobcard->taskcard->skills) == 1){
+                    $jobcard->skill_name .= $jobcard->taskcard->skills[0]->name;
+                }
+                else{
+                    $jobcard->skill_name .= '';
+                }
+            }
 
-        foreach($JobCard as $jobcard){
-
+            $jobcard->customer_name .= $jobcard->quotation->project->customer->name;
+            $jobcard->company_task .= $jobcard->taskcard->additionals->internal_number;
+            
             $count_user = $jobcard->progresses->groupby('progressed_by')->count()-1;
 
             $status = [];
@@ -53,11 +67,7 @@ class TaskReleaseJobCardDatatables extends Controller
                 $jobcard->status .= 'Open';
             }
 
-        }
-
-        foreach($JobCard as $Jobcard){
             $statuses = Status::ofJobCard()->get();
-            $jobcard = JobCard::where('uuid',$Jobcard->uuid)->first();
             foreach($jobcard->helpers as $helper){
                 $helper->userID .= $helper->user->id;
             }
@@ -99,33 +109,10 @@ class TaskReleaseJobCardDatatables extends Controller
             }
             $manhours_break = $manhours_break/3600;
             $actual_manhours =number_format($manhours-$manhours_break, 2);
-            $Jobcard->actual .= $actual_manhours;
+            $jobcard->actual .= $actual_manhours;
         }
 
-        foreach($JobCard as $aircraft){
-            $aircraft->aircraft_name .= $aircraft->quotation->project->aircraft->name;
-        }
-
-        foreach($JobCard as $taskcard){
-            if(isset($taskcard->taskcard->skills) ){
-                if(sizeof($taskcard->taskcard->skills) == 3){
-                    $taskcard->skill_name .= "ERI";
-                }
-                else if(sizeof($taskcard->taskcard->skills) == 1){
-                    $taskcard->skill_name .= $taskcard->taskcard->skills[0]->name;
-                }
-                else{
-                    $taskcard->skill_name .= '';
-                }
-            }
-        }
-
-        foreach($JobCard as $customer){
-            $customer->customer_name .= $customer->quotation->customer;
-        }
-
-        $data = $alldata = json_decode(collect(array_values($JobCard->whereIn('status',['Closed','Task Released','RII Released'])->all())));
-        // dd($data);
+        $data = $alldata = json_decode(collect(array_values($JobCards->whereIn('status',['Closed','Task Released','RII Released'])->all())));
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
@@ -220,36 +207,36 @@ class TaskReleaseJobCardDatatables extends Controller
      */
     public function filter(Request $request)
     {
-        $JobCard=JobCard::with('taskcard');
+        $JobCards=JobCard::with('taskcard');
 
         if (!empty($request->task_type_id)) {
-            $JobCard->whereHas('taskcard', function ($query) use ($request) {
+            $JobCards->whereHas('taskcard', function ($query) use ($request) {
                 $query->where('task_id', $request->task_type_id);
             });
         }
         if (!empty($request->applicability_airplane)) {
-            $JobCard->whereHas('applicability_airplane', function ($query) use ($request) {
+            $JobCards->whereHas('applicability_airplane', function ($query) use ($request) {
                 $query->whereIn('id', $request->applicability_airplane);
             });
         }
         // if (!empty($request->otr_certification)) {
-        //     $JobCard->whereHas('otr_certification', function ($query) use ($request) {
+        //     $JobCards->whereHas('otr_certification', function ($query) use ($request) {
         //         $query->where('id', $request->otr_certification);
         //     });
         // }
         if (!empty($request->project_no)) {
-            $JobCard->orderBy('project_no', $request->project_no);
+            $JobCards->orderBy('project_no', $request->project_no);
         }
         // if (!empty($request->taskcard_routine_type)) {
-        //     $JobCard->whereHas('taskcard_routine_type', function ($query) use ($request) {
+        //     $JobCards->whereHas('taskcard_routine_type', function ($query) use ($request) {
         //     $query->where('task_id', $request->task_type_id);
         // });
         // }
         if (!empty($request->date_issued)) {
-            $JobCard->orderBy('created_at', $request->date_issued);
+            $JobCards->orderBy('created_at', $request->date_issued);
         }
         if (!empty($request->jc_no)) {
-            $JobCard->orderBy('number', $request->jc_no);
+            $JobCards->orderBy('number', $request->jc_no);
         }
         if (!empty($request->customer)) {
             $request->whereHas('otr_certification', function ($query) use ($request) {
@@ -262,7 +249,7 @@ class TaskReleaseJobCardDatatables extends Controller
         // });
         // }
 
-        $data = $alldata = json_decode($JobCard->get());
+        $data = $alldata = json_decode($JobCards->get());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
