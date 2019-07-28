@@ -29,6 +29,11 @@ class CreateDepartmentsTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
+            $table->foreign('type_id')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
             $table->index('code');
             $table->index('name');
         });
