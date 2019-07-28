@@ -12,7 +12,7 @@ $factory->define(Department::class, function (Faker $faker) {
         'code' => $faker->randomElement([null, 'DEPT-DUM-' . $number]),
         'parent_id' => null,
         'type_id' => $faker->randomElement([null, Type::ofDepartment()->get()->random()->id]),
-        'name' => 'Dept-' . $faker->word,
+        'name' => 'Dept. ' . $faker->word,
         'description' => $faker->randomElement([null, $faker->text]),
     ];
 

@@ -12,6 +12,6 @@ class Benefits extends Seeder
      */
     public function run()
     {
-        //
+        factory(Benefit::class, config('memfis.dummies.benefits'))->create();
     }
 }
