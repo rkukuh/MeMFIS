@@ -46,15 +46,17 @@ Route::name('admin.')->group(function () {
         Route::resource('vendor', 'VendorController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
-        Route::resource('company', 'CompanyController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('language', 'LanguageController');
         Route::resource('customer', 'CustomerController');
         Route::resource('employee', 'EmployeeController');
         Route::resource('facility', 'FacilityController');
-        Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
+
+        Route::resource('company', 'CompanyController');
+        Route::resource('department', 'DepartmentController');
+        Route::resource('benefit', 'BenefitController');
 
         /** LICENSE */
 

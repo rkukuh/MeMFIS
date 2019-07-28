@@ -52,15 +52,17 @@ Route::name('frontend.')->group(function () {
         Route::resource('user', 'UserController');
         Route::resource('school', 'SchoolController');
         Route::resource('vendor', 'VendorController');
-        Route::resource('company', 'CompanyController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
         Route::resource('language', 'LanguageController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
-        Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
+
+        Route::resource('company', 'CompanyController');
+        Route::resource('department', 'DepartmentController');
+        Route::resource('benefit', 'BenefitController');
 
         /** CERTIFICATION */
 
