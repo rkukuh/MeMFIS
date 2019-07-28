@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CompaniesTableSeeder::class);
         $this->call(DepartmentsTableSeeder::class);
         $this->call(BenefitsTableSeeder::class);
+        $this->call(PositionsTableSeeder::class);
 
         /** POLYMORPH */
 
