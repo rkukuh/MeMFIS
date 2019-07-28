@@ -37,6 +37,12 @@ $factory->define(Project::class, function (Faker $faker) {
         'no_wo' => 'WO-' . $faker->randomNumber(),
         'aircraft_register' => 'AC-REG-' . $faker->randomNumber(),
         'aircraft_sn' => 'AC-SN-' . $faker->randomNumber(),
+        'origin_project' => null,
+        'origin_project_workpackages' => null,
+        'origin_project_workpackage_engineers' => null,
+        'origin_project_workpackage_facilities' => null,
+        'origin_project_workpackage_manhours' => null,
+        'origin_project_workpackage_taskcards' => null,
     ];
 
 });
