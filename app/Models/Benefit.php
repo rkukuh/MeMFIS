@@ -16,5 +16,23 @@ class Benefit extends MemfisModel
 
     /*************************************** RELATIONSHIP ****************************************/
 
-    // 
+    /**
+     * One-Way: A Benefit may have zero or one base calculation.
+     *
+     * @return mixed
+     */
+    public function base_calculation()
+    {
+        return $this->belongsTo(Type::class, 'base_calculation');
+    }
+
+    /**
+     * One-Way: A Benefit may have zero or one prorate calculation.
+     *
+     * @return mixed
+     */
+    public function prorate_calculation()
+    {
+        return $this->belongsTo(Type::class, 'prorate_calculation');
+    }
 }
