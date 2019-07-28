@@ -14,8 +14,19 @@ class CreateCompaniesTable extends Migration
     public function up()
     {
         Schema::create('companies', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
+            $table->char('uuid', 36)->unique();
+            $table->string('code')->nullable();
+            $table->string('name');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('parent_id')
+                    ->references('id')->on('htcrr')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 

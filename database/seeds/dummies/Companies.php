@@ -12,6 +12,6 @@ class Companies extends Seeder
      */
     public function run()
     {
-        //
+        factory(Company::class, config('memfis.dummies.companies'))->create();
     }
 }
