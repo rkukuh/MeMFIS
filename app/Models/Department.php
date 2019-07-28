@@ -8,6 +8,7 @@ class Department extends MemfisModel
 {
     protected $fillable = [
         'code',
+        'company_id',
         'parent_id',
         'type_id',
         'name',
@@ -27,6 +28,19 @@ class Department extends MemfisModel
     public function childs()
     {
         return $this->hasMany(Department::class, 'parent_id');
+    }
+
+    /**
+     * One-to-Many: A Company may have one or many departments.
+     *
+     * This function will retrieve the Company of a given Department.
+     * See: Company's departments() method for the inverse
+     *
+     * @return mixed
+     */
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 
     /**

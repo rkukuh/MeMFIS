@@ -17,12 +17,18 @@ class CreateDepartmentsTable extends Migration
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
+            $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedBigInteger('type_id')->nullable();
             $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('company_id')
+                    ->references('id')->on('companies')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->foreign('parent_id')
                     ->references('id')->on('departments')

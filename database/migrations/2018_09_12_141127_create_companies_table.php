@@ -25,7 +25,7 @@ class CreateCompaniesTable extends Migration
             $table->softDeletes();
 
             $table->foreign('parent_id')
-                    ->references('id')->on('htcrr')
+                    ->references('id')->on('companies')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
