@@ -241,7 +241,7 @@
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                     @component('frontend.common.label.data-info')
-                        @slot('text', $engineer->quantity)
+                        @slot('text', $project_workpackage->tat)
                     @endcomponent
             </div>
         </div>

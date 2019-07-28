@@ -64,6 +64,8 @@ class ProjectHMWorkPackageController extends Controller
 
             $project_workpackage->taskcards()->create([
                 'taskcard_id' => $taskcard->id,
+                'sequence' => $taskcard->sequence,
+                'is_mandatory' => $taskcard->is_mandatory,
             ]);
         }
 
@@ -111,7 +113,7 @@ class ProjectHMWorkPackageController extends Controller
         $materialCount = $workPackage->items->count();
         $toolCount = $workPackage->tools->count();
 
-        
+
         $view = 'frontend.project.hm.workpackage.show';
         return view($view,[
             'edit' => false,
