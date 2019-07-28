@@ -22,10 +22,10 @@ class HtCrr extends MemfisModel
         'is_rii',
         'description',
 
-        'origin_htcrr',
-        'origin_item',
-        'origin_unit',
+        'origin_type',
         'origin_project',
+        'origin_conducted_by',
+        'origin_htcrr',
         'origin_htcrr_items',
         'origin_htcrr_skills',
         'origin_htcrr_helpers',
