@@ -335,8 +335,8 @@ class QuotationController extends Controller
                     'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
                     'taskcard_id' => $tc->id,
                     'quotation_id' => $quotation->id,
-                    'data_taskcard' => $tc->toJson(),
-                    'data_taskcard_items' => $tc->items->toJson(),
+                    'origin_taskcard' => $tc->toJson(),
+                    'origin_taskcard_items' => $tc->items->toJson(),
                 ]);
                 // // echo $tc->title.'<br>';
                 // foreach($tc->items as $item){
