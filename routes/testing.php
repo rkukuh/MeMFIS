@@ -15,11 +15,10 @@ Route::name('testing.')->group(function () {
         });
         Route::get('/wp', function () {
 
-            $project_workpackage = App\Models\Pivots\ProjectWorkPackage::where('project_id',1)->pluck('id');
-            $tes = App\Models\ProjectWorkPackageTaskCard::with('taskcard')->whereIn('project_workpackage_id',$project_workpackage->toArray())
+            $project_workpackage = App\Models\Pivots\ProjectWorkPackage::where('project_id',1)->where('workpackage_id',1)->first()->id;
+            $tes = App\Models\ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
             ->whereHas('taskcard', function ($query) {
-                $query->with('type','task')
-                    ->whereHas('type', function ($query) {
+                $query->whereHas('type', function ($query) {
                         $query->where('name', 'Basic');
                     });
                         // $query->where('task_id', $request->task_type_id);
@@ -28,6 +27,7 @@ Route::name('testing.')->group(function () {
             // dd($tes);
 
             foreach($tes as $te){
+                // dump($te->taskcard->type->name);
                 dump($te);
             }
 
