@@ -50,7 +50,7 @@ let AdditionalTask = {
             columns: [
                 {
                     field: 'number',
-                    title: 'Date',
+                    title: 'Project Number',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
@@ -59,19 +59,19 @@ let AdditionalTask = {
                 },
                 {
                     field: 'taskcard.number',
-                    title: 'Additional Task',
+                    title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: 'taskcard.title',
-                    title: 'Project No.',
+                    title: 'Project Title.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: 'taskcard.type.name',
-                    title: 'WO No.',
+                    title: 'WO Number.',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -132,6 +132,12 @@ let AdditionalTask = {
                 },
                 {
                     field: 'taskcard.estimation_manhour',
+                    title: 'Project Type',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'taskcard.estimation_manhour',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -142,8 +148,14 @@ let AdditionalTask = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-print"></i>' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid +'">' +
+                            '<i class="la la-check-square-o"></i>' +
+                            '</a>' +
+                            '<a href="/purchase-order/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
+                                '<i class="la la-pencil"></i>' +
+                            '</a>' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
                             '</a>'
                         );
                     }

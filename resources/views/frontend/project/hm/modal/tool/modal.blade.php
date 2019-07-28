@@ -79,7 +79,7 @@
                             <div class="flex">
                                 <div class="action-buttons">
                                         @component('frontend.common.buttons.submit')
-                                            @slot('class', 'add-tool')
+                                            @slot('class', 'add-htcrr-tool')
                                             @slot('type', 'button')
                                         @endcomponent
                                         @component('frontend.common.buttons.reset')
@@ -95,3 +95,10 @@
         </div>
     </div>
 </div>
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
+@endpush

@@ -33,7 +33,6 @@ class DummyDataSeeder extends Seeder
         $this->call(Aircrafts::class);
         $this->call(Languages::class);
         $this->call(Schools::class);
-        $this->call(Departments::class);
         $this->call(Employees::class);
         $this->call(Storages::class);
         $this->call(Items::class);
@@ -42,6 +41,11 @@ class DummyDataSeeder extends Seeder
         $this->call(Customers::class);
         $this->call(Vendors::class);
         $this->call(Facilities::class);
+
+        $this->call(Companies::class);
+        $this->call(Departments::class);
+        $this->call(Benefits::class);
+        $this->call(Positions::class);
 
         /** POLYMORPH */
 
@@ -96,6 +100,7 @@ class DummyDataSeeder extends Seeder
         $this->call(ProjectWorkPackageEngineers::class);
         $this->call(ProjectWorkPackageManhours::class);
         $this->call(ProjectWorkPackageFacilities::class);
+        $this->call(ProjectWorkPackageTaskCards::class);
 
         /** WORKPACKAGE's TASKCARDs */
 
@@ -112,8 +117,8 @@ class DummyDataSeeder extends Seeder
         
         $this->call(QuotationWorkPackageTaskCardItems::class);
 
-        /** QUOTATION's WORKPACKAGE's HT/CRR's */
+        /** QUOTATION's HT/CRR's */
         
-        $this->call(QuotationWorkPackageHtcrrItems::class);
+        $this->call(QuotationHtcrrItems::class);
     }
 }

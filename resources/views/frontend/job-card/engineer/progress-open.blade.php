@@ -232,7 +232,7 @@
                                                     @endforeach
                                                 @else
                                                 <div class="m-grid">
-                                                    @for($index = 0; $index < 4; $index++)
+                                                    @for($index = 0; $index < $jobcard->taskcard->helper_quantity; $index++)
                                                     <div class="m-grid-row">
                                                         <br>
                                                         <div class="col-sm-12 col-md-12 col-lg-12">

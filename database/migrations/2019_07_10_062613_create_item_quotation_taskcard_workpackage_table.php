@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemQuotationTaskcardWorkpackageTable extends Migration
+class CreateItemQuotationTaskCardWorkPackageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -30,34 +30,34 @@ class CreateItemQuotationTaskcardWorkpackageTable extends Migration
             $table->softDeletes();
 
             $table->foreign('quotation_id')
-                    ->references('id')->on('quotations')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('quotations')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('workpackage_id')
-                    ->references('id')->on('workpackages')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('workpackages')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('taskcard_id')
-                    ->references('id')->on('taskcards')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('taskcards')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('item_id')
-                    ->references('id')->on('items')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('items')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('unit_id')
-                    ->references('id')->on('units')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('units')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('price_id')
-                    ->references('id')->on('prices')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('prices')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

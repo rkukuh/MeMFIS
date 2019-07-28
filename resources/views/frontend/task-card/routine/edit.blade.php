@@ -96,7 +96,7 @@
                                                     @slot('id', 'company_number')
                                                     @slot('text', 'Company Task Number')
                                                     @slot('name', 'company_number')
-                                                    @slot('value', $additionals->company_task)
+                                                    @slot('value', $additionals->internal_number)
                                                     @slot('id_error', 'company_number')
                                                 @endcomponent
                                             @endif

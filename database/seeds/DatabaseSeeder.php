@@ -35,7 +35,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AircraftsTableSeeder::class);
         $this->call(LanguagesTableSeeder::class);
         $this->call(SchoolsTableSeeder::class);
-        $this->call(DepartmentsTableSeeder::class);
         $this->call(EmployeesTableSeeder::class);
         $this->call(StoragesTableSeeder::class);
         $this->call(ItemsTableSeeder::class);
@@ -44,6 +43,11 @@ class DatabaseSeeder extends Seeder
         $this->call(CustomersTableSeeder::class);
         $this->call(VendorsTableSeeder::class);
         $this->call(FacilitiesTableSeeder::class);
+
+        $this->call(CompaniesTableSeeder::class);
+        $this->call(DepartmentsTableSeeder::class);
+        $this->call(BenefitsTableSeeder::class);
+        $this->call(PositionsTableSeeder::class);
 
         /** POLYMORPH */
 
@@ -96,6 +100,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProjectWorkPackageEngineersTableSeeder::class);
         $this->call(ProjectWorkPackageManhoursTableSeeder::class);
         $this->call(ProjectWorkPackageFacilitiesTableSeeder::class);
+        $this->call(ProjectWorkPackageTaskCardsTableSeeder::class);
 
         /** WORKPACKAGE's TASKCARDs */
 
@@ -112,8 +117,8 @@ class DatabaseSeeder extends Seeder
         
         $this->call(QuotationWorkPackageTaskCardItemsTableSeeder::class);
 
-        /** QUOTATION's WORKPACKAGE's HT/CRR's */
+        /** QUOTATION's HT/CRR's */
 
-        $this->call(QuotationWorkPackageHtcrrItemsTableSeeder::class);
+        $this->call(QuotationHtcrrItemsTableSeeder::class);
     }
 }

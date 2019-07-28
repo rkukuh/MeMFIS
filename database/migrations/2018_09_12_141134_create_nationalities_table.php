@@ -22,9 +22,9 @@ class CreateNationalitiesTable extends Migration
             $table->softDeletes();
 
             $table->foreign('country_id')
-                  ->references('id')->on('countries')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
+                    ->references('id')->on('countries')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->index('nationality');
         });

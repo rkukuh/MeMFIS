@@ -192,11 +192,13 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'ProjectDatatables@index')->name('all');
+                Route::get('/defectcard/{project}', 'ProjectDatatables@defectCard')->name('defectcard');
                 Route::get('{project}/htcrr/', 'HtCrrDatatables@index')->name('htcrr.all');
                 Route::get('/{project}/workpackage', 'ProjectDatatables@workpackage')->name('workpackage.project');
                 Route::get('/{htcrr}/tools', 'HtCrrItemsDatatables@tool')->name('htcrr.tools.index');
                 Route::get('/{htcrr}/materials', 'HtCrrItemsDatatables@material')->name('htcrr.materials.index');
-
+                Route::POST('/additional/materials', 'AdditionalItemsDatatables@material')->name('additional.materials.index');
+                Route::POST('/additional/tools', 'AdditionalItemsDatatables@tools')->name('additional.tools.index');
             });
 
         });
@@ -251,16 +253,19 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'QuotationDatatables@index')->name('all');
+                Route::post('/filter', 'QuotationDatatables@filter')->name('filter');
                 Route::get('/{quotation}/job-request', 'QuotationDatatables@jobRequest')->name('job-request');
                 Route::get('/{quotation}/workpackage/{workPackage}/facilities', 'QuotationDatatables@facilities')->name('all-facilities');
 
                 /** Item */
                 Route::get('/{quotation}/workPackage/{workPackage}/item/routine', 'QuotationItemDatatables@routine')->name('item.routine');
                 Route::get('/{quotation}/workPackage/{workPackage}/item/non-routine', 'QuotationItemDatatables@non_routine')->name('item.non_routine');
+                Route::get('/{quotation}/workPackage/{workPackage}/item/htcrr', 'QuotationItemDatatables@htcrr')->name('item.htcrr');
 
                 /** Tool */
                 Route::get('/{quotation}/workPackage/{workPackage}/tool/routine', 'QuotationToolDatatables@routine')->name('tool.routine');
                 Route::get('/{quotation}/workPackage/{workPackage}/tool/non-routine', 'QuotationToolDatatables@non_routine')->name('tool.non_routine');
+                Route::get('/{quotation}/workPackage/{workPackage}/tool/htcrr', 'QuotationToolDatatables@htcrr')->name('tool.htcrr');
 
             });
 
@@ -279,7 +284,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'TaskCardDatatables@index')->name('all');
-                Route::post('/filter/', 'TaskCardDatatables@filter')->name('filter');
+                Route::post('/filter', 'TaskCardDatatables@filter')->name('filter');
 
             });
 
@@ -392,7 +397,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'TaskReleaseJobCardDatatables@index')->name('all');
-                Route::post('/filter/', 'TaskReleaseJobCardDatatables@filter')->name('filter');
+                Route::post('/filter', 'TaskReleaseJobCardDatatables@filter')->name('filter');
 
             });
 
@@ -409,7 +414,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'TaskReleaseDefectCardDatatables@index')->name('all');
-                Route::post('/filter/', 'TaskReleaseDefectCardDatatables@filter')->name('filter');
+                Route::post('/filter', 'TaskReleaseDefectCardDatatables@filter')->name('filter');
 
             });
 
@@ -428,7 +433,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'RIIReleaseJobCardDatatables@index')->name('all');
-                Route::post('/filter/', 'RIIReleaseJobCardDatatables@filter')->name('filter');
+                Route::post('/filter', 'RIIReleaseJobCardDatatables@filter')->name('filter');
 
 
             });
@@ -446,7 +451,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'RIIReleaseDefectCardDatatables@index')->name('all');
-                Route::post('/filter/', 'RIIReleaseDefectCardDatatables@filter')->name('filter');
+                Route::post('/filter', 'RIIReleaseDefectCardDatatables@filter')->name('filter');
 
 
             });
@@ -467,7 +472,7 @@ Route::name('datatables.')->group(function () {
                 /** Master Data */
                 Route::get('/', 'ReleaseToServiceDatatables@index')->name('all');
                 Route::get('/progress', 'ReleaseToServiceDatatables@progress')->name('progress');
-                Route::post('/filter/', 'ReleaseToServiceDatatables@filter')->name('filter');
+                Route::post('/filter', 'ReleaseToServiceDatatables@filter')->name('filter');
 
 
             });
@@ -486,7 +491,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'JobCardDatatables@index')->name('all');
-                Route::post('/filter/', 'JobCardDatatables@filter')->name('filter');
+                Route::post('/filter', 'JobCardDatatables@filter')->name('filter');
                 Route::get('/{jobcard}/materials', 'JobCardDatatables@material')->name('material');
                 Route::get('/{jobcard}/tools', 'JobCardDatatables@tool')->name('tool');
 
@@ -506,7 +511,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'HtCrrDatatables@index')->name('all');
-                Route::post('/filter/', 'HtCrrDatatables@filter')->name('filter');
+                Route::post('/filter', 'HtCrrDatatables@filter')->name('filter');
 
             });
 
@@ -524,7 +529,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'DiscrepancyDatatables@index')->name('all');
-                Route::post('/filter/', 'DiscrepancyDatatables@filter')->name('filter');
+                Route::post('/filter', 'DiscrepancyDatatables@filter')->name('filter');
                 Route::get('/{discrepancy}/materials', 'DiscrepancyItemDatatables@material')->name('materials.index');
                 Route::get('/{discrepancy}/tools', 'DiscrepancyItemDatatables@tool')->name('tools.index');
 
@@ -547,7 +552,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/', 'DefectCardDatatables@index')->name('all');
                 Route::get('/project', 'DefectCardDatatables@project')->name('all.project');
                 Route::get('/project/{project}', 'DefectCardDatatables@show')->name('all.show');
-                Route::post('/filter/', 'DefectCardDatatables@filter')->name('filter');
+                Route::post('/filter', 'DefectCardDatatables@filter')->name('filter');
 
             });
 

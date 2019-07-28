@@ -16,20 +16,15 @@ class HtCrrItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function material(HtCrr $htCrr)
+    public function material(HtCrr $htcrr)
     {
         //TODO API used is API's Datatables Metronic. FIX search Datatables API because not work
-        if (isset($htCrr->materials)) {
-            foreach ($htCrr->materials as $material) {
-                $unit_id = $material->pivot->unit_id;
-                $material->pivot->unit .= Unit::find($unit_id)->name;
-            }
-            $htCrr->materials = json_decode($htCrr->materials);
-        }else{
-            $htCrr->materials = [] ;
+        foreach ($htcrr->materials as $material) {
+            $unit_id = $material->pivot->unit_id;
+            $material->pivot->unit .= Unit::find($unit_id)->name;
         }
 
-        $data = $alldata = $htCrr->materials;
+        $data = $alldata = json_decode($htcrr->materials);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -124,20 +119,15 @@ class HtCrrItemsDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tool(HtCrr $htCrr)
+    public function tool(HtCrr $htcrr)
     {
         //TODO API used is API's Datatables Metronic. FIX search Datatables API because not work
-        if(isset($htCrr->tools)){
-            foreach ($htCrr->tools as $tool) {
-                $unit_id = $tool->pivot->unit_id;
-                $tool->pivot->unit .= Unit::find($unit_id)->name;
-            }
-            $htCrr->tools = json_decode($htCrr->tools);
-        }else{
-            $htCrr->tools = [] ;
+        foreach ($htcrr->tools as $tool) {
+            $unit_id = $tool->pivot->unit_id;
+            $tool->pivot->unit .= Unit::find($unit_id)->name;
         }
 
-        $data = $alldata = $htCrr->tools;
+        $data = $alldata =  json_decode($htcrr->tools);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

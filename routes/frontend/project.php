@@ -21,6 +21,13 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['project-hm' => 'project']
             ]);
 
+            Route::resource('project-hm-additional', 'ProjectHMAdditionalController',[
+                'parameters' => ['project-hm-additional' => 'project']
+            ])->except('create');
+
+            Route::get('/project-hm-additional/create/{project}','ProjectHMAdditionalController@create')->name('project-hm-additional.create');
+
+
             Route::resource('project-workshop', 'ProjectWorkshopController', [
                 'parameters' => ['project-workshop' => 'project']
             ]);
@@ -32,9 +39,11 @@ Route::name('frontend.')->group(function () {
             Route::prefix('project-hm')->group(function () {
 
                 Route::name('project-hm.')->group(function () {
+
                     Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
                         'parameters' => ['workpackage' => 'workPackage']
                     ]);
+
                     /** Summary */
                     Route::get('/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('summary.basic');
                     Route::get('/{workPackage}/summary/sip', 'SummaryRoutineTaskcardController@sip')->name('summary.sip');
@@ -45,6 +54,7 @@ Route::name('frontend.')->group(function () {
                     Route::get('/{workPackage}/summary/routine', 'SummaryRoutineTaskcardController@summary')->name('summary.routine');
                     Route::get('/{workPackage}/summary/non-routine', 'SummaryNonRoutineTaskcardController@summary')->name('summary.nonroutine');
                     Route::get('/{workPackage}/summary/', 'ProjectHMWorkPackageController@summary')->name('summary.workpackage');
+
                 });
 
                 Route::post('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
@@ -58,7 +68,6 @@ Route::name('frontend.')->group(function () {
                 /** Transaction: Item */
                 Route::post('/htcrr/{htcrr}/item', 'HtCrrItemsController@store')->name('htcrr.item.store');
                 Route::delete('/htcrr/{htcrr}/{item}/item', 'HtCrrItemsController@destroy')->name('htcrr.item.destroy');
-
 
                 Route::get('/workpackage/{workPackage}/getManhours','ProjectHMWorkPackageController@getManhours')->name('project-hm.getManhours');
 
@@ -84,6 +93,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('project-workpackage-manhour', 'ProjectWorkPackageManhourController');
         Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
         Route::resource('project-workpackage-facility', 'ProjectWorkPackageFacilityController');
+        Route::resource('project-workpackage-taskcard', 'ProjectWorkPackageTaskCardController');
 
     });
 

@@ -52,14 +52,14 @@ let PurchaseOrder = {
                     }
                 },
                 {
-                    field: 'ordered_at',
-                    title: 'Date',
+                    field: 'vendor.code',
+                    title: 'PR Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'valid_until',
-                    title: 'Valid Until',
+                    field: 'ordered_at',
+                    title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -76,8 +76,20 @@ let PurchaseOrder = {
                     filterable: !1,
                 },
                 {
+                    field: 'valid_until',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: '',
-                    title: 'Approved By',
+                    title: '1st Approved',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: '',
+                    title: '2nd Approved By',
                     sortable: 'asc',
                     filterable: !1,
                 },
