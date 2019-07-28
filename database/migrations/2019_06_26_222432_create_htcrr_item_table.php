@@ -20,6 +20,15 @@ class CreateHtcrrItemTable extends Migration
             $table->double('quantity');
             $table->unsignedBigInteger('unit_id');
             $table->string('note')->nullable();
+
+            $table->json('origin_htcrr')->nullable();
+            $table->json('origin_item')->nullable();
+            $table->json('origin_unit')->nullable();
+            $table->json('origin_project')->nullable();
+            $table->json('origin_htcrr_items')->nullable();
+            $table->json('origin_htcrr_skills')->nullable();
+            $table->json('origin_htcrr_helpers')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
 
