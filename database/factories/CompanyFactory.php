@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Type;
 use App\Models\Company;
 use Faker\Generator as Faker;
 
@@ -9,8 +10,9 @@ $factory->define(Company::class, function (Faker $faker) {
 
     return [
         'code' => $faker->randomElement([null, 'Company-DUM-' . $number]),
-        'name' => $faker->company,
         'parent_id' => null,
+        'type_id' => $faker->randomElement([null, Type::ofCompany()->get()->random()->id]),
+        'name' => $faker->company,
         'description' => $faker->randomElement([null, $faker->text]),
     ];
 

@@ -17,8 +17,9 @@ class CreateCompaniesTable extends Migration
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
-            $table->string('name');
             $table->unsignedBigInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('type_id')->nullable();
+            $table->string('name');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
