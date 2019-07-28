@@ -58,6 +58,17 @@ class ProjectHMWorkPackageController extends Controller
     {
         $project->workpackages()->attach(WorkPackage::where('uuid',$request->workpackage)->first()->id);
 
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',WorkPackage::where('uuid',$request->workpackage)->first()->id)->first();
+        // // $workPackage = WorkPackage::where('uuid',$request->workpackage)->first();
+        foreach($project_workpackage->workpackage->taskcards as $taskcard){
+
+            $project_workpackage->taskcards()->create([
+                'taskcard_id' => $taskcard->id,
+                'sequence' => $taskcard->sequence,
+                'is_mandatory' => $taskcard->is_mandatory,
+            ]);
+        }
+
         return response()->json($project);
     }
 
@@ -102,7 +113,7 @@ class ProjectHMWorkPackageController extends Controller
         $materialCount = $workPackage->items->count();
         $toolCount = $workPackage->tools->count();
 
-        
+
         $view = 'frontend.project.hm.workpackage.show';
         return view($view,[
             'edit' => false,

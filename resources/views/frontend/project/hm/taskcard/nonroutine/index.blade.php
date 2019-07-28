@@ -33,7 +33,7 @@
                                         @slot('text', 'AD/SB')
                                         @slot('class', 'btn-add')
                                         @slot('data_target', '#modal_ad_sb')
-                                    @endif
+                                    @endcomponent
                                     @component('frontend.common.buttons.summary')
                                         @slot('text', 'AD/SB Summary')
                                         @slot('href', route('frontend.project-hm.summary.ad-sb', $workPackage->uuid) )
@@ -85,7 +85,7 @@
                                             @slot('text', 'CMR/AWL')
                                             @slot('class', 'btn-add')
                                             @slot('data_target', '#modal_cmr_awl')
-                                        @endif
+                                        @endcomponent
                                         @component('frontend.common.buttons.summary')
                                             @slot('text', 'CMR/AWL Summary')
                                             @slot('href', route('frontend.project-hm.summary.cmr-awl', $workPackage->uuid) )
@@ -137,7 +137,7 @@
                                             @slot('text', 'Special Instruction')
                                             @slot('class', 'btn-add')
                                             @slot('data_target', '#modal_si')
-                                        @endif
+                                        @endcomponent
                                         @component('frontend.common.buttons.summary')
                                             @slot('text', 'SI Summary')
                                             @slot('href', route('frontend.project-hm.summary.si', $workPackage->uuid) )
