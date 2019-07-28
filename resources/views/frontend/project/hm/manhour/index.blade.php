@@ -71,8 +71,6 @@
 
                 @include('frontend.common.buttons.reset')
 
-                @include('frontend.common.buttons.back')
-
             </div>
         </div>
     </div>

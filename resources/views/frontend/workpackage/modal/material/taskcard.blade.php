@@ -11,6 +11,7 @@
                 <table class="table table-striped table-bordered table-hover table-checkable basic_taskcard" id="m_datatable_material_taskcard_wp">
                     <thead>
                         <tr>
+                            <th>Part Number</th>
                             <th>Material</th>
                             <th>Quantity</th>
                             <th>Unit</th>
