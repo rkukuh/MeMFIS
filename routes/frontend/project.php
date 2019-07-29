@@ -62,6 +62,7 @@ Route::name('frontend.')->group(function () {
                 Route::post('/{project}/workpackage/{workpackage}/manhoursPropotion','ProjectHMWorkPackageController@manhoursPropotion')->name('project-hm.manhoursPropotion.add');
                 Route::put('/{ProjectWorkpackage}/sequence/', 'ProjectHMWorkPackageController@sequence')->name('project-hm.sequence.workpackage');
                 Route::put('/{ProjectWorkpackage}/mandatory/', 'ProjectHMWorkPackageController@mandatory')->name('project-hm.mandatory.workpackage');
+                Route::delete('/{ProjectWorkpackage}/destroy/', 'ProjectHMWorkPackageController@destroyTaskCard')->name('project-hm.destroy.taskcard');
 
                 /** Transaction: HTCRR */
 

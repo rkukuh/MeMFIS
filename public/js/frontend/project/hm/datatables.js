@@ -1158,7 +1158,6 @@ let Datatables = {
         $('.m-datatable').on('click', '.delete', function () {
             let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
             let datatableClassName = parent_id.className.split(' ');
-            // alert(datatableClassName[0]);
             triggeruuid = $(this).data('uuid');
             swal({
                 title: 'Sure want to remove?',
@@ -1177,7 +1176,7 @@ let Datatables = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/workpackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        url: '/project-hm/'+triggeruuid+'/destroy',
                         success: function (data) {
                             toastr.success('Taskcard has been deleted.', 'Deleted', {
                                 timeOut: 5000

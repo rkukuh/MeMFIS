@@ -326,13 +326,24 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function destroy(Project $project, WorkPackage $workPackage)
     {
-        // $project_workpackage = ProjectWorkPackage::where('project_id', $project->id)->where('workpackage_id',$workPackage->id)->first();
-        // $project_workpackage->delete();
         $project->workpackages()->updateExistingPivot($workPackage,[
             'deleted_at' => Carbon::now()
         ]);
 
         return response()->json($project);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyTaskCard(ProjectWorkPackageTaskCard $ProjectWorkpackage)
+    {
+        $ProjectWorkpackage->delete();
+
+        return response()->json($ProjectWorkpackage);
     }
 
     /**
