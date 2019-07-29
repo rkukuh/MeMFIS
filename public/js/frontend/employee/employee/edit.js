@@ -9,6 +9,7 @@ let Employee = {
         let last_name = $('input[name=last_name]').val();
         let dob = $('input[name=dob]').val(); 
         let gender;
+        let hired_at = $('input[name=hired_at]').val(); 
 
         if($('input[name=gender]').val() == 'male'){
             gender = 'm'
@@ -29,7 +30,8 @@ let Employee = {
                 middle_name: middle_name,
                 last_name: last_name,
                 dob: dob,
-                gender: gender
+                gender: gender,
+                hired_at: hired_at,
             },
             success: function (data) {
                 if (data.errors) {

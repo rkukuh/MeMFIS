@@ -38,7 +38,7 @@
                                 <i class="la la-gear"></i>
                             </span>
 
-                            @include('frontend.common.label.edit')
+                            @include('frontend.common.label.create-new')
 
                             <h3 class="m-portlet__head-text">
                                 Employee
@@ -53,17 +53,17 @@
                                     <form id="employeeform" name="employeeform">
                                         <div class="m-portlet__body">
 
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'employee_uuid')
-                                                @slot('name', 'employee_uuid')
-                                                @slot('value', $employee->uuid)
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        <label class="form-control-label">
+                                            Employee Code @include('frontend.common.label.required')
+                                        </label>
+                                        @component('frontend.common.input.text')
+                                            @slot('id', 'code')
+                                            @slot('name', 'code')
                                             @endcomponent
-
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'code')
-                                                @slot('name', 'code')
-                                                @slot('value', $employee->code)
-                                            @endcomponent
+                                    </div>
+                                </div>
 
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-4 col-md-4 col-lg-4">
@@ -72,7 +72,6 @@
                                         </label>
                                         @component('frontend.common.input.text')
                                             @slot('name', 'first_name')
-                                            @slot('value', $employee->first_name)
                                         @endcomponent
                                     </div>
 
@@ -82,7 +81,6 @@
                                         </label>
                                         @component('frontend.common.input.text')
                                             @slot('name', 'middle_name')
-                                            @slot('value', $employee->middle_name)
                                         @endcomponent
                                     </div>
 
@@ -92,7 +90,6 @@
                                         </label>
                                         @component('frontend.common.input.text')
                                             @slot('name', 'last_name')
-                                            @slot('value', $employee->last_name)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -105,7 +102,6 @@
                                         @component('frontend.common.input.datepicker')
                                         @slot('id', 'date-dob')
                                         @slot('name', 'dob')
-                                        @slot('value', $employee->dob)
                                         @endcomponent
                                     </div>
 
@@ -116,45 +112,6 @@
 
                                     <div class="row">
 
-                                    @if(!empty($employee->gender))
-
-                                    @if ($employee->gender == 'm')
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                            @component('frontend.common.input.radio')
-                                            @slot('text', 'Male')
-                                            @slot('name', 'gender')
-                                            @slot('id', 'gender')
-                                            @slot('value', 'male')
-                                            @slot('checked', 'checked')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-4 col-md-4 col-lg-4">
-                                            @component('frontend.common.input.radio')
-                                            @slot('text', 'Female')
-                                            @slot('name', 'gender')
-                                            @slot('id', 'gender')
-                                            @slot('value', 'female')
-                                            @endcomponent
-                                        </div>
-                                    @elseif ($employee->gender == 'f')
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                            @component('frontend.common.input.radio')
-                                            @slot('text', 'Male')
-                                            @slot('name', 'gender')
-                                            @slot('id', 'gender')
-                                            @slot('value', 'male')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-4 col-md-4 col-lg-4">
-                                            @component('frontend.common.input.radio')
-                                            @slot('text', 'Female')
-                                            @slot('name', 'gender')
-                                            @slot('id', 'gender')
-                                            @slot('value', 'female')
-                                            @slot('checked', 'checked')
-                                            @endcomponent
-                                        </div>
-                                    @else
                                     <div class="col-sm-4 col-md-4 col-lg-4">
                                             @component('frontend.common.input.radio')
                                             @slot('text', 'Male')
@@ -171,26 +128,6 @@
                                             @slot('value', 'female')
                                             @endcomponent
                                         </div>
-                                    @endif
-
-                                    @else
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                            @component('frontend.common.input.radio')
-                                            @slot('text', 'Male')
-                                            @slot('name', 'gender')
-                                            @slot('id', 'gender')
-                                            @slot('value', 'male')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-4 col-md-4 col-lg-4">
-                                            @component('frontend.common.input.radio')
-                                            @slot('text', 'Female')
-                                            @slot('name', 'gender')
-                                            @slot('id', 'gender')
-                                            @slot('value', 'female')
-                                            @endcomponent
-                                        </div>
-                                    @endif
 
                                     </div>
                                     
@@ -198,26 +135,25 @@
                                 </div>
 
                                 <div class="form-group m-form__group row">
-                                        <div class="col-sm-4 col-md-4 col-lg-4">
-                                                <label class="form-control-label">
-                                                    Hired At @include('frontend.common.label.required')
-                                                </label>
-                                                @component('frontend.common.input.datepicker')
-                                                @slot('id', 'date-hired_at')
-                                                @slot('name', 'hired_at')
-                                                @slot('value', $employee->hired_at)
-                                                @endcomponent
-                                        </div>
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                        <label class="form-control-label">
+                                            Hired At @include('frontend.common.label.required')
+                                        </label>
+                                        @component('frontend.common.input.datepicker')
+                                        @slot('id', 'date-hired_at')
+                                        @slot('name', 'hired_at')
+                                        @endcomponent
+                                    </div>
                                 </div>
 
                                 <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.update')
-                                                        @slot('type', 'button')
-                                                        @slot('id', 'edit-employee')
-                                                        @slot('class', 'edit-employee')
+                                                    @component('frontend.common.buttons.submit')
+                                                    @slot('type','button')
+                                                    @slot('id', 'add-employee')
+                                                    @slot('class', 'add-employee')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -244,5 +180,5 @@
 
 @push('footer-scripts')
 <script src="{{ asset('js/frontend/employee/employee/employee-datepicker.js')}}"></script>
-<script src="{{ asset('js/frontend/employee/employee/edit.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/employee/create.js') }}"></script>
 @endpush

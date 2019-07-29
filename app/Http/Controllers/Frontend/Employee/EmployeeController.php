@@ -26,7 +26,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.employee.employee.create');
     }
 
     /**
@@ -37,7 +37,9 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeStore $request)
     {
+
         $employee = Employee::create([
+            'user_id' => '1', //SEMENTARA USER ID FOREIGN KE USERS
             'code' => $request->code,
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
@@ -88,7 +90,8 @@ class EmployeeController extends Controller
             'middle_name' => $request->middle_name,
             'last_name' => $request->last_name,
             'dob' => $request->dob,
-            'gender' => $request->gender
+            'gender' => $request->gender,
+            'hired_at' => $request->hired_at
         ]);
 
         // TODO: Return error message as JSON
