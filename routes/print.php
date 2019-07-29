@@ -160,8 +160,18 @@ Route::get('/material-request-general-doc', function () {
 });
 
 
-Route::get('/additional-quotation-doc', function () {
-    $pdf = \PDF::loadView('frontend/form/additional_quotation');
+Route::get('/additional-quotation-page1', function () {
+    $pdf = \PDF::loadView('frontend/form/additional_quotation_1');
+    return $pdf->stream();
+});
+
+Route::get('/additional-quotation-page2', function () {
+    $pdf = \PDF::loadView('frontend/form/additional_quotation_2');
+    return $pdf->stream();
+});
+
+Route::get('/additional-quotation-page3', function () {
+    $pdf = \PDF::loadView('frontend/form/additional_quotation_3');
     return $pdf->stream();
 });
 
