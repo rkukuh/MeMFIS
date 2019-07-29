@@ -319,7 +319,7 @@ class WorkPackageItemsDatatables extends Controller
         $items =[];
 
         foreach($workPackage->taskcards as $taskcard){
-            foreach($taskcard->materials as $item){
+            foreach($taskcard->tools as $item){
                 $item->tackcard_number .= $taskcard->number;
                 $item->unit_name .= $item->unit->name;
                 array_push($items, $item);
