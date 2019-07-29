@@ -401,7 +401,7 @@ class WorkPackageDatatables extends Controller
         }
 
         // get all raw data
-        $taskcards  = TaskCardWorkPackage::with('taskcard')->where('taskcard_id', $taskcard->id)->where('workpackage_id',$workPackage->id)->with('predecessors')->first();
+        $taskcards  = TaskCardWorkPackage::with('taskcard','predecessors')->where('taskcard_id', $taskcard->id)->where('workpackage_id',$workPackage->id)->first();
 
         foreach($taskcards->predecessors as $taskcard){
                 $TaskCard = TaskCard::find($taskcard->previous);
