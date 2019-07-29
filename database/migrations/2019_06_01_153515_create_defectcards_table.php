@@ -26,6 +26,13 @@ class CreateDefectcardsTable extends Migration
             $table->boolean('is_rii');
             $table->text('complaint')->nullable();
             $table->text('description')->nullable();
+
+            $table->json('origin_jobcard')->nullable();
+            $table->json('origin_project_additional')->nullable();
+            $table->json('origin_quotation_additional')->nullable();
+            $table->json('origin_defectcard_items')->nullable();
+            $table->json('origin_defectcard_propose_corrections')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
 

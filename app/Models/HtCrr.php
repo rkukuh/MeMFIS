@@ -21,6 +21,14 @@ class HtCrr extends MemfisModel
         'estimation_manhour',
         'is_rii',
         'description',
+
+        'origin_type',
+        'origin_project',
+        'origin_conducted_by',
+        'origin_htcrr',
+        'origin_htcrr_items',
+        'origin_htcrr_skills',
+        'origin_htcrr_helpers',
     ];
 
     protected $dates = ['conducted_at'];

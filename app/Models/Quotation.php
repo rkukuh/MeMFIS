@@ -28,6 +28,15 @@ class Quotation extends MemfisModel
         'term_of_payment',
         'term_of_condition',
         'description',
+        
+        'origin_project',
+        'origin_currency',
+        'origin_scheduled_payment_type',
+        'origin_quotation',
+        'origin_quotation_workpackages',
+        'origin_quotation_workpackage_items',
+        'origin_quotation_workpackage_taskcard_items',
+        'origin_quotation_htcrr_items',
     ];
 
     protected $dates = ['requested_at', 'valid_until'];

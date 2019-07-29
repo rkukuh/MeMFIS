@@ -132,5 +132,17 @@ class TypesOfTaskCardTask extends Seeder
             'of'  => 'taskcard-task',
         ]);
 
+        Type::create([
+            'code' => 'opening-panel',
+            'name' => 'Opening Panel',
+            'of'  => 'taskcard-task',
+        ]);
+
+        Type::create([
+            'code' => 'closing-panel',
+            'name' => 'Closing Panel',
+            'of'  => 'taskcard-task',
+        ]);
+
     }
 }

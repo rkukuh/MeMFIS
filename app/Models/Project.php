@@ -16,6 +16,12 @@ class Project extends MemfisModel
         'no_wo',
         'aircraft_register',
         'aircraft_sn',
+        'origin_project',
+        'origin_project_workpackages',
+        'origin_project_workpackage_engineers',
+        'origin_project_workpackage_facilities',
+        'origin_project_workpackage_manhours',
+        'origin_project_workpackage_taskcards',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

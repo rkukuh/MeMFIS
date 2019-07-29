@@ -79,6 +79,15 @@ $factory->define(Quotation::class, function (Faker $faker) {
         },
         'term_of_condition' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
+        
+        'origin_project' => null,
+        'origin_currency' => null,
+        'origin_scheduled_payment_type' => null,
+        'origin_quotation' => null,
+        'origin_quotation_workpackages' => null,
+        'origin_quotation_workpackage_items' => null,
+        'origin_quotation_workpackage_taskcard_items' => null,
+        'origin_quotation_htcrr_items' => null,
     ];
 
 });

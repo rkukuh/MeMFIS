@@ -27,6 +27,12 @@ $factory->define(DefectCard::class, function (Faker $faker) {
         'is_rii' => $faker->boolean,
         'complaint' => $faker->randomElement([null, $faker->text]),
         'description' => $faker->randomElement([null, $faker->text]),
+
+        'origin_jobcard' => null,
+        'origin_project_additional' => null,
+        'origin_quotation_additional' => null,
+        'origin_defectcard_items' => null,
+        'origin_defectcard_propose_corrections' => null,
     ];
 
 });
