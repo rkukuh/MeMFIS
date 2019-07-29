@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
 use App\Models\Employee;
+use App\Models\TaskCard;
 use App\Models\Facility;
 use App\Models\WorkPackage;
 use App\Models\ProjectWorkPackageEngineer;
@@ -55,16 +56,22 @@ class ProjectHMWorkPackageTaskCardController extends Controller
      * @param  \App\Http\Requests\Frontend\ProjectStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, WorkPackage $workPackage)
+    public function store(Request $request,Project $project, WorkPackage $workpackage, TaskCard $taskcard)
     {
-        $tc = TaskCard::where('uuid', $request->taskcard)->first();
-        $exists = $workPackage->taskcards->contains($tc->id);
-        if($exists){
+        $project_wokpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workpackage->id)->first();
+
+        $project_wokpackage_taskcard = ProjectWorkPackageTaskCard::where('project_workpackage_id',$project_wokpackage->id)->where('taskcard_id',$taskcard->id)->first();
+
+        if($project_wokpackage_taskcard <> null){
             return response()->json(['title' => "Danger"]);
         }else{
-            $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
+            // $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
 
-            return response()->json($workPackage);
+            $project_wokpackage->taskcards()->create([
+                'taskcard_id' => $taskcard->id,
+            ]);
+
+            return response()->json($project_wokpackage);
         }
     }
 

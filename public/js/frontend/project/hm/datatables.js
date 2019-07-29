@@ -227,15 +227,15 @@ let Datatables = {
         let successor_datatables_init = true;
 
         $('#basic_datatable').on('click', '.select-basic', function () {
+            let taskcard_uuid = $(this).data('uuid');
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/workpackage/' + workPackage_uuid +'/taskcard',
+                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid+'/',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    taskcard: $(this).data('uuid'),
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -268,12 +268,13 @@ let Datatables = {
         });
 
         $('#sip_datatable').on('click', '.select-sip', function () {
+            let taskcard_uuid = $(this).data('uuid');
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/workpackage/' + workPackage_uuid +'/taskcard',
+                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid+'/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -309,12 +310,13 @@ let Datatables = {
         });
 
         $('#cpcp_datatable').on('click', '.select-cpcp', function () {
+            let taskcard_uuid = $(this).data('uuid');
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/workpackage/' + workPackage_uuid +'/taskcard',
+                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid+'/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -350,12 +352,13 @@ let Datatables = {
         });
 
         $('#adsb_datatable').on('click', '.select-adsb', function () {
+            let taskcard_uuid = $(this).data('uuid');
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/workpackage/' + workPackage_uuid +'/taskcard',
+                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid+'/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -391,12 +394,13 @@ let Datatables = {
         });
 
         $('#si_datatable').on('click', '.select-si', function () {
+            let taskcard_uuid = $(this).data('uuid');
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/workpackage/' + workPackage_uuid +'/taskcard',
+                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid+'/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
@@ -431,12 +435,13 @@ let Datatables = {
         });
 
         $('#cmrawl_datatable').on('click', '.select-cmrawl', function () {
+            let taskcard_uuid = $(this).data('uuid');
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/workpackage/' + workPackage_uuid +'/taskcard',
+                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid+'/',
                 data: {
                     _token: $('input[name=_token]').val(),
                     taskcard: $(this).data('uuid'),
