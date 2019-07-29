@@ -26,13 +26,13 @@ class CreateDefectcardItemTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('item_id')
-                    ->references('id')->on('items')
+            $table->foreign('defectcard_id')
+                    ->references('id')->on('defectcards')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('defectcard_id')
-                    ->references('id')->on('defectcards')
+            $table->foreign('item_id')
+                    ->references('id')->on('items')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 

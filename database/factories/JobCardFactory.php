@@ -24,10 +24,13 @@ $factory->define(JobCard::class, function (Faker $faker) {
 
     return [
         'number' => 'JC-DUM-' . $number,
-        'taskcard_id' => $taskcard->id,
         'quotation_id' => Quotation::get()->random()->id,
-        'data_taskcard' => $taskcard->toJson(),
-        'data_taskcard_items' => $taskcard->items->toJson(),
+        'taskcard_id' => $taskcard->id,
+        
+        'origin_quotation' => null,
+        'origin_taskcard' => $taskcard->toJson(),
+        'origin_taskcard_items' => $taskcard->items->toJson(),
+        'origin_jobcard_helpers' => null,
     ];
 
 });
@@ -54,16 +57,6 @@ $factory->afterCreating(JobCard::class, function ($jobcard, $faker) {
         $jobcard->inspections()->save(factory(Inspection::class)->make());
     }
 
-    // Predecessor
-
-    if (JobCard::count()) {
-        for ($i = 1; $i <= rand(1, JobCard::count()); $i++) {
-            $jobcard->predecessors()->save(JobCard::get()->random(), [
-                'order' => $i
-            ]);
-        }
-    }
-
     // Progress
 
     $jobcard->progresses()->save(
@@ -72,15 +65,5 @@ $factory->afterCreating(JobCard::class, function ($jobcard, $faker) {
             'status_id' => Status::ofJobCard()->where('code', 'open')->first()
         ])
     );
-
-    // Successor
-
-    if (JobCard::count()) {
-        for ($i = 1; $i <= rand(1, JobCard::count()); $i++) {
-            $jobcard->successors()->save(JobCard::get()->random(), [
-                'order' => $i
-            ]);
-        }
-    }
     
 });

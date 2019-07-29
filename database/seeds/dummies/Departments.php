@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Department;
 use Illuminate\Database\Seeder;
 
 class Departments extends Seeder
@@ -11,6 +12,6 @@ class Departments extends Seeder
      */
     public function run()
     {
-        //
+        factory(Department::class, config('memfis.dummies.departments'))->create();
     }
 }

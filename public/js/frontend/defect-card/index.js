@@ -79,7 +79,7 @@ let DefectCard = {
                 },
                 {
                     field: 'jobcard.quotation.project.customer.name',
-                    title: 'Cusromer',
+                    title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -108,7 +108,7 @@ let DefectCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.taskcard.estimation_manhour',
+                    field: 'estimation_manhour',
                     title: 'Mhrs',
                     sortable: 'asc',
                     filterable: !1,

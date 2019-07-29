@@ -57,9 +57,9 @@ class QuotationHtcrrItemController extends Controller
      * @param  \App\Models\QuotationHtcrrItem  $quotationHtcrrItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(QuotationHtcrrItem $quotationHtcrrItem)
+    public function edit(QuotationHtcrrItem $qtn_htcrr_item)
     {
-        //
+        return response()->json($qtn_htcrr_item);
     }
 
     /**
@@ -69,9 +69,13 @@ class QuotationHtcrrItemController extends Controller
      * @param  \App\Models\QuotationHtcrrItem  $quotationHtcrrItem
      * @return \Illuminate\Http\Response
      */
-    public function update(QuotationHtcrrItemUpdate $request, QuotationHtcrrItem $quotationHtcrrItem)
+    public function update(QuotationHtcrrItemUpdate $request, QuotationHtcrrItem $qtn_htcrr_item)
     {
-        //
+        $request->merge(['subtotal' => $request->quantity*$request->price_amount]);
+
+        $qtn_htcrr_item->update($request->all());
+
+        return response()->json($qtn_htcrr_item);
     }
 
     /**
