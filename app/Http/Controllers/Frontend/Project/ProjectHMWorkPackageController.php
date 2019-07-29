@@ -65,8 +65,8 @@ class ProjectHMWorkPackageController extends Controller
 
             $project_workpackage->taskcards()->create([
                 'taskcard_id' => $taskcard->id,
-                'sequence' => $taskcard->sequence,
-                'is_mandatory' => $taskcard->is_mandatory,
+                'sequence' => $taskcard->pivot->sequence,
+                'is_mandatory' => $taskcard->pivot->is_mandatory,
             ]);
         }
 
