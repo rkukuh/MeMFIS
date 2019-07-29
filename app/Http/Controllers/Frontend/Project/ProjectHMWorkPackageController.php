@@ -290,34 +290,6 @@ class ProjectHMWorkPackageController extends Controller
         return response()->json($project_workpackage);
     }
 
-        /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
-     * @param  \App\Models\WorkPackage  $workPackage
-     * @return \Illuminate\Http\Response
-     */
-    public function sequence(Request $request, ProjectWorkPackageTaskCard $ProjectWorkpackage)
-    {
-        $ProjectWorkpackage->update($request->all());
-
-        return response()->json($ProjectWorkpackage);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
-     * @param  \App\Models\WorkPackage  $workPackage
-     * @return \Illuminate\Http\Response
-     */
-    public function mandatory(Request $request, ProjectWorkPackageTaskCard $ProjectWorkpackage)
-    {
-        $ProjectWorkpackage->update($request->all());
-
-        return response()->json($ProjectWorkpackage);
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -331,19 +303,6 @@ class ProjectHMWorkPackageController extends Controller
         ]);
 
         return response()->json($project);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
-     */
-    public function destroyTaskCard(ProjectWorkPackageTaskCard $ProjectWorkpackage)
-    {
-        $ProjectWorkpackage->delete();
-
-        return response()->json($ProjectWorkpackage);
     }
 
     /**
