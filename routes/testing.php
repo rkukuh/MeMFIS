@@ -14,6 +14,25 @@ Route::name('testing.')->group(function () {
 
         });
 
+        Route::get('/json', function () {
+            $p = App\Models\Project::find(4);
+            dump($p->workpackages->toJson());
+
+            $pw = App\Models\Pivots\ProjectWorkPackage::where('project_id',4)->pluck('id');
+
+            $pwe = App\Models\ProjectWorkPackageEngineer::whereIn('project_workpackage_id',$pw)->get();
+            dump($pwe->toJson());
+
+            $pwf = App\Models\ProjectWorkPackageFacility::whereIn('project_workpackage_id',$pw)->get();
+            dump($pwf->toJson());
+
+            $pwm = App\Models\ProjectWorkPackageManhour::whereIn('project_workpackage_id',$pw)->get();
+            dump($pwm->toJson());
+
+            $pwt = App\Models\ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$pw)->get();
+            dump($pwt->toJson());
+        });
+
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
         Route::view('/taskcard-wip', 'frontend/testing/taskcard-wip')->name('taskcard');
