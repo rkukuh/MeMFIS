@@ -51,7 +51,7 @@
                                             Job Card No
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxxx
+                                            {{$taskrelease->number}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -59,7 +59,7 @@
                                             Task Card No
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxxxx
+                                            {{$taskrelease->taskcard->number}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -67,7 +67,7 @@
                                             A/C Type
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxxx
+                                            {{$taskrelease->quotation->project->aircraft->name}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -75,7 +75,7 @@
                                             A/C Reg
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxxx
+                                            {{$taskrelease->quotation->project->aircraft_register}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -83,7 +83,7 @@
                                             A/C Serial Number
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            zzzz
+                                            {{$taskrelease->quotation->project->aircraft_sn}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -91,7 +91,7 @@
                                             Inspection Type
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
+                                            {{$taskrelease->taskcard->task->name}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -99,7 +99,11 @@
                                             Company Task No
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
+                                            @if(isset(json_decode($taskrelease->taskcard->additionals)->internal_number))
+                                                {{json_decode($taskrelease->taskcard->additionals)->internal_number}}
+                                            @else
+                                                -
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -107,7 +111,7 @@
                                             Project No
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
+                                            {{$taskrelease->quotation->project->code}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -115,23 +119,29 @@
                                             Skill
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
-                                        </td>
+                                            @if(sizeof($taskrelease->taskcard->skills) == 3)
+                                                ERI
+                                            @elseif(sizeof($taskrelease->taskcard->skills) == 1)
+                                                {{$taskrelease->taskcard->skills[0]->name}}
+                                            @else
+                                                -
+                                            @endif
+                                    </td>
                                     </tr>
                                     <tr>
                                         <td width="30%" style="background-color:beige;padding:10px;">
                                             Est.Mhrs
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
+                                            {{$taskrelease->actual}}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td width="30%" style="background-color:beige;padding:10px;">
-                                            Current.Mhrs
+                                            Actual. Mhrs
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
+                                            {{$taskrelease->taskcard->estimation_manhour}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -139,15 +149,17 @@
                                             Work Area
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
-                                        </td>
+                                            @if(isset($taskrelease->taskcard->workarea->name))
+                                                {{$taskrelease->taskcard->workarea->name}}
+                                            @endif
+                                    </td>
                                     </tr>
                                     <tr>
                                         <td width="30%" style="background-color:beige;padding:10px;">
                                             Sequence
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
+                                            {{$taskrelease->taskcard->sequence}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -155,7 +167,7 @@
                                             Referencce
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
+                                            {{$taskrelease->taskcard->reference}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -163,7 +175,7 @@
                                             Title
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
+                                            {{$taskrelease->taskcard->title}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -171,7 +183,7 @@
                                             Description
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
+                                            {{$taskrelease->taskcard->Description}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -179,7 +191,7 @@
                                             Helper
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
+                                            {{$taskrelease->taskcard->helper_quantity}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -195,128 +207,69 @@
                                             RII
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            Yes/No
+                                            @if($taskrelease->taskcard->is_rii == 1)
+                                                Yes
+                                            @else
+                                                No
+                                            @endif
                                         </td>
                                     </tr>
                                 </table>
-                                <table border="1px" width="100%">
-                                    <tr>
-                                        <td colspan="4" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Tool(s) List
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center;font-weight:bold" width="20%">
-                                            P/N
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="40%">
-                                            Tool Description
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="10%">
-                                            Qty
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="30%">
-                                            Unit
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" width="20%">
-                                            67937376
-                                        </td>
-                                        <td style="text-align:center" width="40%">
-                                            Obeng
-                                        </td>
-                                        <td style="text-align:center" width="10%">
-                                            2
-                                        </td>
-                                        <td style="text-align:center" width="30%">
-                                            Bla Bla
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                </table>
-                                <table border="1px" width="100%">
-                                    <tr>
-                                        <td colspan="4" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Material(s) List
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center;font-weight:bold" width="20%">
-                                            P/N
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="40%">
-                                            Material  Description
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="10%">
-                                            Qty
-                                        </td>
-                                        <td style="text-align:center;font-weight:bold" width="30%">
-                                            Unit
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" width="20%">
-                                            67937376
-                                        </td>
-                                        <td style="text-align:center" width="40%">
-                                            Obeng
-                                        </td>
-                                        <td style="text-align:center" width="10%">
-                                            3
-                                        </td>
-                                        <td style="text-align:center" width="30%">
-                                            Bla Bla
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align:center" height="20px" width="20%"></td>
-                                        <td style="text-align:center" height="20px" width="40%"></td>
-                                        <td style="text-align:center" height="20px" width="10%"></td>
-                                        <td style="text-align:center" height="20px" width="30%"></td>
-                                    </tr>
-                                </table>
+
+                                <div class="form-group m-form__group row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <table class="table table-striped table-bordered second" width="100%" cellpadding="4">
+                                            <tr>
+                                                <td colspan="5" align="center"><b>Material(s) Required</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%" align="center"><b>No</b></td>
+                                                <td width="20%" align="center"><b>Part Number</b></td>
+                                                <td width="50%" align="center"><b>Item Description</b></td>
+                                                <td width="10%" align="center"><b>Qty</b></td>
+                                                <td width="15%" align="center"><b>Unit</b></td>
+                                            </tr>
+                                            @php
+                                            $i=1;
+                                            @endphp
+                                            @foreach ($materials as $material)
+                                            <tr>
+                                                <td width="5%" align="center" valign="top">{{$i++}}</td>
+                                                <td width="20%" align="center" valign="top">{{$material->code}}</td>
+                                                <td width="50%" valign="top">{{$material->name}}</td>
+                                                <td width="10%" align="center" valign="top">{{$material->pivot->quantity}}</td>
+                                                <td width="15%" align="center" valign="top">{{App\Models\Unit::find($material->pivot->unit_id)->name}}</td>
+                                            </tr>
+                                            @endforeach
+                                        </table>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <table class="table table-striped table-bordered second" width="100%" cellpadding="4">
+                                            <tr>
+                                                <td colspan="5" align="center"><b>Tool(s) Required / Special Tooling</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td width="5%" align="center"><b>No</b></td>
+                                                <td width="20%" align="center"><b>Part Number</b></td>
+                                                <td width="50%" align="center"><b>Item Description</b></td>
+                                                <td width="10%" align="center"><b>Qty</b></td>
+                                                <td width="15%" align="center"><b>Unit</b></td>
+                                            </tr>
+                                            @php
+                                            $j=1;
+                                            @endphp
+                                            @foreach ($tools as $tool)
+                                            <tr>
+                                                <td width="5%" align="center" valign="top">{{$j++}}</td>
+                                                <td width="20%" align="center" valign="top">{{$tool->code}}</td>
+                                                <td width="50%" valign="top">{{$tool->name}}</td>
+                                                <td width="10%" align="center" valign="top">{{$tool->pivot->quantity}}</td>
+                                                <td width="15%" align="center" valign="top">{{App\Models\Unit::find($tool->pivot->unit_id)->name}}</td>
+                                            </tr>
+                                            @endforeach
+                                        </table>
+                                    </div>
+                                </div>
 
 
                                 <div class="form-group m-form__group row">
