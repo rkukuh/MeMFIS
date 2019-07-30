@@ -296,7 +296,7 @@
 @endpush
 
 @push('footer-scripts')
-    <script>
+    {{-- <script>
         function initMap() {
             var myLatLng = {lat: -7.265757, lng: 112.734146};
 
@@ -311,7 +311,7 @@
                 title       : 'Hello World!'
             });
         }
-    </script>
+    </script> --}}
 
     {{-- <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/functions/select2/template.js') }}"></script>
