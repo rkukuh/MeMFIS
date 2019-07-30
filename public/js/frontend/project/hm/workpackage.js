@@ -3,7 +3,7 @@
 $('.nav-item').on('click','#engineer_team_tab',function() {
     if(anyChanges){
         let csrf = $('meta[name="csrf-token"]').attr('content');
-        let url = '/project-hm/' + project_uuid  + '/workpackage/' + workPackage_uuid;
+        let url = '/project-hm/' + project_uuid  + '/workpackage/' + workPackage_uuid+'/edit';
         let form = $('<form action="' + url + '" method="GET">' +
         '<input type="hidden" name="anyChanges" value="' + anyChanges + '" />' +
         '<input name="_token" value="'+csrf+'" type="hidden">' +
