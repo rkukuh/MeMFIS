@@ -105,7 +105,7 @@ class JobCardEngineerController extends Controller
         foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
             $date1 = null;
             foreach($values as $value){
-                if($statuses->where('id',$value->status_id)->first()->code <> "open"){
+                if($statuses->where('id',$value->status_id)->first()->code <> "open" or $statuses->where('id',$value->status_id)->first()->code <> "released" or $statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
                     if($jobcard->helpers->where('userID',$key)->first() == null){
                         if($date1 <> null){
                             $t1 = Carbon::parse($date1);
