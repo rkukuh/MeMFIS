@@ -336,6 +336,7 @@
                                                                             @slot('name', 'scheduled_payment')
                                                                             @slot('id', 'scheduled_payment')
                                                                             @slot('text', 'Phone')
+                                                                            @slot('autocomplete', 'off')
                                                                             @slot('id_error', 'scheduled_payment_amount')
                                                                             @endcomponent
                                                                         </div>
