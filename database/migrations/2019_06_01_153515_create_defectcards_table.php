@@ -22,8 +22,11 @@ class CreateDefectcardsTable extends Migration
             $table->unsignedBigInteger('quotation_additional_id')->nullable();
             $table->integer('engineer_quantity');
             $table->integer('helper_quantity');
+            $table->integer('helper_quantity');
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->boolean('is_rii');
+            $table->integer('sequence')->nullable();
+            $table->string('ata')->nullable();
             $table->text('complaint')->nullable();
             $table->text('description')->nullable();
 
