@@ -8,7 +8,12 @@ use App\Models\Aircraft;
 use App\Models\Customer;
 use App\Models\Approval;
 use App\Models\WorkPackage;
+use App\Models\ProjectWorkPackageEngineer;
+use App\Models\ProjectWorkPackageFacility;
+use App\Models\ProjectWorkPackageManhour;
+use App\Models\ProjectWorkPackageTaskCard;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\ProjectWorkPackage;
 use App\Http\Requests\Frontend\ProjectHMStore;
 use App\Http\Requests\Frontend\ProjectHMUpdate;
 
@@ -103,6 +108,30 @@ class ProjectController extends Controller
      */
     public function approve(Project $project)
     {
+        $pw_json = $project->workpackages->toJson();
+
+        $pw = ProjectWorkPackage::where('project_id',$project->id)->pluck('id');
+
+        $pwe = ProjectWorkPackageEngineer::whereIn('project_workpackage_id',$pw)->get();
+        $pwe_json = $pwe->toJson();
+
+        $pwf = ProjectWorkPackageFacility::whereIn('project_workpackage_id',$pw)->get();
+        $pwf_json = $pwf->toJson();
+
+        $pwm = ProjectWorkPackageManhour::whereIn('project_workpackage_id',$pw)->get();
+        $pwm_json = $pwm->toJson();
+
+        $pwt = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$pw)->get();
+        $pwt_json = $pwt->toJson();
+
+        $project->origin_project = $project->toJson();
+        $project->origin_project_workpackages = $pw_json;
+        $project->origin_project_workpackage_engineers = $pwe_json;
+        $project->origin_project_workpackage_facilities = $pwf_json;
+        $project->origin_project_workpackage_manhours = $pwm_json;
+        $project->origin_project_workpackage_taskcards = $pwt_json;
+        $project->save();
+
         $project->approvals()->save(new Approval([
             'approvable_id' => $project->id,
             'approved_by' => Auth::id(),

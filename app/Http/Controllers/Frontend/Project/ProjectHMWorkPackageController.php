@@ -141,7 +141,7 @@ class ProjectHMWorkPackageController extends Controller
     public function edit(Project $project, WorkPackage $workPackage,Request $request)
     {
         $mhrs_pfrm_factor = $skills = $subset = [];
-            
+
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
         ->first();
@@ -171,7 +171,7 @@ class ProjectHMWorkPackageController extends Controller
 
         $employees = Employee::all();
         $facilities = Facility::all();
-        
+
         $materialCount = $workPackage->items->count();
         $toolCount = $workPackage->tools->count();
 
@@ -243,7 +243,7 @@ class ProjectHMWorkPackageController extends Controller
                 ]);
             }
         }
-        
+
         return response()->json($project_workpackage);
     }
 
@@ -264,7 +264,7 @@ class ProjectHMWorkPackageController extends Controller
             ]);
 
         return response()->json($project_workpackage);
-        
+
     }
 
     /**
