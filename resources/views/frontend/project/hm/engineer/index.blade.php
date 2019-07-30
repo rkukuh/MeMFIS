@@ -347,6 +347,7 @@
                     @slot('id', 'cabin_qty')
                     @slot('text', 'Cabin Quantity')
                     @slot('name', 'cabin_qty')
+                    @slot('class', 'engineer_qty')
                     @slot('id_error', 'cabin_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
@@ -713,11 +714,11 @@
     $('#calculate').on('click',function(){
         let engineer_qty = tat = 0;
         $('.engineer_qty').each(function(){
-            engineer_qty = engineer_qty + parseInt($(this).val());
+            engineer_qty = engineer_qty + parseFloat($(this).val());
         });
         let divider = engineer_qty * 6.5;
         if($('#default').prop("checked")){
-            let mhrs = parseInt(mhrs_pfrm_factor);
+            let mhrs = parseFloat(mhrs_pfrm_factor);
             tat = mhrs / divider;
         }else{
             let mhrs = total_mhrs * 1.6;
