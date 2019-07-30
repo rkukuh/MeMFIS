@@ -36,7 +36,13 @@ class TaskReleaseJobCardDatatables extends Controller
             }
 
             $jobcard->customer_name .= $jobcard->quotation->project->customer->name;
-            $jobcard->company_task .= $jobcard->taskcard->additionals->internal_number;
+            if($jobcard->taskcard->additionals <> null){
+                $jobcard->company_task .= $jobcard->taskcard->additionals->internal_number;
+            }
+            else{
+                $jobcard->company_task .= "";
+
+            }
 
             $count_user = $jobcard->progresses->groupby('progressed_by')->count()-1;
 
