@@ -120,8 +120,9 @@
             });
             $(".nav-item").on("click", ".m_tabs_manhour",function() {
                 if(anyChanges){
+                    console.log(anyChanges);
                     $.ajax({
-                    url: "/project-hm/workpackage/"+workPackage_uuid+"/getManhours",
+                    url: "/project-hm/"+Project_uuid+"/workpackage/"+workPackage_uuid+"/getManhours",
                     method: "get",
                     success: function(dataFetched){
                         $('#total_mhrs').html(dataFetched.total_mhrs);

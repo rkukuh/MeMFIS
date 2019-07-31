@@ -10,6 +10,7 @@ use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Facility;
 use App\Models\WorkPackage;
+use App\Models\TaskCard;
 use App\Models\ProjectWorkPackageEngineer;
 use App\Models\ProjectWorkPackageTaskCard;
 use App\Models\Pivots\ProjectWorkPackage;
@@ -397,16 +398,23 @@ class ProjectHMWorkPackageController extends Controller
      *
      * @param  \App\Models\WorkPackage  $workPackage
      */
-    public function getManhours(WorkPackage $workPackage){
-        $data = $mhrs_pfrm_factor = [];
-        foreach($workPackage->taskcards as $taskcard){
+    public function getManhours(Project $project, WorkPackage $workPackage){
+        $pwp = ProjectWorkPackage::where('project_id', $project->id)
+                    ->where('workpackage_id', $workPackage->id)->first();
+        $data = $mhrs_pfrm_factor = $taskcards = [];
+        foreach($pwp->taskcards as $taskcard){
+            array_push($taskcards, $taskcard->taskcard_id);
+        }
+        $taskcards = TaskCard::whereIn('id',$taskcards)->get(); 
+        // dd($taskcards);
+        foreach($taskcards as $taskcard){
             array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
         }
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
-        $data["total_mhrs"] = $workPackage->taskcards->sum('estimation_manhour');
-        $data["mhrs_pfrm_factor"] = $workPackage->taskcards->sum('estimation_manhour') * 1.6;
+        $data["total_mhrs"] = $taskcards->sum('estimation_manhour');
+        $data["mhrs_pfrm_factor"] = $taskcards->sum('estimation_manhour') * 1.6;
         $data["mhrs_tc_pfrm_factor"]  = $mhrs_pfrm_factor;
-
+        // dd( $data["total_mhrs"]);
         return response()->json($data);
     }
 }
