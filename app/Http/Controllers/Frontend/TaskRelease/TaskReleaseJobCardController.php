@@ -105,12 +105,14 @@ class TaskReleaseJobCardController extends Controller
         }
         $manhours_break = $manhours_break/3600;
         $actual =number_format($manhours-$manhours_break, 2);
+        $status = Status::ofJobCard()->where('id',$taskrelease->progresses->last()->status_id)->first()->code;
 
 
         return view('frontend.task-release.create', [
             'taskrelease' => $taskrelease,
             'materials' => $taskrelease->taskcard->materials,
             'tools' => $taskrelease->taskcard->tools,
+            'status' => $status,
 
         ]);
     }

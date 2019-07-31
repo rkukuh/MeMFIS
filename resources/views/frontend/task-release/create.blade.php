@@ -276,9 +276,12 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
-                                                @component('frontend.common.buttons.release')
-                                                    @slot('class', 'release')
-                                                @endcomponent
+                                                @if($status == "closed" )
+                                                    @component('frontend.common.buttons.release')
+                                                        @slot('class', 'release')
+                                                        @slot('id', 'release')
+                                                    @endcomponent
+                                                @endif
 
                                                 @include('frontend.common.buttons.back')
 
@@ -320,6 +323,8 @@
                     type: 'PUT',
                     url: '/taskrelease-jobcard/task-release/' + jobcard_uuid + '/',
                     success: function (data) {
+                        $('#release').remove();
+
                         toastr.success('Task has been released.', 'Released', {
                                 timeOut: 5000
                             }
