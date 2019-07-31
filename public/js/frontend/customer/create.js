@@ -157,6 +157,11 @@ let Customer = {
                 },
                 success: function (data) {
                     if (data.errors) {
+                        if (data.errors.name) {
+                            $('#level-error').html(data.errors.level[0]);
+
+                        }
+
                         $.each(data.errors, function (key, value) {
                             var name = $("input[name='"+key+"']");
                             if(key.indexOf(".") != -1){

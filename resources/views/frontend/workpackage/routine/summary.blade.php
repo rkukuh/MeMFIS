@@ -215,7 +215,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="routine_items_datatable" id="scrolling_both"></div>
+                                            <div class="routine_materials_datatable" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>

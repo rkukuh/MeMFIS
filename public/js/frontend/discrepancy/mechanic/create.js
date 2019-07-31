@@ -17,6 +17,8 @@ let Discrepancy = {
             let helper_quantity =  $('input[name=helper_quantity]').val();
             let manhours =  $('input[name=manhours]').val();
             let description = $('#description').val();
+            let ata = $('#ata').val();
+            let sequence = $('#sequence').val();
             let complaint = $('#complaint').val();
             let other = $('#other_text').val();
 
@@ -46,6 +48,8 @@ let Discrepancy = {
                     estimation_manhour: manhours,
                     description: description,
                     complaint: complaint,
+                    ata: ata,
+                    sequence: sequence,
                     propose: propose,
                     propose_correction_text: other,
                     is_rii:is_rii,

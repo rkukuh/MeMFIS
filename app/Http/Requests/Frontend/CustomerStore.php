@@ -29,6 +29,7 @@ class CustomerStore extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:50',
+            'level' => 'required',
             'phone_array.*' => 'required',
             'phone_array' => 'array|min:1',
             'email_array.*' => 'required',

@@ -7,10 +7,12 @@ use App\MemfisModel;
 class ProjectWorkPackageTaskCard extends MemfisModel
 {
     protected $table = 'project_workpackage_taskcards';
-    
+
     protected $fillable = [
         'project_workpackage_id',
         'taskcard_id',
+        'sequence',
+        'is_mandatory',
         'note',
     ];
 

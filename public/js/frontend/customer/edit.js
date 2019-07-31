@@ -1,6 +1,6 @@
 let Customer = {
     init: function () {
-        
+
         $('.customer_address_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -218,6 +218,11 @@ let Customer = {
                 },
                 success: function (data) {
                     if (data.errors) {
+                        if (data.errors.name) {
+                            $('#level-error').html(data.errors.level[0]);
+
+                        }
+
                         $.each(data.errors, function (key, value) {
                             var name = $("input[name='"+key+"']");
                             if(key.indexOf(".") != -1){
@@ -225,7 +230,7 @@ let Customer = {
                               name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
                             }
                             name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
-                          }); 
+                          });
 
                     } else {
                         $('#modal_customer').modal('hide');
@@ -266,7 +271,7 @@ let Customer = {
                               name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
                             }
                             name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
-                          }); 
+                          });
                     } else {
                         $('#modal_address').modal('hide');
 

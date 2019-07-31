@@ -197,8 +197,18 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{project}/workpackage', 'ProjectDatatables@workpackage')->name('workpackage.project');
                 Route::get('/{htcrr}/tools', 'HtCrrItemsDatatables@tool')->name('htcrr.tools.index');
                 Route::get('/{htcrr}/materials', 'HtCrrItemsDatatables@material')->name('htcrr.materials.index');
-                Route::POST('/additional/materials', 'AdditionalItemsDatatables@material')->name('additional.materials.index');
-                Route::POST('/additional/tools', 'AdditionalItemsDatatables@tools')->name('additional.tools.index');
+                Route::post('/additional/materials', 'AdditionalItemsDatatables@material')->name('additional.materials.index');
+                Route::post('/additional/tools', 'AdditionalItemsDatatables@tools')->name('additional.tools.index');
+
+                /** WORKPACKAGE */
+
+                Route::get('/{project}/workpackage/{workPackage}/basic', 'ProjectWorkPackageTaskCardRoutineDatatables@basic')->name('basic.index');
+                Route::get('/{project}/workpackage/{workPackage}/sip', 'ProjectWorkPackageTaskCardRoutineDatatables@sip')->name('sip.index');
+                Route::get('/{project}/workpackage/{workPackage}/cpcp', 'ProjectWorkPackageTaskCardRoutineDatatables@cpcp')->name('cpcp.index');
+                Route::get('/{project}/workpackage/{workPackage}/ad-sb', 'ProjectWorkPackageTaskCardNonRoutineDatatables@ad_sb')->name('ad-sb.index');
+                Route::get('/{project}/workpackage/{workPackage}/cmr-awl', 'ProjectWorkPackageTaskCardNonRoutineDatatables@cmr_awl')->name('cmr-awl.index');
+                Route::get('/{project}/workpackage/{workPackage}/si', 'ProjectWorkPackageTaskCardNonRoutineDatatables@si')->name('si.index');
+
             });
 
         });

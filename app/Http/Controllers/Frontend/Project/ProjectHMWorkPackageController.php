@@ -11,6 +11,7 @@ use App\Models\Employee;
 use App\Models\Facility;
 use App\Models\WorkPackage;
 use App\Models\ProjectWorkPackageEngineer;
+use App\Models\ProjectWorkPackageTaskCard;
 use App\Models\Pivots\ProjectWorkPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -64,8 +65,8 @@ class ProjectHMWorkPackageController extends Controller
 
             $project_workpackage->taskcards()->create([
                 'taskcard_id' => $taskcard->id,
-                'sequence' => $taskcard->sequence,
-                'is_mandatory' => $taskcard->is_mandatory,
+                'sequence' => $taskcard->pivot->sequence,
+                'is_mandatory' => $taskcard->pivot->is_mandatory,
             ]);
         }
 
@@ -141,7 +142,7 @@ class ProjectHMWorkPackageController extends Controller
     public function edit(Project $project, WorkPackage $workPackage,Request $request)
     {
         $mhrs_pfrm_factor = $skills = $subset = [];
-            
+
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
         ->first();
@@ -171,7 +172,7 @@ class ProjectHMWorkPackageController extends Controller
 
         $employees = Employee::all();
         $facilities = Facility::all();
-        
+
         $materialCount = $workPackage->items->count();
         $toolCount = $workPackage->tools->count();
 
@@ -243,7 +244,7 @@ class ProjectHMWorkPackageController extends Controller
                 ]);
             }
         }
-        
+
         return response()->json($project_workpackage);
     }
 
@@ -264,7 +265,7 @@ class ProjectHMWorkPackageController extends Controller
             ]);
 
         return response()->json($project_workpackage);
-        
+
     }
 
     /**
@@ -297,8 +298,6 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function destroy(Project $project, WorkPackage $workPackage)
     {
-        // $project_workpackage = ProjectWorkPackage::where('project_id', $project->id)->where('workpackage_id',$workPackage->id)->first();
-        // $project_workpackage->delete();
         $project->workpackages()->updateExistingPivot($workPackage,[
             'deleted_at' => Carbon::now()
         ]);
