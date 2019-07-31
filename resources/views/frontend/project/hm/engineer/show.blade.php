@@ -324,11 +324,11 @@
     $('#calculate').on('click',function(){
         let engineer_qty = tat = 0;
         $('.engineer_qty').each(function(){
-            engineer_qty = engineer_qty + parseInt($(this).val());
+            engineer_qty = engineer_qty + parseFloat($(this).val());
         });
         let divider = engineer_qty * 6.5;
         if($('#default').prop("checked")){
-            let mhrs = parseInt(mhrs_pfrm_factor);
+            let mhrs = parseFloat(mhrs_pfrm_factor);
             tat = mhrs / divider;
         }else{
             let mhrs = total_mhrs * 1.6;
