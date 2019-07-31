@@ -295,14 +295,6 @@
                                                             @slot('value', 'Include')
                                                             @endcomponent
                                                         </div>
-                                                        <div class="col-sm-8 col-md-8 col-lg-8">
-                                                            @component('frontend.common.input.checkbox')
-                                                            @slot('id', 'ppn')
-                                                            @slot('name', 'ppn')
-                                                            @slot('text', 'Exclude')
-                                                            @slot('value', 'Exclude')
-                                                            @endcomponent
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -460,17 +452,15 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.update')
+                                                    @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-workpackage')
-                                                        @slot('class', 'add-workpackage')
+                                                        @slot('id', 'add-additional-quotation')
+                                                        @slot('class', 'add-additional-quotation')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
 
-                                                    @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.workpackage.index'))
-                                                    @endcomponent
+                                                    @include('frontend.common.buttons.back')
                                                 </div>
                                             </div>
                                         </div>
@@ -505,6 +495,11 @@
 @endpush
 
 @push('footer-scripts')
+
+    <script>
+        let project_uuid = '{{$project->uuid}}'
+    </script>
+
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/additional/create.js')}}"></script>
     <script src="{{ asset('js/frontend/quotation/additional/summary.js') }}"></script>
