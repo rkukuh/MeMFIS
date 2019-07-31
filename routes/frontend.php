@@ -140,6 +140,14 @@ Route::name('frontend.')->group(function () {
         /** Employment Status */
 
         Route::view('/employment-status', 'frontend.employment-status.index')->name('employment-status.index');
+
+        /** Inventory In */
+
+        Route::view('/inventory-in', 'frontend.inventory-in.index')->name('inventory-in.index');
+        Route::view('/inventory-in/create', 'frontend.inventory-in.create')->name('inventory-in.create');
+        Route::view('/inventory-in/edit', 'frontend.inventory-in.edit')->name('inventory-in.edit');
+        Route::view('/inventory-in/show', 'frontend.inventory-in.show')->name('inventory-in.show');
+
         
         /** QUOTATION's WORKPACKAGE's TASKCARD's */
 
