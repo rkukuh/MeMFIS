@@ -207,8 +207,8 @@
                                                 @slot('name', 'is_rii')
                                                 @slot('text', 'RII?')
                                                 @if ($discrepancy->is_rii == 1)
-                                                        @slot('checked', 'checked')
-                                                    @endif
+                                                    @slot('checked', 'checked')
+                                                @endif
                                             @endcomponent
                                         </div>
                                     </div>
