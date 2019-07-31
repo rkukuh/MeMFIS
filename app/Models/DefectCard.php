@@ -17,6 +17,8 @@ class DefectCard extends MemfisModel
         'estimation_manhour',
         'is_rii',
         'complaint',
+        'sequence',
+        'ata',
         'description',
 
         'origin_jobcard',

@@ -375,7 +375,7 @@
         console.log(JSON.stringify(ajaxdata));
         });
     </script>
-    <script>
+    {{-- <script>
         function initMap() {
             var myLatLng = {lat: -7.265757, lng: 112.734146};
 
@@ -390,10 +390,10 @@
                 title       : 'Hello World!'
             });
         }
-    </script>
+    </script> --}}
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
+    {{-- <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/vendor.js') }}"></script>
 

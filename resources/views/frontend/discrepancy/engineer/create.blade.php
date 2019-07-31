@@ -76,8 +76,10 @@
                                                 Sequence No
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                            @component('frontend.common.input.number')
+                                                @slot('id', 'sequence')
+                                                @slot('name', 'sequence')
+                                                @slot('text', 'Sequence')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -146,8 +148,10 @@
                                                 ATA
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'ata')
+                                                @slot('name', 'ata')
+                                                @slot('text', 'ATA')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">

@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
 use App\Models\QuotationHtcrrItem;
 use App\Http\Controllers\Controller;
+use App\Models\QuotationWorkPackageItem;
 use App\Models\Pivots\ProjectWorkPackage;
 use App\Models\ProjectWorkPackageFacility;
 use App\Models\Pivots\QuotationWorkPackage;
@@ -274,6 +275,27 @@ class QuotationController extends Controller
      */
     public function approve(Quotation $quotation)
     {
+
+        $qw_json = $quotation->workpackages->toJson();
+
+        $qw = QuotationWorkPackage::where('quotation_id',$quotation->id)->pluck('id');
+
+        $qwe = QuotationWorkPackageItem::whereIn('quotation_workpackage_id',$qw)->get();
+        $qwe_json = $qwe->toJson();
+
+        $qwf = QuotationWorkPackageTaskCardItem::where('quotation_id',$quotation->id)->get();
+        $qwf_json = $qwf->toJson();
+
+        $qwm = QuotationHtcrrItem::where('quotation_id',$quotation->id)->get();
+        $qwm_json = $qwm->toJson();
+
+        $quotation->origin_quotation = $quotation->toJson();
+        $quotation->origin_quotation_workpackages = $qw_json;
+        $quotation->origin_quotation_workpackage_items = $qwe_json;
+        $quotation->origin_quotation_workpackage_taskcard_items = $qwf_json;
+        $quotation->origin_quotation_htcrr_items = $qwm_json;
+        $quotation->save();
+
         $quotation->approvals()->save(new Approval([
             'approvable_id' => $quotation->id,
             'approved_by' => Auth::id(),

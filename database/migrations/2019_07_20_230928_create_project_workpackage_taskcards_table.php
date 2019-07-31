@@ -18,6 +18,8 @@ class CreateProjectWorkPackageTaskCardsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('project_workpackage_id');
             $table->unsignedBigInteger('taskcard_id');
+            $table->integer('sequence')->nullable();
+            $table->boolean('is_mandatory')->default(false);
             $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();

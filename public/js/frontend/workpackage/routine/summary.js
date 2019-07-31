@@ -725,7 +725,7 @@ let summaryroutine = {
             ]
         });
 
-        $('.routine_items_datatable').mDatatable({
+        $('.routine_materials_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
