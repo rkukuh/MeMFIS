@@ -379,7 +379,14 @@ class QuotationController extends Controller
             }
 
         }
-
+        foreach($project->htcrr as $htcrr){
+            if($htcrr->parent_id == null){
+                $htcrr->progresses()->save(new Progress([
+                    'status_id' =>  Status::where('code','removal-open')->first()->id,
+                    'progressed_by' => Auth::id()
+                ]));
+            }
+        }
 
         return response()->json($quotation);
     }
