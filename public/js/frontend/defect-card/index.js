@@ -56,7 +56,7 @@ let DefectCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="/defectcard/'+t.uuid+'/">' + t.code + "</a>"
+                            return '<a href="/defectcard-engineer/'+t.uuid+'/">' + t.code + "</a>"
                     }
                 },
                 {
