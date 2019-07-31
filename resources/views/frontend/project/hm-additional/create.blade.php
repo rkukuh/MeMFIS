@@ -239,7 +239,7 @@
         let project_uuid = '{{$project->uuid}}'
     </script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/frontend/project/additional/create.js')}}"></script>
-    <script src="{{ asset('js/frontend/project/additional/item.js')}}"></script>
+    <script src="{{ asset('js/frontend/project/hm-additional/create.js')}}"></script>
+    <script src="{{ asset('js/frontend/project/hm-additional/item.js')}}"></script>
 @endpush
 
