@@ -86,6 +86,25 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** CUSTOMER */
+
+        Route::name('company.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'company',
+                'namespace' => 'Company'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'CompanyDatatables@index')->name('all');
+
+                /** Polymorph */
+            });
+
+        });
+
         /** EMPLOYEE */
 
         Route::name('employee.')->group(function () {

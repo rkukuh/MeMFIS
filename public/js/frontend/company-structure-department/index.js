@@ -6,7 +6,7 @@ let CompanyStructure = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer',
+                        url: '/datatables/company',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -47,37 +47,23 @@ let CompanyStructure = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/customer/'+t.uuid+'">' + t.name + "</a>"
+                        return '<a href="/company/'+t.uuid+'">' + t.name + "</a>"
                     }
                 },
                 {
-                    field: 'addresses',
+                    field: 'type.name',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if(t.addresses[0]){
-                            return t.addresses[0].address
-                        }else{
-                            return ""
-                        }
-                    }
                 },
                 {
-                    field: 'phones',
+                    field: 'description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if(t.phones[0]){
-                            return t.phones[0].number
-                        }else{
-                            return ""
-                        }
-                    }
                 },
                 {
-                    field: 'level',
+                    field: 'parent_id',
                     title: 'Parent Structure',
                     sortable: 'asc',
                     filterable: !1,
@@ -88,7 +74,7 @@ let CompanyStructure = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/customer/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="/company/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
                             '</a>' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
