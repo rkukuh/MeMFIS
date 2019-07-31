@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\ReleaseToService;
 
 use Auth;
+use App\User;
 use App\Models\RTS;
 use App\Models\Project;
 use App\Http\Controllers\Controller;
@@ -103,10 +104,15 @@ class RTSController extends Controller
     public function print(RTS $rts)
     {
         $username = Auth::user()->name;
+        $created_by = User::find($rts->project->audits->first()->user_id)->name;
+
+        $work_perfor = explode(".",$rts->work_performed);
 
         $pdf = \PDF::loadView('frontend/form/rts_certificate',[
                 'username' => $username,
                 'rts' => $rts,
+                'work_perfor' => $work_perfor,
+                'created_by' => $created_by,
 
                 ]);
         return $pdf->stream();
