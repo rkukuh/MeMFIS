@@ -11,7 +11,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/discrepancy',
+                        url: '/datatables/discrepancy/ppc',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -106,7 +106,7 @@ let TaskCard = {
                 },
                 {
                     field: 'estimation_manhour',
-                    title: 'Manhours Estimation',
+                    title: 'Mhrs Est.',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -116,17 +116,21 @@ let TaskCard = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        return (
-                            '<a href="/discrepancy-ppc/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'+
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-check"></i>' +
-                            '</a>'
-                        );
+                        if(t.status == "approved"){
+                            return ("");
+                        }else{
+                            return (
+                                '<a href="/discrepancy-ppc/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                    '<i class="la la-pencil"></i>' +
+                                '</a>' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-trash"></i>' +
+                                '</a>'+
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-check"></i>' +
+                                '</a>'
+                            );
+                        }
                     }
                 }
             ]
