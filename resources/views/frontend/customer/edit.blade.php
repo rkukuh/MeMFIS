@@ -1209,7 +1209,7 @@
 
 </script>
 
-<script>
+{{-- <script>
     function initMap() {
         var myLatLng = {
             lat: -7.265757,
@@ -1227,7 +1227,7 @@
             title: 'Hello World!'
         });
     }
-</script>
+</script> --}}
 
 <script src="{{ asset('js/frontend/common/account-code.js') }}"></script>
 <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
