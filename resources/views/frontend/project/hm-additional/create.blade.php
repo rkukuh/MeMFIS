@@ -190,17 +190,15 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.update')
+                                                    @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-workpackage')
-                                                        @slot('class', 'add-workpackage')
+                                                        @slot('id', 'add-project-additional')
+                                                        @slot('class', 'add-project-additional')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
 
-                                                    @component('frontend.common.buttons.back')
-                                                        @slot('href', route('frontend.workpackage.index'))
-                                                    @endcomponent
+                                                    @include('frontend.common.buttons.back')
                                                 </div>
                                             </div>
                                         </div>

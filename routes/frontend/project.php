@@ -23,9 +23,10 @@ Route::name('frontend.')->group(function () {
 
             Route::resource('project-hm-additional', 'ProjectHMAdditionalController',[
                 'parameters' => ['project-hm-additional' => 'project']
-            ])->except('create');
+            ])->except('create','store');
 
             Route::get('/project-hm-additional/create/{project}','ProjectHMAdditionalController@create')->name('project-hm-additional.create');
+            Route::post('/project-hm-additional/{project}','ProjectHMAdditionalController@store')->name('project-hm-additional.store');
 
 
             Route::resource('project-workshop', 'ProjectWorkshopController', [
