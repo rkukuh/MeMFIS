@@ -89,7 +89,8 @@
             let performa = 0;
 
             $('.footer-manhour').on('click', '.add-manhour', function () {
-                let manhour = total_mhrs;
+                let manhour = $('#total_mhrs').html();
+                manhour = parseFloat(manhour);
                 let performa_used = performa;
                 let total = $('#total').html();
                 $.ajax({
@@ -120,7 +121,6 @@
             });
             $(".nav-item").on("click", ".m_tabs_manhour",function() {
                 if(anyChanges){
-                    console.log(anyChanges);
                     $.ajax({
                     url: "/project-hm/"+Project_uuid+"/workpackage/"+workPackage_uuid+"/getManhours",
                     method: "get",
