@@ -171,7 +171,7 @@ let Customer = {
 
                     } else {
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Customer has been created.', 'Success', {
                             timeOut: 5000
                         });
 
