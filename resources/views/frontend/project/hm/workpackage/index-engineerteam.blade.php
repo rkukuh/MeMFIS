@@ -88,8 +88,16 @@
 @push('footer-scripts')
     <script>
         let workPackage_uuid = '{{ $workPackage->uuid }}';
+        let Project_uuid = '{{ $project->uuid }}';
         let anyChanges = false;
     </script>
     <script src="{{ asset('js/frontend/project/hm/workpackage.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/modal/datatables.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/project/hm/modal/successor.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/modal/predecessor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/taskcard-predecessor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/taskcard-successor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard.js') }}"></script>
 @endpush
