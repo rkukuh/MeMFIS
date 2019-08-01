@@ -95,7 +95,10 @@ $(document).ready(function () {
     }
   }else{
     let GTotal = ForeignFormatter.format(document.getElementById("grand_total").innerHTML);
+    let IDRGTotal = $("#grand_total").attr('value');
+    IDRGTotal = IDRformatter.format(IDRGTotal * exchange_rate);
     document.getElementById("grand_total").innerHTML = GTotal;
+    document.getElementById("grand_total_rupiah").innerHTML = IDRGTotal;
     let subTotal = ForeignFormatter.format(document.getElementById("sub_total").innerHTML);
     document.getElementById("sub_total").innerHTML = subTotal;
     if($('#charge ').length > 0){
@@ -265,22 +268,22 @@ var DatatableAutoColumnHideDemo = function () {
             }
 
             if(currency.id == 1){
-              $("#sub_total").html(IDRformatter.format(subtotal));
-              $("#grand_total_rupiah").html(IDRformatter.format(subtotal));
+              // $("#sub_total").html(IDRformatter.format(subtotal));
+              // $("#grand_total_rupiah").html(IDRformatter.format(subtotal));
               $("#grand_total_rupiah").attr("value", subtotal);
               $("#sub_total").attr("value", subtotal);
               return (
                 IDRformatter.format(total)
               );
             }else{
-              let totalRupiah = subtotal * exchange_rate; 
-              $("#sub_total").html(ForeignFormatter.format(subtotal));
-              $("#grand_total").html(ForeignFormatter.format(subtotal));
-              $("#grand_total").attr("value", subtotal);
-              $("#sub_total").attr("value", subtotal);
+              // let totalRupiah = subtotal * exchange_rate; 
+              // $("#sub_total").html(ForeignFormatter.format(subtotal));
+              // $("#grand_total").html(ForeignFormatter.format(subtotal));
+              // $("#grand_total").attr("value", subtotal);
+              // $("#sub_total").attr("value", subtotal);
 
-              $("#grand_total_rupiah").html(IDRformatter.format(totalRupiah));
-              $("#grand_total_rupiah").attr("value", totalRupiah);
+              // $("#grand_total_rupiah").html(IDRformatter.format(totalRupiah));
+              // $("#grand_total_rupiah").attr("value", totalRupiah);
               return (
                 ForeignFormatter.format(total)
               );
