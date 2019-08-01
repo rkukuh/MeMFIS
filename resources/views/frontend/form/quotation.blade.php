@@ -513,12 +513,13 @@
                     <tr>
                         <th width="50%" rowspan="6" valign="top">Term & Condition <br></th>
                         <td width="25%" valign="top" align="left">Total</td>
-                        <td width="25%" valign="top" align="right">$25.000</td>
+                        <td width="25%" valign="top" align="right">$ {{ number_format($GrandTotal) }}</td>
                     </tr>
                     <tr>
                         <td width="25%" valign="top" align="left">Disc</td>
-                        <td width="25%" valign="top" align="right">$ / %</td>
+                        <td width="25%" valign="top" align="right"></td>
                     </tr>
+                    @if($totalCharge > 0)
                     <tr>
                         <td width="25%" valign="top" align="left">Delivery Cost</td>
                         <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }}</td>
@@ -527,13 +528,14 @@
                         <td width="25%" valign="top" align="left">Other Cost(if available)</td>
                         <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }} <hr width="100%"></td>
                     </tr>
+                    @endif
                     <tr>
                         <th width="25%" valign="top" align="left">Grand Total in USD</th>
-                        <th width="25%" valign="top" align="right">$2.100.000</th>
+                        <th width="25%" valign="top" align="right">$ {{ number_format($GrandTotal) }}</th>
                     </tr>
                     <tr>
                         <th width="25%" valign="top" align="left">Grand Total in Rupiah</th>
-                        <th width="25%" valign="top" align="right">Rp. 2.321.000.000</th>
+                        <th width="25%" valign="top" align="right">Rp. {{ number_format($GrandTotal * $quotation->exchange_rate) }}</th>
                     </tr>
                 </table>
             </div>
