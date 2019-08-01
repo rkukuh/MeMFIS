@@ -48,6 +48,8 @@ class ProjectHMAdditionalController extends Controller
      */
     public function store(Project $project,Request $request)
     {
+        // $defectcard_uuid = explode(",",$request->defectcard_uuid);
+        // dd($defectcard_uuid);
         $parent_id = $project->id;
         $project = $project->replicate();
         $project->parent_id = $parent_id;

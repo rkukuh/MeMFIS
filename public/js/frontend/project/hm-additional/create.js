@@ -1,27 +1,21 @@
 let AdditionalTaskCreate = (function() {
     let t ={
-    // init: function () {
-        // function strtrunc(str, max, add) {
-        //     add = add || '...';
-        //     return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
-        // };
 
-        // $('.defect_card_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/project/defectcard/'+project_uuid
-                        // map: function (raw) {
-                        //     let dataSet = raw;
+                        url: '/datatables/project/defectcard/'+project_uuid,
+                        map: function (raw) {
+                            let dataSet = raw;
 
-                        //     if (typeof raw.data !== 'undefined') {
-                        //         dataSet = raw.data;
-                        //     }
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
 
-                        //     return dataSet;
-                        // }
+                            return dataSet;
+                        }
                     }
                 },
                 pageSize: 10,
@@ -35,18 +29,18 @@ let AdditionalTaskCreate = (function() {
                 footer: !1
             },
             sortable: !0,
-            // filterable: !1,
+            filterable: !1,
             pagination: !0,
-            // search: {
-            //     input: $('#generalSearch')
-            // },
-            // toolbar: {
-            //     items: {
-            //         pagination: {
-            //             pageSizeSelect: [5, 10, 20, 30, 50, 100]
-            //         }
-            //     }
-            // },
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
             columns: [
             {
                 field: "RecordID",
@@ -56,15 +50,11 @@ let AdditionalTaskCreate = (function() {
                 textAlign: "center",
                 selector: { class: "m-checkbox--solid m-checkbox--brand" }
                 },
-                // { field: "ID", title: "ID", width: 40, template: "{{RecordID}}" },
                 {
                     field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t, e, i) {
-                    //         return '<a href="/jobcard-ppc/'+t.uuid+'">' + t.number + "</a>"
-                    // }
                 },
                 {
                     field: 'code',
@@ -300,6 +290,8 @@ let AdditionalTaskCreate = (function() {
                 ]
             });
 
+            let UUID = "";
+
             !(function() {
               (t.extensions = { checkbox: {} }),
                 (t.search = { input: $("#generalSearch1") });
@@ -325,16 +317,21 @@ let AdditionalTaskCreate = (function() {
                 e.on(
                   "m-datatable--on-click-checkbox m-datatable--on-layout-updated",
                   function(t) {
-                    let a = e.checkbox().getSelectedId().length;
-                    $("#m_datatable_selected_number1").html(a),
-                      a > 0
-                        ? $("#m_datatable_group_action_form1").collapse("show")
-                        : $("#m_datatable_group_action_form1").collapse("hide");
+                    let uuids = e.checkbox().getSelectedId();
+
+                    UUID = uuids
+
+                    // let a = e.checkbox().getSelectedId().length;
+                    // $("#m_datatable_selected_number1").html(a),
+                    //   a > 0
+                    //     ? $("#m_datatable_group_action_form1").collapse("show")
+                    //     : $("#m_datatable_group_action_form1").collapse("hide");
                   }
                 ),
                 $(".nav-tabs")
                   .on("click", ".mat-tool", function() {
                     let uuids = e.checkbox().getSelectedId();
+
                     additional_tools_get_datatable(uuids);
 
                     additional_materials_get_datatable(uuids);
@@ -345,21 +342,13 @@ let AdditionalTaskCreate = (function() {
             var datatable = $('.defect_card_datatable').mDatatable();
 
             $(document).on('click', '.deleteFn', (e) => {
-                alert('tes');
             //   e.preventDefault();
             //   let selected = this.datatable.getSelectedRecords();
             });
 
             $('.add-project-additional').on('click', function () {
                 let data = new FormData();
-                // data.append("title", $('#project_title').val());
-                // data.append("customer_id", $('#customer').val());
-                // data.append("no_wo", $('input[name=work-order]').val());
-                // data.append("aircraft_id", $('#applicability_airplane').val());
-                // data.append("aircraft_register", $('input[name=reg]').val());
-                // data.append("aircraft_sn", $('input[name=serial-number]').val());
-                // data.append("code", 'Dummy COde');
-                // data.append("fileInput", document.getElementById('work-order-attachment').files[0]);
+                data.append("defectcard_uuid", UUID);
 
                 $.ajax({
                     headers: {
@@ -373,27 +362,6 @@ let AdditionalTaskCreate = (function() {
                     data:data,
                     success: function (data) {
                         if (data.errors) {
-                            // if (data.errors.customer_id) {
-                            //     $('#customer-error').html(data.errors.customer_id[0]);
-                            // }
-                            // if (data.errors.aircraft_register) {
-                            //     $('#reg-error').html(data.errors.aircraft_register[0]);
-                            // }
-                            // if (data.errors.aircraft_sn) {
-                            //     $('#serial-number-error').html(data.errors.aircraft_sn[0]);
-                            // }
-                            // if (data.errors.aircraft_id) {
-                            //     $('#applicability-airplane-error').html(data.errors.aircraft_id[0]);
-                            // }
-                            // if (data.errors.no_wo) {
-                            //     $('#work-order-error').html(data.errors.no_wo[0]);
-                            // }
-
-                            // document.getElementById('customer').value = data.getAll('customer_id');
-                            // document.getElementById('work-order').value = data.getAll('no_wo');
-                            // document.getElementById('applicability_airplane').value = data.getAll('aircraft_id');
-                            // document.getElementById('reg').value = data.getAll('aircraft_register');
-                            // document.getElementById('serial-number').value = data.getAll('aircraft_sn');
 
                         } else {
                             toastr.success('Project Aditional has been created.', 'Success', {
