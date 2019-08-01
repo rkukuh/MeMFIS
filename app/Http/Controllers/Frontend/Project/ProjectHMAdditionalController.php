@@ -74,10 +74,17 @@ class ProjectHMAdditionalController extends Controller
      */
     public function show(Project $project)
     {
+        if($project->quotations->toArray() == []){
+            $project = Project::find($project->parent_id);
+            $attention = json_decode($project->quotations()->first()->attention);
+        }else{
+            $attention = json_decode($project->quotations()->first()->attention);
+        }
         return view('frontend.project.hm-additional.show',[
             'project' => $project,
             'aircrafts' => $this->aircrafts,
-            'customers' => $this->customers
+            'customers' => $this->customers,
+            'attention' => $attention
         ]);
     }
 
@@ -89,11 +96,13 @@ class ProjectHMAdditionalController extends Controller
      */
     public function edit(Project $project)
     {
+        $attention = json_decode($project->quotations()->first()->attention);
         $attention = $project->quotations;
         return view('frontend.project.hm-additional.edit',[
             'project' => $project,
             'aircrafts' => $this->aircrafts,
-            'customers' => $this->customers
+            'customers' => $this->customers,
+            'attention' => $attention
         ]);
     }
 
