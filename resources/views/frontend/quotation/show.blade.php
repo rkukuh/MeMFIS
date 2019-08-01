@@ -410,7 +410,7 @@
                                                         @component('frontend.common.label.data-info')
                                                             @slot('id', 'sub_total')
                                                             @slot('class', 'sub_total')
-                                                            @slot('text', $quotation->subtotal)
+                                                            @slot('text', number_format($quotation->subtotal) )
                                                             @slot('value', $quotation->subtotal)
                                                         @endcomponent
                                                     </div>
@@ -433,7 +433,7 @@
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('id', 'charge')
                                                                 @slot('name', 'charge')
-                                                                @slot('text', $charge->amount)
+                                                                @slot('text', number_format($charge->amount) )
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -459,7 +459,7 @@
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('id', 'grand_total')
                                                                 @slot('class', 'grand_total')
-                                                                @slot('text', $quotation->grandtotal)
+                                                                @slot('text', number_format($quotation->grandtotal) )
                                                                 @slot('value', $quotation->grandtotal)
                                                             @endcomponent
                                                         </div>
@@ -488,7 +488,7 @@
                                                         @component('frontend.common.label.data-info')
                                                             @slot('id', 'grand_total_rupiah')
                                                             @slot('class', 'grand_total_rupiah')
-                                                            @slot('text', 'Rp '.$quotation->grandtotal)
+                                                            @slot('text', number_format($quotation->grandtotal) )
                                                             @slot('value', $quotation->grandtotal)
                                                         @endcomponent
                                                     </div>
