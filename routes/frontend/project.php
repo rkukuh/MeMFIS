@@ -46,15 +46,15 @@ Route::name('frontend.')->group(function () {
                     ]);
 
                     /** Summary */
-                    Route::get('/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('summary.basic');
-                    Route::get('/{workPackage}/summary/sip', 'SummaryRoutineTaskcardController@sip')->name('summary.sip');
-                    Route::get('/{workPackage}/summary/cpcp', 'SummaryRoutineTaskcardController@cpcp')->name('summary.cpcp');
-                    Route::get('/{workPackage}/summary/ad-sb', 'SummaryNonRoutineTaskcardController@adsb')->name('summary.ad-sb');
-                    Route::get('/{workPackage}/summary/cmr-awl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('summary.cmr-awl');
-                    Route::get('/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('summary.si');
-                    Route::get('/{workPackage}/summary/routine', 'SummaryRoutineTaskcardController@summary')->name('summary.routine');
-                    Route::get('/{workPackage}/summary/non-routine', 'SummaryNonRoutineTaskcardController@summary')->name('summary.nonroutine');
-                    Route::get('/{workPackage}/summary/', 'ProjectHMWorkPackageController@summary')->name('summary.workpackage');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('summary.basic');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/sip', 'SummaryRoutineTaskcardController@sip')->name('summary.sip');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/cpcp', 'SummaryRoutineTaskcardController@cpcp')->name('summary.cpcp');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/ad-sb', 'SummaryNonRoutineTaskcardController@adsb')->name('summary.ad-sb');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/cmr-awl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('summary.cmr-awl');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('summary.si');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/routine', 'SummaryRoutineTaskcardController@summary')->name('summary.routine');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/non-routine', 'SummaryNonRoutineTaskcardController@summary')->name('summary.nonroutine');
+                    Route::get('/{project}/workpackage/{workPackage}/summary', 'ProjectHMWorkPackageController@summary')->name('summary.workpackage');
 
                 });
 

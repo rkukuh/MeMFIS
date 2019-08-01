@@ -120,7 +120,7 @@ class ProjectHMWorkPackageController extends Controller
 
         // $materialCount = $workPackage->items->count();
         // $toolCount = $workPackage->tools->count();
-
+        // dd($workPackage->uuid);
 
         $view = 'frontend.project.hm.workpackage.show';
         return view($view,[
@@ -324,7 +324,7 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function summary(WorkPackage $workPackage)
+    public function summary(Project $project, WorkPackage $workPackage)
     {
         $skills = $subset = [];
 

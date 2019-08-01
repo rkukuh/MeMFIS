@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\Project;
 use App\Models\Aircraft;
 use App\Models\Project;
 use App\Models\ListUtil;
+use App\Models\Pivots\ProjectWorkPackage;
 use App\Models\WorkPackage;
 use App\Models\TaskCard;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class SummaryNonRoutineTaskcardController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function adsb(WorkPackage $workPackage)
+    public function adsb(Project $project, WorkPackage $workPackage)
     {
         $skills = $subset = [];
         $taskcards  = $workPackage->taskcards->load('type')->whereIn('type.code', ['ad','sb']);
@@ -58,7 +59,7 @@ class SummaryNonRoutineTaskcardController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function cmrawl(WorkPackage $workPackage)
+    public function cmrawl(Project $project, WorkPackage $workPackage)
     {
         $taskcards  = $workPackage->taskcards->load('type')->whereIn('type.code', ['cmr','awl']);
         $skills = $subset = [];
@@ -95,7 +96,7 @@ class SummaryNonRoutineTaskcardController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function si(WorkPackage $workPackage)
+    public function si(Project $project, WorkPackage $workPackage)
     {
         $taskcards  = $workPackage->taskcards->load('type')->where('type.code', 'si');
         $skills = $subset = [];
@@ -132,7 +133,7 @@ class SummaryNonRoutineTaskcardController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function summary(WorkPackage $workPackage)
+    public function summary(Project $project, WorkPackage $workPackage)
     {
         $skills = $subset = [];
 
