@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <fieldset class="border p-2">
-                                                <legend class="w-auto">Customer Name (<span>PT. Sejahterah</span>)</legend>
+                                                <legend class="w-auto">Customer Name (<span>{{ $project->customer->name }}</span>)</legend>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <div class="form-group m-form__group row">
@@ -63,7 +63,7 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text',  $project->no_wo)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -110,7 +110,7 @@
                                                                     Attn
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
+                                                                     @slot('text', $attention->name)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -120,7 +120,7 @@
                                                                     Email
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
+                                                                   @slot('text', $attention->email)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -141,12 +141,12 @@
                                                     <td align="center" width="14%"><b>A/C SN</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
+                                                    <td align="center" valign="top">{{$project->created_at}}</td>
+                                                    <td align="center" valign="top">{{$project->code}}</td>
+                                                    <td align="center" valign="top">{{$project->title}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft->name}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft_register}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft_sn}}</td>
                                                 </tr>
                                             </table>
                                         </div>
