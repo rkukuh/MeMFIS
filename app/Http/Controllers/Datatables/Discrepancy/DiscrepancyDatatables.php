@@ -19,7 +19,10 @@ class DiscrepancyDatatables extends Controller
      */
     public function index()
     {
-        $DefectCard=DefectCard::with('jobcard','progresses')->whereDoesntHave('approvals')->get();
+        $DefectCard = DefectCard::with('jobcard','progresses','approvals')
+        ->has('approvals', '<=', 1)
+        // ->orWhereDoesntHave('approvals')
+        ->get();
 
         foreach($DefectCard as $jobcard){
             $jobcard->taskcard_number .= $jobcard->jobcard->taskcard->number;

@@ -19,7 +19,9 @@ class DefectCardDatatables extends Controller
      */
     public function index()
     {
-        $DefectCard = DefectCard::with('jobcard','progresses')->has('approvals','>',1)->get();
+        $DefectCard = DefectCard::with('jobcard','progresses')
+        ->has('approvals','>=',1)
+        ->get();
 
         foreach($DefectCard as $jobcard){
             $jobcard->taskcard_number .= $jobcard->jobcard->taskcard->number;

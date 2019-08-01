@@ -164,10 +164,10 @@
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active show" id="m_tabs_1_1" role="tabpanel">
-                                                    @include('frontend.project.additional.defect-card.index')
+                                                    @include('frontend.project.hm-additional.defect-card.index')
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
-                                                    @include('frontend.project.additional.material-tool.index')
+                                                    @include('frontend.project.hm-additional.material-tool.index')
                                                 </div>
                                             </div>
                                         </div>

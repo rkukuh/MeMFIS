@@ -82,13 +82,18 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function show(Project $project, WorkPackage $workPackage,Request $request)
     {
-        $mhrs_pfrm_factor = $skills = $subset = [];
+        $mhrs_pfrm_factor = $skills = $subset = $taskcards = [];
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
+        ->with('taskcards')
         ->first();
+        foreach($project_workpackage->taskcards as $taskcard){
+            array_push($taskcards, $taskcard->taskcard_id);
+        }
+        $taskcards = TaskCard::whereIn('id',$taskcards)->get(); 
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
-        foreach($workPackage->taskcards as $taskcard){
+        foreach($taskcards as $taskcard){
             array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
             $result = $taskcard->skills->map(function ($skills) {
                 return collect($skills->toArray())
@@ -106,14 +111,15 @@ class ProjectHMWorkPackageController extends Controller
         sort($skills);
         $skills = array_unique($skills);
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
-        $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
-        $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
+        $total_mhrs = $taskcards->sum('estimation_manhour');
+        $total_pfrm_factor = $taskcards->sum('performance_factor');
 
         //get employees
         $employees = Employee::all();
         $facilities = Facility::all();
-        $materialCount = $workPackage->items->count();
-        $toolCount = $workPackage->tools->count();
+
+        // $materialCount = $workPackage->items->count();
+        // $toolCount = $workPackage->tools->count();
 
 
         $view = 'frontend.project.hm.workpackage.show';
@@ -121,13 +127,13 @@ class ProjectHMWorkPackageController extends Controller
             'edit' => false,
             'project' => $project,
             'employees' => $employees,
-            'toolCount' => $toolCount,
+            // 'toolCount' => $toolCount,
             'total_mhrs' => $total_mhrs,
             'facilities' => $facilities,
             'engineer_skills' => $skills,
             'workPackage' => $workPackage,
             'skills' => json_encode($skills),
-            'materialCount' => $materialCount,
+            // 'materialCount' => $materialCount,
             'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
             'total_pfrm_factor' => $total_pfrm_factor,
             'project_workpackage' => $project_workpackage
@@ -150,7 +156,7 @@ class ProjectHMWorkPackageController extends Controller
         ->first();
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
-        foreach($project_workpackage->taskcards as $key => $taskcard){
+        foreach($project_workpackage->taskcards as $taskcard){
             array_push($taskcards, $taskcard->taskcard_id);
         }
         $taskcards = TaskCard::whereIn('id',$taskcards)->get(); 
@@ -174,14 +180,14 @@ class ProjectHMWorkPackageController extends Controller
         $skills = array_unique($skills);
 
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
-        $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
-        $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
+        $total_mhrs = $taskcards->sum('estimation_manhour');
+        $total_pfrm_factor = $taskcards->sum('performance_factor');
 
         $employees = Employee::all();
         $facilities = Facility::all();
 
-        $materialCount = $workPackage->items->count();
-        $toolCount = $workPackage->tools->count();
+        // $materialCount = $workPackage->items->count();
+        // $toolCount = $workPackage->tools->count();
 
         if ($request->anyChanges) {
             $view = 'frontend.project.hm.workpackage.index-engineerteam';
@@ -192,13 +198,13 @@ class ProjectHMWorkPackageController extends Controller
             'edit' => true,
             'project' => $project,
             'employees' => $employees,
-            'toolCount' => $toolCount,
+            // 'toolCount' => $toolCount,
             'total_mhrs' => $total_mhrs,
             'facilities' => $facilities,
             'engineer_skills' => $skills,
             'workPackage' => $workPackage,
             'skills' => json_encode($skills),
-            'materialCount' => $materialCount,
+            // 'materialCount' => $materialCount,
             'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
             'total_pfrm_factor' => $total_pfrm_factor,
             'project_workpackage' => $project_workpackage,

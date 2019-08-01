@@ -15,6 +15,14 @@ use App\Http\Requests\Frontend\ProjectHMUpdate;
 
 class ProjectHMAdditionalController extends Controller
 {
+    protected $aircrafts;
+    protected $customers;
+
+    public function __construct()
+    {
+        $this->aircrafts = Aircraft::all();
+        $this->customers = Customer::all();
+    }
 
     /**
      * Display a listing of the resource.
@@ -48,6 +56,8 @@ class ProjectHMAdditionalController extends Controller
      */
     public function store(Project $project,Request $request)
     {
+        // $defectcard_uuid = explode(",",$request->defectcard_uuid);
+        // dd($defectcard_uuid);
         $parent_id = $project->id;
         $project = $project->replicate();
         $project->parent_id = $parent_id;
