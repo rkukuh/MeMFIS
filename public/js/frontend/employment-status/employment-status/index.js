@@ -6,7 +6,7 @@ let EmploymentStatus = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/employee',
+                        url: '/datatables/employee/statuses',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -49,19 +49,12 @@ let EmploymentStatus = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/employee/'+t.uuid+'">' + t.code + "</a>"
+                        return '<a href="/status/'+t.uuid+'">' + t.code + "</a>"
                     }
                 },
                 {
                     field: 'name',
                     title: 'Employment Status Name',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: "{{first_name}}  {{middle_name}}  {{last_name}}"
-                },
-                {
-                    field: 'dob',
-                    title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -328,63 +321,6 @@ let EmploymentStatus = {
                 }
             });
         });
-        // let remove_employee = $('.m_datatable_employee').on('click', '.delete-employee', function () {
-        //     let triggerid = $(this).data('id');
-
-        //     swal({
-        //         title: 'Are you sure?',
-        //         text: 'You will not be able to recover this imaginary file!',
-        //         type: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonText: 'Yes, delete it!',
-        //         cancelButtonText: 'No, keep it'
-        //     }).then(result => {
-        //         if (result.value) {
-        //             $.ajax({
-        //                 headers: {
-        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-        //                         'content'
-        //                     )
-        //                 },
-        //                 type: 'DELETE',
-        //                 url: '/employee/' + triggerid + '',
-        //                 success: function (data) {
-        //                     toastr.success(
-        //                         'Data berhasil dihapus.',
-        //                         'Sukses!', {
-        //                             timeOut: 5000
-        //                         }
-        //                     );
-
-        //                     let table = $('.m_datatable_employee').mDatatable();
-
-        //                     table.originalDataSet = [];
-        //                     table.reload();
-        //                 },
-        //                 error: function (jqXhr, json, errorThrown) {
-        //                     let errorsHtml = '';
-        //                     let errors = jqXhr.responseJSON;
-
-        //                     $.each(errors.errors, function (index, value) {
-        //                         $('#delete-error').html(value);
-        //                     });
-        //                 }
-        //             });
-        //             swal(
-        //                 'Deleted!',
-        //                 'Your imaginary file has been deleted.',
-        //                 'success'
-        //             );
-        //         } else {
-        //             swal(
-        //                 'Cancelled',
-        //                 'Your imaginary file is safe :)',
-        //                 'error'
-        //             );
-        //         }
-        //     });
-        // });
-
 
 
     }

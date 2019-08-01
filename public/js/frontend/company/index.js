@@ -51,10 +51,13 @@ let CompanyStructure = {
                     }
                 },
                 {
-                    field: 'type.name',
+                    field: 'type',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return t.name
+                    }
                 },
                 {
                     field: 'description',

@@ -119,6 +119,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'EmployeeDatatables@index')->name('all');
+                Route::get('/statuses', 'EmployeeStatusesDatatables@index')->name('employee.statuses');
 
                 /** Polymorph */
                 Route::get('/{customer}/faxes', 'EmployeeFaxesDatatables@index')->name('faxes.index');
