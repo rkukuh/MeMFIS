@@ -91,17 +91,6 @@ let Employee = {
                     title: 'dob',
                     sortable: 'asc',
                     filterable: !1,
-                    template:  function (t) {
-                        let dob;
-
-                        if(t.dob == null){
-                            dob = 'Not Known'
-                        }else{
-                            dob = t.dob
-                        }
-
-                        return dob;
-                    }
                 },
                 {
                     field: 'gender',
@@ -109,14 +98,12 @@ let Employee = {
                     sortable: 'asc',
                     filterable: !1,
                     template:  function (t) {
-                        let gender;
+                        let gender = null;
 
                         if(t.gender == 'm'){
                             gender = 'MALE'
                         }else if(t.gender == 'f'){
                             gender = 'FEMALE'
-                        }else{
-                            gender = 'Not Known'
                         }
 
                         return gender;
@@ -127,17 +114,6 @@ let Employee = {
                     title: 'Hired At',
                     sortable: 'asc',
                     filterable: !1,
-                    template:  function (t) {
-                        let hired_at;
-
-                        if(t.hired_at == null){
-                            hired_at = 'Not Known'
-                        }else{
-                            hired_at = t.hired_at
-                        }
-
-                        return hired_at;
-                    }
                 },
                 {
                     field: 'Actions',

@@ -86,7 +86,7 @@ Route::name('datatables.')->group(function () {
 
         });
 
-        /** CUSTOMER */
+        /** COMPANY */
 
         Route::name('company.')->group(function () {
 
@@ -99,8 +99,9 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'CompanyDatatables@index')->name('all');
-
-                /** Polymorph */
+                Route::get('/type', 'CompanyTypeDatatables@index')->name('company.type');
+                 /** Polymorph */
+                
             });
 
         });

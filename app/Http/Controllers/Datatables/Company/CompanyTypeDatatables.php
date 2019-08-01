@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Datatables\Company;
 
-use App\Models\Company;
+use App\Models\Type;
 use App\Http\Controllers\Controller;
 
-class CompanyDatatables extends Controller
+class CompanyTypeDatatables extends Controller
 {
-
     public function index(){
-        $company = Company::with('departments','type','parent')->get();
+        $type = Type::where('of','company')->get();
 
-        $data = $alldata = json_decode($company);
+        $data = $alldata = json_decode($type);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

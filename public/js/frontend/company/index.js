@@ -63,7 +63,7 @@ let CompanyStructure = {
                     filterable: !1,
                 },
                 {
-                    field: 'parent_id',
+                    field: 'parent.name',
                     title: 'Parent Structure',
                     sortable: 'asc',
                     filterable: !1,

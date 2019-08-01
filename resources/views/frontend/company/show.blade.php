@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.company-structure-department.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.company.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Company Structure & Department
                             </span>
@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.edit')
+                                @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
                                     Company Structure & Department
@@ -56,11 +56,8 @@
                                                 Code 
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'title')
-                                                @slot('id', 'title')
-                                                @slot('name', 'title')
-                                                @slot('id_error', 'title')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $company->code)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -68,11 +65,8 @@
                                                 Name
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'name')
-                                                @slot('id', 'name')
-                                                @slot('name', 'name')
-                                                @slot('id_error', 'name')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $company->name)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -82,11 +76,8 @@
                                                 Description
                                             </label>
 
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '5')
-                                                @slot('id', 'description')
-                                                @slot('name', 'description')
-                                                @slot('text', 'Description')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $company->description)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -96,11 +87,22 @@
                                                Company Type   
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Company Type')
-                                                @slot('id', 'company')
-                                                @slot('name', 'company')
-                                                @slot('id_error', 'company-airplane')
+                                            @php
+                                                //SET COMPANY TYPE 
+                                                $type = null;
+                                                if(isset($company->type->name)){
+                                                    $type = $company->type->name;
+                                                };   
+
+                                                //SET COMPANY PARENT 
+                                                $parent = null;
+                                                if(isset($company->parent->name)){
+                                                    $parent = $company->parent->name;
+                                                }; 
+                                            @endphp
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $type)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -108,11 +110,8 @@
                                                Parent Structure
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Parent Structure')
-                                                @slot('id', 'parent_structure')
-                                                @slot('name', 'parent_structure')
-                                                @slot('id_error', 'parent_structure')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $parent)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -120,16 +119,7 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-company-structure')
-                                                        @slot('class', 'add-company-structure')
-                                                    @endcomponent
-
-                                                    @include('frontend.common.buttons.reset')
-
                                                     @include('frontend.common.buttons.back')
-
                                                 </div>
                                             </div>
                                         </div>
@@ -149,6 +139,5 @@
     <script src="{{ asset('js/frontend/functions/select2/company.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/parent-structure.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/company-structure-department/edit.js') }}"></script>
-    <script src="{{ asset('js/frontend/company-structure-department/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/company/form-reset.js') }}"></script>
 @endpush

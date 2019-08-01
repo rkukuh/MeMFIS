@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.company-structure-department.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.company.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Company Structure & Department
                             </span>
@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.create-new')
+                                @include('frontend.common.label.edit')
 
                                 <h3 class="m-portlet__head-text">
                                     Company Structure & Department
@@ -50,6 +50,13 @@
                         <div class="m-portlet__body">
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
+
+                                        @component('frontend.common.input.hidden')
+                                        @slot('id', 'company_uuid')
+                                        @slot('name', 'company_uuid')
+                                        @slot('value', $company->uuid)
+                                        @endcomponent
+
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -57,10 +64,10 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'title')
-                                                @slot('id', 'title')
-                                                @slot('name', 'title')
-                                                @slot('id_error', 'title')
+                                                @slot('id', 'code')
+                                                @slot('name', 'code')
+                                                @slot('value',$company->code)
+                                                @slot('id_error', 'code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -72,6 +79,7 @@
                                                 @slot('text', 'name')
                                                 @slot('id', 'name')
                                                 @slot('name', 'name')
+                                                @slot('value',$company->name)
                                                 @slot('id_error', 'name')
                                             @endcomponent
                                         </div>
@@ -86,6 +94,7 @@
                                                 @slot('rows', '5')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
+                                                @slot('value',$company->description)
                                                 @slot('text', 'Description')
                                             @endcomponent
                                         </div>
@@ -97,7 +106,6 @@
                                             </label>
 
                                             @component('frontend.common.input.select2')
-                                                @slot('text', 'Company Type')
                                                 @slot('id', 'company')
                                                 @slot('name', 'company')
                                                 @slot('id_error', 'company-airplane')
@@ -109,7 +117,6 @@
                                             </label>
 
                                             @component('frontend.common.input.select2')
-                                                @slot('text', 'Parent Structure')
                                                 @slot('id', 'parent_structure')
                                                 @slot('name', 'parent_structure')
                                                 @slot('id_error', 'parent_structure')
@@ -122,8 +129,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-company-structure')
-                                                        @slot('class', 'add-company-structure')
+                                                        @slot('id', 'edit-company-structure')
+                                                        @slot('class', 'edit-company-structure')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -149,6 +156,6 @@
     <script src="{{ asset('js/frontend/functions/select2/company.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/parent-structure.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/company-structure-department/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/company-structure-department/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/company/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/company/form-reset.js') }}"></script>
 @endpush
