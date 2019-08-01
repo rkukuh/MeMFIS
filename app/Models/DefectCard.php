@@ -44,6 +44,20 @@ class DefectCard extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A Defect Card may have zero or many helper.
+     *
+     * This function will retrieve all the helpers of a Defect Card.
+     * See: Employee's defectcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function helpers()
+    {
+        return $this->belongsToMany(Employee::class, 'defectcard_employee', 'defectcard_id', 'employee_id')
+                    ->withTimestamps();;
+    }
+
+    /**
      * Many-to-Many: A defect card may have zero or many item.
      *
      * This function will retrieve all the items of a defect card.
