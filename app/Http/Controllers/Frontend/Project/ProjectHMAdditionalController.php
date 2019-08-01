@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
 use App\Models\WorkPackage;
+use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -45,20 +46,14 @@ class ProjectHMAdditionalController extends Controller
      * @param  \App\Http\Requests\Frontend\ProjectStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Project $project,ProjectHMStore $request)
+    public function store(Project $project,Request $request)
     {
-        // $request->merge(['code' => DocumentNumber::generate('PROJ-', Project::count()+1)]);
+        $parent_id = $project->id;
+        $project = $project->replicate();
+        $project->parent_id = $parent_id;
+        $project->save();
 
-        // $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
-
-        // $project = Project::create($request->all());
-        // if ($request->hasFile('fileInput')) {
-        //     $destination = 'project/hm/workOrder';
-        //     $fileName = $request->file('fileInput')->getClientOriginalName();
-        //     $fileUpload = Storage::putFileAs($destination,$request->file('fileInput'), $fileName);
-        // }
-
-        // return response()->json($project);
+        return response()->json($project);
     }
 
     /**

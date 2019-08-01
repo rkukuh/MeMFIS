@@ -307,6 +307,11 @@ class QuotationController extends Controller
         ]));
 
         $project = Project::find($quotation->project_id);
+        $project->progresses()->save(new Progress([
+            'status_id' =>  Status::ofProject()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
+
         $project->approvals()->save(new Approval([
             'approvable_id' => $project->id,
             'approved_by' => Auth::id(),
@@ -374,7 +379,14 @@ class QuotationController extends Controller
             }
 
         }
-
+        foreach($project->htcrr as $htcrr){
+            if($htcrr->parent_id == null){
+                $htcrr->progresses()->save(new Progress([
+                    'status_id' =>  Status::where('code','removal-open')->first()->id,
+                    'progressed_by' => Auth::id()
+                ]));
+            }
+        }
 
         return response()->json($quotation);
     }

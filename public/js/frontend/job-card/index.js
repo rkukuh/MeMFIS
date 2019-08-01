@@ -212,7 +212,7 @@ let JobCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="/jobcard-engineer/'+t.uuid+'/edit">' + t.number + "</a>"
+                            return '<a href="/jobcard/'+t.uuid+'/edit">' + t.number + "</a>"
                     }
                 },
                 {

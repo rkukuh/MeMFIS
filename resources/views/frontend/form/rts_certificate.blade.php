@@ -61,12 +61,12 @@
         <tr width="100%">
           <td width="40%" valign="top">Project Refrence</td>
           <td width="1%" valign="top">:</td>
-          <td width="59%" valign="top"><span>generate</span></td>
+          <td width="59%" valign="top"><span>{{$rts->project->code}}</span></td>
         </tr>
         <tr width="100%">
           <td width="40%" valign="top">Aircraft Type / MSN</td>
           <td width="1%" valign="top">:</td>
-          <td width="59%" valign="top"><span>generate</span></td>
+          <td width="59%" valign="top"><span>{{$rts->project->aircraft->name}}</span></td>
         </tr>
         <tr width="100%">
           <td width="40%" valign="top">Nasionality / Registration Mark</td>
@@ -76,12 +76,12 @@
         <tr width="100%">
           <td width="40%" valign="top">Aircarft Total Time</td>
           <td width="1%" valign="top">:</td>
-          <td width="59%" valign="top"><span>generate</span></td>
+        <td width="59%" valign="top"><span>{{$rts->aircraft_total_time}}</span></td>
         </tr>
         <tr width="100%">
           <td width="40%" valign="top">Work Performed</td>
           <td width="1%" valign="top">:</td>
-          <td width="59%" valign="top"><span>generate</span></td>
+          <td width="59%" valign="top"><span>{{ $work_perfor[0] }}</span></td>
         </tr>
         <tr width="100%">
           <td width="30%"></td>
@@ -89,16 +89,7 @@
           <td width="59%">
             <div style="margin-top:-15px;">
               <ul style="margin-left:-40px;">
-                <li>-</li>
-                <li>{{ $rts->work_performed[0] }}</li>
-              </ul>
-              <ul style="margin-top:-12px;margin-left:-40px;">
-                <li>-</li>
-                <li>free text</li>
-              </ul>
-              <ul style="margin-top:-12px;margin-left:-40px;">
-                <li>-</li>
-                <li>free text</li>
+                <li>{{ $work_perfor[1] }}</li>
               </ul>
             </div>
           </td>
@@ -108,25 +99,25 @@
         <tr width="100%">
           <td width="40%" valign="top">Work Data/CAMP Refrence</td>
           <td width="1%" valign="top">:</td>
-          <td width="59%" valign="top"><span>free text</span></td>
+        <td width="59%" valign="top"><span>{{$rts->work_data}}</span></td>
         </tr>
         <tr width="100%">
           <td width="40%" valign="top">Exceptions</td>
           <td width="1%" valign="top">:</td>
-          <td width="59%" valign="top"><span>free text</span></td>
+        <td width="59%" valign="top"><span>{{$rts->exception}}</span></td>
         </tr>
       </table>
-      <p style="text-align:left;padding:5px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit id pariatur quas totam et nesciunt? Sunt quibusdam doloremque praesentium, corporis minima nostrum veniam! Atque, aliquid a ab unde ex minus?</p>
+      <p style="text-align:left;padding:5px;">The work recorded above has been carried out, subject to exception/s itemized above, in accordance with requirements of Civil Aviation Safety Regulaton. For time being in force and in that respect the aircraft/equipment is approved for release to service.</p>
       <table width="100%">
         <tr width="100%">
           <td width="18%" valign="top">Name</td>
           <td width="1%" valign="top">:</td>
-          <td width="82%" valign="top">Username Login</td>
+        <td width="82%" valign="top">{{$created_by}}</td>
         </tr>
         <tr width="100%">
           <td width="18%" valign="top">Date / Time</td>
           <td width="1%" valign="top">:</td>
-          <td width="82%" valign="top">General Sesuai date create</td>
+          <td width="82%" valign="top">{{$rts->created_at}}</td>
         </tr>
       </table>
       <p style="text-align:left;font-size: 14px;padding-left:5px;">For and behalf of PT. Merpati Maintanance Facility</p>
@@ -136,7 +127,11 @@
           <td width="1%" valign="top">:</td>
           <td width="82%" valign="top">
             <div class="checkbox">
-              <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Indonesia DGCA No :</span><span>145D-093</span>
+                @if(sizeOf($rts->approvals->toArray())==0)
+                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Indonesia DGCA No :</span><span>145D-093</span>
+                @else
+                    <img src="./img/check.png" alt="" width="10"> <span style="margin-left:5px;">Indonesia DGCA No :</span><span>145D-093</span>
+                @endif
             </div>
           </td>
         </tr>

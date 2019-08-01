@@ -191,9 +191,9 @@
                                                         @slot('id', 'add-workpackage')
                                                         @slot('class', 'add-workpackage')
                                                     @endcomponent
-    
+
                                                     @include('frontend.common.buttons.reset')
-    
+
                                                     @component('frontend.common.buttons.back')
                                                         @slot('href', route('frontend.workpackage.index'))
                                                     @endcomponent
@@ -232,6 +232,6 @@
 
 @push('footer-scripts')
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/frontend/project/additional/edit.js')}}"></script>
+    <script src="{{ asset('js/frontend/project/hm-additional/edit.js')}}"></script>
 @endpush
 

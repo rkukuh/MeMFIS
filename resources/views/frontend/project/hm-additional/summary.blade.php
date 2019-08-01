@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="m-portlet__body">
                     <!--begin: Datatable -->
                     <div class="table-responsive-xl text-center">
@@ -242,6 +242,6 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/project/additional/summary.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm-additional/summary.js') }}"></script>
     <script src="{{ asset('js/frontend/workpackage/item/form-reset.js') }}"></script>
 @endpush
