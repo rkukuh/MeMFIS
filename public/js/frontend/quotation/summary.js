@@ -70,7 +70,7 @@ var DatatableAutoColumnHideDemo = function () {
               );
             }else{
               return (t.pivot.description + '<br>' +
-                '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x $ ' + ForeignFormatter.format(t.pivot.manhour_rate) + '<br>' +
+                '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x ' + ForeignFormatter.format(t.pivot.manhour_rate) + '<br>' +
                 '- Facility Price : <br>' +
                 '- Material & Tool Price : ' 
               );
