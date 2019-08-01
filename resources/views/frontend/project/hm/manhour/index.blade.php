@@ -10,6 +10,7 @@
                 @component('frontend.common.label.data-info')
                     @slot('id', 'total_mhrs')
                     @slot('text', $total_mhrs)
+                    @slot('value', $total_mhrs)
                 @endcomponent
             </div>
         </div>
