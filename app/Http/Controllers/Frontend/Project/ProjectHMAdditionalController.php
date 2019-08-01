@@ -15,6 +15,14 @@ use App\Http\Requests\Frontend\ProjectHMUpdate;
 
 class ProjectHMAdditionalController extends Controller
 {
+    protected $aircrafts;
+    protected $customers;
+
+    public function __construct()
+    {
+        $this->aircrafts = Aircraft::all();
+        $this->customers = Customer::all();
+    }
 
     /**
      * Display a listing of the resource.

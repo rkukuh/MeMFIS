@@ -55,7 +55,12 @@ let Aircraft = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/project-hm/'+t.uuid+'">' + t.code + "</a>"
+                        if(t.parent_id == null){
+                            return '<a href="/project-hm/'+t.uuid+'">' + t.code + "</a>"
+                        }
+                        else{
+                            return '<a href="/project-hm-additional/'+t.uuid+'">' + t.code + "</a>"
+                        }
                     }
                 },
                 {
@@ -129,19 +134,37 @@ let Aircraft = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.status == 'Project Approved' || t.status == 'Quotation Approved'){
-                            return (
-                                ''
-                            );
-                        }else{
-                            return (
-                                '<a href="/project-hm/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-check"></i>' +
-                                '</a>'
-                            );
+                        if(t.parent_id == null){
+                            if(t.status == 'Project Approved' || t.status == 'Quotation Approved'){
+                                return (
+                                    ''
+                                );
+                            }else{
+                                return (
+                                    '<a href="/project-hm/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                        '<i class="la la-pencil"></i>' +
+                                    '</a>' +
+                                    '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
+                                        '<i class="la la-check"></i>' +
+                                    '</a>'
+                                );
+                            }
+                        }
+                        else{
+                            if(t.status == 'Project Approved' || t.status == 'Quotation Approved'){
+                                return (
+                                    ''
+                                );
+                            }else{
+                                return (
+                                    '<a href="/project-hm-additional/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                        '<i class="la la-pencil"></i>' +
+                                    '</a>' +
+                                    '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
+                                        '<i class="la la-check"></i>' +
+                                    '</a>'
+                                );
+                            }
                         }
                     }
                 }
