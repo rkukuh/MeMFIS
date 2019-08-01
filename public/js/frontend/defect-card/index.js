@@ -56,7 +56,7 @@ let DefectCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="/defectcard/'+t.uuid+'/">' + t.code + "</a>"
+                            return '<a href="/defectcard-engineer/'+t.uuid+'/">' + t.code + "</a>"
                     }
                 },
                 {
@@ -109,7 +109,13 @@ let DefectCard = {
                 },
                 {
                     field: 'estimation_manhour',
-                    title: 'Mhrs',
+                    title: 'Mhrs Est.',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'actual_manhour',
+                    title: 'Actual Mhrs.',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -140,7 +146,7 @@ let DefectCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/defectcard/project',
+                        url: '/datatables/defectcard/',
 
                         map: function (raw) {
                             let dataSet = raw;

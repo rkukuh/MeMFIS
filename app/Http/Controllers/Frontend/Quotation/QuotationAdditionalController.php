@@ -60,101 +60,98 @@ class QuotationAdditionalController extends Controller
      * @param  \App\Http\Requests\Frontend\QuotationStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(QuotationStore $request)
+    public function store(Request $request)
     {
-        $contact = [];
+        // dd($request->all());
+        // $contact = [];
 
-        $contact['name']     = $request->attention_name;
-        $contact['phone'] = $request->attention_phone;
-        $contact['address'] = $request->attention_address;
-        $contact['fax'] = $request->attention_fax;
-        $contact['email'] = $request->attention_email;
+        // $contact['name']     = $request->attention_name;
+        // $contact['phone'] = $request->attention_phone;
+        // $contact['address'] = $request->attention_address;
+        // $contact['fax'] = $request->attention_fax;
+        // $contact['email'] = $request->attention_email;
 
         $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::withTrashed()->count()+1)]);
-        $request->merge(['attention' => json_encode($contact)]);
+        // $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
         $quotation = Quotation::create($request->all());
-        $project = Project::where('id',$request->project_id)->first();
-
-        foreach ($project->workpackages as $workpackage){
-            $quotation->workpackages()->attach(WorkPackage::where('uuid',$workpackage->uuid)->first()->id);
-        }
+        // $project = Project::where('id',$request->project_id)->first();
 
         $quotation->progresses()->save(new Progress([
             'status_id' =>  Status::ofQuotation()->where('code','open')->first()->id,
             'progressed_by' => Auth::id()
         ]));
 
-        // TODO generate item workpackage
-        $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
-        $project = Project::find($request->project_id);
-            foreach($project->workpackages as $workpackage){
-                foreach($workpackage->items as $item){
+        // // TODO generate item workpackage
+        // $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
+        // $project = Project::find($request->project_id);
+        //     foreach($project->workpackages as $workpackage){
+        //         foreach($workpackage->items as $item){
 
-                    $quotation_workpackage_item = QuotationWorkPackage::where('quotation_id',$quotation->id)->where('workpackage_id',$workpackage->id)->first();
+        //             $quotation_workpackage_item = QuotationWorkPackage::where('quotation_id',$quotation->id)->where('workpackage_id',$workpackage->id)->first();
 
-                    if (Item::findOrFail($item->id)->prices->get($customer)) {
-                        $price_id = Item::find($item->id)->prices->get($customer)->id;
-                    } else {
-                        $price_id = null;
-                    }
-                    $quotation_workpackage_item->items()->create([
-                        'item_id' => $item->id,
-                        'quantity' => $item->pivot->quantity,
-                        'unit_id' => $item->pivot->unit_id,
-                        'price_id' => $price_id,
-                    ]);
-                }
-            }
+        //             if (Item::findOrFail($item->id)->prices->get($customer)) {
+        //                 $price_id = Item::find($item->id)->prices->get($customer)->id;
+        //             } else {
+        //                 $price_id = null;
+        //             }
+        //             $quotation_workpackage_item->items()->create([
+        //                 'item_id' => $item->id,
+        //                 'quantity' => $item->pivot->quantity,
+        //                 'unit_id' => $item->pivot->unit_id,
+        //                 'price_id' => $price_id,
+        //             ]);
+        //         }
+        //     }
 
-        // TODO generate htcrr item workpackage
-        $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
-        $project = Project::find($request->project_id);
-            foreach($project->htcrr as $htcrr){
-                foreach($htcrr->items as $item){
+        // // TODO generate htcrr item workpackage
+        // $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
+        // $project = Project::find($request->project_id);
+        //     foreach($project->htcrr as $htcrr){
+        //         foreach($htcrr->items as $item){
 
-                    if (Item::findOrFail($item->id)->prices->get($customer)) {
-                        $price_id = Item::find($item->id)->prices->get($customer)->id;
-                    } else {
-                        $price_id = null;
-                    }
-                    QuotationHtcrrItem::create([
-                        'quotation_id' => $quotation->id,
-                        'htcrr_id' => $htcrr->id,
-                        'item_id' => $item->id,
-                        'quantity' => $item->pivot->quantity,
-                        'unit_id' => $item->pivot->unit_id,
-                        'price_id' => $price_id,
-                    ]);
-                }
-            }
+        //             if (Item::findOrFail($item->id)->prices->get($customer)) {
+        //                 $price_id = Item::find($item->id)->prices->get($customer)->id;
+        //             } else {
+        //                 $price_id = null;
+        //             }
+        //             QuotationHtcrrItem::create([
+        //                 'quotation_id' => $quotation->id,
+        //                 'htcrr_id' => $htcrr->id,
+        //                 'item_id' => $item->id,
+        //                 'quantity' => $item->pivot->quantity,
+        //                 'unit_id' => $item->pivot->unit_id,
+        //                 'price_id' => $price_id,
+        //             ]);
+        //         }
+        //     }
 
-        // TODO generate item taskcard
-        $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
-        $project = Project::find($request->project_id);
-            foreach($project->workpackages as $workpackages){
-                foreach($workpackages->taskcards as $taskcard){
-                    foreach($taskcard->items as $item){
-                        // $quotation_taskcard_item = QuotationTaskCard::where('quotation_id',$quotation->id)->where('workpackage_id',$workpackage->id)->first();
+        // // TODO generate item taskcard
+        // $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
+        // $project = Project::find($request->project_id);
+        //     foreach($project->workpackages as $workpackages){
+        //         foreach($workpackages->taskcards as $taskcard){
+        //             foreach($taskcard->items as $item){
+        //                 // $quotation_taskcard_item = QuotationTaskCard::where('quotation_id',$quotation->id)->where('workpackage_id',$workpackage->id)->first();
 
-                        if (Item::findOrFail($item->id)->prices->get($customer)) {
-                            $price_id = Item::find($item->id)->prices->get($customer)->id;
-                        } else {
-                            $price_id = null;
-                        }
-                        QuotationWorkPackageTaskCardItem::create([
-                            'quotation_id' => $quotation->id,
-                            'workpackage_id' => $workpackages->id,
-                            'taskcard_id' => $taskcard->id,
-                            'item_id' => $item->id,
-                            'quantity' => $item->pivot->quantity,
-                            'unit_id' => $item->pivot->unit_id,
-                            'price_id' => $price_id,
-                        ]);
-                    }
-                }
-            }
+        //                 if (Item::findOrFail($item->id)->prices->get($customer)) {
+        //                     $price_id = Item::find($item->id)->prices->get($customer)->id;
+        //                 } else {
+        //                     $price_id = null;
+        //                 }
+        //                 QuotationWorkPackageTaskCardItem::create([
+        //                     'quotation_id' => $quotation->id,
+        //                     'workpackage_id' => $workpackages->id,
+        //                     'taskcard_id' => $taskcard->id,
+        //                     'item_id' => $item->id,
+        //                     'quantity' => $item->pivot->quantity,
+        //                     'unit_id' => $item->pivot->unit_id,
+        //                     'price_id' => $price_id,
+        //                 ]);
+        //             }
+        //         }
+        //     }
 
 
 

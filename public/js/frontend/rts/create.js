@@ -55,6 +55,10 @@ let ReleaseToService = {
             //     approval = 0;
             // }
 
+            if(approval = null){
+                approval = null;
+            }
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -89,7 +93,7 @@ let ReleaseToService = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/rts/' + data.uuid + '/print';
+                        // window.location.href = '/rts/' + data.uuid + '/print';
 
                     }
                 }

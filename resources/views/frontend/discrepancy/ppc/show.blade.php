@@ -66,47 +66,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Discrepenct No
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                A/C Reg
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                JC No Refference
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                A/C S/N
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text',  $discrepancy->jobcard->quotation->project->aircraft->name)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -117,56 +77,36 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text',  $discrepancy->sequence)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Qty Engineer
+                                                A/C Reg
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                ATA
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Qty Helper
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->jobcard->quotation->project->aircraft_register)
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Area/Zone
+                                                JC No Refference
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->jobcard->number)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Est. Mhrs
+                                                A/C S/N
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->jobcard->quotation->project->aircraft_sn)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -177,18 +117,62 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @if(sizeof($discrepancy->jobcard->taskcard->skills) == 3)
+                                                    @slot('text', 'ERI')
+                                                @elseif(sizeof($discrepancy->jobcard->taskcard->skills) == 1)
+                                                    @slot('text', $discrepancy->jobcard->taskcard->skills[0]->name)
+                                                @else
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @endif
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                RII
+                                                Qty Engineer
                                             </label>
 
-                                            @component('frontend.common.input.checkbox')
-                                                @slot('id', 'is_rii')
-                                                @slot('name', 'is_rii')
-                                                @slot('text', 'IS RII?')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $discrepancy->engineer_quantity)
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                ATA
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text',  $discrepancy->ata)
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Qty Helper
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $discrepancy->helper_quantity)
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Area/Zone
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text',  $discrepancy->jobcard->taskcard->work_area)
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Est. Mhrs
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $discrepancy->estimation_manhour)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -201,6 +185,19 @@
 
                                             <input type="file" id="file" multiple name="name">
                                         </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                            </label>
+
+                                            @component('frontend.common.input.checkbox')
+                                                @slot('id', 'is_rii')
+                                                @slot('name', 'is_rii')
+                                                @slot('text', 'RII?')
+                                                @if ($discrepancy->is_rii == 1)
+                                                    @slot('checked', 'checked')
+                                                @endif
+                                            @endcomponent
+                                        </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -209,7 +206,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->complaint)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -355,7 +352,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                 @slot('text', $discrepancy->description)
                                             @endcomponent
                                         </div>
                                     </div>

@@ -150,6 +150,12 @@ class DiscrepancyPPCController extends Controller
             'approved_by' => Auth::id(),
         ]));
 
+        $discrepancy->progresses()->save(new Progress([
+            'status_id' =>  Status::ofDefectcard()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
+
+
         return response()->json($discrepancy);
     }
 }

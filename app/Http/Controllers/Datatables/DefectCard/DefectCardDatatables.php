@@ -144,7 +144,7 @@ class DefectCardDatatables extends Controller
      */
     public function project()
     {
-        $DefectCard=DefectCard::with('jobcard','progresses')->get();
+        $DefectCard=DefectCard::with('jobcard','progresses')->has('approvals','>',1)->get();
 
         foreach($DefectCard as $jobcard){
             $jobcard->taskcard_number .= $jobcard->jobcard->taskcard->number;
