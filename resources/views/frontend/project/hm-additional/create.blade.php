@@ -87,7 +87,7 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text', $attention->phone)
                                                                 @endcomponent
                                                             </div>
                                                         </div>

@@ -62,7 +62,7 @@
                                                                     Work Order Number
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'project_title')
+                                                                    @slot('id', 'wo')
                                                                     @slot('text', $project->no_wo)
                                                                 @endcomponent
                                                             </div>
@@ -74,7 +74,7 @@
                                                                     Address
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'project_title')
+                                                                    @slot('id', 'address')
                                                                     @slot('text', '..........')
                                                                 @endcomponent
                                                             </div>
@@ -86,8 +86,8 @@
                                                                     Phone
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
+                                                                    @slot('id', 'phone')
+                                                                    @slot('text', $attention->phone)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
