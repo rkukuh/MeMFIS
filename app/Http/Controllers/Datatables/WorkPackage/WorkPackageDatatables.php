@@ -226,7 +226,7 @@ class WorkPackageDatatables extends Controller
         }
 
         // get all raw data
-        $workpackages = WorkPackage::with('aircraft')->get();
+        $workpackages = WorkPackage::with('aircraft')->where('is_template',1)->get();
 
         foreach($workpackages as $workpackage){
             $workpackage->aircraft_name = $workpackage->aircraft->name;
