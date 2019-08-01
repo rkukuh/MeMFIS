@@ -113,7 +113,7 @@
                 title: "Price",
                 template: function (t, e, i) {
                     return (
-                        IDRformatter.format(t.price_amount)
+                        ForeignFormatter.format(t.price_amount)
                     );
             }
             }, {
@@ -185,7 +185,6 @@
             let price_amount =$('#price_amount').val();
             let marketing_note = $('#marketing_note').val();
 
-            console.log($('#facility_name'));
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
