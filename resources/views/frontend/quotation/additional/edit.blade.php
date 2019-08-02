@@ -226,7 +226,7 @@
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
-                                                                Date 
+                                                                Date
                                                             </label>
 
                                                             @component('frontend.common.input.datepicker')
@@ -276,31 +276,6 @@
                                                                 @slot('name', 'exchange')
                                                                 @slot('id_error', 'exchange')
                                                                 @slot('id', 'exchange')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        PPN
-                                                    </label>
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-4 col-md-4 col-lg-4">
-                                                            @component('frontend.common.input.checkbox')
-                                                            @slot('id', 'ppn')
-                                                            @slot('name', 'ppn')
-                                                            @slot('text', 'Include')
-                                                            @slot('value', 'Include')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-8 col-md-8 col-lg-8">
-                                                            @component('frontend.common.input.checkbox')
-                                                            @slot('id', 'ppn')
-                                                            @slot('name', 'ppn')
-                                                            @slot('text', 'Exclude')
-                                                            @slot('value', 'Exclude')
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -465,9 +440,9 @@
                                                         @slot('id', 'add-workpackage')
                                                         @slot('class', 'add-workpackage')
                                                     @endcomponent
-    
+
                                                     @include('frontend.common.buttons.reset')
-    
+
                                                     @component('frontend.common.buttons.back')
                                                         @slot('href', route('frontend.workpackage.index'))
                                                     @endcomponent

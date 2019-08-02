@@ -225,10 +225,10 @@
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
-                                                                Date 
+                                                                Date
                                                             </label>
 
-                                                          
+
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('text', 'XXX')
                                                                 @slot('id', 'name')
@@ -255,7 +255,7 @@
                                                                 Currency
                                                             </label>
 
-                                                           
+
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('text', 'XXX')
                                                                 @slot('id', 'name')
@@ -266,37 +266,10 @@
                                                                 Exchange Rate
                                                             </label>
 
-                                                           
+
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('text', 'XXX')
                                                                 @slot('id', 'name')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        PPN
-                                                    </label>
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-4 col-md-4 col-lg-4">
-                                                            @component('frontend.common.input.checkbox')
-                                                            @slot('id', 'ppn')
-                                                            @slot('name', 'ppn')
-                                                            @slot('text', 'Include')
-                                                            @slot('value', 'Include')
-                                                            @slot('disabled', 'disabled')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-8 col-md-8 col-lg-8">
-                                                            @component('frontend.common.input.checkbox')
-                                                            @slot('id', 'ppn')
-                                                            @slot('name', 'ppn')
-                                                            @slot('text', 'Exclude')
-                                                            @slot('value', 'Exclude')
-                                                            @slot('disabled', 'disabled')
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -310,7 +283,7 @@
                                                 Subject Quotation
                                             </label>
 
-                                                           
+
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', 'XXX')
                                                 @slot('id', 'name')
@@ -335,7 +308,7 @@
                                                             </div>
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                                 <label class="form-control-label">
-                                                                    Scheduled Payment 
+                                                                    Scheduled Payment
                                                                 </label>
                                                                 <div class="repeaterScheduledPayment">
                                                                     <div class="repeaterRow">
