@@ -83,14 +83,18 @@ class ProjectHMWorkPackageController extends Controller
     public function show(Project $project, WorkPackage $workPackage,Request $request)
     {
         $mhrs_pfrm_factor = $skills = $subset = $taskcards = [];
+
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
         ->with('taskcards')
         ->first();
+
         foreach($project_workpackage->taskcards as $taskcard){
             array_push($taskcards, $taskcard->taskcard_id);
         }
+
         $taskcards = TaskCard::whereIn('id',$taskcards)->get(); 
+
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
         foreach($taskcards as $taskcard){
@@ -103,11 +107,13 @@ class ProjectHMWorkPackageController extends Controller
 
             array_push($subset , $result);
         }
+
         foreach ($subset as $value) {
             foreach($value as $skill){
                 array_push($skills, $skill["name"]);
             }
         }
+
         sort($skills);
         $skills = array_unique($skills);
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
@@ -154,6 +160,7 @@ class ProjectHMWorkPackageController extends Controller
         ->where('workpackage_id',$workPackage->id)
         ->with('taskcards')
         ->first();
+
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
         foreach($project_workpackage->taskcards as $taskcard){
@@ -171,11 +178,13 @@ class ProjectHMWorkPackageController extends Controller
 
             array_push($subset , $result);
         }
+
         foreach ($subset as $value) {
             foreach($value as $skill){
                 array_push($skills, $skill["name"]);
             }
         }
+
         sort($skills);
         $skills = array_unique($skills);
 
@@ -413,16 +422,21 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      */
     public function getManhours(Project $project, WorkPackage $workPackage){
+        
+        $data = $mhrs_pfrm_factor = $taskcards = [];
+
         $project_workpackage = ProjectWorkPackage::where('project_id', $project->id)
                     ->where('workpackage_id', $workPackage->id)->first();
-        $data = $mhrs_pfrm_factor = $taskcards = [];
+
         foreach($project_workpackage->taskcards as $taskcard){
             array_push($taskcards, $taskcard->taskcard_id);
         }
+
         $taskcards = TaskCard::whereIn('id',$taskcards)->get(); 
         foreach($taskcards as $taskcard){
             array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
         }
+        
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
         $data["total_mhrs"] = $taskcards->sum('estimation_manhour');
         $data["mhrs_pfrm_factor"] = $taskcards->sum('estimation_manhour') * 1.6;
