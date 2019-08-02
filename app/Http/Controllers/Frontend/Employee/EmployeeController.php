@@ -26,7 +26,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.employee.employee.create');
     }
 
     /**
@@ -37,7 +37,9 @@ class EmployeeController extends Controller
      */
     public function store(EmployeeStore $request)
     {
+
         $employee = Employee::create([
+            'user_id' => '1', //SEMENTARA USER ID FOREIGN KE USERS
             'code' => $request->code,
             'first_name' => $request->first_name,
             'middle_name' => $request->middle_name,
@@ -69,7 +71,7 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
-        return response()->json($employee);
+        return view('frontend.employee.employee.edit',['employee' => $employee]);
     }
 
     /**
@@ -81,17 +83,20 @@ class EmployeeController extends Controller
      */
     public function update(EmployeeUpdate $request, Employee $employee)
     {
-        // dd($request->all());
-        $employee->code = $request->code;
-        $employee->first_name = $request->first_name;
-        $employee->middle_name = $request->middle_name;
-        $employee->last_name = $request->last_name;
-        $employee->gender = $request->gender;
-        $employee->dob = $request->dob;
-        $employee->hired_at = $request->hired_at;
-        $employee->save();
 
+        Employee::where('code',$request->code)
+        ->update([
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
+            'dob' => $request->dob,
+            'gender' => $request->gender,
+            'hired_at' => $request->hired_at
+        ]);
+
+        // TODO: Return error message as JSON
         return response()->json($employee);
+        return false;
     }
 
     /**
