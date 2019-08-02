@@ -367,7 +367,7 @@ let AdditionalTaskCreate = (function() {
                             toastr.success('Project Aditional has been created.', 'Success', {
                                 timeOut: 5000
                             });
-                            // window.location.href = '/project-hm/'+data.uuid+'/edit';
+                            window.location.href = '/project-hm-additional/'+data.uuid+'/edit';
 
                         }
                     }
