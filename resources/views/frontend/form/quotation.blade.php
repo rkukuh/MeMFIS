@@ -307,32 +307,26 @@
                     </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
-                        <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$a]->total_manhours_with_performance_factor}} x {{ number_format($jobRequest[$a]->pivot->manhour_rate) }}</td>
-                        <td width="16%" align="center" valign="top"> {{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->total_manhours_with_performance_factor*$jobRequest[$a]->pivot->manhour_rate) }}</td>
+                        <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$a]->total_manhours_with_performance_factor}} x {{ number_format($jobRequest[$a]->pivot->manhour_rate, 2) }}</td>
+                        <td width="16%" align="center" valign="top"> {{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->total_manhours_with_performance_factor*$jobRequest[$a]->pivot->manhour_rate, 2) }}</td>
 
                         @if($jobRequest[$a]->pivot->discount_value == null && $jobRequest[$a]->pivot->discount_type == null)
                         <td width="17%" align="center" valign="top"></td>
                         @else
                             @if($jobRequest[$a]->pivot->discount_type ==  'amount')
-                            <td width="17%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->pivot->discount_value) }}</td>
+                            <td width="17%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->pivot->discount_value, 2) }}</td>
                             @elseif($jobRequest[$a]->pivot->discount_type == 'percentage'){
                             <td width="17%" align="center" valign="top">{{ $jobRequest[$a]->pivot->discount_value }}%</td>
                             @endif
                         @endif
-                        @if($jobRequest[$a]->pivot->discount_type ==  'amount')
-                            <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->total_manhours_with_performance_factor * $jobRequest[$a]->pivot->manhour_rate + $jobRequest[$a]->facilities_price_amount + $jobRequest[$a]->mat_tool_price - $jobRequest[$a]->pivot->discount_value) }}</td>
-                        @elseif($jobRequest[$a]->pivot->discount_type == 'percentage')
-                            <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->total_manhours_with_performance_factor * $jobRequest[$a]->pivot->manhour_rate + $jobRequest[$a]->facilities_price_amount + $jobRequest[$a]->mat_tool_price - ((($jobRequest[$a]->total_manhours_with_performance_factor * $jobRequest[$a]->pivot->manhour_rate +  $jobRequest[$a]->facilities_price_amount + $jobRequest[$a]->mat_tool_price)*$jobRequest[$a]->pivot->discount_value)/100)) }}</td>
-                        @else
-                            <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->total_manhours_with_performance_factor * $jobRequest[$a]->pivot->manhour_rate + $jobRequest[$a]->facilities_price_amount + $jobRequest[$a]->mat_tool_price) }}</td>
-                        @endif
+                            <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->total_manhours_with_performance_factor * $jobRequest[$a]->pivot->manhour_rate + $jobRequest[$a]->facilities_price_amount + $jobRequest[$a]->mat_tool_price, 2) }}</td>
                     </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
                         <td width="42%" align="left" valign="top">- Material Price</td>
                         <td width="16%" align="center" valign="top">
                             @if($jobRequest[$a]->mat_tool_price)
-                                {{$quotation->currency->symbol}}. {{number_format($jobRequest[$a]->mat_tool_price)}}
+                                {{$quotation->currency->symbol}}. {{number_format($jobRequest[$a]->mat_tool_price, 2)}}
                             @else
                                 -
                             @endif
@@ -345,7 +339,7 @@
                         <td width="42%" align="left" valign="top">- Facilities Price</td>
                         <td width="16%" align="center" valign="top">
                             @if($jobRequest[$a]->facilities_price_amount)
-                                {{$quotation->currency->symbol}}. {{number_format($jobRequest[$a]->facilities_price_amount)}}
+                                {{$quotation->currency->symbol}}. {{number_format($jobRequest[$a]->facilities_price_amount, 2)}}
                             @else
                                 -
                             @endif
@@ -365,27 +359,25 @@
                 <tr>
                     <th width="50%" rowspan="6" valign="top">Term & Condition <br></th>
                     <td width="25%" valign="top" align="left">Total</td>
-                    <td width="25%" valign="top" align="right">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal) }}</td>
+                    <td width="25%" valign="top" align="right">{{ $quotation->currency->symbol }} {{ number_format( $subTotal, 2) }}</td>
                 </tr>
                 <tr>
                     <td width="25%" valign="top" align="left">Disc</td>
-                    <td width="25%" valign="top" align="right">$ / %</td>
+                    <td width="25%" valign="top" align="right">-{{ $quotation->currency->symbol }} {{ number_format($discount, 2) }}</td>
                 </tr>
+                @if($totalCharge > 0)
                 <tr>
                     <td width="25%" valign="top" align="left">Delivery Cost</td>
-                    <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }}</td>
+                    <td width="25%" valign="top" align="right">{{ $quotation->currency->symbol }} {{ number_format($totalCharge, 2) }}</td>
                 </tr>
+                @endif
                 <tr>
-                    <td width="25%" valign="top" align="left">Other Cost(if available)</td>
-                    <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }} <hr width="100%"></td>
-                </tr>
-                <tr>
-                        <th width="25%" valign="top" align="left">Grand Total in {{ $quotation->currency->name  }}</th>
-                <th width="25%" valign="top" align="right">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal) }}</th>
+                    <th width="25%" valign="top" align="left">Grand Total in USD</th>
+                    <th width="25%" valign="top" align="right">{{ $quotation->currency->symbol }} {{ number_format($subTotal + $totalCharge - $discount, 2) }}</th>
                 </tr>
                 <tr>
                     <th width="25%" valign="top" align="left">Grand Total in Rupiah</th>
-                    <th width="25%" valign="top" align="right">Rp. {{ number_format($GrandTotal * $quotation->exchange_rate) }}</th>
+                    <th width="25%" valign="top" align="right">Rp. {{ number_format( ($subTotal + $totalCharge - $discount) * $quotation->exchange_rate, 2) }}</th>
                 </tr>
             </table>
         </div>
@@ -456,32 +448,26 @@
                         </tr>
                         <tr>
                             <td width="8%" align="center" valign="top"></td>
-                            <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$b]->total_manhours_with_performance_factor}} x {{ number_format($jobRequest[$b]->pivot->manhour_rate)}}</td>
-                            <td width="16%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$b]->total_manhours_with_performance_factor*$jobRequest[$b]->pivot->manhour_rate)}}</td>
+                            <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$b]->total_manhours_with_performance_factor}} x {{ number_format($jobRequest[$b]->pivot->manhour_rate, 2)}}</td>
+                            <td width="16%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$b]->total_manhours_with_performance_factor*$jobRequest[$b]->pivot->manhour_rate, 2)}}</td>
 
                             @if($jobRequest[$b]->pivot->discount_value == null && $jobRequest[$b]->pivot->discount_type == null)
                             <td width="17%" align="center" valign="top"></td>
                             @else
                                 @if($jobRequest[$b]->pivot->discount_type ==  'amount')
-                                <td width="17%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$b]->pivot->discount_value) }}</td>
+                                <td width="17%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$b]->pivot->discount_value, 2) }}</td>
                                 @elseif($jobRequest[$b]->pivot->discount_type == 'percentage'){
                                 <td width="17%" align="center" valign="top">{{ $jobRequest[$b]->pivot->discount_value }}%</td>
                                 @endif
                             @endif
-                            @if($jobRequest[$b]->pivot->discount_type ==  'amount')
-                                <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$b]->total_manhours_with_performance_factor * $jobRequest[$b]->pivot->manhour_rate + $jobRequest[$b]->facilities_price_amount + $jobRequest[$b]->mat_tool_price - $jobRequest[$b]->pivot->discount_value) }}</td>
-                            @elseif($jobRequest[$a]->pivot->discount_type == 'percentage')
-                                <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$b]->total_manhours_with_performance_factor * $jobRequest[$b]->pivot->manhour_rate + $jobRequest[$b]->facilities_price_amount + $jobRequest[$b]->mat_tool_price - ((($jobRequest[$b]->total_manhours_with_performance_factor * $jobRequest[$b]->pivot->manhour_rate +  $jobRequest[$b]->facilities_price_amount + $jobRequest[$b]->mat_tool_price)*$jobRequest[$b]->pivot->discount_value)/100)) }}</td>
-                            @else
-                                <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$b]->total_manhours_with_performance_factor * $jobRequest[$b]->pivot->manhour_rate + $jobRequest[$b]->facilities_price_amount + $jobRequest[$b]->mat_tool_price) }}</td>
-                            @endif
+                            <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->total_manhours_with_performance_factor * $jobRequest[$a]->pivot->manhour_rate + $jobRequest[$a]->facilities_price_amount + $jobRequest[$a]->mat_tool_price, 2) }}</td>
                         </tr>
                         <tr>
                             <td width="8%" align="center" valign="top"></td>
                             <td width="42%" align="left" valign="top">- Material Price</td>
                             <td width="16%" align="center" valign="top">
                                 @if($jobRequest[$b]->mat_tool_price)
-                                    {{$quotation->currency->symbol}}. {{number_format($jobRequest[$b]->mat_tool_price)}}
+                                    {{$quotation->currency->symbol}}. {{number_format($jobRequest[$b]->mat_tool_price, 2)}}
                                 @else
                                     -
                                 @endif
@@ -494,7 +480,7 @@
                             <td width="42%" align="left" valign="top">- Facilities Price</td>
                             <td width="16%" align="center" valign="top">
                                 @if($jobRequest[$b]->facilities_price_amount)
-                                    {{$quotation->currency->symbol}}. {{number_format($jobRequest[$b]->facilities_price_amount)}}
+                                    {{$quotation->currency->symbol}}. {{number_format($jobRequest[$b]->facilities_price_amount, 2)}}
                                 @else
                                     -
                                 @endif
@@ -513,29 +499,25 @@
                     <tr>
                         <th width="50%" rowspan="6" valign="top">Term & Condition <br></th>
                         <td width="25%" valign="top" align="left">Total</td>
-                        <td width="25%" valign="top" align="right">$ {{ number_format($GrandTotal) }}</td>
+                        <td width="25%" valign="top" align="right">{{ $quotation->currency->symbol }} {{ number_format( $subTotal, 2) }}</td>
                     </tr>
                     <tr>
                         <td width="25%" valign="top" align="left">Disc</td>
-                        <td width="25%" valign="top" align="right"></td>
+                        <td width="25%" valign="top" align="right">-{{ $quotation->currency->symbol }} {{ number_format($discount, 2) }}</td>
                     </tr>
                     @if($totalCharge > 0)
                     <tr>
                         <td width="25%" valign="top" align="left">Delivery Cost</td>
-                        <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }}</td>
-                    </tr>
-                    <tr>
-                        <td width="25%" valign="top" align="left">Other Cost(if available)</td>
-                        <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }} <hr width="100%"></td>
+                        <td width="25%" valign="top" align="right">{{ $quotation->currency->symbol }} {{ number_format($totalCharge, 2) }}</td>
                     </tr>
                     @endif
                     <tr>
                         <th width="25%" valign="top" align="left">Grand Total in USD</th>
-                        <th width="25%" valign="top" align="right">$ {{ number_format($GrandTotal) }}</th>
+                        <th width="25%" valign="top" align="right">{{ $quotation->currency->symbol }} {{ number_format($subTotal + $totalCharge - $discount, 2) }}</th>
                     </tr>
                     <tr>
                         <th width="25%" valign="top" align="left">Grand Total in Rupiah</th>
-                        <th width="25%" valign="top" align="right">Rp. {{ number_format($GrandTotal * $quotation->exchange_rate) }}</th>
+                        <th width="25%" valign="top" align="right">Rp. {{ number_format( ($subTotal + $totalCharge - $discount) * $quotation->exchange_rate, 2) }}</th>
                     </tr>
                 </table>
             </div>

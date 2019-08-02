@@ -416,15 +416,16 @@ class QuotationController extends Controller
     public function print(Quotation $quotation)
     {
         $username = Auth::user()->name;
-        $totalCharge = $totalFacility = $totalMatTool = $manhourPrice = 0;
+        $discount = $rowTotal = $totalCharge = $totalFacility = $totalMatTool = $manhourPrice = [];
+
         if(json_decode($quotation->charge) !== null) {
             foreach(json_decode($quotation->charge) as $charge){
-                $totalCharge =  $totalCharge +  $charge->amount;
+                array_push($totalCharge, $charge->amount);
             }
         }
 
         $workpackages = $quotation->workpackages;
-        foreach($workpackages as $workPackage){
+        foreach($workpackages as $key => $workPackage){
             $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
@@ -436,32 +437,44 @@ class QuotationController extends Controller
             if($project_workpackage){
                 //total manhour price
                 $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
-                $manhourPrice += $workPackage->total_manhours_with_performance_factor & $quotation_workpackage->manhour_rate;
+                array_push($manhourPrice, $workPackage->total_manhours_with_performance_factor * $quotation_workpackage->manhour_rate);
 
                 //totalfacility price
                 $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
                 ->with('facility')
                 ->sum('price_amount');
                 $workPackage->facilities_price_amount = $ProjectWorkPackageFacility;
-                $totalFacility += $workPackage->facilities_price_amount;
+                array_push($totalFacility, $workPackage->facilities_price_amount);
 
                 //items price
                 $workPackage->mat_tool_price = QuotationWorkPackageTaskCardItem::where('quotation_id',$quotation->id)->where('workpackage_id',$workPackage->id)->sum('subtotal');
-                $totalMatTool += $workPackage->mat_tool_price;
+                array_push($totalMatTool, $workPackage->mat_tool_price);
+            }
+
+            if($quotation_workpackage){
+                switch($quotation_workpackage->discount_type){
+                    case "amount":
+                        array_push($discount, $quotation_workpackage->discount_value);
+                        break;
+                    case "percentage":
+                        array_push($discount, ($manhourPrice[$key] + $totalFacility[$key] + $totalMatTool[$key]) * ($quotation_workpackage->discount_value / 100) );
+                        break;
+                    default:
+                        array_push($discount, 0);
+                }
             }
         }
-
-        $total_kabeh = $manhourPrice + $totalFacility + $totalMatTool;
-        dd($total_kabeh);
 
         $pdf = \PDF::loadView('frontend/form/quotation',[
                 'username' => $username,
                 'quotation' => $quotation,
+                'subTotal' => array_sum($manhourPrice) + array_sum($totalFacility) + array_sum($totalMatTool),
                 'workpackages' => $workpackages,
-                'totalCharge' => $totalCharge,
+                'totalCharge' => array_sum($totalCharge),
                 'attention' => json_decode($quotation->attention),
-                'GrandTotal' => $manhourPrice + $totalFacility + $totalMatTool
+                'discount' => array_sum($discount)
                 ]);
+
         return $pdf->stream();
     }
 
