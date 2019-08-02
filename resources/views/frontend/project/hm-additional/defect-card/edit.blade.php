@@ -87,7 +87,30 @@
                 </div>
                 <div class="defect_card_datatable_actual" id="defect_card_datatable_actual"></div>
 
+                <div class="d-flex justify-content-end my-5">
+                    @component('frontend.common.buttons.submit')
+                        @slot('type','button')
+                        @slot('id', 'delete-defect-card')
+                        @slot('text', 'Delete DefectCard')
+                        @slot('class', 'delete-defect-card')
+                        @slot('icon', 'fa-trash')
+                        @slot('color', 'danger')
+                    @endcomponent
+                </div>
+
                 <div class="defect_card_datatable" id="defect_card_datatable"></div>
+
+
+                <div class="d-flex justify-content-end my-5">
+                    @component('frontend.common.buttons.submit')
+                        @slot('type','button')
+                        @slot('id', 'add-defect-card')
+                        @slot('text', 'Add DefectCard')
+                        @slot('class', 'add-defect-card')
+                        @slot('icon', 'fa-plus')
+                    @endcomponent
+                </div>
+
                 <div class="modal fade" id="m_modal_fetch_id_server"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">

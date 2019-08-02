@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.company-structure-department.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.company.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Company Structure & Department
                             </span>
@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.show')
+                                @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
                                     Company Structure & Department
@@ -56,8 +56,11 @@
                                                 Code 
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'title')
+                                                @slot('id', 'title')
+                                                @slot('name', 'title')
+                                                @slot('id_error', 'title')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -65,8 +68,11 @@
                                                 Name
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'name')
+                                                @slot('id', 'name')
+                                                @slot('name', 'name')
+                                                @slot('id_error', 'name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -76,8 +82,11 @@
                                                 Description
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '5')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('text', 'Description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -87,8 +96,11 @@
                                                Company Type   
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Company Type')
+                                                @slot('id', 'company')
+                                                @slot('name', 'company')
+                                                @slot('id_error', 'company-airplane')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -96,8 +108,11 @@
                                                Parent Structure
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Parent Structure')
+                                                @slot('id', 'parent_structure')
+                                                @slot('name', 'parent_structure')
+                                                @slot('id_error', 'parent_structure')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -134,5 +149,6 @@
     <script src="{{ asset('js/frontend/functions/select2/company.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/parent-structure.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/company-structure-department/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/company/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/company/form-reset.js') }}"></script>
 @endpush

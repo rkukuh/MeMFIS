@@ -130,12 +130,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/material-request/project/edit', 'frontend.material-request.project.edit')->name('material-request.project.edit');
         Route::view('/material-request/project/show', 'frontend.material-request.project.show')->name('material-request.project.show');
 
-        /** Company Structure & Department */
-
-        Route::view('/company-structure-department', 'frontend.company-structure-department.index')->name('company-structure-department.index');
-        Route::view('/company-structure-department/create', 'frontend.company-structure-department.create')->name('company-structure-department.create');
-        Route::view('/company-structure-department/edit', 'frontend.company-structure-department.edit')->name('company-structure-department.edit');
-        Route::view('/company-structure-department/show', 'frontend.company-structure-department.show')->name('company-structure-department.show');
 
         /** Employment Status */
 
