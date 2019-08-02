@@ -337,7 +337,7 @@
                                                 <label class="form-control-label">
                                                     Scheduled Payment @include('frontend.common.label.required')
                                                 </label>
-                                                @if(isset($scheduled_payment_amount))
+                                                @if(sizeof($scheduled_payment_amount) > 0)
                                                 <div class="repeaterScheduledPayment">
                                                     @foreach($scheduled_payment_amount as $spa)
                                                     <div class="repeaterRow">
@@ -348,6 +348,7 @@
                                                                 @slot('id', 'scheduled_payment')
                                                                 @slot('value', $spa)
                                                                 @slot('text', 'Phone')
+                                                                @slot('autocomplete', 'off')
                                                                 @slot('id_error', 'scheduled_payment_amount')
                                                             @endcomponent
                                                             </div>
@@ -374,6 +375,7 @@
                                                                     @slot('name', 'scheduled_payment')
                                                                     @slot('id', 'scheduled_payment')
                                                                     @slot('text', 'Phone')
+                                                                    @slot('autocomplete', 'off')
                                                                     @slot('id_error', 'scheduled_payment_amount')
                                                                 @endcomponent
                                                             </div>
@@ -399,6 +401,7 @@
                                                                     @slot('name', 'scheduled_payment')
                                                                     @slot('id', 'scheduled_payment')
                                                                     @slot('text', 'Phone')
+                                                                    @slot('autocomplete', 'off')
                                                                     @slot('id_error', 'scheduled_payment_amount')
                                                                 @endcomponent
                                                             </div>
