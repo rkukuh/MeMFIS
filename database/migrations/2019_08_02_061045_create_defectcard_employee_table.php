@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJobcardSuccessorTable extends Migration
+class CreateDefectcardEmployeeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,20 @@ class CreateJobcardSuccessorTable extends Migration
      */
     public function up()
     {
-        Schema::create('jobcard_successor', function (Blueprint $table) {
+        Schema::create('defectcard_employee', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('jobcard_id');
-            $table->unsignedBigInteger('next');
-            $table->integer('order');
+            $table->unsignedBigInteger('defectcard_id');
+            $table->unsignedBigInteger('employee_id');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('jobcard_id')
-                    ->references('id')->on('jobcards')
+            $table->foreign('defectcard_id')
+                    ->references('id')->on('defectcards')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('next')
-                    ->references('id')->on('jobcards')
+            $table->foreign('employee_id')
+                    ->references('id')->on('employees')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
@@ -40,6 +39,6 @@ class CreateJobcardSuccessorTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobcard_successor');
+        Schema::dropIfExists('defectcard_employee');
     }
 }

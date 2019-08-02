@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.company-structure-department.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.company.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Company Structure & Department
                             </span>
@@ -67,7 +67,7 @@
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
                                             @slot('text', 'Company Structure')
-                                            @slot('href', route('frontend.company-structure-department.create') )
+                                            @slot('href', route('frontend.company.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -84,5 +84,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/company-structure-department/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/company/index.js')}}"></script>
 @endpush

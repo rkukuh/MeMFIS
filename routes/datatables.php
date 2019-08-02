@@ -86,6 +86,26 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** COMPANY */
+
+        Route::name('company.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'company',
+                'namespace' => 'Company'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'CompanyDatatables@index')->name('all');
+                Route::get('/type', 'CompanyTypeDatatables@index')->name('company.type');
+                 /** Polymorph */
+                
+            });
+
+        });
+
         /** EMPLOYEE */
 
         Route::name('employee.')->group(function () {
@@ -99,6 +119,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'EmployeeDatatables@index')->name('all');
+                Route::get('/statuses', 'EmployeeStatusesDatatables@index')->name('employee.statuses');
 
                 /** Polymorph */
                 Route::get('/{customer}/faxes', 'EmployeeFaxesDatatables@index')->name('faxes.index');
@@ -199,6 +220,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{htcrr}/materials', 'HtCrrItemsDatatables@material')->name('htcrr.materials.index');
                 Route::post('/additional/materials', 'AdditionalItemsDatatables@material')->name('additional.materials.index');
                 Route::post('/additional/tools', 'AdditionalItemsDatatables@tools')->name('additional.tools.index');
+                Route::get('/additional/initial', 'AdditionalItemsDatatables@initial')->name('additional.initial.index');
 
                 /** WORKPACKAGE */
 
@@ -619,6 +641,9 @@ Route::name('datatables.')->group(function () {
             });
 
         });
+
+        Route::get('/testing', 'UnitDatatables@index')->name('testing.index');
+
 
     });
 

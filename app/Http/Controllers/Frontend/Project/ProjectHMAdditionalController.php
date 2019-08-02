@@ -15,6 +15,14 @@ use App\Http\Requests\Frontend\ProjectHMUpdate;
 
 class ProjectHMAdditionalController extends Controller
 {
+    protected $aircrafts;
+    protected $customers;
+
+    public function __construct()
+    {
+        $this->aircrafts = Aircraft::all();
+        $this->customers = Customer::all();
+    }
 
     /**
      * Display a listing of the resource.
@@ -48,6 +56,8 @@ class ProjectHMAdditionalController extends Controller
      */
     public function store(Project $project,Request $request)
     {
+        // $defectcard_uuid = explode(",",$request->defectcard_uuid);
+        // dd($defectcard_uuid);
         $parent_id = $project->id;
         $project = $project->replicate();
         $project->parent_id = $parent_id;
@@ -64,10 +74,17 @@ class ProjectHMAdditionalController extends Controller
      */
     public function show(Project $project)
     {
+        if($project->quotations->toArray() == []){
+            $project = Project::find($project->parent_id);
+            $attention = json_decode($project->quotations()->first()->attention);
+        }else{
+            $attention = json_decode($project->quotations()->first()->attention);
+        }
         return view('frontend.project.hm-additional.show',[
             'project' => $project,
             'aircrafts' => $this->aircrafts,
-            'customers' => $this->customers
+            'customers' => $this->customers,
+            'attention' => $attention
         ]);
     }
 
@@ -79,11 +96,17 @@ class ProjectHMAdditionalController extends Controller
      */
     public function edit(Project $project)
     {
-        $attention = $project->quotations;
+        if($project->quotations->toArray() == []){
+            $project = Project::find($project->parent_id);
+            $attention = json_decode($project->quotations()->first()->attention);
+        }else{
+            $attention = json_decode($project->quotations()->first()->attention);
+        }
         return view('frontend.project.hm-additional.edit',[
             'project' => $project,
             'aircrafts' => $this->aircrafts,
-            'customers' => $this->customers
+            'customers' => $this->customers,
+            'attention' => $attention
         ]);
     }
 
