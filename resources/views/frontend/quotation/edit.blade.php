@@ -348,6 +348,7 @@
                                                                 @slot('id', 'scheduled_payment')
                                                                 @slot('value', $spa)
                                                                 @slot('text', 'Phone')
+                                                                @slot('class','scheduledPayment')
                                                                 @slot('autocomplete', 'off')
                                                                 @slot('id_error', 'scheduled_payment_amount')
                                                             @endcomponent
