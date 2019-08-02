@@ -348,7 +348,9 @@
                                                                 @slot('id', 'scheduled_payment')
                                                                 @slot('value', $spa)
                                                                 @slot('text', 'Phone')
+                                                                @if($quotation->scheduled_payment_type == 59)
                                                                 @slot('class','scheduledPayment')
+                                                                @endif
                                                                 @slot('autocomplete', 'off')
                                                                 @slot('id_error', 'scheduled_payment_amount')
                                                             @endcomponent
