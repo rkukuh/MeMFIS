@@ -60,11 +60,9 @@
                                     <option value="">
                                         Select a Facility
                                     </option>
-                                    <option value="1">Hangar Line 1</option>
-                                    <option value="2">Hangar Line 2</option>
-                                    <option value="3">Hangar Line 3</option>
-                                    <option value="4">Hangar Line 4</option>
-                                    <option value="5">Hangar Line 5</option>
+                                    @foreach($facilities as $facilityItem)
+                                        <option value="{{ $facilityItem->uuid }}">{{ $facilityItem->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-1 col-md-1 col-lg-1">

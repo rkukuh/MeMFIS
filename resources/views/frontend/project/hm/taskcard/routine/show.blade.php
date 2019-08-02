@@ -32,7 +32,7 @@
                                     <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
                                         @component('frontend.common.buttons.summary')
                                             @slot('text', 'Basic Summary')
-                                            @slot('href', route('frontend.project-hm.summary.basic', $workPackage->uuid) )
+                                            @slot('href', route('frontend.project-hm.summary.basic', ['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )
                                         @endcomponent
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
@@ -78,7 +78,7 @@
                                     <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
                                         @component('frontend.common.buttons.summary')
                                             @slot('text', 'SIP Summary')
-                                            @slot('href', route('frontend.project-hm.summary.sip', $workPackage->uuid) )
+                                            @slot('href', route('frontend.project-hm.summary.sip', ['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )
                                         @endcomponent
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
@@ -126,7 +126,7 @@
                                 <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
                                     @component('frontend.common.buttons.summary')
                                         @slot('text', 'CPCP Summary')
-                                        @slot('href', route('frontend.project-hm.summary.cpcp', $workPackage->uuid) )
+                                        @slot('href', route('frontend.project-hm.summary.cpcp', ['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )
                                     @endcomponent
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
