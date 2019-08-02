@@ -24,7 +24,7 @@
                     @endcomponent
                     @component('frontend.common.buttons.summary')
                         @slot('text', 'Basic Summary')
-                        @slot('href', route('frontend.workPackage.summary.basic', 'workPackage' => $workPackage->uuid ) )
+                        @slot('href', route('frontend.workPackage.summary.basic',$workPackage->uuid ) )
                     @endcomponent
 
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -61,7 +61,7 @@
                         @endcomponent
                     @component('frontend.common.buttons.summary')
                         @slot('text', 'SIP Summary')
-                        @slot('href', route('frontend.workPackage.summary.sip', 'workPackage' => $workPackage->uuid) )
+                        @slot('href', route('frontend.workPackage.summary.sip', $workPackage->uuid) )
                     @endcomponent
 
 
@@ -98,8 +98,7 @@
                         @slot('data_target', '#modal_cpcp')
                         @endcomponent
                     @component('frontend.common.buttons.summary')
-                        @slot('text', 'CPCP Summary')
-                        @slot('href', route('frontend.workPackage.summary.cpcp', 'workPackage' => $workPackage->uuid) )
+                        @slot('text', 'CPCP Summary')$workPackage->uuid) )
                     @endcomponent
 
 
