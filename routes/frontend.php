@@ -145,6 +145,9 @@ Route::name('frontend.')->group(function () {
         /** Position */
 
         Route::view('hr/benefit', 'frontend.benefit.index')->name('hr.benefit.index');
+        Route::view('hr/benefit/create', 'frontend.benefit.create')->name('hr.benefit.create');
+        Route::view('hr/benefit/edit', 'frontend.benefit.edit')->name('hr.benefit.edit');
+        Route::view('hr/benefit/show', 'frontend.benefit.show')->name('hr.benefit.show');
 
 
         /** Position */
