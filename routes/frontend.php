@@ -142,11 +142,10 @@ Route::name('frontend.')->group(function () {
         Route::view('/inventory-in/edit', 'frontend.inventory-in.edit')->name('inventory-in.edit');
         Route::view('/inventory-in/show', 'frontend.inventory-in.show')->name('inventory-in.show');
 
-        /** Position */
+        /** Benefits */
 
         Route::view('hr/benefit', 'frontend.benefit.index')->name('hr.benefit.index');
         Route::view('hr/benefit/create', 'frontend.benefit.create')->name('hr.benefit.create');
-        Route::view('hr/benefit/edit', 'frontend.benefit.edit')->name('hr.benefit.edit');
         Route::view('hr/benefit/show', 'frontend.benefit.show')->name('hr.benefit.show');
 
 
