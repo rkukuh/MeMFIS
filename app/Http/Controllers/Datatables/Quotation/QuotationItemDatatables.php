@@ -24,43 +24,31 @@ class QuotationItemDatatables extends Controller
      */
     public function routine(Quotation $quotation, WorkPackage $workPackage)
     {
-        $routinematerials = $materials = [];
-
-        // Get Items from routine taskcards -
-        $taskcards = $workPackage->taskcards()->with('type')
-        ->whereHas('type', function ($query) {
-            $query->where('of', 'taskcard-type-routine');
-        })->get();
-
-        foreach($taskcards as $taskcard){
-            $items = $taskcard->materials;
-            foreach($items as $item){
-                array_push($materials, $item);
-            }
-        }
-        // -Get Items from routine taskcards
-
-        foreach($materials as $material){
-            $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
-            ->where('quotation_id', $quotation->id)
-            ->where('item_id', $material->id)
-            ->get();
-            if(sizeof($items) > 0){
-                foreach($items as $item){
-                    array_push($routinematerials, $item);
-                }
-            }
-        }
+        $routinematerials = QuotationWorkPackageTaskCardItem::with('taskcard','item','unit','price')->where('quotation_id', $quotation->id)
+        ->where('workpackage_id', $workPackage->id)
+        ->whereHas('taskcard', function ($query) {
+                $query->wherehas('type', function ($query2) {
+                    $query2->where('of','taskcard-type-routine');
+                });
+        })
+        ->whereHas('item', function ($query) {
+                $query->whereHas('categories', function ($query) {
+                    $query->whereIn('code', ['raw', 'cons', 'comp']);
+                });
+        })
+        ->get();
 
         foreach($routinematerials as $routinematerial){
-            $routinematerial->tc .= TaskCard::find($routinematerial->taskcard_id)->number;
-            $routinematerial->pn .= Item::find($routinematerial->item_id)->code;
-            $routinematerial->title .= Item::find($routinematerial->item_id)->name;
-            $routinematerial->unit_material .= Unit::find($routinematerial->unit_id)->name;
-            $routinematerial->unitPrice .= null;
+            if($routinematerial->item->prices->last() <> null){
+                $routinematerial->unitPrice .= $routinematerial->item->prices->where('level',$quotation->project->customer->levels->last()->id)->last()->amount;
+            }
+            else{
+                $routinematerial->unitPrice .= 0;
+            }
+
         }
 
-        $data = $alldata = $routinematerials;
+        $data = $alldata = json_decode($routinematerials);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -156,41 +144,32 @@ class QuotationItemDatatables extends Controller
      */
     public function non_routine(Quotation $quotation, WorkPackage $workPackage)
     {
-        $nonroutinematerials = $materials = [];
 
-        // Get Items from non-routine taskcards -
-        $taskcards = $workPackage->taskcards()->with('type')
-        ->whereHas('type', function ($query) {
-            $query->where('of', 'taskcard-type-non-routine');
-        })->get();
-        foreach($taskcards as $taskcard){
-            $items = $taskcard->materials;
-            foreach($items as $item){
-                array_push($materials, $item);
-            }
-        }
-        // -Get Items from non-routine taskcards
-        foreach($materials as $material){
-            $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
-            ->where('quotation_id', $quotation->id)
-            ->where('item_id', $material->id)
-            ->get();
-            if(sizeof($items) > 0){
-                foreach($items as $item){
-                    array_push($nonroutinematerials, $item);
-                }
-            }
-        }
+        $nonroutinematerials = QuotationWorkPackageTaskCardItem::with('taskcard','item','unit','price')->where('quotation_id', $quotation->id)
+        ->where('workpackage_id', $workPackage->id)
+        ->whereHas('taskcard', function ($query) {
+                $query->wherehas('type', function ($query2) {
+                    $query2->where('of','taskcard-type-non-routine');
+                });
+        })
+        ->whereHas('item', function ($query) {
+                $query->whereHas('categories', function ($query) {
+                    $query->whereIn('code', ['raw', 'cons', 'comp']);
+                });
+        })
+        ->get();
 
         foreach($nonroutinematerials as $nonroutinematerial){
-            $nonroutinematerial->tc .= TaskCard::find($nonroutinematerial->taskcard_id)->number;
-            $nonroutinematerial->pn .= Item::find($nonroutinematerial->item_id)->code;
-            $nonroutinematerial->title .= Item::find($nonroutinematerial->item_id)->name;
-            $nonroutinematerial->unit_material .= Unit::find($nonroutinematerial->unit_id)->name;
-            $nonroutinematerial->unitPrice .= null;
+            if($nonroutinematerial->item->prices->last() <> null){
+                $nonroutinematerial->unitPrice .= $nonroutinematerial->item->prices->where('level',$quotation->project->customer->levels->last()->id)->last()->amount;
+            }
+            else{
+                $nonroutinematerial->unitPrice .= 0;
+            }
+
         }
 
-        $data = $alldata = $nonroutinematerials;
+        $data = $alldata = json_decode($nonroutinematerials);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
