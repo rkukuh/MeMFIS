@@ -17,6 +17,7 @@
                     <div class="employee_class">
                             @component('frontend.common.buttons.create-new')
                                 @slot('text', 'Employment Status')
+                                @slot('id','add-employment-status');
                                 @slot('data_target', '#modal_employment_status')
                             @endcomponent    
                     </div>

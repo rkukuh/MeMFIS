@@ -76,7 +76,6 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'name')
                                                 @slot('id', 'name')
                                                 @slot('name', 'name')
                                                 @slot('value',$company->name)
@@ -95,7 +94,6 @@
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
                                                 @slot('value',$company->description)
-                                                @slot('text', 'Description')
                                             @endcomponent
                                         </div>
                                     </div>
