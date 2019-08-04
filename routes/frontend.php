@@ -142,6 +142,21 @@ Route::name('frontend.')->group(function () {
         Route::view('/inventory-in/edit', 'frontend.inventory-in.edit')->name('inventory-in.edit');
         Route::view('/inventory-in/show', 'frontend.inventory-in.show')->name('inventory-in.show');
 
+        /** Benefits */
+
+        Route::view('hr/benefit', 'frontend.benefit.index')->name('hr.benefit.index');
+        Route::view('hr/benefit/create', 'frontend.benefit.create')->name('hr.benefit.create');
+        Route::view('hr/benefit/show', 'frontend.benefit.show')->name('hr.benefit.show');
+
+
+        /** Position */
+
+        Route::view('hr/position', 'frontend.position.index')->name('hr.position.index');
+        Route::view('hr/position/create', 'frontend.position.create')->name('hr.position.create');
+        Route::view('hr/position/edit', 'frontend.position.edit')->name('hr.position.edit');
+        Route::view('hr/position/show', 'frontend.position.show')->name('hr.position.show');
+        Route::view('hr/position/update-benefit', 'frontend.position.update-benefit')->name('hr.position.update-benefit');
+
         
         /** QUOTATION's WORKPACKAGE's TASKCARD's */
 

@@ -19,7 +19,7 @@ class WorkPackageDatatables extends Controller
      */
     public function index()
     {
-        $workpackages = WorkPackage::with('aircraft')->get();
+        $workpackages = WorkPackage::with('aircraft')->where('is_template',1)->get();
 
         foreach($workpackages as $workpackage){
             if($workpackage->audits->first()->user_id == null){
@@ -226,7 +226,7 @@ class WorkPackageDatatables extends Controller
         }
 
         // get all raw data
-        $workpackages = WorkPackage::with('aircraft')->get();
+        $workpackages = WorkPackage::with('aircraft')->where('is_template',1)->get();
 
         foreach($workpackages as $workpackage){
             $workpackage->aircraft_name = $workpackage->aircraft->name;

@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <fieldset class="border p-2">
-                                                <legend class="w-auto">Customer Name (<span>PT. Sejahterah</span>)</legend>
+                                                <legend class="w-auto">Customer Name (<span>{{ $project->customer->name }}</span>)</legend>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <div class="form-group m-form__group row">
@@ -62,8 +62,8 @@
                                                                     Work Order Number
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
+                                                                    @slot('id', 'wo')
+                                                                    @slot('text',  $project->no_wo)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -74,7 +74,7 @@
                                                                     Address
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'project_title')
+                                                                    @slot('id', 'address')
                                                                     @slot('text', '..........')
                                                                 @endcomponent
                                                             </div>
@@ -86,8 +86,8 @@
                                                                     Phone
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
+                                                                    @slot('id', 'phone')
+                                                                    @slot('text', $attention->phone)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -100,7 +100,11 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_number')
-                                                                    @slot('text', 'P-01/HMxxxxx')
+                                                                    @if($attention->fax != 'null')
+                                                                    @slot('text', $attention->fax)
+                                                                    @else
+                                                                    @slot('text', '-')
+                                                                    @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -110,7 +114,7 @@
                                                                     Attn
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
+                                                                     @slot('text', $attention->name)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -120,7 +124,7 @@
                                                                     Email
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
+                                                                   @slot('text', $attention->email)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -141,12 +145,12 @@
                                                     <td align="center" width="14%"><b>A/C SN</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
+                                                    <td align="center" valign="top">{{$project->created_at}}</td>
+                                                    <td align="center" valign="top">{{$project->code}}</td>
+                                                    <td align="center" valign="top">{{$project->title}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft->name}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft_register}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft_sn}}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -164,10 +168,10 @@
                                             </ul>
                                             <div class="tab-content">
                                                 <div class="tab-pane active show" id="m_tabs_1_1" role="tabpanel">
-                                                    @include('frontend.project.additional.defect-card.index')
+                                                    @include('frontend.project.hm-additional.defect-card.edit')
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
-                                                    @include('frontend.project.additional.material-tool.index')
+                                                    @include('frontend.project.hm-additional.material-tool.index')
                                                 </div>
                                             </div>
                                         </div>
@@ -191,9 +195,9 @@
                                                         @slot('id', 'add-workpackage')
                                                         @slot('class', 'add-workpackage')
                                                     @endcomponent
-    
+
                                                     @include('frontend.common.buttons.reset')
-    
+
                                                     @component('frontend.common.buttons.back')
                                                         @slot('href', route('frontend.workpackage.index'))
                                                     @endcomponent
@@ -231,7 +235,11 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let project_uuid = '{{$project->uuid}}'
+    </script>
+
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('js/frontend/project/additional/edit.js')}}"></script>
+    <script src="{{ asset('js/frontend/project/hm-additional/edit.js')}}"></script>
 @endpush
 

@@ -65,12 +65,13 @@ var DatatableAutoColumnHideDemo = function () {
           template: function (t) {
             if(currency.id == 1){
               return (t.pivot.description + '<br>' +
-                '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x ' + IDRformatter.format(t.pivot.manhour_rate) + '<br>' +
-                '- Facility Price : '
+                '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x ' + IDRformatter.format(t.pivot.manhour_rate) + '<br>' +
+                '- Facility Price : <br>' +
+                '- Material & Tool Price : ' 
               );
             }else{
               return (t.pivot.description + '<br>' +
-                '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x $ ' + ForeignFormatter.format(t.pivot.manhour_rate) + '<br>' +
+                '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x ' + ForeignFormatter.format(t.pivot.manhour_rate) + '<br>' +
                 '- Facility Price : <br>' +
                 '- Material & Tool Price : ' 
               );

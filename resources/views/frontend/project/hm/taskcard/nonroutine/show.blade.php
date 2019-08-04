@@ -31,7 +31,7 @@
                                     <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
                                         @component('frontend.common.buttons.summary')
                                             @slot('text', 'AD/SB Summary')
-                                            @slot('href', route('frontend.project-hm.summary.ad-sb', $workPackage->uuid) )
+                                            @slot('href', route('frontend.project-hm.summary.ad-sb', ['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )
                                         @endcomponent
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
@@ -78,7 +78,7 @@
                                         <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
                                             @component('frontend.common.buttons.summary')
                                                 @slot('text', 'CMR/AWL Summary')
-                                                @slot('href', route('frontend.project-hm.summary.cmr-awl', $workPackage->uuid) )
+                                                @slot('href', route('frontend.project-hm.summary.cmr-awl', ['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )
                                             @endcomponent
                                             <div class="m-separator m-separator--dashed d-xl-none"></div>
                                         </div>
@@ -125,7 +125,7 @@
                                         <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
                                             @component('frontend.common.buttons.summary')
                                                 @slot('text', 'SI Summary')
-                                                @slot('href', route('frontend.project-hm.summary.si', $workPackage->uuid) )
+                                                @slot('href', route('frontend.project-hm.summary.si', ['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )
                                             @endcomponent
                                             <div class="m-separator m-separator--dashed d-xl-none"></div>
                                         </div>

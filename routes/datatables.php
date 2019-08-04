@@ -220,6 +220,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{htcrr}/materials', 'HtCrrItemsDatatables@material')->name('htcrr.materials.index');
                 Route::post('/additional/materials', 'AdditionalItemsDatatables@material')->name('additional.materials.index');
                 Route::post('/additional/tools', 'AdditionalItemsDatatables@tools')->name('additional.tools.index');
+                Route::get('/additional/initial', 'AdditionalItemsDatatables@initial')->name('additional.initial.index');
 
                 /** WORKPACKAGE */
 
@@ -560,6 +561,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'DiscrepancyDatatables@index')->name('all');
+                Route::get('/ppc', 'DiscrepancyDatatables@ppc')->name('ppc');
                 Route::post('/filter', 'DiscrepancyDatatables@filter')->name('filter');
                 Route::get('/{discrepancy}/materials', 'DiscrepancyItemDatatables@material')->name('materials.index');
                 Route::get('/{discrepancy}/tools', 'DiscrepancyItemDatatables@tool')->name('tools.index');
@@ -639,6 +641,9 @@ Route::name('datatables.')->group(function () {
             });
 
         });
+
+        Route::get('/testing', 'UnitDatatables@index')->name('testing.index');
+
 
     });
 

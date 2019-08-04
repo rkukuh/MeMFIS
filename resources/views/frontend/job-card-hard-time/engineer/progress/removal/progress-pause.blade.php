@@ -149,6 +149,7 @@
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('id', 'item_sn_removal')
                                                                                 @slot('name', 'item_sn_removal')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('id_error', 'item_sn_removal')
                                                                                 @slot('value', $htcrr_removal->serial_number)
                                                                             @endcomponent
@@ -161,6 +162,7 @@
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.textarea')
                                                                                 @slot('rows', '5')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('id', 'description_removal')
                                                                                 @slot('name', 'description_removal')
                                                                                 @slot('value', $htcrr_removal->description)
@@ -176,6 +178,7 @@
                                                                                 @slot('id', 'is_rii_removal')
                                                                                 @slot('name', 'is_rii_removal')
                                                                                 @slot('text', 'IS RII?')
+                                                                                @slot('disabled', 'disabled')
                                                                                 @if($htcrr_removal->is_null)
                                                                                 @slot('checked', 'checked')
                                                                                 @endif
@@ -474,6 +477,7 @@
                                                                             @component('frontend.common.input.checkbox')
                                                                                 @slot('id', 'is_rii')
                                                                                 @slot('name', 'is_rii')
+                                                                                @slot('disabled', 'disabled')
                                                                                 @slot('text', 'IS RII?')
                                                                                 @if($htcrr->position == 1)
                                                                                     @slot('checked', 'checked')
@@ -494,6 +498,7 @@
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('text', 'title')
                                                                                 @slot('id', 'title')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('name', 'title')
                                                                                 @slot('id_error', 'title')
                                                                             @endcomponent
@@ -507,6 +512,7 @@
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('text', 'title')
                                                                                 @slot('id', 'title')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('name', 'title')
                                                                                 @slot('id_error', 'title')
                                                                             @endcomponent
@@ -519,6 +525,7 @@
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.textarea')
                                                                                 @slot('rows', '5')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('id', 'description')
                                                                                 @slot('name', 'description')
                                                                                 @slot('text', 'Description')

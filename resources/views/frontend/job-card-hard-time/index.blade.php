@@ -74,6 +74,15 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row align-items-center">
+                                <div class="col-xl-12 order-2 order-xl-1">
+                                    <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
+                                        <div class="col-md-12">
+                                            <div class="job_card_htcrr_datatable" id="scrolling_both"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

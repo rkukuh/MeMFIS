@@ -8,6 +8,7 @@ use App\Models\JobCard;
 use App\Models\Project;
 use App\Models\Approval;
 use App\Models\Progress;
+use App\Models\Employee;
 use App\Models\Quotation;
 use App\Models\DefectCard;
 use Faker\Generator as Faker;
@@ -45,6 +46,12 @@ $factory->afterCreating(DefectCard::class, function ($defectcard, $faker) {
 
     if ($faker->boolean) {
         $defectcard->approvals()->save(factory(Approval::class)->make());
+    }
+
+    // Helper (Employee)
+
+    for ($i = 0; $i < rand(1, 3); $i++) {
+        $defectcard->helpers()->save(Employee::get()->random());
     }
 
     // Item
