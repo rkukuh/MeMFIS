@@ -153,6 +153,19 @@ Route::name('frontend.')->group(function () {
         Route::view('/inventory-in/edit', 'frontend.inventory-in.edit')->name('inventory-in.edit');
         Route::view('/inventory-in/show', 'frontend.inventory-in.show')->name('inventory-in.show');
 
+        /** GSE-Tool Returned */
+
+        Route::view('/gse-tool-returned', 'frontend.gse-tool-returned.index')->name('gse-tool-returned.index');
+
+        Route::view('/gse-tool-returned/general/create', 'frontend.gse-tool-returned.general.create')->name('gse-tool-returned.general.create');
+        Route::view('/gse-tool-returned/general/edit', 'frontend.gse-tool-returned.general.edit')->name('gse-tool-returned.general.edit');
+        Route::view('/gse-tool-returned/general/show', 'frontend.gse-tool-returned.general.show')->name('gse-tool-returned.general.show');
+
+        Route::view('/gse-tool-returned/project/create', 'frontend.gse-tool-returned.project.create')->name('gse-tool-returned.project.create');
+        Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
+        Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
+
+
         /** Benefits */
 
         Route::view('hr/benefit', 'frontend.benefit.index')->name('hr.benefit.index');
