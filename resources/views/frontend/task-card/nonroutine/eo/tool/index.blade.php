@@ -11,10 +11,11 @@
                 <table class="table table-striped table-bordered table-hover table-checkable" id="m_datatable_tool">
                     <thead>
                         <tr>
-                            <th>Material</th>
+                            <th>Item Description</th>
                             <th>Quantity</th>
                             <th>Unit</th>
                             <th>Remark</th>
+                            <th>Part Number</th>
                             <th>Action</th>
                         </tr>
                     </thead>
