@@ -11,7 +11,7 @@ function EO_tool(triggeruuid2) {
         ajax: "/datatables/taskcard-eo/" + triggeruuid2 + "/tools",
         columns: [
             {
-                data: "pivot.part number"
+                data: "pivot.part_number"
             },
             {
                 data: "name"
