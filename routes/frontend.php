@@ -181,6 +181,21 @@ Route::name('frontend.')->group(function () {
         Route::view('hr/position/show', 'frontend.position.show')->name('hr.position.show');
         Route::view('hr/position/update-benefit', 'frontend.position.update-benefit')->name('hr.position.update-benefit');
 
+
+        /** Leave Period */
+
+        Route::view('hr/leave-period', 'frontend.leave-period.index')->name('hr.leave-period.index');
+        Route::view('hr/leave-period/create', 'frontend.leave-period.create')->name('hr.leave-period.create');
+        Route::view('hr/leave-period/show', 'frontend.leave-period.show')->name('hr.leave-period.show');
+
+
+        /** Leave Types */
+
+        Route::view('hr/leave-types', 'frontend.leave-types.index')->name('hr.leave-types.index');
+        Route::view('hr/leave-types/create', 'frontend.leave-types.create')->name('hr.leave-types.create');
+        Route::view('hr/leave-types/show', 'frontend.leave-types.show')->name('hr.leave-types.show');
+
+
         
         /** QUOTATION's WORKPACKAGE's TASKCARD's */
 
