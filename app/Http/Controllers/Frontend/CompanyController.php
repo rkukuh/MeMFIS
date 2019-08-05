@@ -38,13 +38,23 @@ class CompanyController extends Controller
      */
     public function store(CompanyStore $request)
     {
-        $parent_id = Company::select('id')
-        ->where('name',$request->company);
+        $parent_id = null;
 
-        $type_id = Type::select('id')->where('name',$request->parent_structure)
-        ->where('of','company')->first();
+        $type_id = null;
 
-        $company = Employee::create([
+        $parent = Company::select('id')->where('uuid',$request->parent_structure)->first();
+
+        $type = Type::select('id')->where('uuid',$request->company)->first();
+
+        if(!empty($parent->id)){
+            $parent_id = $parent->id;
+        }
+
+        if(!empty($type->id)){
+            $type_id = $type->id;
+        }
+
+        $company = Company::create([
             'code' => $request->code,
             'name' => $request->name,
             'description' => $request->description,
@@ -86,14 +96,23 @@ class CompanyController extends Controller
      */
     public function update(CompanyUpdate $request, Company $company)
     {
+        $parent_id = null;
 
-        $parent_id = Company::select('id')
-        ->where('name',$request->company);
+        $type_id = null;
 
-        $type_id = Type::select('id')->where('name',$request->parent_structure)
-        ->where('of','company')->first();
+        $parent = Company::select('id')->where('uuid',$request->parent_structure)->first();
 
-        Employee::where('uuid',$request->uuid)
+        $type = Type::select('id')->where('uuid',$request->company)->first();
+
+        if(!empty($parent->id)){
+            $parent_id = $parent->id;
+        }
+
+        if(!empty($type->id)){
+            $type_id = $type->id;
+        }
+
+        Company::where('uuid',$request->uuid)
         ->update([
             'code' => $request->code,
             'name' => $request->name,
@@ -103,7 +122,7 @@ class CompanyController extends Controller
         ]);
 
         // TODO: Return error message as JSON
-        return response()->json($company);
+        return response()->json($request->description);
         return false;
     }
 
@@ -115,6 +134,8 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        Company::where('uuid',$company->uuid)->delete();
+        return response()->json($company);
+        return false;
     }
 }

@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Company Structure & Department
+                    Benefits
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.company.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.hr.benefit.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Company Structure & Department
+                                Benefits
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Company Structure & Department
+                                    Benefits
                                 </h3>
                             </div>
                         </div>
@@ -53,25 +53,26 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Code 
+                                                Benefits Code
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('id', 'code')
-                                                @slot('name', 'code')
-                                                @slot('id_error', 'code')
+                                                @slot('text', 'Benefits Code')
+                                                @slot('id', 'benefits_code')
+                                                @slot('name', 'benefits_code')
+                                                @slot('id_error', 'benefits_code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Name
+                                                Benefits Name
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'name')
-                                                @slot('id', 'name')
-                                                @slot('name', 'name')
-                                                @slot('id_error', 'name')
+                                                @slot('text', 'Benefits Name')
+                                                @slot('id', 'benefits_name')
+                                                @slot('name', 'benefits_name')
+                                                @slot('id_error', 'benefits_name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -92,37 +93,55 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                               Company Type   
+                                                Calculation Reference
                                             </label>
-
+        
                                             @component('frontend.common.input.select2')
-                                                @slot('text', 'Company Type')
-                                                @slot('id', 'company')
-                                                @slot('name', 'company')
-                                                @slot('id_error', 'company')
-                                            @endcomponent
+                                                @slot('text', 'Calculation Reference')
+                                                @slot('id', 'calculation_reference')
+                                                @slot('name', 'calculation_reference')
+                                                @slot('id_error', 'calculation_reference')
+                                            @endcomponent    
+                                            
+                                            {{-- Value of Calculation Reference
+
+                                            Based on Monthly Fixed
+                                            Based on Annually Fixed
+                                            Based on Daily Presence
+                                            Based on Hourly Overtime --}}
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                               Parent Structure
+                                                Pro-rate Base Calculation
                                             </label>
-
+        
                                             @component('frontend.common.input.select2')
-                                                @slot('text', 'Parent Structure')
-                                                @slot('id', 'parent_structure')
-                                                @slot('name', 'parent_structure')
-                                                @slot('id_error', 'parent_structure')
-                                            @endcomponent
+                                                @slot('text', 'Pro-rate Base Calculation')
+                                                @slot('id', 'pro_rate_base_calculation')
+                                                @slot('name', 'pro_rate_base_calculation')
+                                                @slot('id_error', 'pro_rate_base_calculation')
+                                            @endcomponent    
+                                            
+{{-- 
+                                            Value of Pro Rate Base Calculation
+
+                                            Hour to Day
+                                            Day to Month
+                                            Month to Year
+                                            None (Full Calculated)  --}}
                                         </div>
                                     </div>
+
+
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-company-structure')
-                                                        @slot('class', 'add-company-structure')
+                                                        @slot('id', 'add-benefits')
+                                                        @slot('class', 'add-benefits')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -134,7 +153,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -145,9 +163,6 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/company.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/parent-structure.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/company/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/company/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/calculation-reference.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/pro-rate-base-calculation.js') }}"></script>
 @endpush

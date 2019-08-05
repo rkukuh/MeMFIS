@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Company Structure & Department
+                    Benefits
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.company.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.hr.benefit.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Company Structure & Department
+                                Benefits
                             </span>
                         </a>
                     </li>
@@ -38,10 +38,10 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.create-new')
+                                @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Company Structure & Department
+                                    Benefits
                                 </h3>
                             </div>
                         </div>
@@ -53,25 +53,20 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Code 
+                                                Benefits Code
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('id', 'code')
-                                                @slot('name', 'code')
-                                                @slot('id_error', 'code')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Name
+                                                Benefits Name
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'name')
-                                                @slot('id', 'name')
-                                                @slot('name', 'name')
-                                                @slot('id_error', 'name')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -81,52 +76,39 @@
                                                 Description
                                             </label>
 
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '5')
-                                                @slot('id', 'description')
-                                                @slot('name', 'description')
-                                                @slot('text', 'Description')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                               Company Type   
+                                                Calculation Reference
                                             </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Company Type')
-                                                @slot('id', 'company')
-                                                @slot('name', 'company')
-                                                @slot('id_error', 'company')
+        
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                               Parent Structure
+                                                Pro-rate Base Calculation
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Parent Structure')
-                                                @slot('id', 'parent_structure')
-                                                @slot('name', 'parent_structure')
-                                                @slot('id_error', 'parent_structure')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
+                                            
                                         </div>
                                     </div>
+
+
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-company-structure')
-                                                        @slot('class', 'add-company-structure')
-                                                    @endcomponent
-
-                                                    @include('frontend.common.buttons.reset')
-
                                                     @include('frontend.common.buttons.back')
 
                                                 </div>
@@ -134,7 +116,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -145,9 +126,6 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/company.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/parent-structure.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/company/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/company/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/calculation-reference.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/pro-rate-base-calculation.js') }}"></script>
 @endpush

@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_material_request" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modal_tool_request" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -6,7 +6,7 @@
                 @include('frontend.common.label.create-new')
 
                 <h5 class="modal-title" id="TitleModalInstruction">
-                    Material Request
+                    Item
 
                     <small id="instruction" class="m--font-focus"></small>
                 </h5>
@@ -21,15 +21,11 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
-                                    Item
+                                    Tool
                                 </label>
 
-                                @component('frontend.common.input.select2')
-                                    @slot('text', 'Item')
-                                    @slot('id', 'item')
-                                    @slot('name', 'item')
-                                    @slot('id_error', 'item')
-                                    @slot('style', 'width:100%')
+                                @component('frontend.common.label.data-info')
+                                    @slot('text', 'generate')
                                 @endcomponent
                             </div>
                         </div>
@@ -51,11 +47,8 @@
                                     Unit
                                 </label>
 
-                                @component('frontend.common.input.select2')
-                                    @slot('text', 'Unit')
-                                    @slot('id', 'unit_id')
-                                    @slot('name', 'unit_id')
-                                    @slot('id_error', 'unit')
+                                @component('frontend.common.label.data-info')
+                                    @slot('text', 'generate')
                                 @endcomponent
                             </div>
                         </div>

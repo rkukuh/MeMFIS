@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Benefits
+                    Tool Request
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.benefit.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.tool-request.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Benefits
+                                Tool Request
                             </span>
                         </a>
                     </li>
@@ -42,7 +42,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Benefits
+                                    Tool Request
                                 </h3>
                             </div>
                         </div>
@@ -53,6 +53,9 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-8 order-2 order-xl-1">
                                         <div class="form-group m-form__group row align-items-center">
+                                            <div class="col-md-2">
+                                                @include('frontend.common.buttons.filter')
+                                            </div>
                                             <div class="col-md-4">
                                                 <div class="m-input-icon m-input-icon--left">
                                                     <input type="text" class="form-control m-input" placeholder="Search..."
@@ -65,16 +68,30 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        @component('frontend.common.buttons.create')
-                                            @slot('text', 'Benefits')
-                                            @slot('href', route('frontend.hr.benefit.create') )
-                                        @endcomponent
+                                        <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
+                                            <a href="{{route('frontend.tool-request.project.create')}}" class="m-btn btn btn-primary">
+                                                <span>
+                                                    <i class="la la-plus-circle"></i>
+                                                <span>Project</span>
+                                                </span>
+                                            </a>
+                                            <a href="{{route('frontend.tool-request.general.create')}}" class="btn btn-primary m-btn m-btn--pill-last">
+                                                <span>
+                                                    <i class="la la-plus-circle"></i>
+                                                <span>General</span>
+                                                </span>
+                                            </a>
+                                        </div>
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="benefit_datatable" id="scrolling_both"></div>
+
+                            <div class="col-lg-12">
+                                @include('frontend.tool-request.filter')
+                            </div>
+                            <div class="m_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
                 </div>
@@ -84,5 +101,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/benefit/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/tool-request/index.js')}}"></script>
 @endpush

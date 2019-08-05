@@ -5,10 +5,10 @@ let CompanyStructure = {
         let company_uuid = $('input[name=company_uuid]').val();
         let code = $('input[name=code]').val();
         let name = $('input[name=name]').val();
-        let description = $('input[name=description]').val();
+        let description = $('#description').val();
         let company = $('#company').val();
         let parent_structure = $('#parent_structure').val();
-
+       
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -36,10 +36,9 @@ let CompanyStructure = {
                       }); 
 
                 } else {
-                    alert('masuk pak eko');
-                    // toastr.success('Data berhasil disimpan.', 'Sukses', {
-                    //     timeOut: 5000
-                    // });
+                    toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        timeOut: 5000
+                    });
                 }
             }
         });

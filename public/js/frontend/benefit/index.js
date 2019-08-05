@@ -1,12 +1,13 @@
-let CompanyStructure = {
+
+let Benefit = {
     init: function () {
-        $('.company_structure_datatable').mDatatable({
+        $('.benefit_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/company',
+                        url: '/datatables/customer',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -43,50 +44,43 @@ let CompanyStructure = {
             },
             columns: [{
                     field: 'name',
-                    title: 'Company Structure Name',
+                    title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/company/'+t.uuid+'">' + t.name + "</a>"
+                        return '<a href="/customer/'+t.uuid+'">' + t.name + "</a>"
                     }
                 },
                 {
-                    field: 'type.name',
-                    title: 'Type',
+                    field: 'addresses',
+                    title: 'Benefits Name',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        if(t.addresses[0]){
+                            return t.addresses[0].address
+                        }else{
+                            return ""
+                        }
+                    }
                 },
                 {
-                    field: 'description',
+                    field: 'phones',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
-                },
-                {
-                    field: 'parent.name',
-                    title: 'Parent Structure',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="/company/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.uuid +
-                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
-                        );
+                    template: function (t) {
+                        if(t.phones[0]){
+                            return t.phones[0].number
+                        }else{
+                            return ""
+                        }
                     }
                 }
             ]
         });
 
-        let remove = $('.company_structure_datatable').on('click', '.delete', function () {
+        let remove = $('.position_datatable').on('click', '.delete', function () {
             let triggerid = $(this).data('id');
 
             swal({
@@ -105,13 +99,13 @@ let CompanyStructure = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/company/' + triggerid + '',
+                        url: '/customer/' + triggerid + '',
                         success: function (data) {
-                            toastr.success('Company structure has been deleted.', 'Deleted', {
+                            toastr.success('Position has been deleted.', 'Deleted', {
                                 timeOut: 5000
                             }
                         );
-                        let table = $('.company_structure_datatable').mDatatable();
+                        let table = $('.position_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -134,5 +128,5 @@ let CompanyStructure = {
 };
 
 jQuery(document).ready(function () {
-    CompanyStructure.init();
+    Benefit.init();
 });

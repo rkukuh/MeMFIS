@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Material Request Project
+                    GSE/Tool Returned Project
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.material-request.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.gse-tool-returned.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Material Request Project
+                                GSE/Tool Returned Project
                             </span>
                         </a>
                     </li>
@@ -38,10 +38,10 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.create-new')
+                                @include('frontend.common.label.edit')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material Request Project
+                                    GSE/Tool Returned Project
                                 </h3>
                             </div>
                         </div>
@@ -60,12 +60,12 @@
                                                 @slot('id', 'date')
                                                 @slot('text', 'Date')
                                                 @slot('name', 'date')
-                                                @slot('id_error','requested_at')
+                                                @slot('id_error','date')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Storage
+                                                Storage @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.select2')
@@ -79,7 +79,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Ref Job Card No. @include('frontend.common.label.required')
+                                                Ref Tool Request No. @include('frontend.common.label.required')
                                             </label>
 
                                             @include('frontend.common.warehouse.index')
@@ -91,7 +91,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Location 
+                                                Location @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -110,20 +110,7 @@
                                                 @slot('text', 'generate')
                                             @endcomponent
                                         </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Section Code
-                                            </label>
-
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'Section Code')
-                                                @slot('id', 'section_code')
-                                                @slot('name', 'section_code')
-                                                @slot('id_error', 'section_code')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
+                                        
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -147,18 +134,6 @@
                                                     @endcomponent
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Recieved By 
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Recieved By')
-                                                @slot('id', 'received-by')
-                                                @slot('name', 'received-by')
-                                                @slot('id_error', 'received-by')
-                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -189,7 +164,7 @@
                                                             @include('frontend.common.label.datalist')
 
                                                             <h3 class="m-portlet__head-text">
-                                                                Material
+                                                                Tool
                                                             </h3>
                                                         </div>
                                                     </div>
@@ -213,8 +188,8 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @include('frontend.material-request.modal')
-                                                        <div class="material_request_project_datatable" id="material_request_project_datatable"></div>
+                                                        @include('frontend.gse-tool-returned.modal')
+                                                        <div class="gse_tool_returned_datatable" id="gse_tool_returned_datatable"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -226,8 +201,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-workpackage')
-                                                        @slot('class', 'add-workpackage')
+                                                        @slot('id', 'add-gse-tool-returned')
+                                                        @slot('class', 'add-gse-tool-returned')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -249,16 +224,17 @@
     </div>
 @endsection
 
+
 @push('footer-scripts')
 
-    <script src="{{ asset('js/frontend/material-request/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/gse-tool-returned/create.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/loaned.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
