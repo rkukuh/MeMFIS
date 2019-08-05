@@ -248,22 +248,6 @@
     </div>
 @endsection
 
-@push('header-scripts')
-    <style>
-        fieldset {
-            margin-bottom: 30px;
-        }
-
-        .padding-datatable {
-            padding: 0px
-        }
-
-        .margin-info {
-            margin-left: 5px
-        }
-    </style>
-@endpush
-
 @push('footer-scripts')
 
     <script src="{{ asset('js/frontend/material-request/edit.js') }}"></script>

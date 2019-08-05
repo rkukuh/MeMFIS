@@ -51,13 +51,10 @@ let CompanyStructure = {
                     }
                 },
                 {
-                    field: 'type',
+                    field: 'type.name',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t){
-                        return t.name
-                    }
                 },
                 {
                     field: 'description',
@@ -108,13 +105,13 @@ let CompanyStructure = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/customer/' + triggerid + '',
+                        url: '/company/' + triggerid + '',
                         success: function (data) {
-                            toastr.success('Material has been deleted.', 'Deleted', {
+                            toastr.success('Company structure has been deleted.', 'Deleted', {
                                 timeOut: 5000
                             }
                         );
-                        let table = $('.customer_datatable').mDatatable();
+                        let table = $('.company_structure_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();

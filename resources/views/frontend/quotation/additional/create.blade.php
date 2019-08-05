@@ -281,23 +281,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        PPN
-                                                    </label>
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-4 col-md-4 col-lg-4">
-                                                            @component('frontend.common.input.checkbox')
-                                                            @slot('id', 'ppn')
-                                                            @slot('name', 'ppn')
-                                                            @slot('text', 'Include')
-                                                            @slot('value', 'Include')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">

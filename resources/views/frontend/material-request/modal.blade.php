@@ -6,7 +6,7 @@
                 @include('frontend.common.label.create-new')
 
                 <h5 class="modal-title" id="TitleModalInstruction">
-                    Material Request Project
+                    Material Request
 
                     <small id="instruction" class="m--font-focus"></small>
                 </h5>

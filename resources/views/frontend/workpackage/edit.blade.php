@@ -126,11 +126,11 @@
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Work Package Summary')
-                                                                @slot('href', route('frontend.workPackage.summary.workpackage', 'workPackage' => $workPackage->uuid) )
+                                                                @slot('href', route('frontend.workPackage.summary.workpackage',$workPackage->uuid) )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Routine Summary')
-                                                                @slot('href', route('frontend.workPackage.summary.routine', 'workPackage' => $workPackage->uuid) )
+                                                                @slot('href', route('frontend.workPackage.summary.routine',$workPackage->uuid) )
                                                             @endcomponent
                                                             </div>
                                                         </div>
@@ -146,11 +146,11 @@
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Work Package Summary')
-                                                                @slot('href', route('frontend.workPackage.summary.workpackage', 'workPackage' => $workPackage->uuid) )
+                                                                @slot('href', route('frontend.workPackage.summary.workpackage',$workPackage->uuid) )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Non-routine Summary')
-                                                                @slot('href', route('frontend.workPackage.summary.nonroutine', 'workPackage' => $workPackage->uuid) )
+                                                                @slot('href', route('frontend.workPackage.summary.nonroutine',$workPackage->uuid) )
                                                             @endcomponent
                                                             </div>
                                                         </div>

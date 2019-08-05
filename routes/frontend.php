@@ -130,6 +130,17 @@ Route::name('frontend.')->group(function () {
         Route::view('/material-request/project/edit', 'frontend.material-request.project.edit')->name('material-request.project.edit');
         Route::view('/material-request/project/show', 'frontend.material-request.project.show')->name('material-request.project.show');
 
+        /** Tool Request */
+
+        Route::view('/tool-request', 'frontend.tool-request.index')->name('tool-request.index');
+
+        Route::view('/tool-request/general/create', 'frontend.tool-request.general.create')->name('tool-request.general.create');
+        Route::view('/tool-request/general/edit', 'frontend.tool-request.general.edit')->name('tool-request.general.edit');
+        Route::view('/tool-request/general/show', 'frontend.tool-request.general.show')->name('tool-request.general.show');
+
+        Route::view('/tool-request/project/create', 'frontend.tool-request.project.create')->name('tool-request.project.create');
+        Route::view('/tool-request/project/edit', 'frontend.tool-request.project.edit')->name('tool-request.project.edit');
+        Route::view('/tool-request/project/show', 'frontend.tool-request.project.show')->name('tool-request.project.show');
 
         /** Employment Status */
 
@@ -141,6 +152,34 @@ Route::name('frontend.')->group(function () {
         Route::view('/inventory-in/create', 'frontend.inventory-in.create')->name('inventory-in.create');
         Route::view('/inventory-in/edit', 'frontend.inventory-in.edit')->name('inventory-in.edit');
         Route::view('/inventory-in/show', 'frontend.inventory-in.show')->name('inventory-in.show');
+
+        /** GSE-Tool Returned */
+
+        Route::view('/gse-tool-returned', 'frontend.gse-tool-returned.index')->name('gse-tool-returned.index');
+
+        Route::view('/gse-tool-returned/general/create', 'frontend.gse-tool-returned.general.create')->name('gse-tool-returned.general.create');
+        Route::view('/gse-tool-returned/general/edit', 'frontend.gse-tool-returned.general.edit')->name('gse-tool-returned.general.edit');
+        Route::view('/gse-tool-returned/general/show', 'frontend.gse-tool-returned.general.show')->name('gse-tool-returned.general.show');
+
+        Route::view('/gse-tool-returned/project/create', 'frontend.gse-tool-returned.project.create')->name('gse-tool-returned.project.create');
+        Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
+        Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
+
+
+        /** Benefits */
+
+        Route::view('hr/benefit', 'frontend.benefit.index')->name('hr.benefit.index');
+        Route::view('hr/benefit/create', 'frontend.benefit.create')->name('hr.benefit.create');
+        Route::view('hr/benefit/show', 'frontend.benefit.show')->name('hr.benefit.show');
+
+
+        /** Position */
+
+        Route::view('hr/position', 'frontend.position.index')->name('hr.position.index');
+        Route::view('hr/position/create', 'frontend.position.create')->name('hr.position.create');
+        Route::view('hr/position/edit', 'frontend.position.edit')->name('hr.position.edit');
+        Route::view('hr/position/show', 'frontend.position.show')->name('hr.position.show');
+        Route::view('hr/position/update-benefit', 'frontend.position.update-benefit')->name('hr.position.update-benefit');
 
         
         /** QUOTATION's WORKPACKAGE's TASKCARD's */
