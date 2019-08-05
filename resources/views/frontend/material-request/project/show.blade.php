@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Date @include('frontend.common.label.required')
+                                                Date 
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -73,7 +73,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Ref Job Card No. @include('frontend.common.label.required')
+                                                Ref Job Card No.
                                             </label>
 
                                             @component('frontend.common.label.data-info')
