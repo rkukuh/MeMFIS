@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Material Request Project
+                    Tool Request Project
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.material-request.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.tool-request.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Material Request Project
+                                Tool Request Project
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material Request Project
+                                    Tool Request Project
                                 </h3>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Date @include('frontend.common.label.required')
+                                                Date 
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -73,7 +73,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Ref Job Card No. @include('frontend.common.label.required')
+                                                Ref Job Card No.
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -135,7 +135,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Recieved By 
+                                                Loaned To
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -168,7 +168,7 @@
                                                             @include('frontend.common.label.datalist')
 
                                                             <h3 class="m-portlet__head-text">
-                                                                Material
+                                                                Tool
                                                             </h3>
                                                         </div>
                                                     </div>
@@ -192,8 +192,8 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @include('frontend.material-request.modal')
-                                                        <div class="material_request_project_datatable" id="material_request_project_datatable"></div>
+                                                        @include('frontend.tool-request.modal')
+                                                        <div class="tool_request_project_datatable" id="material_request_project_datatable"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -236,7 +236,7 @@
 
 @push('footer-scripts')
 
-    <script src="{{ asset('js/frontend/material-request/show.js') }}"></script>
+    <script src="{{ asset('js/frontend/tool-request/show.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 

@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Material Request General
+                    Tool Request General
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.material-request.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.tool-request.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Material Request General
+                                Tool Request General
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material Request General
+                                    Tool Request General
                                 </h3>
                             </div>
                         </div>
@@ -112,14 +112,14 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Recieved By 
+                                                Loaned to
                                             </label>
 
                                             @component('frontend.common.input.select2')
-                                                @slot('text', 'Recieved By')
-                                                @slot('id', 'received-by')
-                                                @slot('name', 'received-by')
-                                                @slot('id_error', 'received-by')
+                                                @slot('text', 'Loaned to')
+                                                @slot('id', 'loaned')
+                                                @slot('name', 'loaned')
+                                                @slot('id_error', 'loaned')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -151,7 +151,7 @@
                                                             @include('frontend.common.label.datalist')
 
                                                             <h3 class="m-portlet__head-text">
-                                                                Material
+                                                                Tool
                                                             </h3>
                                                         </div>
                                                     </div>
@@ -175,8 +175,8 @@
                                                                 </div>
                                                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                                     @component('frontend.common.buttons.create-new')
-                                                                        @slot('text', 'Material')
-                                                                        @slot('data_target', '#modal_material_request')
+                                                                        @slot('text', 'Tool')
+                                                                        @slot('data_target', '#modal_tool_request')
                                                                     @endcomponent
                     
                             
@@ -184,8 +184,8 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @include('frontend.material-request.modal')
-                                                        <div class="material_request_project_datatable" id="material_request_project_datatable"></div>
+                                                        @include('frontend.tool-request.modal')
+                                                        <div class="tool_request_project_datatable" id="tool_request_project_datatable"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -197,8 +197,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-workpackage')
-                                                        @slot('class', 'add-workpackage')
+                                                        @slot('id', 'add-tool-request')
+                                                        @slot('class', 'add-tool-request')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -219,33 +219,17 @@
     </div>
 @endsection
 
-@push('header-scripts')
-    <style>
-        fieldset {
-            margin-bottom: 30px;
-        }
-
-        .padding-datatable {
-            padding: 0px
-        }
-
-        .margin-info {
-            margin-left: 5px
-        }
-    </style>
-@endpush
-
 @push('footer-scripts')
 
-    <script src="{{ asset('js/frontend/material-request/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/tool-request/create.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/loaned.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/general-type.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
