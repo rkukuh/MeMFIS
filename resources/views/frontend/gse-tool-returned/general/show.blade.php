@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Date @include('frontend.common.label.required')
+                                                Date    
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Storage @include('frontend.common.label.required')
+                                                Storage    
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -73,7 +73,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Ref Tool Request No. @include('frontend.common.label.required')
+                                                Ref Tool Request No.    
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -82,7 +82,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Location @include('frontend.common.label.required')
+                                                Location    
                                             </label>
 
                                             @component('frontend.common.label.data-info')
