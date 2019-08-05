@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Material Request
+                    Tool Request
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.material-request.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.tool-request.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Material Request
+                                Tool Request
                             </span>
                         </a>
                     </li>
@@ -42,7 +42,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material Request
+                                    Tool Request
                                 </h3>
                             </div>
                         </div>
@@ -69,13 +69,13 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
-                                            <a href="{{route('frontend.material-request.project.create')}}" class="m-btn btn btn-primary">
+                                            <a href="{{route('frontend.tool-request.project.create')}}" class="m-btn btn btn-primary">
                                                 <span>
                                                     <i class="la la-plus-circle"></i>
                                                 <span>Project</span>
                                                 </span>
                                             </a>
-                                            <a href="{{route('frontend.material-request.general.create')}}" class="btn btn-primary m-btn m-btn--pill-last">
+                                            <a href="{{route('frontend.tool-request.general.create')}}" class="btn btn-primary m-btn m-btn--pill-last">
                                                 <span>
                                                     <i class="la la-plus-circle"></i>
                                                 <span>General</span>
@@ -89,7 +89,7 @@
                             </div>
 
                             <div class="col-lg-12">
-                                @include('frontend.material-request.filter')
+                                @include('frontend.tool-request.filter')
                             </div>
                             <div class="m_datatable" id="scrolling_both"></div>
                         </div>
@@ -101,5 +101,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/material-request/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/tool-request/index.js')}}"></script>
 @endpush

@@ -132,7 +132,7 @@ Route::name('frontend.')->group(function () {
 
         /** Tool Request */
 
-        Route::view('/tool-request', 'frontend.material-request.index')->name('material-request.index');
+        Route::view('/tool-request', 'frontend.tool-request.index')->name('tool-request.index');
 
         Route::view('/tool-request/general/create', 'frontend.tool-request.general.create')->name('tool-request.general.create');
         Route::view('/tool-request/general/edit', 'frontend.tool-request.general.edit')->name('tool-request.general.edit');
