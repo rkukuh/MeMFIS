@@ -40,6 +40,7 @@ class CreateHtcrrTable extends Migration
             $table->json('origin_htcrr_items')->nullable();
             $table->json('origin_htcrr_skills')->nullable();
             $table->json('origin_htcrr_helpers')->nullable();
+            $table->json('origin_htcrr_engineers')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

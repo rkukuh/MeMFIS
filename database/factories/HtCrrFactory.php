@@ -55,6 +55,7 @@ $factory->define(HtCrr::class, function (Faker $faker) {
         'origin_htcrr_items' => null,
         'origin_htcrr_skills' => null,
         'origin_htcrr_helpers' => null,
+        'origin_htcrr_engineers' => null,
     ];
 
 });
