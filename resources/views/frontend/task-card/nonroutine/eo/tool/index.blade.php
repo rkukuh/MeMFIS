@@ -11,11 +11,11 @@
                 <table class="table table-striped table-bordered table-hover table-checkable" id="m_datatable_tool">
                     <thead>
                         <tr>
+                            <th>Part Number</th>
                             <th>Item Description</th>
                             <th>Quantity</th>
                             <th>Unit</th>
                             <th>Remark</th>
-                            <th>Part Number</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -27,7 +27,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.close')
-                                    @slot('text', 'Close')
+                                @slot('text', 'Close')
                                 @endcomponent
                             </div>
                         </div>

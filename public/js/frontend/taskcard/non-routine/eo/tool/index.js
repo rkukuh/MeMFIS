@@ -9,7 +9,11 @@ function EO_tool(triggeruuid2) {
         lengthMenu: [5, 10, 25, 50],
         pageLength: 5,
         ajax: "/datatables/taskcard-eo/" + triggeruuid2 + "/tools",
-        columns: [{
+        columns: [
+            {
+                data: "pivot.part number"
+            },
+            {
                 data: "name"
             },
             {
@@ -20,9 +24,6 @@ function EO_tool(triggeruuid2) {
             },
             {
                 data: "pivot.note"
-            },
-            {
-                data: "pivot.part number"
             },
             {
                 data: "Actions"
