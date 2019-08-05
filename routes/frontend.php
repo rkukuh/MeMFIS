@@ -130,6 +130,17 @@ Route::name('frontend.')->group(function () {
         Route::view('/material-request/project/edit', 'frontend.material-request.project.edit')->name('material-request.project.edit');
         Route::view('/material-request/project/show', 'frontend.material-request.project.show')->name('material-request.project.show');
 
+        /** Tool Request */
+
+        Route::view('/tool-request', 'frontend.material-request.index')->name('material-request.index');
+
+        Route::view('/tool-request/general/create', 'frontend.tool-request.general.create')->name('tool-request.general.create');
+        Route::view('/tool-request/general/edit', 'frontend.tool-request.general.edit')->name('tool-request.general.edit');
+        Route::view('/tool-request/general/show', 'frontend.tool-request.general.show')->name('tool-request.general.show');
+
+        Route::view('/tool-request/project/create', 'frontend.tool-request.project.create')->name('tool-request.project.create');
+        Route::view('/tool-request/project/edit', 'frontend.tool-request.project.edit')->name('tool-request.project.edit');
+        Route::view('/tool-request/project/show', 'frontend.tool-request.project.show')->name('tool-request.project.show');
 
         /** Employment Status */
 
