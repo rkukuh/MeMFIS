@@ -157,7 +157,7 @@
                                                                                 </label>
 
                                                                                 @component('frontend.common.input.select2')
-                                                                                    @slot('text', 'Ex. Bp. Romdani')
+                                                                                    @slot('text', 'Customer Name')
                                                                                     @slot('id', 'attention')
                                                                                     @slot('name', 'attention')
                                                                                 @endcomponent
@@ -174,7 +174,7 @@
                                                                                 </label>
 
                                                                                 @component('frontend.common.input.select2')
-                                                                                    @slot('text', '+62xxxxxxx / 07777777')
+                                                                                    @slot('text', 'Customer Phone')
                                                                                     @slot('id', 'phone')
                                                                                     @slot('name', 'phone')
                                                                                 @endcomponent
@@ -186,7 +186,7 @@
                                                                                     </label>
 
                                                                                     @component('frontend.common.input.select2')
-                                                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                                                        @slot('text', 'Customer Fax')
                                                                                         @slot('id', 'fax')
                                                                                         @slot('name', 'fax')
                                                                                     @endcomponent
@@ -223,7 +223,7 @@
                                                                                 @endcomponent
                                                                             </div>
                                                                         </div>
-                                                                        <div id="map"></div>
+                                                                        {{-- <div id="map"></div> --}}
 
                                                                     </div>
                                                                 </div>
@@ -359,7 +359,7 @@
                                                                         @component('frontend.common.input.text')
                                                                         @slot('name', 'scheduled_payment')
                                                                         @slot('id', 'scheduled_payment')
-                                                                        @slot('text', 'Phone')
+                                                                        @slot('text', 'Scheduled Payment')
                                                                         @slot('id_error', 'scheduled_payment_amount')
                                                                         @endcomponent
                                                                     </div>
