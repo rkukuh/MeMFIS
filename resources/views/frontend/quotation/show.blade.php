@@ -147,7 +147,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                                @slot('text', 'XXX')
+                                                                                @slot('text', $quotation->project->customer->name)
                                                                                 @slot('id', 'name')
                                                                             @endcomponent
                                                                         </div>
@@ -160,7 +160,7 @@
                                                                             @if(isset($attention->name))
                                                                                 @slot('text', $attention->name)
                                                                             @else
-                                                                                @slot('text', 'name')
+                                                                                @slot('text', '-')
                                                                             @endif
                                                                                 @slot('id', 'attention')
                                                                                 @slot('name', 'attention')
@@ -181,9 +181,9 @@
                                                                             @if(isset($attention->phone))
                                                                                 @slot('text', $attention->phone)
                                                                             @else
-                                                                                @slot('text', 'phone')
+                                                                                @slot('text', '-')
                                                                             @endif
-                                                                                @slot('text', '+62xxxxxxx / 07777777')
+                                                                                @slot('name', 'attn-phone')
                                                                                 @slot('id', 'phone')
                                                                             @endcomponent
 
@@ -197,8 +197,9 @@
                                                                             @if(isset($attention->fax))
                                                                                 @slot('text', $attention->fax)
                                                                             @else
-                                                                                @slot('text', 'fax')
+                                                                                @slot('text', '-')
                                                                             @endif
+                                                                                @slot('name', 'attn-fax')
                                                                                 @slot('id', 'fax')
                                                                             @endcomponent
                                                                         </div>
@@ -213,7 +214,7 @@
                                                                             @if(isset($attention->email))
                                                                                 @slot('text', $attention->email)
                                                                             @else
-                                                                                @slot('text', 'email')
+                                                                                @slot('text', '-')
                                                                             @endif
                                                                                 @slot('id', 'email')
                                                                             @endcomponent
@@ -234,7 +235,7 @@
                                                                             @if(isset($attention->address))
                                                                                 @slot('text', $attention->address)
                                                                             @else
-                                                                                @slot('text', 'address')
+                                                                                @slot('text', '-')
                                                                             @endif
                                                                                 @slot('id', 'address')
                                                                             @endcomponent
