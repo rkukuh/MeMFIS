@@ -167,7 +167,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Task Card Attachment @include('frontend.common.label.required')
+                                                        Task Card Attachment @include('frontend.common.label.optional')
                                                     </label>
 
                                                     @component('frontend.common.input.upload')
