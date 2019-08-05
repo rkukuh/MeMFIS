@@ -111,5 +111,18 @@ $factory->afterCreating(DefectCard::class, function ($defectcard, $faker) {
             'propose_correction_text' => $faker->randomElement([null, $faker->sentence]),
         ]);
     }
+
+    // Skill
+
+    for ($i = 1; $i <= rand(1, 3); $i++) {
+        if (Type::ofTaskCardSkill()->count()) {
+            $skill = Type::ofTaskCardSkill()->get()->random();
+        }
+        else {
+            $skill = factory(Type::class)->states('taskcard-skill')->create();
+        }
+
+        $defectcard->skills()->attach($skill);
+    }
     
 });

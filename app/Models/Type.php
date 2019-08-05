@@ -627,6 +627,20 @@ class Type extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A Defect Card may have zero or many skill.
+     *
+     * This function will retrieve all Defect Card's skills of a type.
+     * See: DefectCard's skills() method for the inverse
+     *
+     * @return mixed
+     */
+    public function skill_defectcards()
+    {
+        return $this->belongsToMany(DefectCard::class, 'defectcard_skill', 'skill_id', 'defectcard_id')
+                    ->withTimestamps();;
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many skill.
      *
      * This function will retrieve all task card skills of a type.
