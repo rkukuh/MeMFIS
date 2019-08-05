@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Leave Period
+                    Leave Types
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.leave-period.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.hr.leave-types.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Leave Period
+                                Leave Types
                             </span>
                         </a>
                     </li>
@@ -38,10 +38,10 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.create-new')
+                                @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Leave Period
+                                    Leave Types
                                 </h3>
                             </div>
                         </div>
