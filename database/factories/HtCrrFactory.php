@@ -14,6 +14,15 @@ use Faker\Generator as Faker;
 $factory->define(HtCrr::class, function (Faker $faker) {
 
     $number = $faker->unixTime();
+    
+    $disc_type = $faker->randomElement(['percentage', 'amount']);
+                
+    if ($disc_type == 'percentage') {
+        $disc_value = $faker->randomElement([5, 10, 15, 20, 25]);
+    } 
+    else if ($disc_type == 'amount') {
+        $disc_value = rand(1, 10) * 100000;
+    }
 
     return [
         'code' => 'HTCRR-DUM-' . $number,
@@ -33,6 +42,10 @@ $factory->define(HtCrr::class, function (Faker $faker) {
         'conducted_by' => null,
         'estimation_manhour' => 0,
         'is_rii' => false,
+        'manhour_total' => rand(10, 20),
+        'manhour_rate' => rand(10, 20) * 1000000,
+        'discount_type' => $disc_type,
+        'discount_value' => $disc_value,
         'description' => $faker->randomElement([null, $faker->text]),
 
         'origin_type' => null,

@@ -27,6 +27,10 @@ class CreateHtcrrTable extends Migration
             $table->unsignedBigInteger('conducted_by')->nullable();
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->boolean('is_rii')->nullable();
+            $table->double('manhour_total')->nullable();
+            $table->double('manhour_rate')->nullable();
+            $table->string('discount_type')->nullable();
+            $table->double('discount_value')->nullable();
             $table->text('description')->nullable();
 
             $table->json('origin_type')->nullable();

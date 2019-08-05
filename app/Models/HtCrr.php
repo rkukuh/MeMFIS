@@ -20,6 +20,10 @@ class HtCrr extends MemfisModel
         'conducted_by',
         'estimation_manhour',
         'is_rii',
+        'manhour_total',
+        'manhour_rate',
+        'discount_type',
+        'discount_value',
         'description',
 
         'origin_type',
