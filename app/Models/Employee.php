@@ -171,7 +171,7 @@ class Employee extends MemfisModel
      *
      * @return mixed
      */
-    public function htcrr()
+    public function htcrr_helpers()
     {
         return $this->belongsToMany(HtCrr::class, 'employee_htcrr', 'employee_id', 'htcrr_id')
                     ->withTimestamps();;
