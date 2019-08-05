@@ -164,6 +164,21 @@ class Employee extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A HTCRR may have zero or many engineer.
+     *
+     * This function will retrieve all the HTCRRs of a engineer.
+     * See: HtCrr's helpers() method for the inverse
+     *
+     * @return mixed
+     */
+    public function htcrr_engineers()
+    {
+        return $this->belongsToMany(HtCrr::class, 'htcrr_engineers', 'employee_id', 'htcrr_id')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many: A HTCRR may have zero or many helper.
      *
      * This function will retrieve all the HTCRRs of a helper.
@@ -174,7 +189,7 @@ class Employee extends MemfisModel
     public function htcrr_helpers()
     {
         return $this->belongsToMany(HtCrr::class, 'employee_htcrr', 'employee_id', 'htcrr_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**

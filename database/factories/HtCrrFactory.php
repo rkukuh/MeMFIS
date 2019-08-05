@@ -80,6 +80,15 @@ $factory->state(HtCrr::class, 'installation', function ($faker) {
 
 $factory->afterCreating(HtCrr::class, function ($htcrr, $faker) {
 
+    // Engineer (Employee)
+
+    for ($i = 0; $i < rand(1, 3); $i++) {
+        $htcrr->engineers()->save(Employee::get()->random(), [
+            'skill_id' => Type::ofTaskCardSkill()->get()->random()->id,
+            'quantity' => rand(2, 10),
+        ]);
+    }
+
     // Helper (Employee)
 
     for ($i = 0; $i < rand(1, 3); $i++) {
