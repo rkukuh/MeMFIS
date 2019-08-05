@@ -20,38 +20,37 @@ class DiscrepancyDatatables extends Controller
     public function index()
     {
         $DefectCard = DefectCard::with('jobcard','progresses','approvals')
-        ->has('approvals', '<=', 1)
-        // ->orWhereDoesntHave('approvals')
+        // ->has('approvals', '<=', 1)
+        // ->orWhereDoesntHave('approvals') //? Yang ditampilkan adalah discrepancy yang dibuat mechanic saya. yang perlu di approve engineer
         ->get();
+
 
         foreach($DefectCard as $jobcard){
             $jobcard->taskcard_number .= $jobcard->jobcard->taskcard->number;
-        }
-
-        foreach($DefectCard as $jobcard){
             $jobcard->customer_name .= $jobcard->jobcard->quotation->project->customer->name;
-        }
-
-        foreach($DefectCard as $jobcard){
-            if(isset($jobcard->taskcard->skills) ){
-                if(sizeof($jobcard->taskcard->skills) == 3){
-                    $jobcard->skill .= "ERI";
+            $jobcard->type .= $jobcard->jobcard->taskcard->type->name;
+            $jobcard->aircraft .= $jobcard->jobcard->quotation->project->aircraft->name;
+            if(isset($jobcard->jobcard->taskcard->skills) ){
+                if(sizeof($jobcard->jobcard->taskcard->skills) == 3){
+                    $jobcard->jobcardSkill .= "ERI";
                 }
-                else if(sizeof($jobcard->taskcard->skills) == 1){
-                    $jobcard->skill .= $jobcard->taskcard->skills[0]->name;
+                else if(sizeof($jobcard->jobcard->taskcard->skills) == 1){
+                    $jobcard->jobcardSkill .= $jobcard->jobcard->taskcard->skills[0]->name;
                 }
                 else{
-                    $jobcard->skill .= '';
+                    $jobcard->jobcardSkill .= '';
                 }
             }
-        }
 
-        foreach($DefectCard as $jobcard){
-            $jobcard->type .= $jobcard->jobcard->taskcard->type->name;
-        }
-
-        foreach($DefectCard as $jobcard){
-            $jobcard->aircraft .= $jobcard->jobcard->quotation->project->aircraft->name;
+            if(sizeOf($jobcard->approvals) == 0){
+                $jobcard->status .= 'mechanic';
+            }
+            elseif(sizeOf($jobcard->approvals) == 1){
+                $jobcard->status .= 'engineer';
+            }
+            else{
+                $jobcard->status .= 'ppc';
+            }
         }
 
         $data = $alldata = json_decode($DefectCard);
@@ -153,15 +152,15 @@ class DiscrepancyDatatables extends Controller
         $DefectCard=DefectCard::with('jobcard','progresses')->wherehas('approvals')->get();
 
         foreach($DefectCard as $jobcard){
-            if(isset($jobcard->taskcard->skills) ){
-                if(sizeof($jobcard->taskcard->skills) == 3){
-                    $jobcard->skill .= "ERI";
+            if(isset($jobcard->jobcard->taskcard->skills) ){
+                if(sizeof($jobcard->jobcard->taskcard->skills) == 3){
+                    $jobcard->jobcardSkill .= "ERI";
                 }
-                else if(sizeof($jobcard->taskcard->skills) == 1){
-                    $jobcard->skill .= $jobcard->taskcard->skills[0]->name;
+                else if(sizeof($jobcard->jobcard->taskcard->skills) == 1){
+                    $jobcard->jobcardSkill .= $jobcard->jobcard->taskcard->skills[0]->name;
                 }
                 else{
-                    $jobcard->skill .= '';
+                    $jobcard->jobcardSkill .= '';
                 }
             }
 

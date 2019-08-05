@@ -99,7 +99,7 @@ let TaskCard = {
 
                 },
                 {
-                    field: 'jobcard.taskcard.skill.name',
+                    field: 'jobcardSkill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
