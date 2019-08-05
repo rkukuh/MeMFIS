@@ -20,35 +20,11 @@ let type = {
 
                 for(var i=0; i<len; i++){
                     var option = document.createElement('option')
-                    option.setAttribute('value',parseJSON['data'][i].name)
+                    option.setAttribute('value',parseJSON['data'][i].uuid)
                     option.innerHTML = parseJSON['data'][i].name
                     select.appendChild(option)         
                 }
     
-            }
-        });
-    }
-};
-
-let parentStructure = {
-    init: function () { 
-        $.ajax({
-            type: 'GET', 
-            url: '/datatables/company', 
-            dataType: 'JSON',
-            success: function (data) {
-                var select = document.getElementById('parent_structure');
-                var len = data['data'].length;
-                var data_company = JSON.stringify(data, null, 4)
-                var parseJSON = $.parseJSON(data_company);
-        
-                for(var i=0; i<len; i++){
-                    var option = document.createElement('option')
-                    option.setAttribute('value',parseJSON['data'][i].name)
-                    option.innerHTML = parseJSON['data'][i].name
-                    select.appendChild(option)         
-                }
-        
             }
         });
     }

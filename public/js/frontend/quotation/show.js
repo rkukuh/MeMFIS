@@ -257,33 +257,24 @@ var DatatableAutoColumnHideDemo = function () {
             }
             else{
                 if(t.pivot.discount_type ==  'amount'){
-                    total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilities_price_amount + t.mat_tool_price - t.pivot.discount_value;
+                    total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilities_price_amount + t.mat_tool_price;
                     subtotal = subtotal + total;
                     
                 }
                 else if(t.pivot.discount_type == 'percentage'){
-                    total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilities_price_amount + t.mat_tool_price - (((t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilities_price_amount + t.mat_tool_price)*t.pivot.discount_value)/100);
+                    total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilities_price_amount + t.mat_tool_price;
                     subtotal = subtotal + total;
                 }
             }
 
             if(currency.id == 1){
-              // $("#sub_total").html(IDRformatter.format(subtotal));
-              // $("#grand_total_rupiah").html(IDRformatter.format(subtotal));
               $("#grand_total_rupiah").attr("value", subtotal);
               $("#sub_total").attr("value", subtotal);
               return (
                 IDRformatter.format(total)
               );
             }else{
-              // let totalRupiah = subtotal * exchange_rate; 
-              // $("#sub_total").html(ForeignFormatter.format(subtotal));
-              // $("#grand_total").html(ForeignFormatter.format(subtotal));
-              // $("#grand_total").attr("value", subtotal);
-              // $("#sub_total").attr("value", subtotal);
-
-              // $("#grand_total_rupiah").html(IDRformatter.format(totalRupiah));
-              // $("#grand_total_rupiah").attr("value", totalRupiah);
+              
               return (
                 ForeignFormatter.format(total)
               );

@@ -48,17 +48,17 @@ let JobRequest = {
             },
             columns: [
                 {
-                    field: 'tc',
+                    field: 'taskcard.number',
                     title: 'TaskCard',
                     sortable: !1,
                 },
                 {
-                    field: 'pn',
+                    field: 'item.code',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
+                    field: 'item.name',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
@@ -70,14 +70,13 @@ let JobRequest = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit_material',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-
                 },
                 {
-                    field: 'unitPrice',
+                    field: 'price',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
@@ -95,7 +94,7 @@ let JobRequest = {
                     }
                 },
                 {
-                    field: 'sub_total',
+                    field: 'subtotal',
                     title: 'Sub Total',
                     sortable: 'asc',
                     filterable: !1,
@@ -109,6 +108,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     width:150,
+
                 },
                 {
                     field: 'Actions',
@@ -170,17 +170,17 @@ let JobRequest = {
             },
             columns: [
                 {
-                    field: 'tc',
+                    field: 'taskcard.number',
                     title: 'TaskCard',
                     sortable: !1,
                 },
                 {
-                    field: 'pn',
+                    field: 'item.code',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
+                    field: 'item.name',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
@@ -192,13 +192,13 @@ let JobRequest = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit_tool',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unitPrice',
+                    field: 'price',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
@@ -216,7 +216,7 @@ let JobRequest = {
                     }
                 },
                 {
-                    field: 'sub_total',
+                    field: 'subtotal',
                     title: 'Sub Total',
                     sortable: 'asc',
                     filterable: !1,
@@ -292,17 +292,17 @@ let JobRequest = {
             },
             columns: [
                 {
-                    field: 'tc',
+                    field: 'taskcard.number',
                     title: 'TaskCard',
                     sortable: !1,
                 },
                 {
-                    field: 'pn',
+                    field: 'item.code',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
+                    field: 'item.name',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
@@ -314,13 +314,13 @@ let JobRequest = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit_tool',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unitPrice',
+                    field: 'price',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
@@ -338,7 +338,7 @@ let JobRequest = {
                     }
                 },
                 {
-                    field: 'sub_total',
+                    field: 'subtotal',
                     title: 'Sub Total',
                     sortable: 'asc',
                     filterable: !1,
@@ -352,6 +352,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     width:150,
+
                 },
                 {
                     field: 'Actions',
@@ -413,17 +414,17 @@ let JobRequest = {
             },
             columns: [
                 {
-                    field: 'tc',
+                    field: 'taskcard.number',
                     title: 'TaskCard',
                     sortable: !1,
                 },
                 {
-                    field: 'pn',
+                    field: 'item.code',
                     title: 'P/N',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
+                    field: 'item.name',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
@@ -435,14 +436,13 @@ let JobRequest = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit_material',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
-
                 },
                 {
-                    field: 'unitPrice',
+                    field: 'price',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
@@ -460,7 +460,7 @@ let JobRequest = {
                     }
                 },
                 {
-                    field: 'sub_total',
+                    field: 'subtotal',
                     title: 'Sub Total',
                     sortable: 'asc',
                     filterable: !1,
@@ -474,6 +474,7 @@ let JobRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     width:150,
+
                 },
                 {
                     field: 'Actions',
@@ -935,7 +936,7 @@ let JobRequest = {
                 url: '/qtn-wp-tc-item/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('uuid').value = data.uuid;
-                    document.getElementById('qty').value = dahtcrr_materials_datatableta.quantity;
+                    document.getElementById('qty').value = data.quantity;
                     document.getElementById('price').value = data.price_amount;
                     document.getElementById('note').value = data.note;
                     $.ajax({

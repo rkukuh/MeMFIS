@@ -247,13 +247,19 @@ let DefectCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.taskcard.estimation_manhour',
-                    title: 'Mhrs',
+                    field: 'estimation_manhour',
+                    title: 'Mhrs Est.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'progresses.0.status_id',
+                    field: 'actual_manhour',
+                    title: 'Actual Mhrs.',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,

@@ -395,7 +395,7 @@ let Quotation = {
             let scheduled_payment_array = [];
             let type = $('#scheduled_payment_type').children("option:selected").html();
             if(type === "By Date"){
-                $('select[name^=scheduled_payment] ').each(function (i) {
+                $('input[name^=scheduled_payment] ').each(function (i) {
                     scheduled_payment_array[i] = $(this).val();
                 });
             }else{
@@ -504,4 +504,17 @@ let Quotation = {
 
 jQuery(document).ready(function () {
     Quotation.init();
+    $.each($('.scheduledPayment'), function () {
+        $(this).addClass("scheduledPayment");
+        $(this).val("");
+        $(this).datetimepicker({
+            format: "yyyy-mm-dd",
+            todayHighlight: !0,
+            autoclose: !0,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+            pickerPosition: "bottom-left"
+        });
+    });
 });

@@ -37,7 +37,8 @@ class TaskReleaseJobCardDatatables extends Controller
 
             $jobcard->customer_name .= $jobcard->quotation->project->customer->name;
             if($jobcard->taskcard->additionals <> null){
-                $jobcard->company_task .= $jobcard->taskcard->additionals->internal_number;
+                $addtional = json_decode($jobcard->taskcard->additionals);
+                $jobcard->company_task .= $addtional->internal_number;
             }
             else{
                 $jobcard->company_task .= "";

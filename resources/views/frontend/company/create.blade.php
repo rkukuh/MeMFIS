@@ -57,10 +57,9 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'title')
-                                                @slot('id', 'title')
-                                                @slot('name', 'title')
-                                                @slot('id_error', 'title')
+                                                @slot('id', 'code')
+                                                @slot('name', 'code')
+                                                @slot('id_error', 'code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -100,7 +99,7 @@
                                                 @slot('text', 'Company Type')
                                                 @slot('id', 'company')
                                                 @slot('name', 'company')
-                                                @slot('id_error', 'company-airplane')
+                                                @slot('id_error', 'company')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">

@@ -87,7 +87,7 @@ let RiiRelease = {
                     }
                 },
                 {
-                    field: 'quotation.customer.name',
+                    field: 'quotation.project.customer.name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,

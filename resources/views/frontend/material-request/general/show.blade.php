@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Date @include('frontend.common.label.required')
+                                                Date
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -73,7 +73,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                General Type @include('frontend.common.label.required')
+                                                General Type
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -93,7 +93,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Departement  @include('frontend.common.label.optional')
+                                                Departement 
                                             </label> 
 
                                             @component('frontend.common.label.data-info')
@@ -185,22 +185,6 @@
         </div>
     </div>
 @endsection
-
-@push('header-scripts')
-    <style>
-        fieldset {
-            margin-bottom: 30px;
-        }
-
-        .padding-datatable {
-            padding: 0px
-        }
-
-        .margin-info {
-            margin-left: 5px
-        }
-    </style>
-@endpush
 
 @push('footer-scripts')
 

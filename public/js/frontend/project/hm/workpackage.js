@@ -224,7 +224,7 @@ let Workpackage = {
                         table.originalDataSet = [];
                         table.reload();
 
-
+                        anyChanges = true;
                     }
                 }
             });

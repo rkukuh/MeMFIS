@@ -4,7 +4,7 @@ let CompanyStructure = {
 
         let code = $('input[name=code]').val();
         let name = $('input[name=name]').val();
-        let description = $('input[name=description]').val();
+        let description = $('#description').val();
         let company = $('#company').val();
         let parent_structure = $('#parent_structure').val();
 
@@ -34,10 +34,9 @@ let CompanyStructure = {
                       }); 
 
                 } else {
-                    alert('masuk pak eko');
-                    // toastr.success('Data berhasil disimpan.', 'Sukses', {
-                    //     timeOut: 5000
-                    // });
+                    toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        timeOut: 5000
+                    });
                 }
             }
         });

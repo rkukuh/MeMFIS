@@ -99,7 +99,7 @@ let TaskCard = {
 
                 },
                 {
-                    field: 'jobcard.taskcard.skill.name',
+                    field: 'jobcardSkill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
@@ -110,7 +110,29 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                 },
-
+                {
+                    field: 'Status',
+                    title: 'Status',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        if(t.status == "mechanic"){
+                            return (
+                                'Open'
+                            );
+                        }
+                        else if(t.status == "engineer"){
+                            return (
+                                'Engineer Approved'
+                            );
+                        }
+                        else{
+                            return (
+                                'Approved'
+                            );
+                        }
+                    }
+                },
                 {
                     field: 'Actions',
                     sortable: !1,

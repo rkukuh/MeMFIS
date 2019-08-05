@@ -60,12 +60,10 @@
                             <div class="action-buttons">
                                     <div class="flex">
                                         <div class="action-buttons">
-                                                {{-- <div id="button-div" style="height:0px;"> --}}
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('class', 'add-employee')
                                                         @slot('id', 'add-employee')
                                                     @endcomponent
-                                                    {{-- </div>  --}}
                                                     @include('frontend.common.buttons.reset')
                             
                                                     @include('frontend.common.buttons.close')
