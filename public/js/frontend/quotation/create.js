@@ -177,7 +177,7 @@ let Quotation = {
             data.append("subtotal", 0.000000);
             data.append("grandtotal", 0.000000);
             data.append("title", $('#title').val());
-            // data.append("description", $('#description').val());
+            data.append("description", $('#description').val());
             data.append("top_description", $('#term_and_condition').val());
 
             $.ajax({

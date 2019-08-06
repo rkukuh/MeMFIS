@@ -441,10 +441,10 @@
                                         @endcomponent
                                     </div>
                                 </div>
-                                <!-- <div class="form-group m-form__group row">
+                                <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <label class="form-control-label">
-                                            Quotation Subject @include('frontend.common.label.required')
+                                            Description @include('frontend.common.label.optional')
                                         </label>
 
                                         @component('frontend.common.input.textarea')
@@ -456,7 +456,7 @@
                                             @slot('id_error', 'description')
                                         @endcomponent
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <label class="form-control-label">

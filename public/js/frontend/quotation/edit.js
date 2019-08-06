@@ -437,7 +437,7 @@ let Quotation = {
             data.append("attention_address", attention_address);
             data.append("total", 0.000000);
             data.append("title", $('#title').val());
-            // data.append("description", $('#description').val());
+            data.append("description", $('#description').val());
             data.append("top_description", $('#term_and_condition').val());
             data.append("subtotal", $('#sub_total').attr("value"));
             data.append("grandtotal", $('#grand_total').attr("value"));
