@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.employment-status.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.employee.statuses.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Employement Status
                             </span>
@@ -68,10 +68,10 @@
                     <div class="m-portlet__body">
                         <div class="tab-content">
                             <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
-                                @include('frontend.employment-status.employment-status.index')
+                                @include('frontend.employee.employee-status.employee-status.index')
                             </div>
                             <div class="tab-pane" id="m_tabs_6_2" role="tabpanel">
-                                @include('frontend.employment-status.job-title.index')
+                                @include('frontend.employee.employee-status.job-title.index')
                             </div>
                         </div>
                     </div>
@@ -89,6 +89,6 @@
     <script src="{{ asset('js/frontend/functions/datetimepicker.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
-    <script src="{{ asset('js/frontend/employment-status/employment-status/index.js')}}"></script>
-    <script src="{{ asset('js/frontend/employment-status/job-title/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/employee/employee-status/employee-status/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/employee/employee-status/job-title/index.js')}}"></script>
 @endpush
