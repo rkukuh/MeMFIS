@@ -175,7 +175,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        031-8686481/031-8686482
+                    @if($attention)
+                    @if($attention->phone){{ $attention->phone }} @else - @endif/ @if($attention->fax) {{ $attention->fax }} @else - @endif
+                        @else
+                        - / -
+                        @endif
                     </td>
                 </tr>
                 <tr>
@@ -186,7 +190,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        JL. RAYA INDONESIA
+                        @if($attention)
+                        {{ $attention->adress }}
+                        @else
+                        -
+                        @endif
                     </td>
                 </tr>
                 <tr>
