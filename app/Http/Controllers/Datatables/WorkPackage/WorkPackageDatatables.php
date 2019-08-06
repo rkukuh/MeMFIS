@@ -19,7 +19,7 @@ class WorkPackageDatatables extends Controller
      */
     public function index()
     {
-        $workpackages = WorkPackage::with('aircraft')->get();
+        $workpackages = WorkPackage::with('aircraft')->where('is_template',1)->get();
 
         foreach($workpackages as $workpackage){
             if($workpackage->audits->first()->user_id == null){
@@ -226,7 +226,7 @@ class WorkPackageDatatables extends Controller
         }
 
         // get all raw data
-        $workpackages = WorkPackage::with('aircraft')->get();
+        $workpackages = WorkPackage::with('aircraft')->where('is_template',1)->get();
 
         foreach($workpackages as $workpackage){
             $workpackage->aircraft_name = $workpackage->aircraft->name;
@@ -401,7 +401,7 @@ class WorkPackageDatatables extends Controller
         }
 
         // get all raw data
-        $taskcards  = TaskCardWorkPackage::with('taskcard')->where('taskcard_id', $taskcard->id)->where('workpackage_id',$workPackage->id)->with('predecessors')->first();
+        $taskcards  = TaskCardWorkPackage::with('taskcard','predecessors')->where('taskcard_id', $taskcard->id)->where('workpackage_id',$workPackage->id)->first();
 
         foreach($taskcards->predecessors as $taskcard){
                 $TaskCard = TaskCard::find($taskcard->previous);

@@ -107,7 +107,7 @@ let summary = {
             ]
         });
 
-        $('.general_items_datatable').mDatatable({
+        $('.general_materials_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {

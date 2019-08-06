@@ -749,7 +749,7 @@
         $('.selectDocument').select2();
 </script>
 
-<script>
+{{-- <script>
     function initMap() {
         var myLatLng = {
             lat: -7.265757,
@@ -769,7 +769,7 @@
     }
 </script>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script> --}}
 
 <script src="{{ asset('js/frontend/common/account-code.js') }}"></script>
 <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>

@@ -74,6 +74,20 @@ class Employee extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A Defect Card may have zero or many helper.
+     *
+     * This function will retrieve all the Defect Cards of a helper.
+     * See: DefectCard's helpers() method for the inverse
+     *
+     * @return mixed
+     */
+    public function defectcards()
+    {
+        return $this->belongsToMany(DefectCard::class, 'defectcard_employee', 'employee_id', 'defectcard_id')
+                    ->withTimestamps();;
+    }
+
+    /**
      * Polymorphic: An employee can have zero or many documents.
      *
      * This function will get all of the employee's documents.
@@ -150,6 +164,21 @@ class Employee extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A HTCRR may have zero or many engineer.
+     *
+     * This function will retrieve all the HTCRRs of a engineer.
+     * See: HtCrr's helpers() method for the inverse
+     *
+     * @return mixed
+     */
+    public function htcrr_engineers()
+    {
+        return $this->belongsToMany(HtCrr::class, 'htcrr_engineers', 'employee_id', 'htcrr_id')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many: A HTCRR may have zero or many helper.
      *
      * This function will retrieve all the HTCRRs of a helper.
@@ -157,10 +186,10 @@ class Employee extends MemfisModel
      *
      * @return mixed
      */
-    public function htcrr()
+    public function htcrr_helpers()
     {
         return $this->belongsToMany(HtCrr::class, 'employee_htcrr', 'employee_id', 'htcrr_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**

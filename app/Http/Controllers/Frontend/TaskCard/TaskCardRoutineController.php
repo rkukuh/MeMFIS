@@ -206,6 +206,7 @@ class TaskCardRoutineController extends Controller
             'zone_taskcards' => $zone_taskcards,
             'taskcards' => $this->taskcard,
             'relation_taskcards' => $relation_taskcards,
+            'additionals' => json_decode($taskCard->additionals)
         ]);
     }
 
@@ -217,7 +218,6 @@ class TaskCardRoutineController extends Controller
      */
     public function edit(TaskCard $taskCard)
     {
-        // dd($taskCard->skills);
         $aircraft_taskcards = [];
 
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){

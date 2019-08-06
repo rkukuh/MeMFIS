@@ -147,7 +147,7 @@
                                                                                 </label>
 
                                                                                 @component('frontend.common.label.data-info')
-                                                                                    @slot('text', 'XXX')
+                                                                                    @slot('text', 'Customer Name')
                                                                                     @slot('id', 'name')
                                                                                 @endcomponent
                                                                             </div>
@@ -157,7 +157,7 @@
                                                                                 </label>
 
                                                                                 @component('frontend.common.input.select2')
-                                                                                    @slot('text', 'Bp. Romdani')
+                                                                                    @slot('text', 'Customer Name')
                                                                                     @slot('id', 'attention')
                                                                                     @slot('name', 'attention')
                                                                                 @endcomponent
@@ -174,7 +174,7 @@
                                                                                 </label>
 
                                                                                 @component('frontend.common.input.select2')
-                                                                                    @slot('text', '+62xxxxxxx / 07777777')
+                                                                                    @slot('text', 'Customer Phone')
                                                                                     @slot('id', 'phone')
                                                                                     @slot('name', 'phone')
                                                                                 @endcomponent
@@ -186,7 +186,7 @@
                                                                                     </label>
 
                                                                                     @component('frontend.common.input.select2')
-                                                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                                                        @slot('text', 'Customer Fax')
                                                                                         @slot('id', 'fax')
                                                                                         @slot('name', 'fax')
                                                                                     @endcomponent
@@ -199,7 +199,7 @@
                                                                                 </label>
 
                                                                                 @component('frontend.common.input.select2')
-                                                                                    @slot('text', '+62xxxxxxx / 07777777')
+                                                                                    @slot('text', 'example@email.com')
                                                                                     @slot('id', 'email')
                                                                                     @slot('name', 'email')
                                                                                 @endcomponent
@@ -223,7 +223,7 @@
                                                                                 @endcomponent
                                                                             </div>
                                                                         </div>
-                                                                        <div id="map"></div>
+                                                                        {{-- <div id="map"></div> --}}
 
                                                                     </div>
                                                                 </div>
@@ -336,6 +336,7 @@
                                                                             @slot('name', 'scheduled_payment')
                                                                             @slot('id', 'scheduled_payment')
                                                                             @slot('text', 'Phone')
+                                                                            @slot('autocomplete', 'off')
                                                                             @slot('id_error', 'scheduled_payment_amount')
                                                                             @endcomponent
                                                                         </div>
@@ -358,7 +359,7 @@
                                                                         @component('frontend.common.input.text')
                                                                         @slot('name', 'scheduled_payment')
                                                                         @slot('id', 'scheduled_payment')
-                                                                        @slot('text', 'Phone')
+                                                                        @slot('text', 'Scheduled Payment')
                                                                         @slot('id_error', 'scheduled_payment_amount')
                                                                         @endcomponent
                                                                     </div>
@@ -497,6 +498,7 @@
 
     <script type="text/javascript">
         $("#type_website").on('change', function() {
+            
         });
         let simpan = $('.tes').on('click', '.save', function () {
         var usertype=[];
@@ -509,7 +511,7 @@
         console.log(JSON.stringify(ajaxdata));
         });
     </script>
-    <script>
+    {{-- <script>
         function initMap() {
             var myLatLng = {lat: -7.265757, lng: 112.734146};
 
@@ -524,10 +526,10 @@
                 title       : 'Hello World!'
             });
         }
-    </script>
+    </script> --}}
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
+    {{-- <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script> --}}

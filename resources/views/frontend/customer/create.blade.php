@@ -76,8 +76,11 @@
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-5 col-md-5 col-lg-5">
-                                        <select name="customer-level" class="form-control select">
-                                        </select>
+                                        @component('frontend.common.input.select2')
+                                            @slot('name','customer-level')
+                                            @slot('id','customer-level')
+                                            @slot('id_error', 'level')
+                                        @endcomponent
                                     </div>
                                     <div class="col-sm-7 col-md-7 col-lg-7">
                                         @component('frontend.common.input.number')
@@ -654,7 +657,6 @@
                                                         </label>
 
                                                         @component('frontend.common.input.text')
-                                                            @slot('text', 'John Wick')
                                                             @slot('name', 'attn-name')
                                                         @endcomponent
                                                     </div>
@@ -664,7 +666,6 @@
                                                         </label>
 
                                                         @component('frontend.common.input.text')
-                                                            @slot('text', 'Purchasing')
                                                             @slot('name', 'attn-position')
                                                         @endcomponent
                                                     </div>
@@ -839,7 +840,6 @@
 @push('footer-scripts')
 <script>
     $( document ).ready(function() {
-        $('.select').select2();
         $('.selectWebsite').select2();
         $('.selectDocument').select2();
     });

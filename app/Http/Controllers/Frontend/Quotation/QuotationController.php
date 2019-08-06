@@ -16,7 +16,9 @@ use App\Models\Quotation;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
+use App\Models\QuotationHtcrrItem;
 use App\Http\Controllers\Controller;
+use App\Models\QuotationWorkPackageItem;
 use App\Models\Pivots\ProjectWorkPackage;
 use App\Models\ProjectWorkPackageFacility;
 use App\Models\Pivots\QuotationWorkPackage;
@@ -75,7 +77,7 @@ class QuotationController extends Controller
         $contact['fax'] = $request->attention_fax;
         $contact['email'] = $request->attention_email;
 
-        $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::withTrashed()->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
@@ -105,6 +107,28 @@ class QuotationController extends Controller
                         $price_id = null;
                     }
                     $quotation_workpackage_item->items()->create([
+                        'item_id' => $item->id,
+                        'quantity' => $item->pivot->quantity,
+                        'unit_id' => $item->pivot->unit_id,
+                        'price_id' => $price_id,
+                    ]);
+                }
+            }
+
+        // TODO generate htcrr item workpackage
+        $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
+        $project = Project::find($request->project_id);
+            foreach($project->htcrr as $htcrr){
+                foreach($htcrr->items as $item){
+
+                    if (Item::findOrFail($item->id)->prices->get($customer)) {
+                        $price_id = Item::find($item->id)->prices->get($customer)->id;
+                    } else {
+                        $price_id = null;
+                    }
+                    QuotationHtcrrItem::create([
+                        'quotation_id' => $quotation->id,
+                        'htcrr_id' => $htcrr->id,
                         'item_id' => $item->id,
                         'quantity' => $item->pivot->quantity,
                         'unit_id' => $item->pivot->unit_id,
@@ -251,6 +275,27 @@ class QuotationController extends Controller
      */
     public function approve(Quotation $quotation)
     {
+
+        $qw_json = $quotation->workpackages->toJson();
+
+        $qw = QuotationWorkPackage::where('quotation_id',$quotation->id)->pluck('id');
+
+        $qwe = QuotationWorkPackageItem::whereIn('quotation_workpackage_id',$qw)->get();
+        $qwe_json = $qwe->toJson();
+
+        $qwf = QuotationWorkPackageTaskCardItem::where('quotation_id',$quotation->id)->get();
+        $qwf_json = $qwf->toJson();
+
+        $qwm = QuotationHtcrrItem::where('quotation_id',$quotation->id)->get();
+        $qwm_json = $qwm->toJson();
+
+        $quotation->origin_quotation = $quotation->toJson();
+        $quotation->origin_quotation_workpackages = $qw_json;
+        $quotation->origin_quotation_workpackage_items = $qwe_json;
+        $quotation->origin_quotation_workpackage_taskcard_items = $qwf_json;
+        $quotation->origin_quotation_htcrr_items = $qwm_json;
+        $quotation->save();
+
         $quotation->approvals()->save(new Approval([
             'approvable_id' => $quotation->id,
             'approved_by' => Auth::id(),
@@ -262,6 +307,11 @@ class QuotationController extends Controller
         ]));
 
         $project = Project::find($quotation->project_id);
+        $project->progresses()->save(new Progress([
+            'status_id' =>  Status::ofProject()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
+
         $project->approvals()->save(new Approval([
             'approvable_id' => $project->id,
             'approved_by' => Auth::id(),
@@ -309,11 +359,11 @@ class QuotationController extends Controller
                 }
 
                 $jobcard = JobCard::create([
-                    'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::count()+1),
+                    'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
                     'taskcard_id' => $tc->id,
                     'quotation_id' => $quotation->id,
-                    'data_taskcard' => $tc->toJson(),
-                    'data_taskcard_items' => $tc->items->toJson(),
+                    'origin_taskcard' => $tc->toJson(),
+                    'origin_taskcard_items' => $tc->items->toJson(),
                 ]);
                 // // echo $tc->title.'<br>';
                 // foreach($tc->items as $item){
@@ -329,7 +379,14 @@ class QuotationController extends Controller
             }
 
         }
-
+        foreach($project->htcrr as $htcrr){
+            if($htcrr->parent_id == null){
+                $htcrr->progresses()->save(new Progress([
+                    'status_id' =>  Status::where('code','removal-open')->first()->id,
+                    'progressed_by' => Auth::id()
+                ]));
+            }
+        }
 
         return response()->json($quotation);
     }
@@ -359,39 +416,65 @@ class QuotationController extends Controller
     public function print(Quotation $quotation)
     {
         $username = Auth::user()->name;
-        $totalCharge = 0;
+        $discount = $rowTotal = $totalCharge = $totalFacility = $totalMatTool = $manhourPrice = [];
+
         if(json_decode($quotation->charge) !== null) {
             foreach(json_decode($quotation->charge) as $charge){
-                $totalCharge =  $totalCharge +  $charge->amount;
+                array_push($totalCharge, $charge->amount);
             }
         }
 
         $workpackages = $quotation->workpackages;
-        $wp_id = [];
-        foreach($workpackages as $workPackage){
+        foreach($workpackages as $key => $workPackage){
             $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
-            if($project_workpackage){
-                $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
 
+            $quotation_workpackage = QuotationWorkPackage::where('quotation_id',$quotation->id)
+            ->where('workpackage_id',$workPackage->id)
+            ->first();
+
+            if($project_workpackage){
+                //total manhour price
+                $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
+                array_push($manhourPrice, $workPackage->total_manhours_with_performance_factor * $quotation_workpackage->manhour_rate);
+
+                //totalfacility price
                 $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
                 ->with('facility')
                 ->sum('price_amount');
                 $workPackage->facilities_price_amount = $ProjectWorkPackageFacility;
+                array_push($totalFacility, $workPackage->facilities_price_amount);
 
+                //items price
                 $workPackage->mat_tool_price = QuotationWorkPackageTaskCardItem::where('quotation_id',$quotation->id)->where('workpackage_id',$workPackage->id)->sum('subtotal');
+                array_push($totalMatTool, $workPackage->mat_tool_price);
+            }
+
+            if($quotation_workpackage){
+                switch($quotation_workpackage->discount_type){
+                    case "amount":
+                        array_push($discount, $quotation_workpackage->discount_value);
+                        break;
+                    case "percentage":
+                        array_push($discount, ($manhourPrice[$key] + $totalFacility[$key] + $totalMatTool[$key]) * ($quotation_workpackage->discount_value / 100) );
+                        break;
+                    default:
+                        array_push($discount, 0);
+                }
             }
         }
-        // dd($workpackages);
-        // dd($totalCharge);
+
         $pdf = \PDF::loadView('frontend/form/quotation',[
                 'username' => $username,
                 'quotation' => $quotation,
+                'subTotal' => array_sum($manhourPrice) + array_sum($totalFacility) + array_sum($totalMatTool),
                 'workpackages' => $workpackages,
-                'totalCharge' => $totalCharge,
-                'attention' => json_decode($quotation->attention)
+                'totalCharge' => array_sum($totalCharge),
+                'attention' => json_decode($quotation->attention),
+                'discount' => array_sum($discount)
                 ]);
+
         return $pdf->stream();
     }
 

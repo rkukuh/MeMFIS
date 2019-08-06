@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\Project;
 
+use App\Models\Type;
 use App\Models\HtCrr;
 use App\Models\Project;
 use App\Models\ListUtil;
@@ -30,6 +31,14 @@ class HtCrrDatatables extends Controller
                     $data->skill_name .= '';
                 }
             }
+
+            $removal =HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','removal')->first()->id)->first()->estimation_manhour;
+
+            $data->removal.= $removal;
+
+            $installation =HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','installation')->first()->id)->first()->estimation_manhour;
+
+            $data->installation.= $installation;
         }
 
         $data = $alldata = json_decode($HtCrr);

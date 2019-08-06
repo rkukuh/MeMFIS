@@ -6,6 +6,7 @@ use App\Models\Aircraft;
 use App\Models\Project;
 use App\Models\ListUtil;
 use App\Models\WorkPackage;
+use App\Models\Pivots\ProjectWorkPackage;
 use App\Models\TaskCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,10 +21,21 @@ class SummaryRoutineTaskcardController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function basic(WorkPackage $workPackage)
+    public function basic(Project $project, WorkPackage $workPackage)
     {
-        $taskcards  = $workPackage->taskcards->load('type')->where('type.name', 'Basic');
-        $skills = $subset = [];
+        $skills = $subset = $taskcards = [];
+
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
+        ->where('workpackage_id',$workPackage->id)
+        ->with('taskcards')
+        ->first();
+
+        foreach($project_workpackage->taskcards as $taskcard){
+            array_push($taskcards, $taskcard->taskcard_id);
+        }
+
+        $taskcards = TaskCard::whereIn('id',$taskcards)->get(); 
+        $taskcards = $taskcards->load('type')->where('type.name', 'Basic');
 
         foreach($taskcards as $taskcard){
             $result = $taskcard->skills->map(function ($skills) {
@@ -34,14 +46,16 @@ class SummaryRoutineTaskcardController extends Controller
 
             array_push($subset , $result);
         }
+
         foreach ($subset as $value) {
             foreach($value as $skill){
                 array_push($skills, $skill["code"]);
             }
         }
+
         $otr = array_count_values($skills);
-        $total_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'Basic')->count('uuid');
-        $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'Basic')->sum('estimation_manhour');
+        $total_taskcard  = $taskcards->load('type')->where('type.name', 'Basic')->count('uuid');
+        $total_manhour_taskcard  = $taskcards->load('type')->where('type.name', 'Basic')->sum('estimation_manhour');
         return view('frontend.project.hm.taskcard.routine.basic.basic-summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
@@ -56,11 +70,22 @@ class SummaryRoutineTaskcardController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function cpcp(WorkPackage $workPackage)
+    public function cpcp(Project $project, WorkPackage $workPackage)
     {
-        $taskcards  = $workPackage->taskcards->load('type')->where('type.name', 'CPCP');
-        $skills = $subset = [];
+        $skills = $subset = $taskcards = [];
 
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
+        ->where('workpackage_id',$workPackage->id)
+        ->with('taskcards')
+        ->first();
+
+        foreach($project_workpackage->taskcards as $taskcard){
+            array_push($taskcards, $taskcard->taskcard_id);
+        }
+
+        $taskcards = TaskCard::whereIn('id',$taskcards)->get(); 
+        $taskcards = $taskcards->load('type')->where('type.name', 'CPCP');
+        
         foreach($taskcards as $taskcard){
             $result = $taskcard->skills->map(function ($skills) {
                 return collect($skills->toArray())
@@ -93,11 +118,21 @@ class SummaryRoutineTaskcardController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function sip(WorkPackage $workPackage)
+    public function sip(Project $project, WorkPackage $workPackage)
     {
+        $skills = $subset = $taskcards = [];
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
+        ->where('workpackage_id',$workPackage->id)
+        ->with('taskcards')
+        ->first();
+        foreach($project_workpackage->taskcards as $taskcard){
+            array_push($taskcards, $taskcard->taskcard_id);
+        }
+
+        $taskcards = TaskCard::whereIn('id',$taskcards)->where('type.name', 'SIP')->get(); 
+
         // To Do: kalau ada waktu buat pengecekan kalau skill lebih dari 1 maka return ERI
-        $taskcards  = $workPackage->taskcards->load('type')->where('type.name', 'SIP');
-        $skills = $subset = [];
+        // $taskcards  = $workPackage->taskcards->load('type')->where('type.name', 'SIP');
 
         foreach($taskcards as $taskcard){
             $result = $taskcard->skills->map(function ($skills) {
@@ -131,55 +166,70 @@ class SummaryRoutineTaskcardController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function summary(WorkPackage $workPackage)
+    public function summary(Project $project, WorkPackage $workPackage)
     {
-        $skills = $subset = [];
-
-        foreach($workPackage->taskcards->load('type')->where('type.name', 'Basic') as $taskcard){
-            $result = $taskcard->skills->map(function ($skills) {
-                return collect($skills->toArray())
-                    ->only(['code'])
-                    ->all();
-            });
-
-            array_push($subset , $result);
+        $skills = $subset = $taskcards = [];
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
+        ->where('workpackage_id',$workPackage->id)
+        ->with('taskcards')
+        ->first();
+        foreach($project_workpackage->taskcards as $taskcard){
+            array_push($taskcards, $taskcard->taskcard_id);
         }
+
+        $taskcards = TaskCard::whereIn('id',$taskcards)->where('type.name', 'Basic')->get(); 
+        $taskcards = TaskCard::whereIn('id',$taskcards)->where('type.name', 'CPCP')->get(); 
+        $taskcards = TaskCard::whereIn('id',$taskcards)->where('type.name', 'SIP')->get(); 
+
+        $basic = TaskCard::whereIn('id',$taskcards)->where('type.name', 'Basic')->count(); 
+        $sip = TaskCard::whereIn('id',$taskcards)->where('type.name', 'CPCP')->count(); 
+        $cpcp = TaskCard::whereIn('id',$taskcards)->where('type.name', 'SIP')->count(); 
+
+        // foreach($workPackage->taskcards->load('type')->where('type.name', 'Basic') as $taskcard){
+        //     $result = $taskcard->skills->map(function ($skills) {
+        //         return collect($skills->toArray())
+        //             ->only(['code'])
+        //             ->all();
+        //     });
+
+        //     array_push($subset , $result);
+        // }
         
-        $basic = $workPackage->taskcards()->with('type','task')
-                            ->whereHas('type', function ($query) {
-                                $query->where('code', 'basic');
-                            })
-                            ->count();
+        // $basic = $workPackage->taskcards()->with('type','task')
+        //                     ->whereHas('type', function ($query) {
+        //                         $query->where('code', 'basic');
+        //                     })
+        //                     ->count();
 
-        foreach($workPackage->taskcards->load('type')->where('type.name', 'CPCP') as $taskcard){
-            $result = $taskcard->skills->map(function ($skills) {
-                return collect($skills->toArray())
-                    ->only(['code'])
-                    ->all();
-            });
+        // foreach($workPackage->taskcards->load('type')->where('type.name', 'CPCP') as $taskcard){
+        //     $result = $taskcard->skills->map(function ($skills) {
+        //         return collect($skills->toArray())
+        //             ->only(['code'])
+        //             ->all();
+        //     });
 
-            array_push($subset , $result);
-        }
-        $sip = $workPackage->taskcards()->with('type','task')
-                            ->whereHas('type', function ($query) {
-                                $query->where('code', 'sip');
-                            })
-                            ->count();
+        //     array_push($subset , $result);
+        // }
+        // $sip = $workPackage->taskcards()->with('type','task')
+        //                     ->whereHas('type', function ($query) {
+        //                         $query->where('code', 'sip');
+        //                     })
+        //                     ->count();
 
-        foreach($workPackage->taskcards->load('type')->where('type.name', 'SIP') as $taskcard){
-            $result = $taskcard->skills->map(function ($skills) {
-                return collect($skills->toArray())
-                    ->only(['code'])
-                    ->all();
-            });
+        // foreach($workPackage->taskcards->load('type')->where('type.name', 'SIP') as $taskcard){
+        //     $result = $taskcard->skills->map(function ($skills) {
+        //         return collect($skills->toArray())
+        //             ->only(['code'])
+        //             ->all();
+        //     });
 
-            array_push($subset , $result);
-        }
-        $cpcp = $workPackage->taskcards()->with('type','task')
-                            ->whereHas('type', function ($query) {
-                                $query->where('code', 'cpcp');
-                            })
-                            ->count();
+        //     array_push($subset , $result);
+        // }
+        // $cpcp = $workPackage->taskcards()->with('type','task')
+        //                     ->whereHas('type', function ($query) {
+        //                         $query->where('code', 'cpcp');
+        //                     })
+        //                     ->count();
 
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-routine')->count('uuid');
         $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-routine')->sum('estimation_manhour');

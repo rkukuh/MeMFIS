@@ -20,7 +20,20 @@ class HtCrr extends MemfisModel
         'conducted_by',
         'estimation_manhour',
         'is_rii',
+        'manhour_total',
+        'manhour_rate',
+        'discount_type',
+        'discount_value',
         'description',
+
+        'origin_type',
+        'origin_project',
+        'origin_conducted_by',
+        'origin_htcrr',
+        'origin_htcrr_items',
+        'origin_htcrr_skills',
+        'origin_htcrr_helpers',
+        'origin_htcrr_engineers',
     ];
 
     protected $dates = ['conducted_at'];
@@ -54,10 +67,25 @@ class HtCrr extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A HTCRR may have zero or many engineer.
+     *
+     * This function will retrieve all the engineers of a HTCRR.
+     * See: Employee's htcrr_engineers() method for the inverse
+     *
+     * @return mixed
+     */
+    public function engineers()
+    {
+        return $this->belongsToMany(Employee::class, 'htcrr_engineers', 'htcrr_id', 'employee_id')
+                    ->withPivot('quantity')
+                    ->withTimestamps();;
+    }
+
+    /**
      * Many-to-Many: A HTCRR may have zero or many helper.
      *
      * This function will retrieve all the helpers of a HTCRR.
-     * See: Employee's htcrr() method for the inverse
+     * See: Employee's htcrr_helpers() method for the inverse
      *
      * @return mixed
      */
@@ -163,5 +191,29 @@ class HtCrr extends MemfisModel
     public function type()
     {
         return $this->belongsTo(Type::class);
+    }
+
+    /*************************************** ACCESSOR ****************************************/
+
+    /**
+     * Get the task card's item: material.
+     *
+     * @return string
+     */
+    public function getMaterialsAttribute()
+    {
+        return collect(array_values($this->items->load('unit')
+                                                ->whereIn('categories.0.code', ['raw', 'cons', 'comp'])
+                                                ->all()));
+    }
+
+    /**
+     * Get the task card's item: tool.
+     *
+     * @return string
+     */
+    public function getToolsAttribute()
+    {
+        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
     }
 }

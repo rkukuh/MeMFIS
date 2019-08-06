@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use App\Models\Department;
 use Illuminate\Database\Seeder;
 
@@ -16,17 +17,20 @@ class DepartmentsTableSeeder extends Seeder
 
         $production = Department::create([
             'code' => 'production',
+            'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Production',
         ]);
 
         Department::create([
             'code' => 'hm',
+            'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Heavy Maintenance',
             'parent_id' => $production->id,
         ]);
 
         Department::create([
             'code' => 'ss',
+            'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Special Service',
             'parent_id' => $production->id,
         ]);
@@ -35,12 +39,14 @@ class DepartmentsTableSeeder extends Seeder
 
         $workshop = Department::create([
             'code' => 'workshop',
+            'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Workshop',
             'parent_id' => $production->id,
         ]);
 
         Department::create([
             'code' => 'instrument',
+            'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Instrument Shop',
             'parent_id' => $workshop->id,
         ]);
@@ -51,6 +57,7 @@ class DepartmentsTableSeeder extends Seeder
 
         Department::create([
             'code' => 'supporting',
+            'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Supporting',
         ]);
 
@@ -58,6 +65,7 @@ class DepartmentsTableSeeder extends Seeder
 
         Department::create([
             'code' => 'finance',
+            'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Finance',
         ]);
 
@@ -65,6 +73,7 @@ class DepartmentsTableSeeder extends Seeder
 
         Department::create([
             'code' => 'accounting',
+            'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Accounting',
         ]);
 
@@ -72,6 +81,7 @@ class DepartmentsTableSeeder extends Seeder
 
         Department::create([
             'code' => 'marketing',
+            'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Marketing',
         ]);
 
@@ -79,6 +89,7 @@ class DepartmentsTableSeeder extends Seeder
 
         Department::create([
             'code' => 'material',
+            'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Material Planning',
         ]);
 
@@ -86,6 +97,7 @@ class DepartmentsTableSeeder extends Seeder
 
         Department::create([
             'code' => 'quality',
+            'company_id' => Company::where('code', 'mmf')->first()->id,
             'name' => 'Quality',
         ]);
     }

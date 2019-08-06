@@ -24,8 +24,17 @@ class CreateDefectcardsTable extends Migration
             $table->integer('helper_quantity');
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
             $table->boolean('is_rii');
+            $table->integer('sequence')->nullable();
+            $table->string('ata')->nullable();
             $table->text('complaint')->nullable();
             $table->text('description')->nullable();
+
+            $table->json('origin_jobcard')->nullable();
+            $table->json('origin_project_additional')->nullable();
+            $table->json('origin_quotation_additional')->nullable();
+            $table->json('origin_defectcard_items')->nullable();
+            $table->json('origin_defectcard_propose_corrections')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
 

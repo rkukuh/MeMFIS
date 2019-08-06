@@ -6,13 +6,13 @@ let Quotation = {
         $(document).ready(function () {
             let GTotal = 0;
             if(currency == 1){
-                GTotal = IDRformatter.format(document.getElementById("grand_total_rupiah").innerHTML);
-                document.getElementById("grand_total_rupiah").innerHTML = GTotal;
+                GTotal = IDRformatter.format($("#grand_total_rupiah").html());
+                $("#grand_total_rupiah").html(GTotal);
             }else{
-                GTotal = ForeignFormatter.format(document.getElementById("grand_total").innerHTML);
-                document.getElementById("grand_total").innerHTML = GTotal;
-                GTotal = IDRformatter.format(document.getElementById("grand_total_rupiah").innerHTML);
-                document.getElementById("grand_total_rupiah").innerHTML = GTotal;
+                GTotal = ForeignFormatter.format($("#grand_total").html());
+                $("#grand_total").html(GTotal);
+                GTotal = IDRformatter.format($("#grand_total_rupiah").html());
+                $("#grand_total_rupiah").html(GTotal);
             }
         });
 
@@ -158,14 +158,14 @@ let Quotation = {
             let grandTotal = grandTotalRupiah = 0;
             //get all values
             for (let i = 0; i < inputs.length; i++) {
-                value[i] = parseInt($(inputs[i]).val());
+                value[i] = parseFloat($(inputs[i]).val());
             }
             const arrSum = arr => arr.reduce((a, b) => a + b, 0);
             let subTotal = $('#sub_total').attr("value");
-            grandTotal = parseInt(subTotal) + parseInt(arrSum(value));
+            grandTotal = parseFloat(subTotal) + parseFloat(arrSum(value));
 
             if(currency !== 1){
-                grandTotalRupiah = ( parseInt(subTotal) + parseInt(arrSum(value)) ) * exchange_rate;
+                grandTotalRupiah = ( parseFloat(subTotal) + parseFloat(arrSum(value)) ) * exchange_rate;
             }
                         
             $('#grand_total').attr("value", grandTotal);
@@ -381,10 +381,10 @@ let Quotation = {
             let is_ppn =  $('#is_ppn').prop("checked");
             let ppn = 0;
             if(is_ppn){
-                ppn = $('#grand_total').attr("value") * 1.1;
+                ppn = $('#grand_total_rupiah').attr("value") * 1.1;
                 is_ppn = 1;
             }else{
-                ppn = $('#grand_total').attr("value") * 0.1;
+                ppn = $('#grand_total_rupiah').attr("value") * 0.1;
                 is_ppn = 0;
             }
             let attention_name = $('#attention').val();
@@ -395,7 +395,7 @@ let Quotation = {
             let scheduled_payment_array = [];
             let type = $('#scheduled_payment_type').children("option:selected").html();
             if(type === "By Date"){
-                $('select[name^=scheduled_payment] ').each(function (i) {
+                $('input[name^=scheduled_payment] ').each(function (i) {
                     scheduled_payment_array[i] = $(this).val();
                 });
             }else{
@@ -504,4 +504,17 @@ let Quotation = {
 
 jQuery(document).ready(function () {
     Quotation.init();
+    $.each($('.scheduledPayment'), function () {
+        $(this).addClass("scheduledPayment");
+        $(this).val("");
+        $(this).datetimepicker({
+            format: "yyyy-mm-dd",
+            todayHighlight: !0,
+            autoclose: !0,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+            pickerPosition: "bottom-left"
+        });
+    });
 });

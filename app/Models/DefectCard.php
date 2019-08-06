@@ -17,7 +17,15 @@ class DefectCard extends MemfisModel
         'estimation_manhour',
         'is_rii',
         'complaint',
+        'sequence',
+        'ata',
         'description',
+
+        'origin_jobcard',
+        'origin_project_additional',
+        'origin_quotation_additional',
+        'origin_defectcard_items',
+        'origin_defectcard_propose_corrections',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
@@ -33,6 +41,20 @@ class DefectCard extends MemfisModel
     public function approvals()
     {
         return $this->morphMany(Approval::class, 'approvable');
+    }
+
+    /**
+     * Many-to-Many: A Defect Card may have zero or many helper.
+     *
+     * This function will retrieve all the helpers of a Defect Card.
+     * See: Employee's defectcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function helpers()
+    {
+        return $this->belongsToMany(Employee::class, 'defectcard_employee', 'defectcard_id', 'employee_id')
+                    ->withTimestamps();;
     }
 
     /**
@@ -124,6 +146,20 @@ class DefectCard extends MemfisModel
         return $this->belongsTo(Quotation::class);
     }
 
+    /**
+     * Many-to-Many: A Defect Card may have zero or many skill.
+     *
+     * This function will retrieve all the skills of a Defect Card.
+     * See: Type's skill_defectcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function skills()
+    {
+        return $this->belongsToMany(Type::class, 'defectcard_skill', 'defectcard_id', 'skill_id')
+                    ->withTimestamps();;
+    }
+
     /*************************************** ACCESSOR ****************************************/
 
     /**
@@ -133,7 +169,9 @@ class DefectCard extends MemfisModel
      */
     public function getMaterialsAttribute()
     {
-        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'raw')->all()));
+        return collect(array_values($this->items->load('unit')
+                                                ->whereIn('categories.0.code', ['raw', 'cons', 'comp'])
+                                                ->all()));
     }
 
     /**

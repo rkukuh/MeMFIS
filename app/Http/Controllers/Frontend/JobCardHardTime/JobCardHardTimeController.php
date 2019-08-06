@@ -64,7 +64,7 @@ class JobCardHardTimeController extends Controller
      */
     public function edit(HtCrr $htcrr)
     {
-        //TODO Validasi User'skill with JobCard Skill
+        //TODO Validasi User'skill with HtCrr Skill
 
         foreach($htcrr->helpers as $helper){
             $helper->userID .= $helper->user->id;

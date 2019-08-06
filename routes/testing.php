@@ -13,6 +13,31 @@ Route::name('testing.')->group(function () {
             echo App\Helpers\DocumentNumber::generate('WP-', App\Models\WorkPackage::count());
 
         });
+        Route::get('/wp', function () {
+
+            $project_workpackage = App\Models\Pivots\ProjectWorkPackage::where('project_id',1)->where('workpackage_id',1)->first()->id;
+            $tes = App\Models\ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
+            ->whereHas('taskcard', function ($query) {
+                $query->whereHas('type', function ($query) {
+                        $query->where('name', 'Basic');
+                    });
+                        // $query->where('task_id', $request->task_type_id);
+                //     });
+            })->get();
+            // dd($tes);
+
+            foreach($tes as $te){
+                // dump($te->taskcard->type->name);
+                dump($te);
+            }
+
+            // whereIn
+            // $taskcards = $project_workpackage->taskcards;
+
+            // foreach($taskcards as $taskcard){
+            //     dump($taskcard->taskcard);
+            // }
+        });
 
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
@@ -64,8 +89,8 @@ Route::name('testing.')->group(function () {
                     App\Models\JobCard::create([
                         'number' => 'JC-DUM-'.md5(uniqid(rand(), true)),
                         'taskcard_id' => $tc->id,
-                        'data_taskcard' => $tc->toJson(),
-                        'data_taskcard_items' => $tc->items->toJson(),
+                        'origin_taskcard' => $tc->toJson(),
+                        'origin_taskcard_items' => $tc->items->toJson(),
                     ]);                    // // echo $tc->title.'<br>';
                     // foreach($tc->items as $item){
                     //     echo $item->name.'<br>';

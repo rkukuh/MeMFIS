@@ -111,7 +111,7 @@
                                                     <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
                                                 </li>
                                                 <!-- <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool(s) & Material(s)</a>
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">Material(s) & Tool(s)</a>
                                                 </li> -->
                                             </ul>
 
@@ -126,11 +126,11 @@
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Work Package Summary')
-                                                                @slot('href', route('frontend.workPackage.summary.workpackage', $workPackage->uuid) )
+                                                                @slot('href', route('frontend.workPackage.summary.workpackage',$workPackage->uuid) )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Routine Summary')
-                                                                @slot('href', route('frontend.workPackage.summary.routine', $workPackage->uuid) )
+                                                                @slot('href', route('frontend.workPackage.summary.routine',$workPackage->uuid) )
                                                             @endcomponent
                                                             </div>
                                                         </div>
@@ -146,11 +146,11 @@
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Work Package Summary')
-                                                                @slot('href', route('frontend.workPackage.summary.workpackage', $workPackage->uuid) )
+                                                                @slot('href', route('frontend.workPackage.summary.workpackage',$workPackage->uuid) )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Non-routine Summary')
-                                                                @slot('href', route('frontend.workPackage.summary.nonroutine', $workPackage->uuid) )
+                                                                @slot('href', route('frontend.workPackage.summary.nonroutine',$workPackage->uuid) )
                                                             @endcomponent
                                                             </div>
                                                         </div>

@@ -147,6 +147,7 @@
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.text')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('id', 'item_sn_removal')
                                                                                 @slot('name', 'item_sn_removal')
                                                                                 @slot('id_error', 'item_sn_removal')
@@ -161,6 +162,7 @@
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.textarea')
                                                                                 @slot('rows', '5')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('id', 'description_removal')
                                                                                 @slot('name', 'description_removal')
                                                                                 @slot('value', $htcrr_removal->description)
@@ -175,6 +177,7 @@
                                                                             @component('frontend.common.input.checkbox')
                                                                                 @slot('id', 'is_rii_removal')
                                                                                 @slot('name', 'is_rii_removal')
+                                                                                @slot('disabled', 'disabled')
                                                                                 @slot('text', 'IS RII?')
                                                                                 @if($htcrr_removal->is_null)
                                                                                 @slot('checked', 'checked')
@@ -472,6 +475,7 @@
                                                                             @component('frontend.common.input.checkbox')
                                                                                 @slot('id', 'is_rii_installation')
                                                                                 @slot('name', 'is_rii_installation')
+                                                                                @slot('disabled', 'disabled')
                                                                                 @slot('text', 'IS RII?')
                                                                                 @if($htcrr_installation->is_null)
                                                                                 @slot('checked', 'checked')
@@ -492,6 +496,7 @@
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('id', 'item_pn_installation')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('name', 'item_pn_installation')
                                                                                 @slot('id_error', 'item_pn_installation')
                                                                                 @slot('value', $htcrr_installation->part_number)
@@ -505,6 +510,7 @@
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('id', 'item_sn_installation')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('name', 'item_sn_installation')
                                                                                 @slot('id_error', 'item_sn_installation')
                                                                                 @slot('value', $htcrr_installation->serial_number)
@@ -518,6 +524,7 @@
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.textarea')
                                                                                 @slot('rows', '5')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('id', 'description_installation')
                                                                                 @slot('name', 'description_installation')
                                                                                 @slot('value', $htcrr_installation->description)

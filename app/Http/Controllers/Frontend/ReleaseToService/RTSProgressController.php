@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Frontend\ReleaseToService;
 use Auth;
 use App\Models\RTS;
 use App\Models\Status;
+use App\Models\JobCard;
 use App\Models\Project;
 use App\Models\Progress;
+use App\Models\Quotation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\RTSStore;
 use App\Http\Requests\Frontend\RTSUpdate;
@@ -52,9 +54,34 @@ class RTSProgressController extends Controller
      */
     public function store(RTSStore $request)
     {
-        $request->merge(['work_performed' => $request->work_performed.'. '.$request->work_performed_addtional ]);
+        $request->merge(['work_performed' => $request->work_performed.'.'.$request->work_performed_addtional ]);
+
+        $quotations = Quotation::where('project_id',$request->project_id)->get();
+
+        $taskcard_number = "";
+        foreach($quotations as $quotation){
+            $jobcards = JobCard::where('quotation_id',$quotation->id)->get();
+            foreach($jobcards as $jobcard){
+                if(sizeof($jobcard->progresses) <> 0){
+                    if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "closed"){
+                        $taskcard_number = $taskcard_number.", ".$jobcard->taskcard->number;
+                    }
+                }
+            }
+        }
+
+        $taskcard_number = substr($taskcard_number, 2);
+
+        $request->merge(['exception' => $taskcard_number ]);
 
         $rts = RTS::create($request->all());
+
+        if($request->approval <> null){
+            $rts->approvals()->save(new Approval([
+                'approvable_id' => $rts->id,
+                'approved_by' => Auth::id(),
+            ]));
+        }
 
         $project = Project::find($request->project_id);
         $project->progresses()->save(new Progress([
@@ -112,21 +139,4 @@ class RTSProgressController extends Controller
         return response()->json($rts);
     }
 
-    /**
-     * Search the specified resource from storage.
-     *
-     * @param  \App\Models\JobCard  $jobCard
-     * @return \Illuminate\Http\Response
-     */
-    public function print(RTS $rts)
-    {
-        $username = Auth::user()->name;
-
-        $pdf = \PDF::loadView('frontend/form/rts_certificate',[
-                'username' => $username,
-                'rts' => $rts,
-
-                ]);
-        return $pdf->stream();
-    }
 }

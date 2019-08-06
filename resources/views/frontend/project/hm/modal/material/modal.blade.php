@@ -41,9 +41,9 @@
 
                                     @component('frontend.common.input.number')
                                         @slot('text', 'Quantity')
-                                        @slot('name', 'quantity_item')
-                                        @slot('id', 'quantity_item')
-                                        @slot('id_error', 'quantity_item')
+                                        @slot('name', 'quantity_material')
+                                        @slot('id', 'quantity_material')
+                                        @slot('id_error', 'quantity_material')
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -68,9 +68,9 @@
                                     @component('frontend.common.input.textarea')
                                         @slot('text', 'Remark')
                                         @slot('rows', '3')
-                                        @slot('name', 'remark_item')
-                                        @slot('id', 'remark_item')
-                                        @slot('id_error', 'remark_item')
+                                        @slot('name', 'remark_material')
+                                        @slot('id', 'remark_material')
+                                        @slot('id_error', 'remark_material')
                                     @endcomponent
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                             <div class="flex">
                                 <div class="action-buttons">
                                         @component('frontend.common.buttons.submit')
-                                            @slot('class', 'add-item')
+                                            @slot('class', 'add-htcrr-item')
                                             @slot('type', 'button')
                                         @endcomponent
                                         @component('frontend.common.buttons.reset')
@@ -95,3 +95,12 @@
         </div>
     </div>
 </div>
+
+@push('footer-scripts')
+
+    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
+@endpush

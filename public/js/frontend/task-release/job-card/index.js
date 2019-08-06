@@ -1,6 +1,5 @@
 let TaskRelease = {
     init: function () {
-
         $('.taskrelease_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -14,6 +13,7 @@ let TaskRelease = {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
+                            console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -66,14 +66,14 @@ let TaskRelease = {
                     }
                 },
                 {
-                    field: 'pesawat',
+                    field: 'company_task',
                     title: 'Company Task No',
                     sortable: 'asc',
                     filterable: !1,
 
                 },
                 {
-                    field: 'quotation.customer.name',
+                    field: 'quotation.project.customer.name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
@@ -125,18 +125,18 @@ let TaskRelease = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.status == 'CLOSED'){
+                        if(t.status == 'Closed'){
                             return (
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check-circle"></i>' +
                                 '</a>' +
-                                '<a href="/jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
                         }else{
                             return (
-                                '<a href="/jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );

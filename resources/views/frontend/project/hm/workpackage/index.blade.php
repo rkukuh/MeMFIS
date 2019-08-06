@@ -15,7 +15,7 @@
                             @include('frontend.common.label.show')
 
                             <h3 class="m-portlet__head-text">
-                                Project View
+                                Project View - {{ $workPackage->title }}
                             </h3>
                         </div>
                     </div>
@@ -87,6 +87,7 @@
 @push('footer-scripts')
     <script>
         let workPackage_uuid = '{{ $workPackage->uuid }}';
+        let Project_uuid = '{{ $project->uuid }}';
         let anyChanges = false;
     </script>
     <script src="{{ asset('js/frontend/project/hm/workpackage.js') }}"></script>

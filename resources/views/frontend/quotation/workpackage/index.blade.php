@@ -15,7 +15,7 @@
                         @include('frontend.common.label.show')
 
                         <h3 class="m-portlet__head-text">
-                          Project View
+                          Project View - {{ $workPackage->title }}
                         </h3>
                     </div>
                 </div>
@@ -65,6 +65,7 @@
     <script>
         let workPackage_uuid = '{{ $workPackage->uuid }}';
         let project_uuid = '{{  $quotation->project->uuid }}';
+        let currencyCode = '{{  $quotation->currency->code }}';
         let quotation_uuid = '{{ $quotation->uuid }}';
     </script>
     <script src="{{ asset('js/custom.js') }}"></script>

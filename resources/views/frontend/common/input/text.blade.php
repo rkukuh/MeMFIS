@@ -8,6 +8,7 @@
     value="{{$value or ''}}"
     placeholder="{{ $placeholder or '' }}"
     {{$editable or ''}}
+    autocomplete="{{$autocomplete or ''}}"
 >
 
 <div class="form-control-feedback text-danger" id="{{ $id_error or '' }}-error"></div>

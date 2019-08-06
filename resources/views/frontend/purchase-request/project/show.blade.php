@@ -229,7 +229,7 @@
     <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/purchase-request/project/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/project/show.js') }}"></script>
     <script src="{{ asset('js/frontend/purchase-request/form-reset.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>

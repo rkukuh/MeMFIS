@@ -610,7 +610,31 @@ class FillComboxController extends Controller
      */
     public function project()
     {
-        $projects = Project::pluck('title','id');
+        $projects = Project::with('approvals')->whereHas('approvals')->pluck('title','uuid');
+
+        return json_encode($projects);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function projectAdditional()
+    {
+        $projects = Project::with('approvals')->where('parent_id','<>',null)->pluck('title','uuid');
+
+        return json_encode($projects);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function projectAdditionalApproved()
+    {
+        $projects = Project::with('approvals')->where('parent_id','<>',null)->whereHas('approvals')->pluck('title','uuid');
 
         return json_encode($projects);
     }
@@ -634,7 +658,7 @@ class FillComboxController extends Controller
      */
     public function workOrder()
     {
-        $work_order = Project::pluck('no_wo','uuid');
+        $work_order = Project::with('approvals')->whereHas('approvals')->pluck('no_wo','uuid');
 
         return json_encode($work_order);
     }

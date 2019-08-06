@@ -81,7 +81,6 @@ let total = 0;
 let quotation = $('#quotation_uuid').val();
 let exchange_rate = parseInt($('#exchange_rate').attr('value'));
 $(document).ready(function () {
-  console.log(exchange_rate);
   if(currency == 1){
     let GTotal = IDRformatter.format(document.getElementById("grand_total").innerHTML);
     document.getElementById("grand_total").innerHTML = GTotal;
@@ -96,7 +95,10 @@ $(document).ready(function () {
     }
   }else{
     let GTotal = ForeignFormatter.format(document.getElementById("grand_total").innerHTML);
+    let IDRGTotal = $("#grand_total").attr('value');
+    IDRGTotal = IDRformatter.format(IDRGTotal * exchange_rate);
     document.getElementById("grand_total").innerHTML = GTotal;
+    document.getElementById("grand_total_rupiah").innerHTML = IDRGTotal;
     let subTotal = ForeignFormatter.format(document.getElementById("sub_total").innerHTML);
     document.getElementById("sub_total").innerHTML = subTotal;
     if($('#charge ').length > 0){
@@ -114,7 +116,6 @@ var DatatableAutoColumnHideDemo = function () {
 
   // basic demo
   var demo = function () {
-    console.log(quotation);
     // var dataJSONArrayLong = JSON.parse('[{ "OrderID" : "OrderID","ShipCountry" : "ShipCountry","ShipCity" : "ShipCity","Currency" : "Currency","ShipDate" : "ShipDate", "Latitude" : "Latitude","Longitude" : "Longitude","Notes" : "Notes","Department" : "Department","Website" : "Website", "TotalPayment" : "TotalPayment","Status" : 1,"Type" : 1},{ "OrderID" : "OrderID","ShipCountry" : "ShipCountry","ShipCity" : "ShipCity","Currency" : "Currency","ShipDate" : "ShipDate", "Latitude" : "Latitude","Longitude" : "Longitude","Notes" : "Notes","Department" : "Department","Website" : "Website", "TotalPayment" : "TotalPayment","Status" : 1,"Type" : 1}]');
 
     $('.summary_datatable').mDatatable({
@@ -132,7 +133,6 @@ var DatatableAutoColumnHideDemo = function () {
                 dataSet = raw.data;
               }
               
-              console.log(dataSet);
               return dataSet;
             }
           }
@@ -180,13 +180,15 @@ var DatatableAutoColumnHideDemo = function () {
           template: function (t) {
             if(currency == 1){
               return (t.pivot.description + '<br>' +
-                '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x ' + IDRformatter.format(t.pivot.manhour_rate) + '<br>' +
-                '- Facility Price : '
+                '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x ' + IDRformatter.format(t.pivot.manhour_rate) + '<br>' +
+                '- Facility Price : <br>' +
+                '- Material & Tool Price : ' 
               );
             }else{
               return (t.pivot.description + '<br>' +
-                '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x ' + ForeignFormatter.format(t.pivot.manhour_rate) + '<br>' +
-                '- Facility Price : '
+                '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x ' + ForeignFormatter.format(t.pivot.manhour_rate) + '<br>' +
+                '- Facility Price : <br>' +
+                '- Material & Tool Price : ' 
               );
             }
           }
@@ -197,13 +199,15 @@ var DatatableAutoColumnHideDemo = function () {
             
             if(currency == 1){
               return ('<br>' +
-                IDRformatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
-                ' 138'
+              IDRformatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate) + '<br>' +
+              IDRformatter.format(a.facilities_price_amount) + '<br>' +
+              IDRformatter.format(a.mat_tool_price) + '<br>' 
               );
             }else{
               return ('<br>' +
-                ForeignFormatter.format(a.pivot.manhour_total * a.pivot.manhour_rate) + '<br>' +
-                ' 138'
+              ForeignFormatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate) + '<br>' +
+              ForeignFormatter.format(a.facilities_price_amount) + '<br>' +
+              ForeignFormatter.format(a.mat_tool_price) + '<br>' 
               );
             }
           }
@@ -216,33 +220,25 @@ var DatatableAutoColumnHideDemo = function () {
           template: function (t, e, i) {
             if(t.pivot.discount_value == null && t.pivot.discount_type == null){
                 return (
-                    '<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
-                    t.uuid +
-                    '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    '-'
                   );
             }
             else{
                 if(t.pivot.discount_type ==  'amount'){
                   if(currency == 1){
                     return (
-                      IDRformatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
-                      t.uuid +
-                      '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                      IDRformatter.format(t.pivot.discount_value)
                     );
                   }else{
                     return (
-                      ForeignFormatter.format(t.pivot.discount_value)+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
-                      t.uuid +
-                      '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                      ForeignFormatter.format(t.pivot.discount_value)
                     );
                   }
                     
                 }
                 else if(t.pivot.discount_type == 'percentage'){
                     return (
-                        t.pivot.discount_value+'%'+'<button data-toggle="modal" data-target="#discount" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
-                        t.uuid +
-                        '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        t.pivot.discount_value+'%'
                     );
                 }
             }
@@ -253,94 +249,35 @@ var DatatableAutoColumnHideDemo = function () {
           title: 'Total',
           sortable: 'asc',
           filterable: !1,
-          template: function (t, e, i) {
+         template: function (t, e, i) {
             total = 0;
             if(t.pivot.discount_value == null && t.pivot.discount_type == null){
-                total = t.pivot.manhour_total * t.pivot.manhour_rate + 138;
-                subtotal = subtotal + t.pivot.manhour_total * t.pivot.manhour_rate ;
-                if(currency == 1){
-                  document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
-                  document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
-                  $("#grand_total_rupiah").attr("value", subtotal);
-                  $("#sub_total").attr("value", subtotal);
-                }else{
-                  let totalRupiah = subtotal * exchange_rate; 
-                  document.getElementById("sub_total").innerHTML = ForeignFormatter.format(subtotal);
-                  document.getElementById("grand_total").innerHTML = ForeignFormatter.format(subtotal);
-                  $("#grand_total").attr("value", subtotal);
-                  $("#sub_total").attr("value", subtotal);
-
-                  document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
-                  $("#grand_total_rupiah").attr("value", totalRupiah);
-                }
-                if(currency == 1){ 
-                    return (
-                      IDRformatter.format(total)
-                    );
-                  }else{
-                    return (
-                      ForeignFormatter.format(total)
-                    );
-                  }
+                total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilities_price_amount + t.mat_tool_price;
+                subtotal = subtotal + total;
             }
             else{
                 if(t.pivot.discount_type ==  'amount'){
-                    total = t.pivot.manhour_total * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
-                    subtotal = subtotal + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - t.pivot.discount_value;
-                    if(currency == 1){
-                      document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
-                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
-                      $("#grand_total_rupiah").attr("value", subtotal);
-                      $("#sub_total").attr("value", subtotal);
-                    }else{
-                      let totalRupiah = subtotal * exchange_rate; 
-                      document.getElementById("sub_total").innerHTML = ForeignFormatter.format(subtotal);
-                      document.getElementById("grand_total").innerHTML = ForeignFormatter.format(subtotal);
-                      $("#grand_total").attr("value", subtotal);
-                      $("#sub_total").attr("value", subtotal);
-
-                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
-                      $("#grand_total_rupiah").attr("value", totalRupiah);
-                    }
-                    if(currency == 1){ 
-
-                      return (
-                        IDRformatter.format(total)
-                      );
-                    }else{
-                      return (
-                        ForeignFormatter.format(total)
-                      );
-                    }
+                    total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilities_price_amount + t.mat_tool_price;
+                    subtotal = subtotal + total;
+                    
                 }
                 else if(t.pivot.discount_type == 'percentage'){
-                    total = t.pivot.manhour_total * t.pivot.manhour_rate + 138 - (((t.pivot.manhour_total * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
-                    subtotal = subtotal + t.pivot.manhour_total * t.pivot.manhour_rate + 138 - (((t.pivot.manhour_total * t.pivot.manhour_rate + 138)*t.pivot.discount_value)/100);
-                    if(currency == 1){
-                      document.getElementById("sub_total").innerHTML = IDRformatter.format(subtotal);
-                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(subtotal);
-                      $("#grand_total_rupiah").attr("value", subtotal);
-                      $("#sub_total").attr("value", subtotal);
-                    }else{
-                      let totalRupiah = subtotal * exchange_rate; 
-                      document.getElementById("sub_total").innerHTML = ForeignFormatter.format(subtotal);
-                      document.getElementById("grand_total").innerHTML = ForeignFormatter.format(subtotal);
-                      $("#grand_total").attr("value", subtotal);
-                      $("#sub_total").attr("value", subtotal);
-
-                      document.getElementById("grand_total_rupiah").innerHTML = IDRformatter.format(totalRupiah);
-                      $("#grand_total_rupiah").attr("value", totalRupiah);
-                    }
-                    if(currency == 1){ 
-                      return (
-                        IDRformatter.format(total)
-                      );
-                    }else{
-                      return (
-                        ForeignFormatter.format(total)
-                      );
-                    }
+                    total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilities_price_amount + t.mat_tool_price;
+                    subtotal = subtotal + total;
                 }
+            }
+
+            if(currency.id == 1){
+              $("#grand_total_rupiah").attr("value", subtotal);
+              $("#sub_total").attr("value", subtotal);
+              return (
+                IDRformatter.format(total)
+              );
+            }else{
+              
+              return (
+                ForeignFormatter.format(total)
+              );
             }
           }
         },

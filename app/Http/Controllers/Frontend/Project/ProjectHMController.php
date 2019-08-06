@@ -51,7 +51,7 @@ class ProjectHMController extends Controller
      */
     public function store(ProjectHMStore $request)
     {
-        $request->merge(['code' => DocumentNumber::generate('PROJ-', Project::count()+1)]);
+        $request->merge(['code' => DocumentNumber::generate('PROJ-', Project::withTrashed()->count()+1)]);
 
         $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
 
@@ -88,6 +88,11 @@ class ProjectHMController extends Controller
      */
     public function edit(Project $project)
     {
+        if($project->approvals()->latest()->first()){
+            return redirect()->route('frontend.project-hm.show', [
+                'project' => $project->uuid
+            ]);
+        }
         $attention = $project->quotations;
         return view('frontend.project.hm.edit',[
             'project' => $project,

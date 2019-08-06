@@ -24,6 +24,12 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('aircraft_id')->nullable();
             $table->string('aircraft_register');
             $table->string('aircraft_sn');
+            $table->json('origin_project')->nullable();
+            $table->json('origin_project_workpackages')->nullable();
+            $table->json('origin_project_workpackage_engineers')->nullable();
+            $table->json('origin_project_workpackage_facilities')->nullable();
+            $table->json('origin_project_workpackage_manhours')->nullable();
+            $table->json('origin_project_workpackage_taskcards')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -14,6 +14,15 @@ use Faker\Generator as Faker;
 $factory->define(HtCrr::class, function (Faker $faker) {
 
     $number = $faker->unixTime();
+    
+    $disc_type = $faker->randomElement(['percentage', 'amount']);
+                
+    if ($disc_type == 'percentage') {
+        $disc_value = $faker->randomElement([5, 10, 15, 20, 25]);
+    } 
+    else if ($disc_type == 'amount') {
+        $disc_value = rand(1, 10) * 100000;
+    }
 
     return [
         'code' => 'HTCRR-DUM-' . $number,
@@ -33,7 +42,20 @@ $factory->define(HtCrr::class, function (Faker $faker) {
         'conducted_by' => null,
         'estimation_manhour' => 0,
         'is_rii' => false,
+        'manhour_total' => rand(10, 20),
+        'manhour_rate' => rand(10, 20) * 1000000,
+        'discount_type' => $disc_type,
+        'discount_value' => $disc_value,
         'description' => $faker->randomElement([null, $faker->text]),
+
+        'origin_type' => null,
+        'origin_project' => null,
+        'origin_conducted_by' => null,
+        'origin_htcrr' => null,
+        'origin_htcrr_items' => null,
+        'origin_htcrr_skills' => null,
+        'origin_htcrr_helpers' => null,
+        'origin_htcrr_engineers' => null,
     ];
 
 });
@@ -71,6 +93,15 @@ $factory->state(HtCrr::class, 'installation', function ($faker) {
 /** CALLBACKS */
 
 $factory->afterCreating(HtCrr::class, function ($htcrr, $faker) {
+
+    // Engineer (Employee)
+
+    for ($i = 0; $i < rand(1, 3); $i++) {
+        $htcrr->engineers()->save(Employee::get()->random(), [
+            'skill_id' => Type::ofTaskCardSkill()->get()->random()->id,
+            'quantity' => rand(2, 10),
+        ]);
+    }
 
     // Helper (Employee)
 

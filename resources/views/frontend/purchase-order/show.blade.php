@@ -50,158 +50,276 @@
                         <div class="m-portlet__body">
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <label class="form-control-label">
-                                                                    Purchase Order Number
-                                                                </label>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Ref PR
+                                                    </label>
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Currency  
+                                                    </label>
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <label class="form-control-label">
+                                                                Date  
+                                                            </label>
 
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text', 'generate')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <label class="form-control-label">
+                                                                Valid Until  
+                                                            </label>
+
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text', 'generate')
+                                                            @endcomponent
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Exchange Rate  
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Vendor  
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Date Shipping
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Term of Payment
+                                                    </label>
+                                                    <div class="form-group m-form__group row" >
+                                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                                            <div class="form-group m-form__group row">
+                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                    <div class="form-group m-form__group row">
+                                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                            @component('frontend.common.input.radio')
+                                                                                @slot('name', 'top')
+                                                                                @slot('id', 'cash')
+                                                                                @slot('value', 'cash')
+                                                                                @slot('disabled','disabled')
+                                                                            @endcomponent
+                                                                        </div>
+                                                                        <div class="col-sm-11 col-md-11 col-lg-11">
+                                                                            Cash
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                    <div class="form-group m-form__group row">
+                                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                            @component('frontend.common.input.radio')
+                                                                                @slot('name', 'top')
+                                                                                @slot('id', 'by-date')
+                                                                                @slot('value', 'by-date')
+                                                                                @slot('disabled','disabled')
+                                                                            @endcomponent
+                                                                        </div>
+                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                            @component('frontend.common.input.number')
+                                                                                @slot('text', 'Term of Payment')
+                                                                                @slot('id', 'top_day_amount')
+                                                                                @slot('input_append', 'Days')
+                                                                                @slot('name', 'top_day_amount')
+                                                                                @slot('id_error', 'top_day_amount')
+                                                                                @slot('disabled','disabled')
+                                                                            @endcomponent
+                                                                        </div>
+                                                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                            @component('frontend.common.input.datepicker')
+                                                                                @slot('id', 'top_start_at')
+                                                                                @slot('text', 'Date')
+                                                                                @slot('name', 'top_start_at')
+                                                                                @slot('id_error', 'top_start_at')
+                                                                                @slot('disabled','disabled')
+                                                                            @endcomponent
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Shipping Address  
+                                                    </label>
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+
+                                                    <label class="form-control-label">
+                                                        Description
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="m-portlet">
+                                                <div class="m-portlet__head">
+                                                    <div class="m-portlet__head-caption">
+                                                        <div class="m-portlet__head-title">
+                                                            <span class="m-portlet__head-icon m--hide">
+                                                                <i class="la la-gear"></i>
+                                                            </span>
+
+                                                            @include('frontend.common.label.datalist')
+
+                                                            <h3 class="m-portlet__head-text">
+                                                                Item
+                                                            </h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="m-portlet m-portlet--mobile">
+                                                    <div class="m-portlet__body">
+                                                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-xl-8 order-2 order-xl-1">
+                                                                    <div class="form-group m-form__group row align-items-center">
+                                                                        <div class="col-md-4">
+                                                                            <div class="m-input-icon m-input-icon--left">
+                                                                                <input type="text" class="form-control m-input" placeholder="Search..."
+                                                                                    id="generalSearch">
+                                                                                <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                                                    <span><i class="la la-search"></i></span>
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="item_datatable" id="scrolling_both"></div>
+
+                                                        @include('frontend.purchase-order.modal-check')
+
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6"></div>
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="m--align-left" style="padding-top:15px">
+                                                                    Total
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', $purchaseOrder->number)
+                                                                    @slot('id', 'sub_total')
+                                                                    @slot('class', 'sub_total')
+                                                                    @slot('text', 'generate semua total ditabel')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6"></div>
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="m--align-left" style="padding-top:15px">
+                                                                    PPN
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.input.checkbox')
+                                                                    @slot('id', 'is_ppn_include')
+                                                                    @slot('name', 'is_ppn_include')
+                                                                    @slot('value', 1.1)
+                                                                    @slot('text', 'Include')
+                                                                    @slot('disabled','disabled')
+                                                                    @slot('style_div','margin-top:15px')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.input.checkbox')
+                                                                    @slot('id', 'is_ppn_exclude')
+                                                                    @slot('name', 'is_ppn_exclude')
+                                                                    @slot('value', 1.1)
+                                                                    @slot('text', 'Exclude')
+                                                                    @slot('disabled','disabled')
+                                                                    @slot('style_div','margin-top:15px')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6"></div>
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="m--align-left" style="padding-top:15px">
+                                                                    GrandTotal
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'sub_total')
+                                                                    @slot('class', 'sub_total')
+                                                                    @slot('text', 'menghitung nilai total & biaya lainnya')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Currency @include('frontend.common.label.required')
-                                                        </label>
-
-                                                        @component('frontend.common.label.data-info')
-                                                            @slot('text', $purchaseOrder->currency->name)
-                                                        @endcomponent
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                <label class="form-control-label">
-                                                                    Date @include('frontend.common.label.required')
-                                                                </label>
-
-                                                                @component('frontend.common.label.data-info')
-                                                                    @slot('text', '10-10-2018')
-                                                                @endcomponent
-                                                            </div>
-                                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                <label class="form-control-label">
-                                                                    Valid Until @include('frontend.common.label.optional')
-                                                                </label>
-
-                                                                @if (empty($purchaseOrder->valid_until))
-                                                                    @include('frontend.common.label.data-info-nodata')
-                                                                @else
-                                                                    @component('frontend.common.label.data-info')
-                                                                        @slot('text', $purchaseOrder->valid_until)
-                                                                    @endcomponent
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Exchange Rate @include('frontend.common.label.required')
-                                                        </label>
-
-                                                        @component('frontend.common.label.data-info')
-                                                            @slot('text', $purchaseOrder->exchange_rate)
-                                                        @endcomponent
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Ref PR @include('frontend.common.label.required')
-                                                        </label>
-
-                                                        @component('frontend.common.label.data-info')
-                                                            @slot('text', $purchaseOrder->purchase_request->number)
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Date Shipping @include('frontend.common.label.optional')
-                                                        </label>
-
-                                                        @if (empty($purchaseOrder->ship_at))
-                                                            @include('frontend.common.label.data-info-nodata')
-                                                        @else
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', $purchaseOrder->ship_at)
-                                                            @endcomponent
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Vendor @include('frontend.common.label.required')
-                                                        </label>
-
-                                                        @component('frontend.common.label.data-info')
-                                                            @slot('text', $purchaseOrder->vendor->code)
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Shipping Address @include('frontend.common.label.required')
-                                                        </label>
-
-                                                        @component('frontend.common.label.data-info')
-                                                            @slot('text', 'Jl RS Fatmawati 20 Rukan Fatmawati Mas Bl III/319,Cipete Utara')
-                                                        @endcomponent
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Term of Payment @include('frontend.common.label.required')
-                                                        </label>
-
-                                                        @component('frontend.common.label.data-info')
-                                                            @slot('text', 'cash')
-                                                        @endcomponent
-
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-
-                                                        <label class="form-control-label">
-                                                            Description @include('frontend.common.label.optional')
-                                                        </label>
-
-                                                        @if (empty($purchaseOrder->description))
-                                                            @include('frontend.common.label.data-info-nodata')
-                                                        @else
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', $purchaseOrder->description)
-                                                            @endcomponent
-                                                        @endif
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                                <div class="flex">
-                                                    <div class="action-buttons">
-                                                        @component('frontend.common.buttons.submit')
-                                                            @slot('type','button')
-                                                            @slot('id', 'add-quotation')
-                                                            @slot('class', 'add-quotation')
-                                                        @endcomponent
-
-                                                        @include('frontend.common.buttons.reset')
-
-                                                        @include('frontend.common.buttons.back')
-                                                    </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                            <div class="flex">
+                                                <div class="action-buttons">
+                                                    @include('frontend.common.buttons.back')
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -257,7 +375,7 @@
         console.log(JSON.stringify(ajaxdata));
         });
     </script>
-    <script>
+    {{-- <script>
         function initMap() {
             var myLatLng = {lat: -7.265757, lng: 112.734146};
 
@@ -272,10 +390,10 @@
                 title       : 'Hello World!'
             });
         }
-    </script>
+    </script> --}}
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
+    {{-- <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/vendor.js') }}"></script>
 

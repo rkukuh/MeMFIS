@@ -21,6 +21,14 @@ Route::name('frontend.')->group(function () {
                 'parameters' => ['project-hm' => 'project']
             ]);
 
+            Route::resource('project-hm-additional', 'ProjectHMAdditionalController',[
+                'parameters' => ['project-hm-additional' => 'project']
+            ])->except('create','store');
+
+            Route::get('/project-hm-additional/create/{project}','ProjectHMAdditionalController@create')->name('project-hm-additional.create');
+            Route::post('/project-hm-additional/{project}','ProjectHMAdditionalController@store')->name('project-hm-additional.store');
+
+
             Route::resource('project-workshop', 'ProjectWorkshopController', [
                 'parameters' => ['project-workshop' => 'project']
             ]);
@@ -32,24 +40,31 @@ Route::name('frontend.')->group(function () {
             Route::prefix('project-hm')->group(function () {
 
                 Route::name('project-hm.')->group(function () {
+
                     Route::resource('/{project}/workpackage', 'ProjectHMWorkPackageController', [
                         'parameters' => ['workpackage' => 'workPackage']
                     ]);
+
                     /** Summary */
-                    Route::get('/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('summary.basic');
-                    Route::get('/{workPackage}/summary/sip', 'SummaryRoutineTaskcardController@sip')->name('summary.sip');
-                    Route::get('/{workPackage}/summary/cpcp', 'SummaryRoutineTaskcardController@cpcp')->name('summary.cpcp');
-                    Route::get('/{workPackage}/summary/ad-sb', 'SummaryNonRoutineTaskcardController@adsb')->name('summary.ad-sb');
-                    Route::get('/{workPackage}/summary/cmr-awl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('summary.cmr-awl');
-                    Route::get('/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('summary.si');
-                    Route::get('/{workPackage}/summary/routine', 'SummaryRoutineTaskcardController@summary')->name('summary.routine');
-                    Route::get('/{workPackage}/summary/non-routine', 'SummaryNonRoutineTaskcardController@summary')->name('summary.nonroutine');
-                    Route::get('/{workPackage}/summary/', 'ProjectHMWorkPackageController@summary')->name('summary.workpackage');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('summary.basic');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/sip', 'SummaryRoutineTaskcardController@sip')->name('summary.sip');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/cpcp', 'SummaryRoutineTaskcardController@cpcp')->name('summary.cpcp');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/ad-sb', 'SummaryNonRoutineTaskcardController@adsb')->name('summary.ad-sb');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/cmr-awl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('summary.cmr-awl');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('summary.si');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/routine', 'SummaryRoutineTaskcardController@summary')->name('summary.routine');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/non-routine', 'SummaryNonRoutineTaskcardController@summary')->name('summary.nonroutine');
+                    Route::get('/{project}/workpackage/{workPackage}/summary', 'ProjectHMWorkPackageController@summary')->name('summary.workpackage');
+
                 });
 
                 Route::post('/{project}/workpackage/{workpackage}/engineerTeam','ProjectHMWorkPackageController@engineerTeam')->name('project-hm.engineerTeam.add');
                 Route::post('/{project}/workpackage/{workpackage}/facilityUsed','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
                 Route::post('/{project}/workpackage/{workpackage}/manhoursPropotion','ProjectHMWorkPackageController@manhoursPropotion')->name('project-hm.manhoursPropotion.add');
+                Route::put('/{ProjectWorkpackage}/sequence/', 'ProjectHMWorkPackageTaskCardController@sequence')->name('project-hm.sequence.workpackage');
+                Route::put('/{ProjectWorkpackage}/mandatory/', 'ProjectHMWorkPackageTaskCardController@mandatory')->name('project-hm.mandatory.workpackage');
+                Route::post('/{project}/workpackage/{workpackage}/taskcard/{taskcard}/', 'ProjectHMWorkPackageTaskCardController@store')->name('project-hm.store.taskcard');
+                Route::delete('/{ProjectWorkpackage}/destroy/', 'ProjectHMWorkPackageTaskCardController@destroy')->name('project-hm.destroy.taskcard');
 
                 /** Transaction: HTCRR */
 
@@ -59,8 +74,7 @@ Route::name('frontend.')->group(function () {
                 Route::post('/htcrr/{htcrr}/item', 'HtCrrItemsController@store')->name('htcrr.item.store');
                 Route::delete('/htcrr/{htcrr}/{item}/item', 'HtCrrItemsController@destroy')->name('htcrr.item.destroy');
 
-
-                Route::get('/workpackage/{workPackage}/getManhours','ProjectHMWorkPackageController@getManhours')->name('project-hm.getManhours');
+                Route::get('/{project}/workpackage/{workPackage}/getManhours','ProjectHMWorkPackageController@getManhours')->name('project-hm.getManhours');
 
             });
 
@@ -84,6 +98,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('project-workpackage-manhour', 'ProjectWorkPackageManhourController');
         Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
         Route::resource('project-workpackage-facility', 'ProjectWorkPackageFacilityController');
+        Route::resource('project-workpackage-taskcard', 'ProjectWorkPackageTaskCardController');
 
     });
 

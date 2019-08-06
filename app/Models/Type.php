@@ -61,6 +61,28 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Benefit: Base Calculation.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfBenefitBaseCalculation(Builder $query)
+    {
+        return $query->where('of', 'benefit-base-calculation');
+    }
+
+    /**
+     * Scope a query to only include type of Benefit: Prorate Calculation.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfBenefitProrateCalculation(Builder $query)
+    {
+        return $query->where('of', 'benefit-prorate-calculation');
+    }
+
+    /**
      * Scope a query to only include type of Capability.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -69,6 +91,17 @@ class Type extends MemfisModel
     public function scopeOfCapability(Builder $query)
     {
         return $query->where('of', 'capability');
+    }
+
+    /**
+     * Scope a query to only include type of Company.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCompany(Builder $query)
+    {
+        return $query->where('of', 'company');
     }
 
     /**
@@ -102,6 +135,17 @@ class Type extends MemfisModel
     public function scopeOfDefectCardProposeCorrection(Builder $query)
     {
         return $query->where('of', 'defectcard-propose-correction');
+    }
+
+    /**
+     * Scope a query to only include type of Department.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfDepartment(Builder $query)
+    {
+        return $query->where('of', 'department');
     }
 
     /**
@@ -583,6 +627,20 @@ class Type extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A Defect Card may have zero or many skill.
+     *
+     * This function will retrieve all Defect Card's skills of a type.
+     * See: DefectCard's skills() method for the inverse
+     *
+     * @return mixed
+     */
+    public function skill_defectcards()
+    {
+        return $this->belongsToMany(DefectCard::class, 'defectcard_skill', 'skill_id', 'defectcard_id')
+                    ->withTimestamps();;
+    }
+
+    /**
      * One-to-Many: A task card may have zero or many skill.
      *
      * This function will retrieve all task card skills of a type.
@@ -648,6 +706,32 @@ class Type extends MemfisModel
     public function type_htcrrs()
     {
         return $this->hasMany(HtCrr::class, 'type_id', 'id');
+    }
+
+    /**
+     * One-to-Many: A Company may have zero or many type.
+     *
+     * This function will retrieve all Companies of a type.
+     * See: Company's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type_companies()
+    {
+        return $this->hasMany(Company::class, 'type_id', 'id');
+    }
+
+    /**
+     * One-to-Many: A Department may have zero or many type.
+     *
+     * This function will retrieve all Departments of a type.
+     * See: Department's type() method for the inverse
+     *
+     * @return mixed
+     */
+    public function type_departments()
+    {
+        return $this->hasMany(Department::class, 'type_id', 'id');
     }
 
     /**

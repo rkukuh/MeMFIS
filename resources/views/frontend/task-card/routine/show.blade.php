@@ -62,28 +62,31 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Company Task Number @include('frontend.common.label.optional')
-                                            </label>
-                                            @if (empty($taskcard->additionals))
-                                                @include('frontend.common.label.data-info-nodata')
-                                            @else
-                                                @component('frontend.common.label.data-info')
-                                                {{-- @if(isset($taskcard->additionals)) --}}
-                                                    @slot('text', json_decode($taskcard->additionals)->internal_number)
-                                                {{-- @endif --}}
-                                                @endcomponent
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 Task Card Number @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $taskcard->number)
                                             @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Company Task Number @include('frontend.common.label.optional')
+                                            </label>
+                                            @if (empty($taskcard->additionals))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
+                                                @component('frontend.common.label.data-info')
+                                                @if(isset($additionals))
+                                                    @slot('text', $additionals->internal_number)
+                                                @else
+                                                    @slot('text', '-')
+                                                @endif
+                                                @endcomponent
+                                            @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
