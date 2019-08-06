@@ -36,10 +36,10 @@ class QuotationDatatables extends Controller
             $quotation->customer = $quotation->project->customer;
 
             if($quotation->parent_id ==  null){
-                $quotation->quotation_type.= "Quotation";
+                $quotation->quotation_type.= "Quotation Project";
 
             }else{
-                $quotation->quotation_type.= "Additional";
+                $quotation->quotation_type.= "Additional Quotation";
             }
 
             if($quotation->audits->first()->user_id ==  null){
