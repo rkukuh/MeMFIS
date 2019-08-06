@@ -171,12 +171,17 @@ var DatatableAutoColumnHideDemo = function () {
             if(currency.id == 1){
               $("#sub_total").html(IDRformatter.format(subtotal));
               $("#sub_total").attr("value", subtotal);
+              $("#total_discount").html(IDRformatter.format(TotalDiscount));
+              $("#total_discount").attr("value", TotalDiscount);
               $("#grand_total_rupiah").html(IDRformatter.format(grandtotal));
               $("#grand_total_rupiah").attr("value", grandtotal);
             }else{
               let totalRupiah = ( grandtotal ) * exchange_rate; 
               $("#sub_total").html(ForeignFormatter.format(subtotal));
               $("#sub_total").attr("value", subtotal);
+
+              $("#total_discount").html(ForeignFormatter.format(TotalDiscount));
+              $("#total_discount").attr("value", TotalDiscount);
               $("#grand_total").html(ForeignFormatter.format(grandtotal));
               $("#grand_total").attr("value", grandtotal);
       

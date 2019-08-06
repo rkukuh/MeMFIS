@@ -161,11 +161,12 @@ let Quotation = {
                 value[i] = parseFloat($(inputs[i]).val());
             }
             const arrSum = arr => arr.reduce((a, b) => a + b, 0);
+            let total_discount = $("#total_discount").attr("value");
             let subTotal = $('#sub_total').attr("value");
-            grandTotal = parseFloat(subTotal) + parseFloat(arrSum(value));
+            grandTotal = parseFloat(subTotal) - parseFloat(total_discount) + parseFloat(arrSum(value));
 
             if(currency !== 1){
-                grandTotalRupiah = ( parseFloat(subTotal) + parseFloat(arrSum(value)) ) * exchange_rate;
+                grandTotalRupiah = ( parseFloat(subTotal) - parseFloat(total_discount) + parseFloat(arrSum(value)) ) * exchange_rate;
             }
                         
             $('#grand_total').attr("value", grandTotal);
