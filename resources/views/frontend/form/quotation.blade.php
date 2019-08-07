@@ -397,12 +397,12 @@
             <table style="margin-top:80px;" width="100%">
                 <tr>
                     <td width="50%" align="center">
-                        <b> EDDY SIREGAR</b><br>
-                        Marketing Manager
+                        <b> {{ $username }}</b><br>
+                        
                     </td>
                     <td width="50%" align="center">
-                        <b> EDDY SIREGAR </b><br>
-                        Sriwijaya Air
+                        <b> {{ $quotation->project->customer->name }} </b><br>
+                     
                     </td>
                 </tr>
             </table>
@@ -537,12 +537,11 @@
                 <table style="margin-top:80px;" width="100%">
                     <tr>
                         <td width="50%" align="center">
-                            <b> EDDY SIREGAR</b><br>
-                            Marketing Manager
+                            <b> {{ $username }}</b><br>
                         </td>
                         <td width="50%" align="center">
-                            <b> EDDY SIREGAR </b><br>
-                            Sriwijaya Air
+                            <b>  {{ $quotation->project->customer->name }} </b><br>
+                            
                         </td>
                     </tr>
                 </table>
