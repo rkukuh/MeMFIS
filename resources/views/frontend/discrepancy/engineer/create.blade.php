@@ -156,7 +156,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Qty Helper
+                                                Qty Helper @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.number')
@@ -337,7 +337,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Note @include('frontend.common.label.optional')
+                                                    Remark/Description @include('frontend.common.label.optional')
                                             </label>
 
                                             @component('frontend.common.input.textarea')
