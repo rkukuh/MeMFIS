@@ -42,6 +42,8 @@ Route::name('frontend.')->group(function () {
 
             });
 
+            Route::post('defectcard-add-helper', 'DefectCardEngineerController@add_helper')->name('defectcard.add_helper');
+
         });
 
     });

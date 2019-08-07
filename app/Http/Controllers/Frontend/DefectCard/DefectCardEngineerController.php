@@ -214,7 +214,7 @@ class DefectCardEngineerController extends Controller
     /**
      * Search the specified resource from storage.
      *
-     * @param  \App\Models\JobCard  $jobCard
+     * @param  \App\Models\DefectCard  $DefectCard
      * @return \Illuminate\Http\Response
      */
     public function search(Request $request)
@@ -231,5 +231,18 @@ class DefectCardEngineerController extends Controller
         $search = DefectCard::where('code',$request->code)->first();
 
         return redirect()->route('frontend.defectcard-engineer.edit',$search->uuid);
+    }
+
+    /**
+     * Add helper for related defect card in storage .
+     *
+     * @param  \App\Models\DefectCard  $DefectCard
+     * @return \Illuminate\Http\Response
+     */
+    public function add_helper(DefectCard $DefectCard, Request $request)
+    {
+        $DefectCard->helpers()->attach($request->employee);
+
+        return response()->json($DefectCard);
     }
 }

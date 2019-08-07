@@ -587,6 +587,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/project/{project}', 'DefectCardDatatables@show')->name('all.show');
                 Route::post('/filter', 'DefectCardDatatables@filter')->name('filter');
 
+                Route::get('{DefectCard}/helpers', 'HelperDatatables@helpers')->name('helpers.list');
             });
 
         });
