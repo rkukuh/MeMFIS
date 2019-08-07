@@ -38,17 +38,9 @@ class EmployeeController extends Controller
     public function store(EmployeeStore $request)
     {
 
-        $employee = Employee::create([
-            'user_id' => '1', //SEMENTARA USER ID FOREIGN KE USERS
-            'code' => $request->code,
-            'first_name' => $request->first_name,
-            'middle_name' => $request->middle_name,
-            'last_name' => $request->last_name,
-            'gender' => $request->gender,
-            'dob' => $request->dob,
-            'hired_at' => $request->hired_at,
-        ]);
+        $employee = Employee::create($request->all());
 
+        // TODO: Return error message as JSON
         return response()->json($employee);
     }
 
@@ -84,19 +76,10 @@ class EmployeeController extends Controller
     public function update(EmployeeUpdate $request, Employee $employee)
     {
 
-        Employee::where('code',$request->code)
-        ->update([
-            'first_name' => $request->first_name,
-            'middle_name' => $request->middle_name,
-            'last_name' => $request->last_name,
-            'dob' => $request->dob,
-            'gender' => $request->gender,
-            'hired_at' => $request->hired_at
-        ]);
+        $employee->update($request->all());
 
         // TODO: Return error message as JSON
         return response()->json($employee);
-        return false;
     }
 
     /**
@@ -109,7 +92,7 @@ class EmployeeController extends Controller
     {
         $employee->delete();
 
+        // TODO: Return error message as JSON
         return response()->json($employee);
-
     }
 }

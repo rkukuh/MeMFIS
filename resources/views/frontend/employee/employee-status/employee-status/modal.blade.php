@@ -12,8 +12,7 @@
             </div>
             <div class="modal-body">
 
-                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="EmployeeForm">
-                    <input type="hidden" class="form-control form-control-danger m-input" name="id_employ" id="id_employ">
+                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="EmployeeStatusesForm">
                     <div class="m-portlet__body">
 
                             @component('frontend.common.input.hidden')
@@ -61,17 +60,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer modal-footer-employee">
+                    <div class="modal-footer">
                         <div class="flex">
                             <div class="action-buttons">
                                     <div class="flex">
                                         <div class="action-buttons">
                                             @component('frontend.common.buttons.submit')
-                                                @slot('id', 'modal-statuses')
+                                                @slot('class', 'modal-change')
+                                                @slot('type', 'button')
                                             @endcomponent
-                                            @include('frontend.common.buttons.reset')
+                                            @include('frontend.common.buttons.reset',['id' => 'reset'])
                             
-                                            @include('frontend.common.buttons.close')
+                                            @include('frontend.common.buttons.close',['id' => 'close'])
                                             </div>
                                     </div>
                             </div>
