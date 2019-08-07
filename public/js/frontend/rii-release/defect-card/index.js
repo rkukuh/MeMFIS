@@ -49,21 +49,21 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'code',
-                    title: 'DefectCard No',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
                     field: 'jobcard.number',
                     title: 'Job Card No',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t, e, i) {
-                    //     return (
-                    //         '<a href="/rii-release/create">' + t.number + "</a>"
-                    //     );
-                    // }
+                },
+                {
+                    field: 'code',
+                    title: 'DefectCard No',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="/riirelease-defectcard/'+t.uuid+'/edit">' + t.code + "</a>"
+                            );
+                        }
                 },
                 {
                     field: 'company',

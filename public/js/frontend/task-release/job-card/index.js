@@ -61,7 +61,7 @@ let TaskRelease = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<a href="/taskrelease-jobcard/task-release/'+t.uuid+'/edit">' + t.number + "</a>"
+                            '<a href="/taskrelease-jobcard/'+t.uuid+'/edit">' + t.number + "</a>"
                         );
                     }
                 },
