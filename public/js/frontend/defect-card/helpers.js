@@ -43,7 +43,7 @@ let Helpers = {
             },
             columns: [
                 {
-                    field: "name",
+                    field: "first_name",
                     title: "Name",
                     sortable: "asc",
                     filterable: !1,
@@ -54,9 +54,9 @@ let Helpers = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_tool" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool-edit" title="Edit" data-tool_uuid=' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill remove-helper" href="#" data-id=' +
                             t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
                         );
                     }
                 }
@@ -67,7 +67,28 @@ let Helpers = {
 };
 
 $('.add_helper').on('click', function(){
-    console.log($('#defectcard_helper').val());
+    let helper = $('#defectcard_helper').val();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/defectcard/'+uuid+'/add-helper',
+        type: 'POST',
+        data:{helper: helper},
+        success: function (data) {
+            $('#modal_helper').modal('hide');
+
+            toastr.success('Helper has been added.', 'Success', {
+                timeOut: 5000
+            });
+
+            let helpers_datatable = $('.helpers_datatable').mDatatable();
+
+            helpers_datatable.originalDataSet = [];
+            helpers_datatable.reload();
+
+        }
+      });
 });
 jQuery(document).ready(function () {
   Helpers.init();

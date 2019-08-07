@@ -42,7 +42,7 @@ Route::name('frontend.')->group(function () {
 
             });
 
-            Route::post('defectcard-add-helper', 'DefectCardEngineerController@add_helper')->name('defectcard.add_helper');
+            Route::post('defectcard/{DefectCard}/add-helper', 'DefectCardEngineerController@add_helper')->name('defectcard.add_helper');
 
         });
 

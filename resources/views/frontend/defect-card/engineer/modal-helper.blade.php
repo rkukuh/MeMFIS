@@ -14,7 +14,8 @@
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 @component('frontend.common.input.select')
                                     @slot('id', 'defectcard_helper')
-                                    @slot('name', 'defectcard_helper')
+                                    @slot('name', 'employee')
+                                    @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
                         </div>
