@@ -120,6 +120,7 @@ class TaskReleaseJobCardDatatables extends Controller
         }
 
         $data = $alldata = json_decode(collect(array_values($JobCards->whereIn('status',['Closed','Task Released','RII Released'])->all())));
+
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])

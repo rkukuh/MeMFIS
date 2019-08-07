@@ -75,9 +75,23 @@ class DefectCardEngineerController extends Controller
      * @param  \App\Models\DefectCard  $defectCard
      * @return \Illuminate\Http\Response
      */
-    public function show(DefectCard $defectCard)
+    public function show(DefectCard $defectcard)
     {
-        return view('frontend.defect-card.engineer.progress');
+        $this->propose_corrections = array();
+        foreach($defectcard->propose_corrections as $i => $defectCard){
+            $this->propose_corrections[$i] =  $defectCard->code;
+        }
+
+        $this->propose_correction_text = '';
+        foreach($defectcard->propose_corrections as $i => $defectCard){
+            $this->propose_correction_text =  $defectCard->pivot->propose_correction_text;
+        }
+
+        return view('frontend.defect-card.engineer.progress-close', [
+            'defectcard' => $defectcard,
+            'propose_corrections' => $this->propose_corrections,
+            'propose_correction_text' => $this->propose_correction_text,
+        ]);
     }
 
     /**

@@ -7,6 +7,8 @@ use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Approval;
 use App\Models\Progress;
+use App\Models\Inspection;
+use App\Models\DefectCard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\JobCardStore;
 use App\Http\Requests\Frontend\JobCardUpdate;
@@ -20,7 +22,7 @@ class TaskReleaseDefectCardController extends Controller
      */
     public function index()
     {
-        return view('frontend.task-release.index');
+        return view('frontend.task-release.defect-card.index');
     }
 
     /**
@@ -30,7 +32,7 @@ class TaskReleaseDefectCardController extends Controller
      */
     public function create()
     {
-        return view('frontend.task-release.create');
+        return view('frontend.task-release.defect-card.create');
     }
 
     /**
@@ -74,13 +76,18 @@ class TaskReleaseDefectCardController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function update(JobCardUpdate $request, JobCard $taskrelease)
+    public function update(JobCardUpdate $request, DefectCard $taskrelease)
     {
-        $status = Status::ofJobcard()->where('code','released')->first()->id;
+        $status = Status::ofDefectcard()->where('code','released')->first()->id;
 
         $taskrelease->progresses()->save(new Progress([
             'status_id' => $status,
             'progressed_by' => Auth::id()
+        ]));
+
+        $taskrelease->inspections()->save(new Inspection([
+            'is_rii' => '0',
+            'inspected_by' => Auth::id()
         ]));
 
         $taskrelease->approvals()->save(new Approval([

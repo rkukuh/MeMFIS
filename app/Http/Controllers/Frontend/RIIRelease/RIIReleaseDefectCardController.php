@@ -20,7 +20,7 @@ class RIIReleaseDefectCardController extends Controller
      */
     public function index()
     {
-        return view('frontend.rii-release.index');
+        return view('frontend.rii-release.defect-card.index');
     }
 
     /**
@@ -30,7 +30,7 @@ class RIIReleaseDefectCardController extends Controller
      */
     public function create()
     {
-        return view('frontend.rii-release.create');
+        return view('frontend.rii-release.defect-card.create');
     }
 
     /**

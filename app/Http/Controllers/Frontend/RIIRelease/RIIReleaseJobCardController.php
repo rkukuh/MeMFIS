@@ -21,7 +21,7 @@ class RIIReleaseJobCardController extends Controller
      */
     public function index()
     {
-        return view('frontend.rii-release.index');
+        return view('frontend.rii-release.job-card.index');
     }
 
     /**
@@ -106,7 +106,7 @@ class RIIReleaseJobCardController extends Controller
         $actual =number_format($manhours-$manhours_break, 2);
         $status = Status::ofJobCard()->where('id',$riirelease->progresses->last()->status_id)->first()->code;
 
-        return view('frontend.rii-release.create', [
+        return view('frontend.rii-release.job-card.create', [
             'taskrelease' => $riirelease,
             'materials' => $riirelease->taskcard->materials,
             'tools' => $riirelease->taskcard->tools,

@@ -19,9 +19,14 @@ Route::name('frontend.')->group(function () {
 
             Route::post('defectcard-engineer', 'DefectCardEngineerController@search')->name('engineer.defectcard.search');
 
+            Route::resource('defectcard-ppc', 'DefectCardPPCController', [
+                'parameters' => ['defectcard-ppc' => 'defectcard']
+            ]);
+
             Route::resource('defectcard-mechanic', 'DefectCardMechanicController', [
                 'parameters' => ['defectcard-mechanic' => 'defectcard']
             ]);
+
 
             Route::post('defectcard-mechanic', 'DefectCardMechanicController@search')->name('mechanic.defectcard.search');
 
@@ -32,7 +37,7 @@ Route::name('frontend.')->group(function () {
             Route::name('defectcard.')->group(function () {
 
                 Route::prefix('defectcard')->group(function () {
-                    // 
+                    //
                 });
 
             });

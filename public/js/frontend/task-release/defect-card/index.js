@@ -43,16 +43,19 @@ let TaskRelease = {
             },
             columns: [
                 {
-                    field: 'title',
+                    field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.number',
-                    title: 'TaskCard No',
+                    field: 'code',
+                    title: 'Defect No.',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                            return '<a href="/defectcard-engineer/'+t.uuid+'/">' + t.code + "</a>"
+                    }
                 },
                 {
                     field: 'number',
@@ -61,37 +64,37 @@ let TaskRelease = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<a href="/task-release/create">' + t.number + "</a>"
+                            '<a href="/jobcard-ppc/'+t.jobcard.uuid+'">' + t.jobcard.number + "</a>"
                         );
                     }
                 },
                 {
-                    field: 'pesawat',
+                    field: 'jobcard.company_task',
                     title: 'Company Task No',
                     sortable: 'asc',
                     filterable: !1,
 
                 },
                 {
-                    field: 'quotation.customer.name',
+                    field: 'customer_name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft.name',
+                    field: 'jobcard.quotation.project.aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_register',
+                    field: 'jobcard.quotation.project.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_sn',
+                    field: 'jobcard.quotation.project.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
@@ -103,13 +106,19 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.estimation_manhour',
-                    title: 'Mhrs',
+                    field: 'estimation_manhour',
+                    title: 'Mhrs Est.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'actual_manhour',
+                    title: 'Actual Mhrs.',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -119,22 +128,29 @@ let TaskRelease = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-
+                        if(t.status == 'Closed'){
                             return (
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check-circle"></i>' +
                                 '</a>' +
-                                '<a href="jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/defectcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
+                        }else{
+                            return (
+                                '<a href="/defectcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-external-link"></i>' +
+                                '</a>'
+                            );
+                        }
                     }
                 }
             ]
         });
 
         $('.taskrelease_datatable').on('click', '.release', function () {
-            let jobcard_uuid = $(this).data('uuid');
+            let defectcard_uuid = $(this).data('uuid');
 
             swal({
                 title: 'Sure want to Release?',
@@ -153,14 +169,14 @@ let TaskRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/task-release/' + jobcard_uuid + '/',
+                        url: '/taskrelease-defectcard/task-release/' + defectcard_uuid + '/',
                         success: function (data) {
-                            toastr.success('Quotation has been deleted.', 'Deleted', {
+                            toastr.success('Defectcard has been released.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.taskrelease_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();

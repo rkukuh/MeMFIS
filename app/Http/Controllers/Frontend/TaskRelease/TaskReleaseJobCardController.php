@@ -22,7 +22,7 @@ class TaskReleaseJobCardController extends Controller
      */
     public function index()
     {
-        return view('frontend.task-release.index');
+        return view('frontend.task-release.job-card.index');
     }
 
     /**
@@ -108,7 +108,7 @@ class TaskReleaseJobCardController extends Controller
         $status = Status::ofJobCard()->where('id',$taskrelease->progresses->last()->status_id)->first()->code;
 
 
-        return view('frontend.task-release.create', [
+        return view('frontend.task-release.job-card.create', [
             'taskrelease' => $taskrelease,
             'materials' => $taskrelease->taskcard->materials,
             'tools' => $taskrelease->taskcard->tools,
