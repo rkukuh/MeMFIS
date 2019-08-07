@@ -43,73 +43,87 @@ let RiiRelease = {
             },
             columns: [
                 {
-                    field: 'title',
+                    field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.number',
-                    title: 'TaskCard No',
+                    field: 'code',
+                    title: 'DefectCard No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'number',
+                    field: 'jobcard.number',
                     title: 'Job Card No',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="/rii-release/create">' + t.number + "</a>"
-                        );
-                    }
+                    // template: function (t, e, i) {
+                    //     return (
+                    //         '<a href="/rii-release/create">' + t.number + "</a>"
+                    //     );
+                    // }
                 },
                 {
-                    field: 'pesawat',
+                    field: 'company',
                     title: 'Company Task No',
                     sortable: 'asc',
                     filterable: !1,
-
+                    template: function (t, e, i) {
+                        if(t.jobcard.taskcard.additionals){
+                            let company = t.jobcard.taskcard.additionals;
+                            obj = JSON.parse(company);
+                            // console.log()
+                            return (
+                                obj.internal_number
+                            );
+                        }
+                        else{
+                            return(
+                                ''
+                            );
+                        }
+                    }
                 },
                 {
-                    field: 'quotation.customer.name',
+                    field: 'customer_name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft.name',
+                    field: 'jobcard.quotation.project.aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_register',
+                    field: 'jobcard.quotation.project.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_sn',
+                    field: 'jobcard.quotation.project.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.skill.name',
+                    field: 'jobcard.skill_name',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.estimation_manhour',
+                    field: 'estimation_manhour',
                     title: 'Mhrs',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -119,7 +133,13 @@ let RiiRelease = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-
+                        if(t.status == 'RII RELEASED'){
+                            return (
+                                '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-external-link"></i>' +
+                                '</a>'
+                            );
+                        }else{
                             return (
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check-circle"></i>' +
@@ -128,12 +148,13 @@ let RiiRelease = {
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
+                        }
                     }
                 }
             ]
         });
         $('.riirelease_datatable').on('click', '.release', function () {
-            let jobcard_uuid = $(this).data('uuid');
+            let defectcard_uuid = $(this).data('uuid');
 
             swal({
                 title: 'Sure want to Release?',
@@ -152,14 +173,14 @@ let RiiRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/rii-release/' + jobcard_uuid + '/',
+                        url: '/riirelease-defectcard/rii-release/' + defectcard_uuid + '/',
                         success: function (data) {
-                            toastr.success('Quotation has been deleted.', 'Deleted', {
+                            toastr.success('Defectcard has been released.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.riirelease_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
