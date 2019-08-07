@@ -27,7 +27,7 @@ class CompanyUpdate extends FormRequest
     {
         return [
             'code' => 'required',
-            'name' => 'required'  
+            'name' => 'required',
         ];
     }
 

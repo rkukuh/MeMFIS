@@ -7,7 +7,7 @@ let Benefit = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer',
+                        url: '/datatables/benefit',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -43,85 +43,27 @@ let Benefit = {
                 }
             },
             columns: [{
-                    field: 'name',
+                    field: 'code',
                     title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/customer/'+t.uuid+'">' + t.name + "</a>"
+                        return '<a href="/benefit/'+t.uuid+'">' + t.code + "</a>"
                     }
                 },
                 {
-                    field: 'addresses',
+                    field: 'name',
                     title: 'Benefits Name',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if(t.addresses[0]){
-                            return t.addresses[0].address
-                        }else{
-                            return ""
-                        }
-                    }
                 },
                 {
-                    field: 'phones',
+                    field: 'description',
                     title: 'Description',
                     sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if(t.phones[0]){
-                            return t.phones[0].number
-                        }else{
-                            return ""
-                        }
-                    }
+                    filterable: !1
                 }
             ]
-        });
-
-        let remove = $('.position_datatable').on('click', '.delete', function () {
-            let triggerid = $(this).data('id');
-
-            swal({
-                title: 'Are you sure?',
-                type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            }).then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/customer/' + triggerid + '',
-                        success: function (data) {
-                            toastr.success('Position has been deleted.', 'Deleted', {
-                                timeOut: 5000
-                            }
-                        );
-                        let table = $('.position_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errorsHtml = '';
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-
-                }
-            });
         });
 
     }
