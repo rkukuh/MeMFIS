@@ -139,7 +139,11 @@
                                                 Est. Mhrs
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->actual}}
+                                                @if($jobcard->taskcard->estimation_manhour)
+                                                {{$jobcard->taskcard->estimation_manhour}}
+                                                @else
+                                                -
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -165,7 +169,11 @@
                                                 Sequence
                                             </td>
                                             <td width="70%" style="text-align:center">
+                                                @if($jobcard->taskcard->sequence)
                                                 {{$jobcard->taskcard->sequence}}
+                                                @else
+                                                -
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -185,7 +193,11 @@
                                                 Reference
                                             </td>
                                             <td width="70%" style="text-align:center">
+                                                @if($jobcard->taskcard->reference)
                                                 {{$jobcard->taskcard->reference}}
+                                                @else
+                                                -
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -201,7 +213,11 @@
                                                 Description
                                             </td>
                                             <td width="70%" style="text-align:center">
+                                                @if($jobcard->taskcard->Description)
                                                 {{$jobcard->taskcard->Description}}
+                                                @else
+                                                -
+                                                @endif
                                             </td>
                                         </tr>
                                         @if($jobcard->taskcard->helper_quantity != 0)
