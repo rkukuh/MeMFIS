@@ -27,6 +27,27 @@
         <div class="col-sm-1 col-md-1 col-lg-1">
         </div>
     </div>
+    <div class="form-group m-form__group row">
+        <div class="col-sm-5 col-md-5 col-lg-5">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="m--align-left" style="padding-top:15px">
+                Total Discount
+            </div>
+        </div>
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            @component('frontend.common.label.data-info')
+                @slot('id', 'total_discount')
+                @slot('class', 'total_discount')
+                @slot('text', '0')
+                @slot('value', '0')
+            @endcomponent
+        </div>
+        <div class="col-sm-1 col-md-1 col-lg-1">
+        </div>
+        <div class="col-sm-1 col-md-1 col-lg-1">
+        </div>
+    </div>
     <div class='repeater'>
         <div data-repeater-list="group-document">
             <div data-repeater-item>
@@ -34,16 +55,17 @@
                     <div class="col-sm-5 col-md-5 col-lg-5">
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
-                        <select id="charge_type" name="charge_type" class="form-control charge_type" style="width:100%">
-                            <option value="">Select Extra Charge Type</option>
-                            <option value="Shipping Fee">Shipping Fee</option>
-                        </select>
+                        @component('frontend.common.input.text')
+                            @slot('id', 'charge_type')
+                            @slot('name', 'charge_type')
+                            @slot('style' , 'width:100%')
+                        @endcomponent
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
                         @component('frontend.common.input.number')
-                            @slot('id', 'extra')
-                            @slot('name', 'extra')
-                            @slot('class', 'extra')
+                            @slot('id', 'charge')
+                            @slot('name', 'charge')
+                            @slot('class', 'charge')
                             @slot('value' , 0)
                             @slot('min', 0)
                         @endcomponent

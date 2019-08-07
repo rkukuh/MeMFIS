@@ -25,7 +25,7 @@ class TaskCard extends MemfisModel
         'sequence',
         'stringer',
         'version',
-        'tat',
+        'ata',
         'description',
         'additionals',
 
@@ -267,7 +267,7 @@ class TaskCard extends MemfisModel
      */
     public function zones()
     {
-        return $this->belongsToMany(Access::class, 'taskcard_zone', 'taskcard_id', 'zone_id')
+        return $this->belongsToMany(Zone::class, 'taskcard_zone', 'taskcard_id', 'zone_id')
                     ->withTimestamps();
     }
 

@@ -13,15 +13,6 @@ var DatatableAutoColumnHideDemo = function () {
             map: function (raw) {
               let dataSet = raw;
               let = subtotal = grandtotal = total = TotalDiscount = 0;
-              let charges = [];
-              let inputs = $(".charge");
-              //get all values
-              for (let i = 0; i < inputs.length; i++) {
-                  charges[i] = parseInt($(inputs[i]).val());
-              }
-              const arrSum = arr => arr.reduce((a, b) => a + b, 0);
-              charges = arrSum(charges)
-
 
               if (typeof raw.data !== 'undefined') {
                 dataSet = raw.data;
@@ -167,22 +158,30 @@ var DatatableAutoColumnHideDemo = function () {
             }
 
             grandtotal = subtotal - TotalDiscount ;
-
             if(currency.id == 1){
               $("#sub_total").html(IDRformatter.format(subtotal));
               $("#sub_total").attr("value", subtotal);
+
+              $("#total_discount").html(IDRformatter.format(TotalDiscount));
+              $("#total_discount").attr("value", TotalDiscount);
+
               $("#grand_total_rupiah").html(IDRformatter.format(grandtotal));
               $("#grand_total_rupiah").attr("value", grandtotal);
             }else{
               let totalRupiah = ( grandtotal ) * exchange_rate; 
               $("#sub_total").html(ForeignFormatter.format(subtotal));
               $("#sub_total").attr("value", subtotal);
+
+              $("#total_discount").html(ForeignFormatter.format(TotalDiscount));
+              $("#total_discount").attr("value", TotalDiscount);
+
               $("#grand_total").html(ForeignFormatter.format(grandtotal));
               $("#grand_total").attr("value", grandtotal);
       
               $("#grand_total_rupiah").html(IDRformatter.format(totalRupiah));
               $("#grand_total_rupiah").attr("value", totalRupiah);
             }
+            calculate_total();
             
             if(currency.id == 1){
              return (
@@ -210,3 +209,4 @@ jQuery(document).ready(function () {
   DatatableAutoColumnHideDemo.init();
   
 });
+

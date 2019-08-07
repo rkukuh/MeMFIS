@@ -179,8 +179,6 @@ let Quotation = {
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());
             data.append("top_description", $('#term_and_condition').val());
-            data.append("title", $('#title').val());
-
 
             $.ajax({
                 headers: {

@@ -22,7 +22,7 @@
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                 </div>
             </div>
-            @include('frontend.employment-status.job-title.modal')
+            @include('frontend.employee.employee-status.job-title.modal')
 
         <div class="m_datatable_job_title" id="scrolling_both"></div>
     </div>

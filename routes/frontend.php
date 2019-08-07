@@ -142,10 +142,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/tool-request/project/edit', 'frontend.tool-request.project.edit')->name('tool-request.project.edit');
         Route::view('/tool-request/project/show', 'frontend.tool-request.project.show')->name('tool-request.project.show');
 
-        /** Employment Status */
-
-        Route::view('/employment-status', 'frontend.employment-status.index')->name('employment-status.index');
-
         /** Inventory In */
 
         Route::view('/inventory-in', 'frontend.inventory-in.index')->name('inventory-in.index');
