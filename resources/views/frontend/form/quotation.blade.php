@@ -176,7 +176,7 @@
                     </td>
                     <td width="23%" valign="top">
                     @if($attention)
-                    @if($attention->phone){{ $attention->phone }} @else - @endif/ @if($attention->fax) {{ $attention->fax }} @else - @endif
+                    @if($attention->phone !== "null"){{ $attention->phone }} @else - @endif/ @if($attention->fax !== "null") {{ $attention->fax }} @else - @endif
                         @else
                         - / -
                         @endif
@@ -190,8 +190,8 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        @if($attention)
-                        {{ $attention->adress }}
+                        @if($attention->address !== "null")
+                        {{ $attention->address }}
                         @else
                         -
                         @endif
@@ -205,7 +205,7 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        @if($attention)
+                        @if($attention->name !== "null")
                         {{ $attention->name }}
                         @else
                         -
