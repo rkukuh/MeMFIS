@@ -7,6 +7,8 @@ use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Approval;
 use App\Models\Progress;
+use App\Models\DefectCard;
+use App\Models\Inspection;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\JobCardStore;
 use App\Http\Requests\Frontend\JobCardUpdate;
@@ -73,13 +75,18 @@ class RIIReleaseDefectCardController extends Controller
      * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function update(JobCardUpdate $request, JobCard $riirelease)
+    public function update(JobCardUpdate $request, DefectCard $riirelease)
     {
-        $status = Status::ofJobcard()->where('code','rii-released')->first()->id;
+        $status = Status::ofDefectcard()->where('code','rii-released')->first()->id;
 
         $riirelease->progresses()->save(new Progress([
             'status_id' => $status,
             'progressed_by' => Auth::id()
+        ]));
+
+        $riirelease->inspections()->save(new Inspection([
+            'is_rii' => '1',
+            'inspected_by' => Auth::id()
         ]));
 
         $riirelease->approvals()->save(new Approval([
@@ -87,8 +94,7 @@ class RIIReleaseDefectCardController extends Controller
             'approved_by' => Auth::id(),
         ]));
 
-        return response()->json($riirelease);
-    }
+        return response()->json($riirelease);    }
 
     /**
      * Remove the specified resource from storage.

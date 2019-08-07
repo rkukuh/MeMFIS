@@ -50,7 +50,7 @@ let TaskRelease = {
                 },
                 {
                     field: 'code',
-                    title: 'Defect No.',
+                    title: 'Defect No',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {

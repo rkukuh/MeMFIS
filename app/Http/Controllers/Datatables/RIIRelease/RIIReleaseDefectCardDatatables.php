@@ -69,20 +69,20 @@ class RIIReleaseDefectCardDatatables extends Controller
                 }
             }
 
-            // Status::find($Jobcard->progresses->last()->status_id)->name;
-            // if(Status::find($Jobcard->progresses->last()->status_id)->name == 'RELEASED'){
-            //     $Jobcard->status .= 'Waiting for RII';
-            // }else{
-            //     $Jobcard->status .=Status::find($Jobcard->progresses->last()->status_id)->name;
+            Status::find($defectcard->progresses->last()->status_id)->name;
+            if(Status::find($defectcard->progresses->last()->status_id)->name == 'RELEASED'){
+                $defectcard->status .= 'Waiting for RII';
+            }else{
+                $defectcard->status .=Status::find($defectcard->progresses->last()->status_id)->name;
 
-            // }
+            }
 
 
-            // $statuses = Status::ofJobCard()->get();
-            // $jobcard = JobCard::where('uuid',$Jobcard->uuid)->first();
-            // foreach($jobcard->helpers as $helper){
-            //     $helper->userID .= $helper->user->id;
-            // }
+            $statuses = Status::ofDefectCard()->get();
+            $defectcard = DefectCard::where('uuid',$defectcard->uuid)->first();
+            foreach($defectcard->helpers as $helper){
+                $helper->userID .= $helper->user->id;
+            }
             // $manhours = 0;
             // foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
             //     $date1 = null;
