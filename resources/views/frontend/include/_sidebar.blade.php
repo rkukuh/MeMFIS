@@ -270,27 +270,17 @@
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.defectcard-mechanic.index') }}" class="m-menu__link">
-                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
-                                    <span></span>
-                                </i>
-                                <span class="m-menu__link-text">
-                                    Mechanic
-                                </span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.defectcard-engineer.index') }}" class="m-menu__link">
-                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
-                                    <span></span>
-                                </i>
-                                <span class="m-menu__link-text">
-                                    Engineer
-                                </span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.defectcard.index') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    Scan Defect Card
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.defectcard-ppc.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -407,7 +397,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.employment-status.index') }}" class="m-menu__link m-menu__toggle">
+                <a href="{{ route('frontend.employee.statuses.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Employment Status

@@ -34,7 +34,7 @@ class QuotationUpdate extends FormRequest
             'exchange_rate' => 'required', 
             'scheduled_payment_amount' => 'required', 
             'scheduled_payment_type' => 'required', 
-            'description' => 'required', 
+            // 'description' => 'required', 
             // 'title' => 'required', 
             // 'term_of_payment' => 'required',
             // 'name' => 'required|min:3|max:50|regex:/^[\pL\s\-]+$/u',

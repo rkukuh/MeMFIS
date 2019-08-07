@@ -6,7 +6,7 @@ use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class DefectCardController extends Controller
+class DefectCardPPCController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class DefectCardController extends Controller
      */
     public function index()
     {
-        return view('frontend.defect-card.index');
+        return view('frontend.defect-card.ppc.index');
     }
 
     /**
@@ -47,21 +47,7 @@ class DefectCardController extends Controller
      */
     public function show(DefectCard $defectcard)
     {
-        $propose_corrections = array();
-        foreach($defectcard->propose_corrections as $i => $defectCard){
-            $propose_corrections[$i] =  $defectCard->code;
-        }
-
-        $propose_correction_text = '';
-        foreach($defectcard->propose_corrections as $i => $defectCard){
-            $propose_correction_text =  $defectCard->pivot->propose_correction_text;
-        }
-
-        return view('frontend.defect-card.progress-close', [
-            'defectcard' => $defectcard,
-            'propose_corrections' => $propose_corrections,
-            'propose_correction_text' => $propose_correction_text,
-        ]);
+       //
     }
 
     /**
@@ -72,17 +58,7 @@ class DefectCardController extends Controller
      */
     public function edit(DefectCard $defectcard)
     {
-        //TODO Validasi User'skill with DefectCard Skill
-        foreach($defectcard->helpers as $helper){
-            $helper->userID .= $helper->user->id;
-        }
-
-        if($defectcard->helpers->where('userID',Auth::id())->first() == null){
-            return redirect()->route('frontend.defectcard-engineer.edit',$defectcard->uuid);
-        }
-        else{
-            return redirect()->route('frontend.defectcard-mechanic.edit',$defectcard->uuid);
-        }
+       //
     }
 
     /**

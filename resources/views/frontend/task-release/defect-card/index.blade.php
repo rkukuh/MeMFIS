@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @include('frontend.task-release.filter')
+                            @include('frontend.task-release.defect-card.filter')
 
                             <div class="taskrelease_datatable" id="scrolling_both"></div>
                         </div>
@@ -85,5 +85,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/task-release/job-card/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/task-release/defect-card/index.js')}}"></script>
 @endpush
