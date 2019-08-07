@@ -1,5 +1,30 @@
 
 
+function calculate_total() {
+    let value = [];
+    let inputs = $(".charges");
+    let currency = $("#currency").val();
+    let exchange_rate = $("#exchange").val();
+    let grandTotal = grandTotalRupiah = 0;
+    //get all values
+    for (let i = 0; i < inputs.length; i++) {
+        value[i] = parseFloat($(inputs[i]).val());
+    }
+    const arrSum = arr => arr.reduce((a, b) => a + b, 0);
+    let total_discount = $("#total_discount").attr("value");
+    let subTotal = $('#sub_total').attr("value");
+    grandTotal = parseFloat(subTotal) - parseFloat(total_discount) + parseFloat(arrSum(value));
+
+    if(currency !== 1){
+        grandTotalRupiah = ( parseFloat(subTotal) - parseFloat(total_discount) + parseFloat(arrSum(value)) ) * exchange_rate;
+    }
+                
+    $('#grand_total').attr("value", grandTotal);
+    $('#grand_total_rupiah').attr("value", grandTotalRupiah);
+    $('#grand_total').html(ForeignFormatter.format(grandTotal));
+    $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
+}
+
 let Quotation = {
     init: function () {
         let exchange_rate_value = $('input[name=exchange]').val();
@@ -98,9 +123,10 @@ let Quotation = {
                 url: '/label/get-customer/' + customer_uuid,
                 type: 'GET',
                 dataType: "json",
-                success: function (respone) {
-                    if (respone) {
-                        let res = JSON.parse(respone);
+                success: function (response) {
+                    if (response) {
+                        // let res = JSON.parse(response);
+                        let res = response;
                         $('select[name="attention"]').empty();
                         $('select[name="phone"]').empty();
                         $('select[name="email"]').empty();
@@ -138,8 +164,7 @@ let Quotation = {
                             }
                         }
                     } else {
-                        console.log("empty");
-
+                        // console.log("empty");
                     }
 
                 }
@@ -150,30 +175,11 @@ let Quotation = {
             document.getElementById("workpackage_uuid").value = $(this).data('uuid');
         });
 
-        $('.calculate').on('click', function calculate_total() {
-            let value = [];
-            let inputs = $(".charge");
-            let currency = $("#currency").val();
-            let exchange_rate = $("#exchange").val();
-            let grandTotal = grandTotalRupiah = 0;
-            //get all values
-            for (let i = 0; i < inputs.length; i++) {
-                value[i] = parseFloat($(inputs[i]).val());
-            }
-            const arrSum = arr => arr.reduce((a, b) => a + b, 0);
-            let total_discount = $("#total_discount").attr("value");
-            let subTotal = $('#sub_total').attr("value");
-            grandTotal = parseFloat(subTotal) - parseFloat(total_discount) + parseFloat(arrSum(value));
-
-            if(currency !== 1){
-                grandTotalRupiah = ( parseFloat(subTotal) - parseFloat(total_discount) + parseFloat(arrSum(value)) ) * exchange_rate;
-            }
-                        
-            $('#grand_total').attr("value", grandTotal);
-            $('#grand_total_rupiah').attr("value", grandTotalRupiah);
-            $('#grand_total').html("$ "+ForeignFormatter.format(grandTotal));
-            $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
+        $('.calculate').on('click', function () {
+            calculate_total();
         });
+
+        
 
         $('.action-buttons').on('click', '.discount', function () {
             let type = $('#discount-type').val();
@@ -226,6 +232,8 @@ let Quotation = {
             workpackage.reload();
         });
 
+       
+          
         $('.nav-tabs').on('click', '.summary', function () {
 
             let summary = $('.summary_datatable').mDatatable();
@@ -234,7 +242,7 @@ let Quotation = {
             summary.reload();
             
             let value = [];
-            let inputs = $(".charge");
+            let inputs = $(".charges");
             let currency = $("#currency").val();
             let exchange_rate = $("#exchange").val();
             let grandTotal = grandTotalRupiah = 0;
@@ -406,7 +414,7 @@ let Quotation = {
             }
             scheduled_payment_array.pop();
             let charge = [];
-            let chargeInputs = $('input[name^="charge"]');
+            let chargeInputs = $('input[type="number"][name^="charge"]');
             //get all values
             for (let i = 0; i < chargeInputs.length; i++) {
                 charge[i] = parseInt($(chargeInputs[i]).val());
@@ -414,8 +422,8 @@ let Quotation = {
             charge.pop();
             let chargeType = [];
             //get all values
-            $("select[name^=charge_type]").each(function() {
-                chargeType.push($(this).children("option:selected").val());
+            $("input[name^=charge_type]").each(function() {
+                chargeType.push($(this).val());
               });
             chargeType.pop();
 

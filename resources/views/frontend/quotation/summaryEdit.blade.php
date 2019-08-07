@@ -18,8 +18,8 @@
             @component('frontend.common.label.data-info')
                 @slot('id', 'sub_total')
                 @slot('class', 'sub_total')
-                @slot('text', $quotation->subtotal)
-                @slot('value', $quotation->subtotal)
+                {{-- @slot('text', $quotation->subtotal) --}}
+                {{-- @slot('value', $quotation->subtotal) --}}
             @endcomponent
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1">
@@ -56,15 +56,18 @@
                         <div class="col-sm-5 col-md-5 col-lg-5">
                         </div>
                         <div class="col-sm-2 col-md-2 col-lg-2">
-                            <select name="charge_type" class="form-control charge_type">
-                                <option value="Shipping Fee" selected>Shipping Fee</option>
-                            </select>
+                            @component('frontend.common.input.text')
+                                @slot('id', 'charge_type')
+                                @slot('name', 'charge_type')
+                                @slot('value', $charge->type)
+                                @slot('style' , 'width:100%')
+                            @endcomponent
                         </div>
                         <div class="col-sm-3 col-md-3 col-lg-3">
                             @component('frontend.common.input.number')
-                                @slot('id', 'charge')
-                                @slot('name', 'charge')
-                                @slot('class', 'charge')
+                                @slot('id', 'charges')
+                                @slot('name', 'charges')
+                                @slot('class', 'charges')
                                 @slot('value' , $charge->amount)
                                 @slot('min', 0)
                             @endcomponent
@@ -88,15 +91,18 @@
                     <div class="col-sm-5 col-md-5 col-lg-5">
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
-                        <select name="charge_type" class="form-control charge_type" style="width:100%">
-                            <option value="Shipping Fee">Shipping Fee</option>
-                        </select>
+                        @component('frontend.common.input.text')
+                            @slot('id', 'charge_type')
+                            @slot('name', 'charge_type')
+                            @slot('value', 'Shipping Fee')
+                            @slot('style' , 'width:100%')
+                        @endcomponent
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
                         @component('frontend.common.input.number')
-                            @slot('id', 'charge')
-                            @slot('name', 'charge')
-                            @slot('class', 'charge')
+                            @slot('id', 'charges')
+                            @slot('name', 'charges')
+                            @slot('class', 'charges')
                             @slot('value' , 0)
                             @slot('min', 0)
                         @endcomponent
@@ -119,9 +125,12 @@
                     <div class="col-sm-5 col-md-5 col-lg-5">
                     </div>
                     <div class="col-sm-2 col-md-2 col-lg-2">
-                        <select name="charge_type" class="form-control" style="width:100%">
-                            <option value="Shipping Fee">Shipping Fee=</option>
-                        </select>
+                        @component('frontend.common.input.text')
+                            @slot('id', 'charge_type')
+                            @slot('name', 'charge_type')
+                            @slot('value', 'Shipping Fee')
+                            @slot('style' , 'width:100%')
+                        @endcomponent
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
                         @component('frontend.common.input.number')
@@ -158,8 +167,8 @@
             @component('frontend.common.label.data-info')
                 @slot('id', 'grand_total')
                 @slot('class', 'grand_total')
-                @slot('text', $quotation->grandtotal)
-                @slot('value', $quotation->grandtotal)
+                {{-- @slot('text', $quotation->grandtotal) --}}
+                {{-- @slot('value', $quotation->grandtotal) --}}
             @endcomponent
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1">
