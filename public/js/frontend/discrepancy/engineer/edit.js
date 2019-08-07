@@ -131,7 +131,7 @@ let Item = {
                 },
                 {
                     field: "name",
-                    title: "Material Name",
+                    title: "Item Description",
                     sortable: "asc",
                     filterable: !1
                 },

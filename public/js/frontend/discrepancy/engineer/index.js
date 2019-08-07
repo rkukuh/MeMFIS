@@ -87,13 +87,20 @@ let TaskCard = {
                 },
                 {
                     field: 'jobcard.taskcard.type.name',
-                    title: 'TC Type',
+                    title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: 'jobcard.quotation.project.aircraft.name',
-                    title: 'A/C',
+                    title: 'A/C Reg',
+                    sortable: 'asc',
+                    filterable: !1,
+
+                },
+                {
+                    field: 'jobcard.quotation.project.aircraft_sn',
+                    title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
 
@@ -132,6 +139,24 @@ let TaskCard = {
                             );
                         }
                     }
+                },
+                {
+                    field: '',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: '',
+                    title: 'Updated By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: '',
+                    title: 'Approved By',
+                    sortable: 'asc',
+                    filterable: !1,
                 },
                 {
                     field: 'Actions',
