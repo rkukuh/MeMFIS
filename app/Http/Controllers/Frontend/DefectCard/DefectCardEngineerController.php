@@ -244,6 +244,7 @@ class DefectCardEngineerController extends Controller
     {
         $employee = Employee::where('code', $request->helper)->first();
         $DefectCard->helpers()->attach($employee->id);
+        $DefectCard->current_helpers = $DefectCard->helpers()->count();
 
         return response()->json($DefectCard);
     }
@@ -257,7 +258,8 @@ class DefectCardEngineerController extends Controller
     public function remove_helper(DefectCard $DefectCard,Employee $helper)
     {
         $DefectCard->helpers()->detach($helper->id);
-
+        $DefectCard->current_helpers = $DefectCard->helpers()->count();
+        
         return response()->json($DefectCard);
     }
 }

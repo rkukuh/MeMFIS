@@ -83,7 +83,9 @@ $('.add_helper').on('click', function(){
             });
 
             let helpers_datatable = $('.helpers_datatable').mDatatable();
-
+            if(data.current_helpers >= data.helper_quantity){
+                $(".add-helper").hide();
+            }
             helpers_datatable.originalDataSet = [];
             helpers_datatable.reload();
 
@@ -119,6 +121,9 @@ $('.helpers_datatable').on('click', '.remove-helper', function(){
 
                 helpers_datatable.originalDataSet = [];
                 helpers_datatable.reload();
+                if(data.current_helpers < data.helper_quantity){
+                    $(".add-helper").show();
+                }
                 },
                 error: function (jqXhr, json, errorThrown) {
                     let errorsHtml = '';
