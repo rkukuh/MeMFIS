@@ -71,7 +71,7 @@
                                                     Type @include('frontend.common.label.required')
                                                 </label>
 
-                                                <select id="taskcard_non_routine_type" name="taskcard_non_routine_type" class="form-control m-select2" multiple style="width:100%">
+                                                <select id="taskcard_non_routine_type" name="taskcard_non_routine_type" class="form-control m-select2" style="width:100%">
                                                     @if ( empty($taskCard->type_id) )
                                                         @foreach ($types as $type)
                                                             <option value="{{ $type->id }}">
