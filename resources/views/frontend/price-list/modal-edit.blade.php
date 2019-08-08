@@ -46,9 +46,27 @@
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                <table  width="100%" id="price-list">
-
-                                </table>
+                                <label class="form-control-label">
+                                    Unit Price @include('frontend.common.label.required')
+                                </label>
+                                @for($i = 0 ; $i < 5 ; $i++)
+                                <div class=" row">
+                                    <div class="col-sm-7 col-md-7 col-lg-7">
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', 'price')
+                                            @slot('name', 'price')
+                                            @slot('id_error', 'price')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', 'price level')
+                                            @slot('name', 'level')
+                                            @slot('id_error', 'price')
+                                        @endcomponent
+                                    </div>
+                                </div>
+                                @endfor
                             </div>
                         </div>
                     </div>

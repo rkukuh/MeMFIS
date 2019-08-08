@@ -46,6 +46,7 @@
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
+                                
                                 <table  width="100%" id="price-list-show">
 
                                 </table>

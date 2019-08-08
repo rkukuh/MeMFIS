@@ -50,47 +50,36 @@
                                     Unit Price @include('frontend.common.label.required')
                                 </label>
 
-                                <div class='repeater'>
-                                    <div data-repeater-list="group-price">
-                                        <div data-repeater-item>
-                                            <div class=" row">
-                                                <div class="col-sm-5 col-md-5 col-lg-5">
-                                                    @component('frontend.common.input.number')
-                                                        @slot('text', 'price')
-                                                        @slot('id', 'price')
-                                                        @slot('name', 'price')
-                                                        @slot('id_error', 'price')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-3 col-md-3 col-lg-3">
-                                                    <select id="level" name="level" class="form-control">
-                                                        <option value="1">
-                                                            1
-                                                        </option>
-                                                        <option value="2">
-                                                            2
-                                                        </option>
-                                                        <option value="3">
-                                                            3
-                                                        </option>
-                                                        <option value="4">
-                                                            4
-                                                        </option>
-                                                        <option value="5">
-                                                            5
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-2 col-md-2 col-lg-2">
-                                                    @include('frontend.common.buttons.create_repeater')
-                                                </div>
-                                                <div class="col-sm-2 col-md-2 col-lg-2">
-                                                    @include('frontend.common.buttons.delete_repeater')
-                                                </div>
-                                            </div>
-                                        </div>
+                                @for($i = 0 ; $i < 5 ; $i++)
+                                <div class=" row">
+                                    <div class="col-sm-7 col-md-7 col-lg-7">
+                                        @component('frontend.common.input.number')
+                                            @slot('text', 'price')
+                                            @slot('name', 'price')
+                                            @slot('id_error', 'price')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                        <select name="level" class="form-control">
+                                            <option value="1">
+                                                1
+                                            </option>
+                                            <option value="2">
+                                                2
+                                            </option>
+                                            <option value="3">
+                                                3
+                                            </option>
+                                            <option value="4">
+                                                4
+                                            </option>
+                                            <option value="5">
+                                                5
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
+                                @endfor
                             </div>
                         </div>
                     </div>
