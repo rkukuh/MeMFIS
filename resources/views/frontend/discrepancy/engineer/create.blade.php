@@ -116,7 +116,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Skill
+                                                Skill @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -131,7 +131,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Qty Engineer
+                                                Qty Engineer @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.number')
@@ -156,7 +156,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Qty Helper
+                                                Qty Helper @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.number')
@@ -179,7 +179,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Est. Mhrs
+                                                Est. Mhrs @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.number')
@@ -213,7 +213,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Complaint @include('frontend.common.label.optional')
+                                                Complaint @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.textarea')
@@ -226,7 +226,10 @@
                                         </div>
                                     </div>
                                     <fieldset class="border p-2">
-                                        <legend class="w-auto">Propose Correction</legend>
+                                        <legend class="w-auto">
+                                            Propose Correction @include('frontend.common.label.required')
+                                        </legend>
+                                        
                                         <div class="form-control-feedback text-danger" id="propose-error"></div>
 
                                         <div class="form-group m-form__group row">
@@ -334,7 +337,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Note @include('frontend.common.label.optional')
+                                                    Remark/Description @include('frontend.common.label.optional')
                                             </label>
 
                                             @component('frontend.common.input.textarea')

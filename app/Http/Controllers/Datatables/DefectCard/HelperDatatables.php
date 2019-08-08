@@ -1,38 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\TaskCard;
+namespace App\Http\Controllers\Datatables\DefectCard;
 
-use App\Models\TaskCard;
+use App\Models\Project;
+use App\Models\JobCard;
 use App\Models\ListUtil;
+use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\EOInstruction;
 
-class EOInstructionsDatatables extends Controller
+class HelperDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(TaskCard $taskcard)
+    public function helpers(DefectCard $DefectCard)
     {
-       
-        foreach($taskcard->eo_instructions as $item){
-            if(isset($item->skills) ){
-                if(sizeof($item->skills) == 3){
-                    $item->skill .= "ERI";
-                }
-                else if(sizeof($item->skills) == 1){
-                    $item->skill .= $item->skills[0]->name;
-                }
-                else{
-                    $item->skill .= '';
-                }
-            }
-        }
-        $data = $alldata = json_decode($taskcard->eo_instructions);
-        
+        $data = $alldata = json_decode($DefectCard->helpers);
+
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
