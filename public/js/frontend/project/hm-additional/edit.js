@@ -511,7 +511,7 @@ let AdditionalTaskCreate = (function() {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: 'POST',
-                    url: '/project-hm-additional/'+project_uuid+'/',
+                    url: '/project-hm-additional/'+project_uuid,
                     processData: false,
                     contentType: false,
                     cache: false,
