@@ -31,6 +31,13 @@ class EOInstructionsDatatables extends Controller
                 }
             }
         }
+
+        foreach($taskcard->eo_instructions as $item){
+            if(isset($item->workarea) ){
+                $item->workarea_name .= $item->workarea->name;
+            }
+        }
+
         $data = $alldata = json_decode($taskcard->eo_instructions);
         
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

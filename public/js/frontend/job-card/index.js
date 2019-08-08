@@ -98,7 +98,7 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'taskcard.skill.name',
+                    field: 'skill_name',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
@@ -256,7 +256,7 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'taskcard.skill.name',
+                    field: 'skill_name',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,

@@ -37,6 +37,7 @@ class JobCardDatatables extends Controller
                 }
             }
 
+            
             $count_user = $taskcard->progresses->groupby('progressed_by')->count()-1;
 
             $status = [];
