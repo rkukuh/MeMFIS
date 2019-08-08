@@ -233,7 +233,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid,
+                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid, 
                 data: {
                     _token: $('input[name=_token]').val(),
                 },
