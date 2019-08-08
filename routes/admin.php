@@ -104,13 +104,17 @@ Route::name('admin.')->group(function () {
         Route::resource('quotation-workpackage', 'QuotationWorkPackageController');
         Route::resource('quotation-workpackage-item', 'QuotationWorkPackageItemController');
 
-        /** QUOTATION's WORKPACKAGE's TASKCARD's */
+        /** QUOTATION's WORKPACKAGE's TASKCARDs */
 
         Route::resource('qtn-wp-tc-item', 'QuotationWorkPackageTaskCardItemController');
 
-        /** QUOTATION's HT/CRR's */
+        /** QUOTATION's HT/CRRs */
 
         Route::resource('qtn-htcrr-item', 'QuotationHtcrrItemController');
+
+        /** QUOTATION's DEFECTCARDs */
+
+        Route::resource('qtn-defectcard-item', 'QuotationDefectCardItemController');
 
     });
 

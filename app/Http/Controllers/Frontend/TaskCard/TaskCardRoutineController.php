@@ -71,7 +71,6 @@ class TaskCardRoutineController extends Controller
      */
     public function store(TaskCardRoutineStore $request)
     {
-        // dd(json_decode($request->relationship));
         $this->decoder($request);
         $accesses = $zones = [];
         if($request->work_area){
@@ -237,6 +236,7 @@ class TaskCardRoutineController extends Controller
 
         foreach($taskCard->zones as $i => $zone_taskcard){
             $zone_taskcards[$i] =  $zone_taskcard->id;
+            
         }
 
         $relation_taskcards = [];
@@ -305,7 +305,7 @@ class TaskCardRoutineController extends Controller
                     }
                 }
 
-                $taskCard->accesses()->attach($accesses);
+                $taskCard->accesses()->sync($accesses);
 
             }
 
@@ -321,7 +321,7 @@ class TaskCardRoutineController extends Controller
                     }
                 }
 
-                $taskCard->zones()->attach($zones);
+                $taskCard->zones()->sync($zones);
 
             }
 

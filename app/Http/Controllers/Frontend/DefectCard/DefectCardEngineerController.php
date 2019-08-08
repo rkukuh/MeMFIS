@@ -8,6 +8,7 @@ use App\Models\Type;
 use App\Models\Status;
 use App\Models\Approval;
 use App\Models\Progress;
+use App\Models\Employee;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -241,8 +242,24 @@ class DefectCardEngineerController extends Controller
      */
     public function add_helper(DefectCard $DefectCard, Request $request)
     {
-        $DefectCard->helpers()->attach($request->employee);
+        $employee = Employee::where('code', $request->helper)->first();
+        $DefectCard->helpers()->attach($employee->id);
+        $DefectCard->current_helpers = $DefectCard->helpers()->count();
 
+        return response()->json($DefectCard);
+    }
+
+    /**
+     * Remove helper for related defect card in storage .
+     *
+     * @param  \App\Models\DefectCard  $DefectCard
+     * @return \Illuminate\Http\Response
+     */
+    public function remove_helper(DefectCard $DefectCard,Employee $helper)
+    {
+        $DefectCard->helpers()->detach($helper->id);
+        $DefectCard->current_helpers = $DefectCard->helpers()->count();
+        
         return response()->json($DefectCard);
     }
 }

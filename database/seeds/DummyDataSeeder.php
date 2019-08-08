@@ -113,12 +113,16 @@ class DummyDataSeeder extends Seeder
         $this->call(QuotationWorkPackages::class);
         $this->call(QuotationWorkPackageItems::class);
 
-        /** QUOTATION's WORKPACKAGE's TASKCARD's */
+        /** QUOTATION's WORKPACKAGE's TASKCARDs */
         
         $this->call(QuotationWorkPackageTaskCardItems::class);
 
-        /** QUOTATION's HT/CRR's */
+        /** QUOTATION's HT/CRRs */
         
         $this->call(QuotationHtcrrItems::class);
+
+        /** QUOTATION's DEFECTCARDs */
+        
+        $this->call(QuotationDefectCardItems::class);
     }
 }

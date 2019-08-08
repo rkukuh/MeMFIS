@@ -134,7 +134,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.taskrelease-jobcard.task-release.index') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.taskrelease-jobcard.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -144,7 +144,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.riirelease-jobcard.rii-release.index') }}" class="m-menu__link">
+                            <a href="{{ route('frontend.riirelease-jobcard.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
@@ -300,7 +300,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                                <a href="{{ route('frontend.taskrelease-defectcard.task-release.index') }}" class="m-menu__link">
+                                <a href="{{ route('frontend.taskrelease-defectcard.index') }}" class="m-menu__link">
                                     <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                         <span></span>
                                     </i>
@@ -310,7 +310,7 @@
                                 </a>
                             </li>
                             <li class="m-menu__item" aria-haspopup="true">
-                                <a href="{{ route('frontend.riirelease-defectcard.rii-release.index') }}" class="m-menu__link">
+                                <a href="{{ route('frontend.riirelease-defectcard.index') }}" class="m-menu__link">
                                     <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                         <span></span>
                                     </i>

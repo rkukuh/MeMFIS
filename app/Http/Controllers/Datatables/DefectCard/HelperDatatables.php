@@ -18,7 +18,6 @@ class HelperDatatables extends Controller
      */
     public function helpers(DefectCard $DefectCard)
     {
-        dd($DefectCard->helpers);
         $data = $alldata = json_decode($DefectCard->helpers);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

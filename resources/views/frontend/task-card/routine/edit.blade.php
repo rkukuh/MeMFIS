@@ -303,13 +303,13 @@
                                             <select id="access" name="access" class="form-control m-select2" multiple style="width:100%">
                                                 @if ($taskcard->accesses->isEmpty())
                                                     @foreach ($accesses as $access)
-                                                        <option value="{{ $access->id }}">
+                                                        <option value="{{ $access->name }}">
                                                             {{ $access->name }}
                                                         </option>
                                                     @endforeach
                                                 @else
                                                     @foreach ($accesses as $access)
-                                                        <option value="{{ $access->id }}"
+                                                        <option value="{{ $access->name }}"
                                                             @if(in_array( $access->id ,$access_taskcards)) selected @endif>
                                                             {{ $access->name }}
                                                         </option>
@@ -330,13 +330,13 @@
                                             <select id="zone" name="zone" class="form-control m-select2" multiple style="width:100%">
                                                 @if ($taskcard->zones->isEmpty())
                                                     @foreach ($zones as $zone)
-                                                        <option value="{{ $zone->id }}">
+                                                        <option value="{{ $zone->name }}">
                                                             {{ $zone->name }}
                                                         </option>
                                                     @endforeach
                                                 @else
                                                     @foreach ($zones as $zone)
-                                                        <option value="{{ $zone->id }}"
+                                                        <option value="{{ $zone->name }}"
                                                             @if(in_array( $zone->id ,$zone_taskcards)) selected @endif>
                                                             {{ $zone->name }}
                                                         </option>

@@ -43,7 +43,7 @@ let Helpers = {
             },
             columns: [
                 {
-                    field: "name",
+                    field: "first_name",
                     title: "Name",
                     sortable: "asc",
                     filterable: !1,
@@ -54,9 +54,9 @@ let Helpers = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_tool" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool-edit" title="Edit" data-tool_uuid=' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill remove-helper" data-uuid=' +
                             t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
                         );
                     }
                 }
@@ -67,8 +67,78 @@ let Helpers = {
 };
 
 $('.add_helper').on('click', function(){
-    console.log($('#defectcard_helper').val());
+    let helper = $('#defectcard_helper').val();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/defectcard/'+uuid+'/add-helper',
+        type: 'POST',
+        data:{helper: helper},
+        success: function (data) {
+            $('#modal_helper').modal('hide');
+
+            toastr.success('Helper has been added.', 'Success', {
+                timeOut: 5000
+            });
+
+            let helpers_datatable = $('.helpers_datatable').mDatatable();
+            if(data.current_helpers >= data.helper_quantity){
+                $(".add-helper").hide();
+            }
+            helpers_datatable.originalDataSet = [];
+            helpers_datatable.reload();
+
+        }
+      });
 });
+
+$('.helpers_datatable').on('click', '.remove-helper', function(){
+    let triggeruuid = $(this).data('uuid');
+    swal({
+        title: 'Are you sure?',
+        type: 'question',
+        confirmButtonText: 'Yes, REMOVE',
+        confirmButtonColor: '#d33',
+        cancelButtonText: 'Cancel',
+        showCancelButton: true,
+    }).then(result => {
+        if (result.value) {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                        'content'
+                    )
+                },
+                type: 'delete',
+                url: '/defectcard/'+uuid+'/remove-helper/'+triggeruuid,
+                success: function (data) {
+                    toastr.success('helper has been deleted.', 'Deleted', {
+                        timeOut: 5000
+                    }
+                );
+                let helpers_datatable = $('.helpers_datatable').mDatatable();
+
+                helpers_datatable.originalDataSet = [];
+                helpers_datatable.reload();
+                if(data.current_helpers < data.helper_quantity){
+                    $(".add-helper").show();
+                }
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#delete-error').html(value);
+                    });
+                }
+            });
+
+        }
+    });
+});
+
 jQuery(document).ready(function () {
   Helpers.init();
 });
