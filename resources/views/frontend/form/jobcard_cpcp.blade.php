@@ -334,7 +334,7 @@
                 @endif
             </td>
             <td width="47%" align="center" valign="top">
-              @if($jobCard->taskcard->workarea->name)
+              @if($jobCard->taskcard->work_area != null)
                 {{$jobCard->taskcard->workarea->name}}
               @else
                 -
