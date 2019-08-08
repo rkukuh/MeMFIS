@@ -310,7 +310,7 @@
                                                 @else
                                                     @foreach ($accesses as $access)
                                                         <option value="{{ $access->name }}"
-                                                            @if(in_array( $access->name ,$access_taskcards)) selected @endif>
+                                                            @if(in_array( $access->id ,$access_taskcards)) selected @endif>
                                                             {{ $access->name }}
                                                         </option>
                                                     @endforeach
@@ -337,7 +337,7 @@
                                                 @else
                                                     @foreach ($zones as $zone)
                                                         <option value="{{ $zone->name }}"
-                                                            @if(in_array( $zone->name ,$zone_taskcards)) selected @endif>
+                                                            @if(in_array( $zone->id ,$zone_taskcards)) selected @endif>
                                                             {{ $zone->name }}
                                                         </option>
                                                     @endforeach

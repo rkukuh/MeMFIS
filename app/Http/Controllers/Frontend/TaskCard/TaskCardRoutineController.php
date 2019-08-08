@@ -229,13 +229,14 @@ class TaskCardRoutineController extends Controller
         $access_taskcards = [];
 
         foreach($taskCard->accesses as $i => $access_taskcard){
-            $access_taskcards[$i] =  Access::find($access_taskcard->pivot->access_id)->name;
+            $access_taskcards[$i] =  $access_taskcard->pivot->access_id;
         }
 
         $zone_taskcards = [];
 
         foreach($taskCard->zones as $i => $zone_taskcard){
-            $zone_taskcards[$i] =  $zone_taskcard->name;
+            $zone_taskcards[$i] =  $zone_taskcard->id;
+            
         }
 
         $relation_taskcards = [];
