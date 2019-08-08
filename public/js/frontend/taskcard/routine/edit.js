@@ -811,12 +811,12 @@ let TaskCard = {
             data.append("repeat_amount", JSON.stringify(repeat_amount));
             data.append("is_rii", is_rii);
             data.append("additionals",  internal_numberJSON);
+            data.append("ata", $('input[name=ata]').val());
             data.append("fileInput", document.getElementById('taskcard').files[0]);
             data.append('_method', 'PUT');
 
-            for(let pair of data.entries()) {
-                console.log(pair[0]+ ', '+ pair[1]);
-            }
+            console.log(access);
+            console.log(zone);
 
             $.ajax({
                 headers: {
@@ -915,8 +915,6 @@ $(document).ready(function () {
         $("#service_bulletin_div").removeClass("hidden");
         $("#section_div").removeClass("hidden");
         document.getElementById('threshold').innerHTML = 'Implementation Age';
-
-
         } else {
             $("#station_div").addClass("hidden");
             $("#stringer_div").addClass("hidden");
