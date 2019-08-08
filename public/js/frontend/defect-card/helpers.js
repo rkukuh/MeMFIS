@@ -54,7 +54,7 @@ let Helpers = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill remove-helper" href="#" data-uuid=' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill remove-helper" data-uuid=' +
                             t.uuid +
                             ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
                         );
@@ -91,7 +91,7 @@ $('.add_helper').on('click', function(){
       });
 });
 
-$('.remove-helper').on('click', function(){
+$('.helpers_datatable').on('click', '.remove-helper', function(){
     let triggeruuid = $(this).data('uuid');
     swal({
         title: 'Are you sure?',
@@ -108,8 +108,8 @@ $('.remove-helper').on('click', function(){
                         'content'
                     )
                 },
-                type: 'DELETE',
-                url: '/defectcard/'+triggeruuid+'/remove-helper',
+                type: 'delete',
+                url: '/defectcard/'+uuid+'/remove-helper/'+triggeruuid,
                 success: function (data) {
                     toastr.success('helper has been deleted.', 'Deleted', {
                         timeOut: 5000

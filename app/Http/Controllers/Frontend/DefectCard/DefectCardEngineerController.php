@@ -254,10 +254,9 @@ class DefectCardEngineerController extends Controller
      * @param  \App\Models\DefectCard  $DefectCard
      * @return \Illuminate\Http\Response
      */
-    public function remove_helper(DefectCard $DefectCard, $employeeCode)
+    public function remove_helper(DefectCard $DefectCard,Employee $helper)
     {
-        $employee = Employee::where('code', $employeeCode)->first();
-        $DefectCard->helpers()->detach($employee->id);
+        $DefectCard->helpers()->detach($helper->id);
 
         return response()->json($DefectCard);
     }
