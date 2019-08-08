@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Frontend;
-
-use Illuminate\Foundation\Http\FormRequest;
+namespace App\Http\Requests\frontend;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CompanyUpdate extends FormRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class EmployeeStatusesUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

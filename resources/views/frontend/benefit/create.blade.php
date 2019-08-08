@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.benefit.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.benefit.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Benefits
                             </span>
@@ -97,18 +97,10 @@
                                             </label>
         
                                             @component('frontend.common.input.select2')
-                                                @slot('text', 'Calculation Reference')
                                                 @slot('id', 'calculation_reference')
                                                 @slot('name', 'calculation_reference')
                                                 @slot('id_error', 'calculation_reference')
                                             @endcomponent    
-                                            
-                                            {{-- Value of Calculation Reference
-
-                                            Based on Monthly Fixed
-                                            Based on Annually Fixed
-                                            Based on Daily Presence
-                                            Based on Hourly Overtime --}}
 
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -122,14 +114,7 @@
                                                 @slot('name', 'pro_rate_base_calculation')
                                                 @slot('id_error', 'pro_rate_base_calculation')
                                             @endcomponent    
-                                            
-{{-- 
-                                            Value of Pro Rate Base Calculation
-
-                                            Hour to Day
-                                            Day to Month
-                                            Month to Year
-                                            None (Full Calculated)  --}}
+                                    
                                         </div>
                                     </div>
 
@@ -165,4 +150,5 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/calculation-reference.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/pro-rate-base-calculation.js') }}"></script>
+    <script src="{{ asset('js/frontend/benefit/create.js') }}"></script>
 @endpush

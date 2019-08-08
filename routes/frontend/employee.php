@@ -12,11 +12,11 @@ Route::name('frontend.')->group(function () {
         Route::namespace('Employee')->group(function () {
 
             Route::resource('employee', 'EmployeeController');
+            Route::resource('statuses', 'EmployeeStatusesController');
 
             Route::name('employee.')->group(function () {
-
                 Route::prefix('employee')->group(function () {
-
+                    
                     /** Polymorph */
                     Route::resource('/{employee}/faxes', 'EmployeeFaxesController');
                     Route::resource('/{employee}/emails', 'EmployeeEmailsController');

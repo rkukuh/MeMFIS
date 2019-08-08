@@ -142,10 +142,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/tool-request/project/edit', 'frontend.tool-request.project.edit')->name('tool-request.project.edit');
         Route::view('/tool-request/project/show', 'frontend.tool-request.project.show')->name('tool-request.project.show');
 
-        /** Employment Status */
-
-        Route::view('/employment-status', 'frontend.employment-status.index')->name('employment-status.index');
-
         /** Inventory In */
 
         Route::view('/inventory-in', 'frontend.inventory-in.index')->name('inventory-in.index');
@@ -164,14 +160,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/gse-tool-returned/project/create', 'frontend.gse-tool-returned.project.create')->name('gse-tool-returned.project.create');
         Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
         Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
-
-
-        /** Benefits */
-
-        Route::view('hr/benefit', 'frontend.benefit.index')->name('hr.benefit.index');
-        Route::view('hr/benefit/create', 'frontend.benefit.create')->name('hr.benefit.create');
-        Route::view('hr/benefit/show', 'frontend.benefit.show')->name('hr.benefit.show');
-
 
         /** Position */
 

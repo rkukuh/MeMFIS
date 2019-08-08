@@ -33,6 +33,26 @@ Route::name('datatables.')->group(function () {
 
         Route::get('/general-license', 'GeneralLicenseDatatables@index')->name('general-license.index');
 
+        /** BENEFIT */
+
+        Route::name('benefit.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'benefit',
+                'namespace' => 'Benefit'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'BenefitDatatables@index')->name('benefit.index');
+                Route::get('/basecalculation', 'BenefitTypeDatatables@baseCalculation')->name('benefit.base'); 
+                Route::get('/proratecalculation', 'BenefitTypeDatatables@prorateCalculation')->name('benefit.prorate');
+                /** Polymorph */
+                
+            });
+        });
+            
         /** TRANSACTION */
 
         Route::get('/price-list', 'PriceListDatatables@index')->name('price-list.index');
