@@ -1,9 +1,36 @@
 @extends('frontend.master')
 
 @section('content')
+
+<div class="m-subheader hidden">
+  <div class="d-flex align-items-center">
+      <div class="mr-auto">
+          <h3 class="m-subheader__title m-subheader__title--separator">
+            Defect Card
+          </h3>
+          <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+              <li class="m-nav__item m-nav__item--home">
+                  <a href="" class="m-nav__link m-nav__link--icon">
+                      <i class="m-nav__link-icon la la-home"></i>
+                  </a>
+              </li>
+              <li class="m-nav__separator">
+                  -
+              </li>
+              <li class="m-nav__item">
+                  <a href="{{ route('frontend.defectcard.index') }}" class="m-nav__link">
+                      <span class="m-nav__link-text">
+                        Defect Card
+                      </span>
+                  </a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
 <div class="m-content">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-7">
             <div class="m-portlet">
                 <div class="m-portlet__head">
                     <div class="m-portlet__head-caption">
@@ -12,285 +39,417 @@
                                 <i class="la la-gear"></i>
                             </span>
 
-                            @include('frontend.common.label.summary')
+                            @component('frontend.common.label.create-new')
+                                @slot('text','pending')
+                            @endcomponent
 
                             <h3 class="m-portlet__head-text">
-                                Job Card - Required Inpection Inspentor
+                            Defect Card Form
                             </h3>
                         </div>
                     </div>
                 </div>
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
-                        <form id="itemform" name="itemform">
-                            <div class="m-portlet__body">
-                                <table border="1px" width="100%">
-                                    {{-- <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Total Task Card(s)
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            1000 Item (s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Total Manhour(s) (included performance factor)
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            500 mhrs
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="100%" colspan="2" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Skill Needed
-                                        </td>
-                                    </tr> --}}
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Job Card No
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->number}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Task Card No
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->number}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            A/C Type
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->quotation->project->aircraft->name}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            A/C Reg
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->quotation->project->aircraft_register}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            A/C Serial Number
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->quotation->project->aircraft_sn}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Inspection Type
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->task->name}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Company Task No
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            @if(isset(json_decode($taskrelease->taskcard->additionals)->internal_number))
-                                                {{json_decode($taskrelease->taskcard->additionals)->internal_number}}
-                                            @else
-                                                -
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Project No
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->quotation->project->code}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Skill
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            @if(sizeof($taskrelease->taskcard->skills) == 3)
-                                                ERI
-                                            @elseif(sizeof($taskrelease->taskcard->skills) == 1)
-                                                {{$taskrelease->taskcard->skills[0]->name}}
-                                            @else
-                                                -
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Est.Mhrs
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->actual}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Actual. Mhrs
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->estimation_manhour}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Work Area
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            @if(isset($taskrelease->taskcard->workarea->name))
-                                                {{$taskrelease->taskcard->workarea->name}}
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Sequence
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->sequence}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Referencce
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->reference}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Title
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->title}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Description
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->Description}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Helper
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->helper_quantity}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Accomplishment Notes By
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            xxx
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            RII
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            @if($taskrelease->taskcard->is_rii == 1)
-                                                Yes
-                                            @else
-                                                No
-                                            @endif
-                                        </td>
-                                    </tr>
-                                </table>
+                        <div class="m-portlet__body">
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        Date
+                                    </label>
 
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <table class="table table-striped table-bordered second" width="100%" cellpadding="4">
-                                            <tr>
-                                                <td colspan="5" align="center"><b>Material(s) Required</b></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%" align="center"><b>No</b></td>
-                                                <td width="20%" align="center"><b>Part Number</b></td>
-                                                <td width="50%" align="center"><b>Item Description</b></td>
-                                                <td width="10%" align="center"><b>Qty</b></td>
-                                                <td width="15%" align="center"><b>Unit</b></td>
-                                            </tr>
-                                            @php
-                                            $i=1;
-                                            @endphp
-                                            @foreach ($materials as $material)
-                                            <tr>
-                                                <td width="5%" align="center" valign="top">{{$i++}}</td>
-                                                <td width="20%" align="center" valign="top">{{$material->code}}</td>
-                                                <td width="50%" valign="top">{{$material->name}}</td>
-                                                <td width="10%" align="center" valign="top">{{$material->pivot->quantity}}</td>
-                                                <td width="15%" align="center" valign="top">{{App\Models\Unit::find($material->pivot->unit_id)->name}}</td>
-                                            </tr>
-                                            @endforeach
-                                        </table>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <table class="table table-striped table-bordered second" width="100%" cellpadding="4">
-                                            <tr>
-                                                <td colspan="5" align="center"><b>Tool(s) Required / Special Tooling</b></td>
-                                            </tr>
-                                            <tr>
-                                                <td width="5%" align="center"><b>No</b></td>
-                                                <td width="20%" align="center"><b>Part Number</b></td>
-                                                <td width="50%" align="center"><b>Item Description</b></td>
-                                                <td width="10%" align="center"><b>Qty</b></td>
-                                                <td width="15%" align="center"><b>Unit</b></td>
-                                            </tr>
-                                            @php
-                                            $j=1;
-                                            @endphp
-                                            @foreach ($tools as $tool)
-                                            <tr>
-                                                <td width="5%" align="center" valign="top">{{$j++}}</td>
-                                                <td width="20%" align="center" valign="top">{{$tool->code}}</td>
-                                                <td width="50%" valign="top">{{$tool->name}}</td>
-                                                <td width="10%" align="center" valign="top">{{$tool->pivot->quantity}}</td>
-                                                <td width="15%" align="center" valign="top">{{App\Models\Unit::find($tool->pivot->unit_id)->name}}</td>
-                                            </tr>
-                                            @endforeach
-                                        </table>
-                                    </div>
+                                    @component('frontend.common.label.data-info')
+                                        @slot('text', $riirelease->created_at)
+                                    @endcomponent
                                 </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        A/C Type
+                                    </label>
 
+                                    @component('frontend.common.label.data-info')
+                                        @slot('text', $riirelease->jobcard->quotation->project->aircraft->name)
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        Discrepenct No
+                                    </label>
 
+                                    @component('frontend.common.label.data-info')
+                                        @slot('text', $riirelease->code)
+                                    @endcomponent
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        A/C Reg
+                                    </label>
 
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                        <div class="flex">
-                                            <div class="action-buttons">
-                                                @if($status == "released" )
-                                                    @component('frontend.common.buttons.release')
-                                                        @slot('class', 'release')
-                                                        @slot('id', 'release')
-                                                    @endcomponent
+                                    @component('frontend.common.label.data-info')
+                                        @slot('text', $riirelease->jobcard->quotation->project->aircraft_register)
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        JC No Refference
+                                    </label>
+
+                                    @component('frontend.common.label.data-info')
+                                        @slot('text', $riirelease->jobcard->number)
+                                    @endcomponent
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        A/C S/N
+                                    </label>
+
+                                    @component('frontend.common.label.data-info')
+                                        @slot('text', $riirelease->jobcard->quotation->project->aircraft_sn)
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        Sequence No
+                                    </label>
+
+                                    @component('frontend.common.label.data-info')
+                                        @slot('text', $riirelease->jobcard->taskcard->sequence)
+                                    @endcomponent
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        Qty Engineer
+                                    </label>
+
+                                    @component('frontend.common.label.data-info')
+                                        @slot('text', $riirelease->engineer_quantity)
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        ATA
+                                    </label>
+
+                                    @component('frontend.common.label.data-info')
+                                         @slot('text', $riirelease->ata)
+                                    @endcomponent
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        Qty Mech
+                                    </label>
+
+                                    @component('frontend.common.label.data-info')
+                                        @slot('text',  $riirelease->helper_quantity)
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        Area/Zone
+                                    </label>
+
+                                    @if (isset($riirelease->jobcard->taskcard->workarea->name))
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', $riirelease->jobcard->taskcard->workarea->name)
+                                        @endcomponent
+                                    @else
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', '')
+                                        @endcomponent
+                                    @endif
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        Est. Mhrs
+                                    </label>
+
+                                    @component('frontend.common.label.data-info')
+                                        @slot('text',  $riirelease->estimation_manhour)
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        Skill
+                                    </label>
+
+                                    @component('frontend.common.label.data-info')
+                                        @if(sizeof($riirelease->jobcard->taskcard->skills) == 3)
+                                            @slot('text', 'ERI')
+                                        @elseif(sizeof($riirelease->jobcard->taskcard->skills) == 1)
+                                            @slot('text', $riirelease->jobcard->taskcard->skills[0]->name)
+                                        @else
+                                            @include('frontend.common.label.data-info-nodata')
+                                        @endif
+                                    @endcomponent
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label class="form-control-label">
+                                        RII
+                                    </label>
+
+                                    @component('frontend.common.input.checkbox')
+                                        @slot('id', 'is_rii')
+                                        @slot('name', 'is_rii')
+                                        @slot('text', 'IS RII?')
+                                        @slot('disabled','disabled')
+                                        @if($riirelease->is_rii == 1)
+                                            @slot('checked','checked')
+                                        @else
+
+                                        @endif
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <label class="form-control-label">
+                                        Complaint @include('frontend.common.label.optional')
+                                    </label>
+
+                                    @component('frontend.common.label.data-info')
+                                        @slot('text', $riirelease->complaint)
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <label class="form-control-label">
+                                        Remark @include('frontend.common.label.optional')
+                                    </label>
+
+                                    @component('frontend.common.label.data-info')
+                                        @slot('text', $riirelease->description)
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <fieldset class="border p-2">
+                            <legend class="w-auto">Propose Correction</legend>
+
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                    @component('frontend.common.input.checkbox')
+                                        @slot('id', 'remove')
+                                        @slot('name', 'propose[]')
+                                        @slot('value', 'remove')
+                                        @slot('text', '1. REMOVE')
+                                        @slot('size', '12')
+                                        @slot('disabled','disabled')
+                                        @if(in_array('remove',$propose_corrections))
+                                            @slot('checked', 'checked')
+                                        @endif
+                                    @endcomponent
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                    @component('frontend.common.input.checkbox')
+                                        @slot('id', 'repair')
+                                        @slot('name', 'propose[]')
+                                        @slot('value', 'repair')
+                                        @slot('text', '4. REPAIR')
+                                        @slot('disabled','disabled')
+                                        @if(in_array('repair',$propose_corrections))
+                                            @slot('checked', 'checked')
+                                        @endif
+                                        @slot('size', '12')
+                                    @endcomponent
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                    @component('frontend.common.input.checkbox')
+                                        @slot('id', 'test')
+                                        @slot('name', 'propose[]')
+                                        @slot('value', 'test')
+                                        @slot('text', '7. TEST')
+                                        @slot('disabled','disabled')
+                                        @if(in_array('test',$propose_corrections))
+                                            @slot('checked', 'checked')
+                                        @endif
+                                        @slot('size', '12')
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                    @component('frontend.common.input.checkbox')
+                                        @slot('id', 'install')
+                                        @slot('name', 'propose[]')
+                                        @slot('value', 'install')
+                                        @slot('text', '2. INSTALL')
+                                        @slot('disabled','disabled')
+                                        @if(in_array('install',$propose_corrections))
+                                            @slot('checked', 'checked')
+                                        @endif
+                                        @slot('size', '12')
+                                    @endcomponent
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                    @component('frontend.common.input.checkbox')
+                                        @slot('id', 'replace')
+                                        @slot('name', 'propose[]')
+                                        @slot('value', 'replace')
+                                        @slot('text', '5. REPLACE')
+                                        @slot('disabled','disabled')
+                                        @if(in_array('replace',$propose_corrections))
+                                            @slot('checked', 'checked')
+                                        @endif
+                                        @slot('size', '12')
+                                    @endcomponent
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                    @component('frontend.common.input.checkbox')
+                                        @slot('id', 'shop_visit')
+                                        @slot('name', 'propose[]')
+                                        @slot('value', 'shop-visit')
+                                        @slot('text', '8. SHOP VISIT')
+                                        @slot('disabled','disabled')
+                                        @if(in_array('shop-visit',$propose_corrections))
+                                            @slot('checked', 'checked')
+                                        @endif
+                                        @slot('size', '12')
+                                    @endcomponent
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                    @component('frontend.common.input.checkbox')
+                                        @slot('id', 'rectification')
+                                        @slot('name', 'propose[]')
+                                        @slot('value', 'rectification')
+                                        @slot('text', '3. RECTIFICATION')
+                                        @slot('disabled','disabled')
+                                        @if(in_array('rectification',$propose_corrections))
+                                            @slot('checked', 'checked')
+                                        @endif
+                                        @slot('size', '12')
+                                    @endcomponent
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                    @component('frontend.common.input.checkbox')
+                                        @slot('id', 'ndt')
+                                        @slot('name', 'propose[]')
+                                        @slot('value', 'ndt')
+                                        @slot('text', '6. NDT')
+                                        @slot('disabled','disabled')
+                                        @if(in_array('ndt',$propose_corrections))
+                                            @slot('checked', 'checked')
+                                        @endif
+                                        @slot('size', '12')
+                                    @endcomponent
+                                </div>
+                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            @component('frontend.common.input.checkbox')
+                                                @slot('id', 'other')
+                                                @slot('name', 'propose[]')
+                                                @slot('value', 'other')
+                                                @slot('text', '9. Other')
+                                                @slot('disabled','disabled')
+                                                @if(in_array('other',$propose_corrections))
+                                                    @slot('checked', 'checked')
                                                 @endif
-
-                                                @include('frontend.common.buttons.back')
-                                            </div>
+                                                @slot('size', '12')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            @component('frontend.common.input.textarea')
+                                                @slot('id', 'other_text')
+                                                @slot('text', 'other_text')
+                                                @slot('name', 'other_text')
+                                                @if(empty($propose_correction_text))
+                                                    @slot('disabled','disabled')
+                                                @endif
+                                                @slot('value', $propose_correction_text)
+                                                @slot('rows', '3')
+                                                @slot('id_error', 'other_text')
+                                            @endcomponent
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                            </fieldset>
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                    <div class="flex">
+                                        <div class="action-buttons">
+                                            @include('frontend.common.buttons.back')
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="m-portlet">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon m--hide">
+                                <i class="la la-gear"></i>
+                            </span>
+
+                            @include('frontend.common.label.datalist')
+
+                            <h3 class="m-portlet__head-text">
+                                Tool(s) List
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet m-portlet--mobile">
+                    <div class="m-portlet__body">
+                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                            <div class="row align-items-center">
+                                <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                    <div class="defectcard_tool_datatable" id="scrolling_both"></div>
+                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tools_datatable" id="scrolling_both"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon m--hide">
+                                <i class="la la-gear"></i>
+                            </span>
+
+                            @include('frontend.common.label.datalist')
+
+                            <h3 class="m-portlet__head-text">
+                                Material(s) List
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet m-portlet--mobile">
+                    <div class="m-portlet__body">
+                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                            <div class="row align-items-center">
+                                <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                        <div class="defectcard_material_datatable" id="scrolling_both"></div>
+                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="materials_datatable" id="scrolling_both"></div>
                     </div>
                 </div>
             </div>
@@ -301,46 +460,7 @@
 
 @push('footer-scripts')
     <script>
-        $('.footer').on('click', '.release', function () {
-            let jobcard_uuid = '{{ $taskrelease->uuid }}';
-
-            swal({
-                title: 'Sure want to Release?',
-                type: 'question',
-                confirmButtonText: 'Yes, Release',
-                confirmButtonColor: '#34bfa3',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'PUT',
-                        url: '/riirelease-jobcard/rii-release/' + jobcard_uuid + '/',
-                        success: function (data) {
-                            $('#release').remove();
-
-                            toastr.success('RII has been released.', 'Released', {
-                                    timeOut: 5000
-                                }
-                            );
-
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                }
-            });
-        });
-    </script>
+        let uuid = '{{$riirelease->uuid}}';
+   </script>
+    <script src="{{ asset('js/frontend/defect-card/items.js')}}"></script>
 @endpush

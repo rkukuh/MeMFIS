@@ -63,9 +63,25 @@ class TaskReleaseDefectCardController extends Controller
      * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $taskrelease)
+    public function edit(DefectCard $taskrelease)
     {
-       //
+        $propose_corrections = array();
+        foreach($taskrelease->propose_corrections as $i => $defectCard){
+            $this->propose_corrections[$i] =  $defectCard->code;
+        }
+
+        $propose_correction_text = '';
+        foreach($taskrelease->propose_corrections as $i => $defectCard){
+            $this->propose_correction_text =  $defectCard->pivot->propose_correction_text;
+        }
+
+
+        return view('frontend.task-release.defect-card.create', [
+            'taskrelease' => $taskrelease,
+            'propose_corrections' => $propose_corrections,
+            'propose_correction_text' => $propose_correction_text,
+
+        ]);
     }
 
 

@@ -63,9 +63,24 @@ class RIIReleaseDefectCardController extends Controller
      * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $riirelease)
+    public function edit(DefectCard $riirelease)
     {
-       //
+        $propose_corrections = array();
+        foreach($riirelease->propose_corrections as $i => $defectCard){
+            $this->propose_corrections[$i] =  $defectCard->code;
+        }
+
+        $propose_correction_text = '';
+        foreach($riirelease->propose_corrections as $i => $defectCard){
+            $this->propose_correction_text =  $defectCard->pivot->propose_correction_text;
+        }
+
+        return view('frontend.rii-release.defect-card.create', [
+            'riirelease' => $riirelease,
+            'propose_corrections' => $propose_corrections,
+            'propose_correction_text' => $propose_correction_text,
+
+        ]);
     }
 
     /**
