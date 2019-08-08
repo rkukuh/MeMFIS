@@ -43,6 +43,7 @@ Route::name('frontend.')->group(function () {
             });
 
             Route::post('defectcard/{DefectCard}/add-helper', 'DefectCardEngineerController@add_helper')->name('defectcard.add_helper');
+            Route::delete('defectcard/{DefectCard}/remove-helper', 'DefectCardEngineerController@remove_helper')->name('defectcard.remove_helper');
 
         });
 

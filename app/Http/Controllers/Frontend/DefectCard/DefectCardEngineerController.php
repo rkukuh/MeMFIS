@@ -242,9 +242,22 @@ class DefectCardEngineerController extends Controller
      */
     public function add_helper(DefectCard $DefectCard, Request $request)
     {
-        // dd($request->all());
         $employee = Employee::where('code', $request->helper)->first();
         $DefectCard->helpers()->attach($employee->id);
+
+        return response()->json($DefectCard);
+    }
+
+    /**
+     * Remove helper for related defect card in storage .
+     *
+     * @param  \App\Models\DefectCard  $DefectCard
+     * @return \Illuminate\Http\Response
+     */
+    public function remove_helper(DefectCard $DefectCard, $employeeCode)
+    {
+        $employee = Employee::where('code', $employeeCode)->first();
+        $DefectCard->helpers()->detach($employee->id);
 
         return response()->json($DefectCard);
     }
