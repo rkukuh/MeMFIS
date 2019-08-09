@@ -78,6 +78,27 @@ Route::name('frontend.')->group(function () {
 
             });
 
+            Route::prefix('project-htcrr')->group(function () {
+
+                Route::name('project-htcrr.')->group(function () {
+
+                    Route::resource('/{project}', 'ProjectHMHtcrrController');
+
+                });
+
+                /** Transaction: HTCRR */
+
+                // Route::post('/htcrr','HtCrrController@store')->name('project-htcrr.htcrr.add');
+
+                /** Transaction: Item */
+                // Route::post('/htcrr/{htcrr}/item', 'HtCrrItemsController@store')->name('htcrr.item.store');
+                // Route::delete('/htcrr/{htcrr}/{item}/item', 'HtCrrItemsController@destroy')->name('htcrr.item.destroy');
+
+                // Route::get('/{project}/workpackage/{workPackage}/getManhours','ProjectHMWorkPackageController@getManhours')->name('project-hm.getManhours');
+
+            });
+
+
             Route::prefix('project-workshop')->group(function () {
 
                 Route::name('project-workshop.')->group(function () {
