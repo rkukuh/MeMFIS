@@ -238,7 +238,7 @@ let AdditionalTaskShow = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/project/defectcard/'+project_uuid,
+                        url: '/datatables/project/defectcard/'+project_uuid+'/selected',
 
                         map: function (raw) {
                             let dataSet = raw;
