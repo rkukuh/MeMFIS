@@ -46,13 +46,13 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'BenefitDatatables@index')->name('benefit.index');
-                Route::get('/basecalculation', 'BenefitTypeDatatables@baseCalculation')->name('benefit.base'); 
+                Route::get('/basecalculation', 'BenefitTypeDatatables@baseCalculation')->name('benefit.base');
                 Route::get('/proratecalculation', 'BenefitTypeDatatables@prorateCalculation')->name('benefit.prorate');
                 /** Polymorph */
-                
+
             });
         });
-            
+
         /** TRANSACTION */
 
         Route::get('/price-list', 'PriceListDatatables@index')->name('price-list.index');
@@ -121,7 +121,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/', 'CompanyDatatables@index')->name('all');
                 Route::get('/type', 'CompanyTypeDatatables@index')->name('company.type');
                  /** Polymorph */
-                
+
             });
 
         });
@@ -234,6 +234,7 @@ Route::name('datatables.')->group(function () {
 
                 Route::get('/', 'ProjectDatatables@index')->name('all');
                 Route::get('/defectcard/{project}', 'ProjectDatatables@defectCard')->name('defectcard');
+                Route::get('/defectcard/{project}/selected', 'ProjectDatatables@selectedDefectCard')->name('selectedDefectCard');
                 Route::get('{project}/htcrr/', 'HtCrrDatatables@index')->name('htcrr.all');
                 Route::get('/{project}/workpackage', 'ProjectDatatables@workpackage')->name('workpackage.project');
                 Route::get('/{htcrr}/tools', 'HtCrrItemsDatatables@tool')->name('htcrr.tools.index');
