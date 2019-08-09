@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\Project;
 use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
+use App\Models\DefectCard;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
@@ -56,12 +57,20 @@ class ProjectHMAdditionalController extends Controller
      */
     public function store(Project $project,Request $request)
     {
-        // $defectcard_uuid = explode(",",$request->defectcard_uuid);
-        // dd($defectcard_uuid);
         $parent_id = $project->id;
         $project = $project->replicate();
         $project->parent_id = $parent_id;
         $project->save();
+        $defectcard_uuids = explode(",",$request->defectcard_uuid);
+        // dd($defectcard_uuid);
+
+        foreach($defectcard_uuids as $defectcard_uuid){
+            $defectcard = DefectCard::where('uuid',$defectcard_uuid)->first();
+            $defectcard->project_additional_id = $project->id;
+
+            $defectcard->save();
+
+        }
 
         return response()->json($project);
     }
