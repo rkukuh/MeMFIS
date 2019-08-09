@@ -358,7 +358,7 @@ class QuotationController extends Controller
                     $tc_code = 'DUM';
                 }
 
-                if($tc_code == "basic" or $tc_code == "sip" or $tc_code == "cpcp" or $tc_code == "si" or $tc_code == "preliminary" or $tc_code == "DUM"){
+                if($tc_code == "BSC" or $tc_code == "SIP" or $tc_code == "CPC" or $tc_code == "SIT" or $tc_code == "PRE" or $tc_code == "DUM"){
                     $jobcard = JobCard::create([
                         'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
                         'taskcard_id' => $tc->id,
@@ -370,6 +370,7 @@ class QuotationController extends Controller
                         'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
                         'progressed_by' => Auth::id()
                     ]));
+
                 }else{
                     // foreach($tc->eo_instructions as $instruction){
                     //     $jobcard = JobCard::create([
