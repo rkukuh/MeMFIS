@@ -13,9 +13,7 @@ let Unit = {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
-
-                            console.log(dataSet);
-
+console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -97,11 +95,11 @@ let Unit = {
         let simpan = $('.modal-footer').on('click', '.add-price', function () {
             let price_array = [];
             $('#price ').each(function (i) {
-                price_array[i] = document.getElementsByName('group-price[' + i + '][price]')[0].value;
+                price_array[i] = $(this).val();
             });
             let level_array = [];
             $('#level ').each(function (i) {
-                level_array[i] = document.getElementsByName('group-price[' + i + '][level]')[0].value;
+                level_array[i] = $(this).val();
             });
 
             let item = $('#uuid').val();
@@ -141,20 +139,12 @@ let Unit = {
 
         // show add price modal
          $('.price_list_datatable').on('click', '.add-price', function () {
+            let item = $(this).data('uuid');
+
             document.getElementById("uuid").value = $(this).data('uuid');
             document.getElementById("pn").innerHTML = $(this).data('pn');
             document.getElementById("name").innerHTML = $(this).data('name');
             document.getElementById("unit").innerHTML = $(this).data('unit');
-
-
-        });
-        let edit = $('.price_list_datatable').on('click', '.edit-price', function edit () {
-            save_changes_button();
-
-            let item = $(this).data('uuid');
-            document.getElementById("pn-edit").innerHTML = $(this).data('pn');
-            document.getElementById("name-edit").innerHTML = $(this).data('name');
-            document.getElementById("unit-edit").innerHTML = $(this).data('unit');
 
             $.ajax({
                 headers: {
@@ -163,19 +153,53 @@ let Unit = {
                 type: 'get',
                 url: '/item/'+item+'/prices/'+item+'/edit',
                 success: function (data) {
-                    $('#price-list').empty();
+                    $(".unit_price_list").empty();
                     for (let i = 0; i < data.length; i++) {
-                        $('#price-list').append(
-                            //                     '<option value="' + key + '" selected>' + value + '</option>'
-                            '<tr>'+
-                            '<td>Unit Price '+(i+1)+'</td>'+
-                            '<td>'+
-                            '<div id="unit-edit" name="unit" style="background-color: beige;'+
-                            'padding: 15px;" >'+
+                        $('#price_'+i).val(data[i].amount);
+                        $('#level_'+i+" option[value="+data[i].level+"]").prop('selected', true);   
+                    }
+
+                    $('.btn-success').addClass('update');
+                    $('.btn-success').removeClass('add');
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    // this are default for ajax errors
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#kategori-error').html(value);
+                    });
+                }
+            });
+        });
+        let edit = $('.price_list_datatable').on('click', '.edit-price', function edit () {
+            save_changes_button();
+
+            let item = $(this).data('uuid');
+            document.getElementById("pn-edit").innerHTML = $(this).data('pn');
+            document.getElementById("name-edit").innerHTML = $(this).data('name');
+            document.getElementById("unit-edit").innerHTML = $(this).data('unit');
+            
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/item/'+item+'/prices/'+item+'/edit',
+                success: function (data) {
+                    $(".unit_price_list").empty();
+                    for (let i = 0; i < data.length; i++) {
+                        $(".unit_price_list").append(
+                        '<div class="row" style="margin-bottom:15px">'+
+                            '<div class="col-sm-6 col-md-6 col-lg-6" style="padding:15px; background-color:beige; margin-right:15px;  margin-left:15px;">'+
                                 data[i].amount+
                             '</div>'+
-                            '</td>'+
-                            '</tr>'
+                            '<div class="col-sm-4 col-md-4 col-lg-4" style="padding:15px; background-color:beige">'+
+                                data[i].level+
+                            '</div>'+
+                        '</div>'
                         );
                     }
 

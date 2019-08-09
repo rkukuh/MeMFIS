@@ -54,13 +54,14 @@
                                 <div class=" row">
                                     <div class="col-sm-7 col-md-7 col-lg-7">
                                         @component('frontend.common.input.number')
-                                            @slot('text', 'price')
+                                            @slot('id', 'price_'.$i)
                                             @slot('name', 'price')
+                                            @slot('text', 'price')
                                             @slot('id_error', 'price')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-5 col-md-5 col-lg-5">
-                                        <select name="level" class="form-control">
+                                        <select name="level" id="level_{{$i}}" class="form-control">
                                             <option value="1">
                                                 1
                                             </option>

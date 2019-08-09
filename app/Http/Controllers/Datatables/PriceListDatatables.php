@@ -16,7 +16,7 @@ class PriceListDatatables extends Controller
      */
     public function index()
     {
-        $items = Item::with('unit', 'journal')->get();
+        $items = Item::with('unit', 'journal', 'prices')->whereHas('prices')->get();
 
         $data = $alldata = json_decode($items);
 
