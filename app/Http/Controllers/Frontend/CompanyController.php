@@ -62,6 +62,7 @@ class CompanyController extends Controller
             'type_id' => $type_id
         ]);
 
+        // TODO: Return error message as JSON
         return response()->json($company);
     }
 
@@ -123,7 +124,6 @@ class CompanyController extends Controller
 
         // TODO: Return error message as JSON
         return response()->json($request->description);
-        return false;
     }
 
     /**
@@ -134,8 +134,9 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        Company::where('uuid',$company->uuid)->delete();
+        $company->delete();
+
+        // TODO: Return error message as JSON
         return response()->json($company);
-        return false;
     }
 }

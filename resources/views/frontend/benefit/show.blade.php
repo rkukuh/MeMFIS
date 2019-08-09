@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.benefit.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.benefit.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Benefits
                             </span>
@@ -57,7 +57,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text', $benefit->code)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -66,7 +66,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text', $benefit->name)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text', $benefit->description)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -88,7 +88,7 @@
                                             </label>
         
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text', $base)
                                             @endcomponent
 
                                         </div>
@@ -98,7 +98,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text', $prorate)
                                             @endcomponent
                                             
                                         </div>

@@ -161,14 +161,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
         Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
 
-
-        /** Benefits */
-
-        Route::view('hr/benefit', 'frontend.benefit.index')->name('hr.benefit.index');
-        Route::view('hr/benefit/create', 'frontend.benefit.create')->name('hr.benefit.create');
-        Route::view('hr/benefit/show', 'frontend.benefit.show')->name('hr.benefit.show');
-
-
         /** Position */
 
         Route::view('hr/position', 'frontend.position.index')->name('hr.position.index');

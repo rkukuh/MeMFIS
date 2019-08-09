@@ -27,5 +27,5 @@
             </div>
             @include('frontend.employee.employee-status.employee-status.modal')
 
-        <div class="m_datatable_employee" id="scrolling_both"></div>
+        <div class="m_datatable_employee_status" id="scrolling_both"></div>
     </div>
