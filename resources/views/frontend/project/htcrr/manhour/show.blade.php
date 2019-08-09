@@ -26,21 +26,6 @@
                     @slot('text', $project_workpackage->performance_factor)
                 @endcomponent
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                <div class="row">
-                    <div class="col-sm-9 col-md-9 col-lg-9">
-                        @component('frontend.common.input.checkbox')
-                            @slot('id', 'default')
-                            @slot('name', 'default')
-                            @slot('text', 'TaskCard Performance Factor')
-                            @slot('style_div','margin-top:10px')
-                            @slot('help_text','If Checked, Project will use TaskCard Performance Factor')
-                            @slot('icon', 'fa-info-circle m--font-info')
-                            @slot('disabled','disabled')
-                        @endcomponent
-                    </div>
-                </div>
-            </div>
         </div>
         <hr>
         <div class="form-group m-form__group row">

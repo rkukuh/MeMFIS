@@ -27,23 +27,6 @@
                     @slot('value', '1.6')
                 @endcomponent
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                <div class="row">
-                    <div class="col-sm-9 col-md-9 col-lg-9">
-                        @component('frontend.common.input.checkbox')
-                            @slot('id', 'default')
-                            @slot('name', 'default')
-                            @slot('text', 'TaskCard Performance Factor')
-                            @slot('style_div','margin-top:10px')
-                            @slot('help_text','If Checked, Project will use TaskCard Performance Factor')
-                            @slot('icon', 'fa-info-circle m--font-info')
-                        @endcomponent
-                    </div>
-                    <!-- <div class="col-sm-1 col-md-1 col-lg-1"  style="margin-left:-350px;margin-top:10px">
-                        <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="" data-original-title="If Checked, Project will use TaskCard Performance Factor"></i>
-                    </div> -->
-                </div>
-            </div>
         </div>
         <hr>
         <div class="form-group m-form__group row">

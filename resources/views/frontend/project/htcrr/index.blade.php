@@ -27,14 +27,11 @@
                                 <div class="px-2 py-2">
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">Taskcard List(s)</a>
+                                            <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">HTCRR List(s)</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link m_tabs_manhour" data-toggle="tab" href="#m_tabs_manhour">Manhours Propotion</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#m_tabs_facility">Facility Used</a>
-                                        </li>
+                                        </li>  
                                         <li class="nav-item">
                                             <a class="nav-link" data-toggle="tab" href="#m_tabs_enginner" id="engineer_team_tab">Engineer Team</a>
                                         </li>
@@ -46,9 +43,6 @@
                                     </div>
                                     <div class="tab-pane" id="m_tabs_manhour" role="tabpanel">
                                         @include('frontend.project.htcrr.manhour.index')
-                                    </div>
-                                    <div class="tab-pane" id="m_tabs_facility" role="tabpanel">
-                                        @include('frontend.project.htcrr.facility.index')
                                     </div>
                                     <div class="tab-pane" id="m_tabs_enginner" role="tabpanel">
                                         @include('frontend.project.htcrr.engineer.index')
@@ -81,7 +75,7 @@
         let Project_uuid = '{{ $project->uuid }}';
         let anyChanges = false;
     </script>
-    <script src="{{ asset('js/frontend/project/hm/workpackage.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/htcrr/workpackage.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/modal/datatables.js') }}"></script>
 

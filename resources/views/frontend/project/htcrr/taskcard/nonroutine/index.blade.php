@@ -30,5 +30,4 @@
         </div>
     </div>
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/project/hm/non-routine/index.js')}}"></script>
 @endpush
