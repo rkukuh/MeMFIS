@@ -62,7 +62,6 @@ class ProjectHMAdditionalController extends Controller
         $project->parent_id = $parent_id;
         $project->save();
         $defectcard_uuids = explode(",",$request->defectcard_uuid);
-        // dd($defectcard_uuid);
 
         foreach($defectcard_uuids as $defectcard_uuid){
             $defectcard = DefectCard::where('uuid',$defectcard_uuid)->first();
@@ -144,9 +143,20 @@ class ProjectHMAdditionalController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy(Project $project,Request $request)
     {
-        //
+        $defectcard_uuids = explode(",",$request->defectcard_uuid);
+
+        foreach($defectcard_uuids as $defectcard_uuid){
+            // $null = 1;
+            $defectcard = DefectCard::where('uuid',$defectcard_uuid)->first();
+            $defectcard->project_additional_id = null;
+
+            $defectcard->save();
+        }
+
+        return response()->json($project);
+
     }
 
 }

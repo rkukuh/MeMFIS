@@ -92,7 +92,7 @@
                         @slot('type','button')
                         @slot('id', 'delete-defect-card')
                         @slot('text', 'Delete DefectCard')
-                        @slot('class', 'delete-defect-card')
+                        @slot('class', 'delete-project-additional')
                         @slot('icon', 'fa-trash')
                         @slot('color', 'danger')
                     @endcomponent
@@ -106,7 +106,7 @@
                         @slot('type','button')
                         @slot('id', 'add-defect-card')
                         @slot('text', 'Add DefectCard')
-                        @slot('class', 'add-defect-card')
+                        @slot('class', 'add-project-additional')
                         @slot('icon', 'fa-plus')
                     @endcomponent
                 </div>

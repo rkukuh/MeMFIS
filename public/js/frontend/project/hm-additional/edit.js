@@ -397,7 +397,7 @@ let AdditionalTaskCreate = (function() {
                 ]
             });
 
-            let UUID = "";
+            let UUID_Selected = "";
 
             !(function() {
               (t2.extensions = { checkbox: {} }),
@@ -426,7 +426,7 @@ let AdditionalTaskCreate = (function() {
                   function(t2) {
                     let uuids = e.checkbox().getSelectedId();
 
-                    UUID = uuids
+                    UUID_Selected = uuids
 
                     // let a = e.checkbox().getSelectedId().length;
                     // $("#m_datatable_selected_number1").html(a),
@@ -520,10 +520,55 @@ let AdditionalTaskCreate = (function() {
                         if (data.errors) {
 
                         } else {
-                            toastr.success('Project Aditional has been created.', 'Success', {
+                            toastr.success('Defectcard has been created.', 'Success', {
                                 timeOut: 5000
                             });
-                            window.location.href = '/project-hm-additional/'+data.uuid+'/edit';
+
+                            let table = $('#defect_card_datatable_actual').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+
+                            let table2 = $('#defect_card_datatable').mDatatable();
+
+                            table2.originalDataSet = [];
+                            table2.reload();
+
+                        }
+                    }
+                });
+            });
+            $('.delete-project-additional').on('click', function () {
+                let data = new FormData();
+                data.append("defectcard_uuid", UUID_Selected);
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'post',
+                    url: '/project-hm-additional/'+project_uuid+'/destroy',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data:data,
+                    success: function (data) {
+                        if (data.errors) {
+
+                        } else {
+                            toastr.success('Defectcard Aditional has been deleted.', 'Success', {
+                                timeOut: 5000
+                            });
+
+                            let table = $('#defect_card_datatable_actual').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+
+                            let table2 = $('#defect_card_datatable').mDatatable();
+
+                            table2.originalDataSet = [];
+                            table2.reload();
 
                         }
                     }
