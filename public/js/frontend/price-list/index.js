@@ -14,6 +14,8 @@ let Unit = {
                                 dataSet = raw.data;
                             }
 
+                            console.log(dataSet);
+
                             return dataSet;
                         }
                     }
@@ -137,6 +139,7 @@ let Unit = {
             });
         });
 
+        // show add price modal
          $('.price_list_datatable').on('click', '.add-price', function () {
             document.getElementById("uuid").value = $(this).data('uuid');
             document.getElementById("pn").innerHTML = $(this).data('pn');

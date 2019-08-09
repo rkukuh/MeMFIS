@@ -327,11 +327,11 @@
               @endif
             </td>
             <td width="25%" align="center" valign="top">
-              @if($jobCard->taskcard->work_area)
-                {{$jobCard->taskcard->work_area}}
-              @else
-                -
-              @endif
+              @if($jobCard->taskcard->work_area != null)
+              {{$jobCard->taskcard->workarea->name}}
+            @else
+              -
+            @endif
             </td>
             <td width="25%" align="center" valign="top">
               @if($jobCard->taskcard->estimation_manhour)

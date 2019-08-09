@@ -155,7 +155,6 @@ let TaskCard = {
             data.append("is_rii", is_rii);
             data.append("fileInput", document.getElementById('taskcard').files[0]);
 
-            return access;
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -420,9 +420,11 @@
                             <div class="row align-items-center">
                                 <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                         <div class="defectcard_helper_datatable" id="scrolling_both"></div>
+                                        @if($defectcard->helpers()->count() < $defectcard->helper_quantity)
                                         <button data-toggle="modal" data-target="#modal_helper" type="button" href="#" 
                                         class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-md add-helper" title="Add Helper" 
                                 data-defect_card="{{$defectcard->uuid}}"><i class="la la-plus-circle"></i> Add Helper</button>
+                                        @endif
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
                             </div>
