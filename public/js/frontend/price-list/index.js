@@ -156,7 +156,8 @@ let Unit = {
                     $(".unit_price_list").empty();
                     for (let i = 0; i < data.length; i++) {
                         $('#price_'+i).val(data[i].amount);
-                        $('#level_'+i+" option[value="+data[i].level+"]").prop('selected', true);   
+                        $('#level_'+i).val(data[i].amount);
+                        // $('#level_'+i+" option[value="+data[i].level+"]").prop('selected', true);   
                     }
 
                     $('.btn-success').addClass('update');
