@@ -30,7 +30,8 @@ let Quotation = {
                         type: 'GET',
                         dataType: 'json',
                         success: function (response) {
-                            let res = JSON.parse(response.attention);
+                            // let res = JSON.parse(response);
+                            let res = response;
                             $('select[name="attention"]').empty();
                             $('select[name="phone"]').empty();
                             $('select[name="email"]').empty();
@@ -39,28 +40,28 @@ let Quotation = {
                             if(response.addresses.length){
                                 $.each(response.addresses, function( index, value ) {
                                     $('select[name="address"]').append(
-                                        '<option value="' + value.uuid + '">' + value.address + '</option>'
+                                        '<option value="' + value.address + '">' + value.address + '</option>'
                                     );
                                 });
                             }
                             if(response.emails.length){
                                 $.each(response.emails, function( index, value ) {
                                     $('select[name="email"]').append(
-                                        '<option value="' + value.uuid + '">' + value.address + '</option>'
+                                        '<option value="' + value.address + '">' + value.address + '</option>'
                                     );
                                 });
                             }
                             if(response.faxes.length){
                                 $.each(response.faxes, function( index, value ) {
                                     $('select[name="fax"]').append(
-                                        '<option value="' + value.uuid + '">' +value.number + '</option>'
+                                        '<option value="' + value.number + '">' +value.number + '</option>'
                                     );
                                 });
                             }
                             if(response.phones.length){
                                 $.each(response.phones, function( index, value ) {
                                     $('select[name="phone"]').append(
-                                        '<option value="' + value.uuid + '">' + value.number + '</option>'
+                                        '<option value="' + value.number + '">' + value.number + '</option>'
                                     );
                                 });
                             }

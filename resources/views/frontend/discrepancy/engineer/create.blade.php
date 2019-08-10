@@ -119,14 +119,11 @@
                                                 Skill @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @if(sizeof($jobcard->taskcard->skills) == 3)
-                                                    @slot('text', 'ERI')
-                                                @elseif(sizeof($jobcard->taskcard->skills) == 1)
-                                                    @slot('text', $jobcard->taskcard->skills[0]->name)
-                                                @else
-                                                    @include('frontend.common.label.data-info-nodata')
-                                                @endif
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Otr Certification')
+                                                @slot('id', 'otr_certification')
+                                                @slot('name', 'otr_certification')
+                                                @slot('id_error', 'otr-certification')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -173,8 +170,11 @@
                                                 Area/Zone
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                            @slot('text', $jobcard->taskcard->work_area)
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Work Area')
+                                                @slot('id', 'work_area')
+                                                @slot('name', 'work_area')
+                                                @slot('id_error', 'work-area')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -467,6 +467,16 @@
 @endpush
 
 @push('footer-scripts')
+<script>
+// let skill = {!! $jobcard->taskcard->skills[0] !!};
+</script>
+    
     <script src="{{ asset('js/frontend/discrepancy/engineer/create.js') }}"></script>
     <script src="{{ asset('js/frontend/discrepancy/form-reset.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/work-area.js') }}"></script>
 @endpush

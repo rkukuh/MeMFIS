@@ -54,29 +54,20 @@
                                 <div class=" row">
                                     <div class="col-sm-7 col-md-7 col-lg-7">
                                         @component('frontend.common.input.number')
-                                            @slot('text', 'price')
+                                            @slot('id', 'price_'.$i)
                                             @slot('name', 'price')
-                                            @slot('id_error', 'price')
+                                            @slot('text', 'price')
+                                            @slot('id_error', 'price_'.$i)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-5 col-md-5 col-lg-5">
-                                        <select name="level" class="form-control">
-                                            <option value="1">
-                                                1
-                                            </option>
-                                            <option value="2">
-                                                2
-                                            </option>
-                                            <option value="3">
-                                                3
-                                            </option>
-                                            <option value="4">
-                                                4
-                                            </option>
-                                            <option value="5">
-                                                5
-                                            </option>
-                                        </select>
+                                        @component('frontend.common.input.text')
+                                            @slot('id', 'level_'.$i)
+                                            @slot('name', 'level')
+                                            @slot('readonly', 'readonly')
+                                            @slot('value', $i+1)
+                                            @slot('id_error', 'level_'.$i)
+                                        @endcomponent
                                     </div>
                                 </div>
                                 @endfor
