@@ -91,6 +91,25 @@
             border-left:  2px solid  #d4d7db;
             border-right:  2px solid  #d4d7db;
         }
+        #content4 .head{
+            width: 100%;
+            height: 40px;
+            background: #f7dd16;
+            border-radius: 9px 9px 0px 0px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        #content4 .body{
+            width: 100%;
+            border-left:  4px solid  #d4d7db;
+            border-right:  4px solid  #d4d7db;
+            border-bottom:  4px solid  #d4d7db;
+        }
+
+        #content4 .body table tr td{
+            border-left: 1px solid  #d4d7db;
+        }
 
     </style>
 </head>
@@ -100,7 +119,13 @@
     </header>
     <footer style="margin-top:14px;">
         <div class="container">
-          
+          <table width="100%">
+            <tr>
+                <td valign="top" width="36%">Print By : <span>name:timestamp</span></td>
+                <td valign="top" width="25%">Status : <span>Open</span></td>
+                <td valign="top" width="39%">Date Close : <span>time</span></td>
+            </tr>
+          </table>
         </div>
         <img src="./img/form/printoutjobcardeo-new/FooterJobCardEO.png" width="100%" alt="" >
     </footer>
@@ -375,8 +400,8 @@
                         <td valign="top" align="center" width="50%"><b>Tool Required / Special Tooling</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" align="center" height="5%">lorem</td>
-                        <td valign="top" align="center" height="5%">lorem</td>
+                        <td valign="top" align="center" height="8%">lorem</td>
+                        <td valign="top" align="center" height="8%">lorem</td>
                     </tr>
                 </table>
                 <table width="100%" cellpadding="4" class="table_content">
@@ -422,8 +447,21 @@
                 </table>
                 <table  width="100%" cellpadding="4" class="table_content">
                     <tr>
-                        <td>Discrepancy Found :</td>
-                        <td>Transfer To Defect Card No :</td>
+                        <td valign="top" width="50%">Discrepancy Found :
+                            <span>
+                                <div style="margin-left:100px;margin-top:-20px;">
+                                    <ul>
+                                      <li>
+                                        <img  src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                                      </li>
+                                      <li style="margin-left:12px;">
+                                        <img src="./img/check-box-empty.png" alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                                      </li>
+                                    </ul>
+                                </div>
+                            </span>
+                        </td>
+                        <td valign="top" width="50%">Transfer To Defect Card No : <span>Lorem</span></td>
                     </tr>
                 </table>
                 <div style="position:absolute; left:659px; top:-20px;">
@@ -431,6 +469,41 @@
                     {!!DNS2D::getBarcodeHTML('jobcard', 'QRCODE',3.4,3.4)!!}
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div id="content4" style="margin-top:4px;">
+        <div class="container">
+          <div class="head">
+            <table width="100%" cellpadding="10">
+              <tr>
+                <td width="33%" align="center">Accomplished By</td>
+                <td width="33%" align="center">Inspected By</td>
+                <td width="34%" align="center">RII By</td>
+              </tr>
+            </table>
+          </div>
+          <div class="body">
+            <table width="100%">
+              <tr>
+                <td width="33%" height="50" align="center" valign="bottom">
+                  <div style="width:100%;height:20px;text-align:center;padding-left:5px;">name : timestamp</div>
+                </td>
+                <td width="33%" height="50" align="center" valign="bottom">
+                  <div style="width:100%;height:20px;text-align:center;padding-left:5px;">name : timestamp</span></div>
+                </td>
+                <td width="34%" height="50" align="center" valign="bottom"
+                @if(1==0)
+                  style="background:grey"
+                @endif
+                >
+                @if(1==1)
+                  <div style="width:100%;height:20px;text-align:center;padding-left:5px;">name : timestamp</div>
+                @endif
+                </td>
+              </tr>
+            </table>
+          </div>
         </div>
     </div>
 </body>
