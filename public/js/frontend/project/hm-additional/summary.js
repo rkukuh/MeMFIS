@@ -4,13 +4,13 @@ let summary = {
             add = add || '...';
             return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
         };
-        $('.general_tools_datatable').mDatatable({
+        $('.materials_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/08a625c2-cd30-4a9c-98da-054a2cbae391/tools',
+                        url: '/datatables/project/additional/'+project_uuid+'/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -46,20 +46,20 @@ let summary = {
                     }
                 }
             },
-            columns: [
-            {
-                field: 'tackcard_number',
-                title: 'Defect Card No',
-                sortable: !1,
-            },
-            {
+            columns: [{
                 field: 'code',
                 title: 'P/N',
                 sortable: !1,
             },
             {
                 field: 'name',
-                title: 'Item Description',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'description',
+                title: 'Tool Description',
                 sortable: 'asc',
                 filterable: !1,
             },
@@ -70,50 +70,26 @@ let summary = {
                 filterable: !1,
             },
             {
-                field: 'unit_name',
+                field: 'pivot.unit_id',
                 title: 'Unit',
                 sortable: 'asc',
                 filterable: !1,
-
             },
             {
                 field: 'description',
-                title: 'Remarks',
+                title: 'Description',
                 sortable: 'asc',
                 filterable: !1,
-                template: function (t) {
-                    if (t.description) {
-                        data = strtrunc(t.description, 50);
-                        return (
-                            '<p>' + data + '</p>'
-                        );
-                    }
-
-                    return ''
-                }
-            },
-            // {
-            //     field: 'Actions',
-            //     sortable: !1,
-            //     overflow: 'visible',
-            //     template: function (t, e, i) {
-            //         return (
-            //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
-            //                 '<i class="la la-trash"></i>' +
-            //             '</a>'
-            //         );
-            //     }
-            // }
+            }
             ]
         });
-
-        $('.general_items_datatable').mDatatable({
+        $('.tools_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/08a625c2-cd30-4a9c-98da-054a2cbae391/materials',
+                        url: '/datatables/project/additional/'+project_uuid+'/tools',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -149,20 +125,20 @@ let summary = {
                     }
                 }
             },
-            columns: [
-            {
-                field: 'tackcard_number',
-                title: 'Defect Card No.',
-                sortable: !1,
-            },
-            {
+            columns: [{
                 field: 'code',
                 title: 'P/N',
                 sortable: !1,
             },
             {
                 field: 'name',
-                title: 'Item Description',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'description',
+                title: 'Tool Description',
                 sortable: 'asc',
                 filterable: !1,
             },
@@ -173,40 +149,17 @@ let summary = {
                 filterable: !1,
             },
             {
-                field: 'unit_name',
+                field: 'pivot.unit_id',
                 title: 'Unit',
                 sortable: 'asc',
                 filterable: !1,
-
             },
             {
                 field: 'description',
-                title: 'Remarks',
+                title: 'Description',
                 sortable: 'asc',
                 filterable: !1,
-                template: function (t) {
-                    if (t.description) {
-                        data = strtrunc(t.description, 50);
-                        return (
-                            '<p>' + data + '</p>'
-                        );
-                    }
-
-                    return ''
-                }
-            },
-            // {
-            //     field: 'Actions',
-            //     sortable: !1,
-            //     overflow: 'visible',
-            //     template: function (t, e, i) {
-            //         return (
-            //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-material" title="Delete" data-uuid="' + t.uuid + '">' +
-            //                 '<i class="la la-trash"></i>' +
-            //             '</a>'
-            //         );
-            //     }
-            // }
+            }
             ]
         });
     }

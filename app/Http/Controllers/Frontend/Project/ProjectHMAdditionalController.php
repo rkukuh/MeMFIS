@@ -163,4 +163,24 @@ class ProjectHMAdditionalController extends Controller
 
     }
 
+    /**
+     * Display a summary of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function summary(Project $project)
+    {
+        $defectcard =  DefectCard::where('project_additional_id', $project->id)->get();
+        $total_defectcard = $defectcard->count();
+        $total_estimation_manhours = $defectcard->sum('estimation_manhour');
+        return view('frontend.project.hm-additional.summary',[
+            'project' => $project,
+            'total_defectcard' => $total_defectcard,
+            'total_estimation_manhours' => $total_estimation_manhours,
+        ]);
+
+    }
+
+
+
 }
