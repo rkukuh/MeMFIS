@@ -237,6 +237,7 @@
 @push('footer-scripts')
     <script>
         let project_uuid = '{{$project->uuid}}'
+        let project_parent_uuid = '{{$project_parent->uuid}}'
     </script>
 
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>

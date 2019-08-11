@@ -6,7 +6,7 @@ let AdditionalTaskCreate = (function() {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/project/defectcard/'+project_uuid,
+                        url: '/datatables/project/defectcard/'+project_parent_uuid,
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -220,7 +220,7 @@ let AdditionalTaskCreate = (function() {
                     source: {
                         read: {
                             method: 'GET',
-                            url: '/datatables/project/additional/initial',
+                            url: '/datatables/project/additional/'+project_uuid+'/materials',
                             map: function (raw) {
                                 let dataSet = raw;
 
@@ -290,18 +290,6 @@ let AdditionalTaskCreate = (function() {
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
                 }
                 ]
             });
@@ -311,7 +299,7 @@ let AdditionalTaskCreate = (function() {
                     source: {
                         read: {
                             method: 'GET',
-                            url: '/datatables/project/additional/initial',
+                            url: '/datatables/project/additional/'+project_uuid+'/tools',
                             map: function (raw) {
                                 let dataSet = raw;
 
@@ -381,18 +369,6 @@ let AdditionalTaskCreate = (function() {
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
                 }
                 ]
             });
@@ -505,6 +481,8 @@ let AdditionalTaskCreate = (function() {
             $('.add-project-additional').on('click', function () {
                 let data = new FormData();
                 data.append("defectcard_uuid", UUID);
+                data.append('_method', 'PUT');
+
 
                 $.ajax({
                     headers: {
