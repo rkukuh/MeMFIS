@@ -59,7 +59,7 @@
       <h2>CERTIFICATE OF RELEASE TO SERVICE</h2>
       <table width="100%">
         <tr width="100%">
-          <td width="40%" valign="top">Project Refrence</td>
+          <td width="40%" valign="top">Project Reference</td>
           <td width="1%" valign="top">:</td>
           <td width="59%" valign="top"><span>{{$rts->project->code}}</span></td>
         </tr>
@@ -97,7 +97,7 @@
       </table>
       <table width="100%" cellspacing="9" style="margin-top:-6px" class="table2">
         <tr width="100%">
-          <td width="40%" valign="top">Work Data/CAMP Refrence</td>
+          <td width="40%" valign="top">Work Data/CAMP Reference</td>
           <td width="1%" valign="top">:</td>
         <td width="59%" valign="top"><span>{{$rts->work_data}}</span></td>
         </tr>
