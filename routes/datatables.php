@@ -240,7 +240,9 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{htcrr}/tools', 'HtCrrItemsDatatables@tool')->name('htcrr.tools.index');
                 Route::get('/{htcrr}/materials', 'HtCrrItemsDatatables@material')->name('htcrr.materials.index');
                 Route::post('/additional/materials', 'AdditionalItemsDatatables@material')->name('additional.materials.index');
-                Route::post('/additional/tools', 'AdditionalItemsDatatables@tools')->name('additional.tools.index');
+                Route::post('/additional/tools', 'AdditionalItemsDatatables@tool')->name('additional.tools.index');
+                Route::get('/additional/{project}/materials', 'AdditionalItemsDatatables@selectedMaterial')->name('additional.materials.selected');
+                Route::get('/additional/{project}/tools', 'AdditionalItemsDatatables@selectedTool')->name('additional.tools.selected');
                 Route::get('/additional/initial', 'AdditionalItemsDatatables@initial')->name('additional.initial.index');
 
                 /** WORKPACKAGE */
