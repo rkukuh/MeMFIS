@@ -256,14 +256,9 @@ class ProjectDatatables extends Controller
      */
     public function selectedDefectCard(Project $project)
     {
-        $quotation = Quotation::where('project_id',$project->id)->first()->id;
+        $defectcards = DefectCard::with('jobcard')->where('project_additional_id', $project->id)->get();
 
-        $defectcards = DefectCard::with('jobcard')
-                                ->whereHas('jobcard', function ($query) use ($quotation){
-                                    $query->where('quotation_id', $quotation);
-                                })->where('project_additional_id','<>', null)->get();
-
-                                // RecordID
+        // RecordID
 
         foreach($defectcards as $defectcard){
             $defectcard->RecordID .= $defectcard->uuid;

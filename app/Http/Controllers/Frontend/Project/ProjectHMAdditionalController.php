@@ -83,13 +83,14 @@ class ProjectHMAdditionalController extends Controller
     public function show(Project $project)
     {
         if($project->quotations->toArray() == []){
-            $project = Project::find($project->parent_id);
-            $attention = json_decode($project->quotations()->first()->attention);
+            $project_parent = Project::find($project->parent_id);
+            $attention = json_decode($project_parent->quotations()->first()->attention);
         }else{
-            $attention = json_decode($project->quotations()->first()->attention);
+            $attention = json_decode($project_parent->quotations()->first()->attention);
         }
         return view('frontend.project.hm-additional.show',[
             'project' => $project,
+            'project_parent' => $project_parent,
             'aircrafts' => $this->aircrafts,
             'customers' => $this->customers,
             'attention' => $attention
@@ -105,13 +106,14 @@ class ProjectHMAdditionalController extends Controller
     public function edit(Project $project)
     {
         if($project->quotations->toArray() == []){
-            $project = Project::find($project->parent_id);
-            $attention = json_decode($project->quotations()->first()->attention);
+            $project_parent = Project::find($project->parent_id);
+            $attention = json_decode($project_parent->quotations()->first()->attention);
         }else{
-            $attention = json_decode($project->quotations()->first()->attention);
+            $attention = json_decode($project_parent->quotations()->first()->attention);
         }
         return view('frontend.project.hm-additional.edit',[
             'project' => $project,
+            'project_parent' => $project_parent,
             'aircrafts' => $this->aircrafts,
             'customers' => $this->customers,
             'attention' => $attention
@@ -125,16 +127,18 @@ class ProjectHMAdditionalController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectHMUpdate $request, Project $project)
+    public function update(Request $request, Project $project)
     {
-        // $project->update($request->all());
-        // if ($request->hasFile('fileInput')) {
-        //     $destination = 'project/hm/workOrder';
-        //     $fileName = $request->file('fileInput')->getClientOriginalName();
-        //     $fileUpload = Storage::putFileAs($destination,$request->file('fileInput'), $fileName);
-        // }
+        $defectcard_uuids = explode(",",$request->defectcard_uuid);
+        foreach($defectcard_uuids as $defectcard_uuid){
+            $defectcard = DefectCard::where('uuid',$defectcard_uuid)->first();
+            $defectcard->project_additional_id = $project->id;
 
-        // return response()->json($project);
+            $defectcard->save();
+
+        }
+
+        return response()->json($project);
     }
 
     /**
