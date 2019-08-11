@@ -479,7 +479,7 @@
 
 @push('footer-scripts')
 
-<script>
+    <script>
         let project_uuid = '{{$project->uuid}}'
     </script>
 
