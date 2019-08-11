@@ -1,4 +1,4 @@
-let ProjectSelect2 = {
+let ProjectAdditionalSelect2 = {
     init: function () {
         $('#project-additional, #project-additional_validate').select2({
             placeholder: 'Select a Project'
@@ -7,5 +7,5 @@ let ProjectSelect2 = {
 };
 
 jQuery(document).ready(function () {
-    ProjectSelect2.init();
+    ProjectAdditionalSelect2.init();
 });
