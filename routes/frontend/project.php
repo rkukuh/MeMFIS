@@ -83,7 +83,7 @@ Route::name('frontend.')->group(function () {
 
                 Route::name('project-htcrr.')->group(function () {
 
-                    Route::resource('/{project}', 'ProjectHMHtcrrController');
+                    Route::resource('/{project}/project-htcrr', 'ProjectHMHtcrrController');
 
                 });
 
