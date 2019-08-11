@@ -76,9 +76,13 @@
                                                 Sequence No
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text',  $discrepancy->sequence)
+                                            @component('frontend.common.input.number')
+                                                @slot('id', 'sequence')
+                                                @slot('name', 'sequence')
+                                                @slot('text', 'Sequence')
+                                                @slot('value',  $discrepancy->sequence)
                                             @endcomponent
+
                                             <input type="hidden"id="uuid" name="uuid" value="{{$discrepancy->uuid}}">
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -117,15 +121,18 @@
                                                 Skill
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @if(sizeof($discrepancy->jobcard->taskcard->skills) == 3)
-                                                    @slot('text', 'ERI')
-                                                @elseif(sizeof($discrepancy->jobcard->taskcard->skills) == 1)
-                                                    @slot('text', $discrepancy->jobcard->taskcard->skills[0]->name)
-                                                @else
-                                                    @include('frontend.common.label.data-info-nodata')
-                                                @endif
-                                            @endcomponent
+                                            <select id="otr_certification" name="otr_certification" class="form-control m-select2" style="width:100%">
+                                                <option value="">
+                                                    &mdash; Select a Skill &mdash;
+                                                </option>
+
+                                                @foreach ($skills as $skill)
+                                                    <option value="{{ $skill->id }}"
+                                                        @if ($skill->name == "ERI" && sizeof($discrepancy->skills) == 3) selected @elseif($skill->id == $discrepancy->skills[0]->id) selected @endif>
+                                                        {{ $skill->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -147,10 +154,14 @@
                                                 ATA
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text',  $discrepancy->ata)
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'ata')
+                                                @slot('name', 'ata')
+                                                @slot('text', 'ATA')
+                                                @slot('value',  $discrepancy->ata)
                                             @endcomponent
-                                        </div>
+
+\                                        </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Qty Helper
@@ -502,6 +513,9 @@
 
 @push('footer-scripts')
 <script src="{{ asset('js/frontend/discrepancy/mechanic/edit.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
+
 
 <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
