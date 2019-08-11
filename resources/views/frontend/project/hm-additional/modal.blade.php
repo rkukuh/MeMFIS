@@ -11,10 +11,10 @@
                 <div class="form-group m-form__group row">
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         @component('frontend.common.input.select2')
-                            @slot('id', 'project')
-                            @slot('text', 'Project')
-                            @slot('name', 'project')
-                            @slot('id_error', 'project')
+                            @slot('id', 'project-additional')
+                            @slot('text', 'project-additional')
+                            @slot('name', 'project-additional')
+                            @slot('id_error', 'project-additional')
                         @endcomponent
                     </div>
                 </div>

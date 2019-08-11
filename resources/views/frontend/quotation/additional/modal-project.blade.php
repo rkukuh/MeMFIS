@@ -15,10 +15,10 @@
                             </label>
 
                             @component('frontend.common.input.select2')
-                                @slot('id', 'project-additional')
+                                @slot('id', 'project-additional-approved')
                                 @slot('text', 'Project')
-                                @slot('name', 'project-additional')
-                                @slot('id_error', 'project-additional')
+                                @slot('name', 'project-additional-approved')
+                                @slot('id_error', 'project-additional-approved')
                             @endcomponent
                         </div>
                     </div>
