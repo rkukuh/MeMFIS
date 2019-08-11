@@ -158,6 +158,26 @@ class ProjectDatatables extends Controller
 
         foreach($defectcards as $defectcard){
             $defectcard->RecordID .= $defectcard->uuid;
+            $defectcard->taskcard .= $defectcard->jobcard->taskcard;
+            if(isset($defectcard->skills) ){
+                if(sizeof($defectcard->skills) == 3){
+                    $defectcard->defectcard_skill .= "ERI";
+                }
+                else if(sizeof($defectcard->skills) == 1){
+                    $defectcard->defectcard_skill .= $defectcard->skills[0]->name;
+                }
+                else{
+                    $defectcard->defectcard_skill .= '';
+                }
+            }
+
+            if($defectcard->audits->first()->user_id ==  null){
+                $project->created_by.= "System";
+
+            }else{
+                $defectcard->created_by.= User::find($defectcard->audits->first()->user_id)->name;
+            }
+
         }
 
         $data = $alldata = json_decode($defectcards);
@@ -262,6 +282,26 @@ class ProjectDatatables extends Controller
 
         foreach($defectcards as $defectcard){
             $defectcard->RecordID .= $defectcard->uuid;
+            $defectcard->taskcard .= $defectcard->jobcard->taskcard;
+            if(isset($defectcard->skills) ){
+                if(sizeof($defectcard->skills) == 3){
+                    $defectcard->defectcard_skill .= "ERI";
+                }
+                else if(sizeof($defectcard->skills) == 1){
+                    $defectcard->defectcard_skill .= $defectcard->skills[0]->name;
+                }
+                else{
+                    $defectcard->defectcard_skill .= '';
+                }
+            }
+
+            if($defectcard->audits->first()->user_id ==  null){
+                $project->created_by.= "System";
+
+            }else{
+                $defectcard->created_by.= User::find($defectcard->audits->first()->user_id)->name;
+            }
+
         }
 
         $data = $alldata = json_decode($defectcards);
