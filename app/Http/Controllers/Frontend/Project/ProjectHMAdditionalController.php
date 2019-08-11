@@ -60,6 +60,7 @@ class ProjectHMAdditionalController extends Controller
         $parent_id = $project->id;
         $project = $project->replicate();
         $project->parent_id = $parent_id;
+        $project->code = DocumentNumber::generate('PROJ-A-', Project::withTrashed()->count()+1);
         $project->save();
         $defectcard_uuids = explode(",",$request->defectcard_uuid);
 
