@@ -104,6 +104,6 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/action-botton/aircraft.js')}}"></script>
     <script src="{{ asset('js/frontend/project/index.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/project-additional.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/project-additional.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 @endpush
