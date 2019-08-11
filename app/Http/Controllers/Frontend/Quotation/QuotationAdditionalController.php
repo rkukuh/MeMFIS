@@ -13,11 +13,13 @@ use App\Models\Customer;
 use App\Models\Currency;
 use App\Models\Progress;
 use App\Models\Quotation;
+use App\Models\DefectCard;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
 use App\Models\QuotationHtcrrItem;
 use App\Http\Controllers\Controller;
+use App\Models\QuotationDefectCardItem;
 use App\Models\Pivots\ProjectWorkPackage;
 use App\Models\ProjectWorkPackageFacility;
 use App\Models\Pivots\QuotationWorkPackage;
@@ -71,11 +73,28 @@ class QuotationAdditionalController extends Controller
         // $contact['fax'] = $request->attention_fax;
         // $contact['email'] = $request->attention_email;
 
-        $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::withTrashed()->count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('QPRO-A-', Quotation::withTrashed()->count()+1)]);
         // $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
         $quotation = Quotation::create($request->all());
+
+        $defectcards = DefectCard::where('project_additional_id',$request->project_id)->get();
+
+        foreach($defectcards as $defectcard){
+            $defectcard->quotation_additional_id = $quotation->id;
+            $defectcard->save();
+
+            foreach($defectcard->items as $item){
+                QuotationDefectCardItem::create([
+                    'item_id' => $item->id,
+                    'quantity' => $item->pivot->quantity,
+                    'unit_id' => $item->pivot->unit_id,
+                    // 'price_id' => '0', //TODO make price list generate
+                ]);
+            }
+        }
+
         // $project = Project::where('id',$request->project_id)->first();
 
         $quotation->progresses()->save(new Progress([
