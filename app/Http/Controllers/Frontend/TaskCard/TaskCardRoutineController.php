@@ -123,7 +123,9 @@ class TaskCardRoutineController extends Controller
 
             }
 
-            if(!$taskcard->related_to->isEmpty())$taskcard->related_to()->attach($request->relationship);
+            if( !empty(json_decode($request->relationship, true)) ) {
+                $taskcard->related_to()->attach(json_decode($request->relationship));
+            }
 
             if(is_array($request->threshold_amount)){
             for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
@@ -234,6 +236,7 @@ class TaskCardRoutineController extends Controller
 
         foreach($taskCard->zones as $i => $zone_taskcard){
             $zone_taskcards[$i] =  $zone_taskcard->id;
+            
         }
 
         $relation_taskcards = [];
@@ -302,7 +305,7 @@ class TaskCardRoutineController extends Controller
                     }
                 }
 
-                $taskCard->accesses()->attach($accesses);
+                $taskCard->accesses()->sync($accesses);
 
             }
 
@@ -318,12 +321,12 @@ class TaskCardRoutineController extends Controller
                     }
                 }
 
-                $taskCard->zones()->attach($zones);
+                $taskCard->zones()->sync($zones);
 
             }
 
-            if(is_array($taskCard->related_to) ) {
-                $taskCard->related_to()->sync($request->relationship);
+            if( !empty(json_decode($request->relationship, true)) ) {
+                $taskCard->related_to()->sync(json_decode($request->relationship));
             }
 
             if($taskCard->thresholds)$taskCard->thresholds()->delete();

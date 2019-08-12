@@ -23,10 +23,13 @@ Route::name('frontend.')->group(function () {
 
             Route::resource('project-hm-additional', 'ProjectHMAdditionalController',[
                 'parameters' => ['project-hm-additional' => 'project']
-            ])->except('create','store');
+            ])->except('create','store','destroy');
 
             Route::get('/project-hm-additional/create/{project}','ProjectHMAdditionalController@create')->name('project-hm-additional.create');
             Route::post('/project-hm-additional/{project}','ProjectHMAdditionalController@store')->name('project-hm-additional.store');
+            Route::put('/project-hm-additional/{project}','ProjectHMAdditionalController@update')->name('project-hm-additional.update');
+            Route::post('/project-hm-additional/{project}/destroy','ProjectHMAdditionalController@destroy')->name('project-hm-additional.destroy');
+            Route::get('/project-hm-additional/{project}/summary','ProjectHMAdditionalController@summary')->name('project-hm-additional.summary');
 
 
             Route::resource('project-workshop', 'ProjectWorkshopController', [
@@ -63,7 +66,7 @@ Route::name('frontend.')->group(function () {
                 Route::post('/{project}/workpackage/{workpackage}/manhoursPropotion','ProjectHMWorkPackageController@manhoursPropotion')->name('project-hm.manhoursPropotion.add');
                 Route::put('/{ProjectWorkpackage}/sequence/', 'ProjectHMWorkPackageTaskCardController@sequence')->name('project-hm.sequence.workpackage');
                 Route::put('/{ProjectWorkpackage}/mandatory/', 'ProjectHMWorkPackageTaskCardController@mandatory')->name('project-hm.mandatory.workpackage');
-                Route::post('/{project}/workpackage/{workpackage}/taskcard/{taskcard}/', 'ProjectHMWorkPackageTaskCardController@store')->name('project-hm.store.taskcard');
+                Route::post('/{project}/workpackage/{workpackage}/taskcard/{taskcard}', 'ProjectHMWorkPackageTaskCardController@store')->name('project-hm.store.taskcard');
                 Route::delete('/{ProjectWorkpackage}/destroy/', 'ProjectHMWorkPackageTaskCardController@destroy')->name('project-hm.destroy.taskcard');
 
                 /** Transaction: HTCRR */
@@ -77,6 +80,27 @@ Route::name('frontend.')->group(function () {
                 Route::get('/{project}/workpackage/{workPackage}/getManhours','ProjectHMWorkPackageController@getManhours')->name('project-hm.getManhours');
 
             });
+
+            Route::prefix('project-htcrr')->group(function () {
+
+                Route::name('project-htcrr.')->group(function () {
+
+                    Route::resource('/{project}/project-htcrr', 'ProjectHMHtcrrController');
+
+                });
+
+                /** Transaction: HTCRR */
+
+                // Route::post('/htcrr','HtCrrController@store')->name('project-htcrr.htcrr.add');
+
+                /** Transaction: Item */
+                // Route::post('/htcrr/{htcrr}/item', 'HtCrrItemsController@store')->name('htcrr.item.store');
+                // Route::delete('/htcrr/{htcrr}/{item}/item', 'HtCrrItemsController@destroy')->name('htcrr.item.destroy');
+
+                // Route::get('/{project}/workpackage/{workPackage}/getManhours','ProjectHMWorkPackageController@getManhours')->name('project-hm.getManhours');
+
+            });
+
 
             Route::prefix('project-workshop')->group(function () {
 

@@ -75,8 +75,8 @@ class FillLabelController extends Controller
     public function customer(Customer $customer)
     {
         $customer->load('phones','faxes','emails','addresses')->get();
-
-        return json_encode($customer->attention);
+        
+        return json_encode($customer);
     }
 
 }

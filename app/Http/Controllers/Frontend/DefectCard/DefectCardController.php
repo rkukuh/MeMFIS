@@ -70,9 +70,19 @@ class DefectCardController extends Controller
      * @param  \App\DefectCard  $defectCard
      * @return \Illuminate\Http\Response
      */
-    public function edit(DefectCard $defectCard)
+    public function edit(DefectCard $defectcard)
     {
-        //
+        //TODO Validasi User'skill with DefectCard Skill
+        foreach($defectcard->helpers as $helper){
+            $helper->userID .= $helper->user->id;
+        }
+
+        if($defectcard->helpers->where('userID',Auth::id())->first() == null){
+            return redirect()->route('frontend.defectcard-engineer.edit',$defectcard->uuid);
+        }
+        else{
+            return redirect()->route('frontend.defectcard-mechanic.edit',$defectcard->uuid);
+        }
     }
 
     /**

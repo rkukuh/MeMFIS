@@ -6,7 +6,7 @@ let AdditionalTaskCreate = (function() {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/project/defectcard/'+project_uuid,
+                        url: '/datatables/project/defectcard/'+project_parent_uuid,
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -69,35 +69,25 @@ let AdditionalTaskCreate = (function() {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.number',
+                    field: 'jobcard.taskcard.number',
                     title: 'TC No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.number',
+                    field: 'defectcard_skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.number',
+                    field: 'estimation_manhour',
                     title: 'Mhrs Est.',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t) {
-                    //     if (t.taskcard.description) {
-                    //         data = strtrunc(t.taskcard.description, 50);
-                    //         return (
-                    //             '<p>' + data + '</p>'
-                    //         );
-                    //     }
-
-                    //     return ''
-                    // }
                 },
                 {
-                    field: 'jobcard.number',
+                    field: 'created_by',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
@@ -112,7 +102,7 @@ let AdditionalTaskCreate = (function() {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/project/defectcard/'+project_uuid,
+                        url: '/datatables/project/defectcard/'+project_uuid+'/selected',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -175,35 +165,25 @@ let AdditionalTaskCreate = (function() {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.number',
+                    field: 'jobcard.taskcard.number',
                     title: 'TC No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.number',
+                    field: 'defectcard_skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.number',
+                    field: 'estimation_manhour',
                     title: 'Mhrs Est.',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t) {
-                    //     if (t.taskcard.description) {
-                    //         data = strtrunc(t.taskcard.description, 50);
-                    //         return (
-                    //             '<p>' + data + '</p>'
-                    //         );
-                    //     }
-
-                    //     return ''
-                    // }
                 },
                 {
-                    field: 'jobcard.number',
+                    field: 'created_by',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
@@ -220,7 +200,7 @@ let AdditionalTaskCreate = (function() {
                     source: {
                         read: {
                             method: 'GET',
-                            url: '/datatables/project/additional/initial',
+                            url: '/datatables/project/additional/'+project_uuid+'/materials',
                             map: function (raw) {
                                 let dataSet = raw;
 
@@ -290,18 +270,6 @@ let AdditionalTaskCreate = (function() {
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
                 }
                 ]
             });
@@ -311,7 +279,7 @@ let AdditionalTaskCreate = (function() {
                     source: {
                         read: {
                             method: 'GET',
-                            url: '/datatables/project/additional/initial',
+                            url: '/datatables/project/additional/'+project_uuid+'/tools',
                             map: function (raw) {
                                 let dataSet = raw;
 
@@ -381,23 +349,11 @@ let AdditionalTaskCreate = (function() {
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
                 }
                 ]
             });
 
-            let UUID = "";
+            let UUID_Selected = "";
 
             !(function() {
               (t2.extensions = { checkbox: {} }),
@@ -426,7 +382,7 @@ let AdditionalTaskCreate = (function() {
                   function(t2) {
                     let uuids = e.checkbox().getSelectedId();
 
-                    UUID = uuids
+                    UUID_Selected = uuids
 
                     // let a = e.checkbox().getSelectedId().length;
                     // $("#m_datatable_selected_number1").html(a),
@@ -505,13 +461,15 @@ let AdditionalTaskCreate = (function() {
             $('.add-project-additional').on('click', function () {
                 let data = new FormData();
                 data.append("defectcard_uuid", UUID);
+                data.append('_method', 'PUT');
+
 
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: 'POST',
-                    url: '/project-hm-additional/'+project_uuid+'/',
+                    url: '/project-hm-additional/'+project_uuid,
                     processData: false,
                     contentType: false,
                     cache: false,
@@ -520,10 +478,55 @@ let AdditionalTaskCreate = (function() {
                         if (data.errors) {
 
                         } else {
-                            toastr.success('Project Aditional has been created.', 'Success', {
+                            toastr.success('Defectcard has been created.', 'Success', {
                                 timeOut: 5000
                             });
-                            window.location.href = '/project-hm-additional/'+data.uuid+'/edit';
+
+                            let table = $('#defect_card_datatable_actual').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+
+                            let table2 = $('#defect_card_datatable').mDatatable();
+
+                            table2.originalDataSet = [];
+                            table2.reload();
+
+                        }
+                    }
+                });
+            });
+            $('.delete-project-additional').on('click', function () {
+                let data = new FormData();
+                data.append("defectcard_uuid", UUID_Selected);
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'post',
+                    url: '/project-hm-additional/'+project_uuid+'/destroy',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data:data,
+                    success: function (data) {
+                        if (data.errors) {
+
+                        } else {
+                            toastr.success('Defectcard Aditional has been deleted.', 'Success', {
+                                timeOut: 5000
+                            });
+
+                            let table = $('#defect_card_datatable_actual').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+
+                            let table2 = $('#defect_card_datatable').mDatatable();
+
+                            table2.originalDataSet = [];
+                            table2.reload();
 
                         }
                     }

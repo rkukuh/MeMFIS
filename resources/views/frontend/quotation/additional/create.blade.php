@@ -485,7 +485,7 @@
 
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/additional/create.js')}}"></script>
-    <script src="{{ asset('js/frontend/quotation/additional/summary.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/quotation/additional/summary.js') }}"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>

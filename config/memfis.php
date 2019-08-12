@@ -39,6 +39,9 @@ return [
             ],
             'htcrr' => [
                 'items' => 50,
+            ],
+            'defectcard' => [
+                'items' => 50,
             ]
         ],
         'quotations' => 20,

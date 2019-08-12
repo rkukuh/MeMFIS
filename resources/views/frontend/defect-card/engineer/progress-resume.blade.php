@@ -414,6 +414,36 @@
                             @include('frontend.common.label.datalist')
 
                             <h3 class="m-portlet__head-text">
+                                Helper(s) List
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet m-portlet--mobile">
+                    <div class="m-portlet__body">
+                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                            <div class="row align-items-center">
+                                <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                        <div class="defectcard_helper_datatable" id="scrolling_both"></div>
+                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="helpers_datatable" id="scrolling_both"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon m--hide">
+                                <i class="la la-gear"></i>
+                            </span>
+
+                            @include('frontend.common.label.datalist')
+
+                            <h3 class="m-portlet__head-text">
                                 Tool(s) List
                             </h3>
                         </div>
@@ -473,5 +503,6 @@
         let uuid = '{{$defectcard->uuid}}';
    </script>
     <script src="{{ asset('js/frontend/defect-card/items.js')}}"></script>
-@endpush
+    <script src="{{ asset('js/frontend/defect-card/helpers.js')}}"></script>
+    @endpush
 

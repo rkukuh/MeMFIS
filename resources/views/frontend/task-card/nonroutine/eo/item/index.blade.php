@@ -11,7 +11,8 @@
                 <table class="table table-striped table-bordered table-hover table-checkable" id="m_datatable_item">
                     <thead>
                         <tr>
-                            <th>Material</th>
+                            <th>Part Number</th>
+                            <th>Item Description</th>
                             <th>Quantity</th>
                             <th>Unit</th>
                             <th>Remark</th>

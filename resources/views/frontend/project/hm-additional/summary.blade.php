@@ -105,10 +105,10 @@
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-5">
-                                        <span class="m--font-accent"><b>20 Item(s)</b></span>
+                                        <span class="m--font-accent"><b>{{$total_defectcard}} Item(s)</b></span>
                                     </div>
                                     <div class="col-7">
-                                        <span class="m--font-accent">46,5</span>
+                                        <span class="m--font-accent">{{$total_estimation_manhours}}</span>
                                     </div>
                                 </div>
                                 {{-- <span>Basic</span>
@@ -163,7 +163,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="general_tools_datatable" id="scrolling_both"></div>
+                                            <div class="tools_datatable" id="scrolling_both"></div>
 
                                         </div>
                                     </div>
@@ -211,7 +211,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="general_items_datatable" id="scrolling_both"></div>
+                                            <div class="materials_datatable" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -242,6 +242,10 @@
 @endsection
 
 @push('footer-scripts')
+    <script>
+        let project_uuid = '{{$project->uuid}}'
+    </script>
+
     <script src="{{ asset('js/frontend/project/hm-additional/summary.js') }}"></script>
     <script src="{{ asset('js/frontend/workpackage/item/form-reset.js') }}"></script>
 @endpush

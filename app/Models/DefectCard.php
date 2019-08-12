@@ -58,6 +58,19 @@ class DefectCard extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many inspections.
+     *
+     * This function will get all JobCard's inspections.
+     * See: Inspection's inspectable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function inspections()
+    {
+        return $this->morphMany(Progress::class, 'inspectable');
+    }
+
+    /**
      * Many-to-Many: A defect card may have zero or many item.
      *
      * This function will retrieve all the items of a defect card.
@@ -144,6 +157,20 @@ class DefectCard extends MemfisModel
     public function quotation_additional()
     {
         return $this->belongsTo(Quotation::class);
+    }
+
+    /**
+     * Many-to-Many: A Defect Card may have zero or many skill.
+     *
+     * This function will retrieve all the skills of a Defect Card.
+     * See: Type's skill_defectcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function skills()
+    {
+        return $this->belongsToMany(Type::class, 'defectcard_skill', 'defectcard_id', 'skill_id')
+                    ->withTimestamps();;
     }
 
     /*************************************** ACCESSOR ****************************************/

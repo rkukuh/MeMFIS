@@ -20,6 +20,10 @@ class HtCrr extends MemfisModel
         'conducted_by',
         'estimation_manhour',
         'is_rii',
+        'manhour_total',
+        'manhour_rate',
+        'discount_type',
+        'discount_value',
         'description',
 
         'origin_type',
@@ -29,6 +33,7 @@ class HtCrr extends MemfisModel
         'origin_htcrr_items',
         'origin_htcrr_skills',
         'origin_htcrr_helpers',
+        'origin_htcrr_engineers',
     ];
 
     protected $dates = ['conducted_at'];
@@ -62,10 +67,25 @@ class HtCrr extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A HTCRR may have zero or many engineer.
+     *
+     * This function will retrieve all the engineers of a HTCRR.
+     * See: Employee's htcrr_engineers() method for the inverse
+     *
+     * @return mixed
+     */
+    public function engineers()
+    {
+        return $this->belongsToMany(Employee::class, 'htcrr_engineers', 'htcrr_id', 'employee_id')
+                    ->withPivot('quantity')
+                    ->withTimestamps();;
+    }
+
+    /**
      * Many-to-Many: A HTCRR may have zero or many helper.
      *
      * This function will retrieve all the helpers of a HTCRR.
-     * See: Employee's htcrr() method for the inverse
+     * See: Employee's htcrr_helpers() method for the inverse
      *
      * @return mixed
      */

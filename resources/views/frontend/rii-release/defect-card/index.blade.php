@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                         </div>
-                        @include('frontend.rii-release.filter')
+                        @include('frontend.rii-release.defect-card.filter')
 
                         <div class="riirelease_datatable" id="scrolling_both"></div>
                     </div>
@@ -83,5 +83,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/rii-release/job-card/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/rii-release/defect-card/index.js')}}"></script>
 @endpush

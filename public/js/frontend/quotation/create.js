@@ -29,13 +29,42 @@ let Quotation = {
                         url: '/label/get-customer/' + data.customer.uuid,
                         type: 'GET',
                         dataType: 'json',
-                        success: function (respone) {
-                            let res = JSON.parse(respone);
+                        success: function (response) {
+                            // let res = JSON.parse(response);
+                            let res = response;
                             $('select[name="attention"]').empty();
                             $('select[name="phone"]').empty();
                             $('select[name="email"]').empty();
                             $('select[name="fax"]').empty();
                             $('select[name="address"]').empty();
+                            if(response.addresses.length){
+                                $.each(response.addresses, function( index, value ) {
+                                    $('select[name="address"]').append(
+                                        '<option value="' + value.address + '">' + value.address + '</option>'
+                                    );
+                                });
+                            }
+                            if(response.emails.length){
+                                $.each(response.emails, function( index, value ) {
+                                    $('select[name="email"]').append(
+                                        '<option value="' + value.address + '">' + value.address + '</option>'
+                                    );
+                                });
+                            }
+                            if(response.faxes.length){
+                                $.each(response.faxes, function( index, value ) {
+                                    $('select[name="fax"]').append(
+                                        '<option value="' + value.number + '">' +value.number + '</option>'
+                                    );
+                                });
+                            }
+                            if(response.phones.length){
+                                $.each(response.phones, function( index, value ) {
+                                    $('select[name="phone"]').append(
+                                        '<option value="' + value.number + '">' + value.number + '</option>'
+                                    );
+                                });
+                            }
                             for (var i = 0; i < res.length; i++) {
                                 if(res[i].name){
                                     $('select[name="attention"]').append(
@@ -43,12 +72,12 @@ let Quotation = {
                                     );
                                 }
                                 if(res[i].address){
-                                    $('select[name="attention"]').append(
+                                    $('select[name="address"]').append(
                                         '<option value="' + res[i].address + '">' + res[i].address + '</option>'
                                     );
                                 }
                                 if(res[i].fax){
-                                    $('select[name="attention"]').append(
+                                    $('select[name="fax"]').append(
                                         '<option value="' + res[i].fax + '">' + res[i].fax + '</option>'
                                     );
                                 }
@@ -151,8 +180,6 @@ let Quotation = {
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());
             data.append("top_description", $('#term_and_condition').val());
-            data.append("title", $('#title').val());
-
 
             $.ajax({
                 headers: {

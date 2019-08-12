@@ -61,7 +61,7 @@ let RiiRelease = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<a href="/riirelease-jobcard/rii-release/'+t.uuid+'/edit">' + t.number + "</a>"
+                            '<a href="/riirelease-jobcard/'+t.uuid+'/edit">' + t.number + "</a>"
                         );
                     }
                 },
@@ -87,7 +87,7 @@ let RiiRelease = {
                     }
                 },
                 {
-                    field: 'quotation.customer.name',
+                    field: 'quotation.project.customer.name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
@@ -179,7 +179,7 @@ let RiiRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/riirelease-jobcard/rii-release/' + jobcard_uuid + '/',
+                        url: '/riirelease-jobcard/' + jobcard_uuid + '/',
                         success: function (data) {
                             toastr.success('RII has been released.', 'Released', {
                                     timeOut: 5000

@@ -98,7 +98,8 @@
                         @slot('data_target', '#modal_cpcp')
                         @endcomponent
                     @component('frontend.common.buttons.summary')
-                        @slot('text', 'CPCP Summary')$workPackage->uuid) )
+                        @slot('text', 'CPCP Summary')
+                        @slot('href', route('frontend.workPackage.summary.cpcp', $workPackage->uuid ))
                     @endcomponent
 
 

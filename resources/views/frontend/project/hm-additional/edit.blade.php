@@ -181,7 +181,7 @@
                                             <div class="action-buttons m--align-center">
                                             @component('frontend.common.buttons.summary')
                                                 @slot('text', 'Additional Task Summary')
-                                                {{-- @slot('href', route('frontend.workPackage.summary.workpackage') ) --}}
+                                                @slot('href', route('frontend.project-hm-additional.summary',$project->uuid) )
                                             @endcomponent
                                             </div>
                                         </div>
@@ -237,6 +237,7 @@
 @push('footer-scripts')
     <script>
         let project_uuid = '{{$project->uuid}}'
+        let project_parent_uuid = '{{$project_parent->uuid}}'
     </script>
 
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>

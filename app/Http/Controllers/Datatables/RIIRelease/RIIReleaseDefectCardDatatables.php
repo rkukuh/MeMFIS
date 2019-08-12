@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Datatables\RIIRelease;
 
 use App\Models\JobCard;
+use App\Models\Status;
 use App\Models\ListUtil;
+use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,33 +18,113 @@ class RIIReleaseDefectCardDatatables extends Controller
      */
     public function index()
     {
-        $JobCard =JobCard::with('taskcard','quotation')->whereHas('taskcard', function ($query) {
-                                            $query->where('is_rii', '1');
-                                            })->get();
+        // $DefectCard =DefectCard::with('jobcard','jobcard.quotation','jobcard.taskcard')->whereHas('jobcard.taskcard', function ($query) {
+        //                                     $query->where('is_rii', '1');
+        //                                     })->get();
+        // foreach($DefectCard as $aircraft){
+        //     $aircraft->aircraft_name .= $aircraft->jobcard->quotation->project->aircraft->name;
+        // }
 
-        foreach($JobCard as $aircraft){
-            $aircraft->aircraft_name .= $aircraft->quotation->project->aircraft->name;
-        }
+        // foreach($JobCard as $taskcard){
+        //     if(isset($taskcard->taskcard->skills) ){
+        //         if(sizeof($taskcard->taskcard->skills) == 3){
+        //             $taskcard->skill_name .= "ERI";
+        //         }
+        //         else if(sizeof($taskcard->taskcard->skills) == 1){
+        //             $taskcard->skill_name .= $taskcard->taskcard->skills[0]->name;
+        //         }
+        //         else{
+        //             $taskcard->skill_name .= '';
+        //         }
+        //     }
+        // }
 
-        foreach($JobCard as $taskcard){
-            if(isset($taskcard->taskcard->skills) ){
-                if(sizeof($taskcard->taskcard->skills) == 3){
-                    $taskcard->skill_name .= "ERI";
+        // foreach($JobCard as $customer){
+        //     $customer->customer_name .= $customer->quotation->customer;
+        // }
+
+        // $data = $alldata = json_decode($JobCard);
+        $DefectCard =DefectCard::with('jobcard','jobcard.quotation','jobcard.taskcard','progresses')
+                                            ->where('is_rii', '1')
+                                            ->whereHas('progresses', function ($query) {
+                                            $query->where('status_id', Status::where('code','released')->where('of','defectcard')->first()->id);
+                                            })
+                                            ->get();
+        // dd($DefectCard);
+
+        foreach($DefectCard as $defectcard){
+            $defectcard->aircraft_name .= $defectcard->jobcard->quotation->project->aircraft->name;
+
+            $defectcard->customer_name .= $defectcard->jobcard->quotation->project->customer->name;
+
+            if(isset($defectcard->jobcard->taskcard->skills) ){
+                if(sizeof($defectcard->jobcard->taskcard->skills) == 3){
+                    $defectcard->jobcard->skill_name .= "ERI";
                 }
-                else if(sizeof($taskcard->taskcard->skills) == 1){
-                    $taskcard->skill_name .= $taskcard->taskcard->skills[0]->name;
+                else if(sizeof($defectcard->jobcard->taskcard->skills) == 1){
+                    $defectcard->jobcard->skill_name .= $defectcard->jobcard->taskcard->skills[0]->name;
                 }
                 else{
-                    $taskcard->skill_name .= '';
+                    $defectcard->jobcard->skill_name .= '';
                 }
             }
+
+            Status::find($defectcard->progresses->last()->status_id)->name;
+            if(Status::find($defectcard->progresses->last()->status_id)->name == 'RELEASED'){
+                $defectcard->status .= 'Waiting for RII';
+            }else{
+                $defectcard->status .=Status::find($defectcard->progresses->last()->status_id)->name;
+
+            }
+
+
+            $statuses = Status::ofDefectCard()->get();
+            $defectcard = DefectCard::where('uuid',$defectcard->uuid)->first();
+            foreach($defectcard->helpers as $helper){
+                $helper->userID .= $helper->user->id;
+            }
+            // $manhours = 0;
+            // foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            //     $date1 = null;
+            //     foreach($values as $value){
+            //         if($statuses->where('id',$value->status_id)->first()->code <> "open" or $statuses->where('id',$value->status_id)->first()->code <> "released" or $statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
+            //             if($jobcard->helpers->where('userID',$key)->first() == null){
+            //                 if($date1 <> null){
+            //                     $t1 = Carbon::parse($date1);
+            //                     $t2 = Carbon::parse($value->created_at);
+            //                     $diff = $t1->diffInSeconds($t2);
+            //                     $manhours = $manhours + $diff;
+            //                 }
+            //                 $date1 = $value->created_at;
+            //             }
+            //         }
+
+            //     }
+            // }
+            // $manhours = $manhours/3600;
+            // $manhours_break = 0;
+            // foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            //     for($i=0; $i<sizeOf($values->toArray()); $i++){
+            //         if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
+            //             if($jobcard->helpers->where('userID',$key)->first() == null){
+            //                 if($date1 <> null){
+            //                     if($i+1 < sizeOf($values->toArray())){
+            //                         $t2 = Carbon::parse($values[$i]->created_at);
+            //                         $t3 = Carbon::parse($values[$i+1]->created_at);
+            //                         $diff = $t2->diffInSeconds($t3);
+            //                         $manhours_break = $manhours_break + $diff;
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+            // $manhours_break = $manhours_break/3600;
+            // $actual_manhours =number_format($manhours-$manhours_break, 2);
+            // $Jobcard->actual .= $actual_manhours;
         }
 
-        foreach($JobCard as $customer){
-            $customer->customer_name .= $customer->quotation->customer;
-        }
-
-        $data = $alldata = json_decode($JobCard);
+        $data = $alldata = json_decode($DefectCard);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

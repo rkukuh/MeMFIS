@@ -15,10 +15,10 @@
                             </label>
 
                             @component('frontend.common.input.select2')
-                                @slot('id', 'project-additional')
+                                @slot('id', 'project-additional-approved')
                                 @slot('text', 'Project')
-                                @slot('name', 'project-additional')
-                                @slot('id_error', 'project-additional')
+                                @slot('name', 'project-additional-approved')
+                                @slot('id_error', 'project-additional-approved')
                             @endcomponent
                         </div>
                     </div>
@@ -41,7 +41,7 @@
     @push('footer-scripts')
         <script>
             $('.modal-footer').on('click', '.create', function () {
-                let project_uuid =$('#project-additional').val();
+                let project_uuid =$('#project-additional-approved').val();
                 window.location.href = 'quotation-additional/create/'+project_uuid+'/';
             });
         </script>

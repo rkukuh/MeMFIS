@@ -27,36 +27,32 @@ class RIIReleaseJobCardDatatables extends Controller
                                             })
                                             ->get();
 
-        foreach($JobCard as $aircraft){
-            $aircraft->aircraft_name .= $aircraft->quotation->project->aircraft->name;
-        }
+        foreach($JobCard as $Jobcard){
+            $Jobcard->aircraft_name .= $Jobcard->quotation->project->aircraft->name;
 
-        foreach($JobCard as $status){
-            Status::find($status->progresses->last()->status_id)->name;
-            if(Status::find($status->progresses->last()->status_id)->name == 'RELEASED'){
-                $status->status .= 'Waiting for RII';
-            }else{
-                $status->status .=Status::find($status->progresses->last()->status_id)->name;
+            $Jobcard->customer_name .= $Jobcard->quotation->project->customer->name;
 
-            }
-        }
-
-
-        foreach($JobCard as $taskcard){
-            if(isset($taskcard->taskcard->skills) ){
-                if(sizeof($taskcard->taskcard->skills) == 3){
-                    $taskcard->skill_name .= "ERI";
+            if(isset($Jobcard->taskcard->skills) ){
+                if(sizeof($Jobcard->taskcard->skills) == 3){
+                    $Jobcard->skill_name .= "ERI";
                 }
-                else if(sizeof($taskcard->taskcard->skills) == 1){
-                    $taskcard->skill_name .= $taskcard->taskcard->skills[0]->name;
+                else if(sizeof($Jobcard->taskcard->skills) == 1){
+                    $Jobcard->skill_name .= $Jobcard->taskcard->skills[0]->name;
                 }
                 else{
-                    $taskcard->skill_name .= '';
+                    $Jobcard->skill_name .= '';
                 }
             }
-        }
 
-        foreach($JobCard as $Jobcard){
+            Status::find($Jobcard->progresses->last()->status_id)->name;
+            if(Status::find($Jobcard->progresses->last()->status_id)->name == 'RELEASED'){
+                $Jobcard->status .= 'Waiting for RII';
+            }else{
+                $Jobcard->status .=Status::find($Jobcard->progresses->last()->status_id)->name;
+
+            }
+
+
             $statuses = Status::ofJobCard()->get();
             $jobcard = JobCard::where('uuid',$Jobcard->uuid)->first();
             foreach($jobcard->helpers as $helper){
@@ -101,10 +97,6 @@ class RIIReleaseJobCardDatatables extends Controller
             $manhours_break = $manhours_break/3600;
             $actual_manhours =number_format($manhours-$manhours_break, 2);
             $Jobcard->actual .= $actual_manhours;
-        }
-
-        foreach($JobCard as $customer){
-            $customer->customer_name .= $customer->quotation->customer;
         }
 
         $data = $alldata = json_decode($JobCard);

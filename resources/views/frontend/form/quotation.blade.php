@@ -175,7 +175,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        031-8686481/031-8686482
+                    @if($attention)
+                    @if($attention->phone !== "null"){{ $attention->phone }} @else - @endif/ @if($attention->fax !== "null") {{ $attention->fax }} @else - @endif
+                        @else
+                        - / -
+                        @endif
                     </td>
                 </tr>
                 <tr>
@@ -186,7 +190,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        JL. RAYA INDONESIA
+                        @if($attention->address !== "null")
+                        {{ $attention->address }}
+                        @else
+                        -
+                        @endif
                     </td>
                 </tr>
                 <tr>
@@ -197,7 +205,7 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        @if($attention)
+                        @if($attention->name !== "null")
                         {{ $attention->name }}
                         @else
                         -
@@ -397,12 +405,12 @@
             <table style="margin-top:80px;" width="100%">
                 <tr>
                     <td width="50%" align="center">
-                        <b> EDDY SIREGAR</b><br>
-                        Marketing Manager
+                        <b> {{ $username }}</b><br>
+                        
                     </td>
                     <td width="50%" align="center">
-                        <b> EDDY SIREGAR </b><br>
-                        Sriwijaya Air
+                        <b> {{ $quotation->project->customer->name }} </b><br>
+                     
                     </td>
                 </tr>
             </table>
@@ -537,12 +545,11 @@
                 <table style="margin-top:80px;" width="100%">
                     <tr>
                         <td width="50%" align="center">
-                            <b> EDDY SIREGAR</b><br>
-                            Marketing Manager
+                            <b> {{ $username }}</b><br>
                         </td>
                         <td width="50%" align="center">
-                            <b> EDDY SIREGAR </b><br>
-                            Sriwijaya Air
+                            <b>  {{ $quotation->project->customer->name }} </b><br>
+                            
                         </td>
                     </tr>
                 </table>

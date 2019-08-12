@@ -250,7 +250,7 @@ let Workpackage = {
                                 )
                             },
                             type: 'DELETE',
-                            url: '/htcrr/' + uuid_htcrr + '/',
+                            url: '/htcrr/' + uuid_htcrr ,
                             success: function (data) {
                                 toastr.success('Instruction has been deleted.', 'Deleted', {
                                     timeOut: 5000
@@ -359,7 +359,7 @@ let Workpackage = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/htcrr/' + htcrr_uuid + '/',
+                url: '/htcrr/' + htcrr_uuid ,
                 data: {
                     _token: $('input[name=_token]').val(),
                     part_number: pn,
