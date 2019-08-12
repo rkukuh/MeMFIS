@@ -24,7 +24,7 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Code 
+                                    Code  @include('frontend.common.label.required')
                                 </label>
 
                                 @component('frontend.common.input.text')
@@ -35,7 +35,7 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Name 
+                                    Name  @include('frontend.common.label.required')
                                 </label>
 
                                 @component('frontend.common.input.text')
