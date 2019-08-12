@@ -189,6 +189,13 @@ Route::name('frontend.')->group(function () {
         Route::view('hr/event-holidays/create', 'frontend.event-holidays.create')->name('hr.event-holidays.create');
         Route::view('hr/event-holidays/show', 'frontend.event-holidays.show')->name('hr.event-holidays.show');
         Route::view('hr/event-holidays/edit', 'frontend.event-holidays.edit')->name('hr.event-holidays.edit');
+
+        /** Workshift Schedule */
+
+        Route::view('hr/workshift-schedule', 'frontend.workshift-schedule.index')->name('hr.workshift-schedule.index');
+        Route::view('hr/workshift-schedule/create', 'frontend.workshift-schedule.create')->name('hr.workshift-schedule.create');
+        Route::view('hr/workshift-schedule/show', 'frontend.workshift-schedule.show')->name('hr.workshift-schedule.show');
+        
         
         /** QUOTATION's WORKPACKAGE's TASKCARDs */
 
