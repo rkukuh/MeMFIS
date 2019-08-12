@@ -49,7 +49,7 @@ let PurchaseRequest = {
             },
             columns: [{
                     field: 'number',
-                    title: 'Number.',
+                    title: 'Date.',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
@@ -58,25 +58,13 @@ let PurchaseRequest = {
                 },
                 {
                     field: 'type.name',
-                    title: 'Type',
+                    title: 'PR Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: 'aircraft.name',
-                    title: 'Aircraft',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'requested_at',
-                    title: 'Requested At',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'required_at',
-                    title: 'Required At',
+                    title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -94,6 +82,24 @@ let PurchaseRequest = {
                         return ''
                     }
 
+                },
+                {
+                    field: 'requested_at',
+                    title: 'Status',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'required_at',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'required_at',
+                    title: 'Approve By',
+                    sortable: 'asc',
+                    filterable: !1,
                 },
                 {
                     field: 'actions',
