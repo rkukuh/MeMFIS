@@ -11,7 +11,7 @@ let AdditionalTaskQtnShow = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/basic/',
+                        url: '/datatables/quotation/'+quotation_uuid+'/defectcard/item',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -19,6 +19,7 @@ let AdditionalTaskQtnShow = {
                                 dataSet = raw.data;
                             }
 
+                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -47,85 +48,92 @@ let AdditionalTaskQtnShow = {
                     }
                 }
             },
-            columns: [{
-                    field: 'number',
-                    title: 'Defect Card No',
+            columns: [
+                {
+                    field: 'taskcard.number',
+                    title: 'TaskCard',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
-                    title: 'P/N No.',
-                    sortable: 'asc',
-                    filterable: !1,template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "si"){
-                            return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "preliminary"){
-                            return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
-                        } else {
-                            return (
-                                'dummy'
-                            );
-                        }
-                    }
+                    field: 'item.code',
+                    title: 'P/N',
+                    sortable: !1,
                 },
                 {
-                    field: 'skill',
-                    title: 'Item Description',
+                    field: 'item.name',
+                    title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'task.name',
+                    field: 'quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'unitPrice',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.unitPrice);
+                    }
                 },
                 {
-                    field: 'estimation_manhour',
-                    title: 'Selling Unit Price',
+                    field: 'price_amount',
+                    title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.price_amount);
+                    }
                 },
                 {
-                    field: 'estimation_manhour',
-                    title: 'Subtotal',
+                    field: 'subtotal',
+                    title: 'Sub Total',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.quantity*t.price_amount);
+                    }
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'note',
                     title: 'Marketing Notes',
                     sortable: 'asc',
                     filterable: !1,
+                    width:150,
+
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
                 }
             ]
         });
+
         $('.tools_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/basic/',
+                        url: '/datatables/quotation/'+quotation_uuid+'/defectcard/tool',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -133,6 +141,7 @@ let AdditionalTaskQtnShow = {
                                 dataSet = raw.data;
                             }
 
+                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -161,75 +170,81 @@ let AdditionalTaskQtnShow = {
                     }
                 }
             },
-            columns: [{
-                    field: 'number',
-                    title: 'Defect Card No',
+            columns: [
+                {
+                    field: 'taskcard.number',
+                    title: 'TaskCard',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
-                    title: 'P/N No.',
-                    sortable: 'asc',
-                    filterable: !1,template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "si"){
-                            return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "preliminary"){
-                            return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
-                        } else {
-                            return (
-                                'dummy'
-                            );
-                        }
-                    }
+                    field: 'item.code',
+                    title: 'P/N',
+                    sortable: !1,
                 },
                 {
-                    field: 'skill',
-                    title: 'Item Description',
+                    field: 'item.name',
+                    title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'task.name',
+                    field: 'quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'unitPrice',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.unitPrice);
+                    }
                 },
                 {
-                    field: 'estimation_manhour',
-                    title: 'Charge Price',
+                    field: 'price_amount',
+                    title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.price_amount);
+                    }
                 },
                 {
-                    field: 'estimation_manhour',
-                    title: 'Subtotal',
+                    field: 'subtotal',
+                    title: 'Sub Total',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.quantity*t.price_amount);
+                    }
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'note',
                     title: 'Marketing Notes',
                     sortable: 'asc',
                     filterable: !1,
+                    width:150,
+
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
                 }
             ]
         });
@@ -239,7 +254,7 @@ let AdditionalTaskQtnShow = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/jobcard',
+                        url: '/datatables/project/defectcard/'+project_uuid+'/selected',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -277,63 +292,44 @@ let AdditionalTaskQtnShow = {
             },
             columns: [
                 {
-                    field: 'number',
+                    field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                            return '<a href="/jobcard-ppc/'+t.uuid+'">' + t.number + "</a>"
-                    }
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'code',
                     title: 'Defect Card No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.title',
+                    field: 'jobcard.number',
                     title: 'JC Ref.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.type.name',
+                    field: 'jobcard.taskcard.number',
                     title: 'TC No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.task.name',
+                    field: 'defectcard_skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.description',
+                    field: 'estimation_manhour',
                     title: 'Mhrs Est.',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if (t.taskcard.description) {
-                            data = strtrunc(t.taskcard.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
                 },
                 {
-                    field: 'taskcard.skill.name',
-                    title: 'Status',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'taskcard.task.name',
-                    title: 'Remark',
+                    field: 'created_by',
+                    title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
                 }
