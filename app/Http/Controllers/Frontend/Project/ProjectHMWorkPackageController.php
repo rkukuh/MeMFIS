@@ -84,17 +84,16 @@ class ProjectHMWorkPackageController extends Controller
     {
         $mhrs_pfrm_factor = $skills = $subset = $taskcards = [];
 
-        $htcrrs = HtCrr::where('code',  'like', 'JCRI%')->where('project_id', $project->id)->get();
-
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
         ->with('taskcards')
         ->first();
 
+
         foreach($project_workpackage->taskcards as $taskcard){
             array_push($taskcards, $taskcard->taskcard_id);
         }
-
+        
         $taskcards = TaskCard::whereIn('id',$taskcards)->get(); 
 
         // get skill_id(s) from taskcards that are used in workpackage
@@ -119,7 +118,7 @@ class ProjectHMWorkPackageController extends Controller
         sort($skills);
         $skills = array_unique($skills);
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
-        $total_mhrs = $taskcards->sum('estimation_manhour') + $htcrrs->sum('estimation_manhour');
+        $total_mhrs = $taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $taskcards->sum('performance_factor');
 
         //get employees
@@ -128,7 +127,6 @@ class ProjectHMWorkPackageController extends Controller
 
         // $materialCount = $workPackage->items->count();
         // $toolCount = $workPackage->tools->count();
-        // dd($workPackage->uuid);
 
         $view = 'frontend.project.hm.workpackage.show';
         return view($view,[
@@ -157,8 +155,6 @@ class ProjectHMWorkPackageController extends Controller
     public function edit(Project $project, WorkPackage $workPackage,Request $request)
     {
         $mhrs_pfrm_factor = $skills = $subset = $taskcards = [];
-
-        $htcrrs = HtCrr::where('code',  'like', 'JCRI%')->where('project_id', $project->id)->get();
         
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
@@ -170,6 +166,7 @@ class ProjectHMWorkPackageController extends Controller
         foreach($project_workpackage->taskcards as $taskcard){
             array_push($taskcards, $taskcard->taskcard_id);
         }
+        
         $taskcards = TaskCard::whereIn('id',$taskcards)->get(); 
 
         foreach($taskcards as $taskcard){
@@ -183,15 +180,6 @@ class ProjectHMWorkPackageController extends Controller
             array_push($subset , $result);
         }
 
-        foreach($htcrrs as $htcrr){
-            $result = $htcrr->skills->map(function ($skills) {
-                return collect($skills->toArray())
-                    ->only(['name'])
-                    ->all();
-            });
-
-            array_push($subset , $result);
-        }
 
         foreach ($subset as $value) {
             foreach($value as $skill){
@@ -203,7 +191,7 @@ class ProjectHMWorkPackageController extends Controller
         $skills = array_unique($skills);
 
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
-        $total_mhrs = $taskcards->sum('estimation_manhour') + $htcrrs->sum('estimation_manhour');
+        $total_mhrs = $taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $taskcards->sum('performance_factor');
 
         $employees = Employee::all();
@@ -454,8 +442,8 @@ class ProjectHMWorkPackageController extends Controller
         }
         
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
-        $data["total_mhrs"] = $taskcards->sum('estimation_manhour') + $htcrrs->sum('estimation_manhour');
-        $data["mhrs_pfrm_factor"] = ( $taskcards->sum('estimation_manhour') + $htcrrs->sum('estimation_manhour') )* 1.6;
+        $data["total_mhrs"] = $taskcards->sum('estimation_manhour');
+        $data["mhrs_pfrm_factor"] = ( $taskcards->sum('estimation_manhour') )* 1.6;
         $data["mhrs_tc_pfrm_factor"]  = $mhrs_pfrm_factor;
         return response()->json($data);
     }
