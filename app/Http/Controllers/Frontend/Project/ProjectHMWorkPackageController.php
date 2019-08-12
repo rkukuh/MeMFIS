@@ -82,7 +82,7 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function show(Project $project, WorkPackage $workPackage,Request $request)
     {
-        $mhrs_pfrm_factor = $skills = $subset = $taskcards = [];
+        $mhrs_pfrm_factor = $skills = $subset = $taskcards = $engineer_qty = [];
 
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
@@ -100,15 +100,20 @@ class ProjectHMWorkPackageController extends Controller
         // so only required skill will showed up
         foreach($taskcards as $taskcard){
             array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
-            $result = $taskcard->skills->map(function ($skills) {
-                return collect($skills->toArray())
-                    ->only(['name'])
-                    ->all();
-            });
-
-            array_push($subset , $result);
+            if(sizeof($taskcard->skills) > 1){
+                array_push($subset , "ERI");
+                $engineer_qty["ERI"] += $taskcard->engineer_quantity;
+            }else{
+                $result = $taskcard->skills->map(function ($skills) {
+                    return collect($skills->toArray())
+                        ->only(['name'])
+                        ->all();
+                });
+                $engineer_qty[$result[0]["name"]] += $taskcard->engineer_quantity;
+                array_push($subset , $result);
+            }
         }
-
+        // dd($engineer_qty);
         foreach ($subset as $value) {
             foreach($value as $skill){
                 array_push($skills, $skill["name"]);
