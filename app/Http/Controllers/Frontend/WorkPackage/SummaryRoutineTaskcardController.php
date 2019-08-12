@@ -39,11 +39,13 @@ class SummaryRoutineTaskcardController extends Controller
                 array_push($subset, $result);
             }
         }
+
         foreach ($subset as $value) {
             foreach($value as $skill){
                 array_push($skills, $skill["code"]);
             }
         }
+        
         $otr = array_count_values($skills);
         $otr["eri"] = $eri;
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'Basic')->count('uuid');
