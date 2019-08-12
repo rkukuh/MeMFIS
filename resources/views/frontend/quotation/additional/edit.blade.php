@@ -233,6 +233,7 @@
                                                                 @slot('id', 'date')
                                                                 @slot('text', 'Date')
                                                                 @slot('name', 'date')
+                                                                @slot('value', $quotation->requested_at)
                                                                 @slot('id_error','requested_at')
                                                             @endcomponent
                                                         </div>
@@ -245,6 +246,7 @@
                                                                 @slot('id', 'valid_until')
                                                                 @slot('text', 'Valid Until')
                                                                 @slot('name', 'valid_until')
+                                                                @slot('value', $quotation->valid_until)
                                                                 @slot('id_error','valid_until')
                                                             @endcomponent
                                                         </div>
@@ -259,12 +261,13 @@
                                                                 Currency
                                                             </label>
 
-                                                            @component('frontend.common.input.select2')
-                                                                @slot('id', 'currency')
-                                                                @slot('text', 'Currency')
-                                                                @slot('name', 'currency')
-                                                                @slot('id_error', 'currency')
-                                                            @endcomponent
+                                                            <select id="currency" name="currency" class="form-control m-select2">
+                                                                @foreach ($currencies as $currency)
+                                                                <option value="{{ $currency->id }}" @if ($currency->id == $quotation->currency_id) selected @endif>
+                                                                    {{ $currency->name }} ({{ $currency->symbol }})
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
@@ -275,6 +278,7 @@
                                                                 @slot('text', 'exchange')
                                                                 @slot('name', 'exchange')
                                                                 @slot('id_error', 'exchange')
+                                                                @slot('value', $quotation->exchange_rate)
                                                                 @slot('id', 'exchange')
                                                             @endcomponent
                                                         </div>
@@ -286,7 +290,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Subject Quotation
+                                                 Quotation Title
                                             </label>
 
                                             @component('frontend.common.input.textarea')
@@ -294,6 +298,7 @@
                                                 @slot('id', 'title')
                                                 @slot('name', 'title')
                                                 @slot('text', 'Title')
+                                                @slot('value', $quotation->title)
                                                 @slot('id_error', 'title')
                                             @endcomponent
                                         </div>
@@ -493,7 +498,6 @@
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>

@@ -228,9 +228,8 @@
                                                                 Date
                                                             </label>
 
-
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'XXX')
+                                                                @slot('text', $quotation->requested_at)
                                                                 @slot('id', 'name')
                                                             @endcomponent
                                                         </div>
@@ -240,7 +239,7 @@
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'XXX')
+                                                                @slot('text', $quotation->valid_until)
                                                                 @slot('id', 'name')
                                                             @endcomponent
                                                         </div>
@@ -255,11 +254,15 @@
                                                                 Currency
                                                             </label>
 
+                                                            @foreach ($currencies as $currency)
+                                                                @if ($currency->id == $quotation->currency_id)
+                                                                    @component('frontend.common.label.data-info')
+                                                                        @slot('id', 'Currency')
+                                                                        @slot('text', $currency->name.'('.$currency->symbol.')')
+                                                                    @endcomponent
+                                                                @endif
+                                                            @endforeach
 
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', 'XXX')
-                                                                @slot('id', 'name')
-                                                            @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
@@ -268,7 +271,7 @@
 
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'XXX')
+                                                                @slot('text', $quotation->exchange_rate)
                                                                 @slot('id', 'name')
                                                             @endcomponent
                                                         </div>
@@ -285,7 +288,7 @@
 
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'XXX')
+                                                @slot('text', $quotation->title)
                                                 @slot('id', 'name')
                                             @endcomponent
                                         </div>
@@ -437,7 +440,9 @@
 
 @push('footer-scripts')
     <script>
-        let project_uuid = '{{$project->uuid}}'
+        let project_uuid = '{{$project->uuid}}';
+        let quotation_uuid = '{{$quotation->uuid}}';
+
     </script>
 
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
