@@ -82,27 +82,27 @@ let AdditionalTaskQtnEdit = {
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t){
-                        // return ForeignFormatter.format(t.unitPrice);
-                    // }
+                    template: function (t){
+                        return ForeignFormatter.format(t.unitPrice);
+                    }
                 },
                 {
                     field: 'price_amount',
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t){
-                    //     return ForeignFormatter.format(t.price_amount);
-                    // }
+                    template: function (t){
+                        return ForeignFormatter.format(t.price_amount);
+                    }
                 },
                 {
                     field: 'subtotal',
                     title: 'Sub Total',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t){
-                        // return ForeignFormatter.format(t.quantity*t.price_amount);
-                    // }
+                    template: function (t){
+                        return ForeignFormatter.format(t.quantity*t.price_amount);
+                    }
                 },
                 {
                     field: 'note',
@@ -204,27 +204,27 @@ let AdditionalTaskQtnEdit = {
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t){
-                        // return ForeignFormatter.format(t.unitPrice);
-                    // }
+                    template: function (t){
+                        return ForeignFormatter.format(t.unitPrice);
+                    }
                 },
                 {
                     field: 'price_amount',
                     title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t){
-                        // return ForeignFormatter.format(t.price_amount);
-                    // }
+                    template: function (t){
+                        return ForeignFormatter.format(t.price_amount);
+                    }
                 },
                 {
                     field: 'subtotal',
                     title: 'Sub Total',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t){
-                        // return ForeignFormatter.format(t.quantity*t.price_amount);
-                    // }
+                    template: function (t){
+                        return ForeignFormatter.format(t.quantity*t.price_amount);
+                    }
                 },
                 {
                     field: 'note',

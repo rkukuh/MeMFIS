@@ -442,6 +442,7 @@
     <script>
         let project_uuid = '{{$project->uuid}}';
         let quotation_uuid = '{{$quotation->uuid}}';
+        let currencyCode = '{{  $quotation->currency->code }}';
 
     </script>
 

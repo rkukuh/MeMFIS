@@ -486,8 +486,10 @@
 
 @push('footer-scripts')
     <script>
-        let project_uuid = '{{$project->uuid}}'
-        let quotation_uuid = '{{$quotation->uuid}}'
+        let project_uuid = '{{$project->uuid}}';
+        let quotation_uuid = '{{$quotation->uuid}}';
+        let currencyCode = '{{  $quotation->currency->code }}';
+
     </script>
 
     <script src="{{ asset('js/custom.js') }}"></script>
