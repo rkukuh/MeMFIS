@@ -51,8 +51,13 @@
                                 </label>
 
                                 @for($i = 0 ; $i < 5 ; $i++)
-                                <div class=" row">
-                                    <div class="col-sm-7 col-md-7 col-lg-7">
+                                <div class="row">
+                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                        <div style="margin-top:12px;">
+                                            US$
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
                                         @component('frontend.common.input.number')
                                             @slot('id', 'price_'.$i)
                                             @slot('name', 'price')

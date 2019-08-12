@@ -190,12 +190,14 @@ let Unit = {
                 type: 'get',
                 url: '/item/'+item+'/prices/'+item+'/edit',
                 success: function (data) {
+                    let usdFormatter = new Intl.NumberFormat('id', { style: 'currency', currency: 'usd', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
                     $(".unit_price_list").empty();
                     for (let i = 0; i < data.length; i++) {
                         $(".unit_price_list").append(
                         '<div class="row" style="margin-bottom:15px">'+
                             '<div class="col-sm-6 col-md-6 col-lg-6" style="padding:15px; background-color:beige; margin-right:15px;  margin-left:15px;">'+
-                                data[i].amount+
+                            usdFormatter.format(data[i].amount) +
                             '</div>'+
                             '<div class="col-sm-4 col-md-4 col-lg-4" style="padding:15px; background-color:beige">'+
                                 data[i].level+
