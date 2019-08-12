@@ -322,6 +322,11 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{quotation}/workPackage/{workPackage}/tool/non-routine', 'QuotationToolDatatables@non_routine')->name('tool.non_routine');
                 Route::get('/{quotation}/workPackage/{workPackage}/tool/htcrr', 'QuotationToolDatatables@htcrr')->name('tool.htcrr');
 
+
+                /** Defectcard Item */
+                Route::get('/{quotation}/defectcard/item', 'QuotationAdditionalItemDatatables@item')->name('item.quotation-additional');
+                Route::get('/{quotation}/defectcard/tool', 'QuotationAdditionalItemDatatables@tool')->name('tool.quotation-additional');
+
             });
 
         });
