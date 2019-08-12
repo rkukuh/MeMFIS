@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.position.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.position.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Position
                             </span>
@@ -142,7 +142,7 @@
                                                                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                                                     @component('frontend.common.buttons.create')
                                                                                         @slot('text', 'Update')
-                                                                                        @slot('href', route('frontend.hr.position.update-benefit') )
+                                                                                        @slot('href', route('frontend.position.update-benefit') )
                                                                                     @endcomponent
                                     
                                             

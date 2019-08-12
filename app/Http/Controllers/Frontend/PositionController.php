@@ -16,7 +16,7 @@ class PositionController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.position.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.position.create');
     }
 
     /**
@@ -37,7 +37,10 @@ class PositionController extends Controller
      */
     public function store(PositionStore $request)
     {
-        //
+        $position = Position::create($request->all());
+
+        // TODO: Return error message as JSON
+        return response()->json($position);
     }
 
     /**
@@ -48,7 +51,8 @@ class PositionController extends Controller
      */
     public function show(Position $position)
     {
-        //
+        
+        return view('frontend.position.show',['position' => $position]);
     }
 
     /**
@@ -82,6 +86,9 @@ class PositionController extends Controller
      */
     public function destroy(Position $position)
     {
-        //
+        $position->delete();
+        
+        // TODO: Return error message as JSON
+        return response()->json($position);
     }
 }

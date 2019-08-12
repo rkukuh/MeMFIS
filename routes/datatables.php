@@ -178,6 +178,26 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** POSITION */
+
+        Route::name('position.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'position',
+                'namespace' => 'Position'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'PositionDatatables@index')->name('all');
+
+                /** Transaction */
+                Route::get('/{position}/benefit', 'BenefitPositionDatatables@index')->name('position.benefit');
+            });
+
+        });
+
         /** ITEM */
 
         Route::name('item.')->group(function () {

@@ -3,6 +3,8 @@ let Benefit = {
     let create = $('.footer').on('click', '.add-benefits', function () {
 
         let code = $('input[name=benefits_code]').val();
+        let code_uppercase = code.toUpperCase();
+
         let name = $('input[name=benefits_name]').val();
         let description = $('#description').val();
         let baseCal = $('#calculation_reference').val();
@@ -16,7 +18,7 @@ let Benefit = {
             url: '/benefit',
             data: {
                 _token: $('input[name=_token]').val(),
-                benefits_code: code,
+                benefits_code: code_uppercase,
                 benefits_name: name,
                 description: description,
                 calculation_reference: baseCal,
