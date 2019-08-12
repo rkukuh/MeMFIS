@@ -182,6 +182,13 @@ Route::name('frontend.')->group(function () {
         Route::view('hr/time-off-types', 'frontend.time-off-types.index')->name('hr.time-off-types.index');
         Route::view('hr/time-off-types/create', 'frontend.time-off-types.create')->name('hr.time-off-types.create');
         Route::view('hr/time-off-types/show', 'frontend.time-off-types.show')->name('hr.time-off-types.show');
+
+        /** Event/Holidays */
+
+        Route::view('hr/event-holidays', 'frontend.event-holidays.index')->name('hr.event-holidays.index');
+        Route::view('hr/event-holidays/create', 'frontend.event-holidays.create')->name('hr.event-holidays.create');
+        Route::view('hr/event-holidays/show', 'frontend.event-holidays.show')->name('hr.event-holidays.show');
+        Route::view('hr/event-holidays/edit', 'frontend.event-holidays.edit')->name('hr.event-holidays.edit');
         
         /** QUOTATION's WORKPACKAGE's TASKCARDs */
 
