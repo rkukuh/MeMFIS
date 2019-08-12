@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Leave Period
+                    Time-OFF Period
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.leave-period.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.hr.time-off-period.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Leave Period
+                                Time-OFF Period
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Leave Period
+                                    Time-OFF Period
                                 </h3>
                             </div>
                         </div>
@@ -53,26 +53,26 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Leave Period Code @include('frontend.common.label.required')
+                                                Time-OFF Period Code @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Leave Period Code')
-                                                @slot('id', 'leave_period_code')
-                                                @slot('name', 'leave_period_code')
-                                                @slot('id_error', 'leave_period_code')
+                                                @slot('text', 'Time-OFF Period Code')
+                                                @slot('id', 'time_off_period_code')
+                                                @slot('name', 'time_off_period_code')
+                                                @slot('id_error', 'time_off_period_code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Leave Period Name @include('frontend.common.label.required')
+                                                Time-OFF Period Name @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Leave Period Name')
-                                                @slot('id', 'leave_period_name')
-                                                @slot('name', 'leave_period_name')
-                                                @slot('id_error', 'leave_period_name')
+                                                @slot('text', 'Time-OFF Period Name')
+                                                @slot('id', 'time_off_period_name')
+                                                @slot('name', 'time_off_period_name')
+                                                @slot('id_error', 'time_off_period_name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -91,7 +91,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Periode End @include('frontend.common.label.required')
+                                                Period End @include('frontend.common.label.required')
                                             </label>
         
                                             @component('frontend.common.input.datepicker')
@@ -122,8 +122,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-leave-period')
-                                                        @slot('class', 'add-leave-period')
+                                                        @slot('id', 'add-time-off-period')
+                                                        @slot('class', 'add-time-off-period')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')

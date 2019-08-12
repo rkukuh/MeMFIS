@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Leave Types
+                    Time-OFF Types
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.leave-types.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.hr.time-off-types.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Leave Types
+                                Time-OFF Types
                             </span>
                         </a>
                     </li>
@@ -38,10 +38,10 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.create-new')
+                                @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Leave Types
+                                    Time-OFF Types
                                 </h3>
                             </div>
                         </div>
@@ -53,40 +53,31 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Leave Types Code @include('frontend.common.label.required')
+                                                Time-OFF Types Code   
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'Leave Types Code')
-                                                @slot('id', 'leave_types_code')
-                                                @slot('name', 'leave_types_code')
-                                                @slot('id_error', 'leave_types_code')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Leave Types Name @include('frontend.common.label.required')
+                                                Time-OFF Types Name   
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'Leave Types Name')
-                                                @slot('id', 'leave_types_name')
-                                                @slot('name', 'leave_types_name')
-                                                @slot('id_error', 'leave_types_name')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Leave per Leave Period @include('frontend.common.label.required')
+                                                Time-OFF per Time-OFF Period   
                                             </label>
         
-                                            @component('frontend.common.input.number')
-                                                @slot('id', 'leave_per_leave period')
-                                                @slot('text', 'Leave per Leave Period')
-                                                @slot('name', 'leave_per_leave period')
-                                                @slot('id_error','leave_per_leave period')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -104,11 +95,8 @@
                                                 Description
                                             </label>
 
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '5')
-                                                @slot('id', 'description')
-                                                @slot('name', 'description')
-                                                @slot('text', 'Description')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -116,13 +104,6 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-leave-types')
-                                                        @slot('class', 'add-leave-types')
-                                                    @endcomponent
-
-                                                    @include('frontend.common.buttons.reset')
 
                                                     @include('frontend.common.buttons.back')
 

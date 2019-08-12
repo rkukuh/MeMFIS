@@ -1,7 +1,7 @@
 
-let LeavePeriod = {
+let TimeOffPeriod = {
     init: function () {
-        $('.leave_period_datatable').mDatatable({
+        $('.time_off_period_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -83,5 +83,5 @@ let LeavePeriod = {
 };
 
 jQuery(document).ready(function () {
-    LeavePeriod.init();
+    TimeOffPeriod.init();
 });

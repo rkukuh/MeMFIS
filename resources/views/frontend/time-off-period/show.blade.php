@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Leave Types
+                    Time-OFF Period
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.leave-types.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.hr.time-off-period.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Leave Types
+                                Time-OFF Period
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Leave Types
+                                    Time-OFF Period
                                 </h3>
                             </div>
                         </div>
@@ -53,39 +53,40 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Leave Types Code   
+                                                Time-OFF Period Code 
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text', 'Generated')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Leave Types Name   
+                                                Time-OFF Period Name 
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text', 'Generated')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Leave per Leave Period   
+                                                Period Start 
                                             </label>
         
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text', 'Generated')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            @component('frontend.common.input.checkbox')
-                                                @slot('id', 'pro_rate_leave')
-                                                @slot('name', 'pro_rate_leave')
-                                                @slot('text', 'Pro Rate Leaves')
-                                                @slot('style_div','margin-top:30px')
+                                            <label class="form-control-label">
+                                                Period End 
+                                            </label>
+        
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generated')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -96,7 +97,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text', 'Generated')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -121,3 +122,7 @@
     </div>
 @endsection
 
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/datepicker/period-start.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/period-end.js')}}"></script>
+@endpush

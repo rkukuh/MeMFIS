@@ -170,18 +170,18 @@ Route::name('frontend.')->group(function () {
         Route::view('hr/position/update-benefit', 'frontend.position.update-benefit')->name('hr.position.update-benefit');
 
 
-        /** Leave Period */
+        /** Time-OFF Period */
 
-        Route::view('hr/leave-period', 'frontend.leave-period.index')->name('hr.leave-period.index');
-        Route::view('hr/leave-period/create', 'frontend.leave-period.create')->name('hr.leave-period.create');
-        Route::view('hr/leave-period/show', 'frontend.leave-period.show')->name('hr.leave-period.show');
+        Route::view('hr/time-off-period', 'frontend.time-off-period.index')->name('hr.time-off-period.index');
+        Route::view('hr/time-off-period/create', 'frontend.time-off-period.create')->name('hr.time-off-period.create');
+        Route::view('hr/time-off-period/show', 'frontend.time-off-period.show')->name('hr.time-off-period.show');
 
 
-        /** Leave Types */
+        /** Time-OFF Types */
 
-        Route::view('hr/leave-types', 'frontend.leave-types.index')->name('hr.leave-types.index');
-        Route::view('hr/leave-types/create', 'frontend.leave-types.create')->name('hr.leave-types.create');
-        Route::view('hr/leave-types/show', 'frontend.leave-types.show')->name('hr.leave-types.show');
+        Route::view('hr/time-off-types', 'frontend.time-off-types.index')->name('hr.time-off-types.index');
+        Route::view('hr/time-off-types/create', 'frontend.time-off-types.create')->name('hr.time-off-types.create');
+        Route::view('hr/time-off-types/show', 'frontend.time-off-types.show')->name('hr.time-off-types.show');
         
         /** QUOTATION's WORKPACKAGE's TASKCARDs */
 
