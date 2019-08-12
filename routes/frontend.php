@@ -163,11 +163,7 @@ Route::name('frontend.')->group(function () {
 
         /** Position */
 
-        Route::view('hr/position', 'frontend.position.index')->name('hr.position.index');
-        Route::view('hr/position/create', 'frontend.position.create')->name('hr.position.create');
-        Route::view('hr/position/edit', 'frontend.position.edit')->name('hr.position.edit');
-        Route::view('hr/position/show', 'frontend.position.show')->name('hr.position.show');
-        Route::view('hr/position/update-benefit', 'frontend.position.update-benefit')->name('hr.position.update-benefit');
+        Route::view('hr/position/update-benefit', 'frontend.position.update-benefit')->name('position.update-benefit');
 
 
         /** Time-OFF Period */
