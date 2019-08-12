@@ -49,6 +49,7 @@
                                     <th>Radio</th>
                                     <th>Electrical</th>
                                     <th>Instrument</th>
+                                    <th>ERI</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,6 +59,7 @@
                                     <td>@if( isset($otr["radio"]) ) {{ $otr["radio"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
                                     <td>@if( isset($otr["electrical"]) ) {{ $otr["electrical"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
                                     <td>@if( isset($otr["instrument"]) ) {{ $otr["instrument"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["eri"]) ) {{ $otr["eri"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
                                 </tr>
                             </tbody>
                         </table>
