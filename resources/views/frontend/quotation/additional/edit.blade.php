@@ -490,6 +490,8 @@
         let quotation_uuid = '{{$quotation->uuid}}'
     </script>
 
+    <script src="{{ asset('js/custom.js') }}"></script>
+
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/additional/edit.js')}}"></script>
     <script src="{{ asset('js/frontend/quotation/additional/summary.js') }}"></script>
