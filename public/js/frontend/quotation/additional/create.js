@@ -556,7 +556,7 @@ let AdditionalTaskQtnCreate = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/quotation/' + data.uuid + '/edit';
+                        window.location.href = '/quotation-additional/' + data.uuid + '/edit';
 
 
                     }

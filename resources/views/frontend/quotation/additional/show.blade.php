@@ -62,12 +62,12 @@
                                                     <td align="center" width="14%"><b>A/C SN</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
+                                                    <td align="center" valign="top">{{$project->created_at}}</td>
+                                                    <td align="center" valign="top">{{$project->code}}</td>
+                                                    <td align="center" valign="top">{{$project->title}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft->name}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft_register}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft_sn}}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -436,23 +436,13 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let project_uuid = '{{$project->uuid}}'
+    </script>
+
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/additional/show.js')}}"></script>
     <script src="{{ asset('js/frontend/quotation/additional/summary.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/datepicker/scheduled-payment.js')}}"></script>
-
-    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
-    <script src="{{ asset('js/frontend/quotation/repeater.js') }}"></script>
 
 @endpush
 
