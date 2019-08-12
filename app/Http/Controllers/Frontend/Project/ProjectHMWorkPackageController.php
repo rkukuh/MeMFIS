@@ -427,8 +427,6 @@ class ProjectHMWorkPackageController extends Controller
         
         $data = $mhrs_pfrm_factor = $taskcards = [];
 
-        $htcrrs = HtCrr::where('code',  'like', 'JCRI%')->where('project_id', $project->id)->get();
-
         $project_workpackage = ProjectWorkPackage::where('project_id', $project->id)
                     ->where('workpackage_id', $workPackage->id)->first();
 
