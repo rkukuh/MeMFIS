@@ -29,6 +29,13 @@ use App\Models\QuotationWorkPackageTaskCardItem;
 
 class QuotationAdditionalController extends Controller
 {
+    protected $currencies;
+
+    public function __construct()
+    {
+        $this->currencies = Currency::all();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -76,21 +83,31 @@ class QuotationAdditionalController extends Controller
         $request->merge(['number' => DocumentNumber::generate('QPRO-A-', Quotation::withTrashed()->count()+1)]);
         // $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
+        $request->merge(['parent_id' => Project::find($request->project_id)->parent->quotations->first()->id]);
 
         $quotation = Quotation::create($request->all());
 
         $defectcards = DefectCard::where('project_additional_id',$request->project_id)->get();
+        $customer = Customer::find($quotation->parent->project->customer->id)->levels->last()->score;
 
         foreach($defectcards as $defectcard){
             $defectcard->quotation_additional_id = $quotation->id;
             $defectcard->save();
 
             foreach($defectcard->items as $item){
+                if (Item::findOrFail($item->id)->prices->get($customer)) {
+                    $price_id = Item::find($item->id)->prices->get($customer)->id;
+                } else {
+                    $price_id = null;
+                }
+
                 QuotationDefectCardItem::create([
+                    'quotation_id' => $quotation->id,
+                    'defectcard_id' => $defectcard->id,
                     'item_id' => $item->id,
                     'quantity' => $item->pivot->quantity,
                     'unit_id' => $item->pivot->unit_id,
-                    // 'price_id' => '0', //TODO make price list generate
+                    'price_id' => $price_id,
                 ]);
             }
         }
@@ -192,7 +209,7 @@ class QuotationAdditionalController extends Controller
             'currencies' => $this->currencies,
             'quotation' => $quotation,
             'charges' => $charges,
-            'projects' => $projects
+            'project' => $quotation->project
         ]);
     }
 
@@ -204,7 +221,7 @@ class QuotationAdditionalController extends Controller
      */
     public function edit(Quotation $quotation)
     {
-        $projects = Project::get();
+        // $projects = Project::get();
         $scheduled_payment_amount = json_decode($quotation->scheduled_payment_amount);
         $charges = json_decode($quotation->charge);
         return view('frontend.quotation.additional.edit',[
@@ -212,7 +229,7 @@ class QuotationAdditionalController extends Controller
             'quotation' => $quotation,
             'charges' => $charges,
             'scheduled_payment_amount' => $scheduled_payment_amount,
-            'projects' => $projects
+            'project' => $quotation->project
         ]);
     }
 
