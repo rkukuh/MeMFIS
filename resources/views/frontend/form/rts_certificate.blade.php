@@ -43,7 +43,7 @@
     /* height: 1000px; */
     width: 70%;
     position: absolute;
-    top: 11%;
+    top: 14%;
     margin-left:15%;
     text-align: center;
   }
@@ -53,18 +53,23 @@
 
   <div id="content">
     <div class="image">
-        <img src="./img/RTS-Certificate.jpg" alt="">
+        <img src="./img/form/printoutrts/rts.jpg" alt="">
     </div>
     <div class="kotak">
       <h2>CERTIFICATE OF RELEASE TO SERVICE</h2>
       <table width="100%">
         <tr width="100%">
-          <td width="40%" valign="top">Project Refrence</td>
+          <td width="40%" valign="top">Project  Reference</td>
           <td width="1%" valign="top">:</td>
           <td width="59%" valign="top"><span>{{$rts->project->code}}</span></td>
         </tr>
         <tr width="100%">
-          <td width="40%" valign="top">Aircraft Type / MSN</td>
+          <td width="40%" valign="top">Aircraft Type</td>
+          <td width="1%" valign="top">:</td>
+          <td width="59%" valign="top"><span>{{$rts->project->aircraft->name}}</span></td>
+        </tr>
+        <tr width="100%">
+          <td width="40%" valign="top">Aircraft Serial Number</td>
           <td width="1%" valign="top">:</td>
           <td width="59%" valign="top"><span>{{$rts->project->aircraft->name}}</span></td>
         </tr>
@@ -76,7 +81,12 @@
         <tr width="100%">
           <td width="40%" valign="top">Aircarft Total Time</td>
           <td width="1%" valign="top">:</td>
-        <td width="59%" valign="top"><span>{{$rts->aircraft_total_time}}</span></td>
+          <td width="59%" valign="top"><span>{{$rts->aircraft_total_time}} TAT</span></td>
+        </tr>
+        <tr width="100%">
+          <td width="40%" valign="top">Aircarft Total Cycle</td>
+          <td width="1%" valign="top">:</td>
+          <td width="59%" valign="top"><span>{{$rts->aircraft_total_time}} TAC</span></td>
         </tr>
         <tr width="100%">
           <td width="40%" valign="top">Work Performed</td>
@@ -91,13 +101,29 @@
               <ul style="margin-left:-40px;">
                 <li>{{ $work_perfor[1] }}</li>
               </ul>
+              <ul style="margin-top:-12px;margin-left:-40px;">
+                <li>-</li>
+                <li>Generate dari workpackage title</li>
+              </ul>
+              <ul style="margin-top:-12px;margin-left:-40px;">
+                <li>-</li>
+                <li>Generate dari taskcard type (basic inspection)</li>
+              </ul>
+              <ul style="margin-top:-12px;margin-left:-40px;">
+                <li>-</li>
+                <li>CPCP Inspection</li>
+              </ul>
+              <ul style="margin-top:-12px;margin-left:-40px;">
+                <li>-</li>
+                <li>Defect Report</li>
+              </ul>
             </div>
           </td>
         </tr>
       </table>
       <table width="100%" cellspacing="9" style="margin-top:-6px" class="table2">
         <tr width="100%">
-          <td width="40%" valign="top">Work Data/CAMP Refrence</td>
+          <td width="40%" valign="top">Work Data/CAMP  Reference</td>
           <td width="1%" valign="top">:</td>
         <td width="59%" valign="top"><span>{{$rts->work_data}}</span></td>
         </tr>
