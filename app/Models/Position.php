@@ -22,13 +22,26 @@ class Position extends MemfisModel
      *
      * @return mixed
      */
-    public function benefits()
+    public function benefit_current()
     {
         return $this->belongsToMany(Benefit::class)
                     ->withPivot(
                         'min',
                         'max'
                     )
+                    ->whereNull('benefit_position.updated_at')
+                    ->withTimestamps();
+    }
+
+    public function benefit_history()
+    {
+        return $this->belongsToMany(Benefit::class)
+                    ->withPivot(
+                        'min',
+                        'max'
+                    )
+                    ->whereNotNull('benefit_position.updated_at')
+                    ->orderBy('benefit_position.updated_at','desc')
                     ->withTimestamps();
     }
 }

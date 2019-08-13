@@ -70,7 +70,7 @@ Route::name('admin.')->group(function () {
 
         Route::resource('otr-certification', 'OTRCertificationController');
         Route::resource('certification-employee', 'CertificationEmployeeController');
-
+        
         /** TRANSACTION */
 
         Route::resource('rts', 'RTSController');
