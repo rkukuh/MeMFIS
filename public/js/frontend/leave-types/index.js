@@ -1,7 +1,7 @@
 
-let TimeOffTypes= {
+let LeaveTypes= {
     init: function () {
-        $('.time_off_types_datatable').mDatatable({
+        $('.leave_types_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -84,5 +84,5 @@ let TimeOffTypes= {
 };
 
 jQuery(document).ready(function () {
-    TimeOffTypes.init();
+    LeaveTypes.init();
 });

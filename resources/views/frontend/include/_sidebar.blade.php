@@ -421,18 +421,18 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.hr.time-off-period.index') }}" class="m-menu__link m-menu__toggle">
+                <a href="{{ route('frontend.hr.leave-period.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Time-OFF Period
+                        Leave Period
                     </span>
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.hr.time-off-types.index') }}" class="m-menu__link m-menu__toggle">
+                <a href="{{ route('frontend.hr.leave-types.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Time-OFF Types
+                        Leave Types
                     </span>
                 </a>
             </li>

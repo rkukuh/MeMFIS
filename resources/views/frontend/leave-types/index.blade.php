@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Time-OFF Period
+                    Leave Types
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.time-off-period.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.hr.leave-types.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Time-OFF Period
+                                Leave Types
                             </span>
                         </a>
                     </li>
@@ -42,7 +42,7 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
-                                    Time-OFF Period
+                                    Leave Types
                                 </h3>
                             </div>
                         </div>
@@ -66,15 +66,15 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
-                                            @slot('text', 'Time-OFF Period')
-                                            @slot('href', route('frontend.hr.time-off-period.create') )
+                                            @slot('text', 'Leave Types')
+                                            @slot('href', route('frontend.hr.leave-types.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="time_off_period_datatable" id="scrolling_both"></div>
+                            <div class="leave_types_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
                 </div>
@@ -84,5 +84,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/time-off-period/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/leave-types/index.js')}}"></script>
 @endpush
