@@ -32,8 +32,7 @@ class CustomerStore extends FormRequest
             'level' => 'required',
             'phone_array.*' => 'required',
             'phone_array' => 'array|min:1',
-            'email_array.*' => 'required',
-            'email_array' => 'array|min:1',
+           
         ];
     }
 
@@ -46,7 +45,6 @@ class CustomerStore extends FormRequest
     {
         return [
             'phone_array.*.required' => 'The phone field is required.',
-            'email_array.*.required' => 'The email field is required.',
         ];
     }
 

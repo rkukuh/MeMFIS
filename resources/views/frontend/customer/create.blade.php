@@ -378,7 +378,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-5 col-md-5 col-lg-5">
                                                 <label class="form-control-label">
-                                                    Email @include('frontend.common.label.required')
+                                                    Email @include('frontend.common.label.optional')
                                                 </label>
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">
