@@ -138,21 +138,15 @@
                                                                                         <td align="center" width="33%"><b>Minimum</b></td>
                                                                                         <td align="center" width="33%"><b>Maximum</b></td>
                                                                                     </tr>
+                                                                                    
+                                                                                    @for ($i = 0; $i < count($benefits_position[0]->benefits); $i++)
                                                                                     <tr>
-                                                                                        <td valign="top"><b>Position</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
+                                                                                    <td valign="top"><b>{{ $benefits_position[0]->benefits[$i]->name }}</b></td>
+                                                                                    <td valign="top" align="center">{{ $benefits_position[0]->benefits[$i]['pivot']->min }}</td>
+                                                                                    <td valign="top" align="center">{{ $benefits_position[0]->benefits[$i]['pivot']->max }}</td>
                                                                                     </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Meal</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Overtime</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
+                                                                                    @endfor
+
                                                                                 </table>
                                                                             </div>
                                                                         </div>

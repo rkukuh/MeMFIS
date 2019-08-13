@@ -64,6 +64,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('department', 'DepartmentController');
         Route::resource('benefit', 'BenefitController');
         Route::resource('position', 'PositionController');
+        Route::resource('time-off-period', 'TimeOffPeriodController');
 
         /** CERTIFICATION */
 

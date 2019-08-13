@@ -193,7 +193,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/', 'PositionDatatables@index')->name('all');
 
                 /** Transaction */
-                Route::get('/{position}/benefit', 'BenefitPositionDatatables@index')->name('position.benefit');
+              
             });
 
         });

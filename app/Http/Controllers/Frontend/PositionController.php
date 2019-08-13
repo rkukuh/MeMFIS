@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Position;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\PositionStore;
 use App\Http\Requests\Frontend\PositionUpdate;
@@ -51,8 +52,8 @@ class PositionController extends Controller
      */
     public function show(Position $position)
     {
-        
-        return view('frontend.position.show',['position' => $position]);
+        $benefits_position = Position::with('benefits')->where('uuid',$position->uuid)->whereNotNull('deleted_at')->get();
+        return view('frontend.position.show',['position' => $position,'benefits_position' => $benefits_position]);
     }
 
     /**
@@ -63,7 +64,8 @@ class PositionController extends Controller
      */
     public function edit(Position $position)
     {
-        //
+        $benefits_position = Position::with('benefits')->where('uuid',$position->uuid)->get();
+        return view('frontend.position.edit',['position' => $position,'benefits_position' => $benefits_position]);
     }
 
     /**
@@ -86,9 +88,20 @@ class PositionController extends Controller
      */
     public function destroy(Position $position)
     {
-        $position->delete();
+        // $position->delete();
+
+        $data_position = Position::where('uuid', $position->uuid)->first();
+        // $id = $data_position->id;
+        // $delete_at = $data_position->deleted_at;
         
+        // //Update Benefits_Position
+        // DB::table('benefits_position')
+        // ->where('position_id',$id)
+        // ->update([
+        //     'deleted_at' => $delete_at
+        // ]);
+
         // TODO: Return error message as JSON
-        return response()->json($position);
+        return response()->json($data_position);
     }
 }

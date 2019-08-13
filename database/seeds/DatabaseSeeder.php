@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DepartmentsTableSeeder::class);
         $this->call(BenefitsTableSeeder::class);
         $this->call(PositionsTableSeeder::class);
+        $this->call(TimeOffPeriodsTableSeeder::class);
 
         /** POLYMORPH */
 
