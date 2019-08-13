@@ -71,15 +71,17 @@ class CustomerController extends Controller
         if ($customer = Customer::create($request->all())) {
             $customer->levels()->attach($level);
 
+
             if(is_array($request->website_array)){
+                $customer->websites()->delete();
                 for ($i=0; $i < sizeof($request->website_array) ; $i++) {
-                        if($request->website_type[$i] !== null && isset($request->website_array[$i])){
+                    if(isset($request->website_array[$i])){
                         $website_type = Type::ofWebsite()->where('uuid',$request->type_website_array[$i])->first();
                         $customer->websites()->save(new Website([
                             'url' => $request->website_array[$i],
                             'type_id' => $website_type->id,
-                        ]));
-                    }
+                            ]));
+                        }
                 }
             }
 
