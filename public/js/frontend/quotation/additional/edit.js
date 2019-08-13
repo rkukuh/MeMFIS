@@ -50,8 +50,8 @@ let AdditionalTaskQtnEdit = {
             },
             columns: [
                 {
-                    field: 'taskcard.number',
-                    title: 'TaskCard',
+                    field: 'defectcard.code',
+                    title: 'DefectCard',
                     sortable: !1,
                 },
                 {
@@ -172,8 +172,8 @@ let AdditionalTaskQtnEdit = {
             },
             columns: [
                 {
-                    field: 'taskcard.number',
-                    title: 'TaskCard',
+                    field: 'defectcard.code',
+                    title: 'DefectCard',
                     sortable: !1,
                 },
                 {
@@ -515,6 +515,18 @@ let AdditionalTaskQtnEdit = {
                 }
             });
         });
+        $('.nav-tabs').on('click', '.items', function () {
+
+            let table = $('.materials_datatable').mDatatable();
+            table.originalDataSet = [];
+            table.reload();
+
+            let table2 = $('.tools_datatable').mDatatable();
+            table2.originalDataSet = [];
+            table2.reload();
+
+        });
+
     }
 };
 
