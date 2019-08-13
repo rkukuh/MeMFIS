@@ -109,7 +109,7 @@ class ProjectHMWorkPackageController extends Controller
                         ->only(['name'])
                         ->all();
                 });
-                $engineer_qty[$result[0]["name"]] += $taskcard->engineer_quantity;
+                // $engineer_qty[$result[0]["name"]] += $taskcard->engineer_quantity;
                 array_push($subset , $result);
             }
         }
