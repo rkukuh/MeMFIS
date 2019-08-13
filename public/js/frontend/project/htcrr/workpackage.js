@@ -757,7 +757,12 @@ function htcrr_material(triggeruuid) {
         $('#add_material_modal').modal('show');
     });
 
-
+    $('.m_taskcard_htcrr').on('click', function () {
+        let table = $('.ht_crr_datatable').mDatatable();
+    
+        table.originalDataSet = [];
+        table.reload();
+    });
 
 };
 

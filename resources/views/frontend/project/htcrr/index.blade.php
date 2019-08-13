@@ -27,13 +27,13 @@
                                 <div class="px-2 py-2">
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">HTCRR List(s)</a>
+                                            <a class="nav-link m_taskcard_htcrr active show" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">HTCRR List(s)</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link m_tabs_manhour" data-toggle="tab" href="#m_tabs_manhour">Manhours Propotion</a>
                                         </li>  
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#m_tabs_enginner" id="engineer_team_tab">Engineer Team</a>
+                                            <a class="nav-link m_tabs_enginner" data-toggle="tab" href="#m_tabs_enginner" id="engineer_team_tab">Engineer Team</a>
                                         </li>
                                     </ul>
                                 </div>
