@@ -336,6 +336,128 @@ let AdditionalTaskQtnEdit = {
             ]
         });
 
+        $('.footer').on('click', '.update-quotation', function () {
+            let is_ppn =  $('#is_ppn').prop("checked");
+            let ppn = 0;
+            if(is_ppn){
+                ppn = $('#grand_total_rupiah').attr("value") * 1.1;
+                is_ppn = 1;
+            }else{
+                ppn = $('#grand_total_rupiah').attr("value") * 0.1;
+                is_ppn = 0;
+            }
+            let attention_name = $('#attention').val();
+            let attention_phone = $('#phone').val();
+            let attention_fax = $('#fax').val();
+            let attention_email = $('#email').val();
+            let attention_address = $('#address').val();
+            let scheduled_payment_array = [];
+            let type = $('#scheduled_payment_type').children("option:selected").html();
+            if(type === "By Date"){
+                $('input[name^=scheduled_payment] ').each(function (i) {
+                    scheduled_payment_array[i] = $(this).val();
+                });
+            }else{
+                $('#scheduled_payment ').each(function (i) {
+                    scheduled_payment_array[i] = parseInt($(this).val());
+                });
+            }
+            scheduled_payment_array.pop();
+            let charge = [];
+            let chargeInputs = $('input[type="number"][name^="charge"]');
+            //get all values
+            for (let i = 0; i < chargeInputs.length; i++) {
+                charge[i] = parseInt($(chargeInputs[i]).val());
+            }
+            charge.pop();
+            let chargeType = [];
+            //get all values
+            $("input[name^=charge_type]").each(function() {
+                chargeType.push($(this).val());
+              });
+            chargeType.pop();
+
+            let data = new FormData();
+            data.append("chargeType", JSON.stringify(chargeType));
+            data.append("project_id", project_uuid);
+            data.append("customer_id", $('#customer_id').val());
+            data.append("requested_at", $('#date').val());
+            data.append("valid_until", $('#valid_until').val());
+            data.append("currency_id", $('#currency').val());
+            data.append("term_of_condition", $('#term_and_condition').val());
+            data.append("exchange_rate", $('#exchange').val());
+            data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
+            data.append("scheduled_payment_amount", JSON.stringify(scheduled_payment_array));
+            data.append("attention_name", attention_name);
+            data.append("attention_phone", attention_phone);
+            data.append("attention_fax", attention_fax);
+            data.append("attention_email", attention_email);
+            data.append("attention_address", attention_address);
+            data.append("total", 0.000000);
+            data.append("title", $('#title').val());
+            data.append("description", $('#description').val());
+            data.append("top_description", $('#term_and_condition').val());
+            data.append("subtotal", $('#sub_total').attr("value"));
+            data.append("grandtotal", $('#grand_total').attr("value"));
+            data.append("title", $('#title').val());
+            data.append("ppn", ppn);
+            data.append("is_ppn",is_ppn);
+            data.append("charge", JSON.stringify(charge));
+            data.append('_method', 'PUT');
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                type: 'post',
+                url: '/quotation-additional/' + quotation_uuid,
+                processData: false,
+                contentType: false,
+                data: data,
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.currency_id) {
+                        //     $("#currency-error").html(data.errors.currency_id[0]);
+                        // }
+                        // if (data.errors.customer_id) {
+                        //     $("#customer_id-error").html(data.errors.customer_id[0]);
+                        // }
+                        // if (data.errors.description) {
+                        //     $("#description-error").html(data.errors.description[0]);
+                        // }
+                        // if (data.errors.exchange_rate) {
+                        //     $("#exchange-error").html(data.errors.exchange_rate[0]);
+                        // }
+                        // if (data.errors.project_id) {
+                        //     $("#work-order-error").html(data.errors.project_id[0]);
+                        // }
+                        // if (data.errors.requested_at) {
+                        //     $("#requested_at-error").html(data.errors.requested_at[0]);
+                        // }
+                        // if (data.errors.scheduled_payment_amount) {
+                        //     $("#scheduled_payment_amount-error").html(data.errors.scheduled_payment_amount[0]);
+                        // }
+                        // if (data.errors.scheduled_payment_type) {
+                        //     $("#scheduled_payment_type-error").html(data.errors.scheduled_payment_type[0]);
+                        // }
+                        // if (data.errors.valid_until) {
+                        //     $("#valid_until-error").html(data.errors.valid_until[0]);
+                        // }
+
+                        // document.getElementById("name").value = name;
+                    } else {
+
+                        toastr.success('Quotation has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        // window.location.href = '/quotation/' + response.uuid + '/edit';
+
+                    }
+                }
+            });
+        });
+
         $('.materials_datatable').on('click','.edit-item-price', function edit () {
             // save_changes_button();
 

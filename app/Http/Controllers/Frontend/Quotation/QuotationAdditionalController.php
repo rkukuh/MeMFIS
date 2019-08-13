@@ -240,8 +240,10 @@ class QuotationAdditionalController extends Controller
      * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function update(QuotationUpdate $request, Quotation $quotation)
+    public function update(Request $request, Quotation $quotation)
     {
+        $request->merge(['customer_id' => Project::where('uuid',$request->project_id)->first()->customer->id]);
+
         $attention = [];
 
         $attention['name']     = $request->attention_name;
@@ -256,14 +258,21 @@ class QuotationAdditionalController extends Controller
         $charges = [];
 
         for($index = 0; $index < sizeof($request->charge) ; $index++ ){
-            $charge['type'] = $request->chargeType[$index];
-            $charge['amount'] = $request->charge[$index];
-            array_push($charges, $charge);
+                $charge['type'] = $request->chargeType[$index];
+                $charge['amount'] = $request->charge[$index];
+                array_push($charges, $charge);
         }
         $request->merge(['attention' => json_encode($attention)]);
         $request->merge(['charge' => json_encode($charges)]);
         // $request->merge(['scheduled_payment_amount' => json_encode($request->scheduled_payment_amount)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
+
+        //TODO change
+        $request->merge(['subtotal' => 0]);
+        $request->merge(['grandtotal' => 0]);
+        $request->merge(['ppn' => 0]);
+
+        // dd($request->all());
         $quotation->update($request->all());
 
         return response()->json($quotation);

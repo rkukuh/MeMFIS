@@ -458,8 +458,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.update')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-workpackage')
-                                                        @slot('class', 'add-workpackage')
+                                                        @slot('id', 'update-quotation')
+                                                        @slot('class', 'update-quotation')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
