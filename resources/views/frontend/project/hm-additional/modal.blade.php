@@ -12,7 +12,7 @@
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         @component('frontend.common.input.select2')
                             @slot('id', 'project')
-                            @slot('text', 'Project')
+                            @slot('text', 'project')
                             @slot('name', 'project')
                             @slot('id_error', 'project')
                         @endcomponent

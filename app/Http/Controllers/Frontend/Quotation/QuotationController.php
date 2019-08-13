@@ -358,23 +358,43 @@ class QuotationController extends Controller
                     $tc_code = 'DUM';
                 }
 
-                $jobcard = JobCard::create([
-                    'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
-                    'taskcard_id' => $tc->id,
-                    'quotation_id' => $quotation->id,
-                    'origin_taskcard' => $tc->toJson(),
-                    'origin_taskcard_items' => $tc->items->toJson(),
-                ]);
+                if($tc_code == "BSC" or $tc_code == "SIP" or $tc_code == "CPC" or $tc_code == "SIT" or $tc_code == "PRE" or $tc_code == "DUM"){
+                    $jobcard = JobCard::create([
+                        'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                        'taskcard_id' => $tc->id,
+                        'quotation_id' => $quotation->id,
+                        'origin_taskcard' => $tc->toJson(),
+                        'origin_taskcard_items' => $tc->items->toJson(),
+                    ]);
+                    $jobcard->progresses()->save(new Progress([
+                        'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
+                        'progressed_by' => Auth::id()
+                    ]));
+
+                }else{
+                    // foreach($tc->eo_instructions as $instruction){
+                    //     $jobcard = JobCard::create([
+                    //         'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                    //         'taskcard_id' => $tc->id,
+                    //         'quotation_id' => $quotation->id,
+                    //         'origin_taskcard' => $tc->toJson(),
+                    //         'origin_taskcard_items' => $tc->items->toJson(),
+                    //     ]);
+                    //     $jobcard->progresses()->save(new Progress([
+                    //         'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
+                    //         'progressed_by' => Auth::id()
+                    //     ]));
+                    // }
+
+                }
+
                 // // echo $tc->title.'<br>';
                 // foreach($tc->items as $item){
                 //     echo $item->name.'<br>';
                 // }
                 // dump($tc->materials->toJson());
 
-                $jobcard->progresses()->save(new Progress([
-                    'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
-                    'progressed_by' => Auth::id()
-                ]));
+
 
             }
 

@@ -18,6 +18,7 @@ let Discrepancy = {
             let manhours =  $('input[name=manhours]').val();
             let description = $('#description').val();
             let ata = $('#ata').val();
+            let skill_id = $('#otr_certification').val();
             let sequence = $('#sequence').val();
             let complaint = $('#complaint').val();
             let other = $('#other_text').val();
@@ -49,6 +50,7 @@ let Discrepancy = {
                     description: description,
                     complaint: complaint,
                     ata: ata,
+                    skill_id: skill_id,
                     sequence: sequence,
                     propose: propose,
                     propose_correction_text: other,

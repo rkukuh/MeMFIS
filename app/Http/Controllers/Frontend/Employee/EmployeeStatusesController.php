@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\frontend\employee;
 
 use App\Models\status;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\EmployeeStatusesStore;
+use App\Http\Requests\Frontend\EmployeeStatusesUpdate;
 
 class EmployeeStatusesController extends Controller
 {
@@ -25,18 +26,26 @@ class EmployeeStatusesController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param   \App\Http\Requests\Frontend\EmployeeStatusesStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeStatusesStore $request)
     {
-        //
+        $status = Status::create([
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->description,
+            'of' => 'employment'
+        ]);
+     
+        // TODO: Return error message as JSON
+        return response()->json($status);
     }
 
     /**
@@ -47,7 +56,7 @@ class EmployeeStatusesController extends Controller
      */
     public function show(status $status)
     {
-        //
+     //
     }
 
     /**
@@ -64,13 +73,16 @@ class EmployeeStatusesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\EmployeeStatusesUpdate  $request
      * @param  \App\Models\status  $status
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, status $status)
+    public function update(EmployeeStatusesUpdate $request, status $status)
     {
-        //
+        $status->update($request->all());
+
+        // TODO: Return error message as JSON
+        return response()->json($status);
     }
 
     /**
@@ -81,6 +93,9 @@ class EmployeeStatusesController extends Controller
      */
     public function destroy(status $status)
     {
-        //
+        $status->delete();
+
+        // TODO: Return error message as JSON
+        return response()->json($status);
     }
 }

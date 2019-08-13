@@ -17,6 +17,9 @@ let Discrepancy = {
             let jobcard_id =  $('input[name=jobcard_id]').val();
             let manhours =  $('input[name=manhours]').val();
             let description = $('#description').val();
+            let ata = $('#ata').val();
+            let skill_id = $('#otr_certification').val();
+            let sequence = $('#sequence').val();
             let complaint = $('#complaint').val();
             let other = $('#other_text').val();
 
@@ -46,6 +49,9 @@ let Discrepancy = {
                     estimation_manhour: manhours,
                     description: description,
                     complaint: complaint,
+                    ata: ata,
+                    skill_id: skill_id,
+                    sequence: sequence,
                     propose: propose,
                     propose_correction_text: other,
                     is_rii:is_rii,

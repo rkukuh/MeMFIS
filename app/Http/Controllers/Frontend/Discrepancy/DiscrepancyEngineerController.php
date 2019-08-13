@@ -54,6 +54,15 @@ class DiscrepancyEngineerController extends Controller
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
         $defectcard = DefectCard::create($request->all());
 
+        if(Type::where('id',$request->skill_id)->where('of','taskcard-skill')->first()->code == 'eri'){
+            $defectcard->skills()->attach(Type::where('code','electrical')->first()->id);
+            $defectcard->skills()->attach(Type::where('code','radio')->first()->id);
+            $defectcard->skills()->attach(Type::where('code','instrument')->first()->id);
+        }
+        else{
+            $defectcard->skills()->attach($request->skill_id);
+        }
+
         if($request->propose){
             foreach($request->propose as $propose ){
                 $propose_correction = Type::ofDefectCardProposeCorrection()->where('code',$propose)->first()->id;
@@ -119,8 +128,11 @@ class DiscrepancyEngineerController extends Controller
             $propose_correction_text =  $defectcard->pivot->propose_correction_text;
         }
 
+        $skill = Type::ofTaskCardSkill()->get();
+
         return view('frontend.discrepancy.engineer.edit', [
             'discrepancy' => $discrepancy,
+            'skills' => $skill,
             'propose_corrections' => $propose_corrections,
             'propose_correction_text' => $propose_correction_text,
         ]);
@@ -138,6 +150,19 @@ class DiscrepancyEngineerController extends Controller
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
 
         $discrepancy->update($request->all());
+
+        if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+            $discrepancy->skills()->detach();
+            $discrepancy->skills()->attach(Type::where('code','electrical')->first()->id);
+            $discrepancy->skills()->attach(Type::where('code','radio')->first()->id);
+            $discrepancy->skills()->attach(Type::where('code','instrument')->first()->id);
+        }
+        else{
+            if(sizeof($discrepancy->skills) > 1 ){
+                $discrepancy->skills()->detach();
+            }
+            $discrepancy->skills()->sync($request->skill_id);
+        }
 
         $discrepancy->propose_corrections()->detach();
 

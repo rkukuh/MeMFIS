@@ -69,35 +69,25 @@ let AdditionalTaskCreate = (function() {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.number',
+                    field: 'jobcard.taskcard.number',
                     title: 'TC No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.number',
+                    field: 'defectcard_skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.number',
+                    field: 'estimation_manhour',
                     title: 'Mhrs Est.',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t) {
-                    //     if (t.taskcard.description) {
-                    //         data = strtrunc(t.taskcard.description, 50);
-                    //         return (
-                    //             '<p>' + data + '</p>'
-                    //         );
-                    //     }
-
-                    //     return ''
-                    // }
                 },
                 {
-                    field: 'jobcard.number',
+                    field: 'created_by',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,

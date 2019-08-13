@@ -176,16 +176,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <div class="action-buttons m--align-center">
-                                            @component('frontend.common.buttons.summary')
-                                                @slot('text', 'Additional Task Summary')
-                                                {{-- @slot('href', route('frontend.workPackage.summary.workpackage') ) --}}
-                                            @endcomponent
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">

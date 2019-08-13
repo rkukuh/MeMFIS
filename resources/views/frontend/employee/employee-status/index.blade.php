@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.employee.statuses.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.statuses.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Employement Status
                             </span>

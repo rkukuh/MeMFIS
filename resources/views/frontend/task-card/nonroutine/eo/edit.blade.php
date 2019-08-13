@@ -68,25 +68,17 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Type @include('frontend.common.label.required')
+                                                    Title @include('frontend.common.label.required')
                                                 </label>
 
-                                                <select id="taskcard_non_routine_type" name="taskcard_non_routine_type" class="form-control m-select2" style="width:100%">
-                                                    @if ( empty($taskCard->type_id) )
-                                                        @foreach ($types as $type)
-                                                            <option value="{{ $type->id }}">
-                                                                {{ $type->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    @else
-                                                        @foreach ($types as $type)
-                                                            <option value="{{ $type->id }}"
-                                                                @if($type->id == $taskCard->type_id) selected @endif>
-                                                                {{ $type->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
+                                                @component('frontend.common.input.text')
+                                                    @slot('id', 'title')
+                                                    @slot('text', 'Title')
+                                                    @slot('name', 'title')
+                                                    @slot('id_error', 'title')
+                                                    @slot('value',$taskCard->title)
+                                                @endcomponent
+
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -146,19 +138,26 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Title @include('frontend.common.label.required')
+                                                    Type @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.text')
-                                                    @slot('id', 'title')
-                                                    @slot('text', 'Title')
-                                                    @slot('name', 'title')
-                                                    @slot('id_error', 'title')
-                                                    @slot('value',$taskCard->title)
-                                                @endcomponent
-
+                                                <select id="taskcard_non_routine_type" name="taskcard_non_routine_type" class="form-control m-select2" style="width:100%">
+                                                    @if ( empty($taskCard->type_id) )
+                                                        @foreach ($types as $type)
+                                                            <option value="{{ $type->id }}">
+                                                                {{ $type->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($types as $type)
+                                                            <option value="{{ $type->id }}"
+                                                                @if($type->id == $taskCard->type_id) selected @endif>
+                                                                {{ $type->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
                                             </div>
-
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Effectivity (A/C Type) @include('frontend.common.label.required')

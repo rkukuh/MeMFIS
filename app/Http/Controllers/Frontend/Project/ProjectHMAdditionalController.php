@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\Project;
 use App\Models\Project;
 use App\Models\Aircraft;
 use App\Models\Customer;
+use App\Models\DefectCard;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
@@ -56,12 +57,20 @@ class ProjectHMAdditionalController extends Controller
      */
     public function store(Project $project,Request $request)
     {
-        // $defectcard_uuid = explode(",",$request->defectcard_uuid);
-        // dd($defectcard_uuid);
         $parent_id = $project->id;
         $project = $project->replicate();
         $project->parent_id = $parent_id;
+        $project->code = DocumentNumber::generate('PROJ-A-', Project::withTrashed()->count()+1);
         $project->save();
+        $defectcard_uuids = explode(",",$request->defectcard_uuid);
+
+        foreach($defectcard_uuids as $defectcard_uuid){
+            $defectcard = DefectCard::where('uuid',$defectcard_uuid)->first();
+            $defectcard->project_additional_id = $project->id;
+
+            $defectcard->save();
+
+        }
 
         return response()->json($project);
     }
@@ -75,13 +84,14 @@ class ProjectHMAdditionalController extends Controller
     public function show(Project $project)
     {
         if($project->quotations->toArray() == []){
-            $project = Project::find($project->parent_id);
-            $attention = json_decode($project->quotations()->first()->attention);
+            $project_parent = Project::find($project->parent_id);
+            $attention = json_decode($project_parent->quotations()->first()->attention);
         }else{
-            $attention = json_decode($project->quotations()->first()->attention);
+            $attention = json_decode($project_parent->quotations()->first()->attention);
         }
         return view('frontend.project.hm-additional.show',[
             'project' => $project,
+            'project_parent' => $project_parent,
             'aircrafts' => $this->aircrafts,
             'customers' => $this->customers,
             'attention' => $attention
@@ -97,13 +107,14 @@ class ProjectHMAdditionalController extends Controller
     public function edit(Project $project)
     {
         if($project->quotations->toArray() == []){
-            $project = Project::find($project->parent_id);
-            $attention = json_decode($project->quotations()->first()->attention);
+            $project_parent = Project::find($project->parent_id);
+            $attention = json_decode($project_parent->quotations()->first()->attention);
         }else{
-            $attention = json_decode($project->quotations()->first()->attention);
+            $attention = json_decode($project_parent->quotations()->first()->attention);
         }
         return view('frontend.project.hm-additional.edit',[
             'project' => $project,
+            'project_parent' => $project_parent,
             'aircrafts' => $this->aircrafts,
             'customers' => $this->customers,
             'attention' => $attention
@@ -117,16 +128,18 @@ class ProjectHMAdditionalController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(ProjectHMUpdate $request, Project $project)
+    public function update(Request $request, Project $project)
     {
-        // $project->update($request->all());
-        // if ($request->hasFile('fileInput')) {
-        //     $destination = 'project/hm/workOrder';
-        //     $fileName = $request->file('fileInput')->getClientOriginalName();
-        //     $fileUpload = Storage::putFileAs($destination,$request->file('fileInput'), $fileName);
-        // }
+        $defectcard_uuids = explode(",",$request->defectcard_uuid);
+        foreach($defectcard_uuids as $defectcard_uuid){
+            $defectcard = DefectCard::where('uuid',$defectcard_uuid)->first();
+            $defectcard->project_additional_id = $project->id;
 
-        // return response()->json($project);
+            $defectcard->save();
+
+        }
+
+        return response()->json($project);
     }
 
     /**
@@ -135,9 +148,68 @@ class ProjectHMAdditionalController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy(Project $project,Request $request)
     {
-        //
+        $defectcard_uuids = explode(",",$request->defectcard_uuid);
+
+        foreach($defectcard_uuids as $defectcard_uuid){
+            // $null = 1;
+            $defectcard = DefectCard::where('uuid',$defectcard_uuid)->first();
+            $defectcard->project_additional_id = null;
+
+            $defectcard->save();
+        }
+
+        return response()->json($project);
+
     }
+
+    /**
+     * Display a summary of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function summary(Project $project)
+    {
+        $skills = $subset = [];
+
+        $eri = 0;
+        
+        $defectcards =  DefectCard::where('project_additional_id', $project->id)->get();
+
+        foreach($defectcards as $defectcard){
+            if (sizeof($defectcard->skills) > 1) {
+                $eri++;
+            }else{
+                $result = $defectcard->skills->map(function ($skills) {
+                    return collect($skills->toArray())
+                    ->only(['code'])
+                    ->all();
+                });
+                
+                array_push($subset , $result);
+            }
+        }
+        
+        foreach ($subset as $value) {
+            foreach($value as $skill){
+                array_push($skills, $skill["code"]);
+            }
+        }
+        
+        $otr = array_count_values($skills);
+        $otr["eri"] = $eri;
+        $total_defectcard = $defectcards->count();
+        $total_estimation_manhours = $defectcards->sum('estimation_manhour');
+        return view('frontend.project.hm-additional.summary',[
+            'project' => $project,
+            'total_defectcard' => $total_defectcard,            
+            'otr' => $otr,
+            'total_estimation_manhours' => $total_estimation_manhours,
+        ]);
+
+    }
+
+
 
 }
