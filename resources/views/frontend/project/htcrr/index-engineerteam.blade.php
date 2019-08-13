@@ -77,7 +77,8 @@
     </script>
     <script src="{{ asset('js/frontend/project/htcrr/workpackage.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
-    <script src="{{ asset('js/frontend/project/hm/modal/datatables.js') }}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script>
 
     <script src="{{ asset('js/frontend/project/hm/modal/successor.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/modal/predecessor.js') }}"></script>
