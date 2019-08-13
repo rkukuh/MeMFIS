@@ -1,13 +1,13 @@
 
-let TimeOffPeriod = {
+let WorkshiftSchedule = {
     init: function () {
-        $('.time_off_period_datatable').mDatatable({
+        $('.workshift_schedule_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer',
+                        url: '/datatables/benefit',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -43,45 +43,32 @@ let TimeOffPeriod = {
                 }
             },
             columns: [{
-                    field: 'name',
+                    field: 'code',
                     title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/customer/'+t.uuid+'">' + t.name + "</a>"
+                        return '<a href="/benefit/'+t.uuid+'">' + t.code + "</a>"
                     }
                 },
                 {
-                    field: 'addresses',
-                    title: 'Leave Period Name',
+                    field: 'name',
+                    title: 'Workshift Schedule Name',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if(t.addresses[0]){
-                            return t.addresses[0].address
-                        }else{
-                            return ""
-                        }
-                    }
                 },
                 {
-                    field: 'phones',
+                    field: 'description',
                     title: 'Description',
                     sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if(t.phones[0]){
-                            return t.phones[0].number
-                        }else{
-                            return ""
-                        }
-                    }
+                    filterable: !1
                 }
             ]
         });
+
     }
 };
 
 jQuery(document).ready(function () {
-    TimeOffPeriod.init();
+    WorkshiftSchedule.init();
 });

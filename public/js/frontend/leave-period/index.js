@@ -1,7 +1,7 @@
 
-let TimeOffTypes= {
+let LeavePeriod = {
     init: function () {
-        $('.time_off_types_datatable').mDatatable({
+        $('.leave_period_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -53,7 +53,7 @@ let TimeOffTypes= {
                 },
                 {
                     field: 'addresses',
-                    title: 'Leave Types Name',
+                    title: 'Leave Period Name',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
@@ -79,10 +79,9 @@ let TimeOffTypes= {
                 }
             ]
         });
-
     }
 };
 
 jQuery(document).ready(function () {
-    TimeOffTypes.init();
+    LeavePeriod.init();
 });

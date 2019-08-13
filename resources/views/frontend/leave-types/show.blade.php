@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Time-OFF Types
+                    Leave Types
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.time-off-types.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.hr.leave-types.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Time-OFF Types
+                                Leave Types
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Time-OFF Types
+                                    Leave Types
                                 </h3>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Time-OFF Types Code   
+                                                Leave Types Code   
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Time-OFF Types Name   
+                                                Leave Types Name   
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -73,7 +73,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Time-OFF per Time-OFF Period   
+                                                Leave per Leave Period   
                                             </label>
         
                                             @component('frontend.common.label.data-info')
@@ -85,6 +85,7 @@
                                                 @slot('id', 'pro_rate_leave')
                                                 @slot('name', 'pro_rate_leave')
                                                 @slot('text', 'Pro Rate Leaves')
+                                                @slot('disabled', 'disabled')
                                                 @slot('style_div','margin-top:30px')
                                             @endcomponent
                                         </div>
