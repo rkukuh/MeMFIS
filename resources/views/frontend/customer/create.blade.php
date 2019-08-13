@@ -132,7 +132,7 @@
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         @component('frontend.common.input.radio')
-                                                            @slot('text', 'Work')
+                                                            @slot('text', 'Company')
                                                             @slot('name', 'type_phone_1')
                                                             @slot('id', 'type_phone')
                                                             @slot('value', 'work')
@@ -172,7 +172,7 @@
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         @component('frontend.common.input.radio')
-                                                            @slot('text', 'Work')
+                                                            @slot('text', 'Company')
                                                             @slot('name', 'type_phone')
                                                             @slot('id', 'type_phone')
                                                             @slot('value', 'work')
@@ -226,7 +226,7 @@
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         @component('frontend.common.input.radio')
-                                                            @slot('text', 'Work')
+                                                            @slot('text', 'Company')
                                                             @slot('name', 'type_fax')
                                                             @slot('id', 'type_fax')
                                                             @slot('value', 'work')
@@ -260,7 +260,7 @@
                                                         </div>
                                                         <div class="col-sm-3 col-md-3 col-lg-3">
                                                             @component('frontend.common.input.radio')
-                                                                @slot('text', 'Work')
+                                                                @slot('text', 'Company')
                                                                 @slot('name', 'type_fax')
                                                                 @slot('id', 'type_fax')
                                                                 @slot('value', 'work')
@@ -400,7 +400,7 @@
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         @component('frontend.common.input.radio')
-                                                            @slot('text', 'Work')
+                                                            @slot('text', 'Company')
                                                             @slot('name', 'type_email')
                                                             @slot('id', 'type_email')
                                                             @slot('value', 'work')
@@ -434,7 +434,7 @@
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         @component('frontend.common.input.radio')
-                                                            @slot('text', 'Work')
+                                                            @slot('text', 'Company')
                                                             @slot('name', 'type_email')
                                                             @slot('id', 'type_email')
                                                             @slot('value', 'work')
