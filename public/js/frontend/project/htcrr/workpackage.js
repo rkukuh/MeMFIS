@@ -522,7 +522,7 @@ function htcrr_tool(triggeruuid) {
         let unit_tool = $('#unit_tool').val();
         let quantity = $('input[name=quantity]').val();
         let remark_tool = $('#remark_tool').val();
-        console.log('clicked')
+        
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
