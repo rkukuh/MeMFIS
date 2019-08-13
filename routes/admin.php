@@ -58,7 +58,6 @@ Route::name('admin.')->group(function () {
         Route::resource('department', 'DepartmentController');
         Route::resource('benefit', 'BenefitController');
         Route::resource('position', 'PositionController');
-        Route::resource('time-off-period', 'TimeOffPeriodController');
 
         /** LICENSE */
 

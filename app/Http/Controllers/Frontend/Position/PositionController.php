@@ -155,8 +155,6 @@ class PositionController extends Controller
             ];
         }
 
-        // print_r(rsort($unique_raw_date_history_create));
-        // dd($data_benefit_history[0]->benefit_history_date[0]->pivot->updated_at);
         return view('frontend.position.edit',['position' => $position,'benefits_position' => $benefits_position,'history' => $history]);
     }
 

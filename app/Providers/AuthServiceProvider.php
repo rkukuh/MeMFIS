@@ -54,7 +54,6 @@ class AuthServiceProvider extends ServiceProvider
         Models\Approval::class => Policies\ApprovalPolicy::class,
         Models\Progress::class => Policies\ProgressPolicy::class,
         Models\Position::class => Policies\PositionPolicy::class,
-        Models\TimeOffPeriod::class => Policies\TimeOffPeriodPolicy::class,
         Models\Quotation::class => Policies\QuotationPolicy::class,
         Models\Threshold::class => Policies\ThresholdPolicy::class,
         Models\Department::class => Policies\DepartmentPolicy::class,
