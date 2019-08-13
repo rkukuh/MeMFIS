@@ -98,11 +98,15 @@ $('.workpackage_datatable').mDatatable({
             sortable: 'asc',
             filterable: !1,
             template: function (t) {
-                return '<a href="/quotation/'+triggeruuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
+                if(t.uuid){
+                    return '<a href="/quotation/'+triggeruuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
+                }else{
+                    return '<a href="#">' + t.title + "</a>"
+                }
             }
         },
         {
-            field: 'aircraft.name',
+            field: 'ac_type',
             title: 'A/C Type',
             sortable: 'asc',
             filterable: !1,

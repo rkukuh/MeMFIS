@@ -141,19 +141,19 @@ let TaskCard = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'created_by',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'updated_by',
                     title: 'Updated By',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'approved_by',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,

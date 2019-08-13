@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Datatables\Quotation;
 use App\User;
 use App\Models\ListUtil;
 use App\Models\Quotation;
+use App\Models\HtCrr;
 use App\Models\WorkPackage;
 use App\Models\Pivots\ProjectWorkPackage;
 use App\Models\ProjectWorkPackageFacility;
@@ -274,6 +275,9 @@ class QuotationDatatables extends Controller
     public function jobRequest(Quotation $quotation)
     {
         $workpackages = $quotation->workpackages;
+
+   
+
         foreach($workpackages as $workPackage){
             $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
             ->where('workpackage_id',$workPackage->id)
@@ -291,6 +295,17 @@ class QuotationDatatables extends Controller
             }
         }
 
+        $htcrrs = HtCrr::where('project_id',$quotation->project->id)->whereNull('parent_id')->get();
+        if (sizeof($htcrrs) > 1) {
+            $htcrr_workpackage = new WorkPackage();
+            $htcrr_workpackage->code = "Workpackage HT CRR";
+            $htcrr_workpackage->title = "Workpackage HT CRR";
+            $htcrr_workpackage->is_template = 0;
+            $htcrr_workpackage->ac_type = $quotation->project->aircraft->name;
+
+            $workpackages[sizeof($workpackages)] = $htcrr_workpackage;
+        }
+        
 
         $data = $alldata = json_decode($workpackages);
 

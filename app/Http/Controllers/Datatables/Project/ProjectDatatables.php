@@ -7,8 +7,10 @@ use App\Models\Project;
 use App\Models\ListUtil;
 use App\Models\Quotation;
 use App\Models\DefectCard;
+use App\Models\HtCrr;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\WorkPackage;
 
 class ProjectDatatables extends Controller
 {
@@ -418,9 +420,22 @@ class ProjectDatatables extends Controller
     public function workpackage(Project $project)
     {
         $workpackages = $project->workpackages;
+
         foreach($workpackages as $workpackage){
             $workpackage->ac_type = $workpackage->aircraft->name;
         }
+
+        $htcrrs = HtCrr::where('project_id',$project->id)->whereNull('parent_id')->get();
+        if (sizeof($htcrrs) > 1) {
+            $htcrr_workpackage = new WorkPackage();
+            $htcrr_workpackage->code = "Workpackage HT CRR";
+            $htcrr_workpackage->title = "Workpackage HT CRR";
+            $htcrr_workpackage->is_template = 0;
+            $htcrr_workpackage->ac_type = $project->aircraft->name;
+
+            $workpackages[sizeof($workpackages)] = $htcrr_workpackage;
+        }
+
         $data = $alldata = json_decode($workpackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

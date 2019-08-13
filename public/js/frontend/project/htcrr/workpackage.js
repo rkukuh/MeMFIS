@@ -522,7 +522,7 @@ function htcrr_tool(triggeruuid) {
         let unit_tool = $('#unit_tool').val();
         let quantity = $('input[name=quantity]').val();
         let remark_tool = $('#remark_tool').val();
-
+        
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -757,7 +757,12 @@ function htcrr_material(triggeruuid) {
         $('#add_material_modal').modal('show');
     });
 
-
+    $('.m_taskcard_htcrr').on('click', function () {
+        let table = $('.ht_crr_datatable').mDatatable();
+    
+        table.originalDataSet = [];
+        table.reload();
+    });
 
 };
 

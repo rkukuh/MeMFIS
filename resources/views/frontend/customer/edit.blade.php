@@ -149,7 +149,7 @@
                                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                                         @if( $customer->phones[$counter]->type->name === "Work" )
                                                                             @component('frontend.common.input.radio')
-                                                                                @slot('text', 'Work')
+                                                                                @slot('text', 'Company')
                                                                                 @slot('name', 'type_phone_'.$counter)
                                                                                 @slot('id', 'type_phone')
                                                                                 @slot('value', 'work')
@@ -358,7 +358,7 @@
                                                                 </div>
                                                                 <div class="col-sm-3 col-md-3 col-lg-3">
                                                                     @component('frontend.common.input.radio')
-                                                                        @slot('text', 'Work')
+                                                                        @slot('text', 'Company')
                                                                         @slot('name', 'type_fax')
                                                                         @slot('id', 'type_fax')
                                                                         @slot('value', 'work')
@@ -550,7 +550,7 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
                                                         <label class="form-control-label">
-                                                            Email @include('frontend.common.label.required')
+                                                            Email @include('frontend.common.label.optional')
                                                         </label>
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -578,7 +578,7 @@
                                                                             @component('frontend.common.input.radio')
                                                                                 @slot('id', 'type_email')
                                                                                 @slot('name', 'type_email_'.$counter)
-                                                                                @slot('text', 'Work')
+                                                                                @slot('text', 'Company')
                                                                                 @slot('value', 'work')
                                                                                 @slot('checked','checked')
                                                                             @endcomponent
