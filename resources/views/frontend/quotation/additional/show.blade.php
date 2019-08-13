@@ -283,7 +283,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Subject Quotation
+                                                Quotation Title
                                             </label>
 
 
@@ -292,6 +292,17 @@
                                                 @slot('id', 'name')
                                             @endcomponent
                                         </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <label class="form-control-label">
+                                            Quotation Title @include('frontend.common.label.required')
+                                        </label>
+
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', $quotation->sescription)
+                                            @slot('id', 'quotation_title')
+                                        @endcomponent
+                                    </div>
                                     </div>
                                     <div class="form-group m-form__group row mb-0">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
