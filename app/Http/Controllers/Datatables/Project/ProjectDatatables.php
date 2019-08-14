@@ -426,7 +426,7 @@ class ProjectDatatables extends Controller
         }
 
         $htcrrs = HtCrr::where('project_id',$project->id)->whereNull('parent_id')->get();
-        if (sizeof($htcrrs) > 1) {
+        if (sizeof($htcrrs) > 0) {
             $htcrr_workpackage = new WorkPackage();
             $htcrr_workpackage->code = "Workpackage HT CRR";
             $htcrr_workpackage->title = "Workpackage HT CRR";

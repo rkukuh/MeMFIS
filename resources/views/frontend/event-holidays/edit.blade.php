@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Leave Types
+                    Event/Holidays
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.leave-types.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.hr.event-holidays.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Leave Types
+                                Event/Holidays
                             </span>
                         </a>
                     </li>
@@ -38,10 +38,10 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.create-new')
+                                @include('frontend.common.label.edit')
 
                                 <h3 class="m-portlet__head-text">
-                                    Leave Types
+                                    Event/Holidays
                                 </h3>
                             </div>
                         </div>
@@ -53,48 +53,52 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Leave Types Code @include('frontend.common.label.required')
+                                                Holidays Code @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Leave Types Code')
-                                                @slot('id', 'leave_types_code')
-                                                @slot('name', 'leave_types_code')
-                                                @slot('id_error', 'leave_types_code')
+                                                @slot('text', 'Holidays Code')
+                                                @slot('id', 'holidays_code')
+                                                @slot('name', 'holidays_code')
+                                                @slot('id_error', 'holidays_code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Leave Types Name @include('frontend.common.label.required')
+                                                Holidays Name @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Leave Types Name')
-                                                @slot('id', 'leave_types_name')
-                                                @slot('name', 'leave_types_name')
-                                                @slot('id_error', 'leave_types_name')
+                                                @slot('text', 'Holidays Name')
+                                                @slot('id', 'holidays_name')
+                                                @slot('name', 'holidays_name')
+                                                @slot('id_error', 'holidays_name')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Leave per Leave Period @include('frontend.common.label.required')
+                                                Date Start @include('frontend.common.label.required')
                                             </label>
         
-                                            @component('frontend.common.input.number')
-                                                @slot('id', 'leave_per_leave period')
-                                                @slot('text', 'Leave per Leave Period')
-                                                @slot('name', 'leave_per_leave period')
-                                                @slot('id_error','leave_per_leave period')
+                                            @component('frontend.common.input.datepicker')
+                                                @slot('id', 'date')
+                                                @slot('text', 'Date Start')
+                                                @slot('name', 'date')
+                                                @slot('id_error','date')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            @component('frontend.common.input.checkbox')
-                                                @slot('id', 'pro_rate_leave')
-                                                @slot('name', 'pro_rate_leave')
-                                                @slot('text', 'Pro Rate Leaves')
-                                                @slot('style_div','margin-top:30px')
+                                            <label class="form-control-label">
+                                                Date End @include('frontend.common.label.required')
+                                            </label>
+        
+                                            @component('frontend.common.input.datepicker')
+                                                @slot('id', 'valid_until')
+                                                @slot('text', 'Date End')
+                                                @slot('name', 'valid_until')
+                                                @slot('id_error','valid_until')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -118,8 +122,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-leave-types')
-                                                        @slot('class', 'add-leave-types')
+                                                        @slot('id', 'add-holidays-period')
+                                                        @slot('class', 'add-holidays-period')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -140,3 +144,7 @@
     </div>
 @endsection
 
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
+@endpush

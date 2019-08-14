@@ -170,18 +170,32 @@ Route::name('frontend.')->group(function () {
         Route::view('hr/position/update-benefit', 'frontend.position.update-benefit')->name('hr.position.update-benefit');
 
 
-        /** Leave Period */
+        /** Time-OFF Period */
 
-        Route::view('hr/leave-period', 'frontend.leave-period.index')->name('hr.leave-period.index');
-        Route::view('hr/leave-period/create', 'frontend.leave-period.create')->name('hr.leave-period.create');
-        Route::view('hr/leave-period/show', 'frontend.leave-period.show')->name('hr.leave-period.show');
+        Route::view('hr/time-off-period', 'frontend.time-off-period.index')->name('hr.time-off-period.index');
+        Route::view('hr/time-off-period/create', 'frontend.time-off-period.create')->name('hr.time-off-period.create');
+        Route::view('hr/time-off-period/show', 'frontend.time-off-period.show')->name('hr.time-off-period.show');
 
 
-        /** Leave Types */
+        /** Time-OFF Types */
 
-        Route::view('hr/leave-types', 'frontend.leave-types.index')->name('hr.leave-types.index');
-        Route::view('hr/leave-types/create', 'frontend.leave-types.create')->name('hr.leave-types.create');
-        Route::view('hr/leave-types/show', 'frontend.leave-types.show')->name('hr.leave-types.show');
+        Route::view('hr/time-off-types', 'frontend.time-off-types.index')->name('hr.time-off-types.index');
+        Route::view('hr/time-off-types/create', 'frontend.time-off-types.create')->name('hr.time-off-types.create');
+        Route::view('hr/time-off-types/show', 'frontend.time-off-types.show')->name('hr.time-off-types.show');
+
+        /** Event/Holidays */
+
+        Route::view('hr/event-holidays', 'frontend.event-holidays.index')->name('hr.event-holidays.index');
+        Route::view('hr/event-holidays/create', 'frontend.event-holidays.create')->name('hr.event-holidays.create');
+        Route::view('hr/event-holidays/show', 'frontend.event-holidays.show')->name('hr.event-holidays.show');
+        Route::view('hr/event-holidays/edit', 'frontend.event-holidays.edit')->name('hr.event-holidays.edit');
+
+        /** Workshift Schedule */
+
+        Route::view('hr/workshift-schedule', 'frontend.workshift-schedule.index')->name('hr.workshift-schedule.index');
+        Route::view('hr/workshift-schedule/create', 'frontend.workshift-schedule.create')->name('hr.workshift-schedule.create');
+        Route::view('hr/workshift-schedule/show', 'frontend.workshift-schedule.show')->name('hr.workshift-schedule.show');
+        
         
         /** QUOTATION's WORKPACKAGE's TASKCARDs */
 

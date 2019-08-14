@@ -421,18 +421,34 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.hr.leave-period.index') }}" class="m-menu__link m-menu__toggle">
+                <a href="{{ route('frontend.hr.time-off-period.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Leave Period
+                        Time-OFF Period
                     </span>
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.hr.leave-types.index') }}" class="m-menu__link m-menu__toggle">
+                <a href="{{ route('frontend.hr.time-off-types.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Leave Types
+                        Time-OFF Types
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.hr.event-holidays.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                       Event/Holidays
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.hr.workshift-schedule.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                       Workshift Schedule
                     </span>
                 </a>
             </li>

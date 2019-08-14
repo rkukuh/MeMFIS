@@ -17,12 +17,12 @@
                         </div>
                     </div>
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-    
+
                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                     </div>
                 </div>
             </div>
-    
+
             <div class="materials_datatable wp-datatable" id="scrolling_both"></div>
         </div>
     </div>
@@ -45,13 +45,19 @@
                         </div>
                     </div>
                     <div class="col-xl-6 order-1 order-xl-2 m--align-right">
-    
+
                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                     </div>
                 </div>
             </div>
-    
+
             <div class="tools_datatable wp-datatable" id="scrolling_both"></div>
         </div>
+        @include('frontend.quotation.workpackage.modal')
+
     </div>
-    
+
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+@endpush

@@ -184,27 +184,27 @@ var DatatableAutoColumnHideDemo = function () {
     //     },
     //   ],
     // });
-    let value = [];
-    let inputs = $(".charge");
-    let currency = $("#currency").val();
-    let exchange_rate = $("#exchange").val();
-    let grandTotal = grandTotalRupiah = 0;
-    //get all values
-    for (let i = 0; i < inputs.length; i++) {
-        value[i] = parseInt($(inputs[i]).val());
-    }
-    const arrSum = arr => arr.reduce((a, b) => a + b, 0);
-    let subTotal = $('#sub_total').attr("value");
-    grandTotal = parseInt(subTotal) + parseInt(arrSum(value));
+    // let value = [];
+    // let inputs = $(".charge");
+    // let currency = $("#currency").val();
+    // let exchange_rate = $("#exchange").val();
+    // let grandTotal = grandTotalRupiah = 0;
+    // //get all values
+    // for (let i = 0; i < inputs.length; i++) {
+    //     value[i] = parseInt($(inputs[i]).val());
+    // }
+    // const arrSum = arr => arr.reduce((a, b) => a + b, 0);
+    // let subTotal = $('#sub_total').attr("value");
+    // grandTotal = parseInt(subTotal) + parseInt(arrSum(value));
 
-    if(currency !== 1){
-        grandTotalRupiah = ( parseInt(subTotal) + parseInt(arrSum(value)) ) * exchange_rate;
-    }
+    // if(currency !== 1){
+    //     grandTotalRupiah = ( parseInt(subTotal) + parseInt(arrSum(value)) ) * exchange_rate;
+    // }
 
-    $('#grand_total').attr("value", grandTotal);
-    $('#grand_total_rupiah').attr("value", grandTotalRupiah);
-    $('#grand_total').html(ForeignFormatter.format(grandTotal));
-    $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
+    // $('#grand_total').attr("value", grandTotal);
+    // $('#grand_total_rupiah').attr("value", grandTotalRupiah);
+    // $('#grand_total').html(ForeignFormatter.format(grandTotal));
+    // $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
   };
 
   return {
