@@ -108,30 +108,31 @@ let AdditionalTaskQtnCreate = {
 
     
 
-        // $('select[name="scheduled_payment_type"]').on('change', function () {
-        //     let type = this.options[this.selectedIndex].innerHTML;
-        //     if(type === "By Date"){
-        //         $.each($('#scheduled_payment '), function () {
-        //             $(this).addClass("scheduledPayment");
-        //             $(this).val("");
-        //             $(this).datetimepicker({
-        //                 format: "yyyy-mm-dd",
-        //                 todayHighlight: !0,
-        //                 autoclose: !0,
-        //                 startView: 2,
-        //                 minView: 2,
-        //                 forceParse: 0,
-        //                 pickerPosition: "bottom-left"
-        //             });
-        //         });
-        //     }else{
-        //         $.each($('#scheduled_payment '), function () {
-        //             $(this).val("");
-        //             $(this).removeClass("scheduledPayment");
-        //             $(this).datetimepicker( "remove" );
-        //         });
-        //     }
-        // });
+        $('select[name="scheduled_payment_type"]').on('change', function () {
+            let type = this.options[this.selectedIndex].innerHTML;
+            if(type === "By Date"){
+                $.each($('#scheduled_payment '), function () {
+                    $(this).addClass("scheduledPayment");
+                    $(this).val("");
+                    $(this).datetimepicker({
+                        format: "yyyy-mm-dd",
+                        todayHighlight: !0,
+                        autoclose: !0,
+                        startView: 2,
+                        minView: 2,
+
+                        forceParse: 0,
+                        pickerPosition: "bottom-left"
+                    });
+                });
+            }else{
+                $.each($('#scheduled_payment '), function () {
+                    $(this).val("");
+                    $(this).removeClass("scheduledPayment");
+                    $(this).datetimepicker( "remove" );
+                });
+            }
+        });
 
         $('.action-buttons').on('click', '.add-additional-quotation', function () {
             let attention_name = $('#attention').val();
@@ -142,8 +143,9 @@ let AdditionalTaskQtnCreate = {
             let scheduled_payment_array = [];
             let type = $('#scheduled_payment_type').children("option:selected").html();
             if(type === "By Date"){
-                $('select[name^=scheduled_payment] ').each(function (i) {
+                $('input[name^=scheduled_payment] ').each(function (i) {
                     scheduled_payment_array[i] = $(this).val();
+                    console.log($(this).val());
                 });
             }else{
                 $('#scheduled_payment ').each(function (i) {
@@ -153,7 +155,7 @@ let AdditionalTaskQtnCreate = {
             scheduled_payment_array.pop();
             let data = new FormData();
             data.append("project_id", project_uuid);
-            data.append("customer_id", $('#customer_id').val());
+            data.append("customer_id", $('#customer_uuid').val());
             data.append("requested_at", $('#date').val());
             data.append("valid_until", $('#valid_until').val());
             data.append("currency_id", $('#currency').val());

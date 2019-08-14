@@ -329,10 +329,9 @@
                                                                 <label class="form-control-label">
                                                                     Scheduled Payment Type
                                                                 </label>
-                                                                <select id="scheduled_payment_type" name="scheduled_payment_type" class="form-control">
-                                                                    <option value="">
-                                                                        Select a schedule payment
-                                                                    </option>
+                                                                <select name="scheduled_payment_type" id="scheduled_payment_type" class="form-control m-select2">
+                                                                    <option value="59">By Date</option>
+                                                                    <option value="60">By Project Progress</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -344,10 +343,12 @@
                                                                         <div class="form-group m-form__group row">
                                                                             <div class="col-sm-8 col-md-8 col-lg-8">
                                                                                 @component('frontend.common.input.text')
-                                                                                @slot('name', 'scheduled_payment')
-                                                                                @slot('id', 'scheduled_payment')
-                                                                                @slot('text', 'Phone')
-                                                                                @slot('id_error', 'scheduled_payment_amount')
+                                                                                    @slot('id', 'scheduled_payment')
+                                                                                    @slot('name', 'scheduled_payment')
+                                                                                    @slot('class','scheduledPayment')
+                                                                                    @slot('autocomplete', 'off')
+                                                                                    @slot('text', 'Phone')
+                                                                                    @slot('id_error', 'scheduled_payment_amount')
                                                                                 @endcomponent
                                                                             </div>
                                                                             <div class="col-sm-2 col-md-2 col-lg-2">
