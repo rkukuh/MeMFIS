@@ -67,7 +67,7 @@
 
                         <div class="m-login__signin">
                             <div class="m-login__title">
-                                <h3>Login X</h3>
+                                <h3>Login</h3>
                             </div>
 
                             <form action="{{ route('login') }}" method="post" class="m-login__form m-form">
