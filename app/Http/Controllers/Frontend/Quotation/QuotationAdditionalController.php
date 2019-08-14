@@ -60,7 +60,6 @@ class QuotationAdditionalController extends Controller
             'project' => $project
         ]);
 
-        // return view('frontend.quotation.create');
     }
 
     /**
@@ -71,7 +70,7 @@ class QuotationAdditionalController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         // $contact = [];
 
         // $contact['name']     = $request->attention_name;
