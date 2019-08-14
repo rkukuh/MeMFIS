@@ -8,6 +8,16 @@ use App\Http\Controllers\Controller;
 
 class DefectCardController extends Controller
 {
+    protected $error_notification;
+
+    public function __construct()
+    {
+        $this->error_notification = array(
+                            'message' => "Defectard hasn't been approved",
+                            'title' => "Danger",
+                            'alert-type' => "error"
+        );
+    }
     /**
      * Display a listing of the resource.
      *
@@ -72,16 +82,20 @@ class DefectCardController extends Controller
      */
     public function edit(DefectCard $defectcard)
     {
-        //TODO Validasi User'skill with DefectCard Skill
-        foreach($defectcard->helpers as $helper){
-            $helper->userID .= $helper->user->id;
-        }
+        if(sizeOf($defectcard->quotation_additional->approvals->toArray()) >= 1){
+            //TODO Validasi User'skill with DefectCard Skill
+            foreach($defectcard->helpers as $helper){
+                $helper->userID .= $helper->user->id;
+            }
 
-        if($defectcard->helpers->where('userID',Auth::id())->first() == null){
-            return redirect()->route('frontend.defectcard-engineer.edit',$defectcard->uuid);
-        }
-        else{
-            return redirect()->route('frontend.defectcard-mechanic.edit',$defectcard->uuid);
+            if($defectcard->helpers->where('userID',Auth::id())->first() == null){
+                return redirect()->route('frontend.defectcard-engineer.edit',$defectcard->uuid);
+            }
+            else{
+                return redirect()->route('frontend.defectcard-mechanic.edit',$defectcard->uuid);
+            }
+        }else{
+            return redirect()->route('frontend.defectcard.index')->with($this->error_notification);
         }
     }
 

@@ -853,6 +853,7 @@ let TaskCard = {
                         // document.getElementById('quantity').value = quantity;
 
                     } else {
+                                        
 
                         toastr.success('Instruction has been created.', 'Success', {
                             timeOut: 5000
@@ -863,6 +864,7 @@ let TaskCard = {
                         table.originalDataSet = [];
                         table.reload();
                         $('#modal_instruction').modal('hide');
+                        instruction_reset();
                     }
                 }
             });
@@ -959,6 +961,7 @@ let TaskCard = {
                         table.originalDataSet = [];
                         table.reload();
                         $('#modal_instruction').modal('hide');
+                        instruction_reset();
                     }
                 }
             });

@@ -11,7 +11,7 @@
           ajax: "/datatables/taskcard-eo/"+triggeruuid+"/materials",
           columns: [
               {
-                data: "pivot.part_number"
+                data: "code"
               },
               {
                   data: "name"
