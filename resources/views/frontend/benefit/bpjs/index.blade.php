@@ -23,6 +23,7 @@
         </div>
     </div>
     @include('frontend.benefit.bpjs.modal')
+    @include('frontend.benefit.bpjs.show')
 
     <div class="bpjs_datatable" id="scrolling_both"></div>
     <hr>
