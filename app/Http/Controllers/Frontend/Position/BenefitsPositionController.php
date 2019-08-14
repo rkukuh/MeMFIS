@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\Position;
 
 use App\Models\Benefit;
 use App\Models\Position;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
@@ -27,10 +28,10 @@ class BenefitsPositionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $benefit= Benefit::get();
-        return view('frontend.position.update-benefit',['benefit' => $benefit]);
+        
     }
 
     /**
