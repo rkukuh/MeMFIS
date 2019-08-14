@@ -286,7 +286,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Subject Quotation
+                                                Quotation Title
                                             </label>
 
                                             @component('frontend.common.input.textarea')
@@ -295,6 +295,21 @@
                                                 @slot('name', 'title')
                                                 @slot('text', 'Title')
                                                 @slot('id_error', 'title')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Description @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '5')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('text', 'Description')
+                                                @slot('id_error', 'description')
                                             @endcomponent
                                         </div>
                                     </div>

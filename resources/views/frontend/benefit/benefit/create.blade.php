@@ -150,5 +150,5 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/calculation-reference.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/pro-rate-base-calculation.js') }}"></script>
-    <script src="{{ asset('js/frontend/benefit/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/benefit/benefit/create.js') }}"></script>
 @endpush

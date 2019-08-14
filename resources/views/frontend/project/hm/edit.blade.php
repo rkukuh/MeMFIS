@@ -196,7 +196,9 @@
                                                 </div>
                                                 <div class="col-xl-12 order-1 order-xl-2 m--align-right">
                                                     <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
-                                                        <a href="#" class="m-btn btn btn-primary">
+                                                    <a href="{{ route('frontend.project-htcrr.project-htcrr.create', [
+                                                        'project' => $project->uuid
+                                                    ]) }}" class="m-btn btn btn-primary">
                                                             <span>
                                                                 <i class="la la-plus-circle"></i>
                                                             <span>HTCRR</span>

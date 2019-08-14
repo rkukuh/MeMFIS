@@ -1,16 +1,7 @@
 
 
 $('.nav-item').on('click','#engineer_team_tab',function() {
-    if(anyChanges){
-        let csrf = $('meta[name="csrf-token"]').attr('content');
-        // let url = '/project-hm/' + project_uuid  + '/workpackage/' + workPackage_uuid+'/edit';
-        let form = $('<form action="' + url + '" method="GET">' +
-        '<input type="hidden" name="anyChanges" value="' + anyChanges + '" />' +
-        '<input name="_token" value="'+csrf+'" type="hidden">' +
-        '</form>');
-        $('body').append(form);
-        form.submit();
-    }
+    
 });
 
 let Workpackage = {
@@ -522,7 +513,7 @@ function htcrr_tool(triggeruuid) {
         let unit_tool = $('#unit_tool').val();
         let quantity = $('input[name=quantity]').val();
         let remark_tool = $('#remark_tool').val();
-
+        
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -757,7 +748,7 @@ function htcrr_material(triggeruuid) {
         $('#add_material_modal').modal('show');
     });
 
-
+    
 
 };
 
@@ -765,3 +756,33 @@ jQuery(document).ready(function () {
     Workpackage.init();
 });
 
+$('.m_taskcard_htcrr').on('click', function () {
+    let table = $('.ht_crr_datatable').mDatatable();
+
+    table.originalDataSet = [];
+    table.reload();
+});
+
+$('.m_tabs_manhour').on('click', function () {
+    if(anyChanges){
+        alert('Getting manhours');
+    }else{
+        alert('no changes on total manhours');
+    }
+});
+
+$('.m_tabs_enginner').on('click', function () {
+    alert('Checking any changes');
+    if(anyChanges){
+        let csrf = $('meta[name="csrf-token"]').attr('content');
+        // let url = '/project-hm/' + project_uuid  + '/workpackage/' + workPackage_uuid+'/edit';
+        let form = $('<form action="' + url + '" method="GET">' +
+        '<input type="hidden" name="anyChanges" value="' + anyChanges + '" />' +
+        '<input name="_token" value="'+csrf+'" type="hidden">' +
+        '</form>');
+        $('body').append(form);
+        form.submit();
+    }else{
+        alert("There isn't");
+    }
+});

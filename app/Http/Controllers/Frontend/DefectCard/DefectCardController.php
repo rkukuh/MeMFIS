@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\DefectCard;
 
+use Auth;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -72,16 +73,33 @@ class DefectCardController extends Controller
      */
     public function edit(DefectCard $defectcard)
     {
-        //TODO Validasi User'skill with DefectCard Skill
-        foreach($defectcard->helpers as $helper){
-            $helper->userID .= $helper->user->id;
-        }
+        if($defectcard->quotation_additional == null){
+            $error_notification = array(
+                'message' => "Quotation Additional hasn't been created",
+                'title' => "Danger",
+                'alert-type' => "error");
 
-        if($defectcard->helpers->where('userID',Auth::id())->first() == null){
-            return redirect()->route('frontend.defectcard-engineer.edit',$defectcard->uuid);
+            return redirect()->route('frontend.defectcard.index')->with($error_notification);
         }
-        else{
-            return redirect()->route('frontend.defectcard-mechanic.edit',$defectcard->uuid);
+        elseif(sizeOf($defectcard->quotation_additional->approvals->toArray()) >= 1){
+            //TODO Validasi User'skill with DefectCard Skill
+            foreach($defectcard->helpers as $helper){
+                $helper->userID .= $helper->user->id;
+            }
+
+            if($defectcard->helpers->where('userID',Auth::id())->first() == null){
+                return redirect()->route('frontend.defectcard-engineer.edit',$defectcard->uuid);
+            }
+            else{
+                return redirect()->route('frontend.defectcard-mechanic.edit',$defectcard->uuid);
+            }
+        }else{
+            $error_notification = array(
+                'message' => "Quotation Additional hasn't been approved",
+                'title' => "Danger",
+                'alert-type' => "error");
+
+            return redirect()->route('frontend.defectcard.index')->with($error_notification);
         }
     }
 

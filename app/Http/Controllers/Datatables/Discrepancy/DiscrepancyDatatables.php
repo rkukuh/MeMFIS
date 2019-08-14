@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Datatables\Discrepancy;
-
+use App\User;
 use App\Models\Project;
 use App\Models\JobCard;
 use App\Models\ListUtil;
@@ -23,13 +23,19 @@ class DiscrepancyDatatables extends Controller
         // ->has('approvals', '<=', 1)
         // ->orWhereDoesntHave('approvals') //? Yang ditampilkan adalah discrepancy yang dibuat mechanic saya. yang perlu di approve engineer
         ->get();
-
-
+        
+        
         foreach($DefectCard as $jobcard){
             $jobcard->taskcard_number .= $jobcard->jobcard->taskcard->number;
             $jobcard->customer_name .= $jobcard->jobcard->quotation->project->customer->name;
             $jobcard->type .= $jobcard->jobcard->taskcard->type->name;
             $jobcard->aircraft .= $jobcard->jobcard->quotation->project->aircraft->name;
+            
+            $jobcard->approved_by.= User::find($jobcard->approvals[0]->approved_by)->name;
+            $jobcard->created_by .= User::find($jobcard->audits->first()->user_id)->name;
+            $jobcard->updated_by .= User::find($jobcard->audits->first()->user_id)->name;
+
+
             if(isset($jobcard->jobcard->taskcard->skills) ){
                 if(sizeof($jobcard->jobcard->taskcard->skills) == 3){
                     $jobcard->jobcardSkill .= "ERI";

@@ -27,13 +27,13 @@
                                 <div class="px-2 py-2">
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">HTCRR List(s)</a>
+                                            <a class="nav-link m_taskcard_htcrr" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">HTCRR List(s)</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link m_tabs_manhour" data-toggle="tab" href="#m_tabs_manhour">Manhours Propotion</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active show" data-toggle="tab" href="#m_tabs_enginner" id="engineer_team_tab">Engineer Team</a>
+                                            <a class="nav-link m_tabs_enginner active show" data-toggle="tab" href="#m_tabs_enginner" id="engineer_team_tab">Engineer Team</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -77,7 +77,8 @@
     </script>
     <script src="{{ asset('js/frontend/project/htcrr/workpackage.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
-    <script src="{{ asset('js/frontend/project/hm/modal/datatables.js') }}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script>
 
     <script src="{{ asset('js/frontend/project/hm/modal/successor.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/modal/predecessor.js') }}"></script>

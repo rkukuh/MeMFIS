@@ -60,7 +60,7 @@ $('.workpackage_datatable').mDatatable({
             filterable: !1,
         },
         {
-            field: 'aircraft.name',
+            field: 'ac_type',
             title: 'A/C Type',
             sortable: 'asc',
             filterable: !1,

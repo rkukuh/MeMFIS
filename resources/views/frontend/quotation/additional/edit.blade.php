@@ -62,12 +62,12 @@
                                                     <td align="center" width="14%"><b>A/C SN</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
+                                                    <td align="center" valign="top">{{$project->created_at}}</td>
+                                                    <td align="center" valign="top">{{$project->code}}</td>
+                                                    <td align="center" valign="top">{{$project->title}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft->name}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft_register}}</td>
+                                                    <td align="center" valign="top">{{$project->aircraft_sn}}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -233,6 +233,7 @@
                                                                 @slot('id', 'date')
                                                                 @slot('text', 'Date')
                                                                 @slot('name', 'date')
+                                                                @slot('value', $quotation->requested_at)
                                                                 @slot('id_error','requested_at')
                                                             @endcomponent
                                                         </div>
@@ -245,6 +246,7 @@
                                                                 @slot('id', 'valid_until')
                                                                 @slot('text', 'Valid Until')
                                                                 @slot('name', 'valid_until')
+                                                                @slot('value', $quotation->valid_until)
                                                                 @slot('id_error','valid_until')
                                                             @endcomponent
                                                         </div>
@@ -259,12 +261,13 @@
                                                                 Currency
                                                             </label>
 
-                                                            @component('frontend.common.input.select2')
-                                                                @slot('id', 'currency')
-                                                                @slot('text', 'Currency')
-                                                                @slot('name', 'currency')
-                                                                @slot('id_error', 'currency')
-                                                            @endcomponent
+                                                            <select id="currency" name="currency" class="form-control m-select2">
+                                                                @foreach ($currencies as $currency)
+                                                                <option value="{{ $currency->id }}" @if ($currency->id == $quotation->currency_id) selected @endif>
+                                                                    {{ $currency->name }} ({{ $currency->symbol }})
+                                                                </option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
@@ -275,6 +278,7 @@
                                                                 @slot('text', 'exchange')
                                                                 @slot('name', 'exchange')
                                                                 @slot('id_error', 'exchange')
+                                                                @slot('value', $quotation->exchange_rate)
                                                                 @slot('id', 'exchange')
                                                             @endcomponent
                                                         </div>
@@ -286,7 +290,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Subject Quotation
+                                                 Quotation Title
                                             </label>
 
                                             @component('frontend.common.input.textarea')
@@ -294,7 +298,24 @@
                                                 @slot('id', 'title')
                                                 @slot('name', 'title')
                                                 @slot('text', 'Title')
+                                                @slot('value', $quotation->title)
                                                 @slot('id_error', 'title')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Description @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '5')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('text', 'Description')
+                                                @slot('value', $quotation->description)
+                                                @slot('id_error', 'description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -409,13 +430,13 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <ul class="nav nav-tabs" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active show routine" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Defect Card List</a>
+                                                    <a class="nav-link active show defectcard" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Defect Card List</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_2">Material(s) & Tool List(s)</a>
+                                                    <a class="nav-link items" data-toggle="tab" href="#m_tabs_1_2">Material(s) & Tool List(s)</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_3">Summary</a>
+                                                    <a class="nav-link summary" data-toggle="tab" href="#m_tabs_1_3">Summary</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -437,8 +458,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.update')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-workpackage')
-                                                        @slot('class', 'add-workpackage')
+                                                        @slot('id', 'update-quotation')
+                                                        @slot('class', 'update-quotation')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -480,6 +501,15 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let project_uuid = '{{$project->uuid}}';
+        let quotation_uuid = '{{$quotation->uuid}}';
+        let currencyCode = '{{  $quotation->currency->code }}';
+
+    </script>
+
+    <script src="{{ asset('js/custom.js') }}"></script>
+
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/additional/edit.js')}}"></script>
     <script src="{{ asset('js/frontend/quotation/additional/summary.js') }}"></script>
@@ -488,7 +518,6 @@
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>

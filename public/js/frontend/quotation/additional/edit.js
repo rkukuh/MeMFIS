@@ -11,7 +11,7 @@ let AdditionalTaskQtnEdit = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/basic/',
+                        url: '/datatables/quotation/'+quotation_uuid+'/defectcard/item',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -19,6 +19,7 @@ let AdditionalTaskQtnEdit = {
                                 dataSet = raw.data;
                             }
 
+                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -47,102 +48,92 @@ let AdditionalTaskQtnEdit = {
                     }
                 }
             },
-            columns: [{
-                    field: 'number',
-                    title: 'Defect Card No',
+            columns: [
+                {
+                    field: 'defectcard.code',
+                    title: 'DefectCard',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
-                    title: 'P/N No.',
-                    sortable: 'asc',
-                    filterable: !1,template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "si"){
-                            return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "preliminary"){
-                            return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
-                        } else {
-                            return (
-                                'dummy'
-                            );
-                        }
-                    }
+                    field: 'item.code',
+                    title: 'P/N',
+                    sortable: !1,
                 },
                 {
-                    field: 'skill',
-                    title: 'Item Description',
+                    field: 'item.name',
+                    title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'task.name',
+                    field: 'quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'unitPrice',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.unitPrice);
+                    }
                 },
                 {
-                    field: 'estimation_manhour',
-                    title: 'Selling Unit Price',
+                    field: 'price_amount',
+                    title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.price_amount);
+                    }
                 },
                 {
-                    field: 'estimation_manhour',
-                    title: 'Subtotal',
+                    field: 'subtotal',
+                    title: 'Sub Total',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.quantity*t.price_amount);
+                    }
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'note',
                     title: 'Marketing Notes',
                     sortable: 'asc',
                     filterable: !1,
+                    width:150,
+
                 },
                 {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
-                    // template: function (t, e, i) {
-                    //     return (
-                    //         '<button data-toggle="modal" data-target="#modal_price_list_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price" title="Edit"'+
-                    //         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
-                    //         t.uuid +
-                    //         '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                    //         '<button data-toggle="modal" data-target="#modal_price_list" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill add-price" title="Edit"' +
-                    //         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
-                    //         t.uuid +
-                    //         '>\t\t\t\t\t\t\t<i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                    //     );
-                    // }
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
                 }
             ]
         });
+
         $('.tools_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/basic/',
+                        url: '/datatables/quotation/'+quotation_uuid+'/defectcard/tool',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -150,6 +141,7 @@ let AdditionalTaskQtnEdit = {
                                 dataSet = raw.data;
                             }
 
+                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -178,92 +170,81 @@ let AdditionalTaskQtnEdit = {
                     }
                 }
             },
-            columns: [{
-                    field: 'number',
-                    title: 'Defect Card No',
+            columns: [
+                {
+                    field: 'defectcard.code',
+                    title: 'DefectCard',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
-                    title: 'P/N No.',
-                    sortable: 'asc',
-                    filterable: !1,template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                            return '<a href="/taskcard-routine/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return '<a href="/taskcard-eo/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "si"){
-                            return '<a href="/taskcard-si/'+t.uuid+'">' + t.title + "</a>"
-                        }
-                        else if(t.type.code == "preliminary"){
-                            return '<a href="/preliminary/'+t.uuid+'">' + t.title + "</a>"
-                        } else {
-                            return (
-                                'dummy'
-                            );
-                        }
-                    }
+                    field: 'item.code',
+                    title: 'P/N',
+                    sortable: !1,
                 },
                 {
-                    field: 'skill',
-                    title: 'Item Description',
+                    field: 'item.name',
+                    title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'task.name',
+                    field: 'quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'unitPrice',
                     title: 'Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.unitPrice);
+                    }
                 },
                 {
-                    field: 'estimation_manhour',
-                    title: 'Charge Price',
+                    field: 'price_amount',
+                    title: 'Selling  Unit Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.price_amount);
+                    }
                 },
                 {
-                    field: 'estimation_manhour',
-                    title: 'Subtotal',
+                    field: 'subtotal',
+                    title: 'Sub Total',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t){
+                        return ForeignFormatter.format(t.quantity*t.price_amount);
+                    }
                 },
                 {
-                    field: 'estimation_manhour',
+                    field: 'note',
                     title: 'Marketing Notes',
                     sortable: 'asc',
                     filterable: !1,
+                    width:150,
+
                 },
                 {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
-                    // template: function (t, e, i) {
-                    //     return (
-                    //         '<button data-toggle="modal" data-target="#modal_price_list_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price" title="Edit"'+
-                    //         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
-                    //         t.uuid +
-                    //         '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                    //         '<button data-toggle="modal" data-target="#modal_price_list" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill add-price" title="Edit"' +
-                    //         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
-                    //         t.uuid +
-                    //         '>\t\t\t\t\t\t\t<i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                    //     );
-                    // }
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
                 }
             ]
         });
@@ -273,7 +254,7 @@ let AdditionalTaskQtnEdit = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/jobcard',
+                        url: '/datatables/project/defectcard/'+project_uuid+'/selected',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -311,85 +292,363 @@ let AdditionalTaskQtnEdit = {
             },
             columns: [
                 {
-                    field: 'number',
+                    field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                            return '<a href="/jobcard-ppc/'+t.uuid+'">' + t.number + "</a>"
-                    }
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'code',
                     title: 'Defect Card No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.title',
+                    field: 'jobcard.number',
                     title: 'JC Ref.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.type.name',
+                    field: 'jobcard.taskcard.number',
                     title: 'TC No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.task.name',
+                    field: 'defectcard_skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.description',
+                    field: 'estimation_manhour',
                     title: 'Mhrs Est.',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if (t.taskcard.description) {
-                            data = strtrunc(t.taskcard.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
                 },
                 {
-                    field: 'taskcard.skill.name',
-                    title: 'Status',
+                    field: 'created_by',
+                    title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
-                },
-                {
-                    field: 'taskcard.task.name',
-                    title: 'Remark',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    // template: function (t, e, i) {
-                    //     return (
-                    //         '<button data-toggle="modal" data-target="#modal_price_list_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price" title="Edit"'+
-                    //         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
-                    //         t.uuid +
-                    //         '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                    //         '<button data-toggle="modal" data-target="#modal_price_list" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill add-price" title="Edit"' +
-                    //         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
-                    //         t.uuid +
-                    //         '>\t\t\t\t\t\t\t<i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                    //     );
-                    // }
                 }
             ]
         });
+
+        $('.footer').on('click', '.update-quotation', function () {
+            let is_ppn =  $('#is_ppn').prop("checked");
+            let ppn = 0;
+            if(is_ppn){
+                ppn = $('#grand_total_rupiah').attr("value") * 1.1;
+                is_ppn = 1;
+            }else{
+                ppn = $('#grand_total_rupiah').attr("value") * 0.1;
+                is_ppn = 0;
+            }
+            let attention_name = $('#attention').val();
+            let attention_phone = $('#phone').val();
+            let attention_fax = $('#fax').val();
+            let attention_email = $('#email').val();
+            let attention_address = $('#address').val();
+            let scheduled_payment_array = [];
+            let type = $('#scheduled_payment_type').children("option:selected").html();
+            if(type === "By Date"){
+                $('input[name^=scheduled_payment] ').each(function (i) {
+                    scheduled_payment_array[i] = $(this).val();
+                });
+            }else{
+                $('#scheduled_payment ').each(function (i) {
+                    scheduled_payment_array[i] = parseInt($(this).val());
+                });
+            }
+            scheduled_payment_array.pop();
+            let charge = [];
+            let chargeInputs = $('input[type="number"][name^="charge"]');
+            //get all values
+            for (let i = 0; i < chargeInputs.length; i++) {
+                charge[i] = parseInt($(chargeInputs[i]).val());
+            }
+            charge.pop();
+            let chargeType = [];
+            //get all values
+            $("input[name^=charge_type]").each(function() {
+                chargeType.push($(this).val());
+              });
+            chargeType.pop();
+
+            let data = new FormData();
+            data.append("chargeType", JSON.stringify(chargeType));
+            data.append("project_id", project_uuid);
+            data.append("customer_id", $('#customer_id').val());
+            data.append("requested_at", $('#date').val());
+            data.append("valid_until", $('#valid_until').val());
+            data.append("currency_id", $('#currency').val());
+            data.append("term_of_condition", $('#term_and_condition').val());
+            data.append("exchange_rate", $('#exchange').val());
+            data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
+            data.append("scheduled_payment_amount", JSON.stringify(scheduled_payment_array));
+            data.append("attention_name", attention_name);
+            data.append("attention_phone", attention_phone);
+            data.append("attention_fax", attention_fax);
+            data.append("attention_email", attention_email);
+            data.append("attention_address", attention_address);
+            data.append("total", 0.000000);
+            data.append("title", $('#title').val());
+            data.append("description", $('#description').val());
+            data.append("top_description", $('#term_and_condition').val());
+            data.append("subtotal", $('#sub_total').attr("value"));
+            data.append("grandtotal", $('#grand_total').attr("value"));
+            data.append("title", $('#title').val());
+            data.append("ppn", ppn);
+            data.append("is_ppn",is_ppn);
+            data.append("charge", JSON.stringify(charge));
+            data.append('_method', 'PUT');
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                type: 'post',
+                url: '/quotation-additional/' + quotation_uuid,
+                processData: false,
+                contentType: false,
+                data: data,
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.currency_id) {
+                        //     $("#currency-error").html(data.errors.currency_id[0]);
+                        // }
+                        // if (data.errors.customer_id) {
+                        //     $("#customer_id-error").html(data.errors.customer_id[0]);
+                        // }
+                        // if (data.errors.description) {
+                        //     $("#description-error").html(data.errors.description[0]);
+                        // }
+                        // if (data.errors.exchange_rate) {
+                        //     $("#exchange-error").html(data.errors.exchange_rate[0]);
+                        // }
+                        // if (data.errors.project_id) {
+                        //     $("#work-order-error").html(data.errors.project_id[0]);
+                        // }
+                        // if (data.errors.requested_at) {
+                        //     $("#requested_at-error").html(data.errors.requested_at[0]);
+                        // }
+                        // if (data.errors.scheduled_payment_amount) {
+                        //     $("#scheduled_payment_amount-error").html(data.errors.scheduled_payment_amount[0]);
+                        // }
+                        // if (data.errors.scheduled_payment_type) {
+                        //     $("#scheduled_payment_type-error").html(data.errors.scheduled_payment_type[0]);
+                        // }
+                        // if (data.errors.valid_until) {
+                        //     $("#valid_until-error").html(data.errors.valid_until[0]);
+                        // }
+
+                        // document.getElementById("name").value = name;
+                    } else {
+
+                        toastr.success('Quotation has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        // window.location.href = '/quotation/' + response.uuid + '/edit';
+
+                    }
+                }
+            });
+        });
+
+        $('.materials_datatable').on('click','.edit-item-price', function edit () {
+            // save_changes_button();
+
+            let triggerid = $(this).data('uuid');
+            // alert(triggerid);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/qtn-defectcard-item/' + triggerid + '/edit',
+                success: function (data) {
+                    document.getElementById('uuid').value = data.uuid;
+                    document.getElementById('qty').value = data.quantity;
+                    document.getElementById('price').value = data.price_amount;
+                    document.getElementById('note').value = data.note;
+                    $.ajax({
+                        url: '/get-units/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (unit) {
+                            $('select[name="unit_id"]').empty();
+
+                            $.each(unit, function (key, value) {
+                                if(key == data.unit_id){
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '" selected>' + value + '</option>'
+                                    );
+                                }
+                                else{
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '">' + value + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
+
+                    // $('.btn-success').addClass('update');
+                    // $('.btn-success').removeClass('add');
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    // this are default for ajax errors
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#kategori-error').html(value);
+                    });
+                }
+            });
+        });
+        $('.tools_datatable').on('click','.edit-item-price', function edit () {
+            // save_changes_button();
+
+            let triggerid = $(this).data('uuid');
+            // alert(triggerid);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/qtn-defectcard-item/' + triggerid + '/edit',
+                success: function (data) {
+                    document.getElementById('uuid').value = data.uuid;
+                    document.getElementById('qty').value = data.quantity;
+                    document.getElementById('price').value = data.price_amount;
+                    document.getElementById('note').value = data.note;
+                    $.ajax({
+                        url: '/get-units/',
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function (unit) {
+                            $('select[name="unit_id"]').empty();
+
+                            $.each(unit, function (key, value) {
+                                if(key == data.unit_id){
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '" selected>' + value + '</option>'
+                                    );
+                                }
+                                else{
+                                    $('select[name="unit_id"]').append(
+                                        '<option value="' + key + '">' + value + '</option>'
+                                    );
+                                }
+                            });
+                        }
+                    });
+
+                    // $('.btn-success').addClass('update');
+                    // $('.btn-success').removeClass('add');
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    // this are default for ajax errors
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#kategori-error').html(value);
+                    });
+                }
+            });
+        });
+
+        $('.modal-footer').on('click', '.add-item-price', function () {
+            let quantity = $('input[name=qty]').val();
+            let price_amount = $('input[name=price]').val();
+            let unit_id =$('#unit_id').val();
+            let note =$('#note').val();
+            let triggerid = $('input[name=uuid]').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/qtn-defectcard-item/' + triggerid,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    uuid: triggerid,
+                    quantity: quantity,
+                    unit_id: unit_id,
+                    price_amount: price_amount,
+                    note: note
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.quantity) {
+                            $('#qty-limit-error').html(data.errors.quantity[0]);
+                        }
+                        // if (data.errors.symbol) {
+                        //     $('#symbol-error').html(data.errors.symbol[0]);
+
+                        // }
+                        // if (data.errors.type) {
+                        //     $('#type-error').html(data.errors.type[0]);
+
+                        // }
+
+                    } else {
+                        // save_changes_button();
+                        // unit_reset();
+                        $('#modal_item_price').modal('hide');
+
+                        toastr.success('Selling Price has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.materials_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.tools_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        // table = $('.non_routine_tools_datatable').mDatatable();
+
+                        // table.originalDataSet = [];
+                        // table.reload();
+
+                        // table = $('.non_routine_materials_datatable').mDatatable();
+                        // table.originalDataSet = [];
+                        // table.reload();
+
+                        // table = $('.htcrr_materials_datatable').mDatatable();
+                        // table.originalDataSet = [];
+                        // table.reload();
+
+                        // table = $('.htcrr_materials_datatable').mDatatable();
+                        // table.originalDataSet = [];
+                        // table.reload();
+                    }
+                }
+            });
+        });
+        $('.nav-tabs').on('click', '.items', function () {
+
+            let table = $('.materials_datatable').mDatatable();
+            table.originalDataSet = [];
+            table.reload();
+
+            let table2 = $('.tools_datatable').mDatatable();
+            table2.originalDataSet = [];
+            table2.reload();
+
+        });
+
     }
 };
 
