@@ -10,6 +10,7 @@
     style="{{ $style or '' }}"
     target="{{ $target or '' }}"
     href="{{ $href or '' }}"
+    {{$disabled or '' }}
 
 >
 
