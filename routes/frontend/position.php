@@ -9,7 +9,7 @@ Route::name('frontend.')->group(function () {
 
     ], function () {
 
-        Route::namespace('position')->group(function () {
+        Route::namespace('Position')->group(function () {
             Route::resource('position', 'PositionController');
 
             Route::name('position.')->group(function () {

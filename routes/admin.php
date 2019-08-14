@@ -57,7 +57,6 @@ Route::name('admin.')->group(function () {
         Route::resource('company', 'CompanyController');
         Route::resource('department', 'DepartmentController');
         Route::resource('benefit', 'BenefitController');
-        Route::resource('position', 'PositionController');
 
         /** LICENSE */
 
