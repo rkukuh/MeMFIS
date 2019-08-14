@@ -45,7 +45,7 @@ class ProjectHMHtcrrController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Project $project)
+    public function create(Project $project,Request $request)
     {
         $mhrs_pfrm_factor = $skills = $subset = $htcrr_engineers = [];
 
@@ -77,7 +77,11 @@ class ProjectHMHtcrrController extends Controller
 
         $employees = Employee::all();
         $facilities = Facility::all();
-        $view = 'frontend.project.htcrr.index';
+        if ($request->anyChanges) {
+            $view = 'frontend.project.htcrr.index-engineerteam';
+        }else{
+            $view = 'frontend.project.htcrr.index';
+        }
         return view($view,[
         'project' => $project,
         'employees' => $employees,
@@ -471,32 +475,25 @@ class ProjectHMHtcrrController extends Controller
     }
 
     /**
-     * Sent updated manhours on that workpackage
+     * Sent updated manhours from all the htcrrs
      *
-     * @param  \App\Models\WorkPackage  $workPackage
+     * @param  \App\Models\HtCrr  $workPackage
      */
-    public function getManhours(Project $project, WorkPackage $workPackage){
+    public function getManhours(Project $project){
         
-        $data = $mhrs_pfrm_factor = $taskcards = [];
+        $data = $mhrs_pfrm_factor = [];
 
-        $htcrrs = HtCrr::where('code',  'like', 'JCRI%')->where('project_id', $project->id)->get();
+        $htcrrs = HtCrr::where('project_id', $project->id)->whereNull('parent_id')->get();
 
-        $project_workpackage = ProjectWorkPackage::where('project_id', $project->id)
-                    ->where('workpackage_id', $workPackage->id)->first();
-
-        foreach($project_workpackage->taskcards as $taskcard){
-            array_push($taskcards, $taskcard->taskcard_id);
-        }
-
-        $taskcards = TaskCard::whereIn('id',$taskcards)->get(); 
-        foreach($taskcards as $taskcard){
-            array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
+        foreach($htcrrs as $htcrr){
+            array_push($mhrs_pfrm_factor, $htcrr->estimation_manhour * $htcrr->performance_factor);
         }
         
-        $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
-        $data["total_mhrs"] = $taskcards->sum('estimation_manhour') + $htcrrs->sum('estimation_manhour');
-        $data["mhrs_pfrm_factor"] = ( $taskcards->sum('estimation_manhour') + $htcrrs->sum('estimation_manhour') )* 1.6;
-        $data["mhrs_tc_pfrm_factor"]  = $mhrs_pfrm_factor;
+        // $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
+        $data["total_mhrs"] = $htcrrs->sum('estimation_manhour');
+        $data["mhrs_pfrm_factor"] = ( $htcrrs->sum('estimation_manhour') )* 1.6;
+        // $data["mhrs_tc_pfrm_factor"]  = $mhrs_pfrm_factor;
+        
         return response()->json($data);
     }
 }

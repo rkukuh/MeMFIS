@@ -38,13 +38,13 @@
                                     </ul>
                                 </div>
                                 <div class="tab-content">
-                                        <div class="tab-pane active show" id="m_tabs_taskcard" role="tabpanel">
+                                        <div class="tab-pane" id="m_tabs_taskcard" role="tabpanel">
                                             @include('frontend.project.htcrr.taskcard.index')
                                         </div>
                                         <div class="tab-pane" id="m_tabs_manhour" role="tabpanel">
                                             @include('frontend.project.htcrr.manhour.index')
                                         </div>
-                                        <div class="tab-pane" id="m_tabs_enginner" role="tabpanel">
+                                        <div class="tab-pane active show" id="m_tabs_enginner" role="tabpanel">
                                             @include('frontend.project.htcrr.engineer.index')
                                         </div>
     

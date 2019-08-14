@@ -86,6 +86,7 @@ Route::name('frontend.')->group(function () {
                 Route::name('project-htcrr.')->group(function () {
 
                     Route::resource('/{project}/project-htcrr', 'ProjectHMHtcrrController');
+                    Route::get('/{project}/getManhours','ProjectHMHtcrrController@getManhours')->name('project-hm.htcrr.getManhours');
 
                 });
 

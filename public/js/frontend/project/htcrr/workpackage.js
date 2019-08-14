@@ -1,9 +1,5 @@
 
 
-$('.nav-item').on('click','#engineer_team_tab',function() {
-    
-});
-
 let Workpackage = {
     init: function () {
         $('.ht_crr_datatable').mDatatable({
@@ -375,6 +371,8 @@ let Workpackage = {
 
                         table.originalDataSet = [];
                         table.reload();
+                        anyChanges = true;
+
                         $('#modal_ht_crr').modal('hide');
                         $('.btn-success').removeClass('edit-htcrr');
                         $('.btn-success').addClass('add-htcrr');
@@ -727,6 +725,7 @@ function htcrr_material(triggeruuid) {
                           timeOut: 5000
                       }
                   );
+                  anyChanges = true;
 
                   $('#m_datatable_material_htcrr').DataTable().ajax.reload();
 
@@ -765,24 +764,26 @@ $('.m_taskcard_htcrr').on('click', function () {
 
 $('.m_tabs_manhour').on('click', function () {
     if(anyChanges){
-        alert('Getting manhours');
-    }else{
-        alert('no changes on total manhours');
+        $.ajax({
+        url: "/project-htcrr/"+Project_uuid+"/getManhours",
+        method: "get",
+        success: function(dataFetched){
+            $('#total_mhrs').html(dataFetched.total_mhrs);
+            $('#total').html(dataFetched.mhrs_pfrm_factor);
+        },
+        });
     }
 });
 
 $('.m_tabs_enginner').on('click', function () {
-    alert('Checking any changes');
     if(anyChanges){
         let csrf = $('meta[name="csrf-token"]').attr('content');
-        // let url = '/project-hm/' + project_uuid  + '/workpackage/' + workPackage_uuid+'/edit';
+        let url = '/project-htcrr/' + project_uuid  + '/project-htcrr/create';
         let form = $('<form action="' + url + '" method="GET">' +
         '<input type="hidden" name="anyChanges" value="' + anyChanges + '" />' +
         '<input name="_token" value="'+csrf+'" type="hidden">' +
         '</form>');
         $('body').append(form);
         form.submit();
-    }else{
-        alert("There isn't");
     }
 });
