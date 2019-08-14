@@ -3,10 +3,8 @@
 namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class PositionStore extends FormRequest
+class TimeOffPeriodStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +13,7 @@ class PositionStore extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -26,12 +24,7 @@ class PositionStore extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required',
-            'name' => 'required'
+            //
         ];
-    }
-
-    protected function failedValidation(Validator $validator) {
-        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }

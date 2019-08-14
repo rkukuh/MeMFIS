@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.position.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.position.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Position
                             </span>
@@ -57,10 +57,10 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Position')
                                                 @slot('id', 'position')
                                                 @slot('name', 'position')
                                                 @slot('id_error', 'position')
+                                                @slot('value',$position->code);
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -73,6 +73,7 @@
                                                 @slot('id', 'position_name')
                                                 @slot('name', 'position_name')
                                                 @slot('id_error', 'position_name')
+                                                @slot('value',$position->name);
                                             @endcomponent
                                         </div>
                                     </div>
@@ -87,6 +88,7 @@
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
                                                 @slot('text', 'Description')
+                                                @slot('value',$position->description);
                                             @endcomponent
                                         </div>
                                     </div>
@@ -142,7 +144,7 @@
                                                                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                                                     @component('frontend.common.buttons.create')
                                                                                         @slot('text', 'Update')
-                                                                                        @slot('href', route('frontend.hr.position.update-benefit') )
+                                                                                        @slot('href', route('frontend.position.update-benefit') )
                                                                                     @endcomponent
                                     
                                             
@@ -158,21 +160,15 @@
                                                                                         <td align="center" width="33%"><b>Minimum</b></td>
                                                                                         <td align="center" width="33%"><b>Maximum</b></td>
                                                                                     </tr>
+
+                                                                                    @for ($i = 0; $i < count($benefits_position[0]->benefits); $i++)
                                                                                     <tr>
-                                                                                        <td valign="top"><b>Position</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
+                                                                                    <td valign="top"><b>{{ $benefits_position[0]->benefits[$i]->name }}</b></td>
+                                                                                    <td valign="top" align="center">{{ $benefits_position[0]->benefits[$i]['pivot']->min }}</td>
+                                                                                    <td valign="top" align="center">{{ $benefits_position[0]->benefits[$i]['pivot']->max }}</td>
                                                                                     </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Meal</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Overtime</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
+                                                                                    @endfor
+
                                                                                 </table>
                                                                             </div>
                                                                         </div>

@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.position.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.position.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Position
                             </span>
@@ -57,10 +57,9 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Position')
-                                                @slot('id', 'position')
-                                                @slot('name', 'position')
-                                                @slot('id_error', 'position')
+                                                @slot('id', 'code')
+                                                @slot('name', 'code')
+                                                @slot('id_error', 'code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -69,10 +68,9 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Position Name')
-                                                @slot('id', 'position_name')
-                                                @slot('name', 'position_name')
-                                                @slot('id_error', 'position_name')
+                                                @slot('id', 'name')
+                                                @slot('name', 'name')
+                                                @slot('id_error', 'name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -86,7 +84,6 @@
                                                 @slot('rows', '5')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
-                                                @slot('text', 'Description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -142,7 +139,7 @@
                                                                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                                                     @component('frontend.common.buttons.create')
                                                                                         @slot('text', 'Update')
-                                                                                        @slot('href', route('frontend.hr.position.update-benefit') )
+                                                                                        @slot('href', route('frontend.position.update-benefit') )
                                                                                     @endcomponent
                                     
                                             
@@ -324,5 +321,6 @@
 @endpush
 
 @push('footer-scripts')
-
+    <script src="{{ asset('js/frontend/position/create.js')}}"></script>
 @endpush
+
