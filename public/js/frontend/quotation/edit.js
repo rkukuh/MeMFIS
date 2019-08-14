@@ -96,8 +96,7 @@ let Quotation = {
                 dataType: "json",
                 success: function (response) {
                     if (response) {
-                        // let res = JSON.parse(response);
-                        let res = response;
+                        let res = JSON.parse(response.attention);
                         $('select[name="attention"]').empty();
                         $('select[name="phone"]').empty();
                         $('select[name="email"]').empty();
@@ -138,12 +137,12 @@ let Quotation = {
                                 );
                             }
                             if (res[i].address) {
-                                $('select[name="attention"]').append(
+                                $('select[name="address"]').append(
                                     '<option value="' + res[i].address + '">' + res[i].address + '</option>'
                                 );
                             }
                             if (res[i].fax) {
-                                $('select[name="attention"]').append(
+                                $('select[name="fax"]').append(
                                     '<option value="' + res[i].fax + '">' + res[i].fax + '</option>'
                                 );
                             }
