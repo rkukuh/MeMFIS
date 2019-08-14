@@ -695,7 +695,7 @@ let TaskCard = {
                         $('#m_datatable_item').DataTable().ajax.reload();
 
                         $('#add_modal_material').modal('hide');
-
+                        material_modal_reset();
                     }
                 }
             });
