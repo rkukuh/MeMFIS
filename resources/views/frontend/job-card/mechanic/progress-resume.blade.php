@@ -271,12 +271,14 @@
                             <div class="form-group m-form__group row">
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="action-buttons d-flex flex-row-reverse">
-                                        @if($jobcard->defectcards == null)
-                                            <form class="ml-2" method="POST" action="{{route('frontend.discrepancy.jobcard.mechanic.discrepancy.create',$jobcard->uuid)}}">
-                                                {!! csrf_field() !!}
-                                                @include('frontend.common.buttons.found')
-                                            </form>
-                                        @endif
+                                        <form class="ml-2" method="POST" action="{{route('frontend.discrepancy.jobcard.mechanic.discrepancy.create',$jobcard->uuid)}}">
+                                            {!! csrf_field() !!}
+                                            @component('frontend.common.buttons.found')
+                                                @if($jobcard->defectcards <> null)
+                                                    @slot('disabled','disabled')
+                                                @endif
+                                            @endcomponent
+                                        </form>
 
                                         @include('frontend.job-card.mechanic.modal-close')
                                         @component('frontend.common.buttons.close')

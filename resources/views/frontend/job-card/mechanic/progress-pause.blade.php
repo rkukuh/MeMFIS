@@ -271,12 +271,14 @@
                             <div class="form-group m-form__group row">
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="action-buttons d-flex flex-row-reverse">
-                                        @if($jobcard->defectcards == null)
-                                            <form method="POST" action="{{route('frontend.discrepancy.jobcard.mechanic.discrepancy.create',$jobcard->uuid)}}">
-                                                {!! csrf_field() !!}
-                                                @include('frontend.common.buttons.found')
-                                            </form>
-                                        @endif
+                                        <form method="POST" action="{{route('frontend.discrepancy.jobcard.mechanic.discrepancy.create',$jobcard->uuid)}}">
+                                            {!! csrf_field() !!}
+                                            @component('frontend.common.buttons.found')
+                                                @if($jobcard->defectcards <> null)
+                                                    @slot('disabled','disabled')
+                                                @endif
+                                            @endcomponent
+                                        </form>
                                         <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed mr-2" method="POST" action="{{route('frontend.jobcard-mechanic.update',$jobcard->uuid)}}" id="WorkpackageForm">
                                             {{method_field('PATCH')}}
                                             {!! csrf_field() !!}
