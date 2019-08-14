@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Company Structure & Department
+                    Event/Holidays
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.company.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.hr.event-holidays.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Company Structure & Department
+                                Event/Holidays
                             </span>
                         </a>
                     </li>
@@ -38,10 +38,10 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.edit')
+                                @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Company Structure & Department
+                                    Event/Holidays
                                 </h3>
                             </div>
                         </div>
@@ -50,36 +50,55 @@
                         <div class="m-portlet__body">
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
-
-                                        @component('frontend.common.input.hidden')
-                                        @slot('id', 'company_uuid')
-                                        @slot('name', 'company_uuid')
-                                        @slot('value', $company->uuid)
-                                        @endcomponent
-
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Code  @include('frontend.common.label.required')
+                                                Holidays Code @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('id', 'code')
-                                                @slot('name', 'code')
-                                                @slot('value',$company->code)
-                                                @slot('id_error', 'code')
+                                                @slot('text', 'Holidays Code')
+                                                @slot('id', 'holidays_code')
+                                                @slot('name', 'holidays_code')
+                                                @slot('id_error', 'holidays_code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Name  @include('frontend.common.label.required')
+                                                Holidays Name @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('id', 'name')
-                                                @slot('name', 'name')
-                                                @slot('value',$company->name)
-                                                @slot('id_error', 'name')
+                                                @slot('text', 'Holidays Name')
+                                                @slot('id', 'holidays_name')
+                                                @slot('name', 'holidays_name')
+                                                @slot('id_error', 'holidays_name')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Date Start @include('frontend.common.label.required')
+                                            </label>
+        
+                                            @component('frontend.common.input.datepicker')
+                                                @slot('id', 'date')
+                                                @slot('text', 'Date Start')
+                                                @slot('name', 'date')
+                                                @slot('id_error','date')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Date End @include('frontend.common.label.required')
+                                            </label>
+        
+                                            @component('frontend.common.input.datepicker')
+                                                @slot('id', 'valid_until')
+                                                @slot('text', 'Date End')
+                                                @slot('name', 'valid_until')
+                                                @slot('id_error','valid_until')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -93,31 +112,7 @@
                                                 @slot('rows', '5')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
-                                                @slot('value',$company->description)
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                               Company Type   
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'company')
-                                                @slot('name', 'company')
-                                                @slot('id_error', 'company-airplane')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                               Parent Structure
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'parent_structure')
-                                                @slot('name', 'parent_structure')
-                                                @slot('id_error', 'parent_structure')
+                                                @slot('text', 'Description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -127,8 +122,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'edit-company-structure')
-                                                        @slot('class', 'edit-company-structure')
+                                                        @slot('id', 'add-holidays-period')
+                                                        @slot('class', 'add-holidays-period')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -140,7 +135,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -151,9 +145,6 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/company.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/parent-structure.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/company/edit.js') }}"></script>
-    <script src="{{ asset('js/frontend/company/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
 @endpush

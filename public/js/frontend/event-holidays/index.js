@@ -1,13 +1,13 @@
 
-let LeavePeriod = {
+let EventHolidays = {
     init: function () {
-        $('.leave_period_datatable').mDatatable({
+        $('.event_holidays_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer',
+                        url: '/datatables/benefit',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -43,45 +43,47 @@ let LeavePeriod = {
                 }
             },
             columns: [{
-                    field: 'name',
+                    field: 'code',
                     title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/customer/'+t.uuid+'">' + t.name + "</a>"
+                        return '<a href="/benefit/'+t.uuid+'">' + t.code + "</a>"
                     }
                 },
                 {
-                    field: 'addresses',
-                    title: 'Leave Period Name',
+                    field: 'name',
+                    title: 'Holidays Name',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if(t.addresses[0]){
-                            return t.addresses[0].address
-                        }else{
-                            return ""
-                        }
-                    }
                 },
                 {
-                    field: 'phones',
+                    field: 'description',
                     title: 'Description',
                     sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if(t.phones[0]){
-                            return t.phones[0].number
-                        }else{
-                            return ""
-                        }
+                    filterable: !1
+                },
+                {
+                    field: 'actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="/purchase-request/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
+                                '<i class="la la-pencil"></i>' +
+                            '</a>' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
+                        );
                     }
                 }
             ]
         });
+
     }
 };
 
 jQuery(document).ready(function () {
-    LeavePeriod.init();
+    EventHolidays.init();
 });

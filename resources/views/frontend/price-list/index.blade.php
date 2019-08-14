@@ -60,15 +60,38 @@
                                                 </span>
                                             </div>
                                         </div>
+                                        @include('frontend.common.buttons.filter')
                                     </div>
                                 </div>
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                        <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
+                                            <button  class="m-btn btn btn-primary"  data-target="#modal_pricelist_item" data-toggle="modal">
+                                                <span>
+                                                    <i class="la la-plus-circle"></i>
+                                                <span>Item</span>
+                                                </span>
+                                            </button>
+                                            <button type="button" class="btn btn-primary m-btn m-btn--pill-last" data-target="#modal_pricelist_manhour" data-toggle="modal">
+                                                <span>
+                                                    <i class="la la-plus-circle"></i>
+                                                <span>Manhour</span>
+                                                </span>
+                                            </button>
+                                        </div>
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
                             </div>
-                            @include('frontend.price-list.modal')
-                            @include('frontend.price-list.modal-edit')
-                            @include('frontend.price-list.modal-show')
+
+                            @include('frontend.price-list.item.modal-create')
+                            @include('frontend.price-list.item.modal-edit')
+
+                            @include('frontend.price-list.manhour.modal-create')
+                            @include('frontend.price-list.manhour.modal-edit')
+
+
+                            <div class="col-lg-12">
+                                @include('frontend.price-list.filter')
+                            </div>
                             <div class="price_list_datatable" id="price_list_datatable"></div>
                         </div>
                     </div>
@@ -82,6 +105,9 @@
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-type.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
