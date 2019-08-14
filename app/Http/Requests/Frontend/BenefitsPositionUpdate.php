@@ -5,8 +5,9 @@ namespace App\Http\Requests\Frontend;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Models\Benefit;
 
-class PositionUpdate extends FormRequest
+class BenefitsPositionUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +26,18 @@ class PositionUpdate extends FormRequest
      */
     public function rules()
     {
+       return [
+            'uuid.*' => 'required',
+            'position_min.*' => 'numeric',
+            'position_max.*' => 'numeric'
+       ];
+    }
+
+    public function messages()
+    {
         return [
-            'code' => 'required',
-            'name' => 'required'
+            'position_min.*.*' => 'Must be number',
+            'position_max.*.*' => 'Must be number'
         ];
     }
 

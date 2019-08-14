@@ -47,7 +47,7 @@ let Position = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/position/'+t.uuid+'">' + t.name + "</a>"
+                        return '<a href="/position/'+t.uuid+'">' + t.code + "</a>"
                     }
                 },
                 {

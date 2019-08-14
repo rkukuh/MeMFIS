@@ -63,8 +63,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('company', 'CompanyController');
         Route::resource('department', 'DepartmentController');
         Route::resource('benefit', 'BenefitController');
-        Route::resource('position', 'PositionController');
-        Route::resource('time-off-period', 'TimeOffPeriodController');
 
         /** CERTIFICATION */
 
@@ -161,11 +159,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/gse-tool-returned/project/create', 'frontend.gse-tool-returned.project.create')->name('gse-tool-returned.project.create');
         Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
         Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
-
-        /** Position */
-
-        Route::view('hr/position/update-benefit', 'frontend.position.update-benefit')->name('position.update-benefit');
-
 
         /** leave Period */
 

@@ -57,8 +57,6 @@ Route::name('admin.')->group(function () {
         Route::resource('company', 'CompanyController');
         Route::resource('department', 'DepartmentController');
         Route::resource('benefit', 'BenefitController');
-        Route::resource('position', 'PositionController');
-        Route::resource('time-off-period', 'TimeOffPeriodController');
 
         /** LICENSE */
 
@@ -70,7 +68,7 @@ Route::name('admin.')->group(function () {
 
         Route::resource('otr-certification', 'OTRCertificationController');
         Route::resource('certification-employee', 'CertificationEmployeeController');
-
+        
         /** TRANSACTION */
 
         Route::resource('rts', 'RTSController');

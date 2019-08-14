@@ -139,13 +139,17 @@
                                                                                         <td align="center" width="33%"><b>Maximum</b></td>
                                                                                     </tr>
                                                                                     
-                                                                                    @for ($i = 0; $i < count($benefits_position[0]->benefits); $i++)
+                                                                                    @if (count($benefits_position[0]->benefit_current) >= 0)
+                                                                                        
+                                                                                    @for ($i = 0; $i < count($benefits_position[0]->benefit_current); $i++)
                                                                                     <tr>
-                                                                                    <td valign="top"><b>{{ $benefits_position[0]->benefits[$i]->name }}</b></td>
-                                                                                    <td valign="top" align="center">{{ $benefits_position[0]->benefits[$i]['pivot']->min }}</td>
-                                                                                    <td valign="top" align="center">{{ $benefits_position[0]->benefits[$i]['pivot']->max }}</td>
+                                                                                    <td valign="top"><b>{{ $benefits_position[0]->benefit_current[$i]->name }}</b></td>
+                                                                                    <td valign="top" align="center">{{ $benefits_position[0]->benefit_current[$i]['pivot']->min }}</td>
+                                                                                    <td valign="top" align="center">{{ $benefits_position[0]->benefit_current[$i]['pivot']->max }}</td>
                                                                                     </tr>
                                                                                     @endfor
+                                                                                        
+                                                                                    @endif
 
                                                                                 </table>
                                                                             </div>
@@ -174,51 +178,56 @@
                                                                 </div>
                                                                 <div class="m-portlet m-portlet--mobile">
                                                                     <div class="m-portlet__body">
-                                                                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                                                            <div class="row align-items-center">
-                                                                                <div class="col-xl-8 order-2 order-xl-1">
-                                                                                    <div class="form-group m-form__group row align-items-center">
-                                                                                        <div class="col-md-4">
+                                                                        
+                                                                            @for ($i = 0; $i < count($history); $i++)
+                                                                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                                                                <div class="row align-items-center">
+                                                                                    <div class="col-xl-8 order-2 order-xl-1">
+                                                                                        <div class="form-group m-form__group row align-items-center">
+                                                                                            <div class="col-md-4">
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                </div>
-                                                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                                                  
-                                                                                    <h3 class="m-portlet__head-text">
-                                                                                        10 Juli - 31 Juli 2019
-                                                                                    </h3>
-                                
-                                                                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                                                                    <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                                                                      
+                                                                                        <h3 class="m-portlet__head-text">
+                                                                                            @php
+                                                                                                $created_time = $history[$i]['created_at'];
+                                                                                                $formatCreatedTime = strtotime($created_time);
+    
+                                                                                                $updated_time = $history[$i]['updated_at'];
+                                                                                                $formatUpdatedTime = strtotime($updated_time);
+    
+                                                                                                echo date("d F Y", $formatCreatedTime).' to '.date("d F Y", $formatUpdatedTime);
+                                                                                            @endphp
+                                                                                        </h3>
+                                    
+                                                                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="form-group m-form__group row">
-                                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
-                                                                                    <tr>
-                                                                                        <td align="center" width="34%"><b>Allowance</b></td>
-                                                                                        <td align="center" width="33%"><b>Minimum</b></td>
-                                                                                        <td align="center" width="33%"><b>Maximum</b></td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Position</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Meal</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Overtime</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                </table>
+                                                                            <div class="form-group m-form__group row">
+                                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                                    <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
+                                                                                                <tr>
+                                                                                                    <td align="center" width="34%"><b>Allowance</b></td>
+                                                                                                    <td align="center" width="33%"><b>Minimum</b></td>
+                                                                                                    <td align="center" width="33%"><b>Maximum</b></td>
+                                                                                                </tr>
+                                                                                        @for ($j = 0; $j < count($history[$i]['data']); $j++)
+                                                                                                <tr>
+                                                                                                    <td valign="top"><b>{{ $history[$i]['data'][$j]['benefit_name'] }}</b></td>
+                                                                                                    <td valign="top" align="center">{{ $history[$i]['data'][$j]['min'] }}</td>
+                                                                                                    <td valign="top" align="center">{{ $history[$i]['data'][$j]['max'] }}</td>
+                                                                                                </tr>
+                                                                                        @endfor
+    
+                                                                                    </table>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <hr>
+                                                                            <hr>
+                                                                            @endfor
+                                                                            
                                                                         <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                                                                             <div class="row align-items-center">
                                                                                 <div class="col-xl-8 order-2 order-xl-1">
