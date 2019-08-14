@@ -59,10 +59,12 @@ Route::name('frontend.')->group(function () {
         Route::resource('facility', 'FacilityController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
-
+        Route::resource('leave-period','LeavePeriodController');
+        Route::resource('leave-type','LeaveTypeController');
         Route::resource('company', 'CompanyController');
         Route::resource('department', 'DepartmentController');
         Route::resource('benefit', 'BenefitController');
+        
 
         /** CERTIFICATION */
 

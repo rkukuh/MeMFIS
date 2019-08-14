@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\leavePeriod;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -43,11 +44,12 @@ class DatabaseSeeder extends Seeder
         $this->call(CustomersTableSeeder::class);
         $this->call(VendorsTableSeeder::class);
         $this->call(FacilitiesTableSeeder::class);
-
+        $this->call(LeaveTypesTableSeeder::class);
         $this->call(CompaniesTableSeeder::class);
         $this->call(DepartmentsTableSeeder::class);
         $this->call(BenefitsTableSeeder::class);
         $this->call(PositionsTableSeeder::class);
+        $this->call(LeavePeriodsTableSeeder::class);
 
         /** POLYMORPH */
 
