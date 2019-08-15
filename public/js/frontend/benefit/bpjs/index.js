@@ -198,11 +198,11 @@ let Bpjs = {
                 success: function (data) {
                     $('#bpjs_code_show').html(data.code)
                     $('#bpjs_name_show').text(data.name)
-                    $('#basic_salary_employee_show').text('')
-                    $('#min_employee_show').text('ssss')
+                    $('#basic_salary_employee_show').text(data.employee_paid)
+                    $('#min_employee_show').text(data.min_employee_value)
                     $('#max_employee_show').text(data.employee_max_value)
-                    $('#basic_salary_company_show').text('')
-                    $('#min_company_show').text(data.company_mmin_value)
+                    $('#basic_salary_company_show').text(data.company_paid)
+                    $('#min_company_show').text(data.min_company_value)
                     $('#max_company_show').text(data.company_max_value)
                 },
                 error: function (jqXhr, json, errorThrown) {
