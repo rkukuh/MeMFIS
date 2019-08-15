@@ -12,6 +12,6 @@ class Manhours extends Seeder
      */
     public function run()
     {
-        //
+        factory(Manhour::class, config('memfis.dummies.manhours'))->create();
     }
 }
