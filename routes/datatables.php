@@ -254,6 +254,12 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{project}/workpackage/{workPackage}/cmr-awl', 'ProjectWorkPackageTaskCardNonRoutineDatatables@cmr_awl')->name('cmr-awl.index');
                 Route::get('/{project}/workpackage/{workPackage}/si', 'ProjectWorkPackageTaskCardNonRoutineDatatables@si')->name('si.index');
 
+                /** Items for summary */
+
+                Route::get('/{project}/workpackage/{workPackage}/type/{type}/materials', 'ProjectItemDatatales@material')->name('summary.workpackage.material');
+                Route::get('/{project}/workpackage/{workPackage}/type/{type}/tools', 'ProjectItemDatatales@tool')->name('summary.workpackage.tool');
+
+
             });
 
         });
