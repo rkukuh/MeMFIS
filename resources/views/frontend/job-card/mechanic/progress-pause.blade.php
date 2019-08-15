@@ -274,7 +274,7 @@
                                         <form method="POST" action="{{route('frontend.discrepancy.jobcard.mechanic.discrepancy.create',$jobcard->uuid)}}">
                                             {!! csrf_field() !!}
                                             @component('frontend.common.buttons.found')
-                                                @if($jobcard->defectcards <> null)
+                                                @if(sizeOf($jobcard->defectcards) > 0)
                                                     @slot('disabled','disabled')
                                                 @endif
                                             @endcomponent
