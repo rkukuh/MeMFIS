@@ -114,7 +114,7 @@ let DefectCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'actual_manhour',
+                    field: 'actual',
                     title: 'Actual Mhrs.',
                     sortable: 'asc',
                     filterable: !1,
@@ -253,7 +253,7 @@ let DefectCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'actual_manhour',
+                    field: 'actual',
                     title: 'Actual Mhrs.',
                     sortable: 'asc',
                     filterable: !1,
