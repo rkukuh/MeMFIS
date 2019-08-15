@@ -343,12 +343,10 @@
                                             Documents library @include('frontend.common.label.optional')
                                         </label>
 
-                                        @component('frontend.common.input.select2')
+                                        @component('frontend.common.input.text')
                                             @slot('text', 'Document')
                                             @slot('id', 'document')
                                             @slot('name', 'document')
-                                            @slot('multiple','multiple')
-                                            @slot('help_text','You can chose multiple value')
                                             @slot('id_error', 'document')
                                         @endcomponent
 
@@ -685,7 +683,7 @@
 <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>
 
-<script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script> -->
 
 <script src="{{ asset('js/frontend/functions/select2/section.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/section.js') }}"></script>
@@ -778,7 +776,7 @@
             "UserType": usertype
         };
 
-        console.log(JSON.stringify(ajaxdata));
+        // console.log(JSON.stringify(ajaxdata));
     });
 </script>
 @endpush
