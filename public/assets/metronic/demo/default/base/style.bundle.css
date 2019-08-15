@@ -12889,8 +12889,8 @@ body {
     height: 100%;
     margin: 0px;
     padding: 0px;
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 300;
     font-family: Roboto;
     -ms-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
@@ -21159,7 +21159,7 @@ strong {
 }
 
 .m-datatable.m-datatable--default>.m-datatable__table>.m-datatable__body .m-datatable__row>.m-datatable__cell>span {
-    color: #575962
+    color: #000000;
 }
 
 .m-datatable.m-datatable--default>.m-datatable__table>.m-datatable__body .m-datatable__row>.m-datatable__cell.m-datatable__cell--hover {
@@ -56102,7 +56102,7 @@ body.m-content--skin-light2 {
 
 .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item>.m-menu__heading .m-menu__link-text,
 .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item>.m-menu__link .m-menu__link-text {
-    color: #868aa8
+    color: #ccc;
 }
 
 .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__item>.m-menu__heading .m-menu__link-icon,
@@ -56249,7 +56249,7 @@ body.m-content--skin-light2 {
 }
 
 .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__section .m-menu__section-text {
-    color: #464b66
+    color: #2aabe8
 }
 
 .m-aside-menu.m-aside-menu--skin-dark .m-menu__nav>.m-menu__section .m-menu__section-icon {
