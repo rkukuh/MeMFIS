@@ -805,6 +805,7 @@ let TaskCard = {
             data.append("version", JSON.stringify($('#version').val()));
             data.append("effectivity", $('input[name=effectivity]').val());
             data.append("description", $('#description').val());
+            data.append("document", $('#document').val());
             data.append("threshold_type", JSON.stringify(threshold_type));
             data.append("repeat_type", JSON.stringify(repeat_type));
             data.append("threshold_amount", JSON.stringify(threshold_amount));
@@ -814,9 +815,6 @@ let TaskCard = {
             data.append("ata", $('input[name=ata]').val());
             data.append("fileInput", document.getElementById('taskcard').files[0]);
             data.append('_method', 'PUT');
-
-            console.log(access);
-            console.log(zone);
 
             $.ajax({
                 headers: {
