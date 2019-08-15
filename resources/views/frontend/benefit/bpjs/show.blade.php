@@ -17,20 +17,18 @@
                                     <label class="form-control-label">
                                         BPJS Code @include('frontend.common.label.required')
                                     </label>
-    
+
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', 'Generated')
-                                        @slot('id', 'bpjs_code')
+                                        @slot('id', 'bpjs_code_show')
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <label class="form-control-label">
                                         BPJS Name @include('frontend.common.label.required')
                                     </label>
-    
+
                                     @component('frontend.common.label.data-info')
-                                        @slot('id', 'bpjs_name')
-                                        @slot('text', 'Generated')
+                                        @slot('id', 'bpjs_name_show')
                                     @endcomponent
                                 </div>
                             </div>
@@ -43,32 +41,29 @@
                                                 <label class="form-control-label">
                                                     Percentage of Basic Salary
                                                 </label>
-                
-                                                
+
+
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('id', 'basic_salary_employee')
-                                                    @slot('text', 'Generated')
+                                                    @slot('id', 'basic_salary_employee_show')
                                                 @endcomponent
-    
+
                                                 <div class="row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
-                                                            Minimum Value 
+                                                            Minimum Value
                                                         </label>
-                        
+
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('id', 'min_employee')
-                                                            @slot('text', 'Generated')
+                                                            @slot('id', 'min_employee_show')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
                                                             Maximum Value
                                                         </label>
-                                               
+
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('id', 'max_employee')
-                                                            @slot('text', 'Generated')
+                                                            @slot('id', 'max_employee_show')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -86,31 +81,28 @@
                                                 <label class="form-control-label">
                                                     Percentage of Basic Salary
                                                 </label>
-                
+
                                                 @component('frontend.common.label.data-info')
                                                     @slot('id', 'basic_salary_company')
-                                                    @slot('text', 'Generated')
                                                 @endcomponent
-    
+
                                                 <div class="row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
-                                                            Minimum Value 
+                                                            Minimum Value
                                                         </label>
-                        
+
                                                         @component('frontend.common.label.data-info')
                                                             @slot('id', 'min_company')
-                                                            @slot('text', 'Generated')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
                                                             Maximum Value
                                                         </label>
-                        
+
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('id', 'max_company')    
-                                                            @slot('text', 'Generated')
+                                                            @slot('id', 'max_company')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -136,4 +128,3 @@
             </div>
         </div>
     </div>
-    

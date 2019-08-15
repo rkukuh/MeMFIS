@@ -180,43 +180,43 @@ let Bpjs = {
                         table.reload();
                     }
                 }
-            }); 
+            });
         });
 
 
-        // let show = $(document).on('click', '#show', function () {      
-        //        reset()
-        //         let triggerid = $(this).data('uuid');
+        let show = $(document).on('click', '#show', function () {
 
-        //         $.ajax({
-        //             headers: {
-        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //             },
-        //             type: 'get',
-        //             url: '/bpjs/' + triggerid,
-        //             success: function (data) {
-                        // $('#bpjs_code').html(data.code)
-                        // alert(data)
-                        // $('#bpjs_name').val(data.name)
-                        // $('#basic_salary_employee').val('')
-                        // $('#min_employee').val('')
-                        // $('#max_employee').val('')
-                        // $('#basic_salary_company').val('')
-                        // $('#min_company').val('')
-                        // $('#max_company').val('')
-            //         },
-            //         error: function (jqXhr, json, errorThrown) {
-            //             // this are default for ajax errors
-            //             let errorsHtml = '';
-            //             let errors = jqXhr.responseJSON;
-    
-            //             $.each(errors.errors, function (index, value) {
-            //                 alert(value);
-            //             });
-            //         }
-            //     });
+            reset()
+            let triggerid = $(this).data('uuid');
 
-            // });
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'get',
+                url: '/bpjs/' + triggerid,
+                success: function (data) {
+                    $('#bpjs_code_show').html(data.code)
+                    $('#bpjs_name_show').text(data.name)
+                    $('#basic_salary_employee_show').text('')
+                    $('#min_employee_show').text('ssss')
+                    $('#max_employee_show').text(data.employee_max_value)
+                    $('#basic_salary_company_show').text('')
+                    $('#min_company_show').text(data.company_mmin_value)
+                    $('#max_company_show').text(data.company_max_value)
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    // this are default for ajax errors
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
+
+                    $.each(errors.errors, function (index, value) {
+                        // alert(value);
+                    });
+                }
+            });
+
+        });
 
     }
 };

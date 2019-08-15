@@ -49,10 +49,9 @@ class BPJSController extends Controller
      * @param  \App\Models\BPJS  $bPJS
      * @return \Illuminate\Http\Response
      */
-    public function show(BPJS $bPJS)
+    public function show(BPJS $bpj)
     {
-        // print_r($bp);
-        // return response()->json($bPJS);
+        return response()->json($bpj);
     }
 
     /**
