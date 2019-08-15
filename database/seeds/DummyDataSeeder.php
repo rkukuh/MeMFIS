@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\BPJS;
 use App\Models\LeaveType;
 use Illuminate\Database\Seeder;
 
@@ -42,12 +43,12 @@ class DummyDataSeeder extends Seeder
         $this->call(Customers::class);
         $this->call(Vendors::class);
         $this->call(Facilities::class);
-        $this->call(LeaveTypes::class);
         $this->call(Companies::class);
         $this->call(Departments::class);
         $this->call(Benefits::class);
         $this->call(Positions::class);
         $this->call(LeavePeriods::class);
+        $this->call(BPJSS::class);
 
         /** POLYMORPH */
 

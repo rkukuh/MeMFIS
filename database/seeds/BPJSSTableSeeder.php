@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class LeaveTypesTableSeeder extends Seeder
+class BPJSSTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

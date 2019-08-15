@@ -28,6 +28,8 @@ Route::name('datatables.')->group(function () {
         Route::get('/storage/modal', 'StorageDatatables@storageModal')->name('storage.modal');
         Route::get('/manufacturer', 'ManufacturerDatatables@index')->name('manufacturer.index');
         Route::get('/certification', 'CertificationDatatables@index')->name('certification.index');
+        Route::get('/leave-period', 'LeavePeriodDatatables@index')->name('leaveperiod.index');
+        Route::get('/bpjs', 'BPJSDatatables@index')->name('bpjs.index');
 
         /** LICENSE */
 

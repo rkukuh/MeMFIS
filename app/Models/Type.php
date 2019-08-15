@@ -473,6 +473,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of Term of Payment.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function TypeOfLeaves(Builder $query)
+    {
+        return $query->where('of', 'leaves');
+    }
+
+    /**
      * Scope a query to only include type of Unit.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -784,5 +795,15 @@ class Type extends MemfisModel
     public function websites()
     {
         return $this->hasMany(Website::class);
-    }
+    
+    
+    /**
+     * One-to-Many: A website may have zero or many type.
+     *
+     * This function will retrieve all websites of a type.
+     * See: Website's type() method for the inverse
+     *
+     * @return mixed
+     */
+}
 }

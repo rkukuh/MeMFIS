@@ -60,11 +60,10 @@ Route::name('frontend.')->group(function () {
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
         Route::resource('leave-period','LeavePeriodController');
-        Route::resource('leave-type','LeaveTypeController');
         Route::resource('company', 'CompanyController');
         Route::resource('department', 'DepartmentController');
         Route::resource('benefit', 'BenefitController');
-        
+        Route::resource('bpjs', 'BPJSController');
 
         /** CERTIFICATION */
 
@@ -75,6 +74,10 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('general-license', 'GeneralLicenseController');
         Route::resource('employee-license', 'EmployeeLicenseController');
+
+        /** LEAVE TYPES */
+
+        Route::resource('leave-type', 'LeaveTypeController');
 
         /** Jobcard EO */
 
@@ -161,19 +164,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/gse-tool-returned/project/create', 'frontend.gse-tool-returned.project.create')->name('gse-tool-returned.project.create');
         Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
         Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
-
-        /** leave Period */
-
-        Route::view('hr/leave-period', 'frontend.leave-period.index')->name('hr.leave-period.index');
-        Route::view('hr/leave-period/create', 'frontend.leave-period.create')->name('hr.leave-period.create');
-        Route::view('hr/leave-period/show', 'frontend.leave-period.show')->name('hr.leave-period.show');
-
-
-        /** leave Types */
-
-        Route::view('hr/leave-types', 'frontend.leave-types.index')->name('hr.leave-types.index');
-        Route::view('hr/leave-types/create', 'frontend.leave-types.create')->name('hr.leave-types.create');
-        Route::view('hr/leave-types/show', 'frontend.leave-types.show')->name('hr.leave-types.show');
 
         /** Event/Holidays */
 

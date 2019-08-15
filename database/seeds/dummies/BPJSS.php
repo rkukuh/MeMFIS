@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\LeaveType;
+use App\Models\BPJS;
 use Illuminate\Database\Seeder;
 
-class LeaveTypes extends Seeder
+class BPJSS extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class LeaveTypes extends Seeder
      */
     public function run()
     {
-        //
+        factory(BPJS::class, config('memfis.dummies.BPJSS'))->create();
     }
 }

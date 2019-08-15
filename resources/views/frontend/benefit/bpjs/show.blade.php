@@ -20,6 +20,7 @@
     
                                     @component('frontend.common.label.data-info')
                                         @slot('text', 'Generated')
+                                        @slot('id', 'bpjs_code')
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -28,6 +29,7 @@
                                     </label>
     
                                     @component('frontend.common.label.data-info')
+                                        @slot('id', 'bpjs_name')
                                         @slot('text', 'Generated')
                                     @endcomponent
                                 </div>
@@ -44,6 +46,7 @@
                 
                                                 
                                                 @component('frontend.common.label.data-info')
+                                                    @slot('id', 'basic_salary_employee')
                                                     @slot('text', 'Generated')
                                                 @endcomponent
     
@@ -54,6 +57,7 @@
                                                         </label>
                         
                                                         @component('frontend.common.label.data-info')
+                                                            @slot('id', 'min_employee')
                                                             @slot('text', 'Generated')
                                                         @endcomponent
                                                     </div>
@@ -63,6 +67,7 @@
                                                         </label>
                                                
                                                         @component('frontend.common.label.data-info')
+                                                            @slot('id', 'max_employee')
                                                             @slot('text', 'Generated')
                                                         @endcomponent
                                                     </div>
@@ -83,6 +88,7 @@
                                                 </label>
                 
                                                 @component('frontend.common.label.data-info')
+                                                    @slot('id', 'basic_salary_company')
                                                     @slot('text', 'Generated')
                                                 @endcomponent
     
@@ -93,6 +99,7 @@
                                                         </label>
                         
                                                         @component('frontend.common.label.data-info')
+                                                            @slot('id', 'min_company')
                                                             @slot('text', 'Generated')
                                                         @endcomponent
                                                     </div>
@@ -102,6 +109,7 @@
                                                         </label>
                         
                                                         @component('frontend.common.label.data-info')
+                                                            @slot('id', 'max_company')    
                                                             @slot('text', 'Generated')
                                                         @endcomponent
                                                     </div>

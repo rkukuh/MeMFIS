@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Frontend;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LeaveTypeStore extends FormRequest
+class BPJSStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class LeaveTypeStore extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

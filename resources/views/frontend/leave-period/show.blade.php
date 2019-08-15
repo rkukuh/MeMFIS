@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.leave-period.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.leave-period.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Leave Period
                             </span>
@@ -57,7 +57,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $leaveperiod->code)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -66,7 +66,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $leaveperiod->name)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@
                                             </label>
         
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $leaveperiod->period_start)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -86,7 +86,7 @@
                                             </label>
         
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $leaveperiod->period_end)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -97,7 +97,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $leaveperiod->description)
                                             @endcomponent
                                         </div>
                                     </div>
