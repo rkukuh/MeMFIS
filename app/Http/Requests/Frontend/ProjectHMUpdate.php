@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Frontend;
 
+use App\Models\Customer;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -56,7 +57,11 @@ class ProjectHMUpdate extends FormRequest
      */
     public function withValidator($validator)
     {
-        //
+        $validator->after(function ($validator) {
+            $this->merge([
+                'customer_id' => optional(Customer::where('uuid', $this->customer_id)->first())->id
+            ]);
+        });
     }
 
     protected function failedValidation(Validator $validator) {
