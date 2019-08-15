@@ -57,6 +57,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('language', 'LanguageController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
+        Route::resource('manhour', 'ManhourController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
 

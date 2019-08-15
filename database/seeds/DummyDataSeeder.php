@@ -41,6 +41,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Customers::class);
         $this->call(Vendors::class);
         $this->call(Facilities::class);
+        $this->call(Manhours::class);
 
         $this->call(Companies::class);
         $this->call(Departments::class);
