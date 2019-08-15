@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\TimeOffPeriod;
+use App\Models\LeaveType;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\TimeOffPeriodStore;
-use App\Http\Requests\Frontend\TimeOffPeriodUpdate;
+use App\Http\Requests\Admin\LeaveTypeStore;
+use App\Http\Requests\Admin\LeaveTypeUpdate;
 
-class TimeOffPeriodController extends Controller
+class LeaveTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class TimeOffPeriodController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\TimeOffPeriodStore  $request
+     * @param  \App\Http\Requests\Admin\LeaveTypeStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TimeOffPeriodStore $request)
+    public function store(LeaveTypeStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class TimeOffPeriodController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\TimeOffPeriod  $timeOffPeriod
+     * @param  \App\Models\LeaveType  $leaveType
      * @return \Illuminate\Http\Response
      */
-    public function show(TimeOffPeriod $timeOffPeriod)
+    public function show(LeaveType $leaveType)
     {
         //
     }
@@ -54,10 +54,10 @@ class TimeOffPeriodController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\TimeOffPeriod  $timeOffPeriod
+     * @param  \App\Models\LeaveType  $leaveType
      * @return \Illuminate\Http\Response
      */
-    public function edit(TimeOffPeriod $timeOffPeriod)
+    public function edit(LeaveType $leaveType)
     {
         //
     }
@@ -65,11 +65,11 @@ class TimeOffPeriodController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\TimeOffPeriodUpdate  $request
-     * @param  \App\Models\TimeOffPeriod  $timeOffPeriod
+     * @param  \App\Http\Requests\Admin\LeaveTypeUpdate  $request
+     * @param  \App\Models\LeaveType  $leaveType
      * @return \Illuminate\Http\Response
      */
-    public function update(TimeOffPeriodUpdate $request, TimeOffPeriod $timeOffPeriod)
+    public function update(LeaveTypeUpdate $request, LeaveType $leaveType)
     {
         //
     }
@@ -77,10 +77,10 @@ class TimeOffPeriodController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\TimeOffPeriod  $timeOffPeriod
+     * @param  \App\Models\LeaveType  $leaveType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TimeOffPeriod $timeOffPeriod)
+    public function destroy(LeaveType $leaveType)
     {
         //
     }

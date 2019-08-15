@@ -36,7 +36,7 @@ let Position = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/position';
+                        window.location.href = '/position/update-benefits/'+data.uuid+'/edit'
 
                     }
                 }

@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\TimeOffPeriod;
+use App\Models\LeavePeriod;
 use Illuminate\Database\Seeder;
 
-class TimeOffPeriods extends Seeder
+class LeavePeriods extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class TimeOffPeriods extends Seeder
      */
     public function run()
     {
-        factory(TimeOffPeriod::class, config('memfis.dummies.timeoffperiod'))->create();
+        factory(LeavePeriod::class, config('memfis.dummies.leaveperiods'))->create();
     }
 }

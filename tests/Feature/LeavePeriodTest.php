@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class TimeOffPeriodTest extends TestCase
+class LeavePeriodTest extends TestCase
 {
     /**
      * A basic test example.
