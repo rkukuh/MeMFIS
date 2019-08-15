@@ -131,7 +131,14 @@
                                                     @slot('id_error', 'ata')
                                                 @endcomponent
                                             </div>
-                                            
+                                             <div class="col-sm-6 col-md-6 col-lg-6">
+                                                @component('frontend.common.input.checkbox')
+                                                    @slot('id', 'is_rii')
+                                                    @slot('name', 'is_rii')
+                                                    @slot('text', 'RII?')
+                                                    @slot('style_div','margin-top:30px')
+                                                @endcomponent
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -733,6 +740,7 @@
         });
     });
 </script>
+ 
 <script type="text/javascript">
     $(document).ready(function() {
         var counter = 0;
