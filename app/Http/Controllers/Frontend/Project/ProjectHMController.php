@@ -53,8 +53,6 @@ class ProjectHMController extends Controller
     {
         $request->merge(['code' => DocumentNumber::generate('PROJ-', Project::withTrashed()->count()+1)]);
 
-        $request->merge(['customer_id' => Customer::where('uuid',$request->customer_id)->first()->id]);
-
         $project = Project::create($request->all());
         if ($request->hasFile('fileInput')) {
             $destination = 'project/hm/workOrder';

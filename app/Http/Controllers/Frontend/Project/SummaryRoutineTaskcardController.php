@@ -115,14 +115,17 @@ class SummaryRoutineTaskcardController extends Controller
 
         $otr = array_count_values($skills);
         $otr["eri"] = $eri;
-        $total_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'CPCP')->count('uuid');
-        $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'CPCP')->sum('estimation_manhour');
+        $total_taskcard  = $taskcards->load('type')->where('type.name', 'CPCP')->count('uuid');
+        $total_manhour_taskcard  = $taskcards->load('type')->where('type.name', 'CPCP')->sum('estimation_manhour');
+        $type = 'CPCP';
 
         return view('frontend.project.hm.taskcard.routine.cpcp.cpcp-summary',[
+            'otr' => $otr,
+            'type' => $type,
+            'project' => $project,
+            'workPackage' => $workPackage,
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
-            'otr' => $otr,
-            'workPackage' => $workPackage,
         ]);
     }
 
@@ -170,14 +173,16 @@ class SummaryRoutineTaskcardController extends Controller
 
         $otr = array_count_values($skills);
         $otr["eri"] = $eri;
-        $total_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'SIP')->count('uuid');
-        $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.name', 'SIP')->sum('estimation_manhour');
-
+        $total_taskcard  = $taskcards->load('type')->where('type.name', 'SIP')->count('uuid');
+        $total_manhour_taskcard  = $taskcards->load('type')->where('type.name', 'SIP')->sum('estimation_manhour');
+        $type = 'SIP';
         return view('frontend.project.hm.taskcard.routine.sip.sip-summary',[
+            'otr' => $otr,
+            'type' => $type,
+            'project' => $project,
+            'workPackage' => $workPackage,
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
-            'otr' => $otr,
-            'workPackage' => $workPackage,
         ]);
     }
 
