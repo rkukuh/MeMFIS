@@ -18,6 +18,7 @@ class CreateZonesTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('name');
             $table->morphs('zoneable');
+            $table->longText('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
