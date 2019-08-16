@@ -853,7 +853,7 @@ let TaskCard = {
                         // document.getElementById('quantity').value = quantity;
 
                     } else {
-                                        
+
 
                         toastr.success('Instruction has been created.', 'Success', {
                             timeOut: 5000
@@ -1282,6 +1282,7 @@ $('.footer').on('click', '.add-taskcard', function () {
     data.append("repeat_amount", JSON.stringify(repeat_amount));
     data.append("category_id", $('#category').val());
     data.append("additionals",  internal_numberJSON);
+    data.append("document_library", JSON.stringify($('#document-library').val()));
     data.append("fileInput", document.getElementById('taskcard').files[0]);
     data.append('_method', 'PUT');
 
