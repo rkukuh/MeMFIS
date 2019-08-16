@@ -1,4 +1,4 @@
-let DocumentSelect2 = {
+let DocumentLibrarySelect2 = {
     init: function () {
         $('#document-library, #document-library_validate').select2({
             placeholder: 'Select a Document Library',
@@ -8,5 +8,5 @@ let DocumentSelect2 = {
 };
 
 jQuery(document).ready(function () {
-    DocumentSelect2.init();
+    DocumentLibrarySelect2.init();
 });
