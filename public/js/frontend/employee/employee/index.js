@@ -44,21 +44,12 @@ let Employee = {
                 }
             },
             columns: [{
-                    field: 'code',
-                    title: 'Code',
+                    field: '',
+                    title: 'Employee',
                     sortable: 'asc',
+                    width:290,
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/employee/'+t.uuid+'">' + t.code + "</a>"
-                    }
-                },
-                {
-                    field: 'name',
-                    title: 'Name',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template:  function (t) {
-
                         let employee_name
 
                         if(t.middle_name == null || t.last_name == null){
@@ -82,36 +73,76 @@ let Employee = {
                                 employee_name = t.first_name+' '+t.middle_name+' '+t.last_name
                             }
                         }
-
-                        return employee_name
+                        return '<div class="row"><div class="col-4"><div class="media align-items-center"><img alt="Image placeholder" src="assets/metronic/app/media/img/users/user5.jpg" class="m--img-rounded m--marginless"></div></div><div class="col-8 align-self-center"><span>Yemima Kridian asdasd asdasdassd</span><br><span><i class="la la-user"></i><span><a href="/employee/'+t.uuid+'">'+ t.code +'</span></span></div></div>'
                     }
+                },
+                // {
+                //     field: 'name',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                //     template:  function (t) {
+
+                //         let employee_name
+
+                //         if(t.middle_name == null || t.last_name == null){
+                //             if(t.middle_name == null){
+                //                 employee_name = t.first_name +' '+t.last_name
+                //             }
+                //             if(t.last_name == null){
+                //                 employee_name = t.first_name+' '+t.middle_name
+                //             }
+                //             if(t.middle_name == null && t.last_name == null){
+                //                 employee_name = t.first_name
+                //             }
+                //         }else if(t.middle_name != null || t.last_name != null){
+                //             if(t.middle_name != null){
+                //                 employee_name = t.first_name +' '+t.middle_name
+                //             }
+                //             if(t.last_name != null){
+                //                 employee_name = t.first_name+' '+t.last_name
+                //             }
+                //             if(t.middle_name != null && t.last_name != null){
+                //                 employee_name = t.first_name+' '+t.middle_name+' '+t.last_name
+                //             }
+                //         }
+
+                //         return employee_name + '<br>' + 
+                //                 '<span><i class="la la-user"></i><span><a href="/employee/'+t.uuid+'">'+ t.code +'</span></span>'
+                //     }
+                // },
+                {
+                    field: 'dob',
+                    title: 'Phone Number',
+                    sortable: 'asc',
+                    filterable: !1,
                 },
                 {
                     field: 'dob',
-                    title: 'dob',
+                    title: 'Department',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'gender',
-                    title: 'Gender',
+                    field: 'dob',
+                    title: 'Position',
                     sortable: 'asc',
                     filterable: !1,
-                    template:  function (t) {
-                        let gender = null;
-
-                        if(t.gender == 'm'){
-                            gender = 'MALE'
-                        }else if(t.gender == 'f'){
-                            gender = 'FEMALE'
-                        }
-
-                        return gender;
-                    }
+                },
+                {
+                    field: 'dob',
+                    title: 'Employee Status',
+                    sortable: 'asc',
+                    filterable: !1,
                 },
                 {
                     field: 'hired_at',
                     title: 'Hired At',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'hired_at',
+                    title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
                 },
