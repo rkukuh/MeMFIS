@@ -12,6 +12,6 @@ class Branches extends Seeder
      */
     public function run()
     {
-        //
+        factory(Branch::class, config('memfis.dummies.branches'))->create();
     }
 }
