@@ -10,6 +10,7 @@ class Zone extends MemfisModel
         'name',
         'zoneable_type',
         'zoneable_id',
+        'description',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

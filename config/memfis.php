@@ -27,6 +27,7 @@ return [
         'languages' => 20,
         'licenses' => 20,
         'levels' => 20,
+        'manhours' => 20,
         'positions' => 20,
         'projects' => 20,
         'purchase-orders' => 20,
@@ -56,6 +57,7 @@ return [
         'types' => 20,
         'users' => 20,
         'vendors' => 20,
+        'leaveperiod' => 20,
         'workpackages' => 20,
     ],
 ];

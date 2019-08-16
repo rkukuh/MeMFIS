@@ -147,12 +147,12 @@
                                                                         @endcomponent
                                                                     </div>
                                                                     <div class="col-sm-3 col-md-3 col-lg-3">
-                                                                        @if( $customer->phones[$counter]->type->name === "Work" )
+                                                                        @if( $customer->phones[$counter]->type->name === "Company" )
                                                                             @component('frontend.common.input.radio')
                                                                                 @slot('text', 'Company')
                                                                                 @slot('name', 'type_phone_'.$counter)
                                                                                 @slot('id', 'type_phone')
-                                                                                @slot('value', 'work')
+                                                                                @slot('value', 'company')
                                                                                 @slot('checked', 'checked')
                                                                             @endcomponent
                                                                             @component('frontend.common.input.radio')
@@ -163,10 +163,10 @@
                                                                             @endcomponent
                                                                         @else
                                                                             @component('frontend.common.input.radio')
-                                                                                @slot('text', 'Work')
+                                                                                @slot('text', 'Company')
                                                                                 @slot('name', 'type_phone_'.$counter)
                                                                                 @slot('id', 'type_phone')
-                                                                                @slot('value', 'work')
+                                                                                @slot('value', 'company')
                                                                             @endcomponent
                                                                             @component('frontend.common.input.radio')
                                                                                 @slot('id', 'type_phone')
@@ -207,10 +207,10 @@
                                                                 </div>
                                                                 <div class="col-sm-3 col-md-3 col-lg-3">
                                                                     @component('frontend.common.input.radio')
-                                                                        @slot('text', 'Work')
+                                                                        @slot('text', 'Company')
                                                                         @slot('name', 'type_phone_1')
                                                                         @slot('id', 'type_phone')
-                                                                        @slot('value', 'work')
+                                                                        @slot('value', 'company')
                                                                     @endcomponent
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('id', 'type_phone')
@@ -248,10 +248,10 @@
                                                                 </div>
                                                                 <div class="col-sm-3 col-md-3 col-lg-3">
                                                                     @component('frontend.common.input.radio')
-                                                                        @slot('text', 'Work')
+                                                                        @slot('text', 'Company')
                                                                         @slot('name', 'type_phone')
                                                                         @slot('id', 'type_phone')
-                                                                        @slot('value', 'work')
+                                                                        @slot('value', 'company')
                                                                     @endcomponent
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('id', 'type_phone')
@@ -308,8 +308,8 @@
                                                                             @component('frontend.common.input.radio')
                                                                                 @slot('id', 'type_fax')
                                                                                 @slot('name', 'type_fax_'.$counter))
-                                                                                @slot('text', 'Work')
-                                                                                @slot('value', 'work')
+                                                                                @slot('text', 'Company')
+                                                                                @slot('value', 'company')
                                                                                 @slot('checked','checked')
                                                                             @endcomponent
                                                                             @component('frontend.common.input.radio')
@@ -322,8 +322,8 @@
                                                                             @component('frontend.common.input.radio')
                                                                                 @slot('id', 'type_fax')
                                                                                 @slot('name', 'type_fax_'.$counter))
-                                                                                @slot('text', 'Work')
-                                                                                @slot('value', 'work')
+                                                                                @slot('text', 'Company')
+                                                                                @slot('value', 'company')
                                                                             @endcomponent
                                                                             @component('frontend.common.input.radio')
                                                                                 @slot('id', 'type_fax')
@@ -361,7 +361,7 @@
                                                                         @slot('text', 'Company')
                                                                         @slot('name', 'type_fax')
                                                                         @slot('id', 'type_fax')
-                                                                        @slot('value', 'work')
+                                                                        @slot('value', 'company')
                                                                     @endcomponent
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('name', 'type_fax')
@@ -393,10 +393,10 @@
                                                             </div>
                                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                                 @component('frontend.common.input.radio')
-                                                                    @slot('text', 'Work')
+                                                                    @slot('text', 'Company')
                                                                     @slot('name', 'type_fax')
                                                                     @slot('id', 'type_fax')
-                                                                    @slot('value', 'work')
+                                                                    @slot('value', 'company')
                                                                 @endcomponent
                                                                 @component('frontend.common.input.radio')
                                                                     @slot('name', 'type_fax')
@@ -579,7 +579,7 @@
                                                                                 @slot('id', 'type_email')
                                                                                 @slot('name', 'type_email_'.$counter)
                                                                                 @slot('text', 'Company')
-                                                                                @slot('value', 'work')
+                                                                                @slot('value', 'company')
                                                                                 @slot('checked','checked')
                                                                             @endcomponent
                                                                             @component('frontend.common.input.radio')
@@ -592,8 +592,8 @@
                                                                             @component('frontend.common.input.radio')
                                                                                 @slot('id', 'type_email')
                                                                                 @slot('name', 'type_email_'.$counter)
-                                                                                @slot('text', 'Work')
-                                                                                @slot('value', 'work')
+                                                                                @slot('text', 'Company')
+                                                                                @slot('value', 'company')
                                                                             @endcomponent
                                                                             @component('frontend.common.input.radio')
                                                                                 @slot('id', 'type_email')
@@ -628,10 +628,10 @@
                                                                 </div>
                                                                 <div class="col-sm-3 col-md-3 col-lg-3">
                                                                     @component('frontend.common.input.radio')
-                                                                        @slot('text', 'Work')
+                                                                        @slot('text', 'Company')
                                                                         @slot('name', 'type_email')
                                                                         @slot('id', 'type_email')
-                                                                        @slot('value', 'work')
+                                                                        @slot('value', 'company')
                                                                     @endcomponent
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('name', 'type_email')
@@ -663,10 +663,10 @@
                                                             </div>
                                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                                 @component('frontend.common.input.radio')
-                                                                    @slot('text', 'Work')
+                                                                    @slot('text', 'Company')
                                                                     @slot('name', 'type_email')
                                                                     @slot('id', 'type_email')
-                                                                    @slot('value', 'work')
+                                                                    @slot('value', 'company')
                                                                 @endcomponent
                                                                 @component('frontend.common.input.radio')
                                                                     @slot('name', 'type_email')

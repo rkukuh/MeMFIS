@@ -443,15 +443,12 @@
                                                 Documents library @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
+                                            @component('frontend.common.input.text')
                                                 @slot('text', 'Document')
                                                 @slot('id', 'document')
                                                 @slot('name', 'document')
-                                                @slot('multiple','multiple')
-                                                @slot('help_text','You can chose multiple value')
                                                 @slot('id_error', 'document')
                                             @endcomponent
-
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">

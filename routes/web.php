@@ -12,6 +12,7 @@ require('datatables.php');
 require('frontend.php');
 require('frontend/aircraft.php');
 require('frontend/customer.php');
+require('frontend/position.php');
 require('frontend/defectcard.php');
 require('frontend/discrepancy-found.php');
 require('frontend/employee.php');

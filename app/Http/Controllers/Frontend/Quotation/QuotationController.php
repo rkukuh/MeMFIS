@@ -20,6 +20,7 @@ use App\Models\QuotationHtcrrItem;
 use App\Http\Controllers\Controller;
 use App\Models\QuotationWorkPackageItem;
 use App\Models\Pivots\ProjectWorkPackage;
+use App\Models\ProjectWorkPackageTaskCard;
 use App\Models\ProjectWorkPackageFacility;
 use App\Models\Pivots\QuotationWorkPackage;
 use App\Http\Requests\Frontend\QuotationStore;
@@ -317,9 +318,10 @@ class QuotationController extends Controller
             'approved_by' => Auth::id(),
         ]));
 
-        $project = Project::find($quotation->project_id);
-        foreach($project->workpackages as $wp){
-            foreach($wp->taskcards as $tc){
+        $ProjectWorkPackage = ProjectWorkPackage::where('project_id',$quotation->project_id)->pluck('id');
+        $ProjectWorkPackageTaskCard = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
+        foreach($ProjectWorkPackageTaskCard as $tc){
+                $tc = $tc->taskcard;
 
                 if(Type::where('id',$tc->type_id)->first()->code == "basic"){
                     $tc_code = 'BSC';
@@ -396,7 +398,7 @@ class QuotationController extends Controller
 
 
 
-            }
+        //     }
 
         }
         foreach($project->htcrr as $htcrr){

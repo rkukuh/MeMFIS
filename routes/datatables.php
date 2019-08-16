@@ -178,6 +178,26 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** POSITION */
+
+        Route::name('position.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'position',
+                'namespace' => 'Position'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'PositionDatatables@index')->name('all');
+
+                /** Transaction */
+              
+            });
+
+        });
+
         /** ITEM */
 
         Route::name('item.')->group(function () {
@@ -253,6 +273,12 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{project}/workpackage/{workPackage}/ad-sb', 'ProjectWorkPackageTaskCardNonRoutineDatatables@ad_sb')->name('ad-sb.index');
                 Route::get('/{project}/workpackage/{workPackage}/cmr-awl', 'ProjectWorkPackageTaskCardNonRoutineDatatables@cmr_awl')->name('cmr-awl.index');
                 Route::get('/{project}/workpackage/{workPackage}/si', 'ProjectWorkPackageTaskCardNonRoutineDatatables@si')->name('si.index');
+
+                /** Items for summary */
+
+                Route::get('/{project}/workpackage/{workPackage}/type/{type}/materials', 'ProjectItemDatatales@material')->name('summary.workpackage.material');
+                Route::get('/{project}/workpackage/{workPackage}/type/{type}/tools', 'ProjectItemDatatales@tool')->name('summary.workpackage.tool');
+
 
             });
 

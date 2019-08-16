@@ -280,6 +280,7 @@
                                                 {!! csrf_field() !!}
                                                 <input type="hidden" name="progress" value="{{$status->uuid}}">
                                                 @include('frontend.common.buttons.execute')
+                                                @include('frontend.common.buttons.back')
                                             </form>
                                         </div>
                                     </div>

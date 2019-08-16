@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use App\Models\Pivots\QuotationWorkPackage;
 
 class Quotation extends MemfisModel
 {
@@ -179,9 +180,11 @@ class Quotation extends MemfisModel
     public function workpackages()
     {
         return $this->belongsToMany(WorkPackage::class, 'quotation_workpackage', 'quotation_id', 'workpackage_id')
+                    ->using(QuotationWorkPackage::class)
                     ->withPivot(
                         'manhour_total',
-                        'manhour_rate',
+                        'manhour_rate_id',
+                        'manhour_rate_amount',
                         'discount_type',
                         'discount_value',
                         'description'

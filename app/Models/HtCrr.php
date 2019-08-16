@@ -21,7 +21,8 @@ class HtCrr extends MemfisModel
         'estimation_manhour',
         'is_rii',
         'manhour_total',
-        'manhour_rate',
+        'manhour_rate_id',
+        'manhour_rate_amount',
         'discount_type',
         'discount_value',
         'description',
@@ -112,6 +113,19 @@ class HtCrr extends MemfisModel
                         'note'
                     )
                     ->withTimestamps();
+    }
+
+    /**
+     * One-to-Many: An HT/CRR may have one manhour rate.
+     *
+     * This function will retrieve the manhour rate of an HT/CRR.
+     * See: Manhour's htcrr() method for the inverse
+     *
+     * @return mixed
+     */
+    public function manhour_rate()
+    {
+        return $this->belongsTo(Manhour::class, 'manhour_rate_id');
     }
 
     /**

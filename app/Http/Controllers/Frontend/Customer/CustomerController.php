@@ -246,8 +246,8 @@ class CustomerController extends Controller
             }
 
             if(is_array($request->fax_array)){
+                $customer->faxes()->delete();
                 for ($i=0; $i < sizeof($request->fax_array) ; $i++) {
-                    $customer->faxes()->delete();
                     if(isset($request->fax_array[$i])){
                         $fax_type = Type::ofFax()->where('code',$request->type_fax_array[$i])->first();
                         $customer->faxes()->save(new Fax([
