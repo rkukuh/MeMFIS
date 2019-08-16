@@ -205,7 +205,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
             'skill_id' => null, // TODO: Import appropriate value
             'work_area' => $work_area->id, // TODO: Import appropriate value
             'estimation_manhour' => $row['manhours'],
-            'is_rii' => $row['is_rii'],
+            'is_rii' => false,
             'source' => $row['source'],
             'helper_quantity' => $row['helper_quantity'],
             'engineer_quantity' => $row['engineer_quantity'],
