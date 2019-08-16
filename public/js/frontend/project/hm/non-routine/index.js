@@ -39,7 +39,7 @@ let NonRoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/project/'+Project_uuid+'/workpackage/'+workPackage_uuid+'/ad-sb/',
+                        url: '/datatables/project/'+Project_uuid+'/workpackage/'+workPackage_uuid+'/ad-sb',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -204,6 +204,27 @@ let NonRoutineWorkpackage = {
                 }
             },
             {
+                field: 'is_rii',
+                title: 'RII',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                        if(t.is_rii == 1){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="Rii" data-uuid='+t.uuid+' data-rii=1' +
+                            ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+                        else if(t.is_rii == 0  || t.is_rii == null){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
+                            ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+
+                }
+            },
+            {
                 field: 'mandatory',
                 title: 'Mandatory',
                 sortable: 'asc',
@@ -224,18 +245,18 @@ let NonRoutineWorkpackage = {
 
                 }
             },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                            t.uuid +
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
-                        );
-                    }
+            {
+                field: 'Actions',
+                sortable: !1,
+                overflow: 'visible',
+                template: function (t, e, i) {
+                    return (
+                        '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                        t.uuid +
+                        ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                    );
                 }
+            }
             ]
         });
 
@@ -245,7 +266,7 @@ let NonRoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/project/'+Project_uuid+'/workpackage/'+workPackage_uuid+'/cmr-awl/',
+                        url: '/datatables/project/'+Project_uuid+'/workpackage/'+workPackage_uuid+'/cmr-awl',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -410,6 +431,27 @@ let NonRoutineWorkpackage = {
                 }
             },
             {
+                field: 'is_rii',
+                title: 'RII',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                        if(t.is_rii == 1){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="Rii" data-uuid='+t.uuid+' data-rii=1' +
+                            ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+                        else if(t.is_rii == 0  || t.is_rii == null){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
+                            ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+
+                }
+            },
+            {
                 field: 'mandatory',
                 title: 'Mandatory',
                 sortable: 'asc',
@@ -430,18 +472,18 @@ let NonRoutineWorkpackage = {
 
                 }
             },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                            t.uuid +
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
-                        );
-                    }
+            {
+                field: 'Actions',
+                sortable: !1,
+                overflow: 'visible',
+                template: function (t, e, i) {
+                    return (
+                        '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                        t.uuid +
+                        ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                    );
                 }
+            }
             ]
         });
 
@@ -451,7 +493,7 @@ let NonRoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/project/'+Project_uuid+'/workpackage/'+workPackage_uuid+'/si/',
+                        url: '/datatables/project/'+Project_uuid+'/workpackage/'+workPackage_uuid+'/si',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -616,6 +658,27 @@ let NonRoutineWorkpackage = {
                 }
             },
             {
+                field: 'is_rii',
+                title: 'RII',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                        if(t.is_rii == 1){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="Rii" data-uuid='+t.uuid+' data-rii=1' +
+                            ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+                        else if(t.is_rii == 0 || t.is_rii == null){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
+                            ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+
+                }
+            },
+            {
                 field: 'mandatory',
                 title: 'Mandatory',
                 sortable: 'asc',
@@ -636,18 +699,18 @@ let NonRoutineWorkpackage = {
 
                 }
             },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                            t.uuid +
-                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
-                        );
-                    }
+            {
+                field: 'Actions',
+                sortable: !1,
+                overflow: 'visible',
+                template: function (t, e, i) {
+                    return (
+                        '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                        t.uuid +
+                        ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                    );
                 }
+            }
             ]
         });
 

@@ -42,6 +42,7 @@ Route::name('admin.')->group(function () {
         /** MASTER */
 
         Route::resource('item', 'ItemController');
+        Route::resource('bpjs', 'BPJSController');
         Route::resource('school', 'SchoolController');
         Route::resource('vendor', 'VendorController');
         Route::resource('branch', 'BranchController');
@@ -55,7 +56,6 @@ Route::name('admin.')->group(function () {
         Route::resource('customer', 'CustomerController');
         Route::resource('employee', 'EmployeeController');
         Route::resource('facility', 'FacilityController');
-        Route::resource('leave-type','LeaveTypeController');
         Route::resource('department', 'DepartmentController');
         Route::resource('leave-period','LeavePeriodController');
         Route::resource('manufacturer', 'ManufacturerController');

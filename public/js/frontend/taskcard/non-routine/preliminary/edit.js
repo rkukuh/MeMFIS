@@ -721,13 +721,13 @@ let TaskCard = {
             var data = new FormData();
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());
-            data.append( "work_area", $('#work_area').val());
             data.append( "applicability_airplane", JSON.stringify($('#applicability_airplane').val()));
             data.append( "estimation_manhour", $('input[name=manhour]').val());
             data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
             data.append( "helper_quantity", $('input[name=helper_quantity]').val());
             data.append( "description", $('#instruction').val());
-            data.append(" additionals",  internal_numberJSON);
+            data.append( "document_library", JSON.stringify($('#document-library').val()));
+            data.append( "additionals",  internal_numberJSON);
 
             data.append('_method', 'PUT');
 

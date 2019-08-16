@@ -131,7 +131,7 @@
                                                     @slot('id_error', 'ata')
                                                 @endcomponent
                                             </div>
-                                             <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
                                                 @component('frontend.common.input.checkbox')
                                                     @slot('id', 'is_rii')
                                                     @slot('name', 'is_rii')
@@ -351,12 +351,12 @@
                                         </label>
 
                                         @component('frontend.common.input.select2')
-                                            @slot('text', 'Document')
-                                            @slot('id', 'document')
-                                            @slot('name', 'document')
+                                            @slot('id', 'document-library')
+                                            @slot('text', 'document-library')
+                                            @slot('name', 'document-library')
                                             @slot('multiple','multiple')
+                                            @slot('id_error', 'document-library')
                                             @slot('help_text','You can chose multiple value')
-                                            @slot('id_error', 'document')
                                         @endcomponent
 
                                     </div>
@@ -692,12 +692,13 @@
 <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>
 
-<script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script> -->
 
 <script src="{{ asset('js/frontend/functions/select2/section.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/section.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/document-library.js') }}"></script>
 
 <script src="{{ asset('js/frontend/taskcard/routine/create.js') }}"></script>
 
@@ -740,7 +741,7 @@
         });
     });
 </script>
- 
+
 <script type="text/javascript">
     $(document).ready(function() {
         var counter = 0;
@@ -786,7 +787,7 @@
             "UserType": usertype
         };
 
-        console.log(JSON.stringify(ajaxdata));
+        // console.log(JSON.stringify(ajaxdata));
     });
 </script>
 @endpush

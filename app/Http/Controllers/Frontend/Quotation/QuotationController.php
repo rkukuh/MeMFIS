@@ -184,6 +184,7 @@ class QuotationController extends Controller
             'currencies' => $this->currencies,
             'quotation' => $quotation,
             'charges' => $charges,
+            'attention' => $attention,
             'projects' => $projects
         ]);
     }

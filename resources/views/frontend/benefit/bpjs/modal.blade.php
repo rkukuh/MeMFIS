@@ -20,8 +20,8 @@
 
                                 @component('frontend.common.input.input')
                                     @slot('id', 'bpjs_code')
-                                    @slot('text', 'BPJS Code')
                                     @slot('name', 'bpjs_code')
+                                    @slot('id_error', 'bpjs_code')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -31,8 +31,8 @@
 
                                 @component('frontend.common.input.input')
                                     @slot('id', 'bpjs_name')
-                                    @slot('text', 'BPJS Name')
                                     @slot('name', 'bpjs_name')
+                                    @slot('id_error', 'bpjs_name')
                                 @endcomponent
                             </div>
                         </div>
@@ -47,9 +47,9 @@
                                             </label>
             
                                             @component('frontend.common.input.number')
-                                                @slot('id', 'basic_salary')
-                                                @slot('text', 'Percentage of Basic Salary')
-                                                @slot('name', 'basic_salary')
+                                                @slot('id', 'basic_salary_employee')
+                                                @slot('name', 'basic_salary_employee')
+                                                @slot('id_error', 'basic_salary_employee')
                                                 @slot('input_append','%')
                                             @endcomponent
 
@@ -60,9 +60,9 @@
                                                     </label>
                     
                                                     @component('frontend.common.input.number')
-                                                        @slot('id', 'min')
-                                                        @slot('text', 'Minimum Value')
-                                                        @slot('name', 'min')
+                                                        @slot('id', 'min_employee')
+                                                        @slot('name', 'min_employee')
+                                                        @slot('id_error', 'min_employee')
                                                         @slot('input_prepend','Rp')
                                                     @endcomponent
                                                 </div>
@@ -72,9 +72,9 @@
                                                     </label>
                     
                                                     @component('frontend.common.input.number')
-                                                        @slot('id', 'max')
-                                                        @slot('text', 'Maximum Value')
-                                                        @slot('name', 'max')
+                                                        @slot('id', 'max_employee')
+                                                        @slot('name', 'max_employee')
+                                                        @slot('id_error', 'max_employee')
                                                         @slot('input_prepend','Rp')
                                                     @endcomponent
                                                 </div>
@@ -96,8 +96,8 @@
             
                                             @component('frontend.common.input.number')
                                                 @slot('id', 'basic_salary_company')
-                                                @slot('text', 'Percentage of Basic Salary')
                                                 @slot('name', 'basic_salary_company')
+                                                @slot('id_error', 'basic_salary_company')
                                                 @slot('input_append','%')
                                             @endcomponent
 
@@ -109,8 +109,8 @@
                     
                                                     @component('frontend.common.input.number')
                                                         @slot('id', 'min_company')
-                                                        @slot('text', 'Minimum Value')
                                                         @slot('name', 'min_company')
+                                                        @slot('id_error', 'min_company')
                                                         @slot('input_prepend','Rp')
                                                     @endcomponent
                                                 </div>
@@ -121,8 +121,8 @@
                     
                                                     @component('frontend.common.input.number')
                                                         @slot('id', 'max_company')
-                                                        @slot('text', 'Maximum Value')
                                                         @slot('name', 'max_company')
+                                                        @slot('id_error', 'max_company')
                                                         @slot('input_prepend','Rp')
                                                     @endcomponent
                                                 </div>
@@ -139,11 +139,14 @@
                                     <div class="flex">
                                         <div class="action-buttons">
                                                 {{-- <div id="button-div" style="height:0px;"> --}}
-                                                    @include('frontend.common.buttons.submit')
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('id', 'create-bpjs')
+                                                        @slot('type', 'button')
+                                                    @endcomponent
                                                 {{-- </div>  --}}
-                                                    @include('frontend.common.buttons.reset')
+                                                    @include('frontend.common.buttons.reset',['id' => 'reset-bpjs'])
                             
-                                                    @include('frontend.common.buttons.close')
+                                                    @include('frontend.common.buttons.close',['id' => 'close-bpjs'])
                                             </div>
                                     </div>
                             </div>

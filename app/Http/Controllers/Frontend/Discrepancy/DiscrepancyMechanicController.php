@@ -21,7 +21,8 @@ class DiscrepancyMechanicController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.discrepancy.mechanic.index');
+
     }
 
     /**

@@ -132,6 +132,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Description @include('frontend.common.label.required')
+                                </label>
+
+                                @component('frontend.common.input.textarea')
+                                    @slot('rows', '3')
+                                    @slot('id', 'instuction_description')
+                                    @slot('name', 'instuction_description')
+                                    @slot('text', 'Description')
+                                    @slot('description', 'text')
+                                @endcomponent
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer modal-footer-instruction">

@@ -677,7 +677,7 @@
                                                             </label>
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('name', 'attn-ext')
-                                                                @slot('text', '-')
+                                                                @slot('text', $attention->fax)
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">

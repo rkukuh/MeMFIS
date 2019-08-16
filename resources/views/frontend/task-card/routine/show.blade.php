@@ -71,7 +71,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        
+
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Company Task Number @include('frontend.common.label.optional')
@@ -384,8 +384,21 @@
                                                 Documents library @include('frontend.common.label.optional')
                                             </label>
 
+                                            @if (empty($taskcard->document_library))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
+                                                @php
+                                                    $documents = json_decode($taskcard->document_library, TRUE);
+                                                @endphp
+
+                                                @foreach ($documents  as $document)
+                                                    @component('frontend.common.label.badge')
+                                                        @slot('text', $document )
+                                                    @endcomponent
+                                                @endforeach
+                                            @endif
                                         </div>
-                                   </div>
+                                    </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">

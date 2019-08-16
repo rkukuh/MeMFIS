@@ -135,7 +135,7 @@
                                                             @slot('text', 'Company')
                                                             @slot('name', 'type_phone_1')
                                                             @slot('id', 'type_phone')
-                                                            @slot('value', 'work')
+                                                            @slot('value', 'company')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('id', 'type_phone')
@@ -175,7 +175,7 @@
                                                             @slot('text', 'Company')
                                                             @slot('name', 'type_phone')
                                                             @slot('id', 'type_phone')
-                                                            @slot('value', 'work')
+                                                            @slot('value', 'company')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('id', 'type_phone')
@@ -229,7 +229,7 @@
                                                             @slot('text', 'Company')
                                                             @slot('name', 'type_fax')
                                                             @slot('id', 'type_fax')
-                                                            @slot('value', 'work')
+                                                            @slot('value', 'company')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('name', 'type_fax')
@@ -263,7 +263,7 @@
                                                                 @slot('text', 'Company')
                                                                 @slot('name', 'type_fax')
                                                                 @slot('id', 'type_fax')
-                                                                @slot('value', 'work')
+                                                                @slot('value', 'company')
                                                             @endcomponent
                                                             @component('frontend.common.input.radio')
                                                                 @slot('name', 'type_fax')
@@ -403,7 +403,7 @@
                                                             @slot('text', 'Company')
                                                             @slot('name', 'type_email')
                                                             @slot('id', 'type_email')
-                                                            @slot('value', 'work')
+                                                            @slot('value', 'company')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('name', 'type_email')
@@ -437,7 +437,7 @@
                                                             @slot('text', 'Company')
                                                             @slot('name', 'type_email')
                                                             @slot('id', 'type_email')
-                                                            @slot('value', 'work')
+                                                            @slot('value', 'company')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('name', 'type_email')

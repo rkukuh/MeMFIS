@@ -2,6 +2,11 @@
 let TaskCard = {
     init: function () {
         let taskcard_uuid = $('#uuid_taskcard').val();
+        function strtrunc(str, max, add) {
+            add = add || '...';
+            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+        };
+
         $('.instruction_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -64,20 +69,24 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'engineer_quantity',
-                    title: 'Engineer Quantity',
+                    field: 'description',
+                    title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
-                },
-                {
-                    field: 'helper_quantity',
-                    title: 'Helper Quantity',
-                    sortable: 'asc',
-                    filterable: !1,
+                    template: function (t) {
+                        if (t.description) {
+                            data = strtrunc(t.description, 50);
+                            return (
+                                '<p>' + data + '</p>'
+                            );
+                        }
+
+                        return ''
+                    }
                 },
                 {
                     field: 'is_rii',
-                    title: 'Rii?',
+                    title: 'RII',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
@@ -94,13 +103,6 @@ let TaskCard = {
 
                         return '<span class="m-badge ' + e[t.is_rii].class + ' m-badge--wide">' + e[t.is_rii].title + "</span>"
                     }
-
-                },
-                {
-                    field: 'performance_factor',
-                    title: 'Performance Factor',
-                    sortable: 'asc',
-                    filterable: !1,
                 },
                 {
                     field: 'sequence',
@@ -719,6 +721,7 @@ let TaskCard = {
                     document.getElementById('performa').value = data.performance_factor;
                     document.getElementById('helper_quantity').value = data.helper_quantity;
                     document.getElementById('engineer_quantity').value = data.engineer_quantity;
+                    document.getElementById('instuction_description').value = data.description;
                     document.getElementById('sequence').value = data.sequence;
                     document.getElementById('uuid').value = data.uuid;
                     if (data.is_rii == 1) {
@@ -782,6 +785,7 @@ let TaskCard = {
             let engineer_quantity = $('input[name=engineer_quantity]').val();
             let sequence = $('input[name=sequence]').val();
             let otr_certification = $('#otr_certification').val();
+            let description = $('#instuction_description').val();
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
             } else {
@@ -802,6 +806,7 @@ let TaskCard = {
                     engineer_quantity: engineer_quantity,
                     sequence: sequence,
                     skill_id: otr_certification,
+                    description:description,
                     is_rii: is_rii,
                 },
                 success: function (data) {
@@ -853,7 +858,7 @@ let TaskCard = {
                         // document.getElementById('quantity').value = quantity;
 
                     } else {
-                                        
+
 
                         toastr.success('Instruction has been created.', 'Success', {
                             timeOut: 5000
@@ -880,6 +885,7 @@ let TaskCard = {
             let engineer_quantity = $('input[name=engineer_quantity]').val();
             let sequence = $('input[name=sequence]').val();
             let otr_certification = $('#otr_certification').val();
+            let description = $('#instuction_description').val();
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
             } else {
@@ -901,6 +907,7 @@ let TaskCard = {
                     sequence: sequence,
                     skill_id: otr_certification,
                     is_rii: is_rii,
+                    description:description
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -1282,6 +1289,7 @@ $('.footer').on('click', '.add-taskcard', function () {
     data.append("repeat_amount", JSON.stringify(repeat_amount));
     data.append("category_id", $('#category').val());
     data.append("additionals",  internal_numberJSON);
+    data.append("document_library", JSON.stringify($('#document-library').val()));
     data.append("fileInput", document.getElementById('taskcard').files[0]);
     data.append('_method', 'PUT');
 

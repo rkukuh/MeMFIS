@@ -145,6 +145,7 @@ let TaskCard = {
             data.append( "description", $('#description').val());
             data.append( "scheduled_priority_id", $('#scheduled_priority_id').val());
             data.append( "scheduled_priority_type", $('input[name=prior_to]:checked').val());
+            data.append( "document_library", JSON.stringify($('#document-library').val()));
             if($('input[name=prior_to]:checked').val() == 'date'){
                 data.append( "scheduled_priority_text", $('#date').val());
             }

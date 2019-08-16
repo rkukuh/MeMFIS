@@ -96,7 +96,7 @@
                                                     @slot('text', 'Company Task Number')
                                                     @slot('name', 'company_number')
                                                     @if(isset($additionals))
-                                                    @slot('value', $additionals->internal_number)
+                                                        @slot('value', $additionals->internal_number)
                                                     @endif
                                                     @slot('id_error', 'company_number')
                                                 @endcomponent
@@ -443,14 +443,24 @@
                                                 Documents library @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Document')
-                                                @slot('id', 'document')
-                                                @slot('name', 'document')
-                                                @slot('multiple','multiple')
-                                                @slot('help_text','You can chose multiple value')
-                                                @slot('id_error', 'document')
-                                            @endcomponent
+                                            @php
+                                                $documens = json_decode($taskcard->document_library, TRUE);
+                                            @endphp
+
+                                            <select id="document-library" name="document-library" class="form-control m-select2" multiple style="width:100%">
+                                                <option value="">
+                                                    &mdash; Select a Document Library &mdash;
+                                                </option>
+
+                                                @if (isset($documens))
+                                                    @foreach ($documens as $document)
+                                                        <option selected>
+                                                            {{ $document }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+
+                                            </select>
 
                                         </div>
                                     </div>
@@ -859,37 +869,37 @@
         let taskcard_uuid = '{{$taskcard->uuid}}';
         $('.js-example-tags').select2();
         $(document).ready(function () {
-          var counterThresholds = {!! sizeof($taskcard->thresholds) !!};
-          var counterRepeats = {!! sizeof($taskcard->repeats) !!};
-          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
-          $("#addrow").on("click", function () {
-              var x = 1;
-              var newRow = $("<tr>");
-              var cols = "";
-              x = x+1;
-              cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
-              cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
-              cols += '<option value"">Select</option>';
-              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
-                  if(maintenanceCycles[i].id == 1){
-                  }else{
-                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
-                  }
-              };
-              cols += '</select></td>';
-              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
-              newRow.append(cols);
-              $("table.threshold").append(newRow);
-              $('.select').select2();
-              counterThresholds++;
-          });
-          $("table.threshold").on("click", ".ibtnDel", function (event) {
-              if (counterThresholds >= 1) {
-                  $(this).closest("tr").remove();
-                  counterThresholds -= 1
-              }
-          });
-          $("#addrow2").on("click", function () {
+            var counterThresholds = {!! sizeof($taskcard->thresholds) !!};
+            var counterRepeats = {!! sizeof($taskcard->repeats) !!};
+            var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+            $("#addrow").on("click", function () {
+                var x = 1;
+                var newRow = $("<tr>");
+                var cols = "";
+                x = x+1;
+                cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
+                cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
+                cols += '<option value"">Select</option>';
+                for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                    if(maintenanceCycles[i].id == 1){
+                    }else{
+                    cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                    }
+                };
+                cols += '</select></td>';
+                cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+                newRow.append(cols);
+                $("table.threshold").append(newRow);
+                $('.select').select2();
+                counterThresholds++;
+            });
+            $("table.threshold").on("click", ".ibtnDel", function (event) {
+                if (counterThresholds >= 1) {
+                    $(this).closest("tr").remove();
+                    counterThresholds -= 1
+                }
+            });
+            $("#addrow2").on("click", function () {
                 var x = 1;
                 var newRow = $("<tr>");
                 var cols = "";
@@ -961,9 +971,9 @@
 
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/document-library.js') }}"></script>
 
     <script src="{{ asset('js/frontend/taskcard/routine/edit.js') }}"></script>
 

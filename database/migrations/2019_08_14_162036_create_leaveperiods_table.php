@@ -13,7 +13,7 @@ class CreateLeaveperiodsTable extends Migration
      */
     public function up()
     {
-        Schema::create('leave_periods', function (Blueprint $table) {
+        Schema::create('leaveperiods', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
