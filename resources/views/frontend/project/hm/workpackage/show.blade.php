@@ -87,6 +87,7 @@
 @push('footer-scripts')
     <script>
         let workPackage_uuid = '{{ $workPackage->uuid }}';
+        let Project_uuid = '{{ $project->uuid }}';
     </script>
     <script src="{{ asset('js/frontend/project/hm/workpackage.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
