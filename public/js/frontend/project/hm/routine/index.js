@@ -209,7 +209,7 @@ let RoutineWorkpackage = {
                             ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
                         }
-                        else if(t.is_rii == 0){
+                        else if(t.is_rii == 0  || t.is_rii == null){
                             return (
                             '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
                             ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
@@ -435,7 +435,7 @@ let RoutineWorkpackage = {
                             ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
                         }
-                        else if(t.is_rii == 0){
+                        else if(t.is_rii == 0  || t.is_rii == null){
                             return (
                             '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
                             ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
@@ -662,7 +662,7 @@ let RoutineWorkpackage = {
                             ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
                         }
-                        else if(t.is_rii == 0){
+                        else if(t.is_rii == 0  || t.is_rii == null){
                             return (
                             '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
                             ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
