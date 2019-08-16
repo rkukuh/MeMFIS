@@ -229,7 +229,7 @@
                                                     Task Card Attachment @include('frontend.common.label.optional')
                                                 </label>
 
-                                                 @if (empty($taskcard->description))
+                                                @if (empty($taskCard->description))
                                                     @include('frontend.common.label.data-info-nodata')
                                                 @else
                                                     @component('frontend.common.buttons.show-file')
@@ -237,7 +237,26 @@
                                                         @slot('data_target', '#modal_showtaskcard')
                                                     @endcomponent
                                                     @include('frontend.task-card.modal')
-                                                 @endif
+                                                @endif
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Documents library @include('frontend.common.label.optional')
+                                                </label>
+
+                                                @if (empty($taskCard->document_library))
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @php
+                                                        $documents = json_decode($taskCard->document_library, TRUE);
+                                                    @endphp
+
+                                                    @foreach ($documents  as $document)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $document )
+                                                        @endcomponent
+                                                    @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">

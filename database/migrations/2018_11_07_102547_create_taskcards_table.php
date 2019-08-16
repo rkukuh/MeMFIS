@@ -33,6 +33,7 @@ class CreateTaskcardsTable extends Migration
             $table->integer('sequence')->nullable();
             $table->json('stringer')->nullable(); // for CPCP only
             $table->json('version')->nullable();
+            $table->json('document_library')->nullable();
             $table->string('ata')->nullable();
             $table->longText('description')->nullable();
             $table->json('additionals')->nullable();

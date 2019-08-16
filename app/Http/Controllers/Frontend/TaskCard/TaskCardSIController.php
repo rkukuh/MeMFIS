@@ -121,7 +121,9 @@ class TaskCardSIController extends Controller
     public function show(TaskCard $taskCard)
     {
         return view('frontend.task-card.nonroutine.si.show',[
-            'taskCard' => $taskCard
+            'taskCard' => $taskCard,
+            'additionals' => json_decode($taskCard->additionals)
+
         ]);
     }
 
@@ -146,6 +148,7 @@ class TaskCardSIController extends Controller
             'aircrafts' => $this->aircraft,
             'aircraft_taskcards' => $aircraft_taskcards,
             'MaintenanceCycles' => $this->maintenanceCycle,
+            'additionals' => json_decode($taskCard->additionals)
         ]);
     }
 

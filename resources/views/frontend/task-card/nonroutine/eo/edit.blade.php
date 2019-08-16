@@ -99,7 +99,9 @@
                                                         @slot('id', 'company_number')
                                                         @slot('text', 'Company Task Number')
                                                         @slot('name', 'company_number')
-                                                        @slot('value', json_decode($taskCard->additionals)->internal_number)
+                                                        @if(isset($additionals))
+                                                        @slot('value', $additionals->internal_number)
+                                                        @endif
                                                         @slot('id_error', 'company_number')
                                                     @endcomponent
                                                 @endif
@@ -222,14 +224,24 @@
                                                             Documents library @include('frontend.common.label.optional')
                                                         </label>
 
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('text', 'Document')
-                                                            @slot('id', 'document')
-                                                            @slot('name', 'document')
-                                                            @slot('multiple','multiple')
-                                                            @slot('help_text','You can chose multiple value')
-                                                            @slot('id_error', 'document')
-                                                        @endcomponent
+                                                        @php
+                                                            $documens = json_decode($taskCard->document_library, TRUE);
+                                                        @endphp
+
+                                                        <select id="document-library" name="document-library" class="form-control m-select2" multiple style="width:100%">
+                                                            <option value="">
+                                                                &mdash; Select a Document Library &mdash;
+                                                            </option>
+
+                                                            @if (isset($documens))
+                                                                @foreach ($documens as $document)
+                                                                    <option selected>
+                                                                        {{ $document }}
+                                                                    </option>
+                                                                @endforeach
+                                                            @endif
+
+                                                        </select>
 
                                                     </div>
                                                 </div>
@@ -423,7 +435,7 @@
                                                 </label>
 
                                                 <select id="recurrence_id" name="recurrence_id" class="form-control m-select2" style="width:100%">
-                                                     @if ( empty($taskCard->recurrence_id))
+                                                    @if ( empty($taskCard->recurrence_id))
                                                         @foreach ($recurrences as $recurrence)
                                                             <option value="{{ $recurrence->id }}" name-value="{{ $recurrence->name }}">
                                                                 {{ $recurrence->name }}
@@ -728,40 +740,40 @@
         }, false);
         $(document).ready(function () {
 
-          $(".js-example-tags").select2();
-          let counterThresholds = {!! sizeof($taskCard->thresholds) !!};
-          let counterRepeats = {!! sizeof($taskCard->repeats) !!};
+            $(".js-example-tags").select2();
+            let counterThresholds = {!! sizeof($taskCard->thresholds) !!};
+            let counterRepeats = {!! sizeof($taskCard->repeats) !!};
 
-          let maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
-          $("#addrow").on("click", function () {
-              let x = 1;
-              let newRow = $("<tr>");
-              let cols = "";
-              x = x+1;
-              cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
-              cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
-              cols += '<option value"">Select Threshold</option>';
-              for (let i = 0; i < (maintenanceCycles.length - 1); i++) {
-                  if(maintenanceCycles[i].id == 1){
-                  }else{
-                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
-                  }
-              };
-              cols += '</select></td>';
-              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
-              newRow.append(cols);
-              $("table.threshold").append(newRow);
-              $('.select').select2();
-              counterThresholds++;
-          });
-          $("table.threshold").on("click", ".ibtnDel", function (event) {
-              if (counterThresholds >= 1) {
-                  $(this).closest("tr").remove();
-                  counterThresholds -= 1
-              }
-          });
+            let maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+            $("#addrow").on("click", function () {
+                let x = 1;
+                let newRow = $("<tr>");
+                let cols = "";
+                x = x+1;
+                cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
+                cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
+                cols += '<option value"">Select Threshold</option>';
+                for (let i = 0; i < (maintenanceCycles.length - 1); i++) {
+                    if(maintenanceCycles[i].id == 1){
+                    }else{
+                    cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                    }
+                };
+                cols += '</select></td>';
+                cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+                newRow.append(cols);
+                $("table.threshold").append(newRow);
+                $('.select').select2();
+                counterThresholds++;
+            });
+            $("table.threshold").on("click", ".ibtnDel", function (event) {
+                if (counterThresholds >= 1) {
+                    $(this).closest("tr").remove();
+                    counterThresholds -= 1
+                }
+            });
 
-          $("#addrow2").on("click", function () {
+            $("#addrow2").on("click", function () {
                 let x = 1;
                 let newRow = $("<tr>");
                 let cols = "";
@@ -868,6 +880,8 @@
     <script src="{{ asset('js/frontend/functions/action-botton/eo-instruction.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/form-reset-instruction.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/form-reset-material.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/document-library.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
