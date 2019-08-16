@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.leave-types.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.leave-type.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Leave Types
                             </span>

@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Admin;
 
+use App\Models\BPJS;
 use App\Http\Controllers\Controller;
-use App\Models\Type;
-use Illuminate\Http\Request;
+use App\Http\Requests\Admin\BPJSStore;
+use App\Http\Requests\Admin\BPJSUpdate;
 
-class LeaveTypeController extends Controller
+class BPJSController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class LeaveTypeController extends Controller
      */
     public function index()
     {
-        return view('frontend.leave-types.index');
+        //
     }
 
     /**
@@ -25,16 +26,16 @@ class LeaveTypeController extends Controller
      */
     public function create()
     {
-        return view('frontend.leave-types.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Admin\BPJSStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BPJSStore $request)
     {
         //
     }
@@ -42,21 +43,21 @@ class LeaveTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Type  $type
+     * @param  \App\Models\BPJS  $bPJS
      * @return \Illuminate\Http\Response
      */
-    public function show(Type $type)
+    public function show(BPJS $bPJS)
     {
-        return view('frontend.leave-type.show',['type' => $type]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Type  $type
+     * @param  \App\Models\BPJS  $bPJS
      * @return \Illuminate\Http\Response
      */
-    public function edit(Type $type)
+    public function edit(BPJS $bPJS)
     {
         //
     }
@@ -64,11 +65,11 @@ class LeaveTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Type  $type
+     * @param  \App\Http\Requests\Admin\BPJSUpdate  $request
+     * @param  \App\Models\BPJS  $bPJS
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Type $type)
+    public function update(BPJSUpdate $request, BPJS $bPJS)
     {
         //
     }
@@ -76,10 +77,10 @@ class LeaveTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Type  $type
+     * @param  \App\Models\BPJS  $bPJS
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Type $type)
+    public function destroy(BPJS $bPJS)
     {
         //
     }
