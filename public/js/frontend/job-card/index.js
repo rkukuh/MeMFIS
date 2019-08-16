@@ -48,8 +48,12 @@ let JobCard = {
                 }
             },
             columns: [
-              
                 {
+                    field: 'quotation.project.code',
+                    title: 'Project No',
+                    sortable: 'asc',
+                    filterable: !1,
+                },{
                     field: 'number',
                     title: 'JC No.',
                     sortable: 'asc',
@@ -208,7 +212,7 @@ let JobCard = {
             },
             columns: [
                 {
-                    field: 'quotation_id',
+                    field: 'quotation.project.code',
                     title: 'Project No',
                     sortable: 'asc',
                     filterable: !1,
