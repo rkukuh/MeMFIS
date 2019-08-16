@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.position.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.position.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Benefits
                             </span>
@@ -50,6 +50,13 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
+
+                                @component('frontend.common.input.hidden')
+                                @slot('id', 'position_uuid')
+                                @slot('name', 'position_uuid')
+                                @slot('value', $uuid)
+                                @endcomponent
+
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
@@ -61,82 +68,69 @@
                                                     <td width="25%" align="center"><b>Min</b></td>
                                                     <td width="25%" align="center"><b>Max</b></td>
                                                 </tr>
+                                                @foreach ($benefit as $b)
+                                                @if (in_array($b->name, $search))
+                                                @php
+                                                $key = array_search($b->name, $search)    
+                                                @endphp
                                                 <tr>
                                                     <td align="center" style="padding-top:25px;">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', 'check')
+                                                            @slot('id', str_replace(' ', '', $b->name))
                                                             @slot('name', 'check')
+                                                            @slot('checked','checked')
+                                                            @slot('value', $b->uuid)
+                                                            @slot('onclik','checkboxFunction(this.id)')
+                                                            @slot('id_error', str_replace(' ', '', $b->name))
                                                         @endcomponent
-                                                    </div>
                                                     </td>
-                                                    <td style="padding-top:30px;"><b>Position Related</b></td>
+                                                <td style="padding-top:30px;"><b>{{ $b->name }}</b></td>
                                                     <td>
                                                         @component('frontend.common.input.number')
-                                                            @slot('text', 'Min')
                                                             @slot('name', 'position_min')
-                                                            @slot('id', 'position_min')
-                                                            @slot('id_error', 'position_min')
+                                                            @slot('id', str_replace(' ', '', $b->name).'_min')
+                                                            @slot('value', $min[$key])
+                                                            @slot('id_error', str_replace(' ', '', $b->name).'_min')
                                                         @endcomponent
                                                     </td>
                                                     <td>
                                                         @component('frontend.common.input.number')
-                                                            @slot('text', 'Max')
                                                             @slot('name', 'position_max')
-                                                            @slot('id', 'position_max')
-                                                            @slot('id_error', 'position_max')
+                                                            @slot('id', str_replace(' ', '', $b->name).'_max')
+                                                            @slot('value', $max[$key])
+                                                            @slot('id_error', str_replace(' ', '', $b->name).'_max')
                                                         @endcomponent
                                                     </td>
-                                                </tr>
+                                                </tr>  
+                                                @else
                                                 <tr>
                                                     <td align="center" style="padding-top:25px;">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', 'check')
+                                                            @slot('id', str_replace(' ', '', $b->name))
                                                             @slot('name', 'check')
+                                                            @slot('value', $b->uuid)
+                                                            @slot('onclik','checkboxFunction(this.id)')
+                                                            @slot('id_error', str_replace(' ', '', $b->name))
                                                         @endcomponent
                                                     </td>
-                                                    <td style="padding-top:30px;"><b>Meal</b></td>
+                                                <td style="padding-top:30px;"><b>{{ $b->name }}</b></td>
                                                     <td>
                                                         @component('frontend.common.input.number')
-                                                            @slot('text', 'Min')
-                                                            @slot('name', 'meal_min')
-                                                            @slot('id', 'meal_min')
-                                                            @slot('id_error', 'meal_min')
+                                                            @slot('name', 'position_min')
+                                                            @slot('id', str_replace(' ', '', $b->name).'_min')
+                                                            @slot('id_error', str_replace(' ', '', $b->name).'_min')
                                                         @endcomponent
                                                     </td>
                                                     <td>
                                                         @component('frontend.common.input.number')
-                                                            @slot('text', 'Max')
-                                                            @slot('name', 'meal_max')
-                                                            @slot('id', 'meal_max')
-                                                            @slot('id_error', 'meal_max')
+                                                            @slot('name', 'position_max')
+                                                            @slot('id', str_replace(' ', '', $b->name).'_max')
+                                                            @slot('id_error', str_replace(' ', '', $b->name).'_max')
                                                         @endcomponent
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td align="center" style="padding-top:25px;">
-                                                        @component('frontend.common.input.checkbox')
-                                                            @slot('id', 'check')
-                                                            @slot('name', 'check')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td style="padding-top:30px;"><b>Overtime</b></td>
-                                                    <td>
-                                                        @component('frontend.common.input.number')
-                                                            @slot('text', 'min')
-                                                            @slot('name', 'overtime_min')
-                                                            @slot('id', 'overtime_min')
-                                                            @slot('id_error', 'overtime_min')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td>
-                                                        @component('frontend.common.input.number')
-                                                            @slot('text', 'max')
-                                                            @slot('name', 'overtime_max')
-                                                            @slot('id', 'overtime_max')
-                                                            @slot('id_error', 'overtime_max')
-                                                        @endcomponent
-                                                    </td>
-                                                </tr>
+                                                @endif
+                                                @endforeach
                                             </table>
                                         </div>
                                     </div>
@@ -146,8 +140,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-benefit')
-                                                        @slot('class', 'add-benefit')
+                                                        @slot('id', 'update-benefit')
+                                                        @slot('class', 'update-benefit')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -168,3 +162,7 @@
         </div>
     </div>
 @endsection
+
+@push('footer-scripts')
+<script src="{{ asset('js/frontend/position/update_benefit_edit.js')}}"></script>
+@endpush

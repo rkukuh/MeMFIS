@@ -171,12 +171,40 @@ class ProjectHMAdditionalController extends Controller
      */
     public function summary(Project $project)
     {
-        $defectcard =  DefectCard::where('project_additional_id', $project->id)->get();
-        $total_defectcard = $defectcard->count();
-        $total_estimation_manhours = $defectcard->sum('estimation_manhour');
+        $skills = $subset = [];
+
+        $eri = 0;
+        
+        $defectcards =  DefectCard::where('project_additional_id', $project->id)->get();
+
+        foreach($defectcards as $defectcard){
+            if (sizeof($defectcard->skills) > 1) {
+                $eri++;
+            }else{
+                $result = $defectcard->skills->map(function ($skills) {
+                    return collect($skills->toArray())
+                    ->only(['code'])
+                    ->all();
+                });
+                
+                array_push($subset , $result);
+            }
+        }
+        
+        foreach ($subset as $value) {
+            foreach($value as $skill){
+                array_push($skills, $skill["code"]);
+            }
+        }
+        
+        $otr = array_count_values($skills);
+        $otr["eri"] = $eri;
+        $total_defectcard = $defectcards->count();
+        $total_estimation_manhours = $defectcards->sum('estimation_manhour');
         return view('frontend.project.hm-additional.summary',[
             'project' => $project,
-            'total_defectcard' => $total_defectcard,
+            'total_defectcard' => $total_defectcard,            
+            'otr' => $otr,
             'total_estimation_manhours' => $total_estimation_manhours,
         ]);
 

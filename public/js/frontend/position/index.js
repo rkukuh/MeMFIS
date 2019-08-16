@@ -6,7 +6,7 @@ let Position = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer',
+                        url: '/datatables/position',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -42,55 +42,41 @@ let Position = {
                 }
             },
             columns: [{
-                    field: 'name',
+                    field: 'code',
                     title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/customer/'+t.uuid+'">' + t.name + "</a>"
+                        return '<a href="/position/'+t.uuid+'">' + t.code + "</a>"
                     }
                 },
                 {
-                    field: 'addresses',
+                    field: 'name',
                     title: 'Position Name',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if(t.addresses[0]){
-                            return t.addresses[0].address
-                        }else{
-                            return ""
+                },
+                    {
+                        field: 'description',
+                        title: 'Description',
+                        sortable: 'asc',
+                        filterable: !1,
+                    },
+                    {
+                        field: 'Actions',
+                        sortable: !1,
+                        overflow: 'visible',
+                        template: function (t, e, i) {
+                            return (
+                                '<a href="/position/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                    '<i class="la la-pencil"></i>' +
+                                '</a>' +
+                                '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
+                                t.uuid +
+                                ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                            );
                         }
                     }
-                },
-                {
-                    field: 'phones',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if(t.phones[0]){
-                            return t.phones[0].number
-                        }else{
-                            return ""
-                        }
-                    }
-                },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="/customer/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.uuid +
-                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
-                        );
-                    }
-                }
             ]
         });
 
@@ -113,7 +99,7 @@ let Position = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/customer/' + triggerid + '',
+                        url: '/position/' + triggerid + '',
                         success: function (data) {
                             toastr.success('Position has been deleted.', 'Deleted', {
                                 timeOut: 5000

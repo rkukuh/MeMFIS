@@ -47,6 +47,8 @@ class DummyDataSeeder extends Seeder
         $this->call(Departments::class);
         $this->call(Benefits::class);
         $this->call(Positions::class);
+        $this->call(LeaveTypes::class);
+        $this->call(LeavePeriods::class);
 
         /** POLYMORPH */
 

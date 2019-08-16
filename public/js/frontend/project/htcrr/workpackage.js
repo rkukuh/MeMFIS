@@ -1,18 +1,5 @@
 
 
-$('.nav-item').on('click','#engineer_team_tab',function() {
-    if(anyChanges){
-        let csrf = $('meta[name="csrf-token"]').attr('content');
-        // let url = '/project-hm/' + project_uuid  + '/workpackage/' + workPackage_uuid+'/edit';
-        let form = $('<form action="' + url + '" method="GET">' +
-        '<input type="hidden" name="anyChanges" value="' + anyChanges + '" />' +
-        '<input name="_token" value="'+csrf+'" type="hidden">' +
-        '</form>');
-        $('body').append(form);
-        form.submit();
-    }
-});
-
 let Workpackage = {
     init: function () {
         $('.ht_crr_datatable').mDatatable({
@@ -384,6 +371,8 @@ let Workpackage = {
 
                         table.originalDataSet = [];
                         table.reload();
+                        anyChanges = true;
+
                         $('#modal_ht_crr').modal('hide');
                         $('.btn-success').removeClass('edit-htcrr');
                         $('.btn-success').addClass('add-htcrr');
@@ -522,7 +511,7 @@ function htcrr_tool(triggeruuid) {
         let unit_tool = $('#unit_tool').val();
         let quantity = $('input[name=quantity]').val();
         let remark_tool = $('#remark_tool').val();
-
+        
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -736,6 +725,7 @@ function htcrr_material(triggeruuid) {
                           timeOut: 5000
                       }
                   );
+                  anyChanges = true;
 
                   $('#m_datatable_material_htcrr').DataTable().ajax.reload();
 
@@ -757,7 +747,7 @@ function htcrr_material(triggeruuid) {
         $('#add_material_modal').modal('show');
     });
 
-
+    
 
 };
 
@@ -765,3 +755,35 @@ jQuery(document).ready(function () {
     Workpackage.init();
 });
 
+$('.m_taskcard_htcrr').on('click', function () {
+    let table = $('.ht_crr_datatable').mDatatable();
+
+    table.originalDataSet = [];
+    table.reload();
+});
+
+$('.m_tabs_manhour').on('click', function () {
+    if(anyChanges){
+        $.ajax({
+        url: "/project-htcrr/"+Project_uuid+"/getManhours",
+        method: "get",
+        success: function(dataFetched){
+            $('#total_mhrs').html(dataFetched.total_mhrs);
+            $('#total').html(dataFetched.mhrs_pfrm_factor);
+        },
+        });
+    }
+});
+
+$('.m_tabs_enginner').on('click', function () {
+    if(anyChanges){
+        let csrf = $('meta[name="csrf-token"]').attr('content');
+        let url = '/project-htcrr/' + project_uuid  + '/project-htcrr/create';
+        let form = $('<form action="' + url + '" method="GET">' +
+        '<input type="hidden" name="anyChanges" value="' + anyChanges + '" />' +
+        '<input name="_token" value="'+csrf+'" type="hidden">' +
+        '</form>');
+        $('body').append(form);
+        form.submit();
+    }
+});

@@ -99,6 +99,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <input type="hidden" id="customer_uuid" name="customer_uuid" value="{{ $project->customer->uuid }}">
                                                 <div class="m-portlet__body">
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="m_tabs_6_1" role="tabpanel">
@@ -110,9 +111,10 @@
                                                                         </label>
 
                                                                         @component('frontend.common.label.data-info')
-                                                                            @slot('text', 'XXX')
+                                                                            @slot('text', $project->customer->name)
                                                                             @slot('id', 'name')
                                                                         @endcomponent
+
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group m-form__group row">
@@ -122,10 +124,9 @@
                                                                         </label>
 
                                                                         @component('frontend.common.input.select2')
-                                                                            @slot('text', 'Bp. Romdani')
-                                                                            @slot('id', 'attention')
-                                                                            @slot('name', 'attention')
-                                                                        @endcomponent
+                                                                                @slot('id', 'attention')
+                                                                                @slot('name', 'attention')
+                                                                            @endcomponent
                                                                     </div>
                                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                                         <label class="form-control-label">
@@ -133,7 +134,7 @@
                                                                         </label>
 
                                                                         @component('frontend.common.label.data-info')
-                                                                            @slot('text', 'XXX')
+                                                                            @slot('text', $project->customer->levels->last()->name)
                                                                             @slot('id', 'level')
                                                                         @endcomponent
                                                                     </div>
@@ -148,9 +149,10 @@
                                                                             Phone
                                                                         </label>
 
-                                                                        @component('frontend.common.label.data-info')
-                                                                            @slot('text', 'XXX')
+                                                                        @component('frontend.common.input.select2')
+                                                                            @slot('text', '+62xxxxxxx / 07777777')
                                                                             @slot('id', 'phone')
+                                                                            @slot('name', 'phone')
                                                                         @endcomponent
                                                                     </div>
                                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -158,9 +160,10 @@
                                                                             Fax
                                                                         </label>
 
-                                                                        @component('frontend.common.label.data-info')
-                                                                            @slot('text', 'XXX')
+                                                                        @component('frontend.common.input.select2')
+                                                                            @slot('text', '+62xxxxxxx / 07777777')
                                                                             @slot('id', 'fax')
+                                                                            @slot('name', 'fax')
                                                                         @endcomponent
                                                                     </div>
                                                                 </div>
@@ -170,9 +173,10 @@
                                                                             Email
                                                                         </label>
 
-                                                                        @component('frontend.common.label.data-info')
-                                                                            @slot('text', 'XXX')
+                                                                        @component('frontend.common.input.select2')
+                                                                            @slot('text', 'example@email.com')
                                                                             @slot('id', 'email')
+                                                                            @slot('name', 'email')
                                                                         @endcomponent
                                                                     </div>
                                                                 </div>
@@ -186,13 +190,14 @@
                                                                             Address
                                                                         </label>
 
-                                                                        @component('frontend.common.label.data-info')
-                                                                            @slot('text', 'XXX')
-                                                                            @slot('id', 'name')
+                                                                        @component('frontend.common.input.select2')
+                                                                            @slot('text', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, nulla odio consequuntur obcaecati eos error recusandae minima eveniet dolor sed tempora! Ut quidem illum accusantium expedita nulla eos reprehenderit officiis?')
+                                                                            @slot('id', 'address')
+                                                                            @slot('name', 'address')
                                                                         @endcomponent
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group m-form__group row">
+                                                                <div class="form-group m-form__group row hidden">
                                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                                         <label class="form-control-label">
                                                                             City
@@ -286,7 +291,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Subject Quotation
+                                                Quotation Title
                                             </label>
 
                                             @component('frontend.common.input.textarea')
@@ -295,6 +300,21 @@
                                                 @slot('name', 'title')
                                                 @slot('text', 'Title')
                                                 @slot('id_error', 'title')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Description @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '5')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('text', 'Description')
+                                                @slot('id_error', 'description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -309,10 +329,9 @@
                                                                 <label class="form-control-label">
                                                                     Scheduled Payment Type
                                                                 </label>
-                                                                <select id="scheduled_payment_type" name="scheduled_payment_type" class="form-control">
-                                                                    <option value="">
-                                                                        Select a schedule payment
-                                                                    </option>
+                                                                <select name="scheduled_payment_type" id="scheduled_payment_type" class="form-control m-select2">
+                                                                    <option value="59">By Date</option>
+                                                                    <option value="60">By Project Progress</option>
                                                                 </select>
                                                             </div>
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -324,10 +343,12 @@
                                                                         <div class="form-group m-form__group row">
                                                                             <div class="col-sm-8 col-md-8 col-lg-8">
                                                                                 @component('frontend.common.input.text')
-                                                                                @slot('name', 'scheduled_payment')
-                                                                                @slot('id', 'scheduled_payment')
-                                                                                @slot('text', 'Phone')
-                                                                                @slot('id_error', 'scheduled_payment_amount')
+                                                                                    @slot('id', 'scheduled_payment')
+                                                                                    @slot('name', 'scheduled_payment')
+                                                                                    @slot('class','scheduledPayment')
+                                                                                    @slot('autocomplete', 'off')
+                                                                                    @slot('text', 'Phone')
+                                                                                    @slot('id_error', 'scheduled_payment_amount')
                                                                                 @endcomponent
                                                                             </div>
                                                                             <div class="col-sm-2 col-md-2 col-lg-2">
@@ -487,9 +508,16 @@
     <script src="{{ asset('js/frontend/quotation/additional/create.js')}}"></script>
     {{-- <script src="{{ asset('js/frontend/quotation/additional/summary.js') }}"></script> --}}
 
-    <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/phone.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/email.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/fax.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/address.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/charge-type.js') }}"></script>
+    
 
     <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>

@@ -867,6 +867,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/repeat-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/action-botton/eo-instruction.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/form-reset-instruction.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/form-reset-material.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>

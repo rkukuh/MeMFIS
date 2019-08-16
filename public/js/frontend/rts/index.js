@@ -46,6 +46,13 @@ let TaskCard = {
                 }
             },
             columns: [
+                {
+                    field: '',
+                    title: 'No Project',
+                    sortable: 'asc',
+                    filterable: !1,
+
+                },
 
                 {
                     field: 'created_at',

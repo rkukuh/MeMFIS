@@ -273,7 +273,11 @@
                                     <div class="action-buttons d-flex flex-row-reverse">
                                         <form class="ml-2" method="POST" action="{{route('frontend.discrepancy.jobcard.mechanic.discrepancy.create',$jobcard->uuid)}}">
                                             {!! csrf_field() !!}
-                                            @include('frontend.common.buttons.found')
+                                            @component('frontend.common.buttons.found')
+                                                @if(sizeOf($jobcard->defectcards) > 0)
+                                                    @slot('disabled','disabled')
+                                                @endif
+                                            @endcomponent
                                         </form>
 
                                         @include('frontend.job-card.mechanic.modal-close')

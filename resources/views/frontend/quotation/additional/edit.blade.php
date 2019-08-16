@@ -303,6 +303,22 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Description @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '5')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('text', 'Description')
+                                                @slot('value', $quotation->description)
+                                                @slot('id_error', 'description')
+                                            @endcomponent
+                                        </div>
+                                    </div>
                                     <div class="form-group m-form__group row mb-0">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <fieldset class="border p-2">
@@ -414,13 +430,13 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <ul class="nav nav-tabs" role="tablist">
                                                 <li class="nav-item">
-                                                    <a class="nav-link active show routine" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Defect Card List</a>
+                                                    <a class="nav-link active show defectcard" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Defect Card List</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_2">Material(s) & Tool List(s)</a>
+                                                    <a class="nav-link items" data-toggle="tab" href="#m_tabs_1_2">Material(s) & Tool List(s)</a>
                                                 </li>
                                                 <li class="nav-item">
-                                                    <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_3">Summary</a>
+                                                    <a class="nav-link summary" data-toggle="tab" href="#m_tabs_1_3">Summary</a>
                                                 </li>
                                             </ul>
                                             <div class="tab-content">
@@ -442,8 +458,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.update')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-workpackage')
-                                                        @slot('class', 'add-workpackage')
+                                                        @slot('id', 'update-quotation')
+                                                        @slot('class', 'update-quotation')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')

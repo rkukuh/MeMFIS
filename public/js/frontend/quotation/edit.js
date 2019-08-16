@@ -18,7 +18,7 @@ function calculate_total() {
     if(currency !== 1){
         grandTotalRupiah = ( parseFloat(subTotal) - parseFloat(total_discount) + parseFloat(arrSum(value)) ) * exchange_rate;
     }
-                
+
     $('#grand_total').attr("value", grandTotal);
     $('#grand_total_rupiah').attr("value", grandTotalRupiah);
     $('#grand_total').html(ForeignFormatter.format(grandTotal));
@@ -53,35 +53,6 @@ let Quotation = {
             }
         });
 
-        let edit = $(".m_datatable").on("click", ".edit", function () {
-            $("#button").show();
-            $("#simpan").text("Perbarui");
-
-            let triggerid = $(this).data("id");
-
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-                },
-                type: "get",
-                url: "/category/" + triggerid + "/edit",
-                success: function (data) {
-                    document.getElementById("id").value = data.id;
-                    document.getElementById("name").value = data.name;
-
-                    $(".btn-success").addClass("update");
-                    $(".btn-success").removeClass("add");
-                },
-                error: function (jqXhr, json, errorThrown) {
-                    let errorsHtml = "";
-                    let errors = jqXhr.responseJSON;
-
-                    $.each(errors.errors, function (index, value) {
-                        $("#kategori-error").html(value);
-                    });
-                }
-            });
-        });
 
         let workpackage_datatables_init = true;
         $(document).ready(function () {
@@ -125,8 +96,7 @@ let Quotation = {
                 dataType: "json",
                 success: function (response) {
                     if (response) {
-                        // let res = JSON.parse(response);
-                        let res = response;
+                        let res = JSON.parse(response.attention);
                         $('select[name="attention"]').empty();
                         $('select[name="phone"]').empty();
                         $('select[name="email"]').empty();
@@ -167,12 +137,12 @@ let Quotation = {
                                 );
                             }
                             if (res[i].address) {
-                                $('select[name="attention"]').append(
+                                $('select[name="address"]').append(
                                     '<option value="' + res[i].address + '">' + res[i].address + '</option>'
                                 );
                             }
                             if (res[i].fax) {
-                                $('select[name="attention"]').append(
+                                $('select[name="fax"]').append(
                                     '<option value="' + res[i].fax + '">' + res[i].fax + '</option>'
                                 );
                             }
@@ -207,7 +177,7 @@ let Quotation = {
             calculate_total();
         });
 
-        
+
 
         $('.action-buttons').on('click', '.discount', function () {
             let type = $('#discount-type').val();
@@ -260,15 +230,15 @@ let Quotation = {
             workpackage.reload();
         });
 
-       
-          
+
+
         $('.nav-tabs').on('click', '.summary', function () {
 
             let summary = $('.summary_datatable').mDatatable();
 
             summary.originalDataSet = [];
             summary.reload();
-            
+
             let value = [];
             let inputs = $(".charges");
             let currency = $("#currency").val();
@@ -285,7 +255,7 @@ let Quotation = {
             if(currency !== 1){
                 grandTotalRupiah = ( parseInt(subTotal) + parseInt(arrSum(value)) ) * exchange_rate;
             }
-                        
+
             $('#grand_total').attr("value", grandTotal);
             $('#grand_total_rupiah').attr("value", grandTotalRupiah);
             $('#grand_total').html("$ "+ForeignFormatter.format(grandTotal));
@@ -413,7 +383,7 @@ let Quotation = {
                 });
             }
         });
-        
+
         $('.footer').on('click', '.add-quotation', function () {
             let is_ppn =  $('#is_ppn').prop("checked");
             let ppn = 0;

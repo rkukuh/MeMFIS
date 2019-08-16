@@ -56,7 +56,7 @@ let DefectCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="/defectcard-engineer/'+t.uuid+'/">' + t.code + "</a>"
+                            return '<a href="/defectcard/'+t.uuid+'/">' + t.code + "</a>"
                     }
                 },
                 {
@@ -114,7 +114,7 @@ let DefectCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'actual_manhour',
+                    field: 'actual',
                     title: 'Actual Mhrs.',
                     sortable: 'asc',
                     filterable: !1,
@@ -195,7 +195,7 @@ let DefectCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="/defectcard-engineer/'+t.uuid+'/edit ">' + t.code + "</a>"
+                            return '<a href="/defectcard/'+t.uuid+'/edit ">' + t.code + "</a>"
                     }
                 },
                 {
@@ -253,7 +253,7 @@ let DefectCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'actual_manhour',
+                    field: 'actual',
                     title: 'Actual Mhrs.',
                     sortable: 'asc',
                     filterable: !1,

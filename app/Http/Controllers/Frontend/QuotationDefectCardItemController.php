@@ -57,9 +57,9 @@ class QuotationDefectCardItemController extends Controller
      * @param  \App\Models\QuotationDefectCardItem  $quotationDefectCardItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(QuotationDefectCardItem $quotationDefectCardItem)
+    public function edit(QuotationDefectCardItem $qtn_defectcard_item)
     {
-        //
+        return response()->json($qtn_defectcard_item);
     }
 
     /**
@@ -69,9 +69,14 @@ class QuotationDefectCardItemController extends Controller
      * @param  \App\Models\QuotationDefectCardItem  $quotationDefectCardItem
      * @return \Illuminate\Http\Response
      */
-    public function update(QuotationDefectCardItemUpdate $request, QuotationDefectCardItem $quotationDefectCardItem)
+    public function update(QuotationDefectCardItemUpdate $request, QuotationDefectCardItem $qtn_defectcard_item)
     {
-        //
+        $request->merge(['subtotal' => $request->quantity*$request->price_amount]);
+
+        $qtn_defectcard_item->update($request->all());
+
+        return response()->json($qtn_defectcard_item);
+
     }
 
     /**

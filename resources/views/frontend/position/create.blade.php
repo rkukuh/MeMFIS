@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.position.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.position.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Position
                             </span>
@@ -57,10 +57,9 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Position')
-                                                @slot('id', 'position')
-                                                @slot('name', 'position')
-                                                @slot('id_error', 'position')
+                                                @slot('id', 'code')
+                                                @slot('name', 'code')
+                                                @slot('id_error', 'code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -69,10 +68,9 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Position Name')
-                                                @slot('id', 'position_name')
-                                                @slot('name', 'position_name')
-                                                @slot('id_error', 'position_name')
+                                                @slot('id', 'name')
+                                                @slot('name', 'name')
+                                                @slot('id_error', 'name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -86,7 +84,6 @@
                                                 @slot('rows', '5')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
-                                                @slot('text', 'Description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -106,195 +103,6 @@
 
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <fieldset class="border p-2">
-                                                <legend class="w-auto">Benefits</legend>
-                                                <div class="form-group m-form__group row px-5">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                            <div class="m-portlet">
-                                                                <div class="m-portlet__head">
-                                                                    <div class="m-portlet__head-caption">
-                                                                        <div class="m-portlet__head-title">
-                                                                            <span class="m-portlet__head-icon m--hide">
-                                                                                <i class="la la-gear"></i>
-                                                                            </span>
-                
-                                                                            <h3 class="m-portlet__head-text">
-                                                                                Current
-                                                                            </h3>
-                                                                            
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="m-portlet m-portlet--mobile">
-                                                                    <div class="m-portlet__body">
-                                                                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                                                            <div class="row align-items-center">
-                                                                                <div class="col-xl-8 order-2 order-xl-1">
-                                                                                    <div class="form-group m-form__group row align-items-center">
-                                                                                        <div class="col-md-4">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                                                    @component('frontend.common.buttons.create')
-                                                                                        @slot('text', 'Update')
-                                                                                        @slot('href', route('frontend.hr.position.update-benefit') )
-                                                                                    @endcomponent
-                                    
-                                            
-                                                                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group m-form__group row">
-                                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
-                                                                                    <tr>
-                                                                                        <td align="center" width="34%"><b>Allowance</b></td>
-                                                                                        <td align="center" width="33%"><b>Minimum</b></td>
-                                                                                        <td align="center" width="33%"><b>Maximum</b></td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Position</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Meal</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Overtime</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                </table>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                    </div>
-                                                </div>  
-                                                <div class="form-group m-form__group row px-5">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                            <div class="m-portlet">
-                                                                <div class="m-portlet__head">
-                                                                    <div class="m-portlet__head-caption">
-                                                                        <div class="m-portlet__head-title">
-                                                                            <span class="m-portlet__head-icon m--hide">
-                                                                                <i class="la la-gear"></i>
-                                                                            </span>
-                
-                                                                            <h3 class="m-portlet__head-text">
-                                                                                History
-                                                                            </h3>
-                                                                            
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="m-portlet m-portlet--mobile">
-                                                                    <div class="m-portlet__body">
-                                                                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                                                            <div class="row align-items-center">
-                                                                                <div class="col-xl-8 order-2 order-xl-1">
-                                                                                    <div class="form-group m-form__group row align-items-center">
-                                                                                        <div class="col-md-4">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                                                  
-                                                                                    <h3 class="m-portlet__head-text">
-                                                                                        10 Juli - 31 Juli 2019
-                                                                                    </h3>
-                                
-                                                                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group m-form__group row">
-                                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
-                                                                                    <tr>
-                                                                                        <td align="center" width="34%"><b>Allowance</b></td>
-                                                                                        <td align="center" width="33%"><b>Minimum</b></td>
-                                                                                        <td align="center" width="33%"><b>Maximum</b></td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Position</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Meal</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Overtime</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                </table>
-                                                                            </div>
-                                                                        </div>
-                                                                        <hr>
-                                                                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                                                            <div class="row align-items-center">
-                                                                                <div class="col-xl-8 order-2 order-xl-1">
-                                                                                    <div class="form-group m-form__group row align-items-center">
-                                                                                        <div class="col-md-4">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                                                  
-                                                                                    <h3 class="m-portlet__head-text">
-                                                                                        15 Juni - 09 Juli 2019
-                                                                                    </h3>
-                                
-                                                                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group m-form__group row">
-                                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
-                                                                                    <tr>
-                                                                                        <td align="center" width="34%"><b>Allowance</b></td>
-                                                                                        <td align="center" width="33%"><b>Minimum</b></td>
-                                                                                        <td align="center" width="33%"><b>Maximum</b></td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Position</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Meal</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Overtime</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                </table>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                    </div>
-                                                </div>  
-                                            </fieldset>
                                         </div>
                                     </div>
                                 </div>
@@ -324,5 +132,6 @@
 @endpush
 
 @push('footer-scripts')
-
+    <script src="{{ asset('js/frontend/position/create.js')}}"></script>
 @endpush
+

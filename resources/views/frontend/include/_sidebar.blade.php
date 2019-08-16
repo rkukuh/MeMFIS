@@ -255,6 +255,16 @@
                                 </span>
                             </a>
                         </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    Mechanic
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -413,7 +423,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.hr.position.index') }}" class="m-menu__link m-menu__toggle">
+                <a href="{{ route('frontend.position.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Potition
@@ -421,18 +431,18 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.hr.time-off-period.index') }}" class="m-menu__link m-menu__toggle">
+                <a href="{{ route('frontend.hr.leave-period.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Time-OFF Period
+                        Leave Period
                     </span>
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.hr.time-off-types.index') }}" class="m-menu__link m-menu__toggle">
+                <a href="{{ route('frontend.hr.leave-types.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Time-OFF Types
+                        Leave Types
                     </span>
                 </a>
             </li>
@@ -441,6 +451,14 @@
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                        Event/Holidays
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.hr.workshift-schedule.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                       Workshift Schedule
                     </span>
                 </a>
             </li>
@@ -681,13 +699,7 @@
                 </div>
             </li>
             <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="#" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Print Out
-                    </span>
-                    <i class="m-menu__ver-arrow la la-angle-right"></i>
-                </a>
+               
                 <div class="m-menu__submenu">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">

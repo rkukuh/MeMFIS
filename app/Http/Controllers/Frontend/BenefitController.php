@@ -27,7 +27,7 @@ class BenefitController extends Controller
      */
     public function create()
     {
-        return view('frontend.benefit.create');
+        return view('frontend.benefit.benefit.create');
     }
 
     /**
@@ -88,7 +88,7 @@ class BenefitController extends Controller
         }else{
             $prorate_calculation = $prorate_calculation->name;
         }
-        return view('frontend.benefit.show',['benefit' => $benefit,'base' => $base_calculation,'prorate' => $prorate_calculation]);
+        return view('frontend.benefit.benefit.show',['benefit' => $benefit,'base' => $base_calculation,'prorate' => $prorate_calculation]);
     }
 
     /**

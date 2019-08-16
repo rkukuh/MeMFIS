@@ -60,11 +60,12 @@ Route::name('frontend.')->group(function () {
         Route::resource('manhour', 'ManhourController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
-
+        Route::resource('leave-period','LeavePeriodController');
+        Route::resource('leave-type','LeaveTypeController');
         Route::resource('company', 'CompanyController');
         Route::resource('department', 'DepartmentController');
         Route::resource('benefit', 'BenefitController');
-        Route::resource('position', 'PositionController');
+        
 
         /** CERTIFICATION */
 
@@ -162,27 +163,18 @@ Route::name('frontend.')->group(function () {
         Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
         Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
 
-        /** Position */
+        /** leave Period */
 
-        Route::view('hr/position', 'frontend.position.index')->name('hr.position.index');
-        Route::view('hr/position/create', 'frontend.position.create')->name('hr.position.create');
-        Route::view('hr/position/edit', 'frontend.position.edit')->name('hr.position.edit');
-        Route::view('hr/position/show', 'frontend.position.show')->name('hr.position.show');
-        Route::view('hr/position/update-benefit', 'frontend.position.update-benefit')->name('hr.position.update-benefit');
+        Route::view('hr/leave-period', 'frontend.leave-period.index')->name('hr.leave-period.index');
+        Route::view('hr/leave-period/create', 'frontend.leave-period.create')->name('hr.leave-period.create');
+        Route::view('hr/leave-period/show', 'frontend.leave-period.show')->name('hr.leave-period.show');
 
 
-        /** Time-OFF Period */
+        /** leave Types */
 
-        Route::view('hr/time-off-period', 'frontend.time-off-period.index')->name('hr.time-off-period.index');
-        Route::view('hr/time-off-period/create', 'frontend.time-off-period.create')->name('hr.time-off-period.create');
-        Route::view('hr/time-off-period/show', 'frontend.time-off-period.show')->name('hr.time-off-period.show');
-
-
-        /** Time-OFF Types */
-
-        Route::view('hr/time-off-types', 'frontend.time-off-types.index')->name('hr.time-off-types.index');
-        Route::view('hr/time-off-types/create', 'frontend.time-off-types.create')->name('hr.time-off-types.create');
-        Route::view('hr/time-off-types/show', 'frontend.time-off-types.show')->name('hr.time-off-types.show');
+        Route::view('hr/leave-types', 'frontend.leave-types.index')->name('hr.leave-types.index');
+        Route::view('hr/leave-types/create', 'frontend.leave-types.create')->name('hr.leave-types.create');
+        Route::view('hr/leave-types/show', 'frontend.leave-types.show')->name('hr.leave-types.show');
 
         /** Event/Holidays */
 
@@ -190,6 +182,13 @@ Route::name('frontend.')->group(function () {
         Route::view('hr/event-holidays/create', 'frontend.event-holidays.create')->name('hr.event-holidays.create');
         Route::view('hr/event-holidays/show', 'frontend.event-holidays.show')->name('hr.event-holidays.show');
         Route::view('hr/event-holidays/edit', 'frontend.event-holidays.edit')->name('hr.event-holidays.edit');
+
+        /** Workshift Schedule */
+
+        Route::view('hr/workshift-schedule', 'frontend.workshift-schedule.index')->name('hr.workshift-schedule.index');
+        Route::view('hr/workshift-schedule/create', 'frontend.workshift-schedule.create')->name('hr.workshift-schedule.create');
+        Route::view('hr/workshift-schedule/show', 'frontend.workshift-schedule.show')->name('hr.workshift-schedule.show');
+        
         
         /** QUOTATION's WORKPACKAGE's TASKCARDs */
 
