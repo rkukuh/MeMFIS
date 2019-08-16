@@ -71,6 +71,7 @@ class TaskCardRoutineController extends Controller
      */
     public function store(TaskCardRoutineStore $request)
     {
+        // dd($request->all());
         $this->decoder($request);
         $accesses = $zones = [];
         if($request->work_area){
@@ -154,6 +155,18 @@ class TaskCardRoutineController extends Controller
                 $photo = $request->file('fileInput')->getClientOriginalName();
                 $destination = 'master/taskcard/routine/';
                 $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+            }
+
+            if($request->station){
+                foreach ($request->applicability_airplane as $airplane) {
+                    if(isset($request->station)){
+                        $station = Access::firstOrCreate(
+                            ['name' => $request->station, 'stationable_id' => $airplane, 'stationable_type' => 'App\Models\Aircraft']
+                        );
+                    }
+
+                    $taskcard->stations()->attach($station);
+                }
             }
 
             return response()->json($taskcard);

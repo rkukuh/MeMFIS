@@ -474,6 +474,7 @@
                                                 @slot('id', 'stringer')
                                                 @slot('text', 'Stringer')
                                                 @slot('name', 'stringer')
+                                                @slot('value', 'stringer')
                                                 @slot('id_error', 'stringer')
                                             @endcomponent
                                         </div>
@@ -483,7 +484,7 @@
                                                 Station @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.text')
+                                            @component('frontend.common.input.select2')
                                                 @slot('id', 'station')
                                                 @slot('text', 'Station')
                                                 @slot('name', 'station')
@@ -921,7 +922,6 @@
                 counterRepeats++;
             });
             $("table.repeat").on("click", ".ibtnDel", function (event) {
-                console.log("Repeats count : "+counterRepeats);
                 if (counterRepeats >= 1) {
                     $(this).closest("tr").remove();
                     counterRepeats -= 1
@@ -954,6 +954,8 @@
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/station.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/threshold-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/threshold-type.js') }}"></script>
