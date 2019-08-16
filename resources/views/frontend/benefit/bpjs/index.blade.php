@@ -14,28 +14,14 @@
             </div>
         </div>
         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-            @component('frontend.common.buttons.create-new')
+            @component('frontend.common.buttons.create')
                 @slot('text', 'BPJS')
-                @slot('id', 'modal-create-bpjs')
-                @slot('data_target', '#modal_bpjs')
+                @slot('href',route('frontend.hr.benefit.bpjs.create'))
             @endcomponent
 
             <div class="m-separator m-separator--dashed d-xl-none"></div>
         </div>
     </div>
-    @include('frontend.benefit.bpjs.modal')
-    @include('frontend.benefit.bpjs.show')
 
     <div class="bpjs_datatable" id="scrolling_both"></div>
-    <hr>
-    <div class="row mt-5">
-        <div class="col-12 d-flex justify-content-end">
-            @component('frontend.common.buttons.create-new')
-                @slot('text', 'View History/Past Data')
-                @slot('data_target', '#modal_history')
-                @slot('icon','la la-history')
-            @endcomponent
-        </div>
-    </div>
-    @include('frontend.benefit.bpjs.modal-history')
 </div>
