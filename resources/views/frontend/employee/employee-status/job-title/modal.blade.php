@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                @include('frontend.common.label.create-new')
+                @include('frontend.common.label.create-new',['class' => 'labelModal-Job'])
                 <h5 class="modal-title" id="TitleModalEmployee">Job Title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -27,7 +27,7 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Job Title Name 
+                                    Job Title Name  @include('frontend.common.label.required')
                                 </label>
 
                                 @component('frontend.common.input.text')
@@ -59,7 +59,6 @@
 
                                 @component('frontend.common.input.textarea')
                                     @slot('id', 'specification')
-                                    @slot('text', 'Specification')
                                     @slot('name', 'specification')
                                     @slot('rows', '3')
                                     @slot('id_error', 'specification')
@@ -74,13 +73,13 @@
                                         <div class="action-buttons">
                                                 {{-- <div id="button-div" style="height:0px;"> --}}
                                                     @component('frontend.common.buttons.submit')
-                                                        @slot('class', 'add-employee')
-                                                        @slot('id', 'add-employee')
+                                                        @slot('class', 'modal-change-job-tittle')
+                                                        @slot('type', 'button')
                                                     @endcomponent
                                                     {{-- </div>  --}}
-                                                    @include('frontend.common.buttons.reset')
+                                                    @include('frontend.common.buttons.reset',['id' => 'reset-job-tittle'])
                             
-                                                    @include('frontend.common.buttons.close')
+                                                    @include('frontend.common.buttons.close',['id' => 'close-job-tittle'])
                                             </div>
                                     </div>
                             </div>
