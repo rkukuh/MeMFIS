@@ -2,6 +2,7 @@
 
 namespace App\Models\Pivots;
 
+use App\Models\Manhour;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
 use App\Models\QuotationWorkPackageItem;
@@ -27,6 +28,19 @@ class QuotationWorkPackage extends Pivot
     public function items()
     {
         return $this->hasMany(QuotationWorkPackageItem::class, 'quotation_workpackage_id');
+    }
+
+    /**
+     * One-to-Many: A Quotation's WorkPackage may have one or many manhour rate.
+     *
+     * This function will retrieve manhour rate of a Quotation's WorkPackage.
+     * See: Manhour's quotation_workpackages() method for the inverse
+     *
+     * @return mixed
+     */
+    public function manhour_rate()
+    {
+        return $this->belongsTo(Manhour::class, 'manhour_rate_id');
     }
 
     /**

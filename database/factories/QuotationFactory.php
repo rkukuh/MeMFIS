@@ -6,6 +6,7 @@ use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Status;
 use App\Models\Project;
+use App\Models\Manhour;
 use App\Models\Customer;
 use App\Models\Currency;
 use App\Models\TaskCard;
@@ -173,7 +174,8 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
 
             $quotation->workpackages()->save($workpackage, [
                 'manhour_total' => rand(10, 20),
-                'manhour_rate' => rand(10, 20) * 1000000,
+                'manhour_rate_id' => Manhour::get()->random()->id,
+                'manhour_rate_amount' => rand(10, 20) * 1000000,
                 'discount_type' => $disc_type,
                 'discount_value' => $disc_value,
                 'description' => $faker->randomElement([null, $faker->sentence]),

@@ -18,7 +18,8 @@ class CreateQuotationWorkPackageTable extends Migration
             $table->unsignedBigInteger('quotation_id');
             $table->unsignedBigInteger('workpackage_id');
             $table->double('manhour_total')->nullable();
-            $table->double('manhour_rate')->nullable();
+            $table->unsignedBigInteger('manhour_rate_id')->nullable();
+            $table->double('manhour_rate_amount')->nullable();
             $table->string('discount_type')->nullable();
             $table->double('discount_value')->nullable();
             $table->text('description')->nullable();
@@ -32,6 +33,11 @@ class CreateQuotationWorkPackageTable extends Migration
 
             $table->foreign('workpackage_id')
                     ->references('id')->on('workpackages')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('manhour_rate_id')
+                    ->references('id')->on('manhours')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

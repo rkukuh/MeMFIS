@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use App\Models\Pivots\QuotationWorkPackage;
 
 class Manhour extends MemfisModel
 {
@@ -24,5 +25,18 @@ class Manhour extends MemfisModel
     public function htcrr()
     {
         return $this->hasMany(HtCrr::class, 'manhour_rate_id');
+    }
+
+    /**
+     * One-to-Many: A Quotation's WorkPackage may have one or many manhour rate.
+     *
+     * This function will retrieve all the quotation's workpackages of a given manhour.
+     * See: QuotationWorkPackage's manhour_rate() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotation_workpackages()
+    {
+        return $this->belongsTo(QuotationWorkPackage::class, 'manhour_rate_id');
     }
 }
