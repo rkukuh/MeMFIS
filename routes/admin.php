@@ -34,9 +34,9 @@ Route::name('admin.')->group(function () {
         Route::resource('station', 'StationController');
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
-        Route::resource('threshold', 'ThresholdController');
         Route::resource('approval', 'ApprovalController');
         Route::resource('progress', 'ProgressController');
+        Route::resource('threshold', 'ThresholdController');
         Route::resource('inspection', 'InspectionController');
 
         /** MASTER */
@@ -46,19 +46,19 @@ Route::name('admin.')->group(function () {
         Route::resource('vendor', 'VendorController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
+        Route::resource('benefit', 'BenefitController');
+        Route::resource('manhour', 'ManhourController');
+        Route::resource('company', 'CompanyController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('language', 'LanguageController');
         Route::resource('customer', 'CustomerController');
         Route::resource('employee', 'EmployeeController');
         Route::resource('facility', 'FacilityController');
-        Route::resource('manhour', 'ManhourController');
+        Route::resource('leave-type','LeaveTypeController');
+        Route::resource('department', 'DepartmentController');
+        Route::resource('leave-period','LeavePeriodController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
-        Route::resource('leave-period','LeavePeriodController');
-        Route::resource('leave-type','LeaveTypeController');
-        Route::resource('company', 'CompanyController');
-        Route::resource('department', 'DepartmentController');
-        Route::resource('benefit', 'BenefitController');
 
         /** LICENSE */
 
@@ -97,8 +97,8 @@ Route::name('admin.')->group(function () {
         /** WORKPACKAGE's TASKCARDs */
 
         Route::resource('taskcard-workpackage', 'TaskCardWorkPackageController');
-        Route::resource('taskcard-workpackage-predecessor', 'TaskCardWorkPackagePredecessorController');
         Route::resource('taskcard-workpackage-successor', 'TaskCardWorkPackageSuccessorController');
+        Route::resource('taskcard-workpackage-predecessor', 'TaskCardWorkPackagePredecessorController');
 
         /** QUOTATION's WORKPACKAGEs */
 
