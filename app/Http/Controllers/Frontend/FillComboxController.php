@@ -610,7 +610,7 @@ class FillComboxController extends Controller
      */
     public function project()
     {
-        $projects = Project::with('approvals')->where('parent_id',null)->whereHas('approvals')->pluck('title','uuid');
+        $projects = Project::with('approvals')->where('parent_id',null)->doesnthave('quotations')->whereHas('approvals')->pluck('title','uuid');
 
         return json_encode($projects);
     }
