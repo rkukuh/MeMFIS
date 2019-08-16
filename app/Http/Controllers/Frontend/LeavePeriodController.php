@@ -16,7 +16,7 @@ class LeavePeriodController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.leave-period.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class LeavePeriodController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.leave-period.create');
     }
 
     /**
@@ -37,7 +37,10 @@ class LeavePeriodController extends Controller
      */
     public function store(LeavePeriodStore $request)
     {
-        //
+        $leavePeriod = LeavePeriod::create($request->all());
+
+        // TODO: Return error message as JSON
+        return response()->json($leavePeriod);
     }
 
     /**
@@ -48,7 +51,7 @@ class LeavePeriodController extends Controller
      */
     public function show(LeavePeriod $leavePeriod)
     {
-        //
+        return view('frontend.leave-period.show',['leaveperiod' => $leavePeriod]);
     }
 
     /**

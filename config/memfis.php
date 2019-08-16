@@ -57,7 +57,8 @@ return [
         'types' => 20,
         'users' => 20,
         'vendors' => 20,
-        'leaveperiod' => 20,
+        'leave_periods' => 20,
         'workpackages' => 20,
+        'BPJSS' => 20,
     ],
 ];

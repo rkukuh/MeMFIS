@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Frontend;
 
-use App\Models\LeaveType;
+use App\Models\BPJS;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\LeaveTypeStore;
-use App\Http\Requests\Admin\LeaveTypeUpdate;
+use App\Http\Requests\Frontend\BPJSStore;
+use App\Http\Requests\Frontend\BPJSUpdate;
 
-class LeaveTypeController extends Controller
+class BPJSController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class LeaveTypeController extends Controller
      */
     public function index()
     {
-        //
+        return redirect('/benefit');
     }
 
     /**
@@ -26,50 +26,53 @@ class LeaveTypeController extends Controller
      */
     public function create()
     {
-        //
+        return redirect('/benefit');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\LeaveTypeStore  $request
+     * @param  \App\Http\Requests\Frontend\BPJSStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LeaveTypeStore $request)
+    public function store(BPJSStore $request)
     {
-        //
+        $bpjs = BPJS::create($request->all());
+
+        // TODO: Return error message as JSON
+        return response()->json($bpjs);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\LeaveType  $leaveType
+     * @param  \App\Models\BPJS  $bPJS
      * @return \Illuminate\Http\Response
      */
-    public function show(LeaveType $leaveType)
+    public function show(BPJS $bpj)
     {
-        //
+        return response()->json($bpj);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\LeaveType  $leaveType
+     * @param  \App\Models\BPJS  $bPJS
      * @return \Illuminate\Http\Response
      */
-    public function edit(LeaveType $leaveType)
+    public function edit(BPJS $bPJS)
     {
-        //
+        return redirect('/benefit');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Admin\LeaveTypeUpdate  $request
-     * @param  \App\Models\LeaveType  $leaveType
+     * @param  \App\Http\Requests\Frontend\BPJSUpdate  $request
+     * @param  \App\Models\BPJS  $bPJS
      * @return \Illuminate\Http\Response
      */
-    public function update(LeaveTypeUpdate $request, LeaveType $leaveType)
+    public function update(BPJSUpdate $request, BPJS $bPJS)
     {
         //
     }
@@ -77,10 +80,10 @@ class LeaveTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\LeaveType  $leaveType
+     * @param  \App\Models\BPJS  $bPJS
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LeaveType $leaveType)
+    public function destroy(BPJS $bPJS)
     {
         //
     }

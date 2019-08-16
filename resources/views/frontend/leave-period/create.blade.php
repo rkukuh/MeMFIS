@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.leave-period.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.leave-period.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Leave Period
                             </span>
@@ -58,9 +58,9 @@
 
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'Leave Period Code')
-                                                @slot('id', 'leave_period_code')
-                                                @slot('name', 'leave_period_code')
-                                                @slot('id_error', 'leave_period_code')
+                                                @slot('id', 'code')
+                                                @slot('name', 'code')
+                                                @slot('id_error', 'code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -70,9 +70,9 @@
 
                                             @component('frontend.common.input.text')
                                                 @slot('text', 'Leave Period Name')
-                                                @slot('id', 'leave_period_name')
-                                                @slot('name', 'leave_period_name')
-                                                @slot('id_error', 'leave_period_name')
+                                                @slot('id', 'name')
+                                                @slot('name', 'name')
+                                                @slot('id_error', 'name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -83,10 +83,10 @@
                                             </label>
         
                                             @component('frontend.common.input.datepicker')
-                                                @slot('id', 'period_start_date')
+                                                @slot('id', 'period_start_')
                                                 @slot('text', 'Period Start')
-                                                @slot('name', 'period_start_date')
-                                                @slot('id_error','period_start_date')
+                                                @slot('name', 'period_start')
+                                                @slot('id_error','period_start')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -95,10 +95,10 @@
                                             </label>
         
                                             @component('frontend.common.input.datepicker')
-                                                @slot('id', 'period_end_date')
+                                                @slot('id', 'period_end')
                                                 @slot('text', 'Periode End')
-                                                @slot('name', 'period_end_date')
-                                                @slot('id_error','period_end_date')
+                                                @slot('name', 'period_end')
+                                                @slot('id_error','period_end')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -147,4 +147,5 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/datepicker/period-start.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/period-end.js')}}"></script>
+    <script src="{{ asset('js/frontend/leave-period/create.js')}}"></script>
 @endpush

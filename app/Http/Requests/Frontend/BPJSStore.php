@@ -3,11 +3,10 @@
 namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Carbon;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class LeavePeriodStore extends FormRequest
+class BPJSStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,13 +28,19 @@ class LeavePeriodStore extends FormRequest
         return [
             'code' => 'required',
             'name' => 'required',
-            'period_start' => 'required|after_or_equal:'.Carbon::now()->toDateString(),
-            'period_end'=> 'required|date|after:period_start_date'
+            // 'employee_paid' => 'between:0,100',
+            // 'company_paid' => 'between:0,100'
         ];
     }
 
+    public function messages()
+    {
+        return[
+            // 'employee_paid.between' => 'The employee paid must be between 0% until 100%',
+            // 'company_paid.between' => 'The company paid must be between 0% until 100%'
+        ];
+    }
     protected function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
-
 }
