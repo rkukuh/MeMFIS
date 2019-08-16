@@ -43,6 +43,7 @@ $factory->define(Type::class, function (Faker $faker) {
             'taskcard-type-non-routine',
             'project-workpackage-manhour',
             'defectcard-propose-correction',
+            'leaves'
         ]),
     ];
 
@@ -80,3 +81,4 @@ $factory->state(Type::class, 'defectcard-close-reason', ['of' => 'defectcard-clo
 $factory->state(Type::class, 'taskcard-type-non-routine', ['of' => 'taskcard-type-non-routine']);
 $factory->state(Type::class, 'project-workpackage-manhour', ['of' => 'project-workpackage-manhour']);
 $factory->state(Type::class, 'defectcard-propose-correction', ['of' => 'defectcard-propose-correction']);
+$factory->state(Type::class, 'leave', ['of' => 'leaves']);

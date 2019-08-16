@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\BPJS;
+use App\Models\LeaveType;
 use Illuminate\Database\Seeder;
 
 class DummyDataSeeder extends Seeder
@@ -49,6 +51,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Positions::class);
         $this->call(LeaveTypes::class);
         $this->call(LeavePeriods::class);
+        $this->call(BPJSS::class);
 
         /** POLYMORPH */
 

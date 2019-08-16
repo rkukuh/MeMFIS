@@ -50,5 +50,6 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfTermOfPayment::class);
         $this->call(TypesOfUnit::class);
         $this->call(TypesOfWebsite::class);
+        $this->call(TypesOfLeaves::class);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLeaveperiodsTable extends Migration
+class CreateBpjssTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,17 @@ class CreateLeaveperiodsTable extends Migration
      */
     public function up()
     {
-        Schema::create('leaveperiods', function (Blueprint $table) {
+        Schema::create('bpjs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
             $table->string('name');
-            $table->date('period_start');
-            $table->date('period_end');
-            $table->text('description')->nullable();
+            $table->double('employee_paid')->nullable();
+            $table->double('employee_min_value')->nullable();
+            $table->double('employee_max_value')->nullable();
+            $table->double('company_paid')->nullable();
+            $table->double('company_min_value')->nullable();
+            $table->double('company_max_value')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -36,6 +39,6 @@ class CreateLeaveperiodsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('leaveperiods');
+        Schema::dropIfExists('bpjs');
     }
 }
