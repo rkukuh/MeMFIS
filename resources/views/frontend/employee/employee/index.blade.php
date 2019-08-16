@@ -87,20 +87,3 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/employee/employee/index.js') }}"></script>
 @endpush
-
-<div class="row">
-    <div class="col-6">
-        <div class="media align-items-center">
-            <img alt="Image placeholder" src="assets/metronic/app/media/img/users/user5.jpg" class="m--img-rounded m--marginless">
-        </div>
-    </div>
-    <div class="col-6">
-            <span>
-                <i class="la la-user"></i>
-                <span><a href="/employee/'+t.uuid+'">'+ t.code +'</span>
-            </span>
-    </div>
-</div>
-
-
-<div class="row"><div class="col-6"><div class="media align-items-center"><img alt="Image placeholder" src="assets/metronic/app/media/img/users/user5.jpg" class="m--img-rounded m--marginless"></div></div><div class="col-6"><span>asd</span><br><span><i class="la la-user"></i><span><a href="/employee/'+t.uuid+'">'+ t.code +'</span></span></div></div>

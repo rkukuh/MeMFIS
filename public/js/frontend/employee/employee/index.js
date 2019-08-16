@@ -73,43 +73,12 @@ let Employee = {
                                 employee_name = t.first_name+' '+t.middle_name+' '+t.last_name
                             }
                         }
-                        return '<div class="row"><div class="col-4"><div class="media align-items-center"><img alt="Image placeholder" src="assets/metronic/app/media/img/users/user5.jpg" class="m--img-rounded m--marginless"></div></div><div class="col-8 align-self-center"><span>Yemima Kridian asdasd asdasdassd</span><br><span><i class="la la-user"></i><span><a href="/employee/'+t.uuid+'">'+ t.code +'</span></span></div></div>'
+                        return '<div class="row"><div class="col-4"><div class="media align-items-center">'+
+                        '<img alt="Image placeholder" src="assets/metronic/app/media/img/users/user5.jpg" class="m--img-rounded m--marginless">'+
+                        '</div></div><div class="col-8 align-self-center"><span>'+ employee_name +'</span><br>'+
+                        '<span><i class="la la-user"></i><span><a href="/employee/'+t.uuid+'">'+ t.code +'</span></span></div></div>'
                     }
                 },
-                // {
-                //     field: 'name',
-                //     sortable: 'asc',
-                //     filterable: !1,
-                //     template:  function (t) {
-
-                //         let employee_name
-
-                //         if(t.middle_name == null || t.last_name == null){
-                //             if(t.middle_name == null){
-                //                 employee_name = t.first_name +' '+t.last_name
-                //             }
-                //             if(t.last_name == null){
-                //                 employee_name = t.first_name+' '+t.middle_name
-                //             }
-                //             if(t.middle_name == null && t.last_name == null){
-                //                 employee_name = t.first_name
-                //             }
-                //         }else if(t.middle_name != null || t.last_name != null){
-                //             if(t.middle_name != null){
-                //                 employee_name = t.first_name +' '+t.middle_name
-                //             }
-                //             if(t.last_name != null){
-                //                 employee_name = t.first_name+' '+t.last_name
-                //             }
-                //             if(t.middle_name != null && t.last_name != null){
-                //                 employee_name = t.first_name+' '+t.middle_name+' '+t.last_name
-                //             }
-                //         }
-
-                //         return employee_name + '<br>' + 
-                //                 '<span><i class="la la-user"></i><span><a href="/employee/'+t.uuid+'">'+ t.code +'</span></span>'
-                //     }
-                // },
                 {
                     field: 'dob',
                     title: 'Phone Number',
@@ -145,6 +114,24 @@ let Employee = {
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function(e) {
+                        var a = {
+                            1: { title: "Pending", class: "m-badge--brand" },
+                            2: { title: "Delivered", class: " m-badge--metal" },
+                            3: { title: "Canceled", class: " m-badge--primary" },
+                            4: { title: "Success", class: " m-badge--success" },
+                            5: { title: "Info", class: " m-badge--info" },
+                            6: { title: "Danger", class: " m-badge--danger" },
+                            7: { title: "Warning", class: " m-badge--warning" }
+                        };
+                        return (
+                            '<span class="m-badge ' +
+                            a[e.Status].class +
+                            ' m-badge--wide">' +
+                            a[e.Status].title +
+                            "</span>"
+                        );
+                    }
                 },
                 {
                     field: 'Actions',
