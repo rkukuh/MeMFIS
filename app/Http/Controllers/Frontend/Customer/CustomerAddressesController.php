@@ -38,10 +38,10 @@ class CustomerAddressesController extends Controller
      */
     public function store(Customer $customer, Request $request)
     {
-        $address_type = Type::where('of','address')->where('name','Work')->first();
+        $address_type = Type::where('of','address')->where('name','Company')->first();
         $customer->addresses()->save(new Address([
             'address' => $request->address,
-            'type_id' => $address_type->id    
+            'type_id' => $address_type->id
         ]));
         return response()->json($request);
     }
