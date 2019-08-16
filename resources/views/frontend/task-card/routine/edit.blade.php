@@ -443,12 +443,25 @@
                                                 Documents library @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'Document')
-                                                @slot('id', 'document')
-                                                @slot('name', 'document')
-                                                @slot('id_error', 'document')
-                                            @endcomponent
+                                            @php
+                                                $documens = json_decode($taskcard->document_library, TRUE);
+                                            @endphp
+
+                                            <select id="document-library" name="document-library" class="form-control m-select2" multiple style="width:100%">
+                                                <option value="">
+                                                    &mdash; Select a Document Library &mdash;
+                                                </option>
+
+                                                @if (isset($documens))
+                                                    @foreach ($documens as $document)
+                                                        <option selected>
+                                                            {{ $document }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+
+                                            </select>
+
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -961,6 +974,8 @@
     <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/document-library.js') }}"></script>
 
     <script src="{{ asset('js/frontend/taskcard/routine/edit.js') }}"></script>
 
