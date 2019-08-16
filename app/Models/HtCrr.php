@@ -58,7 +58,7 @@ class HtCrr extends MemfisModel
      * One-to-Many: An HTCRR may have one remover / installer.
      *
      * This function will retrieve the removed / installer of an HTCRR.
-     * See: Employee's conducted_htcrr() method for the inverse
+     * See: Employee's conducted_htcrrs() method for the inverse
      *
      * @return mixed
      */
@@ -100,7 +100,7 @@ class HtCrr extends MemfisModel
      * Many-to-Many: An HTCRR may have one or many item.
      *
      * This function will retrieve all the items of an HTCRR.
-     * See: Item's htcrr() method for the inverse
+     * See: Item's htcrrs() method for the inverse
      *
      * @return mixed
      */
@@ -119,7 +119,7 @@ class HtCrr extends MemfisModel
      * One-to-Many: An HT/CRR may have one manhour rate.
      *
      * This function will retrieve the manhour rate of an HT/CRR.
-     * See: Manhour's htcrr() method for the inverse
+     * See: Manhour's htcrrs() method for the inverse
      *
      * @return mixed
      */
@@ -158,7 +158,7 @@ class HtCrr extends MemfisModel
      * One-to-Many: An HT/CRR may have none or many project.
      *
      * This function will retrieve the project of a given HT/CRR.
-     * See: Project's htcrr() method for the inverse
+     * See: Project's htcrrs() method for the inverse
      *
      * @return mixed
      */
@@ -184,7 +184,7 @@ class HtCrr extends MemfisModel
      * Many-to-Many: An HTCRR may have zero or many skill.
      *
      * This function will retrieve all the skills of an HTCRR.
-     * See: Type's skill_htcrr() method for the inverse
+     * See: Type's skill_htcrrs() method for the inverse
      *
      * @return mixed
      */

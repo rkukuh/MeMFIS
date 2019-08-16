@@ -22,7 +22,7 @@ class Manhour extends MemfisModel
      *
      * @return mixed
      */
-    public function htcrr()
+    public function htcrrs()
     {
         return $this->hasMany(HtCrr::class, 'manhour_rate_id');
     }
