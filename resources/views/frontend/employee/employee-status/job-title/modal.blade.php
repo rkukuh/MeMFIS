@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_job_title" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_job_tittle" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -20,10 +20,9 @@
                                 </label>
 
                                 @component('frontend.common.input.text')
-                                    @slot('id', 'code_employee')
-                                    @slot('text', 'Code')
-                                    @slot('name', 'code_employee')
-                                    @slot('id_error', 'code_employee')
+                                    @slot('id', 'code_job_tittle')
+                                    @slot('name', 'code_job_tittle')
+                                    @slot('id_error', 'code_job_tittle')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -32,10 +31,9 @@
                                 </label>
 
                                 @component('frontend.common.input.text')
-                                    @slot('id', 'name')
-                                    @slot('text', 'Name')
-                                    @slot('name', 'name')
-                                    @slot('id_error', 'name')
+                                    @slot('id', 'name_job_tittle')
+                                    @slot('name', 'name_job_tittle')
+                                    @slot('id_error', 'name_job_tittle')
                                 @endcomponent
                             </div>
                         </div>
@@ -46,11 +44,10 @@
                                 </label>
 
                                 @component('frontend.common.input.textarea')
-                                    @slot('id', 'description')
-                                    @slot('text', 'Description')
-                                    @slot('name', 'description')
+                                    @slot('id', 'description_job_tittle')
+                                    @slot('name', 'description_job_tittle')
                                     @slot('rows', '5')
-                                    @slot('id_error', 'description')
+                                    @slot('id_error', 'description_job_tittle')
                                 @endcomponent
                             </div>
                         </div>

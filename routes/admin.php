@@ -59,7 +59,8 @@ Route::name('admin.')->group(function () {
         Route::resource('department', 'DepartmentController');
         Route::resource('benefit', 'BenefitController');
         Route::resource('bpjs', 'BPJSController');
-
+        Route::resource('job-tittle', 'JobTittleController');
+        
         /** LICENSE */
 
         Route::resource('amel', 'AmelController');
