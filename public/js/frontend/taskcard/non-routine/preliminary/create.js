@@ -50,6 +50,7 @@ let TaskCard = {
             data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
             data.append( "helper_quantity", $('input[name=helper_quantity]').val());
             data.append( "description", $('#instruction').val());
+            data.append( "document_library", JSON.stringify($('#document-library').val()));
             data.append( "additionals",  internal_numberJSON);
 
             $.ajax({

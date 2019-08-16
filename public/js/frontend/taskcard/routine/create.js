@@ -145,6 +145,7 @@ let TaskCard = {
             data.append("source", $('input[name=source]').val());
             data.append("relationship", JSON.stringify(relationship));
             data.append("version", JSON.stringify($('#version').val()));
+            data.append("document_library", JSON.stringify($('#document-library').val()));
             data.append("effectivity", $('input[name=effectivity]').val());
             data.append("description", $('#description').val());
             data.append("threshold_type", JSON.stringify(threshold_type));

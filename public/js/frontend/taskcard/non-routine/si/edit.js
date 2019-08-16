@@ -733,6 +733,7 @@ let TaskCard = {
             data.append( "repeat_type", JSON.stringify(repeat_type));
             data.append( "threshold_amount", JSON.stringify(threshold_amount));
             data.append( "repeat_amount", JSON.stringify(repeat_amount));
+            data.append( "document_library", JSON.stringify($('#document-library').val()));
             data.append( "additionals",  internal_numberJSON);
             data.append( "fileInput", document.getElementById('taskcard').files[0]);
             data.append('_method', 'PUT');

@@ -13,6 +13,7 @@ class ProjectWorkPackageTaskCard extends MemfisModel
         'taskcard_id',
         'sequence',
         'is_mandatory',
+        'is_rii',
         'note',
     ];
 
