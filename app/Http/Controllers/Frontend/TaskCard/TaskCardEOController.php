@@ -119,7 +119,8 @@ class TaskCardEOController extends Controller
     public function show(TaskCard $taskCard)
     {
         return view('frontend.task-card.nonroutine.eo.show',[
-            'taskcard' => $taskCard
+            'taskcard' => $taskCard,
+            'additionals' => json_decode($taskCard->additionals)
         ]);
     }
 
@@ -150,6 +151,7 @@ class TaskCardEOController extends Controller
             'scheduled_priorities' => $this->scheduled_priorities,
             'affected_manuals' => $this->affected_manuals,
             'MaintenanceCycles' => $this->maintenanceCycle,
+            'additionals' => json_decode($taskCard->additionals)
         ]);
     }
 
