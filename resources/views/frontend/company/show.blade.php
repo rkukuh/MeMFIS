@@ -131,6 +131,7 @@
                                                             @slot('id', 'max_overtime_per_period')
                                                             @slot('name', 'max_overtime_per_period')
                                                             @slot('id_error', 'max_overtime_per_period')
+                                                            @slot('value', $company->maximum_period)
                                                             @slot('input_append','Hours')
                                                             @slot('disabled','disabled')
                                                         @endcomponent
@@ -144,6 +145,7 @@
                                                             @slot('text', 'Holiday Overtime Allowance')
                                                             @slot('id', 'holiday_overtime_allowance')
                                                             @slot('name', 'holiday_overtime_allowance')
+                                                            @slot('value', $company->maximum_holiday)
                                                             @slot('id_error', 'holiday_overtime_allowance')
                                                             @slot('input_append','IDR per Day')
                                                             @slot('disabled','disabled')

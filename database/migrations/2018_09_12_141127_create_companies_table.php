@@ -20,6 +20,8 @@ class CreateCompaniesTable extends Migration
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedBigInteger('type_id')->nullable();
             $table->string('name');
+            $table->bigInteger('maximum_period');
+            $table->bigInteger('maximum_holiday');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

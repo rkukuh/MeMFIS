@@ -106,7 +106,7 @@
                                             @component('frontend.common.input.select2')
                                                 @slot('id', 'company')
                                                 @slot('name', 'company')
-                                                @slot('id_error', 'company-airplane')
+                                                @slot('id_error', 'company')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -136,6 +136,7 @@
                                                             @slot('text', 'Maximum Overtime per Period')
                                                             @slot('id', 'max_overtime_per_period')
                                                             @slot('name', 'max_overtime_per_period')
+                                                            @slot('value', $company->maximum_period)
                                                             @slot('id_error', 'max_overtime_per_period')
                                                             @slot('input_append','Hours')
                                                         @endcomponent
@@ -149,6 +150,7 @@
                                                             @slot('text', 'Holiday Overtime Allowance')
                                                             @slot('id', 'holiday_overtime_allowance')
                                                             @slot('name', 'holiday_overtime_allowance')
+                                                            @slot('value', $company->maximum_holiday)
                                                             @slot('id_error', 'holiday_overtime_allowance')
                                                             @slot('input_append','IDR per Day')
                                                         @endcomponent

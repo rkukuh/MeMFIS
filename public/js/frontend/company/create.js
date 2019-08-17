@@ -2,11 +2,13 @@ let CompanyStructure = {
     init: function () {
     let create = $('.footer').on('click', '.add-company-structure', function () {
 
-        let code = $('input[name=code]').val();
-        let name = $('input[name=name]').val();
-        let description = $('#description').val();
-        let company = $('#company').val();
-        let parent_structure = $('#parent_structure').val();
+        let code = $('input[name=code]').val()
+        let name = $('input[name=name]').val()
+        let maximum_period = $('input[name=max_overtime_per_period]').val()
+        let maximum_holiday = $('input[name=holiday_overtime_allowance]').val()
+        let description = $('#description').val()
+        let company = $('#company').val()
+        let parent_structure = $('#parent_structure').val()
 
         $.ajax({
             headers: {
@@ -18,6 +20,8 @@ let CompanyStructure = {
                 _token: $('input[name=_token]').val(),
                 code: code,
                 name: name,
+                maximum_period: maximum_period,
+                maximum_holiday: maximum_holiday,
                 description: description,
                 company: company,
                 parent_structure: parent_structure,
