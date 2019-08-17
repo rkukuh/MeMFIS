@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Frontend\TaskCard;
 use App\Models\Type;
 use App\Models\Zone;
 use App\Models\Access;
+use App\Models\Repeat;
+use App\Models\Station;
 use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\Threshold;
-use App\Models\Repeat;
 use App\Helpers\DocumentNumber;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
@@ -160,7 +161,7 @@ class TaskCardRoutineController extends Controller
             if($request->station){
                 foreach ($request->applicability_airplane as $airplane) {
                     if(isset($request->station)){
-                        $station = Access::firstOrCreate(
+                        $station = Station::firstOrCreate(
                             ['name' => $request->station, 'stationable_id' => $airplane, 'stationable_type' => 'App\Models\Aircraft']
                         );
                     }
