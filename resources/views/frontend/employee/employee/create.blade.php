@@ -139,8 +139,3 @@
     </div>
 </div>
 @endsection
-
-@push('footer-scripts')
-<script src="{{ asset('js/frontend/employee/employee/employee-datepicker.js')}}"></script>
-<script src="{{ asset('js/frontend/employee/employee/create.js') }}"></script>
-@endpush
