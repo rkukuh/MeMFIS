@@ -185,42 +185,42 @@ class TaskCardRoutineController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        $aircraft_taskcards = [];
+        $aircraft_taskcards = $access_taskcards = $zone_taskcards = $relation_taskcards = [];
 
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
         }
 
-        $access_taskcards = [];
-
         foreach($taskCard->accesses as $i => $access_taskcard){
             $access_taskcards[$i] =  $access_taskcard->pivot->access_id;
         }
-
-        $zone_taskcards = [];
 
         foreach($taskCard->zones as $i => $zone_taskcard){
             $zone_taskcards[$i] =  $zone_taskcard->id;
         }
 
-        $relation_taskcards = [];
-
         foreach($taskCard->related_to as $i => $relation_taskcard){
             $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
         }
 
+        foreach($taskCard->stations as $i => $station){
+            $station[$i] =  $station->name;
+        }
+        // dd($taskCard->type->name);
+
         return view('frontend.task-card.routine.show', [
-            'taskcard' => $taskCard,
+            // 'stations' => $stations,
             'types' => $this->type,
-            'work_areas' => $this->work_area,
             'tasks' => $this->task,
-            'aircrafts' => $this->aircraft,
-            'aircraft_taskcards' => $aircraft_taskcards,
-            'accesses' => $this->access,
-            'access_taskcards' => $access_taskcards,
+            'taskcard' => $taskCard,
             'zones' => $this->zones,
-            'zone_taskcards' => $zone_taskcards,
+            'accesses' => $this->access,
+            'aircrafts' => $this->aircraft,
             'taskcards' => $this->taskcard,
+            'work_areas' => $this->work_area,
+            'access_taskcards' => $access_taskcards,
+            'zone_taskcards' => $zone_taskcards,
+            'aircraft_taskcards' => $aircraft_taskcards,
             'relation_taskcards' => $relation_taskcards,
             'additionals' => json_decode($taskCard->additionals)
         ]);

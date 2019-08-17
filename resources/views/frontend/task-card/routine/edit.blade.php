@@ -513,8 +513,8 @@
 
                                             @if(isset($taskCard->section))
                                             <select id="section" name="section" class="form-control m-select2" multiple style="width:100%">
-                                                @foreach (json_decode($taskCard->section) as $key => $section)
-                                                    <option value="{{ $section[$key] }}" selected >
+                                                @foreach (json_decode($taskCard->section) as $section)
+                                                    <option value="{{ $section }}" selected >
                                                         {{ $section }}
                                                     </option>
                                                 @endforeach
