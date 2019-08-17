@@ -18,8 +18,4 @@
         <i class="la la-{{ $icon or 'plus-circle'}}"></i>
         <span>{{ $text or 'Add' }}</span>
     </span>
-    <span>
-            <i class="la la-plus-circle"></i>
-            <span>Add</span>
-        </span>
 </button>
