@@ -278,6 +278,13 @@ let EmploymentStatus = {
                 });
             });
 
+            let refresh_datatable = $(document).on('click', '#m_tab_6_1', function () {
+                let table = $('.m_datatable_employee_status').mDatatable();
+    
+                        table.originalDataSet = [];
+                        table.reload();
+            });
+
     }
 };
 

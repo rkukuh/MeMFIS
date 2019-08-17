@@ -57,7 +57,7 @@
                                             </label>
             
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text', $bpjs->code)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -66,7 +66,7 @@
                                             </label>
             
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text', $bpjs->name)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -81,6 +81,7 @@
                                                         </label>
                         
                                                         @component('frontend.common.input.number')
+                                                            @slot('value',$bpjs->employee_paid)
                                                             @slot('id', 'basic_salary_employee')
                                                             @slot('name', 'basic_salary_employee')
                                                             @slot('id_error', 'basic_salary_employee')
@@ -96,6 +97,7 @@
                                                         </label>
                         
                                                         @component('frontend.common.input.number')
+                                                            @slot('value',$bpjs->min_employee)
                                                             @slot('id', 'min_employee')
                                                             @slot('name', 'min_employee')
                                                             @slot('id_error', 'min_employee')
@@ -109,6 +111,7 @@
                                                         </label>
                         
                                                         @component('frontend.common.input.number')
+                                                            @slot('value',$bpjs->max_employee)
                                                             @slot('id', 'max_employee')
                                                             @slot('name', 'max_employee')
                                                             @slot('id_error', 'max_employee')
@@ -129,6 +132,7 @@
                                                         </label>
                         
                                                         @component('frontend.common.input.number')
+                                                            @slot('value',$bpjs->company_paid)
                                                             @slot('id', 'basic_salary_company')
                                                             @slot('name', 'basic_salary_company')
                                                             @slot('id_error', 'basic_salary_company')
@@ -145,6 +149,7 @@
                                                         </label>
                         
                                                         @component('frontend.common.input.number')
+                                                            @slot('value',$bpjs->max_company)
                                                             @slot('id', 'min_company')
                                                             @slot('name', 'min_company')
                                                             @slot('id_error', 'min_company')
@@ -158,6 +163,7 @@
                                                         </label>
                         
                                                         @component('frontend.common.input.number')
+                                                            @slot('value',$bpjs->max_company)
                                                             @slot('id', 'max_company')
                                                             @slot('name', 'max_company')
                                                             @slot('id_error', 'max_company')
@@ -201,21 +207,21 @@
                                                             </div>
 
                                                             <div class="m-portlet m-portlet--mobile">
-                                                                <div class="m-portlet__body">
-                                                                    <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
-                                                                        <tr>
-                                                                            <td align="center" width="34%"></td>
-                                                                            <td align="center" width="33%"><b>Paid by Employees</b></td>
-                                                                            <td align="center" width="33%"><b>Paid by Company</b></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td valign="top"><b>BPJS Name</b></td>
-                                                                            <td valign="top" align="center">generate dari percentage of basic salary</td>
-                                                                            <td valign="top" align="center">generate dari percentage of basic salary</td>
-                                                                        </tr>
-                                                                    </table>
+                                                                    <div class="m-portlet__body">
+                                                                        <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
+                                                                            <tr>
+                                                                                <td align="center" width="34%"></td>
+                                                                                <td align="center" width="33%"><b>Paid by Employees</b></td>
+                                                                                <td align="center" width="33%"><b>Paid by Company</b></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td valign="top"><b>{{ $bpjs->name }}</b></td>
+                                                                                <td valign="top" align="center">{{ $bpjs->employee_paid }}</td>
+                                                                                <td valign="top" align="center">{{ $bpjs->company_paid }}</td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -236,12 +242,21 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
+                                                            
+                                                            @foreach ($history as $h)
                                                             <div class="m-portlet m-portlet--mobile">
                                                                 <div class="m-portlet__body">
                                                                     <div class="d-flex justify-content-end mt-3">
                                                                         <h3 class="m-portlet__head-text">
-                                                                            14 August 2019 to 14 August 2019
+                                                                                @php
+                                                                                $created_time = $h->created_at;
+                                                                                $formatCreatedTime = strtotime($created_time);
+
+                                                                                $updated_time = $h->updated_at;
+                                                                                $formatUpdatedTime = strtotime($updated_time);
+
+                                                                                echo date("d F Y", $formatCreatedTime).' to '.date("d F Y", $formatUpdatedTime);
+                                                                                @endphp
                                                                         </h3>
                                                                     </div>
                                                                     <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
@@ -251,32 +266,15 @@
                                                                             <td align="center" width="33%"><b>Paid by Company</b></td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td valign="top"><b>BPJS Name</b></td>
-                                                                            <td valign="top" align="center"></td>
-                                                                            <td valign="top" align="center"></td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
-                                                                <div class="m-portlet__body">
-                                                                    <div class="d-flex justify-content-end mt-3">
-                                                                        <h3 class="m-portlet__head-text">
-                                                                            14 August 2019 to 14 August 2019
-                                                                        </h3>
-                                                                    </div>
-                                                                    <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
-                                                                        <tr>
-                                                                            <td align="center" width="34%"></td>
-                                                                            <td align="center" width="33%"><b>Paid by Employees</b></td>
-                                                                            <td align="center" width="33%"><b>Paid by Company</b></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td valign="top"><b>BPJS Name</b></td>
-                                                                            <td valign="top" align="center"></td>
-                                                                            <td valign="top" align="center"></td>
+                                                                            <td valign="top"><b>{{ $h->name }}</b></td>
+                                                                            <td valign="top" align="center">{{ $h->employee_paid }}</td>
+                                                                            <td valign="top" align="center">{{ $h->company_paid }}</td>
                                                                         </tr>
                                                                     </table>
                                                                 </div>
                                                             </div>
+                                                            @endforeach
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>

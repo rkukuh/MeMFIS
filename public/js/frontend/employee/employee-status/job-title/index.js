@@ -300,6 +300,13 @@ let EmployeeJobTittle = {
                 });
             });
 
+            let refresh_datatable = $(document).on('click', '#m_tab_6_2', function () {
+                let table = $('.m_datatable_job_title').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+            });
+
     }
 };
 

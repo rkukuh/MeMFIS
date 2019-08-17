@@ -123,7 +123,7 @@ class CompanyController extends Controller
         ]);
 
         // TODO: Return error message as JSON
-        return response()->json($request->description);
+        return response()->json($company);
     }
 
     /**

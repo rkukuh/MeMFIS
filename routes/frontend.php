@@ -179,13 +179,6 @@ Route::name('frontend.')->group(function () {
         Route::view('hr/workshift-schedule', 'frontend.workshift-schedule.index')->name('hr.workshift-schedule.index');
         Route::view('hr/workshift-schedule/create', 'frontend.workshift-schedule.create')->name('hr.workshift-schedule.create');
         Route::view('hr/workshift-schedule/show', 'frontend.workshift-schedule.show')->name('hr.workshift-schedule.show');
-
-        /** BPJS*/
-
-        Route::view('hr/bpjs/create', 'frontend.benefit.bpjs.create')->name('hr.benefit.bpjs.create');
-        Route::view('hr/bpjs/edit', 'frontend.benefit.bpjs.edit')->name('hr.benefit.bpjs.edit');
-        Route::view('hr/bpjs/show', 'frontend.benefit.bpjs.show')->name('hr.benefit.bpjs.show');
-        
         
         /** QUOTATION's WORKPACKAGE's TASKCARDs */
 

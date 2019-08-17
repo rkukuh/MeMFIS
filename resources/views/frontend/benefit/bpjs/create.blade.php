@@ -173,7 +173,6 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-bpjs')
                                                         @slot('class', 'add-bpjs')
                                                     @endcomponent
 
@@ -193,3 +192,7 @@
         </div>
     </div>
 @endsection
+
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/benefit/bpjs/create.js')}}"></script>
+@endpush

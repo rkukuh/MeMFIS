@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
-use App\MemfisModel;
+use Illuminate\Database\Eloquent\Model;
 
-class BPJS extends MemfisModel
+class BpjsHistory extends Model
 {
-    protected $table = 'bpjs';
+    protected $table = 'bpjs_histories';
 
     protected $fillable = [
+        'bpjs_id',
         'code',
         'name',
         'employee_paid',
@@ -25,12 +26,12 @@ class BPJS extends MemfisModel
      * One-to-Many: A BPJS may have one or many history.
      *
      * This function will retrieve all the history of a given BPJS.
-     * See: BpjsHistory bpjs() method for the inverse
+     * See: BPJS history() method for the inverse
      *
      * @return mixed
      */
-    public function history()
+    public function bpjs()
     {
-        return $this->hasMany(BpjsHistory::class);
+        return $this->belongsTo(BPJS::class);
     }
 }

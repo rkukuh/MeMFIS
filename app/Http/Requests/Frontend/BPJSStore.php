@@ -40,6 +40,7 @@ class BPJSStore extends FormRequest
             // 'company_paid.between' => 'The company paid must be between 0% until 100%'
         ];
     }
+    
     protected function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }

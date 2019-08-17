@@ -24,7 +24,8 @@ class BPJSStore extends FormRequest
     public function rules()
     {
         return [
-            //
+            'code' => 'required',
+            'name' => 'required'
         ];
     }
 }
