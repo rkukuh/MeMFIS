@@ -780,6 +780,7 @@ let TaskCard = {
                 sections[i] = entry;
                 i++;
             });
+            console.log(sections);
 
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
@@ -822,9 +823,9 @@ let TaskCard = {
             data.append("additionals",  internal_numberJSON);
             data.append("ata", $('input[name=ata]').val());
             data.append("reference", $('#service_bulletin').val());
-            data.append("stringer", $('#stringer').val());
+            data.append("stringer", JSON.stringify($('#stringer').val()));
             data.append("station", $('#station').val());
-            data.append("sections", JSON.stringify(sections));
+            data.append("section", JSON.stringify(sections));
             data.append("fileInput", document.getElementById('taskcard').files[0]);
             data.append('_method', 'PUT');
 

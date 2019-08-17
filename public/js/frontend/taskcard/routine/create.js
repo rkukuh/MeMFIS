@@ -121,7 +121,6 @@ let TaskCard = {
                 sections[i] = entry;
                 i++;
             });
-
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
             } else {
@@ -163,9 +162,9 @@ let TaskCard = {
             data.append("repeat_type", JSON.stringify(repeat_type));
             data.append("document", $('#document').val());
             data.append("reference", $('#service_bulletin').val());
-            data.append("stringer", $('#stringer').val());
+            data.append("stringer", JSON.stringify( $('#stringer').val()) );
             data.append("station", $('#station').val());
-            data.append("sections", JSON.stringify(sections));
+            data.append("section", JSON.stringify(sections));
             data.append("fileInput", document.getElementById('taskcard').files[0]);
 
             $.ajax({
@@ -245,7 +244,7 @@ let TaskCard = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/taskcard-routine/' + response.uuid + '/edit';
+                        window.location.href = '/taskcard-routine/' + response.uuid + '/edit';
                     }
                 }
             });

@@ -33,11 +33,12 @@ class TaskCardRoutineController extends Controller
     {
         $this->zones = Zone::get();
         $this->access = Access::get();
+        $this->stations = Station::get();
         $this->aircraft = Aircraft::get();
         $this->taskcard = TaskCard::get();
-        $this->skill = Type::ofTaskCardSkill()->get();
         $this->task = Type::ofTaskCardTask()->get();
         $this->work_area = Type::ofWorkArea()->get();
+        $this->skill = Type::ofTaskCardSkill()->get();
         $this->type = Type::ofTaskCardTypeRoutine()->get();
         $this->maintenanceCycle = Type::ofMaintenanceCycle()->get();
     }
@@ -72,7 +73,6 @@ class TaskCardRoutineController extends Controller
      */
     public function store(TaskCardRoutineStore $request)
     {
-        // dd($request->all());
         $this->decoder($request);
         $accesses = $zones = [];
         if($request->work_area){
@@ -234,7 +234,8 @@ class TaskCardRoutineController extends Controller
      */
     public function edit(TaskCard $taskCard)
     {
-        $aircraft_taskcards = [];
+        // dd($taskCard->section);
+        $tc_stations = $aircraft_taskcards = [];
 
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
@@ -259,20 +260,32 @@ class TaskCardRoutineController extends Controller
             $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
         }
 
+        $temp = $taskCard->stations->map(function ($stations) {
+            return collect($stations->toArray())
+            ->only(['uuid'])
+            ->all();
+        });
+        $temp = array_values($temp->toArray());
+        foreach($temp as $station){
+            array_push($tc_stations, $station["uuid"]);
+        }
+
         return view('frontend.task-card.routine.edit', [
-            'taskcard' => $taskCard,
-            'aircraft_taskcards' => $aircraft_taskcards,
-            'access_taskcards' => $access_taskcards,
-            'zone_taskcards' => $zone_taskcards,
-            'relation_taskcards' => $relation_taskcards,
-            'types' => $this->type,
-            'work_areas' => $this->work_area,
             'tasks' => $this->task,
-            'aircrafts' => $this->aircraft,
-            'accesses' => $this->access,
+            'types' => $this->type,
             'zones' => $this->zones,
+            'taskcard' => $taskCard,
             'skills' => $this->skill,
+            'accesses' => $this->access,
+            'stations' => $this->stations,
+            'tc_stations' => $tc_stations,
+            'aircrafts' => $this->aircraft,
             'taskcards' => $this->taskcard,
+            'work_areas' => $this->work_area,
+            'zone_taskcards' => $zone_taskcards,
+            'access_taskcards' => $access_taskcards,
+            'aircraft_taskcards' => $aircraft_taskcards,
+            'relation_taskcards' => $relation_taskcards,
             'MaintenanceCycles' => $this->maintenanceCycle,
             'additionals' => json_decode($taskCard->additionals)
         ]);
@@ -288,6 +301,7 @@ class TaskCardRoutineController extends Controller
      */
     public function update(TaskCardRoutineUpdate $request, TaskCard $taskCard)
     {
+        // dd($request->section);
         $this->decoder($request);
         $accesses = [];
         $zones = [];
@@ -352,10 +366,10 @@ class TaskCardRoutineController extends Controller
                         $taskCard->thresholds()->save(new Threshold([
                             'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
                             'amount' => $request->threshold_amount[$i],
-                            ]));
-                        }
+                        ]));
                     }
                 }
+            }
 
             if(is_array($request->repeat_amount)){
                 for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) {
@@ -363,17 +377,29 @@ class TaskCardRoutineController extends Controller
                         $taskCard->repeats()->save(new Repeat([
                             'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
                             'amount' => $request->repeat_amount[$i],
-                            ]));
-                        }
+                        ]));
                     }
                 }
+            }
 
-                if ($request->hasFile('fileInput')) {
-                    $data = $request->input('image');
-                    $photo = $request->file('fileInput')->getClientOriginalName();
-                    $destination = 'master/taskcard/routine/';
-                    $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+            if(is_array($request->station) && sizeof($request->station) > 0){
+                foreach ($request->applicability_airplane as $airplane) {
+                    if(isset($request->station)){
+                        $station = Station::firstOrCreate(
+                            ['name' => $request->station, 'stationable_id' => $airplane, 'stationable_type' => 'App\Models\Aircraft']
+                        );
+                    }
+
+                    $taskCard->stations()->sync($station);
                 }
+            }
+
+            if ($request->hasFile('fileInput')) {
+                $data = $request->input('image');
+                $photo = $request->file('fileInput')->getClientOriginalName();
+                $destination = 'master/taskcard/routine/';
+                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+            }
 
             return response()->json($taskCard);
         }
@@ -395,13 +421,15 @@ class TaskCardRoutineController extends Controller
 
     public function decoder($req){
 
-        $req->applicability_airplane = json_decode($req->applicability_airplane);
-        $req->threshold_type = json_decode($req->threshold_type);
-        $req->repeat_type = json_decode($req->repeat_type);
-        $req->threshold_amount = json_decode($req->threshold_amount);
-        $req->repeat_amount = json_decode($req->repeat_amount);
-        $req->access = json_decode($req->access);
         $req->zone = json_decode($req->zone);
+        $req->access = json_decode($req->access);
+        // $req->stringer = json_encode($req->stringer);
+        $req->sections = json_decode($req->sections);
+        $req->repeat_type = json_decode($req->repeat_type);
+        $req->repeat_amount = json_decode($req->repeat_amount);
+        $req->threshold_amount = json_decode($req->threshold_amount);
+        $req->threshold_type = json_decode($req->threshold_type);
+        $req->applicability_airplane = json_decode($req->applicability_airplane);
 
         return $req;
     }
