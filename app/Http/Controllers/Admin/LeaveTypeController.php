@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\LeaveType;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\LeaveTypeStore;
-use App\Http\Requests\Frontend\LeaveTypeUpdate;
+use App\Http\Requests\Admin\LeaveTypeStore;
+use App\Http\Requests\Admin\LeaveTypeUpdate;
 
 class LeaveTypeController extends Controller
 {
@@ -32,7 +32,7 @@ class LeaveTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\LeaveTypeStore  $request
+     * @param  \App\Http\Requests\Admin\LeaveTypeStore  $request
      * @return \Illuminate\Http\Response
      */
     public function store(LeaveTypeStore $request)
@@ -65,7 +65,7 @@ class LeaveTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\LeaveTypeUpdate  $request
+     * @param  \App\Http\Requests\Admin\LeaveTypeUpdate  $request
      * @param  \App\Models\LeaveType  $leaveType
      * @return \Illuminate\Http\Response
      */

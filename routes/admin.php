@@ -60,6 +60,7 @@ Route::name('admin.')->group(function () {
         Route::resource('benefit', 'BenefitController');
         Route::resource('bpjs', 'BPJSController');
         Route::resource('job-tittle', 'JobTittleController');
+        Route::resource('leave-type', 'LeaveTypeController');
         
         /** LICENSE */
 

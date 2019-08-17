@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\LeaveType;
 use App\Models\Manhour;
 use Illuminate\Database\Seeder;
 
@@ -50,6 +51,7 @@ class DummyDataSeeder extends Seeder
         $this->call(BPJSS::class);
         $this->call(JobTittles::class);
         $this->call(Manhours::class);
+        $this->call(LeaveTypes::class);
         
         /** POLYMORPH */
 

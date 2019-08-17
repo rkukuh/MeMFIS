@@ -66,6 +66,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('benefit', 'BenefitController');
         Route::resource('bpjs', 'BPJSController');
         Route::resource('job-tittle', 'JobTittleController');
+        Route::resource('leave-type', 'LeaveTypeController');
 
         /** CERTIFICATION */
 
@@ -76,10 +77,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('general-license', 'GeneralLicenseController');
         Route::resource('employee-license', 'EmployeeLicenseController');
-
-        /** LEAVE TYPES */
-
-        Route::resource('leave-type', 'LeaveTypeController');
 
         /** Jobcard EO */
 

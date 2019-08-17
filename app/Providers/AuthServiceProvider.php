@@ -86,7 +86,8 @@ class AuthServiceProvider extends ServiceProvider
         Models\TaskCardWorkPackageSuccessor::class => Policies\TaskCardWorkPackageSuccessorPolicy::class,
         Models\TaskCardWorkPackagePredecessor::class => Policies\TaskCardWorkPackagePredecessorPolicy::class,
         Models\QuotationWorkPackageTaskCardItem::class => Policies\QuotationWorkPackageTaskCardItemPolicy::class,
-        Models\JobTittle::class => Policies\JobTittlePolicy::class
+        Models\JobTittle::class => Policies\JobTittlePolicy::class,
+        Models\LeaveType::class => Policies\LeaveTypePolicy::class,
     ];
 
     /**
