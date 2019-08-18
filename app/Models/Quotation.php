@@ -29,6 +29,7 @@ class Quotation extends MemfisModel
         'term_of_payment',
         'term_of_condition',
         'description',
+        'data_htcrr',
         'origin_project',
         'origin_currency',
         'origin_scheduled_payment_type',
