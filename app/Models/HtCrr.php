@@ -26,7 +26,6 @@ class HtCrr extends MemfisModel
         'discount_type',
         'discount_value',
         'description',
-
         'origin_type',
         'origin_project',
         'origin_conducted_by',

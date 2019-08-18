@@ -20,7 +20,6 @@ class DefectCard extends MemfisModel
         'sequence',
         'ata',
         'description',
-
         'origin_jobcard',
         'origin_project_additional',
         'origin_quotation_additional',

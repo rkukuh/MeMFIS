@@ -19,7 +19,6 @@ class CreateJobcardsTable extends Migration
             $table->string('number');
             $table->unsignedBigInteger('quotation_id');
             $table->unsignedBigInteger('taskcard_id');
-
             $table->json('origin_quotation')->nullable();
             $table->json('origin_taskcard')->nullable();
             $table->json('origin_taskcard_items')->nullable();
