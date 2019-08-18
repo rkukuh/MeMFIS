@@ -6,8 +6,8 @@ let leavePeriod = {
         let code_uppercase = code.toUpperCase();
 
         let name = $('input[name=name]').val();
-        let period_start = $('input[name=period_start]').val();
-        let period_end = $('input[name=period_end]').val();
+        let period_start = $('input[name=period_start_date]').val();
+        let period_end = $('input[name=period_end_date]').val();
         let description = $('#description').val();
 
         $.ajax({
@@ -26,14 +26,31 @@ let leavePeriod = {
             },
             success: function (data) {
                 if (data.errors) {
-                    $.each(data.errors, function (key, value) {
-                        var name = $("input[name='"+key+"']");
-                        if(key.indexOf(".") != -1){
-                          var arr = key.split(".");
-                          name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
-                        }
-                        name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
-                      }); 
+                    if (data.errors.code) {
+                        $('#code-error').html(data.errors.code[0]);
+                    }else{
+                        $('#code-error').html('');
+                    }
+                    if (data.errors.name) {
+                        $('#name-error').html(data.errors.name[0]);
+                    }else{
+                        $('#name-error').html('');
+                    }
+                    if (data.errors.period_start) {
+                        $('#period_start_date-error').html(data.errors.period_start[0]);
+                    }else{
+                        $('#period_start_date-error').html('');
+                    }
+                    if (data.errors.period_end) {
+                        $('#period_end_date-error').html(data.errors.period_end[0]);
+                    }else{
+                        $('#period_end_date-error').html('')
+                    }
+                    if (data.errors.description) {
+                        $('#description-error').html(data.errors.description[0]);
+                    }else{
+                        $('#description-error').html('')
+                    }
 
                 } else {
                     toastr.success('Data has been saved.', 'Succes', {
