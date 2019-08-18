@@ -17,6 +17,7 @@ class Project extends MemfisModel
         'aircraft_register',
         'aircraft_sn',
         'data_htcrr',
+        'data_defectcard',
         'origin_project',
         'origin_project_workpackages',
         'origin_project_workpackage_engineers',

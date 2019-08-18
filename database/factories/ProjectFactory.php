@@ -45,6 +45,14 @@ $factory->define(Project::class, function (Faker $faker) {
 
             return $faker->randomElement([null, json_encode($data)]);
         },
+        'data_defectcard' => function () use ($faker) {
+            $data['tat'] = null;
+            $data['performance_factor'] = null;
+            $data['total_manhours'] = null;
+            $data['total_manhours_with_performance_factor'] = null;
+
+            return $faker->randomElement([null, json_encode($data)]);
+        },
         'origin_project' => null,
         'origin_project_workpackages' => null,
         'origin_project_workpackage_engineers' => null,
