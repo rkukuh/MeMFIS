@@ -185,3 +185,40 @@ Route::get('/jobcard-eo-doc', function () {
     $pdf = \PDF::loadView('frontend/form/jobcard_eo_redesign');
     return $pdf->stream();
 });
+
+Route::get('/dc', function () {
+    // $m = new iio\libmergepdf\Merger();
+
+    // $view1 = \View::make('frontend.form.dc_page1')->render();
+    // $view2 = \View::make('frontend.form.dc_page2')->render();
+
+    // $pdf = App::make('dompdf.wrapper');
+    // $pdf->loadHTML($view1)->setPaper('a4', 'portrait');
+    // $m->addRaw($pdf->output());
+
+    // $pdf = App::make('dompdf.wrapper');
+    // $pdf->loadHTML($view2)->setPaper('a4', 'landscape');
+    // $m->addRaw($pdf->output());
+
+
+    // file_put_contents('img/test_tes.pdf', $m->merge());
+    // $invnoabc = new \PDF;
+    // $invnoabc = 'test_tes.pdf';
+
+// ob_end_clean();
+
+// $invnoabc->stream();
+return response()->file(
+    public_path('test_tes.pdf')
+);
+    // $dompdf->stream('img/test_tes.pdf');
+    // $dompdf->stream("img/test_tes.pdf", array("Attachment" => false));
+
+
+    // $pdf = \PDF::loadView('frontend/form/dc_page1');
+    // $pdf = \PDF::loadView('frontend/form/dc_page2');
+    // $pdf->setPaper('A4', 'landscape');
+
+    // return $pdf->stream();
+});
+
