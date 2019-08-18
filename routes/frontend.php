@@ -99,20 +99,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/work-progress-report', 'frontend.work-progress-report.index')->name('work-progress-report.index');
         Route::view('/work-progress-report/show', 'frontend.work-progress-report.show')->name('work-progress-report.show');
 
-        /** Additional Task */
-
-        Route::view('/additional-task', 'frontend.project.hm-additional.index')->name('additional-task.index');
-        Route::view('/additional-task/create', 'frontend.project.hm-additional.create')->name('additional-task.create');
-        Route::view('/additional-task/edit', 'frontend.project.hm-additional.edit')->name('additional-task.edit');
-        Route::view('/additional-task/show', 'frontend.project.hm-additional.show')->name('additional-task.show');
-        Route::view('/additional-task/summary', 'frontend.project.hm-additional.summary')->name('additional-task.summary');
-
-        /** Additional Task Quotation*/
-        
-        Route::view('/additional-task-qtn/create', 'frontend.quotation.additional.create')->name('additional-task-qtn.create');
-        Route::view('/additional-task-qtn/edit', 'frontend.quotation.additional.edit')->name('additional-task-qtn.edit');
-        Route::view('/additional-task-qtn/show', 'frontend.quotation.additional.show')->name('additional-task-qtn.show');
-
         /** Purchase Request */
 
         Route::view('/purchase-request/general/create', 'frontend.purchase-request.general.create')->name('purchase-request.general.create');
@@ -178,8 +164,8 @@ Route::name('frontend.')->group(function () {
         Route::view('hr/workshift-schedule', 'frontend.workshift-schedule.index')->name('hr.workshift-schedule.index');
         Route::view('hr/workshift-schedule/create', 'frontend.workshift-schedule.create')->name('hr.workshift-schedule.create');
         Route::view('hr/workshift-schedule/show', 'frontend.workshift-schedule.show')->name('hr.workshift-schedule.show');
-        
-        
+
+
         /** QUOTATION's WORKPACKAGE's TASKCARDs */
 
         Route::resource('qtn-wp-tc-item', 'QuotationWorkPackageTaskCardItemController');
