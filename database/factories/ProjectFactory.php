@@ -38,6 +38,7 @@ $factory->define(Project::class, function (Faker $faker) {
         'aircraft_register' => 'AC-REG-' . $faker->randomNumber(),
         'aircraft_sn' => 'AC-SN-' . $faker->randomNumber(),
         'data_htcrr' => function () use ($faker) {
+            $data['tat'] = null;
             $data['performance_factor'] = null;
             $data['total_manhours'] = null;
             $data['total_manhours_with_performance_factor'] = null;
