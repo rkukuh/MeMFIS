@@ -16,7 +16,7 @@ class Project extends MemfisModel
         'no_wo',
         'aircraft_register',
         'aircraft_sn',
-        'tat_htcrr',
+        'data_htcrr',
         'origin_project',
         'origin_project_workpackages',
         'origin_project_workpackage_engineers',
