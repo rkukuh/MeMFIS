@@ -9,11 +9,10 @@
                     </label>
 
                     @component('frontend.common.input.select2')
-                        @slot('text', 'Job Position')
-                        @slot('class', 'job_position')
-                        @slot('id', 'job_position')
-                        @slot('name', 'job_position')
-                        @slot('id_error', 'job_position')
+                        @slot('text', 'Job Position'))
+                        @slot('id', 'job_position_workshift')
+                        @slot('name', 'job_position_workshift')
+                        @slot('id_error', 'job_position_workshift')
                     @endcomponent
                 </div>
             </div>
@@ -22,5 +21,5 @@
 </div>
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/job-position.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/job-position-workshift.js') }}"></script>
 @endpush
