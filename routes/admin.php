@@ -60,7 +60,14 @@ Route::name('admin.')->group(function () {
         Route::resource('leave-period','LeavePeriodController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
-
+        Route::resource('leave-period','LeavePeriodController');
+        Route::resource('company', 'CompanyController');
+        Route::resource('department', 'DepartmentController');
+        Route::resource('benefit', 'BenefitController');
+        Route::resource('bpjs', 'BPJSController');
+        Route::resource('job-tittle', 'JobTittleController');
+        Route::resource('leave-type', 'LeaveTypeController');
+        
         /** LICENSE */
 
         Route::resource('amel', 'AmelController');

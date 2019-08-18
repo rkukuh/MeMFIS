@@ -62,10 +62,16 @@ Route::name('frontend.')->group(function () {
         Route::resource('language', 'LanguageController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
-        Route::resource('department', 'DepartmentController');
-        Route::resource('leave-period','LeavePeriodController');
+        Route::resource('manhour', 'ManhourController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
+        Route::resource('leave-period','LeavePeriodController');
+        Route::resource('company', 'CompanyController');
+        Route::resource('department', 'DepartmentController');
+        Route::resource('benefit', 'BenefitController');
+        Route::resource('bpjs', 'BPJSController');
+        Route::resource('job-tittle', 'JobTittleController');
+        Route::resource('leave-type', 'LeaveTypeController');
 
         /** CERTIFICATION */
 
@@ -76,10 +82,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('general-license', 'GeneralLicenseController');
         Route::resource('employee-license', 'EmployeeLicenseController');
-
-        /** LEAVE TYPES */
-
-        Route::resource('leave-type', 'LeaveTypeController');
 
         /** Jobcard EO */
 
@@ -179,7 +181,6 @@ Route::name('frontend.')->group(function () {
         Route::view('hr/workshift-schedule', 'frontend.workshift-schedule.index')->name('hr.workshift-schedule.index');
         Route::view('hr/workshift-schedule/create', 'frontend.workshift-schedule.create')->name('hr.workshift-schedule.create');
         Route::view('hr/workshift-schedule/show', 'frontend.workshift-schedule.show')->name('hr.workshift-schedule.show');
-        
         
         /** QUOTATION's WORKPACKAGE's TASKCARDs */
 
