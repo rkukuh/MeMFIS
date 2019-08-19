@@ -1,7 +1,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
-            <legend class="w-auto">Termination Details</legend>
+            <legend class="w-auto"><b>Termination Details</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">

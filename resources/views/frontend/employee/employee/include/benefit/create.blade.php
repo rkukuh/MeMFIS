@@ -9,7 +9,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border">
-            <legend class="w-auto">Allowance</legend>
+            <legend class="w-auto"><b>Allowance</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <div style="border-bottom:3px solid black">
@@ -98,7 +98,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
-            <legend class="w-auto">Other</legend>
+            <legend class="w-auto"><b>Other</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -143,7 +143,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
-            <legend class="w-auto">BPJS</legend>
+            <legend class="w-auto"><b>BPJS</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <table width="100%" cellpadding="4" border="1">
@@ -363,7 +363,7 @@
             </div>
         </fieldset>
         <fieldset class="border p-3 mt-3">
-            <legend class="w-auto">PPH 21</legend>
+            <legend class="w-auto"><b>PPH 21</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-2 col-md-2 col-lg-2">
                     @component('frontend.common.input.radio')
@@ -390,7 +390,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-3">
-            <legend class="w-auto">Lately & Absences</legend>
+            <legend class="w-auto"><b>Lately & Absences</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">

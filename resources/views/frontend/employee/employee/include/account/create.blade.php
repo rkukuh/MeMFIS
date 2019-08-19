@@ -1,7 +1,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
-            <legend class="w-auto">User Account Details</legend>
+            <legend class="w-auto"><b>User Account Details</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -73,7 +73,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
-            <legend class="w-auto">Bank Account Details</legend>
+            <legend class="w-auto"><b>Bank Account Details</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">

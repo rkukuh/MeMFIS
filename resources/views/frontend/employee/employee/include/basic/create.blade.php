@@ -1,7 +1,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
-            <legend class="w-auto">Personal Detail</legend>
+            <legend class="w-auto"><b>Personal Details</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -163,7 +163,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
-            <legend class="w-auto">Contact Information Details</legend>
+            <legend class="w-auto"><b>Contact Information Details</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -317,7 +317,7 @@
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
-            <legend class="w-auto">Job Details</legend>
+            <legend class="w-auto"><b>Job Details</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <div class="form-group m-form__group row">
