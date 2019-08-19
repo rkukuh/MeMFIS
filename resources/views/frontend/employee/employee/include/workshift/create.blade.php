@@ -9,7 +9,7 @@
                     </label>
 
                     @component('frontend.common.input.select2')
-                        @slot('text', 'Job Position'))
+                        @slot('text', 'Job Position')
                         @slot('id', 'job_position_workshift')
                         @slot('name', 'job_position_workshift')
                         @slot('id_error', 'job_position_workshift')
@@ -17,6 +17,25 @@
                 </div>
             </div>
         </fieldset>
+    </div>
+</div>
+
+<div class="form-group m-form__group row">
+    <div class="col-sm-12 col-md-12 col-lg-12 footer">
+        <div class="flex">
+            <div class="action-buttons">
+                @component('frontend.common.buttons.submit')
+                    @slot('type','button')
+                    @slot('id', 'add-workshift')
+                    @slot('class', 'add-workshift')
+                @endcomponent
+
+                @include('frontend.common.buttons.reset')
+
+                @include('frontend.common.buttons.back')
+
+            </div>
+        </div>
     </div>
 </div>
 

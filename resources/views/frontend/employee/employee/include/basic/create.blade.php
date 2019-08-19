@@ -167,11 +167,11 @@
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
-                        Address Line @include('frontend.common.label.required')
+                        Address Line 1 @include('frontend.common.label.required')
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('text', 'Address Line')
+                        @slot('text', 'Address Line 1')
                         @slot('id', 'address_line_1')
                         @slot('name', 'address_line_1')
                         @slot('id_error', 'address_line_1')

@@ -54,6 +54,18 @@
                     @endcomponent
                 </div>
             </div>
+            
+            <div class="form-group m-form__group row">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <label class="form-control-label">
+                        Active 
+                    </label><br>
+
+                    <span class="m-bootstrap-switch m-bootstrap-switch--pill">
+                        <input data-switch="true" type="checkbox" data-on-color="success" checked="checked">
+                    </span>
+                </div>
+            </div>
         </fieldset>
     </div>
 </div>
@@ -114,4 +126,16 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/role.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/bank.js') }}"></script>
+    <script>
+    
+    var BootstrapSwitch = {
+        init: function() {
+            $("[data-switch=true]").bootstrapSwitch();
+        }
+    };
+    jQuery(document).ready(function() {
+        BootstrapSwitch.init();
+    });
+
+    </script>
 @endpush
