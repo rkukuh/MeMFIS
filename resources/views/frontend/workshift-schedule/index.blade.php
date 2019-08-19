@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.workshift-schedule.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.workshift.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Workshift Schedule
                             </span>
@@ -67,7 +67,7 @@
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
                                             @slot('text', 'Workshift')
-                                            @slot('href', route('frontend.hr.workshift-schedule.create') )
+                                            @slot('href', route('frontend.workshift.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>

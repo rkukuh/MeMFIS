@@ -89,6 +89,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\JobTittle::class => Policies\JobTittlePolicy::class,
         Models\LeaveType::class => Policies\LeaveTypePolicy::class,
         Models\Holiday::class => Policies\HolidayPolicy::class,
+        Models\Workshift::class => Policies\WorkshiftPolicy::class,
     ];
 
     /**

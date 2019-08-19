@@ -57,6 +57,8 @@ let Holiday = {
                     toastr.success('Data has been saved.', 'Succes', {
                         timeOut: 5000
                     });
+
+                    
                 }
             }
         });

@@ -54,6 +54,7 @@ class DatabaseSeeder extends Seeder
         $this->call(JobTittlesTableSeeder::class);
         $this->call(LeaveTypesTableSeeder::class);
         $this->call(HolidaysTableSeeder::class);
+        $this->call(WorkshiftsTableSeeder::class);
 
         /** POLYMORPH */
 

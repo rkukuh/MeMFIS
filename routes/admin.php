@@ -62,6 +62,7 @@ Route::name('admin.')->group(function () {
         Route::resource('job-tittle', 'JobTittleController');
         Route::resource('leave-type', 'LeaveTypeController');
         Route::resource('holiday', 'HolidayController');
+        Route::resource('workshift', 'WorkshiftController');
 
         /** LICENSE */
 

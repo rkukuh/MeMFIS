@@ -54,6 +54,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Manhours::class);
         $this->call(LeaveTypes::class);
         $this->call(Holidays::class);
+        $this->call(Workshifts::class);
 
         /** POLYMORPH */
 

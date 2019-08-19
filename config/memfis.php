@@ -63,5 +63,6 @@ return [
         'jobtittles' => 20,
         'leavetypes' => 20,
         'holidays' => 20,
+        'workshifts' => 20
     ],
 ];

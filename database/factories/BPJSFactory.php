@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\BPJS;
+use App\Models\BpjsHistory;
 use Illuminate\Support\Carbon;
 use Faker\Generator as Faker;
 

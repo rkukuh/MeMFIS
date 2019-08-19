@@ -68,6 +68,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('job-tittle', 'JobTittleController');
         Route::resource('leave-type', 'LeaveTypeController');
         Route::resource('holiday', 'HolidayController');
+        Route::resource('workshift', 'WorkshiftController');
 
         /** CERTIFICATION */
 
@@ -164,12 +165,6 @@ Route::name('frontend.')->group(function () {
         Route::view('/gse-tool-returned/project/create', 'frontend.gse-tool-returned.project.create')->name('gse-tool-returned.project.create');
         Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
         Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
-        
-        /** Workshift Schedule */
-
-        Route::view('hr/workshift-schedule', 'frontend.workshift-schedule.index')->name('hr.workshift-schedule.index');
-        Route::view('hr/workshift-schedule/create', 'frontend.workshift-schedule.create')->name('hr.workshift-schedule.create');
-        Route::view('hr/workshift-schedule/show', 'frontend.workshift-schedule.show')->name('hr.workshift-schedule.show');
         
         /** QUOTATION's WORKPACKAGE's TASKCARDs */
 
