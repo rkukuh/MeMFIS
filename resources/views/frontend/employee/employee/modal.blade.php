@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal_photo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">   
                 
@@ -122,8 +122,8 @@
 @push('header-scripts')
     <style>
     @media (min-width: 992px){
-        .modal-lg {
-            max-width: 1300px;
+        .modal-xl {
+            max-width: 1300px !important;
         }
     }
     .image-upload{
