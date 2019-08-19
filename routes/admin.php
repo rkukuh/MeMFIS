@@ -61,7 +61,8 @@ Route::name('admin.')->group(function () {
         Route::resource('bpjs', 'BPJSController');
         Route::resource('job-tittle', 'JobTittleController');
         Route::resource('leave-type', 'LeaveTypeController');
-        
+        Route::resource('holiday', 'HolidayController');
+
         /** LICENSE */
 
         Route::resource('amel', 'AmelController');

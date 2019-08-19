@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Datatables;
 
-use App\Models\LeaveType;
+use App\Models\Holiday;
 use App\Http\Controllers\Controller;
 
-class LeaveTypeDatatables extends Controller
+class HolidayDatatables extends Controller
 {
     
     public function index(){
-        $leaveType = LeaveType::get();
+    $holiday = Holiday::get();
 
-        $data = $alldata = json_decode($leaveType);
+        $data = $alldata = json_decode($holiday);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

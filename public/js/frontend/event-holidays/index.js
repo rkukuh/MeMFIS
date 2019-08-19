@@ -7,7 +7,7 @@ let EventHolidays = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/benefit',
+                        url: '/datatables/holiday',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -48,7 +48,7 @@ let EventHolidays = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/benefit/'+t.uuid+'">' + t.code + "</a>"
+                        return '<a href="/holiday/'+t.uuid+'">' + t.code + "</a>"
                     }
                 },
                 {
@@ -69,7 +69,7 @@ let EventHolidays = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/purchase-request/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
+                            '<a href="/holiday/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
                             '</a>' +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +

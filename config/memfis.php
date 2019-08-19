@@ -61,6 +61,7 @@ return [
         'workpackages' => 20,
         'BPJSS' => 20,
         'jobtittles' => 20,
-        'leavetypes' => 20
+        'leavetypes' => 20,
+        'holidays' => 20,
     ],
 ];

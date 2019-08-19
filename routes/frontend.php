@@ -67,6 +67,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('bpjs', 'BPJSController');
         Route::resource('job-tittle', 'JobTittleController');
         Route::resource('leave-type', 'LeaveTypeController');
+        Route::resource('holiday', 'HolidayController');
 
         /** CERTIFICATION */
 
@@ -163,14 +164,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/gse-tool-returned/project/create', 'frontend.gse-tool-returned.project.create')->name('gse-tool-returned.project.create');
         Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
         Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
-
-        /** Event/Holidays */
-
-        Route::view('hr/event-holidays', 'frontend.event-holidays.index')->name('hr.event-holidays.index');
-        Route::view('hr/event-holidays/create', 'frontend.event-holidays.create')->name('hr.event-holidays.create');
-        Route::view('hr/event-holidays/show', 'frontend.event-holidays.show')->name('hr.event-holidays.show');
-        Route::view('hr/event-holidays/edit', 'frontend.event-holidays.edit')->name('hr.event-holidays.edit');
-
+        
         /** Workshift Schedule */
 
         Route::view('hr/workshift-schedule', 'frontend.workshift-schedule.index')->name('hr.workshift-schedule.index');

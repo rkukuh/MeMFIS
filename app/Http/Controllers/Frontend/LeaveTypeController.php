@@ -16,7 +16,7 @@ class LeaveTypeController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.leave-types.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class LeaveTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.leave-types.create');
     }
 
     /**
@@ -37,7 +37,10 @@ class LeaveTypeController extends Controller
      */
     public function store(LeaveTypeStore $request)
     {
-        //
+        $leaveType = LeaveType::create($request->all());
+
+        // TODO: Return error message as JSON
+        return response()->json($leaveType);
     }
 
     /**
@@ -48,7 +51,7 @@ class LeaveTypeController extends Controller
      */
     public function show(LeaveType $leaveType)
     {
-        //
+        return view('frontend.leave-types.show',['leaveType' => $leaveType]);
     }
 
     /**
