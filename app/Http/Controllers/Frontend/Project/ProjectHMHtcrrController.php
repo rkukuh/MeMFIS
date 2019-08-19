@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ProjectHMStore;
 use App\Http\Requests\Frontend\ProjectHMUpdate;
+use stdClass;
 
 class ProjectHMHtcrrController extends Controller
 {
@@ -47,49 +48,35 @@ class ProjectHMHtcrrController extends Controller
      */
     public function create(Project $project,Request $request)
     {
-        $mhrs_pfrm_factor = $skills = $subset = $htcrr_engineers = [];
-
+        $mhrs_pfrm_factor = $skills = $htcrr_engineers = [];
         $htcrrs = HtCrr::where('code',  'like', 'JCRI%')->where('project_id', $project->id)->get();
-      
-        foreach($htcrrs as $htcrr){
-            $result = $htcrr->skills->map(function ($skills) {
-                return collect($skills->toArray())
-                    ->only(['name'])
-                    ->all();
-            });
-
-            array_push($subset , $result);
-            foreach($htcrr->engineers as $engineer){
-                array_push($htcrr_engineers , $engineer);
-            }
+        $htcrr_engineers = json_decode($project->data_htcrr)->engineer;
+        $engineer_qty = json_decode($project->data_htcrr)->engineer_qty;
+        $tat = json_decode($project->data_htcrr)->tat;
+        foreach(json_decode($project->data_htcrr)->skills as $key => $skill){
+            $object = new stdClass();
+            $object->skill = $skill;
+            $object->engineer_code = $htcrr_engineers[$key];
+            $object->quantity = $engineer_qty[$key];
+            array_push($skills, $object);
         }
-
-        foreach ($subset as $value) {
-            foreach($value as $skill){
-                array_push($skills, $skill["name"]);
-            }
-        }
-
-        sort($skills);
-        $skills = array_unique($skills);
-
+        
         $total_mhrs = $htcrrs->sum('estimation_manhour');
-
         $employees = Employee::all();
-        $facilities = Facility::all();
         if ($request->anyChanges) {
             $view = 'frontend.project.htcrr.index-engineerteam';
         }else{
             $view = 'frontend.project.htcrr.index';
         }
+
         return view($view,[
         'project' => $project,
         'employees' => $employees,
         'total_mhrs' => $total_mhrs,
-        'facilities' => $facilities,
+        'tat' => $tat,
         'engineer_skills' => $skills,
         'htcrr_engineers' => $htcrr_engineers,
-        'skills' => json_encode($skills),
+        'skills' => json_decode($project->data_htcrr)->skills,
         'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
         ]);
     }
@@ -169,10 +156,6 @@ class ProjectHMHtcrrController extends Controller
         //get employees
         $employees = Employee::all();
         $facilities = Facility::all();
-
-        // $materialCount = $workPackage->items->count();
-        // $toolCount = $workPackage->tools->count();
-        // dd($workPackage->uuid);
 
         $view = 'frontend.project.hm.workpackage.show';
         return view($view,[
@@ -294,57 +277,52 @@ class ProjectHMHtcrrController extends Controller
      * Update the specified resource in storage.
      *
      */
-    public function engineerTeam(Project $project, WorkPackage $workpackage,Request $request)
+    public function engineerTeam(Project $project, Request $request)
     {
-        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
-            ->where('workpackage_id',$workpackage->id)
-            ->first();
+        if($project->data_htcrr == null){
+            $data_json = [];
+            $data_json["skills"] = $request->engineer_skills;
+            $data_json["engineer"] = $request->engineer;
+            $data_json["engineer_qty"] = $request->engineer_qty;
+            $data_json["tat"] = $request->tat;
 
-        $project_workpackage->update(['tat' =>  $request->tat]);
-        for($index = 0 ; $index < sizeof($request->engineer_skills) ; $index++){
-            $skill = Type::where('name', 'LIKE', '%' .$request->engineer_skills[$index].'%' )
-                            ->where('of','taskcard-skill')->first()->id;
-            $engineer = Employee::where('code',$request->engineer[$index])->first()->id;
-            $ProjectWorkPackageEngineer = ProjectWorkPackageEngineer::where('project_workpackage_id',$project_workpackage->id)
-                    ->where('skill_id',$skill)
-                    ->first();
-            // return response()->json(isset($ProjectWorkPackageEngineer));
+            $project->update(['data_htcrr' => json_encode($data_json)]);
+        }else{
+            $data_json = json_decode($project->data_htcrr, true);
+            $data_json["skills"] = $request->engineer_skills;
+            $data_json["engineer"] = $request->engineer;
+            $data_json["engineer_qty"] = $request->engineer_qty;
+            $data_json["tat"] = $request->tat;
 
-            if(isset($ProjectWorkPackageEngineer)){
-                $res = $ProjectWorkPackageEngineer->update([
-                    'engineer_id' => $engineer,
-                    'quantity' => (int) $request->engineer_qty[$index],
-                    ]);
-            }else{
-                $res = ProjectWorkPackageEngineer::create([
-                    'project_workpackage_id' => $project_workpackage->id,
-                    'skill_id' => $skill,
-                    'engineer_id' => $engineer,
-                    'quantity' => (int) $request->engineer_qty[$index],
-                ]);
-            }
+            $project->update(['data_htcrr' => json_encode($data_json)]);
         }
 
-        return response()->json($project_workpackage);
+        return response()->json($data_json);
     }
 
     /**
      * Update the specified resource in storage.
      *
      */
-    public function manhoursPropotion(Project $project, WorkPackage $workpackage,Request $request)
+    public function manhoursPropotion(Project $project, Request $request)
     {
-        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
-            ->where('workpackage_id',$workpackage->id)
-            ->first();
+        if($project->data_htcrr == null){
+            $data_json = [];
+            $data_json["performance_factor"] = $request->performa_used;
+            $data_json["total_manhours"] = $request->manhour;
+            $data_json["total_manhours_with_performance_factor"] = $request->total;
 
-        $project_workpackage->update([
-            'performance_factor' =>  $request->performa_used,
-            'total_manhours' =>  $request->manhour,
-            'total_manhours_with_performance_factor' =>  $request->total,
-            ]);
+            $project->update(['data_htcrr' => json_encode($data_json)]);
+        }else{
+            $data_json = json_decode($project->data_htcrr, true);
+            $data_json["performance_factor"] = $request->performa_used;
+            $data_json["total_manhours"] = $request->manhour;
+            $data_json["total_manhours_with_performance_factor"] = $request->total;
 
-        return response()->json($project_workpackage);
+            $project->update(['data_htcrr' => json_encode($data_json)]);
+        }
+        
+        return response()->json($data_json);
 
     }
 
