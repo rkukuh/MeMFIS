@@ -134,6 +134,24 @@ let TaskCard = {
                     }
                 },
                 {
+                    field: 'created_by',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'updated_by',
+                    title: 'Updated By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'approved_by',
+                    title: 'Approved By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
