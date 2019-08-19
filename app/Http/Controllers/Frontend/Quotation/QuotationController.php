@@ -314,11 +314,6 @@ class QuotationController extends Controller
             'progressed_by' => Auth::id()
         ]));
 
-        $project->approvals()->save(new Approval([
-            'approvable_id' => $project->id,
-            'approved_by' => Auth::id(),
-        ]));
-
         $ProjectWorkPackage = ProjectWorkPackage::where('project_id',$quotation->project_id)->pluck('id');
         $ProjectWorkPackageTaskCard = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
         foreach($ProjectWorkPackageTaskCard as $tc){
