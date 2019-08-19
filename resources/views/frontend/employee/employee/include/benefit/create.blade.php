@@ -377,7 +377,7 @@
                     @component('frontend.common.input.radio')
                         @slot('id', 'break')
                         @slot('name', 'pause')
-                        @slot('text', 'Rest Time/ Beak Time')
+                        @slot('text', 'Paid by Company')
                         @slot('required','required')
                     @endcomponent
                 </div>
