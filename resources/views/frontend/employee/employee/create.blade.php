@@ -96,7 +96,7 @@
                                             <a class="nav-link btn btn-primary text-white" data-toggle="tab" href="#m_tabs_2_3">Workshift</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link btn btn-primary text-white" data-toggle="tab" href="#m_tabs_2_4">Benefits & PPH</a>
+                                            <a class="nav-link btn btn-primary text-white" data-toggle="tab" href="#m_tabs_2_4">Benefits & Salary</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link btn btn-primary text-white" data-toggle="tab" href="#m_tabs_2_5">Account</a>
