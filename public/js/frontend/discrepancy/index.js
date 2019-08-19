@@ -157,7 +157,7 @@ let TaskCard = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         if(t.status == "approved"){
-                            return ('<a href="/discrepancy-ppc/' + t.uuid + '/show" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Show" data-id="' + t.uuid +'">' +
+                            return ('<a href="/discrepancy-ppc/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Show" data-id="' + t.uuid +'">' +
                             '<i class="la la-eye"></i>');
                         }else{
                             return (
