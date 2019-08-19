@@ -419,6 +419,19 @@
     </div>
 </div>
 
+
+<div class="form-group m-form__group row mt-5">
+    <div class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center">
+        @component('frontend.common.buttons.create-new')
+            @slot('text', 'View History/Past Data')
+            @slot('data_target', '#modal_history')
+            @slot('icon','la la-history')
+        @endcomponent
+    </div>
+</div>
+
+@include('frontend.employee.employee.include.basic.modal-history')
+
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12 footer">
         <div class="flex">
