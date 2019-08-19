@@ -80,7 +80,7 @@
                         <div style="height:60px;width:100%;background:#e9ecef">
                             <div class="form-group m-form__group row p-3">
                                 <div class="col-sm-2 col-md-2 col-lg-2 d-flex justify-content-end">
-                                    <a href="" data-target="#modal_additional_quotation" data-toggle="modal">
+                                    <a href="" data-target="#modal_photo" data-toggle="modal">
                                         <i class="la la-pencil" style="font-size:32px;"></i>
                                     </a>
                                 </div>
@@ -110,7 +110,7 @@
                         </div>
                     </div>
 
-                    @include('frontend.quotation.additional.modal-project')
+                    @include('frontend.employee.employee.modal')
                     <div class="m-portlet__body">
                         <div class="tab-content">
                             <div class="tab-pane active" id="m_tabs_2_1" role="tabpanel">
