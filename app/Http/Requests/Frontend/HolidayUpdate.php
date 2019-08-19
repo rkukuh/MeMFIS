@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests\Frontend;
 
+
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class HolidayUpdate extends FormRequest
 {
@@ -13,7 +16,7 @@ class HolidayUpdate extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +27,15 @@ class HolidayUpdate extends FormRequest
     public function rules()
     {
         return [
-            //
+            'code' => 'required',
+            'name' => 'required',
+            'start_date' => 'required',
+            'end_date'=> 'required|date|after:start_date'
         ];
     }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
+    }
+
 }

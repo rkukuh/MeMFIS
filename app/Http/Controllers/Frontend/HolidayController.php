@@ -37,7 +37,10 @@ class HolidayController extends Controller
      */
     public function store(HolidayStore $request)
     {
-        //
+        $holiday = Holiday::create($request->all());
+
+        // TODO: Return error message as JSON
+        return response()->json($holiday);
     }
 
     /**
@@ -82,6 +85,9 @@ class HolidayController extends Controller
      */
     public function destroy(Holiday $holiday)
     {
-        //
+        $holiday->delete();
+        
+        // TODO: Return error message as JSON
+        return response()->json($holiday);
     }
 }

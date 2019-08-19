@@ -82,9 +82,9 @@
                                                     </label>
                 
                                                     @component('frontend.common.input.datepicker')
-                                                        @slot('id', 'start_date')
-                                                        @slot('name', 'start_date')
-                                                        @slot('id_error','start_date')
+                                                        @slot('id', 'period_start_date')
+                                                        @slot('name', 'period_start_date')
+                                                        @slot('id_error','period_start_date')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -93,9 +93,9 @@
                                                     </label>
                 
                                                     @component('frontend.common.input.datepicker')
-                                                        @slot('id', 'end_date')
-                                                        @slot('name', 'end_date')
-                                                        @slot('id_error','end_date')
+                                                        @slot('id', 'period_end_date')
+                                                        @slot('name', 'period_end_date')
+                                                        @slot('id_error','period_end_date')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -141,6 +141,7 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/period-start.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/period-end.js')}}"></script>
+    <script src="{{ asset('js/frontend/event-holidays/create.js')}}"></script>
 @endpush
