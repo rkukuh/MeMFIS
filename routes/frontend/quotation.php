@@ -25,6 +25,7 @@ Route::name('frontend.')->group(function () {
 
                 Route::get('/{quotation}/print', 'QuotationController@print');
                 Route::post('/{quotation}/workpackage/{workpackage}/discount', 'QuotationController@discount')->name('quotation.discount');
+                Route::post('/{quotation}/workpackage/{workpackage}/discount/htcrr', 'QuotationController@discount_htcrr')->name('quotation.discount.htcrr');
                 Route::post('/{quotation}/approve', 'QuotationController@approve')->name('quotation.approve');
 
                 Route::name('quotation.')->group(function () {
@@ -33,6 +34,7 @@ Route::name('frontend.')->group(function () {
                         'parameters' => ['workpackage' => 'workPackage']
                     ]);
 
+                    Route::get('/{quotation}/htcrr', 'QuotationWorkPackageController@htcrr')->name('workpackage.htcrr');
                 });
 
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('quotation.summary.basic');
