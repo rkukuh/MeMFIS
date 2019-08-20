@@ -182,17 +182,7 @@ Route::name('frontend.')->group(function () {
         Route::view('hr/workshift-schedule/create', 'frontend.workshift-schedule.create')->name('hr.workshift-schedule.create');
         Route::view('hr/workshift-schedule/show', 'frontend.workshift-schedule.show')->name('hr.workshift-schedule.show');
         
-        /** QUOTATION's WORKPACKAGE's TASKCARDs */
 
-        Route::resource('qtn-wp-tc-item', 'QuotationWorkPackageTaskCardItemController');
-
-        /** QUOTATION's HT/CRRs */
-
-        Route::resource('qtn-htcrr-item', 'QuotationHtcrrItemController');
-
-        /** QUOTATION's DEFECTCARDs */
-
-        Route::resource('qtn-defectcard-item', 'QuotationDefectCardItemController');
 
     });
 
