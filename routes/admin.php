@@ -118,6 +118,10 @@ Route::name('admin.')->group(function () {
 
         Route::resource('qtn-defectcard-item', 'QuotationDefectCardItemController');
 
+        /** WORKPACKAGE's EO-INSTRUCTIONs */
+
+        Route::resource('eo-instruction-wp', 'EOInstructionWorkPackageController');
+
     });
 
 });

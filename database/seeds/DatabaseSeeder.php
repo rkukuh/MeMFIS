@@ -113,6 +113,10 @@ class DatabaseSeeder extends Seeder
         $this->call(TaskCardWorkPackagePredecessorsTableSeeder::class);
         $this->call(TaskCardWorkPackageSuccessorsTableSeeder::class);
 
+        /** WORKPACKAGE's EO-INSTRUCTIONs */
+
+        $this->call(EOInstructionWorkPackagesTableSeeder::class);
+
         /** QUOTATION's WORKPACKAGEs */
 
         $this->call(QuotationWorkPackagesTableSeeder::class);
