@@ -59,7 +59,9 @@
 <script>
     let project_uuid = '{{ $quotation->project->uuid }}'    
     let quotation_uuid = '{{ $quotation->uuid }}'    
+    let currencyCode = '{{ $quotation->currency->code }}'
 </script>
     <script src="{{ asset('js/frontend/quotation/htcrr/workpackage.js')}}"></script>
+    <script src="{{ asset('js/custom.js')}}"></script>
 
 @endpush

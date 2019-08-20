@@ -861,6 +861,7 @@ let JobRequest = {
                 }
             });
         });
+        
         $('.modal-footer').on('click', '.add-htcrr-item-price', function () {
             let quantity = $('input[name=qty]').val();
             let price_amount = $('input[name=price]').val();
@@ -1187,8 +1188,6 @@ let JobRequest = {
                 }
             });
         });
-
-
 
         $('.action-buttons').on('click', '.add-job-request', function() {
 
