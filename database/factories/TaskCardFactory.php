@@ -84,6 +84,14 @@ $factory->define(TaskCard::class, function (Faker $faker) {
                 'internal_number' => 'TC-INT-DUM-' . $faker->unixTime()
             ];
 
+            $additionals['document_library'] = [
+                ['no' => 'Doc-102030'],
+                ['ref' => 'Ref-908070', 'title' => 'Some Document'],
+                ['no' => 'Doc-A/2/XII', 'description' => 'blablabla'],
+            ];
+
+            dump($additionals);
+
             return $faker->randomElement([null, json_encode($additionals)]);
         }
 
