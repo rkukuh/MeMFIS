@@ -73,6 +73,8 @@ Route::name('frontend.')->group(function () {
                 /** Transaction: HTCRR */
 
                 Route::post('/htcrr','HtCrrController@store')->name('project-hm.htcrr.add');
+                Route::post('/{project}/htcrr/engineer-team','ProjectHMHtcrrController@engineerTeam')->name('project-hm.htcrr.engineer_team');
+                Route::post('/{project}/htcrr/manhoursPropotion','ProjectHMHtcrrController@manhoursPropotion')->name('project-hm.htcrr.engineer_team');
 
                 /** Transaction: Item */
                 Route::post('/htcrr/{htcrr}/item', 'HtCrrItemsController@store')->name('htcrr.item.store');

@@ -129,4 +129,16 @@ class QuotationWorkPackageController extends Controller
         return response()->json($quotation);
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function htcrr(Quotation $quotation)
+    {
+        return view('frontend.quotation.htcrr.index',[
+            'quotation' => $quotation
+        ]);
+    }
+
 }

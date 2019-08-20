@@ -1,23 +1,20 @@
-{{-- @if(!empty($htcrr_engineers))
-    {{ dd("onok") }}
-@endif --}}
 @if(isset($htcrr_engineers))
 <div class="form-group m-form__group row px-4 pb-4">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        @if(in_array('Airframe',$engineer_skills))
+        @if(in_array('Airframe',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Airframe
                 </label>
             </div>
-            @foreach($htcrr_engineers as $engineer)
-                @if($engineer->skill->name == 'Airframe')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Airframe')
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <select name="employee" style="width:100%" id="employee_airframe" class="form-control">
                         <option value="">Select an Employee</option>
                         @foreach($employees as $employee)
-                            <option value="{{ $employee->code }}" @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                            <option value="{{ $employee->code }}" @if($engineer->engineer_code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -63,20 +60,20 @@
                 @endcomponent
         </div>
         @endif
-        @if(in_array('Powerplant / Engine',$engineer_skills))
+        @if(in_array('Powerplant / Engine',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Powerplant
                 </label>
             </div>
-            @foreach($htcrr_engineers as $engineer)
-                @if($engineer->skill->name == 'Powerplant / Engine')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Powerplant / Engine')
                 <div class="col-sm-6 col-md-6 col-lg-6">
                         <select name="employee" style="width:100%" id="employee_powerplant" class="form-control">
                             <option value="">Select an Employee</option>
                             @foreach($employees as $employee)
-                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer_code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
                             @endforeach
                         </select>
                 </div>
@@ -122,20 +119,20 @@
             @endcomponent
         </div>
         @endif
-        @if(in_array('Electrical',$engineer_skills))
+        @if(in_array('Electrical',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Electrical
                 </label>
             </div>
-            @foreach($htcrr_engineers as $engineer)
-                @if($engineer->skill->name == 'Electrical')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Electrical')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <select name="employee" style="width:100%" id="employee_electrical" class="form-control">
                             <option value="">Select an Employee</option>
                             @foreach($employees as $employee)
-                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer_code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -181,20 +178,20 @@
             @endcomponent
         </div>
         @endif
-        @if(in_array('Radio',$engineer_skills))
+        @if(in_array('Radio',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Radio
                 </label>
             </div>
-            @foreach($htcrr_engineers as $engineer)
-                @if($engineer->skill->name == 'Radio')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Radio')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <select name="employee" style="width:100%" id="employee_radio" class="form-control">
                             <option value="">Select an Employee</option>
                             @foreach($employees as $employee)
-                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer_code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -243,20 +240,20 @@
                 @endcomponent
         </div>
         @endif
-        @if(in_array('Instrument',$engineer_skills))
+        @if(in_array('Instrument',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Instrument
                 </label>
             </div>
-            @foreach($htcrr_engineers as $engineer)
-                @if($engineer->skill->name == 'Instrument')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Instrument')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <select name="employee" style="width:100%" id="employee_instrument" class="form-control">
                             <option value="">Select an Employee</option>
                             @foreach($employees as $employee)
-                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer_code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -302,20 +299,20 @@
                 @endcomponent
         </div>
         @endif
-        @if(in_array('Cabin Maintenance',$engineer_skills))
+        @if(in_array('Cabin Maintenance',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Cabin Maintenance
                 </label>
             </div>
-            @foreach($htcrr_engineers as $engineer)
-                @if($engineer->skill->name == 'Cabin Maintenance')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Cabin Maintenance')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <select name="employee" style="width:100%" id="employee_cabinMaintenance" class="form-control">
                             <option value="">Select an Employee</option>
                             @foreach($employees as $employee)
-                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer_code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -361,20 +358,20 @@
             @endcomponent
         </div>
         @endif
-        @if(in_array('Run-Up',$engineer_skills))
+        @if(in_array('Run-Up',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Run Up
                 </label>
             </div>
-            @foreach($htcrr_engineers as $engineer)
-                @if($engineer->skill->name == 'Run-Up')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Run-Up')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <select name="employee" style="width:100%" id="employee_runup" class="form-control">
                             <option value="">Select an Employee</option>
                             @foreach($employees as $employee)
-                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer_code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -420,20 +417,20 @@
             @endcomponent
         </div>
         @endif
-        @if(in_array('Repair',$engineer_skills))
+        @if(in_array('Repair',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Repair
                 </label>
             </div>
-            @foreach($htcrr_engineers as $engineer)
-                @if($engineer->skill->name == 'Repair')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Repair')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <select name="employee" style="width:100%" id="employee_repair" class="form-control">
                             <option value="">Select an Employee</option>
                             @foreach($employees as $employee)
-                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer_code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -482,20 +479,20 @@
             @endcomponent
         </div>
         @endif
-        @if(in_array('Repainting',$engineer_skills))
+        @if(in_array('Repainting',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Repainting
                 </label>
             </div>
-            @foreach($htcrr_engineers as $engineer)
-                @if($engineer->skill->name == 'Repainting')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Repainting')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <select name="employee" style="width:100%" id="employee_repainting" class="form-control">
                             <option value="">Select an Employee</option>
                             @foreach($employees as $employee)
-                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer_code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -541,20 +538,20 @@
             @endcomponent
         </div>
         @endif
-        @if(in_array('NDI / NDT',$engineer_skills))
+        @if(in_array('NDI / NDT',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     NDI / NDT
                 </label>
             </div>
-            @foreach($htcrr_engineers as $engineer)
-                @if($engineer->skill->name == 'NDI / NDT')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'NDI / NDT')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <select name="employee" style="width:100%" id="employee_ndi_ndt" class="form-control">
                             <option value="">Select an Employee</option>
                             @foreach($employees as $employee)
-                                <option value="{{ $employee->code }}"  @if($engineer->engineer->code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
+                                <option value="{{ $employee->code }}"  @if($engineer->engineer_code == $employee->code) selected @endif>{{ $employee->first_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -615,6 +612,9 @@
                     @slot('id', 'tat')
                     @slot('input_append', 'Workdays')
                     @slot('name', 'tat')
+                    @if($tat !== "null")
+                    @slot('value',$tat)
+                    @endif
                     @slot('id_error', 'tat')
                 @endcomponent
             </div>

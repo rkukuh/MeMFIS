@@ -176,11 +176,12 @@ let TaskCard = {
                                 '</a>'
                             );
                         }
-                        else{
-                            return (
-                                ""
-                            );
+                        else if(t.status == "engineer"){
+                            return ('<a href="/discrepancy-engineer/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Show" data-id="' + t.uuid +'">' +
+                            '<i class="la la-eye"></i>');
 
+                        }else{
+                            return ('');
                         }
                     }
                 }

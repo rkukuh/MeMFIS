@@ -184,7 +184,9 @@ class DiscrepancyDatatables extends Controller
             $jobcard->customer_name .= $jobcard->jobcard->quotation->project->customer->name;
             $jobcard->type .= $jobcard->jobcard->taskcard->type->name;
             $jobcard->aircraft .= $jobcard->jobcard->quotation->project->aircraft->name;
-
+            $jobcard->approved_by.= User::find($jobcard->approvals[0]->approved_by)->name;
+            $jobcard->created_by .= User::find($jobcard->audits->first()->user_id)->name;
+            $jobcard->updated_by .= User::find($jobcard->audits->first()->user_id)->name;
         }
 
         $data = $alldata = json_decode($DefectCard);

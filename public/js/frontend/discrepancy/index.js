@@ -134,12 +134,31 @@ let TaskCard = {
                     }
                 },
                 {
+                    field: 'created_by',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'updated_by',
+                    title: 'Updated By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'approved_by',
+                    title: 'Approved By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
                         if(t.status == "approved"){
-                            return ("");
+                            return ('<a href="/discrepancy-ppc/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Show" data-id="' + t.uuid +'">' +
+                            '<i class="la la-eye"></i>');
                         }else{
                             return (
                                 '<a href="/discrepancy-ppc/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
