@@ -3,7 +3,7 @@
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
-                    Total Mhrs (Based on MPD)
+                    Total Manhours
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
