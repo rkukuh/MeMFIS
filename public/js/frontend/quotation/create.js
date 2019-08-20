@@ -30,8 +30,7 @@ let Quotation = {
                         type: 'GET',
                         dataType: 'json',
                         success: function (response) {
-                            // let res = JSON.parse(response);
-                            let res = response;
+                            let res = JSON.parse(response.attention);
                             $('select[name="attention"]').empty();
                             $('select[name="phone"]').empty();
                             $('select[name="email"]').empty();
