@@ -164,7 +164,7 @@
                             <td align="center" valign="top">Paid by Company</td>
                         </tr>
                         <tr>
-                            <td align="center" valign="top">Percentage of Basic Salary</td>
+                            <td align="center" valign="top" class="pt-3">Percentage of Basic Salary</td>
                             <td align="center" valign="top">
                                  @component('frontend.common.input.number')
                                     @slot('id', 'percentage_of_basic_salary_employee')
@@ -183,7 +183,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" valign="top">Minimum value</td>
+                            <td align="center" valign="top" class="pt-3">Minimum value</td>
                             <td align="center" valign="top">
                                  @component('frontend.common.input.number')
                                     @slot('id', 'min_value_employee')
@@ -200,7 +200,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" valign="top">Maximum Value</td>
+                            <td align="center" valign="top" class="pt-3">Maximum Value</td>
                             <td align="center" valign="top">
                                  @component('frontend.common.input.number')
                                     @slot('id', 'max_value_employee')
@@ -235,7 +235,7 @@
                             <td align="center" valign="top">Paid by Company</td>
                         </tr>
                         <tr>
-                            <td align="center" valign="top">Percentage of Basic Salary</td>
+                            <td align="center" valign="top" class="pt-3">Percentage of Basic Salary</td>
                             <td align="center" valign="top">
                                  @component('frontend.common.input.number')
                                     @slot('id', 'percentage_of_basic_salary_employee')
@@ -254,7 +254,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" valign="top">Minimum value</td>
+                            <td align="center" valign="top" class="pt-3">Minimum value</td>
                             <td align="center" valign="top">
                                  @component('frontend.common.input.number')
                                     @slot('id', 'min_value_employee')
@@ -271,7 +271,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" valign="top">Maximum Value</td>
+                            <td align="center" valign="top" class="pt-3">Maximum Value</td>
                             <td align="center" valign="top">
                                  @component('frontend.common.input.number')
                                     @slot('id', 'max_value_employee')
@@ -306,7 +306,7 @@
                             <td align="center" valign="top">Paid by Company</td>
                         </tr>
                         <tr>
-                            <td align="center" valign="top">Percentage of Basic Salary</td>
+                            <td align="center" valign="top" class="pt-3">Percentage of Basic Salary</td>
                             <td align="center" valign="top">
                                  @component('frontend.common.input.number')
                                     @slot('id', 'percentage_of_basic_salary_employee')
@@ -325,7 +325,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" valign="top">Minimum value</td>
+                            <td align="center" valign="top" class="pt-3">Minimum value</td>
                             <td align="center" valign="top">
                                  @component('frontend.common.input.number')
                                     @slot('id', 'min_value_employee')
@@ -342,7 +342,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" valign="top">Maximum Value</td>
+                            <td align="center" valign="top" class="pt-3">Maximum Value</td>
                             <td align="center" valign="top">
                                  @component('frontend.common.input.number')
                                     @slot('id', 'max_value_employee')
