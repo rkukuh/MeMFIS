@@ -154,7 +154,7 @@ class QuotationController extends Controller
                         QuotationWorkPackageTaskCardItem::create([
                             'quotation_id' => $quotation->id,
                             'workpackage_id' => $workpackages->id,
-                            'taskcard_id' => $taskcard->id,
+                            'taskcard_id' => $taskcard->id, 
                             'item_id' => $item->id,
                             'quantity' => $item->pivot->quantity,
                             'unit_id' => $item->pivot->unit_id,
