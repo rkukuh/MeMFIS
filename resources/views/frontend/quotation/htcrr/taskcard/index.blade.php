@@ -13,6 +13,9 @@
                     @slot('name', 'description')
                     @slot('id', 'description')
                     @slot('rows', '5')
+                    @if(!empty($quotation->data_htcrr))
+                    @slot('value', json_decode($quotation->data_htcrr)->description)
+                    @endif
                     @slot('id_error', 'description')
                 @endcomponent
             </div>
@@ -38,6 +41,9 @@
                     @slot('text', 'rate')
                     @slot('name', 'rate')
                     @slot('id', 'rate')
+                    @if(!empty($quotation->data_htcrr))
+                    @slot('value', json_decode($quotation->data_htcrr)->manhour_rate)
+                    @endif
                     @slot('id_error', 'rate')
                 @endcomponent
             </div>

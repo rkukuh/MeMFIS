@@ -70,9 +70,27 @@ class QuotationHtcrrController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Quotation $quotation)
     {
-        //
+        if(empty($quotation->data_htcrr)){
+            $data_json = [];
+            $data_json["description"] = $request->description;
+            $data_json["manhour_rate"] = $request->manhour_rate;
+            $data_json["manhour_total"] = $request->manhour_total;
+
+            $data_json = json_encode($data_json, true);
+            $quotation->update(['data_htcrr' => $data_json]);
+        }else{
+            $data_json = json_decode($quotation->data_htcrr, true);
+            $data_json["description"] = $request->description;
+            $data_json["manhour_rate"] = $request->manhour_rate;
+            $data_json["manhour_total"] = $request->manhour_total;
+
+            $data_json = json_encode($data_json, true);
+            $quotation->update(['data_htcrr' => $data_json]);
+        }
+
+        return response()->json($data_json);
     }
 
     /**

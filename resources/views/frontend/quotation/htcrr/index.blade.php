@@ -58,5 +58,8 @@
 @push('footer-scripts')
 <script>
     let project_uuid = '{{ $quotation->project->uuid }}'    
+    let quotation_uuid = '{{ $quotation->uuid }}'    
 </script>
+    <script src="{{ asset('js/frontend/quotation/htcrr/workpackage.js')}}"></script>
+
 @endpush
