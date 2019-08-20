@@ -154,7 +154,7 @@ class QuotationController extends Controller
                         QuotationWorkPackageTaskCardItem::create([
                             'quotation_id' => $quotation->id,
                             'workpackage_id' => $workpackages->id,
-                            'taskcard_id' => $taskcard->id, 
+                            'taskcard_id' => $taskcard->id,
                             'item_id' => $item->id,
                             'quantity' => $item->pivot->quantity,
                             'unit_id' => $item->pivot->unit_id,
@@ -366,6 +366,8 @@ class QuotationController extends Controller
                         'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
                         'taskcard_id' => $tc->id,
                         'quotation_id' => $quotation->id,
+                        'is_rii' => $tc->is_rii,
+                        'is_mandatory' => $tc->is_mandatory,
                         'origin_taskcard' => $tc->toJson(),
                         'origin_taskcard_items' => $tc->items->toJson(),
                     ]);
