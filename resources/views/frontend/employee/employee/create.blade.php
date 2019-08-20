@@ -80,7 +80,7 @@
                         <div style="height:60px;width:100%;background:#e9ecef">
                             <div class="form-group m-form__group row p-3">
                                 <div class="col-sm-2 col-md-2 col-lg-2 d-flex justify-content-end">
-                                    <a href="" data-target="#modal_additional_quotation" data-toggle="modal">
+                                    <a href="" data-target="#modal_photo" data-toggle="modal">
                                         <i class="la la-pencil" style="font-size:32px;"></i>
                                     </a>
                                 </div>
@@ -96,7 +96,7 @@
                                             <a class="nav-link btn btn-primary text-white" data-toggle="tab" href="#m_tabs_2_3">Workshift</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link btn btn-primary text-white" data-toggle="tab" href="#m_tabs_2_4">Benefits & PPH</a>
+                                            <a class="nav-link btn btn-primary text-white" data-toggle="tab" href="#m_tabs_2_4">Benefits & Salary</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link btn btn-primary text-white" data-toggle="tab" href="#m_tabs_2_5">Account</a>
@@ -110,7 +110,7 @@
                         </div>
                     </div>
 
-                    @include('frontend.quotation.additional.modal-project')
+                    @include('frontend.employee.employee.modal')
                     <div class="m-portlet__body">
                         <div class="tab-content">
                             <div class="tab-pane active" id="m_tabs_2_1" role="tabpanel">
@@ -139,8 +139,3 @@
     </div>
 </div>
 @endsection
-
-@push('footer-scripts')
-<script src="{{ asset('js/frontend/employee/employee/employee-datepicker.js')}}"></script>
-<script src="{{ asset('js/frontend/employee/employee/create.js') }}"></script>
-@endpush
