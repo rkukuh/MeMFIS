@@ -190,9 +190,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('qtn-htcrr-item', 'QuotationHtcrrItemController');
 
-        /** QUOTATION's DEFECTCARDs */
-
-        Route::resource('qtn-defectcard-item', 'QuotationDefectCardItemController');
 
     });
 

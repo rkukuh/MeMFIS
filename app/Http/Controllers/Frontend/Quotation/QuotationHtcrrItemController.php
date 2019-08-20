@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Quotation;
 
 use App\Models\QuotationHtcrrItem;
 use App\Http\Controllers\Controller;

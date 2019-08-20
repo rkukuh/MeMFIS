@@ -44,6 +44,18 @@ Route::name('frontend.')->group(function () {
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/cmrawl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('quotation.summary.cmrawl');
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('quotation.summary.si');
 
+                
+                /** QUOTATION's DEFECTCARDs */
+
+                Route::resource('qtn-defectcard-item', 'QuotationDefectCardItemController');
+                
+                /** QUOTATION's WORKPACKAGE's TASKCARDs */
+
+                Route::resource('qtn-wp-tc-item', 'QuotationWorkPackageTaskCardItemController');
+
+                /** QUOTATION's HT/CRRs */
+
+                Route::resource('qtn-htcrr-item', 'QuotationHtcrrItemController');
             });
 
         });
