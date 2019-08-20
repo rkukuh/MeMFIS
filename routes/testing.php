@@ -13,6 +13,7 @@ Route::name('testing.')->group(function () {
             echo App\Helpers\DocumentNumber::generate('WP-', App\Models\WorkPackage::count());
 
         });
+
         Route::get('/wp', function () {
 
             $project_workpackage = App\Models\Pivots\ProjectWorkPackage::where('project_id',1)->where('workpackage_id',1)->first()->id;
@@ -59,7 +60,7 @@ Route::name('testing.')->group(function () {
         Route::view('/test11', 'frontend/testing/ibnu/mi');
         Route::view('/test31', 'frontend/testing/ibnu/rir');
         Route::view('/testing', 'frontend/testing/ibnu/testing');
-                // Route::view('/jcprint', 'frontend/job-card/print');
+        // Route::view('/jcprint', 'frontend/job-card/print');
         Route::view('/jcprintraw', 'frontend/form/jobcard');
         Route::resource('setting', 'Frontend\SettingController');
 
@@ -67,6 +68,7 @@ Route::name('testing.')->group(function () {
             $pdf = \PDF::loadView('frontend/form/jobcard');
             return $pdf->stream();
         });
+
         Route::get('/barcode-print', function () {
             $pdf = \PDF::loadView('frontend/form/barcode');
             return $pdf->stream();
@@ -91,7 +93,8 @@ Route::name('testing.')->group(function () {
                         'taskcard_id' => $tc->id,
                         'origin_taskcard' => $tc->toJson(),
                         'origin_taskcard_items' => $tc->items->toJson(),
-                    ]);                    // // echo $tc->title.'<br>';
+                    ]); 
+                                       // // echo $tc->title.'<br>';
                     // foreach($tc->items as $item){
                     //     echo $item->name.'<br>';
                     // }
