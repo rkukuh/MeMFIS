@@ -34,7 +34,7 @@ Route::name('frontend.')->group(function () {
                         'parameters' => ['workpackage' => 'workPackage']
                     ]);
 
-                    Route::get('/{quotation}/htcrr', 'QuotationWorkPackageController@htcrr')->name('workpackage.htcrr');
+                    Route::get('/{quotation}/htcrr', 'QuotationHtcrrController@edit')->name('workpackage.htcrr');
                 });
 
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('quotation.summary.basic');

@@ -56,4 +56,7 @@
 @endsection
 
 @push('footer-scripts')
+<script>
+    let project_uuid = '{{ $quotation->project->uuid }}'    
+</script>
 @endpush

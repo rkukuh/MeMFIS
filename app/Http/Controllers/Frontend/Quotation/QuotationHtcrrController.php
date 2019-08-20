@@ -25,7 +25,7 @@ class QuotationHtcrrController extends Controller
      */
     public function create()
     {
-        //
+       
     }
 
     /**
@@ -56,9 +56,11 @@ class QuotationHtcrrController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Quotation $quotation)
     {
-        //
+        return view('frontend.quotation.htcrr.index',[
+            'quotation' => $quotation
+        ]);
     }
 
     /**
