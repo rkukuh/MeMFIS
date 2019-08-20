@@ -91,7 +91,7 @@
                     </ul>
                 </div>
             </li>
-                    
+
                     </ul>
                 </div>
             </li>
@@ -401,6 +401,7 @@
                     </span>
                 </a>
             </li>
+            @hasanyrole('hrd|admin')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     HUMAN RESOURCES
@@ -459,7 +460,7 @@
                 <a href="{{ route('frontend.hr.event-holidays.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                       Event/Holidays
+                        Event/Holidays
                     </span>
                 </a>
             </li>
@@ -467,10 +468,11 @@
                 <a href="{{ route('frontend.hr.workshift-schedule.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                       Workshift Schedule
+                        Workshift Schedule
                     </span>
                 </a>
             </li>
+            @endrole
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     WAREHOUSE
@@ -708,7 +710,7 @@
                 </div>
             </li>
             <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
-               
+
                 <div class="m-menu__submenu">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
