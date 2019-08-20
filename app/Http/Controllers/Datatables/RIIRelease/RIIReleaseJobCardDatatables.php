@@ -48,8 +48,11 @@ class RIIReleaseJobCardDatatables extends Controller
             if(Status::find($Jobcard->progresses->last()->status_id)->name == 'RELEASED'){
                 $Jobcard->status .= 'Waiting for RII';
             }else{
-                $Jobcard->status .=Status::find($Jobcard->progresses->last()->status_id)->name;
-
+                if(Status::find($Jobcard->progresses->last()->status_id)->name == 'RII RELEASED'){
+                    $Jobcard->status .= 'Released';
+                }else{
+                    $Jobcard->status .= Status::find($Jobcard->progresses->last()->status_id)->name;
+                }
             }
 
 
