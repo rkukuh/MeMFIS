@@ -80,7 +80,26 @@ $factory->define(Quotation::class, function (Faker $faker) {
         },
         'term_of_condition' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
-        
+        'data_defectcard' => function () use ($faker) {
+            $data['manhour_total'] = null;
+            $data['manhour_rate_id'] = null;
+            $data['manhour_rate_amount'] = null;
+            $data['discount_type'] = null;
+            $data['discount_value'] = null;
+            $data['description'] = null;
+
+            return $faker->randomElement([null, json_encode($data)]);
+        },
+        'data_htcrr' => function () use ($faker) {
+            $data['manhour_total'] = null;
+            $data['manhour_rate_id'] = null;
+            $data['manhour_rate_amount'] = null;
+            $data['discount_type'] = null;
+            $data['discount_value'] = null;
+            $data['description'] = null;
+
+            return $faker->randomElement([null, json_encode($data)]);
+        },
         'origin_project' => null,
         'origin_currency' => null,
         'origin_scheduled_payment_type' => null,

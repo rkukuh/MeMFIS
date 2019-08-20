@@ -662,7 +662,7 @@ class Type extends MemfisModel
      *
      * @return mixed
      */
-    public function skill_htcrr()
+    public function skill_htcrrs()
     {
         return $this->belongsToMany(HtCrr::class, 'htcrr_skill', 'skill_id', 'htcrr_id')
                     ->withTimestamps();;

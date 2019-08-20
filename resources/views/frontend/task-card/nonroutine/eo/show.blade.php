@@ -181,12 +181,13 @@
                                                         @php
                                                             $documents = json_decode($taskcard->document_library, TRUE);
                                                         @endphp
-
-                                                        @foreach ($documents  as $document)
-                                                            @component('frontend.common.label.badge')
-                                                                @slot('text', $document )
-                                                            @endcomponent
-                                                        @endforeach
+                                                        <div class="d-flex justify-content-start">
+                                                            @foreach ($documents  as $document)
+                                                                @component('frontend.common.label.badge')
+                                                                    @slot('text', $document )
+                                                                @endcomponent
+                                                            @endforeach
+                                                        </div>
                                                     @endif
                                                 </div>
                                             </div>

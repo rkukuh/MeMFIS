@@ -14,6 +14,7 @@ use App\Models\Project;
 use App\Models\License;
 use App\Models\Storage;
 use App\Models\Journal;
+use App\Models\Station;
 use App\Models\Facility;
 use App\Models\Customer;
 use App\Models\Aircraft;
@@ -689,6 +690,19 @@ class FillComboxController extends Controller
                               ->pluck('name', 'uuid');
 
         return json_encode($customerLevel);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function station()
+    {
+        $station = station::pluck('name', 'uuid');
+
+        return json_encode($station);
 
     }
 

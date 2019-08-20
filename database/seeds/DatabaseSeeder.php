@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         
         /** MASTER */
         
+        $this->call(BranchesTableSeeder::class);
         $this->call(ManufacturersTableSeeder::class);
         $this->call(AircraftsTableSeeder::class);
         $this->call(LanguagesTableSeeder::class);

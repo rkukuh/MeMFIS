@@ -36,12 +36,27 @@ class RTSProgressController extends Controller
             $this->edit(RTS::where('project_id',$project)->first()->uuid);
         }
         else{
+            $taskcard_number = "";
+            foreach($quotations as $quotation){
+                $jobcards = JobCard::where('quotation_id',$quotation->id)->get();
+                foreach($jobcards as $jobcard){
+                    if(sizeof($jobcard->progresses) <> 0){
+                        if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "closed"){
+                            $taskcard_number = $taskcard_number.", ".$jobcard->taskcard->number;
+                        }
+                    }
+                }
+            }
+
+            $taskcard_number = substr($taskcard_number, 2);
+
             $projects = Project::all();
             $rts = RTS::where('project_id',$project->id)->first();
             return view('frontend.rts.create', [
                 'rts' => $rts,
                 'projec' => $project,
-                'projects' => $projects
+                'projects' => $projects,
+                'taskcard_number' =>$taskcard_number
             ]);
         }
     }

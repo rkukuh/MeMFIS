@@ -29,5 +29,11 @@ class TypesOfDocument extends Seeder
             'name' => 'Driving License (SIM)',
             'of'   => 'document',
         ]);
+
+        Type::create([
+            'code' => 'nkpk',
+            'name' => 'NKPK',
+            'of'   => 'document',
+        ]);
     }
 }

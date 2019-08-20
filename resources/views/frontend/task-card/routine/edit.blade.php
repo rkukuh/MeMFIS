@@ -474,6 +474,7 @@
                                                 @slot('id', 'stringer')
                                                 @slot('text', 'Stringer')
                                                 @slot('name', 'stringer')
+                                                @slot('value', json_decode($taskCard->stringer))
                                                 @slot('id_error', 'stringer')
                                             @endcomponent
                                         </div>
@@ -483,12 +484,13 @@
                                                 Station @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('id', 'station')
-                                                @slot('text', 'Station')
-                                                @slot('name', 'station')
-                                                @slot('id_error', 'station')
-                                            @endcomponent
+                                            <select id="station" name="station" class="form-control m-select2" multiple style="width:100%">
+                                                @foreach ( $stations as $station)
+                                                    <option value="{{ $station->uuid }}" @if( in_array($station->uuid, $tc_stations) ) selected @endif>
+                                                        {{ $station->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -499,8 +501,8 @@
 
                                             @component('frontend.common.input.text')
                                                 @slot('id', 'service_bulletin')
-                                                @slot('text', 'Service Bulletins')
                                                 @slot('name', 'service_bulletin')
+                                                @slot('value', $taskCard->reference)
                                             @endcomponent
 
                                         </div>
@@ -509,6 +511,15 @@
                                                 Section(s) @include('frontend.common.label.optional')
                                             </label>
 
+                                            @if(isset($taskCard->section))
+                                            <select id="section" name="section" class="form-control m-select2" multiple style="width:100%">
+                                                @foreach (json_decode($taskCard->section) as $section)
+                                                    <option value="{{ $section }}" selected >
+                                                        {{ $section }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @else
                                             @component('frontend.common.input.select2')
                                                 @slot('id', 'section')
                                                 @slot('text', 'Section')
@@ -517,6 +528,7 @@
                                                 @slot('multiple','multiple')
                                                 @slot('help_text','You can chose multiple value')
                                             @endcomponent
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -921,7 +933,6 @@
                 counterRepeats++;
             });
             $("table.repeat").on("click", ".ibtnDel", function (event) {
-                console.log("Repeats count : "+counterRepeats);
                 if (counterRepeats >= 1) {
                     $(this).closest("tr").remove();
                     counterRepeats -= 1
@@ -955,6 +966,8 @@
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/station.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/threshold-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/threshold-type.js') }}"></script>
 
@@ -965,7 +978,6 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-engine.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/section.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/section.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
 

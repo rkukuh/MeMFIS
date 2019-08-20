@@ -774,6 +774,14 @@ let TaskCard = {
             });
             repeat_amount = repeat_amount.filter(Boolean);
 
+            let sections = [];
+            i = 0;
+            $("#section").val().forEach(function(entry) {
+                sections[i] = entry;
+                i++;
+            });
+            console.log(sections);
+
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
             } else {
@@ -814,6 +822,10 @@ let TaskCard = {
             data.append("is_rii", is_rii);
             data.append("additionals",  internal_numberJSON);
             data.append("ata", $('input[name=ata]').val());
+            data.append("reference", $('#service_bulletin').val());
+            data.append("stringer", JSON.stringify($('#stringer').val()));
+            data.append("station", $('#station').val());
+            data.append("section", JSON.stringify(sections));
             data.append("fileInput", document.getElementById('taskcard').files[0]);
             data.append('_method', 'PUT');
 
@@ -828,7 +840,6 @@ let TaskCard = {
                 contentType: false,
                 cache: false,
                 success: function (response) {
-                    console.log(response);
                     if (response.errors) {
                         if (response.errors.title) {
                             $('#title-error').html(response.errors.title[0]);
@@ -898,14 +909,13 @@ let TaskCard = {
     }
 };
 $(document).ready(function () {
-    let taskcard_routine_type = $('select[name="taskcard_routine_type"]').val();
-    if (this.options[this.selectedIndex].text == "CPCP") {
+    let taskcard_routine_type = $('select[name="taskcard_routine_type"] option:selected').html();
+    if (taskcard_routine_type.trim() == "CPCP") {
         $("#station_div").removeClass("hidden");
         $("#stringer_div").removeClass("hidden");
         $("#service_bulletin_div").removeClass("hidden");
         $("#section_div").removeClass("hidden");
     }
-
 
     $('select[name="taskcard_routine_type"]').on('change', function () {
         if (this.options[this.selectedIndex].text == "CPCP") {

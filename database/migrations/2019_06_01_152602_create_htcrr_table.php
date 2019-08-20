@@ -33,7 +33,6 @@ class CreateHtcrrTable extends Migration
             $table->string('discount_type')->nullable();
             $table->double('discount_value')->nullable();
             $table->text('description')->nullable();
-
             $table->json('origin_type')->nullable();
             $table->json('origin_project')->nullable();
             $table->json('origin_conducted_by')->nullable();

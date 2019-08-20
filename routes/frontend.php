@@ -35,9 +35,9 @@ Route::name('frontend.')->group(function () {
         Route::resource('station', 'StationController');
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
-        Route::resource('threshold', 'ThresholdController');
         Route::resource('approval', 'ApprovalController');
         Route::resource('progress', 'ProgressController');
+        Route::resource('threshold', 'ThresholdController');
         Route::resource('inspection', 'InspectionController');
 
         Route::resource('category-item', 'CategoryItemController', [
@@ -50,10 +50,15 @@ Route::name('frontend.')->group(function () {
         /** MASTER */
 
         Route::resource('user', 'UserController');
+        Route::resource('bpjs', 'BPJSController');
         Route::resource('school', 'SchoolController');
         Route::resource('vendor', 'VendorController');
+        Route::resource('branch', 'BranchController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
+        Route::resource('manhour', 'ManhourController');
+        Route::resource('benefit', 'BenefitController');
+        Route::resource('company', 'CompanyController');
         Route::resource('language', 'LanguageController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
@@ -85,12 +90,12 @@ Route::name('frontend.')->group(function () {
         Route::view('/jobcard-eo', 'frontend.job-card-eo.index')->name('jobcard-eo.index');
 
         Route::view('/jobcard-eo-mechanic-progress-open', 'frontend.job-card-eo.mechanic.progress-open')->name('jobcard-eo.mechanic.progress-open');
-        Route::view('/jobcard-eo-mechanic-progress-resume', 'frontend.job-card-eo.mechanic.progress-resume')->name('jobcard-eo.mechanic.progress-resume');
         Route::view('/jobcard-eo-mechanic-progress-pause', 'frontend.job-card-eo.mechanic.progress-pause')->name('jobcard-eo.mechanic.progress-pause');
+        Route::view('/jobcard-eo-mechanic-progress-resume', 'frontend.job-card-eo.mechanic.progress-resume')->name('jobcard-eo.mechanic.progress-resume');
 
         Route::view('/jobcard-eo-engineer-progress-open', 'frontend.job-card-eo.engineer.progress-open')->name('jobcard-eo.engineer.progress-open');
-        Route::view('/jobcard-eo-engineer-progress-resume', 'frontend.job-card-eo.engineer.progress-resume')->name('jobcard-eo.engineer.progress-resume');
         Route::view('/jobcard-eo-engineer-progress-pause', 'frontend.job-card-eo.engineer.progress-pause')->name('jobcard-eo.engineer.progress-pause');
+        Route::view('/jobcard-eo-engineer-progress-resume', 'frontend.job-card-eo.engineer.progress-resume')->name('jobcard-eo.engineer.progress-resume');
 
         Route::view('/jobcard-eo-ppc', 'frontend.job-card-eo-ppc.index')->name('jobcard-eo.ppc.index');
 
@@ -166,17 +171,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
         Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
         
-        /** QUOTATION's WORKPACKAGE's TASKCARDs */
 
-        Route::resource('qtn-wp-tc-item', 'QuotationWorkPackageTaskCardItemController');
-
-        /** QUOTATION's HT/CRRs */
-
-        Route::resource('qtn-htcrr-item', 'QuotationHtcrrItemController');
-
-        /** QUOTATION's DEFECTCARDs */
-
-        Route::resource('qtn-defectcard-item', 'QuotationDefectCardItemController');
 
     });
 

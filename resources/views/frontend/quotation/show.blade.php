@@ -157,7 +157,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                            @if(isset($attention->name))
+                                                                            @if(isset($attention->name) && $attention->name !== "null")
                                                                                 @slot('text', $attention->name)
                                                                             @else
                                                                                 @slot('text', '-')
@@ -178,7 +178,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                            @if(isset($attention->phone))
+                                                                            @if(isset($attention->phone) && $attention->phone !== "null")
                                                                                 @slot('text', $attention->phone)
                                                                             @else
                                                                                 @slot('text', '-')
@@ -194,7 +194,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                            @if(isset($attention->fax))
+                                                                            @if(isset($attention->fax) && $attention->fax !== "null")
                                                                                 @slot('text', $attention->fax)
                                                                             @else
                                                                                 @slot('text', '-')
@@ -211,7 +211,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                            @if(isset($attention->email))
+                                                                            @if(isset($attention->email) && $attention->email !== "null")
                                                                                 @slot('text', $attention->email)
                                                                             @else
                                                                                 @slot('text', '-')
@@ -232,7 +232,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                            @if(isset($attention->address))
+                                                                            @if(isset($attention->address) && $attention->address !== "null")
                                                                                 @slot('text', $attention->address)
                                                                             @else
                                                                                 @slot('text', '-')

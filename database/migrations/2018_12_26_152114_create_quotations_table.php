@@ -35,7 +35,8 @@ class CreateQuotationsTable extends Migration
             $table->string('term_of_payment')->nullable();
             $table->text('term_of_condition')->nullable();
             $table->text('description')->nullable();
-
+            $table->json('data_defectcard')->nullable();
+            $table->json('data_htcrr')->nullable();
             $table->json('origin_project')->nullable();
             $table->json('origin_currency')->nullable();
             $table->json('origin_scheduled_payment_type')->nullable();
@@ -44,7 +45,6 @@ class CreateQuotationsTable extends Migration
             $table->json('origin_quotation_workpackage_items')->nullable();
             $table->json('origin_quotation_workpackage_taskcard_items')->nullable();
             $table->json('origin_quotation_htcrr_items')->nullable();
-            
             $table->timestamps();
             $table->softDeletes();
 

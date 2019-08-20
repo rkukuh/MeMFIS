@@ -91,34 +91,7 @@
                     </ul>
                 </div>
             </li>
-                    <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle"
-                            title="Non functional dummy link"><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
-                                class="m-menu__link-text">Create New</span><i class="m-menu__ver-arrow la la-angle-right"></i></a>
-                        <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
-                            <ul class="m-menu__subnav">
-                                <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('frontend.taskcard-routine.create') }}"
-                                    class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
-                                        class="m-menu__link-text">Routine</span></a></li>
-                                        <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle"
-                                            title="Non functional dummy link"><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
-                                                class="m-menu__link-text">Non Routine</span><i class="m-menu__ver-arrow la la-angle-right"></i></a>
-                                        <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
-                                            <ul class="m-menu__subnav">
-                                                <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('frontend.preliminary.create') }}"
-                                                    class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
-                                                        class="m-menu__link-text">Preliminary</span></a></li>
-                                                <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('frontend.taskcard-eo.create') }}"
-                                                        class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
-                                                            class="m-menu__link-text">Enginering Order</span></a></li>
-                                                <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('frontend.taskcard-si.create') }}"
-                                                        class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
-                                                            class="m-menu__link-text">Special Instruction</span></a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+
                     </ul>
                 </div>
             </li>
@@ -272,6 +245,16 @@
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
                         <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.discrepancy-mechanic.index') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    Mechanic
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item" aria-haspopup="true">
                             <a href="{{ route('frontend.discrepancy-engineer.index') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
@@ -418,6 +401,7 @@
                     </span>
                 </a>
             </li>
+            @hasanyrole('hrd|admin')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     HUMAN RESOURCES
@@ -452,7 +436,7 @@
                 <a href="{{ route('frontend.position.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Position
+                        Potition
                     </span>
                 </a>
             </li>
@@ -476,7 +460,7 @@
                 <a href="{{ route('frontend.holiday.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                       Event/Holidays
+                        Event/Holidays
                     </span>
                 </a>
             </li>
@@ -484,18 +468,11 @@
                 <a href="{{ route('frontend.workshift.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                       Workshift Schedule
+                        Workshift Schedule
                     </span>
                 </a>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.employee.index') }}" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                       Employee
-                    </span>
-                </a>
-            </li>
+            @endrole
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     WAREHOUSE
@@ -733,7 +710,7 @@
                 </div>
             </li>
             <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
-               
+
                 <div class="m-menu__submenu">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Quotation;
 
 use App\Models\QuotationDefectCardItem;
 use App\Http\Controllers\Controller;
