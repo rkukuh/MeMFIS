@@ -435,7 +435,7 @@ let Workpackage = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/project-hm/' + project_uuid + '/workpackage/' + workPackage_uuid + '/engineerTeam',
+                url: '/project-hm/' + project_uuid + '/htcrr/engineer-team',
                 data: {
                     _token: $('input[name=_token]').val(),
                     engineer_skills: engineer_skills,
@@ -760,6 +760,38 @@ $('.m_taskcard_htcrr').on('click', function () {
 
     table.originalDataSet = [];
     table.reload();
+});
+
+$('.footer-manhour').on('click', '.add-manhour', function () {
+    let performa = $('#perfoma').val();
+    let manhour = $('#total_mhrs').attr('value');
+    manhour = parseFloat(manhour);
+    let total = $('#total').html();
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'post',
+        url: '/project-hm/' + project_uuid + '/htcrr/manhoursPropotion',
+        data: {
+            _token: $('input[name=_token]').val(),
+            manhour: manhour,
+            performa_used: performa,
+            total: total,
+        },
+        success: function (data) {
+            if (data.errors) {
+            } else {
+
+                toastr.success('Manhours Propotion has been created.', 'Success', {
+                    timeOut: 5000
+                });
+
+                // window.location.href = '/discrepancy/' + data.uuid + '/edit';
+
+            }
+        }
+    });
 });
 
 $('.m_tabs_manhour').on('click', function () {

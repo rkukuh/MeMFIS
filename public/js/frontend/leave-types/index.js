@@ -7,7 +7,7 @@ let LeaveTypes= {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/customer',
+                        url: '/datatables/leave-type',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -43,7 +43,7 @@ let LeaveTypes= {
                 }
             },
             columns: [{
-                    field: 'name',
+                    field: 'code',
                     title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
@@ -52,30 +52,16 @@ let LeaveTypes= {
                     }
                 },
                 {
-                    field: 'addresses',
+                    field: 'name',
                     title: 'Leave Types Name',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if(t.addresses[0]){
-                            return t.addresses[0].address
-                        }else{
-                            return ""
-                        }
-                    }
                 },
                 {
-                    field: 'phones',
+                    field: 'description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if(t.phones[0]){
-                            return t.phones[0].number
-                        }else{
-                            return ""
-                        }
-                    }
                 }
             ]
         });

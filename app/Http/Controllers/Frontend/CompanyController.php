@@ -57,6 +57,8 @@ class CompanyController extends Controller
         $company = Company::create([
             'code' => $request->code,
             'name' => $request->name,
+            'maximum_period' => $request->maximum_period,
+            'maximum_holiday' => $request->maximum_holiday,
             'description' => $request->description,
             'parent_id' => $parent_id,
             'type_id' => $type_id
@@ -117,13 +119,15 @@ class CompanyController extends Controller
         ->update([
             'code' => $request->code,
             'name' => $request->name,
+            'maximum_period' => $request->maximum_period,
+            'maximum_holiday' => $request->maximum_holiday,
             'description' => $request->description,
             'parent_id' => $parent_id,
             'type_id' => $type_id
         ]);
 
         // TODO: Return error message as JSON
-        return response()->json($request->description);
+        return response()->json($company);
     }
 
     /**

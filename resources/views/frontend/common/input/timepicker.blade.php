@@ -5,7 +5,7 @@
     class="form-control {{$class or ''}}"
     style="{{$style or ''}}"
     placeholder="{{ $placeholder or 'Select time'}}"
-    readonly
+    readonly {{ $disabled or ''}}
 >
 
 <span class="m-form__help">

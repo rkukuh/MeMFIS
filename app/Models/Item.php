@@ -137,7 +137,7 @@ class Item extends MemfisModel implements HasMedia
      *
      * @return mixed
      */
-    public function htcrr()
+    public function htcrrs()
     {
         return $this->belongsToMany(HtCrr::class)
                     ->withPivot(

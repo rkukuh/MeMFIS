@@ -65,12 +65,12 @@ var DatatableAutoColumnHideDemo = function () {
     //       template: function (t) {
     //         if(currency.id == 1){
     //           return (t.pivot.description + '<br>' +
-    //             '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x ' + IDRformatter.format(t.pivot.manhour_rate) + '<br>' +
+    //             '- Manhours Price : ' + numberFormat.format(t.pivot.manhour_total) + ' x ' + IDRformatter.format(t.pivot.manhour_rate_amount) + '<br>' +
     //             '- Facility Price : '
     //           );
     //         }else{
     //           return (t.pivot.description + '<br>' +
-    //             '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x $ ' + ForeignFormatter.format(t.pivot.manhour_rate) + '<br>' +
+    //             '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x $ ' + ForeignFormatter.format(t.pivot.manhour_rate_amount) + '<br>' +
     //             '- Facility Price : <br>' +
     //             '- Material & Tool Price : '
     //           );
@@ -83,13 +83,13 @@ var DatatableAutoColumnHideDemo = function () {
 
     //         if(currency.id == 1){
     //           return ('<br>' +
-    //             IDRformatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate) + '<br>' +
+    //             IDRformatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate_amount) + '<br>' +
     //             IDRformatter.format(a.facilities_price_amount) + '<br>' +
     //             IDRformatter.format(a.mat_tool_price) + '<br>'
     //           );
     //         }else{
     //           return ('<br>' +
-    //             ForeignFormatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate) + '<br>' +
+    //             ForeignFormatter.format(a.total_manhours_with_performance_factor * a.pivot.manhour_rate_amount) + '<br>' +
     //             ForeignFormatter.format(a.facilities_price_amount) + '<br>' +
     //             ForeignFormatter.format(a.mat_tool_price) + '<br>'
     //           );
@@ -144,17 +144,17 @@ var DatatableAutoColumnHideDemo = function () {
     //       template: function (t, e, i) {
     //         total = 0;
     //         if(t.pivot.discount_value == null && t.pivot.discount_type == null){
-    //             total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilities_price_amount + t.mat_tool_price;
+    //             total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate_amount + t.facilities_price_amount + t.mat_tool_price;
     //             subtotal = subtotal + total;
     //         }
     //         else{
     //             if(t.pivot.discount_type ==  'amount'){
-    //                 total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilities_price_amount + t.mat_tool_price - t.pivot.discount_value;
+    //                 total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate_amount + t.facilities_price_amount + t.mat_tool_price - t.pivot.discount_value;
     //                 subtotal = subtotal + total;
 
     //             }
     //             else if(t.pivot.discount_type == 'percentage'){
-    //                 total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilities_price_amount + t.mat_tool_price - (((t.total_manhours_with_performance_factor * t.pivot.manhour_rate + t.facilities_price_amount + t.mat_tool_price)*t.pivot.discount_value)/100);
+    //                 total = t.total_manhours_with_performance_factor * t.pivot.manhour_rate_amount + t.facilities_price_amount + t.mat_tool_price - (((t.total_manhours_with_performance_factor * t.pivot.manhour_rate_amount + t.facilities_price_amount + t.mat_tool_price)*t.pivot.discount_value)/100);
     //                 subtotal = subtotal + total;
     //             }
     //         }

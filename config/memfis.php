@@ -12,6 +12,7 @@ return [
         'aircraft_accesses' => 20,
         'aircraft_zones' => 20,
         'benefits' => 20,
+        'branches' => 20,
         'companies' => 20,
         'categories' => 20,
         'currencies' => 20,
@@ -60,5 +61,7 @@ return [
         'leave_periods' => 20,
         'workpackages' => 20,
         'BPJSS' => 20,
+        'jobtittles' => 20,
+        'leavetypes' => 20
     ],
 ];

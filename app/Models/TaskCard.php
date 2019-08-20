@@ -25,6 +25,7 @@ class TaskCard extends MemfisModel
         'sequence',
         'stringer',
         'version',
+        'section',
         'document_library',
         'ata',
         'description',
@@ -32,7 +33,7 @@ class TaskCard extends MemfisModel
 
         /** EO Header */
         'revision',
-        'reference',
+        'reference', // juga digunakan untuk Reference Service Bulletin pada CPCP.
         'category_id',
         'scheduled_priority_id',
         'scheduled_priority_text',

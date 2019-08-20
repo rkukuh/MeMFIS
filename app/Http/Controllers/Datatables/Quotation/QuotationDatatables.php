@@ -276,8 +276,6 @@ class QuotationDatatables extends Controller
     {
         $workpackages = $quotation->workpackages;
 
-
-
         foreach($workpackages as $workPackage){
             $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
             ->where('workpackage_id',$workPackage->id)
@@ -295,16 +293,19 @@ class QuotationDatatables extends Controller
             }
         }
 
-        // $htcrrs = HtCrr::where('project_id',$quotation->project->id)->whereNull('parent_id')->get();
-        // if (sizeof($htcrrs) > 0) {
-        //     $htcrr_workpackage = new WorkPackage();
-        //     $htcrr_workpackage->code = "Workpackage HT CRR";
-        //     $htcrr_workpackage->title = "Workpackage HT CRR";
-        //     $htcrr_workpackage->is_template = 0;
-        //     $htcrr_workpackage->ac_type = $quotation->project->aircraft->name;
+        $htcrrs = HtCrr::where('project_id',$quotation->project->id)->whereNull('parent_id')->get();
+        $htcrr = json_decode($quotation->project->data_htcrr);
+        // dd($htcrr);
+        if (sizeof($htcrrs) > 0) {
+            $htcrr_workpackage = new WorkPackage();
+            $htcrr_workpackage->code = "Workpackage HT CRR";
+            $htcrr_workpackage->title = "Workpackage HT CRR";
+            $htcrr_workpackage->is_template = "htcrr";
+            $htcrr_workpackage->total_manhours_with_performance_factor = $htcrr->total_manhours_with_performance_factor;
+            $htcrr_workpackage->ac_type = $quotation->project->aircraft->name;
 
-        //     $workpackages[sizeof($workpackages)] = $htcrr_workpackage;
-        // }
+            $workpackages[sizeof($workpackages)] = $htcrr_workpackage;
+        }
 
 
         $data = $alldata = json_decode($workpackages);

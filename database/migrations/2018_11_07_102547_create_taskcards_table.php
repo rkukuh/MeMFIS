@@ -33,6 +33,7 @@ class CreateTaskcardsTable extends Migration
             $table->integer('sequence')->nullable();
             $table->json('stringer')->nullable(); // for CPCP only
             $table->json('version')->nullable();
+            $table->json('section')->nullable(); // for CPCP only
             $table->json('document_library')->nullable();
             $table->string('ata')->nullable();
             $table->longText('description')->nullable();
@@ -40,7 +41,7 @@ class CreateTaskcardsTable extends Migration
 
             /** EO Header */
             $table->string('revision')->nullable();
-            $table->string('reference')->nullable();
+            $table->string('reference')->nullable(); // juga digunakan untuk Reference Service Bulletin pada CPCP.
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('scheduled_priority_id')->nullable();
             $table->string('scheduled_priority_text')->nullable();

@@ -68,7 +68,7 @@ class Employee extends MemfisModel
      *
      * @return mixed
      */
-    public function conducted_htcrr()
+    public function conducted_htcrrs()
     {
         return $this->hasMany(HtCrr::class, 'conducted_by');
     }

@@ -28,7 +28,6 @@ class CreateDefectcardsTable extends Migration
             $table->string('ata')->nullable();
             $table->text('complaint')->nullable();
             $table->text('description')->nullable();
-
             $table->json('origin_jobcard')->nullable();
             $table->json('origin_project_additional')->nullable();
             $table->json('origin_quotation_additional')->nullable();
