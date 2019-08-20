@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="tab-pane" id="m_tabs_tool_material" role="tabpanel">
                                         @include('frontend.quotation.htcrr.item.index')
-                                        {{-- @include('frontend.quotation.htcrr.modal') --}}
+                                        @include('frontend.quotation.htcrr.modal')
                                     </div>
                                 </div>
                             </div>
@@ -63,5 +63,6 @@
 </script>
     <script src="{{ asset('js/frontend/quotation/htcrr/workpackage.js')}}"></script>
     <script src="{{ asset('js/custom.js')}}"></script>
-
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
 @endpush

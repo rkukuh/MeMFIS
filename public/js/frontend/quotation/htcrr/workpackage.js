@@ -61,7 +61,6 @@ $('#m_accordion_1').on('click', '#m_accordion_7_item_7_head', function () {
 
 });
 
-
 let HtCRRMatsToolsDatatables = {
     init: function() {
 
@@ -79,7 +78,6 @@ let HtCRRMatsToolsDatatables = {
                             dataSet = raw.data;
                         }
 
-                        // console.log(dataSet);
                         return dataSet;
                     }
                 }
@@ -200,7 +198,6 @@ let HtCRRMatsToolsDatatables = {
                             dataSet = raw.data;
                         }
 
-                        // console.log(dataSet);
                         return dataSet;
                     }
                 }
@@ -311,6 +308,173 @@ let HtCRRMatsToolsDatatables = {
     }
 };
 
+$('.modal-footer').on('click', '.add-item-price', function () {
+    let quantity = $('input[name=qty]').val();
+    let price_amount = $('input[name=price]').val();
+    let unit_id =$('#unit_id').val();
+    let note =$('#note').val();
+    let triggerid = $('input[name=uuid]').val();
+    console.log(triggerid);
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'put',
+        url: '/quotation/qtn-htcrr-item/' + triggerid,
+        data: {
+            _token: $('input[name=_token]').val(),
+            uuid: triggerid,
+            quantity: quantity,
+            unit_id: unit_id,
+            price_amount: price_amount,
+            note: note
+        },
+        success: function (data) {
+            if (data.errors) {
+                if (data.errors.quantity) {
+                    $('#qty-limit-error').html(data.errors.quantity[0]);
+                }
+                // if (data.errors.symbol) {
+                //     $('#symbol-error').html(data.errors.symbol[0]);
+
+                // }
+                // if (data.errors.type) {
+                //     $('#type-error').html(data.errors.type[0]);
+
+                // }
+
+            } else {
+                // save_changes_button();
+                // unit_reset();
+                $('#modal_item_price').modal('hide');
+
+                toastr.success('Selling Price has been updated.', 'Success', {
+                    timeOut: 5000
+                });
+
+                let table = $('.htcrr_tools_datatable').mDatatable();
+
+                table.originalDataSet = [];
+                table.reload();
+
+                table = $('.htcrr_materials_datatable').mDatatable();
+
+                table.originalDataSet = [];
+                table.reload();
+
+                $('.add-htcrr-item-price').addClass('add-item-price');
+                $('.add-htcrr-item-price').removeClass('add-htcrr-item-price');
+
+            }
+        }
+    });
+});
+
+$('.htcrr_materials_datatable').on('click','.edit-item-price', function edit () {
+    let triggerid = $(this).data('uuid');
+    $("#modal_item_price").val(triggerid);
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'get',
+        url: '/quotation/qtn-htcrr-item/' + triggerid + '/edit',
+        success: function (data) {
+            document.getElementById('uuid').value = data.uuid;
+            document.getElementById('qty').value = data.quantity;
+            document.getElementById('price').value = data.price_amount;
+            document.getElementById('note').value = data.note;
+            $.ajax({
+                url: '/get-units/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (unit) {
+                    $('select[name="unit_id"]').empty();
+
+                    $.each(unit, function (key, value) {
+                        if(key == data.unit_id){
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '" selected>' + value + '</option>'
+                            );
+                        }
+                        else{
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '">' + value + '</option>'
+                            );
+                        }
+                    });
+                }
+            });
+
+            // $('.btn-success').addClass('update');
+            // $('.btn-success').removeClass('add');
+        },
+        error: function (jqXhr, json, errorThrown) {
+            // this are default for ajax errors
+            let errorsHtml = '';
+            let errors = jqXhr.responseJSON;
+
+            $.each(errors.errors, function (index, value) {
+                $('#kategori-error').html(value);
+            });
+        }
+    });
+});
+$('.htcrr_tools_datatable').on('click','.edit-item-price', function edit () {
+    let triggerid = $(this).data('uuid');
+    $("#modal_item_price").val(triggerid);
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'get',
+        url: '/quotation/qtn-htcrr-item/' + triggerid + '/edit',
+        success: function (data) {
+            document.getElementById('uuid').value = data.uuid;
+            document.getElementById('qty').value = data.quantity;
+            document.getElementById('price').value = data.price_amount;
+            document.getElementById('note').value = data.note;
+            $.ajax({
+                url: '/get-units/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (unit) {
+                    $('select[name="unit_id"]').empty();
+
+                    $.each(unit, function (key, value) {
+                        if(key == data.unit_id){
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '" selected>' + value + '</option>'
+                            );
+                        }
+                        else{
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '">' + value + '</option>'
+                            );
+                        }
+                    });
+                }
+            });
+
+            // $('.btn-success').addClass('update');
+            // $('.btn-success').removeClass('add');
+        },
+        error: function (jqXhr, json, errorThrown) {
+            // this are default for ajax errors
+            let errorsHtml = '';
+            let errors = jqXhr.responseJSON;
+
+            $.each(errors.errors, function (index, value) {
+                $('#kategori-error').html(value);
+            });
+        }
+    });
+});
+
 jQuery(document).ready(function() {
     HtCRRMatsToolsDatatables.init();
 });
+
