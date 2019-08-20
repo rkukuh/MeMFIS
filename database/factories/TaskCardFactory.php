@@ -90,8 +90,6 @@ $factory->define(TaskCard::class, function (Faker $faker) {
                 ['no' => 'Doc-A/2/XII', 'description' => 'blablabla'],
             ];
 
-            dump($additionals);
-
             return $faker->randomElement([null, json_encode($additionals)]);
         }
 
