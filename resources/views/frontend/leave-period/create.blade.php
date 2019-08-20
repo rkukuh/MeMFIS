@@ -83,10 +83,10 @@
                                             </label>
         
                                             @component('frontend.common.input.datepicker')
-                                                @slot('id', 'period_start_')
+                                                @slot('id', 'period_start_date')
                                                 @slot('text', 'Period Start')
-                                                @slot('name', 'period_start')
-                                                @slot('id_error','period_start')
+                                                @slot('name', 'period_start_date')
+                                                @slot('id_error','period_start_date')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -95,10 +95,10 @@
                                             </label>
         
                                             @component('frontend.common.input.datepicker')
-                                                @slot('id', 'period_end')
+                                                @slot('id', 'period_end_date')
                                                 @slot('text', 'Periode End')
-                                                @slot('name', 'period_end')
-                                                @slot('id_error','period_end')
+                                                @slot('name', 'period_end_date')
+                                                @slot('id_error','period_end_date')
                                             @endcomponent
                                         </div>
                                     </div>

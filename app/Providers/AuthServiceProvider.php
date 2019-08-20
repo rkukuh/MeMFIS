@@ -32,6 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Access::class => Policies\AccessPolicy::class,
         Models\Vendor::class => Policies\VendorPolicy::class,
         Models\Repeat::class => Policies\RepeatPolicy::class,
+        Models\Branch::class => Policies\BranchPolicy::class,
         Models\Benefit::class => Policies\BenefitPolicy::class,
         Models\Address::class => Policies\AddressPolicy::class,
         Models\License::class => Policies\LicensePolicy::class,
@@ -86,6 +87,8 @@ class AuthServiceProvider extends ServiceProvider
         Models\TaskCardWorkPackageSuccessor::class => Policies\TaskCardWorkPackageSuccessorPolicy::class,
         Models\TaskCardWorkPackagePredecessor::class => Policies\TaskCardWorkPackagePredecessorPolicy::class,
         Models\QuotationWorkPackageTaskCardItem::class => Policies\QuotationWorkPackageTaskCardItemPolicy::class,
+        Models\JobTittle::class => Policies\JobTittlePolicy::class,
+        Models\LeaveType::class => Policies\LeaveTypePolicy::class,
     ];
 
     /**

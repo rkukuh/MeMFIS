@@ -119,7 +119,7 @@ class QuotationController extends Controller
         // TODO generate htcrr item workpackage
         $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
         $project = Project::find($request->project_id);
-            foreach($project->htcrr as $htcrr){
+            foreach($project->htcrrs as $htcrr){
                 foreach($htcrr->items as $item){
 
                     if (Item::findOrFail($item->id)->prices->get($customer)) {
@@ -184,6 +184,7 @@ class QuotationController extends Controller
             'currencies' => $this->currencies,
             'quotation' => $quotation,
             'charges' => $charges,
+            'attention' => $attention,
             'projects' => $projects
         ]);
     }
@@ -401,7 +402,7 @@ class QuotationController extends Controller
         //     }
 
         }
-        foreach($project->htcrr as $htcrr){
+        foreach($project->htcrrs as $htcrr){
             if($htcrr->parent_id == null){
                 $htcrr->progresses()->save(new Progress([
                     'status_id' =>  Status::where('code','removal-open')->first()->id,

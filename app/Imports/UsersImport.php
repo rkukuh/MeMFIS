@@ -25,9 +25,19 @@ class UsersImport implements ToModel, WithHeadingRow
 
         $user->save();
 
-        $user->assignRole(
-            Role::where('name', 'employee')->first()
-        );
+        if ($user->name == 'Chandra Dwiarini Kusumawardani' || 
+            $user->name == 'Irwan Ruswandono' ||
+            $user->name == 'Endra Budi Hermawan')
+        {
+                $user->assignRole(
+                    Role::where('name', 'hrd')->first()
+                );
+        } 
+        else {
+            $user->assignRole(
+                Role::where('name', 'employee')->first()
+            );
+        }
 
         $user->employee()->create([
             'code' => $row['nrp'],

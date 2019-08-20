@@ -49,7 +49,6 @@ $factory->define(HtCrr::class, function (Faker $faker) {
         'discount_type' => $disc_type,
         'discount_value' => $disc_value,
         'description' => $faker->randomElement([null, $faker->text]),
-
         'origin_type' => null,
         'origin_project' => null,
         'origin_conducted_by' => null,

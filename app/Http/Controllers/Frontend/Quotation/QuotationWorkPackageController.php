@@ -100,7 +100,7 @@ class QuotationWorkPackageController extends Controller
             'quotation' => $quotation,
             'job_request' => $job_request,
             'project_workpackage' => $project_workpackage,
-         ]);
+        ]);
     }
 
     /**
@@ -112,7 +112,8 @@ class QuotationWorkPackageController extends Controller
      */
     public function update(Request $request, Quotation $quotation, WorkPackage $workPackage)
     {
-        return response()->json($quotation->workpackages()->updateExistingPivot($workPackage, ['manhour_total'=>$request->manhour_total,'manhour_rate'=>$request->manhour_rate,'description'=>$request->description]));
+        // dd($request->all());
+        return response()->json($quotation->workpackages()->updateExistingPivot($workPackage, ['manhour_total'=>$request->manhour_total,'manhour_rate_amount'=>$request->manhour_rate,'description'=>$request->description]));
     }
 
     /**
@@ -126,6 +127,18 @@ class QuotationWorkPackageController extends Controller
         $quotation->workpackages()->detach($workPackage);
 
         return response()->json($quotation);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function htcrr(Quotation $quotation)
+    {
+        return view('frontend.quotation.htcrr.index',[
+            'quotation' => $quotation
+        ]);
     }
 
 }

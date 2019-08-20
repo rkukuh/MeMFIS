@@ -30,6 +30,8 @@ Route::name('datatables.')->group(function () {
         Route::get('/certification', 'CertificationDatatables@index')->name('certification.index');
         Route::get('/leave-period', 'LeavePeriodDatatables@index')->name('leaveperiod.index');
         Route::get('/bpjs', 'BPJSDatatables@index')->name('bpjs.index');
+        Route::get('/job-tittle', 'JobTittleDatatables@index')->name('bpjs.index');
+        Route::get('/leave-type', 'LeaveTypeDatatables@index')->name('leavetype.index');
 
         /** LICENSE */
 

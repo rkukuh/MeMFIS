@@ -380,7 +380,7 @@
                                             Station @include('frontend.common.label.optional')
                                         </label>
 
-                                        @component('frontend.common.input.text')
+                                        @component('frontend.common.input.select2')
                                             @slot('id', 'station')
                                             @slot('text', 'Station')
                                             @slot('name', 'station')
@@ -679,6 +679,9 @@
 
 <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/work-area.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/select2/station.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/station.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/threshold-type.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/threshold-type.js') }}"></script>

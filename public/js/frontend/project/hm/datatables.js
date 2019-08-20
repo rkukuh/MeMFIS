@@ -233,7 +233,7 @@ let Datatables = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid, 
+                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid,
                 data: {
                     _token: $('input[name=_token]').val(),
                 },
@@ -638,6 +638,42 @@ let Datatables = {
             });
 
         });
+        $('.basic_datatable').on('click', '.rii', function () {
+            triggeruuid = $(this).data('uuid');
+            rii = $(this).data('rii');
+            if (rii == 0){
+                is_rii = 1;
+            }
+            else if (rii ==  1){
+                is_rii = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/project-hm/'+triggeruuid+'/rii/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_rii: is_rii,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Rii has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.basic_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
 
         $('.basic_datatable').on('click', '.tool', function () {
             if(tool_datatables_init == true){
@@ -768,6 +804,42 @@ let Datatables = {
 
         });
 
+        $('.sip_datatable').on('click', '.rii', function () {
+            triggeruuid = $(this).data('uuid');
+            rii = $(this).data('rii');
+            if (rii == 0){
+                is_rii = 1;
+            }
+            else if (rii ==  1){
+                is_rii = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/project-hm/'+triggeruuid+'/rii/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_rii: is_rii,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Rii has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.sip_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
 
 
         //CPCP taskcard Datatable
@@ -883,6 +955,44 @@ let Datatables = {
 
         });
 
+        $('.cpcp_datatable').on('click', '.rii', function () {
+            triggeruuid = $(this).data('uuid');
+            rii = $(this).data('rii');
+            if (rii == 0){
+                is_rii = 1;
+            }
+            else if (rii ==  1){
+                is_rii = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/project-hm/'+triggeruuid+'/rii/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_rii: is_rii,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Rii has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cpcp_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
+
         //ADSB
         $('.ad-sb_datatable').on('click', '.predecessor', function () {
             if(predecessor_datatables_init == true){
@@ -963,6 +1073,44 @@ let Datatables = {
             });
 
         });
+
+        $('.ad-sb_datatable').on('click', '.rii', function () {
+            triggeruuid = $(this).data('uuid');
+            rii = $(this).data('rii');
+            if (rii == 0){
+                is_rii = 1;
+            }
+            else if (rii ==  1){
+                is_rii = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/project-hm/'+triggeruuid+'/rii/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_rii: is_rii,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Rii has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.ad-sb_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
 
         //CMR-AWL
 
@@ -1046,6 +1194,44 @@ let Datatables = {
             });
 
         });
+
+        $('.cmr-awl_datatable').on('click', '.rii', function () {
+            triggeruuid = $(this).data('uuid');
+            rii = $(this).data('rii');
+            if (rii == 0){
+                is_rii = 1;
+            }
+            else if (rii ==  1){
+                is_rii = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/project-hm/'+triggeruuid+'/rii/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_rii: is_rii,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Rii has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.cmr-awl_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
 
         //SI taskcard Datatable
         $('.si_datatable').on('click', '.predecessor', function () {
@@ -1158,6 +1344,44 @@ let Datatables = {
             });
 
         });
+
+        $('.si_datatable').on('click', '.rii', function () {
+            triggeruuid = $(this).data('uuid');
+            rii = $(this).data('rii');
+            if (rii == 0){
+                is_rii = 1;
+            }
+            else if (rii ==  1){
+                is_rii = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/project-hm/'+triggeruuid+'/rii/',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    is_rii: is_rii,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Rii has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        let table = $('.si_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+
+        });
+
 
         //basic
         $('.m-datatable').on('click', '.delete', function () {

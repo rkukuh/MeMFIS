@@ -473,17 +473,6 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of Term of Payment.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function TypeOfLeaves(Builder $query)
-    {
-        return $query->where('of', 'leaves');
-    }
-
-    /**
      * Scope a query to only include type of Unit.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -673,7 +662,7 @@ class Type extends MemfisModel
      *
      * @return mixed
      */
-    public function skill_htcrr()
+    public function skill_htcrrs()
     {
         return $this->belongsToMany(HtCrr::class, 'htcrr_skill', 'skill_id', 'htcrr_id')
                     ->withTimestamps();;

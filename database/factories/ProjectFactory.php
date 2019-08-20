@@ -37,7 +37,22 @@ $factory->define(Project::class, function (Faker $faker) {
         'no_wo' => 'WO-' . $faker->randomNumber(),
         'aircraft_register' => 'AC-REG-' . $faker->randomNumber(),
         'aircraft_sn' => 'AC-SN-' . $faker->randomNumber(),
-        'tat_htcrr' => $faker->randomElement([null, $faker->randomDigit]),
+        'data_defectcard' => function () use ($faker) {
+            $data['tat'] = null;
+            $data['performance_factor'] = null;
+            $data['total_manhours'] = null;
+            $data['total_manhours_with_performance_factor'] = null;
+
+            return $faker->randomElement([null, json_encode($data)]);
+        },
+        'data_htcrr' => function () use ($faker) {
+            $data['tat'] = null;
+            $data['performance_factor'] = null;
+            $data['total_manhours'] = null;
+            $data['total_manhours_with_performance_factor'] = null;
+
+            return $faker->randomElement([null, json_encode($data)]);
+        },
         'origin_project' => null,
         'origin_project_workpackages' => null,
         'origin_project_workpackage_engineers' => null,

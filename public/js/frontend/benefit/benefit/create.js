@@ -1,5 +1,12 @@
 let Benefit = {
     init: function () {
+
+        let reset = function (){
+        $('input[name=benefits_code]').val('')
+        $('input[name=benefits_name]').val('')
+        $('#description').val('')
+        }
+
     let create = $('.footer').on('click', '.add-benefits', function () {
 
         let code = $('input[name=benefits_code]').val();
@@ -39,6 +46,8 @@ let Benefit = {
                     toastr.success('Data has been saved.', 'Succes', {
                         timeOut: 5000
                     });
+
+                    reset()
                 }
             }
         });

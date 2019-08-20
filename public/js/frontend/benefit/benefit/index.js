@@ -66,6 +66,13 @@ let Benefit = {
             ]
         });
 
+        let refresh_datatable = $(document).on('click', '#m_tab_6_1', function () {
+            let table = $('.benefit_datatable').mDatatable();
+
+                    table.originalDataSet = [];
+                    table.reload();
+        });
+
     }
 };
 
