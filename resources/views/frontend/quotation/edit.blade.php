@@ -485,6 +485,7 @@
                                         <div class="tab-content">
                                             @include('frontend.quotation.summaryEdit')
                                             @include('frontend.quotation.modal-discount')
+                                            @include('frontend.quotation.htcrr.modal-discount-htcrr')
                                         </div>
                                     </div>
                                 </div>

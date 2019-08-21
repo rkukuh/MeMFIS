@@ -37,6 +37,8 @@ Route::name('frontend.')->group(function () {
                     Route::resource('/htcrr', 'QuotationHtcrrController', [
                         'parameters' => ['htcrr' => 'quotation']
                     ]);
+
+                    Route::post('/{quotation}/htcrr/discount','QuotationHtcrrController@discount')->name('htcrr.discount');
                 });
 
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/basic', 'SummaryRoutineTaskcardController@basic')->name('quotation.summary.basic');
