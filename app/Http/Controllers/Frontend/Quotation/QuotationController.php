@@ -151,6 +151,14 @@ class QuotationController extends Controller
                         } else {
                             $price_id = null;
                         }
+
+                        if($price_id <> null){
+                            $selling_price = Item::find($item->id)->prices->get($customer)->amount;
+                        }
+                        else{
+                            $selling_price = null;
+                        }
+
                         QuotationWorkPackageTaskCardItem::create([
                             'quotation_id' => $quotation->id,
                             'workpackage_id' => $workpackages->id,
@@ -159,6 +167,7 @@ class QuotationController extends Controller
                             'quantity' => $item->pivot->quantity,
                             'unit_id' => $item->pivot->unit_id,
                             'price_id' => $price_id,
+                            'price_amount' => $selling_price,
                         ]);
                     }
                 }
