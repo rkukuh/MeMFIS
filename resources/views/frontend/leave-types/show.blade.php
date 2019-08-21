@@ -89,6 +89,7 @@
                                         @endphp
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             @component('frontend.common.input.checkbox')
+                                                @slot('text','Enable Pro-Rate Leaves')
                                                 @slot('id', 'pro_rate_leave')
                                                 @slot('name', 'pro_rate_leave')
                                                 @slot('checked', $checked)

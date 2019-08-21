@@ -88,6 +88,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             @component('frontend.common.input.checkbox')
+                                                @slot('text','Enable Pro-Rate Leaves')
                                                 @slot('id', 'pro_rate')
                                                 @slot('name', 'pro_rate')
                                                 @slot('style_div','margin-top:30px')
