@@ -1,12 +1,12 @@
 let Unit = {
     init: function () {
-        $('.price_list_datatable').mDatatable({
+        $('.price_list_datatable-item').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/price-list',
+                        url: '/datatables/price-list-item',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -115,8 +115,135 @@ let Unit = {
                 }
             ]
         });
+       
+        // Manhour
 
+        $('.price_list_datatable-manhour').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/price-list-manhour',
+                        map: function (raw) {
+                            let dataSet = raw;
 
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+                            
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !1,
+                serverSorting: !1
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [
+                {
+                    field: 'code',
+                    title: 'Code / Part Number',
+                    sortable: 'asc',
+                    filterable: !1,
+                   
+                },
+                {
+                    field: 'name',
+                    title: 'Name',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+             
+                
+            ]
+        });
+
+         // Facility
+
+         $('.price_list_datatable-facility').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/price-list-facility',
+                        map: function (raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+                            
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !1,
+                serverSorting: !1
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [
+                {
+                    field: 'code',
+                    title: 'Code / Part Number',
+                    sortable: 'asc',
+                    filterable: !1,
+                   
+                },
+                {
+                    field: 'name',
+                    title: 'Name',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'prices',
+                    title: 'Price',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+               
+            ]
+        });
 
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
@@ -158,7 +285,7 @@ let Unit = {
                             timeOut: 5000
                         });
 
-                        let table = $('.price_list_datatable').mDatatable();
+                        let table = $('.price_list_datatable-item').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -168,7 +295,7 @@ let Unit = {
         });
 
         // show add price modal
-         $('.price_list_datatable').on('click', '.add-price', function () {
+         $('.price_list_datatable-item').on('click', '.add-price', function () {
             let item = $(this).data('uuid');
 
             document.getElementById("uuid").value = $(this).data('uuid');
@@ -204,7 +331,7 @@ let Unit = {
                 }
             });
         });
-        let edit = $('.price_list_datatable').on('click', '.edit-price', function edit () {
+        let edit = $('.price_list_datatable-item').on('click', '.edit-price', function edit () {
             save_changes_button();
 
             let item = $(this).data('uuid');
@@ -251,7 +378,7 @@ let Unit = {
             });
         });
 
-        let show = $('.price_list_datatable').on('click', '.show-price', function edit () {
+        let show = $('.price_list_datatable-item').on('click', '.show-price', function edit () {
 
             let item = $(this).data('uuid');
             document.getElementById("pn-show").innerHTML = $(this).data('pn');
@@ -392,11 +519,16 @@ let Unit = {
                         }
                     });
                 }
-            });
-        });
+            });                                                                                         
+        });       
 
     }
 };
+                                                                                                                                                                              
+
+
+
+
 
 jQuery(document).ready(function () {
     Unit.init();

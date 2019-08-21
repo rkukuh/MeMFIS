@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.event-holidays.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.holiday.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Event/Holidays
                             </span>
@@ -50,6 +50,13 @@
                         <div class="m-portlet__body">
                             <form id="itemform" name="itemform">
                                 <div class="m-portlet__body">
+                                        @component('frontend.common.input.hidden')
+                                            @slot('id', 'uuid')
+                                            @slot('name', 'uuid')
+                                            @slot('value', $holiday->uuid)
+                                            @slot('id_error', 'uuid')
+                                        @endcomponent
+
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -57,11 +64,12 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Holidays Code')
-                                                @slot('id', 'holidays_code')
-                                                @slot('name', 'holidays_code')
-                                                @slot('id_error', 'holidays_code')
+                                                @slot('id', 'code')
+                                                @slot('name', 'code')
+                                                @slot('value', $holiday->code)
+                                                @slot('id_error', 'code')
                                             @endcomponent
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -69,10 +77,10 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Holidays Name')
-                                                @slot('id', 'holidays_name')
-                                                @slot('name', 'holidays_name')
-                                                @slot('id_error', 'holidays_name')
+                                                @slot('id', 'name')
+                                                @slot('value', $holiday->name)
+                                                @slot('name', 'name')
+                                                @slot('id_error', 'name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -83,10 +91,10 @@
                                             </label>
         
                                             @component('frontend.common.input.datepicker')
-                                                @slot('id', 'date')
-                                                @slot('text', 'Date Start')
-                                                @slot('name', 'date')
-                                                @slot('id_error','date')
+                                                @slot('id', 'period_start_date')
+                                                @slot('value', $holiday->start_date)
+                                                @slot('name', 'period_start_date')
+                                                @slot('id_error','period_start_date')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -95,10 +103,10 @@
                                             </label>
         
                                             @component('frontend.common.input.datepicker')
-                                                @slot('id', 'valid_until')
-                                                @slot('text', 'Date End')
-                                                @slot('name', 'valid_until')
-                                                @slot('id_error','valid_until')
+                                                @slot('id', 'period_end_date')
+                                                @slot('name', 'period_end_date')
+                                                @slot('value', $holiday->end_date)
+                                                @slot('id_error','period_end_date')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -111,8 +119,8 @@
                                             @component('frontend.common.input.textarea')
                                                 @slot('rows', '5')
                                                 @slot('id', 'description')
+                                                @slot('value', $holiday->description)
                                                 @slot('name', 'description')
-                                                @slot('text', 'Description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -122,8 +130,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-holidays-period')
-                                                        @slot('class', 'add-holidays-period')
+                                                        @slot('id', 'edit-holidays-period')
+                                                        @slot('class', 'edit-holidays-period')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -145,6 +153,7 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/period-start.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/period-end.js')}}"></script>
+    <script src="{{ asset('js/frontend/event-holidays/edit.js')}}"></script>
 @endpush

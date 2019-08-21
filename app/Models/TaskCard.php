@@ -23,15 +23,16 @@ class TaskCard extends MemfisModel
         'effectivity',
         'performance_factor',
         'sequence',
-        'stringer',
         'version',
+        'stringer',
+        'section',
         'ata',
         'description',
         'additionals',
 
         /** EO Header */
         'revision',
-        'reference',
+        'reference', 
         'category_id',
         'scheduled_priority_id',
         'scheduled_priority_text',

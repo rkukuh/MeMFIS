@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.event-holidays.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.holiday.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Event/Holidays
                             </span>
@@ -67,7 +67,7 @@
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
                                             @slot('text', 'Holidays')
-                                            @slot('href', route('frontend.hr.event-holidays.create') )
+                                            @slot('href', route('frontend.holiday.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>

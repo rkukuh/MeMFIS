@@ -62,7 +62,7 @@ $('.workpackage_datatable').mDatatable({
                 if(t.uuid){
                     return '<a href="/quotation/'+quotation_uuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
                 }else{
-                    return '<a href="#">' + t.title + "</a>"
+                    return '<a href="/quotation/htcrr/'+quotation_uuid+'/edit">' + t.title + "</a>"
                 }
             }
         },

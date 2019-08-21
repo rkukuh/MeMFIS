@@ -22,6 +22,7 @@ Route::name('component.')->group(function () {
         Route::get('get-vendors', 'FillComboxController@vendor')->name('get-vendor');
         Route::get('get-projects', 'FillComboxController@project')->name('get-project');
         Route::get('get-accesses', 'FillComboxController@access')->name('get-accesses');
+        Route::get('get-stations', 'FillComboxController@station')->name('get-stations');
         Route::get('get-materials', 'FillComboxController@material')->name('get-material');
         Route::get('get-aircrafts', 'FillComboxController@aircraft')->name('get-aircrafts');
         Route::get('get-customers', 'FillComboxController@customer')->name('get-customers');
@@ -54,6 +55,7 @@ Route::name('component.')->group(function () {
         Route::get('get-category-taskcard', 'FillComboxController@categorieTakcard')->name('get-category-taskcard');
         Route::get('get-otr-certifications', 'FillComboxController@otrCertification')->name('get-otr-certifications');
         Route::get('get-aircraft-taskcards', 'FillComboxController@aircraftTaskcard')->name('get-aircraft-taskcards');
+        Route::get('get-project-additionals', 'FillComboxController@projectAdditional')->name('get-project-additional');
         Route::get('get-categories-material', 'FillComboxController@categoriesMaterial')->name('get-categoriesMaterial');
         Route::get('get-scheduled-priorities', 'FillComboxController@scheduledPriority')->name('get-scheduled-priorities');
         Route::get('get-takcard-routine-types', 'FillComboxController@taskcardTypeRoutine')->name('get-takcard-routine-types');

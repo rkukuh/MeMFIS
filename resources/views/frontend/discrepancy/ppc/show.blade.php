@@ -457,6 +457,6 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/job-card/discrepancy/edit.js') }}"></script>
-    <script src="{{ asset('js/frontend/job-card/discrepancy/form-reset.js') }}"></script>
+<script src="{{ asset('assets/metronic/demo/default/custom/crud/forms/widgets/form-repeater.js')}}"></script>
+<script src="{{ asset('js/frontend/discrepancy/show.js') }}"></script>
 @endpush

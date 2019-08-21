@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    TaskcardType = function () {
+    Sections = function () {
         $.ajax({
-            url: '/get-zones/',
+            url: '/get-section',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -20,5 +20,5 @@ $(document).ready(function () {
         });
     };
 
-    TaskcardType();
+    Sections();
 });

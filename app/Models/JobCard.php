@@ -12,6 +12,8 @@ class JobCard extends MemfisModel
         'number',
         'quotation_id',
         'taskcard_id',
+        'is_rii',
+        'is_mandatory',
         'origin_quotation',
         'origin_taskcard',
         'origin_taskcard_items',

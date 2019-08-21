@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\LeaveType;
 use App\Http\Controllers\Controller;
-use App\Models\Type;
-use Illuminate\Http\Request;
+use App\Http\Requests\Frontend\LeaveTypeStore;
+use App\Http\Requests\Frontend\LeaveTypeUpdate;
 
 class LeaveTypeController extends Controller
 {
@@ -31,32 +32,35 @@ class LeaveTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\LeaveTypeStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LeaveTypeStore $request)
     {
-        //
+        $leaveType = LeaveType::create($request->all());
+
+        // TODO: Return error message as JSON
+        return response()->json($leaveType);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Type  $type
+     * @param  \App\Models\LeaveType  $leaveType
      * @return \Illuminate\Http\Response
      */
-    public function show(Type $type)
+    public function show(LeaveType $leaveType)
     {
-        return view('frontend.leave-type.show',['type' => $type]);
+        return view('frontend.leave-types.show',['leaveType' => $leaveType]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Type  $type
+     * @param  \App\Models\LeaveType  $leaveType
      * @return \Illuminate\Http\Response
      */
-    public function edit(Type $type)
+    public function edit(LeaveType $leaveType)
     {
         //
     }
@@ -64,11 +68,11 @@ class LeaveTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Type  $type
+     * @param  \App\Http\Requests\Frontend\LeaveTypeUpdate  $request
+     * @param  \App\Models\LeaveType  $leaveType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Type $type)
+    public function update(LeaveTypeUpdate $request, LeaveType $leaveType)
     {
         //
     }
@@ -76,10 +80,10 @@ class LeaveTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Type  $type
+     * @param  \App\Models\LeaveType  $leaveType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Type $type)
+    public function destroy(LeaveType $leaveType)
     {
         //
     }

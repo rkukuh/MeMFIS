@@ -62,10 +62,18 @@ Route::name('frontend.')->group(function () {
         Route::resource('language', 'LanguageController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
-        Route::resource('department', 'DepartmentController');
-        Route::resource('leave-period','LeavePeriodController');
+        Route::resource('manhour', 'ManhourController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
+        Route::resource('leave-period','LeavePeriodController');
+        Route::resource('company', 'CompanyController');
+        Route::resource('department', 'DepartmentController');
+        Route::resource('benefit', 'BenefitController');
+        Route::resource('bpjs', 'BPJSController');
+        Route::resource('job-tittle', 'JobTittleController');
+        Route::resource('leave-type', 'LeaveTypeController');
+        Route::resource('holiday', 'HolidayController');
+        Route::resource('workshift', 'WorkshiftController');
 
         /** CERTIFICATION */
 
@@ -76,10 +84,6 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('general-license', 'GeneralLicenseController');
         Route::resource('employee-license', 'EmployeeLicenseController');
-
-        /** LEAVE TYPES */
-
-        Route::resource('leave-type', 'LeaveTypeController');
 
         /** Jobcard EO */
 
@@ -109,7 +113,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/additional-task/summary', 'frontend.project.hm-additional.summary')->name('additional-task.summary');
 
         /** Additional Task Quotation*/
-        
+
         Route::view('/additional-task-qtn/create', 'frontend.quotation.additional.create')->name('additional-task-qtn.create');
         Route::view('/additional-task-qtn/edit', 'frontend.quotation.additional.edit')->name('additional-task-qtn.edit');
         Route::view('/additional-task-qtn/show', 'frontend.quotation.additional.show')->name('additional-task-qtn.show');
@@ -167,31 +171,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
         Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
 
-        /** Event/Holidays */
 
-        Route::view('hr/event-holidays', 'frontend.event-holidays.index')->name('hr.event-holidays.index');
-        Route::view('hr/event-holidays/create', 'frontend.event-holidays.create')->name('hr.event-holidays.create');
-        Route::view('hr/event-holidays/show', 'frontend.event-holidays.show')->name('hr.event-holidays.show');
-        Route::view('hr/event-holidays/edit', 'frontend.event-holidays.edit')->name('hr.event-holidays.edit');
-
-        /** Workshift Schedule */
-
-        Route::view('hr/workshift-schedule', 'frontend.workshift-schedule.index')->name('hr.workshift-schedule.index');
-        Route::view('hr/workshift-schedule/create', 'frontend.workshift-schedule.create')->name('hr.workshift-schedule.create');
-        Route::view('hr/workshift-schedule/show', 'frontend.workshift-schedule.show')->name('hr.workshift-schedule.show');
-        
-        
-        /** QUOTATION's WORKPACKAGE's TASKCARDs */
-
-        Route::resource('qtn-wp-tc-item', 'QuotationWorkPackageTaskCardItemController');
-
-        /** QUOTATION's HT/CRRs */
-
-        Route::resource('qtn-htcrr-item', 'QuotationHtcrrItemController');
-
-        /** QUOTATION's DEFECTCARDs */
-
-        Route::resource('qtn-defectcard-item', 'QuotationDefectCardItemController');
 
         /** WORKPACKAGE's EO-INSTRUCTIONs */
 

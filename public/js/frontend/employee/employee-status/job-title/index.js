@@ -1,4 +1,4 @@
-let JobTitle = {
+let EmployeeJobTittle = {
     init: function () {
         $('.m_datatable_job_title').mDatatable({
             data: {
@@ -6,7 +6,7 @@ let JobTitle = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/employee',
+                        url: '/datatables/job-tittle',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -49,17 +49,17 @@ let JobTitle = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/employee/'+t.uuid+'">' + t.code + "</a>"
+                        return '<a href="/job-tittle/'+t.uuid+'">' + t.code + "</a>"
                     }
                 },
                 {
                     field: 'name',
-                    title: 'Job Title',
+                    title: 'Job Tittle Name',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'dob',
+                    field: 'description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -72,323 +72,244 @@ let JobTitle = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_job_title" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-employee" title="Edit" data-id=' +
+                            '<button id="edit-job-tittle" data-toggle="modal" data-target="#modal_job_tittle" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-unit" title="Edit" data-uuid-job=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-employee" href="#" data-uuid=' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
                             t.uuid +
-                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
                     }
                 }
             ]
         });
 
-        $(document).ready(function () {
-            $('.btn-success').removeClass('add');
-            // document.getElementById('isppn').onchange = function () {
-            //     document.getElementById('ppn').disabled = !this.checked;
-            // };
+        let reset = function (){
+            $('#code_job_tittle').val('')
+            $('#name_job_tittle').val('')
+            $('#description_job_tittle').val('')
+            $('#specification').val('')
+            $('#code_job_tittle-error').html('')
+            $('#name_job_tittle-error').html('')
+            $('#description_job_tittle-error').html('')
+            $('#specification-error').html('')
+        }
+
+        let button_reset = $(document).on('click','#reset-job-tittle', function (){
+            reset()
         });
 
-        $('.employee_class').on('click', '.btn-primary', function () {
-            save_general_license_button();
-            employee_employee_reset();
+        let button_close = $(document).on('click','#close-job-tittle', function (){
+            reset()
         });
 
-        $('.modal-footer-employee').on('click', '.reset-employee', function () {
-            employee_employee_reset();
+        let show = $(document).on('click', '#add-job-tittle', function () {      
+            reset()
+            $('.labelModal-Job').children('span').text('Create New');
+            $('.modal-change-job-tittle').attr('id','add-job')
         });
 
-
-        $('.modal-footer-employee').on('click', '.add-employee', function () {
-            let code = $('input[name=code_employee]').val();
-            let first_name = $('input[name=first_name]').val();
-            let middle_name = $('input[name=middle_name]').val();
-            let last_name = $('input[name=last_name]').val();
-            let gender = $('input[name=gender]:checked').val();
-            let dob = $('#dob').val();
-            let hired_at = $('#hired_at').val();
+        let store = $(document).on('click', '#add-job', function () {
+            let code = $('input[name=code_job_tittle]').val()
+            let name = $('input[name=name_job_tittle]').val()
+            let description_job = $('#description_job_tittle').val()
+            let specification = $('#specification').val()
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/employee',
+                url: '/job-tittle',
                 data: {
                     _token: $('input[name=_token]').val(),
                     code: code,
-                    first_name: first_name,
-                    middle_name: middle_name,
-                    last_name: last_name,
-                    gender: gender,
-                    dob: dob,
-                    hired_at: hired_at,
-
+                    name: name,
+                    description: description_job,
+                    specification: specification
                 },
                 success: function (data) {
                     if (data.errors) {
                         if (data.errors.code) {
-                            $('#code_employee-error').html(data.errors.code[0]);
-
+                            $('#code_job_tittle-error').html(data.errors.code[0]);
+                        }else{
+                            $('#code_job_tittle-error').html('');
                         }
-
-                        if (data.errors.first_name) {
-                            $('#first_name-error').html(data.errors.first_name[0]);
-
+                        if (data.errors.name) {
+                            $('#name_job_tittle-error').html(data.errors.name[0]);
+                        }else{
+                            $('#name_job_tittle-error').html('');
                         }
-
-                        document.getElementById('code_employee').value = code;
-                        document.getElementById('first_name').value = first_name;
-                        document.getElementById('middle_name').value = middle_name;
-                        document.getElementById('last_name').value = last_name;
-                        if(gender == 'f'){
-                            document.getElementById('f').checked = true;
+                        if (data.errors.description) {
+                            $('#description_job_tittle-error').html(data.errors.description[0]);
+                        }else{
+                            $('#description_job_tittle-error').html('');
                         }
-                        else if(gender == 'm'){
-                            document.getElementById('m').checked = true;
+                        if (data.errors.specification) {
+                            $('#spesification-error').html(data.errors.description[0]);
+                        }else{
+                            $('#spesification-error').html('')
                         }
-                            document.getElementById('dob').value = dob;
-                        document.getElementById('hired_at').value = hired_at;
-
                     } else {
-                        $('#modal_employee').modal('hide');
+                        $('#modal_job_tittle').modal('hide');
 
-                        let table = $('.m_datatable_employee').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-
-
-                        employee_employee_reset();
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
-                            timeOut: 5000
-                        });
-                        update_item_button();
-                    }
-                }
-            });
-        });
-
-        let edit = $('.m_datatable_employee').on('click', '.edit-employee', function () {
-            let triggerid = $(this).data('id');
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'get',
-                url: '/employee/' + triggerid + '/edit',
-                success: function (data) {
-                    document.getElementById('code_employee').value = data.code;
-                    document.getElementById('first_name').value = data.first_name;
-                    document.getElementById('middle_name').value = data.middle_name;
-                    document.getElementById('last_name').value = data.last_name;
-                    // document.getElementById('gender').value = data.gender;
-                    document.getElementById('dob').value = data.dob;
-                    document.getElementById('hired_at').value = data.hired_at;
-                    document.getElementById('id_employ').value = data.uuid;
-
-                    if(data.gender != null){
-                        if(data.gender == 'f'){
-                            document.getElementById('f').checked = true;
-                        }
-                        else if(data.gender == 'm'){
-                            document.getElementById('m').checked = true;
-                        }
-                    }
-                        $('.btn-success').removeClass('add-employee');
-                        $('.btn-success').addClass('update-employee');
-                        $('.btn-success').html("<span><i class='fa fa-save'></i><span> Save Changes</span></span>");
-
-                },
-                error: function (jqXhr, json, errorThrown) {
-                    let errorsHtml = '';
-                    let errors = jqXhr.responseJSON;
-
-                    $.each(errors.errors, function (index, value) {
-                        $('#employee-error').html(value);
-                    });
-                }
-            });
-        });
-
-        let update = $('.modal-footer-employee').on('click', '.update-employee', function () {
-            let code = $('input[name=code_employee]').val();
-            let first_name = $('input[name=first_name]').val();
-            let middle_name = $('input[name=middle_name]').val();
-            let last_name = $('input[name=last_name]').val();
-            let gender = $('input[name=gender]:checked').val();
-            let dob = $('#dob').val();
-            let hired_at = $('#hired_at').val();
-            let triggerid = $('input[name=id_employ]').val();
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'put',
-                url: '/employee/' + triggerid,
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    code: code,
-                    first_name: first_name,
-                    middle_name: middle_name,
-                    last_name: last_name,
-                    gender: gender,
-                    dob: dob,
-                    hired_at: hired_at,
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.code) {
-                            $('#code_employee-error').html(data.errors.code[0]);
-
-                        }
-
-                        else if (data.errors.first_name) {
-                            $('#first_name-error').html(data.errors.first_name[0]);
-
-                        }
-
-                        document.getElementById('code_employee').value = code;
-                        document.getElementById('first_name').value = first_name;
-                        document.getElementById('middle_name').value = middle_name;
-                        document.getElementById('last_name').value = last_name;
-                        if(gender == 'f'){
-                            document.getElementById('f').checked = true;
-                        }
-                        else if(gender == 'm'){
-                            document.getElementById('m').checked = true;
-                        }
-                            document.getElementById('dob').value = dob;
-                        document.getElementById('hired_at').value = hired_at;
-
-                    } else {
-                        employee_employee_reset();
-
-                        save_button();
-                        $('#modal_employee').modal('hide');
-
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Job tittle has been create.', 'Success', {
                             timeOut: 5000
                         });
 
-                        let table = $('.m_datatable_employee').mDatatable();
+                        let table = $('.m_datatable_job_title').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
-            });
+            }); 
         });
 
-        $('.m_datatable_employee').on('click', '.delete-employee', function () {
-            let employee_uuid = $(this).data('uuid');
 
-            swal({
-                title: 'Sure want to remove?',
-                type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/employee/' + employee_uuid + '',
-                        success: function (data) {
-                            toastr.success('Employee has been deleted.', 'Deleted', {
-                                    timeOut: 5000
-                                }
-                            );
+        let edit = $(document).on('click', '#edit-job-tittle', function () {      
+               reset()
+                $('.labelModal-Job').children('span').text('Edit');
+                $('.modal-change-job-tittle').attr('id','update-job')
+                let triggerid = $(this).data('uuid-job');
 
-                            let table = $('.m_datatable_employee').mDatatable();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'get',
+                    url: '/job-tittle/' + triggerid + '/edit',
+                    success: function (data) {
+                        $('#code_job_tittle').val(data.code)
+                        $('#name_job_tittle').val(data.name)
+                        $('#description_job_tittle').val(data.description)
+                        $('#specification').val(data.specification)
+                    },
+                    error: function (jqXhr, json, errorThrown) {
+                        // this are default for ajax errors
+                        let errorsHtml = '';
+                        let errors = jqXhr.responseJSON;
+    
+                        $.each(errors.errors, function (index, value) {
+                            alert(value);
+                        });
+                    }
+                });
+
+            });
+
+            let update = $(document).on('click', '#update-job', function () {
+                let code = $('input[name=code_job_tittle]').val()
+                let name = $('input[name=name_job_tittle]').val()
+                let description_job = $('#description_job_tittle').val()
+                let specification = $('#specification').val()
+                let triggerid = $('#edit-job-tittle').data('uuid-job')
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'put',
+                    url: '/job-tittle/' + triggerid,
+                    data: {
+                        _token: $('input[name=_token]').val(),
+                        code: code,
+                        name: name,
+                        description: description_job,
+                        specification: specification,
+                    },
+                    success: function (data) {
+                        if (data.errors) {
+                            if (data.errors.code) {
+                                $('#code_job_tittle-error').html(data.errors.code[0]);
+                            }else{
+                                $('#code_job_tittle-error').html('');
+                            }
+                            if (data.errors.name) {
+                                $('#name_job_tittle-error').html(data.errors.name[0]);
+                            }else{
+                                $('#name_job_tittle-error').html('');
+                            }
+                            if (data.errors.description) {
+                                $('#description_job_tittle-error').html(data.errors.description[0]);
+                            }else{
+                                $('#description_job_tittle-error').html('');
+                            }
+                            if (data.errors.specification) {
+                                $('#spesification-error').html(data.errors.description[0]);
+                            }else{
+                                $('#spesification-error').html('')
+                            }
+                        } else {
+                            $('#modal_job_tittle').modal('hide');
+
+                            toastr.success('Job tittle has been updated.', 'Success', {
+                            timeOut: 5000
+                            });
+
+                            let table = $('.m_datatable_job_title').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                }
+                            }
+                    }
+                });
             });
-        });
-        // let remove_employee = $('.m_datatable_employee').on('click', '.delete-employee', function () {
-        //     let triggerid = $(this).data('id');
 
-        //     swal({
-        //         title: 'Are you sure?',
-        //         text: 'You will not be able to recover this imaginary file!',
-        //         type: 'warning',
-        //         showCancelButton: true,
-        //         confirmButtonText: 'Yes, delete it!',
-        //         cancelButtonText: 'No, keep it'
-        //     }).then(result => {
-        //         if (result.value) {
-        //             $.ajax({
-        //                 headers: {
-        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-        //                         'content'
-        //                     )
-        //                 },
-        //                 type: 'DELETE',
-        //                 url: '/employee/' + triggerid + '',
-        //                 success: function (data) {
-        //                     toastr.success(
-        //                         'Data berhasil dihapus.',
-        //                         'Sukses!', {
-        //                             timeOut: 5000
-        //                         }
-        //                     );
+            $('.m_datatable_job_title').on('click', '.delete', function () {
+                let uuid = $('#edit-job-tittle').data('uuid-job');
+    
+                swal({
+                    title: 'Sure want to remove?',
+                    type: 'question',
+                    confirmButtonText: 'Yes, REMOVE',
+                    confirmButtonColor: '#d33',
+                    cancelButtonText: 'Cancel',
+                    showCancelButton: true,
+                })
+                .then(result => {
+                    if (result.value) {
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                    'content'
+                                )
+                            },
+                            type: 'DELETE',
+                            url: '/job-tittle/' + uuid + '',
+                            success: function (data) {
+                                toastr.success('Job tittle has been deleted.', 'Deleted', {
+                                        timeOut: 5000
+                                    }
+                                );
+    
+                                let table = $('.m_datatable_job_title').mDatatable();
+    
+                                table.originalDataSet = [];
+                                table.reload();
+                            },
+                            error: function (jqXhr, json, errorThrown) {
+                                let errors = jqXhr.responseJSON;
+    
+                                $.each(errors.errors, function (index, value) {
+                                    $('#delete-error').html(value);
+                                });
+                            }
+                        });
+                    }
+                });
+            });
 
-        //                     let table = $('.m_datatable_employee').mDatatable();
+            let refresh_datatable = $(document).on('click', '#m_tab_6_2', function () {
+                let table = $('.m_datatable_job_title').mDatatable();
 
-        //                     table.originalDataSet = [];
-        //                     table.reload();
-        //                 },
-        //                 error: function (jqXhr, json, errorThrown) {
-        //                     let errorsHtml = '';
-        //                     let errors = jqXhr.responseJSON;
-
-        //                     $.each(errors.errors, function (index, value) {
-        //                         $('#delete-error').html(value);
-        //                     });
-        //                 }
-        //             });
-        //             swal(
-        //                 'Deleted!',
-        //                 'Your imaginary file has been deleted.',
-        //                 'success'
-        //             );
-        //         } else {
-        //             swal(
-        //                 'Cancelled',
-        //                 'Your imaginary file is safe :)',
-        //                 'error'
-        //             );
-        //         }
-        //     });
-        // });
-
-
+                            table.originalDataSet = [];
+                            table.reload();
+            });
 
     }
 };
 
 jQuery(document).ready(function () {
-    JobTitle.init();
+    EmployeeJobTittle.init();
 });

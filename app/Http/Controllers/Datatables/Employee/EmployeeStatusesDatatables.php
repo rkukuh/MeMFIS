@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Datatables\Employee;
 
 use App\Models\Status;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class EmployeeStatusesDatatables extends Controller

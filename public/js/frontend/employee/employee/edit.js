@@ -4,6 +4,7 @@ let Employee = {
 
         let employee_uuid = $('input[name=employee_uuid]').val();
         let code = $('input[name=code]').val();
+        let code_uppercase = code.toUpperCase();
         let first_name = $('input[name=first_name]').val();
         let middle_name = $('input[name=middle_name]').val();
         let last_name = $('input[name=last_name]').val();
@@ -25,7 +26,7 @@ let Employee = {
             url: '/employee/' + employee_uuid,
             data: {
                 _token: $('input[name=_token]').val(),
-                code: code,
+                code: code_uppercase,
                 first_name: first_name,
                 middle_name: middle_name,
                 last_name: last_name,

@@ -20,7 +20,7 @@ class JobCardDatatables extends Controller
      */
     public function index()
     {
-        $JobCard = JobCard::with('taskcard','quotation','quotation.project','quotation.project.customer')->get();
+        $JobCard = JobCard::with('taskcard','quotation','quotation.project')->get();
 
         foreach($JobCard as $taskcard){
             $taskcard->task_name .= $taskcard->taskcard->task;
@@ -37,7 +37,7 @@ class JobCardDatatables extends Controller
                 }
             }
 
-            
+
             $count_user = $taskcard->progresses->groupby('progressed_by')->count()-1;
 
             $status = [];
@@ -47,15 +47,15 @@ class JobCardDatatables extends Controller
                 }
             }
 
-            if($taskcard->taskcard->is_rii == 1 and $taskcard->approvals->count()==2){
+            if($taskcard->is_rii == 1 and $taskcard->approvals->count()==2){
                 $taskcard->status .= 'Released';
             }
-            elseif($taskcard->taskcard->is_rii == 1 and $taskcard->approvals->count()==1){
+            elseif($taskcard->is_rii == 1 and $taskcard->approvals->count()==1){
                 if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
                     $taskcard->status .= 'Waiting for RII';
                 }
             }
-            elseif($taskcard->taskcard->is_rii == 0 and sizeof($taskcard->approvals)==1){
+            elseif($taskcard->is_rii == 0 and sizeof($taskcard->approvals)==1){
                 if($taskcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
                     $taskcard->status .= 'Released';
                 }

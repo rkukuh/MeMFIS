@@ -19,9 +19,7 @@ class RIIReleaseJobCardDatatables extends Controller
     public function index()
     {
         $JobCard =JobCard::with('taskcard','quotation','progresses')
-                                            ->whereHas('taskcard', function ($query) {
-                                            $query->where('is_rii', '1');
-                                            })
+                                            ->where('is_rii','1')
                                             ->whereHas('progresses', function ($query) {
                                             $query->where('status_id', Status::where('code','released')->where('of','jobcard')->first()->id);
                                             })
@@ -48,8 +46,11 @@ class RIIReleaseJobCardDatatables extends Controller
             if(Status::find($Jobcard->progresses->last()->status_id)->name == 'RELEASED'){
                 $Jobcard->status .= 'Waiting for RII';
             }else{
-                $Jobcard->status .=Status::find($Jobcard->progresses->last()->status_id)->name;
-
+                if(Status::find($Jobcard->progresses->last()->status_id)->name == 'RII RELEASED'){
+                    $Jobcard->status .= 'Released';
+                }else{
+                    $Jobcard->status .= Status::find($Jobcard->progresses->last()->status_id)->name;
+                }
             }
 
 

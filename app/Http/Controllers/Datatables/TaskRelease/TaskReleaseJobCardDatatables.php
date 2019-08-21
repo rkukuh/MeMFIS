@@ -53,12 +53,12 @@ class TaskReleaseJobCardDatatables extends Controller
                     array_push($status, 'Pending');
                 }
             }
-            if($jobcard->taskcard->is_rii == 1 and $jobcard->approvals->count()==2){
-                $jobcard->status .= 'RII Released';
+            if($jobcard->is_rii == 1 and $jobcard->approvals->count()==2){
+                $jobcard->status .= 'Released';
             }
             elseif(sizeof($jobcard->approvals)==1 and Status::ofJobCard()->where('id',$jobcard->progresses->last()->status_id)->first()->code == "released"){
                 if($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-                    $jobcard->status .= 'Task Released';
+                    $jobcard->status .= 'Released';
                 }
             }
             elseif($jobcard->progresses->where('status_id', Status::ofJobCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
@@ -119,7 +119,7 @@ class TaskReleaseJobCardDatatables extends Controller
             $jobcard->actual .= $actual_manhours;
         }
 
-        $data = $alldata = json_decode(collect(array_values($JobCards->whereIn('status',['Closed','Task Released','RII Released'])->all())));
+        $data = $alldata = json_decode(collect(array_values($JobCards->whereIn('status',['Closed','Released'])->all())));
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

@@ -744,7 +744,7 @@ let JobRequest = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/qtn-wp-tc-item/' + triggerid + '/edit',
+                url: '/quotation/qtn-wp-tc-item/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('qty').value = data.quantity;
@@ -799,7 +799,7 @@ let JobRequest = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/qtn-wp-tc-item/' + triggerid,
+                url: '/quotation/qtn-wp-tc-item/' + triggerid,
                 data: {
                     _token: $('input[name=_token]').val(),
                     uuid: triggerid,
@@ -861,6 +861,7 @@ let JobRequest = {
                 }
             });
         });
+
         $('.modal-footer').on('click', '.add-htcrr-item-price', function () {
             let quantity = $('input[name=qty]').val();
             let price_amount = $('input[name=price]').val();
@@ -873,7 +874,7 @@ let JobRequest = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/qtn-htcrr-item/' + triggerid,
+                url: '/quotation/qtn-htcrr-item/' + triggerid,
                 data: {
                     _token: $('input[name=_token]').val(),
                     uuid: triggerid,
@@ -933,7 +934,7 @@ let JobRequest = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/qtn-wp-tc-item/' + triggerid + '/edit',
+                url: '/quotation/qtn-wp-tc-item/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('qty').value = data.quantity;
@@ -986,7 +987,7 @@ let JobRequest = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/qtn-wp-tc-item/' + triggerid + '/edit',
+                url: '/quotation/qtn-wp-tc-item/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('qty').value = data.quantity;
@@ -1039,7 +1040,7 @@ let JobRequest = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/qtn-wp-tc-item/' + triggerid + '/edit',
+                url: '/quotation/qtn-wp-tc-item/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('qty').value = data.quantity;
@@ -1092,7 +1093,7 @@ let JobRequest = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/qtn-htcrr-item/' + triggerid + '/edit',
+                url: '/quotation/qtn-htcrr-item/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('qty').value = data.quantity;
@@ -1145,7 +1146,7 @@ let JobRequest = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/qtn-htcrr-item/' + triggerid + '/edit',
+                url: '/quotation/qtn-htcrr-item/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('qty').value = data.quantity;
@@ -1187,8 +1188,6 @@ let JobRequest = {
                 }
             });
         });
-
-
 
         $('.action-buttons').on('click', '.add-job-request', function() {
 

@@ -81,7 +81,7 @@ let EmploymentStatus = {
         let reset = function (){
             $('#code_statuses').val('')
             $('#name').val('')
-            $('#description').html('')
+            $('#description').val('')
             $('#code_statuses-error').html('')
             $('#name-error').html('')
             $('#description-error').html('')
@@ -122,15 +122,18 @@ let EmploymentStatus = {
                     if (data.errors) {
                         if (data.errors.code) {
                             $('#code_statuses-error').html(data.errors.code[0]);
-
+                        }else{
+                            $('#code_statuses-error').html('');
                         }
                         if (data.errors.name) {
                             $('#name-error').html(data.errors.name[0]);
-
+                        }else{
+                            $('#name-error').html('');
                         }
                         if (data.errors.description) {
                             $('#description-error').html(data.errors.description[0]);
-
+                        }else{
+                            $('#description-error').html('');
                         }
                     } else {
                         $('#modal_employment_status').modal('hide');
@@ -151,9 +154,9 @@ let EmploymentStatus = {
 
         let edit = $(document).on('click', '#edit-employee-status', function () {      
                reset()
-                $('.labelModal').children('span').text('Edit');
+                $('.labelModal').children('span').text('Edit')
                 $('.modal-change').attr('id','update')
-                let triggerid = $(this).data('uuid');
+                let triggerid = $(this).data('uuid')
             
                 $.ajax({
                     headers: {
@@ -181,10 +184,10 @@ let EmploymentStatus = {
             });
 
             let update = $(document).on('click', '#update', function () {
-                let code = $('input[name=code_statuses]').val();
-                let name = $('input[name=name]').val();
-                let description = $('#description').val();
-                let triggerid = $('input[name=uuid]').val();
+                let code = $('input[name=code_statuses]').val()
+                let name = $('input[name=name]').val()
+                let description = $('#description').val()
+                let triggerid = $('#edit-employee-status').data('uuid')
                 
                 $.ajax({
                     headers: {
@@ -202,15 +205,18 @@ let EmploymentStatus = {
                         if (data.errors) {
                             if (data.errors.code) {
                                 $('#code_statuses-error').html(data.errors.code[0]);
-    
+                            }else{
+                                $('#code_statuses-error').html('');
                             }
                             if (data.errors.name) {
                                 $('#name-error').html(data.errors.name[0]);
-    
+                            }else{
+                                $('#name-error').html('');
                             }
                             if (data.errors.description) {
                                 $('#description-error').html(data.errors.description[0]);
-    
+                            }else{
+                                $('#description-error').html('');
                             }
                         } else {
                             $('#modal_employment_status').modal('hide');
@@ -229,7 +235,7 @@ let EmploymentStatus = {
             });
 
             $('.m_datatable_employee_status').on('click', '.delete', function () {
-                let uuid = $(this).data('uuid');
+                let uuid = $('#edit-employee-status').data('uuid');
     
                 swal({
                     title: 'Sure want to remove?',
@@ -270,6 +276,13 @@ let EmploymentStatus = {
                         });
                     }
                 });
+            });
+
+            let refresh_datatable = $(document).on('click', '#m_tab_6_1', function () {
+                let table = $('.m_datatable_employee_status').mDatatable();
+    
+                        table.originalDataSet = [];
+                        table.reload();
             });
 
     }

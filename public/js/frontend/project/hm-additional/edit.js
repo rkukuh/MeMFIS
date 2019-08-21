@@ -1,6 +1,5 @@
 let AdditionalTaskCreate = (function() {
     let t ={
-
             data: {
                 type: 'remote',
                 source: {
@@ -542,4 +541,41 @@ let AdditionalTaskCreate = (function() {
 
 jQuery(document).ready(function () {
     AdditionalTaskCreate.init();
+});
+
+$('.footer-additional').on('click', '.update-additional-data', function () {
+
+    let total_manhours = $("#estimation_manhour").attr('value');
+    let performance_factor = $("#performance_factor").val();
+    let total_manhours_with_performance_factor = total_manhours * performance_factor;
+    
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'POST',
+        url: '/project-hm-additional/'+project_uuid+'/additional-store',
+        data:{
+            total_manhours: total_manhours,
+            performance_factor: performance_factor,
+            total_manhours_with_performance_factor:total_manhours_with_performance_factor,
+        },
+        success: function (data) {
+            if (data.errors) {
+                // if (data.errors.customer_id) {
+                //     $('#customer-error').html(data.errors.customer_id[0]);
+                // }
+
+                // document.getElementById('customer').value = data.getAll('customer_id');
+
+            } else {
+                toastr.success('Project Additional has been Updated.', 'Success', {
+                    timeOut: 5000
+                });
+                
+                // window.location.href = '/project-hm/'+data.uuid+'/edit';
+
+            }
+        }
+    });
 });

@@ -56,7 +56,7 @@ class EmployeeStatusesController extends Controller
      */
     public function show(status $status)
     {
-     //
+     
     }
 
     /**

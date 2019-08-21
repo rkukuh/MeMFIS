@@ -14,6 +14,7 @@ use App\Models\Project;
 use App\Models\License;
 use App\Models\Storage;
 use App\Models\Journal;
+use App\Models\Station;
 use App\Models\Facility;
 use App\Models\Customer;
 use App\Models\Aircraft;
@@ -610,7 +611,19 @@ class FillComboxController extends Controller
      */
     public function project()
     {
-        $projects = Project::with('approvals')->where('parent_id',null)->doesnthave('quotations')->whereHas('approvals')->pluck('title','uuid');
+        $projects = Project::with('approvals')->whereHas('approvals')->pluck('title','uuid');
+
+        return json_encode($projects);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function projectAdditional()
+    {
+        $projects = Project::with('approvals')->where('parent_id',null)->pluck('title','uuid');
 
         return json_encode($projects);
     }
@@ -689,6 +702,19 @@ class FillComboxController extends Controller
                               ->pluck('name', 'uuid');
 
         return json_encode($customerLevel);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function station()
+    {
+        $station = station::pluck('name', 'uuid');
+
+        return json_encode($station);
 
     }
 

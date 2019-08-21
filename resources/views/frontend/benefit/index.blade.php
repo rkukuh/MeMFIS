@@ -37,12 +37,12 @@
                             <div class="m-portlet__head-tools">
                                 <ul class="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x" role="tablist">
                                     <li class="nav-item m-tabs__item">
-                                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_1" role="tab">
+                                        <a class="nav-link m-tabs__link active" data-toggle="tab" id="m_tab_6_1" href="#m_tabs_6_1" role="tab">
                                             <i class="la la-cog"></i> Benefits/Allowance
                                         </a>
                                     </li>
                                     <li class="nav-item m-tabs__item">
-                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_2" role="tab">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" id="m_tab_6_2" href="#m_tabs_6_2" role="tab">
                                             <i class="la la-briefcase"></i> BPJS
                                         </a>
                                     </li>

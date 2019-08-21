@@ -47,128 +47,51 @@
                     </div>
                 </div>
                 <div class="m-portlet m-portlet--mobile">
-                    <div class="m-portlet__body">
-                        <div class="form-group m-form__group row">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <form id="employeeform" name="employeeform">
-                                        <div class="m-portlet__body">
-
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        <label class="form-control-label">
-                                            Employee Code @include('frontend.common.label.required')
-                                        </label>
-                                        @component('frontend.common.input.text')
-                                            @slot('id', 'code')
-                                            @slot('name', 'code')
-                                            @endcomponent
-                                    </div>
+                    <div class="m-portlet__body p-0" style="position:relative">
+                        <div class="m-card-user__pic mx-5">
+                            <img src="{{ asset('assets/metronic/app/media/img/users/user5.jpg') }}" class="m--img-rounded m--marginless" alt="" width="13%" style="position:absolute;top:22px;left:12px;border:4px solid white;z-index: 1;">
+                        </div>
+                        <div class="jumbotron mb-0 pt-4" style="background:#294294;height:170px;">
+                        </div>
+                        <div style="height:60px;width:100%;background:#e9ecef">
+                            <div class="form-group m-form__group row p-3">
+                                <div class="col-sm-2 col-md-2 col-lg-2 d-flex justify-content-end">
+                                    <a href="" data-target="#modal_photo" data-toggle="modal">
+                                        <i class="la la-pencil" style="font-size:32px;"></i>
+                                    </a>
                                 </div>
-
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        <label class="form-control-label">
-                                            First Name @include('frontend.common.label.required')
-                                        </label>
-                                        @component('frontend.common.input.text')
-                                            @slot('name', 'first_name')
-                                        @endcomponent
-                                    </div>
-
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        <label class="form-control-label">
-                                            Middle Name @include('frontend.common.label.optional')
-                                        </label>
-                                        @component('frontend.common.input.text')
-                                            @slot('name', 'middle_name')
-                                        @endcomponent
-                                    </div>
-
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        <label class="form-control-label">
-                                            Last Name @include('frontend.common.label.optional')
-                                        </label>
-                                        @component('frontend.common.input.text')
-                                            @slot('name', 'last_name')
-                                        @endcomponent
-                                    </div>
+                                <div class="col-sm-10 col-md-10 col-lg-10">
+                                    <ul class="nav nav-tabs nav-fill" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link  btn btn-primary text-white active" data-toggle="tab" href="#m_tabs_2_1">Basic Information</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link btn btn-metal text-white" data-toggle="tab" style="pointer-event:none;cursor:default;hover:none;">Education</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link btn btn-metal text-white" data-toggle="tab" style="pointer-event:none;cursor:default;hover:none;">Workshift</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link btn btn-metal text-white" data-toggle="tab" style="pointer-event:none;cursor:default;hover:none;">Benefits & Salary</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link btn btn-metal text-white" data-toggle="tab" style="pointer-event:none;cursor:default;hover:none;">Account</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link btn btn-metal text-white" data-toggle="tab" style="pointer-event:none;cursor:default;hover:none;">Termination</a>
+                                        </li>
+                                    </ul>  
                                 </div>
-
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        <label class="form-control-label">
-                                            Day Of Birth @include('frontend.common.label.required')
-                                        </label>
-                                        @component('frontend.common.input.datepicker')
-                                        @slot('id', 'date-dob')
-                                        @slot('name', 'dob')
-                                        @endcomponent
-                                    </div>
-
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                        <label class="form-control-label">
-                                            Gender @include('frontend.common.label.required')
-                                        </label>
-
-                                    <div class="row">
-
-                                    <div class="col-sm-4 col-md-4 col-lg-4">
-                                            @component('frontend.common.input.radio')
-                                            @slot('text', 'Male')
-                                            @slot('name', 'gender')
-                                            @slot('id', 'gender')
-                                            @slot('value', 'male')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-4 col-md-4 col-lg-4">
-                                            @component('frontend.common.input.radio')
-                                            @slot('text', 'Female')
-                                            @slot('name', 'gender')
-                                            @slot('id', 'gender')
-                                            @slot('value', 'female')
-                                            @endcomponent
-                                        </div>
-
-                                    </div>
-                                    
-                                    </div>
-                                </div>
-
-                                <div class="form-group m-form__group row">
-                                <div class="col-sm-4 col-md-4 col-lg-4">
-                                        <label class="form-control-label">
-                                            Hired At @include('frontend.common.label.required')
-                                        </label>
-                                        @component('frontend.common.input.datepicker')
-                                        @slot('id', 'date-hired_at')
-                                        @slot('name', 'hired_at')
-                                        @endcomponent
-                                    </div>
-                                </div>
-
-                                <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                            <div class="flex">
-                                                <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                    @slot('type','button')
-                                                    @slot('id', 'add-employee')
-                                                    @slot('class', 'add-employee')
-                                                    @endcomponent
-
-                                                    @include('frontend.common.buttons.reset')
-
-                                                    @include('frontend.common.buttons.back')
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                        </div>
-                                    </form>
                             </div>
+                        </div>
+                    </div>
 
+                    @include('frontend.employee.employee.modal')
+                    <div class="m-portlet__body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="m_tabs_2_1" role="tabpanel">
+                                @include('frontend.employee.employee.include.basic.create')
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -177,8 +100,3 @@
     </div>
 </div>
 @endsection
-
-@push('footer-scripts')
-<script src="{{ asset('js/frontend/employee/employee/employee-datepicker.js')}}"></script>
-<script src="{{ asset('js/frontend/employee/employee/create.js') }}"></script>
-@endpush

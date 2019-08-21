@@ -205,7 +205,6 @@ class ProjectHMWorkPackageController extends Controller
 
         // $materialCount = $workPackage->items->count();
         // $toolCount = $workPackage->tools->count();
-
         if ($request->anyChanges) {
             $view = 'frontend.project.hm.workpackage.index-engineerteam';
         }else{

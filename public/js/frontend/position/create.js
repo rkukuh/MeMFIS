@@ -32,7 +32,7 @@ let Position = {
                           });
                     } else {
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Data has been saved.', 'Succes', {
                             timeOut: 5000
                         });
 

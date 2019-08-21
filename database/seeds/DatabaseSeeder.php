@@ -52,7 +52,10 @@ class DatabaseSeeder extends Seeder
         $this->call(PositionsTableSeeder::class);
         $this->call(LeavePeriodsTableSeeder::class);
         $this->call(BPJSSTableSeeder::class);
-
+        $this->call(JobTittlesTableSeeder::class);
+        $this->call(LeaveTypesTableSeeder::class);
+        $this->call(HolidaysTableSeeder::class);
+        $this->call(WorkshiftsTableSeeder::class);
 
         /** POLYMORPH */
 

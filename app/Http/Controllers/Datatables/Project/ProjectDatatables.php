@@ -23,7 +23,9 @@ class ProjectDatatables extends Controller
     {
         $projects = Project::with('aircraft','customer')->get();
         foreach($projects as $project){
-            if(empty($project->approvals->toArray())){
+            if($project->deleted_at <> null){
+                $project->status .= 'Void';
+            }elseif(empty($project->approvals->toArray())){
                 $project->status .= 'Project Open';
             }elseif(sizeof($project->approvals->toArray()) == 1){
                 $project->status .= 'Project Approved';

@@ -115,6 +115,46 @@
                                             @endcomponent
                                         </div>
                                     </div>
+                                    <div class="form-group m-form__group row mt-3">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <hr>
+                                            <fieldset class="border p-2">
+                                                <legend class="w-auto">Overtime Allowance Setting</legend>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Maximum Overtime per Period
+                                                        </label>
+                                                        
+                                                        @component('frontend.common.input.number')
+                                                            @slot('text', 'Maximum Overtime per Period')
+                                                            @slot('id', 'max_overtime_per_period')
+                                                            @slot('name', 'max_overtime_per_period')
+                                                            @slot('id_error', 'max_overtime_per_period')
+                                                            @slot('value', $company->maximum_period)
+                                                            @slot('input_append','Hours')
+                                                            @slot('disabled','disabled')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Holiday Overtime Allowance
+                                                        </label>
+
+                                                        @component('frontend.common.input.number')
+                                                            @slot('text', 'Holiday Overtime Allowance')
+                                                            @slot('id', 'holiday_overtime_allowance')
+                                                            @slot('name', 'holiday_overtime_allowance')
+                                                            @slot('value', $company->maximum_holiday)
+                                                            @slot('id_error', 'holiday_overtime_allowance')
+                                                            @slot('input_append','IDR per Day')
+                                                            @slot('disabled','disabled')
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">

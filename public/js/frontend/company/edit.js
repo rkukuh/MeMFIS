@@ -2,12 +2,14 @@ let CompanyStructure = {
     init: function () {
     let update = $('.footer').on('click', '.edit-company-structure', function () {
 
-        let company_uuid = $('input[name=company_uuid]').val();
-        let code = $('input[name=code]').val();
-        let name = $('input[name=name]').val();
-        let description = $('#description').val();
-        let company = $('#company').val();
-        let parent_structure = $('#parent_structure').val();
+        let company_uuid = $('input[name=company_uuid]').val()
+        let code = $('input[name=code]').val()
+        let name = $('input[name=name]').val()
+        let maximum_period = $('input[name=max_overtime_per_period]').val()
+        let maximum_holiday = $('input[name=holiday_overtime_allowance]').val()
+        let description = $('#description').val()
+        let company = $('#company').val()
+        let parent_structure = $('#parent_structure').val()
        
         $.ajax({
             headers: {
@@ -20,6 +22,8 @@ let CompanyStructure = {
                 uuid: company_uuid,
                 code: code,
                 name: name,
+                maximum_period: maximum_period,
+                maximum_holiday: maximum_holiday,
                 description: description,
                 company: company,
                 parent_structure: parent_structure,
@@ -36,7 +40,7 @@ let CompanyStructure = {
                       }); 
 
                 } else {
-                    toastr.success('Data berhasil disimpan.', 'Sukses', {
+                    toastr.success('Data has been saved.', 'Succes', {
                         timeOut: 5000
                     });
                 }

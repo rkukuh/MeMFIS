@@ -57,10 +57,9 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Leave Types Code')
-                                                @slot('id', 'leave_types_code')
-                                                @slot('name', 'leave_types_code')
-                                                @slot('id_error', 'leave_types_code')
+                                                @slot('id', 'code')
+                                                @slot('name', 'code')
+                                                @slot('id_error', 'code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -69,10 +68,9 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Leave Types Name')
-                                                @slot('id', 'leave_types_name')
-                                                @slot('name', 'leave_types_name')
-                                                @slot('id_error', 'leave_types_name')
+                                                @slot('id', 'name')
+                                                @slot('name', 'name')
+                                                @slot('id_error', 'name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -83,17 +81,15 @@
                                             </label>
         
                                             @component('frontend.common.input.number')
-                                                @slot('id', 'leave_per_leave_period')
-                                                @slot('text', ' Leave per Leave Period')
-                                                @slot('name', 'leave_per_leave_period')
-                                                @slot('id_error','leave_per_leave_period')
+                                                @slot('id', 'leave_period')
+                                                @slot('name', 'leave_period')
+                                                @slot('id_error','leave_period')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             @component('frontend.common.input.checkbox')
-                                                @slot('id', 'pro_rate_leave')
-                                                @slot('name', 'pro_rate_leave')
-                                                @slot('text', 'Pro Rate Leave')
+                                                @slot('id', 'pro_rate')
+                                                @slot('name', 'pro_rate')
                                                 @slot('style_div','margin-top:30px')
                                             @endcomponent
                                         </div>
@@ -108,7 +104,6 @@
                                                 @slot('rows', '5')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
-                                                @slot('text', 'Description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -118,7 +113,6 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-leave-types')
                                                         @slot('class', 'add-leave-types')
                                                     @endcomponent
 
@@ -139,4 +133,8 @@
         </div>
     </div>
 @endsection
+
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/leave-types/create.js')}}"></script>
+@endpush
 

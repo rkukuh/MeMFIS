@@ -1,5 +1,6 @@
 let Benefit = {
     init: function () {
+
     let create = $('.footer').on('click', '.add-benefits', function () {
 
         let code = $('input[name=benefits_code]').val();

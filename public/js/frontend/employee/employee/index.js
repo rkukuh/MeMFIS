@@ -44,21 +44,12 @@ let Employee = {
                 }
             },
             columns: [{
-                    field: 'code',
-                    title: 'Code',
+                    field: 'name',
+                    title: 'Employee',
                     sortable: 'asc',
+                    width:290,
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/employee/'+t.uuid+'">' + t.code + "</a>"
-                    }
-                },
-                {
-                    field: 'name',
-                    title: 'Name',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template:  function (t) {
-
                         let employee_name
 
                         if(t.middle_name == null || t.last_name == null){
@@ -83,37 +74,65 @@ let Employee = {
                             }
                         }
 
-                        return employee_name
+                        return '<div class="row"><div class="col-4"><div class="media align-items-center">'+
+                        '<img alt="Image placeholder" src="assets/metronic/app/media/img/users/user5.jpg" class="m--img-rounded m--marginless">'+
+                        '</div></div><div class="col-8 align-self-center"><span>'+ employee_name +'</span><br>'+
+                        '<span><i class="la la-user"></i><span><a href="/employee/'+t.uuid+'">'+ t.code +'</span></span></div></div>'
                     }
                 },
                 {
                     field: 'dob',
-                    title: 'dob',
+                    title: 'Phone Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'gender',
-                    title: 'Gender',
+                    field: 'dob',
+                    title: 'Department',
                     sortable: 'asc',
                     filterable: !1,
-                    template:  function (t) {
-                        let gender = null;
-
-                        if(t.gender == 'm'){
-                            gender = 'MALE'
-                        }else if(t.gender == 'f'){
-                            gender = 'FEMALE'
-                        }
-
-                        return gender;
-                    }
+                },
+                {
+                    field: 'dob',
+                    title: 'Position',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'dob',
+                    title: 'Employee Status',
+                    sortable: 'asc',
+                    filterable: !1,
                 },
                 {
                     field: 'hired_at',
                     title: 'Hired At',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'hired_at',
+                    title: 'Status',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function(e) {
+                        var a = {
+                            1: { title: "Pending", class: "m-badge--brand" },
+                            2: { title: "Delivered", class: " m-badge--metal" },
+                            3: { title: "Canceled", class: " m-badge--primary" },
+                            4: { title: "Success", class: " m-badge--success" },
+                            5: { title: "Info", class: " m-badge--info" },
+                            6: { title: "Danger", class: " m-badge--danger" },
+                            7: { title: "Warning", class: " m-badge--warning" }
+                        };
+                        return (
+                            '<span class="m-badge ' +
+                            a[e.Status].class +
+                            ' m-badge--wide">' +
+                            a[e.Status].title +
+                            "</span>"
+                        );
+                    }
                 },
                 {
                     field: 'Actions',

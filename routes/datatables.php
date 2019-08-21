@@ -30,6 +30,9 @@ Route::name('datatables.')->group(function () {
         Route::get('/certification', 'CertificationDatatables@index')->name('certification.index');
         Route::get('/leave-period', 'LeavePeriodDatatables@index')->name('leaveperiod.index');
         Route::get('/bpjs', 'BPJSDatatables@index')->name('bpjs.index');
+        Route::get('/job-tittle', 'JobTittleDatatables@index')->name('bpjs.index');
+        Route::get('/leave-type', 'LeaveTypeDatatables@index')->name('leavetype.index');
+        Route::get('/holiday', 'HolidayDatatables@index')->name('holiday.index');
 
         /** LICENSE */
 
@@ -57,7 +60,10 @@ Route::name('datatables.')->group(function () {
 
         /** TRANSACTION */
 
-        Route::get('/price-list', 'PriceListDatatables@index')->name('price-list.index');
+        Route::get('/price-list-item', 'PriceListDatatables@item')->name('price-list.item');
+        Route::get('/price-list-manhour', 'PriceListDatatables@manhour')->name('price-list.manhour');
+        Route::get('/price-list-facility', 'PriceListDatatables@facility')->name('price-list.facility');
+        
 
         /** AIRCRAFT */
 
@@ -343,12 +349,12 @@ Route::name('datatables.')->group(function () {
                 /** Item */
                 Route::get('/{quotation}/workPackage/{workPackage}/item/routine', 'QuotationItemDatatables@routine')->name('item.routine');
                 Route::get('/{quotation}/workPackage/{workPackage}/item/non-routine', 'QuotationItemDatatables@non_routine')->name('item.non_routine');
-                Route::get('/{quotation}/workPackage/{workPackage}/item/htcrr', 'QuotationItemDatatables@htcrr')->name('item.htcrr');
+                Route::get('/{quotation}/workPackage/item/htcrr', 'QuotationItemDatatables@htcrr')->name('item.htcrr');
 
                 /** Tool */
                 Route::get('/{quotation}/workPackage/{workPackage}/tool/routine', 'QuotationToolDatatables@routine')->name('tool.routine');
                 Route::get('/{quotation}/workPackage/{workPackage}/tool/non-routine', 'QuotationToolDatatables@non_routine')->name('tool.non_routine');
-                Route::get('/{quotation}/workPackage/{workPackage}/tool/htcrr', 'QuotationToolDatatables@htcrr')->name('tool.htcrr');
+                Route::get('/{quotation}/workPackage/tool/htcrr', 'QuotationToolDatatables@htcrr')->name('tool.htcrr');
 
 
                 /** Defectcard Item */

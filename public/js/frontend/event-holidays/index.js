@@ -1,5 +1,5 @@
 
-let EventHolidays = {
+let Holiday = {
     init: function () {
         $('.event_holidays_datatable').mDatatable({
             data: {
@@ -7,7 +7,7 @@ let EventHolidays = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/benefit',
+                        url: '/datatables/holiday',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -48,7 +48,7 @@ let EventHolidays = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/benefit/'+t.uuid+'">' + t.code + "</a>"
+                        return '<a href="/holiday/'+t.uuid+'">' + t.code + "</a>"
                     }
                 },
                 {
@@ -69,12 +69,12 @@ let EventHolidays = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/purchase-request/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
+                            '<a href="/holiday/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
                             '</a>' +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
+                            t.uuid +
+                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
                         );
                     }
                 }
@@ -84,6 +84,50 @@ let EventHolidays = {
     }
 };
 
+$('.event_holidays_datatable').on('click', '.delete', function () {
+    let holiday_uuid = $(this).data('id');
+
+    swal({
+        title: 'Sure want to remove?',
+        type: 'question',
+        confirmButtonText: 'Yes, REMOVE',
+        confirmButtonColor: '#d33',
+        cancelButtonText: 'Cancel',
+        showCancelButton: true,
+    })
+    .then(result => {
+        if (result.value) {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                        'content'
+                    )
+                },
+                type: 'DELETE',
+                url: '/holiday/' + holiday_uuid,
+                success: function (data) {
+                    toastr.success('Holiday has been deleted.', 'Deleted', {
+                            timeOut: 5000
+                        }
+                    );
+
+                    let table = $('.event_holidays_datatable').mDatatable();
+
+                    table.originalDataSet = [];
+                    table.reload();
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    let errors = jqXhr.responseJSON;
+
+                    $.each(errors.errors, function (index, value) {
+                        $('#delete-error').html(value);
+                    });
+                }
+            });
+        }
+    });
+});
+
 jQuery(document).ready(function () {
-    EventHolidays.init();
+    Holiday.init();
 });
