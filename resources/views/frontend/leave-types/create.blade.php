@@ -105,6 +105,10 @@
                                                 @slot('id', 'gender')
                                                 @slot('name', 'gender')
                                             @endcomponent
+                                            {{-- male
+                                            female
+                                            all
+                                            default all --}}
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
