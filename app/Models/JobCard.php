@@ -15,6 +15,8 @@ class JobCard extends MemfisModel
         'quotation_id',
         'is_rii',
         'is_mandatory',
+        'station_id',
+        'additionals',
         'origin_quotation',
         'origin_jobcardable',
         'origin_jobcardable_items',
@@ -115,6 +117,19 @@ class JobCard extends MemfisModel
     public function quotation()
     {
         return $this->belongsTo(Quotation::class);
+    }
+
+    /**
+     * One-to-Many: A jobcard may related to an A/C station
+     *
+     * This function will retrieve the A/C station of a jobcard.
+     * See: Station's jobcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function station()
+    {
+        return $this->belongsTo(Station::class);
     }
 
     /**

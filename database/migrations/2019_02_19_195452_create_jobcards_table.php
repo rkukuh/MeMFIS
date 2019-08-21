@@ -17,10 +17,12 @@ class CreateJobcardsTable extends Migration
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
-            $table->unsignedBigInteger('quotation_id');
             $table->morphs('jobcardable');
+            $table->unsignedBigInteger('quotation_id');
             $table->boolean('is_rii')->default(false);
             $table->boolean('is_mandatory')->default(false);
+            $table->unsignedBigInteger('station_id')->nullable();
+            $table->json('additionals')->nullable();
             $table->json('origin_quotation')->nullable();
             $table->json('origin_jobcardable')->nullable();
             $table->json('origin_jobcardable_items')->nullable();
@@ -30,6 +32,11 @@ class CreateJobcardsTable extends Migration
 
             $table->foreign('quotation_id')
                     ->references('id')->on('quotations')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('station_id')
+                    ->references('id')->on('stations')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 

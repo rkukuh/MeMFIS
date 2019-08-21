@@ -2,6 +2,7 @@
 
 use App\Models\Status;
 use App\Models\JobCard;
+use App\Models\Station;
 use App\Models\TaskCard;
 use App\Models\Approval;
 use App\Models\Progress;
@@ -14,7 +15,7 @@ use Faker\Generator as Faker;
 $factory->define(JobCard::class, function (Faker $faker) {
 
     $number = $faker->unixTime();
-    
+
     $jobcardable_type = null;
     $jobcardable_entity = null;
     $jobcardable = $faker->randomElement(['taskcard', 'eo_instruction']);
@@ -30,9 +31,25 @@ $factory->define(JobCard::class, function (Faker $faker) {
 
     return [
         'number' => 'JC-DUM-' . $number,
-        'quotation_id' => Quotation::get()->random()->id,
         'jobcardable_id' => $jobcardable_entity->id,
         'jobcardable_type' => $jobcardable_type,
+        'quotation_id' => Quotation::get()->random()->id,
+        'is_rii' => $faker->boolean,
+        'is_mandatory' => $faker->boolean,
+        'station_id' => $faker->randomElement([null, Station::get()->random()->id]),
+        'additionals' => function () use ($faker) {
+            $additionals = null;
+
+            if ($faker->boolean) {
+                $additionals['TSN'] = 'TSN-102030';
+            }
+
+            if ($faker->boolean) {
+                $additionals['CSN'] = 'CSN-908070';
+            }
+
+            return $faker->randomElement([null, json_encode($additionals)]);
+        },
         'origin_quotation' => null,
         'origin_jobcardable' => $jobcardable_entity->toJson(),
         'origin_jobcardable_items' => $jobcardable_entity->items->toJson(),

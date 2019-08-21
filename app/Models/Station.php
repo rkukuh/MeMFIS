@@ -15,6 +15,19 @@ class Station extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * One-to-Many: A jobcard may related to an A/C station
+     *
+     * This function will retrieve all the jobcards of a given A/C station.
+     * See: JobCard's station() method for the inverse
+     *
+     * @return mixed
+     */
+    public function jobcards()
+    {
+        return $this->hasMany(JobCard::class);
+    }
+
+    /**
      * Polymorphic: An entity can have zero or many stations.
      *
      * This function will get all of the owning stationable models.
