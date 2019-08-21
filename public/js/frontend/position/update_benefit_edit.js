@@ -1,5 +1,13 @@
 let BenefitsPosition = {
     init: function () {
+
+            $("input[name='check']").each(function(){
+                if($('#'+this.id+'').not(':checked')){
+                    $('#'+this.id+'_min').attr('disabled', true)
+                    $('#'+this.id+'_max').attr('disabled', true)
+                }
+            });
+        
     let update = $('.footer').on('click', '#update-benefit', function () {
         var code = []
         var min = []
@@ -78,9 +86,13 @@ let BenefitsPosition = {
 
 function checkboxFunction(id){
     if ($('#'+id).is(':checked')) {
-        $('#'+id).attr('checked', true);
+        $('#'+id).attr('checked', true)
+        // $('#'+this.id+'_min').attr('disabled', true)
+        // $('#'+this.id+'_max').attr('disabled',true)
     }else{
-        $('#'+id).attr('checked', false);
+        $('#'+id).attr('checked', false)
+        // $('#'+this.id+'_min').attr('disabled', false)
+        // $('#'+this.id+'_max').attr('disabled', false)
     }
 }
 jQuery(document).ready(function () {
