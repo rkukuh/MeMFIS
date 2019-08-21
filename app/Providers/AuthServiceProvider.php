@@ -87,6 +87,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Pivots\EOInstructionWorkPackage::class => Policies\EOInstructionWorkPackagePolicy::class,
         Models\TaskCardWorkPackageSuccessor::class => Policies\TaskCardWorkPackageSuccessorPolicy::class,
         Models\TaskCardWorkPackagePredecessor::class => Policies\TaskCardWorkPackagePredecessorPolicy::class,
+        Models\ProjectWorkPackageEOInstruction::class => Policies\ProjectWorkPackageEOInstructionPolicy::class,
         Models\QuotationWorkPackageTaskCardItem::class => Policies\QuotationWorkPackageTaskCardItemPolicy::class,
     ];
 

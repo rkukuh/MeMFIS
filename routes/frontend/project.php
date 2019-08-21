@@ -125,6 +125,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
         Route::resource('project-workpackage-facility', 'ProjectWorkPackageFacilityController');
         Route::resource('project-workpackage-taskcard', 'ProjectWorkPackageTaskCardController');
+        Route::resource('project-workpackage-eo-instruction', 'ProjectWorkPackageEOInstructionController');
 
     });
 
