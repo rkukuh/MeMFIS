@@ -304,7 +304,7 @@
                                                                         @endcomponent
                                                                     </div>
                                                                     <div class="col-sm-3 col-md-3 col-lg-3">
-                                                                        @if( $customer->faxes[$counter]->type->name === "Work" )
+                                                                        @if( $customer->faxes[$counter]->type->name === "Company" )
                                                                             @component('frontend.common.input.radio')
                                                                                 @slot('id', 'type_fax')
                                                                                 @slot('name', 'type_fax_'.$counter))
@@ -574,7 +574,7 @@
                                                                         @endcomponent
                                                                     </div>
                                                                     <div class="col-sm-3 col-md-3 col-lg-3">
-                                                                        @if($customer->emails[$counter]->type->name === "Work")
+                                                                        @if($customer->emails[$counter]->type->name === "Company")
                                                                             @component('frontend.common.input.radio')
                                                                                 @slot('id', 'type_email')
                                                                                 @slot('name', 'type_email_'.$counter)
