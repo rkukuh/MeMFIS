@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                       
+                                    
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
                             </div>
@@ -123,12 +123,12 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        
+
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
                             </div>
 
-                            
+
                             @include('frontend.price-list.item.modal-edit')
 
                             @include('frontend.price-list.manhour.modal-edit')
@@ -183,7 +183,7 @@
                                     </div>
                                 </div>
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                       
+
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
                             </div>
