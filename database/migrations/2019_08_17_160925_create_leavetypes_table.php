@@ -19,7 +19,7 @@ class CreateLeavetypesTable extends Migration
             $table->string('code')->nullable();
             $table->string('name');
             $table->integer('leave_period');
-            $table->boolean('prorate_leave');
+            $table->boolean('prorate_leave')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();

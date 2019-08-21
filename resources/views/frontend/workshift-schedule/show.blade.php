@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.hr.workshift-schedule.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.workshift.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Workshift Schedule
                             </span>

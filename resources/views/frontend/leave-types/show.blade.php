@@ -57,7 +57,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text', $leaveType->code)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -66,7 +66,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text',  $leaveType->name)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -77,14 +77,21 @@
                                             </label>
         
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text',  $leaveType->leave_period)
                                             @endcomponent
                                         </div>
+                                        @php
+                                        $checked = null;
+
+                                            if($leaveType->prorate_leave == 1){
+                                                $checked = 'checked';
+                                            }
+                                        @endphp
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             @component('frontend.common.input.checkbox')
                                                 @slot('id', 'pro_rate_leave')
                                                 @slot('name', 'pro_rate_leave')
-                                                @slot('text', 'Pro Rate Leaves')
+                                                @slot('checked', $checked)
                                                 @slot('disabled', 'disabled')
                                                 @slot('style_div','margin-top:30px')
                                             @endcomponent
@@ -97,7 +104,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
+                                                @slot('text', $leaveType->description)
                                             @endcomponent
                                         </div>
                                     </div>

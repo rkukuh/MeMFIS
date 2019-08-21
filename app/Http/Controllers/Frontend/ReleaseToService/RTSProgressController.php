@@ -36,12 +36,72 @@ class RTSProgressController extends Controller
             $this->edit(RTS::where('project_id',$project)->first()->uuid);
         }
         else{
+            $quotations = Quotation::where('project_id',$project->id)->get();
+
+            $taskcard_number = "";
+            $running_taslcard = "";
+            $mandatory_taskcard = "";
+            foreach($quotations as $quotation){
+                $jobcards = JobCard::where('quotation_id',$quotation->id)->get();
+                foreach($jobcards as $jobcard){
+                    if($jobcard->is_mandatory == 1){
+                        if($jobcard->is_rii == 1){
+                            if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "rii-released"){
+                                $mandatory_taskcard = $mandatory_taskcard.", ".$jobcard->taskcard->number;
+                            }
+                        }else{
+                            if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"){
+                                $mandatory_taskcard = $mandatory_taskcard.", ".$jobcard->taskcard->number;
+                            }
+                        }
+                    }else{
+                        if($jobcard->is_rii == 1){
+                            if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "rii-released" and Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "open"){
+                                $running_taslcard = $running_taslcard.", ".$jobcard->taskcard->number;
+                            }
+                            elseif(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "rii-released"){
+                                $taskcard_number = $taskcard_number.", ".$jobcard->taskcard->number;
+                            }
+                        }else{
+                            if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"  and Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "open"){
+                                $running_taslcard = $running_taslcard.", ".$jobcard->taskcard->number;
+                            }
+                            elseif(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"){
+                                $taskcard_number = $taskcard_number.", ".$jobcard->taskcard->number;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if($mandatory_taskcard <> ""){
+                $error_notification = array(
+                    'message' => "Mandatory is required done",
+                    'title' => "Danger",
+                    'alert-type' => "error"
+                );
+                return redirect()->route('frontend.rts-progress.index')->with($error_notification);
+            }
+            if($running_taslcard <> ""){
+                $error_notification = array(
+                    'message' => "There are jobcard running",
+                    'title' => "Danger",
+                    'alert-type' => "error"
+                );
+
+                return redirect()->route('frontend.rts-progress.index')->with($error_notification);
+            }
+
+            $taskcard_number = substr($taskcard_number, 2);
+            // dd($taskcard_number);
+
             $projects = Project::all();
             $rts = RTS::where('project_id',$project->id)->first();
             return view('frontend.rts.create', [
                 'rts' => $rts,
                 'projec' => $project,
-                'projects' => $projects
+                'projects' => $projects,
+                'taskcard_number' =>$taskcard_number
             ]);
         }
     }

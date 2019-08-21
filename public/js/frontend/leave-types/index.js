@@ -48,7 +48,7 @@ let LeaveTypes= {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/customer/'+t.uuid+'">' + t.name + "</a>"
+                        return '<a href="/leave-type/'+t.uuid+'">' + t.name + "</a>"
                     }
                 },
                 {

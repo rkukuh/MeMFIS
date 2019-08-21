@@ -299,14 +299,42 @@ let Project = {
                 type: 'GET',
                 dataType: "json",
                 url: '/label/get-customer/'+customer_uuid,
-                success: function (respone) {
-                    if (respone) {
-                        let res = JSON.parse(respone);
+                success: function (response) {
+                    if (response) {
+                        let res = JSON.parse(response.attention);
                             $('select[name="attention"]').empty();
                             $('select[name="phone"]').empty();
                             $('select[name="email"]').empty();
                             $('select[name="fax"]').empty();
                             $('select[name="address"]').empty();
+                            if(response.addresses.length){
+                                $.each(response.addresses, function( index, value ) {
+                                    $('select[name="address"]').append(
+                                        '<option value="' + value.address + '">' + value.address + '</option>'
+                                    );
+                                });
+                            }
+                            if(response.emails.length){
+                                $.each(response.emails, function( index, value ) {
+                                    $('select[name="email"]').append(
+                                        '<option value="' + value.address + '">' + value.address + '</option>'
+                                    );
+                                });
+                            }
+                            if(response.faxes.length){
+                                $.each(response.faxes, function( index, value ) {
+                                    $('select[name="fax"]').append(
+                                        '<option value="' + value.number + '">' +value.number + '</option>'
+                                    );
+                                });
+                            }
+                            if(response.phones.length){
+                                $.each(response.phones, function( index, value ) {
+                                    $('select[name="phone"]').append(
+                                        '<option value="' + value.number + '">' + value.number + '</option>'
+                                    );
+                                });
+                            }
                             for (var i = 0; i < res.length; i++) {
                                 if(res[i].name){
                                     $('select[name="attention"]').append(

@@ -177,7 +177,47 @@ let Quotation = {
             calculate_total();
         });
 
+        $('.action-buttons').on('click', '.discount-htcrr', function () {
+            let type = $('select[name="discount-type-htcrr"]').val();
+            let discount = $('input[name="discount-htcrr"').val();
+            let quotation = $('#quotation_uuid').val();
 
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/quotation/' + quotation + '/htcrr/discount',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    discount_type: type,
+                    discount_value: discount,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#discount').modal('hide');
+
+
+                        toastr.success('Discount has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+
+                        let table = $('.summary_datatable').mDatatable();
+
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
 
         $('.action-buttons').on('click', '.discount', function () {
             let type = $('#discount-type').val();

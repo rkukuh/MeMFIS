@@ -1,15 +1,6 @@
 let Bpjs = {
     init: function () {
         let reset = function (){
-            $('#bpjs_code').val('')
-            $('#bpjs_name').val('')
-            $('#basic_salary_employee').val('')
-            $('#min_employee').val('')
-            $('#max_employee').val('')
-            $('#basic_salary_company').val('')
-            $('#min_company').val('')
-            $('#max_company').val('')
-
             $('#bpjs_code-error').html('')
             $('#bpjs_name-error').html('')
             $('#basic_salary_employee-error').html('')
@@ -95,6 +86,7 @@ let Bpjs = {
                     toastr.success('Data has been saved.', 'Succes', {
                         timeOut: 5000
                     });
+
                     reset()
                 }
         }

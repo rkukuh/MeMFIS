@@ -44,7 +44,7 @@ let Employee = {
                 }
             },
             columns: [{
-                    field: '',
+                    field: 'name',
                     title: 'Employee',
                     sortable: 'asc',
                     width:290,
@@ -73,6 +73,7 @@ let Employee = {
                                 employee_name = t.first_name+' '+t.middle_name+' '+t.last_name
                             }
                         }
+
                         return '<div class="row"><div class="col-4"><div class="media align-items-center">'+
                         '<img alt="Image placeholder" src="assets/metronic/app/media/img/users/user5.jpg" class="m--img-rounded m--marginless">'+
                         '</div></div><div class="col-8 align-self-center"><span>'+ employee_name +'</span><br>'+

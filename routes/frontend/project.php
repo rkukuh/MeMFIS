@@ -30,6 +30,7 @@ Route::name('frontend.')->group(function () {
             Route::put('/project-hm-additional/{project}','ProjectHMAdditionalController@update')->name('project-hm-additional.update');
             Route::post('/project-hm-additional/{project}/destroy','ProjectHMAdditionalController@destroy')->name('project-hm-additional.destroy');
             Route::get('/project-hm-additional/{project}/summary','ProjectHMAdditionalController@summary')->name('project-hm-additional.summary');
+            Route::post('/project-hm-additional/{project}/additional-store','ProjectHMAdditionalController@additionalStore')->name('project-hm-additional.store.data');
 
 
             Route::resource('project-workshop', 'ProjectWorkshopController', [

@@ -228,50 +228,7 @@
                                                                             <hr>
                                                                             @endfor
                                                                             
-                                                                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                                                            <div class="row align-items-center">
-                                                                                <div class="col-xl-8 order-2 order-xl-1">
-                                                                                    <div class="form-group m-form__group row align-items-center">
-                                                                                        <div class="col-md-4">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                                                  
-                                                                                    <h3 class="m-portlet__head-text">
-                                                                                        15 Juni - 09 Juli 2019
-                                                                                    </h3>
-                                
-                                                                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group m-form__group row">
-                                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                                <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
-                                                                                    <tr>
-                                                                                        <td align="center" width="34%"><b>Allowance</b></td>
-                                                                                        <td align="center" width="33%"><b>Minimum</b></td>
-                                                                                        <td align="center" width="33%"><b>Maximum</b></td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Position</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Meal</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                        <td valign="top"><b>Overtime</b></td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                        <td valign="top" align="center">generate</td>
-                                                                                    </tr>
-                                                                                </table>
-                                                                            </div>
-                                                                        </div>
+                                                                    
                                                                     </div>
                                                                 </div>
                                                             </div>

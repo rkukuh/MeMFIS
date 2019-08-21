@@ -91,6 +91,11 @@
                     <td width="59%" valign="top"><span>{{$rts->aircraft_total_time}}</span></td>
                 </tr>
                 <tr width="100%">
+                    <td width="40%" valign="top">Aircarft Total Cycle</td>
+                    <td width="1%" valign="top">:</td>
+                    <td width="59%" valign="top"><span>{{$rts->aircraft_total_cycle}}</span></td>
+                </tr>
+                <tr width="100%">
                     <td width="40%" valign="top">Work Performed</td>
                     <td width="1%" valign="top">:</td>
                     <td width="59%" valign="top"><span>{{ $work_perfor[0] }}</span></td>

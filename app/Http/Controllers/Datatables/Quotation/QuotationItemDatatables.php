@@ -263,13 +263,12 @@ class QuotationItemDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function htcrr(Quotation $quotation, WorkPackage $workPackage)
+    public function htcrr(Quotation $quotation)
     {
         $htcrrmaterials = $materials = [];
-        $project = Project::find($quotation->project_id);
-        $project_htcrr = $project->htcrr;
+        $htcrrs = HtCrr::whereNull('parent_id')->where('project_id', $quotation->project_id)->get();
         // -Get Items from htcrr
-        foreach($project_htcrr as $htcrr){
+        foreach($htcrrs as $htcrr){
             foreach($htcrr->materials as $material){
                 array_push($materials, $material);
 
@@ -289,7 +288,7 @@ class QuotationItemDatatables extends Controller
         }
 
         foreach($htcrrmaterials as $htcrrmaterial){
-            $htcrrmaterial->tc .= QuotationHtcrrItem::find($htcrrmaterial->htcrr_id)->code;
+            $htcrrmaterial->tc .= $htcrrmaterial->htcrr->code;
             $htcrrmaterial->pn .= Item::find($htcrrmaterial->item_id)->code;
             $htcrrmaterial->title .= Item::find($htcrrmaterial->item_id)->name;
             $htcrrmaterial->unit_material .= $htcrrmaterial->unit->name;

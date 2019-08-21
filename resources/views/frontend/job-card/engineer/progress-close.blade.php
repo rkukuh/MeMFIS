@@ -181,7 +181,7 @@
                                                 RII
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                @if($jobcard->taskcard->is_rii == 1)
+                                                @if($jobcard->is_rii == 1)
                                                     Yes
                                                 @else
                                                     No

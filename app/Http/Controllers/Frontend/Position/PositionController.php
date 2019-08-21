@@ -98,7 +98,7 @@ class PositionController extends Controller
             ];
         }
 
-        return view('frontend.position.edit',['position' => $position,'benefits_position' => $benefits_position,'history' => $history]);
+        return view('frontend.position.show',['position' => $position,'benefits_position' => $benefits_position,'history' => $history]);
     }
 
     /**

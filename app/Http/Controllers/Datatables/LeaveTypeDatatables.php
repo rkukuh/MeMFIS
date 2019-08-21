@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Datatables;
 
-use App\Models\Type;
+use App\Models\LeaveType;
 use App\Http\Controllers\Controller;
 
 class LeaveTypeDatatables extends Controller
 {
     
     public function index(){
-        $leaveType = Type::where('of','leaves')->get();
+        $leaveType = LeaveType::get();
 
         $data = $alldata = json_decode($leaveType);
 

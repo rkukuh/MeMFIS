@@ -54,7 +54,7 @@
                         <li class="m-menu__item " aria-haspopup="true"><a href="{{ route('frontend.taskcard.index') }}"
                                     class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
                                         class="m-menu__link-text">Task Cards</span></a></li>
-            </li>
+
             <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"><a href="javascript:;"
                     class="m-menu__link m-menu__toggle" title="Non functional dummy link"><i
                         class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
@@ -91,7 +91,7 @@
                     </ul>
                 </div>
             </li>
-                    
+
                     </ul>
                 </div>
             </li>
@@ -401,6 +401,7 @@
                     </span>
                 </a>
             </li>
+            @hasanyrole('hrd|admin')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     HUMAN RESOURCES
@@ -456,21 +457,22 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.hr.event-holidays.index') }}" class="m-menu__link m-menu__toggle">
+                <a href="{{ route('frontend.holiday.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                       Event/Holidays
+                        Event/Holidays
                     </span>
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.hr.workshift-schedule.index') }}" class="m-menu__link m-menu__toggle">
+                <a href="{{ route('frontend.workshift.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                       Workshift Schedule
+                        Workshift Schedule
                     </span>
                 </a>
             </li>
+            @endrole
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     WAREHOUSE
@@ -708,7 +710,7 @@
                 </div>
             </li>
             <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
-               
+
                 <div class="m-menu__submenu">
                     <span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">

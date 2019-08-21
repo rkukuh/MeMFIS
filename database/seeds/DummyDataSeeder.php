@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Holiday;
 use App\Models\LeaveType;
 use App\Models\Manhour;
 use Illuminate\Database\Seeder;
@@ -53,7 +54,9 @@ class DummyDataSeeder extends Seeder
         $this->call(JobTittles::class);
         $this->call(Manhours::class);
         $this->call(LeaveTypes::class);
-        
+        $this->call(Holidays::class);
+        $this->call(Workshifts::class);
+
         /** POLYMORPH */
 
         $this->call(Faxes::class);

@@ -30,7 +30,7 @@
                                         <a class="nav-link active show" data-toggle="tab" href="#" data-target="#m_tabs_taskcard">Taskcard List(s)</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#m_tabs_tool_material">Material & Tool Taskcard List</a>
+                                        <a class="nav-link" data-toggle="tab" href="#m_tabs_tool_material">Material(s) & Tool(s) Taskcard List</a>
                                     </li>
                                 </ul>
                                 </div>
@@ -39,8 +39,8 @@
                                         @include('frontend.quotation.htcrr.taskcard.index')
                                     </div>
                                     <div class="tab-pane" id="m_tabs_tool_material" role="tabpanel">
-                                        {{-- @include('frontend.quotation.htcrr.item.index') --}}
-                                        {{-- @include('frontend.quotation.htcrr.modal') --}}
+                                        @include('frontend.quotation.htcrr.item.index')
+                                        @include('frontend.quotation.htcrr.modal')
                                     </div>
                                 </div>
                             </div>
@@ -58,5 +58,11 @@
 @push('footer-scripts')
 <script>
     let project_uuid = '{{ $quotation->project->uuid }}'    
+    let quotation_uuid = '{{ $quotation->uuid }}'    
+    let currencyCode = '{{ $quotation->currency->code }}'
 </script>
+    <script src="{{ asset('js/frontend/quotation/htcrr/workpackage.js')}}"></script>
+    <script src="{{ asset('js/custom.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
 @endpush
