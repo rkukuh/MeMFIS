@@ -59,7 +59,10 @@ Route::name('datatables.')->group(function () {
 
         /** TRANSACTION */
 
-        Route::get('/price-list', 'PriceListDatatables@index')->name('price-list.index');
+        Route::get('/price-list-item', 'PriceListDatatables@item')->name('price-list.item');
+        Route::get('/price-list-manhour', 'PriceListDatatables@manhour')->name('price-list.manhour');
+        Route::get('/price-list-facility', 'PriceListDatatables@facility')->name('price-list.facility');
+        
 
         /** AIRCRAFT */
 
