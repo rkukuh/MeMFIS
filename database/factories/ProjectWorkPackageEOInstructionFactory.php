@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\ProjectWorkPackageEOInstruction;
 use Faker\Generator as Faker;
+use App\Models\ProjectWorkPackageEOInstruction;
 
 $factory->define(ProjectWorkPackageEOInstruction::class, function (Faker $faker) {
 

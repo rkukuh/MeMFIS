@@ -14,8 +14,26 @@ class CreateProjectWorkPackageEOInstructionsTable extends Migration
     public function up()
     {
         Schema::create('project_workpackage_eo_instructions', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
+            $table->char('uuid', 36)->unique();
+            $table->unsignedBigInteger('project_workpackage_id');
+            $table->unsignedBigInteger('eo_instruction_id');
+            $table->integer('sequence')->nullable();
+            $table->boolean('is_rii')->nullable();
+            $table->boolean('is_mandatory')->default(false);
+            $table->text('note')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('project_workpackage_id', 'prj_wp_eo_ins_project_workpackage_id')
+                    ->references('id')->on('project_workpackage')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('eo_instruction_id')
+                    ->references('id')->on('eo_instructions')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 

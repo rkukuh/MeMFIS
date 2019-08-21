@@ -9,6 +9,7 @@ use App\Models\ProjectWorkPackageEngineer;
 use App\Models\ProjectWorkPackageFacility;
 use App\Models\ProjectWorkPackageTaskCard;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\ProjectWorkPackageEOInstruction;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class ProjectWorkPackage extends Pivot
@@ -30,6 +31,19 @@ class ProjectWorkPackage extends Pivot
     public function engineers()
     {
         return $this->hasMany(ProjectWorkPackageEngineer::class, 'project_workpackage_id');
+    }
+
+    /**
+     * One-to-Many: A Project's WorkPackages may have one or many EO-instruction.
+     *
+     * This function will retrieve all the EO-instruction of a project's workpackages.
+     * See: ProjectWorkPackageEOInstruction's header() method for the inverse
+     *
+     * @return mixed
+     */
+    public function eo_instructions()
+    {
+        return $this->hasMany(ProjectWorkPackageEOInstruction::class, 'project_workpackage_id');
     }
 
     /**
