@@ -640,7 +640,11 @@
 
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('name', 'attn-name')
-                                                                @slot('text', $attention->name)
+                                                                @if(isset($attention->name))
+                                                                    @slot('text', $attention->name)
+                                                                @else
+                                                                    @slot('text', '-')
+                                                                @endif
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -650,12 +654,16 @@
 
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('name', 'attn-position')
-                                                                @slot('text', $attention->position)
+                                                                @if(isset($attention->position))
+                                                                    @slot('text', $attention->position)
+                                                                @else
+                                                                    @slot('text', '-')
+                                                                @endif
                                                             @endcomponent
                                                         </div>
                                                     </div>
                                                     <div class="form-group m-form__group row">
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <label class="form-control-label">
                                                                 Phone
                                                             </label>
@@ -671,7 +679,7 @@
                                                                 @endcomponent
                                                             @endif
                                                         </div>
-                                                        <div class="col-sm-3 col-md-3 col-lg-3">
+                                                        {{-- <div class="col-sm-3 col-md-3 col-lg-3 hidden">
                                                             <label class="form-control-label">
                                                                 Extension
                                                             </label>
@@ -679,15 +687,19 @@
                                                                 @slot('name', 'attn-ext')
                                                                 @slot('text', $attention->fax)
                                                             @endcomponent
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
                                                                 Fax
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', '-')
                                                                 @slot('name', 'attn-fax')
+                                                                @if(isset($attention->fax))
+                                                                    @slot('text', $attention->fax)
+                                                                @else
+                                                                    @slot('text', '-')
+                                                                @endif
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
