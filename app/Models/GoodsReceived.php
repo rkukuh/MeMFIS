@@ -26,7 +26,7 @@ class GoodsReceived extends MemfisModel
     /**
      * Polymorphic: An entity can have zero or many approvals.
      *
-     * This function will get all Quotation's approvals.
+     * This function will get all GoodsReceived's approvals.
      * See: Approvals's approvable() method for the inverse
      *
      * @return mixed
