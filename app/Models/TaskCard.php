@@ -107,16 +107,16 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * One-to-Many (with JSON data): A jobcard must have a taskcard
+     * Polymorphic: An entity can have zero or many jobcards.
      *
-     * This function will retrieve all the jobcards of a taskcard.
-     * See: JobCard's taskcard() method for the inverse
+     * This function will get all TaskCard's jobcards.
+     * See: JobCard's jobcardable() method for the inverse
      *
      * @return mixed
      */
     public function jobcards()
     {
-        return $this->hasMany(JobCard::class);
+        return $this->morphMany(JobCard::class, 'jobcardable');
     }
 
     /**

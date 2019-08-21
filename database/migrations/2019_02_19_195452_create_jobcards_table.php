@@ -18,21 +18,15 @@ class CreateJobcardsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->unsignedBigInteger('quotation_id');
-            $table->unsignedBigInteger('taskcard_id');
+            $table->morphs('jobcardable');
             $table->boolean('is_rii')->default(false);
             $table->boolean('is_mandatory')->default(false);
             $table->json('origin_quotation')->nullable();
-            $table->json('origin_taskcard')->nullable();
-            $table->json('origin_taskcard_items')->nullable();
+            $table->json('origin_jobcardable')->nullable();
+            $table->json('origin_jobcardable_items')->nullable();
             $table->json('origin_jobcard_helpers')->nullable();
-
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('taskcard_id')
-                    ->references('id')->on('taskcards')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
 
             $table->foreign('quotation_id')
                     ->references('id')->on('quotations')

@@ -10,13 +10,14 @@ class JobCard extends MemfisModel
 
     protected $fillable = [
         'number',
+        'jobcardable_type',
+        'jobcardable_id',
         'quotation_id',
-        'taskcard_id',
         'is_rii',
         'is_mandatory',
         'origin_quotation',
-        'origin_taskcard',
-        'origin_taskcard_items',
+        'origin_jobcardable',
+        'origin_jobcardable_items',
         'origin_jobcard_helpers',
     ];
 
@@ -25,7 +26,7 @@ class JobCard extends MemfisModel
     /**
      * Polymorphic: An entity can have zero or many approvals.
      *
-     * This function will get all Quotation's approvals.
+     * This function will get all JobCard's approvals.
      * See: Approvals's approvable() method for the inverse
      *
      * @return mixed
@@ -73,6 +74,21 @@ class JobCard extends MemfisModel
     public function inspections()
     {
         return $this->morphMany(Progress::class, 'inspectable');
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many jobcards.
+     *
+     * This function will get all of the owning jobcardable models.
+     * See:
+     * - TaskCard's jobcards() method for the inverse
+     * - EOInstruction's jobcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function jobcardable()
+    {
+        return $this->morphTo();
     }
 
     /**
