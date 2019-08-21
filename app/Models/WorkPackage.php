@@ -96,7 +96,7 @@ class WorkPackage extends MemfisModel
     }
 
     /**
-     * Many-to-Many: A task card may have one or many workpackage.
+     * Many-to-Many: A Work Package may have one or many Task Card.
      *
      * This function will retrieve all the task cards of a work package.
      * See: TaskCard's workpackages() method for the inverse
