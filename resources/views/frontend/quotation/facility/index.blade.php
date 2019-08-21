@@ -51,7 +51,7 @@
                     map: function (raw) {
                     let dataSet = raw;
                     let total = subtotal = 0;
-                    
+
                     if (typeof raw.data !== 'undefined') {
                         dataSet = raw.data;
                     }
@@ -163,7 +163,7 @@
                     }
                     $('#price_amount').val(data.price_amount);
                     $('#marketing_note').val(data.note);
-                    
+
                     $('.btn-success').addClass('update');
                     $('.btn-success').removeClass('add');
                 },
@@ -215,7 +215,7 @@
                     } else {
                         $('#facility_price').modal('hide');
 
-                        toastr.success('Aircraft has been updated.', 'Success', {
+                        toastr.success('Facility has been updated.', 'Success', {
                             timeOut: 5000
                         });
 
@@ -231,7 +231,7 @@
         }
     };
 
-    
+
 
 
 jQuery(document).ready(function () {
