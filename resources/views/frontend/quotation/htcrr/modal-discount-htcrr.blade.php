@@ -1,4 +1,4 @@
-<div class="modal fade" id="discount"  role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="discount_htcrr"  role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
@@ -17,7 +17,6 @@
             <div class="modal-body">
 
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="ItemForm">
-                    <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="workpackage_uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -27,10 +26,10 @@
 
                                 @component('frontend.common.input.select2')
                                     @slot('text', 'Discount')
-                                    @slot('name', 'discount-type')
-                                    @slot('class', 'discount-type')
-                                    @slot('id', 'discount-type')
-                                    @slot('id_error', 'discount-type')
+                                    @slot('name', 'discount-type-htcrr')
+                                    @slot('id', 'discount-type-htcrr')
+                                    @slot('class', 'discount-type-htcrr')
+                                    @slot('id_error', 'discount-type-htcrr')
                                 @endcomponent
                             </div>
                         </div>
@@ -42,9 +41,9 @@
 
                                 @component('frontend.common.input.number')
                                     @slot('text', 'Discount')
-                                    @slot('name', 'discount')
-                                    @slot('id', 'discount')
-                                    @slot('id_error', 'discount')
+                                    @slot('name', 'discount-htcrr')
+                                    @slot('id', 'discount-htcrr')
+                                    @slot('id_error', 'discount-htcrr')
                                 @endcomponent
                             </div>
                         </div>
@@ -53,7 +52,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                     @component('frontend.common.buttons.update')
-                                        @slot('class', 'discount')
+                                        @slot('class', 'discount-htcrr')
                                         @slot('type', 'button')
                                     @endcomponent
                                     @component('frontend.common.buttons.reset')

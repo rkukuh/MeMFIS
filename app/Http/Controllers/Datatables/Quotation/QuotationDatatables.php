@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Datatables\Quotation;
 
 use App\User;
+use App\Models\HtCrr;
 use App\Models\ListUtil;
 use App\Models\Quotation;
-use App\Models\HtCrr;
 use App\Models\WorkPackage;
+use App\Models\QuotationHtcrrItem;
 use App\Models\Pivots\ProjectWorkPackage;
 use App\Models\ProjectWorkPackageFacility;
 use App\Models\QuotationWorkPackageTaskCardItem;
@@ -294,14 +295,14 @@ class QuotationDatatables extends Controller
         }
 
         $htcrrs = HtCrr::where('project_id',$quotation->project->id)->whereNull('parent_id')->get();
-        $htcrr = json_decode($quotation->project->data_htcrr);
-        // dd($htcrr);
+        $mats_tools_htcrr = QuotationHtcrrItem::where('quotation_id', $quotation->id)->sum('price_amount');
         if (sizeof($htcrrs) > 0) {
             $htcrr_workpackage = new WorkPackage();
             $htcrr_workpackage->code = "Workpackage HT CRR";
             $htcrr_workpackage->title = "Workpackage HT CRR";
+            $htcrr_workpackage->data_htcrr = json_decode($quotation->data_htcrr, true);
+            $htcrr_workpackage->mat_tool_price = $mats_tools_htcrr;
             $htcrr_workpackage->is_template = "htcrr";
-            $htcrr_workpackage->total_manhours_with_performance_factor = $htcrr->total_manhours_with_performance_factor;
             $htcrr_workpackage->ac_type = $quotation->project->aircraft->name;
 
             $workpackages[sizeof($workpackages)] = $htcrr_workpackage;

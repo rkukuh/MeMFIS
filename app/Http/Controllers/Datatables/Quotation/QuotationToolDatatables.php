@@ -265,10 +265,9 @@ class QuotationToolDatatables extends Controller
     public function htcrr(Quotation $quotation, WorkPackage $workPackage)
     {
         $htcrrtools = $tools = [];
-        $project = Project::find($quotation->project_id);
-        $project_htcrr = $project->htcrr;
+        $htcrrs = HtCrr::whereNull('parent_id')->where('project_id', $quotation->project_id)->get();
         // -Get Items from htcrr
-        foreach($project_htcrr as $htcrr){
+        foreach($htcrrs as $htcrr){
             foreach($htcrr->tools as $tool){
                 array_push($tools, $tool);
 
@@ -288,7 +287,7 @@ class QuotationToolDatatables extends Controller
         }
 
         foreach($htcrrtools as $htcrrtool){
-            $htcrrtool->tc .= QuotationHtcrrItem::find($htcrrtool->htcrr_id)->code;
+            $htcrrtool->tc .= $htcrrtool->htcrr->code;
             $htcrrtool->pn .= Item::find($htcrrtool->item_id)->code;
             $htcrrtool->title .= Item::find($htcrrtool->item_id)->name;
             $htcrrtool->unit_tool .= $htcrrtool->unit->name;

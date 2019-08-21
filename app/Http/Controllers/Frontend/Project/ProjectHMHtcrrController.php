@@ -48,17 +48,31 @@ class ProjectHMHtcrrController extends Controller
      */
     public function create(Project $project,Request $request)
     {
-        $mhrs_pfrm_factor = $skills = $htcrr_engineers = [];
+        $mhrs_pfrm_factor = $skills = $htcrr_engineers = $skill_list = [];
+        $tat = 0;
         $htcrrs = HtCrr::where('code',  'like', 'JCRI%')->where('project_id', $project->id)->get();
-        $htcrr_engineers = json_decode($project->data_htcrr)->engineer;
-        $engineer_qty = json_decode($project->data_htcrr)->engineer_qty;
-        $tat = json_decode($project->data_htcrr)->tat;
-        foreach(json_decode($project->data_htcrr)->skills as $key => $skill){
-            $object = new stdClass();
-            $object->skill = $skill;
-            $object->engineer_code = $htcrr_engineers[$key];
-            $object->quantity = $engineer_qty[$key];
-            array_push($skills, $object);
+        if (isset(json_decode($project->data_htcrr)->engineer)) {
+            $htcrr_engineers = json_decode($project->data_htcrr)->engineer;
+            $engineer_qty = json_decode($project->data_htcrr)->engineer_qty;
+            $tat = json_decode($project->data_htcrr)->tat;
+            foreach (json_decode($project->data_htcrr)->skills as $key => $skill) {
+                $object = new stdClass();
+                $object->skill = $skill;
+                $object->engineer_code = $htcrr_engineers[$key];
+                $object->quantity = $engineer_qty[$key];
+                array_push($skills, $object);
+            }
+
+            $skill_list = json_decode($project->data_htcrr)->skills;
+            
+        }else{
+            foreach($htcrrs as $htcrr){
+                if(isset($htcrr->skills)){
+                    foreach($htcrr->skills as $skill){
+                        array_push($skill_list, $skill->name);
+                    }
+                }
+            }
         }
         
         $total_mhrs = $htcrrs->sum('estimation_manhour');
@@ -70,13 +84,13 @@ class ProjectHMHtcrrController extends Controller
         }
 
         return view($view,[
+        'tat' => $tat,
         'project' => $project,
+        'skills' => $skill_list,
         'employees' => $employees,
         'total_mhrs' => $total_mhrs,
-        'tat' => $tat,
         'engineer_skills' => $skills,
         'htcrr_engineers' => $htcrr_engineers,
-        'skills' => json_decode($project->data_htcrr)->skills,
         'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
         ]);
     }
@@ -281,12 +295,17 @@ class ProjectHMHtcrrController extends Controller
     {
         if($project->data_htcrr == null){
             $data_json = [];
+            $data_json["performance_factor"] = "init for later";
+            $data_json["total_manhours"] = "init for later";
+            $data_json["total_manhours_with_performance_factor"] = "init for later";
+
             $data_json["skills"] = $request->engineer_skills;
             $data_json["engineer"] = $request->engineer;
             $data_json["engineer_qty"] = $request->engineer_qty;
             $data_json["tat"] = $request->tat;
 
-            $project->update(['data_htcrr' => json_encode($data_json)]);
+            $data_json = json_encode($data_json, true);
+            $project->update(['data_htcrr' => $data_json]);
         }else{
             $data_json = json_decode($project->data_htcrr, true);
             $data_json["skills"] = $request->engineer_skills;
@@ -294,7 +313,8 @@ class ProjectHMHtcrrController extends Controller
             $data_json["engineer_qty"] = $request->engineer_qty;
             $data_json["tat"] = $request->tat;
 
-            $project->update(['data_htcrr' => json_encode($data_json)]);
+            $data_json = json_encode($data_json, true);
+            $project->update(['data_htcrr' => $data_json]);
         }
 
         return response()->json($data_json);
@@ -311,15 +331,22 @@ class ProjectHMHtcrrController extends Controller
             $data_json["performance_factor"] = $request->performa_used;
             $data_json["total_manhours"] = $request->manhour;
             $data_json["total_manhours_with_performance_factor"] = $request->total;
+            
+            $data_json["skills"] = "init for later";
+            $data_json["engineer"] = "init for later";
+            $data_json["engineer_qty"] = "init for later";
+            $data_json["tat"] = "init for later";
 
-            $project->update(['data_htcrr' => json_encode($data_json)]);
+            $data_json = json_encode($data_json, true);
+            $project->update(['data_htcrr' => $data_json]);
         }else{
             $data_json = json_decode($project->data_htcrr, true);
             $data_json["performance_factor"] = $request->performa_used;
             $data_json["total_manhours"] = $request->manhour;
             $data_json["total_manhours_with_performance_factor"] = $request->total;
 
-            $project->update(['data_htcrr' => json_encode($data_json)]);
+            $data_json = json_encode($data_json, true);
+            $project->update(['data_htcrr' => $data_json]);
         }
         
         return response()->json($data_json);
