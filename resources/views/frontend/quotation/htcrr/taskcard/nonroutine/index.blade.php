@@ -30,5 +30,5 @@
 </div>
 
 @push('footer-scripts')
-    {{-- <script src="{{ asset('js/frontend/quotation/workpackage/taskcard/non-routine/index.js')}}"></script> --}}
+    <script src="{{ asset('js/frontend/quotation/htcrr/index.js')}}"></script>
 @endpush

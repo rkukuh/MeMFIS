@@ -60,10 +60,6 @@
             </div>
         </div>
     </div>
-
-    {{-- @include('frontend.quotation.taskcard.nonroutine.htcrr.modal') --}}
-    {{-- @include('frontend.quotation.taskcard.nonroutine.htcrr.workshop-task') --}}
-    
 </div>
 
 @include('frontend.quotation.htcrr.taskcard.nonroutine.index')
