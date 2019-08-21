@@ -53,7 +53,7 @@ class TaskReleaseJobCardDatatables extends Controller
                     array_push($status, 'Pending');
                 }
             }
-            if($jobcard->taskcard->is_rii == 1 and $jobcard->approvals->count()==2){
+            if($jobcard->is_rii == 1 and $jobcard->approvals->count()==2){
                 $jobcard->status .= 'Released';
             }
             elseif(sizeof($jobcard->approvals)==1 and Status::ofJobCard()->where('id',$jobcard->progresses->last()->status_id)->first()->code == "released"){
