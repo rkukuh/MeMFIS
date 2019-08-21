@@ -77,6 +77,7 @@ let CompanyStructure = {
                 },
                 {
                     field: 'Actions',
+                    title: 'Action',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
