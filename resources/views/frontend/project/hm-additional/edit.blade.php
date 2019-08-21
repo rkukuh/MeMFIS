@@ -129,6 +129,43 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                <label class="form-control-label">
+                                                                    Total Manhour
+                                                                </label>
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'estimation_manhour')
+                                                                    @slot('name', 'estimation_manhour')
+                                                                    @slot('text', number_format($project->defectcards()->sum('estimation_manhour',2)) )
+                                                                    @slot('value', $project->defectcards()->sum('estimation_manhour'))
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                <label class="form-control-label">
+                                                                    Perfomance Factor
+                                                                </label>
+                                                                @component('frontend.common.input.number')
+                                                                   @slot('id', 'performance_factor')
+                                                                   @slot('name', 'performance_factor')
+                                                                   @slot('value', 1.6)
+                                                                   @slot('id_error', 'performance_factor')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                <label class="form-control-label">
+                                                                    Total With Performance Factor
+                                                                </label>
+                                                                @component('frontend.common.label.data-info')
+                                                                   @slot('id', 'total_manhour')
+                                                                   @slot('name', 'total_manhour')
+                                                                   @slot('text', $project->defectcards()->sum('estimation_manhour') * 1.6)
+                                                                   @slot('value', $project->defectcards()->sum('estimation_manhour') * 1.6)
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </fieldset>
                                         </div>
@@ -187,13 +224,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 footer-additional">
                                             <div class="flex">
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.update')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-workpackage')
-                                                        @slot('class', 'add-workpackage')
+                                                        @slot('id', 'update-additional-data')
+                                                        @slot('class', 'update-additional-data')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -236,8 +273,14 @@
 
 @push('footer-scripts')
     <script>
-        let project_uuid = '{{$project->uuid}}'
-        let project_parent_uuid = '{{$project_parent->uuid}}'
+        let project_uuid = '{{$project->uuid}}';
+        let project_parent_uuid = '{{$project_parent->uuid}}';
+        $("#performance_factor").on("change", function(){
+            let estimation_manhour = $("#estimation_manhour").attr('value');
+            let performance_factor = $("#performance_factor").val();
+            $("#total_manhour").html(estimation_manhour * performance_factor);
+            $("#total_manhour").attr('value', estimation_manhour * performance_factor);
+        });
     </script>
 
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>

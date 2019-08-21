@@ -112,6 +112,7 @@ class ProjectHMAdditionalController extends Controller
         }else{
             $attention = json_decode($project_parent->quotations()->first()->attention);
         }
+
         return view('frontend.project.hm-additional.edit',[
             'project' => $project,
             'project_parent' => $project_parent,
@@ -210,6 +211,34 @@ class ProjectHMAdditionalController extends Controller
 
     }
 
+    /**
+     * Update additional related datas in data_additional field.
+     *
+     * @param  \App\Http\Requests  $request
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
+     */
+    public function additionalStore(Request $request, Project $project)
+    {
+        if(empty($project->data_defectcard)){
+            $data_json = [];
+            $data_json["total_manhours"] = $request->total_manhours;
+            $data_json["performance_factor"] = $request->performance_factor;
+            $data_json["total_manhours_with_performance_factor"] = $request->total_manhours_with_performance_factor;
 
+            $data_json = json_encode($data_json, true);
+            $project->update(['data_defectcard' => $data_json]);
+        }else{
+            $data_json = json_decode($project->data_defectcard, true);
+            $data_json["total_manhours"] = $request->total_manhours;
+            $data_json["performance_factor"] = $request->performance_factor;
+            $data_json["total_manhours_with_performance_factor"] = $request->total_manhours_with_performance_factor;
+
+            $data_json = json_encode($data_json, true);
+            $project->update(['data_defectcard' => $data_json]);
+        }
+
+        return response()->json($project);
+    }
 
 }
