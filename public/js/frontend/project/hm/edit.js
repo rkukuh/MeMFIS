@@ -106,10 +106,10 @@ let Project = {
                                 return (
                                     '<a href="/project-htcrr/' + project_uuid + '/project-htcrr/create" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                         '<i class="la la-pencil"></i>' +
-                                    '</a>' 
+                                    '</a>'
                                 );
                             }
-                            
+
                         }
                 }
             ]
@@ -243,7 +243,7 @@ let Project = {
             });
         });
 
-        
+
         $(".modal_blank_project").on("click", function() {
             let aircraft_val = $("#applicability_airplane").val();
             let aircraft_text = $("#applicability_airplane option:selected").text();
@@ -383,7 +383,6 @@ let Project = {
             data.append("aircraft_id", $('#applicability_airplane').val());
             data.append("aircraft_register", $('input[name=reg]').val());
             data.append("aircraft_sn", $('input[name=serial-number]').val());
-            data.append("code", 'Dummy COde');
             data.append("fileInput", document.getElementById('work-order-attachment').files[0]);
             data.append('_method', 'PUT');
 
