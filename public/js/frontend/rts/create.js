@@ -95,7 +95,7 @@ let ReleaseToService = {
                             timeOut: 5000
                         });
 
-                        window.location.href = 'rts/'+data.uuid+'/print';
+                        window.location.href = '/rts/'+data.uuid+'/print';
 
                     }
                 }
