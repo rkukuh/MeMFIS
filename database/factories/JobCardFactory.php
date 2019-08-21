@@ -13,10 +13,10 @@ use Faker\Generator as Faker;
 
 $factory->define(JobCard::class, function (Faker $faker) {
 
-    $jobcardable_entity = null;
-    $jobcardable_type = null;
     $number = $faker->unixTime();
-
+    
+    $jobcardable_type = null;
+    $jobcardable_entity = null;
     $jobcardable = $faker->randomElement(['taskcard', 'eo_instruction']);
 
     if ($jobcardable == 'taskcard') {
