@@ -13,7 +13,7 @@
                         @component('frontend.common.input.select2')
                             @slot('id', 'project-additional')
                             @slot('text', 'project')
-                            @slot('name', 'project')
+                            @slot('name', 'project-additional')
                             @slot('id_error', 'project')
                         @endcomponent
                     </div>
