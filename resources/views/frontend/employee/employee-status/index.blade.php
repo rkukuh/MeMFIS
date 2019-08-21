@@ -58,7 +58,7 @@
                                     </li>
                                     <li class="nav-item m-tabs__item">
                                         <a class="nav-link m-tabs__link" data-toggle="tab" id="m_tab_6_2" href="#m_tabs_6_2" role="tab">
-                                            <i class="la la-briefcase"></i> Job Title
+                                            <i class="la la-briefcase"></i> Job Titles
                                         </a>
                                     </li>
                                 </ul>
