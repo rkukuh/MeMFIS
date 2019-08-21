@@ -81,10 +81,10 @@
                                             @endcomponent
                                         </div>
                                         @php
-                                        $checked = null;
+                                        $checked_leave = null;
 
                                             if($leaveType->prorate_leave == 1){
-                                                $checked = 'checked';
+                                                $checked_leave = 'checked';
                                             }
                                         @endphp
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -92,7 +92,7 @@
                                                 @slot('text','Enable Pro-Rate Leaves')
                                                 @slot('id', 'pro_rate_leave')
                                                 @slot('name', 'pro_rate_leave')
-                                                @slot('checked', $checked)
+                                                @slot('checked', $checked_leave)
                                                 @slot('disabled', 'disabled')
                                                 @slot('style_div','margin-top:30px')
                                             @endcomponent
@@ -104,11 +104,24 @@
                                                 Gender Specification
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'gender')
-                                                @slot('name', 'gender')
+                                            @component('frontend.common.label.data-info')
+                                            @slot('text',  $leaveType->gender)
                                             @endcomponent
                                         </div>
+
+                                        @php
+                                        $checked_distribute = null;
+
+                                            if($leaveType->distribute_evently == 1){
+                                                $checked_distribute = 'checked';
+                                            }
+
+                                        $checked_back = null;
+
+                                            if($leaveType->back_date == 1){
+                                                $checked_back = 'checked';
+                                            }
+                                        @endphp
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -117,6 +130,7 @@
                                                         @slot('id', 'distribute_evently_per_month')
                                                         @slot('name', 'distribute_evently_per_month')
                                                         @slot('size','12')
+                                                        @slot('checked', $checked_back)
                                                         @slot('style_div','margin-top:30px')
                                                         @slot('disabled','disabled')
                                                     @endcomponent
