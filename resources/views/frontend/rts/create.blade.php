@@ -181,7 +181,7 @@
                                         @slot('rows', '5')
                                         @slot('id', 'exceptions')
                                         @slot('name', 'exceptions')
-                                        @slot('text', 'xceptions')
+                                        @slot('value', $taskcard_number)
                                         @slot('disabled', 'disabled')
                                         @endcomponent
                                     </div>
@@ -196,6 +196,7 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                 @slot('id', 'DGCA')
+                                                @slot('checked', 'checked')
                                                 @slot('name', 'approval[]')
                                                 @slot('text', 'Indonesia DGCA No : 145D-093')
                                                 @slot('value', 'Indonesia DGCA No : 145D-093')

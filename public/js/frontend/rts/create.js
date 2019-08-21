@@ -35,6 +35,7 @@ let ReleaseToService = {
             let project_id = $('#project').val();
             let date = $('#date').val();
             let total_time = $('#total_time').val();
+            let total_cycle = $('#total_cycle').val();
             let work_performed = $('#work_performed').val();
             let work_performed_addtional = $('#work_performed_addtional').val();
             // let work_performed = [];
@@ -70,6 +71,7 @@ let ReleaseToService = {
                     project_id: project_id,
                     // date: date,
                     aircraft_total_time:total_time,
+                    aircraft_total_cycle:total_cycle,
                     work_performed:work_performed,
                     work_performed_addtional:work_performed_addtional,
                     work_data: work_data,
@@ -93,7 +95,7 @@ let ReleaseToService = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/rts/' + data.uuid + '/print';
+                        window.location.href = 'rts/'+data.uuid+'/print';
 
                     }
                 }
