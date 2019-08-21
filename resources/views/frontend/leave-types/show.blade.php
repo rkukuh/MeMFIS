@@ -99,6 +99,42 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Gender Specification
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'gender')
+                                                @slot('name', 'gender')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('text','Enable Distribute Evently Per Month')
+                                                        @slot('id', 'distribute_evently_per_month')
+                                                        @slot('name', 'distribute_evently_per_month')
+                                                        @slot('size','12')
+                                                        @slot('style_div','margin-top:30px')
+                                                        @slot('disabled','disabled')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('text','Enable Back Date')
+                                                        @slot('id', 'back_date')
+                                                        @slot('name', 'back_date')
+                                                        @slot('size','12')
+                                                        @slot('style_div','margin-top:30px')
+                                                        @slot('disabled','disabled')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
                                                 Description
