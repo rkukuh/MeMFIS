@@ -54,10 +54,12 @@ class QuotationAdditionalController extends Controller
     public function create(Project $project)
     {
         $websites = Type::ofWebsite()->get();
+        $total_manhour = $project->defectcards()->sum('estimation_manhour');
 
         return view('frontend.quotation.additional.create', [
+            'project' => $project,
             'websites' => $websites,
-            'project' => $project
+            'total_manhour' => $total_manhour
         ]);
 
     }

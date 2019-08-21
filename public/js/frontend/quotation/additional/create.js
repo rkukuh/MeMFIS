@@ -145,7 +145,6 @@ let AdditionalTaskQtnCreate = {
             if(type === "By Date"){
                 $('input[name^=scheduled_payment] ').each(function (i) {
                     scheduled_payment_array[i] = $(this).val();
-                    console.log($(this).val());
                 });
             }else{
                 $('#scheduled_payment ').each(function (i) {
@@ -226,7 +225,7 @@ let AdditionalTaskQtnCreate = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/quotation-additional/' + data.uuid + '/edit';
+                        window.location.href = '/quotation-additional/' + data.uuid + '/edit';
 
 
                     }

@@ -360,6 +360,7 @@ Route::name('datatables.')->group(function () {
                 /** Defectcard Item */
                 Route::get('/{quotation}/defectcard/item', 'QuotationAdditionalItemDatatables@item')->name('item.quotation-additional');
                 Route::get('/{quotation}/defectcard/tool', 'QuotationAdditionalItemDatatables@tool')->name('tool.quotation-additional');
+                Route::get('/{project}/additional/job-request', 'QuotationAdditionalDatatables@jobRequest')->name('quotation-additional.job-request');
 
             });
 

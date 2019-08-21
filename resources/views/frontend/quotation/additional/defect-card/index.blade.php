@@ -10,8 +10,10 @@
                             </label>
 
                             @component('frontend.common.label.data-info')
-                                @slot('text', 'XXX')
-                                @slot('id', 'name')
+                                @slot('id', 'total_manhour')
+                                @slot('name', 'total_manhour')
+                                @slot('text', $total_manhour)
+                                @slot('value', $total_manhour)
                             @endcomponent
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
