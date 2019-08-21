@@ -137,7 +137,7 @@ let Employee = {
                 {
                     field: 'Actions',
                     width: 110,
-                    title: 'Actions',
+                    title: 'Action',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
