@@ -228,10 +228,9 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * One-to-Many: A task card may have one workarea.
+     * One-Way: A task card may have one workarea.
      *
      * This function will retrieve the workarea of a task card.
-     * See: Type's workarea() method for the inverse
      *
      * @return mixed
      */

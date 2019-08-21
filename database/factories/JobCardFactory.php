@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Type;
 use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Station;
@@ -37,6 +38,7 @@ $factory->define(JobCard::class, function (Faker $faker) {
         'is_rii' => $faker->boolean,
         'is_mandatory' => $faker->boolean,
         'station_id' => $faker->randomElement([null, Station::get()->random()->id]),
+        'entered_in' => Type::ofJobCardLogBook()->get()->random()->id,
         'additionals' => function () use ($faker) {
             $additionals = null;
 

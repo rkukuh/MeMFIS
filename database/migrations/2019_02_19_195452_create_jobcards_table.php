@@ -22,6 +22,7 @@ class CreateJobcardsTable extends Migration
             $table->boolean('is_rii')->default(false);
             $table->boolean('is_mandatory')->default(false);
             $table->unsignedBigInteger('station_id')->nullable();
+            $table->unsignedBigInteger('entered_in')->nullable();
             $table->json('additionals')->nullable();
             $table->json('origin_quotation')->nullable();
             $table->json('origin_jobcardable')->nullable();
@@ -37,6 +38,11 @@ class CreateJobcardsTable extends Migration
 
             $table->foreign('station_id')
                     ->references('id')->on('stations')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('entered_in')
+                    ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 

@@ -248,6 +248,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of JobCard logbook.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfJobCardLogBook(Builder $query)
+    {
+        return $query->where('of', 'jobcard-logbook');
+    }
+
+    /**
      * Scope a query to only include type of JobCard pause reason.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
