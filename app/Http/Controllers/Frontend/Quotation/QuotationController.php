@@ -89,10 +89,10 @@ class QuotationController extends Controller
             $quotation->workpackages()->attach(WorkPackage::where('uuid',$workpackage->uuid)->first()->id);
         }
 
-        $quotation->progresses()->save(new Progress([
-            'status_id' =>  Status::ofQuotation()->where('code','open')->first()->id,
-            'progressed_by' => Auth::id()
-        ]));
+        // $quotation->progresses()->save(new Progress([
+        //     'status_id' =>  Status::ofQuotation()->where('code','open')->first()->id,
+        //     'progressed_by' => Auth::id()
+        // ]));
 
         // TODO generate item workpackage
         $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
@@ -321,8 +321,8 @@ class QuotationController extends Controller
 
         $ProjectWorkPackage = ProjectWorkPackage::where('project_id',$quotation->project_id)->pluck('id');
         $ProjectWorkPackageTaskCard = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
-        foreach($ProjectWorkPackageTaskCard as $tc){
-                $tc = $tc->taskcard;
+        foreach($ProjectWorkPackageTaskCard as $taskcard){
+                $tc = $taskcard->taskcard;
 
                 if(Type::where('id',$tc->type_id)->first()->code == "basic"){
                     $tc_code = 'BSC';
@@ -362,12 +362,15 @@ class QuotationController extends Controller
                 }
 
                 if($tc_code == "BSC" or $tc_code == "SIP" or $tc_code == "CPC" or $tc_code == "SIT" or $tc_code == "PRE" or $tc_code == "DUM"){
+                                    dump($taskcard->is_mandatory);
+                                    $mandatory = $taskcard->is_mandatory;
+
                     $jobcard = JobCard::create([
                         'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
                         'taskcard_id' => $tc->id,
                         'quotation_id' => $quotation->id,
-                        'is_rii' => $tc->is_rii,
-                        'is_mandatory' => $tc->is_mandatory,
+                        'is_rii' => $taskcard->is_rii,
+                        'is_mandatory' => $mandatory,
                         'origin_taskcard' => $tc->toJson(),
                         'origin_taskcard_items' => $tc->items->toJson(),
                     ]);
@@ -377,19 +380,19 @@ class QuotationController extends Controller
                     ]));
 
                 }else{
-                    // foreach($tc->eo_instructions as $instruction){
-                    //     $jobcard = JobCard::create([
-                    //         'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
-                    //         'taskcard_id' => $tc->id,
-                    //         'quotation_id' => $quotation->id,
-                    //         'origin_taskcard' => $tc->toJson(),
-                    //         'origin_taskcard_items' => $tc->items->toJson(),
-                    //     ]);
-                    //     $jobcard->progresses()->save(new Progress([
-                    //         'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
-                    //         'progressed_by' => Auth::id()
-                    //     ]));
-                    // }
+                    foreach($tc->eo_instructions as $instruction){
+                        $jobcard = JobCard::create([
+                            'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                            'taskcard_id' => $tc->id,
+                            'quotation_id' => $quotation->id,
+                            'origin_taskcard' => $tc->toJson(),
+                            'origin_taskcard_items' => $tc->items->toJson(),
+                        ]);
+                        $jobcard->progresses()->save(new Progress([
+                            'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
+                            'progressed_by' => Auth::id()
+                        ]));
+                    }
 
                 }
 
