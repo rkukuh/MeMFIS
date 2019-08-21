@@ -113,7 +113,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/additional-task/summary', 'frontend.project.hm-additional.summary')->name('additional-task.summary');
 
         /** Additional Task Quotation*/
-        
+
         Route::view('/additional-task-qtn/create', 'frontend.quotation.additional.create')->name('additional-task-qtn.create');
         Route::view('/additional-task-qtn/edit', 'frontend.quotation.additional.edit')->name('additional-task-qtn.edit');
         Route::view('/additional-task-qtn/show', 'frontend.quotation.additional.show')->name('additional-task-qtn.show');
@@ -170,7 +170,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/gse-tool-returned/project/create', 'frontend.gse-tool-returned.project.create')->name('gse-tool-returned.project.create');
         Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
         Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
-        
+
 
 
     });
