@@ -82,6 +82,24 @@ class EOInstruction extends MemfisModel
         return $this->belongsTo(Type::class, 'work_area');
     }
 
+    /**
+     * Many-to-Many: A Work Package may have one or many EO-Instruction.
+     *
+     * This function will retrieve all the work packages of a task card.
+     * See: WorkPackage's eo_instructions() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workpackages()
+    {
+        return $this->belongsToMany(WorkPackage::class, 'eo_instruction_workpackage', 'eo_instruction_id', 'workpackage_id')
+                    ->withPivot(
+                        'sequence',
+                        'is_mandatory'
+                    )
+                    ->withTimestamps();
+    }
+
     /*************************************** ACCESSOR ****************************************/
 
     /**

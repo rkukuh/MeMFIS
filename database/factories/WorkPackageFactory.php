@@ -5,6 +5,7 @@ use App\Models\Item;
 use App\Models\Aircraft;
 use App\Models\TaskCard;
 use App\Models\WorkPackage;
+use App\Models\EOInstruction;
 use Faker\Generator as Faker;
 
 $factory->define(WorkPackage::class, function (Faker $faker) {
@@ -30,6 +31,23 @@ $factory->define(WorkPackage::class, function (Faker $faker) {
 /** CALLBACKS */
 
 $factory->afterCreating(WorkPackage::class, function ($workpackage, $faker) {
+
+    // EO Instruction
+
+    $eo_instruction = null;
+
+    for ($i = 1; $i <= rand(5, 10); $i++) {
+        if (EOInstruction::count()) {
+            $eo_instruction = EOInstruction::get()->random();
+        } else {
+            $eo_instruction = factory(EOInstruction::class)->create();
+        }
+
+        $workpackage->eo_instructions()->save($eo_instruction, [
+            'sequence' => $i,
+            'is_mandatory' => $faker->boolean,
+        ]);
+    }
 
     // Task Card
 

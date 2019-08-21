@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\EOInstructionWorkPackage;
 use Illuminate\Database\Seeder;
+use App\Models\EOInstructionWorkPackage;
 
 class EOInstructionWorkPackages extends Seeder
 {
