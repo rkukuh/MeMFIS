@@ -71,11 +71,6 @@ class RTSProgressController extends Controller
                             }
                         }
                     }
-                    // if(sizeof($jobcard->progresses) <> 0){
-                    //     if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "closed"){
-                    //         $taskcard_number = $taskcard_number.", ".$jobcard->taskcard->number;
-                    //     }
-                    // }
                 }
             }
 
