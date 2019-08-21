@@ -11,7 +11,7 @@
                 <div class="form-group m-form__group row">
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         @component('frontend.common.input.select2')
-                            @slot('id', 'project')
+                            @slot('id', 'project-additional')
                             @slot('text', 'project')
                             @slot('name', 'project')
                             @slot('id_error', 'project')
@@ -37,7 +37,7 @@
 @push('footer-scripts')
     <script>
         $('.modal-footer').on('click', '.create', function () {
-            let project_uuid =$('#project').val();
+            let project_uuid =$('#project-additional').val();
             window.location.href = 'project-hm-additional/create/'+project_uuid+'/';
         });
     </script>
