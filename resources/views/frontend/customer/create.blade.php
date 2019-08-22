@@ -671,7 +671,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <label class="form-control-label">
                                                             Phone
                                                         </label>
@@ -683,7 +683,7 @@
                                                             @slot('multiple','multiple')
                                                         @endcomponent
                                                     </div>
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    <div class="col-sm-2 col-md-2 col-lg-2 hidden">
                                                         <label class="form-control-label">
                                                             Extension
                                                         </label>
@@ -752,7 +752,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <label class="form-control-label">
                                                             Phone
                                                         </label>
@@ -763,7 +763,7 @@
                                                             @slot('multiple', 'multiple')
                                                         @endcomponent
                                                     </div>
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    <div class="col-sm-2 col-md-2 col-lg-2 hidden">
                                                         <label class="form-control-label">
                                                             Extension
                                                         </label>

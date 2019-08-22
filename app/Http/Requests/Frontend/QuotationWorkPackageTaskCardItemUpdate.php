@@ -60,7 +60,7 @@ class QuotationWorkPackageTaskCardItemUpdate extends FormRequest
             }
         }else{
             if($qty_uom2 = $tc_i->units->where('uom.unit_id',$unit)->first() == null){
-                $validator->errors()->add('quantity', 'UOM have not Deeclared');
+                $validator->errors()->add('quantity', 'UOM have not Declared');
             }
             else{
                 $qty_uom2 = $tc_i->units->where('uom.unit_id',$unit)->first()->uom->quantity; // quantity conversi

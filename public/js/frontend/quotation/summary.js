@@ -309,6 +309,5 @@ var DatatableAutoColumnHideDemo = function () {
 
 jQuery(document).ready(function () {
   DatatableAutoColumnHideDemo.init();
-  
 });
 

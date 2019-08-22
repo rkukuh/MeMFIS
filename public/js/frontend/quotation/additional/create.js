@@ -143,9 +143,8 @@ let AdditionalTaskQtnCreate = {
             let scheduled_payment_array = [];
             let type = $('#scheduled_payment_type').children("option:selected").html();
             if(type === "By Date"){
-                $('input[name^=scheduled_payment] ').each(function (i) {
+                $('select[name^=scheduled_payment] ').each(function (i) {
                     scheduled_payment_array[i] = $(this).val();
-                    console.log($(this).val());
                 });
             }else{
                 $('#scheduled_payment ').each(function (i) {
@@ -174,7 +173,8 @@ let AdditionalTaskQtnCreate = {
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());
             data.append("top_description", $('#term_and_condition').val());
-            data.append("title", $('#title').val());
+            data.append("manhour_rate", $('#manhour_rate').val());
+            data.append("total_manhour", $('#total_manhour').attr('value'));
 
 
             $.ajax({
@@ -226,7 +226,7 @@ let AdditionalTaskQtnCreate = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/quotation-additional/' + data.uuid + '/edit';
+                        window.location.href = '/quotation-additional/' + data.uuid + '/edit';
 
 
                     }
