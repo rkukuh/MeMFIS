@@ -497,7 +497,7 @@ let JobRequest = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation/'+quotation_uuid+'/workPackage/'+workPackage_uuid+'/tool/htcrr',
+                        url: '/datatables/quotation/'+quotation_uuid+'/workPackage/tool/htcrr',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -618,7 +618,7 @@ let JobRequest = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation/'+quotation_uuid+'/workPackage/'+workPackage_uuid+'/item/htcrr',
+                        url: '/datatables/quotation/'+quotation_uuid+'/workPackage/item/htcrr',
                         map: function (raw) {
                             let dataSet = raw;
 
