@@ -5,6 +5,88 @@ let AdditionalTaskQtnEdit = {
             return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
         };
 
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/label/get-customer/' + customer_uuid,
+            type: 'GET',
+            dataType: "json",
+            success: function (response) {
+                // console.log(response.attention);
+                if (response) {
+                    let res = JSON.parse(response.attention);
+                    $('select[name="attention"]').empty();
+                    $('select[name="phone"]').empty();
+                    $('select[name="email"]').empty();
+                    $('select[name="fax"]').empty();
+                    $('select[name="address"]').empty();
+                    if(response.addresses.length){
+                        $.each(response.addresses, function( index, value ) {
+                            $('select[name="address"]').append(
+                                '<option value="' + value.address + '">' + value.address + '</option>'
+                            );
+                        });
+                    }
+                    if(response.emails.length){
+                        $.each(response.emails, function( index, value ) {
+                            $('select[name="email"]').append(
+                                '<option value="' + value.address + '">' + value.address + '</option>'
+                            );
+                        });
+                    }
+                    if(response.faxes.length){
+                        $.each(response.faxes, function( index, value ) {
+                            $('select[name="fax"]').append(
+                                '<option value="' + value.number + '">' +value.number + '</option>'
+                            );
+                        });
+                    }
+                    if(response.phones.length){
+                        $.each(response.phones, function( index, value ) {
+                            $('select[name="phone"]').append(
+                                '<option value="' + value.number + '">' + value.number + '</option>'
+                            );
+                        });
+                    }
+                    for (var i = 0; i < res.length; i++) {
+                        if (res[i].name) {
+                            $('select[name="attention"]').append(
+                                '<option value="' + res[i].name + '">' + res[i].name + '</option>'
+                            );
+                        }
+                        if (res[i].address) {
+                            $('select[name="address"]').append(
+                                '<option value="' + res[i].address + '">' + res[i].address + '</option>'
+                            );
+                        }
+                        if (res[i].fax) {
+                            $('select[name="fax"]').append(
+                                '<option value="' + res[i].fax + '">' + res[i].fax + '</option>'
+                            );
+                        }
+                        if (res[i].phones) {
+                            $.each(res[i].phones, function (value) {
+                                $('select[name="phone"]').append(
+                                    '<option value="' + res[i].phones[value] + '">' + res[i].phones[value] + '</option>'
+                                );
+                            });
+                        }
+                        if (res[i].emails) {
+                            $.each(res[i].emails, function (value) {
+                                $('select[name="email"]').append(
+                                    '<option value="' + res[i].emails[value] + '">' + res[i].emails[value] + '</option>'
+                                );
+                            });
+                        }
+                    }
+                } else {
+                    // console.log("empty");
+                }
+        
+            }
+        });
+
         $('.materials_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -711,6 +793,8 @@ $('.nav-tabs').on('click', '.summary', function () {
 $('.calculate').on('click', function () {
     calculate_total();
 });
+
+
 
 function calculate_total() {
     let value = [];

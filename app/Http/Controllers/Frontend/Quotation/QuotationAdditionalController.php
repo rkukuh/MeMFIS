@@ -157,9 +157,11 @@ class QuotationAdditionalController extends Controller
         $scheduled_payment_amount = json_decode($quotation->scheduled_payment_amount);
         $charges = json_decode($quotation->charge);
         $total_manhour = $quotation->project->defectcards()->sum('estimation_manhour');
-        // dd($scheduled_payment_amount);
+        $attention = json_decode($quotation->attention);
+
         return view('frontend.quotation.additional.edit',[
             'charges' => $charges,
+            'attention' => $attention,
             'quotation' => $quotation,
             'project' => $quotation->project,
             'total_manhour' => $total_manhour,

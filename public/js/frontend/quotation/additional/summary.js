@@ -153,7 +153,6 @@ var DatatableAutoColumnHideDemo = function () {
               }
 
               grandtotal = subtotal - TotalDiscount ;
-              console.log("cummary = "+grandtotal);
               if(currency.id == 1){
                 $("#sub_total").html(IDRformatter.format(subtotal));
                 $("#sub_total").attr("value", subtotal);
