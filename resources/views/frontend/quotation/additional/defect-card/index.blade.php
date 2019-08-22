@@ -10,20 +10,27 @@
                             </label>
 
                             @component('frontend.common.label.data-info')
-                                @slot('text', 'XXX')
-                                @slot('id', 'name')
+                                @slot('id', 'total_manhour')
+                                @slot('name', 'total_manhour')
+                                @if($total_manhour)
+                                    @slot('text', $total_manhour)
+                                    @slot('value', $total_manhour)
+                                @else 
+                                    @slot('text', '-')
+                                @endif
                             @endcomponent
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
                             <label class="form-control-label">
                                 Manhours Rate
                             </label>
-
                             @component('frontend.common.input.number')
-                                @slot('text', 'rate')
-                                @slot('name', 'rate')
-                                @slot('id', 'rate')
-                                @slot('id_error', 'rate')
+                                @slot('name', 'manhour_rate')
+                                @slot('id', 'manhour_rate')
+                                @if($quotation->data_defectcard)
+                                    @slot('value', json_decode($quotation->data_defectcard)->manhour_rate )
+                                @endif
+                                @slot('id_error', 'manhour_rate')
                             @endcomponent
                         </div>
                     </div>

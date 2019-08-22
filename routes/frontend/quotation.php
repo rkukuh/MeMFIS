@@ -19,6 +19,7 @@ Route::name('frontend.')->group(function () {
             ])->except('create');
 
             Route::get('/quotation-additional/create/{project}','QuotationAdditionalController@create')->name('quotation-additional.create');
+            Route::post('/quotation-additional/{quotation}/discount','QuotationAdditionalController@discount')->name('quotation-additional.discount');
 
 
             Route::prefix('quotation')->group(function () {
