@@ -96,8 +96,8 @@ class JobCard extends MemfisModel
      *
      * This function will get all of the owning jobcardable models.
      * See:
-     * - TaskCard's jobcards() method for the inverse
      * - EOInstruction's jobcards() method for the inverse
+     * - TaskCard's jobcards() method for the inverse
      *
      * @return mixed
      */
