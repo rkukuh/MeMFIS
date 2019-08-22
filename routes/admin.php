@@ -103,7 +103,7 @@ Route::name('admin.')->group(function () {
         Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
         Route::resource('project-workpackage-facility', 'ProjectWorkPackageFacilityController');
         Route::resource('project-workpackage-taskcard', 'ProjectWorkPackageTaskCardController');
-        Route::resource('project-workpackage-eo-instruction', 'ProjectWorkPackageEOInstructionController');
+        Route::resource('project-wp-eo', 'ProjectWorkPackageEOInstructionController');
 
         /** WORKPACKAGE's TASKCARDs */
 
