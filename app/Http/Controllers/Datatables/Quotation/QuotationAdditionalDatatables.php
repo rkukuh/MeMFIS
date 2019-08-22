@@ -16,6 +16,7 @@ use App\Models\QuotationHtcrrItem;
 use App\Http\Controllers\Controller;
 use App\Models\QuotationDefectCardItem;
 use App\Models\QuotationWorkPackageTaskCardItem;
+use stdClass;
 
 class QuotationAdditionalDatatables extends Controller
 {
@@ -41,14 +42,39 @@ class QuotationAdditionalDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function jobRequest(Project $project)
+    public function jobRequest(Quotation $quotation)
     {
-        $defectcards = $project->defectcards;
+        $workpackages = []; $json_data = json_decode($quotation->data_defectcard);
 
-        //todo yang perlu diambil adalah : - total manhour with performance factor | - manhour rate | - materials and tools price | - discount type & amount
-        dd($defectcards);
-        
-        $data = $alldata = $defectcards;
+        $total_item_price = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.taskcard','item','unit','price')->where('quotation_id', $quotation->id)
+        ->sum('subtotal');
+    
+        // dd($json_data->total_manhour);
+        $workpackage = new stdClass();
+        $workpackage->code = $quotation->title;
+        $workpackage->description =  $quotation->title;
+        $workpackage->mat_tool_price = $total_item_price;
+        if(isset($json_data)){
+            if(isset($json_data->discount_type)){
+                $workpackage->discount_type = $json_data->discount_type;
+                $workpackage->discount_value = $json_data->discount_value;
+            }else{
+                $workpackage->discount_type = null;
+                $workpackage->discount_value = null;
+            }
+
+            $workpackage->total_manhours_with_performance_factor = $json_data->total_manhour;
+            $workpackage->manhour_rate_amount = $json_data->manhour_rate;
+        }else{
+            $workpackage->discount_type = null;
+            $workpackage->discount_value = null;
+            $workpackage->manhour_rate_amount = 0;
+            $workpackage->total_manhours_with_performance_factor = 0;
+        }
+
+        array_push($workpackages, $workpackage);
+
+        $data = $alldata = $workpackages;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

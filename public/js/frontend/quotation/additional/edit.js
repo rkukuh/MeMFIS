@@ -399,7 +399,8 @@ let AdditionalTaskQtnEdit = {
             data.append("top_description", $('#term_and_condition').val());
             data.append("subtotal", $('#sub_total').attr("value"));
             data.append("grandtotal", $('#grand_total').attr("value"));
-            data.append("title", $('#title').val());
+            data.append("manhour_rate", $('#manhour_rate').val());
+            data.append("total_manhour", $('#total_manhour').attr('value'));
             data.append("ppn", ppn);
             data.append("is_ppn",is_ppn);
             data.append("charge", JSON.stringify(charge));
@@ -468,7 +469,7 @@ let AdditionalTaskQtnEdit = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/qtn-defectcard-item/' + triggerid + '/edit',
+                url: '/quotation/qtn-defectcard-item/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('qty').value = data.quantity;
@@ -520,7 +521,7 @@ let AdditionalTaskQtnEdit = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/qtn-defectcard-item/' + triggerid + '/edit',
+                url: '/quotation/qtn-defectcard-item/' + triggerid + '/edit',
                 success: function (data) {
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('qty').value = data.quantity;
@@ -575,7 +576,7 @@ let AdditionalTaskQtnEdit = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'put',
-                url: '/qtn-defectcard-item/' + triggerid,
+                url: '/quotation/qtn-defectcard-item/' + triggerid,
                 data: {
                     _token: $('input[name=_token]').val(),
                     uuid: triggerid,
@@ -655,3 +656,84 @@ let AdditionalTaskQtnEdit = {
 jQuery(document).ready(function () {
     AdditionalTaskQtnEdit.init();
 });
+
+$('.action-buttons').on('click', '.discount-htcrr', function () {
+    let type = $('select[name="discount-type"]').val();
+    let discount = $('input[name="discount"').val();
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'post',
+        url: '/quotation-additional/'+quotation_uuid+'/discount/',
+        data: {
+            _token: $('input[name=_token]').val(),
+            discount_type: type,
+            discount_value: discount,
+        },
+        success: function (data) {
+            if (data.errors) {
+                // if (data.errors.name) {
+                //     $('#name-error').html(data.errors.name[0]);
+
+                //     document.getElementById('name').value = name;
+                // }
+            } else {
+                $('#discount').modal('hide');
+
+
+                toastr.success('Discount has been updated.', 'Success', {
+                    timeOut: 5000
+                });
+
+
+                let table = $('.summary_datatable').mDatatable();
+
+
+                table.originalDataSet = [];
+                table.reload();
+            }
+        }
+    });
+});
+
+$('.nav-tabs').on('click', '.summary', function () {
+
+    let summary = $('.summary_datatable').mDatatable();
+
+    summary.originalDataSet = [];
+    summary.reload();
+
+    calculate_total();
+});
+
+$('.calculate').on('click', function () {
+    calculate_total();
+});
+
+function calculate_total() {
+    let value = [];
+    let inputs = $(".charge");
+    let currency = $("#currency").val();
+    let exchange_rate = $("#exchange").val();
+    let grandTotal = grandTotalRupiah = 0;
+    //get all values
+    for (let i = 0; i < inputs.length; i++) {
+        value[i] = parseFloat($(inputs[i]).val());
+    }
+    
+    const arrSum = arr => arr.reduce((a, b) => a + b, 0);
+    let total_discount = $("#total_discount").attr("value");
+    let subTotal = $('#sub_total').attr("value");
+    grandTotal = parseFloat(subTotal) - parseFloat(total_discount) + parseFloat(arrSum(value));
+    
+    if(currency !== 1){
+        grandTotalRupiah = ( parseFloat(subTotal) - parseFloat(total_discount) + parseFloat(arrSum(value)) ) * exchange_rate;
+    }
+  
+    $('#grand_total').attr("value", grandTotal);
+    $('#grand_total_rupiah').attr("value", grandTotalRupiah);
+    $('#grand_total').html(ForeignFormatter.format(grandTotal));
+    $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
+  }

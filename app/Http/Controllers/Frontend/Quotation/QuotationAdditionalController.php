@@ -72,18 +72,23 @@ class QuotationAdditionalController extends Controller
      */
     public function store(Request $request)
     {
-        $contact = [];
+        $contact = $defectcard_json = [];
 
-        $contact['name']     = $request->attention_name;
-        $contact['phone'] = $request->attention_phone;
+        $contact['name']    = $request->attention_name;
+        $contact['phone']   = $request->attention_phone;
         $contact['address'] = $request->attention_address;
-        $contact['fax'] = $request->attention_fax;
-        $contact['email'] = $request->attention_email;
+        $contact['fax']     = $request->attention_fax;
+        $contact['email']   = $request->attention_email;
+
+        $defectcard_json["manhour_rate"] = $request->manhour_rate;
+        $defectcard_json["total_manhour"] = $request->total_manhour;
 
         $request->merge(['number' => DocumentNumber::generate('QPRO-A-', Quotation::withTrashed()->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
+        $request->merge(['data_defectcard' => json_encode($defectcard_json)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
         $request->merge(['parent_id' => Project::find($request->project_id)->parent->quotations->first()->id]);
+        $request->merge(['scheduled_payment_amount' => json_encode($request->scheduled_payment_amount)]);
 
         $quotation = Quotation::create($request->all());
 
@@ -133,10 +138,10 @@ class QuotationAdditionalController extends Controller
         $attention = json_decode($quotation->attention);
 		$charges = json_decode($quotation->charge);
         return view('frontend.quotation.additional.show',[
-            'currencies' => $this->currencies,
-            'quotation' => $quotation,
             'charges' => $charges,
-            'project' => $quotation->project
+            'quotation' => $quotation,
+            'project' => $quotation->project,
+            'currencies' => $this->currencies,
         ]);
     }
 
@@ -148,15 +153,17 @@ class QuotationAdditionalController extends Controller
      */
     public function edit(Quotation $quotation)
     {
-        // $projects = Project::get();
         $scheduled_payment_amount = json_decode($quotation->scheduled_payment_amount);
         $charges = json_decode($quotation->charge);
+        $total_manhour = $quotation->project->defectcards()->sum('estimation_manhour');
+
         return view('frontend.quotation.additional.edit',[
-            'currencies' => $this->currencies,
-            'quotation' => $quotation,
             'charges' => $charges,
+            'quotation' => $quotation,
+            'project' => $quotation->project,
+            'total_manhour' => $total_manhour,
+            'currencies' => $this->currencies,
             'scheduled_payment_amount' => $scheduled_payment_amount,
-            'project' => $quotation->project
         ]);
     }
 
@@ -171,13 +178,16 @@ class QuotationAdditionalController extends Controller
     {
         $request->merge(['customer_id' => Project::where('uuid',$request->project_id)->first()->customer->id]);
 
-        $attention = [];
+        $attention = $defectcard_json = [];
 
         $attention['name']     = $request->attention_name;
         $attention['phone'] = $request->attention_phone;
         $attention['address'] = $request->attention_address;
         $attention['fax'] = $request->attention_fax;
         $attention['email'] = $request->attention_email;
+
+        $defectcard_json["manhour_rate"] = $request->manhour_rate;
+        $defectcard_json["total_manhour"] = $request->total_manhour;
 
         $request->charge = json_decode($request->charge);
         $request->chargeType = json_decode($request->chargeType);
@@ -189,9 +199,11 @@ class QuotationAdditionalController extends Controller
                 $charge['amount'] = $request->charge[$index];
                 array_push($charges, $charge);
         }
+
         $request->merge(['attention' => json_encode($attention)]);
         $request->merge(['charge' => json_encode($charges)]);
-        // $request->merge(['scheduled_payment_amount' => json_encode($request->scheduled_payment_amount)]);
+        $request->merge(['data_defectcard' => json_encode($defectcard_json)]);
+        $request->merge(['scheduled_payment_amount' => json_encode($request->scheduled_payment_amount)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
         //TODO change
@@ -323,14 +335,16 @@ class QuotationAdditionalController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Quotation  $quotation
      * @return \Illuminate\Http\Response
      */
-    public function discount( Request $request, Quotation $quotation, WorkPackage $workpackage)
+    public function discount(Request $request, Quotation $quotation)
     {
-        // dd($workpackage);
-        // $Quotation->workpackages()->updateExistingPivot($WorkPackage, ['discount_value'=>$request->discount_value]);
-        $quotation->workpackages()->updateExistingPivot($workpackage, ['discount_type'=>$request->discount_type,'discount_value'=>$request->discount_value]);
+        $json_data = json_decode($quotation->data_defectcard, true);
+        $json_data["discount_type"] = $request->discount_type;
+        $json_data["discount_value"] = $request->discount_value;
+        $json_data = json_encode($json_data);
+        $quotation->update(['data_defectcard' => $json_data]);
 
         return response()->json($quotation);
 
