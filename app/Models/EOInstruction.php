@@ -37,6 +37,19 @@ class EOInstruction extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many jobcards.
+     *
+     * This function will get all EOInstruction's jobcards.
+     * See: JobCard's jobcardable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function jobcards()
+    {
+        return $this->morphMany(JobCard::class, 'jobcardable');
+    }
+
+    /**
      * Many-to-Many: A task card (EO) may have zero or many items.
      *
      * This function will retrieve all the items of a task card (EO).
