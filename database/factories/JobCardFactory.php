@@ -23,11 +23,11 @@ $factory->define(JobCard::class, function (Faker $faker) {
 
     if ($jobcardable == 'taskcard') {
         $jobcardable_entity = TaskCard::where('id', '>', 500)->get()->random();
-        $jobcardable_type = 'App/Models/TaskCard';
+        $jobcardable_type = 'App\Models\TaskCard';
     }
     else if ($jobcardable == 'eo_instruction') {
         $jobcardable_entity = EOInstruction::get()->random();
-        $jobcardable_type = 'App/Models/EOInstruction';
+        $jobcardable_type = 'App\Models\EOInstruction';
     }
 
     return [
