@@ -19,9 +19,14 @@ let leaveType = {
         let name = $('input[name=name]').val()
         let gender = $('input[name=gender]').val()
 
-        if(gender != 'Male' | gender != 'Female'){
-            gender = 'All'
+        if(gender == 'Male'){
+            gender = 'm'
+        }else if(gender == 'Female'){
+            gender = 'f'
+        }else{
+            gender = 'all'
         }
+        
         let leave_period = $('input[name=leave_period]').val()
         
         let pro_rate = null

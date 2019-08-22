@@ -18,7 +18,7 @@ class CreateLeavetypesTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('code')->nullable();
             $table->string('name');
-            $table->string('gender');
+            $table->enum('gender',['m','f','all']);
             $table->integer('leave_period');
             $table->boolean('prorate_leave')->nullable();
             $table->boolean('distribute_evently')->nullable();

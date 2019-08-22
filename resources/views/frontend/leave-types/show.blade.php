@@ -104,8 +104,18 @@
                                                 Gender Specification
                                             </label>
 
+                                            @php
+                                                if($leaveType->gender == 'm'){
+                                                $gender = 'Male'
+                                                }else if($leaveType->gender == 'f'){
+                                                $gender = 'Female'
+                                                }else{
+                                                $gender = 'All'
+                                                }
+                                            @endphp
+
                                             @component('frontend.common.label.data-info')
-                                            @slot('text',  $leaveType->gender)
+                                            @slot('text',  $gender)
                                             @endcomponent
                                         </div>
 

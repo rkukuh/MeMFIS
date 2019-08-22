@@ -10,7 +10,7 @@ $factory->define(LeaveType::class, function (Faker $faker) {
     return [
         'code' => $faker->randomElement([null, 'LTYPE-' . $number]),
         'name' => 'Leave Type' . $faker->word,
-        'gender' => $faker->randomElement(['All','Male','Female']),
+        'gender' => $faker->randomElement(['all','m','f']),
         'leave_period' => $faker->numberBetween(1,10),
         'prorate_leave' =>  $faker->boolean(),
         'distribute_evently' =>  $faker->boolean(),
