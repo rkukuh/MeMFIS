@@ -153,10 +153,11 @@ class QuotationAdditionalController extends Controller
      */
     public function edit(Quotation $quotation)
     {
+        $scheduled_payment_amount = [];
         $scheduled_payment_amount = json_decode($quotation->scheduled_payment_amount);
         $charges = json_decode($quotation->charge);
         $total_manhour = $quotation->project->defectcards()->sum('estimation_manhour');
-
+        // dd($scheduled_payment_amount);
         return view('frontend.quotation.additional.edit',[
             'charges' => $charges,
             'quotation' => $quotation,
