@@ -157,17 +157,4 @@ class JobCard extends MemfisModel
     {
         return $this->morphMany(Status::class, 'statusable');
     }
-
-    /**
-     * One-to-Many (with JSON data): A jobcard must have a taskcard
-     *
-     * This function will retrieve the taskcard of a jobcard.
-     * See: TaskCard's jobcards() method for the inverse
-     *
-     * @return mixed
-     */
-    public function taskcard()
-    {
-        return $this->belongsTo(TaskCard::class);
-    }
 }
