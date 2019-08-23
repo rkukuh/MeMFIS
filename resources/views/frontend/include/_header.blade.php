@@ -25,4 +25,6 @@
 
 <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
 
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-duration-picker.css') }}">
+
 @stack('header-scripts')
