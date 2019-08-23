@@ -200,9 +200,6 @@ class QuotationController extends Controller
                 }
             }
         }
-
-
-            dd('s');
         return response()->json($quotation);
     }
 
@@ -359,6 +356,7 @@ class QuotationController extends Controller
         $ProjectWorkPackage = ProjectWorkPackage::where('project_id',$quotation->project_id)->pluck('id');
         $ProjectWorkPackageTaskCard = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
         foreach($ProjectWorkPackageTaskCard as $taskcard){
+            // dump($taskcard);
                 $tc = $taskcard->taskcard;
 
                 if(Type::where('id',$tc->type_id)->first()->code == "basic"){
@@ -370,8 +368,18 @@ class QuotationController extends Controller
                 else if(Type::where('id',$tc->type_id)->first()->code == "cpcp"){
                     $tc_code = 'CPC';
                 }
+                else if(Type::where('id',$tc->type_id)->first()->code == "si"){
+                    $tc_code = 'SIT';
+                }
+                else if(Type::where('id',$tc->type_id)->first()->code == "preliminary"){
+                    $tc_code = 'PRE';
+                }
                 else{
                     $tc_code = 'DUM';
+                }
+
+                if($taskcard->is_rii == null){
+                    $taskcard->is_rii = 0;
                 }
 
                 if($tc_code == "BSC" or $tc_code == "SIP" or $tc_code == "CPC" or $tc_code == "SIT" or $tc_code == "PRE" or $tc_code == "DUM"){
@@ -444,6 +452,7 @@ class QuotationController extends Controller
         $ProjectWorkPackageTaskCard = ProjectWorkPackageEOInstruction::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
         foreach($ProjectWorkPackageTaskCard as $eo_instruction){
                 $tc = $eo_instruction->eo_instruction->eo_header;
+                $tc_inscrtuction = $eo_instruction->eo_instruction;
 
                 if(Type::where('id',$tc->type_id)->first()->code == "cmr"){
                     $tc_code = 'CMR';
@@ -463,19 +472,17 @@ class QuotationController extends Controller
                 else if(Type::where('id',$tc->type_id)->first()->code == "eo"){
                     $tc_code = 'ENO';
                 }
-                else if(Type::where('id',$tc->type_id)->first()->code == "si"){
-                    $tc_code = 'SIT';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "preliminary"){
-                    $tc_code = 'PRE';
-                }
                 else{
                     $tc_code = 'DUM';
                 }
 
-                $jobcard = $tc->jobcards()->create([
+                if($eo_instruction->is_rii == null){
+                    $eo_instruction->is_rii = 0;
+                }
+
+                $jobcard = $tc_inscrtuction->jobcards()->create([
                     'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
-                    'jobcardable_id' => $tc->id,
+                    'jobcardable_id' => $tc_inscrtuction->id,
                     'quotation_id' => $quotation->id,
                     'is_rii' => $eo_instruction->is_rii,
                     'is_mandatory' => $eo_instruction->is_mandatory,
@@ -504,14 +511,14 @@ class QuotationController extends Controller
             }
 
         }
-        foreach($project->htcrrs as $htcrr){
-            if($htcrr->parent_id == null){
-                $htcrr->progresses()->save(new Progress([
-                    'status_id' =>  Status::where('code','removal-open')->first()->id,
-                    'progressed_by' => Auth::id()
-                ]));
-            }
-        }
+        // foreach($project->htcrrs as $htcrr){
+        //     if($htcrr->parent_id == null){
+        //         $htcrr->progresses()->save(new Progress([
+        //             'status_id' =>  Status::where('code','removal-open')->first()->id,
+        //             'progressed_by' => Auth::id()
+        //         ]));
+        //     }
+        // }
 
         return response()->json($quotation);
     }
