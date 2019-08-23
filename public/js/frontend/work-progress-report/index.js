@@ -11,7 +11,7 @@ let WorkProgressReport = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/jobcard',
+                        url: '/datatables/project',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -49,89 +49,61 @@ let WorkProgressReport = {
             },
             columns: [
                 {
-                    field: 'number',
+                    field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                            return '<a href="/jobcard-ppc/'+t.uuid+'">' + t.number + "</a>"
-                    }
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'code',
                     title: 'Project No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.title',
+                    field: 'no_wo',
                     title: 'Work Order No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.type.name',
+                    field: 'title',
                     title: 'Project Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.task.name',
+                    field: 'customer.name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.description',
+                    field: 'aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if (t.taskcard.description) {
-                            data = strtrunc(t.taskcard.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
                 },
                 {
-                    field: 'taskcard.skill.name',
+                    field: 'aircraft_register',
                     title: 'A/C Reg.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '1',
+                    field: 'aircraft_sn',
                     title: 'A/C Serial No.',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_material" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
-                        );
-                    }
-
                 },
                 {
-                    field: '2',
+                    field: 'created_by',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_tool" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        );
-                    }
                 },
                 {
-                    field: 'taskcard.estimation_manhour',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -142,7 +114,7 @@ let WorkProgressReport = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="/work-progress-report/'+t.uuid+'/" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'
                         );
