@@ -27,6 +27,7 @@ let leaveType = {
             gender = 'all'
         }
         
+        let based = $('input[name=day]').val()
         let leave_period = $('input[name=leave_period]').val()
         
         let pro_rate = null
@@ -64,6 +65,7 @@ let leaveType = {
                 code: code_uppercase,
                 name: name,
                 gender: gender,
+                based: based,
                 leave_period: leave_period,
                 prorate_leave: pro_rate,
                 distirbute_evently: distirbute,
