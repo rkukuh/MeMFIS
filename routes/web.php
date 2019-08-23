@@ -29,5 +29,6 @@ require('frontend/rts.php');
 require('frontend/taskcard.php');
 require('frontend/task-release.php');
 require('frontend/workpackage.php');
+require('frontend/work-progress-report.php');
 
 require('testing.php');

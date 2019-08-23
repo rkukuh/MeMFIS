@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <fieldset class="border p-2">
-                                                <legend class="w-auto">Customer Name (<span>PT. Sejahterah</span>)</legend>
+                                                <legend class="w-auto">Customer Name (<span>{{ $project->customer->name }}</span>)</legend>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <div class="form-group m-form__group row">
@@ -63,7 +63,7 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text', $project->no_wo)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -75,7 +75,7 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text', $attention->address)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -87,7 +87,7 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text', $attention->phone)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -100,17 +100,17 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_number')
-                                                                    @slot('text', 'P-01/HMxxxxx')
+                                                                    @slot('text', $attention->fax)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
                                                         <div class="form-group m-form__group row">
                                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                                 <label class="form-control-label">
-                                                                    Attn
+                                                                    Attention
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text', $attention->name)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -120,7 +120,7 @@
                                                                     Email
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text', $attention->email)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -142,13 +142,13 @@
                                                     <td align="center" width="14%"><b>A/C SN</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
+                                                    <td align="center" valign="top">{{ $project->code }}</td>
+                                                    <td align="center" valign="top">{{ date("D, d-m-Y", strtotime($project->created_at)) }}</td>
+                                                    <td align="center" valign="top">{{ $tat }} day(s)</td>
+                                                    <td align="center" valign="top">{{ $project->title }}</td>
+                                                    <td align="center" valign="top">{{ $project->aircraft->name }}</td>
+                                                    <td align="center" valign="top">{{ $project->aircraft_register }}</td>
+                                                    <td align="center" valign="top">{{ $project->aircraft_sn }}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -171,7 +171,7 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                                 <div class="m-widget16__stats">
                                                                     <div class="m-widget16__visual">
-                                                                        <div id="m_chart_support_tickets" style="height: 350px">
+                                                                        <div id="m_chart_overall_progress" style="height: 350px">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -212,7 +212,7 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                                 <div class="m-widget16__stats">
                                                                     <div class="m-widget16__visual">
-                                                                        <div id="m_chart_support_tickets" style="height: 150px">
+                                                                        <div id="m_chart_routine" style="height: 150px">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -251,7 +251,7 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                                 <div class="m-widget16__stats">
                                                                     <div class="m-widget16__visual">
-                                                                        <div id="m_chart_support_tickets" style="height: 150px">
+                                                                        <div id="m_chart_non_routine" style="height: 150px">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -378,6 +378,9 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let project_uuid = '{{ $project->uuid }}';
+    </script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/work-progress-report/show.js') }}"></script>
 @endpush

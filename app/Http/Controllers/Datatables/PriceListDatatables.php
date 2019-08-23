@@ -20,6 +20,14 @@ class PriceListDatatables extends Controller
     // item , manhour, facility = prices
     {
         $items = Item::with('unit', 'journal', 'prices')->get();
+        
+        foreach($items as $item){
+            $item->unit_name .= $item->unit->name;
+            
+        
+        }
+
+
 
         $data = $alldata = json_decode($items);
 

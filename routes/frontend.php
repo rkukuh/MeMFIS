@@ -99,11 +99,6 @@ Route::name('frontend.')->group(function () {
 
         Route::view('/jobcard-eo-ppc', 'frontend.job-card-eo-ppc.index')->name('jobcard-eo.ppc.index');
 
-        /** Work Progress Report */
-
-        Route::view('/work-progress-report', 'frontend.work-progress-report.index')->name('work-progress-report.index');
-        Route::view('/work-progress-report/show', 'frontend.work-progress-report.show')->name('work-progress-report.show');
-
         /** Additional Task */
 
         Route::view('/additional-task', 'frontend.project.hm-additional.index')->name('additional-task.index');
