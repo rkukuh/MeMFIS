@@ -100,18 +100,16 @@
         <fieldset class="border p-2">
             <legend class="w-auto"><b>Other</b></legend>
             <div class="form-group m-form__group row">
-                <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="col-sm-6 col-md-6 col-lg-6 text-center">
                     <label class="form-control-label">
                         Maximum Overtime per Period 
                     </label>
 
-                    @component('frontend.common.input.number')
-                        @slot('text', 'Maximum Overtime per Period')
-                        @slot('id', 'max_overtime')
-                        @slot('name', 'max_overtime')
-                        @slot('id_error', 'max_overtime')
-                        @slot('input_append','Hours')
+                    @component('frontend.common.input.text')
+                        @slot('id', 'duration')
                     @endcomponent
+
+                    <p class="mt-2 font-weight-bold">Seconds: <span id="duration-label"></span></p>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -482,5 +480,37 @@
             padding-left:38px;
             padding-top:6px;
         }
+        .bdp-block{
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-left:20px;
+            text-align: center;
+        } 
+        
+        .bdp-block input{
+            width:90px;
+            text-align:center;
+        }
     </style>
+@endpush
+
+
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/bootstrap-duration-picker.js') }}"></script>
+    <script>
+            $(function () {
+              $('#duration').durationPicker({
+                onChanged: function (newVal) {
+                  $('#duration-label').text(newVal);
+                }
+              });
+              $('#reset-picker').click(function () {
+                $('#duration6').data('durationPicker').setValue(0);
+              });
+              $('#destroy-picker').click(function () {
+                $('#duration7').data('durationPicker').destroy();
+                $(this).remove();
+              })
+            });
+    </script>
 @endpush
