@@ -472,7 +472,6 @@ Route::name('datatables.')->group(function () {
                 /** Transaction */
                 Route::get('/{taskcard}/tools', 'TaskCardEAItemsDatatables@tool')->name('tools.index');
                 Route::get('/{taskcard}/materials', 'TaskCardEAItemsDatatables@material')->name('materials.index');
-                Route::get('/{taskcard}/aircrafts', 'TaskCardEAAircraftsDatatables@index')->name('aircrafts.index');
                 Route::get('/{taskcard}/ea-instructions', 'EAInstructionsDatatables@index')->name('ea-instructions.index');
             });
 

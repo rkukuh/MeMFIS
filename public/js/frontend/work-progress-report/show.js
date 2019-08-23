@@ -119,7 +119,58 @@ let WorkProgressReportShow = {
                 }
             ]
         });
+        
+        $.ajax({
+            url : '/morris/get-overall/'+ project_uuid,    
+            method : 'get',
+            dataType : 'json'
+        }).done(function(data){
+            Morris.Donut({
+                element: 'm_chart_overall_progress',
+                labelColor: "#a7a7c2",
+                data: data,
+                resize: true,
+                colors: [mApp.getColor("accent"), mApp.getColor("brand"), mApp.getColor("danger"), '#1ab394', '#54cdb4','#1ab394']
+            });
+    
+        }).fail(function(){
+    
+        });
 
+        $.ajax({
+            url : '/morris/get-routine/'+ project_uuid,    
+            method : 'get',
+            dataType : 'json'
+        }).done(function(data){
+            Morris.Donut({
+                element: 'm_chart_routine',
+                labelColor: "#a7a7c2",
+                data: data,
+                resize: true,
+                colors: [mApp.getColor("accent"), mApp.getColor("brand"), mApp.getColor("danger"), '#1ab394', '#54cdb4','#1ab394']
+            });
+    
+        }).fail(function(){
+    
+        });
+
+        $.ajax({
+            url : '/morris/get-non-routine/'+ project_uuid,    
+            method : 'get',
+            dataType : 'json'
+        }).done(function(data){
+            Morris.Donut({
+                element: 'm_chart_non_routine',
+                labelColor: "#a7a7c2",
+                data: data,
+                resize: true,
+                colors: [mApp.getColor("accent"), mApp.getColor("brand"), mApp.getColor("danger"), '#1ab394', '#54cdb4','#1ab394']
+            });
+    
+        }).fail(function(){
+    
+        });
+      
     }
 };
 
