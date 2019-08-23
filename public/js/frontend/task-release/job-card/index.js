@@ -49,7 +49,7 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'jobcardable.number',
                     title: 'TaskCard No',
                     sortable: 'asc',
                     filterable: !1,
@@ -103,7 +103,7 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.estimation_manhour',
+                    field: 'jobcardable.estimation_manhour',
                     title: 'Mhrs',
                     sortable: 'asc',
                     filterable: !1,
