@@ -105,10 +105,7 @@
                                                 @slot('id', 'gender')
                                                 @slot('name', 'gender')
                                             @endcomponent
-                                            {{-- male
-                                            female
-                                            all
-                                            default all --}}
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
@@ -141,7 +138,7 @@
                                                         @slot('text', 'Daily Based')
                                                         @slot('name', 'day')
                                                         @slot('id', 'daily_based')
-                                                        @slot('value', 'daily_based')
+                                                        @slot('value', 'daily')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -149,7 +146,7 @@
                                                         @slot('text', 'Multi-Day Based')
                                                         @slot('name', 'day')
                                                         @slot('id', 'multi_day_based')
-                                                        @slot('value', 'multi_day_based')
+                                                        @slot('value', 'multi')
                                                     @endcomponent
                                                 </div>
                                             </div>

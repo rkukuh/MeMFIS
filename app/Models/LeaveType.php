@@ -13,6 +13,7 @@ class LeaveType extends MemfisModel
         'code',
         'name',
         'gender',
+        'based',
         'leave_period',
         'prorate_leave',
         'distribute_evenly',

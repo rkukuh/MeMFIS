@@ -106,11 +106,11 @@
 
                                             @php
                                                 if($leaveType->gender == 'm'){
-                                                $gender = 'Male'
+                                                $gender = 'Male';
                                                 }else if($leaveType->gender == 'f'){
-                                                $gender = 'Female'
+                                                $gender = 'Female';
                                                 }else{
-                                                $gender = 'All'
+                                                $gender = 'All';
                                                 }
                                             @endphp
 
@@ -158,6 +158,21 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    @php
+                                        $checked_daily = null;
+
+                                            if($leaveType->based == 'daily'){
+                                                $checked_daily = 'checked';
+                                            }
+
+                                        $checked_multi = null;
+
+                                            if($leaveType->based == 'multi'){
+                                                $checked_multi = 'checked';
+                                            }
+                                    @endphp
+
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
@@ -166,7 +181,8 @@
                                                         @slot('text', 'Daily Based')
                                                         @slot('name', 'day')
                                                         @slot('id', 'daily_based')
-                                                        @slot('value', 'daily_based')
+                                                        @slot('value', 'daily')
+                                                        @slot('checked', $checked_daily)
                                                         @slot('disabled','disabled')
                                                     @endcomponent
                                                 </div>
@@ -175,7 +191,8 @@
                                                         @slot('text', 'Multi-Day Based')
                                                         @slot('name', 'day')
                                                         @slot('id', 'multi_day_based')
-                                                        @slot('value', 'multi_day_based')
+                                                        @slot('checked', $checked_multi)
+                                                        @slot('value', 'multi')
                                                         @slot('disabled','disabled')
                                                     @endcomponent
                                                 </div>
