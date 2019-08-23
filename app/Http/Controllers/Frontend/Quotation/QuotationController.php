@@ -24,6 +24,7 @@ use App\Models\ProjectWorkPackageTaskCard;
 use App\Models\ProjectWorkPackageFacility;
 use App\Models\Pivots\QuotationWorkPackage;
 use App\Http\Requests\Frontend\QuotationStore;
+use App\Models\ProjectWorkPackageEOInstruction;
 use App\Http\Requests\Frontend\QuotationUpdate;
 use App\Models\QuotationWorkPackageTaskCardItem;
 
@@ -287,46 +288,46 @@ class QuotationController extends Controller
     public function approve(Quotation $quotation)
     {
 
-        $qw_json = $quotation->workpackages->toJson();
+        // $qw_json = $quotation->workpackages->toJson();
 
-        $qw = QuotationWorkPackage::where('quotation_id',$quotation->id)->pluck('id');
+        // $qw = QuotationWorkPackage::where('quotation_id',$quotation->id)->pluck('id');
 
-        $qwe = QuotationWorkPackageItem::whereIn('quotation_workpackage_id',$qw)->get();
-        $qwe_json = $qwe->toJson();
+        // $qwe = QuotationWorkPackageItem::whereIn('quotation_workpackage_id',$qw)->get();
+        // $qwe_json = $qwe->toJson();
 
-        $qwf = QuotationWorkPackageTaskCardItem::where('quotation_id',$quotation->id)->get();
-        $qwf_json = $qwf->toJson();
+        // $qwf = QuotationWorkPackageTaskCardItem::where('quotation_id',$quotation->id)->get();
+        // $qwf_json = $qwf->toJson();
 
-        $qwm = QuotationHtcrrItem::where('quotation_id',$quotation->id)->get();
-        $qwm_json = $qwm->toJson();
+        // $qwm = QuotationHtcrrItem::where('quotation_id',$quotation->id)->get();
+        // $qwm_json = $qwm->toJson();
 
-        $quotation->origin_quotation = $quotation->toJson();
-        $quotation->origin_quotation_workpackages = $qw_json;
-        $quotation->origin_quotation_workpackage_items = $qwe_json;
-        $quotation->origin_quotation_workpackage_taskcard_items = $qwf_json;
-        $quotation->origin_quotation_htcrr_items = $qwm_json;
-        $quotation->save();
+        // $quotation->origin_quotation = $quotation->toJson();
+        // $quotation->origin_quotation_workpackages = $qw_json;
+        // $quotation->origin_quotation_workpackage_items = $qwe_json;
+        // $quotation->origin_quotation_workpackage_taskcard_items = $qwf_json;
+        // $quotation->origin_quotation_htcrr_items = $qwm_json;
+        // $quotation->save();
 
-        $quotation->approvals()->save(new Approval([
-            'approvable_id' => $quotation->id,
-            'approved_by' => Auth::id(),
-        ]));
+        // $quotation->approvals()->save(new Approval([
+        //     'approvable_id' => $quotation->id,
+        //     'approved_by' => Auth::id(),
+        // ]));
 
-        $quotation->progresses()->save(new Progress([
-            'status_id' =>  Status::ofQuotation()->where('code','open')->first()->id,
-            'progressed_by' => Auth::id()
-        ]));
+        // $quotation->progresses()->save(new Progress([
+        //     'status_id' =>  Status::ofQuotation()->where('code','open')->first()->id,
+        //     'progressed_by' => Auth::id()
+        // ]));
 
-        $project = Project::find($quotation->project_id);
-        $project->progresses()->save(new Progress([
-            'status_id' =>  Status::ofProject()->where('code','open')->first()->id,
-            'progressed_by' => Auth::id()
-        ]));
+        // $project = Project::find($quotation->project_id);
+        // $project->progresses()->save(new Progress([
+        //     'status_id' =>  Status::ofProject()->where('code','open')->first()->id,
+        //     'progressed_by' => Auth::id()
+        // ]));
 
-        $project->approvals()->save(new Approval([
-            'approvable_id' => $project->id,
-            'approved_by' => Auth::id(),
-        ]));
+        // $project->approvals()->save(new Approval([
+        //     'approvable_id' => $project->id,
+        //     'approved_by' => Auth::id(),
+        // ]));
 
         $ProjectWorkPackage = ProjectWorkPackage::where('project_id',$quotation->project_id)->pluck('id');
         $ProjectWorkPackageTaskCard = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
@@ -342,7 +343,82 @@ class QuotationController extends Controller
                 else if(Type::where('id',$tc->type_id)->first()->code == "cpcp"){
                     $tc_code = 'CPC';
                 }
-                else if(Type::where('id',$tc->type_id)->first()->code == "cmr"){
+                else{
+                    $tc_code = 'DUM';
+                }
+
+                if($tc_code == "BSC" or $tc_code == "SIP" or $tc_code == "CPC" or $tc_code == "SIT" or $tc_code == "PRE" or $tc_code == "DUM"){
+
+                    $jobcard = $tc->jobcards()->create([
+                        'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                        'jobcardable_id' => $tc->id,
+                        'quotation_id' => $quotation->id,
+                        'is_rii' => $taskcard->is_rii,
+                        'is_mandatory' => $taskcard->is_mandatory,
+                        'station_id' => null,
+                        'entered_in' => null,
+                        'additionals' => null,
+                        'origin_quotation' => null,
+                        'origin_jobcardable' => $tc->toJson(),
+                        'origin_jobcardable_items' => $tc->items->toJson(),
+                        'origin_jobcard_helpers' => null,
+                    ]);
+
+                    $jobcard->progresses()->save(new Progress([
+                        'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
+                        'progressed_by' => Auth::id()
+                    ]));
+
+                }
+                // else{
+                //     foreach($tc->eo_instructions as $instruction){
+                //         // $jobcard = JobCard::create([
+                //         //     'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                //         //     'taskcard_id' => $tc->id,
+                //         //     'quotation_id' => $quotation->id,
+                //         //     'origin_taskcard' => $tc->toJson(),
+                //         //     'origin_taskcard_items' => $tc->items->toJson(),
+                //         // ]);
+                //         $jobcard = $instruction->jobcards()->create([
+                //             'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                //             'jobcardable_id' => $instruction->id,
+                //             'quotation_id' => $quotation->id,
+                //             'is_rii' => $taskcard->is_rii,
+                //             'is_mandatory' => $taskcard->is_mandatory,
+                //             'station_id' => null,
+                //             'entered_in' => null,
+                //             'additionals' => null,
+                //             'origin_quotation' => null,
+                //             'origin_jobcardable' => $instruction->toJson(),
+                //             'origin_jobcardable_items' => $instruction->items->toJson(),
+                //             'origin_jobcard_helpers' => null,
+
+                //         ]);
+
+
+                //         $jobcard->progresses()->save(new Progress([
+                //             'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
+                //             'progressed_by' => Auth::id()
+                //         ]));
+                //     }
+
+                // }
+
+                // // echo $tc->title.'<br>';
+                // foreach($tc->items as $item){
+                //     echo $item->name.'<br>';
+                // }
+                // dump($tc->materials->toJson());
+
+
+
+        //     }
+
+        $ProjectWorkPackageTaskCard = ProjectWorkPackageEOInstruction::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
+        foreach($ProjectWorkPackageTaskCard as $eo_instruction){
+                $tc = $eo_instruction->eo_instruction->eo_header;
+
+                if(Type::where('id',$tc->type_id)->first()->code == "cmr"){
                     $tc_code = 'CMR';
                 }
                 else if(Type::where('id',$tc->type_id)->first()->code == "awl"){
@@ -370,40 +446,25 @@ class QuotationController extends Controller
                     $tc_code = 'DUM';
                 }
 
-                if($tc_code == "BSC" or $tc_code == "SIP" or $tc_code == "CPC" or $tc_code == "SIT" or $tc_code == "PRE" or $tc_code == "DUM"){
-                                    dump($taskcard->is_mandatory);
-                                    $mandatory = $taskcard->is_mandatory;
+                $jobcard = $tc->jobcards()->create([
+                    'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                    'jobcardable_id' => $tc->id,
+                    'quotation_id' => $quotation->id,
+                    'is_rii' => $eo_instruction->is_rii,
+                    'is_mandatory' => $eo_instruction->is_mandatory,
+                    'station_id' => null,
+                    'entered_in' => null,
+                    'additionals' => null,
+                    'origin_quotation' => null,
+                    'origin_jobcardable' => $eo_instruction->eo_instruction->toJson(),
+                    'origin_jobcardable_items' => $eo_instruction->eo_instruction->items->toJson(),
+                    'origin_jobcard_helpers' => null,
+                ]);
 
-                    $jobcard = JobCard::create([
-                        'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
-                        'taskcard_id' => $tc->id,
-                        'quotation_id' => $quotation->id,
-                        'is_rii' => $taskcard->is_rii,
-                        'is_mandatory' => $mandatory,
-                        'origin_taskcard' => $tc->toJson(),
-                        'origin_taskcard_items' => $tc->items->toJson(),
-                    ]);
-                    $jobcard->progresses()->save(new Progress([
-                        'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
-                        'progressed_by' => Auth::id()
-                    ]));
-
-                }else{
-                    foreach($tc->eo_instructions as $instruction){
-                        $jobcard = JobCard::create([
-                            'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
-                            'taskcard_id' => $tc->id,
-                            'quotation_id' => $quotation->id,
-                            'origin_taskcard' => $tc->toJson(),
-                            'origin_taskcard_items' => $tc->items->toJson(),
-                        ]);
-                        $jobcard->progresses()->save(new Progress([
-                            'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
-                            'progressed_by' => Auth::id()
-                        ]));
-                    }
-
-                }
+                $jobcard->progresses()->save(new Progress([
+                    'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
+                    'progressed_by' => Auth::id()
+                ]));
 
                 // // echo $tc->title.'<br>';
                 // foreach($tc->items as $item){
@@ -413,7 +474,7 @@ class QuotationController extends Controller
 
 
 
-        //     }
+            }
 
         }
         foreach($project->htcrrs as $htcrr){

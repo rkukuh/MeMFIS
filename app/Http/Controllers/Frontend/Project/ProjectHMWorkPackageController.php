@@ -63,13 +63,36 @@ class ProjectHMWorkPackageController extends Controller
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',WorkPackage::where('uuid',$request->workpackage)->first()->id)->first();
         // // $workPackage = WorkPackage::where('uuid',$request->workpackage)->first();
         foreach($project_workpackage->workpackage->taskcards as $taskcard){
+            // if(Type::where('id',$taskcard->type_id)->first()->code == "basic" or Type::where('id',$taskcard->type_id)->first()->code == "sip" or Type::where('id',$taskcard->type_id)->first()->code == "cpcp" or Type::where('id',$taskcard->type_id)->first()->code == "si" or Type::where('id',$taskcard->type_id)->first()->code == "preliminary"){
+                $project_workpackage->taskcards()->create([
+                    'taskcard_id' => $taskcard->id,
+                    'is_rii' => $taskcard->is_rii,
+                    'sequence' => $taskcard->pivot->sequence,
+                    'is_mandatory' => $taskcard->pivot->is_mandatory,
+                ]);
+            // }
+            // else if(Type::where('id',$taskcard->type_id)->first()->code == "cmr" or Type::where('id',$taskcard->type_id)->first()->code == "awl" or Type::where('id',$taskcard->type_id)->first()->code == "ad" or Type::where('id',$taskcard->type_id)->first()->code == "sb" or Type::where('id',$taskcard->type_id)->first()->code == "ea" or
+            //         Type::where('id',$taskcard->type_id)->first()->code == "eo"){
+            //             $taskcards = $taskcard->eo_instructions;
+            //     foreach($taskcards as $eo_instructions){
+            //         $project_workpackage->eo_instructions()->create([
+            //             'eo_instruction_id' => $eo_instructions->id,
+            //             'is_rii' => $taskcard->is_rii,
+            //             'sequence' => $taskcard->pivot->sequence,
+            //             'is_mandatory' => $taskcard->pivot->is_mandatory,
+            //         ]);
+            //     }
+            // }
+            // else{
+            //     $project_workpackage->taskcards()->create([
+            //         'taskcard_id' => $taskcard->id,
+            //         'is_rii' => $taskcard->is_rii,
+            //         'sequence' => $taskcard->pivot->sequence,
+            //         'is_mandatory' => $taskcard->pivot->is_mandatory,
+            //     ]);
+            // }
 
-            $project_workpackage->taskcards()->create([
-                'taskcard_id' => $taskcard->id,
-                'is_rii' => $taskcard->is_rii,
-                'sequence' => $taskcard->pivot->sequence,
-                'is_mandatory' => $taskcard->pivot->is_mandatory,
-            ]);
+
         }
 
         return response()->json($project);
