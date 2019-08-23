@@ -59,6 +59,13 @@ let WorkProgressReport = {
                     title: 'Project No.',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="/work-progress-report/'+t.uuid+'">' +
+                                t.code +
+                            '</a>'
+                        );
+                    }
                 },
                 {
                     field: 'no_wo',
@@ -114,7 +121,7 @@ let WorkProgressReport = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/work-progress-report/'+t.uuid+'/" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="/work-progress-report/'+t.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'
                         );
