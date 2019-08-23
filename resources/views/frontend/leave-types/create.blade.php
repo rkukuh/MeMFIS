@@ -88,10 +88,68 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             @component('frontend.common.input.checkbox')
+                                                @slot('text','Enable Pro-Rate Leaves')
                                                 @slot('id', 'pro_rate')
                                                 @slot('name', 'pro_rate')
                                                 @slot('style_div','margin-top:30px')
                                             @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Gender Specification
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'gender')
+                                                @slot('name', 'gender')
+                                            @endcomponent
+
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('text','Enable Distribute Evently Per Month')
+                                                        @slot('id', 'distribute_evently_per_month')
+                                                        @slot('name', 'distribute_evently_per_month')
+                                                        @slot('size','12')
+                                                        @slot('style_div','margin-top:30px')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('text','Enable Back Date')
+                                                        @slot('id', 'back_date')
+                                                        @slot('name', 'back_date')
+                                                        @slot('size','12')
+                                                        @slot('style_div','margin-top:30px')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.input.radio')
+                                                        @slot('text', 'Daily Based')
+                                                        @slot('name', 'day')
+                                                        @slot('id', 'daily_based')
+                                                        @slot('value', 'daily')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.input.radio')
+                                                        @slot('text', 'Multi-Day Based')
+                                                        @slot('name', 'day')
+                                                        @slot('id', 'multi_day_based')
+                                                        @slot('value', 'multi')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -136,5 +194,6 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/leave-types/create.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/gender.js')}}"></script>
 @endpush
 

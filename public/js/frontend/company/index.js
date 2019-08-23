@@ -42,6 +42,13 @@ let CompanyStructure = {
                 }
             },
             columns: [{
+                    field: '',
+                    title: 'No',
+                    width:'30',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'name',
                     title: 'Company Structure Name',
                     sortable: 'asc',
@@ -70,6 +77,7 @@ let CompanyStructure = {
                 },
                 {
                     field: 'Actions',
+                    title: 'Action',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {

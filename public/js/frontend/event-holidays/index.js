@@ -42,7 +42,15 @@ let Holiday = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
+                    field: '',
+                    title: 'No',
+                    width:'30',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'code',
                     title: 'Code',
                     sortable: 'asc',

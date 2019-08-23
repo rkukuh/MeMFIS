@@ -81,20 +81,122 @@
                                             @endcomponent
                                         </div>
                                         @php
-                                        $checked = null;
+                                        $checked_leave = null;
 
                                             if($leaveType->prorate_leave == 1){
-                                                $checked = 'checked';
+                                                $checked_leave = 'checked';
                                             }
                                         @endphp
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             @component('frontend.common.input.checkbox')
+                                                @slot('text','Enable Pro-Rate Leaves')
                                                 @slot('id', 'pro_rate_leave')
                                                 @slot('name', 'pro_rate_leave')
-                                                @slot('checked', $checked)
+                                                @slot('checked', $checked_leave)
                                                 @slot('disabled', 'disabled')
                                                 @slot('style_div','margin-top:30px')
                                             @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Gender Specification
+                                            </label>
+
+                                            @php
+                                                if($leaveType->gender == 'm'){
+                                                $gender = 'Male';
+                                                }else if($leaveType->gender == 'f'){
+                                                $gender = 'Female';
+                                                }else{
+                                                $gender = 'All';
+                                                }
+                                            @endphp
+
+                                            @component('frontend.common.label.data-info')
+                                            @slot('text',  $gender)
+                                            @endcomponent
+                                        </div>
+
+                                        @php
+                                        $checked_distribute = null;
+
+                                            if($leaveType->distribute_evently == 1){
+                                                $checked_distribute = 'checked';
+                                            }
+
+                                        $checked_back = null;
+
+                                            if($leaveType->back_date == 1){
+                                                $checked_back = 'checked';
+                                            }
+                                        @endphp
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('text','Enable Distribute Evently Per Month')
+                                                        @slot('id', 'distribute_evently_per_month')
+                                                        @slot('name', 'distribute_evently_per_month')
+                                                        @slot('size','12')
+                                                        @slot('checked', $checked_back)
+                                                        @slot('style_div','margin-top:30px')
+                                                        @slot('disabled','disabled')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.input.checkbox')
+                                                        @slot('text','Enable Back Date')
+                                                        @slot('id', 'back_date')
+                                                        @slot('name', 'back_date')
+                                                        @slot('size','12')
+                                                        @slot('style_div','margin-top:30px')
+                                                        @slot('disabled','disabled')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @php
+                                        $checked_daily = null;
+
+                                            if($leaveType->based == 'daily'){
+                                                $checked_daily = 'checked';
+                                            }
+
+                                        $checked_multi = null;
+
+                                            if($leaveType->based == 'multi'){
+                                                $checked_multi = 'checked';
+                                            }
+                                    @endphp
+
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.input.radio')
+                                                        @slot('text', 'Daily Based')
+                                                        @slot('name', 'day')
+                                                        @slot('id', 'daily_based')
+                                                        @slot('value', 'daily')
+                                                        @slot('checked', $checked_daily)
+                                                        @slot('disabled','disabled')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.input.radio')
+                                                        @slot('text', 'Multi-Day Based')
+                                                        @slot('name', 'day')
+                                                        @slot('id', 'multi_day_based')
+                                                        @slot('checked', $checked_multi)
+                                                        @slot('value', 'multi')
+                                                        @slot('disabled','disabled')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">

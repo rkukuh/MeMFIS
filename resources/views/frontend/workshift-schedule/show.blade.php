@@ -57,7 +57,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $workshift->code)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -66,7 +66,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $workshift->name)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -77,14 +77,15 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $workshift->description)
                                             @endcomponent
                                         </div>
                                     </div>
+
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <table widt="100%" class="table table-striped table-bordered second">
-                                                <tr >
+                                                <tr>
                                                     <td align="center" width="20%"><b>Day</b></td>
                                                     <td align="center" width="18%"><b>In</b></td>
                                                     <td align="center" width="18%"><b>Break In</b></td>
@@ -92,6 +93,9 @@
                                                     <td align="center" width="18%"><b>Out</b></td>
                                                     <td align="center" width="8%"></td>
                                                 </tr>
+
+                                                @foreach ($schedule as $s)
+
                                                 <tr>
                                                     <td align="center" width="20%" style="backgroud:#e3e3e3;" class="pt-4">
                                                         <span style="font-weight: bold;color:#6d85c2" valign="middle">Sunday</span>
@@ -99,266 +103,45 @@
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
                                                             @slot('class','m_timepicker_1 text-center')
+                                                            @slot('value', $s->in)
                                                             @slot('disabled','disabled')
                                                         @endcomponent
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
                                                             @slot('class','m_timepicker_1 text-center')
+                                                            @slot('value', $s->break_in)
                                                             @slot('disabled','disabled')
                                                         @endcomponent
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
                                                             @slot('class','m_timepicker_1 text-center')
+                                                            @slot('value', $s->break_out)
                                                             @slot('disabled','disabled')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
                                                             @slot('class','m_timepicker_1 text-center')
+                                                            @slot('value', $s->break_out)
                                                             @slot('disabled','disabled')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="8%">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
+                                                            @slot('checked', 'checked')
                                                             @slot('size', '12')
                                                             @slot('class','ml-4')
                                                             @slot('disabled','disabled')
                                                         @endcomponent
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td align="center" width="20%" style="backgroud:#e3e3e3;" class="pt-4">
-                                                        <span style="font-weight: bold;color:#6d85c2">Monday </span>
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="8%">
-                                                        @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
-                                                            @slot('size', '12')
-                                                            @slot('class','ml-4')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center" width="20%" style="backgroud:#e3e3e3;" class="pt-4">
-                                                        <span style="font-weight: bold;color:#6d85c2">Thuesday</span>
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="8%">
-                                                        @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
-                                                            @slot('size', '12')
-                                                            @slot('class','ml-4')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center" width="20%" style="backgroud:#e3e3e3;" class="pt-4">
-                                                        <span style="font-weight: bold;color:#6d85c2">Wednesday</span>
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="8%">
-                                                        @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
-                                                            @slot('size', '12')
-                                                            @slot('class','ml-4')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center" width="20%" style="backgroud:#e3e3e3;" class="pt-4">
-                                                        <span style="font-weight: bold;color:#6d85c2">Thursday</span>
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="8%">
-                                                        @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
-                                                            @slot('size', '12')
-                                                            @slot('class','ml-4')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center" width="20%" style="backgroud:#e3e3e3;" class="pt-4">
-                                                        <span style="font-weight: bold;color:#6d85c2">Friday</span>
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="8%">
-                                                        @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
-                                                            @slot('size', '12')
-                                                            @slot('class','ml-4')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center" width="20%" style="backgroud:#e3e3e3;" class="pt-4">
-                                                        <span style="font-weight: bold;color:#6d85c2">Saturday</span>
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="8%">
-                                                        @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
-                                                            @slot('size', '12')
-                                                            @slot('class','ml-4')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                </tr>
+                                               
+                                                @endforeach
+
                                             </table>
                                         </div>
                                     </div>
+
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
