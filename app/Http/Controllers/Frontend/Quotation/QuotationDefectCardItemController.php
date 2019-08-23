@@ -6,7 +6,6 @@ use App\Models\QuotationDefectCardItem;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\QuotationDefectCardItemStore;
 use App\Http\Requests\Frontend\QuotationDefectCardItemUpdate;
-
 class QuotationDefectCardItemController extends Controller
 {
     /**

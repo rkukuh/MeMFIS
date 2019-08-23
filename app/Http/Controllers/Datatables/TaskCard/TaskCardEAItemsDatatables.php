@@ -1,50 +1,30 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\Quotation;
+namespace App\Http\Controllers\Datatables\TaskCard;
 
 use App\Models\Unit;
-use App\Models\Item;
-use App\Models\HtCrr;
-use App\Models\Project;
-use App\Models\TaskCard;
 use App\Models\ListUtil;
-use App\Models\Quotation;
-use App\Models\DefectCard;
-use App\Models\WorkPackage;
 use Illuminate\Http\Request;
-use App\Models\QuotationHtcrrItem;
+use App\Models\EOInstruction;
 use App\Http\Controllers\Controller;
-use App\Models\QuotationDefectCardItem;
-use App\Models\QuotationWorkPackageTaskCardItem;
 
-class QuotationAdditionalItemDatatables extends Controller
+class TaskCardEAItemsDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function item(Quotation $quotation)
+    public function material(EOInstruction $taskcard)
     {
-        $materials = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.taskcard','item','unit','price')->where('quotation_id', $quotation->id)
-        ->whereHas('item', function ($query) {
-            $query->whereHas('categories', function ($query) {
-                $query->whereIn('code', ['raw', 'cons', 'comp']);
-            });
-        })
-        ->get();
+        //TODO API used is API's Datatables Metronic. FIX search Datatables API because not work
 
-        foreach($materials as $material){
-            if($material->item->prices->last() <> null){
-                $material->unitPrice .= $material->item->prices->where('level',$quotation->parent->project->customer->levels->last()->id)->last()->amount;
-            }
-            else{
-                $material->unitPrice .= 0;
-            }
-
+        foreach($taskcard->materials as $material){
+            $unit_id = $material->pivot->unit_id;
+            $material->pivot->unit .= Unit::find($unit_id)->name;
         }
 
-        $data = $alldata = json_decode($materials);
+        $data = $alldata = json_decode($taskcard->materials);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -131,6 +111,7 @@ class QuotationAdditionalItemDatatables extends Controller
         ];
 
         echo json_encode($result, JSON_PRETTY_PRINT);
+
     }
 
     /**
@@ -138,27 +119,16 @@ class QuotationAdditionalItemDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tool(Quotation $quotation)
+    public function tool(EOInstruction $taskcard)
     {
-        $tools = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.taskcard','item','unit','price')->where('quotation_id', $quotation->id)
-        ->whereHas('item', function ($query) {
-                $query->whereHas('categories', function ($query) {
-                    $query->where('code','tool');
-                });
-        })
-        ->get();
+        //TODO API used is API's Datatables Metronic. FIX search Datatables API because not work
 
-        foreach($tools as $tool){
-            if($tool->item->prices->last() <> null){
-                $tool->unitPrice .= $tool->item->prices->where('level',$quotation->parent->project->customer->levels->last()->id)->last()->amount;
-            }
-            else{
-                $tool->unitPrice .= 0;
-            }
-
+        foreach($taskcard->tools as $tool){
+            $unit_id = $tool->pivot->unit_id;
+            $tool->pivot->unit .= Unit::find($unit_id)->name;
         }
 
-        $data = $alldata = json_decode($tools);
+        $data = $alldata = json_decode($taskcard->tools);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -263,5 +233,4 @@ class QuotationAdditionalItemDatatables extends Controller
 
         return $util->filter($args, $operator);
     }
-
 }

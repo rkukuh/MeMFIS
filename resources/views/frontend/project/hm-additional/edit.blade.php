@@ -149,7 +149,11 @@
                                                                 @component('frontend.common.input.number')
                                                                    @slot('id', 'performance_factor')
                                                                    @slot('name', 'performance_factor')
-                                                                   @slot('value', 1.6)
+                                                                   @if(empty($project->data_defectcard))
+                                                                        @slot('value', 1.6)
+                                                                   @else 
+                                                                        @slot('value', json_decode($project->data_defectcard)->performance_factor)
+                                                                   @endif
                                                                    @slot('id_error', 'performance_factor')
                                                                 @endcomponent
                                                             </div>
@@ -160,8 +164,13 @@
                                                                 @component('frontend.common.label.data-info')
                                                                    @slot('id', 'total_manhour')
                                                                    @slot('name', 'total_manhour')
-                                                                   @slot('text', $project->defectcards()->sum('estimation_manhour') * 1.6)
-                                                                   @slot('value', $project->defectcards()->sum('estimation_manhour') * 1.6)
+                                                                   @if(empty($project->data_defectcard))
+                                                                        @slot('text', $project->defectcards()->sum('estimation_manhour') * 1.6)
+                                                                        @slot('value', $project->defectcards()->sum('estimation_manhour') * 1.6)
+                                                                   @else 
+                                                                   @slot('text', $project->defectcards()->sum('estimation_manhour') * json_decode($project->data_defectcard)->performance_factor)
+                                                                   @slot('value', $project->defectcards()->sum('estimation_manhour') * json_decode($project->data_defectcard)->performance_factor)
+                                                                   @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>

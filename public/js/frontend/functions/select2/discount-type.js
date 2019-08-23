@@ -6,7 +6,7 @@ let TypeSelect2 = {
         );
         
         $('select[name^="discount-type"], #discount-type_validate').select2({
-            placeholder: 'Select a Type'
+            placeholder: 'Select a Discount Type'
         });
     }
 };

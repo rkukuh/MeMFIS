@@ -51,7 +51,8 @@ class ProjectHMHtcrrController extends Controller
         $mhrs_pfrm_factor = $skills = $htcrr_engineers = $skill_list = [];
         $tat = 0;
         $htcrrs = HtCrr::where('code',  'like', 'JCRI%')->where('project_id', $project->id)->get();
-        if (isset(json_decode($project->data_htcrr)->engineer)) {
+        $data_json = json_decode($project->data_htcrr);
+        if (isset($data_json->engineer) && sizeof($data_json->skills) > 0) {
             $htcrr_engineers = json_decode($project->data_htcrr)->engineer;
             $engineer_qty = json_decode($project->data_htcrr)->engineer_qty;
             $tat = json_decode($project->data_htcrr)->tat;

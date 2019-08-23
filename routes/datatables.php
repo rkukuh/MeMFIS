@@ -360,6 +360,7 @@ Route::name('datatables.')->group(function () {
                 /** Defectcard Item */
                 Route::get('/{quotation}/defectcard/item', 'QuotationAdditionalItemDatatables@item')->name('item.quotation-additional');
                 Route::get('/{quotation}/defectcard/tool', 'QuotationAdditionalItemDatatables@tool')->name('tool.quotation-additional');
+                Route::get('/{quotation}/additional/job-request', 'QuotationAdditionalDatatables@jobRequest')->name('quotation-additional.job-request');
 
             });
 
@@ -431,6 +432,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/', 'TaskCardEODatatables@index')->name('all');
                 Route::get('/adsb/modal', 'TaskCardEODatatables@adsbModal')->name('adsb.modal');
                 Route::get('/cmrawl/modal', 'TaskCardEODatatables@cmrawlModal')->name('cmrawl.modal');
+                Route::get('/eo/modal', 'TaskCardEODatatables@eoModal')->name('eo.modal');
 
                 /** Polymorph */
                 // TODO: with (aircraft) Access
@@ -444,6 +446,33 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{taskcard}/repeats', 'TaskCardEOMaintenanceCycleDatatables@repeat')->name('maintenance-cycle.repeats');
                 Route::get('/{taskcard}/thresholds', 'TaskCardEOMaintenanceCycleDatatables@threshold')->name('maintenance-cycle.thresholds');
 
+            });
+
+        });
+
+        /** TASK CARD: EA */
+
+        Route::name('taskcard-ea.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'taskcard-ea',
+                'namespace' => 'TaskCard'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'TaskCardEADatatables@index')->name('all');
+                Route::get('/ea/modal', 'TaskCardEADatatables@eaModal')->name('ea.modal');
+
+                /** Polymorph */
+                // TODO: with (aircraft) Access
+                // TODO: with (aircraft) Zone
+
+                /** Transaction */
+                Route::get('/{taskcard}/tools', 'TaskCardEAItemsDatatables@tool')->name('tools.index');
+                Route::get('/{taskcard}/materials', 'TaskCardEAItemsDatatables@material')->name('materials.index');
+                Route::get('/{taskcard}/ea-instructions', 'EAInstructionsDatatables@index')->name('ea-instructions.index');
             });
 
         });
@@ -672,6 +701,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{workPackage}/ad-sb', 'WorkPackageTaskCardNonRoutineDatatables@ad_sb')->name('ad-sb.index');
                 Route::get('/{workPackage}/cmr-awl', 'WorkPackageTaskCardNonRoutineDatatables@cmr_awl')->name('cmr-awl.index');
                 Route::get('/{workPackage}/si', 'WorkPackageTaskCardNonRoutineDatatables@si')->name('si.index');
+                Route::get('/{workPackage}/ea', 'WorkPackageTaskCardNonRoutineDatatables@ea')->name('ea.index');
+                Route::get('/{workPackage}/eo', 'WorkPackageTaskCardNonRoutineDatatables@eo')->name('eo.index');
 
                 Route::get('/{workPackage}/general-tools', 'WorkPackageItemsDatatables@generalTool')->name('gen-tools.index');
                 Route::get('/{workPackage}/general-materials', 'WorkPackageItemsDatatables@generalMaterial')->name('gen-materials.index');
