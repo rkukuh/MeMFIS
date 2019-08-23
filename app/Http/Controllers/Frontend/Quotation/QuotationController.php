@@ -199,39 +199,7 @@ class QuotationController extends Controller
                     ]);
                 }
             }
-        // }
-        // $project = Project::find($request->project_id);
-        //     foreach($project->workpackages as $workpackages){
-        //         foreach($workpackages->taskcards as $taskcard){
-        //             foreach($taskcard->items as $item){
-        //                 // $quotation_taskcard_item = QuotationTaskCard::where('quotation_id',$quotation->id)->where('workpackage_id',$workpackage->id)->first();
-
-        //                 if (Item::findOrFail($item->id)->prices->get($customer)) {
-        //                     $price_id = Item::find($item->id)->prices->get($customer)->id;
-        //                 } else {
-        //                     $price_id = null;
-        //                 }
-
-        //                 if($price_id <> null){
-        //                     $selling_price = Item::find($item->id)->prices->get($customer)->amount;
-        //                 }
-        //                 else{
-        //                     $selling_price = null;
-        //                 }
-
-        //                 QuotationWorkPackageTaskCardItem::create([
-        //                     'quotation_id' => $quotation->id,
-        //                     'workpackage_id' => $workpackages->id,
-        //                     'taskcard_id' => $taskcard->id,
-        //                     'item_id' => $item->id,
-        //                     'quantity' => $item->pivot->quantity,
-        //                     'unit_id' => $item->pivot->unit_id,
-        //                     'price_id' => $price_id,
-        //                     'price_amount' => $selling_price,
-        //                 ]);
-        //             }
-        //         }
-            }
+        }
 
 
             dd('s');
