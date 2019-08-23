@@ -87,12 +87,12 @@ let BenefitsPosition = {
 function checkboxFunction(id){
     if ($('#'+id).is(':checked')) {
         $('#'+id).attr('checked', true)
-        // $('#'+this.id+'_min').attr('disabled', true)
-        // $('#'+this.id+'_max').attr('disabled',true)
+        $('#'+id+'_min').attr('disabled', false)
+        $('#'+id+'_max').attr('disabled',false)
     }else{
         $('#'+id).attr('checked', false)
-        // $('#'+this.id+'_min').attr('disabled', false)
-        // $('#'+this.id+'_max').attr('disabled', false)
+        $('#'+id+'_min').attr('disabled', true)
+        $('#'+id+'_max').attr('disabled', true)
     }
 }
 jQuery(document).ready(function () {

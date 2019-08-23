@@ -159,6 +159,30 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.input.radio')
+                                                        @slot('text', 'Daily Based')
+                                                        @slot('name', 'day')
+                                                        @slot('id', 'daily_based')
+                                                        @slot('value', 'daily_based')
+                                                        @slot('disabled','disabled')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.input.radio')
+                                                        @slot('text', 'Multi-Day Based')
+                                                        @slot('name', 'day')
+                                                        @slot('id', 'multi_day_based')
+                                                        @slot('value', 'multi_day_based')
+                                                        @slot('disabled','disabled')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
                                                 Description
