@@ -1,15 +1,5 @@
 let leaveType = {
     init: function () {
-        var genders = ["All", "Male", "Female"];
-        var select = document.getElementById('gender')
-
-        for(i=0; i<3; i++){
-            var opt = document.createElement('option')
-            opt.setAttribute('value',genders[i])
-            opt.innerHTML = genders[i]
-            select.appendChild(opt)
-        }
-
         
     let create = $('.footer').on('click', '.add-leave-types', function () {
 

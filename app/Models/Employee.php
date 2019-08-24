@@ -12,14 +12,15 @@ class Employee extends MemfisModel
         'code',
         'user_id',
         'first_name',
-        'middle_name',
         'last_name',
         'dob',
+        'dob_place',
         'gender',
-        'hired_at',
+        'religion',
+        'marital_status',
+        'nationality'
     ];
 
-    protected $dates = ['hired_at'];
 
     /*************************************** RELATIONSHIP ****************************************/
 

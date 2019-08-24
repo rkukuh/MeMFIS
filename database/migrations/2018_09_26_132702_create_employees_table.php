@@ -17,13 +17,15 @@ class CreateEmployeesTable extends Migration
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('code');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('first_name');
-            $table->string('middle_name')->nullable();
-            $table->string('last_name')->nullable();
-            $table->date('dob')->nullable();
-            $table->enum('gender', ['f', 'm'])->nullable();
-            $table->timestamp('hired_at')->nullable();
+            $table->string('last_name');
+            $table->date('dob');
+            $table->string('dob_place')->nullable();
+            $table->enum('gender', ['f', 'm']);
+            $table->string('religion');
+            $table->enum('marital_status',['s','m']);
+            $table->string('nationality');
             $table->timestamps();
             $table->softDeletes();
 
@@ -33,7 +35,6 @@ class CreateEmployeesTable extends Migration
                     ->onDelete('restrict');
 
             $table->index('first_name');
-            $table->index('middle_name');
             $table->index('last_name');
         });
     }

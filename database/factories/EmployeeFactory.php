@@ -17,17 +17,18 @@ $factory->define(Employee::class, function (Faker $faker) {
 
     $firstNameMale = $faker->firstNameMale();
     $firstNameFemale = $faker->firstNameFemale();
-    $lastname = $faker->lastName();
-
+    
     return [
         'code' => 'EMP-DUM-' . $faker->unixTime(),
         'user_id' => null,
         'first_name' => $faker->randomElement([$firstNameMale, $firstNameFemale]),
-        'middle_name' => $faker->randomElement([null, $faker->lastName()]),
-        'last_name' => $lastname,
+        'last_name' => $faker->lastName(),
         'dob' => Carbon::now()->subYear(rand(20, 50)),
+        'dob_place' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
         'gender' => $faker->randomElement(['m', 'f']),
-        'hired_at' => Carbon::now()->subYear(rand(1, 10))
+        'religion' => $faker->randomElement(['islam','khonghucu','budha','kristen','hindu']),
+        'marital_status' => $faker->randomElement(['s','m']),
+        'nationality' => $faker->randomElement(['Indonesia','Japan','Zimbabwe','South Africa'])
     ];
 
 });
