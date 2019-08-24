@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use Carbon\Carbon;
 use App\Models\Type;
@@ -51,7 +51,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'estimation_manhour' => $faker->randomFloat(2, 0, 9999),
         'engineer_quantity' => rand(1, 10),
         'helper_quantity' => $faker->randomElement([null, rand(1, 5)]),
-        'is_rii' => $faker->boolean,
+        'is_rii' => $faker->boolean(),
         'source' => null,
         'effectivity' => null,
         'performance_factor' => $faker->randomElement([
@@ -198,7 +198,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
         'estimation_manhour' => null,
         'engineer_quantity' => null,
         'helper_quantity' => null,
-        'is_rii' => null,
+        'is_rii' => $faker->boolean(),
         'performance_factor' => null,
         'sequence' => null,
         'version' => null,
@@ -245,19 +245,19 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 
     // Aircraft's Access
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->accesses()->saveMany($aircraft->accesses);
     }
 
     // Aircraft's Zone
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->zones()->saveMany($aircraft->zones);
     }
 
     // Aircraft's Station
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->stations()->saveMany($aircraft->stations);
     }
 
@@ -291,7 +291,7 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
 
     // Related-to
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
     }
 
@@ -310,7 +310,7 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
 
     // Threshold and Repeat
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->thresholds()->saveMany(
             factory(Threshold::class, rand(1, 2))->make()
         );
