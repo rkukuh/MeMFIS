@@ -65,7 +65,7 @@ Route::name('datatables.')->group(function () {
         Route::get('/price-list-item', 'PriceListDatatables@item')->name('price-list.item');
         Route::get('/price-list-manhour', 'PriceListDatatables@manhour')->name('price-list.manhour');
         Route::get('/price-list-facility', 'PriceListDatatables@facility')->name('price-list.facility');
-        
+
 
         /** AIRCRAFT */
 
@@ -203,7 +203,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/', 'PositionDatatables@index')->name('all');
 
                 /** Transaction */
-              
+
             });
 
         });
@@ -702,6 +702,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{workPackage}/cpcp', 'WorkPackageTaskCardRoutineDatatables@cpcp')->name('cpcp.index');
                 Route::get('/{workPackage}/ad-sb', 'WorkPackageTaskCardNonRoutineDatatables@ad_sb')->name('ad-sb.index');
                 Route::get('/{workPackage}/cmr-awl', 'WorkPackageTaskCardNonRoutineDatatables@cmr_awl')->name('cmr-awl.index');
+                Route::get('/{taskcard}/instruction', 'WorkPackageTaskCardNonRoutineDatatables@instruction')->name('instruction.index');
                 Route::get('/{workPackage}/si', 'WorkPackageTaskCardNonRoutineDatatables@si')->name('si.index');
                 Route::get('/{workPackage}/ea', 'WorkPackageTaskCardNonRoutineDatatables@ea')->name('ea.index');
                 Route::get('/{workPackage}/eo', 'WorkPackageTaskCardNonRoutineDatatables@eo')->name('eo.index');

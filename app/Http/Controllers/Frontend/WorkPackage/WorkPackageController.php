@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Frontend\WorkPackage;
 use App\Models\Aircraft;
 use App\Models\Project;
 use App\Models\ListUtil;
-use App\Models\WorkPackage;
 use App\Models\TaskCard;
-use App\Helpers\DocumentNumber;
+use App\Models\WorkPackage;
 use Illuminate\Http\Request;
+use App\Models\EOInstruction;
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\WorkPackageStore;
 use App\Http\Requests\Frontend\WorkPackageUpdate;
@@ -77,6 +78,25 @@ class WorkPackageController extends Controller
             return response()->json(['title' => "Danger"]);
         }else{
             $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
+
+            return response()->json($workPackage);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageStore  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addInstruction(Request $request, WorkPackage $workPackage)
+    {
+        $tc = EOInstruction::where('uuid', $request->taskcard)->first();
+        $exists = $workPackage->eo_instructions->contains($tc->id);
+        if($exists){
+            return response()->json(['title' => "Danger"]);
+        }else{
+            $workPackage->eo_instructions()->attach(EOInstruction::where('uuid', $request->taskcard)->first()->id);
 
             return response()->json($workPackage);
         }

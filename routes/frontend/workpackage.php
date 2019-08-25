@@ -18,6 +18,7 @@ Route::name('frontend.')->group(function () {
             Route::prefix('workpackage')->group(function () {
 
                 Route::post('/{workPackage}/taskcard', 'WorkPackageController@addTaskCard')->name('taskcard.workpackage');
+                Route::post('/{workPackage}/taskcard/instruction', 'WorkPackageController@addInstruction')->name('instruction.workpackage');
                 Route::delete('/{workPackage}/taskcard/{taskcard}', 'WorkPackageController@deleteTaskCard')->name('delete_taskcard.workpackage');
                 Route::put('/{workPackage}/sequence/{taskcard}', 'WorkPackageController@sequence')->name('sequence.workpackage');
                 Route::put('/{workPackage}/mandatory/{taskcard}', 'WorkPackageController@mandatory')->name('mandatory.workpackage');
