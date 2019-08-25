@@ -445,4 +445,17 @@ class Employee extends MemfisModel
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * One-to-Many: A Employee may have one or many history.
+     *
+     * This function will retrieve all the history of a given BPJS.
+     * See: EmployeeHistory employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function history()
+    {
+        return $this->hasMany(EmployeeHistories::class);
+    }
 }
