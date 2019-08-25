@@ -51,7 +51,7 @@ $factory->define(TaskCard::class, function (Faker $faker) {
         'estimation_manhour' => $faker->randomFloat(2, 0, 9999),
         'engineer_quantity' => rand(1, 10),
         'helper_quantity' => $faker->randomElement([null, rand(1, 5)]),
-        'is_rii' => $faker->boolean(),
+        'is_rii' => $faker->boolean,
         'source' => null,
         'effectivity' => null,
         'performance_factor' => $faker->randomElement([
@@ -198,7 +198,7 @@ $factory->state(TaskCard::class, 'eo', function ($faker) {
         'estimation_manhour' => null,
         'engineer_quantity' => null,
         'helper_quantity' => null,
-        'is_rii' => $faker->boolean(),
+        'is_rii' => null,
         'performance_factor' => null,
         'sequence' => null,
         'version' => null,
@@ -304,7 +304,7 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
         else {
             $skill = factory(Type::class)->states('taskcard-skill')->create();
         }
-    
+
         $taskcard->skills()->attach($skill);
     }
 
@@ -363,7 +363,7 @@ $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker)
             else {
                 $skill = factory(Type::class)->states('taskcard-skill')->create();
             }
-        
+
             $eo_instruction->skills()->attach($skill);
         }
     }
@@ -403,7 +403,7 @@ $factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker)
         else {
             $skill = factory(Type::class)->states('taskcard-skill')->create();
         }
-    
+
         $taskcard->skills()->attach($skill);
     }
 
