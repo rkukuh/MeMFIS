@@ -54,58 +54,58 @@ let NonRoutineWorkpackage = {
             },
             columns: [
                 {
-                    field: "number",
+                    field: "eo_header.number",
                     title: "Taskcard Number",
                     sortable: !1
                 },
                 {
-                    field: "title",
+                    field: "eo_header.title",
                     title: "Title",
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
                         if (
-                            t.type.code == "basic" ||
-                            t.type.code == "sip" ||
-                            t.type.code == "cpcp"
+                            t.eo_header.type.code == "basic" ||
+                            t.eo_header.type.code == "sip" ||
+                            t.eo_header.type.code == "cpcp"
                         ) {
                             return (
                                 '<a href="/taskcard-routine/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
                         } else if (
-                            t.type.code == "ad" ||
-                            t.type.code == "sb" ||
-                            t.type.code == "eo" ||
-                            t.type.code == "ea" ||
-                            t.type.code == "htcrr" ||
-                            t.type.code == "cmr" ||
-                            t.type.code == "awl"
+                            t.eo_header.type.code == "ad" ||
+                            t.eo_header.type.code == "sb" ||
+                            t.eo_header.type.code == "eo" ||
+                            t.eo_header.type.code == "ea" ||
+                            t.eo_header.type.code == "htcrr" ||
+                            t.eo_header.type.code == "cmr" ||
+                            t.eo_header.type.code == "awl"
                         ) {
                             return (
                                 '<a href="/taskcard-eo/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.type.code == "si") {
+                        } else if (t.eo_header.type.code == "si") {
                             return (
                                 '<a href="/taskcard-si/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.type.code == "preliminary") {
+                        } else if (t.eo_header.type.code == "preliminary") {
                             return (
                                 '<a href="/preliminary/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
                         } else {
@@ -283,7 +283,7 @@ let NonRoutineWorkpackage = {
             },
             columns: [
                 {
-                    field: "number",
+                    field: "eo_header.number",
                     title: "Taskcard Number",
                     sortable: !1
                 },
@@ -294,47 +294,47 @@ let NonRoutineWorkpackage = {
                     filterable: !1,
                     template: function(t, e, i) {
                         if (
-                            t.type.code == "basic" ||
-                            t.type.code == "sip" ||
-                            t.type.code == "cpcp"
+                            t.eo_header.type.code == "basic" ||
+                            t.eo_header.type.code == "sip" ||
+                            t.eo_header.type.code == "cpcp"
                         ) {
                             return (
                                 '<a href="/taskcard-routine/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
                         } else if (
-                            t.type.code == "ad" ||
-                            t.type.code == "sb" ||
-                            t.type.code == "eo" ||
-                            t.type.code == "ea" ||
-                            t.type.code == "htcrr" ||
-                            t.type.code == "cmr" ||
-                            t.type.code == "awl"
+                            t.eo_header.type.code == "ad" ||
+                            t.eo_header.type.code == "sb" ||
+                            t.eo_header.type.code == "eo" ||
+                            t.eo_header.type.code == "ea" ||
+                            t.eo_header.type.code == "htcrr" ||
+                            t.eo_header.type.code == "cmr" ||
+                            t.eo_header.type.code == "awl"
                         ) {
                             return (
                                 '<a href="/taskcard-eo/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.type.code == "si") {
+                        } else if (t.eo_header.type.code == "si") {
                             return (
                                 '<a href="/taskcard-si/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.type.code == "preliminary") {
+                        } else if (t.eo_header.type.code == "preliminary") {
                             return (
                                 '<a href="/preliminary/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
                         } else {
@@ -769,7 +769,7 @@ let NonRoutineWorkpackage = {
             },
             columns: [
                 {
-                    field: "number",
+                    field: "eo_header.number",
                     title: "Taskcard Number",
                     sortable: !1
                 },
@@ -780,47 +780,47 @@ let NonRoutineWorkpackage = {
                     filterable: !1,
                     template: function(t, e, i) {
                         if (
-                            t.type.code == "basic" ||
-                            t.type.code == "sip" ||
-                            t.type.code == "cpcp"
+                            t.eo_header.type.code == "basic" ||
+                            t.eo_header.type.code == "sip" ||
+                            t.eo_header.type.code == "cpcp"
                         ) {
                             return (
                                 '<a href="/taskcard-routine/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
                         } else if (
-                            t.type.code == "ad" ||
-                            t.type.code == "sb" ||
-                            t.type.code == "eo" ||
-                            t.type.code == "ea" ||
-                            t.type.code == "htcrr" ||
-                            t.type.code == "cmr" ||
-                            t.type.code == "awl"
+                            t.eo_header.type.code == "ad" ||
+                            t.eo_header.type.code == "sb" ||
+                            t.eo_header.type.code == "eo" ||
+                            t.eo_header.type.code == "ea" ||
+                            t.eo_header.type.code == "htcrr" ||
+                            t.eo_header.type.code == "cmr" ||
+                            t.eo_header.type.code == "awl"
                         ) {
                             return (
                                 '<a href="/taskcard-eo/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.type.code == "si") {
+                        } else if (t.eo_header.type.code == "si") {
                             return (
                                 '<a href="/taskcard-si/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.type.code == "preliminary") {
+                        } else if (t.eo_header.type.code == "preliminary") {
                             return (
                                 '<a href="/preliminary/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
                         } else {
@@ -1025,7 +1025,7 @@ let NonRoutineWorkpackage = {
             },
             columns: [
                 {
-                    field: "number",
+                    field: "eo_header.number",
                     title: "Taskcard Number",
                     sortable: !1
                 },
@@ -1036,47 +1036,47 @@ let NonRoutineWorkpackage = {
                     filterable: !1,
                     template: function(t, e, i) {
                         if (
-                            t.type.code == "basic" ||
-                            t.type.code == "sip" ||
-                            t.type.code == "cpcp"
+                            t.eo_header.type.code == "basic" ||
+                            t.eo_header.type.code == "sip" ||
+                            t.eo_header.type.code == "cpcp"
                         ) {
                             return (
                                 '<a href="/taskcard-routine/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
                         } else if (
-                            t.type.code == "ad" ||
-                            t.type.code == "sb" ||
-                            t.type.code == "eo" ||
-                            t.type.code == "ea" ||
-                            t.type.code == "htcrr" ||
-                            t.type.code == "cmr" ||
-                            t.type.code == "awl"
+                            t.eo_header.type.code == "ad" ||
+                            t.eo_header.type.code == "sb" ||
+                            t.eo_header.type.code == "eo" ||
+                            t.eo_header.type.code == "ea" ||
+                            t.eo_header.type.code == "htcrr" ||
+                            t.eo_header.type.code == "cmr" ||
+                            t.eo_header.type.code == "awl"
                         ) {
                             return (
                                 '<a href="/taskcard-eo/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.type.code == "si") {
+                        } else if (t.eo_header.type.code == "si") {
                             return (
                                 '<a href="/taskcard-si/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.type.code == "preliminary") {
+                        } else if (t.eo_header.type.code == "preliminary") {
                             return (
                                 '<a href="/preliminary/' +
-                                t.uuid +
+                                t.eo_header.uuid +
                                 '">' +
-                                t.title +
+                                t.eo_header.title +
                                 "</a>"
                             );
                         } else {

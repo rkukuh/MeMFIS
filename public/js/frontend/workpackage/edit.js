@@ -32,6 +32,16 @@ let Workpackage = {
 
             SI.originalDataSet = [];
             SI.reload();
+
+            let EA = $(".ea_datatable").mDatatable();
+
+            EA.originalDataSet = [];
+            EA.reload();
+
+            let EO = $(".eo_datatable").mDatatable();
+
+            EO.originalDataSet = [];
+            EO.reload();
         });
 
         $(".b-t-n").on("click", ".btn-add", function() {

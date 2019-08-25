@@ -18,8 +18,8 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function ad_sb(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
+        $workPackages = $workPackage->eo_instructions()->with('eo_header.type')
+                                    ->whereHas('eo_header.type', function ($query) {
                                         $query->where('code', 'ad')->orWhere('code','sb');
                                     })->get();
 
@@ -134,8 +134,8 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function cmr_awl(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
+        $workPackages = $workPackage->eo_instructions()->with('eo_header.type')
+                                    ->whereHas('eo_header.type', function ($query) {
                                         $query->where('code', 'cmr')->orWhere('code','awl');
                                     })->get();
 
@@ -541,8 +541,8 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function ea(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
+        $workPackages = $workPackage->eo_instructions()->with('eo_header.type')
+                                    ->whereHas('eo_header.type', function ($query) {
                                         $query->where('code', 'ea');
                                     })->get();
 
@@ -657,8 +657,8 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function eo(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
+        $workPackages = $workPackage->eo_instructions()->with('eo_header.type')
+                                    ->whereHas('eo_header.type', function ($query) {
                                         $query->where('code', 'eo');
                                     })->get();
 
