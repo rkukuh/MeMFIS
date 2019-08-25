@@ -14,4 +14,17 @@ class JobTittle extends MemfisModel
         'description',
         'specification'
     ];
+
+    /**
+     * One-to-Many: An Jobtittle have many Employee.
+     *
+     * This function will retrieve Employee of a Job Tittle.
+     * See: Employee job_tittle() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee()
+    {
+        return $this->hasMany(Employee::class);
+    }
 }
