@@ -29,6 +29,12 @@ class UsersTableSeeder extends Seeder
             'code' => 'SU-' . Carbon::now()->timestamp,
             'first_name' => 'Super',
             'last_name'  => 'Admin',
+            'dob' => Carbon::now()->subYear(20),
+            'dob_place' => 'Jongol',
+            'gender' => 'm',
+            'religion' => 'islam',
+            'marital_status' => 'm',
+            'nationality' => 'indonesia'
         ]);
     }
 }

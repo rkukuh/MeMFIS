@@ -34,6 +34,7 @@ Route::name('datatables.')->group(function () {
         Route::get('/leave-type', 'LeaveTypeDatatables@index')->name('leavetype.index');
         Route::get('/holiday', 'HolidayDatatables@index')->name('holiday.index');
         Route::get('/workshift', 'WorkshiftDatatables@index')->name('workshift.index');
+        Route::get('/department', 'DepartmentDatatables@index')->name('department.index');
 
         /** LICENSE */
 
