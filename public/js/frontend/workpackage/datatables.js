@@ -144,7 +144,11 @@ let Datatables = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-adsb" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return (
+                            '<button class="btn btn-primary btn-sm m-btn--hover-brand instructions" data-toggle="modal" data-target="#modal_instruction" type="button"  title="View" data-uuid="' +
+                            t.uuid +
+                            '">\n<span><i class="la la-edit"></i><span>Select</span></span></button>'
+                        );
                     }
                 },
 
@@ -259,9 +263,9 @@ let Datatables = {
                     orderable: !1,
                     render: function(a, e, t, n) {
                         return (
-                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-si" title="View" data-uuid="' +
+                            '<button class="btn btn-primary btn-sm m-btn--hover-brand instructions" data-toggle="modal" data-target="#modal_instruction" type="button"  title="View" data-uuid="' +
                             t.uuid +
-                            '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                            '">\n<span><i class="la la-edit"></i><span>Select</span></span></button>'
                         );
                     }
                 }
@@ -300,9 +304,9 @@ let Datatables = {
                     orderable: !1,
                     render: function(a, e, t, n) {
                         return (
-                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-si" title="View" data-uuid="' +
+                            '<button class="btn btn-primary btn-sm m-btn--hover-brand instructions" data-toggle="modal" data-target="#modal_instruction" type="button"  title="View" data-uuid="' +
                             t.uuid +
-                            '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                            '">\n<span><i class="la la-edit"></i><span>Select</span></span></button>'
                         );
                     }
                 }

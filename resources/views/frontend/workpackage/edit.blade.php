@@ -140,10 +140,10 @@
                                                     @include('frontend.workpackage.nonroutine.index')
                                                     @include('frontend.workpackage.nonroutine.adsb.modal')
                                                     @include('frontend.workpackage.nonroutine.cmrawl.modal')
-                                                    @include('frontend.workpackage.nonroutine.modal')
                                                     @include('frontend.workpackage.nonroutine.si.modal')
                                                     @include('frontend.workpackage.nonroutine.ea.modal')
                                                     @include('frontend.workpackage.nonroutine.eo.modal')
+                                                    @include('frontend.workpackage.nonroutine.modal')
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <div class="action-buttons m--align-center">

@@ -711,6 +711,61 @@ let Workpackage = {
             }
         });
 
+        $("#adsb_datatable").on("click", ".instructions", function() {
+            if (instruction_datatables_init == true) {
+                instruction_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#instruction_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $("#eo_datatable").on("click", ".instructions", function() {
+            if (instruction_datatables_init == true) {
+                instruction_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#instruction_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $("#ea_datatable").on("click", ".instructions", function() {
+            if (instruction_datatables_init == true) {
+                instruction_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#instruction_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
         function instruction(triggeruuid) {
             $("#instruction_datatable").DataTable({
                 dom: '<"top"f>rt<"bottom">pl',
@@ -783,6 +838,26 @@ let Workpackage = {
                         });
 
                         let table = $(".cmr-awl_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $(".ad-sb_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $(".ad-sb_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $(".eo_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $(".ea_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
