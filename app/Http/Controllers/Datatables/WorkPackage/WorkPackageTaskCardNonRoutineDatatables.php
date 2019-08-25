@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Datatables\WorkPackage;
 
 use App\Models\WorkPackage;
 use App\Models\ListUtil;
+use App\Models\TaskCard;
 use Illuminate\Http\Request;
 use App\Models\EOInstruction;
 use App\Http\Controllers\Controller;
@@ -247,7 +248,7 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function instruction($tes)
+    public function instruction(TaskCard $taskcard)
     {
         function filterArray( $array, $allowed = [] ) {
             return array_filter(
@@ -330,7 +331,7 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
         }
 
         // get all raw data
-        $EOInstructions = EOInstruction::with('eo_header')->get();
+        $EOInstructions = EOInstruction::with('eo_header')->where('taskcard_id',$taskcard->id)->get();
 
         foreach($EOInstructions as $EOInstruction){
             $EOInstruction->number = $EOInstruction->eo_header->number;
