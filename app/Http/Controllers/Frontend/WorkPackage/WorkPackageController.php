@@ -10,6 +10,7 @@ use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Models\EOInstruction;
 use App\Models\Pivots\TaskCardWorkPackage;
+use App\Models\Pivots\EOInstructionWorkPackage;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\WorkPackageStore;
@@ -251,9 +252,19 @@ class WorkPackageController extends Controller
      */
     public function deleteInstruction(WorkPackage $workPackage,EOInstruction $instruction)
     {
-        $workPackage->eo_instructions()->detach($instruction);
+        $eo_instruction = EOInstructionWorkPackage::where('workpackage_id', $workPackage->id)->where('instruction_id', $instruction->id)->first();
 
-        return response()->json($workPackage);
+        if($eo_instruction->predecessors()->exists()){ 
+            $eo_instruction->predecessors()->delete();
+        }
+
+        if($eo_instruction->successors()->exists()){ 
+            $eo_instruction->successors()->delete();
+        }
+
+        $eo_instruction->delete();
+
+        return response()->json($eo_instruction);
     }
 
     /**
