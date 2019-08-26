@@ -11,6 +11,8 @@ class Document extends MemfisModel
         'type_id',
         'documentable_type',
         'documentable_id',
+        'created_at',
+        'updated_at',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
