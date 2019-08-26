@@ -59,7 +59,7 @@ class Position extends MemfisModel
      * One-to-Many: An Position have many Employee.
      *
      * This function will retrieve Employee of a Position.
-     * See: Employee job_tittle() method for the inverse
+     * See: Employee position() method for the inverse
      *
      * @return mixed
      */

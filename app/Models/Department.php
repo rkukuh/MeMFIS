@@ -79,6 +79,6 @@ class Department extends MemfisModel
      */
     public function employee()
     {
-        return $this->hasMany(Department::class);
+        return $this->hasMany(Employee::class);
     }
 }

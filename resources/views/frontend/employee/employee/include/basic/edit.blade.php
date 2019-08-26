@@ -86,8 +86,8 @@
                             
                             @php
                             $document = null;
-                            if(isset($documents[0]->number)){
-                            $document = $documents[0]->number;
+                            if(isset($documents['ktp'])){
+                            $document = $documents['ktp'];
                             }
                             @endphp
 
@@ -178,13 +178,13 @@
 
                     @php
                         $address_1 = null;
-                        if(isset($address[0]->address)){
-                            $address_1 = $address[0]->address;
+                        if(isset($addresses['address_1'])){
+                            $address_1 = $addresses['address_1'];
                         }
 
                         $address_2 = null;
-                        if(isset($address[1]->address)){
-                            $address_2 = $address[1]->address;
+                        if(isset($addresses['address_2'])){
+                            $address_2 = $addresses['address_1'];
                         }
                     @endphp
                     @component('frontend.common.input.text')
@@ -257,23 +257,23 @@
 
                     @php
                         $home_phone = null;
-                        if(isset($phones[0]->number)){
-                            $home_phone = $phones[0]->number;
+                        if(isset($phones['home'])){
+                            $home_phone = $phones['home'];
                         }
 
                         $mobile_phone = null;
-                        if(isset($phones[1]->number)){
-                            $mobile_phone = $phones[0]->number;
+                        if(isset($phones['mobile'])){
+                            $mobile_phone = $phones['mobile'];
                         }
 
                         $work_phone = null;
-                        if(isset($phones[2]->number)){
-                            $work_phone = $phones[2]->number;
+                        if(isset($phones['work'])){
+                            $work_phone = $phones['work'];
                         }
 
                         $other_phone = null;
-                        if(isset($phones[3]->number)){
-                            $other_phone = $phones[3]->number;
+                        if(isset($phones['other'])){
+                            $other_phone = $phones['other'];
                         }
                     @endphp
                     @component('frontend.common.input.number')
@@ -330,16 +330,17 @@
 
                     @php
                         $email_1 = null;
-                        if(isset($email[0]->address)){
-                            $email_1 = $email[0]->address;
+                        if(isset($emails['email_1'])){
+                            $email_1 = $emails['email_1'];
                         }
 
                         $email_2 = null;
-                        if(isset($email[1]->address)){
-                            $email_2 = $email[1]->address;
+                        if(isset($emails['email_2'])){
+                            $email_2 = $emails['email_2'];
                         }
+
                     @endphp
-                    @component('frontend.common.input.number')
+                    @component('frontend.common.input.text')
                         @slot('value',$email_1)
                         @slot('id', 'email_1')
                         @slot('name', 'email_1')
@@ -351,7 +352,7 @@
                         Email 2
                     </label>
 
-                    @component('frontend.common.input.number')
+                    @component('frontend.common.input.text')
                         @slot('value', $email_2)
                         @slot('id', 'email_2')
                         @slot('name', 'email_2')
@@ -376,6 +377,7 @@
                             </label>
         
                             @component('frontend.common.input.datepicker')
+                                @slot('value', $employee->joined_date)
                                 @slot('id', 'period_start_date')
                                 @slot('name', 'period_start_date')
                                 @slot('id_error','period_start_date')

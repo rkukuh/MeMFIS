@@ -182,7 +182,7 @@ class Employee extends MemfisModel
      *
      * @return mixed
      */
-    public function status()
+    public function statuses()
     {
         return $this->belongsTo(Status::class);
     }
@@ -198,6 +198,45 @@ class Employee extends MemfisModel
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    /**
+     * One-to-Many: An Employee have one or many benefit.
+     *
+     * This function will retrieve benefit of a given Employee.
+     * See: employee_benefit employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_benefit()
+    {
+        return $this->belongsTo(EmployeeBenefit::class);
+    }
+
+    /**
+     * One-to-Many: An Employee have one or many bpjs.
+     *
+     * This function will retrieve bpjs of a given Employee.
+     * See: employee_bpjs employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_bpjs()
+    {
+        return $this->belongsTo(EmployeeBPJS::class);
+    }
+
+    /**
+     * One-to-Many: An Employee have one or many provisions.
+     *
+     * This function will retrieve provisions of a given Employee.
+     * See: employee_provisions employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_provisions()
+    {
+        return $this->belongsTo(EmployeeProvisions::class);
     }
 
     /**

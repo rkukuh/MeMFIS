@@ -97,7 +97,7 @@ class EmployeeController extends Controller
         $employee->phones()->create([
             'number' => $request->mobile_phone,
             'type_id' => Type::where('of','phone')->where('code','mobile')->first()->id,
-
+            'updated_at' => null
         ]);
 
         if($request->work_phone){
@@ -110,7 +110,7 @@ class EmployeeController extends Controller
 
         if($request->other_phone){
             $employee->phones()->create([
-                'number' => $request->work_phone,
+                'number' => $request->other_phone,
                 'type_id' => Type::where('of','phone')->where('code','other')->first()->id,
                 'updated_at' => null
             ]);
@@ -158,7 +158,62 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        return view('frontend.employee.employee.show');
+        //Basic Information
+        $dateOfBirth = $employee->dob;
+        $age = Carbon::parse($dateOfBirth)->age;
+
+        $data_documents = $employee->documents()->whereNull('documents.updated_at')->get();
+        $data_emails = $employee->emails()->whereNull('emails.updated_at')->get();
+        $data_addreses = $employee->addresses()->whereNull('addresses.updated_at')->get();
+        $data_phones = $employee->phones()->whereNull('phones.updated_at')->get();
+
+        $documents[] = null; 
+        $emails[] = null;
+        $addreses[] = null;
+        $phones[] = null;
+
+        foreach($data_documents as $dd){
+            $type = Type::find($dd->type_id);
+            $documents[$type->code] = $dd->address;
+        }
+
+        foreach($data_emails as $e){
+            $type = Type::find($e->type_id);
+            $emails[$type->code] = $e->address;
+        }
+
+        foreach($data_addreses as $ad){
+            $type = Type::find($ad->type_id);
+            $addreses[$type->code] = $ad->address;
+        }
+
+        foreach($data_phones as $p){
+            $type = Type::find($p->type_id);
+            $phones[$type->code] = $p->number;
+        }
+
+        $jobDetails[] = null;
+ 
+        if($employee->job_tittle()->first()){
+            $jobDetails['job_tittle'] = $employee->job_tittle()->first()->name;
+        };
+        if($employee->position()->first()){
+            $jobDetails['position'] = $employee->position()->first()->name;
+        }
+        if($employee->statuses()->first()){
+            $jobDetails['status'] = $employee->statuses()->first()->name;
+        }
+        if($employee->department()->first()){
+            $jobDetails['department'] = $employee->department()->first()->name;
+        }
+        if($employee->indirect_supervisor()->first()){
+            $jobDetails['indirect'] = $employee->indirect_supervisor()->first()->name;
+        }
+        if($employee->supervisor()->first()){
+        $jobDetails['supervisor'] = $employee->supervisor()->first()->name;
+        }
+
+        return view('frontend.employee.employee.show',['employee' => $employee,'age' => $age,'documents' => $documents,'emails' => $emails,'addresses' => $addreses,'phones' => $phones,'jobDetails' => $jobDetails]);
     }
 
     /**
@@ -169,14 +224,63 @@ class EmployeeController extends Controller
      */
     public function edit(Employee $employee)
     {
+        //Basic Information
         $dateOfBirth = $employee->dob;
         $age = Carbon::parse($dateOfBirth)->age;
 
-        $documents = $employee->documents()->whereNull('documents.updated_at')->get();
-        $emails = $employee->emails()->whereNull('emails.updated_at')->get();
-        $addreses = $employee->addresses()->whereNull('addresses.updated_at')->get();
-        $phones = $employee->phones()->whereNull('phones.updated_at')->get();
-        return view('frontend.employee.employee.edit',['employee' => $employee,'age' => $age,'documents' => $documents,'email' => $emails,'address' => $addreses,'phones' => $phones]);
+        $data_documents = $employee->documents()->whereNull('documents.updated_at')->get();
+        $data_emails = $employee->emails()->whereNull('emails.updated_at')->get();
+        $data_addreses = $employee->addresses()->whereNull('addresses.updated_at')->get();
+        $data_phones = $employee->phones()->whereNull('phones.updated_at')->get();
+
+        $documents[] = null; 
+        $emails[] = null;
+        $addreses[] = null;
+        $phones[] = null;
+
+
+        foreach($data_documents as $dd){
+            $type = Type::find($dd->type_id);
+            $documents[$type->code] = $dd->address;
+        }
+
+        foreach($data_emails as $e){
+            $type = Type::find($e->type_id);
+            $emails[$type->code] = $e->address;
+        }
+
+        foreach($data_addreses as $ad){
+            $type = Type::find($ad->type_id);
+            $addreses[$type->code] = $ad->address;
+        }
+
+        foreach($data_phones as $p){
+            $type = Type::find($p->type_id);
+            $phones[$type->code] = $p->number;
+        }
+
+        $jobDetails[] = null;
+ 
+        if($employee->job_tittle()->first()){
+            $jobDetails['job_tittle'] = $employee->job_tittle()->first()->name;
+        };
+        if($employee->position()->first()){
+            $jobDetails['position'] = $employee->position()->first()->name;
+        }
+        if($employee->statuses()->first()){
+            $jobDetails['status'] = $employee->statuses()->first()->name;
+        }
+        if($employee->department()->first()){
+            $jobDetails['department'] = $employee->department()->first()->name;
+        }
+        if($employee->indirect_supervisor()->first()){
+            $jobDetails['indirect'] = $employee->indirect_supervisor()->first()->name;
+        }
+        if($employee->supervisor()->first()){
+        $jobDetails['supervisor'] = $employee->supervisor()->first()->name;
+        }
+
+        return view('frontend.employee.employee.edit',['employee' => $employee,'age' => $age,'documents' => $documents,'emails' => $emails,'addresses' => $addreses,'phones' => $phones,'jobDetails' => $jobDetails]);
     }
 
     /**
