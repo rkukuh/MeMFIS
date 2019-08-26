@@ -567,7 +567,7 @@ class TaskCardEODatatables extends Controller
             // get all raw data
             $taskcards  = TaskCard::with('type')
             ->whereHas('type', function ($query) {
-                $query->where('code', 'ea');
+                $query->where('code', 'eo');
             })->get();
 
             $alldata = json_decode( $taskcards, true);
