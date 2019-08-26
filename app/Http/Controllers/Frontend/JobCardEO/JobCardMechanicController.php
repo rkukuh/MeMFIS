@@ -178,6 +178,12 @@ class JobCardMechanicController extends Controller
             if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open"){
                 return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
             }else{
+                $additionals['TSN'] = $request->tsn;
+                $additionals['CSN'] = $request->csn;
+
+                $jobcard->additionals =json_encode($additionals);
+                $jobcard->save();
+
                 $jobcard->progresses()->save(new Progress([
                     'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                     'progressed_by' => Auth::id()
