@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use Carbon\Carbon;
 use App\Models\Type;
@@ -59,15 +59,6 @@ $factory->define(TaskCard::class, function (Faker $faker) {
             (float)(rand(1, 5) * 0.5) // min:1-max:unlimited-step:0,1-eg:1;1,5;2;
         ]),
         'sequence' => $faker->randomElement([null, rand(1, 10)]),
-        'stringer' => function () use ($faker) {
-            $stringers = [];
-
-            for ($i = 0; $i < rand(2, 5); $i++) {
-                $stringers[] = $faker->numberBetween(100, 999);
-            }
-
-            return $faker->randomElement([null, json_encode($stringers)]);
-        },
         'version' => function () use ($faker) {
             $versions = [];
 
@@ -77,11 +68,35 @@ $factory->define(TaskCard::class, function (Faker $faker) {
 
             return $faker->randomElement([null, json_encode($versions)]);
         },
+        'stringer' => function () use ($faker) {
+            $stringers = [];
+
+            for ($i = 0; $i < rand(2, 5); $i++) {
+                $stringers[] = $faker->numberBetween(100, 999);
+            }
+
+            return $faker->randomElement([null, json_encode($stringers)]);
+        },
+        'section' => function () use ($faker) {
+            $sections = [];
+
+            for ($i = 0; $i < rand(2, 5); $i++) {
+                $sections[] = $faker->numberBetween(100, 999);
+            }
+
+            return $faker->randomElement([null, json_encode($sections)]);
+        },
         'ata' => null,
         'description' => $faker->paragraph(rand(10, 20)),
         'additionals' => function () use ($faker) {
             $additionals = [
                 'internal_number' => 'TC-INT-DUM-' . $faker->unixTime()
+            ];
+
+            $additionals['document_library'] = [
+                ['no' => 'Doc-102030'],
+                ['ref' => 'Ref-908070', 'title' => 'Some Document'],
+                ['no' => 'Doc-A/2/XII', 'description' => 'blablabla'],
             ];
 
             return $faker->randomElement([null, json_encode($additionals)]);
@@ -230,19 +245,19 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 
     // Aircraft's Access
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->accesses()->saveMany($aircraft->accesses);
     }
 
     // Aircraft's Zone
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->zones()->saveMany($aircraft->zones);
     }
 
     // Aircraft's Station
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->stations()->saveMany($aircraft->stations);
     }
 
@@ -276,7 +291,7 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
 
     // Related-to
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
     }
 
@@ -289,13 +304,13 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
         else {
             $skill = factory(Type::class)->states('taskcard-skill')->create();
         }
-    
+
         $taskcard->skills()->attach($skill);
     }
 
     // Threshold and Repeat
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->thresholds()->saveMany(
             factory(Threshold::class, rand(1, 2))->make()
         );
@@ -348,7 +363,7 @@ $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker)
             else {
                 $skill = factory(Type::class)->states('taskcard-skill')->create();
             }
-        
+
             $eo_instruction->skills()->attach($skill);
         }
     }
@@ -388,7 +403,7 @@ $factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker)
         else {
             $skill = factory(Type::class)->states('taskcard-skill')->create();
         }
-    
+
         $taskcard->skills()->attach($skill);
     }
 

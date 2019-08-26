@@ -103,6 +103,7 @@ Route::name('admin.')->group(function () {
         Route::resource('project-workpackage-engineer', 'ProjectWorkPackageEngineerController');
         Route::resource('project-workpackage-facility', 'ProjectWorkPackageFacilityController');
         Route::resource('project-workpackage-taskcard', 'ProjectWorkPackageTaskCardController');
+        Route::resource('project-wp-eo', 'ProjectWorkPackageEOInstructionController');
 
         /** WORKPACKAGE's TASKCARDs */
 
@@ -126,6 +127,10 @@ Route::name('admin.')->group(function () {
         /** QUOTATION's DEFECTCARDs */
 
         Route::resource('qtn-defectcard-item', 'QuotationDefectCardItemController');
+
+        /** WORKPACKAGE's EO-INSTRUCTIONs */
+
+        Route::resource('eo-instruction-wp', 'EOInstructionWorkPackageController');
 
     });
 

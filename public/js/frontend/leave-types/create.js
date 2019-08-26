@@ -1,19 +1,45 @@
 let leaveType = {
     init: function () {
+        
     let create = $('.footer').on('click', '.add-leave-types', function () {
 
         let code = $('input[name=code]').val()
         let code_uppercase = code.toUpperCase()
 
         let name = $('input[name=name]').val()
+        let gender = $('input[name=gender]').val()
+
+        if(gender == 'Male'){
+            gender = 'm'
+        }else if(gender == 'Female'){
+            gender = 'f'
+        }else{
+            gender = 'all'
+        }
+        
+        let based = $('input[name=day]').val()
         let leave_period = $('input[name=leave_period]').val()
         
         let pro_rate = null
+        let distirbute = null
+        let back_date = null
 
         if ($('#pro_rate').is(':checked')) {
             pro_rate = 1
         }else{
             pro_rate = 0
+        }
+
+        if ($('#distribute_evently_per_month').is(':checked')) {
+            distirbute = 1
+        }else{
+            distirbute = 0
+        }
+
+        if ($('#back_date').is(':checked')) {
+            back_date = 1
+        }else{
+            back_date = 0
         }
 
         let description = $('#description').val();
@@ -28,8 +54,12 @@ let leaveType = {
                 _token: $('input[name=_token]').val(),
                 code: code_uppercase,
                 name: name,
+                gender: gender,
+                based: based,
                 leave_period: leave_period,
                 prorate_leave: pro_rate,
+                distirbute_evently: distirbute,
+                back_date: back_date,
                 description: description,
             },
             success: function (data) {

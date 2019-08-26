@@ -18,17 +18,17 @@ class TaskReleaseJobCardDatatables extends Controller
      */
     public function index()
     {
-        $JobCards = JobCard::with('taskcard','quotation')->get();
+        $JobCards = JobCard::with('quotation')->get();
 
         foreach($JobCards as $jobcard){
 
             $jobcard->aircraft_name .= $jobcard->quotation->project->aircraft->name;
-            if(isset($jobcard->taskcard->skills) ){
-                if(sizeof($jobcard->taskcard->skills) == 3){
+            if(isset($jobcard->jobcardable->skills) ){
+                if(sizeof($jobcard->jobcardable->skills) == 3){
                     $jobcard->skill_name .= "ERI";
                 }
-                else if(sizeof($jobcard->taskcard->skills) == 1){
-                    $jobcard->skill_name .= $jobcard->taskcard->skills[0]->name;
+                else if(sizeof($jobcard->jobcardable->skills) == 1){
+                    $jobcard->skill_name .= $jobcard->jobcardable->skills[0]->name;
                 }
                 else{
                     $jobcard->skill_name .= '';
@@ -36,8 +36,8 @@ class TaskReleaseJobCardDatatables extends Controller
             }
 
             $jobcard->customer_name .= $jobcard->quotation->project->customer->name;
-            if($jobcard->taskcard->additionals <> null){
-                $addtional = json_decode($jobcard->taskcard->additionals);
+            if($jobcard->jobcardable->additionals <> null){
+                $addtional = json_decode($jobcard->jobcardable->additionals);
                 $jobcard->company_task .= $addtional->internal_number;
             }
             else{
@@ -218,7 +218,7 @@ class TaskReleaseJobCardDatatables extends Controller
         $JobCards=JobCard::with('taskcard');
 
         if (!empty($request->task_type_id)) {
-            $JobCards->whereHas('taskcard', function ($query) use ($request) {
+            $JobCards->whereHas('jobcardable', function ($query) use ($request) {
                 $query->where('task_id', $request->task_type_id);
             });
         }

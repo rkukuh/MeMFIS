@@ -143,6 +143,7 @@
                                                     @include('frontend.workpackage.nonroutine.si.modal')
                                                     @include('frontend.workpackage.nonroutine.ea.modal')
                                                     @include('frontend.workpackage.nonroutine.eo.modal')
+                                                    @include('frontend.workpackage.nonroutine.modal')
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <div class="action-buttons m--align-center">
@@ -166,6 +167,7 @@
                                             @include('frontend.workpackage.modal.material.taskcard')
                                             @include('frontend.workpackage.modal.tool.taskcard')
                                             @include('frontend.workpackage.modal.sequence')
+                                            @include('frontend.workpackage.modal.sequence-instruction')
                                             @include('frontend.workpackage.modal.predecessor')
                                             @include('frontend.workpackage.modal.successor')
                                             @include('frontend.workpackage.modal.create-predecessor')

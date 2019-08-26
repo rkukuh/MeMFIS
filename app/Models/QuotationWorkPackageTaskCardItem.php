@@ -12,6 +12,7 @@ class QuotationWorkPackageTaskCardItem extends MemfisModel
         'quotation_id',
         'workpackage_id',
         'taskcard_id',
+        'eo_instruction_id',
         'item_id',
         'quantity',
         'unit_id',
@@ -22,6 +23,16 @@ class QuotationWorkPackageTaskCardItem extends MemfisModel
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * One-Way: A Quotation's WorkPackage's TaskCard's Item must have an EO-instruction assigned to.
+     *
+     * @return mixed
+     */
+    public function eo_instruction()
+    {
+        return $this->belongsTo(EOInstruction::class);
+    }
 
     /**
      * One-Way: A Quotation's WorkPackage's TaskCard's Item must have an item assigned to.

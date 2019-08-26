@@ -23,6 +23,7 @@ class ProjectWorkPackageTaskCards extends Seeder
                 $project_workpackage->taskcards()->create([
                     'taskcard_id' => TaskCard::find($j)->id,
                     'sequence' => $j,
+                    'is_rii' => $faker->boolean,
                     'is_mandatory' => $faker->boolean,
                     'note' => $faker->randomElement([null, $faker->text]),
                 ]);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Workshift;
+use App\Models\WorkshiftSchedule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\WorkshiftStore;
 use App\Http\Requests\Frontend\WorkshiftUpdate;
@@ -37,7 +38,27 @@ class WorkshiftController extends Controller
      */
     public function store(WorkshiftStore $request)
     {
-        //
+        $workshift = Workshift::create([
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+
+        $id = Workshift::where('uuid',$workshift->uuid)->first()->id; 
+
+        if(isset($request->days)){
+            for($i=0; $i<count($request->days); $i++){
+                WorkshiftSchedule::create([
+                    'workshift_id' => $id,
+                    'days' => $request->days[$i],
+                    'in' => $request->in[$i],
+                    'break_in' => $request->break_in[$i],
+                    'break_out' => $request->break_out[$i],
+                    'out' => $request->out[$i]
+                ]);
+                }
+        }
+        return response()->json($workshift);
     }
 
     /**
@@ -48,7 +69,11 @@ class WorkshiftController extends Controller
      */
     public function show(Workshift $workshift)
     {
-        return view('frontend.workshift-schedule.show',['workshift' => $workshift]);
+        $id = Workshift::where('uuid',$workshift->uuid)->first()->id;
+
+        $schedule = WorkshiftSchedule::where('workshift_id',$id)->get();
+
+        return view('frontend.workshift-schedule.show',['workshift' => $workshift,'schedule' => $schedule]);
     }
 
     /**
@@ -59,7 +84,7 @@ class WorkshiftController extends Controller
      */
     public function edit(Workshift $workshift)
     {
-        return view('frontend.workshift-schedule.edit',['workshift' => $workshift]);
+        //
     }
 
     /**

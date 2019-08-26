@@ -20,17 +20,17 @@ class JobCardDatatables extends Controller
      */
     public function index()
     {
-        $JobCard = JobCard::with('taskcard','quotation','quotation.project')->get();
+        $JobCard = JobCard::with('quotation','quotation.project')->get();
 
         foreach($JobCard as $taskcard){
-            $taskcard->task_name .= $taskcard->taskcard->task;
-            $taskcard->task_name .= $taskcard->taskcard->type;
-            if(isset($taskcard->taskcard->skills) ){
-                if(sizeof($taskcard->taskcard->skills) == 3){
+            $taskcard->task_name .= $taskcard->jobcardable->task;
+            $taskcard->task_name .= $taskcard->jobcardable->type;
+            if(isset($taskcard->jobcardable->skills) ){
+                if(sizeof($taskcard->jobcardable->skills) == 3){
                     $taskcard->skill_name .= "ERI";
                 }
-                else if(sizeof($taskcard->taskcard->skills) == 1){
-                    $taskcard->skill_name .= $taskcard->taskcard->skills[0]->name;
+                else if(sizeof($taskcard->jobcardable->skills) == 1){
+                    $taskcard->skill_name .= $taskcard->jobcardable->skills[0]->name;
                 }
                 else{
                     $taskcard->skill_name .= '';

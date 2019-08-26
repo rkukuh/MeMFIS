@@ -18,7 +18,7 @@ class CreateThresholdsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->morphs('thresholdable');
             $table->unsignedBigInteger('type_id');
-            $table->integer('amount');
+            $table->integer('amount')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

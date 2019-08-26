@@ -34,6 +34,24 @@ class WorkPackage extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A Work Package may have one or many EO-Instruction.
+     *
+     * This function will retrieve all the EO-instructions of a work package.
+     * See: EOInstruction's workpackages() method for the inverse
+     *
+     * @return mixed
+     */
+    public function eo_instructions()
+    {
+        return $this->belongsToMany(EOInstruction::class, 'eo_instruction_workpackage', 'workpackage_id', 'eo_instruction_id')
+                    ->withPivot(
+                        'sequence',
+                        'is_mandatory'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many: A work package may have one or many item.
      *
      * This function will retrieve all the items of a work package.
@@ -96,7 +114,7 @@ class WorkPackage extends MemfisModel
     }
 
     /**
-     * Many-to-Many: A task card may have one or many workpackage.
+     * Many-to-Many: A Work Package may have one or many Task Card.
      *
      * This function will retrieve all the task cards of a work package.
      * See: TaskCard's workpackages() method for the inverse

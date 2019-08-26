@@ -16,7 +16,7 @@ class CreateManhoursTable extends Migration
         Schema::create('manhours', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->double('rate');
+            $table->double('rate')->nullable();
             $table->integer('level');
             $table->timestamps();
             $table->softDeletes();

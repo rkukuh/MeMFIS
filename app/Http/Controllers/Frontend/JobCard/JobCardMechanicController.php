@@ -113,8 +113,8 @@ class JobCardMechanicController extends Controller
             if(isset($jobcard->progresses[1]) and $this->statuses->where('id',$jobcard->progresses->get(1)->status_id)->first()->code == "progress"){
                 return view('frontend.job-card.mechanic.progress-open', [
                     'jobcard' => $jobcard,
-                    'materials' => $jobcard->taskcard->materials,
-                    'tools' => $jobcard->taskcard->tools,
+                    'materials' => $jobcard->jobcardable->materials,
+                    'tools' => $jobcard->jobcardable->tools,
                     'progresses' => $progresses,
                     'status' => $this->statuses->where('code','open')->first(),
                 ]);
@@ -129,8 +129,8 @@ class JobCardMechanicController extends Controller
                 'other' => $this->other,
                 'accomplished' => $this->accomplished,
                 'jobcard' => $jobcard,
-                'materials' => $jobcard->taskcard->materials,
-                'tools' => $jobcard->taskcard->tools,
+                'materials' => $jobcard->jobcardable->materials,
+                'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
                 'pending' => $this->statuses->where('code','pending')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
@@ -139,8 +139,8 @@ class JobCardMechanicController extends Controller
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "pending"){
             return view('frontend.job-card.mechanic.progress-pause', [
                 'jobcard' => $jobcard,
-                'materials' => $jobcard->taskcard->materials,
-                'tools' => $jobcard->taskcard->tools,
+                'materials' => $jobcard->jobcardable->materials,
+                'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
                 'open' => $this->statuses->where('code','open')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
@@ -150,16 +150,16 @@ class JobCardMechanicController extends Controller
             return view('frontend.job-card.mechanic.progress-close', [
                 'progresses' => $progresses,
                 'jobcard' => $jobcard,
-                'materials' => $jobcard->taskcard->materials,
-                'tools' => $jobcard->taskcard->tools,
+                'materials' => $jobcard->jobcardable->materials,
+                'tools' => $jobcard->jobcardable->tools,
             ]);
         }
         else{
             return view('frontend.job-card.mechanic.progress-close', [
                 'progresses' => $progresses,
                 'jobcard' => $jobcard,
-                'materials' => $jobcard->taskcard->materials,
-                'tools' => $jobcard->taskcard->tools,
+                'materials' => $jobcard->jobcardable->materials,
+                'tools' => $jobcard->jobcardable->tools,
             ]);
         }
 

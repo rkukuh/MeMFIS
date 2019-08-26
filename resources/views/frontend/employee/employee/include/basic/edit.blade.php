@@ -9,7 +9,7 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('text', 'Employee ID')
+                        @slot('value', $employee->code)
                         @slot('id', 'employee_id')
                         @slot('name', 'employee_id')
                         @slot('id_error', 'employee_id')
@@ -24,6 +24,7 @@
 
                             @component('frontend.common.input.datepicker')
                                 @slot('id', 'date')
+                                @slot('value', $employee->dob)
                                 @slot('name', 'date')
                             @endcomponent
                         </div>
@@ -33,7 +34,7 @@
                             </label>
         
                             @component('frontend.common.input.text')
-                                @slot('text', 'Birthplace')
+                                @slot('value', $employee->dob_place)
                                 @slot('id', 'birthplace')
                                 @slot('name', 'birthplace')
                                 @slot('id_error', 'birthplace')
@@ -49,7 +50,7 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('text', 'First Name')
+                        @slot('value', $employee->first_name)
                         @slot('id', 'first_name')
                         @slot('name', 'first_name')
                         @slot('id_error', 'first_name')
@@ -60,8 +61,15 @@
                         Last Name @include('frontend.common.label.required')
                     </label>
 
+                    @php
+
+                        $lastName = null;
+                        if($employee->last_name != $employee->first_name){
+                            $lastName = $employee->last_name;
+                        }
+                    @endphp
                     @component('frontend.common.input.text')
-                        @slot('text', 'Last Name')
+                        @slot('value', $lastName)
                         @slot('id', 'last_name')
                         @slot('name', 'last_name')
                         @slot('id_error', 'last_name')
@@ -114,7 +122,7 @@
                             </label>
         
                             @component('frontend.common.input.text')
-                                @slot('text', 'Nationality')
+                                @slot('value', $employee->nationality)
                                 @slot('id', 'nationality')
                                 @slot('name', 'nationality')
                                 @slot('id_error', 'nationality')
@@ -145,15 +153,6 @@
                         @slot('name', 'marital_status')
                         @slot('id_error', 'marital_status')
                     @endcomponent
-
-                    {{-- Married
-                    Married with 1 childs
-                    Married with 2 childs
-                    Married with 3 childs
-                    Not Married
-                    Not Married with 1 childs
-                    Not Married with 2 childs
-                    Not Married with 3 childs --}}
                 </div>
             </div>
         </fieldset>

@@ -3,6 +3,7 @@
 use App\User;
 use App\Models\Employee;
 use Faker\Generator as Faker;
+use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
@@ -30,8 +31,13 @@ $factory->afterCreating(User::class, function ($user, $faker) {
 
     $user->employee()->save(factory(Employee::class)->make([
         'first_name' => $user->name,
-        'middle_name' => null,
-        'last_name' => null,
+        'last_name' => $user->name,
+        'dob' => Carbon::now()->subYear(rand(20, 50)),
+        'dob_place' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
+        'gender' => $faker->randomElement(['m', 'f']),
+        'religion' => $faker->randomElement(['islam','khonghucu','budha','kristen','hindu']),
+        'marital_status' => $faker->randomElement(['s','m']),
+        'nationality' => $faker->randomElement(['Indonesia','Japan','Zimbabwe','South Africa'])
     ]));
 
 });

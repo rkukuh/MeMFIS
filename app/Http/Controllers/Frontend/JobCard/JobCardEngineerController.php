@@ -149,8 +149,8 @@ class JobCardEngineerController extends Controller
         if ($progresses->count() == 0 and $this->statuses->where('id',$jobcard->progresses->first()->status_id)->first()->code == "open") {
             return view('frontend.job-card.engineer.progress-open', [
                 'jobcard' => $jobcard,
-                'materials' => $jobcard->taskcard->materials,
-                'tools' => $jobcard->taskcard->tools,
+                'materials' => $jobcard->jobcardable->materials,
+                'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
                 'status' => $this->statuses->where('code','open')->first(),
                 'employees' => $employees,
@@ -163,8 +163,8 @@ class JobCardEngineerController extends Controller
                 'other' => $this->other,
                 'accomplished' => $this->accomplished,
                 'jobcard' => $jobcard,
-                'materials' => $jobcard->taskcard->materials,
-                'tools' => $jobcard->taskcard->tools,
+                'materials' => $jobcard->jobcardable->materials,
+                'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
                 'pending' => $this->statuses->where('code','pending')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
@@ -173,8 +173,8 @@ class JobCardEngineerController extends Controller
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "pending"){
             return view('frontend.job-card.engineer.progress-pause', [
                 'jobcard' => $jobcard,
-                'materials' => $jobcard->taskcard->materials,
-                'tools' => $jobcard->taskcard->tools,
+                'materials' => $jobcard->jobcardable->materials,
+                'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
                 'open' => $this->statuses->where('code','open')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
@@ -183,8 +183,8 @@ class JobCardEngineerController extends Controller
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "closed"){
             return view('frontend.job-card.engineer.progress-close', [
                 'jobcard' => $jobcard,
-                'materials' => $jobcard->taskcard->materials,
-                'tools' => $jobcard->taskcard->tools,
+                'materials' => $jobcard->jobcardable->materials,
+                'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
                 'actual' => $actual,
             ]);
@@ -192,8 +192,8 @@ class JobCardEngineerController extends Controller
         else{
             return view('frontend.job-card.engineer.progress-close', [
                 'jobcard' => $jobcard,
-                'materials' => $jobcard->taskcard->materials,
-                'tools' => $jobcard->taskcard->tools,
+                'materials' => $jobcard->jobcardable->materials,
+                'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
             ]);
         }

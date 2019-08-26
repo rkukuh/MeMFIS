@@ -9,6 +9,7 @@ use App\Models\ProjectWorkPackageEngineer;
 use App\Models\ProjectWorkPackageFacility;
 use App\Models\ProjectWorkPackageTaskCard;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\ProjectWorkPackageEOInstruction;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class ProjectWorkPackage extends Pivot
@@ -20,7 +21,7 @@ class ProjectWorkPackage extends Pivot
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
-     * One-to-Many: A project's workpackages may have one or many engineer.
+     * One-to-Many: A Project's WorkPackages may have one or many engineer.
      *
      * This function will retrieve all the engineer of a project's workpackages.
      * See: Project WorkPackage Engineer's header() method for the inverse
@@ -33,7 +34,20 @@ class ProjectWorkPackage extends Pivot
     }
 
     /**
-     * One-to-Many: A project's workpackages may have one or many facility.
+     * One-to-Many: A Project's WorkPackages may have one or many EO-instruction.
+     *
+     * This function will retrieve all the EO-instruction of a project's workpackages.
+     * See: ProjectWorkPackageEOInstruction's header() method for the inverse
+     *
+     * @return mixed
+     */
+    public function eo_instructions()
+    {
+        return $this->hasMany(ProjectWorkPackageEOInstruction::class, 'project_workpackage_id');
+    }
+
+    /**
+     * One-to-Many: A Project's WorkPackages may have one or many facility.
      *
      * This function will retrieve all the facility of a project's workpackages.
      * See: Project WorkPackage Engineer's header() method for the inverse
@@ -46,7 +60,7 @@ class ProjectWorkPackage extends Pivot
     }
 
     /**
-     * One-to-Many: A project's workpackages may have one or many manhour.
+     * One-to-Many: A Project's WorkPackages may have one or many manhour.
      *
      * This function will retrieve all the manhour of a project's workpackages.
      * See: Project WorkPackage Manhour's header() method for the inverse
@@ -69,7 +83,7 @@ class ProjectWorkPackage extends Pivot
     }
 
     /**
-     * One-to-Many: A project's workpackages may have one or many taskcard.
+     * One-to-Many: A Project's WorkPackages may have one or many taskcard.
      *
      * This function will retrieve all the taskcard of a project's workpackages.
      * See: Project WorkPackage TaskCard's header() method for the inverse

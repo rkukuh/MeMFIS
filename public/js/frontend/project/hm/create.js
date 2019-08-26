@@ -8,7 +8,6 @@ let Project = {
             data.append("aircraft_id", $('#applicability_airplane').val());
             data.append("aircraft_register", $('input[name=reg]').val());
             data.append("aircraft_sn", $('input[name=serial-number]').val());
-            data.append("code", 'Dummy COde');
             data.append("fileInput", document.getElementById('work-order-attachment').files[0]);
 
             $.ajax({

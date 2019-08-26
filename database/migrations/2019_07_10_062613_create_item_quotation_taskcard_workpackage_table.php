@@ -19,6 +19,7 @@ class CreateItemQuotationTaskCardWorkPackageTable extends Migration
             $table->unsignedBigInteger('quotation_id')->nullable();
             $table->unsignedBigInteger('workpackage_id')->nullable();
             $table->unsignedBigInteger('taskcard_id')->nullable();
+            $table->unsignedBigInteger('eo_instruction_id')->nullable();
             $table->unsignedBigInteger('item_id')->nullable();
             $table->double('quantity');
             $table->unsignedBigInteger('unit_id')->nullable();
@@ -41,6 +42,11 @@ class CreateItemQuotationTaskCardWorkPackageTable extends Migration
 
             $table->foreign('taskcard_id')
                 ->references('id')->on('taskcards')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('eo_instruction_id')
+                ->references('id')->on('eo_instructions')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 

@@ -13,8 +13,8 @@ class TypesOfBenefitBaseCalculation extends Seeder
     public function run()
     {
         Type::create([
-            'code' => 'monthly-fixed',
-            'name' => 'Monthly Fixed',
+            'code' => 'period-fixed',
+            'name' => 'Period Fixed',
             'of'   => 'benefit-base-calculation',
         ]);
 

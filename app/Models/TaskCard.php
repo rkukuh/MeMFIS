@@ -23,17 +23,16 @@ class TaskCard extends MemfisModel
         'effectivity',
         'performance_factor',
         'sequence',
-        'stringer',
         'version',
+        'stringer',
         'section',
-        'document_library',
         'ata',
         'description',
         'additionals',
 
         /** EO Header */
         'revision',
-        'reference', // juga digunakan untuk Reference Service Bulletin pada CPCP.
+        'reference', 
         'category_id',
         'scheduled_priority_id',
         'scheduled_priority_text',
@@ -108,16 +107,16 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * One-to-Many (with JSON data): A jobcard must have a taskcard
+     * Polymorphic: An entity can have zero or many jobcards.
      *
-     * This function will retrieve all the jobcards of a taskcard.
-     * See: JobCard's taskcard() method for the inverse
+     * This function will get all TaskCard's jobcards.
+     * See: JobCard's jobcardable() method for the inverse
      *
      * @return mixed
      */
     public function jobcards()
     {
-        return $this->hasMany(JobCard::class);
+        return $this->morphMany(JobCard::class, 'jobcardable');
     }
 
     /**
@@ -229,10 +228,9 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * One-to-Many: A task card may have one workarea.
+     * One-Way: A task card may have one workarea.
      *
      * This function will retrieve the workarea of a task card.
-     * See: Type's workarea() method for the inverse
      *
      * @return mixed
      */
@@ -242,7 +240,7 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * Many-to-Many: A task card may have one or many workpackage.
+     * Many-to-Many: A Work Package may have one or many Task Card.
      *
      * This function will retrieve all the work packages of a task card.
      * See: WorkPackage's taskcards() method for the inverse

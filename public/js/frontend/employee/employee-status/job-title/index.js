@@ -43,7 +43,15 @@ let EmployeeJobTittle = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
+                    field: '',
+                    title: 'No',
+                    width: '30',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'code',
                     title: 'Code',
                     sortable: 'asc',
@@ -54,7 +62,7 @@ let EmployeeJobTittle = {
                 },
                 {
                     field: 'name',
-                    title: 'Job Tittle Name',
+                    title: 'Job Title Name',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -65,9 +73,9 @@ let EmployeeJobTittle = {
                     filterable: !1,
                 },
                 {
-                    field: 'Actions',
+                    field: 'Action',
                     width: 110,
-                    title: 'Actions',
+                    title: 'Action',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {

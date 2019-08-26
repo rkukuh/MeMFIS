@@ -408,6 +408,7 @@
                 </h4>
                 <i class="m-menu__section-icon flaticon-more-v3"></i>
             </li>
+
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
                 <a href="{{ route('frontend.company.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
@@ -469,6 +470,71 @@
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Workshift Schedule
+                    </span>
+                </a>
+            </li>
+            @endrole
+            @hasanyrole('hrd|employee|admin')
+            <li class="m-menu__section">
+                <h4 class="m-menu__section-text">
+                    MY PROFILE
+                </h4>
+                <i class="m-menu__section-icon flaticon-more-v3"></i>
+            </li>
+
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.employee.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Employee
+                    </span>
+                </a>
+            </li>
+
+            <li class="m-menu__section">
+                <h4 class="m-menu__section-text">
+                    ATTENDANCE
+                </h4>
+                <i class="m-menu__section-icon flaticon-more-v3"></i>
+            </li>
+
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Calendar
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Assign Leaves
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Leave Datalist
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Overtime
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Attendance Correction
                     </span>
                 </a>
             </li>
@@ -586,30 +652,6 @@
                         Vendor
                     </span>
                 </a>
-            </li>
-            <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
-                <a href="#" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Personnel
-                    </span>
-                    <i class="m-menu__ver-arrow la la-angle-right"></i>
-                </a>
-                <div class="m-menu__submenu">
-                    <span class="m-menu__arrow"></span>
-                    <ul class="m-menu__subnav">
-                        <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ route('frontend.employee.index') }}" class="m-menu__link">
-                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
-                                    <span></span>
-                                </i>
-                                <span class="m-menu__link-text">
-                                    Personnels
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </li>
             <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
                 <a href="#" class="m-menu__link m-menu__toggle">

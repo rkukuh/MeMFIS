@@ -24,6 +24,7 @@ use App\Models\ProjectWorkPackageTaskCard;
 use App\Models\ProjectWorkPackageFacility;
 use App\Models\Pivots\QuotationWorkPackage;
 use App\Http\Requests\Frontend\QuotationStore;
+use App\Models\ProjectWorkPackageEOInstruction;
 use App\Http\Requests\Frontend\QuotationUpdate;
 use App\Models\QuotationWorkPackageTaskCardItem;
 
@@ -140,32 +141,65 @@ class QuotationController extends Controller
 
         // TODO generate item taskcard
         $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
-        $project = Project::find($request->project_id);
-            foreach($project->workpackages as $workpackages){
-                foreach($workpackages->taskcards as $taskcard){
-                    foreach($taskcard->items as $item){
-                        // $quotation_taskcard_item = QuotationTaskCard::where('quotation_id',$quotation->id)->where('workpackage_id',$workpackage->id)->first();
+        $project_workpackages = ProjectWorkPackage::where('project_id',$request->project_id)->get();
 
-                        if (Item::findOrFail($item->id)->prices->get($customer)) {
-                            $price_id = Item::find($item->id)->prices->get($customer)->id;
-                        } else {
-                            $price_id = null;
-                        }
-                        QuotationWorkPackageTaskCardItem::create([
-                            'quotation_id' => $quotation->id,
-                            'workpackage_id' => $workpackages->id,
-                            'taskcard_id' => $taskcard->id,
-                            'item_id' => $item->id,
-                            'quantity' => $item->pivot->quantity,
-                            'unit_id' => $item->pivot->unit_id,
-                            'price_id' => $price_id,
-                        ]);
+        foreach($project_workpackages as $workpackage){
+            foreach($workpackage->taskcards as $taskcard){
+                foreach($taskcard->taskcard->items as $item){
+                    if (Item::findOrFail($item->id)->prices->get($customer)) {
+                        $price_id = Item::find($item->id)->prices->get($customer)->id;
+                    } else {
+                        $price_id = null;
                     }
+
+                    if($price_id <> null){
+                        $selling_price = Item::find($item->id)->prices->get($customer)->amount;
+                    }
+                    else{
+                        $selling_price = null;
+                    }
+
+                    QuotationWorkPackageTaskCardItem::create([
+                        'quotation_id' => $quotation->id,
+                        'workpackage_id' => $workpackage->workpackage_id,
+                        'taskcard_id' => $taskcard->taskcard->id,
+                        'item_id' => $item->id,
+                        'quantity' => $item->pivot->quantity,
+                        'unit_id' => $item->pivot->unit_id,
+                        'price_id' => $price_id,
+                        'price_amount' => $selling_price,
+                    ]);
                 }
             }
+            foreach($workpackage->eo_instructions as $eo_instruction){
+                foreach($eo_instruction->eo_instruction->items as $item){
+                    if (Item::findOrFail($item->id)->prices->get($customer)) {
+                        $price_id = Item::find($item->id)->prices->get($customer)->id;
+                    } else {
+                        $price_id = null;
+                    }
 
+                    if($price_id <> null){
+                        $selling_price = Item::find($item->id)->prices->get($customer)->amount;
+                    }
+                    else{
+                        $selling_price = null;
+                    }
 
-
+                    QuotationWorkPackageTaskCardItem::create([
+                        'quotation_id' => $quotation->id,
+                        'workpackage_id' => $workpackage->workpackage_id,
+                        'taskcard_id' => $eo_instruction->eo_instruction->eo_header->id,
+                        'eo_instruction_id' => $eo_instruction->eo_instruction->id,
+                        'item_id' => $item->id,
+                        'quantity' => $item->pivot->quantity,
+                        'unit_id' => $item->pivot->unit_id,
+                        'price_id' => $price_id,
+                        'price_amount' => $selling_price,
+                    ]);
+                }
+            }
+        }
         return response()->json($quotation);
     }
 
@@ -322,6 +356,7 @@ class QuotationController extends Controller
         $ProjectWorkPackage = ProjectWorkPackage::where('project_id',$quotation->project_id)->pluck('id');
         $ProjectWorkPackageTaskCard = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
         foreach($ProjectWorkPackageTaskCard as $taskcard){
+            // dump($taskcard);
                 $tc = $taskcard->taskcard;
 
                 if(Type::where('id',$tc->type_id)->first()->code == "basic"){
@@ -333,7 +368,50 @@ class QuotationController extends Controller
                 else if(Type::where('id',$tc->type_id)->first()->code == "cpcp"){
                     $tc_code = 'CPC';
                 }
-                else if(Type::where('id',$tc->type_id)->first()->code == "cmr"){
+                else if(Type::where('id',$tc->type_id)->first()->code == "si"){
+                    $tc_code = 'SIT';
+                }
+                else if(Type::where('id',$tc->type_id)->first()->code == "preliminary"){
+                    $tc_code = 'PRE';
+                }
+                else{
+                    $tc_code = 'DUM';
+                }
+
+                if($taskcard->is_rii == null){
+                    $taskcard->is_rii = 0;
+                }
+
+                if($tc_code == "BSC" or $tc_code == "SIP" or $tc_code == "CPC" or $tc_code == "SIT" or $tc_code == "PRE" or $tc_code == "DUM"){
+
+                    $jobcard = $tc->jobcards()->create([
+                        'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                        'jobcardable_id' => $tc->id,
+                        'quotation_id' => $quotation->id,
+                        'is_rii' => $taskcard->is_rii,
+                        'is_mandatory' => $taskcard->is_mandatory,
+                        'station_id' => null,
+                        'entered_in' => null,
+                        'additionals' => null,
+                        'origin_quotation' => null,
+                        'origin_jobcardable' => $tc->toJson(),
+                        'origin_jobcardable_items' => $tc->items->toJson(),
+                        'origin_jobcard_helpers' => null,
+                    ]);
+
+                    $jobcard->progresses()->save(new Progress([
+                        'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
+                        'progressed_by' => Auth::id()
+                    ]));
+
+                }
+
+        $ProjectWorkPackageTaskCard = ProjectWorkPackageEOInstruction::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
+        foreach($ProjectWorkPackageTaskCard as $eo_instruction){
+                $tc = $eo_instruction->eo_instruction->eo_header;
+                $tc_inscrtuction = $eo_instruction->eo_instruction;
+
+                if(Type::where('id',$tc->type_id)->first()->code == "cmr"){
                     $tc_code = 'CMR';
                 }
                 else if(Type::where('id',$tc->type_id)->first()->code == "awl"){
@@ -351,50 +429,33 @@ class QuotationController extends Controller
                 else if(Type::where('id',$tc->type_id)->first()->code == "eo"){
                     $tc_code = 'ENO';
                 }
-                else if(Type::where('id',$tc->type_id)->first()->code == "si"){
-                    $tc_code = 'SIT';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "preliminary"){
-                    $tc_code = 'PRE';
-                }
                 else{
                     $tc_code = 'DUM';
                 }
 
-                if($tc_code == "BSC" or $tc_code == "SIP" or $tc_code == "CPC" or $tc_code == "SIT" or $tc_code == "PRE" or $tc_code == "DUM"){
-                                    dump($taskcard->is_mandatory);
-                                    $mandatory = $taskcard->is_mandatory;
-
-                    $jobcard = JobCard::create([
-                        'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
-                        'taskcard_id' => $tc->id,
-                        'quotation_id' => $quotation->id,
-                        'is_rii' => $taskcard->is_rii,
-                        'is_mandatory' => $mandatory,
-                        'origin_taskcard' => $tc->toJson(),
-                        'origin_taskcard_items' => $tc->items->toJson(),
-                    ]);
-                    $jobcard->progresses()->save(new Progress([
-                        'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
-                        'progressed_by' => Auth::id()
-                    ]));
-
-                }else{
-                    foreach($tc->eo_instructions as $instruction){
-                        $jobcard = JobCard::create([
-                            'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
-                            'taskcard_id' => $tc->id,
-                            'quotation_id' => $quotation->id,
-                            'origin_taskcard' => $tc->toJson(),
-                            'origin_taskcard_items' => $tc->items->toJson(),
-                        ]);
-                        $jobcard->progresses()->save(new Progress([
-                            'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
-                            'progressed_by' => Auth::id()
-                        ]));
-                    }
-
+                if($eo_instruction->is_rii == null){
+                    $eo_instruction->is_rii = 0;
                 }
+
+                $jobcard = $tc_inscrtuction->jobcards()->create([
+                    'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                    'jobcardable_id' => $tc_inscrtuction->id,
+                    'quotation_id' => $quotation->id,
+                    'is_rii' => $eo_instruction->is_rii,
+                    'is_mandatory' => $eo_instruction->is_mandatory,
+                    'station_id' => null,
+                    'entered_in' => null,
+                    'additionals' => null,
+                    'origin_quotation' => null,
+                    'origin_jobcardable' => $eo_instruction->eo_instruction->toJson(),
+                    'origin_jobcardable_items' => $eo_instruction->eo_instruction->items->toJson(),
+                    'origin_jobcard_helpers' => null,
+                ]);
+
+                $jobcard->progresses()->save(new Progress([
+                    'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
+                    'progressed_by' => Auth::id()
+                ]));
 
                 // // echo $tc->title.'<br>';
                 // foreach($tc->items as $item){
@@ -404,7 +465,7 @@ class QuotationController extends Controller
 
 
 
-        //     }
+            }
 
         }
         foreach($project->htcrrs as $htcrr){

@@ -18,7 +18,7 @@ class RIIReleaseJobCardDatatables extends Controller
      */
     public function index()
     {
-        $JobCard =JobCard::with('taskcard','quotation','progresses')
+        $JobCard =JobCard::with('quotation','progresses')
                                             ->where('is_rii','1')
                                             ->whereHas('progresses', function ($query) {
                                             $query->where('status_id', Status::where('code','released')->where('of','jobcard')->first()->id);
@@ -30,12 +30,12 @@ class RIIReleaseJobCardDatatables extends Controller
 
             $Jobcard->customer_name .= $Jobcard->quotation->project->customer->name;
 
-            if(isset($Jobcard->taskcard->skills) ){
-                if(sizeof($Jobcard->taskcard->skills) == 3){
+            if(isset($Jobcard->jobcardable->skills) ){
+                if(sizeof($Jobcard->jobcardable->skills) == 3){
                     $Jobcard->skill_name .= "ERI";
                 }
-                else if(sizeof($Jobcard->taskcard->skills) == 1){
-                    $Jobcard->skill_name .= $Jobcard->taskcard->skills[0]->name;
+                else if(sizeof($Jobcard->jobcardable->skills) == 1){
+                    $Jobcard->skill_name .= $Jobcard->jobcardable->skills[0]->name;
                 }
                 else{
                     $Jobcard->skill_name .= '';
@@ -196,10 +196,10 @@ class RIIReleaseJobCardDatatables extends Controller
      */
     public function filter(Request $request)
     {
-        $JobCard=JobCard::with('taskcard');
+        $JobCard=JobCard::with('jobcardable');
 
         if (!empty($request->task_type_id)) {
-            $JobCard->whereHas('taskcard', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable', function ($query) use ($request) {
                 $query->where('task_id', $request->task_type_id);
             });
         }

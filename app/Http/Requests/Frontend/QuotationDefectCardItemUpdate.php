@@ -3,8 +3,11 @@
 namespace App\Http\Requests\Frontend;
 
 use App\Models\DefectCard;
+use Illuminate\Validation\Rule;
 use App\Models\QuotationDefectCardItem;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class QuotationDefectCardItemUpdate extends FormRequest
 {
@@ -38,13 +41,12 @@ class QuotationDefectCardItemUpdate extends FormRequest
      */
     public function withValidator($validator)
     {
-        dd($validator);
         $validator->after(function ($validator) {
         $item = QuotationDefectCardItem::where('uuid',$this->uuid)->first();
         $tc = DefectCard::find($item->defectcard_id);
         $unit =  $this->unit_id;
         $qty = $this->quantity;
-        $tc_i = $tc->item->where('pivot.item_id',$item->item_id)->first();
+        $tc_i = $tc->items->where('pivot.item_id',$item->item_id)->first();
         if($tc_i->pivot->unit_id == $unit){
             if($qty > $tc_i->pivot->quantity){
             $validator->errors()->add('quantity', 'Quantity exceed limit');

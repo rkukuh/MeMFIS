@@ -1,34 +1,60 @@
 <?php
 
+use App\Models\Type;
 use App\Models\Status;
 use App\Models\JobCard;
+use App\Models\Station;
 use App\Models\TaskCard;
 use App\Models\Approval;
 use App\Models\Progress;
 use App\Models\Employee;
 use App\Models\Quotation;
 use App\Models\Inspection;
+use App\Models\EOInstruction;
 use Faker\Generator as Faker;
 
 $factory->define(JobCard::class, function (Faker $faker) {
 
-    $taskcard = null;
     $number = $faker->unixTime();
 
-    if (TaskCard::count()) {
-        $taskcard = TaskCard::get()->random();
-    } 
-    else {
-        $taskcard = factory(TaskCard::class)->create();
+    $jobcardable_type = null;
+    $jobcardable_entity = null;
+    $jobcardable = $faker->randomElement(['taskcard', 'eo_instruction']);
+
+    if ($jobcardable == 'taskcard') {
+        $jobcardable_entity = TaskCard::where('id', '>', 500)->get()->random();
+        $jobcardable_type = 'App\Models\TaskCard';
+    }
+    else if ($jobcardable == 'eo_instruction') {
+        $jobcardable_entity = EOInstruction::get()->random();
+        $jobcardable_type = 'App\Models\EOInstruction';
     }
 
     return [
         'number' => 'JC-DUM-' . $number,
+        'jobcardable_id' => $jobcardable_entity->id,
+        'jobcardable_type' => $jobcardable_type,
         'quotation_id' => Quotation::get()->random()->id,
-        'taskcard_id' => $taskcard->id,
+        'is_rii' => $faker->boolean,
+        'is_mandatory' => $faker->boolean,
+        'station_id' => $faker->randomElement([null, Station::get()->random()->id]),
+        'entered_in' => Type::ofJobCardLogBook()->get()->random()->id,
+        'additionals' => function () use ($faker) {
+            $additionals = null;
+
+            if ($faker->boolean) {
+                $additionals['TSN'] = 'TSN-102030';
+            }
+
+            if ($faker->boolean) {
+                $additionals['CSN'] = 'CSN-908070';
+            }
+
+            return $faker->randomElement([null, json_encode($additionals)]);
+        },
         'origin_quotation' => null,
-        'origin_taskcard' => $taskcard->toJson(),
-        'origin_taskcard_items' => $taskcard->items->toJson(),
+        'origin_jobcardable' => $jobcardable_entity->toJson(),
+        'origin_jobcardable_items' => $jobcardable_entity->items->toJson(),
         'origin_jobcard_helpers' => null,
     ];
 
