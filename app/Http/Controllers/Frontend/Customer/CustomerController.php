@@ -114,15 +114,14 @@ class CustomerController extends Controller
             if(is_array($request->email_array)){
                 for ($i=0; $i < sizeof($request->email_array) ; $i++) {
                     if(isset($request->email_array[$i])){
-                    $email_type = Type::ofEmail()->where('code',$request->type_email_array[$i])->first();
-                    $customer->emails()->save(new Email([
-                        'address' => $request->email_array[$i],
-                        'type_id' => $email_type->id,
-                    ]));
-                }
+                        $email_type = Type::ofEmail()->where('code',$request->type_email_array[$i])->first();
+                        $customer->emails()->save(new Email([
+                            'address' => $request->email_array[$i],
+                            'type_id' => $email_type->id,
+                        ]));
+                    }
                 }
             }
-
 
             // if(is_array($request->document_array)){
             if(is_array($request->type_document_array)){
@@ -261,11 +260,13 @@ class CustomerController extends Controller
             if(is_array($request->email_array)){
                 $customer->emails()->delete();
                 for ($i=0; $i < sizeof($request->email_array) ; $i++) {
-                    $email_type = Type::ofEmail()->where('code',$request->type_email_array[$i])->first();
-                    $customer->emails()->save(new Email([
-                        'address' => $request->email_array[$i],
-                        'type_id' => $email_type->id,
-                    ]));
+                    if (isset($request->email_array[$i])) {
+                        $email_type = Type::ofEmail()->where('code', $request->type_email_array[$i])->first();
+                        $customer->emails()->save(new Email([
+                            'address' => $request->email_array[$i],
+                            'type_id' => $email_type->id,
+                        ]));
+                    }
                 }
             }
 
