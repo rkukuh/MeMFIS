@@ -19,7 +19,7 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
         $workPackages = $workPackage->taskcards()->with('type','task')
                                     ->whereHas('type', function ($query) {
                                         $query->where('name', 'Basic');
-                                    })
+                                    })->whereNull('deleted_at')
                                     ->get();
 
         foreach($workPackages as $taskcard){
@@ -136,7 +136,7 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
         $workPackages = $workPackage->taskcards()->with('type','task')
                                     ->whereHas('type', function ($query) {
                                         $query->where('name', 'SIP');
-                                    })->get();
+                                    })->whereNull('deleted_at')->get();
 
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){
@@ -252,7 +252,7 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
         $workPackages = $workPackage->taskcards()->with('type','task')
                                     ->whereHas('type', function ($query) {
                                         $query->where('name', 'CPCP');
-                                    })->get();
+                                    })->whereNull('deleted_at')->get();
 
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){

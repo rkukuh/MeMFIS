@@ -231,16 +231,16 @@ class WorkPackageController extends Controller
                 ->with('predecessors','successors')->first();
 
         if($tc->predecessors()->exists()){ 
-            $tc->predecessors()->forceDelete();
+            $tc->predecessors()->delete();
         }
 
         if($tc->successors()->exists()){ 
-            $tc->successors()->forceDelete();
+            $tc->successors()->delete();
         }
 
-        $workPackage->taskcards()->detach($taskcard);
+        $tc->delete();
 
-        return response()->json($workPackage);
+        return response()->json($tc);
     }
 
     /**
