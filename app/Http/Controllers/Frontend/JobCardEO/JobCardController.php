@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\JobCard;
+namespace App\Http\Controllers\Frontend\JobCardEO;
 
 use Auth;
 use App\User;
@@ -78,16 +78,7 @@ class JobCardController extends Controller
                 return redirect()->route('frontend.jobcard-mechanic.edit',$jobcard->uuid);
             }
         }else if($jobcard->jobcardable_type == "App\Models\EOInstruction"){
-            //TODO Validasi User'skill with JobCard Skill
-            foreach($jobcard->helpers as $helper){
-                $helper->userID .= $helper->user->id;
-            }
-            if($jobcard->helpers->where('userID',Auth::id())->first() == null){
-                return redirect()->route('frontend.jobcard-eo-engineer.edit',$jobcard->uuid);
-            }
-            else{
-                return redirect()->route('frontend.jobcard-eo-mechanic.edit',$jobcard->uuid);
-            }
+            dd('eo');
         }
     }
 
