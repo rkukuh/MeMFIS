@@ -20,6 +20,8 @@
         @include('frontend.project.hm.taskcard.nonroutine.adsb.modal')
         @include('frontend.project.hm.taskcard.nonroutine.cmrawl.modal')
         @include('frontend.project.hm.taskcard.nonroutine.si.modal')
+        @include('frontend.project.hm.taskcard.nonroutine.ea.modal')
+        @include('frontend.project.hm.taskcard.nonroutine.eo.modal')
         @include('frontend.project.hm.modal.material.modal')
         @include('frontend.project.hm.modal.tool.modal')
     </div>
