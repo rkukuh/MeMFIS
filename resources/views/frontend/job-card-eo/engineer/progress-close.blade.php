@@ -57,7 +57,7 @@
                                                 Job Card No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->number}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -65,7 +65,7 @@
                                                 Task Card EO No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->jobcardable->eo_header->number}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -73,7 +73,7 @@
                                                 Project No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->project->code}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -81,7 +81,7 @@
                                                 A/C Type
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->project->aircraft->name}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -89,7 +89,7 @@
                                                 A/C Reg
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->project->aircraft_register}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -97,7 +97,7 @@
                                                 A/C Serial Number
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->project->aircraft_sn}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -113,7 +113,11 @@
                                                 Refrences
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                @if($jobcard->jobcardable->eo_header->reference)
+                                                {{$jobcard->jobcardable->eo_header->reference}}
+                                                @else
+                                                -
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -121,7 +125,7 @@
                                                 Title
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->jobcardable->eo_header->title}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -129,7 +133,7 @@
                                                 Instruction
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->jobcardable->description}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -169,15 +173,24 @@
                                                 Skill
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
+                                                @if(sizeof($jobcard->jobcardable->skills) == 3)
+                                                    ERI
+                                                @elseif(sizeof($jobcard->jobcardable->skills) == 1)
+                                                    {{$jobcard->jobcardable->skills[0]->name}}
+                                                @else
+                                                    -
+                                                @endif                                            </td>
                                         </tr>
                                         <tr>
                                             <td width="30%" style="background-color:beige;padding:10px;">
                                                 RII
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                @if($jobcard->is_rii == 1)
+                                                    Yes
+                                                @else
+                                                    No
+                                                @endif
                                             </td>
                                         </tr>
 
