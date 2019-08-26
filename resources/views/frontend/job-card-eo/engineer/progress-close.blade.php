@@ -367,29 +367,17 @@
                                     </table>
                                 </div>
                             </div>
-                            <hr class="mt-4">
                             <div class="form-group m-form__group row">
-                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                    <div class="action-buttons d-flex flex-row-reverse">
-                                        <form class="ml-2" method="POST" action="{{route('frontend.discrepancy.jobcard.engineer.discrepancy.create',$jobcard->uuid)}}">
-                                            {!! csrf_field() !!}
-                                            @component('frontend.common.buttons.found')
-                                                @if(sizeOf($jobcard->defectcards) > 0)
-                                                    @slot('disabled','disabled')
-                                                @endif
-                                            @endcomponent
-                                        </form>
-
-                                        @include('frontend.job-card-eo.engineer.modal.modal-close')
-                                        @component('frontend.common.buttons.close')
-                                            @slot('data_target', '#modal_close')
-                                            @slot('class', 'ml-2')
-                                        @endcomponent
-
-                                        @include('frontend.job-card-eo.engineer.modal.modal-pause')
-                                        @component('frontend.common.buttons.pause')
-                                            @slot('data_target', '#modal_pause')
-                                        @endcomponent
+                                <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                                    <div class="flex">
+                                        <div class="action-buttons">
+                                            <form method="POST" action="">
+                                                {{method_field('PATCH')}}
+                                                {!! csrf_field() !!}
+                                                <input type="hidden" name="progress" value="">
+                                                @include('frontend.common.buttons.back')
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
