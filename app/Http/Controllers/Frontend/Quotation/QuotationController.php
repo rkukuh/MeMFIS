@@ -439,6 +439,12 @@ class QuotationController extends Controller
                 $eo_instruction->is_rii = 0;
             }
 
+                $additionals = null;
+
+                $additionals['TSN'] = null;
+                $additionals['CSN'] = null;
+
+
             $jobcard = $tc_inscrtuction->jobcards()->create([
                 'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
                 'jobcardable_id' => $tc_inscrtuction->id,
@@ -447,7 +453,7 @@ class QuotationController extends Controller
                 'is_mandatory' => $eo_instruction->is_mandatory,
                 'station_id' => null,
                 'entered_in' => null,
-                'additionals' => null,
+                'additionals' => json_encode($additionals),
                 'origin_quotation' => null,
                 'origin_jobcardable' => $eo_instruction->eo_instruction->toJson(),
                 'origin_jobcardable_items' => $eo_instruction->eo_instruction->items->toJson(),
