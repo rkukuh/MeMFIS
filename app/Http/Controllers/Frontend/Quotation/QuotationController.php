@@ -406,68 +406,75 @@ class QuotationController extends Controller
 
                 }
 
+        }
+
         $ProjectWorkPackageTaskCard = ProjectWorkPackageEOInstruction::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
         foreach($ProjectWorkPackageTaskCard as $eo_instruction){
-                $tc = $eo_instruction->eo_instruction->eo_header;
-                $tc_inscrtuction = $eo_instruction->eo_instruction;
+            $tc = $eo_instruction->eo_instruction->eo_header;
+            $tc_inscrtuction = $eo_instruction->eo_instruction;
 
-                if(Type::where('id',$tc->type_id)->first()->code == "cmr"){
-                    $tc_code = 'CMR';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "awl"){
-                    $tc_code = 'AWL';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "ad"){
-                    $tc_code = 'ADT';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "sb"){
-                    $tc_code = 'SBU';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "ea"){
-                    $tc_code = 'ENA';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "eo"){
-                    $tc_code = 'ENO';
-                }
-                else{
-                    $tc_code = 'DUM';
-                }
-
-                if($eo_instruction->is_rii == null){
-                    $eo_instruction->is_rii = 0;
-                }
-
-                $jobcard = $tc_inscrtuction->jobcards()->create([
-                    'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
-                    'jobcardable_id' => $tc_inscrtuction->id,
-                    'quotation_id' => $quotation->id,
-                    'is_rii' => $eo_instruction->is_rii,
-                    'is_mandatory' => $eo_instruction->is_mandatory,
-                    'station_id' => null,
-                    'entered_in' => null,
-                    'additionals' => null,
-                    'origin_quotation' => null,
-                    'origin_jobcardable' => $eo_instruction->eo_instruction->toJson(),
-                    'origin_jobcardable_items' => $eo_instruction->eo_instruction->items->toJson(),
-                    'origin_jobcard_helpers' => null,
-                ]);
-
-                $jobcard->progresses()->save(new Progress([
-                    'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
-                    'progressed_by' => Auth::id()
-                ]));
-
-                // // echo $tc->title.'<br>';
-                // foreach($tc->items as $item){
-                //     echo $item->name.'<br>';
-                // }
-                // dump($tc->materials->toJson());
-
-
-
+            if(Type::where('id',$tc->type_id)->first()->code == "cmr"){
+                $tc_code = 'CMR';
+            }
+            else if(Type::where('id',$tc->type_id)->first()->code == "awl"){
+                $tc_code = 'AWL';
+            }
+            else if(Type::where('id',$tc->type_id)->first()->code == "ad"){
+                $tc_code = 'ADT';
+            }
+            else if(Type::where('id',$tc->type_id)->first()->code == "sb"){
+                $tc_code = 'SBU';
+            }
+            else if(Type::where('id',$tc->type_id)->first()->code == "ea"){
+                $tc_code = 'ENA';
+            }
+            else if(Type::where('id',$tc->type_id)->first()->code == "eo"){
+                $tc_code = 'ENO';
+            }
+            else{
+                $tc_code = 'DUM';
             }
 
+            if($eo_instruction->is_rii == null){
+                $eo_instruction->is_rii = 0;
+            }
+
+                $additionals = null;
+
+                $additionals['TSN'] = null;
+                $additionals['CSN'] = null;
+
+
+            $jobcard = $tc_inscrtuction->jobcards()->create([
+                'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
+                'jobcardable_id' => $tc_inscrtuction->id,
+                'quotation_id' => $quotation->id,
+                'is_rii' => $eo_instruction->is_rii,
+                'is_mandatory' => $eo_instruction->is_mandatory,
+                'station_id' => null,
+                'entered_in' => null,
+                'additionals' => json_encode($additionals),
+                'origin_quotation' => null,
+                'origin_jobcardable' => $eo_instruction->eo_instruction->toJson(),
+                'origin_jobcardable_items' => $eo_instruction->eo_instruction->items->toJson(),
+                'origin_jobcard_helpers' => null,
+            ]);
+
+            $jobcard->progresses()->save(new Progress([
+                'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+
+            // // echo $tc->title.'<br>';
+            // foreach($tc->items as $item){
+            //     echo $item->name.'<br>';
+            // }
+            // dump($tc->materials->toJson());
+
+
+
         }
+
         foreach($project->htcrrs as $htcrr){
             if($htcrr->parent_id == null){
                 $htcrr->progresses()->save(new Progress([
