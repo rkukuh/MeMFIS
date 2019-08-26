@@ -129,9 +129,12 @@ class TaskCardRoutineController extends Controller
                 $taskcard->related_to()->attach(json_decode($request->relationship));
             }
 
-            if(is_array($request->threshold_amount)){
-            for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
+            if(is_array($request->threshold_type)){
+            for ($i=0; $i < sizeof($request->threshold_type) ; $i++) {
                 if($request->threshold_type[$i] !== "Select Threshold"){
+                    if($request->threshold_amount[$i] == ''){
+                        $request->threshold_amount[$i] = null;
+                    }
                     $taskcard->thresholds()->save(new Threshold([
                         'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
                         'amount' => $request->threshold_amount[$i],
@@ -140,9 +143,12 @@ class TaskCardRoutineController extends Controller
                 }
             }
 
-            if(is_array($request->repeat_amount)){
-            for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) {
+            if(is_array($request->repeat_type)){
+            for ($i=0; $i < sizeof($request->repeat_type) ; $i++) {
                 if($request->repeat_type[$i] !== "Select Repeat"){
+                    if($request->repeat_amount[$i] == ''){
+                        $request->repeat_amount[$i] = null;
+                    }
                     $taskcard->repeats()->save(new Repeat([
                         'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
                         'amount' => $request->repeat_amount[$i],
@@ -360,9 +366,12 @@ class TaskCardRoutineController extends Controller
             if($taskCard->thresholds)$taskCard->thresholds()->delete();
             if($taskCard->repeats) $taskCard->repeats()->delete();
 
-            if(is_array($request->threshold_amount)){
-                for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
+            if(is_array($request->threshold_type)){
+                for ($i=0; $i < sizeof($request->threshold_type) ; $i++) {
                     if($request->threshold_type[$i] !== "Select Threshold"){
+                        if($request->threshold_amount[$i] == ''){
+                            $request->threshold_amount[$i] = null;
+                        }
                         $taskCard->thresholds()->save(new Threshold([
                             'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
                             'amount' => $request->threshold_amount[$i],
@@ -371,9 +380,12 @@ class TaskCardRoutineController extends Controller
                 }
             }
 
-            if(is_array($request->repeat_amount)){
-                for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) {
+            if(is_array($request->repeat_type)){
+                for ($i=0; $i < sizeof($request->repeat_type) ; $i++) {
                     if($request->repeat_type[$i] !== "Select Repeat"){
+                        if($request->repeat_amount[$i] == ''){
+                            $request->repeat_amount[$i] = null;
+                        }
                         $taskCard->repeats()->save(new Repeat([
                             'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
                             'amount' => $request->repeat_amount[$i],
