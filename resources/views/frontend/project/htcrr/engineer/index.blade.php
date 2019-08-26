@@ -1,4 +1,4 @@
-@if(isset($htcrr_engineers))
+@if(isset($htcrr_engineers) && $htcrr_engineers[0] !== 0)
 <div class="form-group m-form__group row px-4 pb-4">
     <div class="col-sm-12 col-md-12 col-lg-12">
         @if(in_array('Airframe',$skills))
