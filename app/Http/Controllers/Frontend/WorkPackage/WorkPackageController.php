@@ -9,6 +9,7 @@ use App\Models\TaskCard;
 use App\Models\WorkPackage;
 use Illuminate\Http\Request;
 use App\Models\EOInstruction;
+use App\Models\Pivots\TaskCardWorkPackage;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\WorkPackageStore;
@@ -226,6 +227,17 @@ class WorkPackageController extends Controller
      */
     public function deleteTaskCard(WorkPackage $workPackage,TaskCard $taskcard)
     {
+        $tc = TaskCardWorkPackage::where('workpackage_id', $workPackage->id)->where('taskcard_id', $taskcard->id)
+                ->with('predecessors','successors')->first();
+
+        if($tc->predecessors()->exists()){ 
+            $tc->predecessors()->forceDelete();
+        }
+
+        if($tc->successors()->exists()){ 
+            $tc->successors()->forceDelete();
+        }
+
         $workPackage->taskcards()->detach($taskcard);
 
         return response()->json($workPackage);
