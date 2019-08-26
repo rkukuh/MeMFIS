@@ -154,7 +154,7 @@ let NonRoutineWorkpackage = {
                         if (t.pivot.sequence) {
                             return (
                                 t.pivot.sequence +
-                                '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
+                                '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
                                 t.pivot.sequence +
                                 " data-uuid=" +
                                 t.uuid +
@@ -162,7 +162,7 @@ let NonRoutineWorkpackage = {
                             );
                         } else {
                             return (
-                                '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
+                                '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
                                 t.pivot.sequence +
                                 " data-uuid=" +
                                 t.uuid +
@@ -226,7 +226,7 @@ let NonRoutineWorkpackage = {
                     overflow: "visible",
                     template: function(t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-instruction" title="Delete" data-uuid="' +
                             t.uuid +
                             '">' +
                             '<i class="la la-trash"></i>' +
@@ -383,7 +383,7 @@ let NonRoutineWorkpackage = {
                         if (t.pivot.sequence) {
                             return (
                                 t.pivot.sequence +
-                                '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
+                                '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
                                 t.pivot.sequence +
                                 " data-uuid=" +
                                 t.uuid +
@@ -391,7 +391,7 @@ let NonRoutineWorkpackage = {
                             );
                         } else {
                             return (
-                                '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
+                                '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
                                 t.pivot.sequence +
                                 " data-uuid=" +
                                 t.uuid +
@@ -455,7 +455,7 @@ let NonRoutineWorkpackage = {
                     overflow: "visible",
                     template: function(t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-instruction" title="Delete" data-uuid="' +
                             t.uuid +
                             '">' +
                             '<i class="la la-trash"></i>' +
@@ -895,7 +895,7 @@ let NonRoutineWorkpackage = {
                         if (t.pivot.sequence) {
                             return (
                                 t.pivot.sequence +
-                                '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
+                                '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
                                 t.pivot.sequence +
                                 " data-uuid=" +
                                 t.uuid +
@@ -903,7 +903,7 @@ let NonRoutineWorkpackage = {
                             );
                         } else {
                             return (
-                                '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
+                                '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
                                 t.pivot.sequence +
                                 " data-uuid=" +
                                 t.uuid +
@@ -967,7 +967,7 @@ let NonRoutineWorkpackage = {
                     overflow: "visible",
                     template: function(t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-instruction" title="Delete" data-uuid="' +
                             t.uuid +
                             '">' +
                             '<i class="la la-trash"></i>' +
@@ -1151,7 +1151,7 @@ let NonRoutineWorkpackage = {
                         if (t.pivot.sequence) {
                             return (
                                 t.pivot.sequence +
-                                '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
+                                '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
                                 t.pivot.sequence +
                                 " data-uuid=" +
                                 t.uuid +
@@ -1159,7 +1159,7 @@ let NonRoutineWorkpackage = {
                             );
                         } else {
                             return (
-                                '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
+                                '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
                                 t.pivot.sequence +
                                 " data-uuid=" +
                                 t.uuid +
@@ -1223,7 +1223,7 @@ let NonRoutineWorkpackage = {
                     overflow: "visible",
                     template: function(t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-instruction" title="Delete" data-uuid="' +
                             t.uuid +
                             '">' +
                             '<i class="la la-trash"></i>' +

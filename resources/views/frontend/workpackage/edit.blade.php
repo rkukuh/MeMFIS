@@ -167,6 +167,7 @@
                                             @include('frontend.workpackage.modal.material.taskcard')
                                             @include('frontend.workpackage.modal.tool.taskcard')
                                             @include('frontend.workpackage.modal.sequence')
+                                            @include('frontend.workpackage.modal.sequence-instruction')
                                             @include('frontend.workpackage.modal.predecessor')
                                             @include('frontend.workpackage.modal.successor')
                                             @include('frontend.workpackage.modal.create-predecessor')

@@ -152,10 +152,6 @@ let Workpackage = {
                         );
                         $("#taskcard_sequence").modal("hide");
 
-                        let table = $(".basic_datatable").mDatatable();
-                        table.originalDataSet = [];
-                        table.reload();
-
                         table = $(".basic_datatable").mDatatable();
                         table.originalDataSet = [];
                         table.reload();
@@ -168,6 +164,44 @@ let Workpackage = {
                         table.originalDataSet = [];
                         table.reload();
 
+                        table = $(".si_datatable").mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+        $(".modal-footer").on("click", ".sequence-intruction", function() {
+            triggeruuid = $("input[name=uuid-instruction]").val();
+            sequence = $("input[name=sequence-instruction]").val();
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                type: "put",
+                url:
+                    "/workpackage/" +
+                    workPackage_uuid +
+                    "/sequence/" +
+                    triggeruuid+
+                    "/instruction/",
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    sequence: sequence
+                },
+                success: function(data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success(
+                            "Instruction sequence has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+                        $("#instruction_sequence").modal("hide");
+
                         table = $(".ad-sb_datatable").mDatatable();
                         table.originalDataSet = [];
                         table.reload();
@@ -176,13 +210,18 @@ let Workpackage = {
                         table.originalDataSet = [];
                         table.reload();
 
-                        table = $(".si_datatable").mDatatable();
+                        table = $(".eo_datatable").mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $(".ea_datatable").mDatatable();
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
         });
+
         $(".basic_datatable").on("click", ".sequence", function() {
             triggeruuid = $(this).data("uuid");
             sequence = $(this).data("sequence");
@@ -515,8 +554,8 @@ let Workpackage = {
             triggeruuid = $(this).data("uuid");
             sequence = $(this).data("sequence");
 
-            document.getElementById("uuid").value = triggeruuid;
-            document.getElementById("sequence").value = sequence;
+            document.getElementById("uuid-instruction").value = triggeruuid;
+            document.getElementById("sequence-instruction").value = sequence;
         });
         $(".ad-sb_datatable").on("click", ".predecessor", function() {
             if (predecessor_datatables_init == true) {
@@ -576,7 +615,8 @@ let Workpackage = {
                     "/workpackage/" +
                     workPackage_uuid +
                     "/mandatory/" +
-                    triggeruuid,
+                    triggeruuid+
+                    "/instruction",
                 data: {
                     _token: $("input[name=_token]").val(),
                     is_mandatory: is_mandatory
@@ -606,8 +646,8 @@ let Workpackage = {
             triggeruuid = $(this).data("uuid");
             sequence = $(this).data("sequence");
 
-            document.getElementById("uuid").value = triggeruuid;
-            document.getElementById("sequence").value = sequence;
+            document.getElementById("uuid-instruction").value = triggeruuid;
+            document.getElementById("sequence-instruction").value = sequence;
         });
         $(".cmr-awl_datatable").on("click", ".predecessor", function() {
             if (predecessor_datatables_init == true) {
@@ -667,7 +707,8 @@ let Workpackage = {
                     "/workpackage/" +
                     workPackage_uuid +
                     "/mandatory/" +
-                    triggeruuid,
+                    triggeruuid+
+                    "/instruction",
                 data: {
                     _token: $("input[name=_token]").val(),
                     is_mandatory: is_mandatory
@@ -747,6 +788,60 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
+        $(".eo_datatable").on("click", ".mandatory", function() {
+            triggeruuid = $(this).data("uuid");
+            mandatory = $(this).data("mandatory");
+            if (mandatory == 0) {
+                is_mandatory = 1;
+            } else if (mandatory == 1) {
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                type: "put",
+                url:
+                    "/workpackage/" +
+                    workPackage_uuid +
+                    "/mandatory/" +
+                    triggeruuid+
+                    "/instruction",
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    is_mandatory: is_mandatory
+                },
+                success: function(data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success(
+                            "Mandatory has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $(".eo_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $(".eo_datatable").on("click", ".sequence", function() {
+            triggeruuid = $(this).data("uuid");
+            sequence = $(this).data("sequence");
+
+            document.getElementById("uuid-instruction").value = triggeruuid;
+            document.getElementById("sequence-instruction").value = sequence;
+        });
+
+
         $("#ea_datatable").on("click", ".instructions", function() {
             if (instruction_datatables_init == true) {
                 instruction_datatables_init = false;
@@ -765,6 +860,59 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
+        $(".ea_datatable").on("click", ".mandatory", function() {
+            triggeruuid = $(this).data("uuid");
+            mandatory = $(this).data("mandatory");
+            if (mandatory == 0) {
+                is_mandatory = 1;
+            } else if (mandatory == 1) {
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                type: "put",
+                url:
+                    "/workpackage/" +
+                    workPackage_uuid +
+                    "/mandatory/" +
+                    triggeruuid+
+                    "/instruction",
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    is_mandatory: is_mandatory
+                },
+                success: function(data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success(
+                            "Mandatory has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $(".ea_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $(".ea_datatable").on("click", ".sequence", function() {
+            triggeruuid = $(this).data("uuid");
+            sequence = $(this).data("sequence");
+
+            document.getElementById("uuid-instruction").value = triggeruuid;
+            document.getElementById("sequence-instruction").value = sequence;
+        });
+
 
         function instruction(triggeruuid) {
             $("#instruction_datatable").DataTable({
@@ -1002,11 +1150,10 @@ let Workpackage = {
             });
         });
 
-        //basic
+        //taskcard delete
         $(".m-datatable").on("click", ".delete", function() {
             let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
             let datatableClassName = parent_id.className.split(" ");
-            // alert(datatableClassName[0]);
             triggeruuid = $(this).data("uuid");
             swal({
                 title: "Sure want to remove?",
@@ -1032,6 +1179,61 @@ let Workpackage = {
                         success: function(data) {
                             toastr.success(
                                 "Taskcard has been deleted.",
+                                "Deleted",
+                                {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $(
+                                "." + datatableClassName
+                            ).mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function(jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function(index, value) {
+                                $("#delete-error").html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        //taskcard instruction delete
+        $(".m-datatable").on("click", ".delete-instruction", function() {
+            let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            let datatableClassName = parent_id.className.split(" ");
+            triggeruuid = $(this).data("uuid");
+            swal({
+                title: "Sure want to remove?",
+                type: "question",
+                confirmButtonText: "Yes, REMOVE",
+                confirmButtonColor: "#d33",
+                cancelButtonText: "Cancel",
+                showCancelButton: true
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                "content"
+                            )
+                        },
+                        type: "DELETE",
+                        url:
+                            "/workpackage/" +
+                            workPackage_uuid +
+                            "/taskcard/" +
+                            triggeruuid+
+                            "/instruction",
+                        success: function(data) {
+                            toastr.success(
+                                "Instruction has been deleted.",
                                 "Deleted",
                                 {
                                     timeOut: 5000

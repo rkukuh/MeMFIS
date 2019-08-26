@@ -167,10 +167,40 @@ class WorkPackageController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
+    public function sequenceInstruction(Request $request, WorkPackage $workPackage,EOInstruction $instruction)
+    {
+
+        $workPackage->eo_instructions()->updateExistingPivot($instruction, ['sequence'=>$request->sequence]);
+
+        return response()->json($workPackage);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
     public function mandatory(Request $request, WorkPackage $workPackage, TaskCard $taskcard)
     {
 
         $workPackage->taskcards()->updateExistingPivot($taskcard, ['is_mandatory'=>$request->is_mandatory]);
+
+        return response()->json($workPackage);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function mandatoryInstruction(Request $request, WorkPackage $workPackage, EOInstruction $instruction)
+    {
+
+        $workPackage->eo_instructions()->updateExistingPivot($instruction, ['is_mandatory'=>$request->is_mandatory]);
 
         return response()->json($workPackage);
     }
@@ -197,6 +227,19 @@ class WorkPackageController extends Controller
     public function deleteTaskCard(WorkPackage $workPackage,TaskCard $taskcard)
     {
         $workPackage->taskcards()->detach($taskcard);
+
+        return response()->json($workPackage);
+    }
+
+    /**
+     * Remove the taskcard from workpackage .
+     *
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteInstruction(WorkPackage $workPackage,EOInstruction $instruction)
+    {
+        $workPackage->eo_instructions()->detach($instruction);
 
         return response()->json($workPackage);
     }
