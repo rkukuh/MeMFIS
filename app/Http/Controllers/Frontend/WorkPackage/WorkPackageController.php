@@ -75,14 +75,14 @@ class WorkPackageController extends Controller
     public function addTaskCard(Request $request, WorkPackage $workPackage)
     {
         $tc = TaskCard::where('uuid', $request->taskcard)->first();
-        // $exists = $workPackage->taskcards->contains($tc->id);
-        // if($exists){
-        //     return response()->json(['title' => "Danger"]);
-        // }else{
+        $exists = $workPackage->taskcards->contains($tc->id);
+        if($exists){
+            return response()->json(['title' => "Danger"]);
+        }else{
             $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
 
             return response()->json($workPackage);
-        // }
+        }
     }
 
     /**
@@ -94,14 +94,14 @@ class WorkPackageController extends Controller
     public function addInstruction(Request $request, WorkPackage $workPackage)
     {
         $tc = EOInstruction::where('uuid', $request->taskcard)->first();
-        // $exists = $workPackage->eo_instructions->contains($tc->id);
-        // if($exists){
-        //     return response()->json(['title' => "Danger"]);
-        // }else{
+        $exists = $workPackage->eo_instructions->contains($tc->id);
+        if($exists){
+            return response()->json(['title' => "Danger"]);
+        }else{
             $workPackage->eo_instructions()->attach(EOInstruction::where('uuid', $request->taskcard)->first()->id);
 
             return response()->json($workPackage);
-        // }
+        }
     }
 
     /**
