@@ -229,7 +229,7 @@
                                         <legend class="w-auto">
                                             Propose Correction @include('frontend.common.label.required')
                                         </legend>
-                                        
+
                                         <div class="form-control-feedback text-danger" id="propose-error"></div>
 
                                         <div class="form-group m-form__group row">
@@ -467,10 +467,6 @@
 @endpush
 
 @push('footer-scripts')
-<script>
-// let skill = {!! $jobcard->taskcard->skills[0] !!};
-</script>
-    
     <script src="{{ asset('js/frontend/discrepancy/engineer/create.js') }}"></script>
     <script src="{{ asset('js/frontend/discrepancy/form-reset.js') }}"></script>
 

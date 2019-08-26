@@ -369,7 +369,7 @@
                                             <div class="action-buttons">
                                                     {{method_field('PATCH')}}
                                                     {!! csrf_field() !!}
-                                                    <input type="hidden" name="progress" value="">
+                                                    <input type="hidden" name="progress" value="{{$status->uuid}}">
                                                     @include('frontend.common.buttons.execute')
                                             </div>
                                         </div>
