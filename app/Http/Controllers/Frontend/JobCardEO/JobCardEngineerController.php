@@ -203,6 +203,13 @@ class JobCardEngineerController extends Controller
     {
 
         if ($this->statuses->where('uuid', $request->progress)->first()->code == 'open') {
+
+            $additionals['TSN'] = $request->tsn;
+            $additionals['CSN'] = $request->csn;
+
+            $jobcard->additionals =json_encode($additionals);
+            $jobcard->save();
+
             $jobcard->progresses()->save(new Progress([
                 'status_id' => $this->statuses->where('code', 'progress')->first()->id,
                 'progressed_by' => Auth::id(),

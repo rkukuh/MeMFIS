@@ -300,6 +300,7 @@
                                     <td align="center" style="background-color:beige;padding:10px;"><b>ACCOMPLISHMENT RECORD</b></td>
                                 </tr>
                             </table>
+                            @php $additionals = json_decode($jobcard->additionals) @endphp
 
                             <div class="form-group m-form__group row mt-1">
                                 <div class="col-sm-3 col-md-3 col-lg-3">
@@ -308,10 +309,12 @@
                                             <label class="form-control-label">
                                                 TSN
                                             </label>
-
-                                            @component('frontend.common.input.number')
-                                                @slot('text', 'Tsn')
-                                                @slot('name', 'tsn')
+                                            @component('frontend.common.label.data-info')
+                                                @if($additionals->TSN != null)
+                                                    @slot('text', $additionals->TSN)
+                                                @else
+                                                    @slot('text', '-')
+                                                @endif
                                             @endcomponent
                                         </div>
                                     </div>
@@ -320,10 +323,12 @@
                                             <label class="form-control-label">
                                                 CSN
                                             </label>
-
-                                            @component('frontend.common.input.number')
-                                                @slot('text', 'Csn')
-                                                @slot('name', 'csn')
+                                            @component('frontend.common.label.data-info')
+                                                @if($additionals->CSN != null)
+                                                    @slot('text', $additionals->CSN)
+                                                @else
+                                                    @slot('text', '-')
+                                                @endif
                                             @endcomponent
                                         </div>
                                     </div>
