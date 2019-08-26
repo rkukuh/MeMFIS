@@ -831,36 +831,43 @@ let Workpackage = {
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
-                        $("#modal_instruction").modal("hide");
+                        if (data.title == "Danger") {
+                            toastr.error("Instruction alrady exists!", "Error", {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $("#modal_instruction").modal("hide");
 
-                        toastr.success("Instruction has been added.", "Success", {
-                            timeOut: 5000
-                        });
+                            toastr.success("Instruction has been added.", "Success", {
+                                timeOut: 5000
+                            });
 
-                        let table = $(".cmr-awl_datatable").mDatatable();
+                            let table = $(".cmr-awl_datatable").mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
 
-                        table = $(".ad-sb_datatable").mDatatable();
+                            table = $(".ad-sb_datatable").mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
 
-                        table = $(".ad-sb_datatable").mDatatable();
+                            table = $(".ad-sb_datatable").mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
 
-                        table = $(".eo_datatable").mDatatable();
+                            table = $(".eo_datatable").mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
 
-                        table = $(".ea_datatable").mDatatable();
+                            table = $(".ea_datatable").mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
+                            }
+
                     }
                 }
             });
