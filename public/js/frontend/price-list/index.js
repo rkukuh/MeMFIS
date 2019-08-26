@@ -74,13 +74,13 @@ let Unit = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'last_update',
                     title: 'Last Update',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'updated_by',
                     title: 'Updated By',
                     sortable: 'asc',
                     filterable: !1,
