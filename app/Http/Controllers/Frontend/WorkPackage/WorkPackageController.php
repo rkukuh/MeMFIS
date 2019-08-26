@@ -75,14 +75,14 @@ class WorkPackageController extends Controller
     public function addTaskCard(Request $request, WorkPackage $workPackage)
     {
         $tc = TaskCard::where('uuid', $request->taskcard)->first();
-        $exists = $workPackage->taskcards->contains($tc->id);
-        if($exists){
-            return response()->json(['title' => "Danger"]);
-        }else{
+        // $exists = $workPackage->taskcards->contains($tc->id);
+        // if($exists){
+        //     return response()->json(['title' => "Danger"]);
+        // }else{
             $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
 
             return response()->json($workPackage);
-        }
+        // }
     }
 
     /**
@@ -94,14 +94,14 @@ class WorkPackageController extends Controller
     public function addInstruction(Request $request, WorkPackage $workPackage)
     {
         $tc = EOInstruction::where('uuid', $request->taskcard)->first();
-        $exists = $workPackage->eo_instructions->contains($tc->id);
-        if($exists){
-            return response()->json(['title' => "Danger"]);
-        }else{
+        // $exists = $workPackage->eo_instructions->contains($tc->id);
+        // if($exists){
+        //     return response()->json(['title' => "Danger"]);
+        // }else{
             $workPackage->eo_instructions()->attach(EOInstruction::where('uuid', $request->taskcard)->first()->id);
 
             return response()->json($workPackage);
-        }
+        // }
     }
 
     /**
@@ -231,11 +231,11 @@ class WorkPackageController extends Controller
         $tc = TaskCardWorkPackage::where('workpackage_id', $workPackage->id)->where('taskcard_id', $taskcard->id)
                 ->with('predecessors','successors')->first();
 
-        if($tc->predecessors()->exists()){ 
+        if($tc->predecessors()->exists()){
             $tc->predecessors()->delete();
         }
 
-        if($tc->successors()->exists()){ 
+        if($tc->successors()->exists()){
             $tc->successors()->delete();
         }
 
@@ -254,11 +254,11 @@ class WorkPackageController extends Controller
     {
         $eo_instruction = EOInstructionWorkPackage::where('workpackage_id', $workPackage->id)->where('instruction_id', $instruction->id)->first();
 
-        if($eo_instruction->predecessors()->exists()){ 
+        if($eo_instruction->predecessors()->exists()){
             $eo_instruction->predecessors()->delete();
         }
 
-        if($eo_instruction->successors()->exists()){ 
+        if($eo_instruction->successors()->exists()){
             $eo_instruction->successors()->delete();
         }
 
