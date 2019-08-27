@@ -14,8 +14,24 @@ class CreateEOInstructionWorkPackagePredecessorsTable extends Migration
     public function up()
     {
         Schema::create('eo_instruction_workpackage_predecessors', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
+            $table->char('uuid', 36)->unique();
+            $table->unsignedBigInteger('eo_instruction_workpackage_id');
+            $table->unsignedBigInteger('previous');
+            $table->integer('order');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('eo_instruction_workpackage_id', 'eo_instruction_predecessor')
+                    ->references('id')->on('eo_instruction_workpackage')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+
+            $table->foreign('previous')
+                    ->references('id')->on('eo_instructions')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
