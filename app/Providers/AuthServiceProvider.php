@@ -93,6 +93,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\TaskCardWorkPackagePredecessor::class => Policies\TaskCardWorkPackagePredecessorPolicy::class,
         Models\ProjectWorkPackageEOInstruction::class => Policies\ProjectWorkPackageEOInstructionPolicy::class,
         Models\QuotationWorkPackageTaskCardItem::class => Policies\QuotationWorkPackageTaskCardItemPolicy::class,
+        Models\EOInstructionWorkPackagePredecessor::class => Policies\EOInstructionWorkPackagePredecessorPolicy::class,
     ];
 
     /**

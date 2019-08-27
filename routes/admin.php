@@ -114,6 +114,7 @@ Route::name('admin.')->group(function () {
         /** WORKPACKAGE's EO-INSTRUCTIONs */
 
         Route::resource('eo-instruction-wp', 'EOInstructionWorkPackageController');
+        Route::resource('eo-instruction-wp-predecessor', 'EOInstructionWorkPackagePredecessorController');
 
         /** QUOTATION's WORKPACKAGEs */
 

@@ -120,6 +120,7 @@ class DatabaseSeeder extends Seeder
         /** WORKPACKAGE's EO-INSTRUCTIONs */
 
         $this->call(EOInstructionWorkPackagesTableSeeder::class);
+        $this->call(EOInstructionWorkPackagePredecessorsTableSeeder::class);
 
         /** QUOTATION's WORKPACKAGEs */
 
