@@ -13,8 +13,6 @@ class Address extends MemfisModel
         'type_id',
         'addressable_type',
         'addressable_id',
-        'created_at',
-        'updated_at',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

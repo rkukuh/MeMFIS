@@ -37,10 +37,7 @@ $factory->afterCreating(User::class, function ($user, $faker) {
         'gender' => $faker->randomElement(['m', 'f']),
         'religion' => $faker->randomElement(['islam','khonghucu','budha','kristen','hindu']),
         'marital_status' => $faker->randomElement(['s','m']),
-        'nationality' => $faker->randomElement(['Indonesia','Japan','Zimbabwe','South Africa']),
-        'country' => 'indonesia',
-        'city' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
-        'joined_date' => Carbon::now()->toDateString(),
+        'nationality' => $faker->randomElement(['Indonesia','Japan','Zimbabwe','South Africa'])
     ]));
 
 });

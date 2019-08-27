@@ -1,4 +1,3 @@
-<form id="employee_form">
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
@@ -10,9 +9,10 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('id', 'code')
-                        @slot('name', 'code')
-                        @slot('id_error', 'code')
+                        @slot('text', 'Employee ID')
+                        @slot('id', 'employee_id')
+                        @slot('name', 'employee_id')
+                        @slot('id_error', 'employee_id')
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -24,8 +24,7 @@
 
                             @component('frontend.common.input.datepicker')
                                 @slot('id', 'date')
-                                @slot('name', 'dob')
-                                @slot('id_error', 'dob')
+                                @slot('name', 'date')
                             @endcomponent
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -34,8 +33,10 @@
                             </label>
         
                             @component('frontend.common.input.text')
-                                @slot('id', 'dob_place')
-                                @slot('name', 'dob_place')
+                                @slot('text', 'Birthplace')
+                                @slot('id', 'birthplace')
+                                @slot('name', 'birthplace')
+                                @slot('id_error', 'birthplace')
                             @endcomponent
                         </div>
                     </div>
@@ -48,6 +49,7 @@
                     </label>
 
                     @component('frontend.common.input.text')
+                        @slot('text', 'First Name')
                         @slot('id', 'first_name')
                         @slot('name', 'first_name')
                         @slot('id_error', 'first_name')
@@ -59,6 +61,7 @@
                     </label>
 
                     @component('frontend.common.input.text')
+                        @slot('text', 'Last Name')
                         @slot('id', 'last_name')
                         @slot('name', 'last_name')
                         @slot('id_error', 'last_name')
@@ -74,6 +77,7 @@
                             </label>
         
                             @component('frontend.common.input.text')
+                                @slot('text', 'ID Card Number')
                                 @slot('id', 'card_number')
                                 @slot('name', 'card_number')
                                 @slot('id_error', 'card_number')
@@ -86,9 +90,7 @@
         
                             @component('frontend.common.input.upload')
                                 @slot('label', 'document')
-                                @slot('id', 'document')
                                 @slot('name', 'document')
-                                @slot('help_text','File must be image or not be stored!')
                             @endcomponent
                         </div>
                     </div>
@@ -112,6 +114,7 @@
                             </label>
         
                             @component('frontend.common.input.text')
+                                @slot('text', 'Nationality')
                                 @slot('id', 'nationality')
                                 @slot('name', 'nationality')
                                 @slot('id_error', 'nationality')
@@ -159,6 +162,7 @@
                     </label>
 
                     @component('frontend.common.input.text')
+                        @slot('text', 'Address Line 1')
                         @slot('id', 'address_line_1')
                         @slot('name', 'address_line_1')
                         @slot('id_error', 'address_line_1')
@@ -170,6 +174,7 @@
                     </label>
 
                     @component('frontend.common.input.text')
+                        @slot('text', 'Address Line 2')
                         @slot('id', 'address_line_2')
                         @slot('name', 'address_line_2')
                         @slot('id_error', 'address_line_2')
@@ -183,6 +188,7 @@
                     </label>
 
                     @component('frontend.common.input.text')
+                        @slot('text', 'Country')
                         @slot('id', 'country')
                         @slot('name', 'country')
                         @slot('id_error', 'country')
@@ -208,6 +214,7 @@
                             </label>
         
                             @component('frontend.common.input.number')
+                                @slot('text', 'Zip Code')
                                 @slot('id', 'zip_code')
                                 @slot('name', 'zip_code')
                                 @slot('id_error', 'zip_code')
@@ -223,6 +230,7 @@
                     </label>
 
                     @component('frontend.common.input.number')
+                        @slot('text', 'Home Phone')
                         @slot('id', 'home_phone')
                         @slot('name', 'home_phone')
                         @slot('id_error', 'home_phone')
@@ -234,6 +242,7 @@
                     </label>
 
                     @component('frontend.common.input.number')
+                        @slot('text', 'Mobile Phone')
                         @slot('id', 'mobile_phone')
                         @slot('name', 'mobile_phone')
                         @slot('id_error', 'mobile_phone')
@@ -247,6 +256,7 @@
                     </label>
 
                     @component('frontend.common.input.number')
+                        @slot('text', 'Work Phone')
                         @slot('id', 'work_phone')
                         @slot('name', 'work_phone')
                         @slot('id_error', 'work_phone')
@@ -258,6 +268,7 @@
                     </label>
 
                     @component('frontend.common.input.number')
+                        @slot('text', 'Other Phone')
                         @slot('id', 'other_phone')
                         @slot('name', 'other_phone')
                         @slot('id_error', 'other_phone')
@@ -270,7 +281,8 @@
                         Email 1 @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.text')
+                    @component('frontend.common.input.number')
+                        @slot('text', 'Email 1')
                         @slot('id', 'email_1')
                         @slot('name', 'email_1')
                         @slot('id_error', 'email_1')
@@ -281,7 +293,8 @@
                         Email 2
                     </label>
 
-                    @component('frontend.common.input.text')
+                    @component('frontend.common.input.number')
+                        @slot('text', 'Email 2')
                         @slot('id', 'email_2')
                         @slot('name', 'email_2')
                         @slot('id_error', 'email_2')
@@ -306,8 +319,9 @@
         
                             @component('frontend.common.input.datepicker')
                                 @slot('id', 'period_start_date')
-                                @slot('name', 'joined_date')
-                                @slot('id_error','joined_date')
+                                @slot('text', 'Date')
+                                @slot('name', 'period_start_date')
+                                @slot('id_error','period_start_date')
                             @endcomponent
                         </div>
                     </div>
@@ -320,6 +334,7 @@
                     </label>
 
                     @component('frontend.common.input.select2')
+                        @slot('text', 'Job Title')
                         @slot('id', 'job_title')
                         @slot('name', 'job_title')
                         @slot('id_error', 'job_title')
@@ -331,6 +346,7 @@
                     </label>
 
                     @component('frontend.common.input.select2')
+                        @slot('text', 'Job Position')
                         @slot('id', 'job_position')
                         @slot('class', 'job_position')
                         @slot('name', 'job_position')
@@ -345,6 +361,7 @@
                     </label>
 
                     @component('frontend.common.input.select2')
+                        @slot('text', 'Employee Status')
                         @slot('id', 'employee_status')
                         @slot('name', 'employee_status')
                         @slot('id_error', 'employee_status')
@@ -356,6 +373,7 @@
                     </label>
 
                     @component('frontend.common.input.select2')
+                        @slot('text', 'Department')
                         @slot('id', 'department')
                         @slot('name', 'department')
                         @slot('id_error', 'department')
@@ -369,6 +387,7 @@
                     </label>
 
                     @component('frontend.common.input.select2')
+                        @slot('text', 'Indirect Supervisor')
                         @slot('id', 'inderect_supervisor')
                         @slot('name', 'inderect_supervisor')
                         @slot('id_error', 'inderect_supervisor')
@@ -380,6 +399,7 @@
                     </label>
 
                     @component('frontend.common.input.select2')
+                        @slot('text', 'Supervisor')
                         @slot('id', 'supervisor')
                         @slot('name', 'supervisor')
                         @slot('id_error', 'supervisor')
@@ -396,8 +416,8 @@
             <div class="action-buttons">
                 @component('frontend.common.buttons.submit')
                     @slot('type','button')
-                    @slot('id', 'add-employee')
-                    @slot('class', 'add-employee')
+                    @slot('id', 'add-basic-information')
+                    @slot('class', 'add-basic-information')
                 @endcomponent
 
                 @include('frontend.common.buttons.reset')
@@ -408,7 +428,6 @@
         </div>
     </div>
 </div>
-</form>
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/gender.js') }}"></script>

@@ -12,8 +12,6 @@ class Email extends MemfisModel
         'is_active',
         'emailable_type',
         'emailable_id',
-        'created_at',
-        'updated_at',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
