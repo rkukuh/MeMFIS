@@ -244,16 +244,100 @@ class EmployeeController extends Controller
         }
         
         //BASIC INFORMATION HISTORY
-        $employee_history = DB::table('employee_histories')->where('employee_id',$employee->id)->whereNotNull('updated_at')->get();
+        $employee_history = DB::table('employee_histories')->where('employee_id',$employee->id)->whereNotNull('updated_at')->orderBy('created_at','desc')->get();
        
-        foreach($employee_history as $ht){
+        $history[] = null;
 
+        $i = 0;
+        foreach($employee_history as $ht){
+            $addresses_history = $employee->addresses()->where('type_id',Type::where('code','address_1')->first()->id)->where('addresses.created_at',$ht->created_at)->whereNotNull('addresses.updated_at')->first();
+            $phones_history = $employee->phones()->where('type_id',Type::where('code','mobile')->first()->id)->where('phones.created_at',$ht->created_at)->whereNotNull('phones.updated_at')->first();
+            $emails_history = $employee->emails()->where('type_id',Type::where('code','email_1')->first()->id)->where('emails.created_at',$ht->created_at)->whereNotNull('emails.updated_at')->first();
+
+            if($ht->last_name == $ht->first_name){
+                $name = $ht->first_name;
+            }else{
+                $name = $ht->first_name.' '.$ht->last_name;
+            }
+
+            if($ht->gender == 'f'){
+                $gender = 'Female';
+            }else if($ht->gender == 'm'){
+                $gender = 'Male';
+            }else{
+                $gender = null;
+            }
+
+            $job_tittle = null;
+            if($ht->job_tittle_id){
+                $job_tittle = JobTittle::where('id',$ht->job_tittle_id)->first()->name;
+            }
+
+            $position = null;
+            if($ht->position_id){
+                $position = Position::where('id',$ht->position_id)->first()->name;
+            }
+
+            $status = null;
+            if($ht->statuses_id){
+                $status = Status::where('id',$ht->statuses_id)->first()->name;
+            }
+
+            $department = null;
+            if($ht->department_id){
+                $department = Department::where('id',$ht->department_id)->first()->name;
+            }
+
+            $indirect_supervisor = null;
+            if($ht->indirect_supervisor_id){
+                $indirect_supervisor_data = Employee::where('id',$ht->indirect_supervisor_id)->first();
+                
+                if($indirect_supervisor_data->last_name == $indirect_supervisor_data->first_name){
+                    $indirect_supervisor = $indirect_supervisor_data->first_name;
+                }else{
+                    $indirect_supervisor = $indirect_supervisor_data->first_name.' '.$indirect_supervisor_data->last_name;
+                }
+            }
+
+            $supervisor = null;
+            if($ht->supervisor_id){
+                $supervisor_data = Employee::where('id',$ht->supervisor_id)->first();
+                
+                if($supervisor_data->last_name == $supervisor_data->first_name){
+                    $supervisor = $supervisor_data->first_name;
+                }else{
+                    $supervisor = $supervisor_data->first_name.' '.$supervisor_data->last_name;
+                }
+            }
+
+            $history[$i] = [
+                'created_at' => $ht->created_at,
+                'updated_at' => $ht->updated_at,
+                'name' => $name,
+                'code' => $ht->code,
+                'dobdata' => $ht->dob.' & '.$ht->dob_place,
+                'gender' => $gender,
+                'nationality' => $ht->nationality,
+                'religion' => $ht->religion,
+                'martial_status' => $ht->marital_status,
+                'address_1' => $addresses_history->address,
+                'city' => $ht->city,
+                'country' => $ht->country,
+                'mobile_phone' => $phones_history->number,
+                'email_1' => $emails_history->address,
+                'job_tittle' => $job_tittle,
+                'position' => $position,
+                'status' => $status,
+                'department' => $department,
+                'joined_date' => $ht->joined_date,
+                'indirect_supervisor' => $indirect_supervisor,
+                'supervisor' => $supervisor
+            ];
+
+            $i++;
         }
 
-        
-        dd($employee_history);
-        // dd($employee->addresses()->whereNotNull('updated_at')->where('addresses.created_at',$time)->get());
-        // return view('frontend.employee.employee.show',['employee' => $employee,'age' => $age,'documents' => $documents,'emails' => $emails,'addresses' => $addreses,'phones' => $phones,'jobDetails' => $jobDetails]);
+        return view('frontend.employee.employee.show',['employee' => $employee,'age' => $age,'documents' => $documents,'emails' => $emails,'addresses' => $addreses,'phones' => $phones,'jobDetails' => $jobDetails,'history' => $history]);
     }
 
     /**
@@ -327,7 +411,7 @@ class EmployeeController extends Controller
 
         if($employee->supervisor()->first()){
         $first_name = $employee->supervisor()->first()->first_name;
-            $last_name = $employee->supervisor()->first()->last_name;
+        $last_name = $employee->supervisor()->first()->last_name;
 
             if($last_name == $first_name){
                 $name = $first_name;
@@ -337,7 +421,101 @@ class EmployeeController extends Controller
         $jobDetails['supervisor'] = $name;
         }
 
-        return view('frontend.employee.employee.edit',['employee' => $employee,'age' => $age,'documents' => $documents,'emails' => $emails,'addresses' => $addreses,'phones' => $phones,'jobDetails' => $jobDetails]);
+        //BASIC INFORMATION HISTORY
+        $employee_history = DB::table('employee_histories')->where('employee_id',$employee->id)->whereNotNull('updated_at')->orderBy('created_at','desc')->get();
+       
+        $history[] = null;
+
+        $i = 0;
+        foreach($employee_history as $ht){
+            $addresses_history = $employee->addresses()->where('type_id',Type::where('code','address_1')->first()->id)->where('addresses.created_at',$ht->created_at)->whereNotNull('addresses.updated_at')->first();
+            $phones_history = $employee->phones()->where('type_id',Type::where('code','mobile')->first()->id)->where('phones.created_at',$ht->created_at)->whereNotNull('phones.updated_at')->first();
+            $emails_history = $employee->emails()->where('type_id',Type::where('code','email_1')->first()->id)->where('emails.created_at',$ht->created_at)->whereNotNull('emails.updated_at')->first();
+
+            if($ht->last_name == $ht->first_name){
+                $name = $ht->first_name;
+            }else{
+                $name = $ht->first_name.' '.$ht->last_name;
+            }
+
+            if($ht->gender == 'f'){
+                $gender = 'Female';
+            }else if($ht->gender == 'm'){
+                $gender = 'Male';
+            }else{
+                $gender = null;
+            }
+
+            $job_tittle = null;
+            if($ht->job_tittle_id){
+                $job_tittle = JobTittle::where('id',$ht->job_tittle_id)->first()->name;
+            }
+
+            $position = null;
+            if($ht->position_id){
+                $position = Position::where('id',$ht->position_id)->first()->name;
+            }
+
+            $status = null;
+            if($ht->statuses_id){
+                $status = Status::where('id',$ht->statuses_id)->first()->name;
+            }
+
+            $department = null;
+            if($ht->department_id){
+                $department = Department::where('id',$ht->department_id)->first()->name;
+            }
+
+            $indirect_supervisor = null;
+            if($ht->indirect_supervisor_id){
+                $indirect_supervisor_data = Employee::where('id',$ht->indirect_supervisor_id)->first();
+                
+                if($indirect_supervisor_data->last_name == $indirect_supervisor_data->first_name){
+                    $indirect_supervisor = $indirect_supervisor_data->first_name;
+                }else{
+                    $indirect_supervisor = $indirect_supervisor_data->first_name.' '.$indirect_supervisor_data->last_name;
+                }
+            }
+
+            $supervisor = null;
+            if($ht->supervisor_id){
+                $supervisor_data = Employee::where('id',$ht->supervisor_id)->first();
+                
+                if($supervisor_data->last_name == $supervisor_data->first_name){
+                    $supervisor = $supervisor_data->first_name;
+                }else{
+                    $supervisor = $supervisor_data->first_name.' '.$supervisor_data->last_name;
+                }
+            }
+
+            $history[$i] = [
+                'created_at' => $ht->created_at,
+                'updated_at' => $ht->updated_at,
+                'name' => $name,
+                'code' => $ht->code,
+                'dobdata' => $ht->dob.' & '.$ht->dob_place,
+                'gender' => $gender,
+                'nationality' => $ht->nationality,
+                'religion' => $ht->religion,
+                'martial_status' => $ht->marital_status,
+                'address_1' => $addresses_history->address,
+                'city' => $ht->city,
+                'country' => $ht->country,
+                'mobile_phone' => $phones_history->number,
+                'email_1' => $emails_history->address,
+                'job_tittle' => $job_tittle,
+                'position' => $position,
+                'status' => $status,
+                'department' => $department,
+                'joined_date' => $ht->joined_date,
+                'indirect_supervisor' => $indirect_supervisor,
+                'supervisor' => $supervisor
+            ];
+
+            $i++;
+        }
+
+        return view('frontend.employee.employee.edit',['employee' => $employee,'age' => $age,'documents' => $documents,'emails' => $emails,'addresses' => $addreses,'phones' => $phones,'jobDetails' => $jobDetails,'history' => $history]);
     }
 
     /**
