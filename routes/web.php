@@ -26,8 +26,9 @@ require('frontend/purchase-request.php');
 require('frontend/quotation.php');
 require('frontend/rii.php');
 require('frontend/rts.php');
-require('frontend/taskcard.php');
 require('frontend/task-release.php');
+require('frontend/taskcard.php');
+require('frontend/view-only.php');
 require('frontend/workpackage.php');
 
 require('testing.php');
