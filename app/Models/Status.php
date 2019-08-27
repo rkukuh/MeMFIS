@@ -119,4 +119,17 @@ class Status extends MemfisModel
     {
         return $this->morphTo();
     }
+
+    /**
+     * One-to-Many: An Status have many Employee.
+     *
+     * This function will retrieve Employee of a Status.
+     * See: Employee status() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee()
+    {
+        return $this->hasMany(Status::class);
+    }
 }

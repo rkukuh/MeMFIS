@@ -68,4 +68,17 @@ class Department extends MemfisModel
     {
         return $this->belongsTo(Type::class);
     }
+
+    /**
+     * One-to-Many: An Department have many Employee.
+     *
+     * This function will retrieve Employee of a Department.
+     * See: Employee department() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee()
+    {
+        return $this->hasMany(Employee::class);
+    }
 }

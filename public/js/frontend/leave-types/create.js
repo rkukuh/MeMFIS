@@ -7,7 +7,7 @@ let leaveType = {
         let code_uppercase = code.toUpperCase()
 
         let name = $('input[name=name]').val()
-        let gender = $('input[name=gender]').val()
+        let gender = $('#gender option:selected').val()
 
         if(gender == 'Male'){
             gender = 'm'

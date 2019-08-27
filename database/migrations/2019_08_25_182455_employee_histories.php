@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeesTable extends Migration
+class EmployeeHistories extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('employee_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('uuid', 36)->unique();
+            $table->unsignedBigInteger('employee_id');
             $table->string('code');
-            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->date('dob');
@@ -30,18 +29,23 @@ class CreateEmployeesTable extends Migration
             $table->string('city');
             $table->string('zip')->nullable();
             $table->date('joined_date');
-            $table->unsignedBigInteger('job_tittle_id')->nullable();
-            $table->unsignedBigInteger('position_id')->nullable();
-            $table->unsignedBigInteger('statuses_id')->nullable();
-            $table->unsignedBigInteger('department_id')->nullable();
-            $table->unsignedBigInteger('indirect_supervisor_id')->nullable();
-            $table->unsignedBigInteger('supervisor_id')->nullable();
+            $table->unsignedBigInteger('job_tittle_id');
+            $table->unsignedBigInteger('position_id');
+            $table->unsignedBigInteger('statuses_id');
+            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('indirect_supervisor_id');
+            $table->unsignedBigInteger('supervisor_id');
 
             $table->timestamps();
             $table->softDeletes();
 
             $table->index('first_name');
             $table->index('last_name');
+
+            $table->foreign('employee_id')
+            ->references('id')->on('employees')
+            ->onUpdate('cascade')
+            ->onDelete('restrict');
         });
     }
 
@@ -52,6 +56,6 @@ class CreateEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employees');
+        Schema::dropIfExists('employee_histories');
     }
 }

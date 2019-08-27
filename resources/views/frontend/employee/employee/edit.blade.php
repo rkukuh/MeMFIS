@@ -55,23 +55,41 @@
                             <div class="row">
                                 <div class="col-sm-2 col-md-2 col-lg-2"></div>
                                 <div class="col-sm-10 col-md-10 col-lg-10 text-white">
-                                    <h1 class="display-5">Yemima Krisdian Tifani, <span>25</span></h1>
+                                <h1 class="display-5">{{ $employee->first_name.' '.$employee->last_name }}, <span>{{ $age }}</span></h1>
                                     <div class="row">
                                         <div class="col-sm-2 col-md-2 col-lg-2">
-                                            <h6>Job Title</h6>
+                                        @if (isset($employee->job_tittle->name))
+                                        <h6>{{ $employee->job_tittle->name }}</h6>
+                                        @else
+                                        <h6>None</h6>
+                                        @endif
                                         </div>
                                         <div class="col-sm-3 col-md-3 col-lg-3">
-                                            <h6>| Department</h6>
+                                        @if (isset($employee->department->name))
+                                        <h6>| {{ $employee->department->name }}</h6> 
+                                        @else
+                                        <h6>| None</h6>
+                                        @endif
                                         </div>
                                         <div class="col-sm-7 col-md-7 col-lg-7">
-                                            <span>
-                                                <h6><i class="la la-envelope-o"></i>&nbsp;&nbsp; yemimatifani@gmail.com</h6>
-                                            </span>
-                                        </div>
+                                        @if (isset($emails['email_1']))
+                                                <span>
+                                                <h6><i class="la la-envelope-o"></i>&nbsp;&nbsp; {{ $emails['email_1'] }}</h6>
+                                                </span>
+                                        @else
+                                                <span>
+                                                <h6><i class="la la-envelope-o"></i>&nbsp;&nbsp; None</h6>
+                                                </span>
+                                        @endif
+                                    </div>
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-12">
-                                            <h6>Employee Since <span>Aug</span> 1, 2019</h6>
+                                            @php
+                                                $joined_date = $employee->joined_date;
+                                                $formatJoinedDate = strtotime($joined_date);
+                                            @endphp
+                                        <h6>Employee Since <span>{{ date('F', $formatJoinedDate) }}</span>  {{ date('d,Y', $formatJoinedDate) }}</h6>
                                         </div>
                                     </div>
                                 </div>

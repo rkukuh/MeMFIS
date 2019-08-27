@@ -9,7 +9,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $employee->code)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -20,7 +20,7 @@
                             </label>
 
                             @component('frontend.common.label.data-info')
-                                @slot('text', 'Generated')
+                                @slot('text', $employee->dob)
                             @endcomponent
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -29,7 +29,7 @@
                             </label>
         
                             @component('frontend.common.label.data-info')
-                                @slot('text', 'Generated')
+                                @slot('text', $employee->dob_place)
                             @endcomponent
                         </div>
                     </div>
@@ -42,16 +42,21 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $employee->first_name)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
                         Last Name 
                     </label>
-
+                    @php
+                        $lastName = null;
+                        if($employee->last_name != $employee->first_name){
+                            $lastName = $employee->last_name;
+                        }
+                    @endphp
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $lastName)
                     @endcomponent
                 </div>
             </div>
@@ -63,8 +68,14 @@
                                 ID Card No
                             </label>
         
+                            @php
+                            $document = null;
+                            if(isset($documents['ktp'])){
+                            $document = $documents['ktp'];
+                            }
+                            @endphp
                             @component('frontend.common.label.data-info')
-                                @slot('text', 'Generated')
+                                @slot('text', $document)
                             @endcomponent
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -85,8 +96,16 @@
                                 Gender 
                             </label>
                             
+                            @php
+                              $gender = null;
+                              if($employee->gender == 'f'){
+                                $gender = 'Female';
+                              }else if($employee->gender == 'm'){
+                                $gender = 'Male';
+                              }
+                            @endphp
                             @component('frontend.common.label.data-info')
-                                @slot('text', 'Generated')
+                                @slot('text', $gender)
                             @endcomponent  
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -95,7 +114,7 @@
                             </label>
         
                             @component('frontend.common.label.data-info')
-                                @slot('text', 'Generated')
+                                @slot('text', $employee->nationality)
                             @endcomponent
                         </div>
                     </div>
@@ -108,7 +127,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $employee->religion)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -117,7 +136,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $employee->marital_status)
                     @endcomponent
                 </div>
             </div>
@@ -135,8 +154,19 @@
                         Address Line 1 
                     </label>
 
+                    @php
+                        $address_1 = null;
+                        if(isset($addresses['address_1'])){
+                            $address_1 = $addresses['address_1'];
+                        }
+
+                        $address_2 = null;
+                        if(isset($addresses['address_2'])){
+                            $address_2 = $addresses['address_1'];
+                        }
+                    @endphp
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $address_1)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -145,7 +175,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $address_2)
                     @endcomponent
                 </div>
             </div>
@@ -156,7 +186,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $employee->country)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -167,7 +197,7 @@
                             </label>
         
                             @component('frontend.common.label.data-info')
-                                @slot('text', 'Generated')
+                                @slot('text', $employee->city)
                             @endcomponent
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -176,7 +206,7 @@
                             </label>
         
                             @component('frontend.common.label.data-info')
-                                @slot('text', 'Generated')
+                                @slot('text', $employee->zip)
                             @endcomponent
                         </div>
                     </div>
@@ -188,8 +218,29 @@
                         Home Phone 
                     </label>
 
+                    @php
+                        $home_phone = null;
+                        if(isset($phones['home'])){
+                            $home_phone = $phones['home'];
+                        }
+
+                        $mobile_phone = null;
+                        if(isset($phones['mobile'])){
+                            $mobile_phone = $phones['mobile'];
+                        }
+
+                        $work_phone = null;
+                        if(isset($phones['work'])){
+                            $work_phone = $phones['work'];
+                        }
+
+                        $other_phone = null;
+                        if(isset($phones['other'])){
+                            $other_phone = $phones['other'];
+                        }
+                    @endphp
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $home_phone)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -198,7 +249,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $mobile_phone)
                     @endcomponent
                 </div>
             </div>
@@ -209,7 +260,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $work_phone)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -218,7 +269,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $other_phone)
                     @endcomponent
                 </div>
             </div>
@@ -228,8 +279,20 @@
                         Email 1 
                     </label>
 
+                    @php
+                        $email_1 = null;
+                        if(isset($emails['email_1'])){
+                            $email_1 = $emails['email_1'];
+                        }
+
+                        $email_2 = null;
+                        if(isset($emails['email_2'])){
+                            $email_2 = $emails['email_2'];
+                        }
+
+                    @endphp
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $email_1)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -238,7 +301,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $email_2)
                     @endcomponent
                 </div>
             </div>
@@ -259,7 +322,7 @@
                             </label>
         
                             @component('frontend.common.label.data-info')
-                                @slot('text', 'Generated')
+                                @slot('text', $employee->joined_date)
                             @endcomponent
                         </div>
                     </div>
@@ -268,11 +331,42 @@
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
-                        Job Title 
+                        Job Tittle 
                     </label>
 
+                    @php
+                         $jobTittle  = null;
+                         if(isset($jobDetails['job_tittle'])){
+                            $jobTittle = $jobDetails['job_tittle'];
+                         }
+                         
+                         $position  = null;
+                         if(isset($jobDetails['position'])){
+                            $position = $jobDetails['position'];
+                         }
+
+                         $status  = null;
+                         if(isset($jobDetails['status'])){
+                            $status = $jobDetails['status'];
+                         }
+
+                         $department  = null;
+                         if(isset($jobDetails['department'])){
+                            $department = $jobDetails['department'];
+                         }
+
+                         $indirect  = null;
+                         if(isset($jobDetails['indirect'])){
+                            $indirect = $jobDetails['indirect'];
+                         }
+
+                         $supervisor  = null;
+                         if(isset($jobDetails['supervisor'])){
+                            $supervisor = $jobDetails['supervisor'];
+                         }
+                    @endphp
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $jobTittle)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -281,7 +375,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $position)
                     @endcomponent
                 </div>
             </div>
@@ -292,7 +386,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $status)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -301,7 +395,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $department)
                     @endcomponent
                 </div>
             </div>
@@ -312,7 +406,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $indirect)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -321,7 +415,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $supervisor)
                     @endcomponent
                 </div>
             </div>

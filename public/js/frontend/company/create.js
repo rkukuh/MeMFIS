@@ -7,8 +7,8 @@ let CompanyStructure = {
         let maximum_period = $('input[name=max_overtime_per_period]').val()
         let maximum_holiday = $('input[name=holiday_overtime_allowance]').val()
         let description = $('#description').val()
-        let company = $('#company').val()
-        let parent_structure = $('#parent_structure').val()
+        let company = $('#company option:selected').val()
+        let parent_structure = $('#parent_structure option:selected').val()
 
         $.ajax({
             headers: {

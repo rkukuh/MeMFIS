@@ -83,12 +83,19 @@
                             <label class="form-control-label">
                                 ID Card No
                             </label>
-        
+                            
+                            @php
+                            $document = null;
+                            if(isset($documents['ktp'])){
+                            $document = $documents['ktp'];
+                            }
+                            @endphp
+
                             @component('frontend.common.input.text')
-                                @slot('text', 'ID Card Number')
                                 @slot('id', 'card_number')
                                 @slot('name', 'card_number')
                                 @slot('id_error', 'card_number')
+                                @slot('value', $document)
                             @endcomponent
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -169,8 +176,19 @@
                         Address Line 1 @include('frontend.common.label.required')
                     </label>
 
+                    @php
+                        $address_1 = null;
+                        if(isset($addresses['address_1'])){
+                            $address_1 = $addresses['address_1'];
+                        }
+
+                        $address_2 = null;
+                        if(isset($addresses['address_2'])){
+                            $address_2 = $addresses['address_1'];
+                        }
+                    @endphp
                     @component('frontend.common.input.text')
-                        @slot('text', 'Address Line 1')
+                        @slot('value', $address_1)
                         @slot('id', 'address_line_1')
                         @slot('name', 'address_line_1')
                         @slot('id_error', 'address_line_1')
@@ -182,7 +200,7 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('text', 'Address Line 2')
+                        @slot('value', $address_2)
                         @slot('id', 'address_line_2')
                         @slot('name', 'address_line_2')
                         @slot('id_error', 'address_line_2')
@@ -196,7 +214,7 @@
                     </label>
 
                     @component('frontend.common.input.text')
-                        @slot('text', 'Country')
+                        @slot('value', $employee->country)
                         @slot('id', 'country')
                         @slot('name', 'country')
                         @slot('id_error', 'country')
@@ -210,7 +228,7 @@
                             </label>
         
                             @component('frontend.common.input.text')
-                                @slot('text', 'City')
+                                @slot('value', $employee->city);
                                 @slot('id', 'city')
                                 @slot('name', 'city')
                                 @slot('id_error', 'city')
@@ -222,7 +240,7 @@
                             </label>
         
                             @component('frontend.common.input.number')
-                                @slot('text', 'Zip Code')
+                                @slot('value', $employee->zip)
                                 @slot('id', 'zip_code')
                                 @slot('name', 'zip_code')
                                 @slot('id_error', 'zip_code')
@@ -237,8 +255,29 @@
                         Home Phone 
                     </label>
 
+                    @php
+                        $home_phone = null;
+                        if(isset($phones['home'])){
+                            $home_phone = $phones['home'];
+                        }
+
+                        $mobile_phone = null;
+                        if(isset($phones['mobile'])){
+                            $mobile_phone = $phones['mobile'];
+                        }
+
+                        $work_phone = null;
+                        if(isset($phones['work'])){
+                            $work_phone = $phones['work'];
+                        }
+
+                        $other_phone = null;
+                        if(isset($phones['other'])){
+                            $other_phone = $phones['other'];
+                        }
+                    @endphp
                     @component('frontend.common.input.number')
-                        @slot('text', 'Home Phone')
+                        @slot('value', $home_phone)
                         @slot('id', 'home_phone')
                         @slot('name', 'home_phone')
                         @slot('id_error', 'home_phone')
@@ -250,7 +289,7 @@
                     </label>
 
                     @component('frontend.common.input.number')
-                        @slot('text', 'Mobile Phone')
+                        @slot('value', $mobile_phone)
                         @slot('id', 'mobile_phone')
                         @slot('name', 'mobile_phone')
                         @slot('id_error', 'mobile_phone')
@@ -264,7 +303,7 @@
                     </label>
 
                     @component('frontend.common.input.number')
-                        @slot('text', 'Work Phone')
+                        @slot('value', $work_phone)
                         @slot('id', 'work_phone')
                         @slot('name', 'work_phone')
                         @slot('id_error', 'work_phone')
@@ -276,7 +315,7 @@
                     </label>
 
                     @component('frontend.common.input.number')
-                        @slot('text', 'Other Phone')
+                        @slot('value', $other_phone)
                         @slot('id', 'other_phone')
                         @slot('name', 'other_phone')
                         @slot('id_error', 'other_phone')
@@ -289,8 +328,20 @@
                         Email 1 @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.number')
-                        @slot('text', 'Email 1')
+                    @php
+                        $email_1 = null;
+                        if(isset($emails['email_1'])){
+                            $email_1 = $emails['email_1'];
+                        }
+
+                        $email_2 = null;
+                        if(isset($emails['email_2'])){
+                            $email_2 = $emails['email_2'];
+                        }
+
+                    @endphp
+                    @component('frontend.common.input.text')
+                        @slot('value',$email_1)
                         @slot('id', 'email_1')
                         @slot('name', 'email_1')
                         @slot('id_error', 'email_1')
@@ -301,8 +352,8 @@
                         Email 2
                     </label>
 
-                    @component('frontend.common.input.number')
-                        @slot('text', 'Email 2')
+                    @component('frontend.common.input.text')
+                        @slot('value', $email_2)
                         @slot('id', 'email_2')
                         @slot('name', 'email_2')
                         @slot('id_error', 'email_2')
@@ -326,8 +377,8 @@
                             </label>
         
                             @component('frontend.common.input.datepicker')
+                                @slot('value', $employee->joined_date)
                                 @slot('id', 'period_start_date')
-                                @slot('text', 'Date')
                                 @slot('name', 'period_start_date')
                                 @slot('id_error','period_start_date')
                             @endcomponent
@@ -342,7 +393,6 @@
                     </label>
 
                     @component('frontend.common.input.select2')
-                        @slot('text', 'Job Title')
                         @slot('id', 'job_title')
                         @slot('name', 'job_title')
                         @slot('id_error', 'job_title')
@@ -354,7 +404,6 @@
                     </label>
 
                     @component('frontend.common.input.select2')
-                        @slot('text', 'Job Position')
                         @slot('id', 'job_position')
                         @slot('class', 'job_position')
                         @slot('name', 'job_position')
@@ -369,7 +418,6 @@
                     </label>
 
                     @component('frontend.common.input.select2')
-                        @slot('text', 'Employee Status')
                         @slot('id', 'employee_status')
                         @slot('name', 'employee_status')
                         @slot('id_error', 'employee_status')
@@ -381,7 +429,6 @@
                     </label>
 
                     @component('frontend.common.input.select2')
-                        @slot('text', 'Department')
                         @slot('id', 'department')
                         @slot('name', 'department')
                         @slot('id_error', 'department')
@@ -395,7 +442,6 @@
                     </label>
 
                     @component('frontend.common.input.select2')
-                        @slot('text', 'Indirect Supervisor')
                         @slot('id', 'inderect_supervisor')
                         @slot('name', 'inderect_supervisor')
                         @slot('id_error', 'inderect_supervisor')
@@ -407,7 +453,6 @@
                     </label>
 
                     @component('frontend.common.input.select2')
-                        @slot('text', 'Supervisor')
                         @slot('id', 'supervisor')
                         @slot('name', 'supervisor')
                         @slot('id_error', 'supervisor')

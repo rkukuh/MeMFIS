@@ -23,5 +23,29 @@ class TypesOfPhone extends Seeder
             'name' => 'Personal',
             'of'   => 'phone',
         ]);
+
+        Type::create([
+            'code' => 'mobile',
+            'name' => 'Mobile',
+            'of'   => 'phone',
+        ]);
+
+        Type::create([
+            'code' => 'home',
+            'name' => 'Home',
+            'of'   => 'phone',
+        ]);
+
+        Type::create([
+            'code' => 'other',
+            'name' => 'Other',
+            'of'   => 'phone',
+        ]);
+
+        Type::create([
+            'code' => 'work',
+            'name' => 'Work',
+            'of'   => 'phone',
+        ]);
     }
 }
