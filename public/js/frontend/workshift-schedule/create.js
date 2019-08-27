@@ -1,5 +1,15 @@
 let Workshift = {
     init: function () {
+
+        $("input[name='days']").each(function(){
+            if($('#'+this.id+'').not(':checked')){
+                $('#'+this.id+'_in').attr('disabled', true)
+                $('#'+this.id+'_out').attr('disabled', true)
+                $('#'+this.id+'_break_in').attr('disabled', true)
+                $('#'+this.id+'_break_out').attr('disabled', true)
+            }
+        });
+    
     let create = $('.footer').on('click', '.add-workshift-schedule', function () {
         var code = $('input[name="code"]').val()
         var name = $('input[name="name"]').val()
@@ -92,8 +102,16 @@ let Workshift = {
 function checkboxFunction(id){
     if ($('#'+id).is(':checked')) {
         $('#'+id).attr('checked', true);
+        $('#'+id+'_in').attr('disabled', false)
+        $('#'+id+'_out').attr('disabled', false)
+        $('#'+id+'_break_in').attr('disabled', false)
+        $('#'+id+'_break_out').attr('disabled', false)
     }else{
         $('#'+id).attr('checked', false);
+        $('#'+id+'_in').attr('disabled', true)
+        $('#'+id+'_out').attr('disabled', true)
+        $('#'+id+'_break_in').attr('disabled', true)
+        $('#'+id+'_break_out').attr('disabled', true)
     }
 }
 
