@@ -44,11 +44,15 @@ let Bpjs = {
             },
             columns: [
                 {
-                    field: '',
+                    field: '#',
                     title: 'No',
-                    width:'30',
+                    width:'40',
                     sortable: 'asc',
                     filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {   
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
                 },
                 {
                     field: 'code',
