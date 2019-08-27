@@ -179,7 +179,7 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6 align-self-center">
                                                                 <div class="form-group m-form__group row">
                                                                     <div class="col-md-8">
-                                                                        <h1 style="font-size: 4rem;text-align:right;">3.385 <span style="font-size: 2rem;">of</span>  5000 <br> <span style="font-size: 2rem;">Task Finished</span></h1>
+                                                                        <h1 style="font-size: 4rem;text-align:right;">{{ number_format($jobcards["overall_done"]) }} <span style="font-size: 2rem;">of</span>  {{ number_format($jobcards["overall"]) }} <br> <span style="font-size: 2rem;">Task Finished</span></h1>
                                                                     </div>
                                                                 </div>
                                                             </div>					 
@@ -220,7 +220,7 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6 align-self-center">
                                                                 <div class="form-group m-form__group row">
                                                                     <div class="col-md-8">
-                                                                        <h1 style="font-size: 2rem;text-align:right;">3.385 <span style="font-size: 1rem;">of</span>  5000 <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                        <h1 style="font-size: 2rem;text-align:right;">{{ number_format($jobcards["routine_done"]) }} <span style="font-size: 1rem;">of</span>  {{ number_format($jobcards["routine"]) }} <br> <span style="font-size: 1rem;">Task Finished</span></h1>
                                                                     </div>
                                                                 </div>
                                                             </div>					 
@@ -259,7 +259,7 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6 align-self-center">
                                                                 <div class="form-group m-form__group row">
                                                                     <div class="col-md-8">
-                                                                        <h1 style="font-size: 2rem;text-align:right;">3.385 <span style="font-size: 1rem;">of</span>  5000 <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                        <h1 style="font-size: 2rem;text-align:right;">{{ number_format($jobcards["non_routine_done"]) }} <span style="font-size: 1rem;">of</span>  {{ number_format($jobcards["non_routine"]) }} <br> <span style="font-size: 1rem;">Task Finished</span></h1>
                                                                     </div>
                                                                 </div>
                                                             </div>					 
