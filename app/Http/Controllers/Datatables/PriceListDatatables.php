@@ -23,12 +23,15 @@ class PriceListDatatables extends Controller
         $items = Item::with('unit', 'journal', 'prices')->get();
         
         foreach($items as $item){
-            $item->unit_name .= $item->unit->name;
-            $item->last_update .= $item->updated_at;
+            $item->unit_name    .= $item->unit->name;
+            $item->last_update  .= $item->updated_at;
             
             if($item->first()->audits->first()->user_id == 0){
+                
                 $item->updated_by .= 'System';
+            
             }else{
+                
                 $item->updated_by .= $item->first()->audits->first()->user_id;
             }
         }
@@ -127,23 +130,17 @@ class PriceListDatatables extends Controller
     public function manhour() 
     // item , manhour, facility = prices
     {
-        $manhour = Manhour::all();
-
+        
+        $manhour = Manhour::all()->slice(0,1);
         foreach($manhour as $manhours){
             $manhours->updated_by   .= '2019-04-16';
             $manhours->update_at    .= '2019-04-16';
             $manhours->name         .= 'Testing';
-            // $item->unit_name .= $item->unit->name;
-            // $item->last_update .= $item->updated_at;
             
-            // if($item->first()->audits->first()->user_id == 0){
-            //     $item->updated_by .= 'System';
-            // }else{
-            //     $item->updated_by .= $item->first()->audits->first()->user_id;
-            // }
         }
 
         $data = $alldata = json_decode($manhour);
+        
         
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
