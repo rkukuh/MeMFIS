@@ -584,6 +584,20 @@ class Type extends MemfisModel
     }
 
     /**
+     * One-to-Many: A jobcard may have zero or many logbook.
+     *
+     * This function will retrieve all jobcards of a type.
+     * See: JobCard's logbooks() method for the inverse
+     *
+     * @return mixed
+     */
+    public function logbook_jobcards()
+    {
+        return $this->belongsToMany(JobCard::class, 'jobcard_logbooks', 'logbook_id', 'jobcard_id')
+                    ->withTimestamps();;
+    }
+
+    /**
      * One-to-Many: A phone may have zero or many type.
      *
      * This function will retrieve all phones of a type.

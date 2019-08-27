@@ -16,7 +16,6 @@ class JobCard extends MemfisModel
         'is_rii',
         'is_mandatory',
         'station_id',
-        'entered_in',
         'additionals',
         'origin_quotation',
         'origin_jobcardable',
@@ -50,18 +49,6 @@ class JobCard extends MemfisModel
     public function defectcards()
     {
         return $this->hasMany(DefectCard::class, 'jobcard_id');
-    }
-
-    /**
-     * One-Way: A job card may have one logbook (to be entered).
-     *
-     * This function will retrieve the logbook (to be entered) of a job card.
-     *
-     * @return mixed
-     */
-    public function entered_in()
-    {
-        return $this->belongsTo(Type::class, 'entered_in');
     }
 
     /**
@@ -104,6 +91,20 @@ class JobCard extends MemfisModel
     public function jobcardable()
     {
         return $this->morphTo();
+    }
+
+    /**
+     * One-to-Many: A jobcard may have zero or many logbook.
+     *
+     * This function will retrieve all logbooks of a jobcard.
+     * See: Type's logbook_jobcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function logbooks()
+    {
+        return $this->belongsToMany(Type::class, 'jobcard_logbooks', 'jobcard_id', 'logbook_id')
+                    ->withTimestamps();;
     }
 
     /**
