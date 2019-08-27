@@ -127,9 +127,23 @@ class PriceListDatatables extends Controller
     public function manhour() 
     // item , manhour, facility = prices
     {
-        $items = Manhour::all();
+        $manhour = Manhour::all();
+        
+        foreach($manhour as $manhours){
+            $manhours->updated_by   .= '2019-04-16';
+            $manhours->update_at    .= '2019-04-16';
+            $manhours->name         .= 'Testing';
+            // $item->unit_name .= $item->unit->name;
+            // $item->last_update .= $item->updated_at;
+            
+            // if($item->first()->audits->first()->user_id == 0){
+            //     $item->updated_by .= 'System';
+            // }else{
+            //     $item->updated_by .= $item->first()->audits->first()->user_id;
+            // }
+        }
 
-        $data = $alldata = json_decode($items);
+        $data = $alldata = json_decode($manhour);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -408,7 +422,7 @@ class PriceListDatatables extends Controller
             'code'     => true,
             'name'     => true,
             'uuid'     => true,
-            'Actions'      => true,
+            'Actions'  => true,
         ];
 
         if ( isset( $_REQUEST['columnsDef'] ) && is_array( $_REQUEST['columnsDef'] ) ) {
