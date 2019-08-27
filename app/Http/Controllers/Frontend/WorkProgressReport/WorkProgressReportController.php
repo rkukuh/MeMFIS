@@ -59,10 +59,13 @@ class WorkProgressReportController extends Controller
         }
         $quotation_ids = Quotation::where('project_id', $project->id)->pluck('id')->toArray();
 
-        $jobcard_all = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')
-        ->whereHas('jobcardable.type', function ($taskcard) {
-            $taskcard->where('of', 'taskcard-type-routine');
-        })->get();
+        $jobcard_all = JobCard::whereIn('quotation_id', $quotation_ids)->with('jobcardable','progresses')
+        ->whereHas('jobcardable', function ($query) use ($quotation_ids) {
+            $query->whereIn('jobcardable_id', '=', $quotation_ids);
+        }, '>=', 1, ['App\Models\TaskCard'])
+        ->get();
+
+        dd( $jobcard_all);
 
         $jobcards["overall"] = $jobcard_all->count();
         $jobcards["overall_done"] = 0;
