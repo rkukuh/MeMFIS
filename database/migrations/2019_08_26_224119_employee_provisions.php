@@ -28,7 +28,7 @@ class EmployeeProvisions extends Migration
             $table->softDeletes();
 
             $table->foreign('employee_id')
-            ->references('id')->on('employe')
+            ->references('id')->on('employees')
             ->onUpdate('cascade')
             ->onDelete('restrict');
         });

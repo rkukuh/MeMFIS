@@ -38,27 +38,27 @@ class WorkshiftController extends Controller
      */
     public function store(WorkshiftStore $request)
     {
-        $workshift = Workshift::create([
-            'code' => $request->code,
-            'name' => $request->name,
-            'description' => $request->description,
-        ]);
+        // $workshift = Workshift::create([
+        //     'code' => $request->code,
+        //     'name' => $request->name,
+        //     'description' => $request->description,
+        // ]);
 
-        $id = Workshift::where('uuid',$workshift->uuid)->first()->id; 
+        // $id = Workshift::where('uuid',$workshift->uuid)->first()->id; 
 
-        if(isset($request->days)){
-            for($i=0; $i<count($request->days); $i++){
-                WorkshiftSchedule::create([
-                    'workshift_id' => $id,
-                    'days' => $request->days[$i],
-                    'in' => $request->in[$i],
-                    'break_in' => $request->break_in[$i],
-                    'break_out' => $request->break_out[$i],
-                    'out' => $request->out[$i]
-                ]);
-                }
-        }
-        return response()->json($workshift);
+        // if(isset($request->days)){
+        //     for($i=0; $i<count($request->days); $i++){
+        //         WorkshiftSchedule::create([
+        //             'workshift_id' => $id,
+        //             'days' => $request->days[$i],
+        //             'in' => $request->in[$i],
+        //             'break_in' => $request->break_in[$i],
+        //             'break_out' => $request->break_out[$i],
+        //             'out' => $request->out[$i]
+        //         ]);
+        //         }
+        // }
+        return response()->json($request->days);
     }
 
     /**
@@ -69,10 +69,8 @@ class WorkshiftController extends Controller
      */
     public function show(Workshift $workshift)
     {
-        $id = Workshift::where('uuid',$workshift->uuid)->first()->id;
-
-        $schedule = WorkshiftSchedule::where('workshift_id',$id)->get();
-
+        $schedule = $workshift->workshift_schedules()->get();
+      
         return view('frontend.workshift-schedule.show',['workshift' => $workshift,'schedule' => $schedule]);
     }
 
