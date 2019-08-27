@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class WorkshiftStore extends FormRequest
 {
@@ -13,7 +15,7 @@ class WorkshiftStore extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,15 @@ class WorkshiftStore extends FormRequest
     public function rules()
     {
         return [
-            //
+            'code' => 'required',
+            'name' => 'required',
+            // 'break_in.*' => 'after_or_equal:in',
+            // 'break_out.*' => 'after_or_equal:break_in',
+            // 'out.*' => 'after: in|after_or_equal:break_out'
         ];
+    }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }

@@ -41,7 +41,15 @@ let Position = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
+                    field: '',
+                    title: 'No',
+                    width:'30',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'code',
                     title: 'Code',
                     sortable: 'asc',
@@ -56,27 +64,28 @@ let Position = {
                     sortable: 'asc',
                     filterable: !1,
                 },
-                    {
-                        field: 'description',
-                        title: 'Description',
-                        sortable: 'asc',
-                        filterable: !1,
-                    },
-                    {
-                        field: 'Actions',
-                        sortable: !1,
-                        overflow: 'visible',
-                        template: function (t, e, i) {
-                            return (
-                                '<a href="/position/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                                t.uuid +
-                                ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
-                            );
-                        }
+                {
+                    field: 'description',
+                    title: 'Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'Actions',
+                    title: 'Action',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<a href="/position/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                '<i class="la la-pencil"></i>' +
+                            '</a>' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
+                            t.uuid +
+                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                        );
                     }
+                }
             ]
         });
 

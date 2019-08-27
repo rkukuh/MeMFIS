@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 use Carbon\Carbon;
 use App\Models\Type;
@@ -245,19 +245,19 @@ $factory->afterCreating(TaskCard::class, function ($taskcard, $faker) {
 
     // Aircraft's Access
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->accesses()->saveMany($aircraft->accesses);
     }
 
     // Aircraft's Zone
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->zones()->saveMany($aircraft->zones);
     }
 
     // Aircraft's Station
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->stations()->saveMany($aircraft->stations);
     }
 
@@ -291,7 +291,7 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
 
     // Related-to
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->related_to()->saveMany(TaskCard::get()->random(rand(1, 3)));
     }
 
@@ -304,13 +304,13 @@ $factory->afterCreatingState(TaskCard::class, 'basic', function ($taskcard, $fak
         else {
             $skill = factory(Type::class)->states('taskcard-skill')->create();
         }
-    
+
         $taskcard->skills()->attach($skill);
     }
 
     // Threshold and Repeat
 
-    if ($faker->boolean) {
+    if ($faker->boolean()) {
         $taskcard->thresholds()->saveMany(
             factory(Threshold::class, rand(1, 2))->make()
         );
@@ -363,7 +363,7 @@ $factory->afterCreatingState(TaskCard::class, 'eo', function ($taskcard, $faker)
             else {
                 $skill = factory(Type::class)->states('taskcard-skill')->create();
             }
-        
+
             $eo_instruction->skills()->attach($skill);
         }
     }
@@ -403,7 +403,7 @@ $factory->afterCreatingState(TaskCard::class, 'si', function ($taskcard, $faker)
         else {
             $skill = factory(Type::class)->states('taskcard-skill')->create();
         }
-    
+
         $taskcard->skills()->attach($skill);
     }
 

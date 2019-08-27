@@ -43,7 +43,15 @@ let EmploymentStatus = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
+                    field: '',
+                    title: 'No',
+                    width: '30',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'code',
                     title: 'Code',
                     sortable: 'asc',
@@ -59,9 +67,15 @@ let EmploymentStatus = {
                     filterable: !1,
                 },
                 {
+                    field: '',
+                    title: 'Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'Actions',
                     width: 110,
-                    title: 'Actions',
+                    title: 'Action',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {

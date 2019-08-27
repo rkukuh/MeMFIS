@@ -30,5 +30,6 @@ require('frontend/task-release.php');
 require('frontend/taskcard.php');
 require('frontend/view-only.php');
 require('frontend/workpackage.php');
+require('frontend/work-progress-report.php');
 
 require('testing.php');

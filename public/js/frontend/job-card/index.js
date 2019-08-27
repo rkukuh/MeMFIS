@@ -63,37 +63,37 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'jobcardable.number',
                     title: 'TC No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.title',
+                    field: 'jobcardable.title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.type.name',
+                    field: 'jobcardable.type.name',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.task.name',
+                    field: 'jobcardable.task.name',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.description',
+                    field: 'jobcardable.description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        if (t.taskcard.description) {
-                            data = strtrunc(t.taskcard.description, 50);
+                        if (t.jobcardable.description) {
+                            data = strtrunc(t.jobcardable.description, 50);
                             return (
                                 '<p>' + data + '</p>'
                             );
@@ -136,7 +136,7 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'taskcard.estimation_manhour',
+                    field: 'jobcardable.estimation_manhour',
                     title: 'Est. Mhrs',
                     sortable: 'asc',
                     filterable: !1,
@@ -227,37 +227,37 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'jobcardable.number',
                     title: 'TC No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.title',
+                    field: 'jobcardable.title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.type.name',
+                    field: 'jobcardable.type.name',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.task.name',
+                    field: 'jobcardable.task.name',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.description',
+                    field: '',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        if (t.taskcard.description) {
-                            data = strtrunc(t.taskcard.description, 50);
+                        if (t.jobcardable.description) {
+                            data = strtrunc(t.jobcardable.description, 50);
                             return (
                                 '<p>' + data + '</p>'
                             );
@@ -300,7 +300,7 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'taskcard.estimation_manhour',
+                    field: 'jobcardable.estimation_manhour',
                     title: 'Est. Mhrs',
                     sortable: 'asc',
                     filterable: !1,

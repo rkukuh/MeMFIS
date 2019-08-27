@@ -110,8 +110,8 @@ class TaskReleaseJobCardController extends Controller
 
         return view('frontend.task-release.job-card.create', [
             'taskrelease' => $taskrelease,
-            'materials' => $taskrelease->taskcard->materials,
-            'tools' => $taskrelease->taskcard->tools,
+            'materials' => $taskrelease->jobcardable->materials,
+            'tools' => $taskrelease->jobcardable->tools,
             'status' => $status,
 
         ]);

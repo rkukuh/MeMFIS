@@ -61,17 +61,12 @@ let Unit = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'unit_name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
-                {
-                    field: '',
-                    title: 'Type',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
+               
                 {
                     field: '',
                     title: 'Remark',
@@ -79,13 +74,13 @@ let Unit = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'last_update',
                     title: 'Last Update',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'updated_by',
                     title: 'Updated By',
                     sortable: 'asc',
                     filterable: !1,
@@ -97,7 +92,7 @@ let Unit = {
                     template: function (t, e, i) {
                         if('manhour' == 'item'){
                             return (
-                                '<button data-toggle="modal" data-target="#modal_pricelist_item_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price" title="Edit"'+
+                                '<button data-toggle="modal" data-target="#modal_pricelist_item_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-item" title="Edit"'+
                                 'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
                                 t.uuid +
                                 '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
@@ -105,7 +100,7 @@ let Unit = {
                         }
                         else{
                             return (
-                                '<button data-toggle="modal" data-target="#modal_pricelist_manhour_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price" title="Edit"'+
+                                '<button data-toggle="modal" data-target="#modal_pricelist_item_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-item" title="Edit"'+
                                 'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
                                 t.uuid +
                                 '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
@@ -250,7 +245,7 @@ let Unit = {
         });
 
         let simpan = $('.modal-footer').on('click', '.add-price', function () {
-            let price_array = [];
+            let price_array = [];            
             $('#price ').each(function (i) {
                 price_array[i] = $(this).val();
             });
@@ -259,8 +254,10 @@ let Unit = {
                 level_array[i] = $(this).val();
             });
 
-            let item = $('#uuid').val();
-
+            let item = $('input[name=uuid]').val();
+            // let item = $('#uuid').val();
+            console.log(item);
+            
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -331,13 +328,15 @@ let Unit = {
                 }
             });
         });
-        let edit = $('.price_list_datatable-item').on('click', '.edit-price', function edit () {
+        let edit = $('.price_list_datatable-item').on('click', '.edit-price-item', function edit () {
             save_changes_button();
 
             let item = $(this).data('uuid');
-            document.getElementById("pn-edit").innerHTML = $(this).data('pn');
-            document.getElementById("name-edit").innerHTML = $(this).data('name');
-            document.getElementById("unit-edit").innerHTML = $(this).data('unit');
+            document.getElementById("uuid-item").value = item;
+            document.getElementById("name").innerHTML = $(this).data('pn');
+            document.getElementById("unit_id").innerHTML = $(this).data('unit');
+
+            // document.getElementById("name-edit").innerHTML = $(this).data('name');
             
 
             $.ajax({

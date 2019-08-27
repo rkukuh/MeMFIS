@@ -172,7 +172,7 @@
                         @endcomponent
 
                         <h2 class="m-portlet__head-text">
-                            Basic
+                            Structure Inspection Program
                         </h2>
                     </div>
                 </div>
@@ -330,7 +330,7 @@
                         @endcomponent
 
                         <h2 class="m-portlet__head-text">
-                            Basic
+                            Corrotion Prevention and Control Programs
                         </h2>
                     </div>
                 </div>

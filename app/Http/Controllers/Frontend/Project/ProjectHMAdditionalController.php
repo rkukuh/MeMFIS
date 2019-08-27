@@ -60,7 +60,7 @@ class ProjectHMAdditionalController extends Controller
         $parent_id = $project->id;
         $project = $project->replicate();
         $project->parent_id = $parent_id;
-        $project->code = DocumentNumber::generate('PROJ-A-', Project::withTrashed()->count()+1);
+        $project->code = DocumentNumber::generate('PJAD-', Project::withTrashed()->count()+1);
         $project->save();
         $defectcard_uuids = explode(",",$request->defectcard_uuid);
 
@@ -175,7 +175,7 @@ class ProjectHMAdditionalController extends Controller
         $skills = $subset = [];
 
         $eri = 0;
-        
+
         $defectcards =  DefectCard::where('project_additional_id', $project->id)->get();
 
         foreach($defectcards as $defectcard){
@@ -187,24 +187,24 @@ class ProjectHMAdditionalController extends Controller
                     ->only(['code'])
                     ->all();
                 });
-                
+
                 array_push($subset , $result);
             }
         }
-        
+
         foreach ($subset as $value) {
             foreach($value as $skill){
                 array_push($skills, $skill["code"]);
             }
         }
-        
+
         $otr = array_count_values($skills);
         $otr["eri"] = $eri;
         $total_defectcard = $defectcards->count();
         $total_estimation_manhours = $defectcards->sum('estimation_manhour');
         return view('frontend.project.hm-additional.summary',[
             'project' => $project,
-            'total_defectcard' => $total_defectcard,            
+            'total_defectcard' => $total_defectcard,
             'otr' => $otr,
             'total_estimation_manhours' => $total_estimation_manhours,
         ]);

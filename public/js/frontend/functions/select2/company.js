@@ -3,11 +3,7 @@ let CompanySelect2 = {
         $('#company, #company_validate').select2({
             placeholder: 'Select a Company'
         });
-    }
-};
 
-let type = {
-    init: function () { 
         $.ajax({
             type: 'GET', 
             url: '/datatables/company/type', 
@@ -30,8 +26,7 @@ let type = {
     }
 };
 
+
 jQuery(document).ready(function () {
     CompanySelect2.init();
-    type.init();
-    parentStructure.init();
 });

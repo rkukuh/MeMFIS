@@ -766,13 +766,11 @@ let TaskCard = {
             $('input[name^="threshold_amount"]').each(function(i) {
                 threshold_amount[i] = $(this).val();
             });
-            threshold_amount = threshold_amount.filter(Boolean);
 
             let repeat_amount = [];
             $('input[name^="repeat_amount"]').each(function(i) {
                 repeat_amount[i] = $(this).val();
             });
-            repeat_amount = repeat_amount.filter(Boolean);
 
             let sections = [];
             i = 0;

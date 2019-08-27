@@ -57,10 +57,9 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Workshift Schedule Code')
-                                                @slot('id', 'workshift_schedule_code')
-                                                @slot('name', 'workshift_schedule_code')
-                                                @slot('id_error', 'workshift_schedule_code')
+                                                @slot('id', 'code')
+                                                @slot('name', 'code')
+                                                @slot('id_error', 'code')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -69,10 +68,9 @@
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('text', 'Workshift Schedule Name')
-                                                @slot('id', 'workshift_schedule_name')
-                                                @slot('name', 'workshift_schedule_name')
-                                                @slot('id_error', 'workshift_schedule_name')
+                                                @slot('id', 'name')
+                                                @slot('name', 'name')
+                                                @slot('id_error', 'name')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -86,7 +84,6 @@
                                                 @slot('rows', '5')
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
-                                                @slot('text', 'Description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -107,32 +104,34 @@
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'sunday_in')
                                                             @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
                                                         @endcomponent
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'sunday_break_in')
                                                             @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
-                                                        @endcomponent
-                                                    </td>
-                                                    <td align="center" width="18%">
-                                                        @component('frontend.common.input.timepicker')
-                                                            @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'sunday_break_out')
                                                             @slot('class','m_timepicker_1 text-center')
-                                                            @slot('disabled','disabled')
+                                                        @endcomponent
+                                                    </td>
+                                                    <td align="center" width="18%">
+                                                        @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'sunday_out')
+                                                            @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="8%">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
+                                                            @slot('id', 'sunday')
+                                                            @slot('name', 'days')
+                                                            @slot('onclik', 'checkboxFunction(this.id)')
                                                             @slot('size', '12')
+                                                            @slot('value', 'sunday')
                                                             @slot('class','ml-4')
                                                         @endcomponent
                                                     </td>
@@ -143,29 +142,35 @@
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'monday_in')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'monday_break_in')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'monday_break_out')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'monday_out')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="8%">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
+                                                            @slot('id', 'monday')
+                                                            @slot('name', 'days')
+                                                            @slot('onclik', 'checkboxFunction(this.id)')
                                                             @slot('size', '12')
+                                                            @slot('value', 'monday')
                                                             @slot('class','ml-4')
                                                         @endcomponent
                                                     </td>
@@ -176,29 +181,35 @@
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'thuesday_in')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'thuesday_break_in')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'thuesday_break_out')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'thuesday_out')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="8%">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
+                                                            @slot('id', 'thuesday')
+                                                            @slot('name', 'days')
+                                                            @slot('onclik', 'checkboxFunction(this.id)')
                                                             @slot('size', '12')
+                                                            @slot('value', 'thuesday')
                                                             @slot('class','ml-4')
                                                         @endcomponent
                                                     </td>
@@ -209,29 +220,35 @@
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'wednesday_in')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'wednesday_break_in')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'wednesday_break_out')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'wednesday_out')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="8%">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
+                                                            @slot('id', 'wednesday')
+                                                            @slot('name', 'days')
+                                                            @slot('onclik', 'checkboxFunction(this.id)')
                                                             @slot('size', '12')
+                                                            @slot('value', 'wednesday')
                                                             @slot('class','ml-4')
                                                         @endcomponent
                                                     </td>
@@ -242,29 +259,35 @@
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'thursday_in')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'thursday_break_in')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'thursday_break_out')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'thursday_out')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="8%">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
+                                                            @slot('id', 'thursday')
+                                                            @slot('name', 'days')
+                                                            @slot('onclik', 'checkboxFunction(this.id)')
                                                             @slot('size', '12')
+                                                            @slot('value', 'thursday')
                                                             @slot('class','ml-4')
                                                         @endcomponent
                                                     </td>
@@ -275,28 +298,34 @@
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'friday_in')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'friday_break_in')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'friday_break_out')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'friday_out')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="8%">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
+                                                            @slot('id', 'friday')
+                                                            @slot('name', 'days')
+                                                            @slot('onclik', 'checkboxFunction(this.id)')
+                                                            @slot('value', 'friday')
                                                             @slot('size', '12')
                                                             @slot('class','ml-4')
                                                         @endcomponent
@@ -308,28 +337,34 @@
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'saturday_in')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'saturday_break_in')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'saturday_break_out')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
+                                                            @slot('id', 'saturday_out')
                                                             @slot('class','m_timepicker_1 text-center')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="8%">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', '')
-                                                            @slot('name', '')
+                                                            @slot('id', 'saturday')
+                                                            @slot('name', 'days')
+                                                            @slot('onclik', 'checkboxFunction(this.id)')
+                                                            @slot('value', 'saturday')
                                                             @slot('size', '12')
                                                             @slot('class','ml-4')
                                                         @endcomponent
@@ -344,7 +379,6 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-workshift-schedule')
                                                         @slot('class', 'add-workshift-schedule')
                                                     @endcomponent
 
@@ -369,4 +403,6 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/timepicker.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/timeFormat.js')}}"></script>
+    <script src="{{ asset('js/frontend/workshift-schedule/create.js')}}"></script>
 @endpush

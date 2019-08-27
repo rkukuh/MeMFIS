@@ -109,8 +109,8 @@ class RIIReleaseJobCardController extends Controller
 
         return view('frontend.rii-release.job-card.create', [
             'taskrelease' => $riirelease,
-            'materials' => $riirelease->taskcard->materials,
-            'tools' => $riirelease->taskcard->tools,
+            'materials' => $riirelease->jobcardable->materials,
+            'tools' => $riirelease->jobcardable->tools,
             'status' => $status,
 
         ]);

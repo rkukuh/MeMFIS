@@ -61,14 +61,20 @@ class ProjectHMWorkPackageController extends Controller
         $project->workpackages()->attach(WorkPackage::where('uuid',$request->workpackage)->first()->id);
 
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',WorkPackage::where('uuid',$request->workpackage)->first()->id)->first();
-        // // $workPackage = WorkPackage::where('uuid',$request->workpackage)->first();
         foreach($project_workpackage->workpackage->taskcards as $taskcard){
-
             $project_workpackage->taskcards()->create([
                 'taskcard_id' => $taskcard->id,
                 'is_rii' => $taskcard->is_rii,
                 'sequence' => $taskcard->pivot->sequence,
                 'is_mandatory' => $taskcard->pivot->is_mandatory,
+            ]);
+        }
+        foreach($project_workpackage->workpackage->eo_instructions as $eo_instructions){
+            $project_workpackage->eo_instructions()->create([
+                'eo_instruction_id' => $eo_instructions->id,
+                'is_rii' => $eo_instructions->is_rii,
+                'sequence' => $eo_instructions->pivot->sequence,
+                'is_mandatory' => $eo_instructions->pivot->is_mandatory,
             ]);
         }
 

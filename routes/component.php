@@ -72,6 +72,12 @@ Route::name('component.')->group(function () {
             Route::get('get-customer/{customer}', 'FillLabelController@customer')->name('get-customer');
             Route::get('get-project/{project}', 'FillLabelController@project')->name('get-project');
         });
+
+        Route::prefix('morris')->group(function () {
+            Route::get('get-overall/{project}', 'WorkProgressReport\WorkProgressReportController@overall')->name('get-morris-overall');
+            Route::get('get-routine/{project}', 'WorkProgressReport\WorkProgressReportController@routine')->name('get-morris-routine');
+            Route::get('get-non-routine/{project}', 'WorkProgressReport\WorkProgressReportController@non_routine')->name('get-morris-non-routine');
+        });
     });
 });
 

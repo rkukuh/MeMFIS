@@ -51,7 +51,9 @@ class ProjectHMHtcrrController extends Controller
         $mhrs_pfrm_factor = $skills = $htcrr_engineers = $skill_list = [];
         $tat = 0;
         $htcrrs = HtCrr::where('code',  'like', 'JCRI%')->where('project_id', $project->id)->get();
-        if (isset(json_decode($project->data_htcrr)->engineer)) {
+        $data_json = json_decode($project->data_htcrr);
+        // dd($data_json);
+        if (isset($data_json->engineer) && sizeof($data_json->skills) > 0) {
             $htcrr_engineers = json_decode($project->data_htcrr)->engineer;
             $engineer_qty = json_decode($project->data_htcrr)->engineer_qty;
             $tat = json_decode($project->data_htcrr)->tat;
@@ -64,7 +66,7 @@ class ProjectHMHtcrrController extends Controller
             }
 
             $skill_list = json_decode($project->data_htcrr)->skills;
-            
+
         }else{
             foreach($htcrrs as $htcrr){
                 if(isset($htcrr->skills)){
@@ -74,7 +76,7 @@ class ProjectHMHtcrrController extends Controller
                 }
             }
         }
-        
+
         $total_mhrs = $htcrrs->sum('estimation_manhour');
         $employees = Employee::all();
         if ($request->anyChanges) {
@@ -140,7 +142,7 @@ class ProjectHMHtcrrController extends Controller
             array_push($taskcards, $taskcard->taskcard_id);
         }
 
-        $taskcards = TaskCard::whereIn('id',$taskcards)->get(); 
+        $taskcards = TaskCard::whereIn('id',$taskcards)->get();
 
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
@@ -200,7 +202,7 @@ class ProjectHMHtcrrController extends Controller
         $mhrs_pfrm_factor = $skills = $subset = $taskcards = [];
 
         $htcrrs = HtCrr::where('code',  'like', 'JCRI%')->where('project_id', $project->id)->get();
-        
+
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
         ->with('taskcards')
@@ -211,7 +213,7 @@ class ProjectHMHtcrrController extends Controller
         foreach($project_workpackage->taskcards as $taskcard){
             array_push($taskcards, $taskcard->taskcard_id);
         }
-        $taskcards = TaskCard::whereIn('id',$taskcards)->get(); 
+        $taskcards = TaskCard::whereIn('id',$taskcards)->get();
 
         foreach($taskcards as $taskcard){
             array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
@@ -295,9 +297,9 @@ class ProjectHMHtcrrController extends Controller
     {
         if($project->data_htcrr == null){
             $data_json = [];
-            $data_json["performance_factor"] = "init for later";
-            $data_json["total_manhours"] = "init for later";
-            $data_json["total_manhours_with_performance_factor"] = "init for later";
+            $data_json["performance_factor"] = [0];
+            $data_json["total_manhours"] = [0];
+            $data_json["total_manhours_with_performance_factor"] = [0];
 
             $data_json["skills"] = $request->engineer_skills;
             $data_json["engineer"] = $request->engineer;
@@ -331,11 +333,11 @@ class ProjectHMHtcrrController extends Controller
             $data_json["performance_factor"] = $request->performa_used;
             $data_json["total_manhours"] = $request->manhour;
             $data_json["total_manhours_with_performance_factor"] = $request->total;
-            
-            $data_json["skills"] = "init for later";
-            $data_json["engineer"] = "init for later";
-            $data_json["engineer_qty"] = "init for later";
-            $data_json["tat"] = "init for later";
+
+            $data_json["skills"] = [0];
+            $data_json["engineer"] = [0];
+            $data_json["engineer_qty"] = [0];
+            $data_json["tat"] = [0];
 
             $data_json = json_encode($data_json, true);
             $project->update(['data_htcrr' => $data_json]);
@@ -348,7 +350,7 @@ class ProjectHMHtcrrController extends Controller
             $data_json = json_encode($data_json, true);
             $project->update(['data_htcrr' => $data_json]);
         }
-        
+
         return response()->json($data_json);
 
     }
@@ -362,7 +364,7 @@ class ProjectHMHtcrrController extends Controller
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
             ->where('workpackage_id',$workpackage->id)
             ->first();
-            
+
         if(sizeof($project_workpackage->facilities) > 0){
             $project_workpackage->facilities()->delete();
         }
@@ -485,7 +487,7 @@ class ProjectHMHtcrrController extends Controller
      * @param  \App\Models\HtCrr  $workPackage
      */
     public function getManhours(Project $project){
-        
+
         $data = $mhrs_pfrm_factor = [];
 
         $htcrrs = HtCrr::where('project_id', $project->id)->whereNull('parent_id')->get();
@@ -493,12 +495,12 @@ class ProjectHMHtcrrController extends Controller
         foreach($htcrrs as $htcrr){
             array_push($mhrs_pfrm_factor, $htcrr->estimation_manhour * $htcrr->performance_factor);
         }
-        
+
         // $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
         $data["total_mhrs"] = $htcrrs->sum('estimation_manhour');
         $data["mhrs_pfrm_factor"] = ( $htcrrs->sum('estimation_manhour') )* 1.6;
         // $data["mhrs_tc_pfrm_factor"]  = $mhrs_pfrm_factor;
-        
+
         return response()->json($data);
     }
 }

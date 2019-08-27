@@ -8,6 +8,7 @@ Route::group([
     'namespace'     => 'Frontend',
 
 ], function () {
+    
         /** Jobcard EO */
 
         Route::view('/jobcard-eo', 'frontend.job-card-eo.index')->name('jobcard-eo.index');

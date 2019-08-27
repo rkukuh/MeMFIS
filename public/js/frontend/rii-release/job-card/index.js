@@ -49,7 +49,7 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'jobcardable.number',
                     title: 'TaskCard No',
                     sortable: 'asc',
                     filterable: !1,
@@ -71,8 +71,8 @@ let RiiRelease = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        if(t.taskcard.additionals){
-                            let company = t.taskcard.additionals;
+                        if(t.jobcardable.additionals){
+                            let company = t.jobcardable.additionals;
                             obj = JSON.parse(company);
                             // console.log()
                             return (
@@ -117,7 +117,7 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.estimation_manhour',
+                    field: 'jobcardable.estimation_manhour',
                     title: 'Mhrs',
                     sortable: 'asc',
                     filterable: !1,

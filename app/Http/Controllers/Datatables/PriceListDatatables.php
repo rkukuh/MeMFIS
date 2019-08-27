@@ -8,6 +8,7 @@ use App\Models\Facility;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Manhour;
+use App\User;
 
 class PriceListDatatables extends Controller
 {
@@ -20,6 +21,19 @@ class PriceListDatatables extends Controller
     // item , manhour, facility = prices
     {
         $items = Item::with('unit', 'journal', 'prices')->get();
+        
+        foreach($items as $item){
+            $item->unit_name .= $item->unit->name;
+            $item->last_update .= $item->updated_at;
+            
+            if($item->first()->audits->first()->user_id == 0){
+                $item->updated_by .= 'System';
+            }else{
+                $item->updated_by .= $item->first()->audits->first()->user_id;
+            }
+        }
+
+
 
         $data = $alldata = json_decode($items);
 

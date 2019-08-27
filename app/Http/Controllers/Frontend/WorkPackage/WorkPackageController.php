@@ -5,10 +5,13 @@ namespace App\Http\Controllers\Frontend\WorkPackage;
 use App\Models\Aircraft;
 use App\Models\Project;
 use App\Models\ListUtil;
-use App\Models\WorkPackage;
 use App\Models\TaskCard;
-use App\Helpers\DocumentNumber;
+use App\Models\WorkPackage;
 use Illuminate\Http\Request;
+use App\Models\EOInstruction;
+use App\Models\Pivots\TaskCardWorkPackage;
+use App\Models\Pivots\EOInstructionWorkPackage;
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\WorkPackageStore;
 use App\Http\Requests\Frontend\WorkPackageUpdate;
@@ -83,6 +86,25 @@ class WorkPackageController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageStore  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addInstruction(Request $request, WorkPackage $workPackage)
+    {
+        $tc = EOInstruction::where('uuid', $request->taskcard)->first();
+        $exists = $workPackage->eo_instructions->contains($tc->id);
+        if($exists){
+            return response()->json(['title' => "Danger"]);
+        }else{
+            $workPackage->eo_instructions()->attach(EOInstruction::where('uuid', $request->taskcard)->first()->id);
+
+            return response()->json($workPackage);
+        }
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\WorkPackage  $workPackage
@@ -147,10 +169,40 @@ class WorkPackageController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
+    public function sequenceInstruction(Request $request, WorkPackage $workPackage,EOInstruction $instruction)
+    {
+
+        $workPackage->eo_instructions()->updateExistingPivot($instruction, ['sequence'=>$request->sequence]);
+
+        return response()->json($workPackage);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
     public function mandatory(Request $request, WorkPackage $workPackage, TaskCard $taskcard)
     {
 
         $workPackage->taskcards()->updateExistingPivot($taskcard, ['is_mandatory'=>$request->is_mandatory]);
+
+        return response()->json($workPackage);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function mandatoryInstruction(Request $request, WorkPackage $workPackage, EOInstruction $instruction)
+    {
+
+        $workPackage->eo_instructions()->updateExistingPivot($instruction, ['is_mandatory'=>$request->is_mandatory]);
 
         return response()->json($workPackage);
     }
@@ -176,9 +228,44 @@ class WorkPackageController extends Controller
      */
     public function deleteTaskCard(WorkPackage $workPackage,TaskCard $taskcard)
     {
-        $workPackage->taskcards()->detach($taskcard);
+        $tc = TaskCardWorkPackage::where('workpackage_id', $workPackage->id)->where('taskcard_id', $taskcard->id)
+                ->with('predecessors','successors')->first();
 
-        return response()->json($workPackage);
+        if($tc->predecessors()->exists()){
+            $tc->predecessors()->delete();
+        }
+
+        if($tc->successors()->exists()){
+            $tc->successors()->delete();
+        }
+
+        $tc->delete();
+
+        return response()->json($tc);
+    }
+
+    /**
+     * Remove the taskcard from workpackage .
+     *
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteInstruction(WorkPackage $workPackage,EOInstruction $instruction)
+    {
+        $eo_instruction = EOInstructionWorkPackage::where('workpackage_id', $workPackage->id)->where('eo_instruction_id', $instruction->id)->first();
+
+        // BACKEND BELUM JADI
+        // if($eo_instruction->predecessors()->exists()){
+        //     $eo_instruction->predecessors()->delete();
+        // }
+
+        // if($eo_instruction->successors()->exists()){
+        //     $eo_instruction->successors()->delete();
+        // }
+
+        $eo_instruction->delete();
+
+        return response()->json($eo_instruction);
     }
 
     /**

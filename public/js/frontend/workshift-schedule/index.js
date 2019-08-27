@@ -7,7 +7,7 @@ let WorkshiftSchedule = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/benefit',
+                        url: '/datatables/workshift',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -43,12 +43,19 @@ let WorkshiftSchedule = {
                 }
             },
             columns: [{
+                    field: '',
+                    title: 'No',
+                    width:'30',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'code',
                     title: 'Code',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/benefit/'+t.uuid+'">' + t.code + "</a>"
+                        return '<a href="/workshift/'+t.uuid+'">' + t.code + "</a>"
                     }
                 },
                 {

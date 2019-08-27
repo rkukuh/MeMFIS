@@ -56,6 +56,8 @@ Route::name('frontend.')->group(function () {
                     Route::get('/{project}/workpackage/{workPackage}/summary/ad-sb', 'SummaryNonRoutineTaskcardController@adsb')->name('summary.ad-sb');
                     Route::get('/{project}/workpackage/{workPackage}/summary/cmr-awl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('summary.cmr-awl');
                     Route::get('/{project}/workpackage/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('summary.si');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/ea', 'SummaryNonRoutineTaskcardController@ea')->name('summary.ea');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/eo', 'SummaryNonRoutineTaskcardController@eo')->name('summary.eo');
                     Route::get('/{project}/workpackage/{workPackage}/summary/routine', 'SummaryRoutineTaskcardController@summary')->name('summary.routine');
                     Route::get('/{project}/workpackage/{workPackage}/summary/non-routine', 'SummaryNonRoutineTaskcardController@summary')->name('summary.nonroutine');
                     Route::get('/{project}/workpackage/{workPackage}/summary', 'ProjectHMWorkPackageController@summary')->name('summary.workpackage');

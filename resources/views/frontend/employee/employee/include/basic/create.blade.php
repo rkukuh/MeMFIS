@@ -145,15 +145,6 @@
                         @slot('name', 'marital_status')
                         @slot('id_error', 'marital_status')
                     @endcomponent
-
-                    {{-- Married
-                    Married with 1 childs
-                    Married with 2 childs
-                    Married with 3 childs
-                    Not Married
-                    Not Married with 1 childs
-                    Not Married with 2 childs
-                    Not Married with 3 childs --}}
                 </div>
             </div>
         </fieldset>
