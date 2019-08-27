@@ -128,7 +128,7 @@ class PriceListDatatables extends Controller
     // item , manhour, facility = prices
     {
         $manhour = Manhour::all();
-        
+
         foreach($manhour as $manhours){
             $manhours->updated_by   .= '2019-04-16';
             $manhours->update_at    .= '2019-04-16';
@@ -144,7 +144,7 @@ class PriceListDatatables extends Controller
         }
 
         $data = $alldata = json_decode($manhour);
-
+        
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
