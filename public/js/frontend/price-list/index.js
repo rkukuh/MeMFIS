@@ -156,17 +156,39 @@ let Unit = {
             },
             columns: [
                 {
-                    field: 'code',
-                    title: 'Code / Part Number',
+                    field: 'name',
+                    title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
                    
                 },
                 {
-                    field: 'name',
-                    title: 'Name',
+                    field: 'update_at',
+                    title: 'Updated At',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'updated_by',
+                    title: 'Updated By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        if('manhour' == 'item'){
+                            return (
+                                '<button data-toggle="modal" data-target="#modal_pricelist_manhour_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-item" title="Edit"'+
+                                'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
+                                t.uuid +
+                                '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            );
+                        }
+                        
+                    }
                 },
              
                 
