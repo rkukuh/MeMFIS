@@ -532,21 +532,6 @@ class Type extends MemfisModel
     }
 
     /**
-     * One-to-Many: A defect card may have zero or many propose correction.
-     *
-     * This function will retrieve all defect cards of a type.
-     * See: DefectCard's propose_corrections() method for the inverse
-     *
-     * @return mixed
-     */
-    public function defectcards()
-    {
-        return $this->belongsToMany(DefectCard::class, 'defectcard_propose_correction', 'propose_correction_id', 'defectcard_id')
-                    ->withPivot('propose_correction_text')
-                    ->withTimestamps();;
-    }
-
-    /**
      * One-to-Many: A document may have zero or many type.
      *
      * This function will retrieve all documents of a type.
@@ -609,6 +594,21 @@ class Type extends MemfisModel
     public function phones()
     {
         return $this->hasMany(Phone::class);
+    }
+
+    /**
+     * One-to-Many: A defect card may have zero or many propose correction.
+     *
+     * This function will retrieve all defect cards of a type.
+     * See: DefectCard's propose_corrections() method for the inverse
+     *
+     * @return mixed
+     */
+    public function propose_correction_defectcards()
+    {
+        return $this->belongsToMany(DefectCard::class, 'defectcard_propose_correction', 'propose_correction_id', 'defectcard_id')
+                    ->withPivot('propose_correction_text')
+                    ->withTimestamps();;
     }
 
     /**
