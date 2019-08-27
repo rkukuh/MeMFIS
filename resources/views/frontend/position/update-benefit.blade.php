@@ -76,29 +76,29 @@
                                                 <tr>
                                                     <td align="center" style="padding-top:25px;">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', str_replace(' ', '', $b->name))
+                                                            @slot('id', str_replace(' ', '', $b->uuid))
                                                             @slot('name', 'check')
                                                             @slot('checked','checked')
                                                             @slot('value', $b->uuid)
                                                             @slot('onclik','checkboxFunction(this.id)')
-                                                            @slot('id_error', str_replace(' ', '', $b->name))
+                                                            @slot('id_error', str_replace(' ', '', $b->uuid))
                                                         @endcomponent
                                                     </td>
                                                 <td style="padding-top:30px;"><b>{{ $b->name }}</b></td>
                                                     <td>
                                                         @component('frontend.common.input.number')
                                                             @slot('name', 'position_min')
-                                                            @slot('id', str_replace(' ', '', $b->name).'_min')
+                                                            @slot('id', str_replace(' ', '', $b->uuid).'_min')
                                                             @slot('value', $min[$key])
-                                                            @slot('id_error', str_replace(' ', '', $b->name).'_min')
+                                                            @slot('id_error', str_replace(' ', '', $b->uuid).'_min')
                                                         @endcomponent
                                                     </td>
                                                     <td>
                                                         @component('frontend.common.input.number')
                                                             @slot('name', 'position_max')
-                                                            @slot('id', str_replace(' ', '', $b->name).'_max')
+                                                            @slot('id', str_replace(' ', '', $b->uuid).'_max')
                                                             @slot('value', $max[$key])
-                                                            @slot('id_error', str_replace(' ', '', $b->name).'_max')
+                                                            @slot('id_error', str_replace(' ', '', $b->uuid).'_max')
                                                         @endcomponent
                                                     </td>
                                                 </tr>  
@@ -106,26 +106,26 @@
                                                 <tr>
                                                     <td align="center" style="padding-top:25px;">
                                                         @component('frontend.common.input.checkbox')
-                                                            @slot('id', str_replace(' ', '', $b->name))
+                                                            @slot('id', str_replace(' ', '', $b->uuid))
                                                             @slot('name', 'check')
                                                             @slot('value', $b->uuid)
                                                             @slot('onclik','checkboxFunction(this.id)')
-                                                            @slot('id_error', str_replace(' ', '', $b->name))
+                                                            @slot('id_error', str_replace(' ', '', $b->uuid))
                                                         @endcomponent
                                                     </td>
                                                 <td style="padding-top:30px;"><b>{{ $b->name }}</b></td>
                                                     <td>
                                                         @component('frontend.common.input.number')
                                                             @slot('name', 'position_min')
-                                                            @slot('id', str_replace(' ', '', $b->name).'_min')
-                                                            @slot('id_error', str_replace(' ', '', $b->name).'_min')
+                                                            @slot('id', str_replace(' ', '', $b->uuid).'_min')
+                                                            @slot('id_error', str_replace(' ', '', $b->uuid).'_min')
                                                         @endcomponent
                                                     </td>
                                                     <td>
                                                         @component('frontend.common.input.number')
                                                             @slot('name', 'position_max')
-                                                            @slot('id', str_replace(' ', '', $b->name).'_max')
-                                                            @slot('id_error', str_replace(' ', '', $b->name).'_max')
+                                                            @slot('id', str_replace(' ', '', $b->uuid).'_max')
+                                                            @slot('id_error', str_replace(' ', '', $b->uuid).'_max')
                                                         @endcomponent
                                                     </td>
                                                 </tr>

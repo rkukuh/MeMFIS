@@ -20,11 +20,11 @@ class WorkshiftSchedule extends Model
      * One-to-Many: A workshift may have one or many schedule.
      *
      * This function will retrieve all the schedule of a given workshift.
-     * See: workshift schedule() method for the inverse
+     * See: workshift workshift_schedules() method for the inverse
      *
      * @return mixed
      */
-    public function workshift()
+    public function workshifts()
     {
         return $this->belongsTo(Workshift::class);
     }
