@@ -19,7 +19,7 @@ class CreateApprovalsTable extends Migration
             $table->morphs('approvable');
             $table->boolean('is_approved')->nullable();
             $table->unsignedBigInteger('conducted_by');
-            $table->longText('description')->nullable();
+            $table->longText('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -9,7 +9,7 @@ $factory->define(Approval::class, function (Faker $faker) {
     return [
         'is_approved' => $faker->boolean,
         'conducted_by' => Employee::get()->random()->id,
-        'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
+        'note' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];
 
 });
