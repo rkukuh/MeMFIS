@@ -38,6 +38,7 @@ class UsersTableSeeder extends Seeder
             'country' => 'indonesia',
             'city' => 'sidoarjo',
             'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null
         ]);
     }
 }

@@ -10,6 +10,7 @@ class EmployeeHistories extends Model
 
     protected $fillable = [
         'employee_id',
+        'code',
         'first_name',
         'last_name',
         'dob',
@@ -29,6 +30,7 @@ class EmployeeHistories extends Model
         'indirect_supervisor_id',
         'supervisor_id',
         'created_at',
+        'updated_at'
     ];
 
     /**

@@ -1,4 +1,4 @@
-<form id="employee_form">
+<form id="employee_create_form">
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">

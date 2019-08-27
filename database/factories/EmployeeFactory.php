@@ -31,7 +31,8 @@ $factory->define(Employee::class, function (Faker $faker) {
         'nationality' => $faker->randomElement(['Indonesia','Japan','Zimbabwe','South Africa']),
         'country' => 'Indonesia',
         'city' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
-        'joined_date' => Carbon::now()->toDateString()
+        'joined_date' => Carbon::now()->toDateString(),
+        'updated_at' => null
     ];
 
 });

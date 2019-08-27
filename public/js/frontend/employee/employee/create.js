@@ -2,7 +2,7 @@ let Employee = {
     init: function () {
 
         $('#document').attr('accept','image/*')
-        let create = $('.footer').on('click', '.add-employee', function () {
+        let create= $('.footer').on('click', '.add-employee', function () {
 
             let code = $('input[name=code]').val()
             let code_uppercase = code.toUpperCase()
@@ -17,12 +17,12 @@ let Employee = {
                 gender = '';
             }
 
-            formData = new FormData($('#employee_form')[0])
+            formData = new FormData($('#employee_create_form')[0])
     
                    formData.set('code', code_uppercase)
                    formData.set('gender', gender)
                    formData.set('job_tittle', job_tittle)
-                   if($("#document")[0].files[0].length != 0){
+                   if($("#document")[0].files[0]){
                     formData.set('document',$("#document")[0].files[0])
                    }
 

@@ -41,6 +41,7 @@ $factory->afterCreating(User::class, function ($user, $faker) {
         'country' => 'indonesia',
         'city' => $faker->randomElement(['Surabaya','Jakarta','Sidoarjo','Gresik']),
         'joined_date' => Carbon::now()->toDateString(),
+        'updated_at' => null,
     ]));
 
 });

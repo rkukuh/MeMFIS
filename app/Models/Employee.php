@@ -28,7 +28,9 @@ class Employee extends MemfisModel
         'statuses_id',
         'department_id',
         'indirect_supervisor_id',
-        'supervisor_id'
+        'supervisor_id',
+        'created_at',
+        'updated_at'
     ];
 
 
@@ -249,7 +251,7 @@ class Employee extends MemfisModel
      */
     public function indirect_supervisor()
     {
-        return $this->hasMany(Employee::class, 'indirect_supervisor_id');
+        return $this->belongsTo(Employee::class, 'indirect_supervisor_id');
     }
 
     /**
@@ -262,7 +264,7 @@ class Employee extends MemfisModel
      */
     public function supervisor()
     {
-        return $this->hasMany(Employee::class, 'supervisor_id');
+        return $this->belongsTo(Employee::class, 'supervisor_id');
     }
 
     /**

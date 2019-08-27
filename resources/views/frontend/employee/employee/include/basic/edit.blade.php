@@ -1,3 +1,9 @@
+
+        @component('frontend.common.input.hidden')
+        @slot('id', 'employee_uuid')
+        @slot('name', 'employee_uuid')
+        @slot('value', $employee->uuid)
+        @endcomponent
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
@@ -10,9 +16,9 @@
 
                     @component('frontend.common.input.text')
                         @slot('value', $employee->code)
-                        @slot('id', 'employee_id')
-                        @slot('name', 'employee_id')
-                        @slot('id_error', 'employee_id')
+                        @slot('id', 'code')
+                        @slot('name', 'code')
+                        @slot('id_error', 'code')
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -25,7 +31,7 @@
                             @component('frontend.common.input.datepicker')
                                 @slot('id', 'date')
                                 @slot('value', $employee->dob)
-                                @slot('name', 'date')
+                                @slot('name', 'dob')
                             @endcomponent
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -106,6 +112,8 @@
                             @component('frontend.common.input.upload')
                                 @slot('label', 'document')
                                 @slot('name', 'document')
+                                @slot('id','id_card_photo')
+                                @slot('help_text','File must be image or not be stored!')
                             @endcomponent
                         </div>
                     </div>
@@ -379,8 +387,8 @@
                             @component('frontend.common.input.datepicker')
                                 @slot('value', $employee->joined_date)
                                 @slot('id', 'period_start_date')
-                                @slot('name', 'period_start_date')
-                                @slot('id_error','period_start_date')
+                                @slot('name', 'joined_date')
+                                @slot('id_error','joined_date')
                             @endcomponent
                         </div>
                     </div>
@@ -482,8 +490,8 @@
             <div class="action-buttons">
                 @component('frontend.common.buttons.submit')
                     @slot('type','button')
-                    @slot('id', 'add-basic-information')
-                    @slot('class', 'add-basic-information')
+                    @slot('id', 'edit-basic-information')
+                    @slot('class', 'edit-basic-information')
                 @endcomponent
 
                 @include('frontend.common.buttons.reset')
@@ -508,4 +516,5 @@
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/period-start.js')}}"></script>
+    <script src="{{ asset('js/frontend/employee/employee/edit_basic.js') }}"></script>
 @endpush
