@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-12">
-                                            <h6>Employee Since <span>Aug</span> 1, 2019</h6>
+                                            <h6>Employee Since <span>Aug</span> 1, 2019 - 2 Year 2 Month</h6>
                                         </div>
                                     </div>
                                 </div>
