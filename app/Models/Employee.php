@@ -18,7 +18,19 @@ class Employee extends MemfisModel
         'gender',
         'religion',
         'marital_status',
-        'nationality'
+        'nationality',
+        'country',
+        'city',
+        'zip',
+        'joined_date',
+        'job_tittle_id',
+        'position_id',
+        'statuses_id',
+        'department_id',
+        'indirect_supervisor_id',
+        'supervisor_id',
+        'created_at',
+        'updated_at'
     ];
 
 
@@ -136,6 +148,123 @@ class Employee extends MemfisModel
     {
         return $this->hasMany(EmployeeLicense::class)
                     ->where('license_id', License::ofGeneralLicense()->first()->id);
+    }
+
+    /**
+     * One-to-One: An Employee have one Jobtittle.
+     *
+     * This function will retrieve Job Tittle of a given Employee.
+     * See: Jobtittle employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function job_tittle()
+    {
+        return $this->belongsTo(JobTittle::class);
+    }
+
+    /**
+     * One-to-One: An Employee have one Position.
+     *
+     * This function will retrieve Position of a given Employee.
+     * See: Position employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
+
+    /**
+     * One-to-One: An Employee have one Status.
+     *
+     * This function will retrieve Status of a given Employee.
+     * See: Status employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function statuses()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    /**
+     * One-to-One: An Employee have one Department.
+     *
+     * This function will retrieve Department of a given Employee.
+     * See: Department employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    /**
+     * One-to-Many: An Employee have one or many benefit.
+     *
+     * This function will retrieve benefit of a given Employee.
+     * See: employee_benefit employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_benefit()
+    {
+        return $this->belongsTo(EmployeeBenefit::class);
+    }
+
+    /**
+     * One-to-Many: An Employee have one or many bpjs.
+     *
+     * This function will retrieve bpjs of a given Employee.
+     * See: employee_bpjs employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_bpjs()
+    {
+        return $this->belongsTo(EmployeeBPJS::class);
+    }
+
+    /**
+     * One-to-Many: An Employee have one or many provisions.
+     *
+     * This function will retrieve provisions of a given Employee.
+     * See: employee_provisions employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_provisions()
+    {
+        return $this->belongsTo(EmployeeProvisions::class);
+    }
+
+    /**
+     * One-to-Many (self-join): A indirect supervisor may have none or many employee
+     *
+     * This function will retrieve the indirect supervisor of an employee, if any.
+     * See: Employee indirect_supervisor() method for the inverse
+     *
+     * @return mixed
+     */
+    public function indirect_supervisor()
+    {
+        return $this->belongsTo(Employee::class, 'indirect_supervisor_id');
+    }
+
+    /**
+     * One-to-Many (self-join): A supervisor may have none or many employee
+     *
+     * This function will retrieve the supervisor of an employee, if any.
+     * See: Employee supervisor() method for the inverse
+     *
+     * @return mixed
+     */
+    public function supervisor()
+    {
+        return $this->belongsTo(Employee::class, 'supervisor_id');
     }
 
     /**
@@ -356,5 +485,18 @@ class Employee extends MemfisModel
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * One-to-Many: A Employee may have one or many history.
+     *
+     * This function will retrieve all the history of a given BPJS.
+     * See: EmployeeHistory employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function history()
+    {
+        return $this->hasMany(EmployeeHistories::class);
     }
 }
