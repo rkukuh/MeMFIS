@@ -103,7 +103,7 @@ class DummyDataSeeder extends Seeder
         $this->call(HtCrrs::class);
         $this->call(DefectCards::class);
         $this->call(RTSs::class);
-        
+
         /** PROJECT'S WORKPACKAGEs */
 
         $this->call(ProjectWorkPackages::class);
@@ -122,8 +122,8 @@ class DummyDataSeeder extends Seeder
         /** WORKPACKAGE's EO-INSTRUCTIONs */
 
         $this->call(EOInstructionWorkPackages::class);
-        $this->call(EOInstructionWorkPackageSuccessors::class);
-        $this->call(EOInstructionWorkPackagePredecessors::class);
+        // $this->call(EOInstructionWorkPackageSuccessors::class);
+        // $this->call(EOInstructionWorkPackagePredecessors::class);
 
         /** QUOTATION's WORKPACKAGEs */
 
@@ -131,15 +131,15 @@ class DummyDataSeeder extends Seeder
         $this->call(QuotationWorkPackageItems::class);
 
         /** QUOTATION's WORKPACKAGE's TASKCARDs */
-        
+
         $this->call(QuotationWorkPackageTaskCardItems::class);
 
         /** QUOTATION's HT/CRRs */
-        
+
         $this->call(QuotationHtcrrItems::class);
 
         /** QUOTATION's DEFECTCARDs */
-        
+
         $this->call(QuotationDefectCardItems::class);
     }
 }
