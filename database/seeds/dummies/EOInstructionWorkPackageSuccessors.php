@@ -3,7 +3,6 @@
 use App\Models\EOInstruction;
 use Illuminate\Database\Seeder;
 use App\Models\Pivots\EOInstructionWorkPackage;
-use App\Models\EOInstructionWorkPackageSuccessor;
 
 class EOInstructionWorkPackageSuccessors extends Seeder
 {
