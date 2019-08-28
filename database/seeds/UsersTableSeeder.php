@@ -34,7 +34,11 @@ class UsersTableSeeder extends Seeder
             'gender' => 'm',
             'religion' => 'islam',
             'marital_status' => 'm',
-            'nationality' => 'indonesia'
+            'nationality' => 'indonesia',
+            'country' => 'indonesia',
+            'city' => 'sidoarjo',
+            'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null
         ]);
     }
 }
