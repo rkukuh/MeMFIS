@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EmployeeProvisions extends Migration
+class EmployeeBenefit extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,22 @@ class EmployeeProvisions extends Migration
      */
     public function up()
     {
-        Schema::create('employee_provisions', function (Blueprint $table) {
+        Schema::create('employee_benefit', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('employee_id');
-            $table->bigInteger('maximum_overtime');
-            $table->bigInteger('minimum_overtime');
-            $table->bigInteger('holiday_overtime');
-            $table->string('pph');
-            $table->bigInteger('late_tolerance');
-            $table->bigInteger('late_punishment');
-            $table->bigInteger('absence_punishment');
+            $table->bigInteger('benefit_id');
+            $table->bigInteger('amount');
 
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('employee_id')
             ->references('id')->on('employees')
+            ->onUpdate('cascade')
+            ->onDelete('restrict');
+
+            $table->foreign('benefit_id')
+            ->references('id')->on('benefits')
             ->onUpdate('cascade')
             ->onDelete('restrict');
         });
@@ -41,6 +41,6 @@ class EmployeeProvisions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_provisions');
+        //
     }
 }

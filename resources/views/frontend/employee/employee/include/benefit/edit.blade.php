@@ -30,7 +30,7 @@
                     </div>
                     <div>
                         <table width="100%" cellpadding="7">
-
+                            
                             @for ($i = 0; $i < count($employee_benefit); $i++)
                                 
                                 <tr>
@@ -305,11 +305,23 @@
     <div class="col-sm-12 col-md-12 col-lg-12 footer">
         <div class="flex">
             <div class="action-buttons">
+
+                @if ($button_parameter == 'create')
                 @component('frontend.common.buttons.submit')
-                    @slot('type','button')
-                    @slot('id', 'edit-benefit')
-                    @slot('class', 'edit-benefit')
+                @slot('type','button')
+                @slot('id', 'create-benefit')
+                @slot('class', 'create-benefit')
+                @endcomponent 
+                @elseif ($button_parameter == 'approvals')
+
+                @else
+                @component('frontend.common.buttons.submit')
+                @slot('type','button')
+                @slot('id', 'edit-benefit')
+                @slot('class', 'edit-benefit')
                 @endcomponent
+                @endif
+                
 
                 @include('frontend.common.buttons.reset')
 
@@ -375,4 +387,5 @@
 
 @push('footer-scripts')
 <script src="{{ asset('js/frontend/employee/employee/edit_benefit.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/employee/create_benefit.js') }}"></script>
 @endpush

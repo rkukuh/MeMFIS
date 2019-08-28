@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmployeeProvisions extends Model
 {
+    protected $table = 'employee_provisions';
+    
     protected $fillable = [
         'employee_id',
         'maximum_overtime',
@@ -13,6 +15,7 @@ class EmployeeProvisions extends Model
         'holiday_overtime',
         'pph',
         'late_tolerance',
+        'late_punishment',
         'absence_punishment',
         'created_at',
         'updated_at'
@@ -28,7 +31,7 @@ class EmployeeProvisions extends Model
      */
     public function employee()
     {
-        return $this->hasMany(Employee::class);
+        return $this->belongsTo(Employee::class);
     }
 }
 

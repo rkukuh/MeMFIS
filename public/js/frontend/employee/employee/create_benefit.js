@@ -1,7 +1,7 @@
-let Employee_edit_benefit = {
+let Employee_create_benefit = {
     init: function () {
 
-    let update_benefit = $('.footer').on('click', '.edit-benefit', function () {
+    let create_benefit = $('.footer').on('click', '.create-benefit', function () {
         let return_status = null
 
         var uuid_benefit = []
@@ -98,8 +98,8 @@ let Employee_edit_benefit = {
              headers: {
                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
              },
-             type: 'PUT',
-             url: '/employee/'+uuid+'/employee-benefit/'+null,
+             type: 'POST',
+             url: '/employee/'+uuid+'/benefit-salary',
              data: {
                  uuid_benefit: uuid_benefit,
                  amount: amount,
@@ -215,29 +215,7 @@ let Employee_edit_benefit = {
     }
 }
 
-function checkboxFunction(id){
-    if ($('#'+id).is(':checked')) {
-        $('#'+id).attr('checked', true)
-    }else{
-        $('#'+id).attr('checked', false)
-        $('#'+id+'-error').html('')
-    }
-}
-
-function checkboxBPJSFunction(id){
-    if ($('#'+id).is(':checked')) {
-        $('#'+id).attr('checked', true)
-    }else{
-        $('#'+id).attr('checked', false)
-        $('#'+id+'_employee-error').html('')
-        $('#'+id+'_company-error').html('')
-        $('#'+id+'_employee_min-error').html('')
-        $('#'+id+'_company_min-error').html('')
-        $('#'+id+'_employee_max-error').html('')
-        $('#'+id+'_company_max-error').html('')
-    }
-}
 
 jQuery(document).ready(function () {
-    Employee_edit_benefit.init();
+    Employee_create_benefit.init();
 });

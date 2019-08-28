@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmployeeBPJS extends Model
 {
+    protected $table = 'employee_bpjs';
     
     protected $fillable = [
         'employee_id',
@@ -31,6 +32,6 @@ class EmployeeBPJS extends Model
      */
     public function employee()
     {
-        return $this->hasMany(Employee::class);
+        return $this->belongsTo(Employee::class);
     }
 }

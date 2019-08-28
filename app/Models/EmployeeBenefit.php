@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EmployeeBenefit extends Model
 {
-    // protected $table = 'employee_benefit';
+    protected $table = 'employee_benefit';
 
     protected $fillable = [
         'employee_id',
@@ -26,7 +26,7 @@ class EmployeeBenefit extends Model
      */
     public function employee()
     {
-        return $this->hasMany(Employee::class);
+        return $this->belongsTo(Employee::class);
     }
 
     /**

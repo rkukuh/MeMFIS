@@ -551,7 +551,7 @@ class EmployeeController extends Controller
         }
 
         //EMPLOYEE BENEFIT
-        $employee_benefit[] = null;
+        $employee_benefit = [];
         $employee_benefit_data = $employee->position()->get();
 
         if(isset($employee_benefit_data[0])){
@@ -585,9 +585,15 @@ class EmployeeController extends Controller
 
         //EMPLOYEE BPJS
         $employee_bpjs_data = BPJS::get();
-        // dd($employee_bpjs_data);
-        // dd($employee_benefit);
-        // dd($employee_benefit);
+        
+        $button_parameter_data = $employee->where('employees.id',$employee->id)->with('employee_benefit','employee_bpjs','employee_provisions')->get();
+        
+        if($button_parameter_data[0]->employee_benefit == null && $button_parameter_data[0]->employee_bpjs == null && $button_parameter_data[0]->employee_provisions == null){
+            $button_parameter = 'create';
+        }else{
+            $button_parameter = 'update';
+        }
+        // dd($button_parameter_data);
         return view('frontend.employee.employee.edit',[
         'employee' => $employee,
         'age' => $age,
@@ -598,7 +604,8 @@ class EmployeeController extends Controller
         'jobDetails' => $jobDetails,
         'history' => $history,
         'employee_benefit' => $employee_benefit,
-        'employee_bpjs' => $employee_bpjs_data
+        'employee_bpjs' => $employee_bpjs_data,
+        'button_parameter' => $button_parameter
         ]);
     }
 
