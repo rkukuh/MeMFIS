@@ -108,7 +108,8 @@ class TaskReleaseDefectCardController extends Controller
 
         $taskrelease->approvals()->save(new Approval([
             'approvable_id' => $taskrelease->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
         ]));
 
         return response()->json($taskrelease);

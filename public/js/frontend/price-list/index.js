@@ -50,8 +50,7 @@ let Unit = {
                     template: function (t) {
                         return '<a href="" class="show-price" data-toggle="modal" data-target="#modal_price_list_show"'+
                         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
-                        t.uuid +
-                        '>' + t.code + "</a>"
+                        t.uuid + '>' + t.code + "</a>"
                     }
                 },
                 {
@@ -111,135 +110,6 @@ let Unit = {
             ]
         });
        
-        // Manhour
-
-        $('.price_list_datatable-manhour').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/price-list-manhour',
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-                            
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !1,
-                serverSorting: !1
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'code',
-                    title: 'Code / Part Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                   
-                },
-                {
-                    field: 'name',
-                    title: 'Name',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-             
-                
-            ]
-        });
-
-         // Facility
-
-         $('.price_list_datatable-facility').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/price-list-facility',
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-                            
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !1,
-                serverSorting: !1
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'code',
-                    title: 'Code / Part Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                   
-                },
-                {
-                    field: 'name',
-                    title: 'Name',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'prices',
-                    title: 'Price',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-               
-            ]
-        });
-
         $(document).ready(function () {
             $('.btn-success').removeClass('add');
         });
@@ -254,16 +124,16 @@ let Unit = {
                 level_array[i] = $(this).val();
             });
 
-            let item = $('input[name=uuid]').val();
-            // let item = $('#uuid').val();
-            console.log(item);
+            // let item = $('input[name=uuid]').val();
+            let item = $('#uuid-item').val();
+            // console.log(item);
             
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: 'post',
-                url: '/item/'+item+'/prices',
+                type:'post',
+                url: 'item/'+item+'/prices',
                 data: {
                     _token: $('input[name=_token]').val(),
                     price: price_array,
@@ -523,7 +393,6 @@ let Unit = {
 
     }
 };
-                                                                                                                                                                              
 
 
 

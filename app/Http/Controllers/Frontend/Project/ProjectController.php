@@ -134,7 +134,8 @@ class ProjectController extends Controller
 
         $project->approvals()->save(new Approval([
             'approvable_id' => $project->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
         ]));
 
         return response()->json($project);

@@ -11,21 +11,21 @@ Route::name('frontend.')->group(function () {
 
         /** ITEM */
 
-        Route::namespace('Item')->group(function () {
+        Route::namespace('Manhour')->group(function () {
 
-            Route::resource('item', 'ItemController');
-            Route::resource('tool', 'ToolController');
+            Route::resource('manhour', 'ManhourController');
+            // Route::resource('tool', 'ToolController');
 
-            Route::name('item.')->group(function () {
+            Route::name('manhour.')->group(function () {
 
-                Route::prefix('item')->group(function () {
+                Route::prefix('manhour')->group(function () {
 
                     /** Price List */
-                    Route::resource('/{item}/prices', 'ItemPriceController');
-                    
+                    Route::resource('/{manhour}/prices', 'ManhourController');
+
                     /** Transaction: Unit */
-                    Route::post('/{item}/unit', 'ItemUnitController@store')->name('unit.store');
-                    Route::delete('/{item}/{unit}/unit', 'ItemUnitController@destroy')->name('unit.destroy');
+                    Route::post('/{manhour}/unit', 'ItemUnitController@store')->name('unit.store');
+                    Route::delete('/{manhour}/{unit}/unit', 'ItemUnitController@destroy')->name('unit.destroy');
 
                     /** Transaction: Storage */
                     Route::post('/{item}/storage', 'ItemStorageController@store')->name('storage.store');
