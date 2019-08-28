@@ -38,8 +38,9 @@ class ItemPriceController extends Controller
      */
     public function store(PriceStore $request, Item $item)
     {
-        for ($i=0; $i < sizeof($request->price) ; $i++) {
-            $item->prices()->save(new Price (['amount' =>$request->price[$i],'level' =>$request->level[$i]]));
+        for ($i=0; $i < is_array($request->price); $i++) {
+            $item->prices()
+            ->save(new Price (['amount' =>$request->price[$i],'level' =>$request->level[$i]]));
         }
 
         return response()->json($item);
