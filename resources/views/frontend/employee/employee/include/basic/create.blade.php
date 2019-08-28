@@ -270,7 +270,7 @@
                         Email 1 @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.text')
+                    @component('frontend.common.input.email')
                         @slot('id', 'email_1')
                         @slot('name', 'email_1')
                         @slot('id_error', 'email_1')
@@ -281,7 +281,7 @@
                         Email 2
                     </label>
 
-                    @component('frontend.common.input.text')
+                    @component('frontend.common.input.email')
                         @slot('id', 'email_2')
                         @slot('name', 'email_2')
                         @slot('id_error', 'email_2')
