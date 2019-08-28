@@ -16,7 +16,7 @@ class EmployeeBenefit extends Migration
         Schema::create('employee_benefit', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('employee_id');
-            $table->bigInteger('benefit_id');
+            $table->unsignedBigInteger('benefit_id');
             $table->bigInteger('amount');
 
             $table->timestamps();
