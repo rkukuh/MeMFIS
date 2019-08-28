@@ -16,13 +16,13 @@ class EmployeeProvisions extends Migration
         Schema::create('employee_provisions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('employee_id');
-            $table->bigInteger('maximum_overtime');
-            $table->bigInteger('minimum_overtime');
-            $table->bigInteger('holiday_overtime');
-            $table->string('pph');
-            $table->bigInteger('late_tolerance');
-            $table->bigInteger('late_punishment');
-            $table->bigInteger('absence_punishment');
+            $table->bigInteger('maximum_overtime')->nullable();
+            $table->bigInteger('minimum_overtime')->nullable();
+            $table->bigInteger('holiday_overtime')->nullable();
+            $table->string('pph')->nullable();
+            $table->bigInteger('late_tolerance')->nullable();
+            $table->bigInteger('late_punishment')->nullable();
+            $table->bigInteger('absence_punishment')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

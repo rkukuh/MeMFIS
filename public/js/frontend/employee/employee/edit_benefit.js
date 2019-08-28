@@ -8,7 +8,7 @@ let Employee_edit_benefit = {
         var amount = []
         $("input[name='check_benefit']:checked").each(function(){
             
-            if($('input[name='+this.value+'_amount]').val() == '' ||$('input[name='+this.value+'_amount]').val() < document.getElementById(this.value+'_amount').min){
+            if($('input[name='+this.value+'_amount]').val() == '' || $('input[name='+this.value+'_amount]').val() < document.getElementById(this.value+'_amount').min){
                 $('#'+this.value+'-error').html('Must be greater than min value')
                 return_status = false
             }else{
@@ -99,7 +99,7 @@ let Employee_edit_benefit = {
                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
              },
              type: 'PUT',
-             url: '/employee/'+uuid+'/employee-benefit/'+null,
+             url: '/employee/'+uuid+'/benefit-salary/'+null,
              data: {
                  uuid_benefit: uuid_benefit,
                  amount: amount,
@@ -206,7 +206,7 @@ let Employee_edit_benefit = {
                             //     timeOut: 5000
                             // });
     
-                            // location.reload();
+                            location.reload();
     
                         // }
                     }

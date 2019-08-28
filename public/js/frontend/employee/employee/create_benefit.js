@@ -206,7 +206,7 @@ let Employee_create_benefit = {
                             //     timeOut: 5000
                             // });
     
-                            // location.reload();
+                            location.reload();
     
                         // }
                     }

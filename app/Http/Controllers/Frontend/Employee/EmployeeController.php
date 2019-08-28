@@ -12,6 +12,7 @@ use App\Models\Status;
 use App\Models\Department;
 use App\Models\Type;
 use App\Models\BPJS;
+use App\Models\Benefit;
 use Carbon\Carbon;
 use DB;
 
@@ -588,12 +589,97 @@ class EmployeeController extends Controller
         
         $button_parameter_data = $employee->where('employees.id',$employee->id)->with('employee_benefit','employee_bpjs','employee_provisions')->get();
         
-        if($button_parameter_data[0]->employee_benefit == null && $button_parameter_data[0]->employee_bpjs == null && $button_parameter_data[0]->employee_provisions == null){
+        if(count($button_parameter_data[0]->employee_benefit) == 0 && count($button_parameter_data[0]->employee_bpjs) == 0 && count($button_parameter_data[0]->employee_provisions) == 0){
             $button_parameter = 'create';
         }else{
             $button_parameter = 'update';
         }
-        // dd($button_parameter_data);
+        
+        //EMPLOYEE BENEFIT HISTORY
+        $created_at = $employee->employee_provisions()->select('employee_provisions.created_at')->whereNotNull('employee_provisions.updated_at')->orderBy('created_at','DESC')->get();
+        
+        
+        $j = 0;
+        foreach($created_at as $ct){
+            $employee_benefit_history_data[$j] = $employee->employee_benefit()->where('employee_benefit.created_at',$ct->created_at)->whereNotNull('employee_benefit.updated_at')->get();
+            $employee_bpjs_history_data[$j] = $employee->employee_bpjs()->where('employee_bpjs.created_at',$ct->created_at)->whereNotNull('employee_bpjs.updated_at')->get();
+            $employee_provisions_history_data[$j] = $employee->employee_provisions()->where('employee_provisions.created_at',$ct->created_at)->whereNotNull('employee_provisions.updated_at')->get();
+        $j++;
+        }
+
+        $employee_benefit_history = [];
+        
+        if($j > 0){
+        for ($g=0; $g < count($employee_provisions_history_data); $g++) {
+            $employee_benefit_history[$g] = [
+                'created_at' => $employee_provisions_history_data[$g][0]->created_at,
+                'updated_at' => $employee_provisions_history_data[$g][0]->updated_at,
+                'maximum_overtime' => $employee_provisions_history_data[$g][0]->maximum_overtime,
+                'minimum_overtime' => $employee_provisions_history_data[$g][0]->minimum_overtime,
+                'pph' => $employee_provisions_history_data[$g][0]->pph,
+                'late_tolerance' => $employee_provisions_history_data[$g][0]->late_tolerance,
+                'late_punishment' => $employee_provisions_history_data[$g][0]->late_punishment,
+                'absence_punishment' => $employee_provisions_history_data[$g][0]->absence_punishment,
+                'holiday_overtime' => $employee_provisions_history_data[$g][0]->holiday_overtime,
+                'benefit' => $employee_benefit_history_data[$g],
+                'bpjs' => $employee_bpjs_history_data[$g]
+            ];
+
+            for($t=0; $t<count($employee_benefit_history_data[$g]); $t++){
+            $employee_benefit_history[$g]['benefit_name'][$t] = [
+                'name' =>  Benefit::where('id',$employee_benefit_history_data[$g][$t]->benefit_id)->first()->name
+                ];
+            }
+
+            for($t=0; $t<count($employee_bpjs_history_data[$g]); $t++){
+                $employee_benefit_history[$g]['bpjs_name'][$t] = [
+                    'name' => BPJS::where('id',$employee_bpjs_history_data[$g][$t]->bpjs_id)->first()->name
+                    ];
+                }
+        }
+        }
+        //EMPLOYEE BENEFIT CURRENT
+        $benefit_name_data = $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->get();
+        $bpjs_name_data = $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->get();
+        
+        $benefit_name = [];
+        $bpjs_name = [];
+
+        $p = 0;
+        foreach($benefit_name_data as $bnd){
+            $benefit_name[$p] = [
+                'name' => Benefit::where('id',$bnd->benefit_id)->first()->name
+            ];
+            $p++;
+        }
+        
+        $q = 0;
+        foreach($bpjs_name_data as $bpd){
+            $bpjs_name[$q] = [
+                'name' => BPJS::where('id',$bpd->bpjs_id)->first()->name
+            ];
+            $q++;
+        }
+        $current = [
+            'provisions' => $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->get(),
+            'benefit_name' => $benefit_name,
+            'benefit' => $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->get(),
+            'bpjs_name' => $bpjs_name,
+            'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->get()
+        ];
+        
+        // dd($bpjs_name);
+        // dd($benefit_name);
+        // dd(count($employee_bpjs_history_data[0]));
+        // dd($employee_benefit_history);
+        // dd($bpjs_name_history);
+        // dd($employee_benefit_history_data[0][1]->benefit_id);
+        // dd($current['benefit']);
+        // dd($employee_provisions_history_data);
+        // dd(count($employee_bpjs_history_data));
+        // dd($created_at);
+        // dd($employee_provisions_history_data[0][0]->created_at);
+        // dd($employee_bpjs_history_data);
         return view('frontend.employee.employee.edit',[
         'employee' => $employee,
         'age' => $age,
@@ -605,7 +691,9 @@ class EmployeeController extends Controller
         'history' => $history,
         'employee_benefit' => $employee_benefit,
         'employee_bpjs' => $employee_bpjs_data,
-        'button_parameter' => $button_parameter
+        'button_parameter' => $button_parameter,
+        'current' => $current,
+        'employee_benefit_history' =>  $employee_benefit_history
         ]);
     }
 

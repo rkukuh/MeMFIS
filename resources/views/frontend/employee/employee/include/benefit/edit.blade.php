@@ -265,9 +265,9 @@
                     </label>
 
                     @component('frontend.common.input.number')
-                        @slot('id', 'late_pushiment')
-                        @slot('name', 'late_pushiment')
-                        @slot('id_error', 'late_pushiment')
+                        @slot('id', 'late_punishment')
+                        @slot('name', 'late_punishment')
+                        @slot('id_error', 'late_punishment')
                         @slot('input_append','IDR')
                     @endcomponent
                 </div>

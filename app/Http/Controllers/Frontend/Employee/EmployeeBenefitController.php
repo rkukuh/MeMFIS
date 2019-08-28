@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Frontend\Employee;
 
 use App\Models\Employee;
 use App\Models\EmployeeBenefit;
-use App\Models\EmployeeBPJS;
 use App\Models\Benefit;
-use App\Models\EmployeeProvisions;
 use Carbon\Carbon;
 use App\Http\Requests\Frontend\EmployeeBenefitStore;
 use App\Http\Requests\Frontend\EmployeeBenefitUpdate;
@@ -54,7 +52,7 @@ class EmployeeBenefitController extends Controller
             ]);
         }
 
-        for($j=0; $i<count($request->uuid_bpjs); $j++){
+        for($j=0; $j<count($request->uuid_bpjs); $j++){
             $employee->employee_bpjs()->create([
                 'bpjs_id' => BPJS::where('uuid',$request->uuid_bpjs[$j])->first()->id,
                 'employee_paid' => $request->employee_paid[$j],
@@ -114,7 +112,56 @@ class EmployeeBenefitController extends Controller
      */
     public function update(EmployeeBenefitUpdate $request,Employee $employee)
     {
-     //
+        $time = Carbon::now();
+            
+        $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->update([
+            'updated_at' => $time
+        ]);
+
+        $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->update([
+            'updated_at' => $time
+        ]);
+
+        $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->update([
+            'updated_at' => $time
+        ]);
+
+        for($i=0; $i<count($request->uuid_benefit); $i++){
+            $employee->employee_benefit()->create([
+                'benefit_id' => Benefit::where('uuid',$request->uuid_benefit[$i])->first()->id,
+                'amount' => $request->amount[$i],
+                'created_at' => $time,
+                'updated_at' => null,
+            ]);
+        }
+
+        for($j=0; $j<count($request->uuid_bpjs); $j++){
+            $employee->employee_bpjs()->create([
+                'bpjs_id' => BPJS::where('uuid',$request->uuid_bpjs[$j])->first()->id,
+                'employee_paid' => $request->employee_paid[$j],
+                'employee_min_value' => $request->employee_min[$j],
+                'employee_max_value' => $request->employee_max[$j],
+                'company_paid' => $request->company_paid[$j],
+                'company_min_value' => $request->company_min[$j],
+                'company_max_value' => $request->company_max[$j],
+                'created_at' => $time,
+                'updated_at' => null
+            ]);
+        }
+
+        $employee->employee_provisions()->create([
+            'maximum_overtime' => $request->maximum_overtime,
+            'minimum_overtime' => $request->minimum_overtime,
+            'holiday_overtime' => $request->holiday_overtime,
+            'pph' => $request->pph,
+            'late_tolerance' => $request->late_tolerance,
+            'late_punishment' => $request->late_punishment,
+            'absence_punishment' => $request->absence_punishment,
+            'created_at' => $time,
+            'updated_at' => null
+        ]);
+        
+        return response()->json('Sukses');
     }
 
     /**
