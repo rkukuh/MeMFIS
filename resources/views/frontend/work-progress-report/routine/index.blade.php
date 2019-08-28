@@ -31,13 +31,13 @@
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__text">
-                                        63%
+                                        {{ $jobcards["routine"]["done"] / array_sum($jobcards["routine"]) * 100 }}%
                                     </span>		
                                 </div>
                             </div>               	 
                             <div class="m--space-10"></div>
                             <div class="progress m-progress--sm">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $jobcards['routine']['done'] / array_sum($jobcards['routine']) * 100 }}%;" aria-valuenow="{{ $jobcards['routine']['done'] / array_sum($jobcards['routine']) * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -53,12 +53,12 @@
                                 </div>
                                 <div class="col" align="center">
                                     <span class="m-widget15__stats">
-                                        600
+                                    {{ number_format( array_sum($jobcards['routine']) / 2 ) }}
                                     </span>
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__stats">
-                                        4.500 Task
+                                    {{ number_format( array_sum($jobcards['routine']) ) }} Task
                                     </span>
                                 </div>
                             </div>			                	 

@@ -12,6 +12,9 @@ use App\Http\Controllers\Controller;
 
 class WorkProgressReportController extends Controller
 {
+    public function __construct(){
+        $this->jobcard = [];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -51,7 +54,8 @@ class WorkProgressReportController extends Controller
      */
     public function show(Project $project)
     {
-        $jobcards = $statusses_routine = $statusses_non_routine = [];
+        $jobcards = $statusses_routine = $statusses_non_routine =  $basic =  $sip =  $cpcp =  $additional =  $adsb =  $cmr_awl =  $si =  $ea =  $eo =  $ht_crr = [];
+
         $tat = ProjectWorkpackage::where('project_id', $project->id)->sum('tat');
         $attention = json_decode($project->quotations[0]->attention);
         if(isset($project->data_htcrr)){
@@ -85,81 +89,60 @@ class WorkProgressReportController extends Controller
             }else{
                 array_push($statusses_non_routine, $jobcard->progresses->last()->status_id);
             }
+
+            switch($jobcard->jobcardable->type->code){
+                case 'basic':
+                    array_push($basic, $jobcard->progresses->last()->status_id);
+                    break;
+                case 'sip':
+                    array_push($sip, $jobcard->progresses->last()->status_id);
+                    break;
+                case 'cpcp':
+                    array_push($cpcp, $jobcard->progresses->last()->status_id);
+                    break;
+                case 'ad':
+                    array_push($adsb, $jobcard->progresses->last()->status_id);
+                    break;
+                case 'sb':
+                    array_push($adsb, $jobcard->progresses->last()->status_id);
+                    break;
+                case 'ea':
+                    array_push($ea, $jobcard->progresses->last()->status_id);
+                    break;
+                case 'eo    ':
+                    array_push($eo  , $jobcard->progresses->last()->status_id);
+                    break;
+                case 'si':
+                    array_push($si, $jobcard->progresses->last()->status_id);
+                    break;
+                case 'cmr':
+                    array_push($cmr_awl, $jobcard->progresses->last()->status_id);
+                    break;
+                case 'awl':
+                    array_push($cmr_awl, $jobcard->progresses->last()->status_id);
+                    break;
+                default:
+                    array_push($ht_crr, $jobcard->progresses->last()->status_id);
+            }
         }
         
-        $count_each = array_count_values($statusses);
-        $count_each_routine = array_count_values($statusses_routine);
-        $count_each_non_routine = array_count_values($statusses_non_routine);
+        $this->counting($statusses, "all");
+        $this->counting($statusses_routine, "routine");
+        $this->counting($statusses_non_routine, "non-routine");
+        $this->counting($basic, "basic");
+        $this->counting($sip, "sip");
+        $this->counting($cpcp, "cpcp");
+        $this->counting($adsb, "adsb");
+        $this->counting($ea, "ea");
+        $this->counting($eo, "eo");
+        $this->counting($si, "si");
+        $this->counting($cmr_awl, "cmr-awl");
+        $this->counting($ht_crr, "ht-crr");
 
-        foreach($count_each as $key => $value ){
-            $count_each[Status::find($key)->code] = $value;
-        }
-
-        if( isset($count_each["released"]) ){ $jobcards["overall_done"] += $count_each["released"]; } else{ $jobcards["overall_done"] += 0; }
-        if( isset($count_each["rii-released"]) ){ $jobcards["overall_done"] += $count_each["rii-released"]; } else{ $jobcards["overall_done"] += 0; }
-
-        foreach($count_each_routine as $key => $value ){
-            $count_each_routine[Status::find($key)->code] = $value;
-        }
-
-        if( isset($count_each_routine["released"]) ){ $jobcards["routine_done"] += $count_each_routine["released"]; } else{ $jobcards["routine_done"] += 0; }
-        if( isset($count_each_routine["rii-released"]) ){ $jobcards["routine_done"] += $count_each_routine["rii-released"]; } else{ $jobcards["routine_done"] += 0; }
-        
-        foreach($count_each_non_routine as $key => $value ){
-            $count_each_non_routine[Status::find($key)->code] = $value;
-        }
-
-        if( isset($count_each_non_routine["released"]) ){ $jobcards["non_routine_done"] += $count_each_non_routine["released"]; } else{ $jobcards["non_routine_done"] += 0; }
-        if( isset($count_each_non_routine["rii-released"]) ){ $jobcards["non_routine_done"] += $count_each_non_routine["rii-released"]; } else{ $jobcards["non_routine_done"] += 0; }
-            
-        //count all the routine
-
-        // $jobcard_routine = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')
-        // ->whereHas('jobcardable.type', function ($taskcard) {
-        //     $taskcard->where('of', 'taskcard-type-routine');
-        // })->get();
-
-        // $jobcards["routine_done"] = 0;
-
-        // foreach($jobcard_routine as $key => $jobcard){
-        //     $statusses[$key] = $jobcard->progresses->last()->status_id;
-        // }
-        
-        // $count_each = array_count_values($statusses);
-
-        // foreach($count_each as $key => $value ){
-        //     $count_each[Status::find($key)->code] = $value;
-        // }
-
-        // if( isset($count_each["released"]) ){ $jobcards["routine_done"] += $count_each["released"]; } else{ $jobcards["routine_done"] += 0; }
-        // if( isset($count_each["rii-released"]) ){ $jobcards["routine_done"] += $count_each["rii-released"]; } else{ $jobcards["routine_done"] += 0; }
-        
-        //count non routine
-
-        // $jobcard_non_routine = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')
-        // ->whereHas('jobcardable.type', function ($taskcard) {
-        //     $taskcard->where('of', 'taskcard-type-non-routine');
-        // })->get();
-        
-        // $jobcards["non_routine_done"] = 0;
-
-        // foreach($jobcard_non_routine as $key => $jobcard){
-        //     $statusses[$key] = $jobcard->progresses->last()->status_id;
-        // }
-
-        // $count_each = array_count_values($statusses);
-
-        // foreach($count_each as $key => $value ){
-        //     $count_each[Status::find($key)->code] = $value;
-        // }
-
-        // if( isset($count_each["released"]) ){ $jobcards["non_routine_done"] += $count_each["released"]; } else{ $jobcards["non_routine_done"] += 0; }
-        // if( isset($count_each["rii-released"]) ){ $jobcards["non_routine_done"] += $count_each["rii-released"]; } else{ $jobcards["non_routine_done"] += 0; }
-        
         return view('frontend.work-progress-report.show',[
             'tat' => $tat,
             'project' => $project,
-            'jobcards' => $jobcards,
+            'jobcards' =>  $this->jobcard,
             'attention' => $attention,
         ]);
     }
@@ -319,5 +302,30 @@ class WorkProgressReportController extends Controller
         if( isset($count_each["rii-released"]) ){ $data[5]['value'] = $count_each["rii-released"]; } else{ $data[5]['value'] = 0; }
 
         return response()->json($data);
+    }
+
+    public function counting($counter, $attribute){
+        if(!empty($counter)){
+            $container = [];
+            $counter = array_count_values($counter);
+            
+            foreach($counter as $key => $value ){
+                $counter[Status::find($key)->code] = $value;
+            }
+        
+            if( isset($counter["open"]) ){ $container['open'] = $counter["open"]; } else{ $container["open"] = 0; }
+            if( isset($counter["progress"]) ){ $container["progress"] = $counter["progress"]; } else{ $container["progress"] = 0; }
+            if( isset($counter["pending"]) ){ $container["pending"] = $counter["pending"]; } else{ $container["pending"] = 0; }
+            if( isset($counter["closed"]) ){ $container["closed"] = $counter["closed"]; } else{ $container["closed"] = 0; }
+            if( isset($counter["released"]) ){ $container["released"] = $counter["released"]; } else{ $container["released"] = 0; }
+            if( isset($counter["rii-released"]) ){ $container["rii-released "] = $counter["rii-released"]; } else{ $container["rii-released"] = 0; }
+            if( $container["released"] > 0 || $container["rii-released"] > 0 ){ $container["done"] = $container["rii-released"] + $container["released"]; } else{ $container["done"] = 0; }
+            
+            $this->jobcard[$attribute] = $container;
+
+            return;
+        }else{
+            return;
+        }
     }
 }
