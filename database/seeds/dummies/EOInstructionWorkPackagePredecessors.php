@@ -3,7 +3,6 @@
 use App\Models\EOInstruction;
 use Illuminate\Database\Seeder;
 use App\Models\EOInstructionWorkPackage;
-use App\Models\EOInstructionWorkPackagePredecessor;
 
 class EOInstructionWorkPackagePredecessors extends Seeder
 {

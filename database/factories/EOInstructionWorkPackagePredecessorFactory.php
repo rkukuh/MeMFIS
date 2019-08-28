@@ -3,7 +3,6 @@
 use App\Models\EOInstruction;
 use Faker\Generator as Faker;
 use App\Models\EOInstructionWorkPackage;
-use App\Models\EOInstructionWorkPackagePredecessor;
 
 $factory->define(EOInstructionWorkPackagePredecessor::class, function (Faker $faker) {
 
