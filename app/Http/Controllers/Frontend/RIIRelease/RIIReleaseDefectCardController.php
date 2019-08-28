@@ -106,7 +106,7 @@ class RIIReleaseDefectCardController extends Controller
 
         $riirelease->approvals()->save(new Approval([
             'approvable_id' => $riirelease->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
         ]));
 
         return response()->json($riirelease);    }
