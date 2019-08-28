@@ -11,6 +11,7 @@ use App\Models\Position;
 use App\Models\Status;
 use App\Models\Department;
 use App\Models\Type;
+use App\Models\BPJS;
 use Carbon\Carbon;
 use DB;
 
@@ -250,9 +251,26 @@ class EmployeeController extends Controller
 
         $i = 0;
         foreach($employee_history as $ht){
-            $addresses_history = $employee->addresses()->where('type_id',Type::where('code','address_1')->first()->id)->where('addresses.created_at',$ht->created_at)->whereNotNull('addresses.updated_at')->first();
-            $phones_history = $employee->phones()->where('type_id',Type::where('code','mobile')->first()->id)->where('phones.created_at',$ht->created_at)->whereNotNull('phones.updated_at')->first();
-            $emails_history = $employee->emails()->where('type_id',Type::where('code','email_1')->first()->id)->where('emails.created_at',$ht->created_at)->whereNotNull('emails.updated_at')->first();
+            $addresses_history = null;
+            $phones_history = null;
+            $emails_history = null;
+
+            $addresses_history_data = $employee->addresses()->where('type_id',Type::where('code','address_1')->first()->id)->where('addresses.created_at',$ht->created_at)->whereNotNull('addresses.updated_at')->first();
+            $phones_history_data = $employee->phones()->where('type_id',Type::where('code','mobile')->first()->id)->where('phones.created_at',$ht->created_at)->whereNotNull('phones.updated_at')->first();
+            $emails_history_data = $employee->emails()->where('type_id',Type::where('code','email_1')->first()->id)->where('emails.created_at',$ht->created_at)->whereNotNull('emails.updated_at')->first();
+
+
+            if(isset($addresses_history_data->address)){
+                $addresses_history = $addresses_history_data->address;
+            }
+
+            if(isset($phones_history_data->number)){
+                $phones_history = $phones_history_data->number;
+            }
+
+            if(isset($emails_history_data->address)){
+                $emails_history = $emails_history_data->address;
+            }
 
             if($ht->last_name == $ht->first_name){
                 $name = $ht->first_name;
@@ -320,11 +338,11 @@ class EmployeeController extends Controller
                 'nationality' => $ht->nationality,
                 'religion' => $ht->religion,
                 'martial_status' => $ht->marital_status,
-                'address_1' => $addresses_history->address,
+                'address_1' => $addresses_history,
                 'city' => $ht->city,
                 'country' => $ht->country,
-                'mobile_phone' => $phones_history->number,
-                'email_1' => $emails_history->address,
+                'mobile_phone' => $phones_history,
+                'email_1' => $emails_history,
                 'job_tittle' => $job_tittle,
                 'position' => $position,
                 'status' => $status,
@@ -428,9 +446,26 @@ class EmployeeController extends Controller
 
         $i = 0;
         foreach($employee_history as $ht){
-            $addresses_history = $employee->addresses()->where('type_id',Type::where('code','address_1')->first()->id)->where('addresses.created_at',$ht->created_at)->whereNotNull('addresses.updated_at')->first();
-            $phones_history = $employee->phones()->where('type_id',Type::where('code','mobile')->first()->id)->where('phones.created_at',$ht->created_at)->whereNotNull('phones.updated_at')->first();
-            $emails_history = $employee->emails()->where('type_id',Type::where('code','email_1')->first()->id)->where('emails.created_at',$ht->created_at)->whereNotNull('emails.updated_at')->first();
+            $addresses_history = null;
+            $phones_history = null;
+            $emails_history = null;
+
+            $addresses_history_data = $employee->addresses()->where('type_id',Type::where('code','address_1')->first()->id)->where('addresses.created_at',$ht->created_at)->whereNotNull('addresses.updated_at')->first();
+            $phones_history_data = $employee->phones()->where('type_id',Type::where('code','mobile')->first()->id)->where('phones.created_at',$ht->created_at)->whereNotNull('phones.updated_at')->first();
+            $emails_history_data = $employee->emails()->where('type_id',Type::where('code','email_1')->first()->id)->where('emails.created_at',$ht->created_at)->whereNotNull('emails.updated_at')->first();
+
+
+            if(isset($addresses_history_data->address)){
+                $addresses_history = $addresses_history_data->address;
+            }
+
+            if(isset($phones_history_data->number)){
+                $phones_history = $phones_history_data->number;
+            }
+
+            if(isset($emails_history_data->address)){
+                $emails_history = $emails_history_data->address;
+            }
 
             if($ht->last_name == $ht->first_name){
                 $name = $ht->first_name;
@@ -498,11 +533,11 @@ class EmployeeController extends Controller
                 'nationality' => $ht->nationality,
                 'religion' => $ht->religion,
                 'martial_status' => $ht->marital_status,
-                'address_1' => $addresses_history->address,
+                'address_1' => $addresses_history,
                 'city' => $ht->city,
                 'country' => $ht->country,
-                'mobile_phone' => $phones_history->number,
-                'email_1' => $emails_history->address,
+                'mobile_phone' => $phones_history,
+                'email_1' => $emails_history,
                 'job_tittle' => $job_tittle,
                 'position' => $position,
                 'status' => $status,
@@ -515,7 +550,56 @@ class EmployeeController extends Controller
             $i++;
         }
 
-        return view('frontend.employee.employee.edit',['employee' => $employee,'age' => $age,'documents' => $documents,'emails' => $emails,'addresses' => $addreses,'phones' => $phones,'jobDetails' => $jobDetails,'history' => $history]);
+        //EMPLOYEE BENEFIT
+        $employee_benefit[] = null;
+        $employee_benefit_data = $employee->position()->get();
+
+        if(isset($employee_benefit_data[0])){
+            $j = 0;
+            for($i=0; $i<count($employee_benefit_data[0]->benefits); $i++){
+                if($employee_benefit_data[0]->benefits[$i]->pivot->updated_at == null){
+
+                $base_calculation = null;
+                if($employee_benefit_data[0]->benefits[$i]->base_calculation){
+                    $base_calculation = Type::where('id',$employee_benefit_data[0]->benefits[$i]->base_calculation)->first()->name;
+                }
+
+                $prorate_calculation = null;
+                if($employee_benefit_data[0]->benefits[$i]->prorate_calculation){
+                    $prorate_calculation = Type::where('id',$employee_benefit_data[0]->benefits[$i]->prorate_calculation)->first()->name;
+                }
+
+                $employee_benefit[$j] = [
+                    'benefit_uuid' => $employee_benefit_data[0]->benefits[$i]->uuid,
+                    'benefit_name' => $employee_benefit_data[0]->benefits[$i]->name,
+                    'min' => $employee_benefit_data[0]->benefits[$i]->pivot->min,
+                    'max' => $employee_benefit_data[0]->benefits[$i]->pivot->max,
+                    'base_calculation' => $base_calculation,
+                    'prorate_calculation' => $prorate_calculation
+                ];
+                $j++;
+
+            }
+            }
+        }
+
+        //EMPLOYEE BPJS
+        $employee_bpjs_data = BPJS::get();
+        // dd($employee_bpjs_data);
+        // dd($employee_benefit);
+        // dd($employee_benefit);
+        return view('frontend.employee.employee.edit',[
+        'employee' => $employee,
+        'age' => $age,
+        'documents' => $documents,
+        'emails' => $emails,
+        'addresses' => $addreses,
+        'phones' => $phones,
+        'jobDetails' => $jobDetails,
+        'history' => $history,
+        'employee_benefit' => $employee_benefit,
+        'employee_bpjs' => $employee_bpjs_data
+        ]);
     }
 
     /**

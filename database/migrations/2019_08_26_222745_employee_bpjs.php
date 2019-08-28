@@ -17,7 +17,13 @@ class EmployeeBpjs extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('bpjs_id');
-
+            $table->double('employee_paid')->nullable();
+            $table->double('employee_min_value')->nullable();
+            $table->double('employee_max_value')->nullable();
+            $table->double('company_paid')->nullable();
+            $table->double('company_min_value')->nullable();
+            $table->double('company_max_value')->nullable();
+            
             $table->timestamps();
             $table->softDeletes();
 
