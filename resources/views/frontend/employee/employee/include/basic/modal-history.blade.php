@@ -37,57 +37,37 @@
                                                         <td align="center" width="55%"></td>
                                                     </tr>
                                                     <tr>
-                                                            @php
-                                                            $lastName = null;
-                                                            if($employee->last_name != $employee->first_name){
-                                                            $lastName = $employee->last_name;
-                                                            }
-                                                            @endphp
                                                         <td valign="top"><b>Name</b></td>
-                                                    <td valign="top" align="center">{{ $employee->first_name.' '.$lastName}}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Employee ID</b></td>
-                                                    <td valign="top" align="center">{{ $employee->code }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Place & Date of Birth</b></td>
-                                                    <td valign="top" align="center">{{ $employee->dob.' & '.$employee->dob_place }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
-                                                        @php
-                                                            $gender = null;
-                                                            if($employee->gender == 'f'){
-                                                            $gender = 'Female';
-                                                            }else if($employee->gender == 'm'){
-                                                            $gender = 'Male';
-                                                            }
-                                                        @endphp
                                                         <td valign="top"><b>Gender</b></td>
-                                                        <td valign="top" align="center">{{ $gender }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Nationality</b></td>
-                                                    <td valign="top" align="center">{{ $employee->nationality }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Religion</b></td>
-                                                    <td valign="top" align="center">{{ $employee->religion }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Martial Status</b></td>
-                                                    <td valign="top" align="center">{{ $employee->marital_status }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                 </table>
                                             </fieldset>
                                             <fieldset class="border p-2 mt-2">
                                                 <legend class="w-auto"><b>Contact Information Details</b></legend>
-                                                @php
-                                                $address_1 = null;
-                                                if(isset($addresses['address_1'])){
-                                                $address_1 = $addresses['address_1'];
-                                                }
-                                                @endphp
                                                 <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
                                                     <tr>
                                                         <td align="center" width="45%"><b>Contact Information</b></td>
@@ -95,71 +75,28 @@
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Address Line 1</b></td>
-                                                    <td valign="top" align="center">{{ $address_1 }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>City</b></td>
-                                                    <td valign="top" align="center">{{ $employee->city }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Country</b></td>
-                                                    <td valign="top" align="center">{{ $employee->country }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
-                                                            @php
-                                                            $mobile_phone = null;
-                                                            if(isset($phones['mobile'])){
-                                                                $mobile_phone = $phones['mobile'];
-                                                            }
-                                                            @endphp
                                                         <td valign="top"><b>Mobile Phone</b></td>
-                                                        <td valign="top" align="center">{{ $mobile_phone }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
-                                                            @php
-                                                            $email_1 = null;
-                                                            if(isset($emails['email_1'])){
-                                                                $email_1 = $emails['email_1'];
-                                                            }
-                                                            @endphp
                                                         <td valign="top"><b>Email 1</b></td>
-                                                        <td valign="top" align="center">{{ $email_1 }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                 </table>
                                             </fieldset>
                                             <fieldset class="border p-2 mt-2">
                                                 <legend class="w-auto"><b>Job Details</b></legend>
-                                                @php
-                                                $jobTittle  = null;
-                                                if(isset($jobDetails['job_tittle'])){
-                                                    $jobTittle = $jobDetails['job_tittle'];
-                                                    }
-                                                    
-                                                $position  = null;
-                                                if(isset($jobDetails['position'])){
-                                                    $position = $jobDetails['position'];
-                                                }
-
-                                                $status  = null;
-                                                if(isset($jobDetails['status'])){
-                                                    $status = $jobDetails['status'];
-                                                }
-
-                                                $department  = null;
-                                                if(isset($jobDetails['department'])){
-                                                    $department = $jobDetails['department'];
-                                                }
-
-                                                $indirect  = null;
-                                                if(isset($jobDetails['indirect'])){
-                                                    $indirect = $jobDetails['indirect'];
-                                                }
-
-                                                $supervisor  = null;
-                                                if(isset($jobDetails['supervisor'])){
-                                                    $supervisor = $jobDetails['supervisor'];
-                                                    }
-                                                @endphp
                                                 <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
                                                     <tr>
                                                         <td align="center" width="45%"><b>job Details Information</b></td>
@@ -167,31 +104,31 @@
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Job Title</b></td>
-                                                    <td valign="top" align="center">{{ $jobTittle }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Job Position</b></td>
-                                                    <td valign="top" align="center">{{ $position }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Employee Status</b></td>
-                                                    <td valign="top" align="center">{{ $status }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Department</b></td>
-                                                    <td valign="top" align="center">{{ $department }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Joined Date</b></td>
-                                                    <td valign="top" align="center">{{ $employee->joined_date }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Supervisor</b></td>
-                                                    <td valign="top" align="center">{{ $supervisor }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top"><b>Indirect Supervisor</b></td>
-                                                    <td valign="top" align="center">{{ $indirect }}</td>
+                                                        <td valign="top" align="center">generate</td>
                                                     </tr>
                                                 </table>
                                             </fieldset>

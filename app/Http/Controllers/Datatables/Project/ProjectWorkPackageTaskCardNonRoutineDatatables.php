@@ -381,7 +381,7 @@ class ProjectWorkPackageTaskCardNonRoutineDatatables extends Controller
         $workPackages = ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
                         ->whereHas('taskcard', function ($query) {
                             $query->whereHas('type', function ($query) {
-                                    $query->where('code', 'cmr')->orWhere('code','awl');
+                                    $query->where('code', 'cmr')->orWhere('code','awl')->whereNull('deleted_at');
                                 });
                         })->get();
 

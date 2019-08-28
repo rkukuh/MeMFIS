@@ -252,15 +252,16 @@ class WorkPackageController extends Controller
      */
     public function deleteInstruction(WorkPackage $workPackage,EOInstruction $instruction)
     {
-        $eo_instruction = EOInstructionWorkPackage::where('workpackage_id', $workPackage->id)->where('instruction_id', $instruction->id)->first();
+        $eo_instruction = EOInstructionWorkPackage::where('workpackage_id', $workPackage->id)->where('eo_instruction_id', $instruction->id)->first();
 
-        if($eo_instruction->predecessors()->exists()){
-            $eo_instruction->predecessors()->delete();
-        }
+        // BACKEND BELUM JADI
+        // if($eo_instruction->predecessors()->exists()){
+        //     $eo_instruction->predecessors()->delete();
+        // }
 
-        if($eo_instruction->successors()->exists()){
-            $eo_instruction->successors()->delete();
-        }
+        // if($eo_instruction->successors()->exists()){
+        //     $eo_instruction->successors()->delete();
+        // }
 
         $eo_instruction->delete();
 

@@ -23,17 +23,5 @@ class TypesOfEmail extends Seeder
             'name' => 'Personal',
             'of'   => 'email',
         ]);
-
-        Type::create([
-            'code' => 'email_1',
-            'name' => 'Email 1',
-            'of'   => 'email',
-        ]);
-
-        Type::create([
-            'code' => 'email_2',
-            'name' => 'Email 2',
-            'of'   => 'email',
-        ]);
     }
 }

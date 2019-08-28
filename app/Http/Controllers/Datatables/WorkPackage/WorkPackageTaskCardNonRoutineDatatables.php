@@ -428,7 +428,7 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
         $workPackages = $workPackage->taskcards()->with('type')
                                     ->whereHas('type', function ($query) {
                                         $query->where('code', 'si');
-                                    })->whereNull('deleted_at')->get();
+                                    })->whereNull('taskcards.deleted_at')->get();
 
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){

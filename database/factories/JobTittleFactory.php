@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\JobTittle;
-use App\Models\Employee;
 use Faker\Generator as Faker;
 
 $factory->define(JobTittle::class, function (Faker $faker) {
@@ -14,4 +13,5 @@ $factory->define(JobTittle::class, function (Faker $faker) {
         'description' => $faker->text(),
         'specification' => $faker->text()
     ];
+
 });

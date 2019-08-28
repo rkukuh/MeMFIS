@@ -54,18 +54,4 @@ class Position extends MemfisModel
                     ->orderBy('benefit_position.updated_at','desc')
                     ->withTimestamps();
     }
-
-    /**
-     * One-to-Many: An Position have many Employee.
-     *
-     * This function will retrieve Employee of a Position.
-     * See: Employee position() method for the inverse
-     *
-     * @return mixed
-     */
-    public function employee()
-    {
-        return $this->hasMany(Employee::class);
-    }
-
 }
