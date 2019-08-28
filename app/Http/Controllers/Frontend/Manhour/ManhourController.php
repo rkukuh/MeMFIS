@@ -16,7 +16,7 @@ class ManhourController extends Controller
      */
     public function index()
     {
-        //
+        // return view('frontend.item.material.index');
     }
 
     /**

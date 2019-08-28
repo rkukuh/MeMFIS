@@ -22,7 +22,7 @@ Route::name('frontend.')->group(function () {
 
                     /** Price List */
                     Route::resource('/{item}/prices', 'ItemPriceController');
-
+                    
                     /** Transaction: Unit */
                     Route::post('/{item}/unit', 'ItemUnitController@store')->name('unit.store');
                     Route::delete('/{item}/{unit}/unit', 'ItemUnitController@destroy')->name('unit.destroy');

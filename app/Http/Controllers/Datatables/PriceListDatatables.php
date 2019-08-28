@@ -25,7 +25,7 @@ class PriceListDatatables extends Controller
         foreach($items as $item){
             $item->unit_name    .= $item->unit->name;
             $item->last_update  .= $item->updated_at;
-            
+                    
             if($item->first()->audits->first()->user_id == 0){
                 
                 $item->updated_by .= 'System';

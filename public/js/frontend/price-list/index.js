@@ -50,8 +50,7 @@ let Unit = {
                     template: function (t) {
                         return '<a href="" class="show-price" data-toggle="modal" data-target="#modal_price_list_show"'+
                         'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
-                        t.uuid +
-                        '>' + t.code + "</a>"
+                        t.uuid + '>' + t.code + "</a>"
                     }
                 },
                 {
@@ -125,16 +124,16 @@ let Unit = {
                 level_array[i] = $(this).val();
             });
 
-            let item = $('input[name=uuid]').val();
-            // let item = $('#uuid').val();
-            console.log(item);
+            // let item = $('input[name=uuid]').val();
+            let item = $('#uuid-item').val();
+            // console.log(item);
             
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: 'post',
-                url: '/item/'+item+'/prices',
+                type:'post',
+                url: 'item/'+item+'/prices',
                 data: {
                     _token: $('input[name=_token]').val(),
                     price: price_array,
@@ -394,213 +393,6 @@ let Unit = {
 
     }
 };
-
- // Manhour
- 
- $('.price_list_datatable-manhour').mDatatable({
-    data: {
-        type: 'remote',
-        source: {
-            read: {
-                method: 'GET',
-                url: '/datatables/price-list-manhour',
-                map: function (raw) {
-                    let dataSet = raw;
-
-                    if (typeof raw.data !== 'undefined') {
-                        dataSet = raw.data;
-                    }
-                    
-                    return dataSet;
-                }
-            }
-        },
-        pageSize: 10,
-        serverPaging: !1,
-        serverSorting: !1
-    },
-    layout: {
-        theme: 'default',
-        class: '',
-        scroll: false,
-        footer: !1
-    },
-    sortable: !0,
-    filterable: !1,
-    pagination: !0,
-    search: {
-        input: $('#generalSearch')
-    },
-    toolbar: {
-        items: {
-            pagination: {
-                pageSizeSelect: [5, 10, 20, 30, 50, 100]
-            }
-        }
-    },
-    columns: [
-        {
-            field: 'name',
-            title: 'Name',
-            sortable: 'asc',
-            filterable: !1,
-           
-        },
-        {
-            field: 'update_at',
-            title: 'Updated At',
-            sortable: 'asc',
-            filterable: !1,
-        },
-        {
-            field: 'updated_by',
-            title: 'Updated By',
-            sortable: 'asc',
-            filterable: !1,
-        },
-        {
-            field: 'Actions',
-            sortable: !1,
-            overflow: 'visible',
-            template: function (t, e, i) {
-                if('manhour' == 'item'){
-                    return (
-                        '<button data-toggle="modal" data-target="#modal_pricelist_manhour_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-manhour" title="Edit"'+
-                        'data-name='+t.name+' data-uuid=' +
-                        t.uuid +
-                        '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                    );
-                }
-                else{
-                    return (
-                        '<button data-toggle="modal" data-target="#modal_pricelist_manhour_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-manhour" title="Edit"'+
-                        ' data-name='+t.name+' data-uuid=' +
-                        t.uuid +
-                        '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        
-                    );
-                }
-                
-            }
-        },   
-    ]
-});
-
-let edit = $('.price_list_datatable-manhour').on('click', '.edit-price-manhour', function edit () {
-    save_changes_button();
-
-    let manhour = $(this).data('uuid');
-    document.getElementById("uuid-manhour").value = manhour;
-    document.getElementById("name").innerHTML = $(this).data('name');
-
-    console.log()
-
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        type: 'get',
-        url: '/item/'+item+'/prices/'+item+'/edit',
-        success: function (data) {
-            let usdFormatter = new Intl.NumberFormat('id', { style: 'currency', currency: 'usd', minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-            $(".unit_price_list").empty();
-            for (let i = 0; i < data.length; i++) {
-                $(".unit_price_list").append(
-                '<div class="row" style="margin-bottom:15px">'+
-                    '<div class="col-sm-6 col-md-6 col-lg-6" style="padding:15px; background-color:beige; margin-right:15px;  margin-left:15px;">'+
-                    usdFormatter.format(data[i].amount) +
-                    '</div>'+
-                    '<div class="col-sm-4 col-md-4 col-lg-4" style="padding:15px; background-color:beige">'+
-                        data[i].level+
-                    '</div>'+
-                '</div>'
-                );
-            }
-
-            $('.btn-success').addClass('update');
-            $('.btn-success').removeClass('add');
-        },
-        error: function (jqXhr, json, errorThrown) {
-            // this are default for ajax errors
-            let errorsHtml = '';
-            let errors = jqXhr.responseJSON;
-
-            $.each(errors.errors, function (index, value) {
-                $('#kategori-error').html(value);
-            });
-        }
-    });
-});
-
-
- // Facility
-
- $('.price_list_datatable-facility').mDatatable({
-    data: {
-        type: 'remote',
-        source: {
-            read: {
-                method: 'GET',
-                url: '/datatables/price-list-facility',
-                map: function (raw) {
-                    let dataSet = raw;
-
-                    if (typeof raw.data !== 'undefined') {
-                        dataSet = raw.data;
-                    }
-                    
-                    return dataSet;
-                }
-            }
-        },
-        pageSize: 10,
-        serverPaging: !1,
-        serverSorting: !1
-    },
-    layout: {
-        theme: 'default',
-        class: '',
-        scroll: false,
-        footer: !1
-    },
-    sortable: !0,
-    filterable: !1,
-    pagination: !0,
-    search: {
-        input: $('#generalSearch')
-    },
-    toolbar: {
-        items: {
-            pagination: {
-                pageSizeSelect: [5, 10, 20, 30, 50, 100]
-            }
-        }
-    },
-    columns: [
-        {
-            field: 'code',
-            title: 'Code / Part Number',
-            sortable: 'asc',
-            filterable: !1,
-           
-        },
-        {
-            field: 'name',
-            title: 'Name',
-            sortable: 'asc',
-            filterable: !1,
-        },
-        {
-            field: 'prices',
-            title: 'Price',
-            sortable: 'asc',
-            filterable: !1,
-        },
-       
-    ]
-});
-
 
 
 
