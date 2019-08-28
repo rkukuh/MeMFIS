@@ -140,7 +140,7 @@ class TaskReleaseJobCardController extends Controller
 
         $taskrelease->approvals()->save(new Approval([
             'approvable_id' => $taskrelease->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
         ]));
 
         return response()->json($taskrelease);
