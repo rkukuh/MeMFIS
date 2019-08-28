@@ -36,6 +36,11 @@ class CreateEmployeesTable extends Migration
 
             $table->index('first_name');
             $table->index('last_name');
+
+            $table->foreign('user_id')
+            ->references('id')->on('users')
+            ->onUpdate('cascade')
+            ->onDelete('restrict');
         });
     }
 

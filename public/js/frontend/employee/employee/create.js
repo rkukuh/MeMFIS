@@ -1,41 +1,41 @@
 let Employee = {
     init: function () {
-        let create = $('.footer').on('click', '.add-employee', function () {
 
-            let code = $('input[name=code]').val();
-            let code_uppercase = code.toUpperCase();
-            
-            let first_name = $('input[name=first_name]').val();
-            let middle_name = $('input[name=middle_name]').val();
-            let last_name = $('input[name=last_name]').val();
-            let dob = $('input[name=dob]').val();
-            let gender
-            let hired_at = $('input[name=hired_at]').val();
+        $('#document').attr('accept','image/*')
+        let create= $('.footer').on('click', '.add-employee', function () {
 
-            if($('input[name=gender]').val() == 'male'){
+            let code = $('input[name=code]').val()
+            let code_uppercase = code.toUpperCase()
+            let gender = $('#gender option:selected').val()
+            let job_tittle = $('#job_title option:selected').val()
 
-            }else if($('input[name=gender]').val() == 'female'){
-
+            if(gender == 'Male'){
+                gender = 'm'
+            }else if(gender == 'Female'){
+                gender = 'f'
             }else{
-                gender = null;
+                gender = '';
             }
+
+            formData = new FormData($('#employee_create_form')[0])
+    
+                   formData.set('code', code_uppercase)
+                   formData.set('gender', gender)
+                   formData.set('job_tittle', job_tittle)
+                   if($("#document")[0].files[0]){
+                    formData.set('document',$("#document")[0].files[0])
+                   }
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
+                enctype: 'multipart/form-data',
                 type: 'post',
                 url: '/employee',
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    code: code_uppercase,
-                    first_name: first_name,
-                    middle_name: middle_name,
-                    last_name: last_name,
-                    dob: dob,
-                    gender: gender,
-                    hired_at: hired_at,
-                },
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function (data) {
                     if (data.errors) {
                         $.each(data.errors, function (key, value) {
@@ -45,14 +45,86 @@ let Employee = {
                               name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
                             }
                             name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
-                          });
+                            
+                            if (data.errors.dob) {
+                                $('#dob-error').html(data.errors.dob[0]);
+                            }else{
+                                $('#dob-error').html('');
+                            }
+
+                            if (data.errors.gender) {
+                                $('#gender-error').html(data.errors.gender[0]);
+                            }else{
+                                $('#gender-error').html('');
+                            }
+
+                            if (data.errors.marital_status) {
+                                $('#marital_status-error').html(data.errors.marital_status[0]);
+                            }else{
+                                $('#marital_status-error').html('');
+                            }
+
+                            if (data.errors.religion) {
+                                $('#religion-error').html(data.errors.religion[0]);
+                            }else{
+                                $('#religion-error').html('');
+                            }
+
+                            if (data.errors.mobile_phone) {
+                                $('#mobile_phone-error').html(data.errors.mobile_phone[0]);
+                            }else{
+                                $('#mobile_phone-error').html('');
+                            }
+
+                            if (data.errors.joined_date) {
+                                $('#joined_date-error').html(data.errors.joined_date[0]);
+                            }else{
+                                $('#mobile_phone-error').html('');
+                            }
+
+                            if (data.errors.job_tittle) {
+                                $('#job_title-error').html(data.errors.job_tittle[0]);
+                            }else{
+                                $('#job_title-error').html('');
+                            }
+                            
+                            if (data.errors.mobile_phone) {
+                                $('#mobile_phone-error').html(data.errors.mobile_phone[0]);
+                            }else{
+                                $('#mobile_phone-error').html('');
+                            }
+
+                            if (data.errors.job_position) {
+                                $('#job_position-error').html(data.errors.job_position[0]);
+                            }else{
+                                $('#job_position-error').html('');
+                            }
+
+                            if (data.errors.employee_status) {
+                                $('#employee_status-error').html(data.errors.employee_status[0]);
+                            }else{
+                                $('#employee_status-error').html('');
+                            }
+
+                            if (data.errors.department) {
+                                $('#department-error').html(data.errors.department[0]);
+                            }else{
+                                $('#department-error').html('');
+                            }
+
+                            if (data.errors.email_1) {
+                                $('#email_1-error').html(data.errors.email_1[0]);
+                            }else{
+                                $('#email_1-error').html('');
+                            }
+                        });
                     } else {
 
-                        toastr.success('Data berhasil disimpan.', 'Sukses', {
+                        toastr.success('Data has been saved.', 'Sukses', {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/employee';
+                        window.location.href = '/employee/'+data.uuid+'/edit';
 
                     }
                 }
