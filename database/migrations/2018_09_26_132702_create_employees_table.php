@@ -29,11 +29,6 @@ class CreateEmployeesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('user_id')
-                    ->references('id')->on('users')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
             $table->index('first_name');
             $table->index('last_name');
 
