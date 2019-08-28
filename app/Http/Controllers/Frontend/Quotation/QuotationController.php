@@ -334,7 +334,7 @@ class QuotationController extends Controller
 
         $quotation->approvals()->save(new Approval([
             'approvable_id' => $quotation->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
         ]));
 
         $quotation->progresses()->save(new Progress([
@@ -350,7 +350,7 @@ class QuotationController extends Controller
 
         $project->approvals()->save(new Approval([
             'approvable_id' => $project->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
         ]));
 
         $ProjectWorkPackage = ProjectWorkPackage::where('project_id',$quotation->project_id)->pluck('id');
