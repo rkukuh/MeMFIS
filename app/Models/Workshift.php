@@ -17,11 +17,11 @@ class Workshift extends MemfisModel
      * One-to-Many: A workshift may have one or many schedule.
      *
      * This function will retrieve all the schedule of a given workshift.
-     * See: workshiftschedule workshift() method for the inverse
+     * See: workshiftschedule workshifts() method for the inverse
      *
      * @return mixed
      */
-    public function schedule()
+    public function workshift_schedules()
     {
         return $this->hasMany(WorkshiftSchedule::class);
     }

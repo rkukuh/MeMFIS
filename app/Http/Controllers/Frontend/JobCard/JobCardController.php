@@ -66,16 +66,28 @@ class JobCardController extends Controller
      */
     public function edit(JobCard $jobcard)
     {
-        //TODO Validasi User'skill with JobCard Skill
-        foreach($jobcard->helpers as $helper){
-            $helper->userID .= $helper->user->id;
-        }
-
-        if($jobcard->helpers->where('userID',Auth::id())->first() == null){
-            return redirect()->route('frontend.jobcard-engineer.edit',$jobcard->uuid);
-        }
-        else{
-            return redirect()->route('frontend.jobcard-mechanic.edit',$jobcard->uuid);
+        if($jobcard->jobcardable_type == "App\Models\TaskCard"){
+            //TODO Validasi User'skill with JobCard Skill
+            foreach($jobcard->helpers as $helper){
+                $helper->userID .= $helper->user->id;
+            }
+            if($jobcard->helpers->where('userID',Auth::id())->first() == null){
+                return redirect()->route('frontend.jobcard-engineer.edit',$jobcard->uuid);
+            }
+            else{
+                return redirect()->route('frontend.jobcard-mechanic.edit',$jobcard->uuid);
+            }
+        }else if($jobcard->jobcardable_type == "App\Models\EOInstruction"){
+            //TODO Validasi User'skill with JobCard Skill
+            foreach($jobcard->helpers as $helper){
+                $helper->userID .= $helper->user->id;
+            }
+            if($jobcard->helpers->where('userID',Auth::id())->first() == null){
+                return redirect()->route('frontend.jobcard-eo-engineer.edit',$jobcard->uuid);
+            }
+            else{
+                return redirect()->route('frontend.jobcard-eo-mechanic.edit',$jobcard->uuid);
+            }
         }
     }
 

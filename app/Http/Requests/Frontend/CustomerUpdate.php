@@ -32,8 +32,8 @@ class CustomerUpdate extends FormRequest
             'level' => 'required',
             'phone_array.*' => 'required',
             'phone_array' => 'array|min:1',
-            'email_array.*' => 'required',
-            'email_array' => 'array|min:1',
+            // 'email_array.*' => 'required',
+            // 'email_array' => 'array|min:1',
         ];
     }
 

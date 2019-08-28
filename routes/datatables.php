@@ -282,6 +282,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{project}/workpackage/{workPackage}/cpcp', 'ProjectWorkPackageTaskCardRoutineDatatables@cpcp')->name('cpcp.index');
                 Route::get('/{project}/workpackage/{workPackage}/ad-sb', 'ProjectWorkPackageTaskCardNonRoutineDatatables@ad_sb')->name('ad-sb.index');
                 Route::get('/{project}/workpackage/{workPackage}/cmr-awl', 'ProjectWorkPackageTaskCardNonRoutineDatatables@cmr_awl')->name('cmr-awl.index');
+                Route::get('/{project}/workpackage/{workPackage}/ea', 'ProjectWorkPackageTaskCardNonRoutineDatatables@ea')->name('ea.index');
+                Route::get('/{project}/workpackage/{workPackage}/eo', 'ProjectWorkPackageTaskCardNonRoutineDatatables@eo')->name('eo.index');
                 Route::get('/{project}/workpackage/{workPackage}/si', 'ProjectWorkPackageTaskCardNonRoutineDatatables@si')->name('si.index');
 
                 /** Items for summary */

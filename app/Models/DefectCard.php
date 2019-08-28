@@ -134,7 +134,7 @@ class DefectCard extends MemfisModel
      * One-to-Many: A defect card may have zero or many propose correction.
      *
      * This function will retrieve all propose corrections of a defect card.
-     * See: Type's defectcards() method for the inverse
+     * See: Type's propose_correction_defectcards() method for the inverse
      *
      * @return mixed
      */

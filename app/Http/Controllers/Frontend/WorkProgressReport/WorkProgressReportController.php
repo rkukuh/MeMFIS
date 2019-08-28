@@ -51,7 +51,7 @@ class WorkProgressReportController extends Controller
      */
     public function show(Project $project)
     {
-        $jobcards = [];
+        $jobcards = $statusses_routine = $statusses_non_routine = [];
         $tat = ProjectWorkpackage::where('project_id', $project->id)->sum('tat');
         $attention = json_decode($project->quotations[0]->attention);
         if(isset($project->data_htcrr)){
@@ -59,16 +59,107 @@ class WorkProgressReportController extends Controller
         }
         $quotation_ids = Quotation::where('project_id', $project->id)->pluck('id')->toArray();
 
-        $jobcards["overall"] = Jobcard::whereIn('quotation_id', $quotation_ids)->count();
-        $jobcards["overall_done"] = Jobcard::whereIn('quotation_id', $quotation_ids)->count();
-        $jobcards["routine"] = Jobcard::whereIn('quotation_id', $quotation_ids)->count();
-        $jobcards["routine_done"] = Jobcard::whereIn('quotation_id', $quotation_ids)->count();
-        $jobcards["non_routine"] = Jobcard::whereIn('quotation_id', $quotation_ids)->count();
-        $jobcards["non_routine_done"] = Jobcard::whereIn('quotation_id', $quotation_ids)->count();
+        $jobcard_all = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')
+        // ->whereHas('jobcardable.type', function ($taskcard) {
+        //     $taskcard->where('of', 'taskcard-type-routine');
+        // })
+        ->get();
 
+        $jobcards["overall"] = $jobcard_all->count(); 
+        $jobcards["routine"] = $jobcards["non_routine"] = 0; 
+
+        foreach($jobcard_all as $jobcard){
+            if($jobcard->jobcardable->type->of == 'taskcard-type-routine'){
+                $jobcards["routine"] += 1;
+            }else{
+                $jobcards["non_routine"] += 1;
+            }
+        }
+
+        $jobcards["overall_done"] = $jobcards["routine_done"] = $jobcards["non_routine_done"] = 0;
+        
+        foreach($jobcard_all as $key => $jobcard){
+            $statusses[$key] = $jobcard->progresses->last()->status_id;
+            if($jobcard->jobcardable->type->of == 'taskcard-type-routine'){
+                array_push($statusses_routine, $jobcard->progresses->last()->status_id);
+            }else{
+                array_push($statusses_non_routine, $jobcard->progresses->last()->status_id);
+            }
+        }
+        
+        $count_each = array_count_values($statusses);
+        $count_each_routine = array_count_values($statusses_routine);
+        $count_each_non_routine = array_count_values($statusses_non_routine);
+
+        foreach($count_each as $key => $value ){
+            $count_each[Status::find($key)->code] = $value;
+        }
+
+        if( isset($count_each["released"]) ){ $jobcards["overall_done"] += $count_each["released"]; } else{ $jobcards["overall_done"] += 0; }
+        if( isset($count_each["rii-released"]) ){ $jobcards["overall_done"] += $count_each["rii-released"]; } else{ $jobcards["overall_done"] += 0; }
+
+        foreach($count_each_routine as $key => $value ){
+            $count_each_routine[Status::find($key)->code] = $value;
+        }
+
+        if( isset($count_each_routine["released"]) ){ $jobcards["routine_done"] += $count_each_routine["released"]; } else{ $jobcards["routine_done"] += 0; }
+        if( isset($count_each_routine["rii-released"]) ){ $jobcards["routine_done"] += $count_each_routine["rii-released"]; } else{ $jobcards["routine_done"] += 0; }
+        
+        foreach($count_each_non_routine as $key => $value ){
+            $count_each_non_routine[Status::find($key)->code] = $value;
+        }
+
+        if( isset($count_each_non_routine["released"]) ){ $jobcards["non_routine_done"] += $count_each_non_routine["released"]; } else{ $jobcards["non_routine_done"] += 0; }
+        if( isset($count_each_non_routine["rii-released"]) ){ $jobcards["non_routine_done"] += $count_each_non_routine["rii-released"]; } else{ $jobcards["non_routine_done"] += 0; }
+            
+        //count all the routine
+
+        // $jobcard_routine = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')
+        // ->whereHas('jobcardable.type', function ($taskcard) {
+        //     $taskcard->where('of', 'taskcard-type-routine');
+        // })->get();
+
+        // $jobcards["routine_done"] = 0;
+
+        // foreach($jobcard_routine as $key => $jobcard){
+        //     $statusses[$key] = $jobcard->progresses->last()->status_id;
+        // }
+        
+        // $count_each = array_count_values($statusses);
+
+        // foreach($count_each as $key => $value ){
+        //     $count_each[Status::find($key)->code] = $value;
+        // }
+
+        // if( isset($count_each["released"]) ){ $jobcards["routine_done"] += $count_each["released"]; } else{ $jobcards["routine_done"] += 0; }
+        // if( isset($count_each["rii-released"]) ){ $jobcards["routine_done"] += $count_each["rii-released"]; } else{ $jobcards["routine_done"] += 0; }
+        
+        //count non routine
+
+        // $jobcard_non_routine = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')
+        // ->whereHas('jobcardable.type', function ($taskcard) {
+        //     $taskcard->where('of', 'taskcard-type-non-routine');
+        // })->get();
+        
+        // $jobcards["non_routine_done"] = 0;
+
+        // foreach($jobcard_non_routine as $key => $jobcard){
+        //     $statusses[$key] = $jobcard->progresses->last()->status_id;
+        // }
+
+        // $count_each = array_count_values($statusses);
+
+        // foreach($count_each as $key => $value ){
+        //     $count_each[Status::find($key)->code] = $value;
+        // }
+
+        // if( isset($count_each["released"]) ){ $jobcards["non_routine_done"] += $count_each["released"]; } else{ $jobcards["non_routine_done"] += 0; }
+        // if( isset($count_each["rii-released"]) ){ $jobcards["non_routine_done"] += $count_each["rii-released"]; } else{ $jobcards["non_routine_done"] += 0; }
+        
         return view('frontend.work-progress-report.show',[
             'tat' => $tat,
             'project' => $project,
+            'jobcards' => $jobcards,
             'attention' => $attention,
         ]);
     }
@@ -116,7 +207,7 @@ class WorkProgressReportController extends Controller
     public function overall(Project $project){
         $quotation_ids = Quotation::where('project_id', $project->id)->pluck('id')->toArray();
         $statusses = [];
-        $jobcards = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','taskcard')->get();
+        $jobcards = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')->get();
 
         foreach($jobcards as $key => $jobcard){
             $statusses[$key] = $jobcard->progresses->last()->status_id;
@@ -152,15 +243,20 @@ class WorkProgressReportController extends Controller
         $statusses = [];
         $quotation_ids = Quotation::where('project_id', $project->id)->pluck('id')->toArray();
 
-        $jobcards = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','taskcard')
-        ->whereHas('taskcard.type', function ($taskcard) {
-            $taskcard->where('of', 'taskcard-type-routine');
-        })->get();
+        $jobcards = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')
+        // ->whereHas('jobcardable.type', function ($taskcard) {
+        //     $taskcard->where('of', 'taskcard-type-routine');
+        // })
+        ->get();
 
         foreach($jobcards as $key => $jobcard){
-            $statusses[$key] = $jobcard->progresses->last()->status_id;
+            if($jobcard->jobcardable->type->of == 'taskcard-type-routine'){
+                array_push($statusses, $jobcard->progresses->last()->status_id);
+            }
         }
+
         $count_each = array_count_values($statusses);
+
         foreach($count_each as $key => $value ){
             $count_each[Status::find($key)->code] = $value;
         }
@@ -191,15 +287,20 @@ class WorkProgressReportController extends Controller
         $statusses = [];
         $quotation_ids = Quotation::where('project_id', $project->id)->pluck('id')->toArray();
 
-        $jobcards = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','taskcard')
-        ->whereHas('taskcard.type', function ($taskcard) {
-            $taskcard->where('of', 'taskcard-type-non-routine');
-        })->get();
+        $jobcards = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')
+        // ->whereHas('jobcardable.type', function ($taskcard) {
+        //     $taskcard->where('of', 'taskcard-type-non-routine');
+        // })
+        ->get();
 
         foreach($jobcards as $key => $jobcard){
-            $statusses[$key] = $jobcard->progresses->last()->status_id;
+            if($jobcard->jobcardable->type->of == 'taskcard-type-non-routine'){
+                array_push($statusses, $jobcard->progresses->last()->status_id);
+            }
         }
+
         $count_each = array_count_values($statusses);
+        
         foreach($count_each as $key => $value ){
             $count_each[Status::find($key)->code] = $value;
         }

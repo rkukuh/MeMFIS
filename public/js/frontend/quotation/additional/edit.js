@@ -419,6 +419,7 @@ let AdditionalTaskQtnEdit = {
         });
 
         $('.footer').on('click', '.update-quotation', function () {
+            calculate_total();
             let is_ppn =  $('#is_ppn').prop("checked");
             let ppn = 0;
             if(is_ppn){

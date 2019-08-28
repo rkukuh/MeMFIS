@@ -15,18 +15,18 @@ class CreateStationTaskcardTable extends Migration
     {
         Schema::create('station_taskcard', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('taskcard_id');
             $table->unsignedBigInteger('station_id');
+            $table->unsignedBigInteger('taskcard_id');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('station_id')
-                    ->references('id')->on('stations')
+            $table->foreign('taskcard_id')
+                    ->references('id')->on('taskcards')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('taskcard_id')
-                    ->references('id')->on('taskcards')
+            $table->foreign('station_id')
+                    ->references('id')->on('stations')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

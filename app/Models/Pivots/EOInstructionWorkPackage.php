@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Pivots;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -21,6 +21,32 @@ class EOInstructionWorkPackage extends Pivot
     public function eo_instruction()
     {
         return $this->belongsTo(EOInstruction::class);
+    }
+
+    /**
+     * One-to-Many: A WorkPackage's EO-Instruction may have one or many predecessor.
+     *
+     * This function will retrieve all the predecessor of a WorkPackage's EO-Instruction.
+     * See: EOInstructionWorkPackagePredecessor's header() method for the inverse
+     *
+     * @return mixed
+     */
+    public function predecessors()
+    {
+        return $this->hasMany(EOInstructionWorkPackagePredecessor::class, 'eo_instruction_workpackage_id');
+    }
+
+    /**
+     * One-to-Many: A WorkPackage's EO-Instruction may have one or many successor.
+     *
+     * This function will retrieve all the successor of a WorkPackage's EO-Instruction.
+     * See: EOInstructionWorkPackageSuccessor's header() method for the inverse
+     *
+     * @return mixed
+     */
+    public function successors()
+    {
+        return $this->hasMany(EOInstructionWorkPackageSuccessor::class, 'eo_instruction_workpackage_id');
     }
 
     /**
