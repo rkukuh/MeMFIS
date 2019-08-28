@@ -7,7 +7,9 @@ use Faker\Generator as Faker;
 $factory->define(Approval::class, function (Faker $faker) {
 
     return [
-        'approved_by' => Employee::get()->random()->id
+        'is_approved' => $faker->boolean,
+        'conducted_by' => Employee::get()->random()->id,
+        'note' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];
 
 });

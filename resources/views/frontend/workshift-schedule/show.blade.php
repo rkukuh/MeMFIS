@@ -98,7 +98,7 @@
 
                                                 <tr>
                                                     <td align="center" width="20%" style="backgroud:#e3e3e3;" class="pt-4">
-                                                        <span style="font-weight: bold;color:#6d85c2" valign="middle">Sunday</span>
+                                                    <span style="font-weight: bold;color:#6d85c2" valign="middle">{{ $s->days }}</span>
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')

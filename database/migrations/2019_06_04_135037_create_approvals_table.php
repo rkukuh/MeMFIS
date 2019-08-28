@@ -17,11 +17,13 @@ class CreateApprovalsTable extends Migration
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->morphs('approvable');
-            $table->unsignedBigInteger('approved_by');
+            $table->boolean('is_approved')->nullable();
+            $table->unsignedBigInteger('conducted_by');
+            $table->longText('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('approved_by')
+            $table->foreign('conducted_by')
                     ->references('id')->on('employees')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');

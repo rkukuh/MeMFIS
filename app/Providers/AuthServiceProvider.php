@@ -45,6 +45,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Station::class => Policies\StationPolicy::class,
         Models\Company::class => Policies\CompanyPolicy::class,
         Models\Manhour::class => Policies\ManhourPolicy::class,
+        Models\Holiday::class => Policies\HolidayPolicy::class,
         Models\Category::class => Policies\CategoryPolicy::class,
         Models\Currency::class => Policies\CurrencyPolicy::class,
         Models\Aircraft::class => Policies\AircraftPolicy::class,
@@ -57,6 +58,9 @@ class AuthServiceProvider extends ServiceProvider
         Models\Approval::class => Policies\ApprovalPolicy::class,
         Models\Progress::class => Policies\ProgressPolicy::class,
         Models\Position::class => Policies\PositionPolicy::class,
+        Models\JobTittle::class => Policies\JobTittlePolicy::class,
+        Models\LeaveType::class => Policies\LeaveTypePolicy::class,
+        Models\Workshift::class => Policies\WorkshiftPolicy::class,
         Models\Quotation::class => Policies\QuotationPolicy::class,
         Models\Threshold::class => Policies\ThresholdPolicy::class,
         Models\Department::class => Policies\DepartmentPolicy::class,
@@ -89,10 +93,8 @@ class AuthServiceProvider extends ServiceProvider
         Models\TaskCardWorkPackagePredecessor::class => Policies\TaskCardWorkPackagePredecessorPolicy::class,
         Models\ProjectWorkPackageEOInstruction::class => Policies\ProjectWorkPackageEOInstructionPolicy::class,
         Models\QuotationWorkPackageTaskCardItem::class => Policies\QuotationWorkPackageTaskCardItemPolicy::class,
-        Models\JobTittle::class => Policies\JobTittlePolicy::class,
-        Models\LeaveType::class => Policies\LeaveTypePolicy::class,
-        Models\Holiday::class => Policies\HolidayPolicy::class,
-        Models\Workshift::class => Policies\WorkshiftPolicy::class,
+        Models\EOInstructionWorkPackageSuccessor::class => Policies\EOInstructionWorkPackageSuccessorPolicy::class,
+        Models\EOInstructionWorkPackagePredecessor::class => Policies\EOInstructionWorkPackagePredecessorPolicy::class,
     ];
 
     /**

@@ -38,7 +38,6 @@ $factory->define(JobCard::class, function (Faker $faker) {
         'is_rii' => $faker->boolean,
         'is_mandatory' => $faker->boolean,
         'station_id' => $faker->randomElement([null, Station::get()->random()->id]),
-        'entered_in' => Type::ofJobCardLogBook()->get()->random()->id,
         'additionals' => function () use ($faker) {
             $additionals = null;
 
@@ -80,6 +79,14 @@ $factory->afterCreating(JobCard::class, function ($jobcard, $faker) {
 
     for ($i = 0; $i < rand(1, 3); $i++) {
         $jobcard->inspections()->save(factory(Inspection::class)->make());
+    }
+
+    // LogBook
+
+    for ($i = 0; $i < rand(1, 5); $i++) {
+        $logbook = Type::ofJobCardLogBook()->get()->random();
+
+        $jobcard->logbooks()->attach($logbook);
     }
 
     // Progress

@@ -111,6 +111,12 @@ Route::name('admin.')->group(function () {
         Route::resource('taskcard-workpackage-successor', 'TaskCardWorkPackageSuccessorController');
         Route::resource('taskcard-workpackage-predecessor', 'TaskCardWorkPackagePredecessorController');
 
+        /** WORKPACKAGE's EO-INSTRUCTIONs */
+
+        Route::resource('eo-instruction-wp', 'EOInstructionWorkPackageController');
+        Route::resource('eo-instruction-wp-successor', 'EOInstructionWorkPackageSuccessorController');
+        Route::resource('eo-instruction-wp-predecessor', 'EOInstructionWorkPackagePredecessorController');
+
         /** QUOTATION's WORKPACKAGEs */
 
         Route::resource('quotation-workpackage', 'QuotationWorkPackageController');
@@ -127,10 +133,6 @@ Route::name('admin.')->group(function () {
         /** QUOTATION's DEFECTCARDs */
 
         Route::resource('qtn-defectcard-item', 'QuotationDefectCardItemController');
-
-        /** WORKPACKAGE's EO-INSTRUCTIONs */
-
-        Route::resource('eo-instruction-wp', 'EOInstructionWorkPackageController');
 
     });
 
