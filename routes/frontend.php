@@ -91,6 +91,12 @@ Route::name('frontend.')->group(function () {
         Route::resource('eo-instruction-wp-successor', 'EOInstructionWorkPackageSuccessorController');
         Route::resource('eo-instruction-wp-predecessor', 'EOInstructionWorkPackagePredecessorController');
 
+
+        /** IMPORT FINGERPRINT MACHINE */
+
+        Route::view('/import-fingerprint', 'frontend.import-fingerprint.index')->name('import-fingerprint.index');
+        Route::view('/import-fingerprint/create', 'frontend.import-fingerprint.create')->name('import-fingerprint.create');
+
     });
 
 });
