@@ -348,7 +348,7 @@
                         }
 
                     @endphp
-                    @component('frontend.common.input.text')
+                    @component('frontend.common.input.email')
                         @slot('value',$email_1)
                         @slot('id', 'email_1')
                         @slot('name', 'email_1')
@@ -360,7 +360,7 @@
                         Email 2
                     </label>
 
-                    @component('frontend.common.input.text')
+                    @component('frontend.common.input.email')
                         @slot('value', $email_2)
                         @slot('id', 'email_2')
                         @slot('name', 'email_2')

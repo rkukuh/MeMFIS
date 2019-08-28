@@ -34,7 +34,7 @@ Route::name('frontend.')->group(function () {
                     Route::resource('/{employee}/education', 'EmployeeEducationController');
                     Route::resource('/{employee}/travel-request', 'EmployeeTravelRequestController');
                     Route::resource('/{employee}/general-license', 'EmployeeGeneralLicenseController');
-
+                    Route::resource('/{employee}/benefit-salary', 'EmployeeBenefitController');
                 });
 
             });

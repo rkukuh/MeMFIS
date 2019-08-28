@@ -42,18 +42,16 @@
                                                             <td align="center" width="45%"><b>Benefit/Allowance Name</b></td>
                                                             <td align="center" width="55%"><b>Amount</b></td>
                                                         </tr>
+
+                                                        @for ($l = 0; $l < count($current['benefit']); $l++)
+
                                                         <tr>
-                                                            <td valign="top"><b>Benefit Name</b></td>
-                                                            <td valign="top" align="center">generate</td>
+                                                        <td valign="top"><b>{{ $current['benefit_name'][$l]['name'] }}</b></td>
+                                                        <td valign="top" align="center">{{ $current['benefit'][$l]['amount'] }}</td>
                                                         </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Benefit Name</b></td>
-                                                            <td valign="top" align="center">generate</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Benefit Name</b></td>
-                                                            <td valign="top" align="center">generate</td>
-                                                        </tr>
+
+                                                        @endfor
+
                                                     </table>
                                                 </fieldset>
                                                 <fieldset class="border p-2 mt-2">
@@ -64,13 +62,16 @@
                                                             <td align="center" width="55%"><b>Holiday Overtime Allowance</b></td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top" align="center">generate</td>
-                                                            <td valign="top" align="center">generate</td>
+                                                        <td valign="top" align="center">{{ $current['provisions'][0]['maximum_overtime'] }}</td>
+                                                        <td valign="top" align="center">{{ $current['provisions'][0]['holiday_overtime'] }}</td>
                                                         </tr>
                                                     </table>
                                                 </fieldset>
                                                 <fieldset class="border p-2 mt-2">
                                                     <legend class="w-auto"><b>BPJS</b></legend>
+
+                                                    @for ($i = 0; $i < count($current['bpjs']); $i++)
+                                                        
                                                     <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
                                                         <tr>
                                                             <td align="center" width="20%"></td>
@@ -78,11 +79,14 @@
                                                             <td align="center" width="40%"><b>Paid By Company</b></td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top"><b>BPJS Name</b></td>
-                                                            <td valign="top" align="center">Generate</td>
-                                                            <td valign="top" align="center">Generate</td>
+                                                        <td valign="top"><b>{{ $current['bpjs_name'][$i]['name'] }}</b></td>
+                                                            <td valign="top" align="center">{{ $current['bpjs'][$i]['employee_paid'] }}</td>
+                                                            <td valign="top" align="center">{{ $current['bpjs'][$i]['company_paid'] }}</td>
                                                         </tr>
                                                     </table>
+
+                                                    @endfor
+
                                                 </fieldset>
                                                 <fieldset class="border p-2 mt-2">
                                                     <legend class="w-auto"><b>PPH 21</b></legend>
@@ -92,11 +96,22 @@
                                                             <td align="center" width="55%"><b>Paid by Employees</b></td>
                                                         </tr>
                                                         <tr>
+                                                            @php
+                                                                $employee = null;
+                                                                $company = null;
+
+                                                                if($current['provisions'][0]['pph'] == 'employee'){
+                                                                    $employee = 'checked';
+                                                                }else if($current['provisions'][0]['pph'] == 'company'){
+                                                                    $company = 'checked';
+                                                                }
+                                                            @endphp
                                                             <td valign="top" align="center">
                                                                 @component('frontend.common.input.checkbox')
                                                                     @slot('id', 'benefit')
                                                                     @slot('name', 'benefit')
                                                                     @slot('size', '')
+                                                                    @slot('checked', $employee)
                                                                     @slot('style','width:20px;')
                                                                     @slot('disabled','disabled')
                                                                 @endcomponent
@@ -105,6 +120,7 @@
                                                                 @component('frontend.common.input.checkbox')
                                                                     @slot('id', 'benefit')
                                                                     @slot('name', 'benefit')
+                                                                    @slot('checked', $company)
                                                                     @slot('size', '')
                                                                     @slot('style','width:20px;')
                                                                     @slot('disabled','disabled')
@@ -122,9 +138,9 @@
                                                             <td align="center" width="34%"><b>Absences Punishment (per Day)</b></td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top" align="center">generate</td>
-                                                            <td valign="top" align="center">generate</td>
-                                                            <td valign="top" align="center">generate</td>
+                                                        <td valign="top" align="center">{{ $current['provisions'][0]['late_tolerance'] }}</td>
+                                                        <td valign="top" align="center">{{ $current['provisions'][0]['late_punishment'] }}</td>
+                                                        <td valign="top" align="center">{{ $current['provisions'][0]['absence_punishment'] }}</td>
                                                         </tr>
                                                     </table>
                                                 </fieldset>
@@ -152,34 +168,41 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    @for ($i = 0; $i < count($employee_benefit_history); $i++)
+
                                     <div class="m-portlet m-portlet--mobile pb-3">
                                         <div class="m-portlet__body">
                                             <div class="my-4">
                                                 <div class="d-flex justify-content-end">
                                                     <h3 class="m-portlet__head-text">
-                                                        10 Juli - 31 Juli, Approved By
+                                                            @php
+                                                            $created_time = $employee_benefit_history[$i]['created_at'];
+                                                            $formatCreatedTime = strtotime($created_time);
+    
+                                                            $updated_time = $employee_benefit_history[$i]['updated_at'];
+                                                            $formatUpdatedTime = strtotime($updated_time);
+    
+                                                            echo date("d F Y", $formatCreatedTime).' to '.date("d F Y", $formatUpdatedTime).', Approved By';
+                                                        @endphp
                                                     </h3>
                                                 </div>
                                                 <fieldset class="border p-2">
                                                     <legend class="w-auto"><b>Allowance</b></legend>
+
                                                     <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
                                                         <tr>
                                                             <td align="center" width="45%"><b>Benefit/Allowance Name</b></td>
                                                             <td align="center" width="55%"><b>Amount</b></td>
                                                         </tr>
+                                                        @for ($x = 0; $x < count($employee_benefit_history[$i]['benefit']); $x++)
                                                         <tr>
-                                                            <td valign="top"><b>Benefit Name</b></td>
-                                                            <td valign="top" align="center">generate</td>
+                                                            <td valign="top"><b>{{ $employee_benefit_history[$i]['benefit_name'][$x]['name'] }}</b></td>
+                                                            <td valign="top" align="center">{{ $employee_benefit_history[$i]['bpjs'][$x]->amount }}</td>
                                                         </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Benefit Name</b></td>
-                                                            <td valign="top" align="center">generate</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td valign="top"><b>Benefit Name</b></td>
-                                                            <td valign="top" align="center">generate</td>
-                                                        </tr>
+                                                        @endfor
                                                     </table>
+
                                                 </fieldset>
                                                 <fieldset class="border p-2 mt-2">
                                                     <legend class="w-auto"><b>Others</b></legend>
@@ -189,13 +212,16 @@
                                                             <td align="center" width="55%"><b>Holiday Overtime Allowance</b></td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top" align="center">generate</td>
-                                                            <td valign="top" align="center">generate</td>
+                                                        <td valign="top" align="center">{{ $employee_benefit_history[$i]['maximum_overtime'] }}</td>
+                                                        <td valign="top" align="center">{{ $employee_benefit_history[$i]['holiday_overtime'] }}</td>
                                                         </tr>
                                                     </table>
                                                 </fieldset>
                                                 <fieldset class="border p-2 mt-2">
                                                     <legend class="w-auto"><b>BPJS</b></legend>
+
+                                                    @for ($x = 0; $x < count($employee_benefit_history[$i]['bpjs']); $x++)
+                                                        
                                                     <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
                                                         <tr>
                                                             <td align="center" width="20%"></td>
@@ -203,16 +229,29 @@
                                                             <td align="center" width="40%"><b>Paid By Company</b></td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top"><b>BPJS Name</b></td>
-                                                            <td valign="top" align="center">Generate</td>
-                                                            <td valign="top" align="center">Generate</td>
+                                                        <td valign="top"><b>{{ $employee_benefit_history[$i]['bpjs_name'][$x]['name'] }}</b></td>
+                                                        <td valign="top" align="center">{{ $employee_benefit_history[$i]['bpjs'][$x]->employee_paid }}</td>
+                                                        <td valign="top" align="center">{{ $employee_benefit_history[$i]['bpjs'][$x]->company_paid }}</td>
                                                         </tr>
                                                     </table>
+
+                                                    @endfor
+
                                                 </fieldset>
                                                 <fieldset class="border p-2 mt-2">
                                                     <legend class="w-auto"><b>PPH 21</b></legend>
                                                     <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
                                                         <tr>
+                                                                @php
+                                                                $employee = null;
+                                                                $company = null;
+
+                                                                if($current['provisions'][0]['pph'] == 'employee'){
+                                                                    $employee = 'checked';
+                                                                }else if($current['provisions'][0]['pph'] == 'company'){
+                                                                    $company = 'checked';
+                                                                }
+                                                                @endphp
                                                             <td align="center" width="45%"><b>Paid by Employees</b></td>
                                                             <td align="center" width="55%"><b>Paid by Employees</b></td>
                                                         </tr>
@@ -222,6 +261,7 @@
                                                                     @slot('id', 'benefit')
                                                                     @slot('name', 'benefit')
                                                                     @slot('size', '')
+                                                                    @slot('checked', $employee)
                                                                     @slot('style','width:20px;')
                                                                     @slot('disabled','disabled')
                                                                 @endcomponent
@@ -231,6 +271,7 @@
                                                                     @slot('id', 'benefit')
                                                                     @slot('name', 'benefit')
                                                                     @slot('size', '')
+                                                                    @slot('checked', $company)
                                                                     @slot('style','width:20px;')
                                                                     @slot('disabled','disabled')
                                                                 @endcomponent
@@ -247,15 +288,18 @@
                                                             <td align="center" width="34%"><b>Absences Punishment (per Day)</b></td>
                                                         </tr>
                                                         <tr>
-                                                            <td valign="top" align="center">generate</td>
-                                                            <td valign="top" align="center">generate</td>
-                                                            <td valign="top" align="center">generate</td>
+                                                        <td valign="top" align="center">{{ $employee_benefit_history[$i]['late_tolerance'] }}</td>
+                                                        <td valign="top" align="center">{{ $employee_benefit_history[$i]['late_punishment'] }}</td>
+                                                        <td valign="top" align="center">{{ $employee_benefit_history[$i]['absence_punishment'] }}</td>
                                                         </tr>
                                                     </table>
                                                 </fieldset>
                                             </div>
                                         </div>
                                     </div>
+
+                                    @endfor
+
                                 </div>
                             </div>
                         </div>

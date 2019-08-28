@@ -212,7 +212,7 @@ class Employee extends MemfisModel
      */
     public function employee_benefit()
     {
-        return $this->belongsTo(EmployeeBenefit::class);
+        return $this->hasMany(EmployeeBenefit::class);
     }
 
     /**
@@ -225,7 +225,7 @@ class Employee extends MemfisModel
      */
     public function employee_bpjs()
     {
-        return $this->belongsTo(EmployeeBPJS::class);
+        return $this->hasMany(EmployeeBPJS::class);
     }
 
     /**
@@ -238,7 +238,7 @@ class Employee extends MemfisModel
      */
     public function employee_provisions()
     {
-        return $this->belongsTo(EmployeeProvisions::class);
+        return $this->hasMany(EmployeeProvisions::class);
     }
 
     /**
