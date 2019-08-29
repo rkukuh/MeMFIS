@@ -97,6 +97,28 @@ Route::name('frontend.')->group(function () {
         Route::view('/import-fingerprint', 'frontend.import-fingerprint.index')->name('import-fingerprint.index');
         Route::view('/import-fingerprint/create', 'frontend.import-fingerprint.create')->name('import-fingerprint.create');
 
+        /** ATTENDANCE */
+
+        Route::view('/attendance', 'frontend.attendance.index')->name('attendance.index');
+
+        Route::view('/attendance/overtime/create', 'frontend.attendance.overtime.create')->name('attendance.overtime.create');
+        Route::view('/attendance/overtime/approve', 'frontend.attendance.overtime.approve')->name('attendance.overtime.approve');
+
+        Route::view('/attendance/propose-leave/create', 'frontend.attendance.propose-leave.create')->name('attendance.propose-leave.create');
+        Route::view('/attendance/propose-leave/approve', 'frontend.attendance.propose-leave.approve')->name('attendance.propose-leave.approve');
+
+        Route::view('/attendance/attendance-correction/create', 'frontend.attendance.propose-leave.create')->name('attendance.propose-leave.create');
+
+        /** ATTENDANCE CORRECTION */
+
+        Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
+        Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
+        Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
+
+        /** OVERTIME */
+
+        /** PROPOSE LEAVE */
+
     });
 
 });
