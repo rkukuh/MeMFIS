@@ -27,32 +27,28 @@ let Workshift = {
             if($('#'+this.id+'_in').val() == ''){
                 days_in.push(0)
             }else{
-                days_in.push(moment($('#'+this.id+'_in').val()  , 'h:mm A').format('HH:mm:ss'))
+                days_in.push($('#'+this.id+'_in').val())
             }
             
             if($('#'+this.id+'_break_in').val() == ''){
                 break_in.push(0)
             }else{
-                break_in.push(moment($('#'+this.id+'_break_in').val()  , 'h:mm A').format('HH:mm:ss'))
+                break_in.push($('#'+this.id+'_break_in').val())
             }
 
             if($('#'+this.id+'_break_out').val() == ''){
                 break_out.push(0)
             }else{
-                break_out.push(moment($('#'+this.id+'_break_out').val()  , 'h:mm A').format('HH:mm:ss'))
+                break_out.push($('#'+this.id+'_break_out').val())
             }
 
             if($('#'+this.id+'_out').val() == ''){
                 days_out.push(0)
             }else{
-                days_out.push(moment($('#'+this.id+'_out').val()  , 'h:mm A').format('HH:mm:ss'))
+                days_out.push($('#'+this.id+'_out').val())
             }
         });
 
-        console.log(days_in)
-        console.log(break_in)
-        console.log(break_out)
-        console.log(days_out)
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

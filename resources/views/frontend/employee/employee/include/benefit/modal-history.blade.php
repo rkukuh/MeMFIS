@@ -62,8 +62,10 @@
                                                             <td align="center" width="55%"><b>Holiday Overtime Allowance</b></td>
                                                         </tr>
                                                         <tr>
-                                                        <td valign="top" align="center">{{ $current['provisions'][0]['maximum_overtime'] }}</td>
-                                                        <td valign="top" align="center">{{ $current['provisions'][0]['holiday_overtime'] }}</td>
+                                                            @if (isset($current['provisions'][0]))
+                                                            <td valign="top" align="center">{{ $current['provisions'][0]['maximum_overtime'] }}</td>
+                                                            <td valign="top" align="center">{{ $current['provisions'][0]['holiday_overtime'] }}</td>            
+                                                            @endif
                                                         </tr>
                                                     </table>
                                                 </fieldset>
@@ -100,10 +102,12 @@
                                                                 $employee = null;
                                                                 $company = null;
 
+                                                                if(isset($current['provisions'][0]['pph'])){
                                                                 if($current['provisions'][0]['pph'] == 'employee'){
                                                                     $employee = 'checked';
                                                                 }else if($current['provisions'][0]['pph'] == 'company'){
                                                                     $company = 'checked';
+                                                                }
                                                                 }
                                                             @endphp
                                                             <td valign="top" align="center">
@@ -138,9 +142,11 @@
                                                             <td align="center" width="34%"><b>Absences Punishment (per Day)</b></td>
                                                         </tr>
                                                         <tr>
+                                                        @if (isset($current['provisions'][0]))
                                                         <td valign="top" align="center">{{ $current['provisions'][0]['late_tolerance'] }}</td>
                                                         <td valign="top" align="center">{{ $current['provisions'][0]['late_punishment'] }}</td>
                                                         <td valign="top" align="center">{{ $current['provisions'][0]['absence_punishment'] }}</td>
+                                                        @endif
                                                         </tr>
                                                     </table>
                                                 </fieldset>
