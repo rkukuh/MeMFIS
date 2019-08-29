@@ -391,7 +391,7 @@ class EmployeeController extends Controller
             $type = Type::find($e->type_id);
             $emails[$type->code] = $e->address;
         }
-
+        
         foreach($data_addreses as $ad){
             $type = Type::find($ad->type_id);
             $addreses[$type->code] = $ad->address;
@@ -668,6 +668,7 @@ class EmployeeController extends Controller
             'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->get()
         ];
         
+        
         // dd($bpjs_name);
         // dd($benefit_name);
         // dd(count($employee_bpjs_history_data[0]));
@@ -680,6 +681,8 @@ class EmployeeController extends Controller
         // dd($created_at);
         // dd($employee_provisions_history_data[0][0]->created_at);
         // dd($employee_bpjs_history_data);
+        // dd($emails);
+        // dd($data_phones);
         return view('frontend.employee.employee.edit',[
         'employee' => $employee,
         'age' => $age,
