@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\WorkProgressReport;
 
+use Carbon\Carbon;
 use App\Models\Status;
 use App\Models\Project;
 use App\Models\JobCard;
@@ -14,6 +15,7 @@ class WorkProgressReportController extends Controller
 {
     public function __construct(){
         $this->jobcard = [];
+        $this->statuses = Status::ofJobCard()->get();
     }
     /**
      * Display a listing of the resource.
@@ -54,7 +56,7 @@ class WorkProgressReportController extends Controller
      */
     public function show(Project $project)
     {
-        $jobcards = $statusses_routine = $statusses_non_routine =  $basic =  $sip =  $cpcp =  $additional =  $adsb =  $cmr_awl =  $si =  $ea =  $eo =  $ht_crr = [];
+        $jobcards = $statusses_routine = $statusses_non_routine =  $basic =  $sip =  $cpcp =  $additional =  $adsb =  $cmr_awl =  $si =  $ea =  $eo =  $ht_crr = $manhours = [];
 
         $tat = ProjectWorkpackage::where('project_id', $project->id)->sum('tat');
         $attention = json_decode($project->quotations[0]->attention);
@@ -73,12 +75,21 @@ class WorkProgressReportController extends Controller
         $jobcards["routine"] = $jobcards["non_routine"] = 0; 
 
         foreach($jobcard_all as $jobcard){
+            $this->actual_manhours($jobcard);
+            $jobcard->tc_type = $jobcard->jobcardable->type->name;
+            $jobcard->estimation_manhour = $jobcard->jobcardable->estimation_manhour;
             if($jobcard->jobcardable->type->of == 'taskcard-type-routine'){
                 $jobcards["routine"] += 1;
             }else{
                 $jobcards["non_routine"] += 1;
             }
+            
         }
+
+        $manhours["Basic"]["actual"] = $jobcard_all->where('tc_type', 'Basic')->sum('actual_manhours');
+        $manhours["Basic"]["total"] = $jobcard_all->where('tc_type', 'Basic')->sum('estimation_manhour');
+
+        dd($manhours);
 
         $jobcards["overall_done"] = $jobcards["routine_done"] = $jobcards["non_routine_done"] = 0;
         
@@ -327,5 +338,49 @@ class WorkProgressReportController extends Controller
         }else{
             return;
         }
+    }
+
+    public function actual_manhours($jobcard){
+        $manhours = 0;
+        foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            $date1 = null;
+            foreach($values as $value){
+                if($this->statuses->where('id',$value->status_id)->first()->code <> "open" or $this->statuses->where('id',$value->status_id)->first()->code <> "released" or $this->statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
+                    if($jobcard->helpers->where('userID',$key)->first() == null){
+                        if($date1 <> null){
+                            $t1 = Carbon::parse($date1);
+                            $t2 = Carbon::parse($value->created_at);
+                            $diff = $t1->diffInSeconds($t2);
+                            $manhours = $manhours + $diff;
+                        }
+                        $date1 = $value->created_at;
+                    }
+                }
+
+            }
+        }
+        $manhours = $manhours/3600;
+        $manhours_break = 0;
+        foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            for($i=0; $i<sizeOf($values->toArray()); $i++){
+                if($this->statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
+                    if($jobcard->helpers->where('userID',$key)->first() == null){
+                        if($date1 <> null){
+                            if($i+1 < sizeOf($values->toArray())){
+                                $t2 = Carbon::parse($values[$i]->created_at);
+                                $t3 = Carbon::parse($values[$i+1]->created_at);
+                                $diff = $t2->diffInSeconds($t3);
+                                $manhours_break = $manhours_break + $diff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        $manhours_break = $manhours_break/3600;
+        $actual_manhours =number_format($manhours-$manhours_break, 2);
+        $jobcard->actual_manhours = $actual_manhours;
+        return $actual_manhours;
     }
 }
