@@ -82,6 +82,7 @@
                     @component('frontend.common.input.text')
                         @slot('id', 'duration')
                         @slot('name', 'maximum_overtime')
+                        @slot('id_error', 'maximum_overtime')
                     @endcomponent
 
                     <p class="mt-2 font-weight-bold">Seconds: <span id="duration-label"></span></p>
@@ -94,6 +95,7 @@
                     @component('frontend.common.input.text')
                         @slot('id', 'duration_1')
                         @slot('name', 'minimum_overtime')
+                        @slot('id_error', 'minimum_overtime')
                     @endcomponent
 
                     <p class="mt-2 font-weight-bold">Seconds: <span id="duration-label-2"></span></p>
@@ -278,9 +280,9 @@
 
                     @component('frontend.common.input.number')
                         @slot('text', 'Absences Punishment(per Day)')
-                        @slot('id', 'absences_punishment')
-                        @slot('name', 'absences_punishment')
-                        @slot('id_error', 'absences_punishment')
+                        @slot('id', 'absence_punishment')
+                        @slot('name', 'absence_punishment')
+                        @slot('id_error', 'absence_punishment')
                         @slot('input_append','IDR')
                     @endcomponent
                 </div>

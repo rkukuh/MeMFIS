@@ -204,7 +204,7 @@
                                                         @for ($x = 0; $x < count($employee_benefit_history[$i]['benefit']); $x++)
                                                         <tr>
                                                             <td valign="top"><b>{{ $employee_benefit_history[$i]['benefit_name'][$x]['name'] }}</b></td>
-                                                            <td valign="top" align="center">{{ $employee_benefit_history[$i]['bpjs'][$x]->amount }}</td>
+                                                            <td valign="top" align="center">{{ $employee_benefit_history[$i]['benefit'][$x]->amount }}</td>
                                                         </tr>
                                                         @endfor
                                                     </table>
@@ -218,8 +218,10 @@
                                                             <td align="center" width="55%"><b>Holiday Overtime Allowance</b></td>
                                                         </tr>
                                                         <tr>
+                                                        @if (isset($employee_benefit_history[$i]))
                                                         <td valign="top" align="center">{{ $employee_benefit_history[$i]['maximum_overtime'] }}</td>
                                                         <td valign="top" align="center">{{ $employee_benefit_history[$i]['holiday_overtime'] }}</td>
+                                                        @endif
                                                         </tr>
                                                     </table>
                                                 </fieldset>
@@ -235,9 +237,11 @@
                                                             <td align="center" width="40%"><b>Paid By Company</b></td>
                                                         </tr>
                                                         <tr>
-                                                        <td valign="top"><b>{{ $employee_benefit_history[$i]['bpjs_name'][$x]['name'] }}</b></td>
-                                                        <td valign="top" align="center">{{ $employee_benefit_history[$i]['bpjs'][$x]->employee_paid }}</td>
-                                                        <td valign="top" align="center">{{ $employee_benefit_history[$i]['bpjs'][$x]->company_paid }}</td>
+                                                            @if (isset($employee_benefit_history[$i]['bpjs_name'][$x]))
+                                                            <td valign="top"><b>{{ $employee_benefit_history[$i]['bpjs_name'][$x]['name'] }}</b></td>
+                                                            <td valign="top" align="center">{{ $employee_benefit_history[$i]['bpjs'][$x]->employee_paid }}</td>
+                                                            <td valign="top" align="center">{{ $employee_benefit_history[$i]['bpjs'][$x]->company_paid }}</td>
+                                                            @endif
                                                         </tr>
                                                     </table>
 
@@ -252,11 +256,13 @@
                                                                 $employee = null;
                                                                 $company = null;
 
-                                                                if($current['provisions'][0]['pph'] == 'employee'){
+                                                                if(isset( $employee_benefit_history[$i]['pph'])){
+                                                                if($employee_benefit_history[$i]['pph'] == 'employee'){
                                                                     $employee = 'checked';
-                                                                }else if($current['provisions'][0]['pph'] == 'company'){
+                                                                }else if($employee_benefit_history[$i]['pph'] == 'company'){
                                                                     $company = 'checked';
                                                                 }
+                                                            }
                                                                 @endphp
                                                             <td align="center" width="45%"><b>Paid by Employees</b></td>
                                                             <td align="center" width="55%"><b>Paid by Employees</b></td>
@@ -294,9 +300,11 @@
                                                             <td align="center" width="34%"><b>Absences Punishment (per Day)</b></td>
                                                         </tr>
                                                         <tr>
-                                                        <td valign="top" align="center">{{ $employee_benefit_history[$i]['late_tolerance'] }}</td>
-                                                        <td valign="top" align="center">{{ $employee_benefit_history[$i]['late_punishment'] }}</td>
-                                                        <td valign="top" align="center">{{ $employee_benefit_history[$i]['absence_punishment'] }}</td>
+                                                            @if (isset($employee_benefit_history[$i]))
+                                                            <td valign="top" align="center">{{ $employee_benefit_history[$i]['late_tolerance'] }}</td>
+                                                            <td valign="top" align="center">{{ $employee_benefit_history[$i]['late_punishment'] }}</td>
+                                                            <td valign="top" align="center">{{ $employee_benefit_history[$i]['absence_punishment'] }}</td>
+                                                            @endif
                                                         </tr>
                                                     </table>
                                                 </fieldset>
