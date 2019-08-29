@@ -117,8 +117,17 @@ Route::name('frontend.')->group(function () {
 
         /** OVERTIME */
 
+        Route::view('/overtime', 'frontend.overtime.index')->name('overtime.index');
+        Route::view('/overtime/create', 'frontend.overtime.create')->name('overtime.create');
+        Route::view('/overtime/edit', 'frontend.overtime.edit')->name('overtime.edit');
+        Route::view('/overtime/approve', 'frontend.overtime.approve')->name('overtime.approve');
+
         /** PROPOSE LEAVE */
 
+        Route::view('/propose-leave', 'frontend.propose-leave.index')->name('propose-leave.index');
+        Route::view('/propose-leave/create', 'frontend.propose-leave.create')->name('propose-leave.create');
+        Route::view('/propose-leave/edit', 'frontend.propose-leave.edit')->name('propose-leave.edit');
+        Route::view('/propose-leave/approve', 'frontend.propose-leave.approve')->name('propose-leave.approve');
     });
 
 });
