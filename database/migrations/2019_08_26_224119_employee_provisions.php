@@ -23,7 +23,7 @@ class EmployeeProvisions extends Migration
             $table->bigInteger('late_tolerance')->nullable();
             $table->bigInteger('late_punishment')->nullable();
             $table->bigInteger('absence_punishment')->nullable();
-
+            $table->dateTime('approved_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -52,7 +52,6 @@ let Employee_edit_basic = {
             formData = new FormData()
             if($("#id_card_photo")[0].files[0]){
              formData.append('document',$("#id_card_photo")[0].files[0])
-             id_card_file = formData.get('document')
             }
 
             $.ajax({
@@ -89,7 +88,6 @@ let Employee_edit_basic = {
                  job_position: job_position,
                  employee_status: employee_status,
                  department: department,
-                 document: id_card_file,
                  indirect_supervisor: indirect_supervisor,
                  supervisor: supervisor
              },
@@ -177,11 +175,39 @@ let Employee_edit_basic = {
                             });
                         } else {
     
-                            toastr.success('Data has been saved.', 'Sukses', {
-                                timeOut: 5000
-                            });
-    
-                            location.reload();
+        
+                            if($("#id_card_photo")[0].files[0]){
+                                formData = new FormData()
+                                formData.append('document',$("#id_card_photo")[0].files[0])
+                                let uuid = $('input[name=employee_uuid]').val()
+                                $.ajax({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    },
+                                    url: '/employee/'+uuid+'/update-id-card', 
+                                    cache: false,
+                                    contentType: false,
+                                    processData: false,
+                                    data: formData,
+                                    type: 'POST',
+                                    success: function (response) {
+                                        toastr.success('Data has been saved.', 'Sukses', {
+                                            timeOut: 5000
+                                        });
+                
+                                        location.reload();
+                                    },
+                                    error: function (response) {
+                                       
+                                    }
+                                });
+                            }else{
+                                toastr.success('Data has been saved.', 'Sukses', {
+                                    timeOut: 5000
+                                });
+        
+                                location.reload();
+                            }
     
                         }
                     }

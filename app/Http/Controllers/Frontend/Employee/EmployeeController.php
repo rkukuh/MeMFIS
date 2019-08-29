@@ -14,6 +14,7 @@ use App\Models\Type;
 use App\Models\BPJS;
 use App\Models\Benefit;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use DB;
 
 class EmployeeController extends Controller
@@ -104,6 +105,16 @@ class EmployeeController extends Controller
             ]);
         }
 
+
+        if($request->home_phone){
+        $employee->phones()->create([
+            'number' => $request->home_phone,
+            'type_id' => Type::where('of','phone')->where('code','home')->first()->id,
+            'created_at' => $time,
+            'updated_at' => null
+        ]);
+        }
+
         $employee->phones()->create([
             'number' => $request->mobile_phone,
             'type_id' => Type::where('of','phone')->where('code','mobile')->first()->id,
@@ -153,15 +164,11 @@ class EmployeeController extends Controller
                 'updated_at' => null
             ]);
         }
-
-        // if($request->document){
-            // $employee->addMediaFromRequest()->toMediaCollection('ktp');
-            // $employee->media()->create([
-            //     'address' => $request->email_2,
-            //     'type_id' => Type::where('of','email')->where('code','email_2')->first()->id
-            // ]);
-            // }
-
+        
+        if($request->document){
+            $employee->addMedia($request->document)->toMediaCollection('id_card');
+        }
+        
         // TODO: Return error message as JSON
         return response()->json($employee);
     }
@@ -182,15 +189,17 @@ class EmployeeController extends Controller
         $data_emails = $employee->emails()->whereNull('emails.updated_at')->get();
         $data_addreses = $employee->addresses()->whereNull('addresses.updated_at')->get();
         $data_phones = $employee->phones()->whereNull('phones.updated_at')->get();
+        $data_file = $employee->getMedia('id_card');
 
         $documents[] = null; 
         $emails[] = null;
         $addreses[] = null;
         $phones[] = null;
+        $file[] = null;
 
         foreach($data_documents as $dd){
             $type = Type::find($dd->type_id);
-            $documents[$type->code] = $dd->address;
+            $documents[$type->code] = $dd->number;
         }
 
         foreach($data_emails as $e){
@@ -206,6 +215,10 @@ class EmployeeController extends Controller
         foreach($data_phones as $p){
             $type = Type::find($p->type_id);
             $phones[$type->code] = $p->number;
+        }
+
+        foreach($data_file as $f){
+            $file[$f->collection_name] = $f->file_name;
         }
 
         $jobDetails[] = null;
@@ -248,7 +261,7 @@ class EmployeeController extends Controller
         //BASIC INFORMATION HISTORY
         $employee_history = DB::table('employee_histories')->where('employee_id',$employee->id)->whereNotNull('updated_at')->orderBy('created_at','desc')->get();
        
-        $history[] = null;
+        $history = [];
 
         $i = 0;
         foreach($employee_history as $ht){
@@ -356,7 +369,131 @@ class EmployeeController extends Controller
             $i++;
         }
 
-        return view('frontend.employee.employee.show',['employee' => $employee,'age' => $age,'documents' => $documents,'emails' => $emails,'addresses' => $addreses,'phones' => $phones,'jobDetails' => $jobDetails,'history' => $history]);
+         //EMPLOYEE BENEFIT
+         $employee_benefit = [];
+         $employee_benefit_data = $employee->position()->get();
+ 
+         if(isset($employee_benefit_data[0])){
+             $j = 0;
+             for($i=0; $i<count($employee_benefit_data[0]->benefits); $i++){
+                 if($employee_benefit_data[0]->benefits[$i]->pivot->updated_at == null){
+ 
+                 $base_calculation = null;
+                 if($employee_benefit_data[0]->benefits[$i]->base_calculation){
+                     $base_calculation = Type::where('id',$employee_benefit_data[0]->benefits[$i]->base_calculation)->first()->name;
+                 }
+ 
+                 $prorate_calculation = null;
+                 if($employee_benefit_data[0]->benefits[$i]->prorate_calculation){
+                     $prorate_calculation = Type::where('id',$employee_benefit_data[0]->benefits[$i]->prorate_calculation)->first()->name;
+                 }
+ 
+                 $employee_benefit[$j] = [
+                     'benefit_uuid' => $employee_benefit_data[0]->benefits[$i]->uuid,
+                     'benefit_name' => $employee_benefit_data[0]->benefits[$i]->name,
+                     'min' => $employee_benefit_data[0]->benefits[$i]->pivot->min,
+                     'max' => $employee_benefit_data[0]->benefits[$i]->pivot->max,
+                     'base_calculation' => $base_calculation,
+                     'prorate_calculation' => $prorate_calculation
+                 ];
+                 $j++;
+ 
+             }
+             }
+         }
+ 
+         //EMPLOYEE BPJS
+         $employee_bpjs_data = BPJS::get();
+
+         
+         //EMPLOYEE BENEFIT HISTORY
+         $created_at = $employee->employee_provisions()->select('employee_provisions.created_at')->whereNotNull('employee_provisions.updated_at')->orderBy('created_at','DESC')->get();
+         
+         
+         $j = 0;
+         foreach($created_at as $ct){
+             $employee_benefit_history_data[$j] = $employee->employee_benefit()->where('employee_benefit.created_at',$ct->created_at)->whereNotNull('employee_benefit.updated_at')->get();
+             $employee_bpjs_history_data[$j] = $employee->employee_bpjs()->where('employee_bpjs.created_at',$ct->created_at)->whereNotNull('employee_bpjs.updated_at')->get();
+             $employee_provisions_history_data[$j] = $employee->employee_provisions()->where('employee_provisions.created_at',$ct->created_at)->whereNotNull('employee_provisions.updated_at')->get();
+         $j++;
+         }
+ 
+         $employee_benefit_history = [];
+         
+         if($j > 0){
+         for ($g=0; $g < count($employee_provisions_history_data); $g++) {
+             $employee_benefit_history[$g] = [
+                 'created_at' => $employee_provisions_history_data[$g][0]->created_at,
+                 'updated_at' => $employee_provisions_history_data[$g][0]->updated_at,
+                 'maximum_overtime' => $employee_provisions_history_data[$g][0]->maximum_overtime,
+                 'minimum_overtime' => $employee_provisions_history_data[$g][0]->minimum_overtime,
+                 'pph' => $employee_provisions_history_data[$g][0]->pph,
+                 'late_tolerance' => $employee_provisions_history_data[$g][0]->late_tolerance,
+                 'late_punishment' => $employee_provisions_history_data[$g][0]->late_punishment,
+                 'absence_punishment' => $employee_provisions_history_data[$g][0]->absence_punishment,
+                 'holiday_overtime' => $employee_provisions_history_data[$g][0]->holiday_overtime,
+                 'benefit' => $employee_benefit_history_data[$g],
+                 'bpjs' => $employee_bpjs_history_data[$g]
+             ];
+ 
+             for($t=0; $t<count($employee_benefit_history_data[$g]); $t++){
+             $employee_benefit_history[$g]['benefit_name'][$t] = [
+                 'name' =>  Benefit::where('id',$employee_benefit_history_data[$g][$t]->benefit_id)->first()->name
+                 ];
+             }
+ 
+             for($t=0; $t<count($employee_bpjs_history_data[$g]); $t++){
+                 $employee_benefit_history[$g]['bpjs_name'][$t] = [
+                     'name' => BPJS::where('id',$employee_bpjs_history_data[$g][$t]->bpjs_id)->first()->name
+                     ];
+                 }
+         }
+         }
+         //EMPLOYEE BENEFIT CURRENT
+         $benefit_name_data = $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->get();
+         $bpjs_name_data = $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->get();
+         
+         $benefit_name = [];
+         $bpjs_name = [];
+ 
+         $p = 0;
+         foreach($benefit_name_data as $bnd){
+             $benefit_name[$p] = [
+                 'name' => Benefit::where('id',$bnd->benefit_id)->first()->name
+             ];
+             $p++;
+         }
+         
+         $q = 0;
+         foreach($bpjs_name_data as $bpd){
+             $bpjs_name[$q] = [
+                 'name' => BPJS::where('id',$bpd->bpjs_id)->first()->name
+             ];
+             $q++;
+         }
+         $current = [
+             'provisions' => $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->get(),
+             'benefit_name' => $benefit_name,
+             'benefit' => $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->get(),
+             'bpjs_name' => $bpjs_name,
+             'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->get()
+         ];
+         
+         return view('frontend.employee.employee.show',[
+         'employee' => $employee,
+         'age' => $age,
+         'documents' => $documents,
+         'emails' => $emails,
+         'addresses' => $addreses,
+         'phones' => $phones,
+         'jobDetails' => $jobDetails,
+         'history' => $history,
+         'file' => $file,
+         'employee_benefit' => $employee_benefit,
+         'employee_bpjs' => $employee_bpjs_data,
+         'current' => $current,
+         'employee_benefit_history' =>  $employee_benefit_history
+         ]);
     }
 
     /**
@@ -375,16 +512,18 @@ class EmployeeController extends Controller
         $data_emails = $employee->emails()->whereNull('emails.updated_at')->get();
         $data_addreses = $employee->addresses()->whereNull('addresses.updated_at')->get();
         $data_phones = $employee->phones()->whereNull('phones.updated_at')->get();
+        $data_file = $employee->getMedia('id_card');
 
         $documents[] = null; 
         $emails[] = null;
         $addreses[] = null;
         $phones[] = null;
+        $file[] = null;
 
-
+        
         foreach($data_documents as $dd){
             $type = Type::find($dd->type_id);
-            $documents[$type->code] = $dd->address;
+            $documents[$type->code] = $dd->number;
         }
 
         foreach($data_emails as $e){
@@ -402,8 +541,11 @@ class EmployeeController extends Controller
             $phones[$type->code] = $p->number;
         }
 
+        foreach($data_file as $f){
+            $file[$f->collection_name] = $f->file_name;
+        }
         $jobDetails[] = null;
- 
+       
         if($employee->job_tittle()->first()){
             $jobDetails['job_tittle'] = $employee->job_tittle()->first()->name;
         };
@@ -443,7 +585,7 @@ class EmployeeController extends Controller
         //BASIC INFORMATION HISTORY
         $employee_history = DB::table('employee_histories')->where('employee_id',$employee->id)->whereNotNull('updated_at')->orderBy('created_at','desc')->get();
        
-        $history[] = null;
+        $history = [];
 
         $i = 0;
         foreach($employee_history as $ht){
@@ -587,6 +729,7 @@ class EmployeeController extends Controller
         //EMPLOYEE BPJS
         $employee_bpjs_data = BPJS::get();
         
+
         $button_parameter_data = $employee->where('employees.id',$employee->id)->with('employee_benefit','employee_bpjs','employee_provisions')->get();
         
         if(count($button_parameter_data[0]->employee_benefit) == 0 && count($button_parameter_data[0]->employee_bpjs) == 0 && count($button_parameter_data[0]->employee_provisions) == 0){
@@ -668,21 +811,7 @@ class EmployeeController extends Controller
             'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->get()
         ];
         
-        
-        // dd($bpjs_name);
-        // dd($benefit_name);
-        // dd(count($employee_bpjs_history_data[0]));
-        // dd($employee_benefit_history);
-        // dd($bpjs_name_history);
-        // dd($employee_benefit_history_data[0][1]->benefit_id);
-        // dd($current['benefit']);
-        // dd($employee_provisions_history_data);
-        // dd(count($employee_bpjs_history_data));
-        // dd($created_at);
-        // dd($employee_provisions_history_data[0][0]->created_at);
-        // dd($employee_bpjs_history_data);
-        // dd($emails);
-        // dd($data_phones);
+        dd($employee->getMedia('id_card'));
         return view('frontend.employee.employee.edit',[
         'employee' => $employee,
         'age' => $age,
@@ -692,6 +821,7 @@ class EmployeeController extends Controller
         'phones' => $phones,
         'jobDetails' => $jobDetails,
         'history' => $history,
+        'file' => $file,
         'employee_benefit' => $employee_benefit,
         'employee_bpjs' => $employee_bpjs_data,
         'button_parameter' => $button_parameter,
@@ -789,6 +919,15 @@ class EmployeeController extends Controller
             'updated_at' => null
         ]);
 
+        if($request->home_phone){
+        $employee->phones()->create([
+            'number' => $request->home_phone,
+            'type_id' => Type::where('of','phone')->where('code','home')->first()->id,
+            'created_at' => $time_update,
+            'updated_at' => null
+        ]);
+        }
+
         if($request->work_phone){
             $employee->phones()->create([
                 'number' => $request->work_phone,
@@ -832,7 +971,7 @@ class EmployeeController extends Controller
             ]);
         }
 
-        $employee->update([
+            $employee->update([
             'code' => $request->code,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -856,6 +995,10 @@ class EmployeeController extends Controller
             'updated_at' => $time_update,
         ]);
 
+        if($request->document){
+            $employee->addMedia($request->document)->toMediaCollection('id_card');
+        }
+
         // TODO: Return error message as JSON
         return response()->json($employee);
     }
@@ -872,5 +1015,10 @@ class EmployeeController extends Controller
 
         // TODO: Return error message as JSON
         return response()->json($employee);
+    }
+
+    public function update_file(Employee $employee,Request $request){
+        
+        $employee->addMedia($request->document)->toMediaCollection('id_card');
     }
 }
