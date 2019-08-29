@@ -309,23 +309,30 @@
             <div class="action-buttons">
 
                 @if ($button_parameter == 'create')
-                @component('frontend.common.buttons.submit')
-                @slot('type','button')
-                @slot('id', 'create-benefit')
-                @slot('class', 'create-benefit')
-                @endcomponent 
+                    @component('frontend.common.buttons.submit')
+                    @slot('type','button')
+                    @slot('id', 'create-benefit')
+                    @slot('class', 'create-benefit')
+                    @endcomponent 
+
+                    @include('frontend.common.buttons.reset')
                 @elseif ($button_parameter == 'approvals')
-
+                    @component('frontend.common.buttons.submit')
+                    @slot('type','button')
+                    @slot('text','Approve')
+                    @slot('icon','fa-check')
+                    @slot('id', 'approve')
+                    @slot('class', 'approve')
+                    @endcomponent
                 @else
-                @component('frontend.common.buttons.submit')
-                @slot('type','button')
-                @slot('id', 'edit-benefit')
-                @slot('class', 'edit-benefit')
-                @endcomponent
-                @endif
-                
+                    @component('frontend.common.buttons.submit')
+                    @slot('type','button')
+                    @slot('id', 'edit-benefit')
+                    @slot('class', 'edit-benefit')
+                    @endcomponent
 
-                @include('frontend.common.buttons.reset')
+                    @include('frontend.common.buttons.reset')
+                @endif
 
                 @include('frontend.common.buttons.back')
 
