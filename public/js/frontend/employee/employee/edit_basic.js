@@ -136,7 +136,7 @@ let Employee_edit_basic = {
                                 if (data.errors.joined_date) {
                                     $('#joined_date-error').html(data.errors.joined_date[0]);
                                 }else{
-                                    $('#mobile_phone-error').html('');
+                                    $('#joined_date-error').html('');
                                 }
     
                                 if (data.errors.job_tittle) {

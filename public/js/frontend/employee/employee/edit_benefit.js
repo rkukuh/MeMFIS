@@ -91,7 +91,7 @@ let Employee_edit_benefit = {
         let pph = $('input[name=pause]:checked').val()
         let late_tolerance = $('input[name=late_tolerance]').val()
         let late_punishment = $('input[name=late_punishment]').val()
-        let absence_punishment = $('input[name=absences_punishment]').val()
+        let absence_punishment = $('input[name=absence_punishment]').val()
 
 
             $.ajax({
@@ -119,96 +119,53 @@ let Employee_edit_benefit = {
                  absence_punishment: absence_punishment,
              },
              success: function (data) {
-                        // if (data.errors) {
-                            // $.each(data.errors, function (key, value) {
-                            //     var name = $("input[name='"+key+"']");
-                            //     if(key.indexOf(".") != -1){
-                            //       var arr = key.split(".");
-                            //       name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
-                            //     }
-                            //     name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
-                                
-                            //     if (data.errors.dob) {
-                            //         $('#dob-error').html(data.errors.dob[0]);
-                            //     }else{
-                            //         $('#dob-error').html('');
-                            //     }
+                if (data.errors) {
+                    $.each(data.errors, function (key, value) {
+                        if (data.errors.maximum_overtime) {
+                            $('#maximum_overtime-error').html(data.errors.maximum_overtime[0]);
+                        }else{
+                            $('#maximum_overtime-error').html('');
+                        }
+
+                        if (data.errors.minimum_overtime) {
+                            $('#minimum_overtime-error').html(data.errors.minimum_overtime[0]);
+                        }else{
+                            $('#minimum_overtime-error').html('');
+                        }
+
+                        if (data.errors.holiday_overtime) {
+                            $('#holiday_overtime-error').html(data.errors.holiday_overtime[0]);
+                        }else{
+                            $('#holiday_overtime-error').html('');
+                        }
+
+                        if (data.errors.late_tolerance) {
+                            $('#late_tolerance-error').html(data.errors.late_tolerance[0]);
+                        }else{
+                            $('#late_tolerance-error').html('');
+                        }
+
+                        if (data.errors.late_punishment) {
+                            $('#late_punishment-error').html(data.errors.late_punishment[0]);
+                        }else{
+                            $('#late_punishment-error').html('');
+                        }
+
+                        if (data.errors.absence_punishment) {
+                            $('#absence_punishment-error').html(data.errors.absence_punishment[0]);
+                        }else{
+                            $('#absence_punishment-error').html('');
+                        }
+                    });
+                        } else {
     
-                            //     if (data.errors.gender) {
-                            //         $('#gender-error').html(data.errors.gender[0]);
-                            //     }else{
-                            //         $('#gender-error').html('');
-                            //     }
-    
-                            //     if (data.errors.marital_status) {
-                            //         $('#marital_status-error').html(data.errors.marital_status[0]);
-                            //     }else{
-                            //         $('#marital_status-error').html('');
-                            //     }
-    
-                            //     if (data.errors.religion) {
-                            //         $('#religion-error').html(data.errors.religion[0]);
-                            //     }else{
-                            //         $('#religion-error').html('');
-                            //     }
-    
-                            //     if (data.errors.mobile_phone) {
-                            //         $('#mobile_phone-error').html(data.errors.mobile_phone[0]);
-                            //     }else{
-                            //         $('#mobile_phone-error').html('');
-                            //     }
-    
-                            //     if (data.errors.joined_date) {
-                            //         $('#joined_date-error').html(data.errors.joined_date[0]);
-                            //     }else{
-                            //         $('#mobile_phone-error').html('');
-                            //     }
-    
-                            //     if (data.errors.job_tittle) {
-                            //         $('#job_title-error').html(data.errors.job_tittle[0]);
-                            //     }else{
-                            //         $('#job_title-error').html('');
-                            //     }
-                                
-                            //     if (data.errors.mobile_phone) {
-                            //         $('#mobile_phone-error').html(data.errors.mobile_phone[0]);
-                            //     }else{
-                            //         $('#mobile_phone-error').html('');
-                            //     }
-    
-                            //     if (data.errors.job_position) {
-                            //         $('#job_position-error').html(data.errors.job_position[0]);
-                            //     }else{
-                            //         $('#job_position-error').html('');
-                            //     }
-    
-                            //     if (data.errors.employee_status) {
-                            //         $('#employee_status-error').html(data.errors.employee_status[0]);
-                            //     }else{
-                            //         $('#employee_status-error').html('');
-                            //     }
-    
-                            //     if (data.errors.department) {
-                            //         $('#department-error').html(data.errors.department[0]);
-                            //     }else{
-                            //         $('#department-error').html('');
-                            //     }
-    
-                            //     if (data.errors.email_1) {
-                            //         $('#email_1-error').html(data.errors.email_1[0]);
-                            //     }else{
-                            //         $('#email_1-error').html('');
-                            //     }
-                            // });
-                        // } else {
-    
-                            // toastr.success('Data has been saved.', 'Sukses', {
-                            //     timeOut: 5000
-                            // });
+                            toastr.success('Data has been saved.', 'Sukses', {
+                                timeOut: 5000
+                            });
     
                             location.reload();
     
-                        // }
+                        }
                     }
                 });
         })
