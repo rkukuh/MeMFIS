@@ -103,26 +103,26 @@
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
                                                             @slot('class','m_timepicker_1 text-center')
-                                                            @slot('value', $s->in)
+                                                            @slot('placeholder', $s->in)
                                                             @slot('disabled','disabled')
                                                         @endcomponent
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
                                                             @slot('class','m_timepicker_1 text-center')
-                                                            @slot('value', $s->break_in)
+                                                            @slot('placeholder', $s->break_in)
                                                             @slot('disabled','disabled')
                                                         @endcomponent
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
                                                             @slot('class','m_timepicker_1 text-center')
-                                                            @slot('value', $s->break_out)
+                                                            @slot('placeholder', $s->break_out)
                                                             @slot('disabled','disabled')
                                                         @endcomponent
                                                     </td>
                                                     <td align="center" width="18%">
                                                         @component('frontend.common.input.timepicker')
                                                             @slot('class','m_timepicker_1 text-center')
-                                                            @slot('value', $s->break_out)
+                                                            @slot('placeholder', $s->out)
                                                             @slot('disabled','disabled')
                                                         @endcomponent
                                                     </td>

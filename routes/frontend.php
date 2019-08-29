@@ -97,6 +97,37 @@ Route::name('frontend.')->group(function () {
         Route::view('/import-fingerprint', 'frontend.import-fingerprint.index')->name('import-fingerprint.index');
         Route::view('/import-fingerprint/create', 'frontend.import-fingerprint.create')->name('import-fingerprint.create');
 
+        /** ATTENDANCE */
+
+        Route::view('/attendance', 'frontend.attendance.index')->name('attendance.index');
+
+        Route::view('/attendance/overtime/create', 'frontend.attendance.overtime.create')->name('attendance.overtime.create');
+        Route::view('/attendance/overtime/approve', 'frontend.attendance.overtime.approve')->name('attendance.overtime.approve');
+
+        Route::view('/attendance/propose-leave/create', 'frontend.attendance.propose-leave.create')->name('attendance.propose-leave.create');
+        Route::view('/attendance/propose-leave/approve', 'frontend.attendance.propose-leave.approve')->name('attendance.propose-leave.approve');
+
+        Route::view('/attendance/attendance-correction/create', 'frontend.attendance.propose-leave.create')->name('attendance.propose-leave.create');
+
+        /** ATTENDANCE CORRECTION */
+
+        Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
+        Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
+        Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
+
+        /** OVERTIME */
+
+        Route::view('/overtime', 'frontend.overtime.index')->name('overtime.index');
+        Route::view('/overtime/create', 'frontend.overtime.create')->name('overtime.create');
+        Route::view('/overtime/edit', 'frontend.overtime.edit')->name('overtime.edit');
+        Route::view('/overtime/approve', 'frontend.overtime.approve')->name('overtime.approve');
+
+        /** PROPOSE LEAVE */
+
+        Route::view('/propose-leave', 'frontend.propose-leave.index')->name('propose-leave.index');
+        Route::view('/propose-leave/create', 'frontend.propose-leave.create')->name('propose-leave.create');
+        Route::view('/propose-leave/edit', 'frontend.propose-leave.edit')->name('propose-leave.edit');
+        Route::view('/propose-leave/approve', 'frontend.propose-leave.approve')->name('propose-leave.approve');
     });
 
 });
