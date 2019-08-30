@@ -6,7 +6,7 @@
                         @slot('icon','la la-warning')
                         @slot('text','Confirmation')
                     @endcomponent
-                    <h5 class="modal-title" id="TitleModalWorkpackage">Leave Confirmation</h5>
+                    <h5 class="modal-title" id="TitleModalWorkpackage">Attendance Confirmation</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
