@@ -1,5 +1,8 @@
+@if( isset($jobcards["routine"]) )
 <div class="form-group m-form__group row">
-    <div class="col-sm-4 col-md-4 col-lg-4">
+
+    @if( isset($jobcards["basic"]) )
+    <div class="col-sm-{{$col['routine']}} col-md-{{$col['routine']}} col-lg-{{$col['routine']}}">
         <div class="m-portlet  m-portlet--full-height ">
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
@@ -53,12 +56,12 @@
                                 </div>
                                 <div class="col" align="center">
                                     <span class="m-widget15__stats">
-                                    {{ number_format( array_sum($jobcards['routine']) / 2 ) }}
+                                        {{ number_format( array_sum($jobcards['basic']) / 2 ) }}
                                     </span>
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__stats">
-                                    {{ number_format( array_sum($jobcards['routine']) ) }} Task
+                                        {{ number_format( array_sum($jobcards['basic']) ) }} Task
                                     </span>
                                 </div>
                             </div>			                	 
@@ -77,13 +80,13 @@
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__text">
-                                        63%
+                                        {{ number_format($manhours["basic"]["actual"] / $manhours["basic"]["total"] * 100)  }}%
                                     </span>		
                                 </div>
                             </div>               	 
                             <div class="m--space-10"></div>
                             <div class="progress m-progress--sm">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ number_format($manhours["basic"]["actual"] / $manhours["basic"]["total"] * 100)  }}%;" aria-valuenow="{{ number_format($manhours["basic"]["actual"] / $manhours["basic"]["total"] * 100)  }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -99,12 +102,12 @@
                                 </div>
                                 <div class="col" align="center">
                                     <span class="m-widget15__stats">
-                                        60
+                                        {{ number_format($manhours["basic"]["total"] / 2) }}
                                     </span>
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__stats">
-                                        7.000 Mhrs
+                                        {{ number_format($manhours["basic"]["total"]) }} Mhrs
                                     </span>
                                 </div>
                             </div>			                	 
@@ -157,7 +160,10 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    @endif
+
+    @if( isset($jobcards["sip"]) )
+    <div class="col-sm-{{$col['routine']}} col-md-{{$col['routine']}} col-lg-{{$col['routine']}}">
         <div class="m-portlet  m-portlet--full-height ">
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
@@ -211,12 +217,12 @@
                                 </div>
                                 <div class="col" align="center">
                                     <span class="m-widget15__stats">
-                                        600
+                                        {{ number_format( array_sum($jobcards['sip']) / 2 ) }}
                                     </span>
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__stats">
-                                        4.500 Task
+                                        {{ number_format( array_sum($jobcards['sip']) ) }} Task
                                     </span>
                                 </div>
                             </div>			                	 
@@ -315,7 +321,10 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    @endif
+
+    @if( isset($jobcards["cpcp"]) )
+    <div class="col-sm-{{$col['routine']}} col-md-{{$col['routine']}} col-lg-{{$col['routine']}}">
         <div class="m-portlet  m-portlet--full-height ">
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
@@ -347,13 +356,13 @@
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__text">
-                                        63%
+                                            {{ $jobcards["cpcp"]["done"] / array_sum($jobcards["cpcp"]) * 100 }}%
                                     </span>		
                                 </div>
                             </div>               	 
                             <div class="m--space-10"></div>
                             <div class="progress m-progress--sm">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $jobcards['cpcp']['done'] / array_sum($jobcards['cpcp']) * 100 }}%;" aria-valuenow="{{ $jobcards['cpcp']['done'] / array_sum($jobcards['cpcp']) * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -369,12 +378,12 @@
                                 </div>
                                 <div class="col" align="center">
                                     <span class="m-widget15__stats">
-                                        600
+                                        {{ number_format( array_sum($jobcards['cpcp']) / 2 ) }}
                                     </span>
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__stats">
-                                        4.500 Task
+                                        {{ number_format( array_sum($jobcards['cpcp']) ) }} Task
                                     </span>
                                 </div>
                             </div>			                	 
@@ -393,13 +402,13 @@
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__text">
-                                        63%
+                                            {{ number_format($manhours["cpcp"]["actual"] / $manhours["cpcp"]["total"] * 100)  }}%
                                     </span>		
                                 </div>
                             </div>               	 
                             <div class="m--space-10"></div>
                             <div class="progress m-progress--sm">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ number_format($manhours["cpcp"]["actual"] / $manhours["cpcp"]["total"] * 100)  }}%;" aria-valuenow="{{ number_format($manhours["cpcp"]["actual"] / $manhours["cpcp"]["total"] * 100)  }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -415,12 +424,12 @@
                                 </div>
                                 <div class="col" align="center">
                                     <span class="m-widget15__stats">
-                                        60
+                                            {{ number_format($manhours["cpcp"]["total"] / 2) }}
                                     </span>
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__stats">
-                                        7.000 Mhrs
+                                            {{ number_format($manhours["cpcp"]["total"]) }} Mhrs
                                     </span>
                                 </div>
                             </div>			                	 
@@ -473,4 +482,15 @@
             </div>
         </div>
     </div>
+    @endif
+
 </div>
+@else 
+<div class="col-sm-12 col-md-12 col-lg-12">
+    <div class="m-portlet  m-portlet--full-height ">
+        <div class="m-portlet__body text-center">
+            <i>No routine taskcard availables in this projects.</i>
+        </div>
+    </div>
+</div>
+@endif

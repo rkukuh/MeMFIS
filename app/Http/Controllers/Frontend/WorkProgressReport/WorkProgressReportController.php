@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\WorkProgressReport;
 
 use Carbon\Carbon;
+use App\Models\Type;
 use App\Models\Status;
 use App\Models\Project;
 use App\Models\JobCard;
@@ -16,6 +17,7 @@ class WorkProgressReportController extends Controller
     public function __construct(){
         $this->jobcard = [];
         $this->statuses = Status::ofJobCard()->get();
+        $this->tc_type = Type::where('of', 'like', 'taskcard-type%')->pluck('code');
     }
     /**
      * Display a listing of the resource.
@@ -76,7 +78,8 @@ class WorkProgressReportController extends Controller
 
         foreach($jobcard_all as $jobcard){
             $this->actual_manhours($jobcard);
-            $jobcard->tc_type = $jobcard->jobcardable->type->name;
+            $jobcard->tc_type = $jobcard->jobcardable->type->code;
+            $jobcard->of = $jobcard->jobcardable->type->of;
             $jobcard->estimation_manhour = $jobcard->jobcardable->estimation_manhour;
             if($jobcard->jobcardable->type->of == 'taskcard-type-routine'){
                 $jobcards["routine"] += 1;
@@ -85,12 +88,14 @@ class WorkProgressReportController extends Controller
             }
             
         }
-
-        $manhours["Basic"]["actual"] = $jobcard_all->where('tc_type', 'Basic')->sum('actual_manhours');
-        $manhours["Basic"]["total"] = $jobcard_all->where('tc_type', 'Basic')->sum('estimation_manhour');
-
-        dd($manhours);
-
+        
+        foreach($this->tc_type as $type){
+            if( sizeof($jobcard_all->where("tc_type", $type)->pluck("tc_type")) > 0 ) {
+                $manhours[$type]["actual"] = $jobcard_all->where('tc_type', $type)->sum('actual_manhours');
+                $manhours[$type]["total"] = $jobcard_all->where('tc_type', $type)->sum('estimation_manhour');
+            }
+        }
+        
         $jobcards["overall_done"] = $jobcards["routine_done"] = $jobcards["non_routine_done"] = 0;
         
         foreach($jobcard_all as $key => $jobcard){
@@ -150,11 +155,20 @@ class WorkProgressReportController extends Controller
         $this->counting($cmr_awl, "cmr-awl");
         $this->counting($ht_crr, "ht-crr");
 
+        $col["routine"] = $jobcard_all->where("of", "taskcard-type-routine")->pluck('tc_type');
+        if (isset($col["routine"])) {
+            $col["routine"] = 12 / sizeof(array_unique($col["routine"]->toArray()));
+        }else{
+            $col["routine"] = 12;
+        }
+        
         return view('frontend.work-progress-report.show',[
+            'col' => $col,
             'tat' => $tat,
             'project' => $project,
-            'jobcards' =>  $this->jobcard,
+            'manhours' => $manhours,
             'attention' => $attention,
+            'jobcards' =>  $this->jobcard
         ]);
     }
 
