@@ -137,53 +137,54 @@ class WorkProgressReportController extends Controller
         }
 
         foreach($this->tc_type as $type){
+            // dd($jobcard_all[0]);
             if( sizeof($jobcard_all->where("tc_type", $type)->pluck("tc_type")) > 0 ) {
                 $manhours[$type]["actual"] = $jobcard_all->where('tc_type', $type)->sum('actual_manhours');
                 $manhours[$type]["total"] = $jobcard_all->where('tc_type', $type)->sum('estimation_manhour');
 
-                if( $jobcard_all->where('status', "open")->sum('estimation_manhour') > 0 ) { 
-                    $manhours[$type]["estimation_manhour"]["open"] = $jobcard_all->where('status', "open")->sum('estimation_manhour'); 
+                if( $jobcard_all->where('status', "open")->where('tc_type', $type)->sum('estimation_manhour') > 0 ) { 
+                    $manhours[$type]["estimation_manhour"]["open"] = $jobcard_all->where('status', "open")->where('tc_type', $type)->sum('estimation_manhour'); 
                 }else{
                     $manhours[$type]["estimation_manhour"]["open"] = 1;
                 }
 
-                if($jobcard_all->where('status', "closed")->sum('estimation_manhour') > 0) { 
-                    $manhours[$type]["estimation_manhour"]["closed"] = $jobcard_all->where('status', "closed")->sum('estimation_manhour'); 
+                if($jobcard_all->where('status', "closed")->where('tc_type', $type)->sum('estimation_manhour') > 0) { 
+                    $manhours[$type]["estimation_manhour"]["closed"] = $jobcard_all->where('status', "closed")->where('tc_type', $type)->sum('estimation_manhour'); 
                 }else{
                     $manhours[$type]["estimation_manhour"]["closed"] = 1;
                 }
 
-                if($jobcard_all->where('status', "pending")->sum('estimation_manhour') > 0) { 
-                    $manhours[$type]["estimation_manhour"]["pending"] = $jobcard_all->where('status', "pending")->sum('estimation_manhour'); 
+                if($jobcard_all->where('status', "pending")->where('tc_type', $type)->sum('estimation_manhour') > 0) { 
+                    $manhours[$type]["estimation_manhour"]["pending"] = $jobcard_all->where('status', "pending")->where('tc_type', $type)->sum('estimation_manhour'); 
                 }else{
                     $manhours[$type]["estimation_manhour"]["pending"] = 1;
                 }
 
-                if($jobcard_all->where('status', "progress")->sum('estimation_manhour') > 0) { 
-                    $manhours[$type]["estimation_manhour"]["progress"] = $jobcard_all->where('status', "progress")->sum('estimation_manhour'); 
+                if($jobcard_all->where('status', "progress")->where('tc_type', $type)->sum('estimation_manhour') > 0) { 
+                    $manhours[$type]["estimation_manhour"]["progress"] = $jobcard_all->where('status', "progress")->where('tc_type', $type)->sum('estimation_manhour'); 
                 }else{
                     $manhours[$type]["estimation_manhour"]["progress"] = 1;
                 }
 
-                if($jobcard_all->where('status', "released")->sum('estimation_manhour') > 0) { 
-                    $manhours[$type]["estimation_manhour"]["released"] = $jobcard_all->where('status', "released")->sum('estimation_manhour'); 
+                if($jobcard_all->where('status', "released")->where('tc_type', $type)->sum('estimation_manhour') > 0) { 
+                    $manhours[$type]["estimation_manhour"]["released"] = $jobcard_all->where('status', "released")->where('tc_type', $type)->sum('estimation_manhour'); 
                 }else{
                     $manhours[$type]["estimation_manhour"]["released"] = 1;
                 }
 
-                if($jobcard_all->where('status', "rii-released")->sum('estimation_manhour') > 0) { 
-                    $manhours[$type]["estimation_manhour"]["rii-released"] = $jobcard_all->where('status', "rii-released")->sum('estimation_manhour'); 
+                if($jobcard_all->where('status', "rii-released")->where('tc_type', $type)->sum('estimation_manhour') > 0) { 
+                    $manhours[$type]["estimation_manhour"]["rii-released"] = $jobcard_all->where('status', "rii-released")->where('tc_type', $type)->sum('estimation_manhour'); 
                 }else{
                     $manhours[$type]["estimation_manhour"]["rii-released"] = 1;
                 }
 
 
-                $manhours[$type]["actual_manhour"]["open"] = $jobcard_all->where('status', "open")->sum('actual_manhours');
-                $manhours[$type]["actual_manhour"]["closed"] = $jobcard_all->where('status', "closed")->sum('actual_manhours');
-                $manhours[$type]["actual_manhour"]["pending"] = $jobcard_all->where('status', "pending")->sum('actual_manhours');
-                $manhours[$type]["actual_manhour"]["progress"] = $jobcard_all->where('status', "progress")->sum('actual_manhours');
-                $manhours[$type]["actual_manhour"]["released"] = $jobcard_all->where('status', "released")->sum('actual_manhours');
-                $manhours[$type]["actual_manhour"]["rii-released"] = $jobcard_all->where('status', "rii-released")->sum('actual_manhours');
+                $manhours[$type]["actual_manhour"]["open"] = $jobcard_all->where('status', "open")->where('tc_type', $type)->sum('actual_manhours');
+                $manhours[$type]["actual_manhour"]["closed"] = $jobcard_all->where('status', "closed")->where('tc_type', $type)->sum('actual_manhours');
+                $manhours[$type]["actual_manhour"]["pending"] = $jobcard_all->where('status', "pending")->where('tc_type', $type)->sum('actual_manhours');
+                $manhours[$type]["actual_manhour"]["progress"] = $jobcard_all->where('status', "progress")->where('tc_type', $type)->sum('actual_manhours');
+                $manhours[$type]["actual_manhour"]["released"] = $jobcard_all->where('status', "released")->where('tc_type', $type)->sum('actual_manhours');
+                $manhours[$type]["actual_manhour"]["rii-released"] = $jobcard_all->where('status', "rii-released")->where('tc_type', $type)->sum('actual_manhours');
             }
         }
         
@@ -206,6 +207,9 @@ class WorkProgressReportController extends Controller
         }else{
             $col["routine"] = 12;
         }
+
+        // dd(floor(12/(5/2)));
+        // dd($manhours);
         
         return view('frontend.work-progress-report.show',[
             'col' => $col,

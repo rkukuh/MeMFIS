@@ -34,13 +34,13 @@
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__text">
-                                        {{ $jobcards["routine"]["done"] / array_sum($jobcards["routine"]) * 100 }}%
+                                        {{ $jobcards["basic"]["done"] / array_sum($jobcards["basic"]) * 100 }}%
                                     </span>		
                                 </div>
                             </div>               	 
                             <div class="m--space-10"></div>
                             <div class="progress m-progress--sm">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $jobcards['routine']['done'] / array_sum($jobcards['routine']) * 100 }}%;" aria-valuenow="{{ $jobcards['routine']['done'] / array_sum($jobcards['routine']) * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $jobcards['basic']['done'] / array_sum($jobcards['basic']) * 100 }}%;" aria-valuenow="{{ $jobcards['routine']['done'] / array_sum($jobcards['routine']) * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,6 @@
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -190,13 +189,13 @@
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__text">
-                                        63%
+                                            {{ $jobcards["sip"]["done"] / array_sum($jobcards["sip"]) * 100 }}%
                                     </span>		
                                 </div>
                             </div>               	 
                             <div class="m--space-10"></div>
                             <div class="progress m-progress--sm">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $jobcards['sip']['done'] / array_sum($jobcards['sip']) * 100 }}%;" aria-valuenow="{{ $jobcards['basic']['done'] / array_sum($jobcards['basic']) * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -236,13 +235,13 @@
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__text">
-                                        63%
+                                            {{ number_format($manhours["sip"]["actual"] / $manhours["sip"]["total"] * 100)  }}%
                                     </span>		
                                 </div>
                             </div>               	 
                             <div class="m--space-10"></div>
                             <div class="progress m-progress--sm">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ number_format($manhours["sip"]["actual"] / $manhours["sip"]["total"] * 100)  }}%;" aria-valuenow="{{ number_format($manhours["sip"]["actual"] / $manhours["sip"]["total"] * 100)  }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -258,12 +257,12 @@
                                 </div>
                                 <div class="col" align="center">
                                     <span class="m-widget15__stats">
-                                        60
+                                        {{ number_format($manhours["cpcp"]["total"] / 2) }}
                                     </span>
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__stats">
-                                        7.000 Mhrs
+                                        {{ number_format($manhours["sip"]["total"]) }} Mhrs
                                     </span>
                                 </div>
                             </div>			                	 
@@ -277,37 +276,32 @@
                             <tr>
                                 <td valign="top" width="30%">Open</td>
                                 <td valign="top" width="2%">:</td>
-                                <td valign="top" width="20%">5%</td>
-                                <td valign="top" width="24%" align="center">225 Task</td>
-                                <td valign="top" width="24%" align="center">210 Mhrs</td>
+                                <td valign="top" width="24%" align="center">{{ $jobcards["sip"]["open"] }} Task ({{ number_format( ($jobcards["sip"]["open"] / array_sum($jobcards['sip'])) * 100) }}%)</td>
+                                <td valign="top" width="24%" align="center">{{ $manhours["sip"]["actual_manhour"]["open"] }} Mhrs ({{ ( $manhours["sip"]["actual_manhour"]["open"]  /  $manhours["sip"]["estimation_manhour"]["open"] ) * 100 }} %)</td>
                             </tr>
                             <tr>
                                 <td valign="top">Pending</td>
                                 <td valign="top">:</td>
-                                <td valign="top">5%</td>
-                                <td valign="top" align="center">225 Task</td>
-                                <td valign="top" align="center">210 Mhrs</td>
+                                <td valign="top" width="24%" align="center">{{ $jobcards["sip"]["pending"] }} Task ({{ number_format( ($jobcards["sip"]["pending"] / array_sum($jobcards['sip'])) * 100) }}%)</td>
+                                <td valign="top" align="center">{{ $manhours["sip"]["actual_manhour"]["pending"] }} Mhrs ( {{ ( $manhours["sip"]["actual_manhour"]["pending"]  /  $manhours["sip"]["estimation_manhour"]["pending"] ) * 100 }}%)</td>
                             </tr>
                             <tr>
                                 <td valign="top">In Progress</td>
                                 <td valign="top">:</td>
-                                <td valign="top">5%</td>
-                                <td valign="top" align="center">225 Task</td>
-                                <td valign="top" align="center">210 Mhrs</td>
+                                <td valign="top" width="24%" align="center">{{ $jobcards["sip"]["progress"] }} Task ({{ number_format( ($jobcards["sip"]["progress"] / array_sum($jobcards['sip'])) * 100) }}%)</td>
+                                <td valign="top" align="center">{{ $manhours["sip"]["actual_manhour"]["progress"] }} Mhrs ( {{ ( $manhours["sip"]["actual_manhour"]["progress"]  /  $manhours["sip"]["estimation_manhour"]["progress"] ) * 100 }}%)</td>
                             </tr>
                             <tr>
                                 <td valign="top">Waiting for RII</td>
                                 <td valign="top">:</td>
-                                <td valign="top">5%</td>
-                                <td valign="top" align="center">225 Task</td>
-                                <td valign="top" align="center">210 Mhrs</td>
+                                <td valign="top" width="24%" align="center">{{ $jobcards["sip"]["closed"] }} Task ({{ number_format( ($jobcards["sip"]["closed"] / array_sum($jobcards['sip'])) * 100) }}%)</td>
+                                <td valign="top" align="center">{{ $manhours["sip"]["actual_manhour"]["closed"] }} Mhrs ( {{ ( $manhours["sip"]["actual_manhour"]["closed"]  /  $manhours["sip"]["estimation_manhour"]["closed"] ) * 100 }}%)</td>
                             </tr>
                             <tr>
                                 <td valign="top">released</td>
                                 <td valign="top">:</td>
-                                <td valign="top">5%</td>
-                                <td valign="top" align="center">225 Task</td>
-                                <td valign="top" align="center">210 Mhrs</td>
+                                <td valign="top" width="24%" align="center">{{ ($jobcards["sip"]["released"] + $jobcards["sip"]["rii-released"]) }} Task ({{ number_format( (($jobcards["sip"]["released"] + $jobcards["sip"]["rii-released"]) / array_sum($jobcards['sip'])) * 100) }}%)</td>
+                                <td valign="top" align="center">{{ $manhours["sip"]["actual_manhour"]["released"] }} Mhrs ( {{ ( ($manhours["sip"]["actual_manhour"]["released"] + $manhours["sip"]["actual_manhour"]["rii-released"]  )/( $manhours["sip"]["estimation_manhour"]["released"] + $manhours["sip"]["estimation_manhour"]["rii-released"] )) * 100 }}%)</td>
                             </tr>
                         </table>
                     </div>
@@ -397,7 +391,7 @@
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__text">
-                                            {{ number_format($manhours["cpcp"]["actual"] / $manhours["cpcp"]["total"] * 100)  }}%
+                                        {{ number_format($manhours["cpcp"]["actual"] / $manhours["cpcp"]["total"] * 100)  }}%
                                     </span>		
                                 </div>
                             </div>               	 
@@ -419,12 +413,12 @@
                                 </div>
                                 <div class="col" align="center">
                                     <span class="m-widget15__stats">
-                                            {{ number_format($manhours["cpcp"]["total"] / 2) }}
+                                        {{ number_format($manhours["cpcp"]["total"] / 2) }}
                                     </span>
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__stats">
-                                            {{ number_format($manhours["cpcp"]["total"]) }} Mhrs
+                                        {{ number_format($manhours["cpcp"]["total"]) }} Mhrs
                                     </span>
                                 </div>
                             </div>			                	 
@@ -434,43 +428,38 @@
     
                 <div class="form-group m-form__group row mt-5">
                     <div class="col-sm-12 col-md-12 col-lg-12">
-                        <table width="100%" cellpadding="4">
-                            <tr>
-                                <td valign="top" width="30%">Open</td>
-                                <td valign="top" width="2%">:</td>
-                                <td valign="top" width="20%">5%</td>
-                                <td valign="top" width="24%" align="center">225 Task</td>
-                                <td valign="top" width="24%" align="center">210 Mhrs</td>
-                            </tr>
-                            <tr>
-                                <td valign="top">Pending</td>
-                                <td valign="top">:</td>
-                                <td valign="top">5%</td>
-                                <td valign="top" align="center">225 Task</td>
-                                <td valign="top" align="center">210 Mhrs</td>
-                            </tr>
-                            <tr>
-                                <td valign="top">In Progress</td>
-                                <td valign="top">:</td>
-                                <td valign="top">5%</td>
-                                <td valign="top" align="center">225 Task</td>
-                                <td valign="top" align="center">210 Mhrs</td>
-                            </tr>
-                            <tr>
-                                <td valign="top">Waiting for RII</td>
-                                <td valign="top">:</td>
-                                <td valign="top">5%</td>
-                                <td valign="top" align="center">225 Task</td>
-                                <td valign="top" align="center">210 Mhrs</td>
-                            </tr>
-                            <tr>
-                                <td valign="top">released</td>
-                                <td valign="top">:</td>
-                                <td valign="top">5%</td>
-                                <td valign="top" align="center">225 Task</td>
-                                <td valign="top" align="center">210 Mhrs</td>
-                            </tr>
-                        </table>
+                            <table width="100%" cellpadding="4">
+                                <tr>
+                                    <td valign="top" width="30%">Open</td>
+                                    <td valign="top" width="2%">:</td>
+                                    <td valign="top" width="24%" align="center">{{ $jobcards["cpcp"]["open"] }} Task ({{ number_format( ($jobcards["cpcp"]["open"] / array_sum($jobcards['cpcp'])) * 100) }}%)</td>
+                                    <td valign="top" width="24%" align="center">{{ $manhours["cpcp"]["actual_manhour"]["open"] }} Mhrs ({{ ( $manhours["cpcp"]["actual_manhour"]["open"]  /  $manhours["cpcp"]["estimation_manhour"]["open"] ) * 100 }} %)</td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">Pending</td>
+                                    <td valign="top">:</td>
+                                    <td valign="top" width="24%" align="center">{{ $jobcards["cpcp"]["pending"] }} Task ({{ number_format( ($jobcards["cpcp"]["pending"] / array_sum($jobcards['cpcp'])) * 100) }}%)</td>
+                                    <td valign="top" align="center">{{ $manhours["cpcp"]["actual_manhour"]["pending"] }} Mhrs ( {{ ( $manhours["cpcp"]["actual_manhour"]["pending"]  /  $manhours["cpcp"]["estimation_manhour"]["pending"] ) * 100 }}%)</td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">In Progress</td>
+                                    <td valign="top">:</td>
+                                    <td valign="top" width="24%" align="center">{{ $jobcards["cpcp"]["progress"] }} Task ({{ number_format( ($jobcards["cpcp"]["progress"] / array_sum($jobcards['cpcp'])) * 100) }}%)</td>
+                                    <td valign="top" align="center">{{ $manhours["cpcp"]["actual_manhour"]["progress"] }} Mhrs ( {{ ( $manhours["cpcp"]["actual_manhour"]["progress"]  /  $manhours["cpcp"]["estimation_manhour"]["progress"] ) * 100 }}%)</td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">Waiting for RII</td>
+                                    <td valign="top">:</td>
+                                    <td valign="top" width="24%" align="center">{{ $jobcards["cpcp"]["closed"] }} Task ({{ number_format( ($jobcards["cpcp"]["closed"] / array_sum($jobcards['cpcp'])) * 100) }}%)</td>
+                                    <td valign="top" align="center">{{ $manhours["cpcp"]["actual_manhour"]["closed"] }} Mhrs ( {{ ( $manhours["cpcp"]["actual_manhour"]["closed"]  /  $manhours["cpcp"]["estimation_manhour"]["closed"] ) * 100 }}%)</td>
+                                </tr>
+                                <tr>
+                                    <td valign="top">released</td>
+                                    <td valign="top">:</td>
+                                    <td valign="top" width="24%" align="center">{{ ($jobcards["cpcp"]["released"] + $jobcards["cpcp"]["rii-released"]) }} Task ({{ number_format( (($jobcards["cpcp"]["released"] + $jobcards["cpcp"]["rii-released"]) / array_sum($jobcards['cpcp'])) * 100) }}%)</td>
+                                    <td valign="top" align="center">{{ $manhours["cpcp"]["actual_manhour"]["released"] }} Mhrs ( {{ ( ($manhours["cpcp"]["actual_manhour"]["released"] + $manhours["cpcp"]["actual_manhour"]["rii-released"]  )/( $manhours["cpcp"]["estimation_manhour"]["released"] + $manhours["cpcp"]["estimation_manhour"]["rii-released"] )) * 100 }}%)</td>
+                                </tr>
+                            </table>
                     </div>
                 </div>
 
