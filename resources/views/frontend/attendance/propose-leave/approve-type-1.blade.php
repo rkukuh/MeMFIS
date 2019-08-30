@@ -113,23 +113,24 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('text','Approve')
-                                                        @slot('id', 'approve')
-                                                        @slot('icon','fa fa-check')
-                                                        @slot('class', 'add-approve')
+                                                    @component('frontend.common.buttons.approve')
+                                                        @slot('data_target', '#modal_approve')
+                                                        @slot('class', 'ml-2')
                                                     @endcomponent
 
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
+                                                    @component('frontend.common.buttons.close')
+                                                        @slot('data_target', '#modal_reject')
                                                         @slot('text','Reject')
-                                                        @slot('id', 'reject')
+                                                        @slot('class', 'ml-2')
                                                         @slot('icon','fa fa-times-circle')
-                                                        @slot('class', 'add-reject bg-warning text-dark')
+                                                        @slot('class', 'bg-warning text-dark')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.back')
+
+
+                                                    @include('frontend.attendance.modal-approve')
+                                                    @include('frontend.attendance.modal-reject')
 
                                                 </div>
                                             </div>
