@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.edit')
+                                @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
                                     Attendance Correction
@@ -120,15 +120,25 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-attendance')
-                                                        @slot('class', 'add-attendance')
+                                                    
+                                                    @component('frontend.common.buttons.approve')
+                                                        @slot('data_target', '#modal_approve')
+                                                        @slot('class', 'ml-2')
                                                     @endcomponent
 
-                                                    @include('frontend.common.buttons.reset')
+                                                    @component('frontend.common.buttons.close')
+                                                        @slot('data_target', '#modal_reject')
+                                                        @slot('text','Reject')
+                                                        @slot('class', 'ml-2')
+                                                        @slot('icon','fa fa-times-circle')
+                                                        @slot('class', 'bg-warning text-dark')
+                                                    @endcomponent
+
 
                                                     @include('frontend.common.buttons.back')
+
+                                                    @include('frontend.attendance-correction.modal-approve')
+                                                    @include('frontend.attendance-correction.modal-reject')
 
                                                 </div>
                                             </div>

@@ -222,7 +222,7 @@
                                         <div class="m-portlet__body">
 
                                             @for ($i = 0; $i < count($history); $i++)
-
+                                            
                                             <div class="my-4">
                                                 <div class="d-flex justify-content-end">
                                                     <h3 class="m-portlet__head-text">

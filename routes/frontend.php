@@ -104,15 +104,17 @@ Route::name('frontend.')->group(function () {
         Route::view('/attendance/overtime/approve', 'frontend.attendance.overtime.approve')->name('attendance.overtime.approve');
 
         Route::view('/attendance/propose-leave/create', 'frontend.attendance.propose-leave.create')->name('attendance.propose-leave.create');
-        Route::view('/attendance/propose-leave/approve', 'frontend.attendance.propose-leave.approve')->name('attendance.propose-leave.approve');
+        Route::view('/attendance/propose-leave/approve-type-1', 'frontend.attendance.propose-leave.approve-type-1')->name('attendance.propose-leave.approve-type-1');
+        Route::view('/attendance/propose-leave/approve-type-2', 'frontend.attendance.propose-leave.approve-type-2')->name('attendance.propose-leave.approve-type-2');
 
-        Route::view('/attendance/attendance-correction/create', 'frontend.attendance.propose-leave.create')->name('attendance.propose-leave.create');
+        Route::view('/attendance/attendance-correction/create', 'frontend.attendance.attendance-correction.create')->name('attendance.attendance-correction.create');
 
         /** ATTENDANCE CORRECTION */
 
         Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
         Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
         Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
+        Route::view('/attendance-correction/approve', 'frontend.attendance-correction.approve')->name('attendance-correction.approve');
 
         /** OVERTIME */
 

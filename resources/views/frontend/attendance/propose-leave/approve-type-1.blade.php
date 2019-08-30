@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Attendance Correction
+                    Propose Leave
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.attendance-correction.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.attendance.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Attendance Correction
+                                Propose Leave
                             </span>
                         </a>
                     </li>
@@ -38,10 +38,10 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.edit')
+                                @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Attendance Correction
+                                    Propose Leave
                                 </h3>
                             </div>
                         </div>
@@ -53,17 +53,31 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Employee Name @include('frontend.common.label.required')
+                                                Employee Name 
                                             </label>
                                          
-                                         
-                                            @include('frontend.common.employee.index')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generated from attendance')
+                                            @endcomponent
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Correction Date @include('frontend.common.label.required')
+                                                Leave Types 
                                             </label>
-
+                                          
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generated from user propose')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Date Start
+                                            </label>
+                                         
                                             @component('frontend.common.input.datepicker')
                                                 @slot('id', 'date')
                                                 @slot('text', 'Date')
@@ -71,48 +85,27 @@
                                                 @slot('id_error','date')
                                             @endcomponent
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Correction Time @include('frontend.common.label.required')
+                                                Date End 
                                             </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Correction Time')
-                                                @slot('id', 'correction_time')
-                                                @slot('name', 'correction_time')
-                                                @slot('id_error', 'correction_time')
+                                         
+                                            @component('frontend.common.input.datepicker')
+                                                @slot('id', 'exp_date')
+                                                @slot('text', 'Date End')
+                                                @slot('name', 'exp_date')
+                                                @slot('id_error','exp_date')
                                             @endcomponent
-
-                                            {{-- Check-In
-                                            Check-Out --}}
-
                                         </div>
-                                        @if("checkin" == "checkin")
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Time 
-                                                </label>
-
-                                                @component('frontend.common.input.timepicker')
-                                                    @slot('id', 'time')
-                                                    @slot('class','m_timepicker_1 text-center')
-                                                @endcomponent
-                                            </div>
-                                        @endif
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Description 
+                                                Description
                                             </label>
 
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '5')
-                                                @slot('id', 'description')
-                                                @slot('name', 'description')
-                                                @slot('text', 'Description')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generated from user propose')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -120,15 +113,24 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-attendance')
-                                                        @slot('class', 'add-attendance')
+                                                    @component('frontend.common.buttons.approve')
+                                                        @slot('data_target', '#modal_approve')
+                                                        @slot('class', 'ml-2')
                                                     @endcomponent
 
-                                                    @include('frontend.common.buttons.reset')
+                                                    @component('frontend.common.buttons.close')
+                                                        @slot('data_target', '#modal_reject')
+                                                        @slot('text','Reject')
+                                                        @slot('class', 'ml-2')
+                                                        @slot('icon','fa fa-times-circle')
+                                                        @slot('class', 'bg-warning text-dark')
+                                                    @endcomponent
 
                                                     @include('frontend.common.buttons.back')
+
+
+                                                    @include('frontend.attendance.modal-approve')
+                                                    @include('frontend.attendance.modal-reject')
 
                                                 </div>
                                             </div>
@@ -146,7 +148,7 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/correction-time.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/timepicker.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/leave-type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
 @endpush
