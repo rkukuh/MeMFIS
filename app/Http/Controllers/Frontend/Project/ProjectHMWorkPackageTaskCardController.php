@@ -66,8 +66,6 @@ class ProjectHMWorkPackageTaskCardController extends Controller
         if($project_wokpackage_taskcard <> null){
             return response()->json(['title' => "Danger"]);
         }else{
-            // $workPackage->taskcards()->attach(TaskCard::where('uuid', $request->taskcard)->first()->id);
-
             $project_wokpackage->taskcards()->create([
                 'taskcard_id' => $taskcard->id,
             ]);
@@ -206,6 +204,5 @@ class ProjectHMWorkPackageTaskCardController extends Controller
 
         return response()->json($ProjectWorkpackage);
     }
-
 
 }
