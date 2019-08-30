@@ -89,17 +89,11 @@ class WorkProgressReportController extends Controller
             
         }
         
-        foreach($this->tc_type as $type){
-            if( sizeof($jobcard_all->where("tc_type", $type)->pluck("tc_type")) > 0 ) {
-                $manhours[$type]["actual"] = $jobcard_all->where('tc_type', $type)->sum('actual_manhours');
-                $manhours[$type]["total"] = $jobcard_all->where('tc_type', $type)->sum('estimation_manhour');
-            }
-        }
-        
         $jobcards["overall_done"] = $jobcards["routine_done"] = $jobcards["non_routine_done"] = 0;
         
         foreach($jobcard_all as $key => $jobcard){
             $statusses[$key] = $jobcard->progresses->last()->status_id;
+            $jobcard->status = Status::find($jobcard->progresses->last()->status_id)->code;
             if($jobcard->jobcardable->type->of == 'taskcard-type-routine'){
                 array_push($statusses_routine, $jobcard->progresses->last()->status_id);
             }else{
@@ -139,6 +133,57 @@ class WorkProgressReportController extends Controller
                     break;
                 default:
                     array_push($ht_crr, $jobcard->progresses->last()->status_id);
+            }
+        }
+
+        foreach($this->tc_type as $type){
+            if( sizeof($jobcard_all->where("tc_type", $type)->pluck("tc_type")) > 0 ) {
+                $manhours[$type]["actual"] = $jobcard_all->where('tc_type', $type)->sum('actual_manhours');
+                $manhours[$type]["total"] = $jobcard_all->where('tc_type', $type)->sum('estimation_manhour');
+
+                if( $jobcard_all->where('status', "open")->sum('estimation_manhour') > 0 ) { 
+                    $manhours[$type]["estimation_manhour"]["open"] = $jobcard_all->where('status', "open")->sum('estimation_manhour'); 
+                }else{
+                    $manhours[$type]["estimation_manhour"]["open"] = 1;
+                }
+
+                if($jobcard_all->where('status', "closed")->sum('estimation_manhour') > 0) { 
+                    $manhours[$type]["estimation_manhour"]["closed"] = $jobcard_all->where('status', "closed")->sum('estimation_manhour'); 
+                }else{
+                    $manhours[$type]["estimation_manhour"]["closed"] = 1;
+                }
+
+                if($jobcard_all->where('status', "pending")->sum('estimation_manhour') > 0) { 
+                    $manhours[$type]["estimation_manhour"]["pending"] = $jobcard_all->where('status', "pending")->sum('estimation_manhour'); 
+                }else{
+                    $manhours[$type]["estimation_manhour"]["pending"] = 1;
+                }
+
+                if($jobcard_all->where('status', "progress")->sum('estimation_manhour') > 0) { 
+                    $manhours[$type]["estimation_manhour"]["progress"] = $jobcard_all->where('status', "progress")->sum('estimation_manhour'); 
+                }else{
+                    $manhours[$type]["estimation_manhour"]["progress"] = 1;
+                }
+
+                if($jobcard_all->where('status', "released")->sum('estimation_manhour') > 0) { 
+                    $manhours[$type]["estimation_manhour"]["released"] = $jobcard_all->where('status', "released")->sum('estimation_manhour'); 
+                }else{
+                    $manhours[$type]["estimation_manhour"]["released"] = 1;
+                }
+
+                if($jobcard_all->where('status', "rii-released")->sum('estimation_manhour') > 0) { 
+                    $manhours[$type]["estimation_manhour"]["rii-released"] = $jobcard_all->where('status', "rii-released")->sum('estimation_manhour'); 
+                }else{
+                    $manhours[$type]["estimation_manhour"]["rii-released"] = 1;
+                }
+
+
+                $manhours[$type]["actual_manhour"]["open"] = $jobcard_all->where('status', "open")->sum('actual_manhours');
+                $manhours[$type]["actual_manhour"]["closed"] = $jobcard_all->where('status', "closed")->sum('actual_manhours');
+                $manhours[$type]["actual_manhour"]["pending"] = $jobcard_all->where('status', "pending")->sum('actual_manhours');
+                $manhours[$type]["actual_manhour"]["progress"] = $jobcard_all->where('status', "progress")->sum('actual_manhours');
+                $manhours[$type]["actual_manhour"]["released"] = $jobcard_all->where('status', "released")->sum('actual_manhours');
+                $manhours[$type]["actual_manhour"]["rii-released"] = $jobcard_all->where('status', "rii-released")->sum('actual_manhours');
             }
         }
         
@@ -234,7 +279,7 @@ class WorkProgressReportController extends Controller
         $data[3]['label'] = 'CLOSED'; 
         if( isset($count_each["closed"]) ){ $data[3]['value'] = $count_each["closed"]; } else{ $data[3]['value'] = 0; }
         $data[4]['label'] = 'RELEASED'; 
-        if( isset($count_each["released"]) ){ $data[4]['value'] = $count_each["released"]; } else{ $data[4]['value'] = 0; }
+        if( isset($count_each["released"]) ){ $data[4]['value'] = $count_each["pending"]; } else{ $data[4]['value'] = 0; }
         $data[5]['label'] = 'RII RELEASED'; 
         if( isset($count_each["rii-released"]) ){ $data[5]['value'] = $count_each["rii-released"]; } else{ $data[5]['value'] = 0; }
 
@@ -333,7 +378,6 @@ class WorkProgressReportController extends Controller
         if(!empty($counter)){
             $container = [];
             $counter = array_count_values($counter);
-            
             foreach($counter as $key => $value ){
                 $counter[Status::find($key)->code] = $value;
             }
@@ -345,7 +389,7 @@ class WorkProgressReportController extends Controller
             if( isset($counter["released"]) ){ $container["released"] = $counter["released"]; } else{ $container["released"] = 0; }
             if( isset($counter["rii-released"]) ){ $container["rii-released "] = $counter["rii-released"]; } else{ $container["rii-released"] = 0; }
             if( $container["released"] > 0 || $container["rii-released"] > 0 ){ $container["done"] = $container["rii-released"] + $container["released"]; } else{ $container["done"] = 0; }
-            
+            $this->jobcard["all"] = 
             $this->jobcard[$attribute] = $container;
 
             return;
