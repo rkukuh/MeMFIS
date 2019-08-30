@@ -56,13 +56,12 @@ Route::name('frontend.')->group(function () {
         Route::resource('branch', 'BranchController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
-        Route::resource('manhour', 'ManhourController');
+        // Route::resource('manhour', 'ManhourController');
         Route::resource('benefit', 'BenefitController');
         Route::resource('company', 'CompanyController');
         Route::resource('language', 'LanguageController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
-        Route::resource('manhour', 'ManhourController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
         Route::resource('leave-period','LeavePeriodController');
