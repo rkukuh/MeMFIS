@@ -115,6 +115,7 @@ Route::name('frontend.')->group(function () {
         Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
         Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
         Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
+        Route::view('/attendance-correction/approve', 'frontend.attendance-correction.approve')->name('attendance-correction.approve');
 
         /** OVERTIME */
 
