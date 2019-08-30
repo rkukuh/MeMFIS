@@ -1,4 +1,4 @@
-<div class="modal fade" id="taskcard_sequence"  role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="instruction_sequence"  role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
@@ -6,7 +6,7 @@
                 @include('frontend.common.label.create-new')
 
                 <h5 class="modal-title" id="TitleModalItem">
-                    Sequence
+                    Sequence Instruction
 
                     <small id="item-storage" class="m--font-focus"></small>
                 </h5>
@@ -17,7 +17,7 @@
             <div class="modal-body">
 
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="ItemForm">
-                    <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
+                    <input type="hidden" class="form-control form-control-danger m-input" name="uuid-instruction" id="uuid-instruction">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -27,9 +27,9 @@
 
                                 @component('frontend.common.input.number')
                                     @slot('text', 'Sequence')
-                                    @slot('name', 'sequence')
-                                    @slot('id', 'sequence')
-                                    @slot('id_error', 'sequence')
+                                    @slot('name', 'sequence-instruction')
+                                    @slot('id', 'sequence-instruction')
+                                    @slot('id_error', 'sequence-instruction')
                                 @endcomponent
                             </div>
                         </div>
@@ -38,11 +38,11 @@
                         <div class="flex">
                             <div class="action-buttons">
                                     @component('frontend.common.buttons.update')
-                                        @slot('class', 'sequence')
+                                        @slot('class', 'sequence-intruction')
                                         @slot('type', 'button')
                                     @endcomponent
                                     @component('frontend.common.buttons.reset')
-                                        @slot('class', 'reset-sequence')
+                                        @slot('class', 'reset-sequance-intruction')
                                     @endcomponent
                                 @include('frontend.common.buttons.close')
                             </div>

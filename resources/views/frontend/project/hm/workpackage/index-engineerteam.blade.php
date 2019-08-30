@@ -53,12 +53,15 @@
                                     <div class="tab-pane active show" id="m_tabs_enginner" role="tabpanel">
                                         @include('frontend.project.hm.engineer.index')
                                     </div>
-                                    
+
                                     @include('frontend.project.hm.modal.material.routine-si')
                                     @include('frontend.project.hm.modal.tool.routine-si')
                                     @include('frontend.project.hm.modal.sequence')
+                                    @include('frontend.project.hm.modal.sequence-instruction')
                                     @include('frontend.project.hm.modal.predecessor')
                                     @include('frontend.project.hm.modal.successor')
+                                    @include('frontend.project.hm.modal.create-predecessor')
+                                    @include('frontend.project.hm.modal.create-successor')
 
 
                                     <div class="form-group m-form__group row">

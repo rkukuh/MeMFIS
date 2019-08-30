@@ -577,6 +577,46 @@ let Datatables = {
                         table.originalDataSet = [];
                         table.reload();
 
+                        table = $('.si_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+        $('.modal-footer').on('click', '.sequence-intruction', function () {
+            triggeruuid = $('input[name=uuid-instruction]').val();
+            sequence = $('input[name=sequence-instruction]').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'put',
+                url: '/project-hm/'+triggeruuid+'/sequence/instruction',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    sequence: sequence,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success('Sequence has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+                        $('#instruction_sequence').modal('hide');
+
+                        let table = $('.ea_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $('.eo_datatable').mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
                         table = $('.ad-sb_datatable').mDatatable();
 
                         table.originalDataSet = [];
@@ -593,7 +633,9 @@ let Datatables = {
                         table.reload();
                     }
                 }
-            });        });
+            });
+        });
+
         $('.basic_datatable').on('click', '.sequence', function () {
             triggeruuid = $(this).data('uuid');
             sequence = $(this).data('sequence');
@@ -1029,12 +1071,12 @@ let Datatables = {
             }
         });
 
-        $('.ad-sb_datatable').on('click', '.sequence', function () {
+        $('.ad-sb_datatable').on('click', '.sequence-instruction', function () {
             triggeruuid = $(this).data('uuid');
             sequence = $(this).data('sequence');
 
-            document.getElementById('uuid').value = triggeruuid;
-            document.getElementById('sequence').value = sequence;
+            document.getElementById('uuid-instruction').value = triggeruuid;
+            document.getElementById('sequence-instruction').value = sequence;
 
         });
         $('.ad-sb_datatable').on('click', '.mandatory', function () {
@@ -1149,13 +1191,12 @@ let Datatables = {
             }
         });
 
-
-        $('.cmr-awl_datatable').on('click', '.sequence', function () {
+        $('.cmr-awl_datatable').on('click', '.sequence-instruction', function () {
             triggeruuid = $(this).data('uuid');
             sequence = $(this).data('sequence');
 
-            document.getElementById('uuid').value = triggeruuid;
-            document.getElementById('sequence').value = sequence;
+            document.getElementById('uuid-instruction').value = triggeruuid;
+            document.getElementById('sequence-instruction').value = sequence;
 
         });
         $('.cmr-awl_datatable').on('click', '.mandatory', function () {
@@ -1232,6 +1273,15 @@ let Datatables = {
 
         });
 
+
+        $('.ea_datatable').on('click', '.sequence-instruction', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid-instruction').value = triggeruuid;
+            document.getElementById('sequence-instruction').value = sequence;
+
+        });
         $('.ea_datatable').on('click', '.mandatory', function () {
             triggeruuid = $(this).data('uuid');
             mandatory = $(this).data('mandatory');
@@ -1305,6 +1355,16 @@ let Datatables = {
             });
 
         });
+
+        $('.eo_datatable').on('click', '.sequence-instruction', function () {
+            triggeruuid = $(this).data('uuid');
+            sequence = $(this).data('sequence');
+
+            document.getElementById('uuid-instruction').value = triggeruuid;
+            document.getElementById('sequence-instruction').value = sequence;
+
+        });
+
         $('.eo_datatable').on('click', '.mandatory', function () {
             triggeruuid = $(this).data('uuid');
             mandatory = $(this).data('mandatory');
