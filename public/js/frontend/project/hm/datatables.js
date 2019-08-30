@@ -1920,7 +1920,7 @@ let Datatables = {
             });
         });
 
-        //basic
+        //taskcared delete
         $(".m-datatable").on("click", ".delete", function() {
             let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
             let datatableClassName = parent_id.className.split(" ");
@@ -1942,6 +1942,56 @@ let Datatables = {
                         },
                         type: "DELETE",
                         url: "/project-hm/" + triggeruuid + "/destroy",
+                        success: function(data) {
+                            toastr.success(
+                                "Taskcard has been deleted.",
+                                "Deleted",
+                                {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $(
+                                "." + datatableClassName
+                            ).mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function(jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function(index, value) {
+                                $("#delete-error").html(value);
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        //instruction delete
+        $(".m-datatable").on("click", ".delete-instruction", function() {
+            let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            let datatableClassName = parent_id.className.split(" ");
+            triggeruuid = $(this).data("uuid");
+            swal({
+                title: "Sure want to remove?",
+                type: "question",
+                confirmButtonText: "Yes, REMOVE",
+                confirmButtonColor: "#d33",
+                cancelButtonText: "Cancel",
+                showCancelButton: true
+            }).then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                "content"
+                            )
+                        },
+                        type: "DELETE",
+                        url: "/project-hm/" + triggeruuid + "/destroy/instruction",
                         success: function(data) {
                             toastr.success(
                                 "Taskcard has been deleted.",

@@ -259,7 +259,7 @@ let NonRoutineWorkpackage = {
                 overflow: 'visible',
                 template: function (t, e, i) {
                     return (
-                        '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                        '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-instruction" href="#" data-uuid=' +
                         t.uuid +
                         ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                     );
@@ -487,7 +487,7 @@ let NonRoutineWorkpackage = {
                 overflow: 'visible',
                 template: function (t, e, i) {
                     return (
-                        '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                        '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-instruction" href="#" data-uuid=' +
                         t.uuid +
                         ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                     );
@@ -715,7 +715,7 @@ let NonRoutineWorkpackage = {
                 overflow: 'visible',
                 template: function (t, e, i) {
                     return (
-                        '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                        '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-instruction" href="#" data-uuid=' +
                         t.uuid +
                         ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                     );
@@ -943,7 +943,7 @@ let NonRoutineWorkpackage = {
                 overflow: 'visible',
                 template: function (t, e, i) {
                     return (
-                        '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                        '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-instruction" href="#" data-uuid=' +
                         t.uuid +
                         ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                     );

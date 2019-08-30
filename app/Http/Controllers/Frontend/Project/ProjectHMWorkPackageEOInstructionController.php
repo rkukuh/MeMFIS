@@ -67,7 +67,7 @@ class ProjectHMWorkPackageEOInstructionController extends Controller
         if($project_wokpackage_taskcard <> null){
             return response()->json(['title' => "Danger"]);
         }else{
-            $project_wokpackage->eo_instructions()->create([
+                $project_wokpackage->eo_instructions()->create([
                 'eo_instruction_id' => $instruction->id,
             ]);
 
