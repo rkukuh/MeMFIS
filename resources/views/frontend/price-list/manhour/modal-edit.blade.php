@@ -111,7 +111,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-price')
+                                    @slot('class', 'add-price-manhour')
                                     @slot('type', 'button')
                                 @endcomponent
 
