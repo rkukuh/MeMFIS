@@ -317,12 +317,12 @@
 
                     @include('frontend.common.buttons.reset')
                 @elseif ($button_parameter == 'approvals')
-                    @component('frontend.common.buttons.submit')
+                    @component('frontend.common.buttons.submit')     
                     @slot('type','button')
                     @slot('text','Approve')
                     @slot('icon','fa-check')
-                    @slot('id', 'approve')
-                    @slot('class', 'approve')
+                    @slot('id', 'approve_benefit')
+                    @slot('class', 'approve_benefit')
                     @endcomponent
                 @else
                     @component('frontend.common.buttons.submit')
@@ -395,6 +395,7 @@
 @endpush
 
 @push('footer-scripts')
-<script src="{{ asset('js/frontend/employee/employee/edit_benefit.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/employee/approval_benefit.js') }}"></script>
 <script src="{{ asset('js/frontend/employee/employee/create_benefit.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/employee/edit_benefit.js') }}"></script>
 @endpush

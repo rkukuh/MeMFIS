@@ -18,6 +18,7 @@ class EmployeeBenefit extends Migration
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('benefit_id');
             $table->bigInteger('amount');
+            $table->dateTime('approved_at')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
