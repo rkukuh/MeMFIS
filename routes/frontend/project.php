@@ -74,7 +74,9 @@ Route::name('frontend.')->group(function () {
                 Route::put('/{ProjectWorkpackage}/rii/', 'ProjectHMWorkPackageTaskCardController@rii')->name('project-hm.rii.workpackage');
                 Route::put('/{ProjectWorkpackage}/rii/instruction', 'ProjectHMWorkPackageTaskCardController@riiInstruction')->name('project-hm.rii.instruction.workpackage');
                 Route::post('/{project}/workpackage/{workpackage}/taskcard/{taskcard}', 'ProjectHMWorkPackageTaskCardController@store')->name('project-hm.store.taskcard');
+                Route::post('/{project}/workpackage/{workpackage}/instruction/{instruction}', 'ProjectHMWorkPackageEOInstructionController@store')->name('project-hm.store.instruction');
                 Route::delete('/{ProjectWorkpackage}/destroy/', 'ProjectHMWorkPackageTaskCardController@destroy')->name('project-hm.destroy.taskcard');
+                Route::delete('/{ProjectWorkpackage}/destroy/instruction', 'ProjectHMWorkPackageEOInstructionController@destroy')->name('project-hm.destroy.instruction');
 
                 /** Transaction: HTCRR */
 

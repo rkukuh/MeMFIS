@@ -1,7 +1,7 @@
 let Datatables = {
-    init: function () {
+    init: function() {
         $("#basic_datatable").DataTable({
-            "dom": '<"top"f>rt<"bottom">pl',
+            dom: '<"top"f>rt<"bottom">pl',
             responsive: !0,
             searchDelay: 500,
             processing: !0,
@@ -26,18 +26,22 @@ let Datatables = {
                     data: "Actions"
                 }
             ],
-            columnDefs: [{
+            columnDefs: [
+                {
                     targets: -1,
                     orderable: !1,
-                    render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-basic" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                    render: function(a, e, t, n) {
+                        return (
+                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-basic" title="View" data-uuid="' +
+                            t.uuid +
+                            '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        );
                     }
-                },
-
+                }
             ]
-        })
+        });
         $("#sip_datatable").DataTable({
-            "dom": '<"top"f>rt<"bottom">pl',
+            dom: '<"top"f>rt<"bottom">pl',
             responsive: !0,
             searchDelay: 500,
             processing: !0,
@@ -62,18 +66,22 @@ let Datatables = {
                     data: "Actions"
                 }
             ],
-            columnDefs: [{
+            columnDefs: [
+                {
                     targets: -1,
                     orderable: !1,
-                    render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-sip" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                    render: function(a, e, t, n) {
+                        return (
+                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-sip" title="View" data-uuid="' +
+                            t.uuid +
+                            '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        );
                     }
-                },
-
+                }
             ]
-        })
+        });
         $("#cpcp_datatable").DataTable({
-            "dom": '<"top"f>rt<"bottom">pl',
+            dom: '<"top"f>rt<"bottom">pl',
             responsive: !0,
             searchDelay: 500,
             processing: !0,
@@ -98,18 +106,22 @@ let Datatables = {
                     data: "Actions"
                 }
             ],
-            columnDefs: [{
+            columnDefs: [
+                {
                     targets: -1,
                     orderable: !1,
-                    render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-cpcp" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                    render: function(a, e, t, n) {
+                        return (
+                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-cpcp" title="View" data-uuid="' +
+                            t.uuid +
+                            '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        );
                     }
-                },
-
+                }
             ]
-        })
+        });
         $("#adsb_datatable").DataTable({
-            "dom": '<"top"f>rt<"bottom">pl',
+            dom: '<"top"f>rt<"bottom">pl',
             responsive: !0,
             searchDelay: 500,
             processing: !0,
@@ -128,18 +140,22 @@ let Datatables = {
                     data: "Actions"
                 }
             ],
-            columnDefs: [{
+            columnDefs: [
+                {
                     targets: -1,
                     orderable: !1,
-                    render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-adsb" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                    render: function(a, e, t, n) {
+                        return (
+                            '<button class="btn btn-primary btn-sm m-btn--hover-brand instructions" data-toggle="modal" data-target="#modal_instruction" type="button"  title="View" data-uuid="' +
+                            t.uuid +
+                            '">\n<span><i class="la la-edit"></i><span>Select</span></span></button>'
+                        );
                     }
-                },
-
+                }
             ]
-        })
+        });
         $("#cmrawl_datatable").DataTable({
-            "dom": '<"top"f>rt<"bottom">pl',
+            dom: '<"top"f>rt<"bottom">pl',
             responsive: !0,
             searchDelay: 500,
             processing: !0,
@@ -158,18 +174,90 @@ let Datatables = {
                     data: "Actions"
                 }
             ],
-            columnDefs: [{
+            columnDefs: [
+                {
                     targets: -1,
                     orderable: !1,
-                    render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-cmrawl" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                    render: function(a, e, t, n) {
+                        return (
+                            '<button class="btn btn-primary btn-sm m-btn--hover-brand instructions" data-toggle="modal" data-target="#modal_instruction" type="button"  title="View" data-uuid="' +
+                            t.uuid +
+                            '">\n<span><i class="la la-edit"></i><span>Select</span></span></button>'
+                        );
                     }
-                },
-
+                }
             ]
-        })
+        });
+        $("#ea_datatable").DataTable({
+            dom: '<"top"f>rt<"bottom">pl',
+            responsive: !0,
+            searchDelay: 500,
+            processing: !0,
+            serverSide: !0,
+            lengthMenu: [5, 10, 25, 50],
+            pageLength: 5,
+            ajax: "/datatables/taskcard-eo/cmrawl/modal",
+            columns: [
+                {
+                    data: "number"
+                },
+                {
+                    data: "title"
+                },
+                {
+                    data: "Actions"
+                }
+            ],
+            columnDefs: [
+                {
+                    targets: -1,
+                    orderable: !1,
+                    render: function(a, e, t, n) {
+                        return (
+                            '<button class="btn btn-primary btn-sm m-btn--hover-brand instructions" data-toggle="modal" data-target="#modal_instruction" type="button"  title="View" data-uuid="' +
+                            t.uuid +
+                            '">\n<span><i class="la la-edit"></i><span>Select</span></span></button>'
+                        );
+                    }
+                }
+            ]
+        });
+        $("#eo_datatable").DataTable({
+            dom: '<"top"f>rt<"bottom">pl',
+            responsive: !0,
+            searchDelay: 500,
+            processing: !0,
+            serverSide: !0,
+            lengthMenu: [5, 10, 25, 50],
+            pageLength: 5,
+            ajax: "/datatables/taskcard-eo/cmrawl/modal",
+            columns: [
+                {
+                    data: "number"
+                },
+                {
+                    data: "title"
+                },
+                {
+                    data: "Actions"
+                }
+            ],
+            columnDefs: [
+                {
+                    targets: -1,
+                    orderable: !1,
+                    render: function(a, e, t, n) {
+                        return (
+                            '<button class="btn btn-primary btn-sm m-btn--hover-brand instructions" data-toggle="modal" data-target="#modal_instruction" type="button"  title="View" data-uuid="' +
+                            t.uuid +
+                            '">\n<span><i class="la la-edit"></i><span>Select</span></span></button>'
+                        );
+                    }
+                }
+            ]
+        });
         $("#si_datatable").DataTable({
-            "dom": '<"top"f>rt<"bottom">pl',
+            dom: '<"top"f>rt<"bottom">pl',
             responsive: !0,
             searchDelay: 500,
             processing: !0,
@@ -194,69 +282,97 @@ let Datatables = {
                     data: "Actions"
                 }
             ],
-            columnDefs: [{
+            columnDefs: [
+                {
                     targets: -1,
                     orderable: !1,
-                    render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-si" title="View" data-uuid="' + t.uuid + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                    render: function(a, e, t, n) {
+                        return (
+                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-si" title="View" data-uuid="' +
+                            t.uuid +
+                            '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        );
                     }
-                },
-
+                }
             ]
-        })
+        });
 
-        $('<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left: 60%; color: white;"><span><i class="la la-refresh"></i><span>Reload</span></span> </button>').appendTo('div.dataTables_filter');
-        $('.paging_simple_numbers').addClass('pull-left');
-        $('.dataTables_length').addClass('pull-right');
-        $('.dataTables_info').addClass('pull-left');
-        $('.dataTables_info').addClass('margin-info');
-        $('.paging_simple_numbers').addClass('padding-datatable');
+        $(
+            '<a class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm refresh" style="margin-left: 60%; color: white;"><span><i class="la la-refresh"></i><span>Reload</span></span> </button>'
+        ).appendTo("div.dataTables_filter");
+        $(".paging_simple_numbers").addClass("pull-left");
+        $(".dataTables_length").addClass("pull-right");
+        $(".dataTables_info").addClass("pull-left");
+        $(".dataTables_info").addClass("margin-info");
+        $(".paging_simple_numbers").addClass("padding-datatable");
 
-        $('.dataTables_filter').on('click', '.refresh', function () {
-            $('#basic_datatable').DataTable().ajax.reload();
-            $('#sip_datatable').DataTable().ajax.reload();
-            $('#cpcp_datatable').DataTable().ajax.reload();
-            $('#adsb_datatable').DataTable().ajax.reload();
-            $('#cmrawl_datatable').DataTable().ajax.reload();
-            $('#si_datatable').DataTable().ajax.reload();
+        $(".dataTables_filter").on("click", ".refresh", function() {
+            $("#basic_datatable")
+                .DataTable()
+                .ajax.reload();
+            $("#sip_datatable")
+                .DataTable()
+                .ajax.reload();
+            $("#cpcp_datatable")
+                .DataTable()
+                .ajax.reload();
+            $("#adsb_datatable")
+                .DataTable()
+                .ajax.reload();
+            $("#cmrawl_datatable")
+                .DataTable()
+                .ajax.reload();
+            $("#si_datatable")
+                .DataTable()
+                .ajax.reload();
         });
 
         let material_datatables_init = true;
         let tool_datatables_init = true;
         let predecessor_datatables_init = true;
         let successor_datatables_init = true;
+        let instruction_datatables_init = true;
 
-        $('#basic_datatable').on('click', '.select-basic', function () {
-            let taskcard_uuid = $(this).data('uuid');
+        $("#basic_datatable").on("click", ".select-basic", function() {
+            let taskcard_uuid = $(this).data("uuid");
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'post',
-                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid,
+                type: "post",
+                url:
+                    "/project-hm/" +
+                    project_uuid +
+                    "/workpackage/" +
+                    workPackage_uuid +
+                    "/taskcard/" +
+                    taskcard_uuid,
                 data: {
-                    _token: $('input[name=_token]').val(),
+                    _token: $("input[name=_token]").val()
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                         // if (data.errors.name) {
                         //     $('#name-error').html(data.errors.name[0]);
-
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error('Task card alrady exists!', 'Error',  {
+                            toastr.error("Task card alrady exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
-                            $('#modal_basic').modal('hide');
+                            $("#modal_basic").modal("hide");
 
-                            toastr.success('Task Card has been added.', 'Success',  {
-                                timeOut: 5000
-                            });
+                            toastr.success(
+                                "Task Card has been added.",
+                                "Success",
+                                {
+                                    timeOut: 5000
+                                }
+                            );
 
-                            let table = $('.basic_datatable').mDatatable();
+                            let table = $(".basic_datatable").mDatatable();
                             anyChanges = true;
 
                             table.originalDataSet = [];
@@ -267,38 +383,47 @@ let Datatables = {
             });
         });
 
-        $('#sip_datatable').on('click', '.select-sip', function () {
-            let taskcard_uuid = $(this).data('uuid');
+        $("#sip_datatable").on("click", ".select-sip", function() {
+            let taskcard_uuid = $(this).data("uuid");
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'post',
-                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid,
+                type: "post",
+                url:
+                    "/project-hm/" +
+                    project_uuid +
+                    "/workpackage/" +
+                    workPackage_uuid +
+                    "/taskcard/" +
+                    taskcard_uuid,
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    taskcard: $(this).data('uuid'),
+                    _token: $("input[name=_token]").val(),
+                    taskcard: $(this).data("uuid")
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                         // if (data.errors.name) {
                         //     $('#name-error').html(data.errors.name[0]);
-
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error('Task card alrady exists!', 'Error',  {
+                            toastr.error("Task card alrady exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
-                            $('#modal_sip').modal('hide');
+                            $("#modal_sip").modal("hide");
 
-                            toastr.success('Task Card has been added.', 'Success',  {
-                                timeOut: 5000
-                            });
+                            toastr.success(
+                                "Task Card has been added.",
+                                "Success",
+                                {
+                                    timeOut: 5000
+                                }
+                            );
 
-                            let table = $('.sip_datatable').mDatatable();
+                            let table = $(".sip_datatable").mDatatable();
                             anyChanges = true;
 
                             table.originalDataSet = [];
@@ -309,38 +434,47 @@ let Datatables = {
             });
         });
 
-        $('#cpcp_datatable').on('click', '.select-cpcp', function () {
-            let taskcard_uuid = $(this).data('uuid');
+        $("#cpcp_datatable").on("click", ".select-cpcp", function() {
+            let taskcard_uuid = $(this).data("uuid");
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'post',
-                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid,
+                type: "post",
+                url:
+                    "/project-hm/" +
+                    project_uuid +
+                    "/workpackage/" +
+                    workPackage_uuid +
+                    "/taskcard/" +
+                    taskcard_uuid,
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    taskcard: $(this).data('uuid'),
+                    _token: $("input[name=_token]").val(),
+                    taskcard: $(this).data("uuid")
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                         // if (data.errors.name) {
                         //     $('#name-error').html(data.errors.name[0]);
-
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error('Task card alrady exists!', 'Error',  {
+                            toastr.error("Task card alrady exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
-                            $('#modal_cpcp').modal('hide');
+                            $("#modal_cpcp").modal("hide");
 
-                            toastr.success('Task Card has been added.', 'Success',  {
-                                timeOut: 5000
-                            });
+                            toastr.success(
+                                "Task Card has been added.",
+                                "Success",
+                                {
+                                    timeOut: 5000
+                                }
+                            );
 
-                            let table = $('.cpcp_datatable').mDatatable();
+                            let table = $(".cpcp_datatable").mDatatable();
                             anyChanges = true;
 
                             table.originalDataSet = [];
@@ -351,40 +485,87 @@ let Datatables = {
             });
         });
 
-        $('#adsb_datatable').on('click', '.select-adsb', function () {
-            let taskcard_uuid = $(this).data('uuid');
+        $("#adsb_datatable").on("click", ".instructions", function() {
+            if (instruction_datatables_init == true) {
+                instruction_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#instruction_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+        $("#cmrawl_datatable").on("click", ".instructions", function() {
+            if (instruction_datatables_init == true) {
+                instruction_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#instruction_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+
+        $("#si_datatable").on("click", ".select-si", function() {
+            let taskcard_uuid = $(this).data("uuid");
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'post',
-                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid,
+                type: "post",
+                url:
+                    "/project-hm/" +
+                    project_uuid +
+                    "/workpackage/" +
+                    workPackage_uuid +
+                    "/taskcard/" +
+                    taskcard_uuid,
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    taskcard: $(this).data('uuid'),
+                    _token: $("input[name=_token]").val(),
+                    taskcard: $(this).data("uuid")
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                         // if (data.errors.name) {
                         //     $('#name-error').html(data.errors.name[0]);
-
                         //     document.getElementById('name').value = name;
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error('Task card alrady exists!', 'Error',  {
+                            toastr.error("Task card alrady exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
-                            $('#modal_ad_sb').modal('hide');
+                            $("#modal_si").modal("hide");
 
-                            toastr.success('Task Card has been added.', 'Success',  {
-                                timeOut: 5000
-                            });
+                            toastr.success(
+                                "Task Card has been added.",
+                                "Success",
+                                {
+                                    timeOut: 5000
+                                }
+                            );
 
-                            let table = $('.ad-sb_datatable').mDatatable();
+                            let table = $(".si_datatable").mDatatable();
                             anyChanges = true;
-
                             table.originalDataSet = [];
                             table.reload();
                         }
@@ -393,191 +574,122 @@ let Datatables = {
             });
         });
 
-        $('#si_datatable').on('click', '.select-si', function () {
-            let taskcard_uuid = $(this).data('uuid');
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid,
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    taskcard: $(this).data('uuid'),
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        // if (data.errors.name) {
-                        //     $('#name-error').html(data.errors.name[0]);
-
-                        //     document.getElementById('name').value = name;
-                        // }
-                    } else {
-                        if (data.title == "Danger") {
-                            toastr.error('Task card alrady exists!', 'Error',  {
-                                timeOut: 5000
-                            });
-                        } else {
-                            $('#modal_si').modal('hide');
-
-                            toastr.success('Task Card has been added.', 'Success',  {
-                                timeOut: 5000
-                            });
-
-                            let table = $('.si_datatable').mDatatable();
-                            anyChanges = true;
-                            table.originalDataSet = [];
-                            table.reload();
-                        }
-                    }
-                }
-            });
+        $(".b-t-n").on("click", ".btn-add", function() {
+            if ($("#predecessorBtn").length == 0) {
+            } else {
+                $(".add-predecessor-modal").remove();
+            }
+            if ($("#successorBtn").length == 0) {
+            } else {
+                $(".add-successor-modal").remove();
+            }
         });
 
-        $('#cmrawl_datatable').on('click', '.select-cmrawl', function () {
-            let taskcard_uuid = $(this).data('uuid');
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'post',
-                url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/taskcard/'+taskcard_uuid,
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    taskcard: $(this).data('uuid'),
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        // if (data.errors.name) {
-                        //     $('#name-error').html(data.errors.name[0]);
-
-                        //     document.getElementById('name').value = name;
-                        // }
-                    } else {
-                        if (data.title == "Danger") {
-                            toastr.error('Task card alrady exists!', 'Error',  {
-                                timeOut: 5000
-                            });
-                        } else {
-                            $('#modal_cmr_awl').modal('hide');
-
-                            toastr.success('Task Card has been added.', 'Success',  {
-                                timeOut: 5000
-                            });
-
-                            let table = $('.cmr-awl_datatable').mDatatable();
-                            anyChanges = true;
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        }
-                    }
-                }
-            });
-        });
-
-        $('.b-t-n').on('click', '.btn-add', function () {
-            if($("#predecessorBtn").length == 0) {
-              } else {
-                $('.add-predecessor-modal').remove();
-              }
-            if($("#successorBtn").length == 0) {
-              } else {
-                $('.add-successor-modal').remove();
-              }
-        });
-
-          //Basic taskcard Datatable
-          $('.basic_datatable').on('click', '.material', function () {
-            if(material_datatables_init == true){
+        //Basic taskcard Datatable
+        $(".basic_datatable").on("click", ".material", function() {
+            if (material_datatables_init == true) {
                 material_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                $("#m_datatable_material_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $(
+                    "#m_datatable_material_routine_si_wp"
+                ).DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $("#m_datatable_material_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
 
-
-        $('.basic_datatable').on('click', '.predecessor', function () {
-            if(predecessor_datatables_init == true){
+        $(".basic_datatable").on("click", ".predecessor", function() {
+            if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-predecessor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_tc(triggeruuid);
-                $('#predecessor_datatable').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#predecessor_datatable').DataTable();
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#predecessor_datatable").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-predecessor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_tc(triggeruuid);
-                $('#predecessor_datatable').DataTable().ajax.reload();
+                $("#predecessor_datatable")
+                    .DataTable()
+                   .ajax.reload();
             }
         });
-        $('.basic_datatable').on('click', '.successor', function () {
-            if(successor_datatables_init == true){
+        $(".basic_datatable").on("click", ".successor", function() {
+            if (successor_datatables_init == true) {
                 successor_datatables_init = false;
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-successor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
                 successor_tc(triggeruuid);
-                $('#successor_datatable').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#successor_datatable').DataTable();
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#successor_datatable").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-successor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
                 successor_tc(triggeruuid);
-                $('#successor_datatable').DataTable().ajax.reload();
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
 
-        $('.modal-footer').on('click', '.sequence', function () {
-            triggeruuid = $('input[name=uuid]').val();
-            sequence = $('input[name=sequence]').val();
+        $(".modal-footer").on("click", ".sequence", function() {
+            triggeruuid = $("input[name=uuid]").val();
+            sequence = $("input[name=sequence]").val();
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/sequence/',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/sequence/",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    sequence: sequence,
+                    _token: $("input[name=_token]").val(),
+                    sequence: sequence
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Sequence has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
-                        $('#taskcard_sequence').modal('hide');
+                        toastr.success(
+                            "Sequence has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+                        $("#taskcard_sequence").modal("hide");
 
-                        let table = $('.basic_datatable').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-
-                        table = $('.sip_datatable').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-
-                        table = $('.cpcp_datatable').mDatatable();
+                        let table = $(".basic_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
 
-                        table = $('.si_datatable').mDatatable();
+                        table = $(".sip_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $(".cpcp_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $(".si_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -585,49 +697,53 @@ let Datatables = {
                 }
             });
         });
-        $('.modal-footer').on('click', '.sequence-intruction', function () {
-            triggeruuid = $('input[name=uuid-instruction]').val();
-            sequence = $('input[name=sequence-instruction]').val();
+        $(".modal-footer").on("click", ".sequence-intruction", function() {
+            triggeruuid = $("input[name=uuid-instruction]").val();
+            sequence = $("input[name=sequence-instruction]").val();
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/sequence/instruction',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/sequence/instruction",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    sequence: sequence,
+                    _token: $("input[name=_token]").val(),
+                    sequence: sequence
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Sequence has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
-                        $('#instruction_sequence').modal('hide');
+                        toastr.success(
+                            "Sequence has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+                        $("#instruction_sequence").modal("hide");
 
-                        let table = $('.ea_datatable').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-
-                        table = $('.eo_datatable').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-
-                        table = $('.ad-sb_datatable').mDatatable();
+                        let table = $(".ea_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
 
-                        table = $('.cmr-awl_datatable').mDatatable();
+                        table = $(".eo_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
 
-                        table = $('.si_datatable').mDatatable();
+                        table = $(".ad-sb_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $(".cmr-awl_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $(".si_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -636,1009 +752,1226 @@ let Datatables = {
             });
         });
 
-        $('.basic_datatable').on('click', '.sequence', function () {
-            triggeruuid = $(this).data('uuid');
-            sequence = $(this).data('sequence');
+        $(".basic_datatable").on("click", ".sequence", function() {
+            triggeruuid = $(this).data("uuid");
+            sequence = $(this).data("sequence");
 
-            document.getElementById('uuid').value = triggeruuid;
-            document.getElementById('sequence').value = sequence;
-
+            document.getElementById("uuid").value = triggeruuid;
+            document.getElementById("sequence").value = sequence;
         });
-        $('.basic_datatable').on('click', '.mandatory', function () {
-            triggeruuid = $(this).data('uuid');
-            mandatory = $(this).data('mandatory');
-            if (mandatory == 0){
+        $(".basic_datatable").on("click", ".mandatory", function() {
+            triggeruuid = $(this).data("uuid");
+            mandatory = $(this).data("mandatory");
+            if (mandatory == 0) {
                 is_mandatory = 1;
-            }
-            else if (mandatory ==  1){
+            } else if (mandatory == 1) {
                 is_mandatory = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/mandatory/',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/mandatory/",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_mandatory: is_mandatory,
+                    _token: $("input[name=_token]").val(),
+                    is_mandatory: is_mandatory
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Mandatory has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
+                        toastr.success(
+                            "Mandatory has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
 
-                        let table = $('.basic_datatable').mDatatable();
+                        let table = $(".basic_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
-        $('.basic_datatable').on('click', '.rii', function () {
-            triggeruuid = $(this).data('uuid');
-            rii = $(this).data('rii');
-            if (rii == 0){
+        $(".basic_datatable").on("click", ".rii", function() {
+            triggeruuid = $(this).data("uuid");
+            rii = $(this).data("rii");
+            if (rii == 0) {
                 is_rii = 1;
-            }
-            else if (rii ==  1){
+            } else if (rii == 1) {
                 is_rii = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/rii/',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/rii/",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_rii: is_rii,
+                    _token: $("input[name=_token]").val(),
+                    is_rii: is_rii
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Rii has been updated.', 'Success', {
+                        toastr.success("Rii has been updated.", "Success", {
                             timeOut: 5000
                         });
 
-                        let table = $('.basic_datatable').mDatatable();
+                        let table = $(".basic_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
 
-        $('.basic_datatable').on('click', '.tool', function () {
-            if(tool_datatables_init == true){
+        $(".basic_datatable").on("click", ".tool", function() {
+            if (tool_datatables_init == true) {
                 tool_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                $("#m_datatable_tool_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_routine_si_wp").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $("#m_datatable_tool_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
 
         //SIP taskcard Datatable
-        $('.sip_datatable').on('click', '.material', function () {
-            if(material_datatables_init == true){
+        $(".sip_datatable").on("click", ".material", function() {
+            if (material_datatables_init == true) {
                 material_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                $("#m_datatable_material_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $(
+                    "#m_datatable_material_routine_si_wp"
+                ).DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $("#m_datatable_material_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
 
-        $('.sip_datatable').on('click', '.predecessor', function () {
-            if(predecessor_datatables_init == true){
+        $(".sip_datatable").on("click", ".predecessor", function() {
+            if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-predecessor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_tc(triggeruuid);
-                $('#predecessor_datatable').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#predecessor_datatable').DataTable();
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#predecessor_datatable").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-predecessor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_tc(triggeruuid);
-                $('#predecessor_datatable').DataTable().ajax.reload();
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
-        $('.sip_datatable').on('click', '.successor', function () {
-            if(successor_datatables_init == true){
+        $(".sip_datatable").on("click", ".successor", function() {
+            if (successor_datatables_init == true) {
                 successor_datatables_init = false;
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-successor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
                 successor_tc(triggeruuid);
-                $('#successor_datatable').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#successor_datatable').DataTable();
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#successor_datatable").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-successor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
                 successor_tc(triggeruuid);
-                $('#successor_datatable').DataTable().ajax.reload();
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
 
-        $('.sip_datatable').on('click', '.tool', function () {
-            if(tool_datatables_init == true){
+        $(".sip_datatable").on("click", ".tool", function() {
+            if (tool_datatables_init == true) {
                 tool_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                $("#m_datatable_tool_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_routine_si_wp").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $("#m_datatable_tool_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
 
-        $('.sip_datatable').on('click', '.sequence', function () {
-            triggeruuid = $(this).data('uuid');
-            sequence = $(this).data('sequence');
+        $(".sip_datatable").on("click", ".sequence", function() {
+            triggeruuid = $(this).data("uuid");
+            sequence = $(this).data("sequence");
 
-            document.getElementById('uuid').value = triggeruuid;
-            document.getElementById('sequence').value = sequence;
-
+            document.getElementById("uuid").value = triggeruuid;
+            document.getElementById("sequence").value = sequence;
         });
-        $('.sip_datatable').on('click', '.mandatory', function () {
-            triggeruuid = $(this).data('uuid');
-            mandatory = $(this).data('mandatory');
-            if (mandatory == 0){
+        $(".sip_datatable").on("click", ".mandatory", function() {
+            triggeruuid = $(this).data("uuid");
+            mandatory = $(this).data("mandatory");
+            if (mandatory == 0) {
                 is_mandatory = 1;
-            }
-            else if (mandatory ==  1){
+            } else if (mandatory == 1) {
                 is_mandatory = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/mandatory/',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/mandatory/",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_mandatory: is_mandatory,
+                    _token: $("input[name=_token]").val(),
+                    is_mandatory: is_mandatory
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Mandatory has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
+                        toastr.success(
+                            "Mandatory has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
 
-                        let table = $('.sip_datatable').mDatatable();
+                        let table = $(".sip_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
 
-        $('.sip_datatable').on('click', '.rii', function () {
-            triggeruuid = $(this).data('uuid');
-            rii = $(this).data('rii');
-            if (rii == 0){
+        $(".sip_datatable").on("click", ".rii", function() {
+            triggeruuid = $(this).data("uuid");
+            rii = $(this).data("rii");
+            if (rii == 0) {
                 is_rii = 1;
-            }
-            else if (rii ==  1){
+            } else if (rii == 1) {
                 is_rii = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/rii/',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/rii/",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_rii: is_rii,
+                    _token: $("input[name=_token]").val(),
+                    is_rii: is_rii
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Rii has been updated.', 'Success', {
+                        toastr.success("Rii has been updated.", "Success", {
                             timeOut: 5000
                         });
 
-                        let table = $('.sip_datatable').mDatatable();
+                        let table = $(".sip_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
-
 
         //CPCP taskcard Datatable
-        $('.cpcp_datatable').on('click', '.material', function () {
-            if(material_datatables_init == true){
+        $(".cpcp_datatable").on("click", ".material", function() {
+            if (material_datatables_init == true) {
                 material_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                $("#m_datatable_material_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $(
+                    "#m_datatable_material_routine_si_wp"
+                ).DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 material_tc(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $("#m_datatable_material_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
 
-        $('.cpcp_datatable').on('click', '.predecessor', function () {
-            if(predecessor_datatables_init == true){
+        $(".cpcp_datatable").on("click", ".predecessor", function() {
+            if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-predecessor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_tc(triggeruuid);
-                $('#predecessor_datatable').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#predecessor_datatable').DataTable();
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#predecessor_datatable").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-predecessor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_tc(triggeruuid);
-                $('#predecessor_datatable').DataTable().ajax.reload();
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
-        $('.cpcp_datatable').on('click', '.successor', function () {
-            if(successor_datatables_init == true){
+        $(".cpcp_datatable").on("click", ".successor", function() {
+            if (successor_datatables_init == true) {
                 successor_datatables_init = false;
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-successor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
                 successor_tc(triggeruuid);
-                $('#successor_datatable').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#successor_datatable').DataTable();
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#successor_datatable").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-successor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
                 successor_tc(triggeruuid);
-                $('#successor_datatable').DataTable().ajax.reload();
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
 
-        $('.cpcp_datatable').on('click', '.tool', function () {
-            if(tool_datatables_init == true){
+        $(".cpcp_datatable").on("click", ".tool", function() {
+            if (tool_datatables_init == true) {
                 tool_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                $("#m_datatable_tool_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_routine_si_wp").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 tool_tc(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $("#m_datatable_tool_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
 
-        $('.cpcp_datatable').on('click', '.sequence', function () {
-            triggeruuid = $(this).data('uuid');
-            sequence = $(this).data('sequence');
+        $(".cpcp_datatable").on("click", ".sequence", function() {
+            triggeruuid = $(this).data("uuid");
+            sequence = $(this).data("sequence");
 
-            document.getElementById('uuid').value = triggeruuid;
-            document.getElementById('sequence').value = sequence;
-
+            document.getElementById("uuid").value = triggeruuid;
+            document.getElementById("sequence").value = sequence;
         });
-        $('.cpcp_datatable').on('click', '.mandatory', function () {
-            triggeruuid = $(this).data('uuid');
-            mandatory = $(this).data('mandatory');
-            if (mandatory == 0){
+        $(".cpcp_datatable").on("click", ".mandatory", function() {
+            triggeruuid = $(this).data("uuid");
+            mandatory = $(this).data("mandatory");
+            if (mandatory == 0) {
                 is_mandatory = 1;
-            }
-            else if (mandatory ==  1){
+            } else if (mandatory == 1) {
                 is_mandatory = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/mandatory/',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/mandatory/",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_mandatory: is_mandatory,
+                    _token: $("input[name=_token]").val(),
+                    is_mandatory: is_mandatory
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Mandatory has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
+                        toastr.success(
+                            "Mandatory has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
 
-                        let table = $('.cpcp_datatable').mDatatable();
+                        let table = $(".cpcp_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
 
-        $('.cpcp_datatable').on('click', '.rii', function () {
-            triggeruuid = $(this).data('uuid');
-            rii = $(this).data('rii');
-            if (rii == 0){
+        $(".cpcp_datatable").on("click", ".rii", function() {
+            triggeruuid = $(this).data("uuid");
+            rii = $(this).data("rii");
+            if (rii == 0) {
                 is_rii = 1;
-            }
-            else if (rii ==  1){
+            } else if (rii == 1) {
                 is_rii = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/rii/',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/rii/",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_rii: is_rii,
+                    _token: $("input[name=_token]").val(),
+                    is_rii: is_rii
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Rii has been updated.', 'Success', {
+                        toastr.success("Rii has been updated.", "Success", {
                             timeOut: 5000
                         });
 
-                        let table = $('.cpcp_datatable').mDatatable();
+                        let table = $(".cpcp_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
 
+        function instruction(triggeruuid) {
+            $("#instruction_datatable").DataTable({
+                dom: '<"top"f>rt<"bottom">pl',
+                responsive: !0,
+                searchDelay: 500,
+                processing: !0,
+                serverSide: !0,
+                lengthMenu: [5, 10, 25, 50],
+                pageLength: 5,
+                ajax: "/datatables/workpackage/" + triggeruuid + "/instruction",
+                columns: [
+                    {
+                        data: "number"
+                    },
+                    {
+                        data: "description"
+                    },
+                    {
+                        data: "Actions"
+                    }
+                ],
+                columnDefs: [
+                    {
+                        targets: -1,
+                        orderable: !1,
+                        render: function(a, e, t, n) {
+                            return (
+                                '<a class="btn btn-primary btn-sm m-btn--hover-brand select-instruction" title="View" data-uuid="' +
+                                t.uuid +
+                                '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                            );
+                        }
+                    }
+                ]
+            });
+
+            $(".paging_simple_numbers").addClass("pull-left");
+            $(".dataTables_length").addClass("pull-right");
+            $(".dataTables_info").addClass("pull-left");
+            $(".dataTables_info").addClass("margin-info");
+            $(".paging_simple_numbers").addClass("padding-datatable");
+
+            $(".item-body").on("click", ".item_modal", function() {
+                $("#add_modal_material").modal("show");
+            });
+        }
+
+        $("#instruction_datatable").on(
+            "click",
+            ".select-instruction",
+            function() {
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                            "content"
+                        )
+                    },
+                    type: "post",
+                    url: '/project-hm/'+project_uuid+'/workpackage/'+workPackage_uuid+'/instruction/'+$(this).data("uuid"),
+                    // url:
+                    //     "/workpackage/" +
+                    //     workPackage_uuid +
+                    //     "/taskcard/instruction",
+                    data: {
+                        _token: $("input[name=_token]").val(),
+                        // taskcard: $(this).data("uuid")
+                    },
+                    success: function(data) {
+                        if (data.errors) {
+                            // if (data.errors.name) {
+                            //     $('#name-error').html(data.errors.name[0]);
+                            //     document.getElementById('name').value = name;
+                            // }
+                        } else {
+                            if (data.title == "Danger") {
+                                toastr.error(
+                                    "Instruction alrady exists!",
+                                    "Error",
+                                    {
+                                        timeOut: 5000
+                                    }
+                                );
+                            } else {
+                                $("#modal_instruction").modal("hide");
+
+                                toastr.success(
+                                    "Instruction has been added.",
+                                    "Success",
+                                    {
+                                        timeOut: 5000
+                                    }
+                                );
+
+                                let table = $(
+                                    ".cmr-awl_datatable"
+                                ).mDatatable();
+
+                                table.originalDataSet = [];
+                                table.reload();
+
+                                table = $(".ad-sb_datatable").mDatatable();
+
+                                table.originalDataSet = [];
+                                table.reload();
+
+                                table = $(".ad-sb_datatable").mDatatable();
+
+                                table.originalDataSet = [];
+                                table.reload();
+
+                                table = $(".eo_datatable").mDatatable();
+
+                                table.originalDataSet = [];
+                                table.reload();
+
+                                table = $(".ea_datatable").mDatatable();
+
+                                table.originalDataSet = [];
+                                table.reload();
+                            }
+                        }
+                    }
+                });
+            }
+        );
 
         //ADSB
-        $('.ad-sb_datatable').on('click', '.predecessor', function () {
-            if(predecessor_datatables_init == true){
+        $(".ad-sb_datatable").on("click", ".predecessor", function() {
+            if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-predecessor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_tc(triggeruuid);
-                $('#predecessor_datatable').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#predecessor_datatable').DataTable();
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#predecessor_datatable").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-predecessor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_tc(triggeruuid);
-                $('#predecessor_datatable').DataTable().ajax.reload();
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
-        $('.ad-sb_datatable').on('click', '.successor', function () {
-            if(successor_datatables_init == true){
+        $(".ad-sb_datatable").on("click", ".successor", function() {
+            if (successor_datatables_init == true) {
                 successor_datatables_init = false;
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-successor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
                 successor_tc(triggeruuid);
-                $('#successor_datatable').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#successor_datatable').DataTable();
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#successor_datatable").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-successor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
                 successor_tc(triggeruuid);
-                $('#successor_datatable').DataTable().ajax.reload();
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
 
-        $('.ad-sb_datatable').on('click', '.sequence-instruction', function () {
-            triggeruuid = $(this).data('uuid');
-            sequence = $(this).data('sequence');
+        $(".ad-sb_datatable").on("click", ".sequence-instruction", function() {
+            triggeruuid = $(this).data("uuid");
+            sequence = $(this).data("sequence");
 
-            document.getElementById('uuid-instruction').value = triggeruuid;
-            document.getElementById('sequence-instruction').value = sequence;
-
+            document.getElementById("uuid-instruction").value = triggeruuid;
+            document.getElementById("sequence-instruction").value = sequence;
         });
-        $('.ad-sb_datatable').on('click', '.mandatory', function () {
-            triggeruuid = $(this).data('uuid');
-            mandatory = $(this).data('mandatory');
-            if (mandatory == 0){
+        $(".ad-sb_datatable").on("click", ".mandatory", function() {
+            triggeruuid = $(this).data("uuid");
+            mandatory = $(this).data("mandatory");
+            if (mandatory == 0) {
                 is_mandatory = 1;
-            }
-            else if (mandatory ==  1){
+            } else if (mandatory == 1) {
                 is_mandatory = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/mandatory/instruction',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/mandatory/instruction",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_mandatory: is_mandatory,
+                    _token: $("input[name=_token]").val(),
+                    is_mandatory: is_mandatory
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Mandatory has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
+                        toastr.success(
+                            "Mandatory has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
 
-                        let table = $('.ad-sb_datatable').mDatatable();
+                        let table = $(".ad-sb_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
 
-        $('.ad-sb_datatable').on('click', '.rii', function () {
-            triggeruuid = $(this).data('uuid');
-            rii = $(this).data('rii');
-            if (rii == 0){
+
+        $(".ad-sb_datatable").on("click", ".rii", function() {
+            triggeruuid = $(this).data("uuid");
+            rii = $(this).data("rii");
+            if (rii == 0) {
                 is_rii = 1;
-            }
-            else if (rii ==  1){
+            } else if (rii == 1) {
                 is_rii = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/rii/instruction',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/rii/instruction",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_rii: is_rii,
+                    _token: $("input[name=_token]").val(),
+                    is_rii: is_rii
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Rii has been updated.', 'Success', {
+                        toastr.success("Rii has been updated.", "Success", {
                             timeOut: 5000
                         });
 
-                        let table = $('.ad-sb_datatable').mDatatable();
+                        let table = $(".ad-sb_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
-
 
         //CMR-AWL
 
-        $('.cmr-awl_datatable').on('click', '.predecessor', function () {
-            if(predecessor_datatables_init == true){
+        $(".cmr-awl_datatable").on("click", ".predecessor", function() {
+            if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-predecessor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_tc(triggeruuid);
-                $('#predecessor_datatable').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#predecessor_datatable').DataTable();
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#predecessor_datatable").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-predecessor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_tc(triggeruuid);
-                $('#predecessor_datatable').DataTable().ajax.reload();
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
-        $('.cmr-awl_datatable').on('click', '.successor', function () {
-            if(successor_datatables_init == true){
+        $(".cmr-awl_datatable").on("click", ".successor", function() {
+            if (successor_datatables_init == true) {
                 successor_datatables_init = false;
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-successor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
                 successor_tc(triggeruuid);
-                $('#successor_datatable').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#successor_datatable').DataTable();
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#successor_datatable").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-successor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
                 successor_tc(triggeruuid);
-                $('#successor_datatable').DataTable().ajax.reload();
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
 
-        $('.cmr-awl_datatable').on('click', '.sequence-instruction', function () {
-            triggeruuid = $(this).data('uuid');
-            sequence = $(this).data('sequence');
+        $(".cmr-awl_datatable").on(
+            "click",
+            ".sequence-instruction",
+            function() {
+                triggeruuid = $(this).data("uuid");
+                sequence = $(this).data("sequence");
 
-            document.getElementById('uuid-instruction').value = triggeruuid;
-            document.getElementById('sequence-instruction').value = sequence;
-
-        });
-        $('.cmr-awl_datatable').on('click', '.mandatory', function () {
-            triggeruuid = $(this).data('uuid');
-            mandatory = $(this).data('mandatory');
-            if (mandatory == 0){
+                document.getElementById("uuid-instruction").value = triggeruuid;
+                document.getElementById(
+                    "sequence-instruction"
+                ).value = sequence;
+            }
+        );
+        $(".cmr-awl_datatable").on("click", ".mandatory", function() {
+            triggeruuid = $(this).data("uuid");
+            mandatory = $(this).data("mandatory");
+            if (mandatory == 0) {
                 is_mandatory = 1;
-            }
-            else if (mandatory ==  1){
+            } else if (mandatory == 1) {
                 is_mandatory = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/mandatory/instruction',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/mandatory/instruction",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_mandatory: is_mandatory,
+                    _token: $("input[name=_token]").val(),
+                    is_mandatory: is_mandatory
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Mandatory has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
+                        toastr.success(
+                            "Mandatory has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
 
-                        let table = $('.cmr-awl_datatable').mDatatable();
+                        let table = $(".cmr-awl_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
 
-        $('.cmr-awl_datatable').on('click', '.rii', function () {
-            triggeruuid = $(this).data('uuid');
-            rii = $(this).data('rii');
-            if (rii == 0){
+        $(".cmr-awl_datatable").on("click", ".rii", function() {
+            triggeruuid = $(this).data("uuid");
+            rii = $(this).data("rii");
+            if (rii == 0) {
                 is_rii = 1;
-            }
-            else if (rii ==  1){
+            } else if (rii == 1) {
                 is_rii = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/rii/instruction',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/rii/instruction",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_rii: is_rii,
+                    _token: $("input[name=_token]").val(),
+                    is_rii: is_rii
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Rii has been updated.', 'Success', {
+                        toastr.success("Rii has been updated.", "Success", {
                             timeOut: 5000
                         });
 
-                        let table = $('.cmr-awl_datatable').mDatatable();
+                        let table = $(".cmr-awl_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
 
+        $(".ea_datatable").on("click", ".sequence-instruction", function() {
+            triggeruuid = $(this).data("uuid");
+            sequence = $(this).data("sequence");
 
-        $('.ea_datatable').on('click', '.sequence-instruction', function () {
-            triggeruuid = $(this).data('uuid');
-            sequence = $(this).data('sequence');
-
-            document.getElementById('uuid-instruction').value = triggeruuid;
-            document.getElementById('sequence-instruction').value = sequence;
-
+            document.getElementById("uuid-instruction").value = triggeruuid;
+            document.getElementById("sequence-instruction").value = sequence;
         });
-        $('.ea_datatable').on('click', '.mandatory', function () {
-            triggeruuid = $(this).data('uuid');
-            mandatory = $(this).data('mandatory');
-            if (mandatory == 0){
+        $(".ea_datatable").on("click", ".mandatory", function() {
+            triggeruuid = $(this).data("uuid");
+            mandatory = $(this).data("mandatory");
+            if (mandatory == 0) {
                 is_mandatory = 1;
-            }
-            else if (mandatory ==  1){
+            } else if (mandatory == 1) {
                 is_mandatory = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/mandatory/instruction',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/mandatory/instruction",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_mandatory: is_mandatory,
+                    _token: $("input[name=_token]").val(),
+                    is_mandatory: is_mandatory
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Mandatory has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
+                        toastr.success(
+                            "Mandatory has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
 
-                        let table = $('.ea_datatable').mDatatable();
+                        let table = $(".ea_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
 
-        $('.ea_datatable').on('click', '.rii', function () {
-            triggeruuid = $(this).data('uuid');
-            rii = $(this).data('rii');
-            if (rii == 0){
-                is_rii = 1;
+        $("#ea_datatable").on("click", ".instructions", function() {
+            if (instruction_datatables_init == true) {
+                instruction_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#instruction_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
             }
-            else if (rii ==  1){
+        });
+
+        $(".ea_datatable").on("click", ".rii", function() {
+            triggeruuid = $(this).data("uuid");
+            rii = $(this).data("rii");
+            if (rii == 0) {
+                is_rii = 1;
+            } else if (rii == 1) {
                 is_rii = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/rii/instruction',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/rii/instruction",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_rii: is_rii,
+                    _token: $("input[name=_token]").val(),
+                    is_rii: is_rii
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Rii has been updated.', 'Success', {
+                        toastr.success("Rii has been updated.", "Success", {
                             timeOut: 5000
                         });
 
-                        let table = $('.ea_datatable').mDatatable();
+                        let table = $(".ea_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
 
-        $('.eo_datatable').on('click', '.sequence-instruction', function () {
-            triggeruuid = $(this).data('uuid');
-            sequence = $(this).data('sequence');
+        $(".eo_datatable").on("click", ".sequence-instruction", function() {
+            triggeruuid = $(this).data("uuid");
+            sequence = $(this).data("sequence");
 
-            document.getElementById('uuid-instruction').value = triggeruuid;
-            document.getElementById('sequence-instruction').value = sequence;
-
+            document.getElementById("uuid-instruction").value = triggeruuid;
+            document.getElementById("sequence-instruction").value = sequence;
         });
 
-        $('.eo_datatable').on('click', '.mandatory', function () {
-            triggeruuid = $(this).data('uuid');
-            mandatory = $(this).data('mandatory');
-            if (mandatory == 0){
+        $(".eo_datatable").on("click", ".mandatory", function() {
+            triggeruuid = $(this).data("uuid");
+            mandatory = $(this).data("mandatory");
+            if (mandatory == 0) {
                 is_mandatory = 1;
-            }
-            else if (mandatory ==  1){
+            } else if (mandatory == 1) {
                 is_mandatory = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/mandatory/instruction',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/mandatory/instruction",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_mandatory: is_mandatory,
+                    _token: $("input[name=_token]").val(),
+                    is_mandatory: is_mandatory
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Mandatory has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
+                        toastr.success(
+                            "Mandatory has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
 
-                        let table = $('.eo_datatable').mDatatable();
+                        let table = $(".eo_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
 
-        $('.eo_datatable').on('click', '.rii', function () {
-            triggeruuid = $(this).data('uuid');
-            rii = $(this).data('rii');
-            if (rii == 0){
-                is_rii = 1;
+        $("#eo_datatable").on("click", ".instructions", function() {
+            if (instruction_datatables_init == true) {
+                instruction_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#instruction_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
             }
-            else if (rii ==  1){
+        });
+
+        $(".eo_datatable").on("click", ".rii", function() {
+            triggeruuid = $(this).data("uuid");
+            rii = $(this).data("rii");
+            if (rii == 0) {
+                is_rii = 1;
+            } else if (rii == 1) {
                 is_rii = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/rii/instruction',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/rii/instruction",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_rii: is_rii,
+                    _token: $("input[name=_token]").val(),
+                    is_rii: is_rii
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Rii has been updated.', 'Success', {
+                        toastr.success("Rii has been updated.", "Success", {
                             timeOut: 5000
                         });
 
-                        let table = $('.eo_datatable').mDatatable();
+                        let table = $(".eo_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
-
 
         //SI taskcard Datatable
-        $('.si_datatable').on('click', '.predecessor', function () {
-            if(predecessor_datatables_init == true){
+        $(".si_datatable").on("click", ".predecessor", function() {
+            if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-predecessor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_tc(triggeruuid);
-                $('#predecessor_datatable').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#predecessor_datatable').DataTable();
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#predecessor_datatable").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-predecessor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_tc(triggeruuid);
-                $('#predecessor_datatable').DataTable().ajax.reload();
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
-        $('.si_datatable').on('click', '.successor', function () {
-            if(successor_datatables_init == true){
+        $(".si_datatable").on("click", ".successor", function() {
+            if (successor_datatables_init == true) {
                 successor_datatables_init = false;
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-successor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
                 successor_tc(triggeruuid);
-                $('#successor_datatable').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#successor_datatable').DataTable();
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#successor_datatable").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('tc_uuid');
-                document.getElementById('uuid-successor').value = triggeruuid;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
                 successor_tc(triggeruuid);
-                $('#successor_datatable').DataTable().ajax.reload();
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
-        $('.si_datatable').on('click', '.material', function () {
-            if(material_datatables_init == true){
+        $(".si_datatable").on("click", ".material", function() {
+            if (material_datatables_init == true) {
                 material_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 material_tc_si(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#m_datatable_material_routine_si_wp').DataTable();
+                $("#m_datatable_material_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $(
+                    "#m_datatable_material_routine_si_wp"
+                ).DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 material_tc_si(triggeruuid);
-                $('#m_datatable_material_routine_si_wp').DataTable().ajax.reload();
+                $("#m_datatable_material_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
 
-        $('.si_datatable').on('click', '.tool', function () {
-            if(tool_datatables_init == true){
+        $(".si_datatable").on("click", ".tool", function() {
+            if (tool_datatables_init == true) {
                 tool_datatables_init = false;
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 tool_tc_si(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
-            }
-            else{
-                let table = $('#m_datatable_tool_routine_si_wp').DataTable();
+                $("#m_datatable_tool_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_routine_si_wp").DataTable();
                 table.destroy();
-                triggeruuid = $(this).data('uuid');
+                triggeruuid = $(this).data("uuid");
                 tool_tc_si(triggeruuid);
-                $('#m_datatable_tool_routine_si_wp').DataTable().ajax.reload();
+                $("#m_datatable_tool_routine_si_wp")
+                    .DataTable()
+                    .ajax.reload();
             }
         });
 
-        $('.si_datatable').on('click', '.sequence', function () {
-            triggeruuid = $(this).data('uuid');
-            sequence = $(this).data('sequence');
+        $(".si_datatable").on("click", ".sequence", function() {
+            triggeruuid = $(this).data("uuid");
+            sequence = $(this).data("sequence");
 
-            document.getElementById('uuid').value = triggeruuid;
-            document.getElementById('sequence').value = sequence;
-
+            document.getElementById("uuid").value = triggeruuid;
+            document.getElementById("sequence").value = sequence;
         });
-        $('.si_datatable').on('click', '.mandatory', function () {
-            triggeruuid = $(this).data('uuid');
-            mandatory = $(this).data('mandatory');
-            if (mandatory == 0){
+        $(".si_datatable").on("click", ".mandatory", function() {
+            triggeruuid = $(this).data("uuid");
+            mandatory = $(this).data("mandatory");
+            if (mandatory == 0) {
                 is_mandatory = 1;
-            }
-            else if (mandatory ==  1){
+            } else if (mandatory == 1) {
                 is_mandatory = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/mandatory/',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/mandatory/",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_mandatory: is_mandatory,
+                    _token: $("input[name=_token]").val(),
+                    is_mandatory: is_mandatory
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Mandatory has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
+                        toastr.success(
+                            "Mandatory has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
 
-                        let table = $('.si_datatable').mDatatable();
+                        let table = $(".si_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
 
-        $('.si_datatable').on('click', '.rii', function () {
-            triggeruuid = $(this).data('uuid');
-            rii = $(this).data('rii');
-            if (rii == 0){
+        $(".si_datatable").on("click", ".rii", function() {
+            triggeruuid = $(this).data("uuid");
+            rii = $(this).data("rii");
+            if (rii == 0) {
                 is_rii = 1;
-            }
-            else if (rii ==  1){
+            } else if (rii == 1) {
                 is_rii = 0;
             }
 
             $.ajax({
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                type: 'put',
-                url: '/project-hm/'+triggeruuid+'/rii/',
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/rii/",
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    is_rii: is_rii,
+                    _token: $("input[name=_token]").val(),
+                    is_rii: is_rii
                 },
-                success: function (data) {
+                success: function(data) {
                     if (data.errors) {
                     } else {
-                        toastr.success('Rii has been updated.', 'Success', {
+                        toastr.success("Rii has been updated.", "Success", {
                             timeOut: 5000
                         });
 
-                        let table = $('.si_datatable').mDatatable();
+                        let table = $(".si_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
                     }
                 }
             });
-
         });
 
-
         //basic
-        $('.m-datatable').on('click', '.delete', function () {
+        $(".m-datatable").on("click", ".delete", function() {
             let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
-            let datatableClassName = parent_id.className.split(' ');
-            triggeruuid = $(this).data('uuid');
+            let datatableClassName = parent_id.className.split(" ");
+            triggeruuid = $(this).data("uuid");
             swal({
-                title: 'Sure want to remove?',
-                type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
+                title: "Sure want to remove?",
+                type: "question",
+                confirmButtonText: "Yes, REMOVE",
+                confirmButtonColor: "#d33",
+                cancelButtonText: "Cancel",
+                showCancelButton: true
+            }).then(result => {
                 if (result.value) {
                     $.ajax({
                         headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                                "content"
                             )
                         },
-                        type: 'DELETE',
-                        url: '/project-hm/'+triggeruuid+'/destroy',
-                        success: function (data) {
-                            toastr.success('Taskcard has been deleted.', 'Deleted', {
-                                timeOut: 5000
+                        type: "DELETE",
+                        url: "/project-hm/" + triggeruuid + "/destroy",
+                        success: function(data) {
+                            toastr.success(
+                                "Taskcard has been deleted.",
+                                "Deleted",
+                                {
+                                    timeOut: 5000
                                 }
                             );
 
-                            let table = $('.'+datatableClassName).mDatatable();
+                            let table = $(
+                                "." + datatableClassName
+                            ).mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
                         },
-                        error: function (jqXhr, json, errorThrown) {
+                        error: function(jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
 
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
+                            $.each(errors.errors, function(index, value) {
+                                $("#delete-error").html(value);
                             });
                         }
                     });
                 }
-
             });
         });
     }
 };
 
-jQuery(document).ready(function () {
+jQuery(document).ready(function() {
     Datatables.init();
 });

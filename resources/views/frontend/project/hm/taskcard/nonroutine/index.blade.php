@@ -194,13 +194,13 @@
                                             @slot('text', 'EA Summary')
                                             @slot('href', route('frontend.project-hm.summary.ea',['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )
                                         @endcomponent
-                
-                
+
+
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
-                
+
                             <div class="ea_datatable wp-datatable" id="scrolling_both"></div>
                         </div>
                     </div>
@@ -248,13 +248,13 @@
                                             @slot('text', 'EO Summary')
                                             @slot('href', route('frontend.project-hm.summary.eo',['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )
                                         @endcomponent
-                
-                
+
+
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>
-                
+
                             <div class="eo_datatable wp-datatable" id="scrolling_both"></div>
                         </div>
                     </div>
