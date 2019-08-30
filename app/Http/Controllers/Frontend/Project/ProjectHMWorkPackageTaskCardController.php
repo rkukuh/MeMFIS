@@ -13,6 +13,7 @@ use App\Models\Facility;
 use App\Models\WorkPackage;
 use App\Models\ProjectWorkPackageEngineer;
 use App\Models\ProjectWorkPackageTaskCard;
+use App\Models\ProjectWorkPackageEOInstruction;
 use App\Models\Pivots\ProjectWorkPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -109,7 +110,6 @@ class ProjectHMWorkPackageTaskCardController extends Controller
         //
     }
 
-
     /**
      * Update the specified resource in storage.
      *
@@ -118,6 +118,20 @@ class ProjectHMWorkPackageTaskCardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function sequence(Request $request, ProjectWorkPackageTaskCard $ProjectWorkpackage)
+    {
+        $ProjectWorkpackage->update($request->all());
+
+        return response()->json($ProjectWorkpackage);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function sequenceInstruction(Request $request, ProjectWorkPackageEOInstruction $ProjectWorkpackage)
     {
         $ProjectWorkpackage->update($request->all());
 
@@ -145,7 +159,35 @@ class ProjectHMWorkPackageTaskCardController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
+    public function mandatoryInstruction(Request $request, ProjectWorkPackageEOInstruction $ProjectWorkpackage)
+    {
+        $ProjectWorkpackage->update($request->all());
+
+        return response()->json($ProjectWorkpackage);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
     public function rii(Request $request, ProjectWorkPackageTaskCard $ProjectWorkpackage)
+    {
+        $ProjectWorkpackage->update($request->all());
+
+        return response()->json($ProjectWorkpackage);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\WorkPackageUpdate  $request
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function riiInstruction(Request $request, ProjectWorkPackageEOInstruction $ProjectWorkpackage)
     {
         $ProjectWorkpackage->update($request->all());
 

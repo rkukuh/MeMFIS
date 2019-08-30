@@ -68,8 +68,11 @@ Route::name('frontend.')->group(function () {
                 Route::post('/{project}/workpackage/{workpackage}/facilityUsed','ProjectHMWorkPackageController@facilityUsed')->name('project-hm.facilityUsed.add');
                 Route::post('/{project}/workpackage/{workpackage}/manhoursPropotion','ProjectHMWorkPackageController@manhoursPropotion')->name('project-hm.manhoursPropotion.add');
                 Route::put('/{ProjectWorkpackage}/sequence/', 'ProjectHMWorkPackageTaskCardController@sequence')->name('project-hm.sequence.workpackage');
+                Route::put('/{ProjectWorkpackage}/sequence/instruction', 'ProjectHMWorkPackageTaskCardController@sequenceInstruction')->name('project-hm.sequence.instruction.workpackage');
                 Route::put('/{ProjectWorkpackage}/mandatory/', 'ProjectHMWorkPackageTaskCardController@mandatory')->name('project-hm.mandatory.workpackage');
+                Route::put('/{ProjectWorkpackage}/mandatory/instruction', 'ProjectHMWorkPackageTaskCardController@mandatoryInstruction')->name('project-hm.mandatory.instruction.workpackage');
                 Route::put('/{ProjectWorkpackage}/rii/', 'ProjectHMWorkPackageTaskCardController@rii')->name('project-hm.rii.workpackage');
+                Route::put('/{ProjectWorkpackage}/rii/instruction', 'ProjectHMWorkPackageTaskCardController@riiInstruction')->name('project-hm.rii.instruction.workpackage');
                 Route::post('/{project}/workpackage/{workpackage}/taskcard/{taskcard}', 'ProjectHMWorkPackageTaskCardController@store')->name('project-hm.store.taskcard');
                 Route::delete('/{ProjectWorkpackage}/destroy/', 'ProjectHMWorkPackageTaskCardController@destroy')->name('project-hm.destroy.taskcard');
 
