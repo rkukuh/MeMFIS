@@ -490,16 +490,25 @@ class EmployeeController extends Controller
             }
         }
 
+        $position_min_max = null;
+        if(isset($employee->position()->first()->id)){
+            if(Position::find($employee->position()->first()->id)->benefit_current()->get()){
+                $position_min_max = Position::find($employee->position()->first()->id)->benefit_current()->get();
+            }
+        }
+
         $current = [
             'approved_at' => $approved_at,
             'approved_name' => $approved_name,
+            'position_min_max' => $position_min_max,
             'provisions' => $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->get(),
             'benefit_name' => $benefit_name,
             'benefit' => $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNotNull('employee_benefit.approved_at')->get(),
             'bpjs_name' => $bpjs_name,
             'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->get()
         ];
-         
+        
+       
          return view('frontend.employee.employee.show',[
             'employee' => $employee,
             'age' => $age,

@@ -24,66 +24,32 @@
                     </div>
                     <div>
                         <table width="100%" cellpadding="7">
+                                @for ($l = 0; $l < count($current['benefit']); $l++)
+
                             <tr>
-                                <td align="left" width="30%">Benefits Name (genereate lock)</td>
+                                <td align="left" width="30%">{{ $current['benefit_name'][$l]['name'] }}</td>
                                 <td align="center" width="25%">
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', 'Generated')
+                                        @slot('text', $current['benefit'][$l]['amount'])
                                     @endcomponent       
                                 </td>
                                 <td  width="30%">
-                                    <p>Min~Max = 1.000.000 - 2.000.000 <br> Calculation Refrence: <br> Pro-rate Base Calculation:</p>
+                                    <p>Min~Max = {{ $current['position_min_max'][$l]->pivot->min }} - {{ $current['position_min_max'][$l]->pivot->max }} <br> Calculation Refrence: <br> Pro-rate Base Calculation:</p>
                                 </td>
                                 <td align="center" width="15%">
                                     @component('frontend.common.input.checkbox')
                                         @slot('id', 'benefit')
                                         @slot('name', 'benefit')
                                         @slot('size', '')
+                                        @slot('checked', 'checked')
                                         @slot('style','width:20px;')
                                         @slot('disabled','disabled')
                                     @endcomponent
                                 </td>
                             </tr>
-                            <tr>
-                                <td align="left" width="30%">Benefits Name (genereate lock)</td>
-                                <td align="center" width="25%">
-                                    @component('frontend.common.label.data-info')
-                                        @slot('text', 'Generated')
-                                    @endcomponent         
-                                </td>
-                                <td  width="30%">
-                                    <p>Min~Max = 1.000.000 - 2.000.000 <br> Calculation Refrence: <br> Pro-rate Base Calculation:</p>
-                                </td>
-                                <td align="center" width="15%">
-                                    @component('frontend.common.input.checkbox')
-                                        @slot('id', 'benefit')
-                                        @slot('name', 'benefit')
-                                        @slot('size', '')
-                                        @slot('style','width:20px;')
-                                        @slot('disabled','disabled')
-                                    @endcomponent
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="left" width="30%">Benefits Name (genereate lock)</td>
-                                <td align="center" width="25%">
-                                    @component('frontend.common.label.data-info')
-                                        @slot('text', 'Generated')
-                                    @endcomponent      
-                                </td>
-                                <td  width="30%">
-                                    <p>Min~Max = 1.000.000 - 2.000.000 <br> Calculation Refrence: <br> Pro-rate Base Calculation:</p>
-                                </td>
-                                <td align="center" width="15%">
-                                    @component('frontend.common.input.checkbox')
-                                        @slot('id', 'benefit')
-                                        @slot('name', 'benefit')
-                                        @slot('size', '')
-                                        @slot('style','width:20px;')
-                                        @slot('disabled','disabled')
-                                    @endcomponent
-                                </td>
-                            </tr>
+
+                            @endfor
+
                         </table>
                     </div>
                 </div>
@@ -102,28 +68,34 @@
                         Maximum Overtime per Period 
                     </label>
 
+                    @if (isset($current['provisions'][0]))
                     @component('frontend.common.input.number')
                         @slot('text', 'Maximum Overtime per Period')
                         @slot('id', 'max_overtime')
                         @slot('name', 'max_overtime')
                         @slot('id_error', 'max_overtime')
                         @slot('input_append','Hours')
+                        @slot('value', $current['provisions'][0]['maximum_overtime'])
                         @slot('disabled','disabled')
                     @endcomponent
+                    @endif
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
                         Holiday Overtime Allowance 
                     </label>
 
+                    @if (isset($current['provisions'][0]))
                     @component('frontend.common.input.number')
                         @slot('text', 'Holiday Overtime Allowance')
                         @slot('id', 'holiday_overtime')
                         @slot('name', 'holiday_overtime')
                         @slot('id_error', 'holiday_overtime')
                         @slot('input_append','IDR per Day')
+                        @slot('value', $current['provisions'][0]['holiday_overtime'])
                         @slot('disabled','disabled')
                     @endcomponent
+                    @endif
                 </div>
             </div>
         </fieldset>
@@ -145,13 +117,17 @@
             <legend class="w-auto"><b>BPJS</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                        @for ($i = 0; $i < count($current['bpjs']); $i++)
+
                     <table width="100%" cellpadding="4" border="1">
                         <tr>
-                            <td colspan="3" align="center" style="background:#8d32a8;color:white;font-weight: bold">BPJS TITLE</td>
+                        <td colspan="3" align="center" style="background:#8d32a8;color:white;font-weight: bold">{{ $current['bpjs_name'][$i]['name'] }}</td>
                             <td rowspan="5" align="center">
                                 @component('frontend.common.input.checkbox')
                                     @slot('id', 'check')
                                     @slot('name', 'check')
+                                    @slot('checked', 'checked')
                                     @slot('size', '')
                                     @slot('style','width:20px;')
                                     @slot('disabled','disabled')
@@ -171,6 +147,7 @@
                                     @slot('name', 'percentage_of_basic_salary_employee')
                                     @slot('id_error', 'percentage_of_basic_salary_employee')
                                     @slot('input_append','%')
+                                    @slot('value', $current['bpjs'][$i]['employee_paid'])
                                     @slot('disabled','disabled')
                                 @endcomponent
                             </td>
@@ -180,6 +157,7 @@
                                     @slot('name', 'percentage_of_basic_salary_company')
                                     @slot('id_error', 'percentage_of_basic_salary_company')
                                     @slot('input_append','%')
+                                    @slot('value', $current['bpjs'][$i]['company_paid'])
                                     @slot('disabled','disabled')
                                 @endcomponent
                             </td>
@@ -188,12 +166,12 @@
                             <td align="center" valign="top" class="pt-3">Minimum value</td>
                             <td align="center" valign="top">
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', 'Generated')
+                                    @slot('text', $current['bpjs'][$i]['employee_min_value'])
                                 @endcomponent
                             </td>
                             <td align="center" valign="top">
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', 'Generated')
+                                    @slot('text', $current['bpjs'][$i]['company_min_value'])
                                 @endcomponent
                             </td>
                         </tr>
@@ -201,148 +179,19 @@
                             <td align="center" valign="top" class="pt-3">Maximum Value</td>
                             <td align="center" valign="top">
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', 'Generated')
+                                    @slot('text', $current['bpjs'][$i]['employee_max_value'])
                                 @endcomponent
                             </td>
                             <td align="center" valign="top">
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', 'Generated')
+                                    @slot('text', $current['bpjs'][$i]['company_min_value'])
                                 @endcomponent
                             </td>
                         </tr>
                     </table>
-                    <table width="100%" cellpadding="4" border="1" class="mt-3">
-                        <tr>
-                            <td colspan="3" align="center" style="background:#8d32a8;color:white;font-weight: bold">BPJS TITLE</td>
-                            <td rowspan="5" align="center">
-                                @component('frontend.common.input.checkbox')
-                                    @slot('id', 'check')
-                                    @slot('name', 'check')
-                                    @slot('size', '')
-                                    @slot('style','width:20px;')
-                                    @slot('disabled','disabled')
-                                @endcomponent
-                            </td>
-                        </tr>
-                        <tr style="background:#f5f5f5;font-weight: bold">
-                            <td align="center" valign="top">Description</td>
-                            <td align="center" valign="top">Paid by Employees</td>
-                            <td align="center" valign="top">Paid by Company</td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="top" class="pt-3">Percentage of Basic Salary</td>
-                            <td align="center" valign="top">
-                                 @component('frontend.common.input.number')
-                                    @slot('id', 'percentage_of_basic_salary_employee')
-                                    @slot('name', 'percentage_of_basic_salary_employee')
-                                    @slot('id_error', 'percentage_of_basic_salary_employee')
-                                    @slot('input_append','%')
-                                    @slot('disabled','disabled')
-                                @endcomponent
-                            </td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.input.number')
-                                    @slot('id', 'percentage_of_basic_salary_company')
-                                    @slot('name', 'percentage_of_basic_salary_company')
-                                    @slot('id_error', 'percentage_of_basic_salary_company')
-                                    @slot('input_append','%')
-                                    @slot('disabled','disabled')
-                                @endcomponent
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="top" class="pt-3">Minimum value</td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.label.data-info')
-                                    @slot('text', 'Generated')
-                                @endcomponent
-                            </td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.label.data-info')
-                                    @slot('text', 'Generated')
-                                @endcomponent
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="top" class="pt-3">Maximum Value</td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.label.data-info')
-                                    @slot('text', 'Generated')
-                                @endcomponent
-                            </td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.label.data-info')
-                                    @slot('text', 'Generated')
-                                @endcomponent
-                            </td>
-                        </tr>
-                    </table>
-                    <table width="100%" cellpadding="4" border="1" class="mt-3">
-                        <tr>
-                            <td colspan="3" align="center" style="background:#8d32a8;color:white;font-weight: bold">BPJS TITLE</td>
-                            <td rowspan="5" align="center">
-                                @component('frontend.common.input.checkbox')
-                                    @slot('id', 'check')
-                                    @slot('name', 'check')
-                                    @slot('size', '')
-                                    @slot('style','width:20px;')
-                                    @slot('disabled','disabled')
-                                @endcomponent
-                            </td>
-                        </tr>
-                        <tr style="background:#f5f5f5;font-weight: bold">
-                            <td align="center" valign="top">Description</td>
-                            <td align="center" valign="top">Paid by Employees</td>
-                            <td align="center" valign="top">Paid by Company</td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="top" class="pt-3">Percentage of Basic Salary</td>
-                            <td align="center" valign="top">
-                                 @component('frontend.common.input.number')
-                                    @slot('id', 'percentage_of_basic_salary_employee')
-                                    @slot('name', 'percentage_of_basic_salary_employee')
-                                    @slot('id_error', 'percentage_of_basic_salary_employee')
-                                    @slot('input_append','%')
-                                    @slot('disabled','disabled')
-                                @endcomponent
-                            </td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.input.number')
-                                    @slot('id', 'percentage_of_basic_salary_company')
-                                    @slot('name', 'percentage_of_basic_salary_company')
-                                    @slot('id_error', 'percentage_of_basic_salary_company')
-                                    @slot('input_append','%')
-                                    @slot('disabled','disabled')
-                                @endcomponent
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="top" class="pt-3">Minimum value</td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.label.data-info')
-                                    @slot('text', 'Generated')
-                                @endcomponent
-                            </td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.label.data-info')
-                                    @slot('text', 'Generated')
-                                @endcomponent
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="top" class="pt-3">Maximum Value</td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.label.data-info')
-                                    @slot('text', 'Generated')
-                                @endcomponent
-                            </td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.label.data-info')
-                                    @slot('text', 'Generated')
-                                @endcomponent
-                            </td>
-                        </tr>
-                    </table>
+                   
+                        @endfor
+
                 </div>
             </div>
         </fieldset>
@@ -350,10 +199,23 @@
             <legend class="w-auto"><b>PPH 21</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-2 col-md-2 col-lg-2">
+                        @php
+                        $employee = null;
+                        $company = null;
+
+                        if(isset($current['provisions'][0]['pph'])){
+                        if($current['provisions'][0]['pph'] == 'employee'){
+                            $employee = 'checked';
+                        }else if($current['provisions'][0]['pph'] == 'company'){
+                            $company = 'checked';
+                        }
+                        }
+                    @endphp
                     @component('frontend.common.input.radio')
                         @slot('id', 'break')
                         @slot('name', 'pause')
                         @slot('text', 'Paid by Employee')
+                        @slot('checked', $employee)
                         @slot('disabled','disabled')
                     @endcomponent
                 </div>
@@ -361,6 +223,7 @@
                     @component('frontend.common.input.radio')
                         @slot('id', 'break')
                         @slot('name', 'pause')
+                        @slot('checked', $company)
                         @slot('text', 'Paid by Company')
                         @slot('disabled','disabled')
                     @endcomponent
@@ -380,15 +243,17 @@
                     <label class="form-control-label">
                         Late Tolerance
                     </label>
-
+                    @if (isset($current['provisions'][0]))
                     @component('frontend.common.input.number')
                         @slot('text', 'Late Tolerance')
                         @slot('id', 'late_tolerance')
                         @slot('name', 'late_tolerance')
                         @slot('id_error', 'late_tolerance')
                         @slot('input_append','Minutes')
+                        @slot('value', $current['provisions'][0]['late_tolerance'])
                         @slot('disabled','disabled')
                     @endcomponent
+                    @endif
                 </div>
             </div>
             <div class="form-group m-form__group row">
@@ -396,29 +261,33 @@
                     <label class="form-control-label">
                         Late Pushiment
                     </label>
-
+                    @if (isset($current['provisions'][0]))
                     @component('frontend.common.input.number')
                         @slot('text', 'Late Pushiment')
                         @slot('id', 'late_pushiment')
                         @slot('name', 'late_pushiment')
                         @slot('id_error', 'late_pushiment')
                         @slot('input_append','IDR')
+                        @slot('value', $current['provisions'][0]['late_punishment'])
                         @slot('disabled','disabled')
                     @endcomponent
+                    @endif
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
                         Absences Punishment(per Day)
                     </label>
-
+                    @if (isset($current['provisions'][0]))
                     @component('frontend.common.input.number')
                         @slot('text', 'Absences Punishment(per Day)')
                         @slot('id', 'absences_punishment')
                         @slot('name', 'absences_punishment')
                         @slot('id_error', 'absences_punishment')
                         @slot('input_append','IDR')
+                        @slot('value', $current['provisions'][0]['absence_punishment'])
                         @slot('disabled','disabled')
                     @endcomponent
+                    @endif
                 </div>
             </div>
         </fieldset>
