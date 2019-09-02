@@ -166,16 +166,16 @@ class Project extends MemfisModel
     }
 
     /**
-     * One-to-Many: A quotation may have one project.
+     * Polymorphic: An entity can have zero or many quotations.
      *
-     * This function will retrieve all the quotations of a project.
-     * See: Quotation's project() method for the inverse
+     * This function will get all TaskCard's quotations.
+     * See: Quotation's quotationable() method for the inverse
      *
      * @return mixed
      */
     public function quotations()
     {
-        return $this->hasMany(Quotation::class);
+        return $this->morphMany(Quotation::class, 'quotationable');
     }
 
     /**

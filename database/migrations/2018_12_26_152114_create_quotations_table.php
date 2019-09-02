@@ -19,7 +19,7 @@ class CreateQuotationsTable extends Migration
             $table->string('number')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('title')->nullable();
-            $table->unsignedBigInteger('project_id');
+            $table->morphs('quotationable');
             $table->json('attention')->nullable();
             $table->timestamp('requested_at')->nullable();
             $table->timestamp('valid_until')->nullable();
@@ -47,11 +47,6 @@ class CreateQuotationsTable extends Migration
             $table->json('origin_quotation_htcrr_items')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('project_id')
-                    ->references('id')->on('projects')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
 
             $table->foreign('currency_id')
                     ->references('id')->on('currencies')

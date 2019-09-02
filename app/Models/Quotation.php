@@ -10,7 +10,8 @@ class Quotation extends MemfisModel
     protected $fillable = [
         'number',
         'parent_id',
-        'project_id',
+        'quotationable_type',
+        'quotationable_id',
         'attention',
         'requested_at',
         'valid_until',
@@ -145,19 +146,6 @@ class Quotation extends MemfisModel
     }
 
     /**
-     * One-to-Many: A quotation may have one project.
-     *
-     * This function will retrieve the project of a quotation.
-     * See: Project's quotations() method for the inverse
-     *
-     * @return mixed
-     */
-    public function project()
-    {
-        return $this->belongsTo(Project::class);
-    }
-
-    /**
      * Polymorphic: An entity can have zero or many progresses.
      *
      * This function will get all Quotation's progresses.
@@ -168,6 +156,20 @@ class Quotation extends MemfisModel
     public function progresses()
     {
         return $this->morphMany(Progress::class, 'progressable');
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many quotations.
+     *
+     * This function will get all of the owning quotationable models.
+     * See:
+     * - Project's quotations() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotationable()
+    {
+        return $this->morphTo();
     }
 
     /**

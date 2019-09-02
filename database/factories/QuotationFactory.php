@@ -23,16 +23,11 @@ $factory->define(Quotation::class, function (Faker $faker) {
     return [
         'number' => 'QTN-DUM-' . $number,
         'parent_id' => null,
-        'project_id' => function () {
-            if (Project::count()) {
-                return Project::get()->random()->id;
-            }
-
-            return factory(Project::class)->create()->id;
-        },
         'attention' => function (array $quotation) {
             return Customer::get()->random()->attention;
         },
+        'quotationable_id' => Project::get()->random()->id,
+        'quotationable_type' => 'App\Models\Project',
         'requested_at' => $faker->randomElement([null, Carbon::now()]),
         'valid_until' => $faker->randomElement([null, Carbon::now()]),
         'currency_id' => function () {
