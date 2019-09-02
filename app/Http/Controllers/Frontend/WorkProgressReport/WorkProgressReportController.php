@@ -15,7 +15,7 @@ use App\Http\Controllers\Controller;
 class WorkProgressReportController extends Controller
 {
     public function __construct(){
-        $this->jobcard = [];
+        $this->jobcard = $this->col["routine"] = $this->col["non-routine"] = [];
         $this->statuses = Status::ofJobCard()->get();
         $this->tc_type = Type::where('of', 'like', 'taskcard-type%')->pluck('code');
     }
@@ -67,40 +67,52 @@ class WorkProgressReportController extends Controller
         }
         $quotation_ids = Quotation::where('project_id', $project->id)->pluck('id')->toArray();
 
-        $jobcard_all = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')
+        
+        $jobcard_routine = JobCard::whereIn('quotation_id', $quotation_ids)
+                        ->where('jobcardable_type', 'App\Models\TaskCard')->with('progresses','jobcardable')
         // ->whereHas('jobcardable.type', function ($taskcard) {
         //     $taskcard->where('of', 'taskcard-type-routine');
         // })
         ->get();
 
-        $jobcards["overall"] = $jobcard_all->count(); 
+        $jobcard_nonrotine = JobCard::whereIn('quotation_id', $quotation_ids)
+                        ->where('jobcardable_type', 'App\Models\EOInstruction')->with('progresses','jobcardable.eo_header.type')
+                        ->get();
+                        
         $jobcards["routine"] = $jobcards["non_routine"] = 0; 
 
-        foreach($jobcard_all as $jobcard){
+        foreach($jobcard_routine as $jobcard){
             $this->actual_manhours($jobcard);
             $jobcard->tc_type = $jobcard->jobcardable->type->code;
             $jobcard->of = $jobcard->jobcardable->type->of;
             $jobcard->estimation_manhour = $jobcard->jobcardable->estimation_manhour;
-            if($jobcard->jobcardable->type->of == 'taskcard-type-routine'){
-                $jobcards["routine"] += 1;
-            }else{
-                $jobcards["non_routine"] += 1;
-            }
-            
+            $jobcards["routine"] += 1;
+        }
+
+        foreach($jobcard_nonrotine as $jobcard){
+            $this->actual_manhours($jobcard);
+            $jobcard->tc_type = $jobcard->jobcardable->eo_header->type->code;
+            $jobcard->of = $jobcard->jobcardable->eo_header->type->of;
+            $jobcard->estimation_manhour = $jobcard->jobcardable->estimation_manhour;
+            $jobcards["non_routine"] += 1;
         }
         
+        $jobcard_all = $jobcard_routine->merge($jobcard_nonrotine);
+      
+        $jobcards["overall"] = $jobcard_all->count(); 
+
         $jobcards["overall_done"] = $jobcards["routine_done"] = $jobcards["non_routine_done"] = 0;
         
         foreach($jobcard_all as $key => $jobcard){
             $statusses[$key] = $jobcard->progresses->last()->status_id;
             $jobcard->status = Status::find($jobcard->progresses->last()->status_id)->code;
-            if($jobcard->jobcardable->type->of == 'taskcard-type-routine'){
+            if($jobcard->of == 'taskcard-type-routine'){
                 array_push($statusses_routine, $jobcard->progresses->last()->status_id);
             }else{
                 array_push($statusses_non_routine, $jobcard->progresses->last()->status_id);
             }
 
-            switch($jobcard->jobcardable->type->code){
+            switch($jobcard->tc_type){
                 case 'basic':
                     array_push($basic, $jobcard->progresses->last()->status_id);
                     break;
@@ -119,7 +131,7 @@ class WorkProgressReportController extends Controller
                 case 'ea':
                     array_push($ea, $jobcard->progresses->last()->status_id);
                     break;
-                case 'eo    ':
+                case 'eo':
                     array_push($eo  , $jobcard->progresses->last()->status_id);
                     break;
                 case 'si':
@@ -200,18 +212,22 @@ class WorkProgressReportController extends Controller
         $this->counting($cmr_awl, "cmr-awl");
         $this->counting($ht_crr, "ht-crr");
 
-        $col["routine"] = $jobcard_all->where("of", "taskcard-type-routine")->pluck('tc_type');
-        if (isset($col["routine"])) {
-            $col["routine"] = 12 / sizeof(array_unique($col["routine"]->toArray()));
+        if (isset($this->col["routine"])) {
+            $this->col["routine"] = 12 / sizeof( array_unique( $this->col["routine"] ) );
         }else{
-            $col["routine"] = 12;
+            $this->col["routine"] = 12;
         }
 
-        // dd(floor(12/(5/2)));
-        // dd($manhours);
-        
+        if (isset($this->col["non-routine"]) && sizeof( $this->col["non-routine"]) > 2) {
+            $this->col["non-routine"] = floor( ( 12 / sizeof( array_unique( $this->col["non-routine"] ) ) ) * 2 );
+        }elseif (sizeof( $this->col["non-routine"]) == 2 || sizeof( $this->col["non-routine"]) == 3) {
+            $this->col["non-routine"] = 6;
+        }else {
+            $this->col["non-routine"] = 12;
+        }
+
         return view('frontend.work-progress-report.show',[
-            'col' => $col,
+            'col' => $this->col,
             'tat' => $tat,
             'project' => $project,
             'manhours' => $manhours,
@@ -300,6 +316,7 @@ class WorkProgressReportController extends Controller
         $quotation_ids = Quotation::where('project_id', $project->id)->pluck('id')->toArray();
 
         $jobcards = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')
+        ->where('jobcardable_type', 'App\Models\TaskCard')
         // ->whereHas('jobcardable.type', function ($taskcard) {
         //     $taskcard->where('of', 'taskcard-type-routine');
         // })
@@ -341,16 +358,18 @@ class WorkProgressReportController extends Controller
      */
     public function non_routine(Project $project){
         $statusses = [];
+
         $quotation_ids = Quotation::where('project_id', $project->id)->pluck('id')->toArray();
 
-        $jobcards = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')
+        $jobcards = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable.eo_header.type')
+        ->where('jobcardable_type', 'App\Models\EOInstruction')
         // ->whereHas('jobcardable.type', function ($taskcard) {
         //     $taskcard->where('of', 'taskcard-type-non-routine');
         // })
         ->get();
 
         foreach($jobcards as $key => $jobcard){
-            if($jobcard->jobcardable->type->of == 'taskcard-type-non-routine'){
+            if($jobcard->jobcardable->eo_header->type->of == 'taskcard-type-non-routine'){
                 array_push($statusses, $jobcard->progresses->last()->status_id);
             }
         }
@@ -392,9 +411,39 @@ class WorkProgressReportController extends Controller
             if( isset($counter["released"]) ){ $container["released"] = $counter["released"]; } else{ $container["released"] = 0; }
             if( isset($counter["rii-released"]) ){ $container["rii-released "] = $counter["rii-released"]; } else{ $container["rii-released"] = 0; }
             if( $container["released"] > 0 || $container["rii-released"] > 0 ){ $container["done"] = $container["rii-released"] + $container["released"]; } else{ $container["done"] = 0; }
-            $this->jobcard["all"] = 
             $this->jobcard[$attribute] = $container;
-
+            switch($attribute){
+                case 'basic':
+                    array_push($this->col["routine"], $attribute);
+                    break;
+                case 'sip':
+                    array_push($this->col["routine"], $attribute);
+                    break;
+                case 'cpcp':
+                    array_push($this->col["routine"], $attribute);
+                    break;
+                case 'adsb':
+                    array_push($this->col["non-routine"], $attribute);
+                    break;
+                case 'ea':
+                    array_push($this->col["non-routine"], $attribute);
+                    break;
+                case 'eo':
+                    array_push($this->col["non-routine"], $attribute);
+                    break;
+                case 'si':
+                    array_push($this->col["non-routine"], $attribute);
+                    break;
+                case 'cmr-awl':
+                    array_push($this->col["non-routine"], $attribute);
+                    break;
+                case 'ht-crr':
+                    array_push($this->col["non-routine"], $attribute);
+                    break;
+                default:
+                    return;
+            }
+            
             return;
         }else{
             return;
