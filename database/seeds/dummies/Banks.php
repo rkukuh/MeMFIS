@@ -12,6 +12,6 @@ class Banks extends Seeder
      */
     public function run()
     {
-        //
+        factory(Bank::class, config('memfis.dummies.banks'))->create();
     }
 }
