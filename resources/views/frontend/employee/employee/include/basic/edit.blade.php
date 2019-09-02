@@ -108,11 +108,18 @@
                             <label class="form-control-label">
                                 Attach File
                             </label>
-        
+
+                            @php
+                            $files = null;
+                            if(isset($file['id_card'])){
+                            $files = $file['id_card'];
+                            }
+                            @endphp
                             @component('frontend.common.input.upload')
                                 @slot('label', 'document')
                                 @slot('name', 'document')
                                 @slot('id','id_card_photo')
+                                @slot('text', $files)
                                 @slot('help_text','File must be image or not be stored!')
                             @endcomponent
                         </div>
@@ -348,7 +355,7 @@
                         }
 
                     @endphp
-                    @component('frontend.common.input.text')
+                    @component('frontend.common.input.email')
                         @slot('value',$email_1)
                         @slot('id', 'email_1')
                         @slot('name', 'email_1')
@@ -360,7 +367,7 @@
                         Email 2
                     </label>
 
-                    @component('frontend.common.input.text')
+                    @component('frontend.common.input.email')
                         @slot('value', $email_2)
                         @slot('id', 'email_2')
                         @slot('name', 'email_2')

@@ -7,7 +7,7 @@ use App\MemfisModel;
 class EOInstructionWorkPackagePredecessor extends MemfisModel
 {
     protected $table = 'eo_instruction_workpackage_predecessors';
-    
+
     protected $fillable = [
         'eo_instruction_workpackage_id',
         'previous',
@@ -23,7 +23,7 @@ class EOInstructionWorkPackagePredecessor extends MemfisModel
      */
     public function previous()
     {
-        return $this->belongsTo(EOInstruction::class);
+        return $this->belongsTo(TaskCard::class);
     }
 
     /**

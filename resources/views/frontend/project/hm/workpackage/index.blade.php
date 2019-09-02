@@ -57,6 +57,7 @@
                                     @include('frontend.project.hm.modal.material.routine-si')
                                     @include('frontend.project.hm.modal.tool.routine-si')
                                     @include('frontend.project.hm.modal.sequence')
+                                    @include('frontend.project.hm.modal.sequence-instruction')
                                     @include('frontend.project.hm.modal.predecessor')
                                     @include('frontend.project.hm.modal.successor')
                                     @include('frontend.project.hm.modal.create-predecessor')

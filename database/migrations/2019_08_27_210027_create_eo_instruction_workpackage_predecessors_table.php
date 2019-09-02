@@ -29,7 +29,7 @@ class CreateEOInstructionWorkPackagePredecessorsTable extends Migration
 
 
             $table->foreign('previous')
-                    ->references('id')->on('eo_instructions')
+                    ->references('id')->on('taskcards')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

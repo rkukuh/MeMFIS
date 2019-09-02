@@ -18,6 +18,7 @@
                     <span class="m-menu__link-text">Dashboard</span>
                 </a>
             </li>
+            @role('admin')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     MARKETING
@@ -40,13 +41,14 @@
                     </span>
                 </a>
             </li>
+            @endrole
+            @role('admin')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     PPC/SUPPORTING
                 </h4>
                 <i class="m-menu__section-icon flaticon-more-v3"></i>
             </li>
-
             <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle"
                 title="Non functional dummy link"><i class="m-menu__link-icon flaticon-list-3"></i><span class="m-menu__link-text">Task Card</span><i class="m-menu__ver-arrow la la-angle-right"></i></a>
             <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
@@ -357,6 +359,8 @@
                     </span>
                 </a>
             </li>
+            @endrole
+            @role('admin')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     MATERIAL PLANNER
@@ -371,6 +375,8 @@
                     </span>
                 </a>
             </li>
+            @endrole
+            @role('admin')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     PURCHASING
@@ -401,6 +407,7 @@
                     </span>
                 </a>
             </li>
+            @endrole
             @hasanyrole('hrd|admin')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
@@ -437,23 +444,7 @@
                 <a href="{{ route('frontend.position.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
-                        Potition
-                    </span>
-                </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.leave-period.index') }}" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Leave Period
-                    </span>
-                </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.leave-type.index') }}" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Leave Types
+                        Position
                     </span>
                 </a>
             </li>
@@ -470,6 +461,22 @@
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Workshift Schedule
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.leave-period.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Leave Period
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.leave-type.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Leave Types
                     </span>
                 </a>
             </li>
@@ -499,6 +506,54 @@
             </li>
 
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.import-fingerprint.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Import From Fingerprint Machine
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.attendance.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Attendance List
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.attendance-correction.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Attendance Correction
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.overtime.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Overtime
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.propose-leave.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Propose Leave
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Leave Report
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
                 <a href="" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
@@ -522,23 +577,8 @@
                     </span>
                 </a>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Overtime
-                    </span>
-                </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Attendance Correction
-                    </span>
-                </a>
-            </li>
             @endrole
+            @role('admin')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
                     WAREHOUSE
@@ -889,6 +929,7 @@
                     </ul>
                 </div>
             </li>
+            @endrole
         </ul>
     </div>
 </div>

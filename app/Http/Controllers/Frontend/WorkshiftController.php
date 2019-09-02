@@ -70,7 +70,7 @@ class WorkshiftController extends Controller
     public function show(Workshift $workshift)
     {
         $schedule = $workshift->workshift_schedules()->get();
-      
+        
         return view('frontend.workshift-schedule.show',['workshift' => $workshift,'schedule' => $schedule]);
     }
 

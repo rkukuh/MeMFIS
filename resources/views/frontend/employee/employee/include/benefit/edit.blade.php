@@ -1,3 +1,9 @@
+@component('frontend.common.input.hidden')
+        @slot('id', 'employee_uuid')
+        @slot('name', 'employee_uuid')
+        @slot('value', $employee->uuid)
+@endcomponent
+
 <div class="jumbotron p-3" style="background:#294294;">
     <div class="row">
         <div class="col">
@@ -24,69 +30,37 @@
                     </div>
                     <div>
                         <table width="100%" cellpadding="7">
-                            <tr>
-                                <td align="left" width="30%">Benefits Name (genereate lock)</td>
-                                <td align="center" width="25%">
-                                    @component('frontend.common.input.number')
-                                        @slot('id', 'benefit_name')
-                                        @slot('name', 'benefit_name')
-                                        @slot('id_error', 'benefit_name')
-                                    @endcomponent                    
-                                </td>
-                                <td  width="30%">
-                                    <p>Min~Max = 1.000.000 - 2.000.000 <br> Calculation Refrence: <br> Pro-rate Base Calculation:</p>
-                                </td>
-                                <td align="center" width="15%">
-                                    @component('frontend.common.input.checkbox')
-                                        @slot('id', 'benefit')
-                                        @slot('name', 'benefit')
-                                        @slot('size', '')
-                                        @slot('style','width:20px;')
-                                    @endcomponent
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="left" width="30%">Benefits Name (genereate lock)</td>
-                                <td align="center" width="25%">
-                                    @component('frontend.common.input.number')
-                                        @slot('id', 'benefit_name')
-                                        @slot('name', 'benefit_name')
-                                        @slot('id_error', 'benefit_name')
-                                    @endcomponent                    
-                                </td>
-                                <td  width="30%">
-                                    <p>Min~Max = 1.000.000 - 2.000.000 <br> Calculation Refrence: <br> Pro-rate Base Calculation:</p>
-                                </td>
-                                <td align="center" width="15%">
-                                    @component('frontend.common.input.checkbox')
-                                        @slot('id', 'benefit')
-                                        @slot('name', 'benefit')
-                                        @slot('size', '')
-                                        @slot('style','width:20px;')
-                                    @endcomponent
-                                </td>
-                            </tr>
-                            <tr>
-                                <td align="left" width="30%">Benefits Name (genereate lock)</td>
-                                <td align="center" width="25%">
-                                    @component('frontend.common.input.number')
-                                        @slot('id', 'benefit_name')
-                                        @slot('name', 'benefit_name')
-                                        @slot('id_error', 'benefit_name')
-                                    @endcomponent                    
-                                </td>
-                                <td  width="30%">
-                                    <p>Min~Max = 1.000.000 - 2.000.000 <br> Calculation Refrence: <br> Pro-rate Base Calculation:</p>
-                                </td>
-                                <td align="center" width="15%">
-                                    @component('frontend.common.input.checkbox')
-                                        @slot('id', 'benefit')
-                                        @slot('name', 'benefit')
-                                        @slot('size', '')
-                                        @slot('style','width:20px;')
-                                    @endcomponent
-                                </td>
-                            </tr>
+                            
+                            @for ($i = 0; $i < count($employee_benefit); $i++)
+                                
+                                <tr>
+                                <td align="left" width="30%">{{ $employee_benefit[$i]['benefit_name'] }}</td>
+                                    <td align="center" width="25%">
+                                        @component('frontend.common.input.number')
+                                            @slot('min', $employee_benefit[$i]['min'])
+                                            @slot('max', $employee_benefit[$i]['max'])
+                                            @slot('name', $employee_benefit[$i]['benefit_uuid'].'_amount')
+                                            @slot('id', $employee_benefit[$i]['benefit_uuid'].'_amount')
+                                            @slot('id_error', $employee_benefit[$i]['benefit_uuid'])
+                                        @endcomponent                    
+                                    </td>
+                                    <td  width="30%">
+                                    <p>Min~Max = {{ $employee_benefit[$i]['min'] }} - {{ $employee_benefit[$i]['max'] }} <br> Calculation Refrence: {{ $employee_benefit[$i]['base_calculation'] }}<br> Pro-rate Base Calculation:  {{ $employee_benefit[$i]['prorate_calculation'] }}</p>
+                                    </td>
+                                    <td align="center" width="15%">
+                                        @component('frontend.common.input.checkbox')
+                                            @slot('id', $employee_benefit[$i]['benefit_uuid'])
+                                            @slot('name', 'check_benefit')
+                                            @slot('value', $employee_benefit[$i]['benefit_uuid'])
+                                            @slot('onclik', 'checkboxFunction(this.id)')
+                                            @slot('size', '')
+                                            @slot('style','width:20px;')
+                                        @endcomponent
+                                    </td>
+                                </tr>
+
+                            @endfor
+
                         </table>
                     </div>
                 </div>
@@ -107,6 +81,8 @@
 
                     @component('frontend.common.input.text')
                         @slot('id', 'duration')
+                        @slot('name', 'maximum_overtime')
+                        @slot('id_error', 'maximum_overtime')
                     @endcomponent
 
                     <p class="mt-2 font-weight-bold">Seconds: <span id="duration-label"></span></p>
@@ -118,7 +94,8 @@
 
                     @component('frontend.common.input.text')
                         @slot('id', 'duration_1')
-                        @slot('value','21600')
+                        @slot('name', 'minimum_overtime')
+                        @slot('id_error', 'minimum_overtime')
                     @endcomponent
 
                     <p class="mt-2 font-weight-bold">Seconds: <span id="duration-label-2"></span></p>
@@ -131,7 +108,6 @@
                     </label>
 
                     @component('frontend.common.input.number')
-                        @slot('text', 'Holiday Overtime Allowance')
                         @slot('id', 'holiday_overtime')
                         @slot('name', 'holiday_overtime')
                         @slot('id_error', 'holiday_overtime')
@@ -158,14 +134,18 @@
             <legend class="w-auto"><b>BPJS</b></legend>
             <div class="form-group m-form__group row">
                 <div class="col-sm-12 col-md-12 col-lg-12">
+
+                    @foreach ($employee_bpjs as $bpjs)
+
                     <table width="100%" cellpadding="4" border="1">
                         <tr>
-                            <td colspan="3" align="center" style="background:#8d32a8;color:white;font-weight: bold">BPJS TITLE</td>
+                        <td colspan="3" align="center" style="background:#8d32a8;color:white;font-weight: bold">{{ $bpjs->name }}</td>
                             <td rowspan="5" align="center">
                                 @component('frontend.common.input.checkbox')
-                                    @slot('id', 'check')
-                                    @slot('name', 'check')
-                                    @slot('size', '')
+                                    @slot('id', $bpjs->uuid)
+                                    @slot('name', 'check_bpjs')
+                                    @slot('onclik','checkboxBPJSFunction(this.id)')
+                                    @slot('value',$bpjs->uuid)
                                     @slot('style','width:20px;')
                                 @endcomponent
                             </td>
@@ -179,88 +159,17 @@
                             <td align="center" valign="top" class="pt-3">Percentage of Basic Salary</td>
                             <td align="center" valign="top">
                                  @component('frontend.common.input.number')
-                                    @slot('id', 'percentage_of_basic_salary_employee')
-                                    @slot('name', 'percentage_of_basic_salary_employee')
-                                    @slot('id_error', 'percentage_of_basic_salary_employee')
+                                    @slot('name', $bpjs->uuid.'_employee')
+                                    @slot('value', $bpjs->employee_paid)
+                                    @slot('id_error', $bpjs->uuid.'_employee')
                                     @slot('input_append','%')
                                 @endcomponent
                             </td>
                             <td align="center" valign="top">
                                 @component('frontend.common.input.number')
-                                    @slot('id', 'percentage_of_basic_salary_company')
-                                    @slot('name', 'percentage_of_basic_salary_company')
-                                    @slot('id_error', 'percentage_of_basic_salary_company')
-                                    @slot('input_append','%')
-                                @endcomponent
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="top" class="pt-3">Minimum value</td>
-                            <td align="center" valign="top">
-                                 @component('frontend.common.input.number')
-                                    @slot('id', 'min_value_employee')
-                                    @slot('name', 'min_value_employee')
-                                    @slot('id_error', 'min_value_employee')
-                                @endcomponent
-                            </td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.input.number')
-                                    @slot('id', 'min_value_company')
-                                    @slot('name', 'min_value_company')
-                                    @slot('id_error', 'min_value_company')
-                                @endcomponent
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="top" class="pt-3">Maximum Value</td>
-                            <td align="center" valign="top">
-                                 @component('frontend.common.input.number')
-                                    @slot('id', 'max_value_employee')
-                                    @slot('name', 'max_value_employee')
-                                    @slot('id_error', 'max_value_employee')
-                                @endcomponent
-                            </td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.input.number')
-                                    @slot('id', 'max_value_company')
-                                    @slot('name', 'max_value_company')
-                                    @slot('id_error', 'max_value_company')
-                                @endcomponent
-                            </td>
-                        </tr>
-                    </table>
-                    <table width="100%" cellpadding="4" border="1" class="mt-3">
-                        <tr>
-                            <td colspan="3" align="center" style="background:#8d32a8;color:white;font-weight: bold">BPJS TITLE</td>
-                            <td rowspan="5" align="center">
-                                @component('frontend.common.input.checkbox')
-                                    @slot('id', 'check')
-                                    @slot('name', 'check')
-                                    @slot('size', '')
-                                    @slot('style','width:20px;')
-                                @endcomponent
-                            </td>
-                        </tr>
-                        <tr style="background:#f5f5f5;font-weight: bold">
-                            <td align="center" valign="top">Description</td>
-                            <td align="center" valign="top">Paid by Employees</td>
-                            <td align="center" valign="top">Paid by Company</td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="top" class="pt-3">Percentage of Basic Salary</td>
-                            <td align="center" valign="top">
-                                 @component('frontend.common.input.number')
-                                    @slot('id', 'percentage_of_basic_salary_employee')
-                                    @slot('name', 'percentage_of_basic_salary_employee')
-                                    @slot('id_error', 'percentage_of_basic_salary_employee')
-                                    @slot('input_append','%')
-                                @endcomponent
-                            </td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.input.number')
-                                    @slot('id', 'percentage_of_basic_salary_company')
-                                    @slot('name', 'percentage_of_basic_salary_company')
-                                    @slot('id_error', 'percentage_of_basic_salary_company')
+                                    @slot('value', $bpjs->company_paid)
+                                    @slot('name', $bpjs->uuid.'_company')
+                                    @slot('id_error', $bpjs->uuid.'_company')
                                     @slot('input_append','%')
                                 @endcomponent
                             </td>
@@ -269,16 +178,16 @@
                             <td align="center" valign="top" class="pt-3">Minimum value</td>
                             <td align="center" valign="top">
                                  @component('frontend.common.input.number')
-                                    @slot('id', 'min_value_employee')
-                                    @slot('name', 'min_value_employee')
-                                    @slot('id_error', 'min_value_employee')
+                                    @slot('value', $bpjs->employee_min_value)
+                                    @slot('name', $bpjs->uuid.'_employee_min')
+                                    @slot('id_error', $bpjs->uuid.'_employee_min')
                                 @endcomponent
                             </td>
                             <td align="center" valign="top">
                                 @component('frontend.common.input.number')
-                                    @slot('id', 'min_value_company')
-                                    @slot('name', 'min_value_company')
-                                    @slot('id_error', 'min_value_company')
+                                    @slot('value', $bpjs->employee_max_value)
+                                    @slot('name', $bpjs->uuid.'_company_min')
+                                    @slot('id_error', $bpjs->uuid.'_company_min')
                                 @endcomponent
                             </td>
                         </tr>
@@ -286,91 +195,23 @@
                             <td align="center" valign="top" class="pt-3">Maximum Value</td>
                             <td align="center" valign="top">
                                  @component('frontend.common.input.number')
-                                    @slot('id', 'max_value_employee')
-                                    @slot('name', 'max_value_employee')
-                                    @slot('id_error', 'max_value_employee')
+                                    @slot('value', $bpjs->company_min_value)
+                                    @slot('name', $bpjs->uuid.'_employee_max')
+                                    @slot('id_error', $bpjs->uuid.'_employee_max')
                                 @endcomponent
                             </td>
                             <td align="center" valign="top">
                                 @component('frontend.common.input.number')
-                                    @slot('id', 'max_value_company')
-                                    @slot('name', 'max_value_company')
-                                    @slot('id_error', 'max_value_company')
+                                    @slot('value', $bpjs->company_max_value)
+                                    @slot('name', $bpjs->uuid.'_company_max')
+                                    @slot('id_error', $bpjs->uuid.'_company_max')
                                 @endcomponent
                             </td>
                         </tr>
                     </table>
-                    <table width="100%" cellpadding="4" border="1" class="mt-3">
-                        <tr>
-                            <td colspan="3" align="center" style="background:#8d32a8;color:white;font-weight: bold">BPJS TITLE</td>
-                            <td rowspan="5" align="center">
-                                @component('frontend.common.input.checkbox')
-                                    @slot('id', 'check')
-                                    @slot('name', 'check')
-                                    @slot('size', '')
-                                    @slot('style','width:20px;')
-                                @endcomponent
-                            </td>
-                        </tr>
-                        <tr style="background:#f5f5f5;font-weight: bold">
-                            <td align="center" valign="top">Description</td>
-                            <td align="center" valign="top">Paid by Employees</td>
-                            <td align="center" valign="top">Paid by Company</td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="top" class="pt-3">Percentage of Basic Salary</td>
-                            <td align="center" valign="top">
-                                 @component('frontend.common.input.number')
-                                    @slot('id', 'percentage_of_basic_salary_employee')
-                                    @slot('name', 'percentage_of_basic_salary_employee')
-                                    @slot('id_error', 'percentage_of_basic_salary_employee')
-                                    @slot('input_append','%')
-                                @endcomponent
-                            </td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.input.number')
-                                    @slot('id', 'percentage_of_basic_salary_company')
-                                    @slot('name', 'percentage_of_basic_salary_company')
-                                    @slot('id_error', 'percentage_of_basic_salary_company')
-                                    @slot('input_append','%')
-                                @endcomponent
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="top" class="pt-3">Minimum value</td>
-                            <td align="center" valign="top">
-                                 @component('frontend.common.input.number')
-                                    @slot('id', 'min_value_employee')
-                                    @slot('name', 'min_value_employee')
-                                    @slot('id_error', 'min_value_employee')
-                                @endcomponent
-                            </td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.input.number')
-                                    @slot('id', 'min_value_company')
-                                    @slot('name', 'min_value_company')
-                                    @slot('id_error', 'min_value_company')
-                                @endcomponent
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" valign="top" class="pt-3">Maximum Value</td>
-                            <td align="center" valign="top">
-                                 @component('frontend.common.input.number')
-                                    @slot('id', 'max_value_employee')
-                                    @slot('name', 'max_value_employee')
-                                    @slot('id_error', 'max_value_employee')
-                                @endcomponent
-                            </td>
-                            <td align="center" valign="top">
-                                @component('frontend.common.input.number')
-                                    @slot('id', 'max_value_company')
-                                    @slot('name', 'max_value_company')
-                                    @slot('id_error', 'max_value_company')
-                                @endcomponent
-                            </td>
-                        </tr>
-                    </table>
+                   
+                    @endforeach
+
                 </div>
             </div>
         </fieldset>
@@ -382,6 +223,7 @@
                         @slot('id', 'break')
                         @slot('name', 'pause')
                         @slot('text', 'Paid by Employee')
+                        @slot('value', 'employee')
                         @slot('required','required')
                     @endcomponent
                 </div>
@@ -390,6 +232,7 @@
                         @slot('id', 'break')
                         @slot('name', 'pause')
                         @slot('text', 'Paid by Company')
+                        @slot('value', 'company')
                         @slot('required','required')
                     @endcomponent
                 </div>
@@ -410,7 +253,6 @@
                     </label>
 
                     @component('frontend.common.input.number')
-                        @slot('text', 'Late Tolerance')
                         @slot('id', 'late_tolerance')
                         @slot('name', 'late_tolerance')
                         @slot('id_error', 'late_tolerance')
@@ -425,10 +267,9 @@
                     </label>
 
                     @component('frontend.common.input.number')
-                        @slot('text', 'Late Pushiment')
-                        @slot('id', 'late_pushiment')
-                        @slot('name', 'late_pushiment')
-                        @slot('id_error', 'late_pushiment')
+                        @slot('id', 'late_punishment')
+                        @slot('name', 'late_punishment')
+                        @slot('id_error', 'late_punishment')
                         @slot('input_append','IDR')
                     @endcomponent
                 </div>
@@ -439,9 +280,9 @@
 
                     @component('frontend.common.input.number')
                         @slot('text', 'Absences Punishment(per Day)')
-                        @slot('id', 'absences_punishment')
-                        @slot('name', 'absences_punishment')
-                        @slot('id_error', 'absences_punishment')
+                        @slot('id', 'absence_punishment')
+                        @slot('name', 'absence_punishment')
+                        @slot('id_error', 'absence_punishment')
                         @slot('input_append','IDR')
                     @endcomponent
                 </div>
@@ -466,13 +307,32 @@
     <div class="col-sm-12 col-md-12 col-lg-12 footer">
         <div class="flex">
             <div class="action-buttons">
-                @component('frontend.common.buttons.submit')
-                    @slot('type','button')
-                    @slot('id', 'add-benefit')
-                    @slot('class', 'add-benefit')
-                @endcomponent
 
-                @include('frontend.common.buttons.reset')
+                @if ($button_parameter == 'create')
+                    @component('frontend.common.buttons.submit')
+                    @slot('type','button')
+                    @slot('id', 'create-benefit')
+                    @slot('class', 'create-benefit')
+                    @endcomponent 
+
+                    @include('frontend.common.buttons.reset')
+                @elseif ($button_parameter == 'approvals')
+                    @component('frontend.common.buttons.submit')
+                    @slot('type','button')
+                    @slot('text','Approve')
+                    @slot('icon','fa-check')
+                    @slot('id', 'approve')
+                    @slot('class', 'approve')
+                    @endcomponent
+                @else
+                    @component('frontend.common.buttons.submit')
+                    @slot('type','button')
+                    @slot('id', 'edit-benefit')
+                    @slot('class', 'edit-benefit')
+                    @endcomponent
+
+                    @include('frontend.common.buttons.reset')
+                @endif
 
                 @include('frontend.common.buttons.back')
 
@@ -532,4 +392,9 @@
               })
             });
     </script>
+@endpush
+
+@push('footer-scripts')
+<script src="{{ asset('js/frontend/employee/employee/edit_benefit.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/employee/create_benefit.js') }}"></script>
 @endpush

@@ -128,7 +128,8 @@ class DiscrepancyPPCController extends Controller
 
         $discrepancy->approvals()->save(new Approval([
             'approvable_id' => $discrepancy->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
         ]));
 
         $discrepancy->progresses()->save(new Progress([
@@ -162,7 +163,8 @@ class DiscrepancyPPCController extends Controller
     {
         $discrepancy->approvals()->save(new Approval([
             'approvable_id' => $discrepancy->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
         ]));
 
         $discrepancy->progresses()->save(new Progress([

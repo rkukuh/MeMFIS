@@ -79,7 +79,8 @@ class DiscrepancyEngineerController extends Controller
 
         $defectcard->approvals()->save(new Approval([
             'approvable_id' => $defectcard->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
         ]));
 
         return response()->json($defectcard);
@@ -182,7 +183,8 @@ class DiscrepancyEngineerController extends Controller
 
         $discrepancy->approvals()->save(new Approval([
             'approvable_id' => $discrepancy->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
         ]));
 
         return response()->json($discrepancy);
@@ -211,7 +213,8 @@ class DiscrepancyEngineerController extends Controller
     {
         $discrepancy->approvals()->save(new Approval([
             'approvable_id' => $discrepancy->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
         ]));
 
         return response()->json($discrepancy);

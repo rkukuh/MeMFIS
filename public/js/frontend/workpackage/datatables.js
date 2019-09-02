@@ -439,39 +439,6 @@ let Datatables = {
             });
         });
 
-        $("#adsb_datatable").on("click", ".select-adsb", function() {
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-                },
-                type: "post",
-                url: "/workpackage/" + workPackage_uuid + "/taskcard",
-                data: {
-                    _token: $("input[name=_token]").val(),
-                    taskcard: $(this).data("uuid")
-                },
-                success: function(data) {
-                    if (data.errors) {
-                        // if (data.errors.name) {
-                        //     $('#name-error').html(data.errors.name[0]);
-                        //     document.getElementById('name').value = name;
-                        // }
-                    } else {
-                        $("#modal_ad_sb").modal("hide");
-
-                        toastr.success("Task Card has been added.", "Success", {
-                            timeOut: 5000
-                        });
-
-                        let table = $(".ad-sb_datatable").mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
-                }
-            });
-        });
-
         $("#si_datatable").on("click", ".select-si", function() {
             $.ajax({
                 headers: {
@@ -505,38 +472,6 @@ let Datatables = {
             });
         });
 
-        $("#cmrawl_datatable").on("click", ".select-cmrawl", function() {
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-                },
-                type: "post",
-                url: "/workpackage/" + workPackage_uuid + "/taskcard",
-                data: {
-                    _token: $("input[name=_token]").val(),
-                    taskcard: $(this).data("uuid")
-                },
-                success: function(data) {
-                    if (data.errors) {
-                        // if (data.errors.name) {
-                        //     $('#name-error').html(data.errors.name[0]);
-                        //     document.getElementById('name').value = name;
-                        // }
-                    } else {
-                        $("#modal_cmr_awl").modal("hide");
-
-                        toastr.success("Task Card has been added.", "Success", {
-                            timeOut: 5000
-                        });
-
-                        let table = $(".cmr-awl_datatable").mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
-                }
-            });
-        });
     }
 };
 

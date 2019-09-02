@@ -5,9 +5,17 @@ namespace App\Models;
 use App\User;
 use App\MemfisModel;
 use App\Models\Pivots\EmployeeLicense;
+use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\Tags\HasTags;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Employee extends MemfisModel
+class Employee extends MemfisModel implements HasMedia
 {
+
+    use HasTags;
+    use HasMediaTrait;
+
     protected $fillable = [
         'code',
         'user_id',
@@ -33,7 +41,19 @@ class Employee extends MemfisModel
         'updated_at'
     ];
 
-
+// ----------------------------------------OVERIDE-----------------------------------------------//
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('id_card')
+             ->singleFile();
+    }
+    
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('thumb')
+             ->width(45)
+             ->height(45);
+    }
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
@@ -212,7 +232,7 @@ class Employee extends MemfisModel
      */
     public function employee_benefit()
     {
-        return $this->belongsTo(EmployeeBenefit::class);
+        return $this->hasMany(EmployeeBenefit::class);
     }
 
     /**
@@ -225,7 +245,7 @@ class Employee extends MemfisModel
      */
     public function employee_bpjs()
     {
-        return $this->belongsTo(EmployeeBPJS::class);
+        return $this->hasMany(EmployeeBPJS::class);
     }
 
     /**
@@ -238,7 +258,7 @@ class Employee extends MemfisModel
      */
     public function employee_provisions()
     {
-        return $this->belongsTo(EmployeeProvisions::class);
+        return $this->hasMany(EmployeeProvisions::class);
     }
 
     /**

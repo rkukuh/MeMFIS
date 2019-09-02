@@ -56,13 +56,12 @@ Route::name('frontend.')->group(function () {
         Route::resource('branch', 'BranchController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
-        Route::resource('manhour', 'ManhourController');
+        // Route::resource('manhour', 'ManhourController');
         Route::resource('benefit', 'BenefitController');
         Route::resource('company', 'CompanyController');
         Route::resource('language', 'LanguageController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
-        Route::resource('manhour', 'ManhourController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
         Route::resource('leave-period','LeavePeriodController');
@@ -91,6 +90,45 @@ Route::name('frontend.')->group(function () {
         Route::resource('eo-instruction-wp-successor', 'EOInstructionWorkPackageSuccessorController');
         Route::resource('eo-instruction-wp-predecessor', 'EOInstructionWorkPackagePredecessorController');
 
+
+        /** IMPORT FINGERPRINT MACHINE */
+
+        Route::view('/import-fingerprint', 'frontend.import-fingerprint.index')->name('import-fingerprint.index');
+        Route::view('/import-fingerprint/create', 'frontend.import-fingerprint.create')->name('import-fingerprint.create');
+
+        /** ATTENDANCE */
+
+        Route::view('/attendance', 'frontend.attendance.index')->name('attendance.index');
+
+        Route::view('/attendance/overtime/create', 'frontend.attendance.overtime.create')->name('attendance.overtime.create');
+        Route::view('/attendance/overtime/approve', 'frontend.attendance.overtime.approve')->name('attendance.overtime.approve');
+
+        Route::view('/attendance/propose-leave/create', 'frontend.attendance.propose-leave.create')->name('attendance.propose-leave.create');
+        Route::view('/attendance/propose-leave/approve-type-1', 'frontend.attendance.propose-leave.approve-type-1')->name('attendance.propose-leave.approve-type-1');
+        Route::view('/attendance/propose-leave/approve-type-2', 'frontend.attendance.propose-leave.approve-type-2')->name('attendance.propose-leave.approve-type-2');
+
+        Route::view('/attendance/attendance-correction/create', 'frontend.attendance.attendance-correction.create')->name('attendance.attendance-correction.create');
+
+        /** ATTENDANCE CORRECTION */
+
+        Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
+        Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
+        Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
+        Route::view('/attendance-correction/approve', 'frontend.attendance-correction.approve')->name('attendance-correction.approve');
+
+        /** OVERTIME */
+
+        Route::view('/overtime', 'frontend.overtime.index')->name('overtime.index');
+        Route::view('/overtime/create', 'frontend.overtime.create')->name('overtime.create');
+        Route::view('/overtime/edit', 'frontend.overtime.edit')->name('overtime.edit');
+        Route::view('/overtime/approve', 'frontend.overtime.approve')->name('overtime.approve');
+
+        /** PROPOSE LEAVE */
+
+        Route::view('/propose-leave', 'frontend.propose-leave.index')->name('propose-leave.index');
+        Route::view('/propose-leave/create', 'frontend.propose-leave.create')->name('propose-leave.create');
+        Route::view('/propose-leave/edit', 'frontend.propose-leave.edit')->name('propose-leave.edit');
+        Route::view('/propose-leave/approve', 'frontend.propose-leave.approve')->name('propose-leave.approve');
     });
 
 });
