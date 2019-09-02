@@ -289,8 +289,11 @@
                                                 Station
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                @component('frontend.common.input.number')
-                                                    @slot('name', 'csn')
+                                                @component('frontend.common.input.select2')
+                                                    @slot('text', 'station')
+                                                    @slot('name', 'station')
+                                                    @slot('id', 'station')
+                                                    @slot('id_error', 'station')
                                                 @endcomponent
                                             </td>
                                         </tr>
@@ -337,29 +340,33 @@
                                             <tr height="80">
                                                 <td align="center">
                                                     @component('frontend.common.input.checkbox')
-                                                        @slot('id', '')
-                                                        @slot('name', '')
+                                                        @slot('id', 'ac')
+                                                        @slot('name', 'logbook[]')
                                                         @slot('text', 'A/C Log Book')
+                                                        @slot('value', 'ac-logbook')
                                                         @slot('style_div','margin-top:30px')
                                                     @endcomponent
                                                 </td>
                                                 <td align="center">
                                                     @component('frontend.common.input.checkbox')
-                                                        @slot('id', '')
-                                                        @slot('name', '')
-                                                        @slot('text', 'A/C Log Book')
+                                                        @slot('id', 'eng')
+                                                        @slot('name', 'logbook[]')
+                                                        @slot('text', 'ENG. Log Book')
+                                                        @slot('value', 'eng-logbook')
                                                         @slot('style_div','margin-top:30px')
                                                     @endcomponent
                                                 </td>
                                                 <td align="center">
                                                     @component('frontend.common.input.checkbox')
-                                                        @slot('id', '')
-                                                        @slot('name', '')
-                                                        @slot('text', 'A/C Log Book')
+                                                        @slot('id', 'apu')
+                                                        @slot('name', 'logbook[]')
+                                                        @slot('text', 'APU Log Book')
+                                                        @slot('value', 'apu-logbook')
                                                         @slot('style_div','margin-top:30px')
                                                     @endcomponent
                                                 </td>
                                             </tr>
+
                                         </table>
                                     </div>
                                 </div>
@@ -389,6 +396,8 @@
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/type.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/station.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/station.js')}}"></script>
 
 {{-- @if(sizeof($jobcard->helpers) == 0) --}}
 <script src="{{ asset('js/frontend/functions/fill-combobox/helper.js')}}"></script>
