@@ -1,5 +1,6 @@
-@if( isset($jobcards["non-routine"] ) ) 
+@if( isset($jobcards["routine"] ) ) 
 <div class="form-group m-form__group row">
+    @if( isset($jobcards["basic"]) )
     <div class="col-sm-4 col-md-4 col-lg-4">
         <div class="m-portlet  m-portlet--full-height ">
             <div class="m-portlet__head">
@@ -158,6 +159,9 @@
             </div>
         </div>
     </div>
+    @endif
+
+    @if( isset($jobcards["sip"]) )
     <div class="col-sm-4 col-md-4 col-lg-4">
         <div class="m-portlet  m-portlet--full-height ">
             <div class="m-portlet__head">
@@ -316,6 +320,9 @@
             </div>
         </div>
     </div>
+    @endif
+
+    @if( isset($jobcards["sip"]) )
     <div class="col-sm-4 col-md-4 col-lg-4">
         <div class="m-portlet  m-portlet--full-height ">
             <div class="m-portlet__head">
@@ -474,6 +481,8 @@
             </div>
         </div>
     </div>
+    @endif
+
 </div>
 <div class="form-group m-form__group row">
     <div class="col-sm-4 col-md-4 col-lg-4">

@@ -61,7 +61,7 @@ class WorkProgressReportController extends Controller
         $jobcards = $statusses_routine = $statusses_non_routine =  $basic =  $sip =  $cpcp =  $additional =  $adsb =  $cmr_awl =  $si =  $ea =  $eo =  $ht_crr = $manhours = [];
 
         $tat = ProjectWorkpackage::where('project_id', $project->id)->sum('tat');
-        $attention = json_decode($project->quotations[0]->attention);
+        $attention = json_decode($project->quotations->first()->attention);
         if(isset($project->data_htcrr)){
             $tat += json_decode($project->data_htcrr)->tat;
         }
@@ -137,7 +137,6 @@ class WorkProgressReportController extends Controller
         }
 
         foreach($this->tc_type as $type){
-            // dd($jobcard_all[0]);
             if( sizeof($jobcard_all->where("tc_type", $type)->pluck("tc_type")) > 0 ) {
                 $manhours[$type]["actual"] = $jobcard_all->where('tc_type', $type)->sum('actual_manhours');
                 $manhours[$type]["total"] = $jobcard_all->where('tc_type', $type)->sum('estimation_manhour');
