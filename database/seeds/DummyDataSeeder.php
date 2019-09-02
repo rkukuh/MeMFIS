@@ -34,6 +34,7 @@ class DummyDataSeeder extends Seeder
 
         $this->call(Companies::class);
         $this->call(Branches::class);
+        $this->call(Banks::class);
         $this->call(Manufacturers::class);
         $this->call(Aircrafts::class);
         $this->call(Languages::class);

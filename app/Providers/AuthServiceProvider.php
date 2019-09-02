@@ -23,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Amel::class => Policies\AmelPolicy::class,
         Models\Zone::class => Policies\ZonePolicy::class,
         Models\BPJS::class => Policies\BPJSPolicy::class,
+        Models\Bank::class => Policies\BankPolicy::class,
         Models\Email::class => Policies\EmailPolicy::class,
         Models\Phone::class => Policies\PhonePolicy::class,
         Models\Level::class => Policies\LevelPolicy::class,
