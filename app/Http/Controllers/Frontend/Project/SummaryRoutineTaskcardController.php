@@ -62,11 +62,15 @@ class SummaryRoutineTaskcardController extends Controller
         $otr["eri"] = $eri;
         $total_taskcard  = $taskcards->load('type')->where('type.name', 'Basic')->count('uuid');
         $total_manhour_taskcard  = $taskcards->load('type')->where('type.name', 'Basic')->sum('estimation_manhour');
+        $type = 'Basic';
+        
         return view('frontend.project.hm.taskcard.routine.basic.basic-summary',[
+            'otr' => $otr,
+            'type' => $type,
+            'project' => $project,
+            'workPackage' => $workPackage,
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
-            'otr' => $otr,
-            'workPackage' => $workPackage,
         ]);
     }
 
