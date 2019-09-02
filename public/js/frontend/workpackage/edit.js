@@ -61,7 +61,7 @@ let Workpackage = {
         let predecessor_datatables_init = true;
         let successor_datatables_init = true;
         let predecessor_instruction_datatable_init = true;
-        let successor_instruction_datatables_init = true;
+        let successor_instruction_datatable_init = true;
         let instruction_datatables_init = true;
 
         //Basic taskcard Datatable
@@ -580,8 +580,8 @@ let Workpackage = {
             }
         });
         $(".ad-sb_datatable").on("click", ".successor-instruction", function() {
-            if (successor_instruction_datatables_init == true) {
-                successor_instruction_datatables_init = false;
+            if (successor_instruction_datatable_init == true) {
+                successor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
                 document.getElementById("uuid-successor").value = triggeruuid;
                 successor_instruction_tc(triggeruuid);
@@ -652,8 +652,8 @@ let Workpackage = {
             document.getElementById("sequence-instruction").value = sequence;
         });
         $(".cmr-awl_datatable").on("click", ".predecessor-instruction", function() {
-            if (predecessor_instruction_datatables_init == true) {
-                predecessor_instruction_datatables_init = false;
+            if (predecessor_instruction_datatable_init == true) {
+                predecessor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
                 document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_instruction_tc(triggeruuid);
@@ -672,21 +672,21 @@ let Workpackage = {
             }
         });
         $(".cmr-awl_datatable").on("click", ".successor-instruction", function() {
-            if (successor_datatables_init == true) {
-                successor_datatables_init = false;
+            if (successor_instruction_datatable_init == true) {
+                successor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
                 document.getElementById("uuid-successor").value = triggeruuid;
                 successor_instruction_tc(triggeruuid);
-                $("#successor_datatable")
+                $("#successor_instruction_datatable")
                     .DataTable()
                     .ajax.reload();
             } else {
-                let table = $("#successor_datatable").DataTable();
+                let table = $("#successor_instruction_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
                 document.getElementById("uuid-successor").value = triggeruuid;
                 successor_instruction_tc(triggeruuid);
-                $("#successor_datatable")
+                $("#successor_instruction_datatable")
                     .DataTable()
                     .ajax.reload();
             }
@@ -773,8 +773,8 @@ let Workpackage = {
             }
         });
         $(".eo_datatable").on("click", ".predecessor-instruction", function() {
-            if (predecessor_instruction_datatables_init == true) {
-                predecessor_instruction_datatables_init = false;
+            if (predecessor_instruction_datatable_init == true) {
+                predecessor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
                 document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_instruction_tc(triggeruuid);
@@ -793,21 +793,21 @@ let Workpackage = {
             }
         });
         $(".eo_datatable").on("click", ".successor-instruction", function() {
-            if (successor_datatables_init == true) {
-                successor_datatables_init = false;
+            if (successor_instruction_datatable_init == true) {
+                successor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
                 document.getElementById("uuid-successor").value = triggeruuid;
                 successor_instruction_tc(triggeruuid);
-                $("#successor_datatable")
+                $("#successor_instruction_datatable")
                     .DataTable()
                     .ajax.reload();
             } else {
-                let table = $("#successor_datatable").DataTable();
+                let table = $("#successor_instruction_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
                 document.getElementById("uuid-successor").value = triggeruuid;
                 successor_instruction_tc(triggeruuid);
-                $("#successor_datatable")
+                $("#successor_instruction_datatable")
                     .DataTable()
                     .ajax.reload();
             }
@@ -883,8 +883,8 @@ let Workpackage = {
             document.getElementById("sequence-instruction").value = sequence;
         });
         $(".ea_datatable").on("click", ".predecessor-instruction", function() {
-            if (predecessor_instruction_datatables_init == true) {
-                predecessor_instruction_datatables_init = false;
+            if (predecessor_instruction_datatable_init == true) {
+                predecessor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
                 document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_instruction_tc(triggeruuid);
@@ -903,26 +903,25 @@ let Workpackage = {
             }
         });
         $(".ea_datatable").on("click", ".successor-instruction", function() {
-            if (successor_datatables_init == true) {
-                successor_datatables_init = false;
+            if (successor_instruction_datatable_init == true) {
+                successor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
                 document.getElementById("uuid-successor").value = triggeruuid;
                 successor_instruction_tc(triggeruuid);
-                $("#successor_datatable")
+                $("#successor_instruction_datatable")
                     .DataTable()
                     .ajax.reload();
             } else {
-                let table = $("#successor_datatable").DataTable();
+                let table = $("#successor_instruction_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
                 document.getElementById("uuid-successor").value = triggeruuid;
                 successor_instruction_tc(triggeruuid);
-                $("#successor_datatable")
+                $("#successor_instruction_datatable")
                     .DataTable()
                     .ajax.reload();
             }
         });
-
         $("#ea_datatable").on("click", ".instructions", function() {
             if (instruction_datatables_init == true) {
                 instruction_datatables_init = false;
