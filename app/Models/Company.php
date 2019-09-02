@@ -19,6 +19,19 @@ class Company extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * One-to-Many: A company may have zero or many branches.
+     *
+     * This function will retrieve all the branches of a given company.
+     * See: Branch's company() method for the inverse
+     *
+     * @return mixed
+     */
+    public function branches()
+    {
+        return $this->hasMany(Branch::class);
+    }
+
+    /**
      * One-to-Many (self-join): A Company may have none or many sub-Company.
      *
      * This function will retrieve the sub-Company of an Company, if any.

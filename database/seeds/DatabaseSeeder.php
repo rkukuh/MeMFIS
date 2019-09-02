@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         
         /** MASTER */
         
+        $this->call(CompaniesTableSeeder::class);
         $this->call(BranchesTableSeeder::class);
         $this->call(ManufacturersTableSeeder::class);
         $this->call(AircraftsTableSeeder::class);
@@ -45,8 +46,7 @@ class DatabaseSeeder extends Seeder
         $this->call(VendorsTableSeeder::class);
         $this->call(FacilitiesTableSeeder::class);
         $this->call(ManhoursTableSeeder::class);
-
-        $this->call(CompaniesTableSeeder::class);
+        
         $this->call(DepartmentsTableSeeder::class);
         $this->call(BenefitsTableSeeder::class);
         $this->call(PositionsTableSeeder::class);
