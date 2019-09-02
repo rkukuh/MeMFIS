@@ -508,7 +508,7 @@ class EmployeeController extends Controller
             'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->get()
         ];
         
-       
+        
          return view('frontend.employee.employee.show',[
             'employee' => $employee,
             'age' => $age,
@@ -770,10 +770,52 @@ class EmployeeController extends Controller
             $provisions_approve = false;
         }
         
+        $approve = [];
+
         if(count($button_parameter_data[0]->employee_benefit) == 0 && count($button_parameter_data[0]->employee_bpjs) == 0 && count($button_parameter_data[0]->employee_provisions) == 0){
             $button_parameter = 'create';
         }else if($provisions_approve == false){
              $button_parameter = 'approvals';
+    
+        //EMPLOYEE BENEFIT APPROVAL
+        $benefit_name_data = $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNull('employee_benefit.approved_at')->get();
+        $bpjs_name_data = $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNull('employee_bpjs.approved_at')->get();
+        
+        $benefit_name = [];
+        $bpjs_name = [];
+
+        $p = 0;
+        foreach($benefit_name_data as $bnd){
+            $benefit_name[$p] = [
+                'name' => Benefit::where('id',$bnd->benefit_id)->first()
+            ];
+            $p++;
+        }
+        
+        $q = 0;
+        foreach($bpjs_name_data as $bpd){
+            $bpjs_name[$q] = [
+                'name' => BPJS::where('id',$bpd->bpjs_id)->first()
+            ];
+            $q++;
+        }
+
+        $position_min_max = null;
+        if(isset($employee->position()->first()->id)){
+            if(Position::find($employee->position()->first()->id)->benefit_current()->get()){
+                $position_min_max = Position::find($employee->position()->first()->id)->benefit_current()->get();
+            }
+        }
+
+        $approve = [
+            'provisions' => $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNull('employee_provisions.approved_at')->get(),
+            'position_min_max' => $position_min_max,
+            'benefit_name' => $benefit_name,
+            'benefit' => $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNull('employee_benefit.approved_at')->get(),
+            'bpjs_name' => $bpjs_name,
+            'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNull('employee_bpjs.approved_at')->get()
+        ];
+
          }else{
             $button_parameter = 'update';
         }
@@ -832,7 +874,7 @@ class EmployeeController extends Controller
         $p = 0;
         foreach($benefit_name_data as $bnd){
             $benefit_name[$p] = [
-                'name' => Benefit::where('id',$bnd->benefit_id)->first()->name
+                'name' => Benefit::where('id',$bnd->benefit_id)->first()
             ];
             $p++;
         }
@@ -840,7 +882,7 @@ class EmployeeController extends Controller
         $q = 0;
         foreach($bpjs_name_data as $bpd){
             $bpjs_name[$q] = [
-                'name' => BPJS::where('id',$bpd->bpjs_id)->first()->name
+                'name' => BPJS::where('id',$bpd->bpjs_id)->first()
             ];
             $q++;
         }
@@ -870,6 +912,7 @@ class EmployeeController extends Controller
             'bpjs_name' => $bpjs_name,
             'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->get()
         ];
+        
 
         return view('frontend.employee.employee.edit',[
         'employee' => $employee,
@@ -885,7 +928,8 @@ class EmployeeController extends Controller
         'employee_bpjs' => $employee_bpjs_data,
         'button_parameter' => $button_parameter,
         'current' => $current,
-        'employee_benefit_history' =>  $employee_benefit_history
+        'employee_benefit_history' =>  $employee_benefit_history,
+        'approve' => $approve
         ]);
     }
 

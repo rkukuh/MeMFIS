@@ -67,35 +67,41 @@
                     <label class="form-control-label">
                         Maximum Overtime per Period 
                     </label>
-
-                    @if (isset($current['provisions'][0]))
+                    @php
+                    $maximum_overtime = null;
+                    if(isset($current['provisions'][0]['maximum_overtime'])){
+                        $maximum_overtime = $current['provisions'][0]['maximum_overtime'];
+                    }
+                    @endphp
                     @component('frontend.common.input.number')
                         @slot('text', 'Maximum Overtime per Period')
                         @slot('id', 'max_overtime')
                         @slot('name', 'max_overtime')
                         @slot('id_error', 'max_overtime')
                         @slot('input_append','Hours')
-                        @slot('value', $current['provisions'][0]['maximum_overtime'])
+                        @slot('value', $maximum_overtime)
                         @slot('disabled','disabled')
                     @endcomponent
-                    @endif
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
                         Holiday Overtime Allowance 
                     </label>
-
-                    @if (isset($current['provisions'][0]))
+                    @php
+                        $holiday_overtime = null;
+                        if(isset($current['provisions'][0]['holiday_overtime'])){
+                            $holiday_overtime = $current['provisions'][0]['holiday_overtime'];
+                        }
+                    @endphp
                     @component('frontend.common.input.number')
                         @slot('text', 'Holiday Overtime Allowance')
                         @slot('id', 'holiday_overtime')
                         @slot('name', 'holiday_overtime')
                         @slot('id_error', 'holiday_overtime')
                         @slot('input_append','IDR per Day')
-                        @slot('value', $current['provisions'][0]['holiday_overtime'])
+                        @slot('value', $holiday_overtime)
                         @slot('disabled','disabled')
                     @endcomponent
-                    @endif
                 </div>
             </div>
         </fieldset>
@@ -243,17 +249,21 @@
                     <label class="form-control-label">
                         Late Tolerance
                     </label>
-                    @if (isset($current['provisions'][0]))
+                    @php
+                        $late_tolerance = null;
+                        if(isset($current['provisions'][0]['late_tolerance'])){
+                            $late_tolerance = $current['provisions'][0]['late_tolerance'];
+                        }
+                    @endphp
                     @component('frontend.common.input.number')
                         @slot('text', 'Late Tolerance')
                         @slot('id', 'late_tolerance')
                         @slot('name', 'late_tolerance')
                         @slot('id_error', 'late_tolerance')
                         @slot('input_append','Minutes')
-                        @slot('value', $current['provisions'][0]['late_tolerance'])
+                        @slot('value', $late_tolerance)
                         @slot('disabled','disabled')
                     @endcomponent
-                    @endif
                 </div>
             </div>
             <div class="form-group m-form__group row">
@@ -261,33 +271,41 @@
                     <label class="form-control-label">
                         Late Pushiment
                     </label>
-                    @if (isset($current['provisions'][0]))
+                    @php
+                    $late_punishment = null;
+                    if(isset($current['provisions'][0]['late_punishment'])){
+                        $late_punishment = $current['provisions'][0]['late_punishment'];
+                    }
+                    @endphp
                     @component('frontend.common.input.number')
                         @slot('text', 'Late Pushiment')
                         @slot('id', 'late_pushiment')
                         @slot('name', 'late_pushiment')
                         @slot('id_error', 'late_pushiment')
                         @slot('input_append','IDR')
-                        @slot('value', $current['provisions'][0]['late_punishment'])
+                        @slot('value', $late_punishment)
                         @slot('disabled','disabled')
                     @endcomponent
-                    @endif
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
                         Absences Punishment(per Day)
                     </label>
-                    @if (isset($current['provisions'][0]))
+                    @php
+                    $absence_punishment = null;
+                    if(isset($current['provisions'][0]['absence_punishment'])){
+                        $absence_punishment = $current['provisions'][0]['absence_punishment'];
+                    }
+                    @endphp
                     @component('frontend.common.input.number')
                         @slot('text', 'Absences Punishment(per Day)')
                         @slot('id', 'absences_punishment')
                         @slot('name', 'absences_punishment')
                         @slot('id_error', 'absences_punishment')
                         @slot('input_append','IDR')
-                        @slot('value', $current['provisions'][0]['absence_punishment'])
+                        @slot('value', $absence_punishment)
                         @slot('disabled','disabled')
                     @endcomponent
-                    @endif
                 </div>
             </div>
         </fieldset>
