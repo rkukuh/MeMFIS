@@ -715,8 +715,10 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{workPackage}/materials', 'WorkPackageItemsDatatables@material')->name('materials.index');
 
                 Route::get('/modal', 'WorkPackageDatatables@workpackageModal')->name('workpackage.modal');
-                Route::get('/{workPackage}/taskcard/{taskcard}/successor', 'WorkPackageDatatables@successorModal')->name('successor.modal');
-                Route::get('/{workPackage}/taskcard/{taskcard}/predecessor', 'WorkPackageDatatables@predecessorModal')->name('predecessor.modal');
+                Route::get('/{workPackage}/taskcard/{taskcard}/successor', 'WorkPackageDatatables@successorTaskCardModal')->name('successor.taskcard.modal');
+                Route::get('/{workPackage}/taskcard/{taskcard}/predecessor', 'WorkPackageDatatables@predecessorTaskCardModal')->name('predecessor.taskcard.modal');
+                Route::get('/{workPackage}/instruction/{instruction}/successor', 'WorkPackageDatatables@successorInstructionModal')->name('successor.instruction.modal');
+                Route::get('/{workPackage}/instruction/{instruction}/predecessor', 'WorkPackageDatatables@predecessorInstructionModal')->name('predecessor.instruction.modal');
 
                 /** SUMARRY WORK PACKAGE */
                 Route::get('/{workPackage}/routine/materials', 'WorkPackageTaskCardRoutineSummaryDatatables@routineMaterial')->name('workpackage.taskcard.routine.material.summary');

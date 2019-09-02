@@ -123,7 +123,7 @@ $('.modal-footer').on('click', '.add-predecessor', function () {
     });
 });
 
-function predecessor_instruction(triggeruuid) {
+function predecessor_instruction_tc(triggeruuid) {
     $("#predecessor_instruction_datatable").DataTable({
         "dom": '<"top"f>rt<"bottom">pl',
         responsive: !0,
@@ -132,7 +132,7 @@ function predecessor_instruction(triggeruuid) {
         serverSide: !0,
         lengthMenu: [5, 10, 25, 50],
         pageLength: 5,
-        ajax: "/datatables/workpackage/"+workPackage_uuid+"/taskcard/"+triggeruuid+"/predecessor",
+        ajax: "/datatables/workpackage/"+workPackage_uuid+"/instruction/"+triggeruuid+"/predecessor",
         columns: [
             {
                 data: "number"
@@ -184,7 +184,7 @@ function predecessor_instruction(triggeruuid) {
                         )
                     },
                     type: 'DELETE',
-                    url: '/workpackage/'+triggeruuid+'/predecessor ',
+                    url: '/workpackage/'+triggeruuid+'/predecessor/instruction',
                     success: function (data) {
                         toastr.success('Predecessor has been deleted.', 'Deleted', {
                             timeOut: 5000
@@ -210,18 +210,18 @@ function predecessor_instruction(triggeruuid) {
 
 $('.modal-footer').on('click', '.add-predecessor-instruction', function () {
 let tcuuid =$('#uuid-predecessor').val();
-let taskcard_predecessor =$('#taskcard_predecessor').val();
-let order_predecessor = $('input[name=order_predecessor]').val();
+let instruction_predecessor =$('#instruction_predecessor').val();
+let order_predecessor = $('input[name=order_predecessor_instruction]').val();
 
 $.ajax({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     },
     type: 'post',
-    url: '/workpackage/'+workPackage_uuid+'/taskcard/'+tcuuid+'/predecessor ',
+    url: '/workpackage/'+workPackage_uuid+'/instruction/'+tcuuid+'/predecessor ',
     data: {
         _token: $('input[name=_token]').val(),
-        previous: taskcard_predecessor,
+        previous: instruction_predecessor,
         order: order_predecessor,
     },
     success: function (data) {
@@ -242,7 +242,7 @@ $.ajax({
                 timeOut: 5000
             });
 
-            $('#predecessor_datatable').DataTable().ajax.reload();
+            $('#predecessor_instruction_datatable').DataTable().ajax.reload();
         }
     }
 });

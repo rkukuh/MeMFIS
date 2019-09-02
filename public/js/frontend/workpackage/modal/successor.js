@@ -123,7 +123,7 @@ $('.modal-footer').on('click', '.add-successor', function () {
     });
 });
 
-function successor_instruction(triggeruuid) {
+function successor_instruction_tc(triggeruuid) {
     $("#successor_instruction_datatable").DataTable({
         "dom": '<"top"f>rt<"bottom">pl',
         responsive: !0,
@@ -132,7 +132,7 @@ function successor_instruction(triggeruuid) {
         serverSide: !0,
         lengthMenu: [5, 10, 25, 50],
         pageLength: 5,
-        ajax: "/datatables/workpackage/"+workPackage_uuid+"/taskcard/"+triggeruuid+"/successor",
+        ajax: "/datatables/workpackage/"+workPackage_uuid+"/instruction/"+triggeruuid+"/successor",
         columns: [
             {
                 data: "number"
@@ -184,14 +184,14 @@ function successor_instruction(triggeruuid) {
                         )
                     },
                     type: 'DELETE',
-                    url: '/workpackage/'+triggeruuid+'/successor ',
+                    url: '/workpackage/'+triggeruuid+'/successor/instruction',
                     success: function (data) {
                         toastr.success('Predecessor has been deleted.', 'Deleted', {
                             timeOut: 5000
                         }
                     );
 
-                    $('#successor_datatable').DataTable().ajax.reload();
+                    $('#successor_instruction_datatable').DataTable().ajax.reload();
 
                     },
                     error: function (jqXhr, json, errorThrown) {
@@ -210,18 +210,18 @@ function successor_instruction(triggeruuid) {
 
 $('.modal-footer').on('click', '.add-successor-instruction', function () {
     let tcuuid =$('#uuid-successor').val();
-    let taskcard_successor =$('#taskcard_successor').val();
-    let order_successor = $('input[name=order_successor]').val();
+    let instruction_successor =$('#instruction_successor').val();
+    let order_successor = $('input[name=order_successor_instruction]').val();
 
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: 'post',
-        url: '/workpackage/'+workPackage_uuid+'/taskcard/'+tcuuid+'/successor ',
+        url: '/workpackage/'+workPackage_uuid+'/instruction/'+tcuuid+'/successor ',
         data: {
             _token: $('input[name=_token]').val(),
-            previous: taskcard_successor,
+            previous: instruction_successor,
             order: order_successor,
         },
         success: function (data) {
@@ -242,7 +242,7 @@ $('.modal-footer').on('click', '.add-successor-instruction', function () {
                     timeOut: 5000
                 });
 
-                $('#successor_datatable').DataTable().ajax.reload();
+                $('#successor_instruction_datatable').DataTable().ajax.reload();
             }
         }
     });
