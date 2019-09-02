@@ -14,7 +14,7 @@ class CompaniesTableSeeder extends Seeder
     {
         factory(Company::class)->create([
             'code' => 'mmf',
-            'name' => 'PT. Merpati Training Center']
-        );
+            'name' => 'PT. Merpati Training Center',
+        ]);
     }
 }
