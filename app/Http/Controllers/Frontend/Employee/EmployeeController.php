@@ -508,7 +508,9 @@ class EmployeeController extends Controller
             'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->get()
         ];
         
-        
+        //EMPLOYEE ACCOUNT
+        $account = $employee->user()->first();
+
          return view('frontend.employee.employee.show',[
             'employee' => $employee,
             'age' => $age,
@@ -522,7 +524,8 @@ class EmployeeController extends Controller
             'employee_benefit' => $employee_benefit,
             'employee_bpjs' => $employee_bpjs_data,
             'current' => $current,
-            'employee_benefit_history' =>  $employee_benefit_history
+            'employee_benefit_history' =>  $employee_benefit_history,
+            'account' => $account
             ]);
     }
 
@@ -913,6 +916,8 @@ class EmployeeController extends Controller
             'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->get()
         ];
         
+        //EMPLOYEE ACCOUNT
+        $account = $employee->user()->first();
 
         return view('frontend.employee.employee.edit',[
         'employee' => $employee,
@@ -929,7 +934,8 @@ class EmployeeController extends Controller
         'button_parameter' => $button_parameter,
         'current' => $current,
         'employee_benefit_history' =>  $employee_benefit_history,
-        'approve' => $approve
+        'approve' => $approve,
+        'account' => $account
         ]);
     }
 

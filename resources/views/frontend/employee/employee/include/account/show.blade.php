@@ -9,7 +9,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $account->email)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -29,10 +29,7 @@
                     </label>
 
                     @component('frontend.common.input.password')
-                        @slot('text', 'Password')
-                        @slot('id', 'password')
-                        @slot('name', 'password')
-                        @slot('id_error', 'password')
+                        @slot('text', $account->password)
                         @slot('disabled','disabled')
                     @endcomponent
                 </div>
