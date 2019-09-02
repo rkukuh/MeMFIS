@@ -194,7 +194,8 @@ class DefectCardEngineerController extends Controller
 
             $defectcard->approvals()->save(new Approval([
                 'approvable_id' => $defectcard->id,
-                'approved_by' => Auth::id(),
+                'conducted_by' => Auth::id(),
+                'is_approved' => 1
             ]));
             return redirect()->route('frontend.defectcard-engineer.index')->with($this->notification);
         }

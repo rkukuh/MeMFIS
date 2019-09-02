@@ -179,7 +179,7 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6 align-self-center">
                                                                 <div class="form-group m-form__group row">
                                                                     <div class="col-md-8">
-                                                                        <h1 style="font-size: 4rem;text-align:right;">3.385 <span style="font-size: 2rem;">of</span>  5000 <br> <span style="font-size: 2rem;">Task Finished</span></h1>
+                                                                        <h1 style="font-size: 4rem;text-align:right;">{{ number_format($jobcards["all"]["done"]) }} <span style="font-size: 2rem;">of</span>  {{ number_format(array_sum($jobcards["all"])) }} <br> <span style="font-size: 2rem;">Task Finished</span></h1>
                                                                     </div>
                                                                 </div>
                                                             </div>					 
@@ -220,7 +220,11 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6 align-self-center">
                                                                 <div class="form-group m-form__group row">
                                                                     <div class="col-md-8">
-                                                                        <h1 style="font-size: 2rem;text-align:right;">3.385 <span style="font-size: 1rem;">of</span>  5000 <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                    @if(isset($jobcards["routine"]))
+                                                                        <h1 style="font-size: 2rem;text-align:right;">{{ number_format($jobcards["routine"]["done"]) }} <span style="font-size: 1rem;">of</span>  {{ number_format(array_sum($jobcards["routine"])) }} <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                    @else 
+                                                                        <h1 style="font-size: 2rem;text-align:right;">0 <span style="font-size: 1rem;">of</span>  0 <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                    @endif
                                                                     </div>
                                                                 </div>
                                                             </div>					 
@@ -259,7 +263,11 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6 align-self-center">
                                                                 <div class="form-group m-form__group row">
                                                                     <div class="col-md-8">
-                                                                        <h1 style="font-size: 2rem;text-align:right;">3.385 <span style="font-size: 1rem;">of</span>  5000 <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                    @if(isset($jobcards["non-routine"]))
+                                                                        <h1 style="font-size: 2rem;text-align:right;">{{ number_format($jobcards["non-routine"]["done"]) }} <span style="font-size: 1rem;">of</span>  {{ number_format(array_sum($jobcards["non-routine"])) }} <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                    @else 
+                                                                        <h1 style="font-size: 2rem;text-align:right;">0 <span style="font-size: 1rem;">of</span>  0 <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                    @endif
                                                                     </div>
                                                                 </div>
                                                             </div>					 

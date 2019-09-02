@@ -18,6 +18,7 @@ require('frontend/discrepancy-found.php');
 require('frontend/employee.php');
 require('frontend/grn.php');
 require('frontend/htcrr.php');
+require('frontend/facility.php');
 require('frontend/item.php');
 require('frontend/jobcard.php');
 require('frontend/project.php');

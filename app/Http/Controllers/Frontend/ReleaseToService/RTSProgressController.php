@@ -139,7 +139,8 @@ class RTSProgressController extends Controller
         if($request->approval <> null){
             $rts->approvals()->save(new Approval([
                 'approvable_id' => $rts->id,
-                'approved_by' => Auth::id(),
+                'conducted_by' => Auth::id(),
+                'is_approved' => 1
             ]));
         }
 

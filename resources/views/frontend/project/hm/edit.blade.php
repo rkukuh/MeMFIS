@@ -204,7 +204,7 @@
                                                             <span>HTCRR</span>
                                                             </span>
                                                         </a>
-        
+
                                                         <div class="m-btn-group btn-group" role="group">
                                                             <button id="btnGroupDrop1" type="button" class="btn btn-primary m-btn m-btn--pill-last dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                 <span>
@@ -308,7 +308,6 @@
     <script>
         let project_uuid = '{{ $project->uuid }}';
     </script>
-
 
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script> --}}

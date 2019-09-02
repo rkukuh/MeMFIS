@@ -23,5 +23,41 @@ class TypesOfCompany extends Seeder
             'name' => 'Branch Office',
             'of'   => 'company',
         ]);
+
+        Type::create([
+            'code' => 'company',
+            'name' => 'Company',
+            'of'   => 'company',
+        ]);
+
+        Type::create([
+            'code' => 'department',
+            'name' => 'Department',
+            'of'   => 'company',
+        ]);
+
+        Type::create([
+            'code' => 'regional office',
+            'name' => 'Regional Office',
+            'of'   => 'company',
+        ]);
+
+        Type::create([
+            'code' => 'unit',
+            'name' => 'Unit',
+            'of'   => 'company',
+        ]);
+
+        Type::create([
+            'code' => 'sub unit',
+            'name' => 'Sub Unit',
+            'of'   => 'company',
+        ]);
+
+        Type::create([
+            'code' => 'other',
+            'name' => 'Others',
+            'of'   => 'company',
+        ]);
     }
 }

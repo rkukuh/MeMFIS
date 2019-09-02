@@ -46,10 +46,14 @@ Route::name('frontend.')->group(function () {
                 /** Transaction: Predecessor */
                 Route::post('/{WorkPackage}/taskcard/{taskcard}/predecessor/', 'TaskCardWorkPackagePredecessorController@store')->name('create.predecessor.workpackage');
                 Route::delete('/{taskCardWorkPackagePredecessor}/predecessor/', 'TaskCardWorkPackagePredecessorController@destroy')->name('delete.predecessor.workpackage');
+                Route::post('/{WorkPackage}/instruction/{instruction}/predecessor/', 'EOInstructiondWorkPackagePredecessorController@store')->name('create.predecessor.workpackage');
+                Route::delete('/{EOIWorkPackagePredecessor}/predecessor/instruction', 'EOInstructiondWorkPackagePredecessorController@destroy')->name('delete.predecessor.workpackage');
 
                 /** Transaction: Successor */
-                Route::post('/{WorkPackage}/taskcard/{taskcard}/successor/', 'TaskCardWorkPackageSuccessorController@store')->name('create.successor.workpackage');
-                Route::delete('/{taskCardWorkPackageSuccessor}/successor/', 'TaskCardWorkPackageSuccessorController@destroy')->name('delete.successor.workpackage');
+                Route::post('/{WorkPackage}/taskcard/{taskcard}/successor/', 'TaskCardWorkPackageSuccessorController@store')->name('create.taskcard.successor.workpackage');
+                Route::delete('/{taskCardWorkPackageSuccessor}/successor/', 'TaskCardWorkPackageSuccessorController@destroy')->name('delete.taskcard.successor.workpackage');
+                Route::post('/{WorkPackage}/instruction/{instruction}/successor/', 'EOInstructionWorkPackageSuccessorController@store')->name('create.instruction.successor.workpackage');
+                Route::delete('/{EOIWorkPackageSuccessor}/successor/instruction', 'EOInstructionWorkPackageSuccessorController@destroy')->name('delete.instruction.successor.workpackage');
 
             });
 

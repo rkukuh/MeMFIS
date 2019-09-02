@@ -188,6 +188,7 @@
                                 </div>
                             </div>
                             @include('frontend.price-list.item.modal-edit')
+                            @include('frontend.price-list.facility.modal-edit')
 
                             {{-- @include('frontend.price-list.manhour.modal-edit') --}}
 
@@ -209,11 +210,14 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-type.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/item-pricelist.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/unit-pricelist.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+
 
     <script src="{{ asset('js/frontend/functions/action-botton/unit-type.js')}}"></script>
     <script src="{{ asset('js/frontend/price-list/index.js')}}"></script>

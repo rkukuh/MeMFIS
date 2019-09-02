@@ -74,13 +74,18 @@ class TaskCardRoutineController extends Controller
     public function store(TaskCardRoutineStore $request)
     {
         $this->decoder($request);
-        $accesses = $zones = [];
+        $accesses = $zones = $additionals = [];
+
+        $additionals["internal_number"] = $request->additionals;
+        $additionals["document_library"] = $request->document_library;
+        $request->merge(['additionals' => json_encode($additionals, true)]);
+
         if($request->work_area){
             $request->work_area = Type::firstOrCreate(
                 ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
             );
         }
-
+       
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
 
@@ -307,10 +312,15 @@ class TaskCardRoutineController extends Controller
      */
     public function update(TaskCardRoutineUpdate $request, TaskCard $taskCard)
     {
-        // dd($request->section);
         $this->decoder($request);
-        $accesses = [];
-        $zones = [];
+        $accesses = $zones = $additionals = [];
+        
+        if (isset($taskCard->additionals)) {
+            $additionals = json_decode($taskCard->additionals);
+        }
+        $additionals["internal_number"] = $request->additionals;
+        $additionals["document_library"] = $request->document_library;
+        $request->merge(['additionals' => json_encode($additionals, true)]);
 
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
@@ -435,12 +445,12 @@ class TaskCardRoutineController extends Controller
 
         $req->zone = json_decode($req->zone);
         $req->access = json_decode($req->access);
-        // $req->stringer = json_encode($req->stringer);
         $req->sections = json_decode($req->sections);
         $req->repeat_type = json_decode($req->repeat_type);
         $req->repeat_amount = json_decode($req->repeat_amount);
-        $req->threshold_amount = json_decode($req->threshold_amount);
         $req->threshold_type = json_decode($req->threshold_type);
+        $req->threshold_amount = json_decode($req->threshold_amount);
+        $req->document_library = json_decode($req->document_library);
         $req->applicability_airplane = json_decode($req->applicability_airplane);
 
         return $req;

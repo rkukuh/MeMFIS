@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="PriceListForm">
-                    <input type="text" class="form-control form-control-danger m-input" name="uuid" id="uuid-item">
+                    <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid-item">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -17,7 +17,8 @@
                                     Item  @include('frontend.common.label.required')
                                 </label>
                                 @component('frontend.common.input.select2')
-                                    @slot('id', 'item')
+                                    {{-- @slot('id', 'item') --}}
+                                    @slot('class', 'item')
                                     @slot('name', 'item')
                                     @slot('id_error', 'item')
                                 @endcomponent    
@@ -39,7 +40,8 @@
                                     Unit
                                 </label>
                                 @component('frontend.common.input.select2')
-                                    @slot('id', 'unit_id')
+                                    {{-- @slot('id', 'unit_id') --}}
+                                    @slot('class','unit_id')
                                     @slot('name', 'unit_id')
                                     @slot('id_error', 'unit_id')
                                 @endcomponent    

@@ -139,29 +139,30 @@ class ProjectWorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function cmr_awl(Project $project, WorkPackage $workPackage)
     {
-        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first()->id;
-        $workPackages = ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
-                        ->whereHas('taskcard', function ($query) {
-                            $query->whereHas('type', function ($query) {
-                                    $query->where('code', 'cmr')->orWhere('code','awl');
-                                });
-                        })->get();
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first();
 
-        foreach($workPackages as $taskcard){
-            if(isset($taskcard->taskcard->skills) ){
-                if(sizeof($taskcard->taskcard->skills) == 3){
-                    $taskcard->taskcard->skill .= "ERI";
+        $project_workpackage = $project_workpackage->eo_instructions()
+                                ->with('eo_instruction.eo_header.type')
+                                ->whereHas('eo_instruction.eo_header.type', function ($query) {
+                                    $query->where('code', 'cmr')->orWhere('code','awl');
+                                })->whereNull('deleted_at')->get();
+
+
+        foreach($project_workpackage as $taskcard){
+            if(isset($taskcard->eo_instruction->skills) ){
+                if(sizeof($taskcard->eo_instruction->skills) == 3){
+                    $taskcard->eo_instruction->skill .= "ERI";
                 }
-                else if(sizeof($taskcard->taskcard->skills) == 1){
-                    $taskcard->taskcard->skill .= $taskcard->taskcard->skills[0]->name;
+                else if(sizeof($taskcard->eo_instruction->skills) == 1){
+                    $taskcard->eo_instruction->skill .= $taskcard->eo_instruction->skills[0]->name;
                 }
                 else{
-                    $taskcard->taskcard->skill .= '';
+                    $taskcard->eo_instruction->skill .= '';
                 }
             }
         }
 
-        $data = $alldata = json_decode($workPackages);
+        $data = $alldata = json_decode($project_workpackage);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -258,29 +259,30 @@ class ProjectWorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function ea(Project $project, WorkPackage $workPackage)
     {
-        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first()->id;
-        $workPackages = ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
-                        ->whereHas('taskcard', function ($query) {
-                            $query->whereHas('type', function ($query) {
-                                    $query->where('code', 'cmr')->orWhere('code','awl');
-                                });
-                        })->get();
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first();
 
-        foreach($workPackages as $taskcard){
-            if(isset($taskcard->taskcard->skills) ){
-                if(sizeof($taskcard->taskcard->skills) == 3){
-                    $taskcard->taskcard->skill .= "ERI";
+        $project_workpackage = $project_workpackage->eo_instructions()
+                                ->with('eo_instruction.eo_header.type')
+                                ->whereHas('eo_instruction.eo_header.type', function ($query) {
+                                    $query->where('code', 'ea');
+                                })->whereNull('deleted_at')->get();
+
+
+        foreach($project_workpackage as $taskcard){
+            if(isset($taskcard->eo_instruction->skills) ){
+                if(sizeof($taskcard->eo_instruction->skills) == 3){
+                    $taskcard->eo_instruction->skill .= "ERI";
                 }
-                else if(sizeof($taskcard->taskcard->skills) == 1){
-                    $taskcard->taskcard->skill .= $taskcard->taskcard->skills[0]->name;
+                else if(sizeof($taskcard->eo_instruction->skills) == 1){
+                    $taskcard->eo_instruction->skill .= $taskcard->eo_instruction->skills[0]->name;
                 }
                 else{
-                    $taskcard->taskcard->skill .= '';
+                    $taskcard->eo_instruction->skill .= '';
                 }
             }
         }
 
-        $data = $alldata = json_decode($workPackages);
+        $data = $alldata = json_decode($project_workpackage);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -377,29 +379,30 @@ class ProjectWorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function eo(Project $project, WorkPackage $workPackage)
     {
-        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first()->id;
-        $workPackages = ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
-                        ->whereHas('taskcard', function ($query) {
-                            $query->whereHas('type', function ($query) {
-                                    $query->where('code', 'cmr')->orWhere('code','awl')->whereNull('deleted_at');
-                                });
-                        })->get();
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workPackage->id)->first();
 
-        foreach($workPackages as $taskcard){
-            if(isset($taskcard->taskcard->skills) ){
-                if(sizeof($taskcard->taskcard->skills) == 3){
-                    $taskcard->taskcard->skill .= "ERI";
+        $project_workpackage = $project_workpackage->eo_instructions()
+                                ->with('eo_instruction.eo_header.type')
+                                ->whereHas('eo_instruction.eo_header.type', function ($query) {
+                                    $query->where('code', 'eo');
+                                })->whereNull('deleted_at')->get();
+
+
+        foreach($project_workpackage as $taskcard){
+            if(isset($taskcard->eo_instruction->skills) ){
+                if(sizeof($taskcard->eo_instruction->skills) == 3){
+                    $taskcard->eo_instruction->skill .= "ERI";
                 }
-                else if(sizeof($taskcard->taskcard->skills) == 1){
-                    $taskcard->taskcard->skill .= $taskcard->taskcard->skills[0]->name;
+                else if(sizeof($taskcard->eo_instruction->skills) == 1){
+                    $taskcard->eo_instruction->skill .= $taskcard->eo_instruction->skills[0]->name;
                 }
                 else{
-                    $taskcard->taskcard->skill .= '';
+                    $taskcard->eo_instruction->skill .= '';
                 }
             }
         }
 
-        $data = $alldata = json_decode($workPackages);
+        $data = $alldata = json_decode($project_workpackage);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

@@ -16,7 +16,7 @@ class ManhourController extends Controller
      */
     public function index()
     {
-        //
+        // return view('frontend.item.material.index');
     }
 
     /**
@@ -35,9 +35,9 @@ class ManhourController extends Controller
      * @param  \App\Http\Requests\Frontend\ManhourStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ManhourStore $request)
+    public function store(ManhourStore $request, Item $item)
     {
-        //
+      
     }
 
     /**
@@ -59,7 +59,17 @@ class ManhourController extends Controller
      */
     public function edit(Manhour $manhour)
     {
-        //
+        $tags = [];
+        foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags, 'item'));}
+        if ($item->update($request->all())) {
+            $item->categories()->sync($request->category);
+            $item->syncTags($tags);
+
+            return response()->json($item);
+        }
+
+        // TODO: Return error message as JSON
+        return false;
     }
 
     /**
