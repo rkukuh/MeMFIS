@@ -1,7 +1,6 @@
 <div class="col-lg-12 col-md-12 col-sm-12">
 
-    {{-- @hasanyrole('hrd|admin') --}}
-    @hasanyrole('employee')
+    @hasanyrole('hrd|admin')
         <div class="row align-items-center" style="padding-bottom:15px">
             <div class="col-xl-7 order-2 order-xl-1">
                 <div class="form-group m-form__group row align-items-center">
@@ -36,8 +35,7 @@
         @include('frontend.propose-leave.leave-entitlement.remaining-leave')
     @endrole
 
-    {{-- @hasanyrole('employee') --}}
-    @hasanyrole('hrd|admin')
+    @hasanyrole('employee')
     <div class="form-group m-form__group row">
         <div class="col-sm-2 col-md-2 col-lg-2">
             <p class="mt-3">Select Periode</p>
