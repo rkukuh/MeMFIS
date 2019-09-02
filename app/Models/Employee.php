@@ -41,6 +41,8 @@ class Employee extends MemfisModel implements HasMedia
         'updated_at'
     ];
 
+    protected $timestamp = false;
+
 // ----------------------------------------OVERIDE-----------------------------------------------//
     public function registerMediaCollections()
     {

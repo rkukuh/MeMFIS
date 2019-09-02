@@ -1,3 +1,9 @@
+@component('frontend.common.input.hidden')
+        @slot('id', 'employee_uuid')
+        @slot('name', 'employee_uuid')
+        @slot('value', $employee->uuid)
+@endcomponent
+
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
@@ -8,11 +14,17 @@
                         Email  @include('frontend.common.label.required')
                     </label>
 
+                    @php
+                        $email = null;
+                        if(isset($account->email)){
+                            $email = $account->email;
+                        }
+                    @endphp
                     @component('frontend.common.input.email')
                         @slot('text', 'Email')
                         @slot('id', 'email')
                         @slot('name', 'email')
-                        @slot('value', $account->email)
+                        @slot('value', $email)
                         @slot('id_error', 'email')
                     @endcomponent
                 </div>
@@ -22,7 +34,6 @@
                     </label>
 
                     @component('frontend.common.input.select2')
-                        @slot('text', 'Role')
                         @slot('id', 'role')
                         @slot('name', 'role')
                         @slot('id_error', 'role')
@@ -35,11 +46,17 @@
                         Password  @include('frontend.common.label.required')
                     </label>
 
+                    @php
+                        $password = null;
+                        if(isset($account->password)){
+                            $password = $account->password;
+                        }
+                    @endphp
                     @component('frontend.common.input.password')
                         @slot('text', 'Password')
                         @slot('id', 'password')
                         @slot('name', 'password')
-                        @slot('value',$account->password)
+                        @slot('value',$password)
                         @slot('id_error', 'password')
                     @endcomponent
                 </div>
@@ -49,10 +66,9 @@
                     </label>
 
                     @component('frontend.common.input.password')
-                        @slot('text', 'Confirm Password')
-                        @slot('id', 'confirm_password')
-                        @slot('name', 'confirm_password')
-                        @slot('id_error', 'confirm_password')
+                        @slot('id', 'password_confirmation')
+                        @slot('name', 'password_confirmation')
+                        @slot('id_error', 'password_confirmation')
                     @endcomponent
                 </div>
             </div>
@@ -66,11 +82,13 @@
                     <span class="m-bootstrap-switch m-bootstrap-switch--pill">
                         @php
                             $checked = null;
+                            if(isset($account->is_active)){
                             if($account->is_active == 1){
                                 $checked = 'checked';
                             }
+                        }
                         @endphp
-                        <input data-switch="true" type="checkbox" data-on-color="success" checked={{ $checked }}>
+                        <input name="isActive" data-switch="true" type="checkbox" data-on-color="success" checked={{ $checked }}>
                     </span>
                 </div>
             </div>
@@ -79,11 +97,20 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                         <div class="flex">
                             <div class="action-buttons">
+                                @if ($account == null)
                                 @component('frontend.common.buttons.submit')
-                                    @slot('type','button')
-                                    @slot('id', 'add-account')
-                                    @slot('class', 'add-account')
+                                @slot('type','button')
+                                @slot('id', 'create-account')
+                                @slot('class', 'create-account')
                                 @endcomponent
+                                @else    
+                                @component('frontend.common.buttons.submit')
+                                @slot('type','button')
+                                @slot('id', 'edit-account')
+                                @slot('class', 'edit-account')
+                                @endcomponent
+                                @endif
+                                
     
                                 @include('frontend.common.buttons.reset')
     
@@ -177,6 +204,8 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/role.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/bank.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/employee/create_account.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/employee/edit_account.js') }}"></script>
     <script>
     
     var BootstrapSwitch = {
@@ -184,9 +213,10 @@
             $("[data-switch=true]").bootstrapSwitch();
         }
     };
-    jQuery(document).ready(function() {
-        BootstrapSwitch.init();
-    });
 
+
+    jQuery(document).ready(function() {
+        BootstrapSwitch.init()
+    });
     </script>
 @endpush
