@@ -288,11 +288,8 @@
                                             Station
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'station')
-                                                @slot('name', 'station')
-                                                @slot('id', 'station')
-                                                @slot('id_error', 'station')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $jobcard->station->name)
                                             @endcomponent
                                         </td>
                                     </tr>
@@ -348,6 +345,10 @@
                                                     @slot('name', 'logbook[]')
                                                     @slot('text', 'A/C Log Book')
                                                     @slot('value', 'ac-logbook')
+                                                    @if (in_array('ac-logbook', $logbooks))
+                                                        @slot('checked', 'checked')
+                                                    @endif
+                                                    @slot('disabled', 'disabled')
                                                     @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </td>
@@ -357,6 +358,10 @@
                                                     @slot('name', 'logbook[]')
                                                     @slot('text', 'ENG. Log Book')
                                                     @slot('value', 'eng-logbook')
+                                                    @if (in_array('eng-logbook', $logbooks))
+                                                        @slot('checked', 'checked')
+                                                    @endif
+                                                    @slot('disabled', 'disabled')
                                                     @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </td>
@@ -366,6 +371,10 @@
                                                     @slot('name', 'logbook[]')
                                                     @slot('text', 'APU Log Book')
                                                     @slot('value', 'apu-logbook')
+                                                    @if (in_array('apu-logbook', $logbooks))
+                                                        @slot('checked', 'checked')
+                                                    @endif
+                                                    @slot('disabled', 'disabled')
                                                     @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </td>

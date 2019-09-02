@@ -129,6 +129,7 @@ class JobCardMechanicController extends Controller
                 'other' => $this->other,
                 'accomplished' => $this->accomplished,
                 'jobcard' => $jobcard,
+                'logbooks' => $jobcard->logbooks->pluck('code')->toarray(),
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
@@ -139,6 +140,7 @@ class JobCardMechanicController extends Controller
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "pending"){
             return view('frontend.job-card-eo.mechanic.progress-pause', [
                 'jobcard' => $jobcard,
+                'logbooks' => $jobcard->logbooks->pluck('code')->toarray(),
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
@@ -150,6 +152,7 @@ class JobCardMechanicController extends Controller
             return view('frontend.job-card-eo.mechanic.progress-close', [
                 'progresses' => $progresses,
                 'jobcard' => $jobcard,
+                'logbooks' => $jobcard->logbooks->pluck('code')->toarray(),
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
             ]);
@@ -158,6 +161,7 @@ class JobCardMechanicController extends Controller
             return view('frontend.job-card-eo.mechanic.progress-close', [
                 'progresses' => $progresses,
                 'jobcard' => $jobcard,
+                'logbooks' => $jobcard->logbooks->pluck('code')->toarray(),
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
             ]);
@@ -174,14 +178,22 @@ class JobCardMechanicController extends Controller
      */
     public function update(JobCardUpdate $request, JobCard $jobcard)
     {
+        foreach($request->logbook as $logbook){
+            $jobcard->logbooks()->attach(Type::ofJobCardLogBook()->where('code',$logbook)->first()->id);
+        }
+
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open"){
                 return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
             }else{
+                $request->merge(['station_id' => Station::where('uuid',$request->station)->first()->id]);
+
                 $additionals['TSN'] = $request->tsn;
                 $additionals['CSN'] = $request->csn;
 
                 $jobcard->additionals =json_encode($additionals);
+                $jobcard->station_id = $request->station_id;
+
                 $jobcard->save();
 
                 $jobcard->progresses()->save(new Progress([
