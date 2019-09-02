@@ -198,6 +198,8 @@ class WorkProgressReportController extends Controller
                 $manhours[$type]["actual_manhour"]["rii-released"] = $jobcard_all->where('status', "rii-released")->where('tc_type', $type)->sum('actual_manhours');
             }
         }
+        $manhours['adsb'] = array_merge($manhours['ad'],$manhours['sb']) ;
+        dd( $manhours['adsb'] );
         
         $this->counting($statusses, "all");
         $this->counting($statusses_routine, "routine");

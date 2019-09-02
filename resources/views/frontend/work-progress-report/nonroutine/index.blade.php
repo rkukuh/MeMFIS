@@ -33,13 +33,13 @@
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__text">
-                                        63%
+                                        {{ $jobcards["adsb"]["done"] / array_sum($jobcards["adsb"]) * 100 }}%
                                     </span>		
                                 </div>
                             </div>               	 
                             <div class="m--space-10"></div>
                             <div class="progress m-progress--sm">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $jobcards['adsb']['done'] / array_sum($jobcards['adsb']) * 100 }}%;" aria-valuenow="{{ $jobcards['adsb']['done'] / array_sum($jobcards['adsb']) * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -55,12 +55,12 @@
                                 </div>
                                 <div class="col" align="center">
                                     <span class="m-widget15__stats">
-                                        600
+                                        {{ number_format( array_sum($jobcards['adsb']) / 2 ) }}
                                     </span>
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__stats">
-                                        4.500 Task
+                                        {{ number_format( array_sum($jobcards['adsb']) ) }} Task
                                     </span>
                                 </div>
                             </div>			                	 
@@ -79,13 +79,13 @@
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__text">
-                                        63%
+                                        {{ number_format($manhours["adsb"]["actual"] / $manhours["adsb"]["total"] * 100)  }}%
                                     </span>		
                                 </div>
                             </div>               	 
                             <div class="m--space-10"></div>
                             <div class="progress m-progress--sm">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ number_format($manhours["adsb"]["actual"] / $manhours["adsb"]["total"] * 100)  }}%;" aria-valuenow="{{ number_format($manhours["adsb"]["actual"] / $manhours["adsb"]["total"] * 100)  }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -101,12 +101,12 @@
                                 </div>
                                 <div class="col" align="center">
                                     <span class="m-widget15__stats">
-                                        60
+                                        {{ number_format($manhours["adsb"]["total"] / 2) }}
                                     </span>
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__stats">
-                                        7.000 Mhrs
+                                        {{ number_format($manhours["adsb"]["total"]) }} Mhrs
                                     </span>
                                 </div>
                             </div>			                	 
@@ -120,42 +120,36 @@
                             <tr>
                                 <td valign="top" width="30%">Open</td>
                                 <td valign="top" width="2%">:</td>
-                                <td valign="top" width="20%">5%</td>
-                                <td valign="top" width="24%" align="center">225 Task</td>
-                                <td valign="top" width="24%" align="center">210 Mhrs</td>
+                                <td valign="top" width="24%" align="center">{{ $jobcards["adsb"]["open"] }} Task ({{ number_format( ($jobcards["adsb"]["open"] / array_sum($jobcards['adsb'])) * 100) }}%)</td>
+                                <td valign="top" width="24%" align="center">{{ $manhours["adsb"]["actual_manhour"]["open"] }} Mhrs ({{ ( $manhours["adsb"]["actual_manhour"]["open"]  /  $manhours["adsb"]["estimation_manhour"]["open"] ) * 100 }} %)</td>
                             </tr>
                             <tr>
                                 <td valign="top">Pending</td>
                                 <td valign="top">:</td>
-                                <td valign="top">5%</td>
-                                <td valign="top" align="center">225 Task</td>
-                                <td valign="top" align="center">210 Mhrs</td>
+                                <td valign="top" width="24%" align="center">{{ $jobcards["adsb"]["pending"] }} Task ({{ number_format( ($jobcards["adsb"]["pending"] / array_sum($jobcards['adsb'])) * 100) }}%)</td>
+                                <td valign="top" align="center">{{ $manhours["adsb"]["actual_manhour"]["pending"] }} Mhrs ( {{ ( $manhours["adsb"]["actual_manhour"]["pending"]  /  $manhours["adsb"]["estimation_manhour"]["pending"] ) * 100 }}%)</td>
                             </tr>
                             <tr>
                                 <td valign="top">In Progress</td>
                                 <td valign="top">:</td>
-                                <td valign="top">5%</td>
-                                <td valign="top" align="center">225 Task</td>
-                                <td valign="top" align="center">210 Mhrs</td>
+                                <td valign="top" width="24%" align="center">{{ $jobcards["adsb"]["progress"] }} Task ({{ number_format( ($jobcards["adsb"]["progress"] / array_sum($jobcards['adsb'])) * 100) }}%)</td>
+                                <td valign="top" align="center">{{ $manhours["adsb"]["actual_manhour"]["progress"] }} Mhrs ( {{ ( $manhours["adsb"]["actual_manhour"]["progress"]  /  $manhours["adsb"]["estimation_manhour"]["progress"] ) * 100 }}%)</td>
                             </tr>
                             <tr>
                                 <td valign="top">Waiting for RII</td>
                                 <td valign="top">:</td>
-                                <td valign="top">5%</td>
-                                <td valign="top" align="center">225 Task</td>
-                                <td valign="top" align="center">210 Mhrs</td>
+                                <td valign="top" width="24%" align="center">{{ $jobcards["adsb"]["closed"] }} Task ({{ number_format( ($jobcards["adsb"]["closed"] / array_sum($jobcards['adsb'])) * 100) }}%)</td>
+                                <td valign="top" align="center">{{ $manhours["adsb"]["actual_manhour"]["closed"] }} Mhrs ( {{ ( $manhours["adsb"]["actual_manhour"]["closed"]  /  $manhours["adsb"]["estimation_manhour"]["closed"] ) * 100 }}%)</td>
                             </tr>
                             <tr>
                                 <td valign="top">released</td>
                                 <td valign="top">:</td>
-                                <td valign="top">5%</td>
-                                <td valign="top" align="center">225 Task</td>
-                                <td valign="top" align="center">210 Mhrs</td>
+                                <td valign="top" width="24%" align="center">{{ ($jobcards["adsb"]["released"] + $jobcards["adsb"]["rii-released"]) }} Task ({{ number_format( (($jobcards["adsb"]["released"] + $jobcards["adsb"]["rii-released"]) / array_sum($jobcards['adsb'])) * 100) }}%)</td>
+                                <td valign="top" align="center">{{ $manhours["adsb"]["actual_manhour"]["released"] }} Mhrs ( {{ ( ($manhours["adsb"]["actual_manhour"]["released"] + $manhours["adsb"]["actual_manhour"]["rii-released"]  )/( $manhours["adsb"]["estimation_manhour"]["released"] + $manhours["adsb"]["estimation_manhour"]["rii-released"] )) * 100 }}%)</td>
                             </tr>
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
