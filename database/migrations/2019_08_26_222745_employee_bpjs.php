@@ -23,6 +23,7 @@ class EmployeeBpjs extends Migration
             $table->double('company_paid')->nullable();
             $table->double('company_min_value')->nullable();
             $table->double('company_max_value')->nullable();
+            $table->dateTime('approved_at')->nullable();
             
             $table->timestamps();
             $table->softDeletes();

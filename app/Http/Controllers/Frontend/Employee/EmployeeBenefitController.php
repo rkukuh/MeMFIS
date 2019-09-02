@@ -10,6 +10,9 @@ use App\Http\Requests\Frontend\EmployeeBenefitStore;
 use App\Http\Requests\Frontend\EmployeeBenefitUpdate;
 use App\Http\Controllers\Controller;
 use App\Models\BPJS;
+use App\Models\EmployeeProvisions;
+use App\Models\EmployeeBPJS;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeBenefitController extends Controller
 {
@@ -49,6 +52,7 @@ class EmployeeBenefitController extends Controller
                 'amount' => $request->amount[$i],
                 'created_at' => $time,
                 'updated_at' => null,
+                'approved_at' => null
             ]);
         }
 
@@ -62,7 +66,8 @@ class EmployeeBenefitController extends Controller
                 'company_min_value' => $request->company_min[$j],
                 'company_max_value' => $request->company_max[$j],
                 'created_at' => $time,
-                'updated_at' => null
+                'updated_at' => null,
+                'approved_at' => null,
             ]);
         }
 
@@ -75,9 +80,10 @@ class EmployeeBenefitController extends Controller
             'late_punishment' => $request->late_punishment,
             'absence_punishment' => $request->absence_punishment,
             'created_at' => $time,
-            'updated_at' => null
+            'updated_at' => null,
+            'approved_at' => null,
         ]);
-        
+
         return response()->json('Sukses');
     }
 
@@ -114,15 +120,15 @@ class EmployeeBenefitController extends Controller
     {
         $time = Carbon::now();
             
-        $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->update([
+        $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNotNull('employee_benefit.approved_at')->update([
             'updated_at' => $time
         ]);
 
-        $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->update([
+        $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->update([
             'updated_at' => $time
         ]);
 
-        $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->update([
+        $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->update([
             'updated_at' => $time
         ]);
 
@@ -132,6 +138,7 @@ class EmployeeBenefitController extends Controller
                 'amount' => $request->amount[$i],
                 'created_at' => $time,
                 'updated_at' => null,
+                'approved_at' => null
             ]);
         }
 
@@ -145,7 +152,8 @@ class EmployeeBenefitController extends Controller
                 'company_min_value' => $request->company_min[$j],
                 'company_max_value' => $request->company_max[$j],
                 'created_at' => $time,
-                'updated_at' => null
+                'updated_at' => null,
+                'approved_at' => null
             ]);
         }
 
@@ -158,7 +166,8 @@ class EmployeeBenefitController extends Controller
             'late_punishment' => $request->late_punishment,
             'absence_punishment' => $request->absence_punishment,
             'created_at' => $time,
-            'updated_at' => null
+            'updated_at' => null,
+            'approved_at' => null,
         ]);
         
         return response()->json('Sukses');
@@ -173,5 +182,57 @@ class EmployeeBenefitController extends Controller
     public function destroy(EmployeeBenefit $employeeBenefit)
     {
         //
+    }
+
+    public function approval(Employee $employee){
+        $data_provision = $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNull('employee_provisions.approved_at')->get();
+        $data_benefit = $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNull('employee_benefit.approved_at')->get();
+        $data_bpjs = $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNull('employee_bpjs.approved_at')->get();
+        
+        $time = Carbon::now();
+
+        foreach($data_provision as $dp){
+            $provision = EmployeeProvisions::find($dp->id);
+            $provision->approvals()->create([
+                'approvable_id' => $dp->id,
+                'conducted_by' => Auth::id(),
+                'is_approved' => 1,
+                'created_at' => $time
+            ]);
+            $provision->update([
+                'approved_at' => $time,
+                'updated_at' => null,
+            ]);
+        }
+
+        foreach($data_benefit as $db){
+            $benefit = EmployeeBenefit::find($db->id);
+            $benefit->approvals()->create([
+                'approvable_id' => $db->id,
+                'conducted_by' => Auth::id(),
+                'is_approved' => 1,
+                'created_at' => $time
+            ]);
+            $benefit->update([
+                'approved_at' => $time,
+                'updated_at' => null,
+            ]);
+        }
+
+        foreach($data_bpjs as $djs){
+            $bpjs = EmployeeBPJS::find($djs->id);
+            $bpjs->approvals()->create([
+                'approvable_id' => $djs->id,
+                'conducted_by' => Auth::id(),
+                'is_approved' => 1,
+                'created_at' => $time
+            ]);
+            $bpjs->update([
+                'approved_at' => $time,
+                'updated_at' => null,
+            ]);
+        }
+
+        return response()->json('Approved');
     }
 }
