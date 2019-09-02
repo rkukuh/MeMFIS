@@ -64,7 +64,13 @@
                     </label><br>
 
                     <span class="m-bootstrap-switch m-bootstrap-switch--pill">
-                        <input data-switch="true" type="checkbox" data-on-color="success" checked="checked">
+                        @php
+                            $checked = null;
+                            if($account->is_active == 1){
+                                $checked = 'checked';
+                            }
+                        @endphp
+                        <input data-switch="true" type="checkbox" data-on-color="success" checked={{ $checked }}>
                     </span>
                 </div>
             </div>

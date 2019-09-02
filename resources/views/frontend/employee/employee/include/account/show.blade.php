@@ -55,7 +55,13 @@
                     </label><br>
 
                     <span class="m-bootstrap-switch m-bootstrap-switch--pill">
-                        <input data-switch="true" type="checkbox" data-on-color="success" checked="checked" disabled>
+                        @php
+                            $checked = null;
+                            if($account->is_active == 1){
+                                $checked = 'checked';
+                            }
+                        @endphp
+                        <input data-switch="true" type="checkbox" data-on-color="success" checked={{ $checked }} disabled>
                     </span>
                 </div>
             </div>
@@ -112,7 +118,7 @@
     
     var BootstrapSwitch = {
         init: function() {
-            $("[data-switch=true]").bootstrapSwitch();
+            $("[data-switch=true]").bootstrapSwitch({disabled:true});
         }
     };
     jQuery(document).ready(function() {
