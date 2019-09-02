@@ -581,6 +581,33 @@
             @role('admin')
             <li class="m-menu__section">
                 <h4 class="m-menu__section-text">
+                    Finance & Accounting
+                </h4>
+                <i class="m-menu__section-icon flaticon-more-v3"></i>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                <a href="/cashbook" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">Cashbook</span>
+                </a>
+            </li>
+
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                <a href="/invoice" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">Invoice</span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                <a href="/coa" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">COA</span>
+                </a>
+            </li>
+            @endrole
+            @role('admin')
+            <li class="m-menu__section">
+                <h4 class="m-menu__section-text">
                     WAREHOUSE
                 </h4>
                 <i class="m-menu__section-icon flaticon-more-v3"></i>
