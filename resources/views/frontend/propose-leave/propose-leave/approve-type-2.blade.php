@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.propose-leave.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.attendance.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Propose Leave
                             </span>
@@ -52,23 +52,13 @@
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            @hasanyrole('hrd|admin')
-                                                <label class="form-control-label">
-                                                    Propose Leave To @include('frontend.common.label.optional')
-                                                </label>
-                                            
-                                                @include('frontend.common.employee.index')
-                                            @endrole
-                                            @hasanyrole('employee')
-                                                <label class="form-control-label">
-                                                    Employee Name 
-                                                </label>
-
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('id', 'employee')
-                                                    @slot('text', 'generate from user login')
-                                                @endcomponent
-                                            @endrole
+                                            <label class="form-control-label">
+                                                Employee Name 
+                                            </label>
+                                         
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'Generated sesuai user yang propose leave')
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -135,21 +125,30 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-propose-leave')
-                                                        @slot('class', 'add-propose-leave')
+                                                    @component('frontend.common.buttons.approve')
+                                                        @slot('data_target', '#modal_approve')
+                                                        @slot('class', 'ml-2')
                                                     @endcomponent
 
-                                                    @include('frontend.common.buttons.reset')
+                                                    @component('frontend.common.buttons.close')
+                                                        @slot('data_target', '#modal_reject')
+                                                        @slot('text','Reject')
+                                                        @slot('class', 'ml-2')
+                                                        @slot('icon','fa fa-times-circle')
+                                                        @slot('class', 'bg-warning text-dark')
+                                                    @endcomponent
 
                                                     @include('frontend.common.buttons.back')
 
+
+                                                    @include('frontend.attendance.modal-approve')
+                                                    @include('frontend.attendance.modal-reject')
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </form>
                         </div>
                     </div>
