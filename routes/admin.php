@@ -51,24 +51,20 @@ Route::name('admin.')->group(function () {
         Route::resource('benefit', 'BenefitController');
         Route::resource('manhour', 'ManhourController');
         Route::resource('company', 'CompanyController');
+        Route::resource('holiday', 'HolidayController');
         Route::resource('aircraft', 'AircraftController');
         Route::resource('language', 'LanguageController');
         Route::resource('customer', 'CustomerController');
         Route::resource('employee', 'EmployeeController');
         Route::resource('facility', 'FacilityController');
+        Route::resource('workshift', 'WorkshiftController');
+        Route::resource('job-tittle', 'JobTittleController');
+        Route::resource('leave-type', 'LeaveTypeController');
         Route::resource('department', 'DepartmentController');
+        Route::resource('leave-period','LeavePeriodController');
         Route::resource('leave-period','LeavePeriodController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
-        Route::resource('leave-period','LeavePeriodController');
-        Route::resource('company', 'CompanyController');
-        Route::resource('department', 'DepartmentController');
-        Route::resource('benefit', 'BenefitController');
-        Route::resource('bpjs', 'BPJSController');
-        Route::resource('job-tittle', 'JobTittleController');
-        Route::resource('leave-type', 'LeaveTypeController');
-        Route::resource('holiday', 'HolidayController');
-        Route::resource('workshift', 'WorkshiftController');
 
         /** LICENSE */
 
