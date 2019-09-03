@@ -1,6 +1,6 @@
-let AttendanceCorrection = {
+let ProposeLeave = {
     init: function () {
-        $('.attendance_correction_datatable').mDatatable({
+        $('.propose_leave_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -55,13 +55,13 @@ let AttendanceCorrection = {
                 },
                 {
                     field: '',
-                    title: 'Created Date',
+                    title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: 'code',
-                    title: 'Correction Number',
+                    title: 'Leave Number',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
@@ -83,25 +83,19 @@ let AttendanceCorrection = {
                
                 {
                     field: '',
-                    title: 'Corrected Date',
+                    title: 'Leave Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: '',
-                    title: 'Check-in',
+                    title: 'Date Start',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: '',
-                    title: 'check-out',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: '',
-                    title: 'Description',
+                    title: 'Date End',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -148,5 +142,5 @@ let AttendanceCorrection = {
 
 
 jQuery(document).ready(function () {
-    AttendanceCorrection.init();
+    ProposeLeave.init();
 });

@@ -36,6 +36,7 @@ Route::name('frontend.')->group(function () {
                     Route::resource('/{employee}/general-license', 'EmployeeGeneralLicenseController');
                     Route::resource('/{employee}/benefit-salary', 'EmployeeBenefitController');
                     Route::post('/{employee}/update-id-card','EmployeeController@update_file');
+                    Route::post('/{employee}/benefit-approval', 'EmployeeBenefitController@approval');
                 });
 
             });

@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Propose Overtime
+                    Propose Leave
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                     <li class="m-nav__item">
                         <a href="{{ route('frontend.attendance.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Propose Overtime
+                                Propose Leave
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    Propose Overtime
+                                    Propose Leave
                                 </h3>
                             </div>
                         </div>
@@ -53,87 +53,64 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Employee Name
+                                                Employee Name 
                                             </label>
-
+                                         
                                             @component('frontend.common.label.data-info')
-                                                @slot('id', 'employee')
-                                                @slot('text', 'Generate dari user yang mengajukan')
-                                            @endcomponent
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Date 
-                                            </label>
-
-                                            @component('frontend.common.input.datepicker')
-                                                @slot('id', 'date')
-                                                @slot('name', 'date')
-                                                @slot('id_error', 'date')
+                                                @slot('text', 'Generated sesuai user yang propose leave')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Start Time 
-                                                    </label>
-
-                                                    @component('frontend.common.input.timepicker')
-                                                        @slot('id', 'start_time')
-                                                        @slot('class','m_timepicker_1 text-center')
-                                                    @endcomponent
-                                                  
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        End Time 
-                                                    </label>
-        
-                                                    @component('frontend.common.input.timepicker')
-                                                        @slot('id', 'end_time')
-                                                        @slot('class','m_timepicker_1 text-center')
-                                                    @endcomponent
-                                                    
-                                                </div>
-                                            </div>
+                                            <label class="form-control-label">
+                                                Leave Types @include('frontend.common.label.required')
+                                            </label>
+                                            
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Leave Types')
+                                                @slot('id', 'leave_type')
+                                                @slot('name', 'leave_type')
+                                                @slot('id_error', 'leave_type')
+                                            @endcomponent
+                                            {{-- Casual Leave(if setting daily based) = 3 Days Remaining 
+                                            Annual Leave = 10 Days Remaining
+                                            Sick  --}}
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6 mt-5">
+                                           <span id="note_remaining" class="text-danger mt-5">10 Days Remaining</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Date Start @include('frontend.common.label.required')
+                                            </label>
+                                         
+                                            @component('frontend.common.input.datepicker')
+                                                @slot('id', 'date')
+                                                @slot('text', 'Date')
+                                                @slot('name', 'date')
+                                                @slot('id_error','date')
+                                            @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Total Time
+                                                Date End @include('frontend.common.label.required')
                                             </label>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-4 col-md-4 col-lg-4">
-                                                    @component('frontend.common.input.number')
-                                                        @slot('name','hours')
-                                                        @slot('input_append','Hours')
-                                                        @slot('disabled','disabled')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-4 col-md-4 col-lg-4">
-                                                    @component('frontend.common.input.number')
-                                                        @slot('name','minutes')
-                                                        @slot('input_append','Minutes')
-                                                        @slot('disabled','disabled')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-4 col-md-4 col-lg-4">
-                                                    @component('frontend.common.input.number')
-                                                        @slot('name','second')
-                                                        @slot('input_append','Seconds')
-                                                        @slot('disabled','disabled')
-                                                    @endcomponent
-                                                </div>
-                                            </div>  
+                                         
+                                            @component('frontend.common.input.datepicker')
+                                                @slot('id', 'exp_date')
+                                                @slot('text', 'Date End')
+                                                @slot('name', 'exp_date')
+                                                @slot('id_error','exp_date')
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Description @include('frontend.common.label.optional')
+                                                Description
                                             </label>
 
                                             @component('frontend.common.input.textarea')
@@ -148,7 +125,6 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    
                                                     @component('frontend.common.buttons.approve')
                                                         @slot('data_target', '#modal_approve')
                                                         @slot('class', 'ml-2')
@@ -162,12 +138,11 @@
                                                         @slot('class', 'bg-warning text-dark')
                                                     @endcomponent
 
-
                                                     @include('frontend.common.buttons.back')
 
-                                                    @include('frontend.overtime.modal-approve')
-                                                    @include('frontend.overtime.modal-reject')
 
+                                                    @include('frontend.attendance.modal-approve')
+                                                    @include('frontend.attendance.modal-reject')
                                                 </div>
                                             </div>
                                         </div>
@@ -184,6 +159,7 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/timepicker.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/leave-type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
 @endpush

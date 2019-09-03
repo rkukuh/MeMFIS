@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class EmployeeProvisions extends Model
 {
     protected $table = 'employee_provisions';
-    
+    public $timestamps = false;
     protected $fillable = [
         'employee_id',
         'maximum_overtime',
@@ -18,7 +18,8 @@ class EmployeeProvisions extends Model
         'late_punishment',
         'absence_punishment',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'approved_at'
     ];
     
     /**
@@ -32,6 +33,19 @@ class EmployeeProvisions extends Model
     public function employee()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many approvals.
+     *
+     * This function will get all DefectCard's approvals.
+     * See: Approvals's approvable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function approvals()
+    {
+        return $this->morphMany(Approval::class, 'approvable');
     }
 }
 

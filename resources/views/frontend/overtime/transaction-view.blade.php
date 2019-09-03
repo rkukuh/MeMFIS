@@ -43,23 +43,27 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <table class="table table-striped table-bordered table-hover table-checkable" widtd="100%" cellpadding="4">
                                             <tr>
-                                                <td width="25%" class="text-primary font-weight-bold">Correction No.</td>
+                                                <td width="25%" class="text-primary font-weight-bold">Date</td>
                                                 <td align="center" width="75%">Sunday, 25/08/2019</td>
                                             </tr>
                                             <tr>
-                                                <td width="20%" class="text-primary font-weight-bold">Check-In</td>
+                                                <td width="20%" class="text-primary font-weight-bold">Start Time</td>
                                                 <td align="center" width="75%">16:31:59</td>
                                             </tr>
                                             <tr>
-                                                <td width="20%" class="text-primary font-weight-bold">Check-Out</td>
-                                                <td align="center" width="75%"></td>
+                                                <td width="20%" class="text-primary font-weight-bold">End Time</td>
+                                                <td align="center" width="75%">19:12:12</td>
                                             </tr>
                                             <tr>
-                                                <td width="20%" class="text-primary font-weight-bold">Decription</td>
+                                                <td width="20%" class="text-primary font-weight-bold">Overtime Total</td>
+                                                <td align="center" width="75%">03:09(3 Hours 9 Minutes)</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%" class="text-primary font-weight-bold">Overtime Description</td>
                                                 <td align="center" width="75%">Blabla</td>
                                             </tr>
                                             <tr>
-                                                <td width="20%" class="text-primary font-weight-bold">Created Date</td>
+                                                <td width="20%" class="text-primary font-weight-bold">Created</td>
                                                 <td align="center" width="75%">27/08/2019 Timestamp</td>
                                             </tr>
                                         </table>

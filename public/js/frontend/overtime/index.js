@@ -1,6 +1,6 @@
-let AttendanceCorrection = {
+let Overtime = {
     init: function () {
-        $('.attendance_correction_datatable').mDatatable({
+        $('.overtime_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -55,13 +55,13 @@ let AttendanceCorrection = {
                 },
                 {
                     field: '',
-                    title: 'Created Date',
+                    title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: 'code',
-                    title: 'Correction Number',
+                    title: 'Overtime Number',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
@@ -83,19 +83,19 @@ let AttendanceCorrection = {
                
                 {
                     field: '',
-                    title: 'Corrected Date',
+                    title: 'Start Time',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: '',
-                    title: 'Check-in',
+                    title: 'End Time',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: '',
-                    title: 'check-out',
+                    title: 'Total',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -148,5 +148,5 @@ let AttendanceCorrection = {
 
 
 jQuery(document).ready(function () {
-    AttendanceCorrection.init();
+    Overtime.init();
 });
