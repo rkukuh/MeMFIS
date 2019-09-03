@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Unit;
 use App\Models\Item;
+use App\Models\Price;
 use App\Models\Category;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -171,6 +172,11 @@ class MaterialsAndToolsImport implements ToModel, WithHeadingRow
         ]);
 
         $item->save();
+
+        for($i=1;$i<=5;$i++){
+            $item->prices()
+            ->save(new Price (['amount' =>0,'level' =>$i]));
+        }
 
         $item->categories()->sync($category);
     }
