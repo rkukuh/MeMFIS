@@ -207,10 +207,11 @@ class JobCardEngineerController extends Controller
      */
     public function update(JobCardUpdate $request, JobCard $jobcard)
     {
-        dd($request->all());
         if ($this->statuses->where('uuid', $request->progress)->first()->code == 'open') {
-            foreach($request->logbook as $logbook){
-                $jobcard->logbooks()->attach(Type::ofJobCardLogBook()->where('code',$logbook)->first()->id);
+            if (isset($request->logbook)) {
+                foreach ($request->logbook as $logbook) {
+                    $jobcard->logbooks()->attach(Type::ofJobCardLogBook()->where('code', $logbook)->first()->id);
+                }
             }
 
             $request->merge(['station_id' => Station::where('uuid',$request->station)->first()->id]);

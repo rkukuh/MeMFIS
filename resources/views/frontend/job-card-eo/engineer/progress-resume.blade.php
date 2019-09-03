@@ -251,48 +251,28 @@
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
                             <table border="1px" width="100%" style="margin-top:10px">
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Helper
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                        {{-- @if(isset($jobcard->helpers))
-                                            @foreach($jobcard->helpers as $helper)
-                                            <div class="row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <select name="helper" style="width:100%" class="form-control m-select2">
-                                                        <option value=""></option>
-                                                        @foreach($employees as $employee)
-                                                        <option value="{{ $employee->code }}" @if($employee->code == $helper->code) selected @endif>{{ $employee->first_name }}</option>
-                                                        @endforeach
-                                                    </select>
-
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        @else
-                                            <div class="row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    @component('frontend.common.input.select2')
-                                                        @slot('text', 'helper')
-                                                        @slot('name', 'helper')
-                                                        @slot('id_error', 'helper')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                        @endif --}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Station
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $jobcard->station->name)
-                                            @endcomponent
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                        Helper
+                                    </td>
+                                    <td width="70%" style="text-align:left">
+                                    @if(isset($jobcard->helpers))
+                                        @foreach($jobcard->helpers as $key => $helper)
+                                           {{$key + 1}}. {{ $helper->first_name }} <br>
+                                        @endforeach
+                                    @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                        Station
+                                    </td>
+                                    <td width="70%" style="text-align:center">
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', $jobcard->station->name)
+                                        @endcomponent
+                                    </td>
+                                </tr>
                             </table>
 
                             <table border="1px" width="100%" style="margin-top:10px">
