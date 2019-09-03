@@ -6,7 +6,7 @@ let PurchaseRequest = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/item',
+                        url: '/datatables/purchase-request/item/'+pr_uuid,
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -58,7 +58,7 @@ let PurchaseRequest = {
                     filterable: !1,
                 },
                 {
-                    field: 'qty',
+                    field: 'quantity',
                     title: 'Quantity',
                     sortable: 'asc',
                     filterable: !1,
@@ -112,7 +112,6 @@ let PurchaseRequest = {
                             // '<option value="3">'+
                             //     'Select Unit3'+
                             // '</option>'+
-
                         '</select>'
 
                     }
@@ -127,6 +126,29 @@ let PurchaseRequest = {
 
             ]
         });
+
+        $('#item_datatable').on('click','.select-item', function () {
+            let item_uuid = $(this).attr('data-uuid');
+            $.ajax({
+                 headers: {
+                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                 },
+                 url: '/purchase-request/'+pr_uuid+'/item/'+item_uuid,
+                 type: 'post',
+                 success: function (response) {
+                     
+                         toastr.success('Item has been added.', 'Success', {
+                             timeOut: 5000
+                         });
+ 
+                         let table = $('.item_datatable').mDatatable();
+ 
+                         table.originalDataSet = [];
+                         table.reload();
+                     }
+                 
+             });
+         });
 
         $(function(){
             $('input[type="radio"]').click(function(){
@@ -147,8 +169,8 @@ let PurchaseRequest = {
             let number = $('input[name=number]').val();
             let type_id = $('input[name=type]').val();
             // let project_id = $('input[name=project]').val();
-            let date = $('input[name=date]').val();
-            let date_required = $('input[name=date-required]').val();
+            let date = new Date($('input[name=date]').val());
+            let date_required = new Date($('input[name=date-required]').val());
             let description = $('#description').val();
 
             $.ajax({
@@ -156,12 +178,12 @@ let PurchaseRequest = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 url: '/purchase-request',
-                type: 'POST',
+                type: 'PUT',
                 data: {
                     number:number,
                     type_id:type_id,
-                    requested_at:date,
-                    required_at:date_required,
+                    date:date,
+                    date_required:date_required,
                     description:description,
                 },
                 success: function (response) {
@@ -187,6 +209,8 @@ let PurchaseRequest = {
                 }
             });
         });
+
+        
 
     }
 };

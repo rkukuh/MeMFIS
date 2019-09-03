@@ -52,6 +52,7 @@ Route::name('component.')->group(function () {
         Route::get('get-takcard-si-types', 'FillComboxController@taskcardTypeSI')->name('get-takcard-si-types');
         Route::get('get-aviation-degree', 'FillComboxController@aviationDegrees')->name('get-eaviation-degree');
         Route::get('get-manual-affecteds', 'FillComboxController@manualAffected')->name('get-manual-affecteds');
+        Route::get('get-project-quotation', 'FillComboxController@projectQuotation')->name('get-project-quotation');
         Route::get('get-category-taskcard', 'FillComboxController@categorieTakcard')->name('get-category-taskcard');
         Route::get('get-otr-certifications', 'FillComboxController@otrCertification')->name('get-otr-certifications');
         Route::get('get-aircraft-taskcards', 'FillComboxController@aircraftTaskcard')->name('get-aircraft-taskcards');

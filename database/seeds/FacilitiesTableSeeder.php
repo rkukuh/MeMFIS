@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Price;
 use App\Models\Facility;
 use Illuminate\Database\Seeder;
 
@@ -12,30 +13,56 @@ class FacilitiesTableSeeder extends Seeder
      */
     public function run()
     {
-        Facility::create([
+        $facility = Facility::create([
             'code' => 'line1',
             'name' => 'Hanggar line 1',
         ]);
 
-        Facility::create([
+        for($i=1;$i<=5;$i++){
+            $facility->prices()
+            ->save(new Price (['amount' =>0,'level' =>$i]));
+        }
+
+        $facility = Facility::create([
             'code' => 'line2',
             'name' => 'Hanggar line 2',
         ]);
 
-        Facility::create([
+        for($i=1;$i<=5;$i++){
+            $facility->prices()
+            ->save(new Price (['amount' =>0,'level' =>$i]));
+        }
+
+        $facility = Facility::create([
             'code' => 'line3',
             'name' => 'Hanggar line 3',
         ]);
 
-        Facility::create([
+        for($i=1;$i<=5;$i++){
+            $facility->prices()
+            ->save(new Price (['amount' =>0,'level' =>$i]));
+        }
+
+        $facility = Facility::create([
             'code' => 'line4',
             'name' => 'Hanggar line 4',
         ]);
 
-        Facility::create([
+        for($i=1;$i<=5;$i++){
+            $facility->prices()
+            ->save(new Price (['amount' =>0,'level' =>$i]));
+        }
+
+        $facility = Facility::create([
             'code' => 'line5',
             'name' => 'Hanggar line 5',
         ]);
+
+        for($i=1;$i<=5;$i++){
+            $facility->prices()
+            ->save(new Price (['amount' =>0,'level' =>$i]));
+        }
+
 
     }
 }

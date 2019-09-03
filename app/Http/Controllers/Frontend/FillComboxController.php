@@ -621,6 +621,18 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function projectQuotation()
+    {
+        $projects = Project::whereHas('quotations')->pluck('title','uuid');
+
+        return json_encode($projects);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function projectAdditional()
     {
         $projects = Project::with('approvals')->where('parent_id',null)->pluck('title','uuid');
