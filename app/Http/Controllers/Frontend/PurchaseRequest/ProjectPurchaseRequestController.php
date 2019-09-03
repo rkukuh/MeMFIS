@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Frontend\PurchaseRequest;
 
+use Auth;
 use Carbon\Carbon;
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\Project;
+use App\Models\Approval;
 use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
@@ -134,6 +136,12 @@ class ProjectPurchaseRequestController extends Controller
      */
     public function approve(PurchaseRequest $purchaseRequest)
     {
+        $purchaseRequest->approvals()->save(new Approval([
+            'approvable_id' => $purchaseRequest->id,
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
+        ]));
+
         return response()->json($purchaseRequest);
     }
 

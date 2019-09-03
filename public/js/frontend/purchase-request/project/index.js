@@ -108,9 +108,9 @@ let PurchaseRequest = {
                     template: function (t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid +'">' +
-                                '<i class="la la-check-square-o"></i>' +
+                                '<i class="la la-check"></i>' +
                             '</a>' +
-                            '<a href="/purchase-request/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
+                            '<a href="/purchase-request-poject/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
                             '</a>' +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
@@ -142,7 +142,7 @@ let PurchaseRequest = {
                             )
                         },
                         type: 'PUT',
-                        url: '/purchase-request/' +  purchase_request_uuid +'/approve',
+                        url: '/purchase-request/' +  purchase_request_uuid +'/project/approve',
                         success: function (data) {
                             toastr.success('Goods Received has been Approved.', 'Approved', {
                                 timeOut: 5000
@@ -185,7 +185,7 @@ let PurchaseRequest = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/purchase-request/' + purchase_request_uuid + '',
+                        url: '/purchase-request-project/' + purchase_request_uuid + '',
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
