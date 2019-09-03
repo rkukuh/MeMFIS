@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EmployeeBenefit extends Migration
+class EmployeeBanks extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,17 @@ class EmployeeBenefit extends Migration
      */
     public function up()
     {
-        Schema::create('employee_benefit', function (Blueprint $table) {
+        Schema::create('employee_bank', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('employee_id');
-            $table->unsignedBigInteger('benefit_id');
-            $table->bigInteger('amount');
-            $table->dateTime('approved_at')->nullable();
+            $table->string('number');
+            $table->string('bank_name');
 
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('employee_id')
             ->references('id')->on('employees')
-            ->onUpdate('cascade')
-            ->onDelete('restrict');
-
-            $table->foreign('benefit_id')
-            ->references('id')->on('benefits')
             ->onUpdate('cascade')
             ->onDelete('restrict');
         });
@@ -42,6 +36,6 @@ class EmployeeBenefit extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_benefit');
+        Schema::dropIfExists('employee_bank');
     }
 }

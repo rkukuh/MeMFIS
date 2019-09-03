@@ -92,9 +92,26 @@ class EmployeeUserController extends Controller
      * @param  int  App\Models\Employee
      * @return \Illuminate\Http\Response
      */
-    public function update(EmployeeUserUpdate $request, Employee $employee)
+    public function update(EmployeeUserUpdate $request, Employee $employee, User $account)
     {
-        //
+        if($employee->last_name == $employee->first_name){
+            $name = $employee->first_name;
+        }else{
+            $name = $employee->first_name.' '.$employee->last_name;
+        }
+        
+        $account->update([
+            'name' => $name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'is_active' => $request->active
+        ]);
+
+        $account->assignRole(
+            Role::where('name', $request->role)->first()
+        );
+
+        return response()->json('Sukses');
     }
 
     /**
