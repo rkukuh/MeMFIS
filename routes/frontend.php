@@ -10,8 +10,6 @@ Route::name('frontend.')->group(function () {
     ], function () {
 
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
-        Route::view('/purchase-request', 'frontend.purchase-request.index')->name('purchase-request.index');
-        Route::view('/purchase-request/create', 'frontend.purchase-request.create')->name('purchase-request.create');
 
         /** INITIAL DATA */
 

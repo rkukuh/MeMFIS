@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\PurchaseRequestStore;
 use App\Http\Requests\Frontend\PurchaseRequestUpdate;
 
-class PurchaseRequestController extends Controller
+class GeneralPurchaseRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
