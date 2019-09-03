@@ -1,4 +1,4 @@
-let Unit = {
+let AttendanceCorrection = {
     init: function () {
         $('.attendance_correction_datatable').mDatatable({
             data: {
@@ -148,5 +148,5 @@ let Unit = {
 
 
 jQuery(document).ready(function () {
-    Unit.init();
+    AttendanceCorrection.init();
 });

@@ -12,6 +12,7 @@ class Approval extends MemfisModel
         'is_approved',
         'conducted_by',
         'note',
+        'created_at'
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

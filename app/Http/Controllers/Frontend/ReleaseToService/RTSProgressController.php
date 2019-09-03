@@ -47,27 +47,27 @@ class RTSProgressController extends Controller
                     if($jobcard->is_mandatory == 1){
                         if($jobcard->is_rii == 1){
                             if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "rii-released"){
-                                $mandatory_taskcard = $mandatory_taskcard.", ".$jobcard->taskcard->number;
+                                $mandatory_taskcard = $mandatory_taskcard.", ".$jobcard->jobcardable->number;
                             }
                         }else{
                             if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"){
-                                $mandatory_taskcard = $mandatory_taskcard.", ".$jobcard->taskcard->number;
+                                $mandatory_taskcard = $mandatory_taskcard.", ".$jobcard->jobcardable->number;
                             }
                         }
                     }else{
                         if($jobcard->is_rii == 1){
                             if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "rii-released" and Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "open"){
-                                $running_taslcard = $running_taslcard.", ".$jobcard->taskcard->number;
+                                $running_taslcard = $running_taslcard.", ".$jobcard->jobcardable->number;
                             }
                             elseif(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "rii-released"){
-                                $taskcard_number = $taskcard_number.", ".$jobcard->taskcard->number;
+                                $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
                             }
                         }else{
                             if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"  and Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "open"){
-                                $running_taslcard = $running_taslcard.", ".$jobcard->taskcard->number;
+                                $running_taslcard = $running_taslcard.", ".$jobcard->jobcardable->number;
                             }
                             elseif(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"){
-                                $taskcard_number = $taskcard_number.", ".$jobcard->taskcard->number;
+                                $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
                             }
                         }
                     }
@@ -124,7 +124,7 @@ class RTSProgressController extends Controller
             foreach($jobcards as $jobcard){
                 if(sizeof($jobcard->progresses) <> 0){
                     if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "closed"){
-                        $taskcard_number = $taskcard_number.", ".$jobcard->taskcard->number;
+                        $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
                     }
                 }
             }

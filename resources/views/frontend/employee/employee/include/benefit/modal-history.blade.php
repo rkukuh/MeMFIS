@@ -27,12 +27,15 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    @if ($current['approved_at'] != null)
+                                    
                                     <div class="m-portlet m-portlet--mobile pb-3">
                                         <div class="m-portlet__body">
                                             <div class="my-4">
                                                 <div class="d-flex justify-content-end">
                                                     <h3 class="m-portlet__head-text">
-                                                        Approve by .... at .... (timestamp)
+                                                        Approve by {{ $current['approved_name'] }} at {{ $current['approved_at'] }}
                                                     </h3>
                                                 </div>
                                                 <fieldset class="border p-2">
@@ -153,6 +156,9 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
@@ -188,8 +194,13 @@
     
                                                             $updated_time = $employee_benefit_history[$i]['updated_at'];
                                                             $formatUpdatedTime = strtotime($updated_time);
-    
-                                                            echo date("d F Y", $formatCreatedTime).' to '.date("d F Y", $formatUpdatedTime).', Approved By';
+
+                                                            if($employee_benefit_history[0]['approved_by']['last_name'] == $employee_benefit_history[0]['approved_by']['first_name']){
+                                                                $name = $employee_benefit_history[0]['approved_by']['first_name'];
+                                                            }else{
+                                                                $name = $employee_benefit_history[0]['approved_by']['first_name'].' '.$employee_benefit_history[0]['approved_by']['last_name'];
+                                                            }
+                                                            echo date("d F Y", $formatCreatedTime).' to '.date("d F Y", $formatUpdatedTime).', Approved By '.$name;
                                                         @endphp
                                                     </h3>
                                                 </div>
