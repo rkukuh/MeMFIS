@@ -10,6 +10,7 @@ use App\Models\Website;
 use App\Models\Journal;
 use App\Models\Document;
 use App\Models\Customer;
+use App\Models\BankAccount;
 use Faker\Generator as Faker;
 
 $factory->define(Customer::class, function (Faker $faker) {
@@ -51,32 +52,41 @@ $factory->define(Customer::class, function (Faker $faker) {
 /** Callbacks */
 
 $factory->afterCreating(Customer::class, function ($customer, $faker) {
+
+    // Address
+
     if ($faker->boolean) {
         $customer->addresses()->saveMany(factory(Address::class, rand(2, 4))->make());
     }
+
+    // Bank Account
+    
+    if ($faker->boolean) {
+        $customer->bank_accounts()->saveMany(factory(BankAccount::class, rand(1, 3))->make());
+    }
+
+    // Document
 
     if ($faker->boolean) {
         $customer->documents()->saveMany(factory(Document::class, rand(1, 3))->make());
     }
 
+    // Email
+
     if ($faker->boolean) {
         $customer->emails()->saveMany(factory(Email::class, rand(1, 2))->make());
     }
+
+    // Fax
 
     if ($faker->boolean) {
         $customer->faxes()->saveMany(factory(Fax::class, rand(1, 2))->make());
     }
 
+    // Journal
+
     if ($faker->boolean) {
         $customer->journal()->associate(Journal::get()->random())->save();
-    }
-
-    if ($faker->boolean) {
-        $customer->phones()->saveMany(factory(Phone::class, rand(1, 2))->make());
-    }
-
-    if ($faker->boolean) {
-        $customer->websites()->saveMany(factory(Website::class, rand(2, 4))->make());
     }
 
     // Level
@@ -84,4 +94,17 @@ $factory->afterCreating(Customer::class, function ($customer, $faker) {
     for ($i = 1; $i < rand(1, Level::ofCustomer()->count()); $i++) {
         $customer->levels()->save(Level::ofCustomer()->get()->random());
     }
+
+    // Phone
+
+    if ($faker->boolean) {
+        $customer->phones()->saveMany(factory(Phone::class, rand(1, 2))->make());
+    }
+
+    // Website
+
+    if ($faker->boolean) {
+        $customer->websites()->saveMany(factory(Website::class, rand(2, 4))->make());
+    }
+
 });

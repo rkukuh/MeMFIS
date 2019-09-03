@@ -33,6 +33,19 @@ class Customer extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many bank accounts.
+     *
+     * This function will get all Customer's bank accounts.
+     * See: BankAccount's bank_accountable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function bank_accounts()
+    {
+        return $this->morphMany(BankAccount::class, 'bank_accountable');
+    }
+
+    /**
      * Polymorphic: A customer can have zero or many documents.
      *
      * This function will get all of the customer's documents.
