@@ -40,7 +40,7 @@
                                     Unit
                                 </label>
                                 @component('frontend.common.input.select2')
-                                    @slot('id', 'unit_id')
+                                    {{-- @slot('id', 'unit_id') --}}
                                     @slot('class','unit_id')
                                     @slot('name', 'unit_id')
                                     @slot('id_error', 'unit_id')
@@ -59,7 +59,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.number')
-                                                    @slot('id', 'price')
+                                                    @slot('id', 'price_facility')
                                                     @slot('name', 'price')
                                                     @slot('text', 'price')
                                                     @slot('input_prepend','$')
@@ -72,7 +72,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.number')
-                                                    @slot('id', 'price')
+                                                    @slot('id', 'price_facility')
                                                     @slot('name', 'price')
                                                     @slot('text', 'price')
                                                     @slot('input_prepend','$')
@@ -88,7 +88,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.number')
-                                                    @slot('id', 'price')
+                                                    @slot('id', 'price_facility')
                                                     @slot('name', 'price')
                                                     @slot('text', 'price')
                                                     @slot('input_prepend','$')
@@ -102,7 +102,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.number')
-                                                    @slot('id', 'price')
+                                                    @slot('id', 'price_facility')
                                                     @slot('name', 'price')
                                                     @slot('text', 'price')
                                                     @slot('input_prepend','$')
@@ -118,7 +118,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.number')
-                                                    @slot('id', 'price')
+                                                    @slot('id', 'price_facility')
                                                     @slot('name', 'price')
                                                     @slot('text', 'price')
                                                     @slot('input_prepend','$')

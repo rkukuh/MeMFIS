@@ -453,7 +453,7 @@ let Facility = {
                     filterable: !1,
                     template: function (t) {
                         return '<a href="" class="show-price" data-toggle="modal" data-target="#modal_price_list_show"'+
-                        'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
+                        'data-pn='+t.code+' data-name='+t.name+' data-uuid=' +
                         t.uuid + '>' + t.code + "</a>"
                     }
                 },
@@ -464,27 +464,8 @@ let Facility = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit_name',
-                    title: 'Unit',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-               
-                {
-                    field: '',
-                    title: 'Remark',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'last_update',
-                    title: 'Last Update',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'updated_by',
-                    title: 'Updated By',
+                    field: 'prices',
+                    title: 'Price',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -493,18 +474,18 @@ let Facility = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if('item' == 'manhour'){
+                        if('facility' == 'item'){
                             return (
-                                '<button data-toggle="modal" data-target="#modal_pricelist_facility_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-facility-item" title="Edit"'+
-                                'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
+                                '<button data-toggle="modal" data-target="#modal_pricelist_facility_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-facility" title="Edit"'+
+                                'data-pn='+t.code+' data-name='+t.name+' data-uuid=' +
                                 t.uuid +
                                 '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                             );
                         }
                         else{
                             return (
-                                '<button data-toggle="modal" data-target="#modal_pricelist_facility_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-facility-item" title="Edit"'+
-                                'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
+                                '<button data-toggle="modal" data-target="#modal_pricelist_facility_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-facility" title="Edit"'+
+                                'data-pn='+t.code+' data-name='+t.name+' data-uuid=' +
                                 t.uuid +
                                 '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                             );
@@ -518,13 +499,13 @@ let Facility = {
             $('.btn-success').removeClass('add');
         });
 
-        let simpan = $('.modal-footer').on('click', '.add-price', function () {
+        let simpanFacility = $('.modal-footer').on('click', '.add-price-facility', function () {
             
             let price_array = [];            
-            $('#price ').slice(0,5).each(function (i) {
+            $('#price_facility ').slice(0,5).each(function (i) {
                 price_array[i] = $(this).val();
             });
-            
+
             let level_array = [
                 1,2,3,4,5
             ];
@@ -532,18 +513,18 @@ let Facility = {
             $.each(function(i){
                 level_array[i] =  $(this).val();
             });
-            
-            // console.log(price_array,level_array);
+            console.log(price_array, level_array);
+
             // let item = $('input[name=uuid]').val();
-            let item = $('#uuid-item').val();
-            // console.log(item);
+            let facility = $('#uuid-facility').val();
+            // console.log(facility);
             
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type:'post',
-                url: 'item/'+item+'/prices',
+                url: 'facility/'+facility+'/prices',
                 data: {
                     _token: $('input[name=_token]').val(),
                     price: price_array,
@@ -562,7 +543,7 @@ let Facility = {
                             timeOut: 5000
                         });
 
-                        let table = $('.price_list_datatable-item').mDatatable();
+                        let table = $('.price_list_datatable-facility').mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -572,10 +553,10 @@ let Facility = {
         });
 
         // show add price modal
-         $('.price_list_datatable-item').on('click', '.add-price', function () {
-            let item = $(this).data('uuid');
-
-            document.getElementById("uuid").value = $(this).data('uuid');
+         $('.price_list_datatable-facility').on('click', '.add-price-facility', function () {
+            let facility = $(this).data('uuid');
+            
+            document.getElementById("uuid-facility").value = $(this).data('uuid');
             document.getElementById("pn").innerHTML = $(this).data('pn');
             document.getElementById("name").innerHTML = $(this).data('name');
             document.getElementById("unit").innerHTML = $(this).data('unit');
@@ -608,14 +589,15 @@ let Facility = {
                 }
             });
         });
-        let edit = $('.price_list_datatable-item').on('click', '.edit-price-item', function edit () {
+        
+        let edit = $('.price_list_datatable-facility').on('click', '.edit-price-facility', function edit () {
             save_changes_button();
 
-            let item = $(this).data('uuid');
-            document.getElementById("uuid-item").value = item;
+            let facility = $(this).data('uuid');
+            document.getElementById("uuid-facility").value = facility;
             document.getElementById("name").innerHTML = $(this).data('pn');
             document.getElementById("unit_id").innerHTML = $(this).data('unit');
-
+            
             // document.getElementById("name-edit").innerHTML = $(this).data('name');
             
 
@@ -657,7 +639,7 @@ let Facility = {
             });
         });
 
-        let show = $('.price_list_datatable-item').on('click', '.show-price', function edit () {
+        let show = $('.price_list_datatable-facility').on('click', '.show-price', function edit () {
 
             let item = $(this).data('uuid');
             document.getElementById("pn-show").innerHTML = $(this).data('pn');
