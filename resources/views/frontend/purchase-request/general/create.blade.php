@@ -55,6 +55,20 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
+                                                    Purchase Request Type @include('frontend.common.label.required')
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('id', 'purchase-request-type')
+                                                    @slot('text', 'Type')
+                                                    @slot('name', 'purchase-request-type')
+                                                    @slot('id_error', 'purchase-request-type')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
                                                     Date @include('frontend.common.label.required')
                                                 </label>
 
@@ -173,6 +187,8 @@
 
     <script src="{{ asset('js/frontend/purchase-request/general/create.js') }}"></script>
     <script src="{{ asset('js/frontend/purchase-request/general/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/purchase-request-type.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/purchase-request-type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-required.js')}}"></script>
 

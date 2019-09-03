@@ -53,7 +53,7 @@ let PurchaseRequest = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/purchase-request/'+t.uuid+'">' + t.number + "</a>"
+                        return '<a href="/purchase-request-general/'+t.uuid+'">' + t.number + "</a>"
                     }
                 },
                 {

@@ -6,6 +6,7 @@ let PurchaseRequestGeneral = {
             let date = $('input[name=date]').val();
             let date_required = $('input[name=date-required]').val();
             let description = $('#description').val();
+            let type_id = $('#purchase-request-type').val();
 
             $.ajax({
                 headers: {
@@ -18,6 +19,7 @@ let PurchaseRequestGeneral = {
                     requested_at:date,
                     required_at:date_required,
                     description:description,
+                    type_id:type_id,
                 },
                 success: function (response) {
                     if (response.errors) {

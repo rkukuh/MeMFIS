@@ -41,7 +41,7 @@ class GeneralPurchaseRequestController extends Controller
     public function store(PurchaseRequestStore $request)
     {
         $request->merge(['number' => DocumentNumber::generate('PR-', PurchaseRequest::withTrashed()->count()+1)]);
-        $request->merge(['type_id' => Type::where('of','purchase-request')->where('name','General')->first()->id ]);
+        $request->merge(['type_id' => Type::where('of','purchase-request')->where('uuid',$request->type_id)->first()->id ]);
         $request->merge(['requested_at' => Carbon::parse($request->requested_at)]);
         $request->merge(['required_at' => Carbon::parse($request->required_at)]);
 
