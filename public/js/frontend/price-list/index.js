@@ -513,8 +513,7 @@ let Facility = {
             $.each(function(i){
                 level_array[i] =  $(this).val();
             });
-            console.log(price_array, level_array);
-
+            
             // let item = $('input[name=uuid]').val();
             let facility = $('#uuid-facility').val();
             // console.log(facility);
