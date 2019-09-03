@@ -2,6 +2,7 @@
 
 use App\Models\Branch;
 use App\Models\Company;
+use App\Models\BankAccount;
 use Faker\Generator as Faker;
 
 $factory->define(Branch::class, function (Faker $faker) {
@@ -20,5 +21,17 @@ $factory->define(Branch::class, function (Faker $faker) {
         },
         'description' => $faker->randomElement([null, $faker->text]),
     ];
+
+});
+
+/** Callbacks */
+
+$factory->afterCreating(Branch::class, function ($branch, $faker) {
+
+    // Bank Account
+    
+    if ($faker->boolean) {
+        $branch->bank_accounts()->saveMany(factory(BankAccount::class, rand(1, 3))->make());
+    }
 
 });
