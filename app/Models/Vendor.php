@@ -14,6 +14,19 @@ class Vendor extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * Polymorphic: An entity can have zero or many bank accounts.
+     *
+     * This function will get all Vendor's bank accounts.
+     * See: BankAccount's bank_accountable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function bank_accounts()
+    {
+        return $this->morphMany(BankAccount::class, 'bank_accountable');
+    }
+
+    /**
      * One-to-Many: A purchase order may have one vendor.
      *
      * This function will retrieve all the purchase orders of a vendor.
