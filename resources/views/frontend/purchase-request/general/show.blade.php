@@ -58,20 +58,28 @@
                                                     Purchase Request Number
                                                 </label>
 
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text',  $purchaseRequest->number)
+                                                @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Purchase Request Type
+                                                </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Generated')
+                                                    @slot('text',  $purchaseRequest->type->name)
                                                 @endcomponent
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Date 
+                                                    Date
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Generated')
+                                                    @slot('text',  $purchaseRequest->requested_at)
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -80,7 +88,7 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Generated')
+                                                    @slot('text',  $purchaseRequest->required_at)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -89,9 +97,9 @@
                                                 <label class="form-control-label">
                                                     Description
                                                 </label>
-    
+
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Generated')
+                                                    @slot('text',  $purchaseRequest->description)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -132,7 +140,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                                 
+
                                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                 </div>
                                                             </div>
@@ -187,6 +195,7 @@
 
 @push('footer-scripts')
     <script>
+        let pr_uuid = '{{$purchaseRequest->uuid}}';
         var autoExpand = function (field) {
 
         // Reset field height
