@@ -1,6 +1,7 @@
 @if( isset($jobcards["non-routine"] ) ) 
 <div class="form-group m-form__group row">
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    @if( isset($jobcards["adsb"]) )
+    <div class="col-sm-{{$col['non-routine']}} col-md-{{$col['non-routine']}} col-lg-{{$col['non-routine']}}">
         <div class="m-portlet  m-portlet--full-height ">
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
@@ -158,7 +159,10 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    @endif
+
+    @if( isset($jobcards["cmr-awl"]) )
+    <div class="col-sm-{{$col['non-routine']}} col-md-{{$col['non-routine']}} col-lg-{{$col['non-routine']}}">
         <div class="m-portlet  m-portlet--full-height ">
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
@@ -316,7 +320,10 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    @endif
+
+    @if( isset($jobcards["si"]) )
+    <div class="col-sm-{{$col['non-routine']}} col-md-{{$col['non-routine']}} col-lg-{{$col['non-routine']}}">
         <div class="m-portlet  m-portlet--full-height ">
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
@@ -474,9 +481,10 @@
             </div>
         </div>
     </div>
-</div>
-<div class="form-group m-form__group row">
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    @endif
+
+    @if( isset($jobcards["ea"]) )
+    <div class="col-sm-{{$col['non-routine']}} col-md-{{$col['non-routine']}} col-lg-{{$col['non-routine']}}">
         <div class="m-portlet  m-portlet--full-height ">
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
@@ -634,7 +642,10 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    @endif
+
+    @if( isset($jobcards["eo"]) )
+    <div class="col-sm-{{$col['non-routine']}} col-md-{{$col['non-routine']}} col-lg-{{$col['non-routine']}}">
         <div class="m-portlet  m-portlet--full-height ">
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
@@ -792,7 +803,10 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    @endif
+
+    @if( isset($jobcards["htcrr"]) )
+    <div class="col-sm-{{$col['non-routine']}} col-md-{{$col['non-routine']}} col-lg-{{$col['non-routine']}}">
         <div class="m-portlet  m-portlet--full-height ">
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
@@ -950,6 +964,7 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 @else 
 <div class="col-sm-12 col-md-12 col-lg-12">
