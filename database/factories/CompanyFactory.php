@@ -25,6 +25,8 @@ $factory->define(Company::class, function (Faker $faker) {
 
 $factory->afterCreating(Company::class, function ($company, $faker) {
 
+    // Bank Account
+    
     if ($faker->boolean) {
         $company->bank_accounts()->saveMany(factory(BankAccount::class, rand(1, 3))->make());
     }
