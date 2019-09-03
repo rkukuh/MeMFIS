@@ -160,25 +160,9 @@ let PurchaseRequestProject = {
             ]
         });
 
-        $(function(){
-            $('input[type="radio"]').click(function(){
-              if ($(this).is(':checked'))
-              {
-                // alert($(this).val());
-                if($(this).val() == 'general'){
-                    $('.project').addClass('hidden');
-                }
-                else if($(this).val() == 'project'){
-                    $('.project').removeClass('hidden');
-                }
-              }
-            });
-        });
-
         $('.footer').on('click', '.add-pr', function () {
             let number = $('input[name=number]').val();
-            let type_id = $('input[name=type]').val();
-            // let project_id = $('input[name=project]').val();
+            let project_id = $('#project').val();
             let date = $('input[name=date]').val();
             let date_required = $('input[name=date-required]').val();
             let description = $('#description').val();
@@ -187,11 +171,11 @@ let PurchaseRequestProject = {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/purchase-request',
+                url: '/purchase-request-project',
                 type: 'POST',
                 data: {
                     number:number,
-                    type_id:type_id,
+                    project_id: project_id,
                     requested_at:date,
                     required_at:date_required,
                     description:description,
@@ -214,7 +198,7 @@ let PurchaseRequestProject = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/purchase-request/'+response.uuid+'/edit';
+                        window.location.href = '/purchase-request-project/'+response.uuid+'/edit';
                     }
                 }
             });

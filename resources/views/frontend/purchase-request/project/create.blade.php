@@ -52,22 +52,7 @@
                                 <div class="m-portlet__body">
                                     <fieldset class="border p-2">
                                         <legend class="w-auto">Identifier</legend>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Purchase Request Number
-                                                </label>
 
-
-                                                @component('frontend.common.input.text')
-                                                    @slot('id', 'number')
-                                                    @slot('name', 'number')
-                                                    @slot('value', 'PR-2121212')
-                                                    @slot('id_error','number')
-                                                    @slot('editable','disabled')
-                                                @endcomponent
-                                            </div>
-                                        </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6 project">
                                                 <label class="form-control-label">
@@ -87,7 +72,7 @@
                                                         <label class="form-control-label">
                                                             Date @include('frontend.common.label.required')
                                                         </label>
-        
+
                                                         @component('frontend.common.input.datepicker')
                                                             @slot('id', 'date')
                                                             @slot('text', 'Date')
@@ -99,7 +84,7 @@
                                                         <label class="form-control-label">
                                                             Date Required @include('frontend.common.label.required')
                                                         </label>
-        
+
                                                         @component('frontend.common.input.datepicker')
                                                             @slot('id', 'date-required')
                                                             @slot('text', 'Date Required')
@@ -115,7 +100,7 @@
                                                 <label class="form-control-label">
                                                     Description @include('frontend.common.label.optional')
                                                 </label>
-    
+
                                                 @component('frontend.common.input.textarea')
                                                     @slot('rows', '10')
                                                     @slot('id', 'description')
@@ -165,8 +150,8 @@
                                                                         @slot('text', 'Item')
                                                                         @slot('data_target', '#modal_item')
                                                                     @endcomponent
-                    
-                            
+
+
                                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                 </div>
                                                             </div>

@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Frontend\PurchaseRequest;
+
 use Carbon\Carbon;
 use App\Models\Item;
 use App\Models\Type;
+use App\Models\Project;
+use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\PurchaseRequestStore;
@@ -39,10 +42,11 @@ class ProjectPurchaseRequestController extends Controller
      */
     public function store(PurchaseRequestStore $request)
     {
-        $request->merge(['type_id' => Type::where('of','purchase-request')->where('name',$request->type_id)->first()->id ]);
+        $request->merge(['number' => DocumentNumber::generate('PR-', PurchaseRequest::withTrashed()->count()+1)]);
+        $request->merge(['project_id' =>Project::where('uuid',$request->project_id)->first()->id ]);
+        $request->merge(['type_id' => Type::where('of','purchase-request')->where('name','Project')->first()->id ]);
         $request->merge(['requested_at' => Carbon::parse($request->requested_at)]);
         $request->merge(['required_at' => Carbon::parse($request->required_at)]);
-
         $purchaseRequest = PurchaseRequest::create($request->all());
 
         return response()->json($purchaseRequest);
