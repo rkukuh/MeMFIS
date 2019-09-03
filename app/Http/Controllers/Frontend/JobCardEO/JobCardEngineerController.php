@@ -95,7 +95,7 @@ class JobCardEngineerController extends Controller
     public function edit(JobCard $jobcard)
     {
         $statuses = Status::ofJobCard()->get();
-        $jobcard = JobCard::where('uuid', $jobcard->uuid)->first();
+        // $jobcard = JobCard::where('uuid', $jobcard->uuid)->first();
         foreach ($jobcard->helpers as $helper) {
             $helper->userID .= $helper->user->id;
         }
@@ -207,8 +207,7 @@ class JobCardEngineerController extends Controller
      */
     public function update(JobCardUpdate $request, JobCard $jobcard)
     {
-
-
+        dd($request->all());
         if ($this->statuses->where('uuid', $request->progress)->first()->code == 'open') {
             foreach($request->logbook as $logbook){
                 $jobcard->logbooks()->attach(Type::ofJobCardLogBook()->where('code',$logbook)->first()->id);
@@ -229,8 +228,8 @@ class JobCardEngineerController extends Controller
             ]));
 
             if ($request->helper) {
-                $helpers = Employee::whereIn('code', $request->helper)->pluck('id');
-                $jobcard->helpers()->sync($helpers);
+                $helper = Employee::whereIn('code', $request->helper)->pluck('id');
+                $jobcard->helpers()->sync($helper);
             }
 
             return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
