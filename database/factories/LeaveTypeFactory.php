@@ -13,9 +13,9 @@ $factory->define(LeaveType::class, function (Faker $faker) {
         'gender' => $faker->randomElement(['all','m','f']),
         'based' => $faker->randomElement(['multi','daily',null]),
         'leave_period' => $faker->numberBetween(1,10),
-        'prorate_leave' =>  $faker->boolean(),
-        'distribute_evently' =>  $faker->boolean(),
-        'back_date' =>  $faker->boolean(),
+        'prorate_leave' =>  $faker->boolean,
+        'distribute_evently' =>  $faker->boolean,
+        'back_date' =>  $faker->boolean,
         'description' => $faker->randomElement([null, $faker->text]),
     ];
 

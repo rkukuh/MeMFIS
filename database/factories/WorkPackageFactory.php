@@ -15,7 +15,7 @@ $factory->define(WorkPackage::class, function (Faker $faker) {
     return [
         'code' => $faker->randomElement([null, 'WP-DUM-' . $number]),
         'title' => 'WorkPackage Dummy #' . $number,
-        'is_template' => $faker->boolean(),
+        'is_template' => $faker->boolean,
         'aircraft_id' => function () {
             if (Aircraft::count()) {
                 return Aircraft::get()->random()->id;
