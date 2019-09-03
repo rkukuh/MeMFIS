@@ -16,8 +16,8 @@ class PurchaseRequest extends MemfisModel
     ];
 
     protected $dates = [
-        'requested_at', 
-        'required_at', 
+        'requested_at',
+        'required_at',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
@@ -45,7 +45,7 @@ class PurchaseRequest extends MemfisModel
      */
     public function items()
     {
-        return $this->belongsToMany(Item::class)
+        return $this->belongsToMany(Item::class, 'item_purchase_request', 'purchase_request_id', 'item_id')
                     ->withPivot(
                         'quantity',
                         'unit_id',
