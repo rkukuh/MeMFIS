@@ -88,6 +88,6 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/purchase-request/index.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/general/index.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/daterange/purchase-request.js') }}" ></script>
 @endpush

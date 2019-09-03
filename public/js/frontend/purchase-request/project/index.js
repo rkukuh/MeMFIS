@@ -11,7 +11,7 @@ let PurchaseRequest = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/purchase-request',
+                        url: '/datatables/purchase-request/project',
 
                         map: function (raw) {
                             let dataSet = raw;

@@ -19,7 +19,7 @@ class ProjectPurchaseRequestDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(PurchaseRequest::with('type')->get());
+        $data = $alldata = json_decode(PurchaseRequest::with('type')->where('type_id',Type::where('of','purchase-request')->where('name','Project')->first()->id)->get());
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
