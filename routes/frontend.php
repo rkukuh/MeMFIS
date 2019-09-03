@@ -57,20 +57,17 @@ Route::name('frontend.')->group(function () {
         // Route::resource('manhour', 'ManhourController');
         Route::resource('benefit', 'BenefitController');
         Route::resource('company', 'CompanyController');
+        Route::resource('holiday', 'HolidayController');
         Route::resource('language', 'LanguageController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
+        Route::resource('workshift', 'WorkshiftController');
+        Route::resource('leave-type', 'LeaveTypeController');
+        Route::resource('job-tittle', 'JobTittleController');
+        Route::resource('department', 'DepartmentController');
+        Route::resource('leave-period','LeavePeriodController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
-        Route::resource('leave-period','LeavePeriodController');
-        Route::resource('company', 'CompanyController');
-        Route::resource('department', 'DepartmentController');
-        Route::resource('benefit', 'BenefitController');
-        Route::resource('bpjs', 'BPJSController');
-        Route::resource('job-tittle', 'JobTittleController');
-        Route::resource('leave-type', 'LeaveTypeController');
-        Route::resource('holiday', 'HolidayController');
-        Route::resource('workshift', 'WorkshiftController');
 
         /** CERTIFICATION */
 
