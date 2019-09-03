@@ -64,8 +64,7 @@ class PurchaseRequest extends MemfisModel
      */
     public function project()
     {
-        return $this->belongsTo(Project::class)
-                    ->withTimestamps();
+        return $this->belongsTo(Project::class);
     }
 
     /**
