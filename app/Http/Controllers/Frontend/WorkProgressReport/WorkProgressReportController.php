@@ -97,6 +97,7 @@ class WorkProgressReportController extends Controller
             $jobcards["non_routine"] += 1;
         }
         
+
         $jobcard_all = $jobcard_routine->merge($jobcard_nonrotine);
       
         $jobcards["overall"] = $jobcard_all->count(); 
@@ -198,6 +199,7 @@ class WorkProgressReportController extends Controller
                 $manhours[$type]["actual_manhour"]["rii-released"] = $jobcard_all->where('status', "rii-released")->where('tc_type', $type)->sum('actual_manhours');
             }
         }
+
         $manhours['adsb'] = [];
         if (isset($manhours['ad']) && isset($manhours['sb'])) {
             foreach ($manhours['ad'] as $key => $value) {
@@ -209,6 +211,27 @@ class WorkProgressReportController extends Controller
                     $manhours['adsb'][$key] = $manhours['ad'][$key] + $manhours['sb'][$key];
                 }
             }
+        }elseif(isset($manhours['ad'])){
+            $manhours['adsb'] = $manhours['ad'];
+        }elseif(isset($manhours['sb'])){
+            $manhours['adsb'] = $manhours['sb'];
+        }
+
+        $manhours['cmr-awl'] = [];
+        if (isset($manhours['cmr']) && isset($manhours['awl'])) {
+            foreach ($manhours['cmr'] as $key => $value) {
+                if (is_array($value)) {
+                    foreach ($value as $key2 => $value2) {
+                    $manhours['cmr-awl'][$key][$key2] = $manhours['cmr'][$key][$key2] + $manhours['awl'][$key][$key2];
+                    }
+                } else {
+                    $manhours['cmr-awl'][$key] = $manhours['cmr'][$key] + $manhours['awl'][$key];
+                }
+            }
+        }elseif(isset($manhours['cmr'])){
+            $manhours['cmr-awl'] = $manhours['cmr'];
+        }elseif(isset($manhours['awl'])){
+            $manhours['cmr-awl'] = $manhours['awl'];
         }
         
         $this->counting($statusses, "all");
@@ -464,6 +487,7 @@ class WorkProgressReportController extends Controller
 
     public function actual_manhours($jobcard){
         $manhours = 0;
+
         foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
             $date1 = null;
             foreach($values as $value){
@@ -473,14 +497,19 @@ class WorkProgressReportController extends Controller
                             $t1 = Carbon::parse($date1);
                             $t2 = Carbon::parse($value->created_at);
                             $diff = $t1->diffInSeconds($t2);
-                            $manhours = $manhours + $diff;
+                            $manhours += + $diff;
+                        }elseif($this->statuses->where('id',$value->status_id)->first()->code == "progress" ) {
+                            $t1 = Carbon::now($date1);
+                            $t2 = Carbon::parse($value->created_at);
+                            $diff = $t1->diffInSeconds($t2);
+                            $manhours += + $diff;
                         }
                         $date1 = $value->created_at;
                     }
                 }
-
             }
         }
+
         $manhours = $manhours/3600;
         $manhours_break = 0;
         foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
@@ -492,7 +521,7 @@ class WorkProgressReportController extends Controller
                                 $t2 = Carbon::parse($values[$i]->created_at);
                                 $t3 = Carbon::parse($values[$i+1]->created_at);
                                 $diff = $t2->diffInSeconds($t3);
-                                $manhours_break = $manhours_break + $diff;
+                                $manhours_break += $diff;
                             }
                         }
                     }
