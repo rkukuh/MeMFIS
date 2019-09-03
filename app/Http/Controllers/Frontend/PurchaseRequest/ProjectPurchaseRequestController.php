@@ -18,7 +18,7 @@ class ProjectPurchaseRequestController extends Controller
      */
     public function index()
     {
-        return view('frontend.purchase-request.index');
+        return view('frontend.purchase-request.project.index');
     }
 
     /**
@@ -28,7 +28,7 @@ class ProjectPurchaseRequestController extends Controller
      */
     public function create()
     {
-        return view('frontend.purchase-request.create');
+        return view('frontend.purchase-request.project.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class ProjectPurchaseRequestController extends Controller
      */
     public function show(PurchaseRequest $purchaseRequest)
     {
-        return view('frontend.purchase-request.show', [
+        return view('frontend.purchase-request.project.show', [
             'purchaseRequest' => $purchaseRequest,
         ]);
 
@@ -70,7 +70,7 @@ class ProjectPurchaseRequestController extends Controller
      */
     public function edit(PurchaseRequest $purchaseRequest)
     {
-        return view('frontend.purchase-request.edit', [
+        return view('frontend.purchase-request.project.edit', [
             'purchaseRequest' => $purchaseRequest,
         ]);
     }
@@ -121,21 +121,6 @@ class ProjectPurchaseRequestController extends Controller
      */
     public function approve(PurchaseRequest $purchaseRequest)
     {
-        return response()->json($purchaseRequest);
-    }
-
-    /**
-     * Adding item into purchase request.
-     *
-     * @param  \App\Models\PurchaseRequest  $purchaseRequest
-     * @return \Illuminate\Http\Response
-     */
-    public function add_item(PurchaseRequest $purchaseRequest,Item $item){
-        $purchaseRequest->items()->attach($item->id, [
-            'quantity' => 0,
-            'unit_id' => $item->unit_id
-        ]);
-
         return response()->json($purchaseRequest);
     }
 

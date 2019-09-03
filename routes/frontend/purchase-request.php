@@ -11,8 +11,8 @@ Route::name('frontend.')->group(function () {
 
         Route::namespace('PurchaseRequest')->group(function () {
 
-            Route::resource('purchase-request/genaral', 'GeneralPurchaseRequestController');
-            Route::resource('purchase-request/project', 'ProjectPurchaseRequestController');
+            Route::resource('purchase-request-general', 'GeneralPurchaseRequestController');
+            Route::resource('purchase-request-project', 'ProjectPurchaseRequestController');
 
             Route::put('purchase-request/{purchaseRequest}/project/approve', 'ProjectPurchaseRequestController@approve')->name('purchase-request.approve');
             Route::put('purchase-request/{purchaseRequest}/general/approve', 'GeneralPurchaseRequestController@approve')->name('purchase-request.approve');
