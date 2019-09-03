@@ -20,6 +20,7 @@ return [
         'customers' => 20,
         'defectcards' => 20,
         'departments' => 20,
+        'employees' => 20,
         'facilities' => 20,
         'goods-received' => 20,
         'htcrr' => 20,
