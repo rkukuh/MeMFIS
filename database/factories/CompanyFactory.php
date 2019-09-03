@@ -2,6 +2,7 @@
 
 use App\Models\Type;
 use App\Models\Company;
+use App\Models\BankAccount;
 use Faker\Generator as Faker;
 
 $factory->define(Company::class, function (Faker $faker) {
@@ -17,5 +18,15 @@ $factory->define(Company::class, function (Faker $faker) {
         'maximum_holiday' => $faker->numberBetween('500000','900000'),
         'description' => $faker->randomElement([null, $faker->text]),
     ];
+
+});
+
+/** Callbacks */
+
+$factory->afterCreating(Company::class, function ($company, $faker) {
+
+    if ($faker->boolean) {
+        $company->bank_accounts()->saveMany(factory(BankAccount::class, rand(1, 3))->make());
+    }
 
 });

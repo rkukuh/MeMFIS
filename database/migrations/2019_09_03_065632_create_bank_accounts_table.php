@@ -14,8 +14,21 @@ class CreateBankAccountsTable extends Migration
     public function up()
     {
         Schema::create('bank_accounts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
+            $table->char('uuid', 36)->unique();
+            $table->string('number');
+            $table->string('name');
+            $table->morphs('bank_accountable');
+            $table->unsignedBigInteger('bank_id');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('bank_id')
+                    ->references('id')->on('banks')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->index('number');
         });
     }
 
