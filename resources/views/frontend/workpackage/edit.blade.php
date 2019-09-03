@@ -174,6 +174,8 @@
                                             @include('frontend.workpackage.modal.successor-instruction')
                                             @include('frontend.workpackage.modal.create-predecessor')
                                             @include('frontend.workpackage.modal.create-successor')
+                                            @include('frontend.workpackage.modal.create-predecessor-instruction')
+                                            @include('frontend.workpackage.modal.create-successor-instruction')
 
                                         </div>
                                     </div>
@@ -241,9 +243,9 @@
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-predecessor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/taskcard-successor.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/instruction-predecessor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/instructon-predecessor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/instruction-successor.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard.js') }}"></script>
 
     <script src="{{ asset('js/frontend/workpackage/edit.js') }}"></script>

@@ -12,6 +12,7 @@
                         @slot('text', 'Email')
                         @slot('id', 'email')
                         @slot('name', 'email')
+                        @slot('value', $account->email)
                         @slot('id_error', 'email')
                     @endcomponent
                 </div>
@@ -31,13 +32,14 @@
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
-                        Passoword  @include('frontend.common.label.required')
+                        Password  @include('frontend.common.label.required')
                     </label>
 
                     @component('frontend.common.input.password')
                         @slot('text', 'Password')
                         @slot('id', 'password')
                         @slot('name', 'password')
+                        @slot('value',$account->password)
                         @slot('id_error', 'password')
                     @endcomponent
                 </div>

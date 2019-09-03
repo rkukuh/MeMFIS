@@ -115,15 +115,21 @@ let Unit = {
         });
 
         let simpan = $('.modal-footer').on('click', '.add-price', function () {
+            
             let price_array = [];            
-            $('#price ').each(function (i) {
+            $('#price ').slice(0,5).each(function (i) {
                 price_array[i] = $(this).val();
             });
-            let level_array = [];
-            $('#level ').each(function (i) {
-                level_array[i] = $(this).val();
-            });
+            
+            let level_array = [
+                1,2,3,4,5
+            ];
 
+            $.each(function(i){
+                level_array[i] =  $(this).val();
+            });
+            
+            // console.log(price_array,level_array);
             // let item = $('input[name=uuid]').val();
             let item = $('#uuid-item').val();
             // console.log(item);

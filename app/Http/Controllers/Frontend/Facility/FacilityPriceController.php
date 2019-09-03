@@ -39,11 +39,11 @@ class FacilityPriceController extends Controller
      */
     public function store(PriceStore $request, Facility $facility)
     {
-        for ($i=0; $i < is_array($request->price); $i++) {
+        for ($i=0; $i < sizeof($request->price); $i++) {
             $facility->prices()
             ->save(new Price (['amount' =>$request->price[$i],'level' =>$request->level[$i]]));
         }
-
+        // dd($facility);
         return response()->json($facility);
     }
 

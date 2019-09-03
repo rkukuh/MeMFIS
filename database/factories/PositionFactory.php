@@ -26,6 +26,7 @@ $factory->afterCreating(Position::class, function ($position, $faker) {
         $position->benefits()->save(Benefit::get()->random(), [
             'min' => rand(100, 500) * 1000,
             'max' => rand(600, 1000) * 1000,
+            'updated_at' => null,
         ]);
     }
 
