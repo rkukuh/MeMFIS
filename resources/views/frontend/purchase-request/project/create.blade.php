@@ -146,12 +146,6 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                                    @component('frontend.common.buttons.create-new')
-                                                                        @slot('text', 'Item')
-                                                                        @slot('data_target', '#modal_item')
-                                                                    @endcomponent
-
-
                                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                 </div>
                                                             </div>
@@ -242,10 +236,10 @@
 
 
     <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/project-quotation.js') }}"></script>
 
     <script src="{{ asset('js/frontend/purchase-request/project/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/purchase-request/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/project/form-reset.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-required.js')}}"></script>

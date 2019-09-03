@@ -1,163 +1,114 @@
 let PurchaseRequestProject = {
     init: function () {
-        $('.item_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/item',
+        function item(triggeruuid) {
+            $('.item_datatable').mDatatable({
+                data: {
+                    type: 'remote',
+                    source: {
+                        read: {
+                            method: 'GET',
+                            url: '/datatables/purchase-request/project/item/'+triggeruuid,
 
-                        map: function (raw) {
-                            let dataSet = raw;
+                            map: function (raw) {
+                                let dataSet = raw;
 
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
+                                if (typeof raw.data !== 'undefined') {
+                                    dataSet = raw.data;
+                                }
+
+                                return dataSet;
                             }
-
-                            return dataSet;
+                        }
+                    },
+                    pageSize: 10,
+                    serverPaging: !0,
+                    serverSorting: !0
+                },
+                layout: {
+                    theme: 'default',
+                    class: '',
+                    scroll: false,
+                    footer: !1
+                },
+                sortable: !0,
+                filterable: !1,
+                pagination: !0,
+                search: {
+                    input: $('#generalSearch')
+                },
+                toolbar: {
+                    items: {
+                        pagination: {
+                            pageSizeSelect: [5, 10, 20, 30, 50, 100]
                         }
                     }
                 },
-                pageSize: 10,
-                serverPaging: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                    }
+                columns: [{
+                        field: 'item.code',
+                        title: 'Part Number',
+                        sortable: 'asc',
+                        filterable: !1,
+                        template: function (t) {
+                            return '<a href="/item/'+t.uuid+'">' + t.code + "</a>"
+                        }
+                    },
+                    {
+                        field: 'item.name',
+                        title: 'Item Description',
+                        sortable: 'asc',
+                        filterable: !1,
+                    },
+                    {
+                        field: '',
+                        title: 'Project Requirement Qty',
+                        sortable: 'asc',
+                        filterable: !1,
+                    },
+                    {
+                        field: '',
+                        title: 'Stock Available',
+                        sortable: 'asc',
+                        filterable: !1,
+                    },
+                    {
+                        field: "quantity",
+                        title: "Request Qty",
+                    },
+                    {
+                        field: "item.unit.name",
+                        title: "Unit",
+                    },
+                    {
+                        field: "",
+                        title: "Remark",
+                    },
+                ]
+            });
+        };
+
+        let item_datatables_init = true;
+
+        $(document).ready(function () {
+            $('select[name="project"]').on('change', function () {
+                if (item_datatables_init == true) {
+                    item_datatables_init = false;
+                    triggeruuid = $('#project').val();
+                    item(triggeruuid);
+                    table = $(".item_datatable").mDatatable();
+                    table.originalDataSet = [];
+                    table.reload();
+            } else {
+                let table = $('.item_datatable').mDatatable();
+                table.destroy();
+                triggeruuid = $('#project').val();
+                item(triggeruuid);
+                table = $(".item_datatable").mDatatable();
+                table.originalDataSet = [];
+                table.reload();
+                item_datatables_init = true;
+
                 }
-            },
-            columns: [{
-                    field: 'code',
-                    title: 'Part Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<a href="/item/'+t.uuid+'">' + t.code + "</a>"
-                    }
-                },
-                {
-                    field: 'name',
-                    title: 'Item Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'qty',
-                    title: 'Project Requirement Qty',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<input type="number" id="qty" name="qty" class="form-control m-input">'
-                    }
-                },
-                {
-                    field: 'unit',
-                    title: 'Stock Available',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        $(document).ready(function () {
-                            units = function () {
-                                $.ajax({
-                                    url: '/get-units/',
-                                    type: 'GET',
-                                    dataType: 'json',
-                                    success: function (data) {
-                                        $('select[name="unit_id"]').empty();
-
-                                        $('select[name="unit_id"]').append(
-                                            '<option value=""> Select a Unit</option>'
-                                        );
-
-                                        $.each(data, function (key, value) {
-                                            if(key == 4){
-                                                $('select[name="unit_id"]').append(
-                                                    '<option value="' + key + '" selected>' + value + '</option>'
-                                                );
-                                            }else{
-                                                $('select[name="unit_id"]').append(
-                                                    '<option value="' + key + '" >' + value + '</option>'
-                                                );
-                                            }
-                                        });
-                                    }
-                                });
-                            };
-
-                            units();
-                        });
-                        return '<select id="unit_id" name="unit_id" class="form-control m-input unit_id">'+
-                            '<option value="">'+
-                                'Select Unit'+
-                            // '</option>'+
-                            // '<option value="2">'+
-                            //     'Select Unit2'+
-                            // '</option>'+
-                            // '<option value="3">'+
-                            //     'Select Unit3'+
-                            // '</option>'+
-
-                        '</select>'
-
-                    }
-                },
-                {
-                    field: "description",
-                    title: "Request Qty",
-                    template: function (t) {
-                        return '<input type="text" id="qty" name="qty" class="form-control m-input">'
-                    }
-                },
-                {
-                    field: "description",
-                    title: "Unit",
-                    template: function (t) {
-                        return '<input type="text" id="qty" name="qty" class="form-control m-input">'
-                    }
-                },
-                {
-                    field: "description",
-                    title: "Remark",
-                    template: function (t) {
-                        return '<input type="text" id="qty" name="qty" class="form-control m-input">'
-                    }
-                },
-                {
-                    field: 'Actions',
-                    width: 110,
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_project" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-instruction_uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                            t.uuid +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
-                }
-
-            ]
+            });
         });
 
         $('.footer').on('click', '.add-pr', function () {
@@ -198,7 +149,7 @@ let PurchaseRequestProject = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/purchase-request-project/'+response.uuid+'/edit';
+                        // window.location.href = '/purchase-request-project/'+response.uuid+'/edit';
                     }
                 }
             });
