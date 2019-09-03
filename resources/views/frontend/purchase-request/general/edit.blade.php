@@ -78,6 +78,7 @@
                                                     @slot('id', 'date')
                                                     @slot('text', 'Date')
                                                     @slot('name', 'date')
+                                                    @slot('value', $purchaseRequest->requested_at)
                                                     @slot('id_error', 'date')
                                                 @endcomponent
                                             </div>
@@ -90,6 +91,7 @@
                                                     @slot('id', 'date-required')
                                                     @slot('text', 'Date Required')
                                                     @slot('name', 'date-required')
+                                                    @slot('value', $purchaseRequest->required_at)
                                                     @slot('id_error', 'date-required')
                                                 @endcomponent
                                             </div>
@@ -105,6 +107,7 @@
                                                             @slot('id', 'description')
                                                             @slot('name', 'description')
                                                             @slot('text', 'Description')
+                                                            @slot('value', $purchaseRequest->description)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -214,6 +217,8 @@
 
 @push('footer-scripts')
     <script>
+        let pr_uuid = '{{$purchaseRequest->uuid}}';
+
         var autoExpand = function (field) {
 
         // Reset field height
@@ -240,7 +245,7 @@
     </script>
 
 
-    <script src="{{ asset('js/frontend/purchase-request/general/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/general/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/purchase-request/general/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-required.js')}}"></script>
