@@ -62,7 +62,7 @@
                                                 @component('frontend.common.input.text')
                                                     @slot('id', 'number')
                                                     @slot('name', 'number')
-                                                    @slot('value', 'PR-2121212')
+                                                    @slot('value', $purchaseRequest->number)
                                                     @slot('id_error','number')
                                                     @slot('editable','disabled')
                                                 @endcomponent
@@ -99,7 +99,7 @@
                                                         <label class="form-control-label">
                                                             Description @include('frontend.common.label.optional')
                                                         </label>
-            
+
                                                         @component('frontend.common.input.textarea')
                                                             @slot('rows', '10')
                                                             @slot('id', 'description')
@@ -149,8 +149,8 @@
                                                                         @slot('text', 'Item')
                                                                         @slot('data_target', '#modal_item')
                                                                     @endcomponent
-                    
-                            
+
+
                                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                 </div>
                                                             </div>
