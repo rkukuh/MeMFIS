@@ -69,9 +69,10 @@ Route::name('frontend.')->group(function () {
         Route::resource('job-tittle', 'JobTittleController');
         Route::resource('leave-type', 'LeaveTypeController');
         Route::resource('department', 'DepartmentController');
+        Route::resource('leave-period','LeavePeriodController');
+        Route::resource('bank-account', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
-        Route::resource('leave-period','LeavePeriodController');
 
         /** CERTIFICATION */
 

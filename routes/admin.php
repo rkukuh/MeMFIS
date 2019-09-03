@@ -64,6 +64,7 @@ Route::name('admin.')->group(function () {
         Route::resource('department', 'DepartmentController');
         Route::resource('leave-period','LeavePeriodController');
         Route::resource('leave-period','LeavePeriodController');
+        Route::resource('bank-account', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
 
