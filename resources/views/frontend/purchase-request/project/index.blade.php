@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.purchase-request.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.purchase-request-project.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                     Purchase Request
                             </span>
@@ -66,20 +66,10 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
-                                            <a href="{{route('frontend.purchase-request.project.create')}}" class="m-btn btn btn-primary">
-                                                <span>
-                                                    <i class="la la-plus-circle"></i>
-                                                <span>Project</span>
-                                                </span>
-                                            </a>
-                                            <a href="{{route('frontend.purchase-request.general.create')}}" class="btn btn-primary m-btn m-btn--pill-last">
-                                                <span>
-                                                    <i class="la la-plus-circle"></i>
-                                                <span>General</span>
-                                                </span>
-                                            </a>
-                                        </div>
+                                        @component('frontend.common.buttons.create')
+                                            @slot('text', 'Purchase Request Project')
+                                            @slot('href', route('frontend.purchase-request-project.create') )
+                                        @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
@@ -98,6 +88,6 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/purchase-request/index.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/project/index.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/daterange/purchase-request.js') }}" ></script>
 @endpush

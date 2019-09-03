@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class EmployeeBenefit extends Model
 {
     protected $table = 'employee_benefit';
-
+    public $timestamps = false;
     protected $fillable = [
         'employee_id',
         'benefit_id',
         'amount',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'approved_at'
     ];
 
     /**

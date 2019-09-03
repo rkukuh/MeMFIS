@@ -108,11 +108,18 @@
                             <label class="form-control-label">
                                 Attach File
                             </label>
-        
+
+                            @php
+                            $files = null;
+                            if(isset($file['id_card'])){
+                            $files = $file['id_card'];
+                            }
+                            @endphp
                             @component('frontend.common.input.upload')
                                 @slot('label', 'document')
                                 @slot('name', 'document')
                                 @slot('id','id_card_photo')
+                                @slot('text', $files)
                                 @slot('help_text','File must be image or not be stored!')
                             @endcomponent
                         </div>

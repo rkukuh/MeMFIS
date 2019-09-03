@@ -367,13 +367,39 @@
                 </h4>
                 <i class="m-menu__section-icon flaticon-more-v3"></i>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.purchase-request.index') }}" class="m-menu__link m-menu__toggle">
+            <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                <a href="#" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Purchase Request
                     </span>
+                    <i class="m-menu__ver-arrow la la-angle-right"></i>
                 </a>
+                <div class="m-menu__submenu">
+                    <span class="m-menu__arrow"></span>
+                    <ul class="m-menu__subnav">
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.purchase-request-general.index') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    General
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item" aria-haspopup="true">
+                            <a href="{{ route('frontend.purchase-request-project.index') }}" class="m-menu__link">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    Project
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
             @endrole
             @role('admin')
@@ -449,22 +475,6 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.leave-period.index') }}" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Leave Period
-                    </span>
-                </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.leave-type.index') }}" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Leave Types
-                    </span>
-                </a>
-            </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
                 <a href="{{ route('frontend.holiday.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
@@ -477,6 +487,22 @@
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Workshift Schedule
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.leave-period.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Leave Period
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.leave-type.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Leave Types
                     </span>
                 </a>
             </li>
@@ -506,13 +532,53 @@
             </li>
 
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                    <a href="{{ route('frontend.import-fingerprint.index') }}" class="m-menu__link m-menu__toggle">
-                        <i class="m-menu__link-icon flaticon-list-3"></i>
-                        <span class="m-menu__link-text">
-                            Import From Fingerprint Machine
-                        </span>
-                    </a>
-                </li>
+                <a href="{{ route('frontend.import-fingerprint.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Import From Fingerprint Machine
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.attendance.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Attendance List
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.attendance-correction.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Attendance Correction
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.overtime.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Overtime
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="{{ route('frontend.propose-leave.index') }}" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Propose Leave
+                    </span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
+                <a href="" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">
+                        Leave Report
+                    </span>
+                </a>
+            </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
                 <a href="" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
@@ -537,20 +603,31 @@
                     </span>
                 </a>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="" class="m-menu__link m-menu__toggle">
+            @endrole
+            @role('admin')
+            <li class="m-menu__section">
+                <h4 class="m-menu__section-text">
+                    Finance & Accounting
+                </h4>
+                <i class="m-menu__section-icon flaticon-more-v3"></i>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                <a href="/cashbook" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Overtime
-                    </span>
+                    <span class="m-menu__link-text">Cashbook</span>
                 </a>
             </li>
-            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="" class="m-menu__link m-menu__toggle">
+
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                <a href="/invoice" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Attendance Correction
-                    </span>
+                    <span class="m-menu__link-text">Invoice</span>
+                </a>
+            </li>
+            <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover">
+                <a href="/coa" class="m-menu__link m-menu__toggle">
+                    <i class="m-menu__link-icon flaticon-list-3"></i>
+                    <span class="m-menu__link-text">COA</span>
                 </a>
             </li>
             @endrole

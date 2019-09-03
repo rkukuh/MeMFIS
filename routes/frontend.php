@@ -10,8 +10,6 @@ Route::name('frontend.')->group(function () {
     ], function () {
 
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
-        Route::view('/purchase-request', 'frontend.purchase-request.index')->name('purchase-request.index');
-        Route::view('/purchase-request/create', 'frontend.purchase-request.create')->name('purchase-request.create');
 
         /** INITIAL DATA */
 
@@ -51,28 +49,28 @@ Route::name('frontend.')->group(function () {
 
         Route::resource('user', 'UserController');
         Route::resource('bpjs', 'BPJSController');
-        Route::resource('bank', 'BankController');
         Route::resource('school', 'SchoolController');
         Route::resource('vendor', 'VendorController');
         Route::resource('branch', 'BranchController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
-        Route::resource('manhour', 'ManhourController');
+        // Route::resource('manhour', 'ManhourController');
         Route::resource('benefit', 'BenefitController');
         Route::resource('company', 'CompanyController');
-        Route::resource('manhour', 'ManhourController');
-        Route::resource('holiday', 'HolidayController');
         Route::resource('language', 'LanguageController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
-        Route::resource('workshift', 'WorkshiftController');
-        Route::resource('job-tittle', 'JobTittleController');
-        Route::resource('leave-type', 'LeaveTypeController');
-        Route::resource('department', 'DepartmentController');
-        Route::resource('leave-period','LeavePeriodController');
-        Route::resource('bank-account', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
+        Route::resource('leave-period','LeavePeriodController');
+        Route::resource('company', 'CompanyController');
+        Route::resource('department', 'DepartmentController');
+        Route::resource('benefit', 'BenefitController');
+        Route::resource('bpjs', 'BPJSController');
+        Route::resource('job-tittle', 'JobTittleController');
+        Route::resource('leave-type', 'LeaveTypeController');
+        Route::resource('holiday', 'HolidayController');
+        Route::resource('workshift', 'WorkshiftController');
 
         /** CERTIFICATION */
 
@@ -104,15 +102,17 @@ Route::name('frontend.')->group(function () {
         Route::view('/attendance/overtime/approve', 'frontend.attendance.overtime.approve')->name('attendance.overtime.approve');
 
         Route::view('/attendance/propose-leave/create', 'frontend.attendance.propose-leave.create')->name('attendance.propose-leave.create');
-        Route::view('/attendance/propose-leave/approve', 'frontend.attendance.propose-leave.approve')->name('attendance.propose-leave.approve');
+        Route::view('/attendance/propose-leave/approve-type-1', 'frontend.attendance.propose-leave.approve-type-1')->name('attendance.propose-leave.approve-type-1');
+        Route::view('/attendance/propose-leave/approve-type-2', 'frontend.attendance.propose-leave.approve-type-2')->name('attendance.propose-leave.approve-type-2');
 
-        Route::view('/attendance/attendance-correction/create', 'frontend.attendance.propose-leave.create')->name('attendance.propose-leave.create');
+        Route::view('/attendance/attendance-correction/create', 'frontend.attendance.attendance-correction.create')->name('attendance.attendance-correction.create');
 
         /** ATTENDANCE CORRECTION */
 
         Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
         Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
         Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
+        Route::view('/attendance-correction/approve', 'frontend.attendance-correction.approve')->name('attendance-correction.approve');
 
         /** OVERTIME */
 
@@ -124,9 +124,10 @@ Route::name('frontend.')->group(function () {
         /** PROPOSE LEAVE */
 
         Route::view('/propose-leave', 'frontend.propose-leave.index')->name('propose-leave.index');
-        Route::view('/propose-leave/create', 'frontend.propose-leave.create')->name('propose-leave.create');
-        Route::view('/propose-leave/edit', 'frontend.propose-leave.edit')->name('propose-leave.edit');
-        Route::view('/propose-leave/approve', 'frontend.propose-leave.approve')->name('propose-leave.approve');
+        Route::view('/propose-leave/create', 'frontend.propose-leave.propose-leave.create')->name('propose-leave.create');
+        Route::view('/propose-leave/edit', 'frontend.propose-leave.propose-leave.edit')->name('propose-leave.edit');
+        Route::view('/propose-leave/approve-type-1', 'frontend.propose-leave.propose-leave.approve-type-1')->name('propose-leave.approve-type-1');
+        Route::view('/propose-leave/approve-type-2', 'frontend.propose-leave.propose-leave.approve-type-2')->name('propose-leave.approve-type-2');
     });
 
 });

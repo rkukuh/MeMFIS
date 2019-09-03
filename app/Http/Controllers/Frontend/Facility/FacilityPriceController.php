@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Facility;
 
-use App\Models\Manhour;
+use Illuminate\Http\Request;
+use App\Models\Price;
+use App\Models\Facility;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\ManhourStore;
-use App\Http\Requests\Frontend\ManhourUpdate;
+use App\Http\Requests\Frontend\PriceStore;
+use App\Http\Requests\Frontend\PriceUpdate;
 
-class ManhourController extends Controller
+class FacilityPriceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +18,7 @@ class ManhourController extends Controller
      */
     public function index()
     {
-        // return view('frontend.item.material.index');
+        //
     }
 
     /**
@@ -32,21 +34,26 @@ class ManhourController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ManhourStore  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ManhourStore $request)
+    public function store(PriceStore $request, Facility $facility)
     {
-        //
+        for ($i=0; $i < sizeof($request->price); $i++) {
+            $facility->prices()
+            ->save(new Price (['amount' =>$request->price[$i],'level' =>$request->level[$i]]));
+        }
+        // dd($facility);
+        return response()->json($facility);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Manhour  $manhour
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Manhour $manhour)
+    public function show($id)
     {
         //
     }
@@ -54,10 +61,10 @@ class ManhourController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Manhour  $manhour
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Manhour $manhour)
+    public function edit($id)
     {
         //
     }
@@ -65,11 +72,11 @@ class ManhourController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ManhourUpdate  $request
-     * @param  \App\Models\Manhour  $manhour
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ManhourUpdate $request, Manhour $manhour)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -77,10 +84,10 @@ class ManhourController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Manhour  $manhour
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Manhour $manhour)
+    public function destroy($id)
     {
         //
     }

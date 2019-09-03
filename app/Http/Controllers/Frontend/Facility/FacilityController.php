@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Facility;
 
-use App\Models\Facility;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\FacilityStore;
 use App\Http\Requests\Frontend\FacilityUpdate;
@@ -32,21 +32,33 @@ class FacilityController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\FacilityStore  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(FacilityStore $request)
     {
-        //
+        $tags = [];
+        if($request->selectedtags){
+        foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags, 'item'));}
+        }
+        if ($facility = Facility::create($request->all())) {
+            $facility->categories()->attach($request->category);
+            $facility->syncTags($tags);
+
+            return response()->json($facility);
+        }
+
+        // TODO: Return error message as JSON
+        return false;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Facility  $facility
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Facility $facility)
+    public function show($id)
     {
         //
     }
@@ -54,10 +66,10 @@ class FacilityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Facility  $facility
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Facility $facility)
+    public function edit($id)
     {
         //
     }
@@ -65,11 +77,11 @@ class FacilityController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\FacilityUpdate  $request
-     * @param  \App\Models\Facility  $facility
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FacilityUpdate $request, Facility $facility)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -77,10 +89,10 @@ class FacilityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Facility  $facility
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Facility $facility)
+    public function destroy($id)
     {
         //
     }

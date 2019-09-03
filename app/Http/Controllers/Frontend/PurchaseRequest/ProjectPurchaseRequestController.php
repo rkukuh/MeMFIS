@@ -1,15 +1,21 @@
 <?php
 
 namespace App\Http\Controllers\Frontend\PurchaseRequest;
+
+use Auth;
 use Carbon\Carbon;
 use App\Models\Item;
 use App\Models\Type;
+use App\Models\Project;
+use App\Models\Approval;
+use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
+use App\Models\QuotationWorkPackageTaskCardItem;
 use App\Http\Requests\Frontend\PurchaseRequestStore;
 use App\Http\Requests\Frontend\PurchaseRequestUpdate;
 
-class PurchaseRequestController extends Controller
+class ProjectPurchaseRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +24,7 @@ class PurchaseRequestController extends Controller
      */
     public function index()
     {
-        return view('frontend.purchase-request.index');
+        return view('frontend.purchase-request.project.index');
     }
 
     /**
@@ -28,7 +34,7 @@ class PurchaseRequestController extends Controller
      */
     public function create()
     {
-        return view('frontend.purchase-request.create');
+        return view('frontend.purchase-request.project.create');
     }
 
     /**
@@ -39,11 +45,20 @@ class PurchaseRequestController extends Controller
      */
     public function store(PurchaseRequestStore $request)
     {
-        $request->merge(['type_id' => Type::where('of','purchase-request')->where('name',$request->type_id)->first()->id ]);
+        $request->merge(['number' => DocumentNumber::generate('PR-', PurchaseRequest::withTrashed()->count()+1)]);
+        $request->merge(['project_id' =>Project::where('uuid',$request->project_id)->first()->id ]);
+        $request->merge(['type_id' => Type::where('of','purchase-request')->where('name','Project')->first()->id ]);
         $request->merge(['requested_at' => Carbon::parse($request->requested_at)]);
         $request->merge(['required_at' => Carbon::parse($request->required_at)]);
-
         $purchaseRequest = PurchaseRequest::create($request->all());
+
+        $items = QuotationWorkPackageTaskCardItem::with('item','item.unit')->where('quotation_id',Project::find($request->project_id)->quotations->first()->id)->get();
+
+        foreach($items as $item){
+            $purchaseRequest->items()->attach([$item->item_id => [
+                'quantity'=> $item->quantity,
+                'unit_id' => $item->unit_id]]);
+        }
 
         return response()->json($purchaseRequest);
     }
@@ -56,7 +71,7 @@ class PurchaseRequestController extends Controller
      */
     public function show(PurchaseRequest $purchaseRequest)
     {
-        return view('frontend.purchase-request.show', [
+        return view('frontend.purchase-request.project.show', [
             'purchaseRequest' => $purchaseRequest,
         ]);
 
@@ -70,7 +85,7 @@ class PurchaseRequestController extends Controller
      */
     public function edit(PurchaseRequest $purchaseRequest)
     {
-        return view('frontend.purchase-request.edit', [
+        return view('frontend.purchase-request.project.edit', [
             'purchaseRequest' => $purchaseRequest,
         ]);
     }
@@ -121,20 +136,11 @@ class PurchaseRequestController extends Controller
      */
     public function approve(PurchaseRequest $purchaseRequest)
     {
-        return response()->json($purchaseRequest);
-    }
-
-    /**
-     * Adding item into purchase request.
-     *
-     * @param  \App\Models\PurchaseRequest  $purchaseRequest
-     * @return \Illuminate\Http\Response
-     */
-    public function add_item(PurchaseRequest $purchaseRequest,Item $item){
-        $purchaseRequest->items()->attach($item->id, [
-            'quantity' => 0,
-            'unit_id' => $item->unit_id
-        ]);
+        $purchaseRequest->approvals()->save(new Approval([
+            'approvable_id' => $purchaseRequest->id,
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
+        ]));
 
         return response()->json($purchaseRequest);
     }

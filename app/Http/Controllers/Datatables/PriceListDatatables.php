@@ -234,7 +234,7 @@ class PriceListDatatables extends Controller
     // item , manhour, facility = prices
     {
         $items = Facility::with('prices')->get();
-
+        
         $data = $alldata = json_decode($items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

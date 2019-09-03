@@ -158,8 +158,6 @@
 
 </div>
 @push('footer-scripts')
-
     <script src="{{ asset('js/frontend/project/hm/routine/index.js')}}"></script>
-    <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush

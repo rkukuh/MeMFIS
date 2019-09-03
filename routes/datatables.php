@@ -326,9 +326,13 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
-                Route::get('/', 'PurchaseRequestDatatables@index')->name('all');
-                Route::get('/modal', 'PurchaseRequestDatatables@purchaseRequestModal')->name('modal.index');
-                Route::get('/item/{purchaseRequest}', 'PurchaseRequestDatatables@pr_item')->name('pr.item');
+                Route::get('/general', 'GeneralPurchaseRequestDatatables@index')->name('all.general');
+                Route::get('/project', 'ProjectPurchaseRequestDatatables@index')->name('all.project');
+                Route::get('/project/item/{project}', 'ProjectPurchaseRequestDatatables@projectItem')->name('item.project');
+                Route::get('/modal/general', 'GeneralPurchaseRequestDatatables@purchaseRequestModal')->name('modal.general.index');
+                Route::get('/modalproject', 'ProjectPurchaseRequestDatatables@purchaseRequestModal')->name('modal.projectindex');
+                Route::get('/item/{purchaseRequest}/general', 'GeneralPurchaseRequestDatatables@pr_item')->name('pr.general.item');
+                Route::get('/item/{purchaseRequest}/project', 'ProjectPurchaseRequestDatatables@pr_item')->name('pr.project.item');
 
             });
 
@@ -715,8 +719,10 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{workPackage}/materials', 'WorkPackageItemsDatatables@material')->name('materials.index');
 
                 Route::get('/modal', 'WorkPackageDatatables@workpackageModal')->name('workpackage.modal');
-                Route::get('/{workPackage}/taskcard/{taskcard}/successor', 'WorkPackageDatatables@successorModal')->name('successor.modal');
-                Route::get('/{workPackage}/taskcard/{taskcard}/predecessor', 'WorkPackageDatatables@predecessorModal')->name('predecessor.modal');
+                Route::get('/{workPackage}/taskcard/{taskcard}/successor', 'WorkPackageDatatables@successorTaskCardModal')->name('successor.taskcard.modal');
+                Route::get('/{workPackage}/taskcard/{taskcard}/predecessor', 'WorkPackageDatatables@predecessorTaskCardModal')->name('predecessor.taskcard.modal');
+                Route::get('/{workPackage}/instruction/{instruction}/successor', 'WorkPackageDatatables@successorInstructionModal')->name('successor.instruction.modal');
+                Route::get('/{workPackage}/instruction/{instruction}/predecessor', 'WorkPackageDatatables@predecessorInstructionModal')->name('predecessor.instruction.modal');
 
                 /** SUMARRY WORK PACKAGE */
                 Route::get('/{workPackage}/routine/materials', 'WorkPackageTaskCardRoutineSummaryDatatables@routineMaterial')->name('workpackage.taskcard.routine.material.summary');

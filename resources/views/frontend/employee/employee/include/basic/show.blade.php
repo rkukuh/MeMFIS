@@ -83,9 +83,15 @@
                                     Attach File
                                 </label>
             
-                                @component('frontend.common.label.data-info')
-                                    @slot('text', 'Generated')
-                                @endcomponent
+                                @php
+                            $files = null;
+                            if(isset($file['id_card'])){
+                            $files = $file['id_card'];
+                            }
+                            @endphp
+                            @component('frontend.common.input.upload')
+                                @slot('text', $files)
+                            @endcomponent
                             </div>
                         </div>
                     </div>

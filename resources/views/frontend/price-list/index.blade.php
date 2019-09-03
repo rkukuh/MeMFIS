@@ -188,6 +188,7 @@
                                 </div>
                             </div>
                             @include('frontend.price-list.item.modal-edit')
+                            @include('frontend.price-list.facility.modal-edit')
 
                             {{-- @include('frontend.price-list.manhour.modal-edit') --}}
 

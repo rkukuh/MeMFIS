@@ -10,6 +10,7 @@ use App\Models\JobCard;
 use App\Models\Progress;
 use App\Models\Status;
 use App\Models\Type;
+use App\Models\Station;
 use Auth;
 use carbon\Carbon;
 use Illuminate\Http\Request;
@@ -94,7 +95,7 @@ class JobCardEngineerController extends Controller
     public function edit(JobCard $jobcard)
     {
         $statuses = Status::ofJobCard()->get();
-        $jobcard = JobCard::where('uuid', $jobcard->uuid)->first();
+        // $jobcard = JobCard::where('uuid', $jobcard->uuid)->first();
         foreach ($jobcard->helpers as $helper) {
             $helper->userID .= $helper->user->id;
         }
@@ -146,6 +147,7 @@ class JobCardEngineerController extends Controller
         if ($progresses->count() == 0 and $this->statuses->where('id', $jobcard->progresses->first()->status_id)->first()->code == "open") {
             return view('frontend.job-card-eo.engineer.progress-open', [
                 'jobcard' => $jobcard,
+                'logbooks' => $jobcard->logbooks->pluck('code'),
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
@@ -159,6 +161,7 @@ class JobCardEngineerController extends Controller
                 'other' => $this->other,
                 'accomplished' => $this->accomplished,
                 'jobcard' => $jobcard,
+                'logbooks' => $jobcard->logbooks->pluck('code')->toarray(),
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
@@ -168,6 +171,7 @@ class JobCardEngineerController extends Controller
         } else if ($this->statuses->where('id', $progresses->last()->status_id)->first()->code == "pending") {
             return view('frontend.job-card-eo.engineer.progress-pause', [
                 'jobcard' => $jobcard,
+                'logbooks' => $jobcard->logbooks->pluck('code')->toarray(),
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
@@ -177,6 +181,7 @@ class JobCardEngineerController extends Controller
         } else if ($this->statuses->where('id', $progresses->last()->status_id)->first()->code == "closed") {
             return view('frontend.job-card-eo.engineer.progress-close', [
                 'jobcard' => $jobcard,
+                'logbooks' => $jobcard->logbooks->pluck('code')->toarray(),
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
@@ -185,6 +190,7 @@ class JobCardEngineerController extends Controller
         } else {
             return view('frontend.job-card-eo.engineer.progress-close', [
                 'jobcard' => $jobcard,
+                'logbooks' => $jobcard->logbooks->pluck('code')->toarray(),
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
@@ -201,13 +207,20 @@ class JobCardEngineerController extends Controller
      */
     public function update(JobCardUpdate $request, JobCard $jobcard)
     {
-
         if ($this->statuses->where('uuid', $request->progress)->first()->code == 'open') {
+            if (isset($request->logbook)) {
+                foreach ($request->logbook as $logbook) {
+                    $jobcard->logbooks()->attach(Type::ofJobCardLogBook()->where('code', $logbook)->first()->id);
+                }
+            }
+
+            $request->merge(['station_id' => Station::where('uuid',$request->station)->first()->id]);
 
             $additionals['TSN'] = $request->tsn;
             $additionals['CSN'] = $request->csn;
 
             $jobcard->additionals =json_encode($additionals);
+            $jobcard->station_id = $request->station_id;
             $jobcard->save();
 
             $jobcard->progresses()->save(new Progress([
@@ -216,8 +229,8 @@ class JobCardEngineerController extends Controller
             ]));
 
             if ($request->helper) {
-                $helpers = Employee::whereIn('code', $request->helper)->pluck('id');
-                $jobcard->helpers()->sync($helpers);
+                $helper = Employee::whereIn('code', $request->helper)->pluck('id');
+                $jobcard->helpers()->sync($helper);
             }
 
             return redirect()->route('frontend.jobcard.index')->with($this->success_notification);

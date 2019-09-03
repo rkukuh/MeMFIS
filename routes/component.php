@@ -39,6 +39,7 @@ Route::name('component.')->group(function () {
         Route::get('get-repeat-types', 'FillComboxController@repeatType')->name('get-repeat-types');
         Route::get('get-categories-item', 'FillComboxController@categories')->name('get-categories');
         Route::get('get-payment-term', 'FillComboxController@paymentTerm')->name('get-payment-term');
+        Route::get('get-pr-types', 'FillComboxController@purchaseRequestType')->name('get-pr-types');
         Route::get('get-accountcodes', 'FillComboxController@accountCodes')->name('get-accountcodes');
         Route::get('get-website-types', 'FillComboxController@websiteType')->name('get-website-types');
         Route::get('get-employees-data', 'FillComboxController@employees')->name('get-employees-data');
@@ -52,6 +53,7 @@ Route::name('component.')->group(function () {
         Route::get('get-takcard-si-types', 'FillComboxController@taskcardTypeSI')->name('get-takcard-si-types');
         Route::get('get-aviation-degree', 'FillComboxController@aviationDegrees')->name('get-eaviation-degree');
         Route::get('get-manual-affecteds', 'FillComboxController@manualAffected')->name('get-manual-affecteds');
+        Route::get('get-project-quotation', 'FillComboxController@projectQuotation')->name('get-project-quotation');
         Route::get('get-category-taskcard', 'FillComboxController@categorieTakcard')->name('get-category-taskcard');
         Route::get('get-otr-certifications', 'FillComboxController@otrCertification')->name('get-otr-certifications');
         Route::get('get-aircraft-taskcards', 'FillComboxController@aircraftTaskcard')->name('get-aircraft-taskcards');

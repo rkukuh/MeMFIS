@@ -251,51 +251,58 @@
                         </div>
                         <div class="m-portlet m-portlet--mobile">
                             <div class="m-portlet__body">
+                                @if($jobcard->jobcardable->helper_quantity != 0)
                                 <table border="1px" width="100%" style="margin-top:10px">
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Helper
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                            {{-- @if(isset($jobcard->helpers))
-                                                @foreach($jobcard->helpers as $helper)
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <select name="helper" style="width:100%" class="form-control m-select2">
-                                                            <option value=""></option>
-                                                            @foreach($employees as $employee)
-                                                            <option value="{{ $employee->code }}" @if($employee->code == $helper->code) selected @endif>{{ $employee->first_name }}</option>
-                                                            @endforeach
-                                                        </select>
+                                    <tr>
+                                        <td width="30%" style="background-color:beige;padding:10px;">
+                                            Helper
+                                        </td>
+                                        <td width="70%" style="text-align:center">
+                                        @if($jobcard->helpers->count() > 0)
+                                            @foreach($jobcard->helpers as $helper)
+                                            <div class="row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <select name="helper[]" style="width:100%" class="form-control m-select2">
+                                                        <option value=""></option>
+                                                        @foreach($employees as $employee)
+                                                        <option value="{{ $employee->code }}" @if($employee->code == $helper->code) selected @endif>{{ $employee->first_name }}</option>
+                                                        @endforeach
+                                                    </select>
 
-                                                    </div>
                                                 </div>
-                                                @endforeach
-                                            @else
-                                                <div class="row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('text', 'helper')
-                                                            @slot('name', 'helper')
-                                                            @slot('id_error', 'helper')
-                                                        @endcomponent
-                                                    </div>
+                                            </div>
+                                            @endforeach
+                                        @else
+                                            @for($i=1 ; $i <= $jobcard->jobcardable->helper_quantity; $i++)
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    @component('frontend.common.input.select2')
+                                                        @slot('text', 'helper')
+                                                        @slot('name', 'helper[]')
+                                                        @slot('class', 'helper')
+                                                        @slot('id_error', 'helper')
+                                                    @endcomponent
                                                 </div>
-                                            @endif --}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Station
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                @component('frontend.common.input.number')
-                                                    @slot('name', 'csn')
-                                                @endcomponent
-                                            </td>
-                                        </tr>
+                                            </div>
+                                            @endfor
+                                        @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="30%" style="background-color:beige;padding:10px;">
+                                            Station
+                                        </td>
+                                        <td width="70%" style="text-align:center">
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'station')
+                                                @slot('name', 'station')
+                                                @slot('id', 'station')
+                                                @slot('id_error', 'station')
+                                            @endcomponent
+                                        </td>
+                                    </tr>
                                 </table>
-
+                                @endif
                                 <table border="1px" width="100%" style="margin-top:10px">
                                     <tr>
                                         <td align="center" style="background-color:beige;padding:10px;"><b>ACCOMPLISHMENT RECORD</b></td>
@@ -337,29 +344,33 @@
                                             <tr height="80">
                                                 <td align="center">
                                                     @component('frontend.common.input.checkbox')
-                                                        @slot('id', '')
-                                                        @slot('name', '')
+                                                        @slot('id', 'ac')
+                                                        @slot('name', 'logbook[]')
                                                         @slot('text', 'A/C Log Book')
+                                                        @slot('value', 'ac-logbook')
                                                         @slot('style_div','margin-top:30px')
                                                     @endcomponent
                                                 </td>
                                                 <td align="center">
                                                     @component('frontend.common.input.checkbox')
-                                                        @slot('id', '')
-                                                        @slot('name', '')
-                                                        @slot('text', 'A/C Log Book')
+                                                        @slot('id', 'eng')
+                                                        @slot('name', 'logbook[]')
+                                                        @slot('text', 'ENG. Log Book')
+                                                        @slot('value', 'eng-logbook')
                                                         @slot('style_div','margin-top:30px')
                                                     @endcomponent
                                                 </td>
                                                 <td align="center">
                                                     @component('frontend.common.input.checkbox')
-                                                        @slot('id', '')
-                                                        @slot('name', '')
-                                                        @slot('text', 'A/C Log Book')
+                                                        @slot('id', 'apu')
+                                                        @slot('name', 'logbook[]')
+                                                        @slot('text', 'APU Log Book')
+                                                        @slot('value', 'apu-logbook')
                                                         @slot('style_div','margin-top:30px')
                                                     @endcomponent
                                                 </td>
                                             </tr>
+
                                         </table>
                                     </div>
                                 </div>
@@ -385,22 +396,24 @@
 @endsection
 
 @push('footer-scripts')
-<script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/type.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/station.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/station.js')}}"></script>
 
-{{-- @if(sizeof($jobcard->helpers) == 0) --}}
-<script src="{{ asset('js/frontend/functions/fill-combobox/helper.js')}}"></script>
-{{-- @endif --}}
-<script src="{{ asset('js/frontend/functions/select2/helper.js')}}"></script>
-{{-- <!--
+    @if($jobcard->helpers->count() == 0)
+    <script src="{{ asset('js/frontend/functions/fill-combobox/helper.js')}}"></script>
+    @endif
+    <script src="{{ asset('js/frontend/functions/select2/helper.js')}}"></script>
+<!--
     <script>
         $( document ).ready(function() {
         let helpers = {!! $jobcard->helpers !!}
         console.log($('select[name^=helper]').length);
         $('select[name^=helper]').each()
-        $('select[name^=helper]').select2().trigger('change');
+        $('select[name^=helper]').select2();
         // $('select[name^=helper] option[value='+helpers[key].code+']').attr('selected','selected');
         });
 
@@ -408,15 +421,8 @@
     <script>
         $( document ).ready(function() {
             $('.helper').each( function() {
-                console.log( $(this).select2() );
+            //    $(this).select2();
             });
-        console.log($('.helper').length);
         });
-
-    </script> --}}
-
-
-
-    <script src="{{ asset('js/frontend/journal.js')}}"></script>
-    <script src="{{ asset('js/frontend/workpackage/routine/index.js')}}"></script>
+    </script>
 @endpush

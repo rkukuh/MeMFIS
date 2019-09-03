@@ -62,6 +62,11 @@ class ToolController extends Controller
             $tool->categories()->attach($request->category);
             $tool->syncTags($tags);
 
+            for($i=1;$i<=5;$i++){
+                $tool->prices()
+                ->save(new Price (['amount' =>0,'level' =>$i]));
+            }
+
             return response()->json($tool);
         }
 

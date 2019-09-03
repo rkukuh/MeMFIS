@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Datatables\WorkPackage;
 use App\User;
 use App\Models\WorkPackage;
 use App\Models\Pivots\TaskCardWorkPackage;
+use App\Models\Pivots\EOInstructionWorkPackage;
 use App\Models\TaskCard;
 use App\Models\ListUtil;
+use App\Models\EOInstruction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -316,7 +318,7 @@ class WorkPackageDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function predecessorModal(WorkPackage $workPackage,TaskCard $taskcard){
+    public function predecessorTaskCardModal(WorkPackage $workPackage,TaskCard $taskcard){
         function filterArray( $array, $allowed = [] ) {
             return array_filter(
                 $array,
@@ -495,7 +497,7 @@ class WorkPackageDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function successorModal(WorkPackage $workPackage, TaskCard $taskcard){
+    public function successorTaskCardModal(WorkPackage $workPackage, TaskCard $taskcard){
         function filterArray( $array, $allowed = [] ) {
             return array_filter(
                 $array,
@@ -852,7 +854,7 @@ class WorkPackageDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function successorInstructionModal(WorkPackage $workPackage, TaskCard $taskcard){
+    public function successorInstructionModal(WorkPackage $workPackage, EOInstruction $instruction){
         function filterArray( $array, $allowed = [] ) {
             return array_filter(
                 $array,

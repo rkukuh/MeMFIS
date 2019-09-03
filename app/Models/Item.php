@@ -239,7 +239,7 @@ class Item extends MemfisModel implements HasMedia
      */
     public function purchase_requests()
     {
-        return $this->belongsToMany(PurchaseRequest::class)
+        return $this->belongsToMany(PurchaseRequest::class, 'item_purchase_request', 'purchase_request_id', 'item_id')
                     ->withPivot(
                         'quantity',
                         'unit_id',

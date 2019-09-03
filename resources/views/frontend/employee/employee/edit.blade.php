@@ -97,7 +97,7 @@
                                                 $joined_date = $employee->joined_date;
                                                 $formatJoinedDate = strtotime($joined_date);
                                             @endphp
-                                        <h6>Employee Since <span>{{ date('F', $formatJoinedDate) }}</span>  {{ date('d,Y', $formatJoinedDate) }}</h6>
+                                        <h6>Employee Since <span>{{ date('F', $formatJoinedDate) }}</span>  {{ date('d,Y', $formatJoinedDate) }} - 2 Year 2 Month</h6>
                                         </div>
                                     </div>
                                 </div>

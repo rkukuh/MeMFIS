@@ -62,7 +62,7 @@
                                                 @component('frontend.common.input.text')
                                                     @slot('id', 'number')
                                                     @slot('name', 'number')
-                                                    @slot('value', 'PR-2121212')
+                                                    @slot('value', $purchaseRequest->number)
                                                     @slot('id_error','number')
                                                     @slot('editable','disabled')
                                                 @endcomponent
@@ -78,6 +78,7 @@
                                                     @slot('id', 'date')
                                                     @slot('text', 'Date')
                                                     @slot('name', 'date')
+                                                    @slot('value', $purchaseRequest->requested_at)
                                                     @slot('id_error', 'date')
                                                 @endcomponent
                                             </div>
@@ -90,6 +91,7 @@
                                                     @slot('id', 'date-required')
                                                     @slot('text', 'Date Required')
                                                     @slot('name', 'date-required')
+                                                    @slot('value', $purchaseRequest->required_at)
                                                     @slot('id_error', 'date-required')
                                                 @endcomponent
                                             </div>
@@ -99,12 +101,13 @@
                                                         <label class="form-control-label">
                                                             Description @include('frontend.common.label.optional')
                                                         </label>
-            
+
                                                         @component('frontend.common.input.textarea')
                                                             @slot('rows', '10')
                                                             @slot('id', 'description')
                                                             @slot('name', 'description')
                                                             @slot('text', 'Description')
+                                                            @slot('value', $purchaseRequest->description)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -149,8 +152,8 @@
                                                                         @slot('text', 'Item')
                                                                         @slot('data_target', '#modal_item')
                                                                     @endcomponent
-                    
-                            
+
+
                                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                 </div>
                                                             </div>
@@ -214,6 +217,8 @@
 
 @push('footer-scripts')
     <script>
+        let pr_uuid = '{{$purchaseRequest->uuid}}';
+
         var autoExpand = function (field) {
 
         // Reset field height
@@ -240,8 +245,8 @@
     </script>
 
 
-    <script src="{{ asset('js/frontend/purchase-request/general/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/purchase-request/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/general/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/general/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-required.js')}}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
