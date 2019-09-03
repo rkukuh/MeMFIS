@@ -18,7 +18,7 @@ class GeneralPurchaseRequestController extends Controller
      */
     public function index()
     {
-        return view('frontend.purchase-request.index');
+        return view('frontend.purchase-request.general.index');
     }
 
     /**
@@ -28,7 +28,7 @@ class GeneralPurchaseRequestController extends Controller
      */
     public function create()
     {
-        return view('frontend.purchase-request.create');
+        return view('frontend.purchase-request.general.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class GeneralPurchaseRequestController extends Controller
      */
     public function show(PurchaseRequest $purchaseRequest)
     {
-        return view('frontend.purchase-request.show', [
+        return view('frontend.purchase-request.general.show', [
             'purchaseRequest' => $purchaseRequest,
         ]);
 
@@ -70,7 +70,7 @@ class GeneralPurchaseRequestController extends Controller
      */
     public function edit(PurchaseRequest $purchaseRequest)
     {
-        return view('frontend.purchase-request.edit', [
+        return view('frontend.purchase-request.general.edit', [
             'purchaseRequest' => $purchaseRequest,
         ]);
     }
