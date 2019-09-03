@@ -178,14 +178,15 @@ class JobCardMechanicController extends Controller
      */
     public function update(JobCardUpdate $request, JobCard $jobcard)
     {
-        foreach($request->logbook as $logbook){
-            $jobcard->logbooks()->attach(Type::ofJobCardLogBook()->where('code',$logbook)->first()->id);
-        }
 
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             if($this->statuses->where('id',$jobcard->progresses->last()->status_id)->first()->code == "open"){
                 return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
             }else{
+                foreach($request->logbook as $logbook){
+                    $jobcard->logbooks()->attach(Type::ofJobCardLogBook()->where('code',$logbook)->first()->id);
+                }
+
                 $request->merge(['station_id' => Station::where('uuid',$request->station)->first()->id]);
 
                 $additionals['TSN'] = $request->tsn;
