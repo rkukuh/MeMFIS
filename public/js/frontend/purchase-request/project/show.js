@@ -84,66 +84,6 @@ let PurchaseRequestGeneralShow = {
             ]
         });
 
-        $(function(){
-            $('input[type="radio"]').click(function(){
-              if ($(this).is(':checked'))
-              {
-                // alert($(this).val());
-                if($(this).val() == 'general'){
-                    $('.project').addClass('hidden');
-                }
-                else if($(this).val() == 'project'){
-                    $('.project').removeClass('hidden');
-                }
-              }
-            });
-        });
-
-        $('.footer').on('click', '.add-pr', function () {
-            let number = $('input[name=number]').val();
-            let type_id = $('input[name=type]').val();
-            // let project_id = $('input[name=project]').val();
-            let date = $('input[name=date]').val();
-            let date_required = $('input[name=date-required]').val();
-            let description = $('#description').val();
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: '/purchase-request',
-                type: 'POST',
-                data: {
-                    number:number,
-                    type_id:type_id,
-                    requested_at:date,
-                    required_at:date_required,
-                    description:description,
-                },
-                success: function (response) {
-                    if (response.errors) {
-                        console.log(errors);
-                        // if (response.errors.title) {
-                        //     $('#title-error').html(response.errors.title[0]);
-                        // }
-
-                        // document.getElementById('manual_affected_id').value = manual_affected_id;
-
-
-                    } else {
-                        //    taskcard_reset();
-
-
-                        toastr.success('Taskcard has been created.', 'Success', {
-                            timeOut: 5000
-                        });
-
-                        window.location.href = '/purchase-request/'+response.uuid+'/edit';
-                    }
-                }
-            });
-        });
-
     }
 };
 
