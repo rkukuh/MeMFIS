@@ -255,31 +255,11 @@
                                             Helper
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                        {{-- @if(isset($jobcard->helpers))
-                                            @foreach($jobcard->helpers as $helper)
-                                            <div class="row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <select name="helper" style="width:100%" class="form-control m-select2">
-                                                        <option value=""></option>
-                                                        @foreach($employees as $employee)
-                                                        <option value="{{ $employee->code }}" @if($employee->code == $helper->code) selected @endif>{{ $employee->first_name }}</option>
-                                                        @endforeach
-                                                    </select>
-
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        @else
-                                            <div class="row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    @component('frontend.common.input.select2')
-                                                        @slot('text', 'helper')
-                                                        @slot('name', 'helper')
-                                                        @slot('id_error', 'helper')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                        @endif --}}
+                                            @if(isset($jobcard->helpers))
+                                                @foreach($jobcard->helpers as $key => $helper)
+                                                   {{$key + 1}}. {{ $helper->first_name }} <br>
+                                                @endforeach
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
