@@ -24,6 +24,7 @@ use App\Models\Employee;
 use App\Models\TaskCard;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
+use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\EmployeeLicense;
 
@@ -650,6 +651,18 @@ class FillComboxController extends Controller
         $projects = Project::with('approvals')->where('parent_id','<>',null)->whereHas('approvals')->pluck('title','uuid');
 
         return json_encode($projects);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function purchaseRequestType()
+    {
+        $PRs = Type::where('of','purchase-request')->where('name','<>','Project')->pluck('name','uuid');
+
+        return json_encode($PRs);
     }
 
     /**
