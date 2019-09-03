@@ -74,6 +74,19 @@ class Employee extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many bank accounts.
+     *
+     * This function will get all Employee's bank accounts.
+     * See: BankAccount's bank_accountable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function bank_accounts()
+    {
+        return $this->morphMany(BankAccount::class, 'bank_accountable');
+    }
+
+    /**
      * One-to-Many: An HTCRR may have one remover / installer.
      *
      * This function will retrieve all the HTCRRs of a given remover / installer.

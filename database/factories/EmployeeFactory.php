@@ -11,6 +11,7 @@ use App\Models\Website;
 use App\Models\Document;
 use App\Models\Employee;
 use App\Models\Language;
+use App\Models\BankAccount;
 use Faker\Generator as Faker;
 
 $factory->define(Employee::class, function (Faker $faker) {
@@ -40,29 +41,50 @@ $factory->define(Employee::class, function (Faker $faker) {
 /** CALLBACKS */
 
 $factory->afterCreating(Employee::class, function ($employee, $faker) {
+
+    // Address
+
     if ($faker->boolean) {
         $employee->addresses()->saveMany(factory(Address::class, rand(2, 4))->make());
     }
+
+    // Bank Account
+    
+    if ($faker->boolean) {
+        $employee->bank_accounts()->saveMany(factory(BankAccount::class, rand(1, 3))->make());
+    }
+
+    // Document
 
     if ($faker->boolean) {
         $employee->documents()->saveMany(factory(Document::class, rand(1, 3))->make());
     }
 
+    // Email
+
     if ($faker->boolean) {
         $employee->emails()->saveMany(factory(Email::class, rand(1, 2))->make());
     }
+
+    // Fax
 
     if ($faker->boolean) {
         $employee->faxes()->saveMany(factory(Fax::class, rand(1, 2))->make());
     }
 
+    // Phone
+
     if ($faker->boolean) {
         $employee->phones()->saveMany(factory(Phone::class, rand(1, 2))->make());
     }
 
+    // Website
+
     if ($faker->boolean) {
         $employee->websites()->saveMany(factory(Website::class, rand(2, 4))->make());
     }
+
+    // Language 
 
     if ($faker->boolean) {
         for ($i = 1; $i <= rand(2, 4); $i++) {
@@ -78,6 +100,8 @@ $factory->afterCreating(Employee::class, function ($employee, $faker) {
         }
     }
 
+    // School
+    
     if ($faker->boolean) {
         for ($i = 1; $i <= rand(3, 4); $i++) {
             $employee->schools()->attach(
