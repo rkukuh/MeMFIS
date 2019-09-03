@@ -60,7 +60,7 @@
 
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Generated')
+                                                    @slot('text', $purchaseRequest->number)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -80,18 +80,18 @@
                                                         <label class="form-control-label">
                                                             Date @include('frontend.common.label.required')
                                                         </label>
-        
+
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', 'Generated')
+                                                            @slot('text', $purchaseRequest->requested_at)
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
                                                             Date Required @include('frontend.common.label.required')
                                                         </label>
-        
+
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', 'Generated')
+                                                            @slot('text', $purchaseRequest->required_at)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -102,9 +102,9 @@
                                                 <label class="form-control-label">
                                                     Description @include('frontend.common.label.optional')
                                                 </label>
-    
+
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Generated')
+                                                    @slot('text', $purchaseRequest->description)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -200,6 +200,8 @@
 
 @push('footer-scripts')
     <script>
+        let pr_uuid = '{{$purchaseRequest->uuid}}';
+
         var autoExpand = function (field) {
 
         // Reset field height
