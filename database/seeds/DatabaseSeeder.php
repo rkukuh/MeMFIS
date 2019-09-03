@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         
         /** MASTER */
         
+        $this->call(BanksTableSeeder::class);
         $this->call(CompaniesTableSeeder::class);
         $this->call(BranchesTableSeeder::class);
         $this->call(ManufacturersTableSeeder::class);
@@ -57,7 +58,6 @@ class DatabaseSeeder extends Seeder
         $this->call(HolidaysTableSeeder::class);
         $this->call(WorkshiftsTableSeeder::class);
         
-        $this->call(BanksTableSeeder::class);
         $this->call(BankAccountsTableSeeder::class);
 
         /** POLYMORPH */

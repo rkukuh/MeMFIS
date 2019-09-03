@@ -32,6 +32,7 @@ class DummyDataSeeder extends Seeder
 
         /** MASTER */
 
+        $this->call(Banks::class);
         $this->call(Companies::class);
         $this->call(Branches::class);
         $this->call(Manufacturers::class);
@@ -58,7 +59,6 @@ class DummyDataSeeder extends Seeder
         $this->call(Holidays::class);
         $this->call(Workshifts::class);
         
-        $this->call(Banks::class);
         $this->call(BankAccounts::class);
 
         /** POLYMORPH */
