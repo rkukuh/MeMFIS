@@ -196,6 +196,7 @@
 @push('footer-scripts')
     <script>
         let pr_uuid = '{{$purchaseRequest->uuid}}';
+
         var autoExpand = function (field) {
 
         // Reset field height
