@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             'name'      => 'Super Admin',
             'email'     => 'admin@smartaircraft.id',
             'password'  => Hash::make('admin'),
+            'is_active' => 1    
         ]);
 
         $user->assignRole(

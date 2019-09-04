@@ -20,10 +20,13 @@ class UsersImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
 
+        $faker = Faker\Factory::create();
+
         $user = new User([
             'name' => ucwords(strtolower($row['nama'])),
             'email' => !empty($row['email']) ? strtolower($row['email']) : str_slug(strtolower($row['nama'])) . '@example.org',
             'password' => Hash::make('employee'),
+            'is_active' => $faker->boolean()
         ]);
 
         $user->save();
@@ -42,7 +45,6 @@ class UsersImport implements ToModel, WithHeadingRow
             );
         }
 
-        $faker = Faker\Factory::create();
 
         $user->employee()->create([
             'code' => $row['nrp'],

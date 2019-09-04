@@ -156,6 +156,12 @@ let Employee_edit_benefit = {
                         }else{
                             $('#absence_punishment-error').html('');
                         }
+
+                        if (data.errors.joined_date) {
+                            $('#joined_date-error').html(data.errors.joined_date[0]);
+                        }else{
+                            $('#joined_date-error').html('');
+                        }
                     });
                         } else {
     

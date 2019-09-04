@@ -35,6 +35,7 @@ Route::name('datatables.')->group(function () {
         Route::get('/holiday', 'HolidayDatatables@index')->name('holiday.index');
         Route::get('/workshift', 'WorkshiftDatatables@index')->name('workshift.index');
         Route::get('/department', 'DepartmentDatatables@index')->name('department.index');
+        Route::get('/role', 'RoleDatatables@index')->name('role.index');
 
         /** LICENSE */
 
