@@ -171,7 +171,7 @@ class JobCardEngineerController extends Controller
         } else if ($this->statuses->where('id', $progresses->last()->status_id)->first()->code == "pending") {
             return view('frontend.job-card-eo.engineer.progress-pause', [
                 'jobcard' => $jobcard,
-                'logbooks' => $jobcard->logbooks->pluck('code'),
+                'logbooks' => $jobcard->logbooks->pluck('code')->toarray(),
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
@@ -208,11 +208,12 @@ class JobCardEngineerController extends Controller
     public function update(JobCardUpdate $request, JobCard $jobcard)
     {
 
-        foreach($request->logbook as $logbook){
-            $jobcard->logbooks()->attach(Type::ofJobCardLogBook()->where('code',$logbook)->first()->id);
-        }
 
         if ($this->statuses->where('uuid', $request->progress)->first()->code == 'open') {
+            foreach($request->logbook as $logbook){
+                $jobcard->logbooks()->attach(Type::ofJobCardLogBook()->where('code',$logbook)->first()->id);
+            }
+
             $request->merge(['station_id' => Station::where('uuid',$request->station)->first()->id]);
 
             $additionals['TSN'] = $request->tsn;
