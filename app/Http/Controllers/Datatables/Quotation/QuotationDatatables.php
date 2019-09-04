@@ -176,7 +176,7 @@ class QuotationDatatables extends Controller
                 $quotation->status .= '';
 
             }
-            $quotation->customer = $quotation->project->customer;
+            $quotation->customer = $quotation->quotationable->customer;
         }
         $data = $alldata = json_decode($quotations);
 
@@ -278,7 +278,7 @@ class QuotationDatatables extends Controller
         $workpackages = $quotation->workpackages;
 
         foreach($workpackages as $workPackage){
-            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
 
@@ -294,7 +294,7 @@ class QuotationDatatables extends Controller
             }
         }
 
-        $htcrrs = HtCrr::where('project_id',$quotation->project->id)->whereNull('parent_id')->get();
+        $htcrrs = HtCrr::where('project_id',$quotation->quotationable->id)->whereNull('parent_id')->get();
         $mats_tools_htcrr = QuotationHtcrrItem::where('quotation_id', $quotation->id)->sum('price_amount');
         if (sizeof($htcrrs) > 0) {
             $htcrr_workpackage = new WorkPackage();
@@ -303,7 +303,7 @@ class QuotationDatatables extends Controller
             $htcrr_workpackage->data_htcrr = json_decode($quotation->data_htcrr, true);
             $htcrr_workpackage->mat_tool_price = $mats_tools_htcrr;
             $htcrr_workpackage->is_template = "htcrr";
-            $htcrr_workpackage->ac_type = $quotation->project->aircraft->name;
+            $htcrr_workpackage->ac_type = $quotation->quotationable->aircraft->name;
 
             $workpackages[sizeof($workpackages)] = $htcrr_workpackage;
         }
@@ -405,7 +405,7 @@ class QuotationDatatables extends Controller
      */
     public function facilities(Quotation $quotation,WorkPackage $workPackage)
     {
-        $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+        $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
 
