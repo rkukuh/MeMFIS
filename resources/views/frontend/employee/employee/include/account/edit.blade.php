@@ -154,7 +154,7 @@
                         Bank Account Name @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.select2')
+                    @component('frontend.common.input.input')
                         @slot('text', 'Bank Account Name')
                         @slot('id', 'bank_name')
                         @slot('name', 'bank_name')
@@ -211,7 +211,6 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/role.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/bank.js') }}"></script>
     <script src="{{ asset('js/frontend/employee/employee/create_account.js') }}"></script>
     <script src="{{ asset('js/frontend/employee/employee/edit_account.js') }}"></script>
     <script>
