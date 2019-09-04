@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 use Spatie\Tags\HasTags;
+use App\Models\Pivot\Interchange;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -145,6 +146,20 @@ class Item extends MemfisModel implements HasMedia
                         'unit_id',
                         'note'
                     )
+                    ->withTimestamps();
+    }
+
+    /**
+     * One-Way: An item may have zero or many interchanges.
+     *
+     * This function will retrieve all the interchanges of an item.
+     *
+     * @return mixed
+     */
+    public function interchanges()
+    {
+        return $this->belongsToMany(Item::class, 'interchanges', 'item_id', 'alternate_item_id')
+                    ->using(Interchange::class)
                     ->withTimestamps();
     }
 
