@@ -119,18 +119,6 @@ class EmployeeBenefitController extends Controller
     public function update(EmployeeBenefitUpdate $request,Employee $employee)
     {
         $time = Carbon::now();
-            
-        $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNotNull('employee_benefit.approved_at')->update([
-            'updated_at' => $time
-        ]);
-
-        $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->update([
-            'updated_at' => $time
-        ]);
-
-        $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->update([
-            'updated_at' => $time
-        ]);
 
         for($i=0; $i<count($request->uuid_benefit); $i++){
             $employee->employee_benefit()->create([
@@ -185,11 +173,24 @@ class EmployeeBenefitController extends Controller
     }
 
     public function approval(Employee $employee){
+        $time = Carbon::now();
+        
+        $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNotNull('employee_benefit.approved_at')->update([
+            'updated_at' => $time
+        ]);
+
+        $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->update([
+            'updated_at' => $time
+        ]);
+
+        $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->update([
+            'updated_at' => $time
+        ]);
+
         $data_provision = $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNull('employee_provisions.approved_at')->get();
         $data_benefit = $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNull('employee_benefit.approved_at')->get();
         $data_bpjs = $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNull('employee_bpjs.approved_at')->get();
         
-        $time = Carbon::now();
 
         foreach($data_provision as $dp){
             $provision = EmployeeProvisions::find($dp->id);

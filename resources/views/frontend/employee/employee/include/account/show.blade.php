@@ -8,8 +8,14 @@
                         Email  
                     </label>
 
+                    @php
+                    $email = null;
+                    if(isset($account->email)){
+                        $email = $account->email;
+                    }
+                @endphp
                     @component('frontend.common.label.data-info')
-                        @slot('text', $account->email)
+                        @slot('text', $email)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -22,6 +28,13 @@
                     @endcomponent
                 </div>
             </div>
+
+            @php
+                $password = null;
+                if(isset($account->password)){
+                    $password = $account->password;
+                }
+            @endphp
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -29,7 +42,7 @@
                     </label>
 
                     @component('frontend.common.input.password')
-                        @slot('text', $account->password)
+                        @slot('text', $password)
                         @slot('disabled','disabled')
                     @endcomponent
                 </div>
@@ -56,11 +69,13 @@
 
                     <span class="m-bootstrap-switch m-bootstrap-switch--pill">
                         @php
-                            $checked = null;
-                            if($account->is_active == 1){
-                                $checked = 'checked';
-                            }
-                        @endphp
+                        $checked = null;
+                        if(isset($account->is_active)){
+                        if($account->is_active == 1){
+                            $checked = 'checked';
+                        }
+                    }
+                    @endphp
                         <input data-switch="true" type="checkbox" data-on-color="success" checked={{ $checked }} disabled>
                     </span>
                 </div>
