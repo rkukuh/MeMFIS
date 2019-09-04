@@ -23,7 +23,7 @@ class QuotationDatatables extends Controller
      */
     public function index()
     {
-        $quotations = Quotation::with('project')->withTrashed()->get();
+        $quotations = Quotation::with('quotationable')->withTrashed()->get();
 
         foreach($quotations as $quotation){
             if($quotation->deleted_at <> null){
@@ -35,7 +35,7 @@ class QuotationDatatables extends Controller
                 $quotation->status .= '';
 
             }
-            $quotation->customer = $quotation->project->customer;
+            $quotation->customer = $quotation->quotationable->customer;
 
             if($quotation->parent_id ==  null){
                 $quotation->quotation_type.= "Quotation Project";
