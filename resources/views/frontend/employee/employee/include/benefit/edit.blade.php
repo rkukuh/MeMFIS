@@ -1153,6 +1153,14 @@
                     @slot('id', 'approve_benefit')
                     @slot('class', 'approve_benefit')
                     @endcomponent
+
+                    @component('frontend.common.buttons.submit')     
+                    @slot('type','button')
+                    @slot('text','Reject')
+                    @slot('id', 'reject_benefit')
+                    @slot('icon','fa fa-times-circle')
+                    @slot('class', 'bg-warning text-dark')
+                    @endcomponent
                 @else
                     @component('frontend.common.buttons.submit')
                     @slot('type','button')
