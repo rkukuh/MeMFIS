@@ -16,8 +16,8 @@
                                 <label class="form-control-label">
                                     Item  @include('frontend.common.label.required')
                                 </label>
-                                @component('frontend.common.input.select2')
-                                    {{-- @slot('id', 'item') --}}
+                                @component('frontend.common.label.data-info')
+                                    @slot('id', 'item')
                                     @slot('class', 'item')
                                     @slot('name', 'item')
                                     @slot('id_error', 'item')
@@ -28,9 +28,8 @@
                                     Part Number
                                 </label>
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', 'name')
-                                    @slot('name', 'name')
-                                    @slot('id', 'name')
+                                    @slot('id', 'pn')
+                                    @slot('name', 'pn')
                                 @endcomponent
                             </div>
                         </div>
@@ -39,8 +38,8 @@
                                 <label class="form-control-label">
                                     Unit
                                 </label>
-                                @component('frontend.common.input.select2')
-                                    {{-- @slot('id', 'unit_id') --}}
+                                @component('frontend.common.label.data-info')
+                                    @slot('id', 'unit_id')
                                     @slot('class','unit_id')
                                     @slot('name', 'unit_id')
                                     @slot('id_error', 'unit_id')
@@ -134,7 +133,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-price')
+                                    @slot('class', 'update-price-item')
                                     @slot('type', 'button')
                                 @endcomponent
 

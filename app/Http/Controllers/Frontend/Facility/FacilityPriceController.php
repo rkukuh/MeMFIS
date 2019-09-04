@@ -79,7 +79,7 @@ class FacilityPriceController extends Controller
     public function update(Request $request, Facility $facility)
     {
         foreach($request->uuid as $key => $uuid){
-            $price = Price::where('uuid', $uuid)->update(['amount' => $request->price[$key], 'level' => $request->level[$key]]);
+            Price::where('uuid', $uuid)->update(['amount' => $request->price[$key], 'level' => $request->level[$key]]);
         }
 
         return response()->json($facility->prices);
