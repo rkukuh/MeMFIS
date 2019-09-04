@@ -18,7 +18,7 @@
                                 <label class="form-control-label">
                                     Item
                                 </label>
-                        
+
                                 @component('frontend.common.input.select2')
                                     @slot('text', 'Item')
                                     @slot('id', 'item')
@@ -44,7 +44,7 @@
                                 <label class="form-control-label">
                                     Unit
                                 </label>
-                        
+
                                 @component('frontend.common.input.select2')
                                     @slot('text', 'Unit')
                                     @slot('id', 'unit_id')
@@ -59,24 +59,27 @@
                                 <label class="form-control-label">
                                     Remark
                                 </label>
-                        
-                                @component('frontend.common.input.text')
+
+                                @component('frontend.common.input.textarea')
                                     @slot('id', 'remark')
                                     @slot('text', 'Remark')
                                     @slot('name', 'remark')
                                 @endcomponent
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="modal-footer">
                         <div class="flex">
                             <div class="action-buttons">
-                                @include('frontend.common.buttons.submit')
-            
+                                @component('frontend.common.buttons.submit')
+                                    @slot('class', 'add-item')
+                                    @slot('type', 'button')
+                                @endcomponent
+
                                 @include('frontend.common.buttons.reset')
-            
-                                @include('frontend.common.buttons.close')        
+
+                                @include('frontend.common.buttons.close')
                             </div>
                         </div>
                     </div>
@@ -89,6 +92,7 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/item-uuid.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
 @endpush
