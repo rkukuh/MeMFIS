@@ -138,7 +138,6 @@ class TaskCardEOController extends Controller
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
         }
 
-
         return view('frontend.task-card.nonroutine.eo.edit',[
             'tasks' => $this->task,
             'types' => $this->type,
