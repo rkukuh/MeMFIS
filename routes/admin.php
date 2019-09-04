@@ -38,6 +38,7 @@ Route::name('admin.')->group(function () {
         Route::resource('progress', 'ProgressController');
         Route::resource('threshold', 'ThresholdController');
         Route::resource('inspection', 'InspectionController');
+        Route::resource('interchange', 'InterchangeController');
 
         /** MASTER */
 

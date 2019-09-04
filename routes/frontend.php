@@ -37,6 +37,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('progress', 'ProgressController');
         Route::resource('threshold', 'ThresholdController');
         Route::resource('inspection', 'InspectionController');
+        Route::resource('interchange', 'InterchangeController');
 
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']

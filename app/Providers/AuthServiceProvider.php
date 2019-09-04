@@ -70,6 +70,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\WorkPackage::class => Policies\WorkPackagePolicy::class,
         Models\LeavePeriod::class => Policies\LeavePeriodPolicy::class,
         Models\BankAccount::class => Policies\BankAccountPolicy::class,
+        Models\Interchange::class => Policies\InterchangePolicy::class,
         Models\Manufacturer::class => Policies\ManufacturerPolicy::class,
         Models\Certification::class => Policies\CertificationPolicy::class,
         Models\EOInstruction::class => Policies\EOInstructionPolicy::class,

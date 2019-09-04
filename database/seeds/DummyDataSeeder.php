@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Holiday;
-use App\Models\LeaveType;
-use App\Models\Manhour;
 use Illuminate\Database\Seeder;
 
 class DummyDataSeeder extends Seeder
@@ -79,6 +76,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Approvals::class);
         $this->call(Progresses::class);
         $this->call(Inspections::class);
+        $this->call(Interchanges::class);
 
         /** LICENSE */
 
