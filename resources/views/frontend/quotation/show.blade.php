@@ -64,7 +64,7 @@
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', $quotation->project->no_wo)
+                                                                @slot('text', $quotation->quotationable->no_wo)
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -75,7 +75,7 @@
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', $quotation->project->title)
+                                                                @slot('text', $quotation->quotationable->title)
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -147,7 +147,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                                @slot('text', $quotation->project->customer->name)
+                                                                                @slot('text', $quotation->quotationable->customer->name)
                                                                                 @slot('id', 'name')
                                                                             @endcomponent
                                                                         </div>
@@ -545,7 +545,7 @@
 
 @push('footer-scripts')
 <script>
-    let project_id = '{{  $quotation->project->uuid }}';
+    let project_id = '{{  $quotation->quotationable->uuid }}';
     let currency = '{{  $quotation->currency_id }}';
     let currencyCode = '{{  $quotation->currency->code }}';
 </script>

@@ -68,7 +68,7 @@
                                                                     &mdash; Select a Work Order &mdash;
                                                                 </option>
                                                                 @foreach ($projects as $project)
-                                                                <option value="{{ $project->uuid }}" @if ($project->no_wo === $quotation->project->no_wo) selected @endif>
+                                                                <option value="{{ $project->uuid }}" @if ($project->no_wo === $quotation->quotationable->no_wo) selected @endif>
                                                                     {{ $project->no_wo }}
                                                                 </option>
                                                                 @endforeach
@@ -82,11 +82,11 @@
                                                             </label>
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('id', 'project_number')
-                                                                @slot('text', $quotation->project->title)
+                                                                @slot('text', $quotation->quotationable->title)
                                                             @endcomponent
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" id="customer_id" name="customer_id" value="{{ $quotation->project->customer->uuid }}">
+                                                    <input type="hidden" id="customer_id" name="customer_id" value="{{ $quotation->quotationable->customer->uuid }}">
 
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -97,7 +97,7 @@
                                                             </label>
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('id', 'project_number')
-                                                                @slot('text', $quotation->project->code)
+                                                                @slot('text', $quotation->quotationable->code)
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -153,7 +153,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                                @slot('text', $quotation->project->customer->name)
+                                                                                @slot('text', $quotation->quotationable->customer->name)
                                                                                 @slot('id', 'name')
                                                                             @endcomponent
                                                                         </div>
@@ -546,7 +546,7 @@
 @endpush
 @push('footer-scripts')
 <script>
-    let project_id = '{{  $quotation->project->uuid }}';
+    let project_id = '{{  $quotation->quotationable->uuid }}';
     let quotation_uuid = '{{  $quotation->uuid }}';
     let currency = '{{  $quotation->currency }}';
     let currencyCode = '{{  $quotation->currency->code }}';
