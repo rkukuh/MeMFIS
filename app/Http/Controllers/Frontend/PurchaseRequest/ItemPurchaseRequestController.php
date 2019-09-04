@@ -11,7 +11,8 @@ use App\Helpers\DocumentNumber;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemPurchaseRequestStore;
-use App\Http\Requests\Frontend\ItemPurchaseRequestUpdate;
+use App\Http\Requests\Frontend\ItemGeneralPurchaseRequestUpdate;
+use App\Http\Requests\Frontend\ItemProjectPurchaseRequestUpdate;
 
 class ItemPurchaseRequestController extends Controller
 {
@@ -43,6 +44,7 @@ class ItemPurchaseRequestController extends Controller
      */
     public function store(ItemPurchaseRequestStore $request,PurchaseRequest $purchaseRequest,Item $item)
     {
+        dd($request->all());
         // if($request->unit_id == "".$item->unit_id.""){
 
         // }
@@ -87,11 +89,23 @@ class ItemPurchaseRequestController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\ItemPurchaseRequestUpdate  $request
+     * @param  \App\Http\Requests\Frontend\ItemGeneralPurchaseRequestUpdate  $request
      * @param  \App\Models\PurchaseRequest  $purchaseRequest
      * @return \Illuminate\Http\Response
      */
-    public function update(ItemPurchaseRequestUpdate $request, PurchaseRequest $purchaseRequest)
+    public function updateGeneral(ItemGeneralPurchaseRequestUpdate $request, PurchaseRequest $purchaseRequest)
+    {
+       //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\ItemProjectPurchaseRequestUpdate  $request
+     * @param  \App\Models\PurchaseRequest  $purchaseRequest
+     * @return \Illuminate\Http\Response
+     */
+    public function updateProject(ItemProjectPurchaseRequestUpdate $request, PurchaseRequest $purchaseRequest)
     {
        //
     }

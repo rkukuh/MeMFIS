@@ -41,6 +41,8 @@ class ItemPurchaseRequestStore extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
+            $this->merge(['quotation_unit' => '1']);
+
             $item = Item::where('uuid',$this->item_id)->first();
             if($this->unit_id == "".$item->unit_id.""){
                 //
