@@ -43,6 +43,15 @@ class ItemPurchaseRequestController extends Controller
      */
     public function store(ItemPurchaseRequestStore $request,PurchaseRequest $purchaseRequest,Item $item)
     {
+        // if($request->unit_id == "".$item->unit_id.""){
+
+        // }
+        // else{
+        //     // if($qty_uom2 = $item->units->where('uom.unit_id',$request->unit_id)->first() == null){
+        //     //     $validator->errors()->add('quantity', 'UOM have not Declared');
+        //     // }
+        //     $qty_uom2 = $item->units->where('uom.unit_id',$request->unit_id)->first();
+        // }
         $purchaseRequest->items()->attach($item->id, [
             'quantity' => $request->quantity,
             'unit_id' => $request->unit_id,

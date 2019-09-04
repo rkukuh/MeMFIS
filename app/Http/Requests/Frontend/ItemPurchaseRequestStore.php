@@ -2,7 +2,11 @@
 
 namespace App\Http\Requests\Frontend;
 
+use App\Models\Item;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class ItemPurchaseRequestStore extends FormRequest
 {
@@ -26,5 +30,31 @@ class ItemPurchaseRequestStore extends FormRequest
         return [
             //
         ];
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $item = Item::where('uuid',$this->item_id)->first();
+            if($this->unit_id == "".$item->unit_id.""){
+                //
+            }
+            else{
+                if($qty_uom2 = $item->units->where('uom.unit_id',$this->unit_id)->first() == null){
+                    $validator->errors()->add('quantity', 'UOM have not Declared');
+                }
+
+            }
+        });
+    }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }
