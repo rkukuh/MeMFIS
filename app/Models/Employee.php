@@ -4,10 +4,10 @@ namespace App\Models;
 
 use App\User;
 use App\MemfisModel;
+use Spatie\Tags\HasTags;
 use App\Models\Pivots\EmployeeLicense;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\Tags\HasTags;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 class Employee extends MemfisModel implements HasMedia
@@ -130,7 +130,7 @@ class Employee extends MemfisModel implements HasMedia
     public function defectcards()
     {
         return $this->belongsToMany(DefectCard::class, 'defectcard_employee', 'employee_id', 'defectcard_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -379,7 +379,7 @@ class Employee extends MemfisModel implements HasMedia
     public function jobcards()
     {
         return $this->belongsToMany(JobCard::class, 'employee_jobcard', 'employee_id', 'jobcard_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
