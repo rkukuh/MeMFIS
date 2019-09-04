@@ -524,7 +524,7 @@ class QuotationController extends Controller
 
         $workpackages = $quotation->workpackages;
         foreach($workpackages as $key => $workPackage){
-            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
 
