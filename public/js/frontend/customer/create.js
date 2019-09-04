@@ -81,7 +81,7 @@ let Customer = {
                 $(this).val().forEach(function(entry) {
                     attn_phone_array_row[ai] = entry;
                     ai++;
-                });;
+                });
                 attn_phone_array.push(attn_phone_array_row);
             });
             attn_phone_array.pop();
@@ -117,7 +117,7 @@ let Customer = {
                 $(this).val().forEach(function(entry) {
                     attn_email_array_row[ai] = entry;
                    ai++;
-               });;
+               });
                attn_email_array.push(attn_email_array_row);
             });
             attn_email_array.pop();
