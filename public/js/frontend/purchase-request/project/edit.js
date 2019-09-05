@@ -61,6 +61,12 @@ let PurchaseRequest = {
                     filterable: !1
                 },
                 {
+                    field: '',
+                    title: 'Project Requirement Qty',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: "",
                     title: "Stock Available",
                     sortable: "asc",
