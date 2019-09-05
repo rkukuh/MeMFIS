@@ -160,7 +160,7 @@ let TaskCard = {
             data.append( "recurrence_amount", $('input[name=recurrence]').val());
             data.append( "recurrence_type", $('#recurrence-select').val());
             data.append( "manual_affected_id", $('#manual_affected_id').val());
-            data.append( "manual_affected", $('#note').val());
+            data.append( "manual_affected_text", $('#note').val());
             data.append( "threshold_type", JSON.stringify(threshold_type));
             data.append( "repeat_type", JSON.stringify(repeat_type));
             data.append( "threshold_amount", JSON.stringify(threshold_amount));

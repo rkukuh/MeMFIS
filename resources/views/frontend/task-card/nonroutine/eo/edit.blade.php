@@ -401,7 +401,6 @@
                                                     <div class="col-sm-10 col-md-10 col-lg-10">
                                                         @component('frontend.common.input.number')
                                                             @slot('id', 'hour')
-                                                            @slot('text', 'hour')
                                                             @slot('name', 'hour')
                                                             @slot('disabled', 'disabled')
                                                             @slot('input_append', 'Hours')
@@ -806,11 +805,9 @@
         let view_manual_affected_id = $('#manual_affected_id').children("option:selected").attr("name-value");
 
         let rdo_Scheduled = '{{$taskCard->scheduled_priority_type}}';
-        let amount_Scheduled = '{{$taskCard->scheduled_priority_amount}}';
+        let amount_Scheduled = '{{ $taskCard->scheduled_priority_text }}';
 
-        console.log(view_scheduled_priority_id);
-        console.log(view_recurrence_id);
-        console.log(view_manual_affected_id);
+        console.log(amount_Scheduled);
         // Manuals Affected
         if(view_manual_affected_id == "Other"){
             $("#note_div").removeClass("hidden");

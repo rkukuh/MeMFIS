@@ -268,9 +268,14 @@
                                         Station
                                     </td>
                                     <td width="70%" style="text-align:center">
-                                        @component('frontend.common.label.data-info')
-                                            @slot('text', $jobcard->station->name)
-                                        @endcomponent
+                                        @if( isset($jobcard->station) )
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $jobcard->station->name)
+                                            @endcomponent
+                                        @else 
+                                            @component('frontend.common.label.data-info-nodata')
+                                            @endcomponent
+                                        @endif
                                     </td>
                                 </tr>
                             </table>
