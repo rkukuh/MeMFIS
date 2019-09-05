@@ -61,10 +61,19 @@
                                                         @slot('text', 'generate')
                                                     @endcomponent
                                                 </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
                                                     <label class="form-control-label">
-                                                        Currency  
+                                                        Currency
                                                     </label>
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                    <label class="form-control-label">
+                                                        Exchange Rate
+                                                    </label>
+
                                                     @component('frontend.common.label.data-info')
                                                         @slot('text', 'generate')
                                                     @endcomponent
@@ -75,7 +84,7 @@
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
-                                                                Date  
+                                                                Date
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
@@ -84,7 +93,7 @@
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
-                                                                Valid Until  
+                                                                Valid Until
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
@@ -93,29 +102,18 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Exchange Rate  
-                                                    </label>
-
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('text', 'generate')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Vendor  
-                                                    </label>
-
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('text', 'generate')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
                                                     <label class="form-control-label">
                                                         Date Shipping
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                    <label class="form-control-label">
+                                                        Vendor
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
@@ -183,7 +181,7 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Shipping Address  
+                                                        Shipping Address
                                                     </label>
                                                     @component('frontend.common.label.data-info')
                                                         @slot('text', 'generate')

@@ -64,7 +64,7 @@
                                                         @slot('name', 'ref-pr')
                                                     @endcomponent
                                                 </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
                                                     <label class="form-control-label">
                                                         Currency @include('frontend.common.label.required')
                                                     </label>
@@ -74,6 +74,17 @@
                                                         @slot('text', 'Currency')
                                                         @slot('name', 'currency')
                                                         @slot('id_error', 'currency')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                    <label class="form-control-label">
+                                                        Exchange Rate @include('frontend.common.label.required')
+                                                    </label>
+
+                                                    @component('frontend.common.input.number')
+                                                        @slot('text', 'exchange')
+                                                        @slot('name', 'exchange')
+                                                        @slot('id', 'exchange')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -106,33 +117,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Exchange Rate @include('frontend.common.label.required')
-                                                    </label>
-
-                                                    @component('frontend.common.input.number')
-                                                        @slot('text', 'exchange')
-                                                        @slot('input_prepend', 'Rp')
-                                                        @slot('name', 'exchange')
-                                                        @slot('id', 'exchange')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Vendor @include('frontend.common.label.required')
-                                                    </label>
-
-                                                    @component('frontend.common.input.select2')
-                                                        @slot('id', 'vendor')
-                                                        @slot('text', 'vendor')
-                                                        @slot('name', 'vendor')
-                                                        @slot('id_error', 'vendor')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
                                                     <label class="form-control-label">
                                                         Date Shipping
                                                     </label>
@@ -142,6 +127,18 @@
                                                         @slot('text', 'Date Shipping')
                                                         @slot('name', 'date_shipping')
                                                         @slot('id_error', 'date_shipping')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                    <label class="form-control-label">
+                                                        Vendor @include('frontend.common.label.required')
+                                                    </label>
+
+                                                    @component('frontend.common.input.select2')
+                                                        @slot('id', 'vendor')
+                                                        @slot('text', 'vendor')
+                                                        @slot('name', 'vendor')
+                                                        @slot('id_error', 'vendor')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -208,7 +205,7 @@
                                                         @slot('id', 'shipping_address')
                                                         @slot('text', 'Shipping Adddress')
                                                         @slot('name', 'shipping_address')
-                                                        @slot('rows', '3')
+                                                        @slot('rows', '5')
                                                         @slot('value', 'Jl. Raya Bandara Juanda,Sudimoro, Betro, Sedati, Bali, Jawa Timur 61253')
                                                         @slot('id_error', 'shipping_address')
 
