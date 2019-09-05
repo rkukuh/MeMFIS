@@ -72,7 +72,7 @@ class QuotationController extends Controller
     public function store(QuotationStore $request)
     {
         $contact = [];
-
+        
         $contact['name']     = $request->attention_name;
         $contact['phone'] = $request->attention_phone;
         $contact['address'] = $request->attention_address;
@@ -81,10 +81,11 @@ class QuotationController extends Controller
 
         $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::withTrashed()->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
-        $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
+        $request->merge(['quotationable_type' => 'App\Models\Project']);
+        $request->merge(['quotationable_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
         $quotation = Quotation::create($request->all());
-        $project = Project::where('id',$request->project_id)->first();
+        $project = Project::where('uuid',$request->project_id)->first();
 
         foreach ($project->workpackages as $workpackage){
             $quotation->workpackages()->attach(WorkPackage::where('uuid',$workpackage->uuid)->first()->id);
@@ -97,7 +98,6 @@ class QuotationController extends Controller
 
         // TODO generate item workpackage
         $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
-        $project = Project::find($request->project_id);
             foreach($project->workpackages as $workpackage){
                 foreach($workpackage->items as $item){
 
@@ -119,7 +119,7 @@ class QuotationController extends Controller
 
         // TODO generate htcrr item workpackage
         $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
-        $project = Project::find($request->project_id);
+        $project = Project::find(Project::where('uuid',$request->project_id)->first()->id);
             foreach($project->htcrrs as $htcrr){
                 foreach($htcrr->items as $item){
 
@@ -141,7 +141,7 @@ class QuotationController extends Controller
 
         // TODO generate item taskcard
         $customer = Customer::where('uuid',$request->customer_id)->first()->levels->last()->score;
-        $project_workpackages = ProjectWorkPackage::where('project_id',$request->project_id)->get();
+        $project_workpackages = ProjectWorkPackage::where('project_id',Project::where('uuid',$request->project_id)->first()->id)->get();
 
         foreach($project_workpackages as $workpackage){
             foreach($workpackage->taskcards as $taskcard){
@@ -524,7 +524,7 @@ class QuotationController extends Controller
 
         $workpackages = $quotation->workpackages;
         foreach($workpackages as $key => $workPackage){
-            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
 

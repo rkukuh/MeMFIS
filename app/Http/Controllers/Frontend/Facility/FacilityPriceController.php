@@ -35,6 +35,7 @@ class FacilityPriceController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Facility  $facility
      * @return \Illuminate\Http\Response
      */
     public function store(PriceStore $request, Facility $facility)
@@ -43,17 +44,16 @@ class FacilityPriceController extends Controller
             $facility->prices()
             ->save(new Price (['amount' =>$request->price[$i],'level' =>$request->level[$i]]));
         }
-        // dd($facility);
         return response()->json($facility);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Facility  $facility
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Facility $facility)
     {
         //
     }
@@ -61,33 +61,37 @@ class FacilityPriceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Facility  $facility
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Facility $facility)
     {
-        //
+        return response()->json($facility->prices);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Facility  $facility
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Facility $facility)
     {
-        //
+        foreach($request->uuid as $key => $uuid){
+            $price = Price::where('uuid', $uuid)->update(['amount' => $request->price[$key], 'level' => $request->level[$key]]);
+        }
+
+        return response()->json($facility->prices);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Facility  $facility
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Facility $facility)
     {
         //
     }

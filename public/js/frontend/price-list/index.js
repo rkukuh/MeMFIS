@@ -65,13 +65,12 @@ let Unit = {
                     sortable: 'asc',
                     filterable: !1,
                 },
-               
-                {
-                    field: '',
-                    title: 'Remark',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
+                // {
+                //     field: '',
+                //     title: 'Remark',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
                 {
                     field: 'last_update',
                     title: 'Last Update',
@@ -89,22 +88,12 @@ let Unit = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if('manhour' == 'item'){
-                            return (
-                                '<button data-toggle="modal" data-target="#modal_pricelist_item_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-item" title="Edit"'+
-                                'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
-                                t.uuid +
-                                '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                            );
-                        }
-                        else{
-                            return (
-                                '<button data-toggle="modal" data-target="#modal_pricelist_item_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-item" title="Edit"'+
-                                'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
-                                t.uuid +
-                                '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                            );
-                        }
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_pricelist_item_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-item" title="Edit"'+
+                            'data-pn='+t.code+' data-name='+t.name+' data-unit='+t.unit.name+' data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
                     }
                 }
             ]
@@ -114,36 +103,34 @@ let Unit = {
             $('.btn-success').removeClass('add');
         });
 
-        let simpan = $('.modal-footer').on('click', '.add-price', function () {
+        let simpan = $('.modal-footer').on('click', '.update-price-item', function () {
             
             let price_array = [];            
-            $('#price ').slice(0,5).each(function (i) {
-                price_array[i] = $(this).val();
-            });
-            
+            let price_uuid_array = [];            
             let level_array = [
                 1,2,3,4,5
             ];
-
-            $.each(function(i){
-                level_array[i] =  $(this).val();
+            $('#price ').each(function() {
+                price_array.push($(this).val());
             });
-            
-            // console.log(price_array,level_array);
-            // let item = $('input[name=uuid]').val();
+
+            $('#item_price_uuid ').each(function() {
+                price_uuid_array.push($(this).val());
+            });
+
             let item = $('#uuid-item').val();
-            // console.log(item);
             
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type:'post',
-                url: 'item/'+item+'/prices',
+                type:'put',
+                url: '/item/'+item+'/prices',
                 data: {
                     _token: $('input[name=_token]').val(),
                     price: price_array,
                     level: level_array,
+                    uuid: price_uuid_array
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -152,9 +139,9 @@ let Unit = {
 
                         // }
                     } else {
-                        $('#modal_price_list').modal('hide');
+                        $('#modal_pricelist_item_edit').modal('hide');
 
-                        toastr.success('Price List has been created.', 'Success', {
+                        toastr.success('Price List has been updated.', 'Success', {
                             timeOut: 5000
                         });
 
@@ -168,78 +155,24 @@ let Unit = {
         });
 
         // show add price modal
-         $('.price_list_datatable-item').on('click', '.add-price', function () {
-            let item = $(this).data('uuid');
-
-            document.getElementById("uuid").value = $(this).data('uuid');
-            document.getElementById("pn").innerHTML = $(this).data('pn');
-            document.getElementById("name").innerHTML = $(this).data('name');
-            document.getElementById("unit").innerHTML = $(this).data('unit');
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'get',
-                url: '/item/'+item+'/prices/'+item+'/edit',
-                success: function (data) {
-                    $(".unit_price_list").empty();
-                    for (let i = 0; i < data.length; i++) {
-                        $('#price_'+i).val(data[i].amount);
-                        $('#level_'+i).val(data[i].amount);
-                        // $('#level_'+i+" option[value="+data[i].level+"]").prop('selected', true);   
-                    }
-
-                    $('.btn-success').addClass('update');
-                    $('.btn-success').removeClass('add');
-                },
-                error: function (jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
-                    let errorsHtml = '';
-                    let errors = jqXhr.responseJSON;
-
-                    $.each(errors.errors, function (index, value) {
-                        $('#kategori-error').html(value);
-                    });
-                }
-            });
-        });
-        let edit = $('.price_list_datatable-item').on('click', '.edit-price-item', function edit () {
-            save_changes_button();
-
+        $('.price_list_datatable-item').on('click', '.edit-price-item', function () {
             let item = $(this).data('uuid');
             document.getElementById("uuid-item").value = item;
-            document.getElementById("name").innerHTML = $(this).data('pn');
+            document.getElementById("pn").innerHTML = $(this).data('pn');
+            document.getElementById("item").innerHTML = $(this).data('name');
             document.getElementById("unit_id").innerHTML = $(this).data('unit');
 
-            // document.getElementById("name-edit").innerHTML = $(this).data('name');
-            
-
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/item/'+item+'/prices/'+item+'/edit',
+                url: '/item/'+item+'/prices/edit',
                 success: function (data) {
-                    let usdFormatter = new Intl.NumberFormat('id', { style: 'currency', currency: 'usd', minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-                    $(".unit_price_list").empty();
-                    for (let i = 0; i < data.length; i++) {
-                        $(".unit_price_list").append(
-                        '<div class="row" style="margin-bottom:15px">'+
-                            '<div class="col-sm-6 col-md-6 col-lg-6" style="padding:15px; background-color:beige; margin-right:15px;  margin-left:15px;">'+
-                            usdFormatter.format(data[i].amount) +
-                            '</div>'+
-                            '<div class="col-sm-4 col-md-4 col-lg-4" style="padding:15px; background-color:beige">'+
-                                data[i].level+
-                            '</div>'+
-                        '</div>'
-                        );
-                    }
-
-                    $('.btn-success').addClass('update');
-                    $('.btn-success').removeClass('add');
+                    $("#price ").each( function(i) {
+                        $(this).val(data[i].amount);
+                        $("input[type=hidden][name=item_price_uuid]:eq("+i+")").val(data[i].uuid);
+                    });
                 },
                 error: function (jqXhr, json, errorThrown) {
                     // this are default for ajax errors
@@ -252,151 +185,6 @@ let Unit = {
                 }
             });
         });
-
-        let show = $('.price_list_datatable-item').on('click', '.show-price', function edit () {
-
-            let item = $(this).data('uuid');
-            document.getElementById("pn-show").innerHTML = $(this).data('pn');
-            document.getElementById("name-show").innerHTML = $(this).data('name');
-            document.getElementById("unit-show").innerHTML = $(this).data('unit');
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'get',
-                url: '/item/'+item+'/prices/'+item+'/edit',
-                success: function (data) {
-                    $('#price-list').empty();
-
-                    for (let i = 0; i < data.length; i++) {
-                        $('#price-list-show').append(
-                            //                     '<option value="' + key + '" selected>' + value + '</option>'
-                            '<tr>'+
-                            '<td>Unit Price '+(i+1)+'</td>'+
-                            '<td>'+
-                            '<div id="unit-edit" name="unit" style="background-color: beige;'+
-                            'padding: 15px;" >'+
-                                data[i].amount+
-                            '</div>'+
-                            '</td>'+
-                            '</tr>'
-                        );
-                    }
-
-                    $('.btn-success').addClass('update');
-                    $('.btn-success').removeClass('add');
-                },
-                error: function (jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
-                    let errorsHtml = '';
-                    let errors = jqXhr.responseJSON;
-
-                    $.each(errors.errors, function (index, value) {
-                        $('#kategori-error').html(value);
-                    });
-                }
-            });
-        });
-
-        let update = $('.modal-footer').on('click', '.update', function () {
-            let name = $('input[name=name]').val();
-            let symbol = $('input[name=symbol]').val();
-            let type_id =$('#type_id').val();
-            let triggerid = $('input[name=uuid]').val();
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'put',
-                url: '/unit/' + triggerid,
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    name: name,
-                    symbol: symbol,
-                    type_id: type_id
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
-
-                        }
-                        if (data.errors.symbol) {
-                            $('#symbol-error').html(data.errors.symbol[0]);
-
-                        }
-                        if (data.errors.type) {
-                            $('#type-error').html(data.errors.type[0]);
-
-                        }
-
-                    } else {
-                        save_changes_button();
-                        $('#modal_unit').modal('hide');
-
-                        toastr.success('Unit has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
-
-                        let table = $('.unit_datatable').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
-                }
-            });
-        });
-
-        let close = $('.modal-footer').on('click', '.clse', function () {
-            save_button();
-        });
-
-        $('.unit_datatable').on('click', '.delete', function () {
-            let unit_uuid = $(this).data('uuid');
-
-            swal({
-                title: 'Sure want to remove?',
-                type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/unit/' + unit_uuid + '',
-                        success: function (data) {
-                            toastr.success('Unit has been deleted.', 'Deleted', {
-                                    timeOut: 5000
-                                }
-                            );
-
-                            let table = $('.unit_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                }
-            });                                                                                         
-        });       
-
     }
 };
 
@@ -462,34 +250,32 @@ let Facility = {
                     title: 'Name',
                     sortable: 'asc',
                     filterable: !1,
+                    
                 },
                 {
                     field: 'prices',
                     title: 'Price',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        let price = "";
+                        t.prices.forEach(element => {
+                            price += "Level : "+ element.level +" Price : US$"+ element.amount +" <br>";
+                        });
+                        return price;
+                    }
                 },
                 {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if('facility' == 'item'){
-                            return (
-                                '<button data-toggle="modal" data-target="#modal_pricelist_facility_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-facility" title="Edit"'+
-                                'data-pn='+t.code+' data-name='+t.name+' data-uuid=' +
-                                t.uuid +
-                                '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                            );
-                        }
-                        else{
-                            return (
-                                '<button data-toggle="modal" data-target="#modal_pricelist_facility_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-facility" title="Edit"'+
-                                'data-pn='+t.code+' data-name='+t.name+' data-uuid=' +
-                                t.uuid +
-                                '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                            );
-                        }
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_pricelist_facility_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-facility" title="Edit"'+
+                            'data-name='+t.name+' data-amount= '+t.prices+' data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
                     }
                 }
             ]
@@ -499,288 +285,70 @@ let Facility = {
             $('.btn-success').removeClass('add');
         });
 
-        let simpanFacility = $('.modal-footer').on('click', '.add-price-facility', function () {
+        let updateFacility = $('.modal-footer').on('click', '.update-price-facility', function () {
             
             let price_array = [];            
-            $('#price_facility ').slice(0,5).each(function (i) {
-                price_array[i] = $(this).val();
-            });
-
+            let price_uuid_array = [];            
             let level_array = [
                 1,2,3,4,5
             ];
-
-            $.each(function(i){
-                level_array[i] =  $(this).val();
+            $('#price_facility ').each(function() {
+                price_array.push($(this).val());
             });
-            
-            // let item = $('input[name=uuid]').val();
+
+            $('#price_facility_uuid ').each(function() {
+                price_uuid_array.push($(this).val());
+            });
+
             let facility = $('#uuid-facility').val();
-            // console.log(facility);
             
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type:'post',
-                url: 'facility/'+facility+'/prices',
+                type:'put',
+                url: '/facility/'+facility+'/prices',
                 data: {
                     _token: $('input[name=_token]').val(),
                     price: price_array,
                     level: level_array,
+                    uuid: price_uuid_array
                 },
                 success: function (data) {
-                    if (data.errors) {
-                        // if (data.errors.name) {
-                        //     $('#name-error').html(data.errors.name[0]);
+                   
+                    $('#modal_pricelist_facility_edit').modal('hide');
 
-                        // }
-                    } else {
-                        $('#modal_price_list').modal('hide');
+                    toastr.success('Price List has been updated.', 'Success', {
+                        timeOut: 5000
+                    });
 
-                        toastr.success('Price List has been created.', 'Success', {
-                            timeOut: 5000
-                        });
+                    let table = $('.price_list_datatable-facility').mDatatable();
 
-                        let table = $('.price_list_datatable-facility').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
+                    table.originalDataSet = [];
+                    table.reload();
                 }
             });
         });
 
-        // show add price modal
-         $('.price_list_datatable-facility').on('click', '.add-price-facility', function () {
-            let facility = $(this).data('uuid');
+        $('.price_list_datatable-facility').on('click', '.edit-price-facility', function () {
+            let uuid = $(this).data('uuid');
+            document.getElementById("uuid-facility").value = uuid;
+            document.getElementById("facility").innerHTML = $(this).data('name');
             
-            document.getElementById("uuid-facility").value = $(this).data('uuid');
-            document.getElementById("pn").innerHTML = $(this).data('pn');
-            document.getElementById("name").innerHTML = $(this).data('name');
-            document.getElementById("unit").innerHTML = $(this).data('unit');
-
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'get',
-                url: '/item/'+item+'/prices/'+item+'/edit',
+                url: '/facility/'+uuid+'/prices/edit',
                 success: function (data) {
-                    $(".unit_price_list").empty();
-                    for (let i = 0; i < data.length; i++) {
-                        $('#price_'+i).val(data[i].amount);
-                        $('#level_'+i).val(data[i].amount);
-                        // $('#level_'+i+" option[value="+data[i].level+"]").prop('selected', true);   
-                    }
-
-                    $('.btn-success').addClass('update');
-                    $('.btn-success').removeClass('add');
-                },
-                error: function (jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
-                    let errorsHtml = '';
-                    let errors = jqXhr.responseJSON;
-
-                    $.each(errors.errors, function (index, value) {
-                        $('#kategori-error').html(value);
+                    $("#price_facility ").each( function(i) {
+                        $(this).val(data[i].amount);
+                        $("input[type=hidden][name=price_facility_uuid]:eq("+i+")").val(data[i].uuid);
                     });
                 }
             });
         });
-        
-        let edit = $('.price_list_datatable-facility').on('click', '.edit-price-facility', function edit () {
-            save_changes_button();
-
-            let facility = $(this).data('uuid');
-            document.getElementById("uuid-facility").value = facility;
-            document.getElementById("name").innerHTML = $(this).data('pn');
-            document.getElementById("unit_id").innerHTML = $(this).data('unit');
-            
-            // document.getElementById("name-edit").innerHTML = $(this).data('name');
-            
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'get',
-                url: '/item/'+item+'/prices/'+item+'/edit',
-                success: function (data) {
-                    let usdFormatter = new Intl.NumberFormat('id', { style: 'currency', currency: 'usd', minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
-                    $(".unit_price_list").empty();
-                    for (let i = 0; i < data.length; i++) {
-                        $(".unit_price_list").append(
-                        '<div class="row" style="margin-bottom:15px">'+
-                            '<div class="col-sm-6 col-md-6 col-lg-6" style="padding:15px; background-color:beige; margin-right:15px;  margin-left:15px;">'+
-                            usdFormatter.format(data[i].amount) +
-                            '</div>'+
-                            '<div class="col-sm-4 col-md-4 col-lg-4" style="padding:15px; background-color:beige">'+
-                                data[i].level+
-                            '</div>'+
-                        '</div>'
-                        );
-                    }
-
-                    $('.btn-success').addClass('update');
-                    $('.btn-success').removeClass('add');
-                },
-                error: function (jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
-                    let errorsHtml = '';
-                    let errors = jqXhr.responseJSON;
-
-                    $.each(errors.errors, function (index, value) {
-                        $('#kategori-error').html(value);
-                    });
-                }
-            });
-        });
-
-        let show = $('.price_list_datatable-facility').on('click', '.show-price', function edit () {
-
-            let item = $(this).data('uuid');
-            document.getElementById("pn-show").innerHTML = $(this).data('pn');
-            document.getElementById("name-show").innerHTML = $(this).data('name');
-            document.getElementById("unit-show").innerHTML = $(this).data('unit');
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'get',
-                url: '/item/'+item+'/prices/'+item+'/edit',
-                success: function (data) {
-                    $('#price-list').empty();
-
-                    for (let i = 0; i < data.length; i++) {
-                        $('#price-list-show').append(
-                            //                     '<option value="' + key + '" selected>' + value + '</option>'
-                            '<tr>'+
-                            '<td>Unit Price '+(i+1)+'</td>'+
-                            '<td>'+
-                            '<div id="unit-edit" name="unit" style="background-color: beige;'+
-                            'padding: 15px;" >'+
-                                data[i].amount+
-                            '</div>'+
-                            '</td>'+
-                            '</tr>'
-                        );
-                    }
-
-                    $('.btn-success').addClass('update');
-                    $('.btn-success').removeClass('add');
-                },
-                error: function (jqXhr, json, errorThrown) {
-                    // this are default for ajax errors
-                    let errorsHtml = '';
-                    let errors = jqXhr.responseJSON;
-
-                    $.each(errors.errors, function (index, value) {
-                        $('#kategori-error').html(value);
-                    });
-                }
-            });
-        });
-
-        let update = $('.modal-footer').on('click', '.update', function () {
-            let name = $('input[name=name]').val();
-            let symbol = $('input[name=symbol]').val();
-            let type_id =$('#type_id').val();
-            let triggerid = $('input[name=uuid]').val();
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: 'put',
-                url: '/unit/' + triggerid,
-                data: {
-                    _token: $('input[name=_token]').val(),
-                    name: name,
-                    symbol: symbol,
-                    type_id: type_id
-                },
-                success: function (data) {
-                    if (data.errors) {
-                        if (data.errors.name) {
-                            $('#name-error').html(data.errors.name[0]);
-
-                        }
-                        if (data.errors.symbol) {
-                            $('#symbol-error').html(data.errors.symbol[0]);
-
-                        }
-                        if (data.errors.type) {
-                            $('#type-error').html(data.errors.type[0]);
-
-                        }
-
-                    } else {
-                        save_changes_button();
-                        $('#modal_unit').modal('hide');
-
-                        toastr.success('Unit has been updated.', 'Success', {
-                            timeOut: 5000
-                        });
-
-                        let table = $('.unit_datatable').mDatatable();
-
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
-                }
-            });
-        });
-
-        let close = $('.modal-footer').on('click', '.clse', function () {
-            save_button();
-        });
-
-        $('.unit_datatable').on('click', '.delete', function () {
-            let unit_uuid = $(this).data('uuid');
-
-            swal({
-                title: 'Sure want to remove?',
-                type: 'question',
-                confirmButtonText: 'Yes, REMOVE',
-                confirmButtonColor: '#d33',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'DELETE',
-                        url: '/unit/' + unit_uuid + '',
-                        success: function (data) {
-                            toastr.success('Unit has been deleted.', 'Deleted', {
-                                    timeOut: 5000
-                                }
-                            );
-
-                            let table = $('.unit_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                }
-            });                                                                                         
-        });       
 
     }
 };

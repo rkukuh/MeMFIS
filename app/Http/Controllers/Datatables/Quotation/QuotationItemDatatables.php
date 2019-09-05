@@ -40,7 +40,7 @@ class QuotationItemDatatables extends Controller
 
         foreach($routinematerials as $routinematerial){
             if($routinematerial->item->prices->last() <> null){
-                $routinematerial->unitPrice .= $routinematerial->item->prices->where('level',$quotation->project->customer->levels->last()->id)->last()->amount;
+                $routinematerial->unitPrice .= $routinematerial->item->prices->where('level',$quotation->quotationable->customer->levels->last()->id)->last()->amount;
             }
             else{
                 $routinematerial->unitPrice .= 0;
@@ -161,7 +161,7 @@ class QuotationItemDatatables extends Controller
 
         foreach($nonroutinematerials as $nonroutinematerial){
             if($nonroutinematerial->item->prices->last() <> null){
-                $nonroutinematerial->unitPrice .= $nonroutinematerial->item->prices->where('level',$quotation->project->customer->levels->last()->id)->last()->amount;
+                $nonroutinematerial->unitPrice .= $nonroutinematerial->item->prices->where('level',$quotation->quotationable->customer->levels->last()->id)->last()->amount;
             }
             else{
                 $nonroutinematerial->unitPrice .= 0;

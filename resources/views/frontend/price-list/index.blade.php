@@ -70,7 +70,6 @@
                             </div>
 
                             @include('frontend.price-list.item.modal-edit')
-
                             @include('frontend.price-list.manhour.modal-edit')
 
 
@@ -128,12 +127,6 @@
                                 </div>
                             </div>
 
-
-                            @include('frontend.price-list.item.modal-edit')
-
-                            @include('frontend.price-list.manhour.modal-edit')
-
-
                             <div class="col-lg-12">
                                 {{-- @include('frontend.price-list.filter') --}}
                             </div>
@@ -187,11 +180,6 @@
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
                             </div>
-                            @include('frontend.price-list.item.modal-edit')
-                            @include('frontend.price-list.facility.modal-edit')
-
-                            {{-- @include('frontend.price-list.manhour.modal-edit') --}}
-
 
                             <div class="col-lg-12">
                                 {{-- @include('frontend.price-list.filter') --}}
@@ -207,17 +195,6 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit-type.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/item-pricelist.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/unit-pricelist.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
-
 
     <script src="{{ asset('js/frontend/functions/action-botton/unit-type.js')}}"></script>
     <script src="{{ asset('js/frontend/price-list/index.js')}}"></script>

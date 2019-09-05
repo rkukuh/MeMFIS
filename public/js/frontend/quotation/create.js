@@ -231,7 +231,6 @@ let Quotation = {
 
                         window.location.href = '/quotation/' + data.uuid + '/edit';
 
-
                     }
                 }
             });
