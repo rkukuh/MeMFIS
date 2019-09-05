@@ -65,13 +65,12 @@ let Unit = {
                     sortable: 'asc',
                     filterable: !1,
                 },
-               
-                {
-                    field: '',
-                    title: 'Remark',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
+                // {
+                //     field: '',
+                //     title: 'Remark',
+                //     sortable: 'asc',
+                //     filterable: !1,
+                // },
                 {
                     field: 'last_update',
                     title: 'Last Update',
@@ -111,11 +110,11 @@ let Unit = {
             let level_array = [
                 1,2,3,4,5
             ];
-            $('#price_facility ').each(function() {
+            $('#price ').each(function() {
                 price_array.push($(this).val());
             });
 
-            $('#price_facility_uuid ').each(function() {
+            $('#item_price_uuid ').each(function() {
                 price_uuid_array.push($(this).val());
             });
 
@@ -131,6 +130,7 @@ let Unit = {
                     _token: $('input[name=_token]').val(),
                     price: price_array,
                     level: level_array,
+                    uuid: price_uuid_array
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -139,9 +139,9 @@ let Unit = {
 
                         // }
                     } else {
-                        $('#modal_price_list').modal('hide');
+                        $('#modal_pricelist_item_edit').modal('hide');
 
-                        toastr.success('Price List has been created.', 'Success', {
+                        toastr.success('Price List has been updated.', 'Success', {
                             timeOut: 5000
                         });
 
@@ -169,9 +169,9 @@ let Unit = {
                 type: 'get',
                 url: '/item/'+item+'/prices/edit',
                 success: function (data) {
-                    $("#price_facility ").each( function(i) {
+                    $("#price ").each( function(i) {
                         $(this).val(data[i].amount);
-                        $("input[type=hidden][name=price_facility_uuid]:eq("+i+")").val(data[i].uuid);
+                        $("input[type=hidden][name=item_price_uuid]:eq("+i+")").val(data[i].uuid);
                     });
                 },
                 error: function (jqXhr, json, errorThrown) {

@@ -74,7 +74,7 @@ class ItemPriceController extends Controller
      * @param  \App\Models\Item  $Item
      * @return \Illuminate\Http\Response
      */
-    public function update(PriceUpdate $request, Facility $item)
+    public function update(PriceUpdate $request, Item $item)
     {
         foreach($request->uuid as $key => $uuid){
             Price::where('uuid', $uuid)->update(['amount' => $request->price[$key], 'level' => $request->level[$key]]);

@@ -60,10 +60,13 @@
                                                 @component('frontend.common.input.number')
                                                     @slot('id', 'price')
                                                     @slot('name', 'price')
-                                                    @slot('text', 'price')
                                                     @slot('input_prepend','$')
                                                     @slot('id_error', 'price_1')
-                                                @endcomponent      
+                                                @endcomponent         
+                                                @component('frontend.common.input.hidden')
+                                                    @slot('id', 'item_price_uuid')
+                                                    @slot('name', 'item_price_uuid')
+                                                @endcomponent  
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
@@ -73,10 +76,13 @@
                                                 @component('frontend.common.input.number')
                                                     @slot('id', 'price')
                                                     @slot('name', 'price')
-                                                    @slot('text', 'price')
                                                     @slot('input_prepend','$')
                                                     @slot('id_error', 'price_2')
-                                                @endcomponent         
+                                                @endcomponent            
+                                                @component('frontend.common.input.hidden')
+                                                    @slot('id', 'item_price_uuid')
+                                                    @slot('name', 'item_price_uuid')
+                                                @endcomponent       
                                             </div>
                                         </div>
 
@@ -89,10 +95,13 @@
                                                 @component('frontend.common.input.number')
                                                     @slot('id', 'price')
                                                     @slot('name', 'price')
-                                                    @slot('text', 'price')
                                                     @slot('input_prepend','$')
                                                     @slot('id_error', 'price_3')
-                                                @endcomponent      
+                                                @endcomponent                
+                                                @component('frontend.common.input.hidden')
+                                                    @slot('id', 'item_price_uuid')
+                                                    @slot('name', 'item_price_uuid')
+                                                @endcomponent    
                                             </div>
 
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -103,10 +112,13 @@
                                                 @component('frontend.common.input.number')
                                                     @slot('id', 'price')
                                                     @slot('name', 'price')
-                                                    @slot('text', 'price')
                                                     @slot('input_prepend','$')
                                                     @slot('id_error', 'price_4')
-                                                @endcomponent      
+                                                @endcomponent                
+                                                @component('frontend.common.input.hidden')
+                                                    @slot('id', 'item_price_uuid')
+                                                    @slot('name', 'item_price_uuid')
+                                                @endcomponent    
                                             </div>
                                         </div>
 
@@ -119,10 +131,13 @@
                                                 @component('frontend.common.input.number')
                                                     @slot('id', 'price')
                                                     @slot('name', 'price')
-                                                    @slot('text', 'price')
                                                     @slot('input_prepend','$')
                                                     @slot('id_error', 'price_5')
-                                                @endcomponent      
+                                                @endcomponent                
+                                                @component('frontend.common.input.hidden')
+                                                    @slot('id', 'item_price_uuid')
+                                                    @slot('name', 'item_price_uuid')
+                                                @endcomponent    
                                             </div>
                                         </div>
                                 </fieldset>
