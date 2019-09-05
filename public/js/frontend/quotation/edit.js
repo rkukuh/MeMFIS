@@ -266,7 +266,7 @@ let Quotation = {
         $('.nav-tabs').on('click', '.workpackage', function () {
             let workpackage = $('.workpackage_datatable').mDatatable();
 
-            workpackage.originalDataSet = [];
+            workpackage.scheduled_paymen_dataSet = [];
             workpackage.reload();
         });
 

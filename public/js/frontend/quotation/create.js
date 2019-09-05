@@ -147,16 +147,16 @@ let Quotation = {
             let attention_address = $('#address').val();
             let scheduled_payment_amount_array = [];
             let scheduled_payment_note_array = [];
-            let type = $('#scheduled_payment_type').children("option:selected").html();
+            // let type = $('#scheduled_payment_type').children("option:selected").html();
     
-            $('#scheduled_payment ').each(function (i) {
-                scheduled_payment_amount_array[i] = parseInt($(this).val());
-            });
+            // $('#scheduled_payment ').each(function (i) {
+            //     scheduled_payment_amount_array[i] = parseInt($(this).val());
+            // });
 
-            $('#scheduled_payment_note ').each(function (i) {
-                scheduled_payment_note_array[i] = $(this).val();
-            });
-            scheduled_payment_array.pop();
+            // $('#scheduled_payment_note ').each(function (i) {
+            //     scheduled_payment_note_array[i] = $(this).val();
+            // });
+            // scheduled_payment_array.pop();
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
@@ -166,8 +166,8 @@ let Quotation = {
             data.append("term_of_payment", $('#term_of_payment').val());
             data.append("term_of_condition", $('#term_and_condition').val());
             data.append("exchange_rate", $('#exchange').val());
-            data.append("scheduled_payment_amount", JSON.stringify(scheduled_payment_amount_array));
-            data.append("scheduled_payment_note", JSON.stringify(scheduled_payment_note_array));
+            // data.append("scheduled_payment_amount", JSON.stringify(scheduled_payment_amount_array));
+            // data.append("scheduled_payment_note", JSON.stringify(scheduled_payment_note_array));
             data.append("attention_name", attention_name);
             data.append("attention_phone", attention_phone);
             data.append("attention_fax", attention_fax);
