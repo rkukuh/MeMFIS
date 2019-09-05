@@ -51,12 +51,6 @@ let Customer = {
                     sortable: 'asc',
                     filterable: !1,
                 },
-                {
-                    field: 'type.name',
-                    title: 'Type Address',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
             ]
         });
 
