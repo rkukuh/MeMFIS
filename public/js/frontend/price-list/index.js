@@ -409,12 +409,6 @@ let Manhours = {
                     filterable: !1
                 },
                 {
-                    field: 'remark',
-                    title: 'Remark',
-                    sortable: 'asc',
-                    filterable: !1
-                },
-                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',

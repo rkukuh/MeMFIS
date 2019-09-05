@@ -18,7 +18,6 @@ class CreateManhoursTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->double('rate')->nullable();
             $table->integer('level');
-            $table->text('remark')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
