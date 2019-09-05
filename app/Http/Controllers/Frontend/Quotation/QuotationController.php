@@ -345,7 +345,7 @@ class QuotationController extends Controller
             'progressed_by' => Auth::id()
         ]));
 
-        $project = Project::find($quotation->project_id);
+        $project = Project::find($quotation->quotationable_id);
         $project->progresses()->save(new Progress([
             'status_id' =>  Status::ofProject()->where('code','open')->first()->id,
             'progressed_by' => Auth::id()
