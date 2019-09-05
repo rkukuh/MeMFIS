@@ -63,7 +63,36 @@
         <fieldset class="border p-2">
             <legend class="w-auto"><b>Other</b></legend>
             <div class="form-group m-form__group row">
-                <div class="col-sm-6 col-md-6 col-lg-6">
+                <div class="col-sm-6 col-md-6 col-lg-6 text-center">
+                    <label class="form-control-label">
+                        Maximum Overtime per Period 
+                    </label>
+
+                    @component('frontend.common.input.text')
+                        @slot('id', 'duration')
+                        @slot('name', 'maximum_overtime')
+                        @slot('id_error', 'maximum_overtime')
+                        @slot('disable','disable')
+                    @endcomponent
+
+                    <p class="mt-2 font-weight-bold">Seconds: <span id="duration-label"></span></p>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 text-center">
+                    <label class="form-control-label">
+                        After Minimum Overtime
+                    </label>
+
+                    @component('frontend.common.input.text')
+                        @slot('id', 'duration_1')
+                        @slot('name', 'minimum_overtime')
+                        @slot('id_error', 'minimum_overtime')
+                    @endcomponent
+
+                    <p class="mt-2 font-weight-bold">Seconds: <span id="duration-label-2"></span></p>
+                </div>
+            </div>
+            <div class="form-group m-form__group row">
+                {{-- <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
                         Maximum Overtime per Period 
                     </label>
@@ -82,7 +111,7 @@
                         @slot('value', $maximum_overtime)
                         @slot('disabled','disabled')
                     @endcomponent
-                </div>
+                </div> --}}
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
                         Holiday Overtime Allowance 
@@ -324,8 +353,6 @@
 
 @include('frontend.employee.employee.include.benefit.modal-history')
 
-    
-
 
 @push('header-scripts')
     <style>
@@ -338,5 +365,47 @@
             padding-left:38px;
             padding-top:6px;
         }
+        .bdp-block{
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-left:20px;
+            text-align: center;
+        } 
+        
+        .bdp-block input{
+            width:90px;
+            text-align:center;
+        }
+
+        .bdp-block input:disabled{  
+            background: #ccc;
+        }
+
     </style>
+@endpush
+
+
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/bootstrap-duration-picker.js') }}"></script>
+    <script>
+            $(function () {
+              $('#duration').durationPicker({
+                onChanged: function (newVal) {
+                  $('#duration-label').text(newVal);
+                }
+              });
+              $('#duration_1').durationPicker({
+                onChanged: function (newVal) {
+                  $('#duration-label-2').text(newVal);
+                }
+              });
+              $('#reset-picker').click(function () {
+                $('#duration6').data('durationPicker').setValue(0);
+              });
+              $('#destroy-picker').click(function () {
+                $('#duration7').data('durationPicker').destroy();
+                $(this).remove();
+              })
+            });
+    </script>
 @endpush
