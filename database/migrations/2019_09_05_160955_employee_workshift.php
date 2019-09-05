@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EmployeeBanks extends Migration
+class EmployeeWorkshift extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class EmployeeBanks extends Migration
      */
     public function up()
     {
-        Schema::create('employee_bank', function (Blueprint $table) {
+        Schema::create('employee_workshift', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('employee_id');
-            $table->string('number');
-            $table->string('bank_name');
+            $table->unsignedBigInteger('workshift_id');
 
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('employee_id')
-            ->references('id')->on('employees')
+            $table->foreign('workshift_id')
+            ->references('id')->on('workshifts')
             ->onUpdate('cascade')
             ->onDelete('restrict');
         });
@@ -36,6 +35,6 @@ class EmployeeBanks extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employee_bank');
+        Schema::dropIfExists('employee_workshift');
     }
 }

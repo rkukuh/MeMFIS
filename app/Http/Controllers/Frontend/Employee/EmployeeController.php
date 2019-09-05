@@ -15,6 +15,7 @@ use App\User;
 use App\Models\BPJS;
 use App\Models\Benefit;
 use App\Models\EmployeeProvisions;
+use App\Models\Workshift;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
@@ -462,7 +463,7 @@ class EmployeeController extends Controller
         $p = 0;
         foreach($benefit_name_data as $bnd){
             $benefit_name[$p] = [
-                'name' => Benefit::where('id',$bnd->benefit_id)->first()->name
+                'name' => Benefit::where('id',$bnd->benefit_id)->first()
             ];
             $p++;
         }
@@ -470,7 +471,7 @@ class EmployeeController extends Controller
         $q = 0;
         foreach($bpjs_name_data as $bpd){
             $bpjs_name[$q] = [
-                'name' => BPJS::where('id',$bpd->bpjs_id)->first()->name
+                'name' => BPJS::where('id',$bpd->bpjs_id)->first()
             ];
             $q++;
         }
@@ -509,6 +510,32 @@ class EmployeeController extends Controller
             'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->get()
         ];
         
+        //EMPLOYEE WORKSHIFT CURRENT
+        $workshift_current = [];
+        if(isset($employee->workshift()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id)){
+            $data_workshift = Workshift::find($employee->workshift()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id);
+            $workshift_current = [
+                'name' => $data_workshift->name,
+                'data' => $data_workshift->workshift_schedules()->get()
+            ];
+        }
+
+        //EMPLOYEE WORKSHIFT HISTORY
+        $workshift_history = [];
+        
+        $data_workshift_history = $employee->workshift()->whereNotNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->orderBy('created_at','DESC')->get();
+
+        $l = 0;
+        foreach($data_workshift_history as $dwh){
+            $workshift_history[$l] = [
+                'created_at' => $dwh->created_at,
+                'updated_at' => $dwh->updated_at,
+                'name' => Workshift::find($dwh->workshift_id)->name
+            ];
+
+            $l++;
+        }
+        
         //EMPLOYEE ACCOUNT
         $account = $employee->user()->first();
 
@@ -526,6 +553,8 @@ class EmployeeController extends Controller
             'employee_bpjs' => $employee_bpjs_data,
             'current' => $current,
             'employee_benefit_history' =>  $employee_benefit_history,
+            'workshift_current' => $workshift_current,
+            'workshift_history' => $workshift_history,
             'account' => $account
             ]);
     }
@@ -767,6 +796,7 @@ class EmployeeController extends Controller
         $button_parameter_data = $employee->where('employees.id',$employee->id)->with('employee_benefit','employee_bpjs')->with(array('employee_provisions' => function($query){
             $query->whereNull('employee_provisions.updated_at');
             $query->whereNull('employee_provisions.approved_at');
+            $query->whereNull('employee_provisions.deleted_at');
         }))->get();
 
         $provisions_approve = true;
@@ -782,8 +812,8 @@ class EmployeeController extends Controller
              $button_parameter = 'approvals';
     
         //EMPLOYEE BENEFIT APPROVAL
-        $benefit_name_data = $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNull('employee_benefit.approved_at')->get();
-        $bpjs_name_data = $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNull('employee_bpjs.approved_at')->get();
+        $benefit_name_data = $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNull('employee_benefit.approved_at')->whereNull('employee_benefit.deleted_at')->get();
+        $bpjs_name_data = $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNull('employee_bpjs.approved_at')->whereNull('employee_bpjs.deleted_at')->get();
         
         $benefit_name = [];
         $bpjs_name = [];
@@ -812,12 +842,12 @@ class EmployeeController extends Controller
         }
 
         $approve = [
-            'provisions' => $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNull('employee_provisions.approved_at')->get(),
+            'provisions' => $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNull('employee_provisions.approved_at')->whereNull('employee_provisions.deleted_at')->get(),
             'position_min_max' => $position_min_max,
             'benefit_name' => $benefit_name,
-            'benefit' => $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNull('employee_benefit.approved_at')->get(),
+            'benefit' => $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNull('employee_benefit.approved_at')->whereNull('employee_benefit.deleted_at')->get(),
             'bpjs_name' => $bpjs_name,
-            'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNull('employee_bpjs.approved_at')->get()
+            'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNull('employee_bpjs.approved_at')->whereNull('employee_bpjs.deleted_at')->get()
         ];
 
          }else{
@@ -825,14 +855,14 @@ class EmployeeController extends Controller
         }
 
         //EMPLOYEE BENEFIT HISTORY
-        $created_at = $employee->employee_provisions()->select('employee_provisions.created_at')->whereNotNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->orderBy('created_at','DESC')->get();
+        $created_at = $employee->employee_provisions()->select('employee_provisions.created_at')->whereNotNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->whereNull('employee_provisions.deleted_at')->orderBy('created_at','DESC')->get();
         
         
         $j = 0;
         foreach($created_at as $ct){
-            $employee_benefit_history_data[$j] = $employee->employee_benefit()->where('employee_benefit.created_at',$ct->created_at)->whereNotNull('employee_benefit.updated_at')->whereNotNull('employee_benefit.approved_at')->get();
-            $employee_bpjs_history_data[$j] = $employee->employee_bpjs()->where('employee_bpjs.created_at',$ct->created_at)->whereNotNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->get();
-            $employee_provisions_history_data[$j] = $employee->employee_provisions()->where('employee_provisions.created_at',$ct->created_at)->whereNotNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->get();
+            $employee_benefit_history_data[$j] = $employee->employee_benefit()->where('employee_benefit.created_at',$ct->created_at)->whereNotNull('employee_benefit.updated_at')->whereNotNull('employee_benefit.approved_at')->whereNull('employee_benefit.deleted_at')->get();
+            $employee_bpjs_history_data[$j] = $employee->employee_bpjs()->where('employee_bpjs.created_at',$ct->created_at)->whereNotNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->whereNull('employee_bpjs.deleted_at')->get();
+            $employee_provisions_history_data[$j] = $employee->employee_provisions()->where('employee_provisions.created_at',$ct->created_at)->whereNotNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->whereNull('employee_provisions.deleted_at')->get();
         $j++;
         }
 
@@ -869,8 +899,8 @@ class EmployeeController extends Controller
         }
         }
         //EMPLOYEE BENEFIT CURRENT
-        $benefit_name_data = $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNotNull('employee_benefit.approved_at')->get();
-        $bpjs_name_data = $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->get();
+        $benefit_name_data = $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNotNull('employee_benefit.approved_at')->whereNull('employee_benefit.deleted_at')->get();
+        $bpjs_name_data = $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->whereNull('employee_bpjs.deleted_at')->get();
         
         $benefit_name = [];
         $bpjs_name = [];
@@ -892,13 +922,13 @@ class EmployeeController extends Controller
         }
 
         $approved_at = null;
-        if(isset($employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->first()->approved_at)){
+        if(isset($employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->whereNull('employee_provisions.deleted_at')->first()->approved_at)){
             $approved_at = $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->first()->approved_at;
         }
 
         $approved_name = null;
-        if(isset($employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->first()->id)){
-            $approved_by_data = EmployeeProvisions::find($employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->first()->id);
+        if(isset($employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->whereNull('employee_provisions.deleted_at')->first()->id)){
+            $approved_by_data = EmployeeProvisions::find($employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->whereNull('employee_provisions.deleted_at')->first()->id);
             $approved_by = Employee::find($approved_by_data->approvals()->first()->conducted_by);
             if($approved_by->last_name == $approved_by->first_name){
                 $approved_name = $approved_by->first_name;
@@ -910,16 +940,42 @@ class EmployeeController extends Controller
         $current = [
             'approved_at' => $approved_at,
             'approved_name' => $approved_name,
-            'provisions' => $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->get(),
+            'provisions' => $employee->employee_provisions()->whereNull('employee_provisions.updated_at')->whereNotNull('employee_provisions.approved_at')->whereNull('employee_provisions.deleted_at')->get(),
             'benefit_name' => $benefit_name,
-            'benefit' => $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNotNull('employee_benefit.approved_at')->get(),
+            'benefit' => $employee->employee_benefit()->whereNull('employee_benefit.updated_at')->whereNotNull('employee_benefit.approved_at')->whereNull('employee_benefit.deleted_at')->get(),
             'bpjs_name' => $bpjs_name,
-            'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->get()
+            'bpjs' => $employee->employee_bpjs()->whereNull('employee_bpjs.updated_at')->whereNotNull('employee_bpjs.approved_at')->whereNull('employee_bpjs.deleted_at')->get()
         ];
+      
+        //EMPLOYEE WORKSHIFT CURRENT
+        $workshift_current = [];
+        if(isset($employee->workshift()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id)){
+            $data_workshift = Workshift::find($employee->workshift()->whereNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->first()->workshift_id);
+            $workshift_current = [
+                'name' => $data_workshift->name,
+                'data' => $data_workshift->workshift_schedules()->get()
+            ];
+        }
+
+        //EMPLOYEE WORKSHIFT HISTORY
+        $workshift_history = [];
         
+        $data_workshift_history = $employee->workshift()->whereNotNull('employee_workshift.updated_at')->whereNull('employee_workshift.deleted_at')->orderBy('created_at','DESC')->get();
+
+        $l = 0;
+        foreach($data_workshift_history as $dwh){
+            $workshift_history[$l] = [
+                'created_at' => $dwh->created_at,
+                'updated_at' => $dwh->updated_at,
+                'name' => Workshift::find($dwh->workshift_id)->name
+            ];
+
+            $l++;
+        }
+
         //EMPLOYEE ACCOUNT
         $account = User::where('id',$employee->user_id)->first();
-      
+
         return view('frontend.employee.employee.edit',[
         'employee' => $employee,
         'age' => $age,
@@ -936,6 +992,8 @@ class EmployeeController extends Controller
         'current' => $current,
         'employee_benefit_history' =>  $employee_benefit_history,
         'approve' => $approve,
+        'workshift_current' => $workshift_current,
+        'workshift_history' => $workshift_history,
         'account' => $account
         ]);
     }

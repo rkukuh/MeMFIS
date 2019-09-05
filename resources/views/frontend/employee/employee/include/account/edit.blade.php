@@ -5,13 +5,14 @@
 @endcomponent
 
 
-    @if($account != null){
+    @if($account != null)
         @component('frontend.common.input.hidden')
         @slot('id', 'account_uuid')
         @slot('name', 'account_uuid')
         @slot('value', $account->uuid)
         @endcomponent
     @endif
+
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">

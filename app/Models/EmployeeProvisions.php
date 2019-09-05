@@ -19,7 +19,8 @@ class EmployeeProvisions extends Model
         'absence_punishment',
         'created_at',
         'updated_at',
-        'approved_at'
+        'approved_at',
+        'deleted_at'
     ];
     
     /**

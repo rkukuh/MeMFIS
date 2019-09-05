@@ -9,10 +9,13 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $workshift_current['name'])
                     @endcomponent
                 </div>
             </div>
+
+            @if (count($workshift_current) != 0)
+
             <div class="form-group m-form__group row mt-5">
                 <div class="col-sm-12 col-md-12 col-lg-12">
                     <table widt="100%" class="table table-striped table-bordered second">
@@ -25,35 +28,35 @@
                             <td align="center" width="8%"></td>
                         </tr>
 
-                        {{-- @foreach ($schedule as $s)
+                        @for ($i = 0; $i < count($workshift_current['data']); $i++)
 
                         <tr>
                             <td align="center" width="20%" style="backgroud:#e3e3e3;" class="pt-4">
-                            <span style="font-weight: bold;color:#6d85c2" valign="middle">{{ $s->days }}</span>
+                            <span style="font-weight: bold;color:#6d85c2" valign="middle">{{ $workshift_current['data'][$i]['days'] }}</span>
                             </td>
                             <td align="center" width="18%">
                                 @component('frontend.common.input.timepicker')
                                     @slot('class','m_timepicker_1 text-center')
-                                    @slot('placeholder', $s->in)
+                                    @slot('placeholder', $workshift_current['data'][$i]['in'] )
                                     @slot('disabled','disabled')
                                 @endcomponent
                             <td align="center" width="18%">
                                 @component('frontend.common.input.timepicker')
                                     @slot('class','m_timepicker_1 text-center')
-                                    @slot('placeholder', $s->break_in)
+                                    @slot('placeholder', $workshift_current['data'][$i]['break_in'])
                                     @slot('disabled','disabled')
                                 @endcomponent
                             <td align="center" width="18%">
                                 @component('frontend.common.input.timepicker')
                                     @slot('class','m_timepicker_1 text-center')
-                                    @slot('placeholder', $s->break_out)
+                                    @slot('placeholder', $workshift_current['data'][$i]['break_out'])
                                     @slot('disabled','disabled')
                                 @endcomponent
                             </td>
                             <td align="center" width="18%">
                                 @component('frontend.common.input.timepicker')
                                     @slot('class','m_timepicker_1 text-center')
-                                    @slot('placeholder', $s->out)
+                                    @slot('placeholder',$workshift_current['data'][$i]['out'])
                                     @slot('disabled','disabled')
                                 @endcomponent
                             </td>
@@ -67,11 +70,14 @@
                             </td>
                         </tr>
                        
-                        @endforeach --}}
+                        @endfor
 
                     </table>
                 </div>
             </div>
+
+            @endif
+
         </fieldset>
     </div>
 </div>

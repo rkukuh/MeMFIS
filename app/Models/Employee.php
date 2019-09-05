@@ -238,6 +238,19 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
+     * One-to-Many: An Employee have one or many Workshift or History.
+     *
+     * This function will retrieve Workshift of a given Employee.
+     * See: EmployeeWorkshift employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workshift()
+    {
+        return $this->hasMany(EmployeeWorkshift::class);
+    }
+
+    /**
      * One-to-Many: An Employee have one or many benefit.
      *
      * This function will retrieve benefit of a given Employee.
