@@ -40,20 +40,20 @@ class ItemPurchaseRequestStore extends FormRequest
      */
     public function withValidator($validator)
     {
-        $validator->after(function ($validator) {
-            $this->merge(['quotation_unit' => '1']);
+        // $validator->after(function ($validator) {
+        //     $this->merge(['quotation_unit' => '1']);
 
-            $item = Item::where('uuid',$this->item_id)->first();
-            if($this->unit_id == "".$item->unit_id.""){
-                //
-            }
-            else{
-                if($qty_uom2 = $item->units->where('uom.unit_id',$this->unit_id)->first() == null){
-                    $validator->errors()->add('quantity', 'UOM have not Declared');
-                }
+        //     $item = Item::where('uuid',$this->item_id)->first();
+        //     if($this->unit_id == "".$item->unit_id.""){
+        //         //
+        //     }
+        //     else{
+        //         if($qty_uom2 = $item->units->where('uom.unit_id',$this->unit_id)->first() == null){
+        //             $validator->errors()->add('quantity', 'UOM have not Declared');
+        //         }
 
-            }
-        });
+        //     }
+        // });
     }
 
     protected function failedValidation(Validator $validator) {

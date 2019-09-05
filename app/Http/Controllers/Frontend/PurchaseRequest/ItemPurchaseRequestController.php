@@ -44,7 +44,7 @@ class ItemPurchaseRequestController extends Controller
      */
     public function store(ItemPurchaseRequestStore $request,PurchaseRequest $purchaseRequest,Item $item)
     {
-        dd($request->all());
+        // dd($request->all());
         // if($request->unit_id == "".$item->unit_id.""){
 
         // }
