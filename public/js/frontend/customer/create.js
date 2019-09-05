@@ -22,9 +22,17 @@ let Customer = {
 
             let type_phone_array = [];
             $('#type_phone ').each(function (i) {
-                type_phone_array[i] = $(this).val();
+                if($(this).is(':checked')){
+                    console.log($(this).val());
+                    type_phone_array[i] = $(this).val();
+                }
             });
-            type_phone_array.pop();
+
+            type_phone_array = type_phone_array.filter(function (el) {
+
+                return el != null && el != "";
+        
+            });
 
             let fax_array = [];
             $('#fax ').each(function (i) {
@@ -33,10 +41,20 @@ let Customer = {
             fax_array.pop();
 
             let type_fax_array = [];
+
             $('#type_fax ').each(function (i) {
-                type_fax_array[i] = $(this).val();
+                if($(this).is(':checked')){
+                    console.log($(this).val());
+                    type_fax_array[i] = $(this).val();
+                }
             });
-            type_fax_array.pop();
+
+            type_fax_array = type_fax_array.filter(function (el) {
+
+                return el != null && el != "";
+        
+            });
+
 
             let website_array = [];
             $('#website ').each(function (i) {
@@ -58,9 +76,18 @@ let Customer = {
 
             let type_email_array = [];
             $('#type_email ').each(function (i) {
-                type_email_array[i] = $(this).val();
+                if($(this).is(':checked')){
+                    console.log($(this).val());
+                    type_email_array[i] = $(this).val();
+                }
             });
-            type_email_array.pop();
+            
+            type_email_array = type_email_array.filter(function (el) {
+
+                return el != null && el != "";
+            
+            });
+
 
             let document_array = [];
             $('#email ').each(function (i) {
@@ -182,6 +209,7 @@ let Customer = {
 
                         window.location.href = '/customer/' + data.uuid + '/edit';
                         // window.location.href = '/customer';
+          
 
                     }
                 }
