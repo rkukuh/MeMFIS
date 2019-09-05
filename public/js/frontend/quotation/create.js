@@ -5,7 +5,7 @@ let Quotation = {
         $('select[name="currency"]').on('change', function () {
             let exchange_id = this.options[this.selectedIndex].innerHTML;
             let exchange_rate = $('input[name=exchange]');
-            if (exchange_id === "Rupiah (Rp)") {
+            if (exchange_id.includes("Rp")) {
                 exchange_rate.val(1);
                 exchange_rate.attr("readonly", true);
             } else {
@@ -148,7 +148,7 @@ let Quotation = {
             let scheduled_payment_amount_array = [];
             let scheduled_payment_note_array = [];
             // let type = $('#scheduled_payment_type').children("option:selected").html();
-    
+
             // $('#scheduled_payment ').each(function (i) {
             //     scheduled_payment_amount_array[i] = parseInt($(this).val());
             // });
