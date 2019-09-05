@@ -276,7 +276,8 @@ let TaskCard = {
                         document.getElementById('recurrence_id').value = recurrence_id;
                         document.getElementById('manual_affected_id').value = manual_affected_id;
                         document.getElementById('description').value = data.getAll('description');
-
+                        // file upload
+                        document.getElementById('taskcard').value = taskcard;
 
 
                     } else {

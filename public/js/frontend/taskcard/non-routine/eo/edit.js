@@ -1396,6 +1396,7 @@ $('.footer').on('click', '.add-taskcard', function () {
                 document.getElementById('scheduled_priority_id').value = scheduled_priority_id;
                 document.getElementById('recurrence_id').value = recurrence_id;
                 document.getElementById('manual_affected_id').value = manual_affected_id;
+                document.getElementById('taskcard').value = taskcard;
 
             } else {
                 //    taskcard_reset();
