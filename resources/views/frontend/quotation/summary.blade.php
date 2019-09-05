@@ -266,11 +266,18 @@
                         @endcomponent
                     </div>
                     <div class="col-sm-1 col-md-1 col-lg-1">
-                        
                         @component('frontend.common.buttons.create_repeater')
                             @slot('id', 'add_scheduled_row')
                             @slot('name', 'add_scheduled_row')
                             @slot('class', 'add_scheduled_row')
+                            @slot('style', 'margin-top:32.5px')
+                        @endcomponent
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-lg-1">
+                        @component('frontend.common.buttons.create_repeater')
+                            @slot('id', 'calculate_scheduled')
+                            @slot('name', 'calculate_scheduled')
+                            @slot('class', 'calculate_scheduled')
                             @slot('style', 'margin-top:32.5px')
                         @endcomponent
                     </div>
