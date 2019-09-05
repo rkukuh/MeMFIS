@@ -432,7 +432,6 @@ let Manhours = {
                 let manhour = $('#uuid-manhour').val();
                 let rate = $("#rate-manhour").val();
                 let level = $("#level-manhour").val();
-                let remark = $("#remark_manhour").val();
             
             $.ajax({
                 headers: {
@@ -444,7 +443,6 @@ let Manhours = {
                     _token: $('input[name=_token]').val(),
                     rate: rate,
                     level: level,
-                    remark: remark
                 },
                 success: function (data) {
                    
