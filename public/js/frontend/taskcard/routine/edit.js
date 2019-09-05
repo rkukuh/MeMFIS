@@ -537,6 +537,15 @@ let TaskCard = {
                         table.originalDataSet = [];
                         table.reload();
                         $('#modal_item').modal('hide');
+                        $('#modal_item').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea,select")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end();
+                        })
 
                     }
                 }
@@ -584,6 +593,15 @@ let TaskCard = {
                         table.reload();
 
                         $('#modal_tool').modal('hide');
+                        $('#modal_tool').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea,select")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end();
+                        })
 
                     }
                 }
