@@ -73,7 +73,9 @@ class ManhourController extends Controller
      */
     public function update(ManhourUpdate $request, Manhour $manhour)
     {
-        //
+        $manhour->update(['rate' => $request->rate, 'remark' => $request->remark]); 
+
+        return response()->json($manhour);
     }
 
     /**

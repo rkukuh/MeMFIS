@@ -10,6 +10,7 @@ class Manhour extends MemfisModel
     protected $fillable = [
         'rate',
         'level',
+        'remark',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
