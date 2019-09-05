@@ -93,9 +93,11 @@ class ItemPurchaseRequestController extends Controller
      * @param  \App\Models\PurchaseRequest  $purchaseRequest
      * @return \Illuminate\Http\Response
      */
-    public function updateGeneral(ItemGeneralPurchaseRequestUpdate $request, PurchaseRequest $purchaseRequest)
+    public function updateGeneral(ItemGeneralPurchaseRequestUpdate $request, PurchaseRequest $purchaseRequest, Item $item)
     {
-       //
+        $purchaseRequest->items()->updateExistingPivot($item->id, [ 'unit_id'=>$request->unit_id, 'quantity'=> $request->quantity, 'note' => $request->note]);
+
+        return response()->json($purchaseRequest);
     }
 
     /**
@@ -105,7 +107,7 @@ class ItemPurchaseRequestController extends Controller
      * @param  \App\Models\PurchaseRequest  $purchaseRequest
      * @return \Illuminate\Http\Response
      */
-    public function updateProject(ItemProjectPurchaseRequestUpdate $request, PurchaseRequest $purchaseRequest)
+    public function updateProject(ItemProjectPurchaseRequestUpdate $request, PurchaseRequest $purchaseRequest, Item $item)
     {
        //
     }
@@ -116,10 +118,11 @@ class ItemPurchaseRequestController extends Controller
      * @param  \App\Models\PurchaseRequest  $purchaseRequest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PurchaseRequest $purchaseRequest)
+    public function destroy(PurchaseRequest $purchaseRequest,Item $item)
     {
-        $purchaseRequest->delete();
+        $purchaseRequest->items()->detach($item->id);
 
-        //
+        return response()->json($purchaseRequest);
+
     }
 }

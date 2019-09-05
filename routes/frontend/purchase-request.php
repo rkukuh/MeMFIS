@@ -22,8 +22,9 @@ Route::name('frontend.')->group(function () {
             Route::put('purchase-request/{purchaseRequest}/project/approve', 'ProjectPurchaseRequestController@approve')->name('purchase-request.project.approve');
             Route::put('purchase-request/{purchaseRequest}/general/approve', 'GeneralPurchaseRequestController@approve')->name('purchase-request.general.approve');
             Route::post('purchase-request/{purchaseRequest}/item/{item}', 'ItemPurchaseRequestController@store')->name('item.purchase-request.store');
-            Route::put('purchase-request-general/{purchaseRequest}', 'ItemPurchaseRequestController@updateGeneral')->name('purchase-request.general.update');
-            Route::put('purchase-request-project/{purchaseRequest}', 'ItemPurchaseRequestController@updateProject')->name('purchase-request.project.update');
+            Route::put('purchase-request-general/{purchaseRequest}/item/{item}', 'ItemPurchaseRequestController@updateGeneral')->name('purchase-request.general.update');
+            Route::put('purchase-request-project/{purchaseRequest}/item/{item}', 'ItemPurchaseRequestController@updateProject')->name('purchase-request.project.update');
+            Route::delete('purchase-request/{purchaseRequest}/item/{item}', 'ItemPurchaseRequestController@destroy')->name('purchase-request.destroy');
 
             Route::name('purchase-request.')->group(function () {
 

@@ -17,12 +17,6 @@ class PurchaseRequestDatatables extends Controller
      */
     public function index(PurchaseRequest $purchase_request)
     {
-       // $items = PurchaseRequest::with('item')->get();
-        // ->whereHas('categories', function ($query) {
-        //     $query->where('code','<>','tool');
-        // })->get();
-        // dd($purchase_request->items);
-
         $data = $alldata = json_decode($purchase_request->items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
