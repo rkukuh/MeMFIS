@@ -637,7 +637,7 @@ class FillComboxController extends Controller
      */
     public function projectQuotation()
     {
-        $projects = Project::whereHas('quotations')->pluck('title','uuid');
+        $projects = Project::has('quotations')->pluck('title','uuid');
 
         return json_encode($projects);
     }

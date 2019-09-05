@@ -72,7 +72,7 @@ class QuotationController extends Controller
     public function store(QuotationStore $request)
     {
         $contact = [];
-        
+
         $contact['name']     = $request->attention_name;
         $contact['phone'] = $request->attention_phone;
         $contact['address'] = $request->attention_address;
@@ -273,6 +273,7 @@ class QuotationController extends Controller
         }
         $request->merge(['attention' => json_encode($attention)]);
         $request->merge(['charge' => json_encode($charges)]);
+        $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
         // $request->merge(['scheduled_payment_amount' => json_encode($request->scheduled_payment_amount)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
         $quotation->update($request->all());

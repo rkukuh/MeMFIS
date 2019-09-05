@@ -150,7 +150,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @include('frontend.purchase-request.project.modal')
                                                         <div class="item_datatable" id="scrolling_both"></div>
                                                     </div>
                                                 </div>
