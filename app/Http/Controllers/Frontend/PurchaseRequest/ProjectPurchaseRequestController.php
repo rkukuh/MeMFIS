@@ -55,12 +55,14 @@ class ProjectPurchaseRequestController extends Controller
         $items = QuotationWorkPackageTaskCardItem::with('item','item.unit')->where('quotation_id',Project::find($request->project_id)->quotations->first()->id)->get();
 
         foreach($items as $item){
-            // TODO if only item that generated
-            $purchaseRequest->items()->attach([$item->item_id => [
-                'quantity'=> $item->quantity,
-                'unit_id' => $item->unit_id,
-                'quantity_unit' => $item->quantity]
+            $i = Item::find($item->item_id)->categories->first()->code;
+            if($i == "raw" or $i == "cons" or $i == "comp"){
+                $purchaseRequest->items()->attach([$item->item_id => [
+                    'quantity'=> $item->quantity,
+                    'unit_id' => $item->unit_id,
+                    'quantity_unit' => $item->quantity]
                 ]);
+            }
         }
 
         return response()->json($purchaseRequest);
