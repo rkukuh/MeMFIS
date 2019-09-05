@@ -11,6 +11,7 @@ use App\Models\Position;
 use App\Models\Status;
 use App\Models\Department;
 use App\Models\Type;
+use App\User;
 use App\Models\BPJS;
 use App\Models\Benefit;
 use App\Models\EmployeeProvisions;
@@ -917,8 +918,8 @@ class EmployeeController extends Controller
         ];
         
         //EMPLOYEE ACCOUNT
-        $account = $employee->user()->first();
-
+        $account = User::where('id',$employee->user_id)->first();
+      
         return view('frontend.employee.employee.edit',[
         'employee' => $employee,
         'age' => $age,
@@ -1107,6 +1108,7 @@ class EmployeeController extends Controller
         if($request->document){
             $employee->addMedia($request->document)->toMediaCollection('id_card');
         }
+        
 
         // TODO: Return error message as JSON
         return response()->json($employee);

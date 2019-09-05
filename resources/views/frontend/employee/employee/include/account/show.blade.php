@@ -8,8 +8,14 @@
                         Email  
                     </label>
 
+                    @php
+                    $email = null;
+                    if(isset($account->email)){
+                        $email = $account->email;
+                    }
+                @endphp
                     @component('frontend.common.label.data-info')
-                        @slot('text', $account->email)
+                        @slot('text', $email)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -22,6 +28,13 @@
                     @endcomponent
                 </div>
             </div>
+
+            @php
+                $password = null;
+                if(isset($account->password)){
+                    $password = $account->password;
+                }
+            @endphp
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
@@ -29,7 +42,7 @@
                     </label>
 
                     @component('frontend.common.input.password')
-                        @slot('text', $account->password)
+                        @slot('text', $password)
                         @slot('disabled','disabled')
                     @endcomponent
                 </div>
@@ -55,7 +68,15 @@
                     </label><br>
 
                     <span class="m-bootstrap-switch m-bootstrap-switch--pill">
-                        <input data-switch="true" type="checkbox" data-on-color="success" checked="checked" disabled>
+                        @php
+                        $checked = null;
+                        if(isset($account->is_active)){
+                        if($account->is_active == 1){
+                            $checked = 'checked';
+                        }
+                    }
+                    @endphp
+                        <input data-switch="true" type="checkbox" data-on-color="success" checked={{ $checked }} disabled>
                     </span>
                 </div>
             </div>
@@ -108,11 +129,12 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/role.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/bank.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/employee/create_account.js') }}"></script>
     <script>
     
     var BootstrapSwitch = {
         init: function() {
-            $("[data-switch=true]").bootstrapSwitch();
+            $("[data-switch=true]").bootstrapSwitch({disabled:true});
         }
     };
     jQuery(document).ready(function() {

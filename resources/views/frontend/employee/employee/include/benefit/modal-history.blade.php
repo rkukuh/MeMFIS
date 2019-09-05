@@ -49,7 +49,7 @@
                                                         @for ($l = 0; $l < count($current['benefit']); $l++)
 
                                                         <tr>
-                                                        <td valign="top"><b>{{ $current['benefit_name'][$l]['name'] }}</b></td>
+                                                        <td valign="top"><b>{{ $current['benefit_name'][$l]['name']['name'] }}</b></td>
                                                         <td valign="top" align="center">{{ $current['benefit'][$l]['amount'] }}</td>
                                                         </tr>
 
@@ -84,7 +84,7 @@
                                                             <td align="center" width="40%"><b>Paid By Company</b></td>
                                                         </tr>
                                                         <tr>
-                                                        <td valign="top"><b>{{ $current['bpjs_name'][$i]['name'] }}</b></td>
+                                                        <td valign="top"><b>{{ $current['bpjs_name'][$i]['name']['name'] }}</b></td>
                                                             <td valign="top" align="center">{{ $current['bpjs'][$i]['employee_paid'] }}</td>
                                                             <td valign="top" align="center">{{ $current['bpjs'][$i]['company_paid'] }}</td>
                                                         </tr>
