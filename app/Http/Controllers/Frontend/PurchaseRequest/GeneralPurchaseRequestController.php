@@ -92,7 +92,6 @@ class GeneralPurchaseRequestController extends Controller
         $purchaseRequest->update($request->all());
 
         return response()->json($purchaseRequest);
-
     }
 
     /**

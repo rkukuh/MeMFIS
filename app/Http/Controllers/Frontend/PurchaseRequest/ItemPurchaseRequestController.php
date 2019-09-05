@@ -109,7 +109,9 @@ class ItemPurchaseRequestController extends Controller
      */
     public function updateProject(ItemProjectPurchaseRequestUpdate $request, PurchaseRequest $purchaseRequest, Item $item)
     {
-       //
+        $purchaseRequest->items()->updateExistingPivot($item->id, [ 'unit_id'=>$request->unit_id, 'quantity'=> $request->quantity, 'note' => $request->note]);
+
+        return response()->json($purchaseRequest);
     }
 
     /**

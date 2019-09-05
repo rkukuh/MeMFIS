@@ -166,6 +166,8 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        @include('frontend.purchase-request.general.modal-edit')
+
                                                         <div class="item_datatable" id="scrolling_both"></div>
                                                     </div>
                                                 </div>
@@ -178,8 +180,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-pr')
-                                                        @slot('class', 'add-pr')
+                                                        @slot('id', 'update-pr')
+                                                        @slot('class', 'update-pr')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
