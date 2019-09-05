@@ -82,6 +82,7 @@ class QuotationController extends Controller
         $request->merge(['number' => DocumentNumber::generate('QPRO-', Quotation::withTrashed()->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['quotationable_type' => 'App\Models\Project']);
+        $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
         $request->merge(['quotationable_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
         $quotation = Quotation::create($request->all());
@@ -358,7 +359,6 @@ class QuotationController extends Controller
         $ProjectWorkPackage = ProjectWorkPackage::where('project_id',$quotation->project_id)->pluck('id');
         $ProjectWorkPackageTaskCard = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
         foreach($ProjectWorkPackageTaskCard as $taskcard){
-            // dump($taskcard);
                 $tc = $taskcard->taskcard;
 
                 if(Type::where('id',$tc->type_id)->first()->code == "basic"){

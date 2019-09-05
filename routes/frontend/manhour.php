@@ -12,16 +12,13 @@ Route::name('frontend.')->group(function () {
         /** ITEM */
 
         Route::namespace('Manhour')->group(function () {
-
-            Route::resource('manhour', 'ManhourController');
-            // Route::resource('tool', 'ToolController');
-
             Route::name('manhour.')->group(function () {
 
+                Route::resource('manhour', 'ManhourController');
                 Route::prefix('manhour')->group(function () {
 
                     /** Price List */
-                    Route::resource('/{manhour}/rate', 'ManhourController');
+                    // Route::resource('/{manhour}/rate', 'ManhourController');
 
                     /** Transaction: Unit */
                     // Route::post('/{manhour}/unit', 'ItemUnitController@store')->name('unit.store');

@@ -188,8 +188,6 @@ let Unit = {
     }
 };
 
-
-
 let Facility = {
     init: function () {
         $('.price_list_datatable-facility').mDatatable({
@@ -353,8 +351,128 @@ let Facility = {
     }
 };
 
+let Manhours = {
+    init: function () {
+        $('.price_list_datatable-manhour').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/price-list-manhour',
+                        map: function (raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+                            
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !1,
+                serverSorting: !1
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [
+                {
+                    field: 'level',
+                    title: 'Level',
+                    sortable: 'asc',
+                    filterable: !1,
+                    
+                },
+                {
+                    field: 'rate',
+                    title: 'Rate',
+                    sortable: 'asc',
+                    filterable: !1
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_pricelist_manhour_edit" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-price-manhour" title="Edit"'+
+                            'data-level='+t.level+' data-rate='+t.rate+' data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                }
+            ]
+        });
+       
+        $(document).ready(function () {
+            $('.btn-success').removeClass('add');
+        });
+
+        $('.modal-footer').on('click', '.update-price-manhour', function () {
+                let manhour = $('#uuid-manhour').val();
+                let rate = $("#rate-manhour").val();
+                let level = $("#level-manhour").val();
+            
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type:'put',
+                url: '/manhour/'+manhour,
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    rate: rate,
+                    level: level,
+                },
+                success: function (data) {
+                   
+                    $('#modal_pricelist_manhour_edit').modal('hide');
+
+                    toastr.success('Price List has been updated.', 'Success', {
+                        timeOut: 5000
+                    });
+
+                    let table = $('.price_list_datatable-manhour').mDatatable();
+
+                    table.originalDataSet = [];
+                    table.reload();
+                }
+            });
+        });
+
+        $('.price_list_datatable-manhour').on('click', '.edit-price-manhour', function () {
+            let uuid = $(this).data('uuid');
+            document.getElementById("uuid-manhour").value = uuid;
+            document.getElementById("level-manhour").innerHTML = $(this).data('level');
+            document.getElementById("level-manhour").value = $(this).data('level');
+            document.getElementById("rate-manhour").value = $(this).data('rate');
+        });
+
+    }
+};
 
 jQuery(document).ready(function () {
     Unit.init();
     Facility.init();
+    Manhours.init();
 });
