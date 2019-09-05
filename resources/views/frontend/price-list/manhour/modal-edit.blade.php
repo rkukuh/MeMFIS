@@ -13,19 +13,6 @@
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <label class="form-control-label">
-                                    Remark @include('frontend.common.label.optional')
-                                </label>
-                                @component('frontend.common.input.textarea')
-                                    @slot('id', 'remark_manhour')
-                                    @slot('name', 'remark_manhour')
-                                    @slot('text', 'Remark')
-                                    @slot('rows', '5')
-                                @endcomponent
-                            </div>
-                        </div>
-                        <div class="form-group m-form__group row ">
-                            <div class="col-sm-12 col-md-12 col-lg-12">
                                 <fieldset class="border p-2">
                                         <legend class="w-auto">Unit Price (USD) @include('frontend.common.label.required')</legend>
 
