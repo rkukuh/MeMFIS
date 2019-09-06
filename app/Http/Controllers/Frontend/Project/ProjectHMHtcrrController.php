@@ -52,7 +52,6 @@ class ProjectHMHtcrrController extends Controller
         $tat = 0;
         $htcrrs = HtCrr::where('code',  'like', 'JCRI%')->where('project_id', $project->id)->get();
         $data_json = json_decode($project->data_htcrr);
-        // dd($data_json);
         if (isset($data_json->engineer) && sizeof($data_json->skills) > 0) {
             $htcrr_engineers = json_decode($project->data_htcrr)->engineer;
             $engineer_qty = json_decode($project->data_htcrr)->engineer_qty;
@@ -334,10 +333,10 @@ class ProjectHMHtcrrController extends Controller
             $data_json["total_manhours"] = $request->manhour;
             $data_json["total_manhours_with_performance_factor"] = $request->total;
 
-            $data_json["skills"] = [0];
-            $data_json["engineer"] = [0];
-            $data_json["engineer_qty"] = [0];
-            $data_json["tat"] = [0];
+            $data_json["skills"] = [];
+            $data_json["engineer"] = [];
+            $data_json["engineer_qty"] = [];
+            $data_json["tat"] = [];
 
             $data_json = json_encode($data_json, true);
             $project->update(['data_htcrr' => $data_json]);

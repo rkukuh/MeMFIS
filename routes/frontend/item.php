@@ -21,8 +21,10 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('item')->group(function () {
 
                     /** Price List */
-                    Route::resource('/{item}/prices', 'ItemPriceController');
-                    
+                    // Route::resource('/{item}/prices', 'ItemPriceController');
+                    Route::put('/{item}/prices', 'ItemPriceController@update')->name('price.update');
+                    Route::get('/{item}/prices/edit', 'ItemPriceController@edit')->name('price.edit');
+
                     /** Transaction: Unit */
                     Route::post('/{item}/unit', 'ItemUnitController@store')->name('unit.store');
                     Route::delete('/{item}/{unit}/unit', 'ItemUnitController@destroy')->name('unit.destroy');

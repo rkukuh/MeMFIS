@@ -21,6 +21,7 @@ require('frontend/htcrr.php');
 require('frontend/facility.php');
 require('frontend/item.php');
 require('frontend/jobcard.php');
+require('frontend/manhour.php');
 require('frontend/project.php');
 require('frontend/purchase-order.php');
 require('frontend/purchase-request.php');

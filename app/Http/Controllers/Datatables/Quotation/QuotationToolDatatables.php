@@ -40,7 +40,7 @@ class QuotationToolDatatables extends Controller
 
         foreach($routinetools as $routinetool){
             if($routinetool->item->prices->last() <> null){
-                $routinetool->unitPrice .= $routinetool->item->prices->where('level',$quotation->project->customer->levels->last()->id)->last()->amount;
+                $routinetool->unitPrice .= $routinetool->item->prices->where('level',$quotation->quotationable->customer->levels->last()->id)->last()->amount;
             }
             else{
                 $routinetool->unitPrice .= 0;
@@ -160,7 +160,7 @@ class QuotationToolDatatables extends Controller
 
         foreach($nonroutinetools as $nonroutinetool){
             if($nonroutinetool->item->prices->last() <> null){
-                $nonroutinetool->unitPrice .= $nonroutinetool->item->prices->where('level',$quotation->project->customer->levels->last()->id)->last()->amount;
+                $nonroutinetool->unitPrice .= $nonroutinetool->item->prices->where('level',$quotation->quotationable->customer->levels->last()->id)->last()->amount;
             }
             else{
                 $nonroutinetool->unitPrice .= 0;

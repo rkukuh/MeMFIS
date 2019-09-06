@@ -36,7 +36,7 @@ class QuotationAdditionalItemDatatables extends Controller
 
         foreach($materials as $material){
             if($material->item->prices->last() <> null){
-                $material->unitPrice .= $material->item->prices->where('level',$quotation->parent->project->customer->levels->last()->id)->last()->amount;
+                $material->unitPrice .= $material->item->prices->where('level',$quotation->parent->quotationable->customer->levels->last()->id)->last()->amount;
             }
             else{
                 $material->unitPrice .= 0;
@@ -150,7 +150,7 @@ class QuotationAdditionalItemDatatables extends Controller
 
         foreach($tools as $tool){
             if($tool->item->prices->last() <> null){
-                $tool->unitPrice .= $tool->item->prices->where('level',$quotation->parent->project->customer->levels->last()->id)->last()->amount;
+                $tool->unitPrice .= $tool->item->prices->where('level',$quotation->parent->quotationable->customer->levels->last()->id)->last()->amount;
             }
             else{
                 $tool->unitPrice .= 0;
