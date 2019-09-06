@@ -24,7 +24,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $role)
                     @endcomponent
                 </div>
             </div>

@@ -540,6 +540,11 @@ class EmployeeController extends Controller
         //EMPLOYEE ACCOUNT
         $account = $employee->user()->first();
 
+        $account_role = null;
+        if(isset(User::find($employee->user()->first()->id)->role)){
+            $account_role = User::find($employee->user()->first()->id)->role;
+        } 
+
         //EMPLOYEE BANK CURRENT
         $bank = [];
 
@@ -583,6 +588,7 @@ class EmployeeController extends Controller
             'workshift_current' => $workshift_current,
             'workshift_history' => $workshift_history,
             'account' => $account,
+            'role' => $account_role,
             'bank' => $bank,
             'bank_history' => $bank_history
             ]);
