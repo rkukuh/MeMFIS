@@ -19,7 +19,7 @@ function material_tc(triggeruuid) {
                 data: "pivot.quantity"
             },
             {
-                data: "unit.name"
+                data: "pivot.unit"
             }
         ]
     });
@@ -58,7 +58,7 @@ function tool_tc(triggeruuid) {
                 data: "pivot.quantity"
             },
             {
-                data: "unit.name"
+                data: "pivot.unit"
             }
         ]
     });
