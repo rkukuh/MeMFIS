@@ -297,6 +297,7 @@
                                                         <div class="item_datatable" id="scrolling_both"></div>
 
                                                         @include('frontend.purchase-order.modal-check')
+                                                        @include('frontend.purchase-order.modal-po')
 
                                                         <div class="form-group m-form__group row">
                                                             <div class="col-sm-6 col-md-6 col-lg-6"></div>
@@ -422,6 +423,8 @@
 
 
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/phone.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/email.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/fax.js') }}"></script>

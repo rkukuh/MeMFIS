@@ -113,7 +113,11 @@ let PurchaseOrder = {
                     return (
                         '<button data-toggle="modal" data-target="#modal_check" type="button" href="#" class="m-badge m-badge--brand m-badge--wide " title="Edit" data-uuid=' +
                         t.uuid +
-                        '>\t\t\t\t\t\t\tCheck\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        '>\t\t\t\t\t\t\tCheck\t\t\t\t\t\t</button>\t\t\t\t\t\t'+
+
+                        '<button data-toggle="modal" data-target="#modal_po" type="button" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<i class="la la-pencil"></i>' +
+                        '</button>' 
                     );
                 }
             }
