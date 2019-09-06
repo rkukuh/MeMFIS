@@ -179,6 +179,7 @@
                                                                                 @slot('id', 'top_day_amount')
                                                                                 @slot('input_append', 'Days')
                                                                                 @slot('name', 'top_day_amount')
+                                                                                @slot('disabled', 'disabled')
                                                                                 @slot('id_error', 'top_day_amount')
                                                                             @endcomponent
                                                                         </div>
@@ -187,6 +188,7 @@
                                                                                 @slot('id', 'top_start_at')
                                                                                 @slot('text', 'Date')
                                                                                 @slot('name', 'top_start_at')
+                                                                                @slot('disabled', 'disabled')
                                                                                 @slot('id_error', 'top_start_at')
                                                                             @endcomponent
                                                                         </div>

@@ -12,6 +12,8 @@ Route::name('frontend.')->group(function () {
         Route::namespace('PurchaseOrder')->group(function () {
 
             Route::resource('purchase-order', 'PurchaseOrderController');
+            Route::resource('purchase-order/item', 'ItemPurchaseOrderController');
+
             Route::put('purchase-order/{purchaseOrder}/approve', 'PurchaseOrderController@approve')->name('purchase-order.approve');
 
             Route::name('purchase-order.')->group(function () {

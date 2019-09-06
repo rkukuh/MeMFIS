@@ -58,7 +58,7 @@
                                                         Ref PR
                                                     </label>
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'generate')
+                                                        @slot('text', $purchaseOrder->purchase_request->number)
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-3 col-md-3 col-lg-3">
@@ -66,7 +66,7 @@
                                                         Currency
                                                     </label>
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'generate')
+                                                        @slot('text', $purchaseOrder->currency->name)
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-3 col-md-3 col-lg-3">
@@ -75,7 +75,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'generate')
+                                                        @slot('text', $purchaseOrder->exchange_rate)
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -88,7 +88,7 @@
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'generate')
+                                                                @slot('text', $purchaseOrder->ordered_at)
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -97,7 +97,7 @@
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'generate')
+                                                                @slot('text', $purchaseOrder->valid_until)
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -108,7 +108,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'generate')
+                                                        @slot('text', $purchaseOrder->ship_at)
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-3 col-md-3 col-lg-3">
@@ -117,7 +117,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'generate')
+                                                        @slot('text', $purchaseOrder->vendor->name)
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -126,65 +126,22 @@
                                                     <label class="form-control-label">
                                                         Term of Payment
                                                     </label>
-                                                    <div class="form-group m-form__group row" >
-                                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                                            <div class="form-group m-form__group row">
-                                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    <div class="form-group m-form__group row">
-                                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                            @component('frontend.common.input.radio')
-                                                                                @slot('name', 'top')
-                                                                                @slot('id', 'cash')
-                                                                                @slot('value', 'cash')
-                                                                                @slot('disabled','disabled')
-                                                                            @endcomponent
-                                                                        </div>
-                                                                        <div class="col-sm-11 col-md-11 col-lg-11">
-                                                                            Cash
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    <div class="form-group m-form__group row">
-                                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                            @component('frontend.common.input.radio')
-                                                                                @slot('name', 'top')
-                                                                                @slot('id', 'by-date')
-                                                                                @slot('value', 'by-date')
-                                                                                @slot('disabled','disabled')
-                                                                            @endcomponent
-                                                                        </div>
-                                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                            @component('frontend.common.input.number')
-                                                                                @slot('text', 'Term of Payment')
-                                                                                @slot('id', 'top_day_amount')
-                                                                                @slot('input_append', 'Days')
-                                                                                @slot('name', 'top_day_amount')
-                                                                                @slot('id_error', 'top_day_amount')
-                                                                                @slot('disabled','disabled')
-                                                                            @endcomponent
-                                                                        </div>
-                                                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                                                            @component('frontend.common.input.datepicker')
-                                                                                @slot('id', 'top_start_at')
-                                                                                @slot('text', 'Date')
-                                                                                @slot('name', 'top_start_at')
-                                                                                @slot('id_error', 'top_start_at')
-                                                                                @slot('disabled','disabled')
-                                                                            @endcomponent
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @if($top == 'cash')
+                                                            @slot('text','Cash')
+                                                        @elseif($top == 'by-date')
+                                                            @slot('text',$purchaseOrder->top_day_amount." Days   |     ".$purchaseOrder->top_start_at )
+                                                        @endif
+                                                    @endcomponent
+
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         Shipping Address
                                                     </label>
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'generate')
+                                                        @slot('text', $purchaseOrder->shipping_address)
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -196,7 +153,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'generate')
+                                                        @slot('text', $purchaseOrder->description)
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -328,70 +285,11 @@
     </div>
 @endsection
 
-@push('header-scripts')
-    <style>
-        #map { height: 200px; }
-    </style>
-    <style>
-        fieldset {
-            margin-bottom: 30px;
-        }
-
-        .padding-datatable {
-            padding: 0px
-        }
-
-        .margin-info {
-            margin-left: 5px
-        }
-    </style>
-@endpush
 @push('footer-scripts')
+
     <script>
-    function myFunction(object) {
-        // var numItems = $('.project').length
-
-        // var x = this.getElementById("type_website");
-        var x = object;
-        var y = x.name;
-
-        var numb = y.match(/\d/g);
-        var z = x.value;
-        var projectUuid = z;
-    }
+        let po_uuid = "{{$purchaseOrder->uuid}}";
     </script>
-
-    <script type="text/javascript">
-        let simpan = $('.tes').on('click', '.save', function () {
-        var usertype=[];
-        $("select[name=project]").each(function(){
-            usertype.push($(this).val());
-            // alert($(this).val());
-        });
-        var ajaxdata={"UserType":usertype};
-
-        console.log(JSON.stringify(ajaxdata));
-        });
-    </script>
-    {{-- <script>
-        function initMap() {
-            var myLatLng = {lat: -7.265757, lng: 112.734146};
-
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom    : 10,
-                center  : myLatLng
-            });
-
-            var marker = new google.maps.Marker({
-                position    : myLatLng,
-                map         : map,
-                title       : 'Hello World!'
-            });
-        }
-    </script> --}}
-    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
-
-    {{-- <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/vendor.js') }}"></script>
 
@@ -405,6 +303,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 
 
+    <script src="{{ asset('js/frontend/purchase-order/show.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/phone.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/email.js') }}"></script>
@@ -413,8 +312,6 @@
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-shipping.js')}}"></script>
