@@ -229,7 +229,7 @@
         <div class="form-group m-form__group row">
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group m-form__group row">
-                    <div class="col-sm-2 col-md-2 col-lg-2">
+                    <div class="col-sm-3 col-md-3 col-lg-3">
                         <label class="form-control-label">
                             Work Progress
                         </label>
@@ -242,7 +242,7 @@
                             @slot('id_error', 'work_progress_scheduled')
                         @endcomponent
                     </div>
-                    <div class="col-sm-2 col-md-2 col-lg-2">
+                    <div class="col-sm-3 col-md-3 col-lg-3">
                         <label class="form-control-label">
                             Amount
                         </label>
@@ -254,7 +254,7 @@
                             @slot('id', 'amount_scheduled')
                         @endcomponent
                     </div>
-                    <div class="col-sm-7 col-md-7 col-lg-7">
+                    <div class="col-sm-4 col-md-4 col-lg-4">
                         <label class="form-control-label">
                             Description
                         </label>
@@ -276,9 +276,9 @@
                     </div>
                     <div class="col-sm-1 col-md-1 col-lg-1">
                         @component('frontend.common.buttons.create_repeater')
-                            @slot('id', 'calculate_scheduled')
-                            @slot('name', 'calculate_scheduled')
-                            @slot('class', 'calculate_scheduled')
+                            @slot('id', 'get_all_data')
+                            @slot('name', 'get_all_data')
+                            @slot('class', 'get_all_data')
                             @slot('style', 'margin-top:32.5px')
                         @endcomponent
                     </div>

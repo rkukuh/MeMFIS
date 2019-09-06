@@ -1,11 +1,11 @@
 let scheduled_payments = {
     init: function () {
         let dataSet = [
-            [ 1, "4%", 7, 100000],
-            [ 2, "5%", 8, 75000],
-            [ 3, "6%", 9, 185000]
+            [ "DP", "10%", 100000000, "31.99%"],
+            [ "MID", "50%", 200000000, "63.96%"],
         ];
-        $("#scheduled_payments_datatables").append('<tfoot><th></th></tfoot>');
+        // let dataSet = [];
+        $("#scheduled_payments_datatables").append('<tfoot><th></th><th></th><th></th><th></th></tfoot>');
         $('#scheduled_payments_datatables').DataTable( {
             data: dataSet,
             columns: [
@@ -30,10 +30,33 @@ let scheduled_payments = {
                       var y = parseFloat(b) || 0;
                       return x + y;
                     }, 0);
-                  console.log(sum); //alert(sum);
-                  console.log($(this.footer()).html(sum));
-                  $( api.column( 2 ).footer() ).html(sum);
+                  $( api.column( 2 ).footer() ).html("Total Amount : "+sum);
                 });
+                api.columns('1', {
+                    page: 'current'
+                  }).every(function() {
+                    var sum = this
+                      .data()
+                      .reduce(function(a, b) {
+                        var x = parseFloat(a) || 0;
+                        var y = parseFloat(b) || 0;
+                        return x + y;
+                      }, 0);
+                    $( api.column( 1 ).footer() ).html("Total Progress : "+sum+"%");
+                  });
+                  api.columns('3', {
+                    page: 'current'
+                  }).every(function() {
+                    var sum = this
+                      .data()
+                      .reduce(function(a, b) {
+                        var x = parseFloat(a) || 0;
+                        var y = parseFloat(b) || 0;
+                        return x + y;
+                      }, 0);
+                    $( api.column( 3 ).footer() ).html("Total Amount : "+sum+"%");
+                  });
+                  
               }
            
         } );
@@ -53,6 +76,15 @@ let scheduled_payments = {
             calculate_progress();
         });
 
+        $('.get_all_data').on('click', function () {
+            let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable();
+            let allData = scheduled_payment_datatable.rows().data();
+
+            for(let ind = 0 ; ind < allData.length ; ind++){
+                console.log(allData[ind]);
+            }
+        });
+
         // calculate amount
         
         function calculate_amount() {
@@ -60,8 +92,6 @@ let scheduled_payments = {
             let total = scheduled_payment_datatable.column(2).data().reduce( function (a,b) {
                 return parseFloat(a) + parseFloat(b);
             } );
-
-            console.log(total);
         }
 
         // calculate progress
@@ -70,8 +100,6 @@ let scheduled_payments = {
             let total = scheduled_payment_datatable.column(1).data().reduce( function (a,b) {
                 return parseFloat(a) + parseFloat(b);
             } );
-
-            console.log(total);
         }
 
 

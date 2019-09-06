@@ -124,6 +124,9 @@ function tool_tc_si(triggeruuid) {
         ajax: "/datatables/taskcard-si/" + triggeruuid + "/tools",
         columns: [
             {
+                data: "code"
+            },
+            {
                 data: "name"
             },
             {
