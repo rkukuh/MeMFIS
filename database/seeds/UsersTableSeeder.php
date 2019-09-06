@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
             'name'      => 'Super Admin',
             'email'     => 'admin@smartaircraft.id',
             'password'  => Hash::make('admin'),
-            'is_active' => 1    
+            'is_active' => 1,
         ]);
 
         $user->assignRole(
@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
             'first_name' => 'Super',
             'last_name'  => 'Admin',
             'joined_date' => Carbon::now()->toDateString(),
-            'updated_at' => null
+            'updated_at' => null,
         ]);
 
         // YEMIMA 
@@ -42,6 +42,7 @@ class UsersTableSeeder extends Seeder
             'name'      => 'Yemima',
             'email'     => 'yemima@smartaircraft.id',
             'password'  => Hash::make('admin'),
+            'is_active' => 1,
         ]);
 
         $user->assignRole(
