@@ -78,8 +78,15 @@ class ItemPurchaseOrderController extends Controller
      */
     public function update(PurchaseOrderUpdate $request, PurchaseOrder $purchaseOrder, Item $item)
     {
-        // dd($request->all());
-        $purchaseOrder->items()->updateExistingPivot($item->id, [ 'unit_id'=>$request->unit_id, 'quantity'=> $request->quantity, 'price'=> $request->price, 'note' => $request->note]);
+        $purchaseOrder->items()->updateExistingPivot($item->id,
+                    ['unit_id'=>$request->unit_id,
+                    'quantity'=> $request->quantity,
+                    'price'=> $request->price,
+                    'subtotal_before_discount'=> $request->quantity*$request->price ,
+                    // 'discount_type'=> $request->discount_type ,
+                    // 'discount_value'=> $request->discount_value ,
+                    'subtotal_after_discount'=> $request->quantity*$request->price ,
+                    'note' => $request->note]);
 
         return response()->json($purchaseOrder);
 

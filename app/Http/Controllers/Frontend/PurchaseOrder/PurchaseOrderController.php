@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Frontend\PurchaseOrder;
 
+use Auth;
 use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\Vendor;
+use App\Models\Approval;
 use App\Models\Currency;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
@@ -152,6 +154,12 @@ class PurchaseOrderController extends Controller
      */
     public function approve(PurchaseOrder $purchaseOrder)
     {
+        $purchaseOrder->approvals()->save(new Approval([
+            'approvable_id' => $purchaseOrder->id,
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
+        ]));
+
         return response()->json($purchaseOrder);
     }
 }
