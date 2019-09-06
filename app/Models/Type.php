@@ -594,7 +594,7 @@ class Type extends MemfisModel
     public function logbook_jobcards()
     {
         return $this->belongsToMany(JobCard::class, 'jobcard_logbooks', 'logbook_id', 'jobcard_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -622,7 +622,7 @@ class Type extends MemfisModel
     {
         return $this->belongsToMany(DefectCard::class, 'defectcard_propose_correction', 'propose_correction_id', 'defectcard_id')
                     ->withPivot('propose_correction_text')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -662,7 +662,7 @@ class Type extends MemfisModel
     public function skill_defectcards()
     {
         return $this->belongsToMany(DefectCard::class, 'defectcard_skill', 'skill_id', 'defectcard_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -676,7 +676,7 @@ class Type extends MemfisModel
     public function skill_eo_instructions()
     {
         return $this->belongsToMany(EOInstruction::class, 'eo_instruction_skill', 'skill_id', 'eo_instruction_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -690,7 +690,7 @@ class Type extends MemfisModel
     public function skill_htcrrs()
     {
         return $this->belongsToMany(HtCrr::class, 'htcrr_skill', 'skill_id', 'htcrr_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -704,7 +704,7 @@ class Type extends MemfisModel
     public function skill_taskcards()
     {
         return $this->belongsToMany(TaskCard::class, 'skill_taskcard', 'skill_id', 'taskcard_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**

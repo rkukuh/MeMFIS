@@ -1,18 +1,19 @@
 $(document).ready(function () {
-    PRs = function () {
+    item = function () {
         $.ajax({
-            url: '/get-pr-types/',
+            url: '/get-items-uuid/',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
-                $('select[name="purchase-request-type"]').empty();
 
-                $('select[name="purchase-request-type"]').append(
-                    '<option value=""> Select a Type</option>'
+                $('select[name="item"]').empty();
+
+                $('select[name="item"]').append(
+                    '<option value=""> Select a Item</option>'
                 );
 
                 $.each(data, function (key, value) {
-                    $('select[name="purchase-request-type"]').append(
+                    $('select[name="item"]').append(
                         '<option value="' + key + '">' + value + '</option>'
                     );
                 });
@@ -20,5 +21,5 @@ $(document).ready(function () {
         });
     };
 
-    PRs();
+    item();
 });

@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\PurchaseOrderStore;
 use App\Http\Requests\Frontend\PurchaseOrderUpdate;
 
-class PurchaseOrderController extends Controller
+class ItemPurchaseOrderController extends Controller
 {
     /**
      * Display a listing of the resource.

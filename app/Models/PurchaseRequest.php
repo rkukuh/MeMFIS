@@ -49,6 +49,7 @@ class PurchaseRequest extends MemfisModel
                     ->withPivot(
                         'quantity',
                         'unit_id',
+                        'quantity_unit',
                         'note'
                     )
                     ->withTimestamps();

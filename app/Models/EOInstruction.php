@@ -79,7 +79,7 @@ class EOInstruction extends MemfisModel
     public function skills()
     {
         return $this->belongsToMany(Type::class, 'eo_instruction_skill', 'eo_instruction_id', 'skill_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**

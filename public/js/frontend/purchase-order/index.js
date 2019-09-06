@@ -100,7 +100,7 @@ let PurchaseOrder = {
                     template: function (t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid +'">' +
-                                '<i class="la la-check-square-o"></i>' +
+                                '<i class="la la-check"></i>' +
                             '</a>' +
                             '<a href="/purchase-order/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +

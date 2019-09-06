@@ -171,7 +171,7 @@ class TaskCard extends MemfisModel
     public function skills()
     {
         return $this->belongsToMany(Type::class, 'skill_taskcard', 'taskcard_id', 'skill_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**

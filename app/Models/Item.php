@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 use Spatie\Tags\HasTags;
+use App\Models\Pivot\Interchange;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -149,6 +150,20 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
+     * One-Way: An item may have zero or many interchanges.
+     *
+     * This function will retrieve all the interchanges of an item.
+     *
+     * @return mixed
+     */
+    public function interchanges()
+    {
+        return $this->belongsToMany(Item::class, 'interchanges', 'item_id', 'alternate_item_id')
+                    ->using(Interchange::class)
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many: An item may have zero or one account code (journal).
      *
      * This function will retrieve the account code (journal) of an item.
@@ -243,6 +258,7 @@ class Item extends MemfisModel implements HasMedia
                     ->withPivot(
                         'quantity',
                         'unit_id',
+                        'quantity_unit',
                         'note'
                     )
                     ->withTimestamps();
