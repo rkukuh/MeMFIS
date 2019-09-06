@@ -57,7 +57,7 @@
 
 @push('footer-scripts')
 <script>
-    let project_uuid = '{{ $quotation->project->uuid }}'    
+    let project_uuid = '{{ $quotation->quotationable->uuid }}'    
     let quotation_uuid = '{{ $quotation->uuid }}'    
     let currencyCode = '{{ $quotation->currency->code }}'
 </script>

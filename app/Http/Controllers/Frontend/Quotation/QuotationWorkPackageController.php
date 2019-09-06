@@ -58,7 +58,7 @@ class QuotationWorkPackageController extends Controller
         $job_request = $quotation->workpackages()->where('quotation_id',$quotation->id)
         ->where('workpackage_id',$workPackage->id)
         ->first();
-        $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+        $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
         ->where('workpackage_id',$workPackage->id)
         ->first();
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
@@ -67,7 +67,7 @@ class QuotationWorkPackageController extends Controller
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
-            'project' => $quotation->project->uuid,
+            'project' => $quotation->quotationable->uuid,
             'quotation' => $quotation,
             'job_request' => $job_request,
             'project_workpackage' => $project_workpackage,
@@ -86,7 +86,7 @@ class QuotationWorkPackageController extends Controller
         ->where('workpackage_id',$workPackage->id)
         ->first();
 
-        $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+        $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
         ->where('workpackage_id',$workPackage->id)
         ->first();
 
@@ -96,7 +96,7 @@ class QuotationWorkPackageController extends Controller
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
-            'project' => $quotation->project->uuid,
+            'project' => $quotation->quotationable->uuid,
             'quotation' => $quotation,
             'job_request' => $job_request,
             'project_workpackage' => $project_workpackage,
