@@ -12,6 +12,8 @@ class BankAccount extends MemfisModel
         'bank_accountable_type',
         'bank_accountable_id',
         'bank_id',
+        'created_at',
+        'updated_at'
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

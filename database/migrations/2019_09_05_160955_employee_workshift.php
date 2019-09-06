@@ -21,6 +21,11 @@ class EmployeeWorkshift extends Migration
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('employee_id')
+            ->references('id')->on('employees')
+            ->onUpdate('cascade')
+            ->onDelete('restrict');
+
             $table->foreign('workshift_id')
             ->references('id')->on('workshifts')
             ->onUpdate('cascade')

@@ -143,10 +143,17 @@
                         Bank Account Number  @include('frontend.common.label.required')
                     </label>
 
+                    @php
+                        $bank_number = null;
+                        if(isset($bank['account_number'])){
+                            $bank_number = $bank['account_number'];
+                        }
+                    @endphp
                     @component('frontend.common.input.number')
                         @slot('text', 'Bank Account Number')
                         @slot('id', 'bank_account_number')
                         @slot('name', 'bank_account_number')
+                        @slot('value', $bank_number)
                         @slot('id_error', 'bank_account_number')
                     @endcomponent
                 </div>
@@ -178,11 +185,20 @@
                 <div class="col-sm-12 col-md-12 col-lg-12 footer">
                     <div class="flex">
                         <div class="action-buttons">
+                            @if ($bank != null)
                             @component('frontend.common.buttons.submit')
                                 @slot('type','button')
-                                @slot('id', 'add-account')
-                                @slot('class', 'add-account')
-                            @endcomponent
+                                @slot('id', 'edit-bank')
+                                @slot('class', 'edit-bank')
+                            @endcomponent    
+                            @else
+                            @component('frontend.common.buttons.submit')
+                                @slot('type','button')
+                                @slot('id', 'create-bank')
+                                @slot('class', 'create-bank')
+                            @endcomponent    
+                            @endif
+                            
 
                             @include('frontend.common.buttons.reset')
 
@@ -215,6 +231,8 @@
     <script src="{{ asset('js/frontend/functions/select2/bank.js') }}"></script>
     <script src="{{ asset('js/frontend/employee/employee/create_account.js') }}"></script>
     <script src="{{ asset('js/frontend/employee/employee/edit_account.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/employee/create_bank.js') }}"></script>
+    <script src="{{ asset('js/frontend/employee/employee/edit_bank.js') }}"></script>
     <script>
     
     var BootstrapSwitch = {

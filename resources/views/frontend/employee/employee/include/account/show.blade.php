@@ -93,18 +93,28 @@
                     <label class="form-control-label">
                         Bank Account Number  
                     </label>
-
+                    @php
+                        $bank_number = null;
+                        if(isset($bank['account_number'])){
+                            $bank_number = $bank['account_number'];
+                        }
+                    @endphp
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $bank_number)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
                         Bank Account Name 
                     </label>
-
+                    @php
+                        $bank_name = null;
+                        if(isset($bank['bank_name'])){
+                            $bank_name = $bank['bank_name'];
+                        }
+                    @endphp
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $bank_name['name'])
                     @endcomponent
                 </div>
             </div>
