@@ -178,7 +178,7 @@
                             @endcomponent
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'EO Summary')
-                            @slot('href', route('frontend.workPackage.summary.si', $workPackage->uuid) )
+                            @slot('href', route('frontend.workPackage.summary.eo', $workPackage->uuid) )
                         @endcomponent
 
 

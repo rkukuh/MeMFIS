@@ -233,8 +233,8 @@ let Aircraft = {
             let project_uuid = $(this).data('uuid');
 
             swal({
-                title: 'Sure want to Approve?',
-                type: 'question',
+                title: 'Are you sure do you want to approve this transaction?',
+                type: 'warning',
                 confirmButtonText: 'Yes, Approve',
                 confirmButtonColor: '#34bfa3',
                 cancelButtonText: 'Cancel',
