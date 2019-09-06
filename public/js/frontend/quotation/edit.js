@@ -440,17 +440,11 @@ let Quotation = {
             let attention_email = $('#email').val();
             let attention_address = $('#address').val();
             let scheduled_payment_array = [];
-            let type = $('#scheduled_payment_type').children("option:selected").html();
-            if(type === "By Date"){
-                $('input[name^=scheduled_payment] ').each(function (i) {
-                    scheduled_payment_array[i] = $(this).val();
-                });
-            }else{
-                $('#scheduled_payment ').each(function (i) {
-                    scheduled_payment_array[i] = parseInt($(this).val());
-                });
+            let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable();
+            let allData = scheduled_payment_datatable.rows().data();
+            for(let ind = 0 ; ind < allData.length ; ind++){
+                scheduled_payment_array.push(allData[ind]);
             }
-            scheduled_payment_array.pop();
             let charge = [];
             let chargeInputs = $('input[type="number"][name^="charge"]');
             //get all values
@@ -464,6 +458,7 @@ let Quotation = {
                 chargeType.push($(this).val());
               });
             chargeType.pop();
+            console.log(scheduled_payment_array);
 
             let data = new FormData();
             data.append("chargeType", JSON.stringify(chargeType));
