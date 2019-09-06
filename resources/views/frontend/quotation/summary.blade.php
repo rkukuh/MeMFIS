@@ -225,6 +225,7 @@
     </div>
 
     <fieldset class="border p-2">
+        <legend class="w-auto">Scheduled Payment :</legend>
         <div class="form-group m-form__group row">
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <div class="form-group m-form__group row">
@@ -284,6 +285,7 @@
                 </div>
             </div>
         </div>
-        <table id="scheduled_payments_datatables" class="table table-striped table-bordered" width="100%"></table>
+        <table id="scheduled_payments_datatables" class="table table-striped table-bordered" width="100%">
+        </table>
     </fieldset>
 </div>
