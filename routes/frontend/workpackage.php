@@ -34,6 +34,7 @@ Route::name('frontend.')->group(function () {
                     Route::get('/{workPackage}/summary/ad-sb', 'SummaryNonRoutineTaskcardController@adsb')->name('summary.ad-sb');
                     Route::get('/{workPackage}/summary/cmr-awl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('summary.cmr-awl');
                     Route::get('/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('summary.si');
+                    Route::get('/{workPackage}/summary/eo', 'SummaryNonRoutineTaskcardController@eo')->name('summary.eo');
                     Route::get('/{workPackage}/summary/routine', 'SummaryRoutineTaskcardController@summary')->name('summary.routine');
                     Route::get('/{workPackage}/summary/non-routine', 'SummaryNonRoutineTaskcardController@summary')->name('summary.nonroutine');
                     Route::get('/{workPackage}/summary/', 'WorkPackageController@summary')->name('summary.workpackage');
