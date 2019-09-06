@@ -411,6 +411,8 @@
         let po_uuid = "{{$purchaseOrder->uuid}}";
     </script>
 
+    <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/vendor.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
