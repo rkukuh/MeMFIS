@@ -120,7 +120,15 @@ class PurchaseOrderController extends Controller
      */
     public function update(PurchaseOrderUpdate $request, PurchaseOrder $purchaseOrder)
     {
-        //
+        $request->merge(['ordered_at' => Carbon::parse($request->ordered_at)]);
+        $request->merge(['valid_until' => Carbon::parse($request->valid_until)]);
+        $request->merge(['ship_at' => Carbon::parse($request->ship_at)]);
+        $request->merge(['top_start_at' => Carbon::parse($request->top_start_at)]);
+        $request->merge(['top_type' => Type::where('code',$request->top_type)->first()->id]);
+
+        $purchaseOrder->update($request->all());
+
+        return response()->json($purchaseOrder);
     }
 
     /**

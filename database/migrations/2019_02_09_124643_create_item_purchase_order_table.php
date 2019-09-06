@@ -21,8 +21,8 @@ class CreateItemPurchaseOrderTable extends Migration
             $table->unsignedBigInteger('unit_id');
             $table->double('price')->nullable();
             $table->double('subtotal_before_discount')->nullable();
-            $table->double('discount_percentage')->nullable();
-            $table->double('discount_amount')->nullable();
+            $table->string('discount_type')->nullable();
+            $table->double('discount_value')->nullable();
             $table->double('subtotal_after_discount')->nullable();
             $table->string('note')->nullable();
             $table->timestamps();

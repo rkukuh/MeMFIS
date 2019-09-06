@@ -18,6 +18,7 @@
                                     </label>
                                     @component('frontend.common.label.data-info')
                                         @slot('text', 'Item')
+                                        @slot('id', 'item_name')
                                     @endcomponent
                                 </div>
                             </div>
@@ -90,9 +91,9 @@
                                     @component('frontend.common.input.textarea')
                                         @slot('text', 'Remark')
                                         @slot('rows', '5')
-                                        @slot('name', 'remark_tool')
-                                        @slot('id', 'remark_tool')
-                                        @slot('id_error', 'remark_tool')
+                                        @slot('name', 'remark_material')
+                                        @slot('id', 'remark_material')
+                                        @slot('id_error', 'remark_material')
                                     @endcomponent
                                 </div>
                             </div>
@@ -100,7 +101,13 @@
                         <div class="modal-footer">
                             <div class="flex">
                                 <div class="action-buttons">
-                                    @include('frontend.common.buttons.close')
+                                    @component('frontend.common.buttons.update')
+                                        @slot('class', 'update-item')
+                                        @slot('type', 'button')
+                                    @endcomponent
+                                    @component('frontend.common.buttons.reset')
+                                        @slot('class', 'reset-sequance')
+                                    @endcomponent
                                 </div>
                             </div>
                         </div>
