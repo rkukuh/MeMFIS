@@ -112,8 +112,8 @@
 
                                                                         @component('frontend.common.label.data-info')
                                                                             @slot('id', 'customer')
-                                                                            @slot('text', $quotation->project->customer->name)
-                                                                            @slot('value', $quotation->project->customer->uuid)
+                                                                            @slot('text', $quotation->quotationable->customer->name)
+                                                                            @slot('value', $quotation->quotationable->customer->uuid)
                                                                         @endcomponent
                                                                     </div>
                                                                 </div>
@@ -137,7 +137,7 @@
 
                                                                         @component('frontend.common.label.data-info')
                                                                             @slot('id', 'customer_level')
-                                                                            @slot('text', $quotation->project->customer->levels->last()->name)
+                                                                            @slot('text', $quotation->quotationable->customer->levels->last()->name)
                                                                         @endcomponent
                                                                     </div>
                                                                 </div>
@@ -528,7 +528,7 @@
         let project_uuid    = '{{ $project->uuid}}';
         let quotation_uuid  = '{{ $quotation->uuid}}';
         let currencyCode    = '{{ $quotation->currency->code }}';
-        let customer_uuid   = '{{ $quotation->project->customer->uuid }}';
+        let customer_uuid   = '{{ $quotation->quotationable->customer->uuid }}';
     </script>
 
     <script src="{{ asset('js/custom.js') }}"></script>

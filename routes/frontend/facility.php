@@ -18,7 +18,9 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('facility')->group(function () {
 
                     /** Price List */
-                    Route::resource('/{facility}/prices', 'FacilityPriceController');
+                    Route::put('/{facility}/prices', 'FacilityPriceController@update')->name('price.update');
+                    Route::get('/{facility}/prices/edit', 'FacilityPriceController@edit')->name('price.edit');
+                    // Route::resource('/{facility}/prices', 'FacilityPriceController');
                 });
 
             });

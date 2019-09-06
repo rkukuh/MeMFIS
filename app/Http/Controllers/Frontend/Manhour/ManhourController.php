@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\Manhour;
 
 use App\Models\Manhour;
 use App\Http\Controllers\Controller;
@@ -16,7 +16,7 @@ class ManhourController extends Controller
      */
     public function index()
     {
-        // return view('frontend.item.material.index');
+        //
     }
 
     /**
@@ -26,7 +26,9 @@ class ManhourController extends Controller
      */
     public function create()
     {
-        //
+        $manhours = Manhour::get();
+
+        return response()->json($manhours);
     }
 
     /**
@@ -37,7 +39,7 @@ class ManhourController extends Controller
      */
     public function store(ManhourStore $request, Item $item)
     {
-      
+        //
     }
 
     /**
@@ -59,17 +61,7 @@ class ManhourController extends Controller
      */
     public function edit(Manhour $manhour)
     {
-        $tags = [];
-        foreach($request->selectedtags as $selectedtags ){ array_push($tags,Tag::findOrCreate($selectedtags, 'item'));}
-        if ($item->update($request->all())) {
-            $item->categories()->sync($request->category);
-            $item->syncTags($tags);
-
-            return response()->json($item);
-        }
-
-        // TODO: Return error message as JSON
-        return false;
+        //
     }
 
     /**
@@ -81,7 +73,9 @@ class ManhourController extends Controller
      */
     public function update(ManhourUpdate $request, Manhour $manhour)
     {
-        //
+        $manhour->update(['rate' => $request->rate]); 
+
+        return response()->json($manhour);
     }
 
     /**

@@ -28,8 +28,8 @@
                 @component('frontend.common.label.data-info')
                     @slot('id', 'total_mhrs')
                     @slot('name', 'total_mhrs')
-                    @slot('text', json_decode($quotation->project->data_htcrr)->total_manhours_with_performance_factor)
-                    @slot('value', json_decode($quotation->project->data_htcrr)->total_manhours_with_performance_factor)
+                    @slot('text', json_decode($quotation->quotationable->data_htcrr)->total_manhours_with_performance_factor)
+                    @slot('value', json_decode($quotation->quotationable->data_htcrr)->total_manhours_with_performance_factor)
                 @endcomponent
 
             </div>

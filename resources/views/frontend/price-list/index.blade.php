@@ -60,7 +60,6 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        {{-- @include('frontend.common.buttons.filter') --}}
                                     </div>
                                 </div>
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
@@ -70,12 +69,11 @@
                             </div>
 
                             @include('frontend.price-list.item.modal-edit')
-
+                            @include('frontend.price-list.facility.modal-edit')
                             @include('frontend.price-list.manhour.modal-edit')
 
 
                             <div class="col-lg-12">
-                                {{-- @include('frontend.price-list.filter') --}}
                             </div>
                             <div class="price_list_datatable-item" id="price_list_datatable-item"></div>
                         </div>
@@ -119,7 +117,6 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        @include('frontend.common.buttons.filter')
                                     </div>
                                 </div>
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
@@ -128,14 +125,7 @@
                                 </div>
                             </div>
 
-
-                            @include('frontend.price-list.item.modal-edit')
-
-                            @include('frontend.price-list.manhour.modal-edit')
-
-
                             <div class="col-lg-12">
-                                {{-- @include('frontend.price-list.filter') --}}
                             </div>
                             <div class="price_list_datatable-manhour" id="price_list_datatable-manhour"></div>
                         </div>
@@ -179,7 +169,6 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        @include('frontend.common.buttons.filter')
                                     </div>
                                 </div>
                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
@@ -187,14 +176,8 @@
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
                             </div>
-                            @include('frontend.price-list.item.modal-edit')
-                            @include('frontend.price-list.facility.modal-edit')
-
-                            {{-- @include('frontend.price-list.manhour.modal-edit') --}}
-
 
                             <div class="col-lg-12">
-                                {{-- @include('frontend.price-list.filter') --}}
                             </div>
                             <div class="price_list_datatable-facility" id="price_list_datatable-facility"></div>
                         </div>
@@ -207,17 +190,6 @@
 
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit-type.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/item-pricelist.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/unit-pricelist.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
-
 
     <script src="{{ asset('js/frontend/functions/action-botton/unit-type.js')}}"></script>
     <script src="{{ asset('js/frontend/price-list/index.js')}}"></script>

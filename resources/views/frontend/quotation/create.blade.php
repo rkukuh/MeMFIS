@@ -311,74 +311,87 @@
 
                                                 </div>
                                             </div>
-                                            <div class="form-group m-form__group row">
+                                            {{-- <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label class="form-control-label">
+                                                        Scheduled Payment @include('frontend.common.label.required')
+                                                    </label>
                                                     <div class="form-group m-form__group row">
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="col-sm-5 col-md-5 col-lg-5">
                                                             <label class="form-control-label">
-                                                                Scheduled Payment Type @include('frontend.common.label.required')
+                                                                Progress
                                                             </label>
-                                                            <select id="scheduled_payment_type" name="scheduled_payment_type" class="form-control">
-                                                                <option value="">
-                                                                    Select a schedule payment
-                                                                </option>
-                                                            </select>
                                                         </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="col-sm-5 col-md-5 col-lg-5">
                                                             <label class="form-control-label">
-                                                                Scheduled Payment @include('frontend.common.label.required')
+                                                                Note
                                                             </label>
-                                                            <div class="repeaterScheduledPayment">
-                                                                <div class="repeaterRow">
-                                                                    <div class="form-group m-form__group row">
-                                                                        <div class="col-sm-8 col-md-8 col-lg-8">
-                                                                            @component('frontend.common.input.text')
-                                                                            @slot('name', 'scheduled_payment')
-                                                                            @slot('id', 'scheduled_payment')
-                                                                            @slot('text', 'Phone')
-                                                                            @slot('autocomplete', 'off')
-                                                                            @slot('id_error', 'scheduled_payment_amount')
-                                                                            @endcomponent
-                                                                        </div>
-                                                                        <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                            @component('frontend.common.buttons.create_repeater')
-                                                                                @slot('class', 'AddRow')
-                                                                            @endcomponent
-                                                                        </div>
-                                                                        <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                            @component('frontend.common.buttons.delete_repeater')
-                                                                                @slot('class', 'DeleteRow')
-                                                                            @endcomponent
-                                                                        </div>
-                                                                    </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="repeaterScheduledPayment">
+                                                        <div class="repeaterRow">
+                                                            <div class="form-group m-form__group row">
+                                                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                    @component('frontend.common.input.text')
+                                                                    @slot('name', 'scheduled_payment')
+                                                                    @slot('id', 'scheduled_payment')
+                                                                    @slot('autocomplete', 'off')
+                                                                    @slot('id_error', 'scheduled_payment_amount')
+                                                                    @endcomponent
                                                                 </div>
-                                                            </div>
-                                                            <div class="repeaterRow Copy hidden">
-                                                                <div class="form-group m-form__group row">
-                                                                    <div class="col-sm-8 col-md-8 col-lg-8">
-                                                                        @component('frontend.common.input.text')
-                                                                        @slot('name', 'scheduled_payment')
-                                                                        @slot('id', 'scheduled_payment')
-                                                                        @slot('text', 'Scheduled Payment')
-                                                                        @slot('id_error', 'scheduled_payment_amount')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                        @component('frontend.common.buttons.create_repeater')
-                                                                            @slot('class', 'AddRow')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                        @component('frontend.common.buttons.delete_repeater')
-                                                                            @slot('class', 'DeleteRow')
-                                                                        @endcomponent
-                                                                    </div>
+                                                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                    @component('frontend.common.input.text')
+                                                                    @slot('name', 'scheduled_payment_note')
+                                                                    @slot('id', 'scheduled_payment_note')
+                                                                    @slot('autocomplete', 'off')
+                                                                    @slot('id_error', 'scheduled_payment_amount')
+                                                                    @endcomponent
+                                                                </div>
+                                                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                    @component('frontend.common.buttons.create_repeater')
+                                                                        @slot('class', 'AddRow')
+                                                                    @endcomponent
+                                                                </div>
+                                                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                    @component('frontend.common.buttons.delete_repeater')
+                                                                        @slot('class', 'DeleteRow')
+                                                                    @endcomponent
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="repeaterRow Copy hidden">
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                @component('frontend.common.input.text')
+                                                                @slot('name', 'scheduled_payment')
+                                                                @slot('id', 'scheduled_payment')
+                                                                @slot('autocomplete', 'off')
+                                                                @slot('id_error', 'scheduled_payment_amount')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                @component('frontend.common.input.text')
+                                                                @slot('name', 'scheduled_payment_note')
+                                                                @slot('id', 'scheduled_payment_note')
+                                                                @slot('autocomplete', 'off')
+                                                                @slot('id_error', 'scheduled_payment_amount')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.buttons.create_repeater')
+                                                                    @slot('class', 'AddRow')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.buttons.delete_repeater')
+                                                                    @slot('class', 'DeleteRow')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -508,7 +521,6 @@
         });
         var ajaxdata={"UserType":usertype};
 
-        console.log(JSON.stringify(ajaxdata));
         });
     </script>
     {{-- <script>

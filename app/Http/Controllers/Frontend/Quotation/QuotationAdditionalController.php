@@ -93,7 +93,7 @@ class QuotationAdditionalController extends Controller
         $quotation = Quotation::create($request->all());
 
         $defectcards = DefectCard::where('project_additional_id',$request->project_id)->get();
-        $customer = Customer::find($quotation->parent->project->customer->id)->levels->last()->score;
+        $customer = Customer::find($quotation->parent->quotationable->customer->id)->levels->last()->score;
 
         foreach($defectcards as $defectcard){
             $defectcard->quotation_additional_id = $quotation->id;
@@ -156,7 +156,7 @@ class QuotationAdditionalController extends Controller
         $scheduled_payment_amount = [];
         $scheduled_payment_amount = json_decode($quotation->scheduled_payment_amount);
         $charges = json_decode($quotation->charge);
-        $total_manhour = $quotation->project->defectcards()->sum('estimation_manhour');
+        $total_manhour = $quotation->quotationable->defectcards()->sum('estimation_manhour');
         $attention = json_decode($quotation->attention);
 
         return view('frontend.quotation.additional.edit',[
@@ -373,7 +373,7 @@ class QuotationAdditionalController extends Controller
 
         $workpackages = $quotation->workpackages;
         foreach($workpackages as $workPackage){
-            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+            $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
 

@@ -9,21 +9,8 @@
             </div>
             <div class="modal-body">
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="PriceListForm">
-                    <input type="text" class="form-control form-control-danger m-input" name="uuid" id="uuid-manhour">
+                    <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid-manhour">
                     <div class="m-portlet__body">
-                        <div class="form-group m-form__group row ">
-                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                <label class="form-control-label">
-                                    Remark @include('frontend.common.label.optional')
-                                </label>
-                                @component('frontend.common.input.textarea')
-                                    @slot('rows', '5')
-                                    @slot('id', 'remark_material')
-                                    @slot('name', 'remark_material')
-                                    @slot('text', 'Remark')
-                                @endcomponent
-                            </div>
-                        </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <fieldset class="border p-2">
@@ -32,75 +19,26 @@
                                         <div class="form-group m-form__group row ">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Level 1 (Very low Price) 
+                                                    Level 
                                                 </label>
 
-                                                @component('frontend.common.input.number')
-                                                    @slot('id', 'price_1')
-                                                    @slot('name', 'price')
-                                                    @slot('text', 'price')
-                                                    @slot('input_prepend','$')
-                                                    @slot('id_error', 'price_1')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('id', 'level-manhour')
+                                                    @slot('name', 'level-manhour')
+                                                    @slot('id_error', 'level')
                                                 @endcomponent      
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Level 2 (low Price) 
+                                                    Rate
                                                 </label>
 
                                                 @component('frontend.common.input.number')
-                                                    @slot('id', 'price_2')
-                                                    @slot('name', 'price')
-                                                    @slot('text', 'price')
+                                                    @slot('id', 'rate-manhour')
+                                                    @slot('name', 'rate-manhour')
                                                     @slot('input_prepend','$')
-                                                    @slot('id_error', 'price_2')
+                                                    @slot('id_error', 'rate')
                                                 @endcomponent         
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group m-form__group row ">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Level 3 (Normal Price) 
-                                                </label>
-
-                                                @component('frontend.common.input.number')
-                                                    @slot('id', 'price_3')
-                                                    @slot('name', 'price')
-                                                    @slot('text', 'price')
-                                                    @slot('input_prepend','$')
-                                                    @slot('id_error', 'price_3')
-                                                @endcomponent      
-                                            </div>
-
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Level 4 (High Price) 
-                                                </label>
-
-                                                @component('frontend.common.input.number')
-                                                    @slot('id', 'price_4')
-                                                    @slot('name', 'price')
-                                                    @slot('text', 'price')
-                                                    @slot('input_prepend','$')
-                                                    @slot('id_error', 'price_4')
-                                                @endcomponent      
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group m-form__group row ">
-                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                <label class="form-control-label">
-                                                    Level 5 (Very High Price) 
-                                                </label>
-
-                                                @component('frontend.common.input.number')
-                                                    @slot('id', 'price_5')
-                                                    @slot('name', 'price')
-                                                    @slot('text', 'price')
-                                                    @slot('input_prepend','$')
-                                                    @slot('id_error', 'price_5')
-                                                @endcomponent      
                                             </div>
                                         </div>
                                 </fieldset>
@@ -111,7 +49,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                    @slot('class', 'add-price-manhour')
+                                    @slot('class', 'update-price-manhour')
                                     @slot('type', 'button')
                                 @endcomponent
 
