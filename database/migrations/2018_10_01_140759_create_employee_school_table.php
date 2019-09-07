@@ -15,6 +15,7 @@ class CreateEmployeeSchoolTable extends Migration
     {
         Schema::create('employee_school', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('employee_id');
             $table->unsignedBigInteger('degree');
             $table->string('institute');

@@ -16,6 +16,7 @@ class EmployeeSchool extends Model implements HasMedia
     protected $table = 'employee_school';
 
     protected $fillable = [
+        'uuid',
         'degree',
         'institute',
         'field_of_study',

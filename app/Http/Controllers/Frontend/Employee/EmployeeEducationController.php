@@ -8,6 +8,7 @@ use App\Models\Employee;
 use App\Models\Type;
 use App\Models\EmployeeSchool;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 
 class EmployeeEducationController extends Controller
@@ -41,6 +42,7 @@ class EmployeeEducationController extends Controller
     public function store(EmployeeEducationStore $request,Employee $employee)
     {
         $employee_school = $employee->employee_school()->create([
+            'uuid' => Str::uuid(),
             'degree' => Type::where('uuid',$request->qualification)->first()->id,
             'institute' => $request->institute,
             'field_of_study' => $request->field_of_study,
@@ -70,10 +72,11 @@ class EmployeeEducationController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,Employee $employee)
+    public function edit(Request $request)
     {
-        return response()->json($request->education);
-        // return response()->json($education);
+        $education = EmployeeSchool::where('uuid',$request->education)->first();
+
+        return response()->json($education);
     }
 
     /**

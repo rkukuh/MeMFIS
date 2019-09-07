@@ -18,7 +18,6 @@ class EmployeeSchoolDatatables extends Controller
         foreach($employeeSchool_data as $ed){
             $employeeSchool[$i] = [
                 'uuid' => $ed->uuid,
-                'code' => Type::find($ed->degree)->code,
                 'institute' => $ed->institute,
                 'qualification' => Type::find($ed->degree)->name,
                 'field_of_study' => $ed->field_of_study,

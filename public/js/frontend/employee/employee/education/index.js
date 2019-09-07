@@ -74,10 +74,10 @@ let EducationEmployee = {
                     template: function (t, e, i) {
                         return (
                             '<button id="edit-employee-education" data-toggle="modal" data-target="#modal_education" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-unit" title="Edit" data-uuid=' +
-                            t.code +
+                            t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                            t.code +
+                            t.uuid +
                             ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
                     }
@@ -96,10 +96,8 @@ let EducationEmployee = {
                     type: 'get',
                     url: '/employee/' + uuid + '/education/' + triggerid + '/edit',
                     success: function (data) {
-                        // $('#uuid').val(data.uuid)
-                        // $('#code_statuses').val(data.code)
-                        // $('#name').val(data.name)
-                        // $('#description').html(data.description)
+                        $('#institute').val(data.institute)
+                        $('#graduation_date').val(data.graduated_at)
                     },
                     error: function (jqXhr, json, errorThrown) {
                         // this are default for ajax errors
