@@ -509,17 +509,16 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
-     * Many-to-Many: An employee may have zero or many schools.
+     * One-to-Many: An employee may have zero or many schools.
      *
      * This function will retrieve all the schools of an employee.
-     * See: School's employees() method for the inverse
+     * See: EmployeeSchool employee() method for the inverse
      *
      * @return mixed
      */
-    public function schools()
+    public function employee_school()
     {
-        return $this->belongsToMany(School::class)
-                    ->withTimestamps();
+        return $this->hasMany(EmployeeSchool::class);
     }
 
     /**

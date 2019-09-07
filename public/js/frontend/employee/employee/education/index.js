@@ -1,17 +1,13 @@
 let EducationEmployee = {
     init: function () {
-        function strtrunc(str, max, add) {
-            add = add || '...';
-            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
-        };
-
+        let uuid = $('input[name=employee_uuid]').val();
         $('.education_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/purchase-request',
+                        url: '/datatables/employee/'+uuid+'/employee-school',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -48,25 +44,25 @@ let EducationEmployee = {
                 }
             },
             columns: [{
-                    field: 'number',
+                    field: 'institute',
                     title: 'Institute/University',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'type.name',
+                    field: 'qualification',
                     title: 'Qualification',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'aircraft.name',
+                    field: 'field_of_study',
                     title: 'Field of Study',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'requested_at',
+                    field: 'graduated_at',
                     title: 'Graduation Date',
                     sortable: 'asc',
                     filterable: !1,
@@ -77,17 +73,46 @@ let EducationEmployee = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/purchase-request/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
+                            '<button id="edit-employee-education" data-toggle="modal" data-target="#modal_education" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-unit" title="Edit" data-uuid=' +
+                            t.code +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                            t.code +
+                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
                         );
                     }
                 }
             ]
         });
+
+        let edit = $(document).on('click', '#edit-employee-education', function () {
+            let triggerid = $(this).data('uuid')
+            let uuid = $('input[name=employee_uuid]').val();
+
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'get',
+                    url: '/employee/' + uuid + '/education/' + triggerid + '/edit',
+                    success: function (data) {
+                        // $('#uuid').val(data.uuid)
+                        // $('#code_statuses').val(data.code)
+                        // $('#name').val(data.name)
+                        // $('#description').html(data.description)
+                    },
+                    error: function (jqXhr, json, errorThrown) {
+                        // this are default for ajax errors
+                        let errorsHtml = '';
+                        let errors = jqXhr.responseJSON;
+    
+                        $.each(errors.errors, function (index, value) {
+                            alert(value);
+                        });
+                    }
+                });
+        })
+
     }
 };
 

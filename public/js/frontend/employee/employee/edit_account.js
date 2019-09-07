@@ -51,7 +51,7 @@ let Employee_edit_account = {
                                 timeOut: 5000
                             });
     
-                            // location.reload();
+                            location.reload();
     
                         }
                     }

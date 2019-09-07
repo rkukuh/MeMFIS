@@ -99,18 +99,4 @@ $factory->afterCreating(Employee::class, function ($employee, $faker) {
             );
         }
     }
-
-    // School
-    
-    if ($faker->boolean) {
-        for ($i = 1; $i <= rand(3, 4); $i++) {
-            $employee->schools()->attach(
-                School::get()->random(),
-                [
-                    'start_at' => Carbon::now()->subYear(rand(3, 5)),
-                    'graduated_at' => $faker->randomElement([null, Carbon::now()->subYear(1, 2)]),
-                ]
-            );
-        }
-    }
 });
