@@ -56,7 +56,6 @@ class PurchaseOrderController extends Controller
         $purchaseOrder = PurchaseOrder::create($request->all());
 
         $items = PurchaseRequest::find($request->purchase_request_id)->items;
-        // dd($items);
 
         foreach($items as $item){
             $purchaseOrder->items()->attach([$item->pivot->item_id => [
