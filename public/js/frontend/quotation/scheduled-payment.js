@@ -1,18 +1,34 @@
 let scheduled_payments = {
     init: function () {
-        let dataSet = [
-            [ "DP", "10%", 100000000, "31.99%"],
-            [ "MID", "50%", 200000000, "63.96%"],
-        ];
-        // let dataSet = [];
+        let dataSet = [];
         $("#scheduled_payments_datatables").append('<tfoot><th></th><th></th><th></th><th></th></tfoot>');
         $('#scheduled_payments_datatables').DataTable( {
             data: dataSet,
             columns: [
-                { title: "Description" },
-                { title: "Work Progress(%)" },
-                { title: "Amount" },
-                { title: "Amount(%)" },
+                { 
+                  title: "Work Progress(%)",
+                  data: "work_progress",
+                  "render": function ( data, type, row, meta ) {
+                    return data+"%";
+                  }
+                },
+                { 
+                  title: "Amount", 
+                  data: "amount",
+                  "render": function ( data, type, row, meta ) {
+                    return ForeignFormatter.format(data);
+                  }
+                },
+                { title: "Amount(%)",
+                data: "amount_percentage",
+                  "render": function ( data, type, row, meta ) {
+                    return data+"%";
+                  }
+                },
+                { 
+                  title: "Description",
+                  data: "description"
+                }
             ],
             searching: false, 
             paging: false, 
@@ -20,7 +36,7 @@ let scheduled_payments = {
             footer: true,
             "footerCallback": function(row, data, start, end, display) {
                 var api = this.api();
-                api.columns('2', {
+                api.columns('0', {
                   page: 'current'
                 }).every(function() {
                   var sum = this
@@ -30,9 +46,22 @@ let scheduled_payments = {
                       var y = parseFloat(b) || 0;
                       return x + y;
                     }, 0);
-                  $( api.column( 2 ).footer() ).html("Total Amount : "+sum);
+                  $( api.column( 0 ).footer() ).html("Total Work Progress : "+sum+"%");
                 });
                 api.columns('1', {
+                  page: 'current'
+                }).every(function() {
+                  var sum = this
+                    .data()
+                    .reduce(function(a, b) {
+                      var x = parseFloat(a) || 0;
+                      var y = parseFloat(b) || 0;
+                      return x + y;
+                    }, 0);
+                  $( api.column( 1 ).footer() ).html("Total Amount : "+ForeignFormatter.format(sum));
+                });
+
+                  api.columns('2', {
                     page: 'current'
                   }).every(function() {
                     var sum = this
@@ -42,19 +71,7 @@ let scheduled_payments = {
                         var y = parseFloat(b) || 0;
                         return x + y;
                       }, 0);
-                    $( api.column( 1 ).footer() ).html("Total Progress : "+sum+"%");
-                  });
-                  api.columns('3', {
-                    page: 'current'
-                  }).every(function() {
-                    var sum = this
-                      .data()
-                      .reduce(function(a, b) {
-                        var x = parseFloat(a) || 0;
-                        var y = parseFloat(b) || 0;
-                        return x + y;
-                      }, 0);
-                    $( api.column( 3 ).footer() ).html("Total Amount : "+sum+"%");
+                    $( api.column( 2 ).footer() ).html("Total Amount : "+sum+"%");
                   });
                   
               }
@@ -68,8 +85,13 @@ let scheduled_payments = {
             let description_scheduled = $("#description_scheduled").val();
             let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable();
             let amount_scheduled_percentage = ( amount_scheduled / total_rupiah) * 100;
+            let newRow = [];
+            newRow["description"] = description_scheduled;
+            newRow["work_progress"] = work_progress_scheduled;
+            newRow["amount"] = amount_scheduled;
+            newRow["amount_percentage"] = amount_scheduled_percentage;
             scheduled_payment_datatable
-                .row.add( [ description_scheduled, work_progress_scheduled+"%", amount_scheduled, amount_scheduled_percentage+"%" ] )
+                .row.add( newRow )
                 .draw();
 
             calculate_amount();
