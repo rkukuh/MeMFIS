@@ -185,6 +185,8 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'GoodsReceivedDatatables@index')->name('all');
+                Route::get('/item/{goodReceived}', 'ItemGoodsReceivedDatatables@index')->name('good-received.item');
+
 
             });
 

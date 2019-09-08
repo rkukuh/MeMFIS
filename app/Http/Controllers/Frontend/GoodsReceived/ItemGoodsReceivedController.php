@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\GoodsReceivedStore;
 use App\Http\Requests\Frontend\GoodsReceivedUpdate;
 
-class GoodsReceivedController extends Controller
+class ItemGoodsReceivedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -99,13 +99,7 @@ class GoodsReceivedController extends Controller
      */
     public function update(GoodsReceivedUpdate $request, GoodsReceived $goodsReceived)
     {
-        $request->merge(['storage_id' => Storage::where('uuid',$request->storage_id)->first()->id]);
-        $request->merge(['received_at' => Carbon::parse($request->received_at)]);
-
-        $goodsReceived->update($request->all());
-
-        return response()->json($goodsReceived);
-
+        //
     }
 
     /**

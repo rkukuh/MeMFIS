@@ -55,27 +55,27 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Ref PO  
+                                                        Ref PO
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Generated')
+                                                        @slot('text', $goodsReceived->purchase_order->number)
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Warehouse  
+                                                        Warehouse
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Generated')
+                                                        @slot('text', $goodsReceived->storage->name)
                                                     @endcomponent
                                                 </div>
                                             </div>
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Delivery Order Number  
+                                                        Delivery Order Number
                                                     </label>
                                                     @component('frontend.common.label.data-info')
                                                         @slot('text', 'Generated')
@@ -85,11 +85,11 @@
                                                     <div class="row">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
-                                                                Date  
+                                                                Date
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'Generated')
+                                                                @slot('text', $goodsReceived->received_at)
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -111,7 +111,7 @@
                                                         Purchase Request Number
                                                     </label>
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Generated')
+                                                        @slot('text', $goodsReceived->purchase_order->purchase_request->number)
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -120,7 +120,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Generated')
+                                                        @slot('text', $goodsReceived->vendor->name)
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -137,10 +137,10 @@
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
-                                                               Received By  
+                                                                Received By
                                                             </label>
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'Generated')
+                                                                @slot('text', $goodsReceived->received_by)
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -149,10 +149,10 @@
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'Generated')
+                                                                @slot('text', $goodsReceived->vehicle_no)
                                                             @endcomponent
                                                         </div>
-                                                    </div>  
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group m-form__group row">
@@ -162,7 +162,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Generated')
+                                                        @slot('text', $goodsReceived->description)
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -196,6 +196,9 @@
 @endsection
 
 @push('footer-scripts')
+    <script>
+        let grn_uuid = '{{$goodsReceived->uuid}}';
+    </script>
 
     <script src="{{ asset('js/frontend/good-received-note/show.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
