@@ -2,7 +2,9 @@
     class="btn
            btn-{{ $color or 'danger' }}
            btn-{{ $size or 'sm' }}
-           {{ $class or '' }}">
+           {{ $class or '' }}"
+           style="{{ $style or '' }}"
+           title="{{ $title or '' }}">
         <span>
             <i class="la la-trash-o"></i>
         </span>
