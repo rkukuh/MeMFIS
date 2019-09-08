@@ -443,7 +443,12 @@ let Quotation = {
             let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable();
             let allData = scheduled_payment_datatable.rows().data();
             for(let ind = 0 ; ind < allData.length ; ind++){
-                scheduled_payment_array.push(allData[ind]);
+                let container = [];
+                container[0] = allData[ind]["amount"];
+                container[1] = allData[ind]["amount_percentage"];
+                container[2] = allData[ind]["description"];
+                container[3] = allData[ind]["work_progress"];
+                scheduled_payment_array.push(container);
             }
             let charge = [];
             let chargeInputs = $('input[type="number"][name^="charge"]');
@@ -458,7 +463,6 @@ let Quotation = {
                 chargeType.push($(this).val());
               });
             chargeType.pop();
-            console.log(scheduled_payment_array);
 
             let data = new FormData();
             data.append("chargeType", JSON.stringify(chargeType));

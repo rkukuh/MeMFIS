@@ -1,6 +1,6 @@
 let scheduled_payments = {
     init: function () {
-        let dataSet = [];
+        
         let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable( {
             data: dataSet,
             columns: [
