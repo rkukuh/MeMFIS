@@ -236,7 +236,6 @@
 
                         @component('frontend.common.input.number')
                             @slot('id', 'work_progress_scheduled')
-                            @slot('text', 'work_progress_scheduled')
                             @slot('name', 'work_progress_scheduled')
                             @slot('input_append','%')
                             @slot('id_error', 'work_progress_scheduled')
@@ -248,10 +247,9 @@
                         </label>
 
                         @component('frontend.common.input.number')
-                            @slot('text', 'amount_scheduled')
+                            @slot('id', 'amount_scheduled')
                             @slot('name', 'amount_scheduled')
                             @slot('id_error', 'amount_scheduled')
-                            @slot('id', 'amount_scheduled')
                         @endcomponent
                     </div>
                     <div class="col-sm-4 col-md-4 col-lg-4">

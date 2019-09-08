@@ -78,26 +78,35 @@ let scheduled_payments = {
         } );
 
         $('.add_scheduled_row').on('click', function () {
-            let total_rupiah = $('#grand_total_rupiah').attr('value');
+            $("#work_progress_scheduled-error").html(''); 
+            $("#amount_scheduled-error").html(''); 
+            let total = $('#grand_total').attr('value');
             let work_progress_scheduled = $("#work_progress_scheduled").val();
             let amount_scheduled = $("#amount_scheduled").val();
             let description_scheduled = $("#description_scheduled").val();
-            let amount_scheduled_percentage = ( amount_scheduled / total_rupiah) * 100;
-            let newRow = [];
-            newRow["description"] = description_scheduled;
-            newRow["work_progress"] = work_progress_scheduled;
-            newRow["amount"] = amount_scheduled;
-            newRow["amount_percentage"] = amount_scheduled_percentage;
-            scheduled_payment_datatable
-                .row.add( newRow )
-                .draw();
-
-            $("#work_progress_scheduled").val(0);
-            $("#amount_scheduled").val(0);
-            $("#description_scheduled").val("");
-
-            calculate_amount();
-            calculate_progress();
+            let amount_scheduled_percentage = ( amount_scheduled / total) * 100;
+            let sub_total = calculate_amount();
+            let remaining = total - sub_total;
+            if(work_progress_scheduled > 100){
+              $("#work_progress_scheduled-error").html('Work progess precentage cannot exceed 100%'); 
+              return;
+            }else if(parseInt(amount_scheduled) > parseInt(total)){
+              $("#amount_scheduled-error").html('Amount inserted cannot exceed remaining '+ ForeignFormatter.format(remaining)+' of total'); 
+              return ;
+            }else{
+              let newRow = [];
+              newRow["description"] = description_scheduled;
+              newRow["work_progress"] = work_progress_scheduled;
+              newRow["amount"] = amount_scheduled;
+              newRow["amount_percentage"] = amount_scheduled_percentage;
+              scheduled_payment_datatable
+                  .row.add( newRow )
+                  .draw();
+                
+              $("#work_progress_scheduled").val(0);
+              $("#amount_scheduled").val(0);
+              $("#description_scheduled").val("");
+            }
         });
 
         $('#scheduled_payments_datatables tbody').on( 'click', 'tr', function () {

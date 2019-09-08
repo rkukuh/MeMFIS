@@ -482,7 +482,6 @@
 <script type="text/javascript">
     let dataSet = {!! $quotation->scheduled_payment_amount !!}
 
-    console.log(dataSet);
     if(dataSet.length < 1){
         dataSet = [];
     }
