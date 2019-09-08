@@ -1,8 +1,7 @@
 let scheduled_payments = {
     init: function () {
         let dataSet = [];
-        $("#scheduled_payments_datatables").append('<tfoot><th></th><th></th><th></th><th></th></tfoot>');
-        $('#scheduled_payments_datatables').DataTable( {
+        let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable( {
             data: dataSet,
             columns: [
                 { 
@@ -83,7 +82,6 @@ let scheduled_payments = {
             let work_progress_scheduled = $("#work_progress_scheduled").val();
             let amount_scheduled = $("#amount_scheduled").val();
             let description_scheduled = $("#description_scheduled").val();
-            let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable();
             let amount_scheduled_percentage = ( amount_scheduled / total_rupiah) * 100;
             let newRow = [];
             newRow["description"] = description_scheduled;
@@ -98,13 +96,18 @@ let scheduled_payments = {
             calculate_progress();
         });
 
-        $('.get_all_data').on('click', function () {
-            let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable();
-            let allData = scheduled_payment_datatable.rows().data();
-
-            for(let ind = 0 ; ind < allData.length ; ind++){
-                console.log(allData[ind]);
+        $('#scheduled_payments_datatables tbody').on( 'click', 'tr', function () {
+            if ( $(this).hasClass('selected') ) {
+                $(this).removeClass('selected');
             }
+            else {
+              scheduled_payment_datatable.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        } );
+
+        $('.delete_row').on('click', function () {
+            scheduled_payment_datatable.row('.selected').remove().draw( false );
         });
 
         // calculate amount
@@ -114,6 +117,8 @@ let scheduled_payments = {
             let total = scheduled_payment_datatable.column(2).data().reduce( function (a,b) {
                 return parseFloat(a) + parseFloat(b);
             } );
+
+            return total;
         }
 
         // calculate progress
@@ -122,15 +127,9 @@ let scheduled_payments = {
             let total = scheduled_payment_datatable.column(1).data().reduce( function (a,b) {
                 return parseFloat(a) + parseFloat(b);
             } );
+
+            return total;
         }
-
-
-        // WIP Delete row
-        $('#scheduled_payments_datatables tbody').on( 'click', 'tr', function () {
-            let table = $('#scheduled_payments_datatables').DataTable();
-            alert( 'Row index: '+ table.row( this ).index() );
-        } );
-
     }
 };
 

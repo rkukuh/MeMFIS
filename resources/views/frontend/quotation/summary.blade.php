@@ -271,14 +271,16 @@
                             @slot('id', 'add_scheduled_row')
                             @slot('name', 'add_scheduled_row')
                             @slot('class', 'add_scheduled_row')
+                            @slot('title', 'Add scheduled payment row')
                             @slot('style', 'margin-top:32.5px')
                         @endcomponent
                     </div>
                     <div class="col-sm-1 col-md-1 col-lg-1">
-                        @component('frontend.common.buttons.create_repeater')
-                            @slot('id', 'get_all_data')
-                            @slot('name', 'get_all_data')
-                            @slot('class', 'get_all_data')
+                        @component('frontend.common.buttons.delete_repeater')
+                            @slot('id', 'delete_row')
+                            @slot('name', 'delete_row')
+                            @slot('class', 'delete_row')
+                            @slot('title', 'Delete scheduled payment row')
                             @slot('style', 'margin-top:32.5px')
                         @endcomponent
                     </div>
@@ -286,6 +288,7 @@
             </div>
         </div>
         <table id="scheduled_payments_datatables" class="table table-striped table-bordered" width="100%">
+        <tfoot><th></th><th></th><th colspan="2"></th></tfoot>
         </table>
     </fieldset>
 </div>
