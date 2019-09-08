@@ -45,7 +45,7 @@ class PurchaseOrderController extends Controller
      */
     public function store(PurchaseOrderStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('PR-', PurchaseOrder::withTrashed()->count()+1)]);
+        $request->merge(['number' => DocumentNumber::generate('PO-', PurchaseOrder::withTrashed()->count()+1)]);
         $request->merge(['purchase_request_id' => PurchaseRequest::where('uuid',$request->purchase_request_id)->first()->id]);
         $request->merge(['ordered_at' => Carbon::parse($request->ordered_at)]);
         $request->merge(['valid_until' => Carbon::parse($request->valid_until)]);

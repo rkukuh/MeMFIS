@@ -11,7 +11,7 @@ let PurchaseRequestGeneral = {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/purchase-request/general',
+                url: '/purchase-request-general',
                 type: 'POST',
                 data: {
                     requested_at:date,

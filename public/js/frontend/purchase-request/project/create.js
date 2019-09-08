@@ -122,7 +122,7 @@ let PurchaseRequestProject = {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/purchase-request/project',
+                url: '/purchase-request-project',
                 type: 'POST',
                 data: {
                     number:number,
