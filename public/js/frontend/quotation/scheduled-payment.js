@@ -92,6 +92,10 @@ let scheduled_payments = {
                 .row.add( newRow )
                 .draw();
 
+            $("#work_progress_scheduled").val(0);
+            $("#amount_scheduled").val(0);
+            $("#description_scheduled").val("");
+
             calculate_amount();
             calculate_progress();
         });
