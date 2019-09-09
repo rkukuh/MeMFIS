@@ -347,7 +347,7 @@
                                                         <option value="">
                                                             Select Recurrence
                                                         </option>
-                                                        <option value="cyrcle">
+                                                        <option value="cycle">
                                                             Cycle
                                                         </option>
                                                         <option value="hourly">
