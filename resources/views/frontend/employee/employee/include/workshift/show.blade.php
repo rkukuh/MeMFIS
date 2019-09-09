@@ -8,8 +8,14 @@
                         Workshift Name 
                     </label>
 
+                    @php
+                        $workshift_name = null;
+                        if(isset($workshift_current['name'])){
+                            $workshift_name = $workshift_current['name'];
+                        }
+                    @endphp
                     @component('frontend.common.label.data-info')
-                        @slot('text', $workshift_current['name'])
+                        @slot('text', $workshift_name)
                     @endcomponent
                 </div>
             </div>

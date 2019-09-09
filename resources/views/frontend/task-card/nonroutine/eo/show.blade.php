@@ -145,14 +145,12 @@
                                                     Category @include('frontend.common.label.required')
                                                 </label>
 
-                                                @if (empty($taskcard->category_id))
-                                                    @include('frontend.common.label.data-info-nodata')
+                                                @if(isset($taskcard->category_id))
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $taskcard->category_id)
+                                                    @endcomponent
                                                 @else
-                                                    <div style="background-color:beige; padding:15px;" class="">
-                                                        @foreach($taskcard->related_to  as $related)
-                                                            {{ $related->number }},
-                                                        @endforeach
-                                                    </div>
+                                                    @include('frontend.common.label.data-info-nodata')
                                                 @endif
                                             </div>
                                             <div class="form-group m-form__group row">
@@ -305,33 +303,35 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @if( $taskcard->manual_affected_id == 69)
+                                                    @if( $taskcard->manual_affected_id == 136)
                                                         @slot('text', 'MM')
-                                                    @elseif( $taskcard->manual_affected_id == 70)
+                                                    @elseif( $taskcard->manual_affected_id == 137)
                                                         @slot('text', 'IPC')
-                                                    @elseif( $taskcard->manual_affected_id == 71)
+                                                    @elseif( $taskcard->manual_affected_id == 138)
                                                         @slot('text', 'WDM')
-                                                    @elseif( $taskcard->manual_affected_id == 72)
+                                                    @elseif( $taskcard->manual_affected_id == 139)
                                                         @slot('text', 'OHM')
                                                     @else
                                                         @slot('text', 'Other')
                                                     @endif
                                                 @endcomponent
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="note_div">
+                                            @if($taskcard->manual_affected_id == 140)
+                                            <div class="col-sm-6 col-md-6 col-lg-6" id="note_div">
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>
 
-                                                @if($taskcard->manual_affected)
+                                                @if(isset($taskcard->manual_affected_text))
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', $taskcard->manual_affected)
+                                                            @slot('text', $taskcard->manual_affected_text)
                                                         @endcomponent
                                                     </div>
                                                 </div>
                                                 @endif
                                             </div>
+                                            @endif
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -427,8 +427,8 @@
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
                             @include('frontend.task-card.nonroutine.eo.instruction.modal')
-                            @include('frontend.task-card.nonroutine.eo.tool.modal')
-                            @include('frontend.task-card.nonroutine.eo.item.modal')
+                            @include('frontend.task-card.nonroutine.eo.tool.index')
+                            @include('frontend.task-card.nonroutine.eo.item.index')
 
                             <div class="instruction_datatable" id="instruction_datatable"></div>
                         </div>
@@ -460,6 +460,11 @@
 @endpush
 
 @push('footer-scripts')
+
+    <script>
+        let taskcard_uuid = '{{$taskcard->uuid}}';
+    </script>
+
     <script>
         var autoExpand = function (field) {
 
@@ -484,10 +489,6 @@
         if (event.target.tagName.toLowerCase() !== 'textarea') return;
         autoExpand(event.target);
         }, false);
-    </script>
-
-    <script>
-        let taskcard_uuid = '{{$taskcard->uuid}}';
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
@@ -524,4 +525,7 @@
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/show.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/item/index.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/tool/index.js') }}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush
