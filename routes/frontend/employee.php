@@ -32,6 +32,7 @@ Route::name('frontend.')->group(function () {
                     /** Transaction */
                     Route::resource('/{employee}/history', 'EmployeeHistoryController');
                     Route::resource('/{employee}/education', 'EmployeeEducationController');
+                    Route::post('/{employee}/education/{education}/update-document','EmployeeEducationController@update_file');
                     Route::resource('/{employee}/travel-request', 'EmployeeTravelRequestController');
                     Route::resource('/{employee}/general-license', 'EmployeeGeneralLicenseController');
                     Route::resource('/{employee}/benefit-salary', 'EmployeeBenefitController');

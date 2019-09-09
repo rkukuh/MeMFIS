@@ -1,9 +1,8 @@
 let Employee_create_education = {
     init: function () {
 
-    let create_education = $(document).on('click', '.create-education', function () {
+    let create_education = $(document).on('click', '#create-education', function () {
 
-       
         let uuid = $('input[name=employee_uuid]').val() 
         
         formData = new FormData($('#education_form')[0])
@@ -33,6 +32,12 @@ let Employee_create_education = {
                             $('#graduation_date-error').html(data.errors.graduation_date[0]);
                         }else{
                             $('#graduation_date-error').html('');
+                        }
+
+                        if (data.errors.field_of_study) {
+                            $('#field_of_study-error').html(data.errors.field_of_study[0]);
+                        }else{
+                            $('#field_of_study-error').html('');
                         }
                     });
                 } else {
