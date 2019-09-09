@@ -55,9 +55,14 @@ class ProjectPurchaseRequestController extends Controller
         $items = QuotationWorkPackageTaskCardItem::with('item','item.unit')->where('quotation_id',Project::find($request->project_id)->quotations->first()->id)->get();
 
         foreach($items as $item){
-            $purchaseRequest->items()->attach([$item->item_id => [
-                'quantity'=> $item->quantity,
-                'unit_id' => $item->unit_id]]);
+            $i = Item::find($item->item_id)->categories->first()->code;
+            if($i == "raw" or $i == "cons" or $i == "comp"){
+                $purchaseRequest->items()->attach([$item->item_id => [
+                    'quantity'=> $item->quantity,
+                    'unit_id' => $item->unit_id,
+                    'quantity_unit' => $item->quantity]
+                ]);
+            }
         }
 
         return response()->json($purchaseRequest);
@@ -99,21 +104,11 @@ class ProjectPurchaseRequestController extends Controller
      */
     public function update(PurchaseRequestUpdate $request, PurchaseRequest $purchaseRequest)
     {
-        $request->type_id = Type::where('of','purchase-request')->where('name',$request->type_id)->first()->id;
-        $request->requested_at = Carbon::parse($request->requested_at);
-        $request->required_at = Carbon::parse($request->required_at);
-
-        $purchaseRequest = PurchaseRequest::update([
-            'number' => $request->number,
-            'type_id' => $request->type_id,
-            'requested_at' => $request->requested_at,
-            'required_at' => $request->required_at,
-            'description' => $request->description,
-            ]);
+        $purchaseRequest->update($request->all());
 
         return response()->json($purchaseRequest);
-
     }
+
 
     /**
      * Remove the specified resource from storage.

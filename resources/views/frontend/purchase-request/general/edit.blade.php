@@ -58,14 +58,10 @@
                                                     Purchase Request Number
                                                 </label>
 
-
-                                                @component('frontend.common.input.text')
-                                                    @slot('id', 'number')
-                                                    @slot('name', 'number')
-                                                    @slot('value', $purchaseRequest->number)
-                                                    @slot('id_error','number')
-                                                    @slot('editable','disabled')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $purchaseRequest->number)
                                                 @endcomponent
+
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -150,7 +146,7 @@
                                                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                                     @component('frontend.common.buttons.create-new')
                                                                         @slot('text', 'Item')
-                                                                        @slot('data_target', '#modal_item')
+                                                                        @slot('data_target', '#modal_general')
                                                                     @endcomponent
 
 
@@ -159,6 +155,7 @@
                                                             </div>
                                                         </div>
                                                         @include('frontend.purchase-request.general.modal')
+                                                        @include('frontend.purchase-request.general.modal-edit')
                                                         <div class="item_datatable" id="scrolling_both"></div>
                                                     </div>
                                                 </div>
@@ -171,8 +168,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-pr')
-                                                        @slot('class', 'add-pr')
+                                                        @slot('id', 'update-pr')
+                                                        @slot('class', 'update-pr')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')

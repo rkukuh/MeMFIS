@@ -2,7 +2,6 @@ let PurchaseRequestGeneral = {
     init: function () {
 
         $('.footer').on('click', '.add-pr', function () {
-            let number = $('input[name=number]').val();
             let date = $('input[name=date]').val();
             let date_required = $('input[name=date-required]').val();
             let description = $('#description').val();
@@ -15,7 +14,6 @@ let PurchaseRequestGeneral = {
                 url: '/purchase-request-general',
                 type: 'POST',
                 data: {
-                    number:number,
                     requested_at:date,
                     required_at:date_required,
                     description:description,

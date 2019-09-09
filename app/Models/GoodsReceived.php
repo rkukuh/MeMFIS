@@ -94,4 +94,17 @@ class GoodsReceived extends MemfisModel
     {
         return $this->belongsTo(Storage::class);
     }
+
+    /**
+     * One-to-Many: A GRN may have one vedor.
+     *
+     * This function will retrieve the vedor of a GRN.
+     * See: Vendor's goods_receiveds() method for the inverse
+     *
+     * @return mixed
+     */
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
 }

@@ -23,6 +23,7 @@ class CreateGoodsReceivedTable extends Migration
             $table->string('container_no')->nullable();
             $table->unsignedBigInteger('purchase_order_id');
             $table->unsignedBigInteger('storage_id');
+            $table->unsignedBigInteger('vendor_id');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
@@ -39,6 +40,11 @@ class CreateGoodsReceivedTable extends Migration
 
             $table->foreign('storage_id')
                     ->references('id')->on('storages')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('vendor_id')
+                    ->references('id')->on('vendors')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 

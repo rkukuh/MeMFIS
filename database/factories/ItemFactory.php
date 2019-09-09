@@ -55,12 +55,12 @@ $factory->afterCreating(Item::class, function ($item, $faker) {
         $item->categories()->attach(Category::ofItem()->get()->random());
     }
 
-    // Tags
+    // Interchange
 
-    $tags = Tag::getWithType('item');
-
-    for ($i = 1; $i <= rand(0, $tags->count()); $i++) {
-        $item->tags()->attach($tags->find($i));
+    if ($faker->boolean) {
+        for ($i = 1; $i <= rand(1, 5); $i++) {
+            $item->interchanges()->save(Item::get()->random());
+        }
     }
 
     // Journal
@@ -74,5 +74,13 @@ $factory->afterCreating(Item::class, function ($item, $faker) {
     $item->prices()->saveMany(
         factory(Price::class, rand(3, 6))->make()
     );
+
+    // Tags
+
+    $tags = Tag::getWithType('item');
+
+    for ($i = 1; $i <= rand(0, $tags->count()); $i++) {
+        $item->tags()->attach($tags->find($i));
+    }
 
 });

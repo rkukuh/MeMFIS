@@ -53,7 +53,7 @@ class DefectCard extends MemfisModel
     public function helpers()
     {
         return $this->belongsToMany(Employee::class, 'defectcard_employee', 'defectcard_id', 'employee_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -142,7 +142,7 @@ class DefectCard extends MemfisModel
     {
         return $this->belongsToMany(Type::class, 'defectcard_propose_correction', 'defectcard_id', 'propose_correction_id')
                     ->withPivot('propose_correction_text')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -169,7 +169,7 @@ class DefectCard extends MemfisModel
     public function skills()
     {
         return $this->belongsToMany(Type::class, 'defectcard_skill', 'defectcard_id', 'skill_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /*************************************** ACCESSOR ****************************************/

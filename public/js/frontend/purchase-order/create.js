@@ -2,13 +2,31 @@ let PurchaseOrder = {
     init: function () {
 
         $(document).ready(function () {
-            function myFunction(event) {
-                alert('s');
-                // document.getElementById("myText").value = e.target.value
-            }
+            $('#cash').on('click', function () {
 
+                $('#top_day_amount').prop("disabled", true);
+                $('#top_start_at').prop("disabled", true);
+                $('#top_day_amount').val("");
+                $('#top_start_at').val("");
+
+            });
+            $('#by-date').on('click', function () {
+                $('#top_day_amount').removeAttr("disabled");
+                $('#top_start_at').removeAttr("disabled");
+            });
         });
 
+        $('select[name="currency"]').on('change', function () {
+            let exchange_id = this.options[this.selectedIndex].innerHTML;
+            let exchange_rate = $('input[name=exchange]');
+            if (exchange_id.includes("Rp")) {
+                exchange_rate.val(1);
+                exchange_rate.attr("readonly", true);
+            } else {
+                exchange_rate.val(1);
+                exchange_rate.attr("readonly", false);
+            }
+        });
         $('.footer').on('click', '.add-po', function () {
             let number = $('input[name=number]').val();
             let currency = $('#currency').val();
@@ -28,6 +46,7 @@ let PurchaseOrder = {
 
             if($('#cash').is(":checked")){
                 top = 'cash';
+
             }
             else if($('#by-date').is(":checked")){
                 top = 'by-date';
@@ -69,11 +88,11 @@ let PurchaseOrder = {
                         //    taskcard_reset();
 
 
-                        toastr.success('Taskcard has been created.', 'Success', {
+                        toastr.success('Purchase Order has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/purchase-order/'+response.uuid+'/edit';
+                        window.location.href = '/purchase-order/'+response.uuid+'/edit';
                     }
                 }
             });

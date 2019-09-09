@@ -14,8 +14,21 @@ class CreateInterchangesTable extends Migration
     public function up()
     {
         Schema::create('interchanges', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('alternate_item_id');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('item_id')
+                    ->references('id')->on('items')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('alternate_item_id')
+                    ->references('id')->on('items')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 

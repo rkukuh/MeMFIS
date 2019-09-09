@@ -26,9 +26,9 @@ class PurchaseOrder extends MemfisModel
     ];
 
     protected $dates = [
-        'ordered_at', 
-        'valid_until', 
-        'ship_at', 
+        'ordered_at',
+        'valid_until',
+        'ship_at',
         'top_start_at',
     ];
 
@@ -89,8 +89,8 @@ class PurchaseOrder extends MemfisModel
                         'unit_id',
                         'price',
                         'subtotal_before_discount',
-                        'discount_percentage',
-                        'discount_amount',
+                        'discount_type',
+                        'discount_value',
                         'subtotal_after_discount',
                         'note'
                     )
