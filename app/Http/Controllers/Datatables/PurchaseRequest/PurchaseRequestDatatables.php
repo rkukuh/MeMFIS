@@ -295,7 +295,7 @@ class PurchaseRequestDatatables extends Controller
             }
 
             // get all raw data
-            $purchase_request = PurchaseRequest::with('Type')->get();
+            $purchase_request = PurchaseRequest::with('Type')->wherehas('approvals')->get();
 
             $alldata = json_decode( $purchase_request, true);
 

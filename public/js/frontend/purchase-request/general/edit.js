@@ -217,7 +217,7 @@ let PurchaseRequest = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: '/purchase-request-general/'+pr_uuid+'/item/'+uuid,
+                url: '/purchase-request/'+pr_uuid+'/general/item/'+uuid,
                 type: "PUT",
                 data: {
                     quantity: quantity,

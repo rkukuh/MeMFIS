@@ -33,7 +33,7 @@ class QuotationUpdate extends FormRequest
             'currency_id' => 'required|exists:currencies,id', 
             'exchange_rate' => 'required', 
             'scheduled_payment_amount' => 'required', 
-            'scheduled_payment_type' => 'required', 
+            // 'scheduled_payment_type' => 'required', 
             // 'description' => 'required', 
             // 'title' => 'required', 
             // 'term_of_payment' => 'required',

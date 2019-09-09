@@ -16,7 +16,21 @@ class PurchaseOrderDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(PurchaseOrder::with('vendor')->get());
+        $PurchaseOrders = PurchaseOrder::with('vendor')->get();
+
+        foreach($PurchaseOrders as $PurchaseOrder){
+            if($PurchaseOrder->deleted_at <> null){
+                $PurchaseOrder->status .= 'Void';
+            }
+            else if(!empty($PurchaseOrder->approvals->toArray())){
+                $PurchaseOrder->status .= 'Approved';
+            }else{
+                $PurchaseOrder->status .= '';
+
+            }
+        }
+
+        $data = $alldata = json_decode($PurchaseOrders);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

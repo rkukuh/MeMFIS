@@ -2,7 +2,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="TitleModalCheck">Check Stocl</h5>
+                    <h5 class="modal-title" id="TitleModalCheck">Item</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -18,6 +18,7 @@
                                     </label>
                                     @component('frontend.common.label.data-info')
                                         @slot('text', 'Item')
+                                        @slot('id', 'item_name')
                                     @endcomponent
                                 </div>
                             </div>
@@ -58,24 +59,26 @@
                             <div class="form-group m-form__group row ">
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <label class="form-control-label">
-                                        Disc
+                                        Disc Type
                                     </label>
-                                    @component('frontend.common.input.number')
-                                        @slot('text', 'Disc')
-                                        @slot('name','disc_dollar')
-                                        @slot('id','disc_dollar')
-                                        @slot('input_append','$')
+
+                                    @component('frontend.common.input.select2')
+                                        @slot('text', 'Discount')
+                                        @slot('name', 'discount-type')
+                                        @slot('class', 'discount-type')
+                                        @slot('id', 'discount-type')
+                                        @slot('id_error', 'discount-type')
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <label class="form-control-label">
-                                        Disc
+                                        Disc  Amount
                                     </label>
                                     @component('frontend.common.input.number')
-                                        @slot('text', 'Disc')
-                                        @slot('name','disc_percentage')
-                                        @slot('id','disc_percentage')
-                                        @slot('input_append','%')
+                                        @slot('text', 'Discount')
+                                        @slot('name', 'discount')
+                                        @slot('id', 'discount')
+                                        @slot('id_error', 'discount')
                                     @endcomponent
                                 </div>
                             </div>
@@ -84,13 +87,13 @@
                                     <label class="form-control-label">
                                         Remark @include('frontend.common.label.optional')
                                     </label>
-    
+
                                     @component('frontend.common.input.textarea')
                                         @slot('text', 'Remark')
                                         @slot('rows', '5')
-                                        @slot('name', 'remark_tool')
-                                        @slot('id', 'remark_tool')
-                                        @slot('id_error', 'remark_tool')
+                                        @slot('name', 'remark_material')
+                                        @slot('id', 'remark_material')
+                                        @slot('id_error', 'remark_material')
                                     @endcomponent
                                 </div>
                             </div>
@@ -98,7 +101,13 @@
                         <div class="modal-footer">
                             <div class="flex">
                                 <div class="action-buttons">
-                                    @include('frontend.common.buttons.close')
+                                    @component('frontend.common.buttons.update')
+                                        @slot('class', 'update-item')
+                                        @slot('type', 'button')
+                                    @endcomponent
+                                    @component('frontend.common.buttons.reset')
+                                        @slot('class', 'reset-sequance')
+                                    @endcomponent
                                 </div>
                             </div>
                         </div>

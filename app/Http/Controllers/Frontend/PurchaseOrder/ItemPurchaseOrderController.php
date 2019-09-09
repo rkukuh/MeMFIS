@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\PurchaseOrder;
 
 use Carbon\Carbon;
+use App\Models\Item;
 use App\Models\Type;
 use App\Models\Vendor;
 use App\Models\Currency;
@@ -22,7 +23,7 @@ class ItemPurchaseOrderController extends Controller
      */
     public function index()
     {
-        return view('frontend.purchase-order.index');
+        //
     }
 
     /**
@@ -32,7 +33,7 @@ class ItemPurchaseOrderController extends Controller
      */
     public function create()
     {
-        return view('frontend.purchase-order.create');
+        //
     }
 
     /**
@@ -43,28 +44,7 @@ class ItemPurchaseOrderController extends Controller
      */
     public function store(PurchaseOrderStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('PR-', PurchaseOrder::withTrashed()->count()+1)]);
-        $request->merge(['purchase_request_id' => PurchaseRequest::where('uuid',$request->purchase_request_id)->first()->id]);
-        $request->merge(['ordered_at' => Carbon::parse($request->ordered_at)]);
-        $request->merge(['valid_until' => Carbon::parse($request->valid_until)]);
-        $request->merge(['ship_at' => Carbon::parse($request->ship_at)]);
-        $request->merge(['top_start_at' => Carbon::parse($request->top_start_at)]);
-        $request->merge(['top_type' => Type::where('code',$request->top_type)->first()->id]);
-
-        $purchaseOrder = PurchaseOrder::create($request->all());
-
-        $items = PurchaseRequest::find($request->purchase_request_id)->items;
-        // dd($items);
-
-        foreach($items as $item){
-            $purchaseOrder->items()->attach([$item->pivot->item_id => [
-                'quantity'=> $item->pivot->quantity,
-                'unit_id' => $item->pivot->unit_id
-                ]
-            ]);
-        }
-
-        return response()->json($purchaseOrder);
+        //
     }
 
     /**
@@ -75,17 +55,7 @@ class ItemPurchaseOrderController extends Controller
      */
     public function show(PurchaseOrder $purchaseOrder)
     {
-        if(Type::find($purchaseOrder->top_type)->code == "cash"){
-            $top = "cash";
-        }
-        else{
-            $top = "by-date";
-        }
-
-        return view('frontend.purchase-order.show', [
-            'top' => $top,
-            'purchaseOrder' => $purchaseOrder,
-        ]);
+       //
     }
 
     /**
@@ -94,21 +64,9 @@ class ItemPurchaseOrderController extends Controller
      * @param  \App\Models\PurchaseOrder  $purchaseOrder
      * @return \Illuminate\Http\Response
      */
-    public function edit(PurchaseOrder $purchaseOrder)
+    public function edit(PurchaseOrder $purchaseOrder, Item $item)
     {
-        if(Type::find($purchaseOrder->top_type)->code == "cash"){
-            $top = "cash";
-        }
-        else{
-            $top = "by-date";
-        }
-        return view('frontend.purchase-order.edit', [
-            'top' => $top,
-            'vendors' => Vendor::all(),
-            'currencies' => Currency::all(),
-            'purchaseOrder' => $purchaseOrder,
-        ]);
-
+        return response()->json($purchaseOrder->items->where('pivot.item_id',$item->id)->first());
     }
 
     /**
@@ -118,9 +76,20 @@ class ItemPurchaseOrderController extends Controller
      * @param  \App\Models\PurchaseOrder  $purchaseOrder
      * @return \Illuminate\Http\Response
      */
-    public function update(PurchaseOrderUpdate $request, PurchaseOrder $purchaseOrder)
+    public function update(PurchaseOrderUpdate $request, PurchaseOrder $purchaseOrder, Item $item)
     {
-        //
+        $purchaseOrder->items()->updateExistingPivot($item->id,
+                    ['unit_id'=>$request->unit_id,
+                    'quantity'=> $request->quantity,
+                    'price'=> $request->price,
+                    'subtotal_before_discount'=> $request->quantity*$request->price ,
+                    // 'discount_type'=> $request->discount_type ,
+                    // 'discount_value'=> $request->discount_value ,
+                    'subtotal_after_discount'=> $request->quantity*$request->price ,
+                    'note' => $request->note]);
+
+        return response()->json($purchaseOrder);
+
     }
 
     /**
@@ -129,21 +98,10 @@ class ItemPurchaseOrderController extends Controller
      * @param  \App\Models\PurchaseOrder  $purchaseOrder
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PurchaseOrder $purchaseOrder)
+    public function destroy(PurchaseOrder $purchaseOrder, Item $item)
     {
-        $purchaseOrder->delete();
+        $purchaseOrder->items()->detach($item->id);
 
-        return response()->json($purchaseOrder);
-    }
-
-    /**
-     * Approve the specified resource from storage.
-     *
-     * @param  \App\Models\PurchaseOrder  $purchaseOrder
-     * @return \Illuminate\Http\Response
-     */
-    public function approve(PurchaseOrder $purchaseOrder)
-    {
         return response()->json($purchaseOrder);
     }
 }

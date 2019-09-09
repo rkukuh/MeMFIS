@@ -366,8 +366,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-po')
-                                                        @slot('class', 'add-po')
+                                                        @slot('id', 'update-po')
+                                                        @slot('class', 'update-po')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -410,6 +410,8 @@
     <script>
         let po_uuid = "{{$purchaseOrder->uuid}}";
     </script>
+
+    <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/vendor.js') }}"></script>
 

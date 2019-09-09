@@ -57,7 +57,7 @@ let Workpackage = {
             },
             {
                 field: 'description',
-                title: 'Title',
+                title: 'Item Description',
                 sortable: 'asc',
                 filterable: !1,
             },
@@ -67,24 +67,37 @@ let Workpackage = {
                 sortable: 'asc',
                 filterable: !1,
             },
-            {
-                field: 'removal',
-                title: 'Removal Mhrs Est.',
-                sortable: 'asc',
-                filterable: !1,
-            },
-            {
-                field: 'installation',
-                title: 'Installation Mhrs Est.',
-                sortable: 'asc',
-                filterable: !1,
-            },
-            {
+             {
                 field: 'skill_name',
                 title: 'Skill',
                 sortable: 'asc',
                 filterable: !1,
             },
+            {
+                field: '',
+                title: 'RII',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'removal',
+                title: 'Est. Removal Mhrs ',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'installation',
+                title: 'Est. Installation Mhrs ',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'description',
+                title: 'Description',
+                sortable: 'asc',
+                filterable: !1,
+            },
+           
             {
                 field: 'material',
                 title: 'Material',
@@ -114,6 +127,7 @@ let Workpackage = {
             },
             {
                 field: 'Actions',
+                title: 'Action',
                 sortable: !1,
                 overflow: 'visible',
                 template: function (t, e, i) {
@@ -129,6 +143,11 @@ let Workpackage = {
                         '</a>'
                     );
                 }
+            },{
+                field: '',
+                title: 'Create Task (Sent to)',
+                sortable: !1,
+                overflow: 'visible',
             }
             ]
         });
