@@ -44,7 +44,7 @@
                                 <label class="form-control-label">
                                     Field of Study  @include('frontend.common.label.required')
                                 </label>
-                                @component('frontend.common.input.select2')
+                                @component('frontend.common.input.input')
                                     @slot('id', 'field_of_study')
                                     @slot('name', 'field_of_study')
                                     @slot('id_error', 'field_of_study')
