@@ -190,7 +190,7 @@ let Workpackage = {
             let installation = $('input[name=installation]').val();
             let description = $('#description').val();
             let otr_certification = $('#otr_certification').val();
-            let mhrs = $('input[name=mhrs]').val();
+            let mhrs = parseFloat(removal) + parseFloat(installation);
 
             $.ajax({
                 headers: {
@@ -352,7 +352,7 @@ let Workpackage = {
             let installation = $('input[name=installation]').val();
             let description = $('#description').val();
             let otr_certification = $('#otr_certification').val();
-            let mhrs = $('input[name=mhrs]').val();
+            let mhrs = parseFloat(removal) + parseFloat(installation);
 
             $.ajax({
                 headers: {

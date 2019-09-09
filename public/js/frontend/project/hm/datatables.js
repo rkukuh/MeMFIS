@@ -196,7 +196,7 @@ let Datatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 5,
-            ajax: "/datatables/taskcard-eo/cmrawl/modal",
+            ajax: "/datatables/taskcard-ea/ea/modal",
             columns: [
                 {
                     data: "number"
@@ -230,7 +230,7 @@ let Datatables = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50],
             pageLength: 5,
-            ajax: "/datatables/taskcard-eo/cmrawl/modal",
+            ajax: "/datatables/taskcard-eo/eo/modal",
             columns: [
                 {
                     data: "number"
@@ -334,7 +334,6 @@ let Datatables = {
         let instruction_datatables_init = true;
         let predecessor_instruction_datatable_init = true;
         let successor_instruction_datatable_init = true;
-
 
         $("#basic_datatable").on("click", ".select-basic", function() {
             let taskcard_uuid = $(this).data("uuid");
@@ -489,6 +488,7 @@ let Datatables = {
         });
 
         $("#adsb_datatable").on("click", ".instructions", function() {
+            console.log(instruction_datatables_init);
             if (instruction_datatables_init == true) {
                 instruction_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
@@ -508,6 +508,7 @@ let Datatables = {
         });
 
         $("#cmrawl_datatable").on("click", ".instructions", function() {
+            console.log(instruction_datatables_init);
             if (instruction_datatables_init == true) {
                 instruction_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
@@ -1648,6 +1649,7 @@ let Datatables = {
         });
 
         $("#ea_datatable").on("click", ".instructions", function() {
+            console.log(instruction_datatables_init);
             if (instruction_datatables_init == true) {
                 instruction_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
@@ -1790,6 +1792,7 @@ let Datatables = {
         });
 
         $("#eo_datatable").on("click", ".instructions", function() {
+            console.log(instruction_datatables_init);
             if (instruction_datatables_init == true) {
                 instruction_datatables_init = false;
                 triggeruuid = $(this).data("uuid");

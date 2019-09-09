@@ -807,7 +807,6 @@
         let rdo_Scheduled = '{{$taskCard->scheduled_priority_type}}';
         let amount_Scheduled = '{{ $taskCard->scheduled_priority_text }}';
 
-        console.log(amount_Scheduled);
         // Manuals Affected
         if(view_manual_affected_id == "Other"){
             $("#note_div").removeClass("hidden");
