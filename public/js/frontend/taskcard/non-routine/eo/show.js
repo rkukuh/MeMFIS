@@ -44,13 +44,13 @@ let TaskCard = {
             },
             columns: [
                 {
-                    field: 'work_area',
+                    field: 'workarea_name',
                     title: 'Work Area',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
@@ -254,6 +254,41 @@ let TaskCard = {
             ]
         });
 
+        let material_datatables_init = true;
+        let triggeruuid = "";
+        let material = $('.instruction_datatable').on('click', '.material', function () {
+            if (material_datatables_init == true) {
+                material_datatables_init = false;
+                triggeruuid = $(this).data('uuid');
+                EO_item(triggeruuid);
+                $('#m_datatable_item').DataTable().ajax.reload();
+            }
+            else {
+                let table = $('#m_datatable_item').DataTable();
+                table.destroy();
+                triggeruuid = $(this).data('uuid');
+                EO_item(triggeruuid);
+                $('#m_datatable_item').DataTable().ajax.reload();
+            }
+        });
+
+        let tool_datatables_init = true;
+        let triggeruuid2 = "";
+        let tool = $('.instruction_datatable').on('click', '.tool', function () {
+            if (tool_datatables_init == true) {
+                tool_datatables_init = false;
+                triggeruuid2 = $(this).data('uuid');
+                EO_tool(triggeruuid2);
+                $('#m_datatable_tool').DataTable().ajax.reload();
+            }
+            else {
+                let table = $('#m_datatable_tool').DataTable();
+                table.destroy();
+                triggeruuid2 = $(this).data('uuid');
+                EO_tool(triggeruuid2);
+                $('#m_datatable_tool').DataTable().ajax.reload();
+            }
+        });
 
 
 

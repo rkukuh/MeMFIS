@@ -249,6 +249,13 @@ let Project = {
             let aircraft_text = $("#applicability_airplane option:selected").text();
             $("#aircraft_type_modal").html(aircraft_text);
             $("#aircraft_type_modal").val(aircraft_val);
+
+            $('#modal_blank_project').on('show.bs.modal', function (e) {
+                $(this)
+                .find("input,textarea")
+                    .val('')
+                    .end()
+            })
         });
 
         $('.add-blank-workpackage').on('click', function () {

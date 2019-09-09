@@ -6,6 +6,7 @@ use App\Models\Employee;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\EmployeeStore;
 use App\Http\Requests\Frontend\EmployeeUpdate;
+use App\Models\Bank;
 use App\Models\JobTittle;
 use App\Models\Position;
 use App\Models\Status;
@@ -539,6 +540,37 @@ class EmployeeController extends Controller
         //EMPLOYEE ACCOUNT
         $account = $employee->user()->first();
 
+        $account_role = null;
+        if(isset(User::find($employee->user()->first()->id)->role)){
+            $account_role = User::find($employee->user()->first()->id)->role;
+        } 
+
+        //EMPLOYEE BANK CURRENT
+        $bank = [];
+
+        if(isset($employee->bank_accounts()->whereNull('bank_accounts.updated_at')->first()->bank_id)){
+            $bank = [
+                'account_number' => $employee->bank_accounts()->whereNull('bank_accounts.updated_at')->first()->number,
+                'bank_name' => Bank::find($employee->bank_accounts()->whereNull('bank_accounts.updated_at')->first()->bank_id)
+            ];
+        }
+
+        //EMPLOYEE BANK HISTORY
+        $bank_history = [];
+        
+        $data_bank_history = $employee->bank_accounts()->whereNotNull('bank_accounts.updated_at')->get();
+
+        $r = 0;
+        foreach($data_bank_history as $dbh){
+            $bank_history[$r] = [
+                'created_at' => $dbh->created_at,
+                'updated_at' => $dbh->updated_at,
+                'account_number' => $dbh->number,
+                'bank_name' => Bank::find($dbh->bank_id)->name
+            ];
+            $r++;
+        }
+
          return view('frontend.employee.employee.show',[
             'employee' => $employee,
             'age' => $age,
@@ -555,7 +587,10 @@ class EmployeeController extends Controller
             'employee_benefit_history' =>  $employee_benefit_history,
             'workshift_current' => $workshift_current,
             'workshift_history' => $workshift_history,
-            'account' => $account
+            'account' => $account,
+            'role' => $account_role,
+            'bank' => $bank,
+            'bank_history' => $bank_history
             ]);
     }
 
@@ -976,6 +1011,32 @@ class EmployeeController extends Controller
         //EMPLOYEE ACCOUNT
         $account = User::where('id',$employee->user_id)->first();
 
+        //EMPLOYEE BANK CURRENT
+        $bank = [];
+
+        if(isset($employee->bank_accounts()->whereNull('bank_accounts.updated_at')->first()->bank_id)){
+            $bank = [
+                'account_number' => $employee->bank_accounts()->whereNull('bank_accounts.updated_at')->first()->number,
+                'bank_name' => Bank::find($employee->bank_accounts()->whereNull('bank_accounts.updated_at')->first()->bank_id)
+            ];
+        }
+
+        //EMPLOYEE BANK HISTORY
+        $bank_history = [];
+        
+        $data_bank_history = $employee->bank_accounts()->whereNotNull('bank_accounts.updated_at')->get();
+
+        $r = 0;
+        foreach($data_bank_history as $dbh){
+            $bank_history[$r] = [
+                'created_at' => $dbh->created_at,
+                'updated_at' => $dbh->updated_at,
+                'account_number' => $dbh->number,
+                'bank_name' => Bank::find($dbh->bank_id)->name
+            ];
+            $r++;
+        }
+
         return view('frontend.employee.employee.edit',[
         'employee' => $employee,
         'age' => $age,
@@ -994,7 +1055,9 @@ class EmployeeController extends Controller
         'approve' => $approve,
         'workshift_current' => $workshift_current,
         'workshift_history' => $workshift_history,
-        'account' => $account
+        'account' => $account,
+        'bank' => $bank,
+        'bank_history' => $bank_history
         ]);
     }
 

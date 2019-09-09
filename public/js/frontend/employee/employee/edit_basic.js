@@ -46,13 +46,8 @@ let Employee_edit_basic = {
             }
 
             let uuid = $('input[name=employee_uuid]').val()
-
-            id_card_file = null;
             
-            formData = new FormData()
-            if($("#id_card_photo")[0].files[0]){
-             formData.append('document',$("#id_card_photo")[0].files[0])
-            }
+            
 
             $.ajax({
              headers: {

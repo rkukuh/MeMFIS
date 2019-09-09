@@ -53,7 +53,7 @@ class EmployeeUserController extends Controller
         ]);
 
         $user->assignRole(
-            Role::where('name', $request->role)->first()
+            Role::where('name', $request->role)->first()->name
         );
 
         $employee->update([
@@ -108,7 +108,7 @@ class EmployeeUserController extends Controller
         ]);
 
         $account->assignRole(
-            Role::where('name', $request->role)->first()
+            Role::where('name', $request->role)->first()->name
         );
 
         return response()->json('Sukses');

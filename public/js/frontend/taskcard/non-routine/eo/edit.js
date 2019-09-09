@@ -697,7 +697,20 @@ let TaskCard = {
                         $('#m_datatable_item').DataTable().ajax.reload();
 
                         $('#add_modal_material').modal('hide');
-                        material_modal_reset();
+                        // material_modal_reset();
+
+                        $('#add_modal_material').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end()
+                            .find("select")
+                                .select2('val','All')
+                                .end();
+                        })
                     }
                 }
             });
