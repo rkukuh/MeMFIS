@@ -44,13 +44,13 @@ let TaskCard = {
             },
             columns: [
                 {
-                    field: 'work_area',
+                    field: 'workarea_name',
                     title: 'Work Area',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
