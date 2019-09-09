@@ -520,7 +520,7 @@
                                                     @slot('name', 'note')
                                                     @slot('text', 'Note')
                                                     @slot('disabled', 'disabled')
-                                                    @slot('value',$taskCard->manual_affected)
+                                                    @slot('value',$taskCard->manual_affected_text)
                                                 @endcomponent
                                             </div>
                                         </div>
