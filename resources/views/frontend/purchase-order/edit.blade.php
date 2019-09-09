@@ -57,23 +57,36 @@
                                                     <label class="form-control-label">
                                                         Ref PR @include('frontend.common.label.required')
                                                     </label>
-                                                    @include('frontend.common.purchase-request.index')
 
-                                                    @component('frontend.common.input.hidden')
-                                                        @slot('id', 'ref-pr')
-                                                        @slot('name', 'ref-pr')
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $purchaseOrder->purchase_request->number)
                                                     @endcomponent
+
                                                 </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
                                                     <label class="form-control-label">
                                                         Currency @include('frontend.common.label.required')
                                                     </label>
 
-                                                    @component('frontend.common.input.select2')
-                                                        @slot('id', 'currency')
-                                                        @slot('text', 'Currency')
-                                                        @slot('name', 'currency')
-                                                        @slot('id_error', 'currency')
+                                                    <select id="currency" name="currency" class="form-control m-select2">
+                                                        @foreach ($currencies as $currency)
+                                                        <option value="{{ $currency->id }}" @if ($currency->id == $purchaseOrder->currency_id) selected @endif>
+                                                            {{ $currency->name }} ({{ $currency->symbol }})
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+
+                                                </div>
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                    <label class="form-control-label">
+                                                        Exchange Rate @include('frontend.common.label.required')
+                                                    </label>
+
+                                                    @component('frontend.common.input.number')
+                                                        @slot('text', 'exchange')
+                                                        @slot('name', 'exchange')
+                                                        @slot('value', $purchaseOrder->exchange_rate)
+                                                        @slot('id', 'exchange')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -89,6 +102,7 @@
                                                                 @slot('id', 'date')
                                                                 @slot('text', 'Date')
                                                                 @slot('name', 'date')
+                                                                @slot('value', $purchaseOrder->ordered_at)
                                                                 @slot('id_error', 'date')
                                                             @endcomponent
                                                         </div>
@@ -101,38 +115,13 @@
                                                                 @slot('id', 'valid_until')
                                                                 @slot('text', 'Valid Until')
                                                                 @slot('name', 'valid_until')
+                                                                @slot('value', $purchaseOrder->valid_until)
                                                                 @slot('id_error', 'valid_until')
                                                             @endcomponent
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Exchange Rate @include('frontend.common.label.required')
-                                                    </label>
-
-                                                    @component('frontend.common.input.number')
-                                                        @slot('text', 'exchange')
-                                                        @slot('input_prepend', 'Rp')
-                                                        @slot('name', 'exchange')
-                                                        @slot('id', 'exchange')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Vendor @include('frontend.common.label.required')
-                                                    </label>
-
-                                                    @component('frontend.common.input.select2')
-                                                        @slot('id', 'vendor')
-                                                        @slot('text', 'vendor')
-                                                        @slot('name', 'vendor')
-                                                        @slot('id_error', 'vendor')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
                                                     <label class="form-control-label">
                                                         Date Shipping
                                                     </label>
@@ -141,8 +130,23 @@
                                                         @slot('id', 'date_shipping')
                                                         @slot('text', 'Date Shipping')
                                                         @slot('name', 'date_shipping')
+                                                        @slot('value', $purchaseOrder->ship_at)
                                                         @slot('id_error', 'date_shipping')
                                                     @endcomponent
+                                                </div>
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                    <label class="form-control-label">
+                                                        Vendor @include('frontend.common.label.required')
+                                                    </label>
+
+                                                    <select id="vendor" name="vendor" class="form-control m-select2">
+                                                        @foreach ($vendors as $vendor)
+                                                        <option value="{{ $vendor->id }}" @if ($vendor->id == $purchaseOrder->vendor_id) selected @endif>
+                                                            {{ $vendor->name }}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+
                                                 </div>
                                             </div>
                                             <div class="form-group m-form__group row">
@@ -160,6 +164,9 @@
                                                                                 @slot('name', 'top')
                                                                                 @slot('id', 'cash')
                                                                                 @slot('value', 'cash')
+                                                                                @if($top == 'cash')
+                                                                                    @slot('checked','checked')
+                                                                                @endif
                                                                             @endcomponent
                                                                         </div>
                                                                         <div class="col-sm-11 col-md-11 col-lg-11">
@@ -174,6 +181,9 @@
                                                                                 @slot('name', 'top')
                                                                                 @slot('id', 'by-date')
                                                                                 @slot('value', 'by-date')
+                                                                                @if($top == 'by-date')
+                                                                                    @slot('checked','checked')
+                                                                                @endif
                                                                             @endcomponent
                                                                         </div>
                                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -181,6 +191,11 @@
                                                                                 @slot('text', 'Term of Payment')
                                                                                 @slot('id', 'top_day_amount')
                                                                                 @slot('input_append', 'Days')
+                                                                                @slot('value', $purchaseOrder->top_day_amount)
+                                                                                @if($top == 'cash')
+                                                                                    @slot('value','')
+                                                                                    @slot('disabled','disabled')
+                                                                                @endif
                                                                                 @slot('name', 'top_day_amount')
                                                                                 @slot('id_error', 'top_day_amount')
                                                                             @endcomponent
@@ -189,6 +204,11 @@
                                                                             @component('frontend.common.input.datepicker')
                                                                                 @slot('id', 'top_start_at')
                                                                                 @slot('text', 'Date')
+                                                                                @slot('value', $purchaseOrder->top_start_at)
+                                                                                @if($top == 'cash')
+                                                                                    @slot('value','')
+                                                                                    @slot('disabled','disabled')
+                                                                                @endif
                                                                                 @slot('name', 'top_start_at')
                                                                                 @slot('id_error', 'top_start_at')
                                                                             @endcomponent
@@ -208,8 +228,8 @@
                                                         @slot('id', 'shipping_address')
                                                         @slot('text', 'Shipping Adddress')
                                                         @slot('name', 'shipping_address')
-                                                        @slot('rows', '3')
-                                                        @slot('value', 'Jl. Raya Bandara Juanda,Sudimoro, Betro, Sedati, Bali, Jawa Timur 61253')
+                                                        @slot('rows', '5')
+                                                        @slot('value',  $purchaseOrder->shipping_address)
                                                         @slot('id_error', 'shipping_address')
 
                                                     @endcomponent
@@ -226,6 +246,7 @@
                                                         @slot('id', 'description')
                                                         @slot('text', 'Description')
                                                         @slot('name', 'description')
+                                                        @slot('value', $purchaseOrder->description)
                                                         @slot('rows', '5')
                                                         @slot('id_error', 'description')
                                                     @endcomponent
@@ -276,6 +297,7 @@
                                                         <div class="item_datatable" id="scrolling_both"></div>
 
                                                         @include('frontend.purchase-order.modal-check')
+                                                        @include('frontend.purchase-order.modal-po')
 
                                                         <div class="form-group m-form__group row">
                                                             <div class="col-sm-6 col-md-6 col-lg-6"></div>
@@ -344,8 +366,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-po')
-                                                        @slot('class', 'add-po')
+                                                        @slot('id', 'update-po')
+                                                        @slot('class', 'update-po')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -384,66 +406,27 @@
     </style>
 @endpush
 @push('footer-scripts')
+
     <script>
-    function myFunction(object) {
-        // var numItems = $('.project').length
-
-        // var x = this.getElementById("type_website");
-        var x = object;
-        var y = x.name;
-
-        var numb = y.match(/\d/g);
-        var z = x.value;
-        var projectUuid = z;
-    }
+        let po_uuid = "{{$purchaseOrder->uuid}}";
     </script>
 
-    <script type="text/javascript">
-        let simpan = $('.tes').on('click', '.save', function () {
-        var usertype=[];
-        $("select[name=project]").each(function(){
-            usertype.push($(this).val());
-            // alert($(this).val());
-        });
-        var ajaxdata={"UserType":usertype};
-
-        console.log(JSON.stringify(ajaxdata));
-        });
-    </script>
-    {{-- <script>
-        function initMap() {
-            var myLatLng = {lat: -7.265757, lng: 112.734146};
-
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom    : 10,
-                center  : myLatLng
-            });
-
-            var marker = new google.maps.Marker({
-                position    : myLatLng,
-                map         : map,
-                title       : 'Hello World!'
-            });
-        }
-    </script> --}}
-    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
-
-    {{-- <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script> --}}
+    <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/vendor.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/vendor.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/currency.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/phone.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/email.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/fax.js') }}"></script>
@@ -451,10 +434,11 @@
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/quotation/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-order/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-order/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-shipping.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/by-date.js')}}"></script>
 
 @endpush

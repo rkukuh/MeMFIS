@@ -37,6 +37,10 @@ Route::name('frontend.')->group(function () {
                     Route::resource('/{employee}/benefit-salary', 'EmployeeBenefitController');
                     Route::post('/{employee}/update-id-card','EmployeeController@update_file');
                     Route::post('/{employee}/benefit-approval', 'EmployeeBenefitController@approval');
+                    Route::post('/{employee}/benefit-reject', 'EmployeeBenefitController@reject');
+                    Route::resource('/{employee}/account', 'EmployeeUserController');
+                    Route::resource('/{employee}/bank', 'EmployeeBankController');
+                    Route::resource('/{employee}/workshift', 'EmployeeWorkshiftController');
                 });
 
             });

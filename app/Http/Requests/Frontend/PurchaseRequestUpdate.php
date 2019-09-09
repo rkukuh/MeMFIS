@@ -3,6 +3,9 @@
 namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
+
 
 class PurchaseRequestUpdate extends FormRequest
 {
@@ -24,8 +27,8 @@ class PurchaseRequestUpdate extends FormRequest
     public function rules()
     {
         return [
-            'requested_at' => 'required|date',
-            'required_at' => 'required|date',
+            'requested_at' => 'required',
+            'required_at' => 'required',
         ];
     }
 
@@ -55,5 +58,5 @@ class PurchaseRequestUpdate extends FormRequest
     protected function failedValidation(Validator $validator) {
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
-    
+
 }

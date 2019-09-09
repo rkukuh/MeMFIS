@@ -42,6 +42,6 @@ class EmployeeBenefit extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('employee_benefit');
     }
 }

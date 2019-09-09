@@ -49,7 +49,7 @@ let PurchaseRequestProject = {
                         sortable: 'asc',
                         filterable: !1,
                         template: function (t) {
-                            return '<a href="/item/'+t.uuid+'">' + t.code + "</a>"
+                            return '<a href="/item/'+t.item.uuid+'">' + t.item.code + "</a>"
                         }
                     },
                     {
@@ -149,7 +149,7 @@ let PurchaseRequestProject = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/purchase-request-project/'+response.uuid+'/edit';
+                        window.location.href = '/purchase-request-project/'+response.uuid+'/edit';
                     }
                 }
             });

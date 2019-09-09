@@ -42,44 +42,47 @@ let PurchaseRequestGeneralShow = {
                     }
                 }
             },
-            columns: [{
-                    field: 'code',
-                    title: 'Part Number',
-                    sortable: 'asc',
+            columns: [
+                {
+                    field: "code",
+                    title: "Part Number",
+                    sortable: "asc",
                     filterable: !1,
-                    template: function (t) {
-                        return '<a href="/item/'+t.uuid+'">' + t.code + "</a>"
+                    template: function(t) {
+                        return (
+                            '<a href="/item/' + t.uuid + '">' + t.code + "</a>"
+                        );
                     }
                 },
                 {
-                    field: 'name',
-                    title: 'Item Description',
-                    sortable: 'asc',
-                    filterable: !1,
+                    field: "name",
+                    title: "Item Description",
+                    sortable: "asc",
+                    filterable: !1
                 },
                 {
-                    field: 'pivot.quantity',
+                    field: '',
                     title: 'Project Requirement Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
-                    title: 'Stock Available',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: "quantity",
-                    title: "Request Qty",
-                },
-                {
-                    field: "item.unit.name",
-                    title: "Unit",
-                },
-                {
                     field: "",
-                    title: "Remark",
+                    title: "Stock Available",
+                    sortable: "asc",
+                    filterable: !1
+                },
+                {
+                    field: "pivot.quantity",
+                    title: "Request Qty"
+                },
+                {
+                    field: "pivot.unit_id",
+                    title: "Unit"
+                },
+                {
+                    field: "pivot.note",
+                    title: "Remark"
                 },
             ]
         });

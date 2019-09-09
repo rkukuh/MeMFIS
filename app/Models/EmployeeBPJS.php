@@ -19,7 +19,8 @@ class EmployeeBPJS extends Model
         'company_max_value',
         'created_at',
         'updated_at',
-        'approved_at'
+        'approved_at',
+        'deleted_at'
     ];
     
 

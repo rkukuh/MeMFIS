@@ -27,7 +27,7 @@
                                 @for ($l = 0; $l < count($current['benefit']); $l++)
 
                             <tr>
-                                <td align="left" width="30%">{{ $current['benefit_name'][$l]['name'] }}</td>
+                                <td align="left" width="30%">{{ $current['benefit_name'][$l]['name']['name'] }}</td>
                                 <td align="center" width="25%">
                                     @component('frontend.common.label.data-info')
                                         @slot('text', $current['benefit'][$l]['amount'])
@@ -67,6 +67,7 @@
                     <label class="form-control-label">
                         Maximum Overtime per Period 
                     </label>
+
                     @php
                     $maximum_overtime = null;
                     if(isset($current['provisions'][0]['maximum_overtime'])){
@@ -74,15 +75,37 @@
                     }
                     @endphp
                     @component('frontend.common.input.number')
-                        @slot('text', 'Maximum Overtime per Period')
-                        @slot('id', 'max_overtime')
-                        @slot('name', 'max_overtime')
-                        @slot('id_error', 'max_overtime')
-                        @slot('input_append','Hours')
+                        @slot('id', 'duration')
+                        @slot('name', 'maximum_overtime')
+                        @slot('id_error', 'maximum_overtime')
                         @slot('value', $maximum_overtime)
                         @slot('disabled','disabled')
+                        @slot('input_append','Seconds')
                     @endcomponent
+
                 </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <label class="form-control-label">
+                        After Minimum Overtime
+                    </label>
+                    @php
+                    $minimum_overtime = null;
+                    if(isset($current['provisions'][0]['minimum_overtime'])){
+                        $minimum_overtime = $current['provisions'][0]['minimum_overtime'];
+                    }
+                    @endphp
+                    @component('frontend.common.input.number')
+                        @slot('id', 'duration_1')
+                        @slot('name', 'minimum_overtime')
+                        @slot('id_error', 'minimum_overtime')
+                        @slot('value', $minimum_overtime)
+                        @slot('disabled','disabled')
+                        @slot('input_append','Seconds')
+                    @endcomponent
+
+                </div>
+            </div>
+            <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
                         Holiday Overtime Allowance 
@@ -128,7 +151,7 @@
 
                     <table width="100%" cellpadding="4" border="1">
                         <tr>
-                        <td colspan="3" align="center" style="background:#8d32a8;color:white;font-weight: bold">{{ $current['bpjs_name'][$i]['name'] }}</td>
+                        <td colspan="3" align="center" style="background:#8d32a8;color:white;font-weight: bold">{{ $current['bpjs_name'][$i]['name']['name'] }}</td>
                             <td rowspan="5" align="center">
                                 @component('frontend.common.input.checkbox')
                                     @slot('id', 'check')
@@ -324,8 +347,6 @@
 
 @include('frontend.employee.employee.include.benefit.modal-history')
 
-    
-
 
 @push('header-scripts')
     <style>
@@ -338,5 +359,21 @@
             padding-left:38px;
             padding-top:6px;
         }
+        .bdp-block{
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-left:20px;
+            text-align: center;
+        } 
+        
+        .bdp-block input{
+            width:90px;
+            text-align:center;
+        }
+
+        .bdp-block input:disabled{  
+            background: #ccc;
+        }
+
     </style>
 @endpush

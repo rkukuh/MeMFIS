@@ -480,10 +480,15 @@
 </script>
 
 <script type="text/javascript">
+    let dataSet = {!! $quotation->scheduled_payment_amount !!}
+
+    if(dataSet.length < 1){
+        dataSet = [];
+    }
     $(document).ready(function() {
         let attentions = $('#attentions-val').val();
         let attention = $('#attention-val').val();
-        // attention = JSON.parse(attention)[0];
+        
         if (attentions) {
             let attn = JSON.parse(attentions);
             $('select[name="attention"]').empty();

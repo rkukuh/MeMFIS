@@ -34,6 +34,7 @@ class User extends Authenticatable implements Auditable, HasMedia
         'name',
         'email',
         'password',
+        'is_active'
     ];
 
     protected $hidden = [

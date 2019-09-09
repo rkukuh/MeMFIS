@@ -59,7 +59,8 @@
                                     @component('frontend.common.buttons.reset')
                                         @slot('class', 'reset-sequance')
                                     @endcomponent
-                                @include('frontend.common.buttons.close')
+
+                                    @include('frontend.common.buttons.close')
                             </div>
                         </div>
                     </div>

@@ -14,7 +14,8 @@ class EmployeeBenefit extends Model
         'amount',
         'created_at',
         'updated_at',
-        'approved_at'
+        'approved_at',
+        'deleted_at'
     ];
 
     /**

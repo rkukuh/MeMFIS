@@ -327,6 +327,19 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function itemUUID()
+    {
+        $items = Item::with('categories')
+                 ->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name','uuid');
+
+        return $items;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function customer()
     {
         $customers = Customer::pluck('name', 'uuid');
@@ -624,7 +637,7 @@ class FillComboxController extends Controller
      */
     public function projectQuotation()
     {
-        $projects = Project::whereHas('quotations')->pluck('title','uuid');
+        $projects = Project::has('quotations')->pluck('title','uuid');
 
         return json_encode($projects);
     }

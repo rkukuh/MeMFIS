@@ -1,5 +1,111 @@
 let Grn = {
     init: function () {
+        function item(uuid) {
+            $('.purchase_order_datatable').mDatatable({
+                data: {
+                    type: 'remote',
+                    source: {
+                        read: {
+                            method: 'GET',
+                            url:
+                            "/datatables/purchase-order/item/" +
+                            uuid,
+                            map: function (raw) {
+                                let dataSet = raw;
+
+                                if (typeof raw.data !== 'undefined') {
+                                    dataSet = raw.data;
+                                }
+
+                                return dataSet;
+                            }
+                        }
+                    },
+                    pageSize: 10,
+                    serverPaging: !0,
+                    serverFiltering: !0,
+                    serverSorting: !0
+                },
+                layout: {
+                    theme: 'default',
+                    class: '',
+                    scroll: false,
+                    footer: !1
+                },
+                sortable: !0,
+                filterable: !1,
+                pagination: !0,
+                search: {
+                    input: $('#generalSearch')
+                },
+                toolbar: {
+                    items: {
+                        pagination: {
+                            pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                        }
+                    }
+                },
+                columns: [
+                    {
+                        field: 'code',
+                        title: 'P/N',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: 'name',
+                        title: 'Item Description',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: '',
+                        title: 'Qty PR',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150
+                    },
+                    {
+                        field: 'pivot.quantity',
+                        title: 'Qty PO',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150,
+                    },
+                    {
+                        field: '',
+                        title: 'Qty',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150,
+                    },
+                    {
+                        field: '',
+                        title: 'Unit',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150,
+                    },
+                    {
+                        field: '',
+                        title: 'Remark',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150,
+                    },
+                    {
+                        field: '',
+                        title: 'Expired Date',
+                        sortable: 'asc',
+                        filterable: !1,
+                        width: 150,
+                    }
+                ]
+            });
+        };
+
         $("#purhcase_order_datatable").DataTable({
             "dom": '<"top"f>rt<"bottom">pl',
             responsive: !0,
@@ -44,6 +150,7 @@ let Grn = {
         $('.dataTables_info').addClass('margin-info');
         $('.paging_simple_numbers').addClass('padding-datatable');
 
+        let item_datatables_init = true;
         $('.dataTable').on('click', '.select-purchase-order', function () {
             let uuid = $(this).data('uuid');
             let code = $(this).data('code');
@@ -64,14 +171,33 @@ let Grn = {
                 url: '/label/get-purchase-request/'+uuid+'/',
                 type: 'GET',
                 dataType: 'json',
-                success: function (data) {
-                    $('#pr-number').html(data.purchase_request.number);
+                success: function (data2) {
+                    $('#pr-number').html(data2.purchase_request.number);
                 }
             });
 
-            $('#project-number').html('323331');
+            //TODO kalau misal grn dari po pr general gimana?
+            // $('#project-number').html('323331');
 
             $('.search-purchase-order').html(code);
+
+            if(item_datatables_init == true){
+                item_datatables_init = false;
+                item(uuid);
+                table = $(".purchase_order_datatable").mDatatable();
+                table.originalDataSet = [];
+                table.reload();
+            }
+            else{
+                let table = $('.purchase_order_datatable').mDatatable();
+                table.destroy();
+                item(uuid);
+                table = $(".purchase_order_datatable").mDatatable();
+                table.originalDataSet = [];
+                table.reload();
+                item_datatables_init = true;
+            }
+
             $('#modal_purchase_order').modal('hide');
         });
     }
