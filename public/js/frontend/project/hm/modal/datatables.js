@@ -1,6 +1,6 @@
 function material_tc(triggeruuid) {
     $("#m_datatable_material_routine_si_wp").DataTable({
-        "dom": '<"top"f>rt<"bottom">pl',
+        dom: '<"top"f>rt<"bottom">pl',
         responsive: !0,
         searchDelay: 500,
         processing: !0,
@@ -9,6 +9,9 @@ function material_tc(triggeruuid) {
         pageLength:5,
         ajax: "/datatables/taskcard-routine/"+triggeruuid+"/materials",
         columns: [
+            {
+                data: "code"
+            },
             {
                 data: "name"
             },
@@ -38,7 +41,7 @@ function material_tc(triggeruuid) {
 
 function tool_tc(triggeruuid) {
     $("#m_datatable_tool_routine_si_wp").DataTable({
-        "dom": '<"top"f>rt<"bottom">pl',
+        dom: '<"top"f>rt<"bottom">pl',
         responsive: !0,
         searchDelay: 500,
         processing: !0,
@@ -47,6 +50,9 @@ function tool_tc(triggeruuid) {
         pageLength:5,
         ajax: "/datatables/taskcard-routine/"+triggeruuid+"/tools",
         columns: [
+            {
+                data: "code"
+            },
             {
                 data: "name"
             },
@@ -76,7 +82,7 @@ function tool_tc(triggeruuid) {
 
 function material_tc_si(triggeruuid) {
     $("#m_datatable_material_routine_si_wp").DataTable({
-        "dom": '<"top"f>rt<"bottom">pl',
+        dom: '<"top"f>rt<"bottom">pl',
         responsive: !0,
         searchDelay: 500,
         processing: !0,
@@ -85,6 +91,9 @@ function material_tc_si(triggeruuid) {
         pageLength:5,
         ajax: "/datatables/taskcard-si/"+triggeruuid+"/materials",
         columns: [
+            {
+                data: "code"
+            },
             {
                 data: "name"
             },
@@ -114,7 +123,7 @@ function material_tc_si(triggeruuid) {
 
 function tool_tc_si(triggeruuid) {
     $("#m_datatable_tool_routine_si_wp").DataTable({
-        "dom": '<"top"f>rt<"bottom">pl',
+        dom: '<"top"f>rt<"bottom">pl',
         responsive: !0,
         searchDelay: 500,
         processing: !0,
@@ -123,6 +132,9 @@ function tool_tc_si(triggeruuid) {
         pageLength:5,
         ajax: "/datatables/taskcard-si/"+triggeruuid+"/tools",
         columns: [
+            {
+                data: "code"
+            },
             {
                 data: "name"
             },

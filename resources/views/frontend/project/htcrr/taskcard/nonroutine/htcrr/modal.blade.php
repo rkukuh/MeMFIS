@@ -65,18 +65,6 @@
                 <div class="form-group m-form__group row ">
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <label class="form-control-label">
-                            Est. Mhrs @include('frontend.common.label.required')
-                        </label>
-
-                        @component('frontend.common.input.number')
-                            @slot('text', 'Mhrs')
-                            @slot('id', 'mhrs')
-                            @slot('name', 'mhrs')
-                            @slot('id_error', 'mhrs')
-                        @endcomponent
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <label class="form-control-label">
                             Position @include('frontend.common.label.required')
                         </label>
 
@@ -87,9 +75,7 @@
                             @slot('id_error', 'position')
                         @endcomponent
                     </div>
-                </div>
-                <div class="form-group m-form__group row ">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-3 col-md-3 col-lg-3">
                         <label class="form-control-label">
                             Est. Removal Mhrs @include('frontend.common.label.required')
                         </label>
@@ -101,7 +87,7 @@
                             @slot('id_error', 'removal')
                         @endcomponent
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-sm-3 col-md-3 col-lg-3">
                         <label class="form-control-label">
                             Est. Installation Mhrs @include('frontend.common.label.required')
                         </label>
