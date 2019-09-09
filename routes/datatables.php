@@ -37,7 +37,8 @@ Route::name('datatables.')->group(function () {
         Route::get('/department', 'DepartmentDatatables@index')->name('department.index');
         Route::get('/role', 'RoleDatatables@index')->name('role.index');
         Route::get('/bank', 'BankDatatables@index')->name('bank.index');
-
+        Route::get('/school-type', 'SchoolTypeDatatables@index')->name('school.index');
+        
         /** LICENSE */
 
         Route::get('/general-license', 'GeneralLicenseDatatables@index')->name('general-license.index');
@@ -166,6 +167,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{employee}/amel', 'EmployeeAMELDatatables@index')->name('amel.index');
 
                 /** Transaction */
+                Route::get('/{employee}/employee-school', 'EmployeeSchoolDatatables@index')->name('employee-school.index');
                 Route::get('/{employee}/histories', 'EmployeeHistoriesDatatables@index')->name('histories.index');
                 Route::get('/{employee}/travel-requests', 'EmployeeTravelRequestsDatatables@index')->name('travel-requests.index');
 

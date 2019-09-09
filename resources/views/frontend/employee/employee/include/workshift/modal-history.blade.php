@@ -34,7 +34,13 @@
                                                     <td align="center"><b>Workshift Information</b></td>
                                                 </tr>
                                                 <tr>
-                                                <td align="center" valign="top">{{ $workshift_current['name'] }}</td>
+                                                    @php
+                                                    $workshift_name = null;
+                                                        if(isset($workshift_current['name'])){
+                                                            $workshift_name = $workshift_current['name'];
+                                                        }
+                                                    @endphp
+                                                <td align="center" valign="top">{{ $workshift_name }}</td>
                                                 </tr>
                                             </table>
                                         </div>

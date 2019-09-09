@@ -8,7 +8,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="PriceListForm">
+                <form id="education_form" class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="PriceListForm">
+                    @component('frontend.common.input.hidden')
+                        @slot('id', 'employee_uuid')
+                        @slot('name', 'employee_uuid')
+                        @slot('value', $employee->uuid)
+                    @endcomponent
                     <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
@@ -65,7 +70,9 @@
             
                                 @component('frontend.common.input.upload')
                                     @slot('label', 'document')
+                                    @slot('id', 'education_document')
                                     @slot('name', 'document')
+                                    @slot('help_text', 'File must be image or not be stored!')
                                 @endcomponent  
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -77,9 +84,11 @@
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
                                     @slot('type', 'button')
+                                    @slot('id','create-education')
+                                    @slot('class','create-education')
                                 @endcomponent
 
-                                @include('frontend.common.buttons.reset')
+                                @include('frontend.common.buttons.reset',['id' => 'education-reset'])
 
                                 @include('frontend.common.buttons.close')
                             </div>
