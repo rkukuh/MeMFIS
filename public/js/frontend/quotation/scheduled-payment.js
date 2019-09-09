@@ -127,21 +127,18 @@ let scheduled_payments = {
         
         function calculate_amount() {
             let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable();
-            let total = scheduled_payment_datatable.column(2).data().reduce( function (a,b) {
-                return parseFloat(a) + parseFloat(b);
-            } );
+            let total = scheduled_payment_datatable.column(1).data().reduce( function (a,b) {
+                var x = parseFloat(a) || 0;
+                var y = parseFloat(b) || 0;
+                return x + y;
+            }, 0 );
 
             return total;
         }
 
         // calculate progress
         function calculate_progress() {
-            let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable();
-            let total = scheduled_payment_datatable.column(1).data().reduce( function (a,b) {
-                return parseFloat(a) + parseFloat(b);
-            } );
-
-            return total;
+          
         }
     }
 };
