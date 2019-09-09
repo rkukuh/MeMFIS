@@ -117,7 +117,8 @@ let TaskCard = {
                 },
                 {
                     field: 'description',
-                    title: 'Instruction',
+                    title: 'Instruction/Description',
+                    width: '250',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
