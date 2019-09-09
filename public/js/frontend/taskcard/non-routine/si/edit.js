@@ -447,7 +447,18 @@ let TaskCard = {
 
                         // $('#item_unit_id').select2('val', 'All');
 
-
+                        $('#modal_item').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end()
+                            .find("select")
+                                .select2('val','All')
+                                .end();
+                        })
                     }
                 }
             });
@@ -497,8 +508,18 @@ let TaskCard = {
                         // document.getElementById('uom_quantity').value = '';
 
                         // $('#item_unit_id').select2('val', 'All');
-
-
+                        $('#modal_tool').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end()
+                            .find("select")
+                                .select2('val','All')
+                                .end();
+                        })
                     }
                 }
             });
