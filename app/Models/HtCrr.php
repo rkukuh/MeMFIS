@@ -78,7 +78,7 @@ class HtCrr extends MemfisModel
     {
         return $this->belongsToMany(Employee::class, 'htcrr_engineers', 'htcrr_id', 'employee_id')
                     ->withPivot('quantity')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -92,7 +92,7 @@ class HtCrr extends MemfisModel
     public function helpers()
     {
         return $this->belongsToMany(Employee::class, 'employee_htcrr', 'htcrr_id', 'employee_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -190,7 +190,7 @@ class HtCrr extends MemfisModel
     public function skills()
     {
         return $this->belongsToMany(Type::class, 'htcrr_skill', 'htcrr_id', 'skill_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**

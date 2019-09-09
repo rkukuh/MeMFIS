@@ -34,7 +34,7 @@
                                                     <td align="center"><b>Workshift Information</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center" valign="top">Shift 1</td>
+                                                <td align="center" valign="top">{{ $workshift_current['name'] }}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -62,10 +62,21 @@
                                     </div>
                                     <div class="m-portlet m-portlet--mobile pb-3">
                                         <div class="m-portlet__body">
+
+                                            @for ($i = 0; $i < count($workshift_history); $i++)
+
                                             <div class="my-4">
                                                 <div class="d-flex justify-content-end">
                                                     <h3 class="m-portlet__head-text">
-                                                        14 August 2019 to 14 August 2019
+                                                            @php
+                                                            $created_time = $workshift_history[$i]['created_at'];
+                                                            $formatCreatedTime = strtotime($created_time);
+    
+                                                            $updated_time = $workshift_history[$i]['updated_at'];
+                                                            $formatUpdatedTime = strtotime($updated_time);
+
+                                                            echo date("d F Y", $formatCreatedTime).' to '.date("d F Y", $formatUpdatedTime);
+                                                        @endphp
                                                     </h3>
                                                 </div>
                                                 <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
@@ -73,26 +84,14 @@
                                                         <td align="center"><b>Workshift Information</b></td>
                                                     </tr>
                                                     <tr>
-                                                        <td align="center" valign="top">Shift 1</td>
+                                                    <td align="center" valign="top">{{ $workshift_history[$i]['name'] }}</td>
                                                     </tr>
                                                 </table>
                                             </div>
                                             <hr>
-                                            <div class="my-4">
-                                                <div class="d-flex justify-content-end">
-                                                    <h3 class="m-portlet__head-text">
-                                                        14 August 2019 to 14 August 2019
-                                                    </h3>
-                                                </div>
-                                                <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
-                                                    <tr>
-                                                        <td align="center"><b>Workshift Information</b></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td align="center" valign="top">Shift 1</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
+
+                                            @endfor
+
                                         </div>
                                     </div>
                                 </div>

@@ -13,8 +13,14 @@ class TypesOfPurchaseRequest extends Seeder
     public function run()
     {
         Type::create([
-            'code' => 'general',
-            'name' => 'General',
+            'code' => 'production',
+            'name' => 'Production',
+            'of'   => 'purchase-request',
+        ]);
+
+        Type::create([
+            'code' => 'office',
+            'name' => 'Office',
             'of'   => 'purchase-request',
         ]);
 

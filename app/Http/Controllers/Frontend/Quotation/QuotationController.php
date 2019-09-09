@@ -72,7 +72,7 @@ class QuotationController extends Controller
     public function store(QuotationStore $request)
     {
         $contact = [];
-        
+
         $contact['name']     = $request->attention_name;
         $contact['phone'] = $request->attention_phone;
         $contact['address'] = $request->attention_address;
@@ -253,7 +253,19 @@ class QuotationController extends Controller
      */
     public function update(QuotationUpdate $request, Quotation $quotation)
     {
-        $attention = [];
+        $attention = $scheduled_payment_amount = [];
+        $request->scheduled_payment_amount = json_decode($request->scheduled_payment_amount);
+        if(sizeof($request->scheduled_payment_amount) > 0){
+            foreach ($request->scheduled_payment_amount as $value) {
+                $container = [];
+                $container["amount"]            = $value[0];
+                $container["amount_percentage"] = $value[1];
+                $container["description"]       = $value[2];
+                $container["work_progress"]     = $value[3];
+
+                array_push($scheduled_payment_amount, $container);
+            }
+        }
 
         $attention['name']     = $request->attention_name;
         $attention['phone'] = $request->attention_phone;
@@ -274,6 +286,7 @@ class QuotationController extends Controller
         $request->merge(['attention' => json_encode($attention)]);
         $request->merge(['charge' => json_encode($charges)]);
         $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
+        $request->merge(['scheduled_payment_amount' => json_encode($scheduled_payment_amount)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
         $quotation->update($request->all());
 
@@ -344,7 +357,7 @@ class QuotationController extends Controller
             'progressed_by' => Auth::id()
         ]));
 
-        $project = Project::find($quotation->project_id);
+        $project = Project::find($quotation->quotationable_id);
         $project->progresses()->save(new Progress([
             'status_id' =>  Status::ofProject()->where('code','open')->first()->id,
             'progressed_by' => Auth::id()

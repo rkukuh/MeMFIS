@@ -16,6 +16,7 @@ $factory->define(User::class, function (Faker $faker)
         'name' => $first_name . ' ' . $last_name,
         'email' => strtolower($first_name . '.' . $last_name) . '@memfis.dev',
         'password' => Hash::make('rahasia'),
+        'is_active' => $faker->boolean(),
         'remember_token' => str_random(10),
     ];
 

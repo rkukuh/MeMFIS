@@ -64,7 +64,7 @@
                                                         @slot('name', 'ref-pr')
                                                     @endcomponent
                                                 </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
                                                     <label class="form-control-label">
                                                         Currency @include('frontend.common.label.required')
                                                     </label>
@@ -74,6 +74,17 @@
                                                         @slot('text', 'Currency')
                                                         @slot('name', 'currency')
                                                         @slot('id_error', 'currency')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                    <label class="form-control-label">
+                                                        Exchange Rate @include('frontend.common.label.required')
+                                                    </label>
+
+                                                    @component('frontend.common.input.number')
+                                                        @slot('text', 'exchange')
+                                                        @slot('name', 'exchange')
+                                                        @slot('id', 'exchange')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -106,33 +117,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Exchange Rate @include('frontend.common.label.required')
-                                                    </label>
-
-                                                    @component('frontend.common.input.number')
-                                                        @slot('text', 'exchange')
-                                                        @slot('input_prepend', 'Rp')
-                                                        @slot('name', 'exchange')
-                                                        @slot('id', 'exchange')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Vendor @include('frontend.common.label.required')
-                                                    </label>
-
-                                                    @component('frontend.common.input.select2')
-                                                        @slot('id', 'vendor')
-                                                        @slot('text', 'vendor')
-                                                        @slot('name', 'vendor')
-                                                        @slot('id_error', 'vendor')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
                                                     <label class="form-control-label">
                                                         Date Shipping
                                                     </label>
@@ -142,6 +127,18 @@
                                                         @slot('text', 'Date Shipping')
                                                         @slot('name', 'date_shipping')
                                                         @slot('id_error', 'date_shipping')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-3 col-md-3 col-lg-3">
+                                                    <label class="form-control-label">
+                                                        Vendor @include('frontend.common.label.required')
+                                                    </label>
+
+                                                    @component('frontend.common.input.select2')
+                                                        @slot('id', 'vendor')
+                                                        @slot('text', 'vendor')
+                                                        @slot('name', 'vendor')
+                                                        @slot('id_error', 'vendor')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -182,6 +179,7 @@
                                                                                 @slot('id', 'top_day_amount')
                                                                                 @slot('input_append', 'Days')
                                                                                 @slot('name', 'top_day_amount')
+                                                                                @slot('disabled', 'disabled')
                                                                                 @slot('id_error', 'top_day_amount')
                                                                             @endcomponent
                                                                         </div>
@@ -190,6 +188,7 @@
                                                                                 @slot('id', 'top_start_at')
                                                                                 @slot('text', 'Date')
                                                                                 @slot('name', 'top_start_at')
+                                                                                @slot('disabled', 'disabled')
                                                                                 @slot('id_error', 'top_start_at')
                                                                             @endcomponent
                                                                         </div>
@@ -208,7 +207,7 @@
                                                         @slot('id', 'shipping_address')
                                                         @slot('text', 'Shipping Adddress')
                                                         @slot('name', 'shipping_address')
-                                                        @slot('rows', '3')
+                                                        @slot('rows', '5')
                                                         @slot('value', 'Jl. Raya Bandara Juanda,Sudimoro, Betro, Sedati, Bali, Jawa Timur 61253')
                                                         @slot('id_error', 'shipping_address')
 
@@ -277,62 +276,6 @@
 
                                                         @include('frontend.purchase-order.modal-check')
 
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-6 col-md-6 col-lg-6"></div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                <div class="m--align-left" style="padding-top:15px">
-                                                                    Total
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                                                @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'sub_total')
-                                                                    @slot('class', 'sub_total')
-                                                                    @slot('text', 'generate semua total ditabel')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-6 col-md-6 col-lg-6"></div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                <div class="m--align-left" style="padding-top:15px">
-                                                                    PPN
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                @component('frontend.common.input.checkbox')
-                                                                    @slot('id', 'is_ppn_include')
-                                                                    @slot('name', 'is_ppn_include')
-                                                                    @slot('value', 1.1)
-                                                                    @slot('text', 'Include')
-                                                                    @slot('style_div','margin-top:15px')
-                                                                @endcomponent
-                                                            </div>
-                                                            <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                @component('frontend.common.input.checkbox')
-                                                                    @slot('id', 'is_ppn_exclude')
-                                                                    @slot('name', 'is_ppn_exclude')
-                                                                    @slot('value', 1.1)
-                                                                    @slot('text', 'Exclude')
-                                                                    @slot('style_div','margin-top:15px')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-6 col-md-6 col-lg-6"></div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                <div class="m--align-left" style="padding-top:15px">
-                                                                    GrandTotal
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4 col-md-4 col-lg-4">
-                                                                @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'sub_total')
-                                                                    @slot('class', 'sub_total')
-                                                                    @slot('text', 'menghitung nilai total & biaya lainnya')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -409,7 +352,7 @@
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/purchase-order/item.js') }}"></script>
+    {{-- <script src="{{ asset('js/frontend/purchase-order/item.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/purchase-order/create.js') }}"></script>
     <script src="{{ asset('js/frontend/purchase-order/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>

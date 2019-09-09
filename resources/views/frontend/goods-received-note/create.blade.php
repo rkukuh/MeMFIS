@@ -83,7 +83,7 @@
                                                         Delivery Order Number @include('frontend.common.label.required')
                                                     </label>
                                                     @component('frontend.common.input.text')
-                                                        @slot('id', 'pr-number')
+                                                        @slot('id', 'deliv-number')
                                                         @slot('text', '-')
                                                     @endcomponent
                                                 </div>
@@ -144,8 +144,8 @@
                                                     </label>
                                                     @component('frontend.common.label.data-info')
                                                         @slot('id', 'project-number')
-                                                        @slot('text', '-')
-                                                    @endcomponent    
+                                                        @slot('text', '- ?')
+                                                    @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <div class="form-group m-form__group row">
@@ -172,7 +172,7 @@
                                                                 @slot('id_error', 'vehicle-no')
                                                             @endcomponent
                                                         </div>
-                                                    </div>  
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group m-form__group row">

@@ -6,6 +6,7 @@ let instruction_reset = function () {
     document.getElementById('helper_quantity').value = '';
     document.getElementById('engineer_quantity').value = '';
     document.getElementById('sequence').value = '';
+    document.getElementById('instuction_description').value = '';
     $('#work_area-error').html('');
     $('#otr-certification-error').html('');
     $('#manhour-error').html('');

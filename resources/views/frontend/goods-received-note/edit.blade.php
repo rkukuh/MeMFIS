@@ -57,12 +57,11 @@
                                                     <label class="form-control-label">
                                                         Ref PO @include('frontend.common.label.required')
                                                     </label>
-                                                    @include('frontend.common.purchase-order.index')
 
-                                                    @component('frontend.common.input.hidden')
-                                                        @slot('id', 'ref-po')
-                                                        @slot('name', 'ref-po')
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $goodsReceived->purchase_order->number)
                                                     @endcomponent
+
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
@@ -98,6 +97,7 @@
                                                                 @slot('id', 'date')
                                                                 @slot('text', 'Date')
                                                                 @slot('name', 'date')
+                                                                @slot('value', $goodsReceived->received_at)
                                                                 @slot('id_error', 'date')
                                                             @endcomponent
                                                         </div>
@@ -123,7 +123,7 @@
                                                     </label>
                                                     @component('frontend.common.label.data-info')
                                                         @slot('id', 'pr-number')
-                                                        @slot('text', '-')
+                                                        @slot('text', $goodsReceived->purchase_order->purchase_request->number)
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -133,7 +133,7 @@
 
                                                     @component('frontend.common.label.data-info')
                                                         @slot('id', 'vendor-code')
-                                                        @slot('text', '-')
+                                                        @slot('text', $goodsReceived->vendor->name)
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -145,7 +145,7 @@
                                                     @component('frontend.common.label.data-info')
                                                         @slot('id', 'project-number')
                                                         @slot('text', '-')
-                                                    @endcomponent    
+                                                    @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <div class="form-group m-form__group row">
@@ -156,6 +156,7 @@
                                                             @component('frontend.common.input.text')
                                                                 @slot('id', 'received-by')
                                                                 @slot('text', 'received-by')
+                                                                @slot('value', $goodsReceived->received_by)
                                                                 @slot('name', 'received-by')
                                                                 @slot('id_error', 'received-by')
                                                             @endcomponent
@@ -169,10 +170,11 @@
                                                                 @slot('id', 'vehicle-no')
                                                                 @slot('text', 'vehicle-no')
                                                                 @slot('name', 'vehicle-no')
+                                                                @slot('value', $goodsReceived->vehicle_no)
                                                                 @slot('id_error', 'vehicle-no')
                                                             @endcomponent
                                                         </div>
-                                                    </div>  
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group m-form__group row">
@@ -185,6 +187,7 @@
                                                         @slot('id', 'description')
                                                         @slot('text', 'Description')
                                                         @slot('name', 'description')
+                                                        @slot('value', $goodsReceived->description)
                                                         @slot('rows', '7')
                                                         @slot('id_error', 'description')
                                                     @endcomponent
@@ -204,8 +207,8 @@
                                                         <div class="action-buttons">
                                                             @component('frontend.common.buttons.submit')
                                                                 @slot('type','button')
-                                                                @slot('id', 'add-goods-received')
-                                                                @slot('class', 'add-goods-received')
+                                                                @slot('id', 'update-goods-received')
+                                                                @slot('class', 'update-goods-received')
                                                             @endcomponent
 
                                                             @include('frontend.common.buttons.reset')
@@ -229,8 +232,15 @@
 @endsection
 
 @push('footer-scripts')
+    <script>
+        let grn_uuid = '{{$goodsReceived->uuid}}';
+        $(document).ready(function () {
+            document.getElementById('search-storage').innerHTML = '{{$goodsReceived->storage->name}}';
+            document.getElementById('warehouse').value = '{{$goodsReceived->storage->uuid}}';
+        });
+    </script>
 
-    <script src="{{ asset('js/frontend/good-received-note/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/good-received-note/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/ref-date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>

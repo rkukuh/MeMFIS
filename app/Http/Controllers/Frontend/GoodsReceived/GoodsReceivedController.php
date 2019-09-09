@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Storage;
 use App\Models\PurchaseOrder;
 use App\Models\GoodsReceived;
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\GoodsReceivedStore;
 use App\Http\Requests\Frontend\GoodsReceivedUpdate;
@@ -40,12 +41,23 @@ class GoodsReceivedController extends Controller
      */
     public function store(GoodsReceivedStore $request)
     {
+        $request->merge(['number' => DocumentNumber::generate('GRN-', GoodsReceived::withTrashed()->count()+1)]);
         $request->merge(['purchase_order_id' => PurchaseOrder::where('uuid',$request->purchase_order_id)->first()->id]);
         $request->merge(['storage_id' => Storage::where('uuid',$request->storage_id)->first()->id]);
         $request->merge(['received_at' => Carbon::parse($request->received_at)]);
 
         $goodsReceived = GoodsReceived::create($request->all());
 
+        $items = PurchaseOrder::find($request->purchase_order_id)->items;
+
+        foreach($items as $item){
+            $goodsReceived->items()->attach([$item->pivot->item_id => [
+                'quantity'=> $item->pivot->quantity,
+                'already_received'=> 2,// TODO ask whats is it?
+                'unit_id' => $item->pivot->unit_id
+                ]
+            ]);
+        }
 
         return response()->json($goodsReceived);
     }
@@ -87,7 +99,13 @@ class GoodsReceivedController extends Controller
      */
     public function update(GoodsReceivedUpdate $request, GoodsReceived $goodsReceived)
     {
-        //
+        $request->merge(['storage_id' => Storage::where('uuid',$request->storage_id)->first()->id]);
+        $request->merge(['received_at' => Carbon::parse($request->received_at)]);
+
+        $goodsReceived->update($request->all());
+
+        return response()->json($goodsReceived);
+
     }
 
     /**

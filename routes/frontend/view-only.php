@@ -11,36 +11,36 @@ Route::group([
 
         /** Jobcard EO */
 
-        Route::view('/jobcard-eo', 'frontend.job-card-eo.index')->name('jobcard-eo.index');
+        // Route::view('/jobcard-eo', 'frontend.job-card-eo.index')->name('jobcard-eo.index');
 
-        Route::view('/jobcard-eo-mechanic-progress-open', 'frontend.job-card-eo.mechanic.progress-open')->name('jobcard-eo.mechanic.progress-open');
-        Route::view('/jobcard-eo-mechanic-progress-pause', 'frontend.job-card-eo.mechanic.progress-pause')->name('jobcard-eo.mechanic.progress-pause');
-        Route::view('/jobcard-eo-mechanic-progress-resume', 'frontend.job-card-eo.mechanic.progress-resume')->name('jobcard-eo.mechanic.progress-resume');
+        // Route::view('/jobcard-eo-mechanic-progress-open', 'frontend.job-card-eo.mechanic.progress-open')->name('jobcard-eo.mechanic.progress-open');
+        // Route::view('/jobcard-eo-mechanic-progress-pause', 'frontend.job-card-eo.mechanic.progress-pause')->name('jobcard-eo.mechanic.progress-pause');
+        // Route::view('/jobcard-eo-mechanic-progress-resume', 'frontend.job-card-eo.mechanic.progress-resume')->name('jobcard-eo.mechanic.progress-resume');
 
-        Route::view('/jobcard-eo-engineer-progress-open', 'frontend.job-card-eo.engineer.progress-open')->name('jobcard-eo.engineer.progress-open');
-        Route::view('/jobcard-eo-engineer-progress-pause', 'frontend.job-card-eo.engineer.progress-pause')->name('jobcard-eo.engineer.progress-pause');
-        Route::view('/jobcard-eo-engineer-progress-resume', 'frontend.job-card-eo.engineer.progress-resume')->name('jobcard-eo.engineer.progress-resume');
+        // Route::view('/jobcard-eo-engineer-progress-open', 'frontend.job-card-eo.engineer.progress-open')->name('jobcard-eo.engineer.progress-open');
+        // Route::view('/jobcard-eo-engineer-progress-pause', 'frontend.job-card-eo.engineer.progress-pause')->name('jobcard-eo.engineer.progress-pause');
+        // Route::view('/jobcard-eo-engineer-progress-resume', 'frontend.job-card-eo.engineer.progress-resume')->name('jobcard-eo.engineer.progress-resume');
 
-        Route::view('/jobcard-eo-ppc', 'frontend.job-card-eo-ppc.index')->name('jobcard-eo.ppc.index');
+        // Route::view('/jobcard-eo-ppc', 'frontend.job-card-eo-ppc.index')->name('jobcard-eo.ppc.index');
 
         /** Work Progress Report */
 
-        Route::view('/work-progress-report', 'frontend.work-progress-report.index')->name('work-progress-report.index');
-        Route::view('/work-progress-report/show', 'frontend.work-progress-report.show')->name('work-progress-report.show');
+        // Route::view('/work-progress-report', 'frontend.work-progress-report.index')->name('work-progress-report.index');
+        // Route::view('/work-progress-report/show', 'frontend.work-progress-report.show')->name('work-progress-report.show');
 
         /** Additional Task */
 
-        Route::view('/additional-task', 'frontend.project.hm-additional.index')->name('additional-task.index');
-        Route::view('/additional-task/create', 'frontend.project.hm-additional.create')->name('additional-task.create');
-        Route::view('/additional-task/edit', 'frontend.project.hm-additional.edit')->name('additional-task.edit');
-        Route::view('/additional-task/show', 'frontend.project.hm-additional.show')->name('additional-task.show');
-        Route::view('/additional-task/summary', 'frontend.project.hm-additional.summary')->name('additional-task.summary');
+        // Route::view('/additional-task', 'frontend.project.hm-additional.index')->name('additional-task.index');
+        // Route::view('/additional-task/create', 'frontend.project.hm-additional.create')->name('additional-task.create');
+        // Route::view('/additional-task/edit', 'frontend.project.hm-additional.edit')->name('additional-task.edit');
+        // Route::view('/additional-task/show', 'frontend.project.hm-additional.show')->name('additional-task.show');
+        // Route::view('/additional-task/summary', 'frontend.project.hm-additional.summary')->name('additional-task.summary');
 
         /** Additional Task Quotation*/
 
-        Route::view('/additional-task-qtn/create', 'frontend.quotation.additional.create')->name('additional-task-qtn.create');
-        Route::view('/additional-task-qtn/edit', 'frontend.quotation.additional.edit')->name('additional-task-qtn.edit');
-        Route::view('/additional-task-qtn/show', 'frontend.quotation.additional.show')->name('additional-task-qtn.show');
+        // Route::view('/additional-task-qtn/create', 'frontend.quotation.additional.create')->name('additional-task-qtn.create');
+        // Route::view('/additional-task-qtn/edit', 'frontend.quotation.additional.edit')->name('additional-task-qtn.edit');
+        // Route::view('/additional-task-qtn/show', 'frontend.quotation.additional.show')->name('additional-task-qtn.show');
 
         /** Purchase Request */
 

@@ -15,10 +15,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        // ADMIN
+
         $user = User::create([
             'name'      => 'Super Admin',
             'email'     => 'admin@smartaircraft.id',
             'password'  => Hash::make('admin'),
+            'is_active' => 1,
         ]);
 
         $user->assignRole(
@@ -29,14 +32,27 @@ class UsersTableSeeder extends Seeder
             'code' => 'SU-' . Carbon::now()->timestamp,
             'first_name' => 'Super',
             'last_name'  => 'Admin',
-            'dob' => Carbon::now()->subYear(20),
-            'dob_place' => 'Jongol',
-            'gender' => 'm',
-            'religion' => 'islam',
-            'marital_status' => 'm',
-            'nationality' => 'indonesia',
-            'country' => 'indonesia',
-            'city' => 'sidoarjo',
+            'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null,
+        ]);
+
+        // YEMIMA 
+
+        $user = User::create([
+            'name'      => 'Yemima',
+            'email'     => 'yemima@smartaircraft.id',
+            'password'  => Hash::make('admin'),
+            'is_active' => 1,
+        ]);
+
+        $user->assignRole(
+            Role::where('name', 'admin')->first()
+        );
+
+        $user->employee()->create([
+            'code' => 'SU-' . Carbon::now()->timestamp,
+            'first_name' => 'Yemima',
+            'last_name'  => 'Admin',
             'joined_date' => Carbon::now()->toDateString(),
             'updated_at' => null
         ]);

@@ -17,7 +17,21 @@ class GeneralPurchaseRequestDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(PurchaseRequest::with('type')->where('type_id','<>',Type::where('of','purchase-request')->where('name','Project')->first()->id)->get());
+        $purchaseRequests = PurchaseRequest::with('type')->where('type_id','<>',Type::where('of','purchase-request')->where('name','Project')->first()->id)->get();
+
+        foreach($purchaseRequests as $purchaseRequest){
+            if($purchaseRequest->deleted_at <> null){
+                $purchaseRequest->status .= 'Void';
+            }
+            else if(!empty($purchaseRequest->approvals->toArray())){
+                $purchaseRequest->status .= 'Approved';
+            }else{
+                $purchaseRequest->status .= '';
+
+            }
+        }
+
+        $data = $alldata = json_decode($purchaseRequests);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

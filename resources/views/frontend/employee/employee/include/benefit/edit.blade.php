@@ -396,21 +396,27 @@
                         @slot('value', $maximum_overtime)
                         @slot('disabled','disabled')
                     @endcomponent
-
-                    <p class="mt-2 font-weight-bold">Seconds: <span id="duration-label"></span></p>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6 text-center">
                     <label class="form-control-label">
                         After Minimum Overtime
                     </label>
 
-                    @component('frontend.common.input.text')
-                        @slot('id', 'duration_1')
-                        @slot('name', 'minimum_overtime')
-                        @slot('id_error', 'minimum_overtime')
-                    @endcomponent
-
-                    <p class="mt-2 font-weight-bold">Seconds: <span id="duration-label-2"></span></p>
+                    @php
+                    $minimum_overtime = null;
+                    if(isset($current['provisions'][0]['minimum_overtime'])){
+                        $minimum_overtime = $current['provisions'][0]['minimum_overtime'];
+                    }
+                    @endphp
+                   @component('frontend.common.input.number')
+                   @slot('text', 'Minimum Overtime per Period')
+                   @slot('id', 'min_overtime')
+                   @slot('name', 'min_overtime')
+                   @slot('id_error', 'min_overtime')
+                   @slot('input_append','Hours')
+                   @slot('value', $minimum_overtime)
+                   @slot('disabled','disabled')
+               @endcomponent
                 </div>
             </div>
             <div class="form-group m-form__group row">
@@ -1153,6 +1159,14 @@
                     @slot('id', 'approve_benefit')
                     @slot('class', 'approve_benefit')
                     @endcomponent
+
+                    @component('frontend.common.buttons.submit')     
+                    @slot('type','button')
+                    @slot('text','Reject')
+                    @slot('id', 'reject_benefit')
+                    @slot('icon','fa fa-times-circle')
+                    @slot('class', 'bg-warning text-dark')
+                    @endcomponent
                 @else
                     @component('frontend.common.buttons.submit')
                     @slot('type','button')
@@ -1225,6 +1239,7 @@
 
 @push('footer-scripts')
 <script src="{{ asset('js/frontend/employee/employee/approval_benefit.js') }}"></script>
+<script src="{{ asset('js/frontend/employee/employee/reject_benefit.js') }}"></script>
 <script src="{{ asset('js/frontend/employee/employee/create_benefit.js') }}"></script>
 <script src="{{ asset('js/frontend/employee/employee/edit_benefit.js') }}"></script>
 @endpush

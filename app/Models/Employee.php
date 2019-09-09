@@ -4,10 +4,10 @@ namespace App\Models;
 
 use App\User;
 use App\MemfisModel;
+use Spatie\Tags\HasTags;
 use App\Models\Pivots\EmployeeLicense;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\Tags\HasTags;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 class Employee extends MemfisModel implements HasMedia
@@ -40,6 +40,8 @@ class Employee extends MemfisModel implements HasMedia
         'created_at',
         'updated_at'
     ];
+
+    protected $timestamp = false;
 
 // ----------------------------------------OVERIDE-----------------------------------------------//
     public function registerMediaCollections()
@@ -130,7 +132,7 @@ class Employee extends MemfisModel implements HasMedia
     public function defectcards()
     {
         return $this->belongsToMany(DefectCard::class, 'defectcard_employee', 'employee_id', 'defectcard_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -233,6 +235,19 @@ class Employee extends MemfisModel implements HasMedia
     public function department()
     {
         return $this->belongsTo(Department::class);
+    }
+
+    /**
+     * One-to-Many: An Employee have one or many Workshift or History.
+     *
+     * This function will retrieve Workshift of a given Employee.
+     * See: EmployeeWorkshift employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workshift()
+    {
+        return $this->hasMany(EmployeeWorkshift::class);
     }
 
     /**
@@ -379,7 +394,7 @@ class Employee extends MemfisModel implements HasMedia
     public function jobcards()
     {
         return $this->belongsToMany(JobCard::class, 'employee_jobcard', 'employee_id', 'jobcard_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
