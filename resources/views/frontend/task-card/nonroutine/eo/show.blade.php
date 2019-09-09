@@ -427,8 +427,8 @@
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
                             @include('frontend.task-card.nonroutine.eo.instruction.modal')
-                            @include('frontend.task-card.nonroutine.eo.tool.modal')
-                            @include('frontend.task-card.nonroutine.eo.item.modal')
+                            @include('frontend.task-card.nonroutine.eo.tool.index')
+                            @include('frontend.task-card.nonroutine.eo.item.index')
 
                             <div class="instruction_datatable" id="instruction_datatable"></div>
                         </div>
@@ -460,6 +460,11 @@
 @endpush
 
 @push('footer-scripts')
+
+    <script>
+        let taskcard_uuid = '{{$taskcard->uuid}}';
+    </script>
+
     <script>
         var autoExpand = function (field) {
 
@@ -484,10 +489,6 @@
         if (event.target.tagName.toLowerCase() !== 'textarea') return;
         autoExpand(event.target);
         }, false);
-    </script>
-
-    <script>
-        let taskcard_uuid = '{{$taskcard->uuid}}';
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
@@ -524,4 +525,7 @@
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/show.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/item/index.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/tool/index.js') }}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush
