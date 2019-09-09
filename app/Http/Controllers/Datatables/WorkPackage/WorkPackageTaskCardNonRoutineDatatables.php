@@ -22,7 +22,7 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
                                     ->whereHas('eo_header.type', function ($query) {
                                         $query->where('code', 'ad')->orWhere('code','sb');
                                     })->whereNull('eo_instructions.deleted_at')->get();
-
+        // dd($workPackages);
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){
                 if(sizeof($taskcard->skills) == 3){
