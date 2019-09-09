@@ -78,27 +78,14 @@
                                             </div>
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Delivery Order Number @include('frontend.common.label.required')
-                                                    </label>
-                                                    @component('frontend.common.input.text')
-                                                        @slot('id', 'pr-number')
-                                                        @slot('text', '-')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <div class="row">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
-                                                                Date @include('frontend.common.label.required')
+                                                                Delivery Order Number @include('frontend.common.label.required')
                                                             </label>
-
-                                                            @component('frontend.common.input.datepicker')
-                                                                @slot('id', 'date')
-                                                                @slot('text', 'Date')
-                                                                @slot('name', 'date')
-                                                                @slot('value', $goodsReceived->received_at)
-                                                                @slot('id_error', 'date')
+                                                            @component('frontend.common.input.text')
+                                                                @slot('id', 'pr-number')
+                                                                @slot('text', '-')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -112,7 +99,35 @@
                                                                 @slot('id', 'ref-date')
                                                             @endcomponent
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <label class="form-control-label">
+                                                                Received By @include('frontend.common.label.required')
+                                                            </label>
+                                                            @component('frontend.common.input.text')
+                                                                @slot('id', 'received-by')
+                                                                @slot('text', 'received-by')
+                                                                @slot('value', $goodsReceived->received_by)
+                                                                @slot('name', 'received-by')
+                                                                @slot('id_error', 'received-by')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <label class="form-control-label">
+                                                                Date @include('frontend.common.label.required')
+                                                            </label>
 
+                                                            @component('frontend.common.input.datepicker')
+                                                                @slot('id', 'date')
+                                                                @slot('text', 'Date')
+                                                                @slot('name', 'date')
+                                                                @slot('value', $goodsReceived->received_at)
+                                                                @slot('id_error', 'date')
+                                                            @endcomponent
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -148,33 +163,17 @@
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                               Received By @include('frontend.common.label.required')
-                                                            </label>
-                                                            @component('frontend.common.input.text')
-                                                                @slot('id', 'received-by')
-                                                                @slot('text', 'received-by')
-                                                                @slot('value', $goodsReceived->received_by)
-                                                                @slot('name', 'received-by')
-                                                                @slot('id_error', 'received-by')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                                Vehicle No
-                                                            </label>
+                                                    <label class="form-control-label">
+                                                        Vehicle No
+                                                    </label>
 
-                                                            @component('frontend.common.input.text')
-                                                                @slot('id', 'vehicle-no')
-                                                                @slot('text', 'vehicle-no')
-                                                                @slot('name', 'vehicle-no')
-                                                                @slot('value', $goodsReceived->vehicle_no)
-                                                                @slot('id_error', 'vehicle-no')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
+                                                    @component('frontend.common.input.text')
+                                                        @slot('id', 'vehicle-no')
+                                                        @slot('text', 'vehicle-no')
+                                                        @slot('name', 'vehicle-no')
+                                                        @slot('value', $goodsReceived->vehicle_no)
+                                                        @slot('id_error', 'vehicle-no')
+                                                    @endcomponent
                                                 </div>
                                             </div>
                                             <div class="form-group m-form__group row">
@@ -197,8 +196,51 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
 
-                                                    @include('frontend.goods-received-note.modal')
-                                                    <div class="purchase_order_datatable" id="purchase_order_datatable"></div>
+                                                    <div class="m-portlet">
+                                                        <div class="m-portlet__head">
+                                                            <div class="m-portlet__head-caption">
+                                                                <div class="m-portlet__head-title">
+                                                                    <span class="m-portlet__head-icon m--hide">
+                                                                        <i class="la la-gear"></i>
+                                                                    </span>
+
+                                                                    @include('frontend.common.label.datalist')
+
+                                                                    <h3 class="m-portlet__head-text">
+                                                                        Item
+                                                                    </h3>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="m-portlet m-portlet--mobile">
+                                                            <div class="m-portlet__body">
+                                                                <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                                                    <div class="row align-items-center">
+                                                                        <div class="col-xl-8 order-2 order-xl-1">
+                                                                            <div class="form-group m-form__group row align-items-center">
+                                                                                <div class="col-md-4">
+                                                                                    <div class="m-input-icon m-input-icon--left">
+                                                                                        <input type="text" class="form-control m-input" placeholder="Search..."
+                                                                                            id="generalSearch">
+                                                                                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                                                            <span><i class="la la-search"></i></span>
+                                                                                        </span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                                                            <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="purchase_order_datatable" id="purchase_order_datatable"></div>
+
+                                                                @include('frontend.goods-received-note.modal')
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group m-form__group row">
