@@ -67,7 +67,7 @@ class SummaryNonRoutineTaskcardController extends Controller
             $query->where('code', 'ea');
         })->sum('estimation_manhour');
         
-        dd($total_manhour_taskcard);
+        // dd($total_manhour_taskcard);
 
         return view('frontend.workpackage.nonroutine.ea.ea-summary',[
             'total_taskcard' => $total_taskcard,
