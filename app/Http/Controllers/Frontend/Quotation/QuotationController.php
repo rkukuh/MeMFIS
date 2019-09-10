@@ -325,15 +325,14 @@ class QuotationController extends Controller
      */
     public function approve(Quotation $quotation)
     {
-        $amount = $work_progress = 0;
-        $error_messages = [];
+        $amount = 0;
+        $error_messages = $work_progress= [];
         $scheduled_payment_amounts = json_decode($quotation->scheduled_payment_amount);
         foreach($scheduled_payment_amounts as $scheduled_payment_amount){
             $amount += $scheduled_payment_amount->amount;
-            $work_progress += $scheduled_payment_amount->work_progress;
+            array_push($work_progress, $scheduled_payment_amount->work_progress);
         }
-        if($amount != $quotation->subtotal ){
-            
+        if(intval($amount) != intval($quotation->grandtotal) ){
             $error_message = array(
                 'message' => "Scheduled payment total amount not equal with sub total",
                 'title' => $quotation->number,
@@ -341,7 +340,7 @@ class QuotationController extends Controller
             );
             array_push($error_messages, $error_message);
         }
-        if( $work_progress != 100){
+        if( max($work_progress) != 100){
             $error_message = array(
                 'message' => "Scheduled payment work progress still not 100%",
                 'title' => $quotation->number,
