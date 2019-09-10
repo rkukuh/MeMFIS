@@ -71,7 +71,7 @@ class QuotationController extends Controller
      */
     public function store(QuotationStore $request)
     {
-        $contact = [];
+        $contact = $scheduled_payment_amount = [];
 
         $contact['name']     = $request->attention_name;
         $contact['phone'] = $request->attention_phone;
@@ -83,6 +83,7 @@ class QuotationController extends Controller
         $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['quotationable_type' => 'App\Models\Project']);
         $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
+        $request->merge(['scheduled_payment_amount' => json_encode($scheduled_payment_amount) ]);
         $request->merge(['quotationable_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
         $quotation = Quotation::create($request->all());
