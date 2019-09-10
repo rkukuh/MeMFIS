@@ -15,10 +15,12 @@ class CreateEmployeeSchoolTable extends Migration
     {
         Schema::create('employee_school', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('employee_id');
-            $table->unsignedBigInteger('school_id');
-            $table->timestamp('start_at')->nullable();
-            $table->timestamp('graduated_at')->nullable();
+            $table->unsignedBigInteger('degree');
+            $table->string('institute');
+            $table->string('field_of_study');
+            $table->date('graduated_at');
             $table->timestamps();
             $table->softDeletes();
 
@@ -27,8 +29,8 @@ class CreateEmployeeSchoolTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('school_id')
-                    ->references('id')->on('schools')
+            $table->foreign('degree')
+                    ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

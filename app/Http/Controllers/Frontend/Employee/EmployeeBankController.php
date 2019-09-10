@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Frontend\Employee;
 
-use App\Models\EmployeeBank;
-use Illuminate\Http\Request;
+
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\EmployeeBankStore;
+use App\Http\Requests\Frontend\EmployeeBankUpdate;
+use App\Models\Employee;
+use App\Models\Bank;
+use Carbon\Carbon;
 
 class EmployeeBankController extends Controller
 {
@@ -34,9 +38,22 @@ class EmployeeBankController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeBankStore $request,Employee $employee)
     {
-        //
+
+        if($employee->last_name == $employee->first_name){
+            $name = $employee->first_name; 
+        }else{
+            $name = $employee->first_name.' '.$employee->last_name;
+        }
+        $save = $employee->bank_accounts()->create([
+            'number' => $request->account_number,
+            'name' => $name,
+            'bank_id' => Bank::where('uuid',$request->bank_name)->first()->id,
+            'updated_at' => null
+        ]);
+        
+        return response()->json($save);
     }
 
     /**
@@ -68,9 +85,29 @@ class EmployeeBankController extends Controller
      * @param  \App\Models\EmployeeBank  $employeeBank
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EmployeeBank $employeeBank)
+    public function update(EmployeeBankUpdate $request, Employee $employee)
     {
-        //
+        $time = Carbon::now();
+        
+        $employee->bank_accounts()->whereNull('bank_accounts.updated_at')->update([
+            'updated_at' => $time
+        ]);
+
+        if($employee->last_name == $employee->first_name){
+            $name = $employee->first_name; 
+        }else{
+            $name = $employee->first_name.' '.$employee->last_name;
+        }
+
+        $save = $employee->bank_accounts()->create([
+            'number' => $request->account_number,
+            'name' => $name,
+            'bank_id' => Bank::where('uuid',$request->bank_name)->first()->id,
+            'created_at' => $time,
+            'updated_at' => null
+        ]);
+
+        return response()->json($save);
     }
 
     /**

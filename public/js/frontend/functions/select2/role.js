@@ -20,7 +20,7 @@ let roleSelect = {
         
                 for(var i=0; i<len; i++){
                     var option = document.createElement('option')
-                    option.setAttribute('value',parseJSON['data'][i].uuid)
+                    option.setAttribute('value',parseJSON['data'][i].name)
                     option.innerHTML = parseJSON['data'][i].name
                     select.appendChild(option)         
                 }
