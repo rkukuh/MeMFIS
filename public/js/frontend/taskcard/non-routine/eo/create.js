@@ -5,17 +5,23 @@ let TaskCard = {
             $('#prior_to_date').on('click', function () {
                 $('#date').removeAttr("disabled");
                 $('#hour').prop("disabled", true);
+                document.getElementById('hour').value = '';
                 $('#cycle').prop("disabled", true);
+                document.getElementById('cycle').value = '';
             });
             $('#prior_to_hours').on('click', function () {
                 $('#hour').removeAttr("disabled");
                 $('#date').prop("disabled", true);
+                document.getElementById('date').value = '';
                 $('#cycle').prop("disabled", true);
+                document.getElementById('cycle').value = '';
             });
             $('#prior_to_cycle').on('click', function () {
                 $('#cycle').removeAttr("disabled");
                 $('#date').prop("disabled", true);
+                document.getElementById('date').value = '';
                 $('#hour').prop("disabled", true);
+                document.getElementById('hour').value = '';
             });
 
             $('select[name="recurrence_id"]').on('change', function () {

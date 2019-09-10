@@ -30,14 +30,18 @@
                                     <div class="m-portlet m-portlet--mobile pb-3">
                                         <div class="m-portlet__body">
                                             <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
+                                                
+                                                @if ($bank != null)
                                                 <tr>
                                                     <td align="center"><b>Bank Account Number</b></td>
                                                     <td align="center"><b>Bank Account Name</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center" valign="top">generate</td>
-                                                    <td align="center" valign="top">generate</td>
+                                                <td align="center" valign="top">{{ $bank['account_number'] }}</td>
+                                                    <td align="center" valign="top">{{ $bank['bank_name']['name'] }}</td>
                                                 </tr>
+                                                @endif
+
                                             </table>
                                         </div>
                                     </div>
@@ -61,13 +65,24 @@
                                                 </h3>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>  
+
+                            
                                     <div class="m-portlet m-portlet--mobile pb-3">
                                         <div class="m-portlet__body">
+                                                @for ($i = 0; $i < count($bank_history); $i++)
                                             <div class="my-4">
                                                 <div class="d-flex justify-content-end">
                                                     <h3 class="m-portlet__head-text">
-                                                        14 August 2019 to 14 August 2019
+                                                            @php
+                                                            $created_time = $bank_history[$i]['created_at'];
+                                                            $formatCreatedTime = strtotime($created_time);
+    
+                                                            $updated_time = $bank_history[$i]['updated_at'];
+                                                            $formatUpdatedTime = strtotime($updated_time);
+
+                                                            echo date("d F Y", $formatCreatedTime).' to '.date("d F Y", $formatUpdatedTime);
+                                                        @endphp
                                                     </h3>
                                                 </div>
                                                 <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
@@ -76,31 +91,16 @@
                                                         <td align="center"><b>Bank Account Name</b></td>
                                                     </tr>
                                                     <tr>
-                                                        <td align="center" valign="top">generate</td>
-                                                        <td align="center" valign="top">generate</td>
+                                                    <td align="center" valign="top">{{ $bank_history[$i]['account_number'] }}</td>
+                                                    <td align="center" valign="top">{{ $bank_history[$i]['bank_name'] }}</td>
                                                     </tr>
                                                 </table>
                                             </div>
                                             <hr>
-                                            <div class="my-4">
-                                                <div class="d-flex justify-content-end">
-                                                    <h3 class="m-portlet__head-text">
-                                                        14 August 2019 to 14 August 2019
-                                                    </h3>
-                                                </div>
-                                                <table class="table table-striped table-bordered second" widtd="100%" cellpadding="4">
-                                                    <tr>
-                                                        <td align="center"><b>Bank Account Number</b></td>
-                                                        <td align="center"><b>Bank Account Name</b></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td align="center" valign="top">generate</td>
-                                                        <td align="center" valign="top">generate</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
+                                            @endfor
                                     </div>
+                                    
+                                </div>
                                 </div>
                             </div>
                         </div>

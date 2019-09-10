@@ -13,18 +13,4 @@ class School extends MemfisModel
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
-
-    /**
-     * Many-to-Many: An employee may have zero or many schools.
-     *
-     * This function will retrieve all the employees of a school.
-     * See: Employee's schools() method for the inverse
-     *
-     * @return mixed
-     */
-    public function employees()
-    {
-        return $this->belongsToMany(Employee::class)
-                    ->withTimestamps();
-    }
 }

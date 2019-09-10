@@ -19,8 +19,7 @@ class TaskCardRoutineItemsDatatables extends Controller
     public function material(TaskCard $taskcard)
     {
         foreach($taskcard->materials as $material){
-            $unit_id = $material->pivot->unit_id;
-            $material->pivot->unit .= Unit::find($unit_id)->name;
+            $material->pivot->unit .= Unit::find($material->pivot->unit_id)->name;
         }
 
         $data = $alldata = json_decode($taskcard->materials);
@@ -121,8 +120,7 @@ class TaskCardRoutineItemsDatatables extends Controller
     public function tool(TaskCard $taskcard)
     {
         foreach($taskcard->tools as $tool){
-            $unit_id = $tool->pivot->unit_id;
-            $tool->pivot->unit .= Unit::find($unit_id)->name;
+            $tool->pivot->unit .= Unit::find($tool->pivot->unit_id)->name;
         }
 
         $data = $alldata = json_decode($taskcard->tools);
