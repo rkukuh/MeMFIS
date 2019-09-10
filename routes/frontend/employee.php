@@ -42,6 +42,7 @@ Route::name('frontend.')->group(function () {
                     Route::resource('/{employee}/account', 'EmployeeUserController');
                     Route::resource('/{employee}/bank', 'EmployeeBankController');
                     Route::resource('/{employee}/workshift', 'EmployeeWorkshiftController');
+                    Route::resource('/{employee}/termiantion', 'EmployeeTerminationController');
                 });
 
             });
