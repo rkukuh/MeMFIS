@@ -237,6 +237,7 @@
                         @component('frontend.common.input.number')
                             @slot('id', 'work_progress_scheduled')
                             @slot('name', 'work_progress_scheduled')
+                            @slot('max', 100)
                             @slot('input_append','%')
                             @slot('id_error', 'work_progress_scheduled')
                         @endcomponent

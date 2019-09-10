@@ -27,7 +27,6 @@ $('.filter').on('change', function () {
             task_type_id: task_type_id,
             aircrafts: aircrafts,
             skills: skills,
-            // task_card_no: task_card_no,
         },
         success: function(response) {
             let table = $('.taskcard_datatable').mDatatable();
@@ -197,8 +196,6 @@ $('.filter').on('change', function () {
                     }
                 ]
             });
-
-            // table.reload();
 
         }
     });
