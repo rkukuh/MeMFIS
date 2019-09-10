@@ -22,8 +22,6 @@ $factory->define(PurchaseRequest::class, function (Faker $faker) {
 
             return factory(Type::class)->states('purchase-request')->create()->id;
         },
-        'requested_at' => $faker->randomElement([null, Carbon::now()]),
-        'required_at' => $faker->randomElement([null, Carbon::now()]),
         'project_id' => function () use ($faker) {
             if (Project::count()) {
                 return Project::get()->random()->id;
@@ -31,6 +29,8 @@ $factory->define(PurchaseRequest::class, function (Faker $faker) {
 
             return $faker->randomElement([null, factory(Project::class)->create()->id]);
         },
+        'requested_at' => $faker->randomElement([null, Carbon::now()]),
+        'required_at' => $faker->randomElement([null, Carbon::now()]),
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
     ];
 

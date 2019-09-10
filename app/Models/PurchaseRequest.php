@@ -9,9 +9,9 @@ class PurchaseRequest extends MemfisModel
     protected $fillable = [
         'number',
         'type_id',
+        'project_id',
         'requested_at',
         'required_at',
-        'project_id',
         'description',
     ];
 
