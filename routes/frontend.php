@@ -51,6 +51,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('user', 'UserController');
         Route::resource('bpjs', 'BPJSController');
         Route::resource('bank', 'BankController');
+        Route::resource('promo', 'PromoController');
         Route::resource('school', 'SchoolController');
         Route::resource('vendor', 'VendorController');
         Route::resource('branch', 'BranchController');
