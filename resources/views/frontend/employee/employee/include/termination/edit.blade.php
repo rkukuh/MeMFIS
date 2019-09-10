@@ -8,11 +8,11 @@
                         Termination Date  @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.email')
+                    @component('frontend.common.input.datepicker')
                         @slot('text', 'Termination Date')
-                        @slot('id', 'termination_date')
-                        @slot('name', 'termination_date')
-                        @slot('id_error', 'termination_date')
+                        @slot('id', 'date_termination')
+                        @slot('name', 'date_termination')
+                        @slot('id_error', 'date_termination')
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -78,4 +78,5 @@
     
 
 @push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/datepicker/date-termination.js')}}"></script>
 @endpush
