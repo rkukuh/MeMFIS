@@ -1,6 +1,5 @@
 let scheduled_payments = {
     init: function () {
-        
         let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable( {
             data: dataSet,
             columns: [
@@ -42,8 +41,10 @@ let scheduled_payments = {
                   var sum = this.data();
                   let arr_work_progress = sum.join();
                   let max = arr_work_progress.split(",");
-                  max=max.map((num) => parseInt(num));
-                  $( api.column( 0 ).footer() ).html("Work Progress : "+Math.max(max)+"%");
+                  Array.prototype.max = function() {
+                    return Math.max.apply(null, this);
+                  };
+                  $( api.column( 0 ).footer() ).html("Work Progress : "+max.max()+"%");
                 });
                 api.columns('1', {
                   page: 'current'
