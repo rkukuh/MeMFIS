@@ -34,18 +34,16 @@ let scheduled_payments = {
             info: false,
             footer: true,
             "footerCallback": function(row, data, start, end, display) {
-                var api = this.api();
+                
+              var api = this.api();
                 api.columns('0', {
                   page: 'current'
                 }).every(function() {
-                  var sum = this
-                    .data()
-                    .reduce(function(a, b) {
-                      var x = parseFloat(a) || 0;
-                      var y = parseFloat(b) || 0;
-                      return x + y;
-                    }, 0);
-                  $( api.column( 0 ).footer() ).html("Total Work Progress : "+sum+"%");
+                  var sum = this.data();
+                  let arr_work_progress = sum.join();
+                  let max = arr_work_progress.split(",");
+                  max=max.map((num) => parseInt(num));
+                  $( api.column( 0 ).footer() ).html("Work Progress : "+Math.max(max)+"%");
                 });
                 api.columns('1', {
                   page: 'current'
