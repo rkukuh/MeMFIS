@@ -10,13 +10,15 @@ class GoodsReceived extends MemfisModel
 
     protected $fillable = [
         'number',
+        'purchase_order_id',
         'received_by',
         'received_at',
         'vehicle_no',
         'container_no',
-        'purchase_order_id',
         'storage_id',
         'description',
+        'additionals',
+        'origin_vendor_coa',
     ];
 
     protected $dates = ['received_at'];
