@@ -88,6 +88,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\QuotationDefectCardItem::class => Policies\QuotationDefectCardItemPolicy::class,
         Models\Pivots\QuotationWorkPackage::class => Policies\QuotationWorkPackagePolicy::class,
         Models\QuotationWorkPackageItem::class => Policies\QuotationWorkPackageItemPolicy::class,
+        Models\Pivots\PurchaseOrderItem::class => Policies\Pivots\PurchaseOrderItemPolicy::class,
         Models\ProjectWorkPackageManhour::class => Policies\ProjectWorkPackageManhourPolicy::class,
         Models\ProjectWorkPackageEngineer::class => Policies\ProjectWorkPackageEngineerPolicy::class,
         Models\ProjectWorkPackageFacility::class => Policies\ProjectWorkPackageFacilityPolicy::class,

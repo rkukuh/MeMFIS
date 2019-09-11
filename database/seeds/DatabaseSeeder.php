@@ -144,5 +144,9 @@ class DatabaseSeeder extends Seeder
         /** QUOTATION's DEFECTCARDs */
 
         $this->call(QuotationDefectCardItemsTableSeeder::class);
+
+        /** PURCHASE ORDER's ITEMs */
+
+        $this->call(PurchaseOrderItemsTableSeeder::class);
     }
 }

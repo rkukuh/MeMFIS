@@ -144,5 +144,9 @@ class DummyDataSeeder extends Seeder
         /** QUOTATION's DEFECTCARDs */
 
         $this->call(QuotationDefectCardItems::class);
+
+        /** PURCHASE ORDER's ITEMs */
+
+        $this->call(PurchaseOrderItems::class);
     }
 }
