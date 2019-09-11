@@ -160,17 +160,17 @@ let PurchaseOrder = {
 
                     $('select[name="discount-type"]').empty();
 
-                    if(data.pivot.discount_type == "percentage"){
-                        $('select[name^="discount-type"]').append(
-                            '<option value="amount">Amount</option>',
-                            '<option value="percentage" selected>Percentage</option>'
-                        );
-                    }else{
-                        $('select[name^="discount-type"]').append(
-                            '<option value="amount" selected>Amount</option>',
-                            '<option value="percentage">Percentage</option>'
-                        );
-                    }
+                    // if(data.pivot.discount_type == "percentage"){
+                    //     $('select[name^="discount-type"]').append(
+                    //         '<option value="amount">Amount</option>',
+                    //         '<option value="percentage" selected>Percentage</option>'
+                    //     );
+                    // }else{
+                    //     $('select[name^="discount-type"]').append(
+                    //         '<option value="amount" selected>Amount</option>',
+                    //         '<option value="percentage">Percentage</option>'
+                    //     );
+                    // }
 
                     document.getElementById('item_name').innerText = data.name;
                     document.getElementById('uuid').value = data.uuid;
@@ -188,8 +188,9 @@ let PurchaseOrder = {
             let qty = $('#qty').val();
             let unit_id = $('#unit_id').val();
             let price = $('#price').val();
+            let ppn = $('#ppn').val();
             let discount = $('#discount').val();
-            let discount_type = $('#discount-type').val();
+            // let discount_type = $('#discount-type').val();
             let remark_material = $('#remark_material').val();
 
             $.ajax({
@@ -202,6 +203,7 @@ let PurchaseOrder = {
                     quantity:qty,
                     unit_id:unit_id,
                     price:price,
+                    ppn:ppn,
                     // discount:discount,
                     // discount_type:discount_type,
                     note:remark_material,

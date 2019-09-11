@@ -9,9 +9,9 @@ class PurchaseRequest extends MemfisModel
     protected $fillable = [
         'number',
         'type_id',
+        'project_id',
         'requested_at',
         'required_at',
-        'project_id',
         'description',
     ];
 
@@ -48,8 +48,8 @@ class PurchaseRequest extends MemfisModel
         return $this->belongsToMany(Item::class, 'item_purchase_request', 'purchase_request_id', 'item_id')
                     ->withPivot(
                         'quantity',
-                        'unit_id',
                         'quantity_unit',
+                        'unit_id',
                         'note'
                     )
                     ->withTimestamps();

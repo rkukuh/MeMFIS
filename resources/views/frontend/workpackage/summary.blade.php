@@ -26,7 +26,7 @@
 
     <div class="row">
 
-        <div class="col-xl-6">
+        <div class="col-xl-8">
             <div class="m-portlet m-portlet--mobile ">
                 <div class="m-portlet__head">
                     <div class="m-portlet__head-caption">
@@ -106,7 +106,7 @@
             </div>
         </div>
 
-        <div class="col-xl-6">
+        <div class="col-xl-4">
             <div class="m-widget29">
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-widget_content">

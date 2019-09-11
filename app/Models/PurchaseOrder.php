@@ -8,16 +8,21 @@ class PurchaseOrder extends MemfisModel
 {
     protected $fillable = [
         'number',
-        'vendor_id',
         'purchase_request_id',
+        'vendor_id',
         'ordered_at',
         'valid_until',
+        'valid_at',
         'shipping_address',
         'ship_at',
         'currency_id',
-        'exchange_rate',
-        'total_before_tax',
+        'subtotal',
+        'discount_percent',
+        'discount_amount',
+        'tax_percent',
         'tax_amount',
+        'total_before_tax',
+        'exchange_rate',
         'total_after_tax',
         'top_type',
         'top_day_amount',
@@ -28,6 +33,7 @@ class PurchaseOrder extends MemfisModel
     protected $dates = [
         'ordered_at',
         'valid_until',
+        'valid_at',
         'ship_at',
         'top_start_at',
     ];
@@ -88,9 +94,9 @@ class PurchaseOrder extends MemfisModel
                         'quantity',
                         'unit_id',
                         'price',
+                        'tax_percent',
+                        'tax_amount',
                         'subtotal_before_discount',
-                        'discount_type',
-                        'discount_value',
                         'subtotal_after_discount',
                         'note'
                     )

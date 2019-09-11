@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\GoodsReceived;
 
 use Carbon\Carbon;
+use App\Models\Item;
 use App\Models\Storage;
 use App\Models\PurchaseOrder;
 use App\Models\GoodsReceived;
@@ -20,7 +21,7 @@ class ItemGoodsReceivedController extends Controller
      */
     public function index()
     {
-        return view('frontend.goods-received-note.index');
+        //
     }
 
     /**
@@ -30,7 +31,7 @@ class ItemGoodsReceivedController extends Controller
      */
     public function create()
     {
-        return view('frontend.goods-received-note.create');
+        //
     }
 
     /**
@@ -41,25 +42,7 @@ class ItemGoodsReceivedController extends Controller
      */
     public function store(GoodsReceivedStore $request)
     {
-        $request->merge(['number' => DocumentNumber::generate('GRN-', GoodsReceived::withTrashed()->count()+1)]);
-        $request->merge(['purchase_order_id' => PurchaseOrder::where('uuid',$request->purchase_order_id)->first()->id]);
-        $request->merge(['storage_id' => Storage::where('uuid',$request->storage_id)->first()->id]);
-        $request->merge(['received_at' => Carbon::parse($request->received_at)]);
-
-        $goodsReceived = GoodsReceived::create($request->all());
-
-        $items = PurchaseOrder::find($request->purchase_order_id)->items;
-
-        foreach($items as $item){
-            $goodsReceived->items()->attach([$item->pivot->item_id => [
-                'quantity'=> $item->pivot->quantity,
-                'already_received'=> 2,// TODO ask whats is it?
-                'unit_id' => $item->pivot->unit_id
-                ]
-            ]);
-        }
-
-        return response()->json($goodsReceived);
+       //
     }
 
     /**
@@ -70,10 +53,7 @@ class ItemGoodsReceivedController extends Controller
      */
     public function show(GoodsReceived $goodsReceived)
     {
-        return view('frontend.goods-received-note.show', [
-            'goodsReceived' => $goodsReceived,
-        ]);
-
+       //
     }
 
     /**
@@ -84,10 +64,7 @@ class ItemGoodsReceivedController extends Controller
      */
     public function edit(GoodsReceived $goodsReceived)
     {
-        return view('frontend.goods-received-note.edit', [
-            'goodsReceived' => $goodsReceived,
-        ]);
-
+       //
     }
 
     /**
@@ -97,9 +74,16 @@ class ItemGoodsReceivedController extends Controller
      * @param  \App\Models\GoodsReceived  $goodsReceived
      * @return \Illuminate\Http\Response
      */
-    public function update(GoodsReceivedUpdate $request, GoodsReceived $goodsReceived)
+    public function update(GoodsReceivedUpdate $request, GoodsReceived $goodsReceived, Item $item)
     {
-        //
+        // dd($request->all());
+        $goodsReceived->items()->updateExistingPivot($item->id,
+        ['unit_id'=>$request->unit_id,
+        'quantity'=> $request->quantity,
+        // 'exp_date'=> $request->exp_date,
+        'note' => $request->note]);
+
+return response()->json($goodsReceived);
     }
 
     /**
@@ -108,21 +92,10 @@ class ItemGoodsReceivedController extends Controller
      * @param  \App\Models\GoodsReceived  $goodsReceived
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GoodsReceived $goodsReceived)
+    public function destroy(GoodsReceived $goodsReceived, Item $item)
     {
-        $goodsReceived->delete();
+        $goodsReceived->items()->detach($item->id);
 
-        return response()->json($goodsReceived);
-    }
-
-    /**
-     * Approve the specified resource from storage.
-     *
-     * @param  \App\Models\GoodsReceived  $goodsReceived
-     * @return \Illuminate\Http\Response
-     */
-    public function approve(GoodsReceived $goodsReceived)
-    {
         return response()->json($goodsReceived);
     }
 }

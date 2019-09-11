@@ -33,6 +33,7 @@ return [
         'manhours' => 20,
         'positions' => 20,
         'projects' => 20,
+        'promos' => 20,
         'purchase-orders' => 20,
         'purchase-requests' => 20,
         'quotation' => [
