@@ -73,7 +73,7 @@
                                                 A/C Type
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->quotation->project->aircraft->name}}
+                                                {{$jobcard->quotation->quotationable->aircraft->name}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -81,7 +81,7 @@
                                                 A/C Reg
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->quotation->project->aircraft_register}}
+                                                {{$jobcard->quotation->quotationable->aircraft_register}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -89,7 +89,7 @@
                                                 A/C Serial Number
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->quotation->project->aircraft_sn}}
+                                                {{$jobcard->quotation->quotationable->aircraft_sn}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -109,7 +109,7 @@
                                                 Project No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->quotation->project->code}}
+                                                {{$jobcard->quotation->quotationable->code}}
                                             </td>
                                         </tr>
                                         <tr>

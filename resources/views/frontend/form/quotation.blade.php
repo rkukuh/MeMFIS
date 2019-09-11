@@ -159,7 +159,7 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{$quotation->project->customer->name}}
+                        {{$quotation->quotationable->customer->name}}
                     </td>
                     <td width="33%" rowspan="5" align="center">
                             <div class="barcode">
@@ -220,7 +220,7 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{$quotation->project->no_wo}}
+                        {{$quotation->quotationable->no_wo}}
                     </td>
                 </tr>
             </table>
@@ -235,7 +235,7 @@
                     <td width="35%" valign="top">{{$quotation->created_at}}</td>
                     <th width="14%" valign="top">Project No</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top">{{$quotation->project->code}}</td>
+                    <td width="35%" valign="top">{{$quotation->quotationable->code}}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Currency</th>
@@ -243,7 +243,7 @@
                     <td width="35%" valign="top">{{$quotation->currency->name}}</td>
                     <th width="14%" valign="top">A/C Type</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top">{{$quotation->project->aircraft->name}}</td>
+                    <td width="35%" valign="top">{{$quotation->quotationable->aircraft->name}}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Exchange Rate</th>
@@ -251,7 +251,7 @@
                     <td width="35%" valign="top">{{$quotation->exchange_rate}}</td>
                     <th width="14%" valign="top">A/C Reg.</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top">{{$quotation->project->aircraft_register}}</td>
+                    <td width="35%" valign="top">{{$quotation->quotationable->aircraft_register}}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Valid Until</th>
@@ -259,12 +259,12 @@
                     <td width="35%" valign="top">{{$quotation->valid_until}}</td>
                     <th width="14%" valign="top">A/C Serial No.</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top">{{$quotation->project->aircraft_sn}}</td>
+                    <td width="35%" valign="top">{{$quotation->quotationable->aircraft_sn}}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Subject</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top">{{$quotation->project->title}}</td>
+                    <td width="35%" valign="top">{{$quotation->quotationable->title}}</td>
                     <td width="14%" valign="top"></td>
                     <td width="1%" valign="top"></td>
                     <td width="35%" valign="top"></td>
@@ -409,7 +409,7 @@
                         
                     </td>
                     <td width="50%" align="center">
-                        <b> {{ $quotation->project->customer->name }} </b><br>
+                        <b> {{ $quotation->quotationable->customer->name }} </b><br>
                      
                     </td>
                 </tr>
@@ -548,7 +548,7 @@
                             <b> {{ $username }}</b><br>
                         </td>
                         <td width="50%" align="center">
-                            <b>  {{ $quotation->project->customer->name }} </b><br>
+                            <b>  {{ $quotation->quotationable->customer->name }} </b><br>
                             
                         </td>
                     </tr>
