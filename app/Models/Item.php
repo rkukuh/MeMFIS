@@ -126,6 +126,7 @@ class Item extends MemfisModel implements HasMedia
                         'quantity',
                         'quantity_unit',
                         'unit_id',
+                        'price',
                         'already_received_amount',
                         'note'
                     )
