@@ -16,6 +16,7 @@ class EmployeeTermination extends Model implements HasMedia
     protected $table = 'employee_termination';
 
     protected $fillable = [
+        'employee_id',
         'termination_id',
         'termination_date',
         'reason',
