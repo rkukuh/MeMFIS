@@ -51,8 +51,9 @@ class GoodsReceived extends MemfisModel
         return $this->belongsToMany(Item::class)
                     ->withPivot(
                         'quantity',
-                        'already_received',
+                        'quantity_unit',
                         'unit_id',
+                        'already_received_amount',
                         'note'
                     )
                     ->withTimestamps();

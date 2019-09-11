@@ -82,8 +82,9 @@ $factory->afterCreating(GoodsReceived::class, function ($goods_received, $faker)
 
             $goods_received->items()->save($item, [
                 'quantity' => rand(1, 10),
-                'already_received' => rand(2, 3),
+                'quantity_unit' => rand(1, 10),
                 'unit_id' => $unit->id,
+                'already_received_amount' => rand(2, 3),
                 'note' => $faker->randomElement([null, $faker->sentence]),
             ]);
         }

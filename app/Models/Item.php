@@ -123,8 +123,9 @@ class Item extends MemfisModel implements HasMedia
         return $this->belongsToMany(GoodsReceived::class)
                     ->withPivot(
                         'quantity',
-                        'already_received',
+                        'quantity_unit',
                         'unit_id',
+                        'already_received_amount',
                         'note'
                     )
                     ->withTimestamps();
