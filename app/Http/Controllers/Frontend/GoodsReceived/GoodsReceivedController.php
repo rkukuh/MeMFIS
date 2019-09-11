@@ -48,9 +48,22 @@ class GoodsReceivedController extends Controller
         $request->merge(['storage_id' => Storage::where('uuid',$request->storage_id)->first()->id]);
         $request->merge(['received_at' => Carbon::parse($request->received_at)]);
 
+        $additionals = null;
+
+        $additionals['SupplierRefNo'] = $request->do_no;
+        $additionals['SupplierRefDate'] = $request->do_date;
+
+        $request->merge(['additionals' => json_encode($additionals)]);
+
         $goodsReceived = GoodsReceived::create($request->all());
 
-        $items = PurchaseOrder::find($request->purchase_order_id)->items;
+    //     @if(isset(json_decode($jobCard->taskcard->additionals)->internal_number))
+    //     {{json_decode($jobCard->taskcard->additionals)->internal_number}}
+    // @else
+    //     -
+    // @endif
+
+        // $items = PurchaseOrder::find($request->purchase_order_id)->items;
 
         // foreach($items as $item){
         //     $goodsReceived->items()->attach([$item->pivot->item_id => [
@@ -74,6 +87,7 @@ class GoodsReceivedController extends Controller
     {
         return view('frontend.goods-received-note.show', [
             'goodsReceived' => $goodsReceived,
+            'additionals' => json_decode($goodsReceived->additionals)
         ]);
 
     }
@@ -88,6 +102,7 @@ class GoodsReceivedController extends Controller
     {
         return view('frontend.goods-received-note.edit', [
             'goodsReceived' => $goodsReceived,
+            'additionals' => json_decode($goodsReceived->additionals)
         ]);
 
     }

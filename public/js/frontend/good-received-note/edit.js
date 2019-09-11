@@ -121,8 +121,8 @@ let goods_received_note = {
             let received_at = $('input[name=date]').val();
             let received_by = $('#received-by').val();
             let ref_po = $('input[name=ref-po]').val();
-            let do_no = $('input[name=do-no]').val();
-            let ref_date = $('input[name=date-ref-date]').val();
+            let do_no = $('input[name=deliv-number]').val();
+            let do_date = $('input[name=do-date]').val();
             let warehouse = $('input[name=warehouse]').val();
             let description = $('#description').val();
             let vehicle_no = $('input[name=vehicle-no]').val();
@@ -140,6 +140,8 @@ let goods_received_note = {
                     vehicle_no:vehicle_no,
                     container_no:container_no,
                     purchase_order_id:ref_po,
+                    do_no:do_no,
+                    do_date:do_date,
                     storage_id:warehouse,
                     description:description,
                 },

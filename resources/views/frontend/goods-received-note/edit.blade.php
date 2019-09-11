@@ -84,8 +84,12 @@
                                                                 Delivery Order Number @include('frontend.common.label.required')
                                                             </label>
                                                             @component('frontend.common.input.text')
-                                                                @slot('id', 'pr-number')
-                                                                @slot('text', '-')
+                                                                @slot('id', 'deliv-number')
+                                                                @slot('name', 'deliv-number')
+                                                                @slot('text', 'Deliv Number')
+                                                                @if(isset($additionals))
+                                                                    @slot('value', $additionals->SupplierRefNo)
+                                                                @endif
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -94,9 +98,12 @@
                                                             </label>
 
                                                             @component('frontend.common.input.datepicker')
-                                                                @slot('text', 'ref-date')
-                                                                @slot('name', 'ref-date')
-                                                                @slot('id', 'ref-date')
+                                                                @slot('text', 'Do Date')
+                                                                @slot('name', 'do-date')
+                                                                @slot('id', 'do-date')
+                                                                @if(isset($additionals))
+                                                                    @slot('value', $additionals->SupplierRefDate)
+                                                                @endif
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -284,7 +291,7 @@
 
     <script src="{{ asset('js/frontend/good-received-note/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/datepicker/ref-date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/do-date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
