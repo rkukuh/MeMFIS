@@ -151,7 +151,7 @@
                             </div>
                             <div class="m-widget_content-item">
                                 <span>Total</span>
-                                <span>{{$adsb+$cmrawl+$si}}</span>
+                                <span>{{$adsb+$cmrawl+$si+$ea+$eo}}</span>
                             </div>
                         </div>
 
