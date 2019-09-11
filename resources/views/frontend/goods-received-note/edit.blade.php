@@ -310,6 +310,7 @@
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/do-date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/expired-date2.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
