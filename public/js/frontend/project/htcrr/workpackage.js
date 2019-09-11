@@ -56,7 +56,7 @@ let Workpackage = {
                 filterable: !1,
             },
             {
-                field: 'description',
+                field: 'part_number',
                 title: 'Item Description',
                 sortable: 'asc',
                 filterable: !1,
