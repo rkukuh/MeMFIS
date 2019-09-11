@@ -81,6 +81,12 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
 
 $factory->afterCreating(PurchaseOrder::class, function ($purchase_order, $faker) {
 
+    // Approval
+
+    if ($faker->boolean) {
+        $purchase_order->approvals()->save(factory(Approval::class)->make());
+    }
+
     // Item
 
     if ($faker->boolean) {
@@ -111,12 +117,6 @@ $factory->afterCreating(PurchaseOrder::class, function ($purchase_order, $faker)
                 'note' => $faker->randomElement([null, $faker->sentence]),
             ]);
         }
-    }
-
-    // Approval
-
-    if ($faker->boolean) {
-        $purchase_order->approvals()->save(factory(Approval::class)->make());
     }
 
 });
