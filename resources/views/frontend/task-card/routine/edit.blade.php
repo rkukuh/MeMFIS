@@ -96,7 +96,7 @@
                                                     @slot('text', 'Company Task Number')
                                                     @slot('name', 'company_number')
                                                     @if(isset($additionals))
-                                                        @slot('value', $additionals->internal_number)
+                                                        @slot('value', json_decode($additionals->internal_number)->internal_number)
                                                     @endif
                                                     @slot('id_error', 'company_number')
                                                 @endcomponent
@@ -542,7 +542,7 @@
                                                         <td width="45%">
                                                             <input type="number" required="required" class="form-control" name="threshold_amount[]"/>
                                                         </td>
-                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select</option>
+                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value="">Select Threshold</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                         <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
                                                         @endforeach
@@ -559,7 +559,7 @@
                                                         <td width="45%">
                                                             <input type="number" required="required" class="form-control" name="threshold_amount[]" value="{{ $taskcard->thresholds[$i]->amount }}"/>
                                                         </td>
-                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select</option>
+                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value="">Select Repeats</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                         <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->thresholds[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
                                                         @endforeach
@@ -590,7 +590,7 @@
                                                     <tr>
                                                         <td width="45%"><input type="number" required="required" class="form-control" name="repeat_amount[]"/></td>
                                                         <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
-                                                        <option value"">Select </option>
+                                                        <option value="">Select Threshold</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                         <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
                                                         @endforeach
@@ -606,7 +606,7 @@
                                                 <tr>
                                                     <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]" value="{{ $taskcard->repeats[$i]->amount }}"/></td>
                                                     <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
-                                                    <option value"">Select</option>
+                                                    <option value="">Select Repeat</option>
                                                     @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                     <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->repeats[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
                                                     @endforeach
@@ -891,7 +891,7 @@
                 x = x+1;
                 cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
                 cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
-                cols += '<option value"">Select</option>';
+                cols += '<option value="">Select Threshold</option>';
                 for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
                     if(maintenanceCycles[i].id == 1){
                     }else{
@@ -918,7 +918,7 @@
                 x = x+1;
                 cols += '<td width="45%"><input type="text" required="required" class="form-control"  name="repeat_amount[]"/></td>';
                 cols += '<td width="50%"><select name="repeat_type[]" class="select form-control ">';
-                cols += '<option value"">Select</option>';
+                cols += '<option value="">Select Repeat</option>';
                 for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
                     if(maintenanceCycles[i].id == 1){
                     }else{
