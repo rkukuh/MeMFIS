@@ -53,6 +53,7 @@ class GoodsReceived extends MemfisModel
                         'quantity',
                         'quantity_unit',
                         'unit_id',
+                        'price',
                         'already_received_amount',
                         'note'
                     )
