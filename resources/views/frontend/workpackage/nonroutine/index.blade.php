@@ -139,7 +139,7 @@
                             @endcomponent
                         @component('frontend.common.buttons.summary')
                             @slot('text', 'EA Summary')
-                            @slot('href', route('frontend.workPackage.summary.si', $workPackage->uuid) )
+                            @slot('href', route('frontend.workPackage.summary.ea', $workPackage->uuid) )
                         @endcomponent
 
 
