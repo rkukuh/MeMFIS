@@ -237,6 +237,11 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                                                            @component('frontend.common.buttons.create-new')
+                                                                                @slot('text', 'Item')
+                                                                                @slot('data_target', '#modal_grn_add')
+                                                                            @endcomponent
+
                                                                             <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                         </div>
                                                                     </div>
@@ -244,6 +249,7 @@
                                                                 <div class="purchase_order_datatable" id="purchase_order_datatable"></div>
 
                                                                 @include('frontend.goods-received-note.modal')
+                                                                @include('frontend.goods-received-note.modal-edit')
 
                                                             </div>
                                                         </div>
@@ -283,11 +289,22 @@
 @push('footer-scripts')
     <script>
         let grn_uuid = '{{$goodsReceived->uuid}}';
+        let po_uuid = '{{$goodsReceived->purchase_order->uuid}}';
+
         $(document).ready(function () {
             document.getElementById('search-storage').innerHTML = '{{$goodsReceived->storage->name}}';
             document.getElementById('warehouse').value = '{{$goodsReceived->storage->uuid}}';
         });
     </script>
+
+    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material-po.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item.js') }}"></script>
 
     <script src="{{ asset('js/frontend/good-received-note/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>

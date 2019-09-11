@@ -25,6 +25,7 @@ Route::name('component.')->group(function () {
         Route::get('get-accesses', 'FillComboxController@access')->name('get-accesses');
         Route::get('get-stations', 'FillComboxController@station')->name('get-stations');
         Route::get('get-materials', 'FillComboxController@material')->name('get-material');
+        Route::get('get-po-materials/{purchaseOrder}', 'FillComboxController@poMaterial')->name('get-po-material');
         Route::get('get-aircrafts', 'FillComboxController@aircraft')->name('get-aircrafts');
         Route::get('get-customers', 'FillComboxController@customer')->name('get-customers');
         Route::get('get-taskcards', 'FillComboxController@taskcard')->name('get-taskcards');

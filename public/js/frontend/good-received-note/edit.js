@@ -168,6 +168,55 @@ let goods_received_note = {
             });
         });
 
+        $('.modal-footer').on('click', '.add-item', function () {
+            let item_uuid = $("#material").val();
+            let exp_date = $("#exp_date_2").val();
+            let qty = $("#quantity").val();
+            let unit_id = $("#unit_material").val();
+            let note = $("#description").val();
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                url: '/goods-received/'+grn_uuid+'/item/',
+                type: "POST",
+                data: {
+                    item_uuid: item_uuid,
+                    exp_date: exp_date,
+                    quantity: qty,
+                    unit_id: unit_id,
+                    note: note,
+                },
+                success: function(response) {
+                    if (response.errors) {
+                        console.log(errors);
+                        // if (response.errors.title) {
+                        //     $('#title-error').html(response.errors.title[0]);
+                        // }
+
+                        // document.getElementById('manual_affected_id').value = manual_affected_id;
+                    } else {
+                        //    taskcard_reset();
+                        $('#modal_grn').modal('hide');
+
+                        toastr.success(
+                            "GRN has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $(".purchase_order_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                    }
+                }
+            });
+        });
         $('.purchase_order_datatable').on('click', '.edit-item', function () {
             let description = "";
             document.getElementById('item').innerText = $(this).data('item');

@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_grn_add" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="modal_grn" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -16,19 +16,16 @@
             </div>
             <div class="modal-body">
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="InstructionForm">
+                    <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Item
+                                    Part Number
                                 </label>
 
-                                @component('frontend.common.input.select2')
-                                    @slot('text', 'Item')
-                                    @slot('id', 'material')
-                                    @slot('name', 'material')
-                                    @slot('id_error', 'item')
-                                    @slot('style', 'width:100%')
+                                @component('frontend.common.label.data-info')
+                                    @slot('id', 'item-label')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -37,10 +34,21 @@
                                 </label>
 
                                 @component('frontend.common.input.datepicker')
-                                    @slot('id', 'exp_date_2')
+                                    @slot('id', 'exp_date')
                                     @slot('text', 'Expired Date')
-                                    @slot('name', 'exp_date_2')
-                                    @slot('id_error', 'exp_date_2')
+                                    @slot('name', 'exp_date')
+                                    @slot('id_error', 'exp_date')
+                                @endcomponent
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <label class="form-control-label">
+                                    Item Description
+                                </label>
+
+                                @component('frontend.common.label.data-info')
+                                    @slot('id', 'item-description')
                                 @endcomponent
                             </div>
                         </div>
@@ -51,10 +59,10 @@
                                 </label>
 
                                 @component('frontend.common.input.number')
-                                    @slot('id', 'quantity')
+                                    @slot('id', 'qty')
                                     @slot('text', 'Qty Recieved')
-                                    @slot('name', 'quantity')
-                                    @slot('id_error', 'quantity')
+                                    @slot('name', 'qty')
+                                    @slot('id_error', 'qty')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -64,8 +72,8 @@
 
                                 @component('frontend.common.input.select2')
                                     @slot('text', 'Unit')
-                                    @slot('id', 'unit_material')
-                                    @slot('name', 'unit_material')
+                                    @slot('id', 'unit_id')
+                                    @slot('name', 'unit_id')
                                     @slot('id_error', 'unit')
                                 @endcomponent
                             </div>
@@ -78,9 +86,9 @@
 
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
-                                    @slot('id', 'description')
-                                    @slot('name', 'description')
-                                    @slot('text', 'Description')
+                                    @slot('id', 'note')
+                                    @slot('name', 'note')
+                                    @slot('text', 'Note')
                                     @slot('required', 'required')
                                 @endcomponent
                             </div>
@@ -90,7 +98,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                     @component('frontend.common.buttons.submit')
-                                        @slot('class', 'add-item')
+                                        @slot('class', 'update-item')
                                         @slot('type', 'button')
                                     @endcomponent
                                     @component('frontend.common.buttons.reset')
