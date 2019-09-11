@@ -104,6 +104,19 @@ class PurchaseOrder extends MemfisModel
     }
 
     /**
+     * M-M Polymorphic: A promo can be applied to many entities.
+     *
+     * This function will get all the promos that are applied to a given PO.
+     * See: Promo's purchase_orders() method for the inverse
+     *
+     * @return mixed
+     */
+    public function promos()
+    {
+        return $this->morphToMany(Promo::class, 'promoable');
+    }
+
+    /**
      * One-to-Many: A purchase order may have one purchase request.
      *
      * This function will retrieve the purchase request of a purchase order.
