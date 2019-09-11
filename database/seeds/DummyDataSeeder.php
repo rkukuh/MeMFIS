@@ -125,8 +125,8 @@ class DummyDataSeeder extends Seeder
         /** WORKPACKAGE's EO-INSTRUCTIONs */
 
         $this->call(EOInstructionWorkPackages::class);
-        // $this->call(EOInstructionWorkPackageSuccessors::class);
-        // $this->call(EOInstructionWorkPackagePredecessors::class);
+        $this->call(EOInstructionWorkPackageSuccessors::class);
+        $this->call(EOInstructionWorkPackagePredecessors::class);
 
         /** QUOTATION's WORKPACKAGEs */
 
