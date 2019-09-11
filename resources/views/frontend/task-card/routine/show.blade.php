@@ -81,7 +81,7 @@
                                             @else
                                                 @component('frontend.common.label.data-info')
                                                 @if(isset($additionals))
-                                                    @slot('text', $additionals->internal_number)
+                                                    @slot('text', json_decode($additionals->internal_number)->internal_number)
                                                 @else
                                                     @slot('text', '-')
                                                 @endif

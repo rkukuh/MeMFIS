@@ -96,7 +96,7 @@
                                                     @slot('text', 'Company Task Number')
                                                     @slot('name', 'company_number')
                                                     @if(isset($additionals))
-                                                        @slot('value', $additionals->internal_number)
+                                                        @slot('value', json_decode($additionals->internal_number)->internal_number)
                                                     @endif
                                                     @slot('id_error', 'company_number')
                                                 @endcomponent
