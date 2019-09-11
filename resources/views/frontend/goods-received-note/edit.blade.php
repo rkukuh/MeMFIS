@@ -304,13 +304,12 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
 
     <script src="{{ asset('js/frontend/good-received-note/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/do-date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/datepicker/expired-date2.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>

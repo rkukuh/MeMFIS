@@ -40,9 +40,19 @@ class ItemGoodsReceivedController extends Controller
      * @param  \App\Http\Requests\Frontend\GoodsReceivedStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GoodsReceivedStore $request)
+    public function store(GoodsReceivedStore $request,GoodsReceived $goodsReceived, Item $item)
     {
-       //
+        $goodsReceived->items()->attach([$item->id => [
+            'quantity'=> $request->quantity,
+            'already_received_amount'=> 2,// TODO ask whats is it?
+            'unit_id' => $request->unit_id,
+            'quantity_unit' => $request->quantity,
+            'note' => $request->note,
+            ]
+        ]);
+
+        return response()->json($goodsReceived);
+
     }
 
     /**
@@ -83,7 +93,7 @@ class ItemGoodsReceivedController extends Controller
         // 'exp_date'=> $request->exp_date,
         'note' => $request->note]);
 
-return response()->json($goodsReceived);
+        return response()->json($goodsReceived);
     }
 
     /**

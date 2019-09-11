@@ -37,10 +37,10 @@
                                 </label>
 
                                 @component('frontend.common.input.datepicker')
-                                    @slot('id', 'exp_date_2')
+                                    @slot('id', 'exp_date2')
                                     @slot('text', 'Expired Date')
-                                    @slot('name', 'exp_date_2')
-                                    @slot('id_error', 'exp_date_2')
+                                    @slot('name', 'exp_date2')
+                                    @slot('id_error', 'exp_date2')
                                 @endcomponent
                             </div>
                         </div>
@@ -105,3 +105,6 @@
         </div>
     </div>
 </div>
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/datepicker/expired-date2.js')}}"></script>
+@endpush

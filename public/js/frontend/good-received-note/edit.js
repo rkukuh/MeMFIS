@@ -179,10 +179,9 @@ let goods_received_note = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: '/goods-received/'+grn_uuid+'/item/',
+                url: '/goods-received/'+grn_uuid+'/item/'+item_uuid,
                 type: "POST",
                 data: {
-                    item_uuid: item_uuid,
                     exp_date: exp_date,
                     quantity: qty,
                     unit_id: unit_id,
@@ -198,10 +197,10 @@ let goods_received_note = {
                         // document.getElementById('manual_affected_id').value = manual_affected_id;
                     } else {
                         //    taskcard_reset();
-                        $('#modal_grn').modal('hide');
+                        $('#modal_grn_add').modal('hide');
 
                         toastr.success(
-                            "GRN has been updated.",
+                            "GRN's Item has been updated.",
                             "Success",
                             {
                                 timeOut: 5000
@@ -219,7 +218,7 @@ let goods_received_note = {
         });
         $('.purchase_order_datatable').on('click', '.edit-item', function () {
             let description = "";
-            document.getElementById('item').innerText = $(this).data('item');
+            document.getElementById('item-label').innerText = $(this).data('item');
             if($(this).data('description') != null){
                 description = $(this).data('description');
             }else{
