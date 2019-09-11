@@ -10,6 +10,7 @@ use App\Models\Manufacturer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemStore;
 use App\Http\Requests\Frontend\ItemUpdate;
+use App\Models\Price;
 
 class ItemController extends Controller
 {
