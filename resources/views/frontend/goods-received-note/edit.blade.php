@@ -148,7 +148,7 @@
 
                                                     @component('frontend.common.label.data-info')
                                                         @slot('id', 'vendor-code')
-                                                        @slot('text', $goodsReceived->vendor->name)
+                                                        @slot('text', $goodsReceived->purchase_order->vendor->name)
                                                     @endcomponent
                                                 </div>
                                             </div>
