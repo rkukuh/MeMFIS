@@ -21,16 +21,16 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Part Number 
+                                    Part Number
                                 </label>
 
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', 'Work Area')
+                                    @slot('id', 'item')
                                 @endcomponent
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                   Expired Date
+                                    Expired Date
                                 </label>
 
                                 @component('frontend.common.input.datepicker')
@@ -48,7 +48,7 @@
                                 </label>
 
                                 @component('frontend.common.label.data-info')
-                                    @slot('text', 'Work Area')
+                                    @slot('id', 'item-description')
                                 @endcomponent
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                                 <label class="form-control-label">
                                     Qty Recieved
                                 </label>
-        
+
                                 @component('frontend.common.input.number')
                                     @slot('id', 'qty')
                                     @slot('text', 'Qty Recieved')
@@ -94,11 +94,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer modal-footer-instruction">
+                    <div class="modal-footer">
                         <div class="flex">
                             <div class="action-buttons">
                                     @component('frontend.common.buttons.submit')
-                                        @slot('class', 'add-instruction')
+                                        @slot('class', 'update-item')
                                         @slot('type', 'button')
                                     @endcomponent
                                     @component('frontend.common.buttons.reset')

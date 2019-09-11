@@ -71,7 +71,7 @@ class QuotationController extends Controller
      */
     public function store(QuotationStore $request)
     {
-        $contact = [];
+        $contact = $scheduled_payment_amount = [];
 
         $contact['name']     = $request->attention_name;
         $contact['phone'] = $request->attention_phone;
@@ -83,6 +83,7 @@ class QuotationController extends Controller
         $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['quotationable_type' => 'App\Models\Project']);
         $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
+        $request->merge(['scheduled_payment_amount' => json_encode($scheduled_payment_amount) ]);
         $request->merge(['quotationable_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
         $quotation = Quotation::create($request->all());
@@ -325,15 +326,14 @@ class QuotationController extends Controller
      */
     public function approve(Quotation $quotation)
     {
-        $amount = $work_progress = 0;
-        $error_messages = [];
+        $amount = 0;
+        $error_messages = $work_progress= [];
         $scheduled_payment_amounts = json_decode($quotation->scheduled_payment_amount);
         foreach($scheduled_payment_amounts as $scheduled_payment_amount){
             $amount += $scheduled_payment_amount->amount;
-            $work_progress += $scheduled_payment_amount->work_progress;
+            array_push($work_progress, $scheduled_payment_amount->work_progress);
         }
-        if($amount != $quotation->subtotal ){
-            
+        if(intval($amount) != intval($quotation->grandtotal) ){
             $error_message = array(
                 'message' => "Scheduled payment total amount not equal with sub total",
                 'title' => $quotation->number,
@@ -341,7 +341,7 @@ class QuotationController extends Controller
             );
             array_push($error_messages, $error_message);
         }
-        if( $work_progress != 100){
+        if( max($work_progress) != 100){
             $error_message = array(
                 'message' => "Scheduled payment work progress still not 100%",
                 'title' => $quotation->number,

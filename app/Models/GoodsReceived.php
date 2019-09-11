@@ -10,13 +10,15 @@ class GoodsReceived extends MemfisModel
 
     protected $fillable = [
         'number',
+        'purchase_order_id',
         'received_by',
         'received_at',
         'vehicle_no',
         'container_no',
-        'purchase_order_id',
         'storage_id',
         'description',
+        'additionals',
+        'origin_vendor_coa',
     ];
 
     protected $dates = ['received_at'];
@@ -49,8 +51,9 @@ class GoodsReceived extends MemfisModel
         return $this->belongsToMany(Item::class)
                     ->withPivot(
                         'quantity',
-                        'already_received',
+                        'quantity_unit',
                         'unit_id',
+                        'already_received_amount',
                         'note'
                     )
                     ->withTimestamps();
@@ -93,18 +96,5 @@ class GoodsReceived extends MemfisModel
     public function storage()
     {
         return $this->belongsTo(Storage::class);
-    }
-
-    /**
-     * One-to-Many: A GRN may have one vedor.
-     *
-     * This function will retrieve the vedor of a GRN.
-     * See: Vendor's goods_receiveds() method for the inverse
-     *
-     * @return mixed
-     */
-    public function vendor()
-    {
-        return $this->belongsTo(Vendor::class);
     }
 }

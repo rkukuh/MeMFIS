@@ -45,6 +45,7 @@ Route::name('admin.')->group(function () {
         Route::resource('item', 'ItemController');
         Route::resource('bpjs', 'BPJSController');
         Route::resource('bank', 'BankController');
+        Route::resource('promo', 'PromoController');
         Route::resource('school', 'SchoolController');
         Route::resource('vendor', 'VendorController');
         Route::resource('branch', 'BranchController');

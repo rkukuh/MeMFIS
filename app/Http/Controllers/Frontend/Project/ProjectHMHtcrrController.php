@@ -251,9 +251,6 @@ class ProjectHMHtcrrController extends Controller
         $employees = Employee::all();
         $facilities = Facility::all();
 
-        // $materialCount = $workPackage->items->count();
-        // $toolCount = $workPackage->tools->count();
-
         if ($request->anyChanges) {
             $view = 'frontend.project.hm.workpackage.index-engineerteam';
         }else{
@@ -263,13 +260,11 @@ class ProjectHMHtcrrController extends Controller
             'edit' => true,
             'project' => $project,
             'employees' => $employees,
-            // 'toolCount' => $toolCount,
             'total_mhrs' => $total_mhrs,
             'facilities' => $facilities,
             'engineer_skills' => $skills,
             'workPackage' => $workPackage,
             'skills' => json_encode($skills),
-            // 'materialCount' => $materialCount,
             'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
             'total_pfrm_factor' => $total_pfrm_factor,
             'project_workpackage' => $project_workpackage,

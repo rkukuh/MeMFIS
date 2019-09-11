@@ -18,8 +18,8 @@ class CreateItemPurchaseRequestTable extends Migration
             $table->unsignedBigInteger('purchase_request_id');
             $table->unsignedBigInteger('item_id');
             $table->double('quantity');
-            $table->unsignedBigInteger('unit_id');
             $table->double('quantity_unit');
+            $table->unsignedBigInteger('unit_id');
             $table->string('note')->nullable();
             $table->timestamps();
             $table->softDeletes();

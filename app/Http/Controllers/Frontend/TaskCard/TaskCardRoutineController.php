@@ -76,7 +76,7 @@ class TaskCardRoutineController extends Controller
         $this->decoder($request);
         $accesses = $zones = $additionals = [];
 
-        $additionals["internal_number"] = $request->additionals;
+        $additionals["internal_number"] = $request->additionals->internal_number;
         $additionals["document_library"] = $request->document_library;
         $request->merge(['additionals' => json_encode($additionals, true)]);
 
@@ -245,7 +245,6 @@ class TaskCardRoutineController extends Controller
      */
     public function edit(TaskCard $taskCard)
     {
-        // dd($taskCard->section);
         $tc_stations = $aircraft_taskcards = [];
 
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
@@ -315,10 +314,7 @@ class TaskCardRoutineController extends Controller
         $this->decoder($request);
         $accesses = $zones = $additionals = [];
         
-        if (isset($taskCard->additionals)) {
-            $additionals = json_decode($taskCard->additionals);
-        }
-        $additionals["internal_number"] = $request->additionals;
+        $additionals["internal_number"] = $request->additionals->internal_number;
         $additionals["document_library"] = $request->document_library;
         $request->merge(['additionals' => json_encode($additionals, true)]);
 
@@ -378,6 +374,7 @@ class TaskCardRoutineController extends Controller
 
             if(is_array($request->threshold_type)){
                 for ($i=0; $i < sizeof($request->threshold_type) ; $i++) {
+                    dump($request->threshold_type[$i]);
                     if($request->threshold_type[$i] !== "Select Threshold"){
                         if($request->threshold_amount[$i] == ''){
                             $request->threshold_amount[$i] = null;
@@ -446,6 +443,7 @@ class TaskCardRoutineController extends Controller
         $req->zone = json_decode($req->zone);
         $req->access = json_decode($req->access);
         $req->sections = json_decode($req->sections);
+        $req->additionals = json_decode($req->additionals);
         $req->repeat_type = json_decode($req->repeat_type);
         $req->repeat_amount = json_decode($req->repeat_amount);
         $req->threshold_type = json_decode($req->threshold_type);

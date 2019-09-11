@@ -44,6 +44,8 @@ class DummyDataSeeder extends Seeder
         $this->call(Customers::class);
         $this->call(Vendors::class);
         $this->call(Facilities::class);
+        $this->call(Manhours::class);
+        $this->call(Promos::class);
         
         $this->call(Departments::class);
         $this->call(Benefits::class);
@@ -51,7 +53,6 @@ class DummyDataSeeder extends Seeder
         $this->call(LeavePeriods::class);
         $this->call(BPJSS::class);
         $this->call(JobTittles::class);
-        $this->call(Manhours::class);
         $this->call(LeaveTypes::class);
         $this->call(Holidays::class);
         $this->call(Workshifts::class);

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend\GoodsReceived;
 
+use Auth;
 use Carbon\Carbon;
 use App\Models\Storage;
+use App\Models\Approval;
 use App\Models\PurchaseOrder;
 use App\Models\GoodsReceived;
 use App\Helpers\DocumentNumber;
@@ -50,14 +52,14 @@ class GoodsReceivedController extends Controller
 
         $items = PurchaseOrder::find($request->purchase_order_id)->items;
 
-        foreach($items as $item){
-            $goodsReceived->items()->attach([$item->pivot->item_id => [
-                'quantity'=> $item->pivot->quantity,
-                'already_received'=> 2,// TODO ask whats is it?
-                'unit_id' => $item->pivot->unit_id
-                ]
-            ]);
-        }
+        // foreach($items as $item){
+        //     $goodsReceived->items()->attach([$item->pivot->item_id => [
+        //         'quantity'=> $item->pivot->quantity,
+                // 'already_received'=> 2,// TODO ask whats is it?
+        //         'unit_id' => $item->pivot->unit_id
+        //         ]
+        //     ]);
+        // }
 
         return response()->json($goodsReceived);
     }
@@ -129,6 +131,12 @@ class GoodsReceivedController extends Controller
      */
     public function approve(GoodsReceived $goodsReceived)
     {
+        $goodsReceived->approvals()->save(new Approval([
+            'approvable_id' => $goodsReceived->id,
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
+        ]));
+
         return response()->json($goodsReceived);
     }
 }

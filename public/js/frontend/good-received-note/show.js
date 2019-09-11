@@ -65,40 +65,40 @@ let goods_received_note_show = {
                     width: 150
                 },
                 {
-                    field: 'pivot.quantity',
+                    field: '',
                     title: 'Qty PO',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: '',
+                    field: 'pivot.quantity',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: '',
+                    field: 'pivot.unit_id',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: '',
+                    field: 'pivot.note',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: '',
+                    field: 'pivot.expired_at',
                     title: 'Expired Date',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
-                }
+                },
             ]
         });
     }

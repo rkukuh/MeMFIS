@@ -18,8 +18,9 @@ class CreateGoodsReceivedItemTable extends Migration
             $table->unsignedBigInteger('goods_received_id');
             $table->unsignedBigInteger('item_id');
             $table->double('quantity');
-            $table->double('already_received');
+            $table->double('quantity_unit');
             $table->unsignedBigInteger('unit_id');
+            $table->double('already_received_amount');
             $table->string('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
