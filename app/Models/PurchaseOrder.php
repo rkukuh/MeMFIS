@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use App\Models\Pivots\PurchaseOrderItem;
 
 class PurchaseOrder extends MemfisModel
 {
@@ -90,6 +91,7 @@ class PurchaseOrder extends MemfisModel
     public function items()
     {
         return $this->belongsToMany(Item::class)
+                    ->using(PurchaseOrderItem::class)
                     ->withPivot(
                         'quantity',
                         'unit_id',
