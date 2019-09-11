@@ -17,23 +17,25 @@ class CreateGoodsReceivedTable extends Migration
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('number')->nullable();
+            $table->unsignedBigInteger('purchase_order_id');
             $table->unsignedBigInteger('received_by');
             $table->timestamp('received_at')->nullable();
             $table->string('vehicle_no')->nullable();
             $table->string('container_no')->nullable();
-            $table->unsignedBigInteger('purchase_order_id');
             $table->unsignedBigInteger('storage_id');
             $table->text('description')->nullable();
+            $table->json('additionals')->nullable();
+            $table->json('origin_vendor_coa')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('received_by')
-                    ->references('id')->on('employees')
+            $table->foreign('purchase_order_id')
+                    ->references('id')->on('purchase_orders')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('purchase_order_id')
-                    ->references('id')->on('purchase_orders')
+            $table->foreign('received_by')
+                    ->references('id')->on('employees')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 

@@ -18,11 +18,12 @@ class CreateItemPurchaseOrderTable extends Migration
             $table->unsignedBigInteger('purchase_order_id');
             $table->unsignedBigInteger('item_id');
             $table->double('quantity');
+            $table->double('quantity_unit');
             $table->unsignedBigInteger('unit_id');
             $table->double('price')->nullable();
+            $table->double('tax_percent')->nullable();
+            $table->double('tax_amount')->nullable();
             $table->double('subtotal_before_discount')->nullable();
-            $table->string('discount_type')->nullable();
-            $table->double('discount_value')->nullable();
             $table->double('subtotal_after_discount')->nullable();
             $table->string('note')->nullable();
             $table->timestamps();
