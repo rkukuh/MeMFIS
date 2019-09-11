@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\Unit;
 use App\Models\Item;
+use App\Models\Promo;
 use App\Models\Vendor;
 use App\Models\Currency;
 use App\Models\Approval;
@@ -115,6 +116,17 @@ $factory->afterCreating(PurchaseOrder::class, function ($purchase_order, $faker)
                 'subtotal_before_discount' => rand(150, 200) * 1000000,
                 'subtotal_after_discount' => rand(100, 150) * 1000000,
                 'note' => $faker->randomElement([null, $faker->sentence]),
+            ]);
+        }
+    }
+
+    // Promo
+    
+    if ($faker->boolean) {
+        for ($i = 1; $i <= rand(1, 3); $i++) {
+            $purchase_order->promos()->save(Promo::get()->random(), [
+                'value'     => rand(1, 9) * 10,
+                'amount'    => rand(100, 200) * 1000000,
             ]);
         }
     }
