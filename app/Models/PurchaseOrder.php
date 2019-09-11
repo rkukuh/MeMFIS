@@ -94,11 +94,10 @@ class PurchaseOrder extends MemfisModel
                     ->using(PurchaseOrderItem::class)
                     ->withPivot(
                         'quantity',
+                        'quantity_unit',
                         'unit_id',
                         'price',
                         'subtotal_before_discount',
-                        'discount_type',
-                        'discount_value',
                         'subtotal_after_discount',
                         'note'
                     )
