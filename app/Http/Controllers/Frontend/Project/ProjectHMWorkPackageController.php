@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ProjectHMStore;
 use App\Http\Requests\Frontend\ProjectHMUpdate;
+use App\Models\EOInstruction;
 
 class ProjectHMWorkPackageController extends Controller
 {
@@ -89,19 +90,24 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function show(Project $project, WorkPackage $workPackage,Request $request)
     {
-        $mhrs_pfrm_factor = $skills = $subset = $taskcards = $engineer_qty = [];
+        $mhrs_pfrm_factor = $skills = $subset = $taskcards_routine = $taskcards_non_routine = $taskcards = $engineer_qty = [];
 
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
         ->with('taskcards')
         ->first();
 
-
         foreach($project_workpackage->taskcards as $taskcard){
-            array_push($taskcards, $taskcard->taskcard_id);
+            array_push($taskcards_routine, $taskcard->taskcard_id);
         }
 
-        $taskcards = TaskCard::whereIn('id',$taskcards)->get();
+        foreach($project_workpackage->eo_instructions as $taskcard){
+            array_push($taskcards_non_routine, $taskcard->eo_instruction_id);
+        }
+
+        $taskcards_routine = TaskCard::whereIn('id',$taskcards_routine)->get();
+        $taskcards_non_routine = EOInstruction::whereIn('id',$taskcards_non_routine)->get();
+        $taskcards = $taskcards_routine->merge($taskcards_non_routine);
 
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
@@ -166,7 +172,7 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function edit(Project $project, WorkPackage $workPackage,Request $request)
     {
-        $mhrs_pfrm_factor = $skills = $subset = $taskcards = [];
+        $mhrs_pfrm_factor = $skills = $subset = $taskcards_routine = $taskcards_non_routine = $taskcards = [];
 
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
@@ -176,11 +182,16 @@ class ProjectHMWorkPackageController extends Controller
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
         foreach($project_workpackage->taskcards as $taskcard){
-            array_push($taskcards, $taskcard->taskcard_id);
+            array_push($taskcards_routine, $taskcard->taskcard_id);
         }
 
-        $taskcards = TaskCard::whereIn('id',$taskcards)->get();
+        foreach($project_workpackage->eo_instructions as $taskcard){
+            array_push($taskcards_non_routine, $taskcard->eo_instruction_id);
+        }
 
+        $taskcards_routine = TaskCard::whereIn('id',$taskcards_routine)->get();
+        $taskcards_non_routine = EOInstruction::whereIn('id',$taskcards_non_routine)->get();
+        $taskcards = $taskcards_routine->merge($taskcards_non_routine);
         foreach($taskcards as $taskcard){
             array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
             $result = $taskcard->skills->map(function ($skills) {
@@ -436,16 +447,23 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function getManhours(Project $project, WorkPackage $workPackage){
 
-        $data = $mhrs_pfrm_factor = $taskcards = [];
+        $data = $mhrs_pfrm_factor = $taskcards_routine = $taskcards_non_routine = $taskcards = [];
 
         $project_workpackage = ProjectWorkPackage::where('project_id', $project->id)
                     ->where('workpackage_id', $workPackage->id)->first();
 
         foreach($project_workpackage->taskcards as $taskcard){
-            array_push($taskcards, $taskcard->taskcard_id);
+            array_push($taskcards_routine, $taskcard->taskcard_id);
         }
 
-        $taskcards = TaskCard::whereIn('id',$taskcards)->get();
+        foreach($project_workpackage->eo_instructions as $taskcard){
+            array_push($taskcards_non_routine, $taskcard->eo_instruction_id);
+        }
+
+        $taskcards_routine = TaskCard::whereIn('id',$taskcards_routine)->get();
+        $taskcards_non_routine = EOInstruction::whereIn('id',$taskcards_non_routine)->get();
+        $taskcards = $taskcards_routine->merge($taskcards_non_routine);
+
         foreach($taskcards as $taskcard){
             array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
         }

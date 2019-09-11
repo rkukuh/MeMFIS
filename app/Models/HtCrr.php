@@ -34,6 +34,7 @@ class HtCrr extends MemfisModel
         'origin_htcrr_skills',
         'origin_htcrr_helpers',
         'origin_htcrr_engineers',
+        'origin_htcrr_item_quotation',
     ];
 
     protected $dates = ['conducted_at'];

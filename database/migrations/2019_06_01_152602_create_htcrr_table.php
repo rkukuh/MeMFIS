@@ -41,34 +41,35 @@ class CreateHtcrrTable extends Migration
             $table->json('origin_htcrr_skills')->nullable();
             $table->json('origin_htcrr_helpers')->nullable();
             $table->json('origin_htcrr_engineers')->nullable();
+            $table->json('origin_htcrr_item_quotation')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('parent_id')
-                    ->references('id')->on('htcrr')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('htcrr')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('type_id')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('project_id')
-                    ->references('id')->on('projects')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('projects')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('conducted_by')
-                    ->references('id')->on('employees')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('employees')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('manhour_rate_id')
-                    ->references('id')->on('manhours')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('manhours')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->index('code');
         });
@@ -81,6 +82,6 @@ class CreateHtcrrTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('htcrr');
+    Schema::dropIfExists('htcrr');
     }
 }
