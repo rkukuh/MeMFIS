@@ -64,25 +64,25 @@ let Grn = {
                     filterable: !1,
                 },
                 {
-                    field: 'purchase_order.number',
+                    field: 'purchase_order.purchase_request.number',
                     title: 'PO Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'purchase_order.number',
+                    field: 'vendor.code',
                     title: 'Vendor',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'purchase_order.number',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'approved_by.first_name',
+                    field: '',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
@@ -92,17 +92,21 @@ let Grn = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid +'">' +
-                                '<i class="la la-check-square-o"></i>' +
-                            '</a>' +
-                            '<a href="/goods-received/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
+                        if(t.status == "Approved"){
+                            return '';
+                        }else{
+                            return (
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid +'">' +
+                                    '<i class="la la-check"></i>' +
+                                '</a>' +
+                                '<a href="/goods-received/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
+                                    '<i class="la la-pencil"></i>' +
+                                '</a>' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-trash"></i>' +
+                                '</a>'
+                            );
+                        }
                     }
                 }
             ]
@@ -172,7 +176,7 @@ let Grn = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/goods-received/' + grn_uuid + '',
+                        url: '/goods-received/' + grn_uuid ,
                         success: function (data) {
                             toastr.success('Goods Received has been deleted.', 'Deleted', {
                                     timeOut: 5000

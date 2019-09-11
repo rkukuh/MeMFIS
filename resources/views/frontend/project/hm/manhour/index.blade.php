@@ -24,7 +24,7 @@
                 @component('frontend.common.input.number')
                     @slot('id', 'perfoma')
                     @slot('name', 'perfoma')
-                    @slot('value', '1.6')
+                    @slot('value', 1.6)
                 @endcomponent
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -87,7 +87,7 @@
             let project_prfm_factor = $('#perfoma').val();
             let total  = project_prfm_factor*total_mhrs;
             document.getElementById('total').innerHTML = total.toFixed(2);
-            let performa = 0;
+            let performa = project_prfm_factor;
 
             $('.footer-manhour').on('click', '.add-manhour', function () {
                 let manhour = $('#total_mhrs').html();

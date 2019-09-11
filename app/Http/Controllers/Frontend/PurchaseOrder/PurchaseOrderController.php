@@ -60,6 +60,7 @@ class PurchaseOrderController extends Controller
         foreach($items as $item){
             $purchaseOrder->items()->attach([$item->pivot->item_id => [
                 'quantity'=> $item->pivot->quantity,
+                'quantity_unit' => $item->pivot->quantity_unit,
                 'unit_id' => $item->pivot->unit_id
                 ]
             ]);
