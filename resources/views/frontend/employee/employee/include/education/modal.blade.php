@@ -84,8 +84,7 @@
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
                                     @slot('type', 'button')
-                                    @slot('id','create-education')
-                                    @slot('class','create-education')
+                                    @slot('class','button-education')
                                 @endcomponent
 
                                 @include('frontend.common.buttons.reset',['id' => 'education-reset'])

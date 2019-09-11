@@ -1,4 +1,12 @@
-<div class="form-group m-form__group row">
+<form id="termination_form">
+
+        @component('frontend.common.input.hidden')
+        @slot('id', 'employee_uuid')
+        @slot('name', 'employee_uuid')
+        @slot('value', $employee->uuid)
+        @endcomponent
+
+        <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
             <legend class="w-auto"><b>Termination Details</b></legend>
@@ -8,11 +16,11 @@
                         Termination Date  @include('frontend.common.label.required')
                     </label>
 
-                    @component('frontend.common.input.email')
+                    @component('frontend.common.input.datepicker')
                         @slot('text', 'Termination Date')
-                        @slot('id', 'termination_date')
-                        @slot('name', 'termination_date')
-                        @slot('id_error', 'termination_date')
+                        @slot('id', 'date_termination')
+                        @slot('name', 'date_termination')
+                        @slot('id_error', 'date_termination')
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -68,14 +76,16 @@
         @component('frontend.common.buttons.submit')
             @slot('type','button')
             @slot('id', 'terminate')
-            @slot('class', 'teminate')
+            @slot('class', 'terminate')
             @slot('color', 'danger')
             @slot('text','TERMINATE THIS EMPLOYEE')
             @slot('icon','')
         @endcomponent
     </div>
 </div>
-    
+</form>
 
 @push('footer-scripts')
+    <script src="{{ asset('js/frontend/functions/datepicker/date-termination.js')}}"></script>
+    <script src="{{ asset('js/frontend/employee/employee/termination.js') }}"></script>
 @endpush

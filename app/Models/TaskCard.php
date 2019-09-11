@@ -228,6 +228,18 @@ class TaskCard extends MemfisModel
     }
 
     /**
+     * One-Way: A task card may have one category.
+     *
+     * This function will retrieve the category of a task card.
+     *
+     * @return mixed
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
      * One-Way: A task card may have one workarea.
      *
      * This function will retrieve the workarea of a task card.

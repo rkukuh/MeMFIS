@@ -18,6 +18,7 @@ use App\Models\Benefit;
 use App\Models\EmployeeProvisions;
 use App\Models\Workshift;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use DB;
 
@@ -1250,7 +1251,18 @@ class EmployeeController extends Controller
     }
 
     public function update_file(Employee $employee,Request $request){
+        $rules = array(
+            'document' => 'image|nullable'
+        );
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if($validator->fails()) {
+            return response()->json('File not a image and not be stored!');
+        }else{
+            $employee->media->each->delete();
+            $employee->addMedia($request->document)->toMediaCollection('id_card');
+        }
         
-        $employee->addMedia($request->document)->toMediaCollection('id_card');
     }
 }

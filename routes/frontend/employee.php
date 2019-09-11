@@ -32,6 +32,7 @@ Route::name('frontend.')->group(function () {
                     /** Transaction */
                     Route::resource('/{employee}/history', 'EmployeeHistoryController');
                     Route::resource('/{employee}/education', 'EmployeeEducationController');
+                    Route::post('/{employee}/education/{education}/update-document','EmployeeEducationController@update_file');
                     Route::resource('/{employee}/travel-request', 'EmployeeTravelRequestController');
                     Route::resource('/{employee}/general-license', 'EmployeeGeneralLicenseController');
                     Route::resource('/{employee}/benefit-salary', 'EmployeeBenefitController');
@@ -41,6 +42,7 @@ Route::name('frontend.')->group(function () {
                     Route::resource('/{employee}/account', 'EmployeeUserController');
                     Route::resource('/{employee}/bank', 'EmployeeBankController');
                     Route::resource('/{employee}/workshift', 'EmployeeWorkshiftController');
+                    Route::resource('/{employee}/termiantion', 'EmployeeTerminationController');
                 });
 
             });

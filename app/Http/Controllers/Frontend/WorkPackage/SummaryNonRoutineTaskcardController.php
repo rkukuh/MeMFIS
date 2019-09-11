@@ -28,7 +28,6 @@ class SummaryNonRoutineTaskcardController extends Controller
         ->whereHas('eo_header.type', function ($query) {
             $query->where('code', 'ea');
         })->whereNull('eo_instructions.deleted_at')->get();
-        
        
             foreach($taskcards as $eo_instruction){
 
@@ -44,38 +43,26 @@ class SummaryNonRoutineTaskcardController extends Controller
                     array_push($subset , $result);
                 }
             }
-
-     
     
         foreach ($subset as $value) {
             foreach($value as $skill){
                 array_push($skills, $skill["code"]);
             }
         }
-      
 
         $otr = array_count_values($skill);       
         $otr["eri"] = $eri;
       
-        $total_taskcard  = $workPackage->eo_instructions()->with('eo_header.type')
-        ->whereHas('eo_header.type', function ($query) {
-            $query->where('code', 'ea');
-        })->count('uuid');
+        $total_taskcard  = $taskcards->count();
       
-        $total_manhour_taskcard  = $workPackage->eo_instructions()->with('eo_header.type')
-        ->whereHas('eo_header.type', function ($query) {
-            $query->where('code', 'ea');
-        })->sum('estimation_manhour');
+        $total_manhour_taskcard  = $taskcards->sum('estimation_manhour');
         
-        // dd($total_manhour_taskcard);
-
         return view('frontend.workpackage.nonroutine.ea.ea-summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
             'otr' => $otr,
             'workPackage' => $workPackage
         ]);
-        // dd($total_manhour_taskcard);
     }
 
     public function adsb(WorkPackage $workPackage)
@@ -87,7 +74,6 @@ class SummaryNonRoutineTaskcardController extends Controller
             $query->where('code', 'ad')->orWhere('code','sb');
         })->whereNull('eo_instructions.deleted_at')->get();
         
-       
             foreach($taskcards as $eo_instruction){
 
                 if (sizeof($eo_instruction->skills) > 1) {
@@ -102,8 +88,6 @@ class SummaryNonRoutineTaskcardController extends Controller
                     array_push($subset , $result);
                 }
             }
-
-     
     
         foreach ($subset as $value) {
             foreach($value as $skill){
@@ -115,25 +99,16 @@ class SummaryNonRoutineTaskcardController extends Controller
         $otr = array_count_values($skill);       
         $otr["eri"] = $eri;
       
-        $total_taskcard  = $workPackage->eo_instructions()->with('eo_header.type')
-        ->whereHas('eo_header.type', function ($query) {
-            $query->where('code', 'ad')->orWhere('code','sb');
-        })->count('uuid');
+        $total_taskcard  = $taskcards->count();
       
-        $total_manhour_taskcard  = $workPackage->eo_instructions()->with('eo_header.type')
-        ->whereHas('eo_header.type', function ($query) {
-            $query->where('code', 'ad')->orWhere('code','sb');
-        })->sum('estimation_manhour');
+        $total_manhour_taskcard  = $taskcards->sum('estimation_manhour');
         
-        // dd($total_manhour_taskcard);
-
         return view('frontend.workpackage.nonroutine.adsb.ad-sb-summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,
             'otr' => $otr,
             'workPackage' => $workPackage
         ]);
-        // dd($total_manhour_taskcard);
     }
 
     public function eo(WorkPackage $workPackage)
@@ -144,7 +119,6 @@ class SummaryNonRoutineTaskcardController extends Controller
         ->whereHas('eo_header.type', function ($query) {
             $query->where('code', 'eo');
         })->whereNull('eo_instructions.deleted_at')->get();
-        
         
             foreach($taskcards as $eo_instruction){
                 if (sizeof($eo_instruction->skills) > 1) {
@@ -160,8 +134,6 @@ class SummaryNonRoutineTaskcardController extends Controller
                 }
             }
 
-        
-
         foreach ($subset as $value) {
             foreach($value as $skill){
                 array_push($skills, $skill["code"]);
@@ -170,16 +142,9 @@ class SummaryNonRoutineTaskcardController extends Controller
 
         $otr = array_count_values($skills);
         $otr["eri"] = $eri;
-        $total_taskcard  = $workPackage->eo_instructions()->with('eo_header.type')
-        ->whereHas('eo_header.type', function ($query) {
-            $query->where('code', 'eo');
-        })->count('uuid');
-
+        $total_taskcard  = $taskcards->count();
        
-        $total_manhour_taskcard  = $workPackage->eo_instructions()->with('eo_header.type')
-        ->whereHas('eo_header.type', function ($query) {
-            $query->where('code', 'eo');
-        })->sum('estimation_manhour');
+        $total_manhour_taskcard  = $taskcards->sum('estimation_manhour');
 
         return view('frontend.workpackage.nonroutine.eo.eo-summary',[
             'total_taskcard' => $total_taskcard,
@@ -227,17 +192,8 @@ class SummaryNonRoutineTaskcardController extends Controller
         
         $otr = array_count_values($skills);
         $otr["eri"] = $eri;
-        $total_taskcard  = $workPackage->eo_instructions()->with('eo_header.type')
-        ->whereHas('eo_header.type', function ($query) {
-            $query->where('code', 'cmr')->orWhere('code','awl');
-        })->count('uuid');
-
- 
-
-        $total_manhour_taskcard  = $workPackage->eo_instructions()->with('eo_header.type')
-        ->whereHas('eo_header.type', function ($query) {
-            $query->where('code', 'cmr')->orWhere('code','awl');
-        })->sum('estimation_manhour');
+        $total_taskcard  = $taskcards->count();
+        $total_manhour_taskcard  = $taskcards->sum('estimation_manhour');
        
         return view('frontend.workpackage.nonroutine.cmrawl.cmr-awl-summary',[
             'total_taskcard' => $total_taskcard,
@@ -334,11 +290,6 @@ class SummaryNonRoutineTaskcardController extends Controller
             $query->where('code', 'cmr')->orWhere('code','awl');
         })->whereNull('eo_instructions.deleted_at')->count();
 
-        $si  = $workPackage->eo_instructions()->with('eo_header.type')
-        ->whereHas('eo_header.type', function ($query) {
-            $query->where('code', 'si');
-        })->whereNull('eo_instructions.deleted_at')->count();
-
         $ea  = $workPackage->eo_instructions()->with('eo_header.type')
         ->whereHas('eo_header.type', function ($query) {
             $query->where('code', 'ea');
@@ -349,10 +300,12 @@ class SummaryNonRoutineTaskcardController extends Controller
             $query->where('code', 'eo');
         })->whereNull('eo_instructions.deleted_at')->count();
 
+        $si  = $workPackage->taskcards->load('type')->where('type.code', 'si')->count('uuid');
+
         $otr = array_count_values($skills);
         $otr["eri"] = $eri;
         $total_taskcard  = $taskcards->count();
-        $total_manhour_taskcard  = $taskcards->sum('estimation_manhour');
+        $total_manhour_taskcard  = $taskcards->sum('estimation_manhour') + $workPackage->taskcards->load('type')->where('type.code', 'si')->sum('estimation_manhour');
 
         return view('frontend.workpackage.nonroutine.summary',[
             'total_taskcard' => $total_taskcard,
