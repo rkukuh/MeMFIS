@@ -397,7 +397,7 @@ class QuotationController extends Controller
             'is_approved' => 1
         ]));
 
-        $ProjectWorkPackage = ProjectWorkPackage::where('project_id',$quotation->project_id)->pluck('id');
+        $ProjectWorkPackage = ProjectWorkPackage::where('project_id',$quotation->quotationable_id)->pluck('id');
         $ProjectWorkPackageTaskCard = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
         foreach($ProjectWorkPackageTaskCard as $taskcard){
                 $tc = $taskcard->taskcard;
@@ -507,14 +507,6 @@ class QuotationController extends Controller
                 'progressed_by' => Auth::id()
             ]));
 
-            // // echo $tc->title.'<br>';
-            // foreach($tc->items as $item){
-            //     echo $item->name.'<br>';
-            // }
-            // dump($tc->materials->toJson());
-
-
-
         }
 
         foreach($project->htcrrs as $htcrr){
@@ -537,8 +529,6 @@ class QuotationController extends Controller
      */
     public function discount( Request $request, Quotation $quotation, WorkPackage $workpackage)
     {
-        // dd($workpackage);
-        // $Quotation->workpackages()->updateExistingPivot($WorkPackage, ['discount_value'=>$request->discount_value]);
         $quotation->workpackages()->updateExistingPivot($workpackage, ['discount_type'=>$request->discount_type,'discount_value'=>$request->discount_value]);
 
         return response()->json($quotation);

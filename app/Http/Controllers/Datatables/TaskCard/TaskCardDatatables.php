@@ -150,7 +150,7 @@ class TaskCardDatatables extends Controller
         // dd($request->taskcard_routine_type);
 
         $TaskCard = TaskCard::with('task','aircrafts','skills','type');
-
+        
         if (!empty($request->task_type_id)) {
             $TaskCard->whereHas('task', function ($query) use ($request) {
                 $query->where('task_id', $request->task_type_id);

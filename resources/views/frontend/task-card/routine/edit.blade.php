@@ -96,7 +96,7 @@
                                                     @slot('text', 'Company Task Number')
                                                     @slot('name', 'company_number')
                                                     @if(isset($additionals))
-                                                        @slot('value', json_decode($additionals->internal_number)->internal_number)
+                                                        @slot('value', $additionals->internal_number)
                                                     @endif
                                                     @slot('id_error', 'company_number')
                                                 @endcomponent
@@ -443,17 +443,14 @@
                                                 Documents library @include('frontend.common.label.optional')
                                             </label>
 
-                                            @php
-                                                $documens = json_decode($taskcard->document_library, TRUE);
-                                            @endphp
 
                                             <select id="document-library" name="document-library" class="form-control m-select2" multiple style="width:100%">
                                                 <option value="">
                                                     &mdash; Select a Document Library &mdash;
                                                 </option>
 
-                                                @if (isset($documens))
-                                                    @foreach ($documens as $document)
+                                                @if (isset($additionals->document_library))
+                                                    @foreach ($additionals->document_library as $document)
                                                         <option selected>
                                                             {{ $document }}
                                                         </option>

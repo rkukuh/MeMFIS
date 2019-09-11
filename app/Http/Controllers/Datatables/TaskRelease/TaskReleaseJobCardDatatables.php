@@ -22,7 +22,7 @@ class TaskReleaseJobCardDatatables extends Controller
 
         foreach($JobCards as $jobcard){
 
-            $jobcard->aircraft_name .= $jobcard->quotation->project->aircraft->name;
+            $jobcard->aircraft_name .= $jobcard->quotation->quotationable->aircraft->name;
             if(isset($jobcard->jobcardable->skills) ){
                 if(sizeof($jobcard->jobcardable->skills) == 3){
                     $jobcard->skill_name .= "ERI";
@@ -35,7 +35,7 @@ class TaskReleaseJobCardDatatables extends Controller
                 }
             }
 
-            $jobcard->customer_name .= $jobcard->quotation->project->customer->name;
+            $jobcard->customer_name .= $jobcard->quotation->quotationable->customer->name;
             if($jobcard->jobcardable->additionals <> null){
                 $addtional = json_decode($jobcard->jobcardable->additionals);
                 $jobcard->company_task .= $addtional->internal_number;

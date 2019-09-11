@@ -152,8 +152,8 @@
                         <td width="20%">AC/Type</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                          @if($jobCard->quotation->project->aircraft->name)
-                          {{$jobCard->quotation->project->aircraft->name}}
+                          @if($jobCard->quotation->quotationable->aircraft->name)
+                          {{$jobCard->quotation->quotationable->aircraft->name}}
                           @else
                             -
                           @endif
@@ -163,8 +163,8 @@
                         <td width="20%">Project No</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                          @if($jobCard->quotation->project->code)
-                          {{$jobCard->quotation->project->code}}
+                          @if($jobCard->quotation->quotationable->code)
+                          {{$jobCard->quotation->quotationable->code}}
                           @else
                             -
                           @endif
@@ -172,8 +172,8 @@
                         <td width="20%">A/C Reg</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                          @if($jobCard->quotation->project->aircraft_register)
-                          {{$jobCard->quotation->project->aircraft_register}}
+                          @if($jobCard->quotation->quotationable->aircraft_register)
+                          {{$jobCard->quotation->quotationable->aircraft_register}}
                           @else
                             -
                           @endif
@@ -186,8 +186,8 @@
                         <td width="20%">A/C S/N</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                          @if($jobCard->quotation->project->aircraft_sn)
-                          {{$jobCard->quotation->project->aircraft_sn}}
+                          @if($jobCard->quotation->quotationable->aircraft_sn)
+                          {{$jobCard->quotation->quotationable->aircraft_sn}}
                           @else
                             -
                           @endif

@@ -81,7 +81,7 @@
                                             @else
                                                 @component('frontend.common.label.data-info')
                                                 @if(isset($additionals))
-                                                    @slot('text', json_decode($additionals->internal_number)->internal_number)
+                                                    @slot('text', $additionals->internal_number)
                                                 @else
                                                     @slot('text', '-')
                                                 @endif
@@ -382,20 +382,18 @@
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Documents library @include('frontend.common.label.optional')
-                                            </label>
+                                            </label><br>
 
-                                            @if (empty($taskcard->document_library))
+                                            @if (sizeof($additionals->document_library) == 0)
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
-                                                @php
-                                                    $documents = json_decode($taskcard->document_library, TRUE);
-                                                @endphp
-
-                                                @foreach ($documents  as $document)
-                                                    @component('frontend.common.label.badge')
-                                                        @slot('text', $document )
-                                                    @endcomponent
-                                                @endforeach
+                                                @if(isset($additionals))
+                                                    @foreach ($additionals->document_library  as $document)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $document )
+                                                        @endcomponent
+                                                    @endforeach
+                                                @endif
                                             @endif
                                         </div>
                                     </div>

@@ -19,8 +19,8 @@
                     @component('frontend.common.input.datepicker')
                         @slot('text', 'Termination Date')
                         @slot('id', 'date_termination')
-                        @slot('name', 'date_termination')
-                        @slot('id_error', 'date_termination')
+                        @slot('name', 'termination_date')
+                        @slot('id_error', 'termination_date')
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -61,6 +61,8 @@
 
                             @component('frontend.common.input.upload')
                                 @slot('label', 'document')
+                                @slot('id', 'termination_document')
+                                @slot('help_text', 'File must be image or not be stored!')
                                 @slot('name', 'document')
                             @endcomponent
                         </div>

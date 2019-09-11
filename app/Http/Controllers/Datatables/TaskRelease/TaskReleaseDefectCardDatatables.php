@@ -22,7 +22,7 @@ class TaskReleaseDefectCardDatatables extends Controller
 
         foreach($DefectCard as $defectcard){
 
-            $defectcard->jobcard->aircraft_name .= $defectcard->jobcard->quotation->project->aircraft->name;
+            $defectcard->jobcard->aircraft_name .= $defectcard->jobcard->quotation->quotationable->aircraft->name;
             if(isset($defectcard->jobcard->taskcard->skills) ){
                 if(sizeof($defectcard->jobcard->taskcard->skills) == 3){
                     $defectcard->skill_name .= "ERI";
@@ -35,7 +35,7 @@ class TaskReleaseDefectCardDatatables extends Controller
                 }
             }
 
-            $defectcard->customer_name .= $defectcard->jobcard->quotation->project->customer->name;
+            $defectcard->customer_name .= $defectcard->jobcard->quotation->quotationable->customer->name;
             if($defectcard->jobcard->taskcard->additionals <> null){
                 $addtional = json_decode($defectcard->jobcard->taskcard->additionals);
                 $defectcard->jobcard->company_task .= $addtional->internal_number;
