@@ -274,7 +274,7 @@ class Employee extends MemfisModel implements HasMedia
      */
     public function employee_termination()
     {
-        return $this->belongsTo(EmployeeTermination::class);
+        return $this->hasMany(EmployeeTermination::class);
     }
 
     /**

@@ -9,7 +9,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $employee_termination->termination_date)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -18,7 +18,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $employee_termination->reason)
                     @endcomponent
                 </div>
             </div>
@@ -29,7 +29,7 @@
                     </label>
 
                     @component('frontend.common.label.data-info')
-                        @slot('text', 'Generated')
+                        @slot('text', $employee_termination->remark)
                     @endcomponent
                 </div>
             </div>
@@ -41,8 +41,14 @@
                                 Attach Document
                             </label>
 
+                            @php
+                                $document = null;
+                                if(isset($document_termination[0]->file_name)){
+                                    $document = $document_termination[0]->file_name;
+                                }
+                            @endphp
                             @component('frontend.common.label.data-info')
-                                @slot('text', 'Generated')
+                                @slot('text', $document)
                             @endcomponent
                     </div>
                 </div>

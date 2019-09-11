@@ -542,9 +542,11 @@ class EmployeeController extends Controller
         $account = $employee->user()->first();
 
         $account_role = null;
-        if(isset(User::find($employee->user()->first()->id)->role)){
-            $account_role = User::find($employee->user()->first()->id)->role;
-        } 
+        if(isset($employee->user()->first()->id)){
+            if(isset(User::find($employee->user()->first()->id)->role)){
+                $account_role = User::find($employee->user()->first()->id)->role;
+            } 
+        }
 
         //EMPLOYEE BANK CURRENT
         $bank = [];
@@ -572,6 +574,11 @@ class EmployeeController extends Controller
             $r++;
         }
 
+        //EMPLOYEE TERMINATION
+        $employee_termination = $employee->employee_termination()->first();
+        $document_termination = $employee_termination->getMedia('');
+        // dd($document_termination[0]->name);
+
          return view('frontend.employee.employee.show',[
             'employee' => $employee,
             'age' => $age,
@@ -591,7 +598,9 @@ class EmployeeController extends Controller
             'account' => $account,
             'role' => $account_role,
             'bank' => $bank,
-            'bank_history' => $bank_history
+            'bank_history' => $bank_history,
+            'employee_termination' => $employee_termination,
+            'document_termination' => $document_termination
             ]);
     }
 
