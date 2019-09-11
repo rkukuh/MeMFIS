@@ -4,9 +4,9 @@ namespace App\Models\Pivots;
 
 use App\Models\WorkPackage;
 use App\Models\EOInstruction;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\EOInstructionWorkPackageSuccessor;
 use App\Models\EOInstructionWorkPackagePredecessor;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class EOInstructionWorkPackage extends Pivot
