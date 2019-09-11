@@ -15,7 +15,7 @@
                             @include('frontend.common.label.summary')
 
                             <h3 class="m-portlet__head-text">
-                                SI Taskcard
+                                EO Taskcard
                             </h3>
                         </div>
                     </div>
