@@ -52,14 +52,14 @@ class GoodsReceivedController extends Controller
 
         $items = PurchaseOrder::find($request->purchase_order_id)->items;
 
-        foreach($items as $item){
-            $goodsReceived->items()->attach([$item->pivot->item_id => [
-                'quantity'=> $item->pivot->quantity,
-                'already_received'=> 2,// TODO ask whats is it?
-                'unit_id' => $item->pivot->unit_id
-                ]
-            ]);
-        }
+        // foreach($items as $item){
+        //     $goodsReceived->items()->attach([$item->pivot->item_id => [
+        //         'quantity'=> $item->pivot->quantity,
+                // 'already_received'=> 2,// TODO ask whats is it?
+        //         'unit_id' => $item->pivot->unit_id
+        //         ]
+        //     ]);
+        // }
 
         return response()->json($goodsReceived);
     }

@@ -129,7 +129,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', $goodsReceived->vendor->name)
+                                                        @slot('text', $goodsReceived->purchase_order->vendor->name)
                                                     @endcomponent
                                                 </div>
                                             </div>

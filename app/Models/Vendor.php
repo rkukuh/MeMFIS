@@ -27,19 +27,6 @@ class Vendor extends MemfisModel
     }
 
     /**
-     * One-to-Many: A good recieved may have one vendor.
-     *
-     * This function will retrieve all the good recieveds of a vendor.
-     * See: GoodRecieved's vendor() method for the inverse
-     *
-     * @return mixed
-     */
-    public function good_receiveds()
-    {
-        return $this->hasMany(GoodsReceived::class);
-    }
-
-    /**
      * One-to-Many: A purchase order may have one vendor.
      *
      * This function will retrieve all the purchase orders of a vendor.
