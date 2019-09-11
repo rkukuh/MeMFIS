@@ -147,7 +147,7 @@
 
                                                 @if(isset($taskcard->category_id))
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', $taskcard->category_id)
+                                                        @slot('text', $taskcard->category->name)
                                                     @endcomponent
                                                 @else
                                                     @include('frontend.common.label.data-info-nodata')
