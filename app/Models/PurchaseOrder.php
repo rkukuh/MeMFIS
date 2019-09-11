@@ -94,6 +94,7 @@ class PurchaseOrder extends MemfisModel
                     ->using(PurchaseOrderItem::class)
                     ->withPivot(
                         'quantity',
+                        'quantity_unit',
                         'unit_id',
                         'price',
                         'tax_percent',

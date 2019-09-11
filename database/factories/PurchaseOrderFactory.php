@@ -110,8 +110,6 @@ $factory->afterCreating(PurchaseOrder::class, function ($purchase_order, $faker)
             'quantity_unit' => rand(1, 10),
             'unit_id' => $unit->id,
             'price' => rand(10, 100) * 1000000,
-            'tax_percent' => $faker->randomElement([5, 10]),
-            'tax_amount' => rand(10, 15) * 1000,
             'subtotal_before_discount' => rand(150, 200) * 1000000,
             'subtotal_after_discount' => rand(100, 150) * 1000000,
             'note' => $faker->randomElement([null, $faker->sentence]),

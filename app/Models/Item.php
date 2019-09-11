@@ -236,6 +236,7 @@ class Item extends MemfisModel implements HasMedia
                     ->using(PurchaseOrderItem::class)
                     ->withPivot(
                         'quantity',
+                        'quantity_unit',
                         'unit_id',
                         'price',
                         'tax_percent',
