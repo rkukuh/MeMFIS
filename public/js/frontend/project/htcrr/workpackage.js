@@ -56,7 +56,7 @@ let Workpackage = {
                 filterable: !1,
             },
             {
-                field: 'part_number',
+                field: 'name',
                 title: 'Item Description',
                 sortable: 'asc',
                 filterable: !1,
@@ -132,9 +132,7 @@ let Workpackage = {
                 overflow: 'visible',
                 template: function (t, e, i) {
                     return (
-                        '<button data-toggle="modal" data-target="#modal_workshop_task" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Create Workshop Task" data-uuid=' +
-                        t.uuid +
-                        '>\t\t\t\t\t\t\t<i class="la la-file"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                      
                         '<button data-toggle="modal" data-target="#modal_ht_crr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid_htcrr=' +
                         t.uuid +
                         '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
@@ -144,10 +142,17 @@ let Workpackage = {
                     );
                 }
             },{
-                field: '',
+                field: '#',
                 title: 'Create Task (Sent to)',
                 sortable: !1,
                 overflow: 'visible',
+                template: function (t, e, i) {
+                    return (
+                        '<button data-toggle="modal" data-target="#modal_workshop_task" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Create Workshop Task" data-uuid=' +
+                        t.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-file"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'                      
+                                        );
+                }
             }
             ]
         });
