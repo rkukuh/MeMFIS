@@ -67,4 +67,19 @@ class Category extends MemfisModel
     {
         return $this->morphedByMany(Item::class, 'categorizable');
     }
+
+    /**
+     * One-to-Many: A project must have an aircraft
+     *
+     * This function will retrieve all the projects of an aircraft.
+     * See: Project's aircraft() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taskcards()
+    {
+        return $this->hasMany(TaskCard::class);
+    }
+
+    
 }
