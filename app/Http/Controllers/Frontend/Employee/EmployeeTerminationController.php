@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\frontend\employee;
 
+use App\Http\Controllers\Controller;
 use App\Models\EmployeeTermination;
 use App\Models\Employee;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Frontend\EmployeeTerminationStore;
 
 class EmployeeTerminationController extends Controller
 {
@@ -34,9 +36,23 @@ class EmployeeTerminationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeTerminationStore $request, Employee $employee)
     {
-        //
+        $employeeTermination = $employee->employee_termination()->create([
+            'employee_id' => $employee->id,
+            'termination_id' => Employee::where('user_id',Auth::id())->first()->id,
+            'termination_date' => $request->termination_date,
+            'reason' => $request->reason,
+            'remark' => $request->remark
+        ]);
+
+        if($request->document){
+            $employeeTermination->addMedia($request->document)->toMediaCollection('document_employee_termiantion');
+        }
+
+        $employee->delete();
+
+        return response()->json('Sukses');
     }
 
     /**

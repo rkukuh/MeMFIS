@@ -65,25 +65,25 @@ let Employee = {
                     }
                 },
                 {
-                    field: 'dob',
+                    field: 'phones.number',
                     title: 'Phone Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'dob',
+                    field: 'department.name',
                     title: 'Department',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'dob',
+                    field: 'position.name',
                     title: 'Position',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'dob',
+                    field: 'status.name',
                     title: 'Employee Status',
                     sortable: 'asc',
                     filterable: !1,

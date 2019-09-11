@@ -48,7 +48,7 @@ let Employee_edit_basic = {
             let uuid = $('input[name=employee_uuid]').val()
             
             
-
+            // alert(dob)
             $.ajax({
              headers: {
                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
