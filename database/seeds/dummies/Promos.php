@@ -12,6 +12,6 @@ class Promos extends Seeder
      */
     public function run()
     {
-        //
+        factory(Promo::class, config('memfis.dummies.promos'))->create();
     }
 }
