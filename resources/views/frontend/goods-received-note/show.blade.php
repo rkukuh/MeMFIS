@@ -80,7 +80,9 @@
                                                                 Delivery Order Number
                                                             </label>
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'Generated')
+                                                                @if(isset($additionals))
+                                                                    @slot('text', $additionals->SupplierRefNo)
+                                                                @endif
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -88,7 +90,9 @@
                                                                 DO Date
                                                             </label>
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'Generated')
+                                                                @if(isset($additionals))
+                                                                    @slot('text', $additionals->SupplierRefDate)
+                                                                @endif
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -105,10 +109,10 @@
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <label class="form-control-label">
-                                                                DO Date
+                                                                Date
                                                             </label>
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'Generated')
+                                                                @slot('text', $goodsReceived->received_at)
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -129,7 +133,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', $goodsReceived->vendor->name)
+                                                        @slot('text', $goodsReceived->purchase_order->vendor->name)
                                                     @endcomponent
                                                 </div>
                                             </div>

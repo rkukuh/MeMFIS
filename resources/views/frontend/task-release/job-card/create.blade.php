@@ -67,7 +67,7 @@
                                             A/C Type
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->quotation->project->aircraft->name}}
+                                            {{$taskrelease->quotation->quotationable->aircraft->name}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -75,7 +75,7 @@
                                             A/C Reg
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->quotation->project->aircraft_register}}
+                                            {{$taskrelease->quotation->quotationable->aircraft_register}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -83,7 +83,7 @@
                                             A/C Serial Number
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->quotation->project->aircraft_sn}}
+                                            {{$taskrelease->quotation->quotationable->aircraft_sn}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -111,7 +111,7 @@
                                             Project No
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->quotation->project->code}}
+                                            {{$taskrelease->quotation->quotationable->code}}
                                         </td>
                                     </tr>
                                     <tr>

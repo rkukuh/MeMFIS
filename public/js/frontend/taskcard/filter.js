@@ -228,5 +228,18 @@ $(document).ready(function () {
         }
     });
 
+    $.ajax({
+        url: '/get-takcard-si-types/',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $.each(data, function (key, value) {
+                $('#taskcard_routine_type').append(
+                    '<option value="' + key + '">' + value + '</option>'
+                );
+            });
+        }
+    });
+
 });
 

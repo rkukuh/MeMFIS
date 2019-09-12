@@ -20,7 +20,7 @@ class JobCardDatatables extends Controller
      */
     public function index()
     {
-        $JobCard = JobCard::with('quotation','quotation.project')->get();
+        $JobCard = JobCard::with('quotation','quotation.quotationable')->get();
 
         foreach($JobCard as $taskcard){
             $taskcard->task_name .= $taskcard->jobcardable->task;

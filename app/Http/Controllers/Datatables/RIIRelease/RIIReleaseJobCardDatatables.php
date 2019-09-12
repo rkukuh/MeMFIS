@@ -26,9 +26,9 @@ class RIIReleaseJobCardDatatables extends Controller
                                             ->get();
 
         foreach($JobCard as $Jobcard){
-            $Jobcard->aircraft_name .= $Jobcard->quotation->project->aircraft->name;
+            $Jobcard->aircraft_name .= $Jobcard->quotation->quotationable->aircraft->name;
 
-            $Jobcard->customer_name .= $Jobcard->quotation->project->customer->name;
+            $Jobcard->customer_name .= $Jobcard->quotation->quotationable->customer->name;
 
             if(isset($Jobcard->jobcardable->skills) ){
                 if(sizeof($Jobcard->jobcardable->skills) == 3){

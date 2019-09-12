@@ -17,6 +17,7 @@
                 </div>
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
                     @component('frontend.common.buttons.create-new')
+                        @slot('id','create-new')
                         @slot('text', 'Education')
                         @slot('data_target', '#modal_education')
                     @endcomponent

@@ -57,7 +57,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', $discrepancy->jobcard->quotation->project->created_at)
+                                                @slot('text', $discrepancy->jobcard->quotation->quotationable->created_at)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -66,7 +66,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text',  $discrepancy->jobcard->quotation->project->aircraft->name)
+                                                @slot('text',  $discrepancy->jobcard->quotation->quotationable->aircraft->name)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -87,7 +87,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', $discrepancy->jobcard->quotation->project->aircraft_register)
+                                                @slot('text', $discrepancy->jobcard->quotation->quotationable->aircraft_register)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -107,7 +107,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', $discrepancy->jobcard->quotation->project->aircraft_sn)
+                                                @slot('text', $discrepancy->jobcard->quotation->quotationable->aircraft_sn)
                                             @endcomponent
                                         </div>
                                     </div>

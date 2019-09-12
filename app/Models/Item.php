@@ -240,6 +240,8 @@ class Item extends MemfisModel implements HasMedia
                         'quantity_unit',
                         'unit_id',
                         'price',
+                        'tax_percent',
+                        'tax_amount',
                         'subtotal_before_discount',
                         'subtotal_after_discount',
                         'note'

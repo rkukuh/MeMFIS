@@ -122,7 +122,7 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{-- {{$quotation->project->customer->name}} --}}
+                        {{-- {{$quotation->quotationable->customer->name}} --}}
                         generate
                     </td>
                     <td width="33%" rowspan="5" align="center">
@@ -178,7 +178,7 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{-- {{$quotation->project->no_wo}} --}}
+                        {{-- {{$quotation->quotationable->no_wo}} --}}
                         generate
                     </td>
                 </tr>
@@ -195,7 +195,7 @@
                     <td width="35%" valign="top">generate</td>
                     <th width="14%" valign="top">Project No</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->project->code}}</td> --}}
+                    {{-- <td width="35%" valign="top">{{$quotation->quotationable->code}}</td> --}}
                     <td width="35%" valign="top">generate</td>
                 </tr>
                 <tr>
@@ -205,7 +205,7 @@
                     <td width="35%" valign="top">generate</td>
                     <th width="14%" valign="top">A/C Type</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->project->aircraft->name}}</td> --}}
+                    {{-- <td width="35%" valign="top">{{$quotation->quotationable->aircraft->name}}</td> --}}
                     <td width="35%" valign="top">generate</td>
                 </tr>
             </table>

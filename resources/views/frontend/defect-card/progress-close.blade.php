@@ -69,7 +69,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $defectcard->jobcard->quotation->project->aircraft->name)
+                                            @slot('text', $defectcard->jobcard->quotation->quotationable->aircraft->name)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $defectcard->jobcard->quotation->project->aircraft_register)
+                                            @slot('text', $defectcard->jobcard->quotation->quotationable->aircraft_register)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $defectcard->jobcard->quotation->project->aircraft_sn)
+                                            @slot('text', $defectcard->jobcard->quotation->quotationable->aircraft_sn)
                                         @endcomponent
                                     </div>
                                 </div>

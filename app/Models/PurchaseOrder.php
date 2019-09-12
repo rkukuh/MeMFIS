@@ -93,6 +93,8 @@ class PurchaseOrder extends MemfisModel
                         'quantity_unit',
                         'unit_id',
                         'price',
+                        'tax_percent',
+                        'tax_amount',
                         'subtotal_before_discount',
                         'subtotal_after_discount',
                         'note'

@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class EmployeeEducationUpdate extends FormRequest
 {
@@ -13,7 +15,7 @@ class EmployeeEducationUpdate extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,15 @@ class EmployeeEducationUpdate extends FormRequest
     public function rules()
     {
         return [
-            //
+            'institute' => 'required',
+            'qualification' => 'required',
+            'field_of_study' => 'required',
+            'graduation_date' => 'required',
+            'document' => 'image|nullable'
         ];
+    }
+
+    protected function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }

@@ -71,7 +71,7 @@ class QuotationController extends Controller
      */
     public function store(QuotationStore $request)
     {
-        $contact = [];
+        $contact = $scheduled_payment_amount = [];
 
         $contact['name']     = $request->attention_name;
         $contact['phone'] = $request->attention_phone;
@@ -83,6 +83,7 @@ class QuotationController extends Controller
         $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['quotationable_type' => 'App\Models\Project']);
         $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
+        $request->merge(['scheduled_payment_amount' => json_encode($scheduled_payment_amount) ]);
         $request->merge(['quotationable_id' => Project::where('uuid',$request->project_id)->first()->id]);
 
         $quotation = Quotation::create($request->all());
@@ -396,7 +397,7 @@ class QuotationController extends Controller
             'is_approved' => 1
         ]));
 
-        $ProjectWorkPackage = ProjectWorkPackage::where('project_id',$quotation->project_id)->pluck('id');
+        $ProjectWorkPackage = ProjectWorkPackage::where('project_id',$quotation->quotationable_id)->pluck('id');
         $ProjectWorkPackageTaskCard = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
         foreach($ProjectWorkPackageTaskCard as $taskcard){
                 $tc = $taskcard->taskcard;
@@ -486,7 +487,6 @@ class QuotationController extends Controller
                 $additionals['TSN'] = null;
                 $additionals['CSN'] = null;
 
-
             $jobcard = $tc_inscrtuction->jobcards()->create([
                 'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
                 'jobcardable_id' => $tc_inscrtuction->id,
@@ -506,14 +506,6 @@ class QuotationController extends Controller
                 'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
                 'progressed_by' => Auth::id()
             ]));
-
-            // // echo $tc->title.'<br>';
-            // foreach($tc->items as $item){
-            //     echo $item->name.'<br>';
-            // }
-            // dump($tc->materials->toJson());
-
-
 
         }
 
@@ -537,8 +529,6 @@ class QuotationController extends Controller
      */
     public function discount( Request $request, Quotation $quotation, WorkPackage $workpackage)
     {
-        // dd($workpackage);
-        // $Quotation->workpackages()->updateExistingPivot($WorkPackage, ['discount_value'=>$request->discount_value]);
         $quotation->workpackages()->updateExistingPivot($workpackage, ['discount_type'=>$request->discount_type,'discount_value'=>$request->discount_value]);
 
         return response()->json($quotation);

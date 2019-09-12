@@ -22,7 +22,7 @@ class RIIReleaseDefectCardDatatables extends Controller
         //                                     $query->where('is_rii', '1');
         //                                     })->get();
         // foreach($DefectCard as $aircraft){
-        //     $aircraft->aircraft_name .= $aircraft->jobcard->quotation->project->aircraft->name;
+        //     $aircraft->aircraft_name .= $aircraft->jobcard->quotation->quotationable->aircraft->name;
         // }
 
         // foreach($JobCard as $taskcard){
@@ -53,9 +53,9 @@ class RIIReleaseDefectCardDatatables extends Controller
         // dd($DefectCard);
 
         foreach($DefectCard as $defectcard){
-            $defectcard->aircraft_name .= $defectcard->jobcard->quotation->project->aircraft->name;
+            $defectcard->aircraft_name .= $defectcard->jobcard->quotation->quotationable->aircraft->name;
 
-            $defectcard->customer_name .= $defectcard->jobcard->quotation->project->customer->name;
+            $defectcard->customer_name .= $defectcard->jobcard->quotation->quotationable->customer->name;
 
             if(isset($defectcard->jobcard->taskcard->skills) ){
                 if(sizeof($defectcard->jobcard->taskcard->skills) == 3){

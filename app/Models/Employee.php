@@ -263,6 +263,20 @@ class Employee extends MemfisModel implements HasMedia
         return $this->hasMany(EmployeeBenefit::class);
     }
 
+
+    /**
+     * One-to-One: An employee may have zero or one termination.
+     *
+     * This function will retrieve the employees of a termination.
+     * See: EmployeeTermination employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_termination()
+    {
+        return $this->belongsTo(EmployeeTermination::class);
+    }
+
     /**
      * One-to-Many: An Employee have one or many bpjs.
      *

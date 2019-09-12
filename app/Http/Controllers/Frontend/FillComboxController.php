@@ -24,6 +24,7 @@ use App\Models\Employee;
 use App\Models\TaskCard;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
+use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\EmployeeLicense;
@@ -614,6 +615,18 @@ class FillComboxController extends Controller
                 ->whereHas('categories', function ($query) {
                     $query->where('code', 'raw')->orWhere('code', 'cons')->orWhere('code', 'comp')->orWhere('code', 'service')->orWhere('code', 'facility');
                 })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
+
+        return $items;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function poMaterial(purchaseOrder $purchaseOrder)
+    {
+        $items = $purchaseOrder->items->pluck('name','uuid');
 
         return $items;
     }

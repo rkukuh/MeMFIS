@@ -25,6 +25,7 @@ Route::name('component.')->group(function () {
         Route::get('get-accesses', 'FillComboxController@access')->name('get-accesses');
         Route::get('get-stations', 'FillComboxController@station')->name('get-stations');
         Route::get('get-materials', 'FillComboxController@material')->name('get-material');
+        Route::get('get-po-materials/{purchaseOrder}', 'FillComboxController@poMaterial')->name('get-po-material');
         Route::get('get-aircrafts', 'FillComboxController@aircraft')->name('get-aircrafts');
         Route::get('get-customers', 'FillComboxController@customer')->name('get-customers');
         Route::get('get-taskcards', 'FillComboxController@taskcard')->name('get-taskcards');
@@ -66,6 +67,7 @@ Route::name('component.')->group(function () {
         Route::get('get-taskcard-relationships', 'FillComboxController@taskcardRelationship')->name('get-taskcard-relationships');
         Route::get('get-scheduled-payment-types', 'FillComboxController@scheduledPaymentType')->name('get-scheduled-payment-types');
         Route::get('get-takcard-non-routine-types', 'FillComboxController@taskcardTypeNonRoutine')->name('get-takcard-non-routine-types');
+        Route::get('get-takcard-si-types', 'FillComboxController@taskcardTypeSI')->name('get-takcard-si-types');
         Route::get('get-takcard-preliminary-types', 'FillComboxController@taskcardTypePreliminary')->name('get-takcard-preliminary-types');
         Route::get('get-project-additionals-approved', 'FillComboxController@projectAdditionalApproved')->name('get-project-additional-approved');
 

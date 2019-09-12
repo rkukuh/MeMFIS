@@ -219,8 +219,8 @@ class JobCardController extends Controller
                 $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
-            if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
+                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
             }else{
                 $prepared_by ="-";
             }
@@ -279,8 +279,8 @@ class JobCardController extends Controller
                 $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
-            if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
+                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
             }else{
                 $prepared_by ="-";
             }
@@ -339,8 +339,8 @@ class JobCardController extends Controller
                 $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
-            if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
+                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
             }else{
                 $prepared_by ="-";
             }
@@ -399,8 +399,8 @@ class JobCardController extends Controller
                 $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
-            if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
+                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
             }else{
                 $prepared_by ="-";
             }
@@ -458,8 +458,8 @@ class JobCardController extends Controller
                 $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
-            if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
+                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
             }else{
                 $prepared_by ="-";
             }
@@ -518,8 +518,8 @@ class JobCardController extends Controller
                 $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
-            if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
+                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
             }else{
                 $prepared_by ="-";
             }
@@ -578,8 +578,8 @@ class JobCardController extends Controller
                 $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
-            if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
+                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
             }else{
                 $prepared_by ="-";
             }
@@ -638,8 +638,8 @@ class JobCardController extends Controller
                 $accomplished_at =  $jobCard->progresses->get(1)->created_at;
             }
 
-            if(isset(User::find($jobCard->quotation->project->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->project->audits->first()->user_id)->name;
+            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
+                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
             }else{
                 $prepared_by ="-";
             }

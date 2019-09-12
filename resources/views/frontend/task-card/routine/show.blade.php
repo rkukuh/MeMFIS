@@ -332,7 +332,7 @@
                                                     </label>
 
                                                     <div>
-                                                        @if (empty($taskcard->version))
+                                                        @if (sizeof(json_decode($taskcard->version)) == 0)
                                                             @include('frontend.common.label.data-info-nodata')
                                                         @else
                                                             @php
@@ -382,20 +382,18 @@
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Documents library @include('frontend.common.label.optional')
-                                            </label>
+                                            </label><br>
 
-                                            @if (empty($taskcard->document_library))
+                                            @if (sizeof($additionals->document_library) == 0)
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
-                                                @php
-                                                    $documents = json_decode($taskcard->document_library, TRUE);
-                                                @endphp
-
-                                                @foreach ($documents  as $document)
-                                                    @component('frontend.common.label.badge')
-                                                        @slot('text', $document )
-                                                    @endcomponent
-                                                @endforeach
+                                                @if(isset($additionals))
+                                                    @foreach ($additionals->document_library  as $document)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $document )
+                                                        @endcomponent
+                                                    @endforeach
+                                                @endif
                                             @endif
                                         </div>
                                     </div>
@@ -420,7 +418,7 @@
                                             </label>
 
                                             <div>
-                                                @if ($taskcard->stations->isEmpty())
+                                                @if (!isset($taskcard->stations))
                                                     @include('frontend.common.label.data-info-nodata')
                                                 @else
                                                     @foreach ($taskcard->stations as $station)
@@ -452,12 +450,16 @@
                                             </label>
 
                                             <div>
-                                                @if ($taskcard->section->isEmpty())
+                                                @if (sizeof(json_decode($taskcard->section)) == 0)
                                                     @include('frontend.common.label.data-info-nodata')
                                                 @else
-                                                    @foreach ($taskcard->section as $section)
+                                                    @php
+                                                        $sections = json_decode($taskcard->section, TRUE);
+                                                    @endphp
+
+                                                    @foreach ($sections as $section)
                                                         @component('frontend.common.label.badge')
-                                                            @slot('text', $section->name )
+                                                            @slot('text', $section )
                                                         @endcomponent
                                                     @endforeach
                                                 @endif

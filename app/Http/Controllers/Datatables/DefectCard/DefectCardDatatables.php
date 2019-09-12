@@ -26,9 +26,9 @@ class DefectCardDatatables extends Controller
                         ->get();
 
         foreach($DefectCard as $jobcard){
-            $jobcard->customer_name .= $jobcard->jobcard->quotation->project->customer->name;
+            $jobcard->customer_name .= $jobcard->jobcard->quotation->quotationable->customer->name;
             $jobcard->taskcard_number .= $jobcard->jobcard->taskcard->number;
-            $jobcard->aircraft .= $jobcard->jobcard->quotation->project->aircraft->name;
+            $jobcard->aircraft .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
 
             if(isset($jobcard->jobcard->taskcard->skills) ){
                 if(sizeof($jobcard->jobcard->taskcard->skills) == 3){
@@ -236,7 +236,7 @@ class DefectCardDatatables extends Controller
         }
 
         foreach($DefectCard as $jobcard){
-            $jobcard->customer_name .= $jobcard->jobcard->quotation->project->customer->name;
+            $jobcard->customer_name .= $jobcard->jobcard->quotation->quotationable->customer->name;
         }
 
         foreach($DefectCard as $jobcard){
@@ -255,7 +255,7 @@ class DefectCardDatatables extends Controller
         }
 
         foreach($DefectCard as $jobcard){
-            $jobcard->aircraft .= $jobcard->jobcard->quotation->project->aircraft->name;
+            $jobcard->aircraft .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
         }
 
         $data = $alldata = json_decode($DefectCard);

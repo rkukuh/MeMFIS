@@ -48,7 +48,7 @@ let Employee_edit_basic = {
             let uuid = $('input[name=employee_uuid]').val()
             
             
-
+            // alert(dob)
             $.ajax({
              headers: {
                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -186,14 +186,16 @@ let Employee_edit_basic = {
                                     data: formData,
                                     type: 'POST',
                                     success: function (response) {
+                                        if (response.errors) {
+                                            alert(response.errors)
+                                            location.reload();
+                                        }else{
                                         toastr.success('Data has been saved.', 'Sukses', {
                                             timeOut: 5000
                                         });
-                
+        
                                         location.reload();
-                                    },
-                                    error: function (response) {
-                                       
+                                    }
                                     }
                                 });
                             }else{

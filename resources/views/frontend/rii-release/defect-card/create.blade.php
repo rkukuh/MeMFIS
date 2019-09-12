@@ -68,7 +68,7 @@
                                     </label>
 
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', $riirelease->jobcard->quotation->project->aircraft->name)
+                                        @slot('text', $riirelease->jobcard->quotation->quotationable->aircraft->name)
                                     @endcomponent
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                                     </label>
 
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', $riirelease->jobcard->quotation->project->aircraft_register)
+                                        @slot('text', $riirelease->jobcard->quotation->quotationable->aircraft_register)
                                     @endcomponent
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                     </label>
 
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', $riirelease->jobcard->quotation->project->aircraft_sn)
+                                        @slot('text', $riirelease->jobcard->quotation->quotationable->aircraft_sn)
                                     @endcomponent
                                 </div>
                             </div>

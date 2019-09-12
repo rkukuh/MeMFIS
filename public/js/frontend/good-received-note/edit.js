@@ -121,8 +121,8 @@ let goods_received_note = {
             let received_at = $('input[name=date]').val();
             let received_by = $('#received-by').val();
             let ref_po = $('input[name=ref-po]').val();
-            let do_no = $('input[name=do-no]').val();
-            let ref_date = $('input[name=date-ref-date]').val();
+            let do_no = $('input[name=deliv-number]').val();
+            let do_date = $('input[name=do-date]').val();
             let warehouse = $('input[name=warehouse]').val();
             let description = $('#description').val();
             let vehicle_no = $('input[name=vehicle-no]').val();
@@ -140,6 +140,8 @@ let goods_received_note = {
                     vehicle_no:vehicle_no,
                     container_no:container_no,
                     purchase_order_id:ref_po,
+                    do_no:do_no,
+                    do_date:do_date,
                     storage_id:warehouse,
                     description:description,
                 },
@@ -166,9 +168,57 @@ let goods_received_note = {
             });
         });
 
+        $('.modal-footer').on('click', '.add-item', function () {
+            let item_uuid = $("#material").val();
+            let exp_date = $("#exp_date_2").val();
+            let qty = $("#quantity").val();
+            let unit_id = $("#unit_material").val();
+            let note = $("#description").val();
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                url: '/goods-received/'+grn_uuid+'/item/'+item_uuid,
+                type: "POST",
+                data: {
+                    exp_date: exp_date,
+                    quantity: qty,
+                    unit_id: unit_id,
+                    note: note,
+                },
+                success: function(response) {
+                    if (response.errors) {
+                        console.log(errors);
+                        // if (response.errors.title) {
+                        //     $('#title-error').html(response.errors.title[0]);
+                        // }
+
+                        // document.getElementById('manual_affected_id').value = manual_affected_id;
+                    } else {
+                        //    taskcard_reset();
+                        $('#modal_grn_add').modal('hide');
+
+                        toastr.success(
+                            "GRN's Item has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $(".purchase_order_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+
+                    }
+                }
+            });
+        });
         $('.purchase_order_datatable').on('click', '.edit-item', function () {
             let description = "";
-            document.getElementById('item').innerText = $(this).data('item');
+            document.getElementById('item-label').innerText = $(this).data('item');
             if($(this).data('description') != null){
                 description = $(this).data('description');
             }else{

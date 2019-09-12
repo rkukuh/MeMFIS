@@ -90,7 +90,8 @@ class HtCrrController extends Controller
             'estimation_manhour' => $request->installation_manhour_estimation,
             'position' => $request->position,
         ]);
-
+        
+        
         return response()->json($htcrr);
     }
 

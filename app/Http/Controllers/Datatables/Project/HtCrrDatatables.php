@@ -30,8 +30,14 @@ class HtCrrDatatables extends Controller
                 else{
                     $data->skill_name .= '';
                 }
+
             }
 
+            // foreach($discrepancy->tools as $material){
+            //     $unit_id = $material->pivot->unit_id;
+            //     $material->pivot->unit .= Unit::find($unit_id)->name;
+            // }
+            
             $removal =HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','removal')->first()->id)->first()->estimation_manhour;
 
             $data->removal.= $removal;
