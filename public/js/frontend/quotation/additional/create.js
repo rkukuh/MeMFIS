@@ -227,8 +227,6 @@ let AdditionalTaskQtnCreate = {
                         });
 
                         window.location.href = '/quotation-additional/' + data.uuid + '/edit';
-
-
                     }
                 }
             });

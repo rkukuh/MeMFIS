@@ -55,7 +55,7 @@ class QuotationAdditionalController extends Controller
     {
         $websites = Type::ofWebsite()->get();
         $total_manhour = $project->defectcards()->sum('estimation_manhour');
-
+        
         return view('frontend.quotation.additional.create', [
             'project' => $project,
             'websites' => $websites,
@@ -72,6 +72,7 @@ class QuotationAdditionalController extends Controller
      */
     public function store(Request $request)
     {
+        $project = Project::where('uuid', $request->project_id)->first();
         $contact = $defectcard_json = [];
 
         $contact['name']    = $request->attention_name;
@@ -86,13 +87,15 @@ class QuotationAdditionalController extends Controller
         $request->merge(['number' => DocumentNumber::generate('QADD-', Quotation::withTrashed()->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['data_defectcard' => json_encode($defectcard_json)]);
-        $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
-        $request->merge(['parent_id' => Project::find($request->project_id)->parent->quotations->first()->id]);
-        $request->merge(['scheduled_payment_amount' => json_encode($request->scheduled_payment_amount)]);
+        $request->merge(['quotationable_type' => 'App\Models\Project']);
+        $request->merge(['quotationable_id' => Project::where('uuid',$request->project_id)->first()->id]);
+        $request->merge(['parent_id' => $project->parent->quotations->last()->id]);
+        $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
+        $request->merge(['scheduled_payment_amount' => json_encode([])]);
 
+        $defectcards = DefectCard::where('project_additional_id',$project->id)->get();
         $quotation = Quotation::create($request->all());
 
-        $defectcards = DefectCard::where('project_additional_id',$request->project_id)->get();
         $customer = Customer::find($quotation->parent->quotationable->customer->id)->levels->last()->score;
 
         foreach($defectcards as $defectcard){
@@ -163,7 +166,7 @@ class QuotationAdditionalController extends Controller
             'charges' => $charges,
             'attention' => $attention,
             'quotation' => $quotation,
-            'project' => $quotation->project,
+            'project' => $quotation->quotationable,
             'total_manhour' => $total_manhour,
             'currencies' => $this->currencies,
             'scheduled_payment_amount' => $scheduled_payment_amount,
