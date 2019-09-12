@@ -229,6 +229,19 @@ let Workpackage = {
 
                         $('#modal_ht_crr').modal('hide');
 
+                        $('#modal_ht_crr').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end()
+                            .find("select")
+                                .select2('val','All')
+                                .end();
+                        })
+
                         let table = $('.ht_crr_datatable').mDatatable();
 
                         table.originalDataSet = [];
