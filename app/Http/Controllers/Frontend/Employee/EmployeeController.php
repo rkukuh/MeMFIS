@@ -576,7 +576,11 @@ class EmployeeController extends Controller
 
         //EMPLOYEE TERMINATION
         $employee_termination = $employee->employee_termination()->first();
-        $document_termination = $employee_termination->getMedia('');
+        $document_termination = null;
+        if($employee_termination != null){
+            $document_termination = $employee_termination->getMedia('');
+        }
+        
 
          return view('frontend.employee.employee.show',[
             'employee' => $employee,

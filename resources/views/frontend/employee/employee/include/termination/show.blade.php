@@ -8,8 +8,14 @@
                         Termination Date    
                     </label>
 
+                    @php
+                        $termination_date = null;
+                        if(isset($employee_termination->termination_date)){
+                            $termination_date = $employee_termination->termination_date;
+                        }
+                    @endphp
                     @component('frontend.common.label.data-info')
-                        @slot('text', $employee_termination->termination_date)
+                        @slot('text', $termination_date)
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -17,8 +23,14 @@
                         Reason   
                     </label>
 
+                    @php
+                        $employee_reason = null;
+                        if(isset($employee_termination->reason)){
+                            $employee_reason = $employee_termination->reason;
+                        }
+                    @endphp
                     @component('frontend.common.label.data-info')
-                        @slot('text', $employee_termination->reason)
+                        @slot('text', $employee_reason)
                     @endcomponent
                 </div>
             </div>
@@ -28,8 +40,14 @@
                         Remark
                     </label>
 
+                    @php
+                        $employee_remark = null;
+                        if(isset($employee_termination->remark)){
+                            $employee_remark = $employee_termination->remark;
+                        }
+                    @endphp
                     @component('frontend.common.label.data-info')
-                        @slot('text', $employee_termination->remark)
+                        @slot('text', $employee_remark)
                     @endcomponent
                 </div>
             </div>
