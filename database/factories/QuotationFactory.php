@@ -163,7 +163,9 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
     // Tax
 
     if ($faker->boolean) {
-        $quotation->taxes()->save(factory(Tax::class)->make());
+        for ($i = 1; $i <= rand(1, 3); $i++) {
+            $quotation->taxes()->save(factory(Tax::class)->make());
+        }
     }
 
     // WorkPackage
