@@ -129,6 +129,19 @@ class PurchaseOrder extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many taxes.
+     *
+     * This function will get all PurchaseOrder's taxes.
+     * See: Tax's taxable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taxes()
+    {
+        return $this->morphMany(Tax::class, 'taxable');
+    }
+
+    /**
      * One-to-Many: A purchase order may have one vendor.
      *
      * This function will retrieve the vendor of a purchase order.

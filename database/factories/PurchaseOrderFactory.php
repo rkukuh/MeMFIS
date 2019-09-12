@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Tax;
 use App\Models\Type;
 use App\Models\Unit;
 use App\Models\Item;
@@ -120,6 +121,14 @@ $factory->afterCreating(PurchaseOrder::class, function ($purchase_order, $faker)
                 'value'     => rand(1, 9) * 10,
                 'amount'    => rand(100, 200) * 1000000,
             ]);
+        }
+    }
+
+    // Tax
+
+    if ($faker->boolean) {
+        for ($i = 1; $i <= rand(1, 3); $i++) {
+            $purchase_order->taxes()->save(factory(Tax::class)->make());
         }
     }
 
