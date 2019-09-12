@@ -7,6 +7,7 @@ use App\Models\HtCrr;
 use App\Models\Project;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
+use App\Models\Item;    
 use App\Http\Controllers\Controller;
 
 class HtCrrDatatables extends Controller
@@ -20,6 +21,9 @@ class HtCrrDatatables extends Controller
     {
         $HtCrr = HtCrr::where('project_id',$project->id)->where('parent_id',null)->get();
         foreach($HtCrr as $data){
+            $item = Item::where('code', $data->part_number)->first();
+            $data->item_description = $item->name;
+            
             if(isset($data->skills) ){
                 if(sizeof($data->skills) == 3){
                     $data->skill_name .= "ERI";

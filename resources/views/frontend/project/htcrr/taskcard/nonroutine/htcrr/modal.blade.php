@@ -140,13 +140,10 @@
                         @slot('id', 'is_rii')
                         @slot('name', 'is_rii')
                         @slot('text', 'RII?')
-                        @slot('disabled','disabled')
-                        {{-- @if($defectcard->is_rii == 1)
-                                        @slot('checked','checked')
-                                    @else
-
-                                    @endif --}}
+                        @slot('value', 1)
                         @endcomponent
+
+                      
                     </div>
 
                 </div>

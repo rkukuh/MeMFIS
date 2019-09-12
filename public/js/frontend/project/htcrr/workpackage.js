@@ -56,7 +56,7 @@ let Workpackage = {
                 filterable: !1,
             },
             {
-                field: 'name',
+                field: 'item_description',
                 title: 'Item Description',
                 sortable: 'asc',
                 filterable: !1,
@@ -74,10 +74,25 @@ let Workpackage = {
                 filterable: !1,
             },
             {
-                field: '',
+                field: 'is_rii',
                 title: 'RII',
                 sortable: 'asc',
                 filterable: !1,
+                template: function (t){
+                    let e = {
+                        1:{
+                            title:  "Yes",
+                            class:  "m-badge--brand"
+                        },
+                        0:{
+                            title: "No",
+                            class: " m-badge--warning"
+                        }
+                    };
+                        return '<span class="m-badge ' + e[t.is_rii].class + ' m-badge--wide">' + e[t.is_rii].title + "</span>"
+                    
+                }
+                
             },
             {
                 field: 'removal',
@@ -178,7 +193,6 @@ let Workpackage = {
                 $('#m_datatable_material_htcrr').DataTable().ajax.reload();
             }
         });
-
         let tool_htcrr_datatables_init = true;
         let htcrr_tools = $('.ht_crr_datatable').on('click', '.tool_htcrr', function () {
             if (tool_htcrr_datatables_init == true) {
@@ -205,6 +219,12 @@ let Workpackage = {
             let description = $('#description').val();
             let otr_certification = $('#otr_certification').val();
             let mhrs = parseFloat(removal) + parseFloat(installation);
+            let serial_number = $('#sn_off').val();
+            if (document.getElementById("is_rii").checked) {
+                is_rii = 1;
+            } else {
+                is_rii = 0;
+            }
 
             $.ajax({
                 headers: {
@@ -222,6 +242,8 @@ let Workpackage = {
                     removal_manhour_estimation: removal,
                     installation_manhour_estimation: installation,
                     project_id: project_uuid,
+                    is_rii:is_rii,
+                    serial_number:serial_number,
                 },
                 success: function (data) {
                     if (data.errors) {
