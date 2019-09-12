@@ -83,11 +83,11 @@ class ProjectHMAdditionalController extends Controller
      */
     public function show(Project $project)
     {
+        $project_parent = Project::find($project->parent_id);
         if($project->quotations->toArray() == []){
-            $project_parent = Project::find($project->parent_id);
             $attention = json_decode($project_parent->quotations()->first()->attention);
         }else{
-            $attention = json_decode($project_parent->quotations()->first()->attention);
+            $attention = json_decode($project->quotations()->first()->attention);
         }
         return view('frontend.project.hm-additional.show',[
             'project' => $project,
@@ -106,11 +106,12 @@ class ProjectHMAdditionalController extends Controller
      */
     public function edit(Project $project)
     {
+
+        $project_parent = Project::find($project->parent_id);
         if($project->quotations->toArray() == []){
-            $project_parent = Project::find($project->parent_id);
             $attention = json_decode($project_parent->quotations()->first()->attention);
         }else{
-            $attention = json_decode($project_parent->quotations()->first()->attention);
+            $attention = json_decode($project->quotations()->first()->attention);
         }
 
         return view('frontend.project.hm-additional.edit',[

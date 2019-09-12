@@ -182,9 +182,13 @@
                                                 Area/Zone
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text',  $discrepancy->jobcard->taskcard->work_area)
-                                            @endcomponent
+                                            @if(isset($discrepancy->jobcard->jobcardable->work_area))
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text',  $discrepancy->jobcard->jobcardable->work_area)
+                                                @endcomponent
+                                            @else
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">

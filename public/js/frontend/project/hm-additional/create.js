@@ -69,7 +69,7 @@ let AdditionalTaskCreate = (function() {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.taskcard.number',
+                    field: 'jobcard.jobcardable.number',
                     title: 'TC No.',
                     sortable: 'asc',
                     filterable: !1,

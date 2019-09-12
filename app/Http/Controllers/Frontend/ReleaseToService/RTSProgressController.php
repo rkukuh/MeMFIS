@@ -36,7 +36,7 @@ class RTSProgressController extends Controller
             $this->edit(RTS::where('project_id',$project)->first()->uuid);
         }
         else{
-            $quotations = Quotation::where('project_id',$project->id)->get();
+            $quotations = Quotation::where('quotationable_id',$project->id)->get();
 
             $taskcard_number = "";
             $running_taslcard = "";
@@ -116,7 +116,7 @@ class RTSProgressController extends Controller
     {
         $request->merge(['work_performed' => $request->work_performed.'.'.$request->work_performed_addtional ]);
 
-        $quotations = Quotation::where('project_id',$request->project_id)->get();
+        $quotations = Quotation::where('quotationable_id',$request->project_id)->get();
 
         $taskcard_number = "";
         foreach($quotations as $quotation){

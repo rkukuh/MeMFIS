@@ -183,8 +183,8 @@ class JobCardController extends Controller
 
         $jobCard = JobCard::with('taskcard','quotation')->where('uuid',$jobCard)->first();
 
-        if($jobCard->taskcard->type->code == "basic"){
-            $rii_status = $jobCard->taskcard->is_rii;
+        if($jobcard->jobcardable->type->code == "basic"){
+            $rii_status = $jobcard->jobcardable->is_rii;
             $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
@@ -198,7 +198,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -207,7 +207,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -243,8 +243,8 @@ class JobCardController extends Controller
                     ]);
             return $pdf->stream();
         }
-        elseif($jobCard->taskcard->type->code == "sip"){
-            $rii_status = $jobCard->taskcard->is_rii;
+        elseif($jobcard->jobcardable->type->code == "sip"){
+            $rii_status = $jobcard->jobcardable->is_rii;
             $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
@@ -258,7 +258,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -267,7 +267,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -303,8 +303,8 @@ class JobCardController extends Controller
                     ]);
             return $pdf->stream();
         }
-        elseif($jobCard->taskcard->type->code == "cpcp"){
-            $rii_status = $jobCard->taskcard->is_rii;
+        elseif($jobcard->jobcardable->type->code == "cpcp"){
+            $rii_status = $jobcard->jobcardable->is_rii;
             $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
@@ -318,7 +318,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -327,7 +327,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -363,8 +363,8 @@ class JobCardController extends Controller
                     ]);
             return $pdf->stream();
         }
-        elseif (($jobCard->taskcard->type->code == "ad") or ($jobCard->taskcard->type->code == "sb")) {
-            $rii_status = $jobCard->taskcard->is_rii;
+        elseif (($jobcard->jobcardable->type->code == "ad") or ($jobcard->jobcardable->type->code == "sb")) {
+            $rii_status = $jobcard->jobcardable->is_rii;
             $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
@@ -378,7 +378,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -387,7 +387,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -422,8 +422,8 @@ class JobCardController extends Controller
                     'actual_manhours'=> $actual_manhours
                     ]);
             return $pdf->stream();        }
-        elseif(($jobCard->taskcard->type->code == "eo") or ($jobCard->taskcard->type->code == "ea")){
-            $rii_status = $jobCard->taskcard->is_rii;
+        elseif(($jobcard->jobcardable->type->code == "eo") or ($jobcard->jobcardable->type->code == "ea")){
+            $rii_status = $jobcard->jobcardable->is_rii;
             $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
@@ -437,7 +437,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -446,7 +446,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -482,8 +482,8 @@ class JobCardController extends Controller
                     ]);
             return $pdf->stream();
         }
-        elseif(($jobCard->taskcard->type->code == "cmr") or ($jobCard->taskcard->type->code == "awl")){
-            $rii_status = $jobCard->taskcard->is_rii;
+        elseif(($jobcard->jobcardable->type->code == "cmr") or ($jobcard->jobcardable->type->code == "awl")){
+            $rii_status = $jobcard->jobcardable->is_rii;
             $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
@@ -497,7 +497,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -506,7 +506,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -542,8 +542,8 @@ class JobCardController extends Controller
                     ]);
             return $pdf->stream();
         }
-        elseif($jobCard->taskcard->type->code == "si"){
-            $rii_status = $jobCard->taskcard->is_rii;
+        elseif($jobcard->jobcardable->type->code == "si"){
+            $rii_status = $jobcard->jobcardable->is_rii;
             $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
@@ -557,7 +557,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -566,7 +566,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -602,8 +602,8 @@ class JobCardController extends Controller
                     ]);
             return $pdf->stream();
         }
-        elseif($jobCard->taskcard->type->code == "preliminary"){
-            $rii_status = $jobCard->taskcard->is_rii;
+        elseif($jobcard->jobcardable->type->code == "preliminary"){
+            $rii_status = $jobcard->jobcardable->is_rii;
             $helpers = $jobCard->helpers;
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
@@ -617,7 +617,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -626,7 +626,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
