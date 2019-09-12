@@ -354,7 +354,7 @@ class DefectCardDatatables extends Controller
      */
     public function show(Project $project)
     {
-        $quotation = Quotation::where('project_id',$project->id)->first()->id;
+        $quotation = Quotation::where('quotationable_id',$project->id)->first()->id;
 
         $defectcard = DefectCard::with('jobcard')
                                 ->whereHas('jobcard', function ($query) use ($quotation){

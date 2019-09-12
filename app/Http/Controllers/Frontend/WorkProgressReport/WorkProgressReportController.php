@@ -65,7 +65,7 @@ class WorkProgressReportController extends Controller
         if(isset($project->data_htcrr)){
             $tat += json_decode($project->data_htcrr)->tat;
         }
-        $quotation_ids = Quotation::where('project_id', $project->id)->pluck('id')->toArray();
+        $quotation_ids = Quotation::where('quotationable_id', $project->id)->pluck('id')->toArray();
 
         
         $jobcard_routine = JobCard::whereIn('quotation_id', $quotation_ids)
@@ -312,7 +312,7 @@ class WorkProgressReportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function overall(Project $project){
-        $quotation_ids = Quotation::where('project_id', $project->id)->pluck('id')->toArray();
+        $quotation_ids = Quotation::where('quotationable_id', $project->id)->pluck('id')->toArray();
         $statusses = [];
         $jobcards = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')->get();
 
@@ -348,7 +348,7 @@ class WorkProgressReportController extends Controller
      */
     public function routine(Project $project){
         $statusses = [];
-        $quotation_ids = Quotation::where('project_id', $project->id)->pluck('id')->toArray();
+        $quotation_ids = Quotation::where('quotationable_id', $project->id)->pluck('id')->toArray();
 
         $jobcards = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable')
         ->where('jobcardable_type', 'App\Models\TaskCard')
@@ -394,7 +394,7 @@ class WorkProgressReportController extends Controller
     public function non_routine(Project $project){
         $statusses = [];
 
-        $quotation_ids = Quotation::where('project_id', $project->id)->pluck('id')->toArray();
+        $quotation_ids = Quotation::where('quotationable_id', $project->id)->pluck('id')->toArray();
 
         $jobcards = JobCard::whereIn('quotation_id', $quotation_ids)->with('progresses','jobcardable.eo_header.type')
         ->where('jobcardable_type', 'App\Models\EOInstruction')
