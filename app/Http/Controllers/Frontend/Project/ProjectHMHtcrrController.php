@@ -137,8 +137,10 @@ class ProjectHMHtcrrController extends Controller
         ->with('taskcards')
         ->first();
 
-        foreach($project_workpackage->taskcards as $taskcard){
-            array_push($taskcards, $taskcard->taskcard_id);
+        if(isset($project_workpackage->taskcards)){
+            foreach($project_workpackage->taskcards as $taskcard){
+                array_push($taskcards, $taskcard->taskcard_id);
+            }
         }
 
         $taskcards = TaskCard::whereIn('id',$taskcards)->get();
@@ -172,7 +174,7 @@ class ProjectHMHtcrrController extends Controller
         $employees = Employee::all();
         $facilities = Facility::all();
 
-        $view = 'frontend.project.hm.workpackage.show';
+        $view = 'frontend.project.htcrr.show';
         return view($view,[
             'edit' => false,
             'project' => $project,
@@ -245,7 +247,7 @@ class ProjectHMHtcrrController extends Controller
         $skills = array_unique($skills);
 
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
-        $total_mhrs = $taskcards->sum('estimation_manhour') + $htcrrs->sum('estimation_manhour');
+        $total_mhrs = $htcrrs->sum('estimation_manhour');
         $total_pfrm_factor = $taskcards->sum('performance_factor');
 
         $employees = Employee::all();
