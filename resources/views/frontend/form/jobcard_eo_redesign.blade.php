@@ -165,8 +165,8 @@
                             <td width="20%">EO Task No</td>
                             <td width="1%">:</td>
                             <td width="29%">
-                              {{-- @if($jobCard->taskcard->number)
-                              {{$jobCard->taskcard->number}}
+                              {{-- @if($jobCard->jobcardable->number)
+                              {{$jobCard->jobcardable->number}}
                               @else
                                 -
                               @endif --}}
