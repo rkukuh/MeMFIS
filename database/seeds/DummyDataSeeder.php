@@ -29,6 +29,7 @@ class DummyDataSeeder extends Seeder
 
         /** MASTER */
 
+        $this->call(Taxes::class);
         $this->call(Banks::class);
         $this->call(Companies::class);
         $this->call(Branches::class);
