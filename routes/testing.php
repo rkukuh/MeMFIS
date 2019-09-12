@@ -78,17 +78,30 @@ Route::name('testing.')->group(function () {
                 // }
         });
 
+
+
         Route::get('/validation-taskcard-item', function () {
 
             $item = App\Models\Item::find('1');
 
-            $unit_input = App\Models\Unit::find('9');
+            $quantity_sekarang = 2;
+            $unit_sekarang = App\Models\Unit::find('11');
+
+            $qty_uom = $item->units->where('uom.unit_id',$unit_sekarang->id)->first()->uom->quantity; // quantity conversi
+
+            dd($qty_uom*$quantity_sekarang);
+
+
+        });
+
+        Route::get('/convert-unit-to-prelimary', function () {
+
+            $item = App\Models\Item::find('1');
+
+            $unit_ada = App\Models\Unit::find('16');
 
             $tc_i = $item;
-            if($tc_i->unit_id == $unit_input->id){
-                dd('inputan = primary (aman)');
-            }
-            else if($tc_i->units->where('uom.unit_id',$unit_input->id)->first() <> null){
+            if($tc_i->unit_id == $unit_input->id or $tc_i->units->where('uom.unit_id',$unit_input->id)->first() <> null){
                 dd('aman');
             }
             else{
