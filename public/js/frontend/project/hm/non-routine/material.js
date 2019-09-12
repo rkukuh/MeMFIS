@@ -92,6 +92,6 @@
   };
 // };
 
-jQuery(document).ready(function () {
-  EO_item.init();
-});
+// jQuery(document).ready(function () {
+//   EO_item.init();
+// });

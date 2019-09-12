@@ -148,10 +148,14 @@ let Workpackage = {
                 overflow: 'visible',
                 template: function (t, e, i) {
                     return (
-                        '<button data-toggle="modal" data-target="#modal_workshop_task" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Create Workshop Task" data-uuid=' +
+                        '<button data-toggle="modal" data-target="#modal_workshop_task" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air btn-primary" style="display:inline-block;" title="Create Workshop Task" data-uuid=' +
                         t.uuid +
-                        '>\t\t\t\t\t\t\t<i class="la la-file"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'                      
-                                        );
+                        '>\t\t\t\t\t\t\tWorkshop\t\t\t\t\t\t</button>\t\t\t\t\t\t' 
+                        // + 
+                        // '<button data-toggle="modal" data-target="#" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air btn-primary" style="display:inline-block;" title="Create Workshop Task" data-uuid=' +
+                        // t.uuid +
+                        // '>\t\t\t\t\t\t\tSub count\t\t\t\t\t\t</button>\t\t\t\t\t\t'                   
+);
                 }
             }
             ]

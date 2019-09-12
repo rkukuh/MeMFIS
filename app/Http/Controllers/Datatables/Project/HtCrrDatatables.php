@@ -18,7 +18,7 @@ class HtCrrDatatables extends Controller
      */
     public function index(Project $project)
     {
-        $HtCrr =HtCrr::where('project_id',$project->id)->where('parent_id',null)->get();
+        $HtCrr = HtCrr::where('project_id',$project->id)->where('parent_id',null)->get();
         foreach($HtCrr as $data){
             if(isset($data->skills) ){
                 if(sizeof($data->skills) == 3){
@@ -33,12 +33,13 @@ class HtCrrDatatables extends Controller
 
             }
 
-            // foreach($discrepancy->tools as $material){
-            //     $unit_id = $material->pivot->unit_id;
-            //     $material->pivot->unit .= Unit::find($unit_id)->name;
+            // foreach($HtCrr as $name_item){
+            //     $name_item->part_number;
             // }
-            
-            $removal =HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','removal')->first()->id)->first()->estimation_manhour;
+
+            // dd($name_item);
+
+            $removal = HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','removal')->first()->id)->first()->estimation_manhour;
 
             $data->removal.= $removal;
 
