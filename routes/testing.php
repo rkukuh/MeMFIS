@@ -29,8 +29,6 @@ Route::name('testing.')->group(function () {
 
             // dd($unit_input->name);
 
-            // $items = QuotationWorkPackageTaskCardItem::where('uuid',$this->uuid)->first();
-            // $tc = TaskCard::find($items->taskcard_id);
             $unit =  $unit_input->id;
             $qty = $quantity;
             $tc_i = $item;
@@ -78,8 +76,24 @@ Route::name('testing.')->group(function () {
                         }
                     }
                 // }
+        });
 
+        Route::get('/validation-taskcard-item', function () {
 
+            $item = App\Models\Item::find('1');
+
+            $unit_input = App\Models\Unit::find('9');
+
+            $tc_i = $item;
+            if($tc_i->unit_id == $unit_input->id){
+                dd('inputan = primary (aman)');
+            }
+            else if($tc_i->units->where('uom.unit_id',$unit_input->id)->first() <> null){
+                dd('aman');
+            }
+            else{
+                dd('UOM have not Declared');
+            }
         });
 
         Route::get('/wp', function () {
