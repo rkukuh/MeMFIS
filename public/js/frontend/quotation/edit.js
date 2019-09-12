@@ -425,6 +425,8 @@ let Quotation = {
         });
 
         $('.footer').on('click', '.add-quotation', function () {
+            calculate_total();
+
             let is_ppn =  $('#is_ppn').prop("checked");
             let ppn = 0;
             if(is_ppn){
@@ -439,6 +441,7 @@ let Quotation = {
             let attention_fax = $('#fax').val();
             let attention_email = $('#email').val();
             let attention_address = $('#address').val();
+
             let scheduled_payment_array = [];
             let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable();
             let allData = scheduled_payment_datatable.rows().data();
@@ -450,6 +453,7 @@ let Quotation = {
                 container[3] = allData[ind]["work_progress"];
                 scheduled_payment_array.push(container);
             }
+            
             let charge = [];
             let chargeInputs = $('input[type="number"][name^="charge"]');
             //get all values

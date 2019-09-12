@@ -420,6 +420,7 @@ let AdditionalTaskQtnEdit = {
 
         $('.footer').on('click', '.update-quotation', function () {
             calculate_total();
+            
             let is_ppn =  $('#is_ppn').prop("checked");
             let ppn = 0;
             if(is_ppn){
@@ -434,18 +435,19 @@ let AdditionalTaskQtnEdit = {
             let attention_fax = $('#fax').val();
             let attention_email = $('#email').val();
             let attention_address = $('#address').val();
+
             let scheduled_payment_array = [];
-            let type = $('#scheduled_payment_type').children("option:selected").html();
-            if(type === "By Date"){
-                $('input[name^=scheduled_payment] ').each(function (i) {
-                    scheduled_payment_array[i] = $(this).val();
-                });
-            }else{
-                $('#scheduled_payment ').each(function (i) {
-                    scheduled_payment_array[i] = parseInt($(this).val());
-                });
+            let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable();
+            let allData = scheduled_payment_datatable.rows().data();
+            for(let ind = 0 ; ind < allData.length ; ind++){
+                let container = [];
+                container[0] = allData[ind]["amount"];
+                container[1] = allData[ind]["amount_percentage"];
+                container[2] = allData[ind]["description"];
+                container[3] = allData[ind]["work_progress"];
+                scheduled_payment_array.push(container);
             }
-            scheduled_payment_array.pop();
+
             let charge = [];
             let chargeInputs = $('input[type="number"][name^="charge"]');
             //get all values
@@ -469,7 +471,6 @@ let AdditionalTaskQtnEdit = {
             data.append("currency_id", $('#currency').val());
             data.append("term_of_condition", $('#term_and_condition').val());
             data.append("exchange_rate", $('#exchange').val());
-            data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
             data.append("scheduled_payment_amount", JSON.stringify(scheduled_payment_array));
             data.append("attention_name", attention_name);
             data.append("attention_phone", attention_phone);
