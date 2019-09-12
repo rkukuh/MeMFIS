@@ -136,7 +136,7 @@ class JobCardHardTimeController extends Controller
             $query->where('uuid',$jobCard);
         })->first();
 
-        if($jobCard->taskcard->type->code == "basic"){
+        if($jobcard->jobcardable->type->code == "basic"){
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -152,7 +152,7 @@ class JobCardHardTimeController extends Controller
                     ]);
             return $pdf->stream();
         }
-        elseif($jobCard->taskcard->type->code == "sip"){
+        elseif($jobcard->jobcardable->type->code == "sip"){
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -168,7 +168,7 @@ class JobCardHardTimeController extends Controller
                     ]);
             return $pdf->stream();
         }
-        elseif($jobCard->taskcard->type->code == "cpcp"){
+        elseif($jobcard->jobcardable->type->code == "cpcp"){
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -184,7 +184,7 @@ class JobCardHardTimeController extends Controller
                     ]);
             return $pdf->stream();
         }
-        elseif (($jobCard->taskcard->type->code == "ad") or ($jobCard->taskcard->type->code == "sb")) {
+        elseif (($jobcard->jobcardable->type->code == "ad") or ($jobcard->jobcardable->type->code == "sb")) {
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -199,7 +199,7 @@ class JobCardHardTimeController extends Controller
                     'dateClosed' => $dateClosed
                     ]);
             return $pdf->stream();        }
-        elseif(($jobCard->taskcard->type->code == "eo") or ($jobCard->taskcard->type->code == "ea")){
+        elseif(($jobcard->jobcardable->type->code == "eo") or ($jobcard->jobcardable->type->code == "ea")){
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -215,7 +215,7 @@ class JobCardHardTimeController extends Controller
                     ]);
             return $pdf->stream();
         }
-        elseif(($jobCard->taskcard->type->code == "cmr") or ($jobCard->taskcard->type->code == "awl")){
+        elseif(($jobcard->jobcardable->type->code == "cmr") or ($jobcard->jobcardable->type->code == "awl")){
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -231,7 +231,7 @@ class JobCardHardTimeController extends Controller
                     ]);
             return $pdf->stream();
         }
-        elseif($jobCard->taskcard->type->code == "si"){
+        elseif($jobcard->jobcardable->type->code == "si"){
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -247,7 +247,7 @@ class JobCardHardTimeController extends Controller
                     ]);
             return $pdf->stream();
         }
-        elseif($jobCard->taskcard->type->code == "preliminary"){
+        elseif($jobcard->jobcardable->type->code == "preliminary"){
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){

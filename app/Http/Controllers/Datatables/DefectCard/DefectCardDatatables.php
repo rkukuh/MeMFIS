@@ -27,15 +27,15 @@ class DefectCardDatatables extends Controller
 
         foreach($DefectCard as $jobcard){
             $jobcard->customer_name .= $jobcard->jobcard->quotation->quotationable->customer->name;
-            $jobcard->taskcard_number .= $jobcard->jobcard->taskcard->number;
+            $jobcard->taskcard_number .= $jobcard->jobcard->jobcardable->number;
             $jobcard->aircraft .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
 
-            if(isset($jobcard->jobcard->taskcard->skills) ){
-                if(sizeof($jobcard->jobcard->taskcard->skills) == 3){
+            if(isset($jobcard->jobcard->jobcardable->skills) ){
+                if(sizeof($jobcard->jobcard->jobcardable->skills) == 3){
                     $jobcard->skill .= "ERI";
                 }
-                else if(sizeof($jobcard->jobcard->taskcard->skills) == 1){
-                    $jobcard->skill .= $jobcard->jobcard->taskcard->skills[0]->name;
+                else if(sizeof($jobcard->jobcard->jobcardable->skills) == 1){
+                    $jobcard->skill .= $jobcard->jobcard->jobcardable->skills[0]->name;
                 }
                 else{
                     $jobcard->skill .= '';
@@ -232,7 +232,7 @@ class DefectCardDatatables extends Controller
         $DefectCard=DefectCard::with('jobcard','progresses')->has('approvals','>',1)->get();
 
         foreach($DefectCard as $jobcard){
-            $jobcard->taskcard_number .= $jobcard->jobcard->taskcard->number;
+            $jobcard->taskcard_number .= $jobcard->jobcard->jobcardable->number;
         }
 
         foreach($DefectCard as $jobcard){
@@ -240,12 +240,12 @@ class DefectCardDatatables extends Controller
         }
 
         foreach($DefectCard as $jobcard){
-            if(isset($jobcard->taskcard->skills) ){
-                if(sizeof($jobcard->taskcard->skills) == 3){
+            if(isset($jobcard->jobcardable->skills) ){
+                if(sizeof($jobcard->jobcardable->skills) == 3){
                     $jobcard->skill .= "ERI";
                 }
-                else if(sizeof($jobcard->taskcard->skills) == 1){
-                    $jobcard->skill .= $jobcard->taskcard->skills[0]->name;
+                else if(sizeof($jobcard->jobcardable->skills) == 1){
+                    $jobcard->skill .= $jobcard->jobcardable->skills[0]->name;
                 }
                 else{
                     $jobcard->skill .= '';
