@@ -16,8 +16,17 @@ class CreateTaxesTable extends Migration
         Schema::create('taxes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
+            $table->morphs('taxable');
+            $table->unsignedBigInteger('type_id');
+            $table->double('percent');
+            $table->double('amount');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('type_id')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
