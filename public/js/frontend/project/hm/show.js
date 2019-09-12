@@ -62,7 +62,7 @@ let Project = {
                         if(t.uuid){
                             return '<a href="/project-hm/'+project_uuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
                         }else{
-                            return '<a href="/project-htcrr/'+project_uuid+'/project-htcrr/create  ">' + t.title + "</a>"
+                            return '<a href="/project-htcrr/'+project_uuid+'/project-htcrr/'+t.uuid+'">' + t.title + "</a>"
                         }
                     }
                 },

@@ -7,10 +7,15 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @component('frontend.common.label.data-info')
-                    @slot('id', 'total_mhrs')
-                    @slot('text', $total_mhrs)
-                @endcomponent
+                @if(isset($total_mhrs))
+                    @component('frontend.common.label.data-info')
+                        @slot('id', 'total_mhrs')
+                        @slot('name', 'total_mhrs')
+                        @slot('text', $total_mhrs)
+                    @endcomponent
+                @else
+                    @include('frontend.common.label.data-info-nodata')
+                @endif
             </div>
         </div>
         <div class="form-group m-form__group row">
@@ -20,11 +25,15 @@
                 </label>
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
-                @component('frontend.common.label.data-info')
-                    @slot('id', 'perfoma')
-                    @slot('name', 'perfoma')
-                    @slot('text', $project_workpackage->performance_factor)
-                @endcomponent
+                @if(isset($project_workpackage->performance_factor))
+                    @component('frontend.common.label.data-info')
+                        @slot('id', 'perfoma')
+                        @slot('name', 'perfoma')
+                        @slot('text', $project_workpackage->performance_factor)
+                    @endcomponent
+                @else
+                    @include('frontend.common.label.data-info-nodata')
+                @endif
             </div>
         </div>
         <hr>
@@ -35,11 +44,15 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @component('frontend.common.label.data-info')
-                    @slot('id', 'total')
-                    @slot('text', $project_workpackage->total_manhours_with_performance_factor)
-                @endcomponent
-
+                @if(isset($project_workpackage->total_manhours_with_performance_factor))
+                    @component('frontend.common.label.data-info')
+                        @slot('id', 'total')
+                        @slot('name', 'total')
+                        @slot('text', $project_workpackage->total_manhours_with_performance_factor)
+                    @endcomponent
+                @else
+                    @include('frontend.common.label.data-info-nodata')
+                @endif
             </div>
         </div>
     </div>
