@@ -198,7 +198,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -207,7 +207,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -258,7 +258,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -267,7 +267,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -318,7 +318,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -327,7 +327,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -378,7 +378,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -387,7 +387,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -437,7 +437,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -446,7 +446,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -497,7 +497,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -506,7 +506,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -557,7 +557,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -566,7 +566,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 
@@ -617,7 +617,7 @@ class JobCardController extends Controller
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->approved_by)->name;
+                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
                 $inspected_at = $jobCard->approvals->first()->created_at;
             }
 
@@ -626,7 +626,7 @@ class JobCardController extends Controller
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->approved_by)->name;
+                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
                 $rii_at = $jobCard->approvals->get(1)->created_at;
             }
 

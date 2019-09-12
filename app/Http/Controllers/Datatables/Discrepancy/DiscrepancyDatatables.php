@@ -31,8 +31,7 @@ class DiscrepancyDatatables extends Controller
             $jobcard->type .= $jobcard->jobcard->jobcardable->type->name;
             $jobcard->aircraft .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
             
-            dd($jobcard->approvals[0]);
-            $jobcard->approved_by.= User::find($jobcard->approvals[0]->approved_by)->name;
+            $jobcard->conducted_by.= User::find($jobcard->approvals[0]->conducted_by)->name;
             $jobcard->created_by .= User::find($jobcard->audits->first()->user_id)->name;
             $jobcard->updated_by .= User::find($jobcard->audits->first()->user_id)->name;
 
@@ -185,7 +184,7 @@ class DiscrepancyDatatables extends Controller
             $jobcard->customer_name .= $jobcard->jobcard->quotation->quotationable->customer->name;
             $jobcard->type .= $jobcard->jobcard->jobcardable->type->name;
             $jobcard->aircraft .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
-            $jobcard->approved_by.= User::find($jobcard->approvals[0]->approved_by)->name;
+            $jobcard->conducted_by.= User::find($jobcard->approvals[0]->conducted_by)->name;
             $jobcard->created_by .= User::find($jobcard->audits->first()->user_id)->name;
             $jobcard->updated_by .= User::find($jobcard->audits->first()->user_id)->name;
         }
