@@ -54,13 +54,9 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
 
             return factory(Currency::class)->create()->id;
         },
-        'subtotal' => rand(10, 15) * 10000,
-        'discount_percent' => $faker->randomElement([5, 10, 15, 20, 25]),
-        'discount_amount' => rand(10, 15) * 1000,
-        'tax_percent' => $faker->randomElement([5, 10]),
-        'tax_amount' => rand(10, 15) * 1000,
-        'total_before_tax' => rand(10, 100) * 1000000,
         'exchange_rate' => rand(10, 15) * 1000,
+        'subtotal' => rand(10, 15) * 10000,
+        'total_before_tax' => rand(10, 100) * 1000000,
         'total_after_tax' => rand(10, 100) * 1000000,
         'top_type' => $top_type,
         'top_day_amount' => function () use ($top_type) {
