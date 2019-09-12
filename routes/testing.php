@@ -78,9 +78,7 @@ Route::name('testing.')->group(function () {
                 // }
         });
 
-
-
-        Route::get('/validation-taskcard-item', function () {
+        Route::get('/convert-unit-to-prelimary', function () {
 
             $item = App\Models\Item::find('1');
 
@@ -94,11 +92,11 @@ Route::name('testing.')->group(function () {
 
         });
 
-        Route::get('/convert-unit-to-prelimary', function () {
+        Route::get('/validation-taskcard-item', function () {
 
             $item = App\Models\Item::find('1');
 
-            $unit_ada = App\Models\Unit::find('16');
+            $unit_input = App\Models\Unit::find('11');
 
             $tc_i = $item;
             if($tc_i->unit_id == $unit_input->id or $tc_i->units->where('uom.unit_id',$unit_input->id)->first() <> null){
