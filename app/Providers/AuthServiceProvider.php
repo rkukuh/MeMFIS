@@ -15,6 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Models\Fax::class => Policies\FaxPolicy::class,
+        Models\Tax::class => Policies\TaxPolicy::class,
         Models\RTS::class => Policies\RTSPolicy::class,
         Models\User::class => Policies\UserPolicy::class,
         Models\Type::class => Policies\TypePolicy::class,

@@ -22,6 +22,7 @@ Route::name('frontend.')->group(function () {
         /** POLYMORPH */
 
         Route::resource('fax', 'FaxController');
+        Route::resource('tax', 'TaxController');
         Route::resource('zone', 'ZoneController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
