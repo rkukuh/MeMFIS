@@ -84,8 +84,12 @@
                                                                 Delivery Order Number @include('frontend.common.label.required')
                                                             </label>
                                                             @component('frontend.common.input.text')
-                                                                @slot('id', 'pr-number')
-                                                                @slot('text', '-')
+                                                                @slot('id', 'deliv-number')
+                                                                @slot('name', 'deliv-number')
+                                                                @slot('text', 'Deliv Number')
+                                                                @if(isset($additionals))
+                                                                    @slot('value', $additionals->SupplierRefNo)
+                                                                @endif
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -94,9 +98,12 @@
                                                             </label>
 
                                                             @component('frontend.common.input.datepicker')
-                                                                @slot('text', 'ref-date')
-                                                                @slot('name', 'ref-date')
-                                                                @slot('id', 'ref-date')
+                                                                @slot('text', 'Do Date')
+                                                                @slot('name', 'do-date')
+                                                                @slot('id', 'do-date')
+                                                                @if(isset($additionals))
+                                                                    @slot('value', $additionals->SupplierRefDate)
+                                                                @endif
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -230,6 +237,11 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                                                            @component('frontend.common.buttons.create-new')
+                                                                                @slot('text', 'Item')
+                                                                                @slot('data_target', '#modal_grn_add')
+                                                                            @endcomponent
+
                                                                             <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                         </div>
                                                                     </div>
@@ -237,6 +249,7 @@
                                                                 <div class="purchase_order_datatable" id="purchase_order_datatable"></div>
 
                                                                 @include('frontend.goods-received-note.modal')
+                                                                @include('frontend.goods-received-note.modal-edit')
 
                                                             </div>
                                                         </div>
@@ -276,17 +289,27 @@
 @push('footer-scripts')
     <script>
         let grn_uuid = '{{$goodsReceived->uuid}}';
+        let po_uuid = '{{$goodsReceived->purchase_order->uuid}}';
+
         $(document).ready(function () {
             document.getElementById('search-storage').innerHTML = '{{$goodsReceived->storage->name}}';
             document.getElementById('warehouse').value = '{{$goodsReceived->storage->uuid}}';
         });
     </script>
 
+    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material-po.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
+
     <script src="{{ asset('js/frontend/good-received-note/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/datepicker/ref-date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/do-date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/datepicker/expired-date2.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>

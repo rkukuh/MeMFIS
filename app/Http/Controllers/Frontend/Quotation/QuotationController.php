@@ -488,7 +488,6 @@ class QuotationController extends Controller
                 $additionals['TSN'] = null;
                 $additionals['CSN'] = null;
 
-
             $jobcard = $tc_inscrtuction->jobcards()->create([
                 'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
                 'jobcardable_id' => $tc_inscrtuction->id,

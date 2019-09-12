@@ -16,6 +16,7 @@ Route::name('frontend.')->group(function () {
 
             Route::name('goods-received.')->group(function () {
                 Route::prefix('goods-received')->group(function () {
+                    Route::post('/{goodsReceived}/item/{item}', 'ItemGoodsReceivedController@store')->name('item.store');
                     Route::put('/{goodsReceived}/item/{item}', 'ItemGoodsReceivedController@update')->name('item.update');
                     Route::delete('/{goodsReceived}/item/{item}', 'ItemGoodsReceivedController@destroy')->name('item.destroy');
                 });
