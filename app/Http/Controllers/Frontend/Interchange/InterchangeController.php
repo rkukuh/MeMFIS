@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend\Interchange;
 
-use Illuminate\Http\Request;
+use App\Models\Interchange;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\InterchangeStore;
+use App\Http\Requests\Frontend\InterchangeUpdate;
 
 class InterchangeController extends Controller
 {
@@ -30,10 +32,10 @@ class InterchangeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\InterchangeStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InterchangeStore $request)
     {
         //
     }
@@ -41,10 +43,10 @@ class InterchangeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Interchange  $interchange
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Interchange $interchange)
     {
         return view('frontend.interchange.show');
     }
@@ -52,10 +54,10 @@ class InterchangeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Interchange  $interchange
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Interchange $interchange)
     {
         return view('frontend.interchange.edit');
     }
@@ -63,11 +65,11 @@ class InterchangeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\Frontend\InterchangeUpdate  $request
+     * @param  \App\Models\Interchange  $interchange
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(InterchangeUpdate $request, Interchange $interchange)
     {
         //
     }
@@ -75,10 +77,10 @@ class InterchangeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Interchange  $interchange
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Interchange $interchange)
     {
         //
     }

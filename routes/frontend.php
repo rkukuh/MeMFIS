@@ -38,7 +38,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('progress', 'ProgressController');
         Route::resource('threshold', 'ThresholdController');
         Route::resource('inspection', 'InspectionController');
-        Route::resource('interchange', 'InterchangeController');
 
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']
@@ -88,7 +87,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('eo-instruction-wp', 'EOInstructionWorkPackageController');
         Route::resource('eo-instruction-wp-successor', 'EOInstructionWorkPackageSuccessorController');
         Route::resource('eo-instruction-wp-predecessor', 'EOInstructionWorkPackagePredecessorController');
-        
+
     });
 
 });
