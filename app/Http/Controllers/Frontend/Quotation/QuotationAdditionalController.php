@@ -272,6 +272,7 @@ class QuotationAdditionalController extends Controller
      */
     public function approve(Quotation $quotation)
     {
+        //todo validation scheduled payment amount and progress
         $quotation->approvals()->save(new Approval([
             'approvable_id' => $quotation->id,
             'conducted_by' => Auth::id(),
@@ -283,14 +284,14 @@ class QuotationAdditionalController extends Controller
             'progressed_by' => Auth::id()
         ]));
 
-        $project = Project::find($quotation->project_id);
+        $project = Project::find($quotation->quotationable_id);
         $project->approvals()->save(new Approval([
             'approvable_id' => $project->id,
             'conducted_by' => Auth::id(),
             'is_approved' => 1
         ]));
 
-        $project = Project::find($quotation->project_id);
+        $project = Project::find($quotation->quotationable_id);
         foreach($project->workpackages as $wp){
             foreach($wp->taskcards as $tc){
 
