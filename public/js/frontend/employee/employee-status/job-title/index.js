@@ -185,6 +185,8 @@ let EmployeeJobTittle = {
                 $('.modal-change-job-tittle').attr('id','update-job')
                 let triggerid = $(this).data('uuid-job');
 
+                $('#employee_uuid').val(triggerid)
+
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -215,7 +217,8 @@ let EmployeeJobTittle = {
                 let name = $('input[name=name_job_tittle]').val()
                 let description_job = $('#description_job_tittle').val()
                 let specification = $('#specification').val()
-                let triggerid = $('#edit-job-tittle').data('uuid-job')
+
+                let triggerid = $('input[name=employee_uuid]').val()
 
                 $.ajax({
                     headers: {
