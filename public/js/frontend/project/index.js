@@ -51,7 +51,7 @@ let Aircraft = {
                 },
                 {
                     field: 'code',
-                    title: 'Code',
+                    title: 'Project No',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
@@ -70,20 +70,8 @@ let Aircraft = {
                     filterable: !1,
                 },
                 {
-                    field: '',
-                    title: 'Additional Task',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
                     field: 'no_wo',
                     title: 'WO No',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: '',
-                    title: 'Project No',
                     sortable: 'asc',
                     filterable: !1,
                 },
