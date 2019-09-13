@@ -19,6 +19,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ProjectHMStore;
 use App\Http\Requests\Frontend\ProjectHMUpdate;
 use App\Models\EOInstruction;
+use App\Models\Manhour;
 
 class ProjectHMWorkPackageController extends Controller
 {
@@ -303,11 +304,14 @@ class ProjectHMWorkPackageController extends Controller
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
             ->where('workpackage_id',$workpackage->id)
             ->first();
+            
+        $manhour_price =   Manhour::first()->rate; 
 
         $project_workpackage->update([
             'performance_factor' =>  $request->performa_used,
             'total_manhours' =>  $request->manhour,
             'total_manhours_with_performance_factor' =>  $request->total,
+            'manhour_price_list' => $request -> $manhour_price
             ]);
 
         return response()->json($project_workpackage);

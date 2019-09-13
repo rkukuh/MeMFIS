@@ -343,6 +343,7 @@ class QuotationController extends Controller
             array_push($error_messages, $error_message);
         }
         if( max($work_progress) != 100){
+
             $error_message = array(
                 'message' => "Scheduled payment work progress still not 100%",
                 'title' => $quotation->number,
