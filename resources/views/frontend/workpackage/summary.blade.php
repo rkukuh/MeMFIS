@@ -146,7 +146,7 @@
                                 <span class="m--font-brand">{{$cmrawl}}</span>
                             </div>
                             <div class="m-widget_content-item">
-                                <span>Special Instruction (SI)</span>
+                                <span>SI</span>
                                 <span class="m--font-focus">{{$si}}</span>
                             </div>
                             <div class="m-widget_content-item">
