@@ -418,7 +418,7 @@
                                             </label>
 
                                             <div>
-                                                @if (!isset($taskcard->stations))
+                                                @if (sizeof($taskcard->stations) == 0)
                                                     @include('frontend.common.label.data-info-nodata')
                                                 @else
                                                     @foreach ($taskcard->stations as $station)
