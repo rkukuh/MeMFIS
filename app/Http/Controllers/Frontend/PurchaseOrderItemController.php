@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Models\Interchange;
+use App\Models\PurchaseOrderItem;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\InterchangeStore;
-use App\Http\Requests\Frontend\InterchangeUpdate;
+use App\Http\Requests\Frontend\PurchaseOrderItemStore;
+use App\Http\Requests\Frontend\PurchaseOrderItemUpdate;
 
-class InterchangeController extends Controller
+class PurchaseOrderItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,10 +32,10 @@ class InterchangeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\InterchangeStore  $request
+     * @param  \App\Http\Requests\Frontend\PurchaseOrderItemStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InterchangeStore $request)
+    public function store(PurchaseOrderItemStore $request)
     {
         //
     }
@@ -43,10 +43,10 @@ class InterchangeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Interchange  $interchange
+     * @param  \App\Models\PurchaseOrderItem  $purchaseOrderItem
      * @return \Illuminate\Http\Response
      */
-    public function show(Interchange $interchange)
+    public function show(PurchaseOrderItem $purchaseOrderItem)
     {
         //
     }
@@ -54,10 +54,10 @@ class InterchangeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Interchange  $interchange
+     * @param  \App\Models\PurchaseOrderItem  $purchaseOrderItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(Interchange $interchange)
+    public function edit(PurchaseOrderItem $purchaseOrderItem)
     {
         //
     }
@@ -65,11 +65,11 @@ class InterchangeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\InterchangeUpdate  $request
-     * @param  \App\Models\Interchange  $interchange
+     * @param  \App\Http\Requests\Frontend\PurchaseOrderItemUpdate  $request
+     * @param  \App\Models\PurchaseOrderItem  $purchaseOrderItem
      * @return \Illuminate\Http\Response
      */
-    public function update(InterchangeUpdate $request, Interchange $interchange)
+    public function update(PurchaseOrderItemUpdate $request, PurchaseOrderItem $purchaseOrderItem)
     {
         //
     }
@@ -77,10 +77,10 @@ class InterchangeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Interchange  $interchange
+     * @param  \App\Models\PurchaseOrderItem  $purchaseOrderItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Interchange $interchange)
+    public function destroy(PurchaseOrderItem $purchaseOrderItem)
     {
         //
     }

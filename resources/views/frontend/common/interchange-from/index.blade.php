@@ -4,7 +4,7 @@
 
     <div class="form-group m-form__group row">
         <div class="col-sm-8 col-md-8 col-lg-8">
-                <div class="search-interchange" id="search-interchange"
+                <div class="search-interchange-from" id="search-interchange-from"
                 style="line-height:50px;margin-left:9px">
                     {{ $text or 'Search Interchange' }}
                 </div>
@@ -15,16 +15,16 @@
                 @slot('text', '')
                 @slot('size', 'sm')
                 @slot('icon', 'search')
-                @slot('data_target', '#modal_interchange')
+                @slot('data_target', '#modal_interchange_from')
                 @slot('style','float:right;margin-top:10px;margin-right:-10px;')
             @endcomponent
         </div>
     </div>
 </div>
 
-@include('frontend.common.interchange.modal')
+@include('frontend.common.interchange-from.modal')
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/common/interchange.js') }}"></script>
+    <script src="{{ asset('js/frontend/common/interchange-from.js') }}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush

@@ -6,6 +6,7 @@ use App\MemfisModel;
 use Spatie\Tags\HasTags;
 use App\Models\Pivot\Interchange;
 use Spatie\MediaLibrary\Models\Media;
+use App\Models\Pivots\PurchaseOrderItem;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -125,6 +126,7 @@ class Item extends MemfisModel implements HasMedia
                         'quantity',
                         'quantity_unit',
                         'unit_id',
+                        'price',
                         'already_received_amount',
                         'note'
                     )
@@ -232,8 +234,10 @@ class Item extends MemfisModel implements HasMedia
     public function purchase_orders()
     {
         return $this->belongsToMany(PurchaseOrder::class)
+                    ->using(PurchaseOrderItem::class)
                     ->withPivot(
                         'quantity',
+                        'quantity_unit',
                         'unit_id',
                         'price',
                         'tax_percent',

@@ -2,7 +2,7 @@
 
 use App\Models\EOInstruction;
 use Illuminate\Database\Seeder;
-use App\Models\EOInstructionWorkPackage;
+use App\Models\Pivots\EOInstructionWorkPackage;
 
 class EOInstructionWorkPackagePredecessors extends Seeder
 {

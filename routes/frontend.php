@@ -22,6 +22,7 @@ Route::name('frontend.')->group(function () {
         /** POLYMORPH */
 
         Route::resource('fax', 'FaxController');
+        Route::resource('tax', 'TaxController');
         Route::resource('zone', 'ZoneController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
@@ -37,7 +38,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('progress', 'ProgressController');
         Route::resource('threshold', 'ThresholdController');
         Route::resource('inspection', 'InspectionController');
-        Route::resource('interchange', 'InterchangeController');
 
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']
@@ -87,7 +87,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('eo-instruction-wp', 'EOInstructionWorkPackageController');
         Route::resource('eo-instruction-wp-successor', 'EOInstructionWorkPackageSuccessorController');
         Route::resource('eo-instruction-wp-predecessor', 'EOInstructionWorkPackagePredecessorController');
-        
+
     });
 
 });

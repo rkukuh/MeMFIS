@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         
         /** MASTER */
         
+        $this->call(TaxesTableSeeder::class);
         $this->call(BanksTableSeeder::class);
         $this->call(CompaniesTableSeeder::class);
         $this->call(BranchesTableSeeder::class);
@@ -144,5 +145,9 @@ class DatabaseSeeder extends Seeder
         /** QUOTATION's DEFECTCARDs */
 
         $this->call(QuotationDefectCardItemsTableSeeder::class);
+
+        /** PURCHASE ORDER's ITEMs */
+
+        $this->call(PurchaseOrderItemsTableSeeder::class);
     }
 }

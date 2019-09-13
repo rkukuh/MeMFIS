@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use App\Models\Pivots\PurchaseOrderItem;
 
 class PurchaseOrder extends MemfisModel
 {
@@ -16,13 +17,9 @@ class PurchaseOrder extends MemfisModel
         'shipping_address',
         'ship_at',
         'currency_id',
-        'subtotal',
-        'discount_percent',
-        'discount_amount',
-        'tax_percent',
-        'tax_amount',
-        'total_before_tax',
         'exchange_rate',
+        'subtotal',
+        'total_before_tax',
         'total_after_tax',
         'top_type',
         'top_day_amount',
@@ -90,8 +87,10 @@ class PurchaseOrder extends MemfisModel
     public function items()
     {
         return $this->belongsToMany(Item::class)
+                    ->using(PurchaseOrderItem::class)
                     ->withPivot(
                         'quantity',
+                        'quantity_unit',
                         'unit_id',
                         'price',
                         'tax_percent',
@@ -101,6 +100,19 @@ class PurchaseOrder extends MemfisModel
                         'note'
                     )
                     ->withTimestamps();
+    }
+
+    /**
+     * M-M Polymorphic: A promo can be applied to many entities.
+     *
+     * This function will get all the promos that are applied to a given PO.
+     * See: Promo's purchase_orders() method for the inverse
+     *
+     * @return mixed
+     */
+    public function promos()
+    {
+        return $this->morphToMany(Promo::class, 'promoable');
     }
 
     /**
@@ -114,6 +126,19 @@ class PurchaseOrder extends MemfisModel
     public function purchase_request()
     {
         return $this->belongsTo(PurchaseRequest::class);
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many taxes.
+     *
+     * This function will get all PurchaseOrder's taxes.
+     * See: Tax's taxable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taxes()
+    {
+        return $this->morphMany(Tax::class, 'taxable');
     }
 
     /**
