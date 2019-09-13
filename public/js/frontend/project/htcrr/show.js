@@ -74,10 +74,24 @@ let Workpackage = {
                 filterable: !1,
             },
             {
-                field: '',
+                field: 'is_rii',
                 title: 'RII',
                 sortable: 'asc',
                 filterable: !1,
+                template: function (t){
+                    let e = {
+                        1:{
+                            title:  "Yes",
+                            class:  "m-badge--brand"
+                        },
+                        0:{
+                            title: "No",
+                            class: " m-badge--warning"
+                        }
+                    };
+                        return '<span class="m-badge ' + e[t.is_rii].class + ' m-badge--wide">' + e[t.is_rii].title + "</span>"
+                    
+                }
             },
             {
                 field: 'removal',
