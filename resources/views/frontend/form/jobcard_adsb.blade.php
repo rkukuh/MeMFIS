@@ -221,8 +221,8 @@
             </div>
           </td>
           <td width="81%">
-            @if($jobCard->taskcard->title)
-            {{$jobCard->taskcard->title}}
+            @if($jobCard->jobcardable->title)
+            {{$jobCard->jobcardable->title}}
             @else
               -
             @endif
@@ -240,8 +240,8 @@
             </div>
           </td>
           <td width="81%">
-            @if($jobCard->taskcard->description)
-            {{$jobCard->taskcard->description}}
+            @if($jobCard->jobcardable->description)
+            {{$jobCard->jobcardable->description}}
             @else
               -
             @endif
@@ -259,8 +259,8 @@
             </div>
           </td>
           <td width="81%">
-            @if($jobCard->taskcard->reference)
-            {{$jobCard->taskcard->reference}}
+            @if($jobCard->jobcardable->reference)
+            {{$jobCard->jobcardable->reference}}
             @else
               -
             @endif
@@ -284,24 +284,24 @@
         <table width="100%" cellpadding="10">
           <tr>
             <td width="25%" valign="top">
-              @if(sizeof($jobCard->taskcard->skills) == 3)
+              @if(sizeof($jobCard->jobcardable->skills) == 3)
                   @slot('text', 'ERI')
-              @elseif(sizeof($jobCard->taskcard->skills) == 1)
-                  @slot('text', $jobCard->taskcard->skills[0]->name)
+              @elseif(sizeof($jobCard->jobcardable->skills) == 1)
+                  @slot('text', $jobCard->jobcardable->skills[0]->name)
               @else
                   @slot('text', '-')
               @endif
             </td>
             <td width="25%" align="center" valign="top">
-              @if($jobCard->taskcard->work_area != null)
-              {{$jobCard->taskcard->workarea->name}}
+              @if($jobCard->jobcardable->work_area != null)
+              {{$jobCard->jobcardable->workarea->name}}
             @else
               -
             @endif
             </td>
             <td width="25%" align="center" valign="top">
-              @if($jobCard->taskcard->estimation_manhour)
-                {{$jobCard->taskcard->estimation_manhour}}
+              @if($jobCard->jobcardable->estimation_manhour)
+                {{$jobCard->jobcardable->estimation_manhour}}
               @else
                 -
               @endif
@@ -325,7 +325,7 @@
         <tr>
           <td height="15%" valign="top">
            <span>
-              @foreach($jobCard->taskcard->items as $material)
+              @foreach($jobCard->jobcardable->items as $material)
                   {{$material->name}} - {{$material->pivot->quantity}} {{$material->pivot->unit_id}} <br>
               @endforeach
            </span>

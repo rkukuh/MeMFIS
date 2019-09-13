@@ -59,7 +59,7 @@
                                             Task Card No
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->number}}
+                                            {{$taskrelease->jobcardable->number}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -91,7 +91,7 @@
                                             Inspection Type
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->task->name}}
+                                            {{$taskrelease->jobcardable->task->name}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -99,8 +99,8 @@
                                             Company Task No
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            @if(isset(json_decode($taskrelease->taskcard->additionals)->internal_number))
-                                                {{json_decode($taskrelease->taskcard->additionals)->internal_number}}
+                                            @if(isset(json_decode($taskrelease->jobcardable->additionals)->internal_number))
+                                                {{json_decode($taskrelease->jobcardable->additionals)->internal_number}}
                                             @else
                                                 -
                                             @endif
@@ -119,10 +119,10 @@
                                             Skill
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            @if(sizeof($taskrelease->taskcard->skills) == 3)
+                                            @if(sizeof($taskrelease->jobcardable->skills) == 3)
                                                 ERI
-                                            @elseif(sizeof($taskrelease->taskcard->skills) == 1)
-                                                {{$taskrelease->taskcard->skills[0]->name}}
+                                            @elseif(sizeof($taskrelease->jobcardable->skills) == 1)
+                                                {{$taskrelease->jobcardable->skills[0]->name}}
                                             @else
                                                 -
                                             @endif
@@ -141,7 +141,7 @@
                                             Actual. Mhrs
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->estimation_manhour}}
+                                            {{$taskrelease->jobcardable->estimation_manhour}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -149,8 +149,8 @@
                                             Work Area
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            @if(isset($taskrelease->taskcard->workarea->name))
-                                                {{$taskrelease->taskcard->workarea->name}}
+                                            @if(isset($taskrelease->jobcardable->workarea->name))
+                                                {{$taskrelease->jobcardable->workarea->name}}
                                             @endif
                                         </td>
                                     </tr>
@@ -159,7 +159,7 @@
                                             Sequence
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->sequence}}
+                                            {{$taskrelease->jobcardable->sequence}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -167,7 +167,7 @@
                                             Referencce
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->reference}}
+                                            {{$taskrelease->jobcardable->reference}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -175,7 +175,7 @@
                                             Title
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->title}}
+                                            {{$taskrelease->jobcardable->title}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -183,7 +183,7 @@
                                             Description
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->Description}}
+                                            {{$taskrelease->jobcardable->Description}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -191,7 +191,7 @@
                                             Helper
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->taskcard->helper_quantity}}
+                                            {{$taskrelease->jobcardable->helper_quantity}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -207,7 +207,7 @@
                                             RII
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            @if($taskrelease->taskcard->is_rii == 1)
+                                            @if($taskrelease->jobcardable->is_rii == 1)
                                                 Yes
                                             @else
                                                 No

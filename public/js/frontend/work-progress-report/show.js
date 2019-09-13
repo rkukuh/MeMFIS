@@ -58,37 +58,37 @@ let WorkProgressReportShow = {
                     }
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'jobcardable.number',
                     title: 'Project No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.title',
+                    field: 'jobcardable.title',
                     title: 'Title Taskcard',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.type.name',
+                    field: 'jobcardable.type.name',
                     title: 'Taskcard Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.task.name',
+                    field: 'jobcardable.task.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.description',
+                    field: 'jobcardable.description',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        if (t.taskcard.description) {
-                            data = strtrunc(t.taskcard.description, 50);
+                        if (t.jobcardable.description) {
+                            data = strtrunc(t.jobcardable.description, 50);
                             return (
                                 '<p>' + data + '</p>'
                             );
@@ -98,7 +98,7 @@ let WorkProgressReportShow = {
                     }
                 },
                 {
-                    field: 'taskcard.skill.name',
+                    field: 'jobcardable.skill.name',
                     title: 'Mhrs',
                     sortable: 'asc',
                     filterable: !1,

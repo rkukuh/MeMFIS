@@ -69,12 +69,12 @@ let DefectCard = {
                     }
                 },
                 {
-                    field: 'jobcard.taskcard.number',
+                    field: 'jobcard.jobcardable.number',
                     title: 'TC No',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/taskcard/'+t.jobcard.taskcard.uuid+'">' + t.jobcard.taskcard.number + "</a>"
+                        return '<a href="/taskcard/'+t.jobcard.jobcardable.uuid+'">' + t.jobcard.jobcardable.number + "</a>"
                     }
                 },
                 {
@@ -208,12 +208,12 @@ let DefectCard = {
                     }
                 },
                 {
-                    field: 'jobcard.taskcard.number',
+                    field: 'jobcard.jobcardable.number',
                     title: 'TC No',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/taskcard/'+t.jobcard.taskcard.uuid+'">' + t.jobcard.taskcard.number + "</a>"
+                        return '<a href="/taskcard/'+t.jobcard.jobcardable.uuid+'">' + t.jobcard.jobcardable.number + "</a>"
                     }
                 },
                 {
@@ -241,7 +241,7 @@ let DefectCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.taskcard.skill.name',
+                    field: 'jobcard.jobcardable.skill.name',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
