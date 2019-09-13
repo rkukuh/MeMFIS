@@ -14,6 +14,99 @@ Route::name('testing.')->group(function () {
 
         });
 
+        Route::get('/validation-quotation-item', function () {
+
+            $item = App\Models\Item::find('1');
+
+            $unit_primary = $item->unit->name;
+
+            $unit_input = App\Models\Unit::find('11');
+
+            $unit_kebutuhan = App\Models\Unit::find('27');
+
+            $quantity = 2;
+            $quantity_kebutuhan = 9;
+
+            // dd($unit_input->name);
+
+            $unit =  $unit_input->id;
+            $qty = $quantity;
+            $tc_i = $item;
+            // if($tc_i->pivot->unit_id == $unit){
+            //     if($qty > $tc_i->pivot->quantity){
+            //     $validator->errors()->add('quantity', 'Quantity exceed limit');
+            //     }
+            // }else if($unit == $tc_i->unit_id){
+            //     $qty_uom = $tc_i->units->where('uom.unit_id',$tc_i->pivot->unit_id)->first()->uom->quantity; // quantity conversi
+            //     $qty_pri = 1/$qty_uom;
+            //     $result = $qty_pri*$qty;
+            //     if($result > $tc_i->pivot->quantity){
+            //     $validator->errors()->add('quantity', 'Quantity exceed limit');
+            //     }
+            // }else{
+                // dd( $tc_i->units);
+                if($qty_uom2 = $tc_i->units->where('uom.unit_id',$unit)->first() == null){
+                    // $validator->errors()->add('quantity', 'UOM have not Declared');
+                    dd('UOM have not Declared');
+                }
+                else{
+                    // dd('masuk');
+                    $qty_uom2 = $tc_i->units->where('uom.unit_id',$unit)->first()->uom->quantity; // quantity conversi
+                    // dd($qty_uom2); // quantity primari from uom
+                    $result2 = $qty_uom2*$qty;
+                    // dd($result2);// perkalian antara quantity uom dan inputan jadi ini adalah inputan quantity masukan dalam primary unit
+
+                    //dijadikan uom kebutuhan yaitu liter
+                    // dd($unit_kebutuhan);
+
+                    $qty_uom_kebutuhan = $tc_i->units->where('uom.unit_id',$unit_kebutuhan->id)->first()->uom->quantity; // quantity conversi //$unit_kebutuhan->id diganti kebutuhan quantity
+                    // dd($qty_uom_kebutuhan);
+                    $quantity_convert = $result2/$qty_uom_kebutuhan;
+
+                    // dd($quantity_convert);
+
+                    // $qty_pri = 1/$qty_uom;
+                    // $result = $qty_pri*$result2;
+                        if($quantity_convert > $quantity_kebutuhan){
+                            // $validator->errors()->add('quantity', 'Quantity exceed limit');
+                            dd( 'Quantity exceed limit');
+                        }
+                        else{
+                            dd( 'ok');
+                        }
+                    }
+                // }
+        });
+
+        Route::get('/convert-unit-to-prelimary', function () {
+
+            $item = App\Models\Item::find('1');
+
+            $quantity_sekarang = 2;
+            $unit_sekarang = App\Models\Unit::find('11');
+
+            $qty_uom = $item->units->where('uom.unit_id',$unit_sekarang->id)->first()->uom->quantity; // quantity conversi
+
+            dd($qty_uom*$quantity_sekarang);
+
+
+        });
+
+        Route::get('/validation-taskcard-item', function () {
+
+            $item = App\Models\Item::find('1');
+
+            $unit_input = App\Models\Unit::find('11');
+
+            $tc_i = $item;
+            if($tc_i->unit_id == $unit_input->id or $tc_i->units->where('uom.unit_id',$unit_input->id)->first() <> null){
+                dd('aman');
+            }
+            else{
+                dd('UOM have not Declared');
+            }
+        });
+
         Route::get('/wp', function () {
 
             $project_workpackage = App\Models\Pivots\ProjectWorkPackage::where('project_id',1)->where('workpackage_id',1)->first()->id;
@@ -93,7 +186,7 @@ Route::name('testing.')->group(function () {
                         'taskcard_id' => $tc->id,
                         'origin_taskcard' => $tc->toJson(),
                         'origin_taskcard_items' => $tc->items->toJson(),
-                    ]); 
+                    ]);
                                        // // echo $tc->title.'<br>';
                     // foreach($tc->items as $item){
                     //     echo $item->name.'<br>';

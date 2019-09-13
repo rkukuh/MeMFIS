@@ -1,9 +1,11 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Tax;
 use App\Models\Type;
 use App\Models\Unit;
 use App\Models\Item;
+use App\Models\Promo;
 use App\Models\Vendor;
 use App\Models\Currency;
 use App\Models\Approval;
@@ -53,13 +55,9 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
 
             return factory(Currency::class)->create()->id;
         },
-        'subtotal' => rand(10, 15) * 10000,
-        'discount_percent' => $faker->randomElement([5, 10, 15, 20, 25]),
-        'discount_amount' => rand(10, 15) * 1000,
-        'tax_percent' => $faker->randomElement([5, 10]),
-        'tax_amount' => rand(10, 15) * 1000,
-        'total_before_tax' => rand(10, 100) * 1000000,
         'exchange_rate' => rand(10, 15) * 1000,
+        'subtotal' => rand(10, 15) * 10000,
+        'total_before_tax' => rand(10, 100) * 1000000,
         'total_after_tax' => rand(10, 100) * 1000000,
         'top_type' => $top_type,
         'top_day_amount' => function () use ($top_type) {
@@ -81,42 +79,57 @@ $factory->define(PurchaseOrder::class, function (Faker $faker) {
 
 $factory->afterCreating(PurchaseOrder::class, function ($purchase_order, $faker) {
 
-    // Item
-
-    if ($faker->boolean) {
-        $item = null;
-
-        for ($i = 1; $i <= rand(5, 10); $i++) {
-            if (Item::count()) {
-                $item = Item::get()->random();
-            } else {
-                $item = factory(Item::class)->create();
-            }
-
-            if (Unit::count()) {
-                $unit = Unit::get()->random();
-            } else {
-                $unit = factory(Unit::class)->create();
-            }
-
-            $purchase_order->items()->save($item, [
-                'quantity' => rand(1, 10),
-                'quantity_unit' => rand(1, 10),
-                'unit_id' => $unit->id,
-                'price' => rand(10, 100) * 1000000,
-                'tax_percent' => $faker->randomElement([5, 10]),
-                'tax_amount' => rand(10, 15) * 1000,
-                'subtotal_before_discount' => rand(150, 200) * 1000000,
-                'subtotal_after_discount' => rand(100, 150) * 1000000,
-                'note' => $faker->randomElement([null, $faker->sentence]),
-            ]);
-        }
-    }
-
     // Approval
 
     if ($faker->boolean) {
         $purchase_order->approvals()->save(factory(Approval::class)->make());
+    }
+
+    // Item
+
+    $item = null;
+
+    for ($i = 1; $i <= rand(5, 10); $i++) {
+        if (Item::count()) {
+            $item = Item::get()->random();
+        } else {
+            $item = factory(Item::class)->create();
+        }
+
+        if (Unit::count()) {
+            $unit = Unit::get()->random();
+        } else {
+            $unit = factory(Unit::class)->create();
+        }
+
+        $purchase_order->items()->save($item, [
+            'quantity' => rand(1, 10),
+            'quantity_unit' => rand(1, 10),
+            'unit_id' => $unit->id,
+            'price' => rand(10, 100) * 1000000,
+            'subtotal_before_discount' => rand(150, 200) * 1000000,
+            'subtotal_after_discount' => rand(100, 150) * 1000000,
+            'note' => $faker->randomElement([null, $faker->sentence]),
+        ]);
+    }
+
+    // Promo
+    
+    if ($faker->boolean) {
+        for ($i = 1; $i <= rand(1, 3); $i++) {
+            $purchase_order->promos()->save(Promo::get()->random(), [
+                'value'     => rand(1, 9) * 10,
+                'amount'    => rand(100, 200) * 1000000,
+            ]);
+        }
+    }
+
+    // Tax
+
+    if ($faker->boolean) {
+        for ($i = 1; $i <= rand(1, 3); $i++) {
+            $purchase_order->taxes()->save(factory(Tax::class)->make());
+        }
     }
 
 });

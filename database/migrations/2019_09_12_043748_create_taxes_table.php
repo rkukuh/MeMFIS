@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemPurchaseOrderPromos extends Migration
+class CreateTaxesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,18 @@ class CreateItemPurchaseOrderPromos extends Migration
      */
     public function up()
     {
-        Schema::create('item_purchase_order_promos', function (Blueprint $table) {
+        Schema::create('taxes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedBigInteger('item_purchase_order_id');
-            $table->unsignedBigInteger('promo_id');
+            $table->morphs('taxable');
+            $table->unsignedBigInteger('type_id');
+            $table->double('percent');
             $table->double('amount');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('item_purchase_order_id')
-                    ->references('id')->on('item_purchase_order')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('promo_id')
-                    ->references('id')->on('promos')
+            $table->foreign('type_id')
+                    ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
@@ -41,6 +37,6 @@ class CreateItemPurchaseOrderPromos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_purchase_order_promos');
+        Schema::dropIfExists('taxes');
     }
 }
