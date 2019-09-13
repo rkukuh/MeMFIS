@@ -230,7 +230,7 @@ class WorkPackageController extends Controller
     {
         $tc = TaskCardWorkPackage::where('workpackage_id', $workPackage->id)->where('taskcard_id', $taskcard->id)
                 ->with('predecessors','successors')->first();
-
+        
         if($tc->predecessors()->exists()){
             $tc->predecessors()->delete();
         }

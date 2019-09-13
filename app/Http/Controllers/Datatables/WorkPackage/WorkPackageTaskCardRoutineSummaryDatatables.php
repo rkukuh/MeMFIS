@@ -460,7 +460,7 @@ class WorkPackageTaskCardRoutineSummaryDatatables extends Controller
                 }
             }
         }
-
+        
         $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);

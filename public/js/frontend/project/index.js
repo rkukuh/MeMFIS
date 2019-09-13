@@ -118,6 +118,12 @@ let Aircraft = {
                     filterable: !1,
                 },
                 {
+                    field: 'conducted_by',
+                    title: 'Approved By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
