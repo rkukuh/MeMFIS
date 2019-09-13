@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "36964216c33d713bf86fe18dc8cc129d",
@@ -731,25 +731,25 @@
         },
         {
             "name": "fideloper/proxy",
-            "version": "4.2.0",
+            "version": "4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fideloper/TrustedProxy.git",
-                "reference": "39a4c2165e578bc771f5dc031c273210a3a9b6d2"
+                "reference": "03085e58ec7bee24773fa5a8850751a6e61a7e8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/39a4c2165e578bc771f5dc031c273210a3a9b6d2",
-                "reference": "39a4c2165e578bc771f5dc031c273210a3a9b6d2",
+                "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/03085e58ec7bee24773fa5a8850751a6e61a7e8a",
+                "reference": "03085e58ec7bee24773fa5a8850751a6e61a7e8a",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "~5.0|~6.0",
+                "illuminate/contracts": "^5.0|^6.0|^7.0",
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "illuminate/http": "~5.6|~6.0",
-                "mockery/mockery": "~1.0",
+                "illuminate/http": "^5.0|^6.0|^7.0",
+                "mockery/mockery": "^1.0",
                 "phpunit/phpunit": "^6.0"
             },
             "type": "library",
@@ -781,7 +781,7 @@
                 "proxy",
                 "trusted proxy"
             ],
-            "time": "2019-07-29T16:49:45+00:00"
+            "time": "2019-09-03T16:45:42+00:00"
         },
         {
             "name": "flynsarmy/csv-seeder",
@@ -1565,29 +1565,29 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "3.1.15",
+            "version": "3.1.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "7d47c7af2ddcf93b4fee4f167e10702e918f69f1"
+                "reference": "bd377ad37b285d9bc25c9adca360e4392041dea6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/7d47c7af2ddcf93b4fee4f167e10702e918f69f1",
-                "reference": "7d47c7af2ddcf93b4fee4f167e10702e918f69f1",
+                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/bd377ad37b285d9bc25c9adca360e4392041dea6",
+                "reference": "bd377ad37b285d9bc25c9adca360e4392041dea6",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*",
+                "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0",
                 "opis/closure": "^3.1",
                 "php": "^7.0",
                 "phpoffice/phpspreadsheet": "^1.6"
             },
             "require-dev": {
                 "mockery/mockery": "^1.1",
-                "orchestra/database": "^3.8",
-                "orchestra/testbench": "^3.8",
+                "orchestra/database": "^4.0",
+                "orchestra/testbench": "^4.0",
                 "phpunit/phpunit": "^8.0",
                 "predis/predis": "^1.1"
             },
@@ -1629,33 +1629,28 @@
                 "php",
                 "phpspreadsheet"
             ],
-            "time": "2019-07-16T08:40:48+00:00"
+            "time": "2019-09-04T19:28:20+00:00"
         },
         {
             "name": "maennchen/zipstream-php",
-            "version": "1.2.0",
+            "version": "v0.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maennchen/ZipStream-PHP.git",
-                "reference": "6373eefe0b3274d7b702d81f2c99aa977ff97dc2"
+                "reference": "95922b6324955974675fd4923f987faa598408af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maennchen/ZipStream-PHP/zipball/6373eefe0b3274d7b702d81f2c99aa977ff97dc2",
-                "reference": "6373eefe0b3274d7b702d81f2c99aa977ff97dc2",
+                "url": "https://api.github.com/repos/maennchen/ZipStream-PHP/zipball/95922b6324955974675fd4923f987faa598408af",
+                "reference": "95922b6324955974675fd4923f987faa598408af",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "myclabs/php-enum": "^1.5",
-                "php": ">= 7.1",
-                "psr/http-message": "^1.0"
+                "php": ">= 7.0"
             },
             "require-dev": {
-                "ext-zip": "*",
-                "guzzlehttp/guzzle": ">= 6.3",
-                "mikey179/vfsstream": "^1.6",
-                "phpunit/phpunit": ">= 7.5"
+                "phpunit/phpunit": "^6.3"
             },
             "type": "library",
             "autoload": {
@@ -1679,10 +1674,6 @@
                 {
                     "name": "Jonatan Männchen",
                     "email": "jonatan@maennchen.ch"
-                },
-                {
-                    "name": "András Kolesár",
-                    "email": "kolesar@kolesar.hu"
                 }
             ],
             "description": "ZipStream is a library for dynamically streaming dynamic zip files from PHP without writing to the disk at all on the server.",
@@ -1690,7 +1681,7 @@
                 "stream",
                 "zip"
             ],
-            "time": "2019-07-17T11:01:58+00:00"
+            "time": "2018-02-09T09:26:57+00:00"
         },
         {
             "name": "markbaker/complex",
@@ -1908,16 +1899,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.24.0",
+            "version": "1.25.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266"
+                "reference": "70e65a5470a42cfec1a7da00d30edb6e617e8dcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
-                "reference": "bfc9ebb28f97e7a24c45bdc3f0ff482e47bb0266",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/70e65a5470a42cfec1a7da00d30edb6e617e8dcf",
+                "reference": "70e65a5470a42cfec1a7da00d30edb6e617e8dcf",
                 "shasum": ""
             },
             "require": {
@@ -1982,52 +1973,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2018-11-05T09:00:11+00:00"
-        },
-        {
-            "name": "myclabs/php-enum",
-            "version": "1.7.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/myclabs/php-enum.git",
-                "reference": "45f01adf6922df6082bcda36619deb466e826acf"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/php-enum/zipball/45f01adf6922df6082bcda36619deb466e826acf",
-                "reference": "45f01adf6922df6082bcda36619deb466e826acf",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": ">=7.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
-                "squizlabs/php_codesniffer": "1.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "MyCLabs\\Enum\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP Enum contributors",
-                    "homepage": "https://github.com/myclabs/php-enum/graphs/contributors"
-                }
-            ],
-            "description": "PHP Enum implementation",
-            "homepage": "http://github.com/myclabs/php-enum",
-            "keywords": [
-                "enum"
-            ],
-            "time": "2019-08-19T13:53:00+00:00"
+            "time": "2019-09-06T13:49:17+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -2423,28 +2369,28 @@
         },
         {
             "name": "phenx/php-svg-lib",
-            "version": "v0.3.2",
+            "version": "v0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PhenX/php-svg-lib.git",
-                "reference": "ccc46ef6340d4b8a4a68047e68d8501ea961442c"
+                "reference": "5fa61b65e612ce1ae15f69b3d223cb14ecc60e32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PhenX/php-svg-lib/zipball/ccc46ef6340d4b8a4a68047e68d8501ea961442c",
-                "reference": "ccc46ef6340d4b8a4a68047e68d8501ea961442c",
+                "url": "https://api.github.com/repos/PhenX/php-svg-lib/zipball/5fa61b65e612ce1ae15f69b3d223cb14ecc60e32",
+                "reference": "5fa61b65e612ce1ae15f69b3d223cb14ecc60e32",
                 "shasum": ""
             },
             "require": {
-                "sabberworm/php-css-parser": "8.1.*"
+                "sabberworm/php-css-parser": "^8.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "~5.0"
+                "phpunit/phpunit": "^5.5|^6.5"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Svg\\": "src/"
+                "psr-4": {
+                    "Svg\\": "src/Svg"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2459,7 +2405,7 @@
             ],
             "description": "A library to read, parse and export to PDF SVG files.",
             "homepage": "https://github.com/PhenX/php-svg-lib",
-            "time": "2018-06-03T10:10:03+00:00"
+            "time": "2019-09-11T20:02:13+00:00"
         },
         {
             "name": "phpoffice/phpspreadsheet",
@@ -2992,23 +2938,24 @@
         },
         {
             "name": "sabberworm/php-css-parser",
-            "version": "8.1.0",
+            "version": "8.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabberworm/PHP-CSS-Parser.git",
-                "reference": "850cbbcbe7fbb155387a151ea562897a67e242ef"
+                "reference": "91bcc3e3fdb7386c9a2e0e0aa09ca75cc43f121f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/850cbbcbe7fbb155387a151ea562897a67e242ef",
-                "reference": "850cbbcbe7fbb155387a151ea562897a67e242ef",
+                "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/91bcc3e3fdb7386c9a2e0e0aa09ca75cc43f121f",
+                "reference": "91bcc3e3fdb7386c9a2e0e0aa09ca75cc43f121f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "*"
+                "codacy/coverage": "^1.4",
+                "phpunit/phpunit": "~4.8"
             },
             "type": "library",
             "autoload": {
@@ -3032,7 +2979,7 @@
                 "parser",
                 "stylesheet"
             ],
-            "time": "2016-07-19T19:14:21+00:00"
+            "time": "2019-02-22T07:42:52+00:00"
         },
         {
             "name": "setasign/fpdi",
@@ -3385,15 +3332,15 @@
             "authors": [
                 {
                     "name": "Sebastian De Deyne",
+                    "role": "Developer",
                     "email": "sebastian@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
+                    "homepage": "https://spatie.be"
                 },
                 {
                     "name": "Freek Van der Herten",
+                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
+                    "homepage": "https://spatie.be"
                 }
             ],
             "description": "A very simple activity logger to monitor the users of your website or application",
@@ -3465,9 +3412,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
-                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 }
             ],
             "description": "A Laravel 5 package to backup your application",
@@ -3533,9 +3480,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
-                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 }
             ],
             "description": "Simple event sourcing in Laravel",
@@ -3550,28 +3497,26 @@
         },
         {
             "name": "spatie/laravel-medialibrary",
-            "version": "7.10.1",
+            "version": "7.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-medialibrary.git",
-                "reference": "4dafd857c3dd16909d04f808b431eb590f037241"
+                "reference": "8d85c4e9046f60d94f7df66c6c3163eb019f4f8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/4dafd857c3dd16909d04f808b431eb590f037241",
-                "reference": "4dafd857c3dd16909d04f808b431eb590f037241",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/8d85c4e9046f60d94f7df66c6c3163eb019f4f8d",
+                "reference": "8d85c4e9046f60d94f7df66c6c3163eb019f4f8d",
                 "shasum": ""
             },
             "require": {
-                "ext-fileinfo": "*",
-                "ext-imagick": "*",
                 "illuminate/bus": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
                 "illuminate/console": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
                 "illuminate/database": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
                 "illuminate/pipeline": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
                 "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
                 "league/flysystem": "^1.0.8",
-                "maennchen/zipstream-php": "^0.4|^1.0",
+                "maennchen/zipstream-php": "~0.4",
                 "php": "^7.2",
                 "spatie/image": "^1.4.0",
                 "spatie/pdf-to-image": "^1.2",
@@ -3614,9 +3559,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
+                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://murze.be",
-                    "role": "Developer"
+                    "homepage": "https://murze.be"
                 }
             ],
             "description": "Associate files with Eloquent models",
@@ -3631,7 +3576,7 @@
                 "media",
                 "spatie"
             ],
-            "time": "2019-08-28T12:39:17+00:00"
+            "time": "2019-07-12T11:25:27+00:00"
         },
         {
             "name": "spatie/laravel-permission",
@@ -3746,9 +3691,9 @@
             "authors": [
                 {
                     "name": "Alex Vanderbist",
-                    "role": "Developer",
                     "email": "alex@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 }
             ],
             "description": "Easily build Eloquent queries from API requests",
@@ -3761,26 +3706,26 @@
         },
         {
             "name": "spatie/laravel-schemaless-attributes",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-schemaless-attributes.git",
-                "reference": "e83e02f0105ab673f3786e5127ee2700296fb131"
+                "reference": "7bd66feab0bc5289c089c8c53201a929781797dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-schemaless-attributes/zipball/e83e02f0105ab673f3786e5127ee2700296fb131",
-                "reference": "e83e02f0105ab673f3786e5127ee2700296fb131",
+                "url": "https://api.github.com/repos/spatie/laravel-schemaless-attributes/zipball/7bd66feab0bc5289c089c8c53201a929781797dc",
+                "reference": "7bd66feab0bc5289c089c8c53201a929781797dc",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^5.6",
-                "illuminate/support": "^5.6",
+                "illuminate/database": "^5.6|^6.0",
+                "illuminate/support": "^5.6|^6.0",
                 "php": "^7.2"
             },
             "require-dev": {
                 "larapack/dd": "^1.0",
-                "orchestra/testbench": "^3.6",
+                "orchestra/testbench": "^3.6|^4.0",
                 "phpunit/phpunit": "^8.0"
             },
             "type": "library",
@@ -3803,9 +3748,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
-                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 }
             ],
             "description": "Add schemaless attributes to Eloquent models",
@@ -3814,29 +3759,29 @@
                 "laravel-schemaless-attributes",
                 "spatie"
             ],
-            "time": "2019-08-21T16:20:53+00:00"
+            "time": "2019-09-04T07:08:44+00:00"
         },
         {
             "name": "spatie/laravel-sluggable",
-            "version": "2.1.8",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-sluggable.git",
-                "reference": "45b67cdcd78c2ab283d99a08501121f1805cffff"
+                "reference": "492a3b2a392f90a78725c3f07001f2074d704713"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-sluggable/zipball/45b67cdcd78c2ab283d99a08501121f1805cffff",
-                "reference": "45b67cdcd78c2ab283d99a08501121f1805cffff",
+                "url": "https://api.github.com/repos/spatie/laravel-sluggable/zipball/492a3b2a392f90a78725c3f07001f2074d704713",
+                "reference": "492a3b2a392f90a78725c3f07001f2074d704713",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "~5.6.0|~5.7.0|~5.8.0",
-                "illuminate/support": "~5.6.0|~5.7.0|~5.8.0",
-                "php": ">=7.1.3"
+                "illuminate/database": "~5.6.0|~5.7.0|~5.8.0|~6.0.0",
+                "illuminate/support": "~5.6.0|~5.7.0|~5.8.0|~6.0.0",
+                "php": "^7.2"
             },
             "require-dev": {
-                "orchestra/testbench": "~3.6.0|~3.7.0|~3.8.0"
+                "orchestra/testbench": "~3.6.0|~3.7.0|~3.8.0|~4.0.0"
             },
             "type": "library",
             "autoload": {
@@ -3851,9 +3796,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
-                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 }
             ],
             "description": "Generate slugs when saving Eloquent models",
@@ -3862,7 +3807,7 @@
                 "laravel-sluggable",
                 "spatie"
             ],
-            "time": "2019-06-08T20:54:14+00:00"
+            "time": "2019-09-04T09:23:20+00:00"
         },
         {
             "name": "spatie/laravel-tags",
@@ -3908,9 +3853,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
+                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
+                    "homepage": "https://spatie.be"
                 }
             ],
             "description": "Add tags and taggable behaviour to your Laravel app",
@@ -3964,20 +3909,20 @@
             "authors": [
                 {
                     "name": "Sebastian De Deyne",
-                    "role": "Developer",
                     "email": "sebastian@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 },
                 {
                     "name": "Freek Van der Herten",
-                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 },
                 {
                     "name": "Mohamed Said",
-                    "role": "Original idea",
-                    "email": "theMohamedSaid@gmail.com"
+                    "email": "theMohamedSaid@gmail.com",
+                    "role": "Original idea"
                 }
             ],
             "description": "A trait to make an Eloquent model hold translations",
@@ -3995,24 +3940,24 @@
         },
         {
             "name": "spatie/pdf-to-image",
-            "version": "1.8.2",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/pdf-to-image.git",
-                "reference": "22a580e03550c95ce810ad430e3c44d2f7a1c75a"
+                "reference": "9a5cb264a99e87e010c65d4ece03b51f821d55bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/pdf-to-image/zipball/22a580e03550c95ce810ad430e3c44d2f7a1c75a",
-                "reference": "22a580e03550c95ce810ad430e3c44d2f7a1c75a",
+                "url": "https://api.github.com/repos/spatie/pdf-to-image/zipball/9a5cb264a99e87e010c65d4ece03b51f821d55bd",
+                "reference": "9a5cb264a99e87e010c65d4ece03b51f821d55bd",
                 "shasum": ""
             },
             "require": {
-                "ext-imagick": "*",
-                "php": "^7.0"
+                "php": ">=5.5.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.2"
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
             },
             "type": "library",
             "autoload": {
@@ -4027,9 +3972,9 @@
             "authors": [
                 {
                     "name": "Freek Van der Herten",
-                    "role": "Developer",
                     "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 }
             ],
             "description": "Convert a pdf to an image",
@@ -4041,7 +3986,7 @@
                 "pdf-to-image",
                 "spatie"
             ],
-            "time": "2019-07-31T06:46:19+00:00"
+            "time": "2016-12-14T15:37:00+00:00"
         },
         {
             "name": "spatie/string",
@@ -4129,9 +4074,9 @@
             "authors": [
                 {
                     "name": "Alex Vanderbist",
-                    "role": "Developer",
                     "email": "alex@spatie.be",
-                    "homepage": "https://spatie.be"
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 }
             ],
             "description": "Easily create, use and destroy temporary directories",
@@ -5883,16 +5828,16 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-debugbar",
-            "version": "v3.2.7",
+            "version": "v3.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-debugbar.git",
-                "reference": "8794e7a3b7f3a0e7222bcd088f5f44b2b6ff8e61"
+                "reference": "18208d64897ab732f6c04a19b319fe8f1d57a9c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/8794e7a3b7f3a0e7222bcd088f5f44b2b6ff8e61",
-                "reference": "8794e7a3b7f3a0e7222bcd088f5f44b2b6ff8e61",
+                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/18208d64897ab732f6c04a19b319fe8f1d57a9c0",
+                "reference": "18208d64897ab732f6c04a19b319fe8f1d57a9c0",
                 "shasum": ""
             },
             "require": {
@@ -5947,7 +5892,7 @@
                 "profiler",
                 "webprofiler"
             ],
-            "time": "2019-08-22T14:29:54+00:00"
+            "time": "2019-08-29T07:01:03+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -6007,16 +5952,16 @@
         },
         {
             "name": "facade/flare-client-php",
-            "version": "1.0.1",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/flare-client-php.git",
-                "reference": "6c3509372c20255ac19b3b5583216daea0c2f992"
+                "reference": "7128b251b48f24ef64e5cddd7f8d40cc3a06fd3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/6c3509372c20255ac19b3b5583216daea0c2f992",
-                "reference": "6c3509372c20255ac19b3b5583216daea0c2f992",
+                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/7128b251b48f24ef64e5cddd7f8d40cc3a06fd3e",
+                "reference": "7128b251b48f24ef64e5cddd7f8d40cc3a06fd3e",
                 "shasum": ""
             },
             "require": {
@@ -6057,20 +6002,20 @@
                 "flare",
                 "reporting"
             ],
-            "time": "2019-09-02T18:43:12+00:00"
+            "time": "2019-09-11T14:19:56+00:00"
         },
         {
             "name": "facade/ignition",
-            "version": "1.3.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "5971338abf4766f89f64d2956ebdcd82a06d6f81"
+                "reference": "36a1e4ca0973ac8e5c8289ee31956bbaf8e6bb67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/5971338abf4766f89f64d2956ebdcd82a06d6f81",
-                "reference": "5971338abf4766f89f64d2956ebdcd82a06d6f81",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/36a1e4ca0973ac8e5c8289ee31956bbaf8e6bb67",
+                "reference": "36a1e4ca0973ac8e5c8289ee31956bbaf8e6bb67",
                 "shasum": ""
             },
             "require": {
@@ -6078,18 +6023,18 @@
                 "ext-mbstring": "*",
                 "facade/flare-client-php": "^1.0",
                 "facade/ignition-contracts": "^1.0",
-                "filp/whoops": "^2.1.4",
-                "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0|^6.0",
-                "monolog/monolog": "^1.12",
+                "filp/whoops": "^2.4",
+                "illuminate/support": "~5.5.0 || ~5.6.0 || ~5.7.0 || ~5.8.0 || ^6.0",
+                "monolog/monolog": "^1.12 || ^2.0",
                 "php": "^7.1",
                 "scrivo/highlight.php": "^9.15",
-                "symfony/console": "^3.4|^4.0",
-                "symfony/var-dumper": "^3.4|^4.0"
+                "symfony/console": "^3.4 || ^4.0",
+                "symfony/var-dumper": "^3.4 || ^4.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.14",
                 "mockery/mockery": "^1.2",
-                "orchestra/testbench": "^3.5|^3.6|^3.7|^3.8|^4.0"
+                "orchestra/testbench": "^3.5 || ^3.6 || ^3.7 || ^3.8 || ^4.0"
             },
             "suggest": {
                 "laravel/telescope": "^2.0"
@@ -6117,7 +6062,7 @@
             "license": [
                 "MIT"
             ],
-            "description": "A beautiful error page for Laravel apps",
+            "description": "A beautiful error page for Laravel applications.",
             "homepage": "https://github.com/facade/ignition",
             "keywords": [
                 "error",
@@ -6125,7 +6070,7 @@
                 "laravel",
                 "page"
             ],
-            "time": "2019-09-02T21:10:17+00:00"
+            "time": "2019-09-09T14:06:15+00:00"
         },
         {
             "name": "facade/ignition-contracts",
@@ -6216,8 +6161,8 @@
             "authors": [
                 {
                     "name": "Filipe Dobreira",
-                    "role": "Developer",
-                    "homepage": "https://github.com/filp"
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
                 }
             ],
             "description": "php error handling for cool kids",
@@ -6653,18 +6598,18 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "email": "arne@blankerts.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "arne@blankerts.de"
                 },
                 {
                     "name": "Sebastian Heuer",
-                    "email": "sebastian@phpeople.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpeople.de"
                 },
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "Developer"
+                    "role": "Developer",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Library for handling version information and constraints",
@@ -6935,8 +6880,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
@@ -6986,8 +6931,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "FilterIterator implementation that filters files based on a list of suffixes.",
@@ -7028,8 +6973,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Simple template engine.",
@@ -7077,8 +7022,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "Utility class for timing",
@@ -7208,8 +7153,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "role": "lead",
-                    "email": "sebastian@phpunit.de"
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
                 }
             ],
             "description": "The PHP Unit Testing framework.",
@@ -7846,8 +7791,8 @@
             "authors": [
                 {
                     "name": "Sebastian Bergmann",
-                    "email": "sebastian@phpunit.de",
-                    "role": "lead"
+                    "role": "lead",
+                    "email": "sebastian@phpunit.de"
                 }
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
@@ -7887,8 +7832,8 @@
             "authors": [
                 {
                     "name": "Arne Blankerts",
-                    "role": "Developer",
-                    "email": "arne@blankerts.de"
+                    "email": "arne@blankerts.de",
+                    "role": "Developer"
                 }
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",

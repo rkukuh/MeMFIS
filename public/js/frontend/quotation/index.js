@@ -170,6 +170,7 @@ let Quotation = {
                                 );
                             }
                             else{
+                                console.log(t.quotation_type);
                                 return (
                                     '<a href="/quotation-additional/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                         '<i class="la la-pencil"></i>' +
@@ -177,7 +178,7 @@ let Quotation = {
                                     // '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
                                     //     '<i class="la la-trash"></i>' +
                                     // '</a>'+
-                                    '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +
+                                    '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve-additional" title="Approve Additional" data-id="' + t.uuid + '">' +
                                         '<i class="la la-check"></i>' +
                                     '</a>'+
                                     '<a href="quotation-additional/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
@@ -257,6 +258,53 @@ let Quotation = {
                         },
                         type: 'POST',
                         url: '/quotation/' + quotation_uuid + '/approve',
+                        success: function (data) {
+                            toastr.success('Quotation has been approved.', 'Approved', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.m_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+                            $.each(errors.error, function (index, value) {
+                                toastr.error(value.message, value.title, {
+                                    "closeButton": true,
+                                    "timeOut": "0",
+                                }
+                            );
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        $('.m_datatable').on('click', '.approve-additional', function () {
+            let quotation_uuid = $(this).data('id');
+
+            swal({
+                title: 'Sure want to Approve?',
+                type: 'question',
+                confirmButtonText: 'Yes, Approve',
+                confirmButtonColor: '#34bfa3',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'POST',
+                        url: '/quotation-additional/' + quotation_uuid + '/approve',
                         success: function (data) {
                             toastr.success('Quotation has been approved.', 'Approved', {
                                     timeOut: 5000

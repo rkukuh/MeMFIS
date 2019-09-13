@@ -26,7 +26,7 @@ class QuotationAdditionalItemDatatables extends Controller
      */
     public function item(Quotation $quotation)
     {
-        $materials = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.taskcard','item','unit','price')->where('quotation_id', $quotation->id)
+        $materials = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.jobcardable','item','unit','price')->where('quotation_id', $quotation->id)
         ->whereHas('item', function ($query) {
             $query->whereHas('categories', function ($query) {
                 $query->whereIn('code', ['raw', 'cons', 'comp']);
@@ -140,7 +140,7 @@ class QuotationAdditionalItemDatatables extends Controller
      */
     public function tool(Quotation $quotation)
     {
-        $tools = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.taskcard','item','unit','price')->where('quotation_id', $quotation->id)
+        $tools = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.jobcardable','item','unit','price')->where('quotation_id', $quotation->id)
         ->whereHas('item', function ($query) {
                 $query->whereHas('categories', function ($query) {
                     $query->where('code','tool');

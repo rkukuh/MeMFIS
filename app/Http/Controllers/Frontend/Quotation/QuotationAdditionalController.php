@@ -55,7 +55,7 @@ class QuotationAdditionalController extends Controller
     {
         $websites = Type::ofWebsite()->get();
         $total_manhour = $project->defectcards()->sum('estimation_manhour');
-
+        
         return view('frontend.quotation.additional.create', [
             'project' => $project,
             'websites' => $websites,
@@ -72,6 +72,7 @@ class QuotationAdditionalController extends Controller
      */
     public function store(Request $request)
     {
+        $project = Project::where('uuid', $request->project_id)->first();
         $contact = $defectcard_json = [];
 
         $contact['name']    = $request->attention_name;
@@ -86,13 +87,16 @@ class QuotationAdditionalController extends Controller
         $request->merge(['number' => DocumentNumber::generate('QADD-', Quotation::withTrashed()->count()+1)]);
         $request->merge(['attention' => json_encode($contact)]);
         $request->merge(['data_defectcard' => json_encode($defectcard_json)]);
-        $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
-        $request->merge(['parent_id' => Project::find($request->project_id)->parent->quotations->first()->id]);
-        $request->merge(['scheduled_payment_amount' => json_encode($request->scheduled_payment_amount)]);
+        $request->merge(['quotationable_type' => 'App\Models\Project']);
+        $request->merge(['quotationable_id' => Project::where('uuid',$request->project_id)->first()->id]);
+        $request->merge(['parent_id' => $project->parent->quotations->last()->id]);
+        $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
+        $request->merge(['scheduled_payment_amount' => json_encode([])]);
 
+        $defectcards = DefectCard::where('project_additional_id',$project->id)->get();
+       
         $quotation = Quotation::create($request->all());
 
-        $defectcards = DefectCard::where('project_additional_id',$request->project_id)->get();
         $customer = Customer::find($quotation->parent->quotationable->customer->id)->levels->last()->score;
 
         foreach($defectcards as $defectcard){
@@ -163,7 +167,7 @@ class QuotationAdditionalController extends Controller
             'charges' => $charges,
             'attention' => $attention,
             'quotation' => $quotation,
-            'project' => $quotation->project,
+            'project' => $quotation->quotationable,
             'total_manhour' => $total_manhour,
             'currencies' => $this->currencies,
             'scheduled_payment_amount' => $scheduled_payment_amount,
@@ -179,9 +183,22 @@ class QuotationAdditionalController extends Controller
      */
     public function update(Request $request, Quotation $quotation)
     {
-        $request->merge(['customer_id' => Project::where('uuid',$request->project_id)->first()->customer->id]);
 
-        $attention = $defectcard_json = [];
+        $attention = $defectcard_json = $scheduled_payment_amount = [];
+        $project = Project::where('uuid', $request->project_id)->first();
+
+        $request->scheduled_payment_amount = json_decode($request->scheduled_payment_amount);
+        if(sizeof($request->scheduled_payment_amount) > 0){
+            foreach ($request->scheduled_payment_amount as $value) {
+                $container = [];
+                $container["amount"]            = $value[0];
+                $container["amount_percentage"] = $value[1];
+                $container["description"]       = $value[2];
+                $container["work_progress"]     = $value[3];
+
+                array_push($scheduled_payment_amount, $container);
+            }
+        }
 
         $attention['name']     = $request->attention_name;
         $attention['phone'] = $request->attention_phone;
@@ -206,9 +223,12 @@ class QuotationAdditionalController extends Controller
         $request->merge(['attention' => json_encode($attention)]);
         $request->merge(['charge' => json_encode($charges)]);
         $request->merge(['data_defectcard' => json_encode($defectcard_json)]);
-        $request->merge(['scheduled_payment_amount' => json_encode($request->scheduled_payment_amount)]);
-        $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
+        $request->merge(['scheduled_payment_type' => Type::ofScheduledPayment('code', 'by-progress')->first()->id]);
+        $request->merge(['scheduled_payment_amount' => json_encode($scheduled_payment_amount)]);
+        $request->merge(['project_id' => $project->id]);
+        $request->merge(['customer_id' => $project->customer->id]);
 
+        
         //TODO change
         $request->merge(['subtotal' => 0]);
         $request->merge(['grandtotal' => 0]);
@@ -252,6 +272,7 @@ class QuotationAdditionalController extends Controller
      */
     public function approve(Quotation $quotation)
     {
+        //todo validation scheduled payment amount and progress
         $quotation->approvals()->save(new Approval([
             'approvable_id' => $quotation->id,
             'conducted_by' => Auth::id(),
@@ -263,14 +284,14 @@ class QuotationAdditionalController extends Controller
             'progressed_by' => Auth::id()
         ]));
 
-        $project = Project::find($quotation->project_id);
+        $project = Project::find($quotation->quotationable_id);
         $project->approvals()->save(new Approval([
             'approvable_id' => $project->id,
             'conducted_by' => Auth::id(),
             'is_approved' => 1
         ]));
 
-        $project = Project::find($quotation->project_id);
+        $project = Project::find($quotation->quotationable_id);
         foreach($project->workpackages as $wp){
             foreach($wp->taskcards as $tc){
 

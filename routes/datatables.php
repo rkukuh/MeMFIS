@@ -755,6 +755,26 @@ Route::name('datatables.')->group(function () {
 
         });
 
+
+        /** Work Progress Report */
+
+        Route::name('work-progress-report.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'work-progress-report',
+                'namespace' => 'WorkProgressReport'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'WorkProgressReportDatatables@index')->name('all');
+
+
+            });
+
+        });
+
         Route::get('/testing', 'UnitDatatables@index')->name('testing.index');
 
 
