@@ -96,7 +96,7 @@
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
                                                 <div style="background-color:beige; padding:15px;" class="">
-                                                    {{ $taskcard->type->name }},
+                                                    {{ $taskcard->type->name }}
                                                 </div>
                                             @endif
                                         </div>
@@ -131,7 +131,7 @@
                                                         @include('frontend.common.label.data-info-nodata')
                                                     @else
                                                         <div style="background-color:beige; padding:15px;" class="">
-                                                            {{ $taskcard->ata }},
+                                                            {{ $taskcard->ata }}
                                                         </div>
                                                     @endif
 
@@ -159,7 +159,7 @@
                                             </label>
                                             @if (isset($taskcard->task->name))
                                                 <div style="background-color:beige; padding:15px;" class="">
-                                                    {{ $taskcard->task->name }},
+                                                    {{ $taskcard->task->name }}
                                                 </div>
                                             @else
                                                 @include('frontend.common.label.data-info')
