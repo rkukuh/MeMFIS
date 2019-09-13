@@ -1,4 +1,4 @@
-let PurchaseRequest = {
+let IntrechangeTo = {
   init: function () {
       $("#interchange_datatable").DataTable({
           "dom": '<"top"f>rt<"bottom">pl',
@@ -72,5 +72,5 @@ let PurchaseRequest = {
 };
 
 jQuery(document).ready(function () {
-  PurchaseRequest.init();
+  IntrechangeTo.init();
 });
