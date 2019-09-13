@@ -255,6 +255,7 @@ class QuotationController extends Controller
     public function update(QuotationUpdate $request, Quotation $quotation)
     {
         $attention = $scheduled_payment_amount = [];
+        
         $request->scheduled_payment_amount = json_decode($request->scheduled_payment_amount);
         if(sizeof($request->scheduled_payment_amount) > 0){
             foreach ($request->scheduled_payment_amount as $value) {

@@ -11,7 +11,7 @@ let WorkProgressReport = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/project',
+                        url: '/datatables/work-progress-report',
 
                         map: function (raw) {
                             let dataSet = raw;

@@ -17,10 +17,11 @@ Route::name('frontend.')->group(function () {
             Route::resource('quotation-additional', 'QuotationAdditionalController',[
                 'parameters' => ['quotation-additional' => 'quotation']
             ])->except('create');
-
-            Route::get('/quotation-additional/create/{project}','QuotationAdditionalController@create')->name('quotation-additional.create');
-            Route::post('/quotation-additional/{quotation}/discount','QuotationAdditionalController@discount')->name('quotation-additional.discount');
-
+            Route::prefix('quotation-additional')->group(function () {
+                Route::get('/create/{project}','QuotationAdditionalController@create')->name('quotation-additional.create');
+                Route::post('/{quotation}/discount','QuotationAdditionalController@discount')->name('quotation-additional.discount');
+                Route::post('/{quotation}/approve', 'QuotationAdditionalController@approve')->name('quotation.approve');
+            });
 
             Route::prefix('quotation')->group(function () {
 

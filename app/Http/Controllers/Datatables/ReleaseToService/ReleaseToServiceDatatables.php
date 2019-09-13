@@ -26,7 +26,7 @@ class ReleaseToServiceDatatables extends Controller
 
         foreach($alldata as $project){
             $project->customer_name .= $project->customer->name;
-            $quotations = Quotation::where('project_id',$project->id)->get();
+            $quotations = Quotation::where('quotationable_id',$project->id)->get();
                 $project->status .= 'RTS';
         }
 
@@ -133,7 +133,7 @@ class ReleaseToServiceDatatables extends Controller
         foreach($alldata as $project){
             $project->customer_name .= $project->customer->name;
 
-            $quotations = Quotation::where('project_id',$project->id)->get();
+            $quotations = Quotation::where('quotationable_id',$project->id)->get();
             $status = "-";
             foreach($quotations as $quotation){
                 $jobcards = JobCard::where('quotation_id',$quotation->id)->get();
