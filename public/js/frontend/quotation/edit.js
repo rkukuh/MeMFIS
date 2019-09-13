@@ -430,9 +430,9 @@ let Quotation = {
             let tax_type =  $('#is_ppn').prop("checked");
             let ppn = tax_percentage = 0;
             if(tax_type){
-                ppn = $('#grand_total_rupiah').attr("value") * 1.1;
+                ppn = $('#grand_total_rupiah').attr("value") / 1.1 * 0.1;
                 tax_type = "include";
-                tax_percentage = 110;
+                tax_percentage = 10;
             }else{
                 ppn = $('#grand_total_rupiah').attr("value") * 0.1;
                 tax_type = "exclude";
