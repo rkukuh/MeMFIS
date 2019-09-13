@@ -189,13 +189,15 @@ class TaskCardsCPCPTriganaimport implements ToModel, WithHeadingRow
                     ->where('name', 'Basic')->first();
             }
         }
+        
+
+        $additionals = [];
+        $additionals["internal_number"] = "";
+        $additionals["document_library"] = [];
         if( $row['company_task']) {
-            $additionals = [];
             $additionals["internal_number"] = $row['company_task'];
-            $additionals =  json_encode($additionals);
-        }else{
-            $additionals = null;
         }
+        $additionals =  json_encode($additionals);
 
         $taskcard =  new TaskCard([
             'number' => $row['number'],
@@ -214,6 +216,7 @@ class TaskCardsCPCPTriganaimport implements ToModel, WithHeadingRow
             'reference' => $row['reference'],
             'version' => json_encode(explode(';',$row['version'])),
             'description' => $row['description'],
+            'section' => json_encode([]),
             'additionals' => $additionals
         ]);
 
