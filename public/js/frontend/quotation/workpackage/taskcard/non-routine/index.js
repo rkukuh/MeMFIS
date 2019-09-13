@@ -280,7 +280,7 @@ let NonRoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/si/',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/ea/',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -370,7 +370,7 @@ let NonRoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/si/',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/eo/',
                         map: function (raw) {
                             let dataSet = raw;
 
