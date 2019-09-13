@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Tax;
 use App\Models\Type;
 use App\Models\Unit;
 use App\Models\Item;
@@ -52,7 +53,6 @@ $factory->define(Quotation::class, function (Faker $faker) {
 
             return $faker->randomElement([null, json_encode($charges)]);
         },
-        'ppn' => $faker->randomElement([null, 10]),
         'grandtotal' => rand(101, 200) * 1000000,
         'scheduled_payment_type' => function () {
             if (Type::ofScheduledPayment()->count()) {
@@ -159,6 +159,14 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
             'status_id' => Status::ofQuotation()->where('code', 'open')->first()
         ])
     );
+
+    // Tax
+
+    if ($faker->boolean) {
+        for ($i = 1; $i <= rand(1, 3); $i++) {
+            $quotation->taxes()->save(factory(Tax::class)->make());
+        }
+    }
 
     // WorkPackage
 

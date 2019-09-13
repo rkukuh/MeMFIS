@@ -44,8 +44,8 @@ Route::name('frontend.')->group(function () {
 
         Route::namespace('Interchange')->group(function () {
 
-            Route::resource('interchange', 'InterchangeController');
-            
+            Route::resource('/', 'InterchangeController');
+
         });
 
     });

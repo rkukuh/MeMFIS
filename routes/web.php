@@ -20,6 +20,7 @@ require('frontend/grn.php');
 require('frontend/htcrr.php');
 require('frontend/facility.php');
 require('frontend/item.php');
+require('frontend/interchange.php');
 require('frontend/jobcard.php');
 require('frontend/manhour.php');
 require('frontend/project.php');

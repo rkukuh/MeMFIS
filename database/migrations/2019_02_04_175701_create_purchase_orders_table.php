@@ -25,13 +25,9 @@ class CreatePurchaseOrdersTable extends Migration
             $table->text('shipping_address');
             $table->timestamp('ship_at')->nullable();
             $table->unsignedBigInteger('currency_id');
-            $table->double('subtotal')->nullable();
-            $table->double('discount_percent')->nullable();
-            $table->double('discount_amount')->nullable();
-            $table->double('tax_percent')->nullable();
-            $table->double('tax_amount')->nullable();
-            $table->double('total_before_tax')->nullable();
             $table->double('exchange_rate')->nullable();
+            $table->double('subtotal')->nullable();
+            $table->double('total_before_tax')->nullable();
             $table->double('total_after_tax')->nullable();
             $table->unsignedBigInteger('top_type');
             $table->integer('top_day_amount')->nullable();

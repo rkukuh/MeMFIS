@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Quotation;
 
 use Auth;
+use App\Models\Tax;
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\Status;
@@ -291,7 +292,23 @@ class QuotationController extends Controller
         $request->merge(['scheduled_payment_amount' => json_encode($scheduled_payment_amount)]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
         $quotation->update($request->all());
-
+        if(sizeof($quotation->taxes) > 0){
+            // $quotation->taxes()->delete();
+            $tax = Tax::where('uuid', $quotation->taxes->last()->uuid)->update([
+                'taxable_type' => 'App\Models\Quotation',
+                'taxable_id' => $quotation->id,
+                'type_id' => Type::ofTax()->where('code', $request->tax_type)->first()->id,
+                'percent' => $request->tax_percentage,
+                'amount' => $request->ppn
+            ]);
+        }else{
+            $quotation->taxes()->save(new Tax(['taxable_type' => 'App\Models\Quotation',
+                'taxable_id' => $quotation->id,
+                'type_id' => Type::ofTax()->where('code', $request->tax_type)->first()->id,
+                'percent' => $request->tax_percentage,
+                'amount' => $request->ppn
+            ]));
+        }
         return response()->json($quotation);
     }
 

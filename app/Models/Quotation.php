@@ -21,8 +21,6 @@ class Quotation extends MemfisModel
         'exchange_rate',
         'subtotal',
         'charge',
-        'ppn',
-        'is_ppn',
         'grandtotal',
         'title',
         'scheduled_payment_type',
@@ -170,6 +168,19 @@ class Quotation extends MemfisModel
     public function quotationable()
     {
         return $this->morphTo();
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many taxes.
+     *
+     * This function will get all Quotation's taxes.
+     * See: Tax's taxable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taxes()
+    {
+        return $this->morphMany(Tax::class, 'taxable');
     }
 
     /**
