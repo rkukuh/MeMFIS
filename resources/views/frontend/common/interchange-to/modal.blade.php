@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_interchange" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal_interchange_to" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped table-bordered table-hover table-checkable" id="interchange_datatable">
+                <table class="table table-striped table-bordered table-hover table-checkable" id="interchange_datatable_to">
                     <thead>
                         <tr>
                             <th>Code</th>

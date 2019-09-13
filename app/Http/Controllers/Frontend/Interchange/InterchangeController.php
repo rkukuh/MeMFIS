@@ -37,7 +37,7 @@ class InterchangeController extends Controller
      */
     public function store(InterchangeStore $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

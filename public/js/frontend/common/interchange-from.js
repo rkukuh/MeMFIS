@@ -1,6 +1,6 @@
-let IntrechangeTo = {
+let InterchangeFrom = {
     init: function() {
-        $("#interchange_datatable_to").DataTable({
+        $("#interchange_datatable_from").DataTable({
             dom: '<"top"f>rt<"bottom">pl',
             responsive: !0,
             searchDelay: 500,
@@ -26,7 +26,7 @@ let IntrechangeTo = {
                     orderable: !1,
                     render: function(a, e, t, n) {
                         return (
-                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-interchange-to" title="View" data-uuid="' +
+                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-interchange-from" title="View" data-uuid="' +
                             t.uuid +
                             '" data-code="' +
                             t.code +
@@ -54,14 +54,14 @@ let IntrechangeTo = {
 
         // let item_datatables_init = true;
 
-        $(".dataTable").on("click", ".select-interchange-to", function() {
+        $(".dataTable").on("click", ".select-interchange-from", function() {
             let uuid = $(this).data("uuid");
 
             let code = $(this).data("code");
 
-            document.getElementById("uuid_to").value = uuid;
-            $("#search-interchange-to").html(code);
-            $("#modal_interchange_to").modal("hide");
+            document.getElementById("uuid_from").value = uuid;
+            $("#search-interchange-from").html(code);
+            $("#modal_interchange_from").modal("hide");
 
             // if (item_datatables_init == true) {
             //     item_datatables_init = false;
@@ -79,5 +79,5 @@ let IntrechangeTo = {
 };
 
 jQuery(document).ready(function() {
-    IntrechangeTo.init();
+    InterchangeFrom.init();
 });

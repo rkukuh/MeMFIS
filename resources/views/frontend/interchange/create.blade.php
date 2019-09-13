@@ -59,15 +59,15 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                                @component('frontend.common.interchange.index')
+                                                @component('frontend.common.interchange-from.index')
                                                 @slot('id', '')
                                                 @slot('name', '')
                                                 @slot('text', 'Search Part Number')
                                                 @slot('margintop', '0')
                                                 @endcomponent
                                                 @component('frontend.common.input.hidden')
-                                                @slot('id', '')
-                                                @slot('name', '')
+                                                @slot('id', 'uuid_from')
+                                                @slot('name', 'uuid_from')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -79,11 +79,11 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 @component('frontend.common.input.textarea')
-                                                @slot('id', 'description')
+                                                @slot('id', 'description-from')
                                                 @slot('text', 'Description')
-                                                @slot('name', 'description')
+                                                @slot('name', 'description-from')
                                                 @slot('rows', '5')
-                                                @slot('id_error', 'description')
+                                                @slot('id_error', 'description-from')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -95,15 +95,15 @@
                                                 </label>
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
-                                                @component('frontend.common.interchange.index')
+                                                @component('frontend.common.interchange-to.index')
                                                 @slot('id', '')
                                                 @slot('name', '')
                                                 @slot('text', 'Search Part Number')
                                                 @slot('margintop', '0')
                                                 @endcomponent
                                                 @component('frontend.common.input.hidden')
-                                                @slot('id', '')
-                                                @slot('name', '')
+                                                @slot('id', 'uuid_to')
+                                                @slot('name', 'uuid_to')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -115,11 +115,11 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 @component('frontend.common.input.textarea')
-                                                @slot('id', 'description')
+                                                @slot('id', 'description-to')
                                                 @slot('text', 'Description')
-                                                @slot('name', 'description')
+                                                @slot('name', 'description-to')
                                                 @slot('rows', '5')
-                                                @slot('id_error', 'description')
+                                                @slot('id_error', 'description-to')
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -128,8 +128,8 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 @component('frontend.common.input.checkbox')
-                                                @slot('id', 'is_stock')
-                                                @slot('name', 'is_stock')
+                                                @slot('id', '2way')
+                                                @slot('name', '2way')
                                                 @slot('size','12')
                                                 @slot('text', '2-Way Interchange')
                                                 @endcomponent
@@ -164,3 +164,6 @@
     </div>
 </div>
 @endsection
+@push('footer-scripts')
+    <script src="{{ asset('js/frontend/interchange/create.js')}}"></script>
+@endpush
