@@ -12,7 +12,7 @@ use App\Models\Repeat;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class TaskCardsCNimport implements ToModel, WithHeadingRow
+class TaskCardsCPCPTriganaimport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -189,6 +189,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                     ->where('name', 'Basic')->first();
             }
         }
+        
 
         $additionals = [];
         $additionals["internal_number"] = "";
