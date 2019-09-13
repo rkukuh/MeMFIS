@@ -48,18 +48,18 @@ let NonRoutineWorkpackage = {
                 }
             },
             columns: [{
-                    field: 'number',
+                    field: 'eo_header.number',
                     title: 'Taskcard Number',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
+                    field: 'eo_header.title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'task.name',
+                    field: 'eo_header.task_id',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
@@ -138,18 +138,18 @@ let NonRoutineWorkpackage = {
                 }
             },
             columns: [{
-                    field: 'number',
+                    field: 'eo_header.number',
                     title: 'Taskcard Number',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
+                    field: 'eo_header.title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'task.name',
+                    field: 'eo_header.task_id',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
@@ -227,18 +227,18 @@ let NonRoutineWorkpackage = {
                 }
             },
             columns: [{
-                    field: 'number',
+                    field: 'eo_header.number',
                     title: 'Taskcard Number',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
+                    field: 'eo_header.title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'task.name',
+                    field: 'eo_header.task_id',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
