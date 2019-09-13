@@ -57,7 +57,7 @@
                             @endphp
 
                         @if ($active != null)
-                        <img src="{{$active}}" class="m--img-rounded m--marginless" alt="{{$active}}" width="13%" style="position:absolute;top:22px;left:12px;border:4px solid white;z-index: 1;">    
+                        <img src="{{$active}}" class="m--img-rounded m--marginless" alt="{{$active}}" width="13%" style="position:absolute;top:22px;left:12px;border:4px solid white;z-index: 1;height:175px">    
                         @else
                         <img src="{{ asset('assets/metronic/app/media/img/users/user5.jpg') }}" class="m--img-rounded m--marginless" alt="" width="13%" style="position:absolute;top:22px;left:12px;border:4px solid white;z-index: 1;">
                         @endif
