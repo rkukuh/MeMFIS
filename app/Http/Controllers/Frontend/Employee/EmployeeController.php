@@ -581,6 +581,12 @@ class EmployeeController extends Controller
             $document_termination = $employee_termination->getMedia('');
         }
         
+        //EMPLOYEE PHOTO PROFILE
+        $photo_profile = [];
+
+        if($employee->getFirstMedia('photo_profile_active')){
+            $photo_profile['active'] = $employee->getFirstMedia('photo_profile_active')->getUrl(); 
+        }
 
          return view('frontend.employee.employee.show',[
             'employee' => $employee,
@@ -603,7 +609,8 @@ class EmployeeController extends Controller
             'bank' => $bank,
             'bank_history' => $bank_history,
             'employee_termination' => $employee_termination,
-            'document_termination' => $document_termination
+            'document_termination' => $document_termination,
+            'photo_profile' => $photo_profile
             ]);
     }
 
@@ -1050,6 +1057,29 @@ class EmployeeController extends Controller
             $r++;
         }
 
+        //EMPLOYEE PHOTO PROFILE
+        $photo_profile = [];
+
+        if($employee->getFirstMedia('photo_profile_1')){
+            $photo_profile['profile_1'] = $employee->getFirstMedia('photo_profile_1')->getUrl(); 
+        }
+
+        if($employee->getFirstMedia('photo_profile_2')){
+            $photo_profile['profile_2'] = $employee->getFirstMedia('photo_profile_2')->getUrl(); 
+        }
+
+        if($employee->getFirstMedia('photo_profile_3')){
+            $photo_profile['profile_3'] = $employee->getFirstMedia('photo_profile_3')->getUrl(); 
+        }
+
+        if($employee->getFirstMedia('photo_profile_4')){
+            $photo_profile['profile_4'] = $employee->getFirstMedia('photo_profile_4')->getUrl(); 
+        }
+
+        if($employee->getFirstMedia('photo_profile_active')){
+            $photo_profile['active'] = $employee->getFirstMedia('photo_profile_active')->getUrl(); 
+        }
+
         return view('frontend.employee.employee.edit',[
         'employee' => $employee,
         'age' => $age,
@@ -1070,7 +1100,8 @@ class EmployeeController extends Controller
         'workshift_history' => $workshift_history,
         'account' => $account,
         'bank' => $bank,
-        'bank_history' => $bank_history
+        'bank_history' => $bank_history,
+        'photo_profile' => $photo_profile
         ]);
     }
 

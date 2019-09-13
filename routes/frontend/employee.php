@@ -43,6 +43,7 @@ Route::name('frontend.')->group(function () {
                     Route::resource('/{employee}/bank', 'EmployeeBankController');
                     Route::resource('/{employee}/workshift', 'EmployeeWorkshiftController');
                     Route::resource('/{employee}/termination', 'EmployeeTerminationController');
+                    Route::resource('/{employee}/photo-profile', 'EmployeeProfileController');
                 });
 
             });
