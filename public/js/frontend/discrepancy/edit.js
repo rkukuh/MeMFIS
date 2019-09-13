@@ -20,7 +20,7 @@ let Discrepancy = {
             let description = $('#description').val();
             let complaint = $('#complaint').val();
             let other = $('#other_text').val();
-
+            
             let is_rii;
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;

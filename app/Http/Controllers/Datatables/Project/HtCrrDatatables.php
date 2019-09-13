@@ -7,6 +7,7 @@ use App\Models\HtCrr;
 use App\Models\Project;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
+use App\Models\Item;    
 use App\Http\Controllers\Controller;
 
 class HtCrrDatatables extends Controller
@@ -18,8 +19,12 @@ class HtCrrDatatables extends Controller
      */
     public function index(Project $project)
     {
-        $HtCrr =HtCrr::where('project_id',$project->id)->where('parent_id',null)->get();
+        $HtCrr = HtCrr::where('project_id',$project->id)->where('parent_id',null)->get();
         foreach($HtCrr as $data){
+            
+            $item = Item::where('code', $data->part_number)->first();
+            $data->item_description = $item->name;
+
             if(isset($data->skills) ){
                 if(sizeof($data->skills) == 3){
                     $data->skill_name .= "ERI";
@@ -33,12 +38,7 @@ class HtCrrDatatables extends Controller
 
             }
 
-            // foreach($discrepancy->tools as $material){
-            //     $unit_id = $material->pivot->unit_id;
-            //     $material->pivot->unit .= Unit::find($unit_id)->name;
-            // }
-            
-            $removal =HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','removal')->first()->id)->first()->estimation_manhour;
+            $removal = HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','removal')->first()->id)->first()->estimation_manhour;
 
             $data->removal.= $removal;
 

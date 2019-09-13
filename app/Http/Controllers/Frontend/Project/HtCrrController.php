@@ -44,6 +44,7 @@ class HtCrrController extends Controller
      */
     public function store(HtCrrStore $request)
     {
+
         $number = HtCrr::withTrashed()->where('parent_id',null)->count()+1;
         $request->merge(['code' => DocumentNumber::generate('JCRI-',$number)]);
         $request->merge(['part_number' => Item::where('id',$request->part_number)->first()->code]);
@@ -56,6 +57,7 @@ class HtCrrController extends Controller
             'progressed_by' => Auth::id()
         ]));
 
+      
         if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
             $htcrr->skills()->attach(Type::where('code','electrical')->first()->id);
             $htcrr->skills()->attach(Type::where('code','radio')->first()->id);
@@ -125,6 +127,7 @@ class HtCrrController extends Controller
                 $htcrr->skill_id .= $htcrr->skills->first()->skill_id;
             }
 
+            // dd($htcrr);
         return response()->json($htcrr);
     }
 
