@@ -52,11 +52,15 @@ class OldDataImport extends Command
         $this->line('Importing: Task Cards for Boeing');
         app()->make(OldDataController::class)->taskCardsBoeing();
 
+        $this->line('Importing: Task Cards CPCP for Trigana');
+        app()->make(OldDataController::class)->taskCardsCPCPTrigana();
+
         $this->line('Importing: Task Cards for CN');
         app()->make(OldDataController::class)->taskCardsCN();
 
         $this->line('Importing: Materials and Tools for CN');
         app()->make(OldDataController::class)->materialsAndToolsCN();
+        
 
         $this->line('Syncing: Task Card\'s Items for CN');
         app()->make(OldDataController::class)->taskCardCNItems();
