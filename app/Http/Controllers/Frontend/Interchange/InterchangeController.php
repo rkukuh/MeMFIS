@@ -50,11 +50,11 @@ class InterchangeController extends Controller
             ]);
 
             return response()->json($interchange);
+
         }else{
             $interchange =  Interchange::create($request->all());
 
             return response()->json($interchange);
-
         }
 
     }
@@ -76,9 +76,13 @@ class InterchangeController extends Controller
      * @param  \App\Models\Interchange  $interchange
      * @return \Illuminate\Http\Response
      */
-    public function edit(Interchange $interchange)
+    public function edit(Item $item,Item $alternateItem)
     {
-        return view('frontend.interchange.edit');
+        $Interchange = Interchange::where('item_id',$item->id)->where('alternate_item_id',$alternateItem->id)->first();
+
+        return view('frontend.interchange.edit', [
+            'Interchange' => $Interchange,
+        ]);
     }
 
     /**
@@ -99,8 +103,10 @@ class InterchangeController extends Controller
      * @param  \App\Models\Interchange  $interchange
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Interchange $interchange)
+    public function destroy(Item $item,Item $alternateItem)
     {
-        //
+        $Interchange = Interchange::where('item_id',$item->id)->where('alternate_item_id',$alternateItem->id)->first()->delete();
+
+        return response()->json($Interchange);
     }
 }

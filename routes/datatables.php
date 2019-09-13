@@ -38,7 +38,7 @@ Route::name('datatables.')->group(function () {
         Route::get('/role', 'RoleDatatables@index')->name('role.index');
         Route::get('/bank', 'BankDatatables@index')->name('bank.index');
         Route::get('/school-type', 'SchoolTypeDatatables@index')->name('school.index');
-        
+
         /** LICENSE */
 
         Route::get('/general-license', 'GeneralLicenseDatatables@index')->name('general-license.index');
@@ -234,6 +234,24 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{item}/units', 'ItemUnitDatatables@index')->name('units.index');
                 Route::get('/{item}/prices', 'ItemPriceDatatables@index')->name('prices.index');
                 Route::get('/{item}/storages', 'ItemStorageDatatables@index')->name('storages.index');
+
+            });
+
+        });
+
+        /** INTERCHANGE */
+
+        Route::name('interchange.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'interchange',
+                'namespace' => 'Interchange'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'InterchangeDatatables@index')->name('all');
 
             });
 

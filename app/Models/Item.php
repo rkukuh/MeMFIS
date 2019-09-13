@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 use Spatie\Tags\HasTags;
-use App\Models\Pivot\Interchange;
+use App\Models\Pivots\Interchange;
 use Spatie\MediaLibrary\Models\Media;
 use App\Models\Pivots\PurchaseOrderItem;
 use Spatie\MediaLibrary\HasMedia\HasMedia;

@@ -38,7 +38,7 @@ let intechange = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/goods-received/'+response.uuid+'/edit';
+                        window.location.href = '/interchange';
                     }
                 }
             });
