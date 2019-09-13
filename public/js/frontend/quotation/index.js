@@ -122,7 +122,7 @@ let Quotation = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'conducted_by',
                     title: 'Approve By',
                     sortable: 'asc',
                     filterable: !1,
