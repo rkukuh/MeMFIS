@@ -91,6 +91,7 @@ class Employee extends MemfisModel implements HasMedia
      * @return mixed
      */
     public function approvals()
+    
     {
         return $this->hasMany(Approval::class);
     }
@@ -274,7 +275,7 @@ class Employee extends MemfisModel implements HasMedia
      */
     public function employee_termination()
     {
-        return $this->belongsTo(EmployeeTermination::class);
+        return $this->hasMany(EmployeeTermination::class);
     }
 
     /**

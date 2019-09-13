@@ -71,7 +71,7 @@ let EmploymentStatus = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -175,7 +175,9 @@ let EmploymentStatus = {
                 $('.labelModal').children('span').text('Edit')
                 $('.modal-change').attr('id','update')
                 let triggerid = $(this).data('uuid')
-            
+                
+                $('#employee_uuid').val(triggerid)
+
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -186,7 +188,7 @@ let EmploymentStatus = {
                         $('#uuid').val(data.uuid)
                         $('#code_statuses').val(data.code)
                         $('#name').val(data.name)
-                        $('#description').html(data.description)
+                        $('#description').val(data.description)
                     },
                     error: function (jqXhr, json, errorThrown) {
                         // this are default for ajax errors
@@ -205,8 +207,8 @@ let EmploymentStatus = {
                 let code = $('input[name=code_statuses]').val()
                 let name = $('input[name=name]').val()
                 let description = $('#description').val()
-                let triggerid = $('#edit-employee-status').data('uuid')
-                
+                let triggerid = $('input[name=employee_uuid]').val()
+    
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

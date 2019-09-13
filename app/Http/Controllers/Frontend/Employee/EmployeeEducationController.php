@@ -78,7 +78,7 @@ class EmployeeEducationController extends Controller
         $education = EmployeeSchool::where('uuid',$request->education)->first();
         $media = null;
         if(isset($education->getMedia('')->first()->name)){
-            $media = $education->getMedia('')->first()->name;
+            $media = $education->getMedia('')->first()->file_name;
         }
 
         return response()->json(['data' => $education, 'media' => $media]);
