@@ -119,7 +119,7 @@
                                     </label>
 
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', $taskrelease->jobcard->taskcard->sequence)
+                                        @slot('text', $taskrelease->jobcard->jobcardable->sequence)
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -158,9 +158,9 @@
                                         Area/Zone
                                     </label>
 
-                                    @if (isset($taskrelease->jobcard->taskcard->workarea->name))
+                                    @if (isset($taskrelease->jobcard->jobcardable->workarea->name))
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $taskrelease->jobcard->taskcard->workarea->name)
+                                            @slot('text', $taskrelease->jobcard->jobcardable->workarea->name)
                                         @endcomponent
                                     @else
                                         @component('frontend.common.label.data-info')
@@ -185,10 +185,10 @@
                                     </label>
 
                                     @component('frontend.common.label.data-info')
-                                        @if(sizeof($taskrelease->jobcard->taskcard->skills) == 3)
+                                        @if(sizeof($taskrelease->jobcard->jobcardable->skills) == 3)
                                             @slot('text', 'ERI')
-                                        @elseif(sizeof($taskrelease->jobcard->taskcard->skills) == 1)
-                                            @slot('text', $taskrelease->jobcard->taskcard->skills[0]->name)
+                                        @elseif(sizeof($taskrelease->jobcard->jobcardable->skills) == 1)
+                                            @slot('text', $taskrelease->jobcard->jobcardable->skills[0]->name)
                                         @else
                                             @include('frontend.common.label.data-info-nodata')
                                         @endif

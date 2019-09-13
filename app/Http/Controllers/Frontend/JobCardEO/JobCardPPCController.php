@@ -50,8 +50,8 @@ class JobCardPPCController extends Controller
     {
         return view('frontend.job-card.ppc.show', [
             'jobcard' => $jobcard,
-            'materials' => $jobcard->taskcard->materials,
-            'tools' => $jobcard->taskcard->tools,
+            'materials' => $jobcard->jobcardable->materials,
+            'tools' => $jobcard->jobcardable->tools,
         ]);
     }
 

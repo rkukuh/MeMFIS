@@ -57,12 +57,12 @@ class RIIReleaseDefectCardDatatables extends Controller
 
             $defectcard->customer_name .= $defectcard->jobcard->quotation->quotationable->customer->name;
 
-            if(isset($defectcard->jobcard->taskcard->skills) ){
-                if(sizeof($defectcard->jobcard->taskcard->skills) == 3){
+            if(isset($defectcard->jobcard->jobcardable->skills) ){
+                if(sizeof($defectcard->jobcard->jobcardable->skills) == 3){
                     $defectcard->jobcard->skill_name .= "ERI";
                 }
-                else if(sizeof($defectcard->jobcard->taskcard->skills) == 1){
-                    $defectcard->jobcard->skill_name .= $defectcard->jobcard->taskcard->skills[0]->name;
+                else if(sizeof($defectcard->jobcard->jobcardable->skills) == 1){
+                    $defectcard->jobcard->skill_name .= $defectcard->jobcard->jobcardable->skills[0]->name;
                 }
                 else{
                     $defectcard->jobcard->skill_name .= '';

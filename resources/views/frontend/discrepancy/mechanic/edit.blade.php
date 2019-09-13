@@ -183,7 +183,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', $discrepancy->jobcard->taskcard->work_area)
+                                                @slot('text', $discrepancy->jobcard->jobcardable->work_area)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">

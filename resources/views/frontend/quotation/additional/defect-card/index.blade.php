@@ -25,9 +25,9 @@
                                 Manhours Rate
                             </label>
                             @component('frontend.common.input.number')
-                                @slot('name', 'manhour_rate')
                                 @slot('id', 'manhour_rate')
-                                @if($quotation->data_defectcard)
+                                @slot('name', 'manhour_rate')
+                                @if(isset($quotation->data_defectcard))
                                     @slot('value', json_decode($quotation->data_defectcard)->manhour_rate )
                                 @endif
                                 @slot('id_error', 'manhour_rate')

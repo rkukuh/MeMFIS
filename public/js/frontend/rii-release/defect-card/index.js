@@ -71,8 +71,8 @@ let RiiRelease = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        if(t.jobcard.taskcard.additionals){
-                            let company = t.jobcard.taskcard.additionals;
+                        if(t.jobcard.jobcardable.additionals){
+                            let company = t.jobcard.jobcardable.additionals;
                             obj = JSON.parse(company);
                             // console.log()
                             return (

@@ -71,12 +71,12 @@ let TaskCard = {
                     }
                 },
                 {
-                    field: 'jobcard.taskcard.number',
+                    field: 'jobcard.jobcardable.number',
                     title: 'Taskcard No',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/taskcard/'+t.jobcard.taskcard.uuid+'">' + t.jobcard.taskcard.number + "</a>"
+                        return '<a href="/taskcard/'+t.jobcard.jobcardable.uuid+'">' + t.jobcard.jobcardable.number + "</a>"
                     }
                 },
                 {
@@ -86,7 +86,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.taskcard.type.name',
+                    field: 'jobcard.jobcardable.type.name',
                     title: 'TC Type',
                     sortable: 'asc',
                     filterable: !1,
