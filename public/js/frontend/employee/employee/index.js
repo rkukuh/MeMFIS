@@ -67,7 +67,7 @@ let Employee = {
                         }
 
                         return '<div class="row"><div class="col-4"><div class="media align-items-center">'+
-                        '<img alt="Image placeholder" src="'+ photo +'" class="m--img-rounded m--marginless">'+
+                        '<img alt="Image placeholder" src="'+ photo +'" class="m--img-rounded m--marginless" style="width:100%;height:75px">'+
                         '</div></div><div class="col-8 align-self-center"><span>'+ employee_name +'</span><br>'+
                         '<span><i class="la la-user"></i><span><a href="/employee/'+t.uuid+'">'+ t.code +'</span></span></div></div>'
                     }
