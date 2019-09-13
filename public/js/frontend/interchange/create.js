@@ -3,8 +3,6 @@ let intechange = {
         $('.footer').on('click', '.add-interchange', function () {
             let uuid_from = $('input[name=uuid_from]').val();
             let uuid_to = $('input[name=uuid_to]').val();
-            let description_from = $('#description-from').val();
-            let description_to = $('#description-to').val();
             if (document.getElementById("2way").checked) {
                 way = 1;
             } else {
@@ -18,10 +16,8 @@ let intechange = {
                 url: '/interchange',
                 type: 'POST',
                 data: {
-                    uuid_from:uuid_from,
-                    uuid_to:uuid_to,
-                    description_from:description_from,
-                    description_to:description_to,
+                    item_id:uuid_from,
+                    alternate_item_id:uuid_to,
                     way:way
                 },
                 success: function (response) {

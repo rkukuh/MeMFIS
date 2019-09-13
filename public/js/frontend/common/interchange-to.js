@@ -30,6 +30,8 @@ let IntrechangeTo = {
                             t.uuid +
                             '" data-code="' +
                             t.code +
+                            '" data-desc_to="' +
+                            t.description +
                             '" >\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                         );
                     }
@@ -58,9 +60,11 @@ let IntrechangeTo = {
             let uuid = $(this).data("uuid");
 
             let code = $(this).data("code");
+            let desc_to = $(this).data("desc_to");
 
             document.getElementById("uuid_to").value = uuid;
             $("#search-interchange-to").html(code);
+            $("#description-to").val(desc_to);
             $("#modal_interchange_to").modal("hide");
 
             // if (item_datatables_init == true) {

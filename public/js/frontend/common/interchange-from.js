@@ -30,6 +30,8 @@ let InterchangeFrom = {
                             t.uuid +
                             '" data-code="' +
                             t.code +
+                            '" data-desc_from="' +
+                            t.description +
                             '" >\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                         );
                     }
@@ -59,8 +61,11 @@ let InterchangeFrom = {
 
             let code = $(this).data("code");
 
+            let desc_from = $(this).data("desc_from");
+
             document.getElementById("uuid_from").value = uuid;
             $("#search-interchange-from").html(code);
+            $("#description-from").val(desc_from);
             $("#modal_interchange_from").modal("hide");
 
             // if (item_datatables_init == true) {
