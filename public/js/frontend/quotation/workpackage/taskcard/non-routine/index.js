@@ -274,6 +274,186 @@ let NonRoutineWorkpackage = {
             table.reload();
         });
 
+        $('.ea_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/si/',
+                        map: function (raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [{
+                    field: 'eo_header.number',
+                    title: 'Taskcard Number',
+                    sortable: !1,
+                },
+                {
+                    field: 'eo_header.title',
+                    title: 'Title',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'eo_header.task_id',
+                    title: 'Task',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'Manhour',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'description',
+                    title: 'Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.description) {
+                            data = strtrunc(t.description, 50);
+                            return (
+                                '<p>' + data + '</p>'
+                            );
+                        }
+
+                        return ''
+                    }
+                },
+            ]
+        });
+        $('#m_accordion_5_item_6_head').on('click', function () {
+            let table = $('.si_datatable').mDatatable();
+
+            table.originalDataSet = [];
+            table.reload();
+        });
+
+        $('.eo_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/si/',
+                        map: function (raw) {
+                            let dataSet = raw;
+
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
+
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !0,
+                serverFiltering: !0,
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [{
+                    field: 'eo_header.number',
+                    title: 'Taskcard Number',
+                    sortable: !1,
+                },
+                {
+                    field: 'eo_header.title',
+                    title: 'Title',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'eo_header.task_id',
+                    title: 'Task',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'estimation_manhour',
+                    title: 'Manhour',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'description',
+                    title: 'Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.description) {
+                            data = strtrunc(t.description, 50);
+                            return (
+                                '<p>' + data + '</p>'
+                            );
+                        }
+
+                        return ''
+                    }
+                },
+            ]
+        });
+        $('#m_accordion_5_item_7_head').on('click', function () {
+            let table = $('.si_datatable').mDatatable();
+
+            table.originalDataSet = [];
+            table.reload();
+        });
+
         $('.ht_crr_datatable').mDatatable({
             data: {
                 type: 'remote',
