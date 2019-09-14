@@ -49,7 +49,18 @@
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body p-0" style="position:relative">
                         <div class="m-card-user__pic mx-5">
-                            <img src="{{ asset('assets/metronic/app/media/img/users/user5.jpg') }}" class="m--img-rounded m--marginless" alt="" width="13%" style="position:absolute;top:22px;left:12px;border:4px solid white;z-index: 1;">
+                                @php
+                                $active = null;
+                                if(isset($photo_profile['active'])){
+                                    $active = $photo_profile['active'];
+                                }
+                            @endphp
+
+                        @if ($active != null)
+                        <img src="{{$active}}" class="m--img-rounded m--marginless" alt="{{$active}}" width="13%" style="position:absolute;top:22px;left:12px;border:4px solid white;z-index: 1;">    
+                        @else
+                        <img src="{{ asset('assets/metronic/app/media/img/users/user5.jpg') }}" class="m--img-rounded m--marginless" alt="" width="13%" style="position:absolute;top:22px;left:12px;border:4px solid white;z-index: 1;">
+                        @endif
                         </div>
                         <div class="jumbotron mb-0 pt-4" style="background:#294294;height:170px;">
                             <div class="row">

@@ -16,8 +16,8 @@ class LeaveType extends MemfisModel
         'based',
         'leave_period',
         'prorate_leave',
-        'distribute_evenly',
-        'bacK_date',
+        'distribute_evently',
+        'back_date',
         'description'
     ];
 

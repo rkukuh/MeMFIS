@@ -40,7 +40,7 @@ class LeaveTypeController extends Controller
         $leaveType = LeaveType::create($request->all());
 
         // TODO: Return error message as JSON
-        return response()->json($leaveType);
+        return response()->json($request);
     }
 
     /**
