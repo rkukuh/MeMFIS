@@ -196,7 +196,7 @@ class TaskCardRoutineController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        $aircraft_taskcards = $access_taskcards = $zone_taskcards = $relation_taskcards = [];
+        $aircraft_taskcards = $access_taskcards = $zone_taskcards = $relation_taskcards = $station = [];
 
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
@@ -217,10 +217,9 @@ class TaskCardRoutineController extends Controller
         foreach($taskCard->stations as $i => $station){
             $station[$i] =  $station->name;
         }
-        // dd($taskCard->type->name);
 
         return view('frontend.task-card.routine.show', [
-            // 'stations' => $stations,
+            'stations' => $station,
             'types' => $this->type,
             'tasks' => $this->task,
             'taskcard' => $taskCard,
@@ -245,6 +244,7 @@ class TaskCardRoutineController extends Controller
      */
     public function edit(TaskCard $taskCard)
     {
+        // dd($taskCard->stations);
         $tc_stations = $aircraft_taskcards = [];
 
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
@@ -374,7 +374,6 @@ class TaskCardRoutineController extends Controller
 
             if(is_array($request->threshold_type)){
                 for ($i=0; $i < sizeof($request->threshold_type) ; $i++) {
-                    dump($request->threshold_type[$i]);
                     if($request->threshold_type[$i] !== "Select Threshold"){
                         if($request->threshold_amount[$i] == ''){
                             $request->threshold_amount[$i] = null;
@@ -401,15 +400,19 @@ class TaskCardRoutineController extends Controller
                 }
             }
 
-            if(is_array($request->station) && sizeof($request->station) > 0){
+            $request->station = explode(',', $request->station);
+            if(sizeof($request->station) > 0){
+                $station_array = [];
                 foreach ($request->applicability_airplane as $airplane) {
                     if(isset($request->station)){
-                        $station = Station::firstOrCreate(
-                            ['name' => $request->station, 'stationable_id' => $airplane, 'stationable_type' => 'App\Models\Aircraft']
-                        );
+                        foreach($request->station as $data){
+                            $station = Station::firstOrCreate(
+                                ['name' => $data, 'stationable_id' => $airplane, 'stationable_type' => 'App\Models\Aircraft']
+                            )->id;
+                            array_push($station_array, $station);
+                        }
                     }
-
-                    $taskCard->stations()->sync($station);
+                    $taskCard->stations()->sync($station_array);
                 }
             }
 
