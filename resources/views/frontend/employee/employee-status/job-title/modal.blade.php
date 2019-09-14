@@ -15,6 +15,11 @@
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
+                                @component('frontend.common.input.hidden')
+                                @slot('id', 'employee_uuid')
+                                @slot('name', 'employee_uuid')
+                                @endcomponent
+                                
                                 <label class="form-control-label">
                                     Job Title Code  @include('frontend.common.label.required')
                                 </label>
