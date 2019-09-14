@@ -482,7 +482,7 @@
                                             </label>
 
                                             <select id="station" name="station" class="form-control m-select2" multiple style="width:100%">
-                                                @foreach ( $stations as $station)
+                                                @foreach ( $taskcard->stations as $station)
                                                     <option value="{{ $station->uuid }}" @if( in_array($station->uuid, $tc_stations) ) selected @endif>
                                                         {{ $station->name }}
                                                     </option>
