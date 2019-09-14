@@ -310,8 +310,7 @@ class ProjectHMWorkPackageController extends Controller
         $project_workpackage->update([
             'performance_factor' =>  $request->performa_used,
             'total_manhours' =>  $request->manhour,
-            'total_manhours_with_performance_factor' =>  $request->total,
-            'manhour_price_list' => $request -> $manhour_price
+            'total_manhours_with_performance_factor' =>  $request->total
             ]);
 
         return response()->json($project_workpackage);
