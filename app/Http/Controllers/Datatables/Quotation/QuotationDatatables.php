@@ -23,7 +23,7 @@ class QuotationDatatables extends Controller
      */
     public function index()
     {
-        $quotations = Quotation::with('quotationable')->withTrashed()->get();
+        $quotations = Quotation::with('quotationable','approvals')->withTrashed()->get();
 
         foreach($quotations as $quotation){
             if($quotation->deleted_at <> null){
@@ -31,8 +31,15 @@ class QuotationDatatables extends Controller
             }
             else if(!empty($quotation->approvals->toArray())){
                 $quotation->status .= 'Approved';
+
+                if(isset($quotation->approvals)){
+                    $conducted_by  = User::find($quotation->approvals->first()->conducted_by);
+                    $quotation->conducted_by .= $conducted_by->name;
+                }else{
+                    $quotation->conducted_by .= '';
+                }
             }else{
-                $quotation->status .= '';
+                $quotation->status .= 'Not Approved';
 
             }
             $quotation->customer = $quotation->quotationable->customer;

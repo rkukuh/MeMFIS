@@ -127,6 +127,7 @@ class HtCrrController extends Controller
                 $htcrr->skill_id .= $htcrr->skills->first()->skill_id;
             }
 
+            // dd($htcrr);
         return response()->json($htcrr);
     }
 

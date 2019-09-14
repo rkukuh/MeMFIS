@@ -29,21 +29,26 @@ class ProjectDatatables extends Controller
                 $project->status .= 'Project Open';
             }elseif(sizeof($project->approvals->toArray()) == 1){
                 $project->status .= 'Project Approved';
+                $project->conducted_by.= User::find($project->approvals[0]->conducted_by)->name;
+
             }elseif(sizeof($project->approvals->toArray()) == 2){
                 $project->status .= 'Quotation Approved';
+                $project->conducted_by.= User::find($project->approvals[0]->conducted_by)->name;
+
             }
             else{
                 $project->status .= (sizeof($project->approvals->toArray())).'?'; // *Find bug size of approve
             }
 
             $project->aircraft_type.= $project->aircraft->name;
-
+            
             if($project->audits->first()->user_id ==  null){
                 $project->created_by.= "System";
 
             }else{
                 $project->created_by.= User::find($project->audits->first()->user_id)->name;
             }
+            
 
             if($project->parent_id ==  null){
                 $project->project_type.= "Project";

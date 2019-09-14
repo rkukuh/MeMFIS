@@ -148,10 +148,10 @@ let Workpackage = {
                 template: function (t, e, i) {
                     return (
                       
-                        '<button data-toggle="modal" data-target="#modal_ht_crr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid_htcrr=' +
+                        '<button data-toggle="modal" data-target="#modal_ht_crr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-htcrr" title="Edit" data-uuid_htcrr=' +
                         t.uuid +
                         '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                        '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid_htcrr="' + t.uuid + '">' +
+                        '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-htcrr" title="Delete" data-uuid_htcrr="' + t.uuid + '">' +
                         '<i class="la la-trash"></i>' +
                         '</a>'
                     );
@@ -252,8 +252,21 @@ let Workpackage = {
                         toastr.success('HT/CRR has been created.', 'Success', {
                             timeOut: 5000
                         });
-
+                        
                         $('#modal_ht_crr').modal('hide');
+
+                        $('#modal_ht_crr').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end()
+                            .find("select")
+                                .select2('val','All')
+                                .end();
+                        })
 
                         let table = $('.ht_crr_datatable').mDatatable();
 
@@ -266,7 +279,7 @@ let Workpackage = {
             });
         });
 
-        let remove = $('.ht_crr_datatable').on('click', '.delete', function () {
+        let remove = $('.ht_crr_datatable').on('click', '.delete-htcrr', function () {
             let uuid_htcrr = $(this).data('uuid_htcrr');
 
             swal({
@@ -312,7 +325,7 @@ let Workpackage = {
         });
 
 
-        $('.ht_crr_datatable').on('click', '.edit', function () {
+        $('.ht_crr_datatable').on('click', '.edit-htcrr', function () {
             $('.btn-success').removeClass('add-htcrr');
             $('.btn-success').removeClass('add');
             $('.btn-success').addClass('edit-htcrr');
@@ -320,7 +333,7 @@ let Workpackage = {
 
 
             let uuid_htcrr = $(this).data('uuid_htcrr');
-
+         
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -329,12 +342,13 @@ let Workpackage = {
                 url: '/htcrr/' + uuid_htcrr + '/edit/',
                 success: function (data) {
                     document.getElementById('description').value = data.description;
-                    document.getElementById('mhrs').value = data.estimation_manhour;
                     document.getElementById('position').value = data.position;
                     document.getElementById('installation').value = data.installation_mhrs;
                     document.getElementById('removal').value = data.removal_mhrs;
+                    document.getElementById('sn_off').value = data.serial_number;
                     document.getElementById('htcrr_uuid').value = data.uuid;
-
+                    
+                   
 
                     $.ajax({
                         url: '/get-items/',
@@ -380,6 +394,7 @@ let Workpackage = {
             });
 
         });
+       
         $('.modal-footer').on('click', '.edit-htcrr', function () {
             let htcrr_uuid = $('#htcrr_uuid').val();
             let pn = $('#item').val();
@@ -389,6 +404,17 @@ let Workpackage = {
             let description = $('#description').val();
             let otr_certification = $('#otr_certification').val();
             let mhrs = parseFloat(removal) + parseFloat(installation);
+            let is_rii;
+            if (document.getElementById("is_rii").checked) {
+                is_rii = 1;
+            } else {
+                is_rii = 0;
+            }
+            let propose = [];
+            $.each($("input[name='propose[]']:checked"), function() {
+                propose.push($(this).val());
+              });
+            // console.log(propose);
 
             $.ajax({
                 headers: {

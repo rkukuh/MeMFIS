@@ -21,9 +21,10 @@ class HtCrrDatatables extends Controller
     {
         $HtCrr = HtCrr::where('project_id',$project->id)->where('parent_id',null)->get();
         foreach($HtCrr as $data){
+            
             $item = Item::where('code', $data->part_number)->first();
             $data->item_description = $item->name;
-            
+
             if(isset($data->skills) ){
                 if(sizeof($data->skills) == 3){
                     $data->skill_name .= "ERI";
@@ -36,12 +37,6 @@ class HtCrrDatatables extends Controller
                 }
 
             }
-
-            // foreach($HtCrr as $name_item){
-            //     $name_item->part_number;
-            // }
-
-            // dd($name_item);
 
             $removal = HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','removal')->first()->id)->first()->estimation_manhour;
 

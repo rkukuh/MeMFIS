@@ -221,9 +221,9 @@
 @endsection
 
 @push('footer-scripts')
-    <script>
-        let workPackage_uuid = '{{ $workPackage->uuid }}';
-    </script>
-    <script src="{{ asset('js/frontend/project/routine/summary.js') }}"></script>
-    <script src="{{ asset('js/frontend/project/item/form-reset.js') }}"></script>
+<script>
+    let workPackage_uuid = '{{ $workPackage->uuid }}';
+</script>
+<script src="{{ asset('js/frontend/workpackage/routine/summary.js') }}"></script>
+<script src="{{ asset('js/frontend/workpackage/item/form-reset.js') }}"></script>
 @endpush

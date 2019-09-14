@@ -42,7 +42,7 @@
                     @slot('name', 'rate')
                     @slot('id', 'rate')
                     @if(!empty($quotation->data_htcrr))
-                    @slot('value', json_decode($quotation->data_htcrr)->manhour_rate)
+                    @slot('value', json_decode($quotation->data_htcrr)->manhour_rate_amount)
                     @endif
                     @slot('id_error', 'rate')
                 @endcomponent

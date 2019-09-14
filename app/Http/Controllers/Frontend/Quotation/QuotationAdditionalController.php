@@ -291,69 +291,14 @@ class QuotationAdditionalController extends Controller
             'is_approved' => 1
         ]));
 
-        $project = Project::find($quotation->quotationable_id);
-        foreach($project->workpackages as $wp){
-            foreach($wp->taskcards as $tc){
+        $defect_cards = DefectCard::where('quotation_additional_id', $quotation->id)->get();
 
-                if(Type::where('id',$tc->type_id)->first()->code == "basic"){
-                    $tc_code = 'BSC';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "sip"){
-                    $tc_code = 'SIP';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "cpcp"){
-                    $tc_code = 'CPC';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "cmr"){
-                    $tc_code = 'CMR';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "awl"){
-                    $tc_code = 'AWL';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "ad"){
-                    $tc_code = 'ADT';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "sb"){
-                    $tc_code = 'SBU';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "ea"){
-                    $tc_code = 'ENA';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "eo"){
-                    $tc_code = 'ENO';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "si"){
-                    $tc_code = 'SIT';
-                }
-                else if(Type::where('id',$tc->type_id)->first()->code == "preliminary"){
-                    $tc_code = 'PRE';
-                }
-                else{
-                    $tc_code = 'DUM';
-                }
-
-                $jobcard = JobCard::create([
-                    'number' => DocumentNumber::generate('J'.$tc_code.'-', JobCard::withTrashed()->count()+1),
-                    'taskcard_id' => $tc->id,
-                    'quotation_id' => $quotation->id,
-                    'origin_taskcard' => $tc->toJson(),
-                    'origin_taskcard_items' => $tc->items->toJson(),
-                ]);
-                // // echo $tc->title.'<br>';
-                // foreach($tc->items as $item){
-                //     echo $item->name.'<br>';
-                // }
-                // dump($tc->materials->toJson());
-
-                $jobcard->progresses()->save(new Progress([
-                    'status_id' =>  Status::ofJobcard()->where('code','open')->first()->id,
-                    'progressed_by' => Auth::id()
+        foreach($defect_cards as $defect_card){
+            $defect_card->progresses()->save(new Progress([
+                'status_id' =>  Status::OfDefectCard()->where('code','open')->first()->id,
+                'progressed_by' => Auth::id()
                 ]));
-
-            }
-
         }
-
 
         return response()->json($quotation);
     }
@@ -424,6 +369,7 @@ class QuotationAdditionalController extends Controller
                 'attention' => json_decode($quotation->attention),
                 'GrandTotal' => $manhourPrice + $totalFacility + $totalMatTool
                 ]);
+                
         return $pdf->stream();
     }
 
