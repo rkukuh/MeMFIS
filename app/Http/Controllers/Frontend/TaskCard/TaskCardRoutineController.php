@@ -196,7 +196,7 @@ class TaskCardRoutineController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
-        $aircraft_taskcards = $access_taskcards = $zone_taskcards = $relation_taskcards = $station = [];
+        $aircraft_taskcards = $access_taskcards = $zone_taskcards = $relation_taskcards = [];
 
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
@@ -214,12 +214,7 @@ class TaskCardRoutineController extends Controller
             $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
         }
 
-        foreach($taskCard->stations as $i => $station){
-            $station[$i] =  $station->name;
-        }
-
         return view('frontend.task-card.routine.show', [
-            'stations' => $station,
             'types' => $this->type,
             'tasks' => $this->task,
             'taskcard' => $taskCard,
