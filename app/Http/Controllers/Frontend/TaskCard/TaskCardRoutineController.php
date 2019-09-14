@@ -180,7 +180,7 @@ class TaskCardRoutineController extends Controller
                     $taskcard->stations()->attach($station);
                 }
             }
-
+            // dd($taskcard);
             return response()->json($taskcard);
         }
 
@@ -272,12 +272,12 @@ class TaskCardRoutineController extends Controller
 
         $temp = $taskCard->stations->map(function ($stations) {
             return collect($stations->toArray())
-            ->only(['uuid'])
+            ->only(['name'])
             ->all();
         });
         $temp = array_values($temp->toArray());
         foreach($temp as $station){
-            array_push($tc_stations, $station["uuid"]);
+            array_push($tc_stations, $station["name"]);
         }
 
         return view('frontend.task-card.routine.edit', [
