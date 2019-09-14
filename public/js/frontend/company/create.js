@@ -41,6 +41,8 @@ let CompanyStructure = {
                     toastr.success('Data has been saved.', 'Succes', {
                         timeOut: 5000
                     });
+
+                    window.location.href = '/company';
                 }
             }
         });

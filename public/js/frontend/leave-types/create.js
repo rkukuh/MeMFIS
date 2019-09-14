@@ -17,7 +17,7 @@ let leaveType = {
             gender = 'all'
         }
         
-        let based = $('input[name=day]').val()
+        let based = $('input[name=day]:checked').val()
         let leave_period = $('input[name=leave_period]').val()
         
         let pro_rate = null
@@ -58,7 +58,7 @@ let leaveType = {
                 based: based,
                 leave_period: leave_period,
                 prorate_leave: pro_rate,
-                distirbute_evently: distirbute,
+                distribute_evently: distirbute,
                 back_date: back_date,
                 description: description,
             },
@@ -93,6 +93,8 @@ let leaveType = {
                     toastr.success('Data has been saved.', 'Succes', {
                         timeOut: 5000
                     });
+
+                    window.location.href='/leave-type'
                 }
             }
         });

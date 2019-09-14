@@ -140,7 +140,7 @@
                                                         @slot('id', 'distribute_evently_per_month')
                                                         @slot('name', 'distribute_evently_per_month')
                                                         @slot('size','12')
-                                                        @slot('checked', $checked_back)
+                                                        @slot('checked', $checked_distribute)
                                                         @slot('style_div','margin-top:30px')
                                                         @slot('disabled','disabled')
                                                     @endcomponent
@@ -151,6 +151,7 @@
                                                         @slot('id', 'back_date')
                                                         @slot('name', 'back_date')
                                                         @slot('size','12')
+                                                        @slot('checked', $checked_back)
                                                         @slot('style_div','margin-top:30px')
                                                         @slot('disabled','disabled')
                                                     @endcomponent
