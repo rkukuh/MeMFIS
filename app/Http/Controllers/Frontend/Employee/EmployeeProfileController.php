@@ -36,18 +36,17 @@ class EmployeeProfileController extends Controller
      */
     public function store(EmployeeProfileStore $request,Employee $employee)
     {
-
         if(!isset($request->file_input_1) && !isset($request->file_input_2) && !isset($request->file_input_3) && !isset($request->file_input_4)){
-                $active = $employee->getFirstMedia('photo_profile_active')->getUrl();
-                
+                $active = $employee->getFirstMedia('photo_profile_active')->getFullUrl();
+        
                 //Set change active picture
-                if(!$employee->getFirstMedia('photo_profile_1')){
+                if($employee->getFirstMedia('photo_profile_1') == null){
                     $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_1');
-                }else if(!$employee->getFirstMedia('photo_profile_2')){
+                }else if($employee->getFirstMedia('photo_profile_2') == null){
                     $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_2');
-                }else if(!$employee->getFirstMedia('photo_profile_3')){
+                }else if($employee->getFirstMedia('photo_profile_3') == null){
                     $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_3');
-                }else if(!$employee->getFirstMedia('photo_profile_4')){
+                }else if($employee->getFirstMedia('photo_profile_4') == null){
                     $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_4');
                 }
 
