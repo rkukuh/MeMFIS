@@ -37,41 +37,88 @@ class EmployeeProfileController extends Controller
     public function store(EmployeeProfileStore $request,Employee $employee)
     {
         if(!isset($request->file_input_1) && !isset($request->file_input_2) && !isset($request->file_input_3) && !isset($request->file_input_4)){
-                $active = $employee->getFirstMedia('photo_profile_active')->getFullUrl();
         
                 //Set change active picture
-                if($employee->getFirstMedia('photo_profile_1') == null){
-                    $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_1');
-                }else if($employee->getFirstMedia('photo_profile_2') == null){
-                    $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_2');
-                }else if($employee->getFirstMedia('photo_profile_3') == null){
-                    $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_3');
-                }else if($employee->getFirstMedia('photo_profile_4') == null){
-                    $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_4');
-                }
+                if($employee->getFirstMedia('photo_profile_active')){
+                    $active = $employee->getFirstMedia('photo_profile_active')->getPath();
+                    
+                    if(!$employee->getFirstMedia('photo_profile_1')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_1');
+                    }else if(!$employee->getFirstMedia('photo_profile_2')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_2');
+                    }else if(!$employee->getFirstMedia('photo_profile_3')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_3');
+                    }else if(!$employee->getFirstMedia('photo_profile_4')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_4');
+                    }
 
-                if($request->active == 1){
-                    $employee->media->where('collection_name','photo_profile_active')->each->delete();
-                    $employee->addMediaFromUrl($employee->getFirstMedia('photo_profile_1')->getUrl())->toMediaCollection('photo_profile_active');
-                    $employee->media->where('collection_name','photo_profile_1')->each->delete();
-                }else if($request->active == 2){
-                    $employee->media->where('collection_name','photo_profile_active')->each->delete();
-                    $employee->addMediaFromUrl($employee->getFirstMedia('photo_profile_2')->getUrl())->toMediaCollection('photo_profile_active');
-                    $employee->media->where('collection_name','photo_profile_2')->each->delete();
-                }else if($request->active == 3){
-                    $employee->media->where('collection_name','photo_profile_active')->each->delete();
-                    $employee->addMediaFromUrl($employee->getFirstMedia('photo_profile_3')->getUrl())->toMediaCollection('photo_profile_active');
-                    $employee->media->where('collection_name','photo_profile_3')->each->delete();
-                }else if($request->active == 4){
-                    $employee->media->where('collection_name','photo_profile_active')->each->delete();
-                    $employee->addMediaFromUrl($employee->getFirstMedia('photo_profile_4')->getUrl())->toMediaCollection('photo_profile_active');
-                    $employee->media->where('collection_name','photo_profile_4')->each->delete();
+                    if($request->active == 1){
+                        $employee->media->where('collection_name','photo_profile_active')->each->delete();
+                        $employee->addMedia($employee->getFirstMedia('photo_profile_1')->getPath())->toMediaCollection('photo_profile_active');
+                        $employee->media->where('collection_name','photo_profile_1')->each->delete();
+                    }else if($request->active == 2){
+                        $employee->media->where('collection_name','photo_profile_active')->each->delete();
+                        $employee->addMedia($employee->getFirstMedia('photo_profile_2')->getPath())->toMediaCollection('photo_profile_active');
+                        $employee->media->where('collection_name','photo_profile_2')->each->delete();
+                    }else if($request->active == 3){
+                        $employee->media->where('collection_name','photo_profile_active')->each->delete();
+                        $employee->addMedia($employee->getFirstMedia('photo_profile_3')->getPath())->toMediaCollection('photo_profile_active');
+                        $employee->media->where('collection_name','photo_profile_3')->each->delete();
+                    }else if($request->active == 4){
+                        $employee->media->where('collection_name','photo_profile_active')->each->delete();
+                        $employee->addMedia($employee->getFirstMedia('photo_profile_4')->getPath())->toMediaCollection('photo_profile_active');
+                        $employee->media->where('collection_name','photo_profile_4')->each->delete();
+                    }
+                }else{
+                    if($request->active == 1){
+                        if($employee->getFirstMedia('photo_profile_1')){
+                            $employee->addMedia($employee->getFirstMedia('photo_profile_1')->getPath())->toMediaCollection('photo_profile_active');
+                            $employee->media->where('collection_name','photo_profile_1')->each->delete();
+                        }else{
+                            $employee->media->where('collection_name','photo_profile_active')->each->delete();
+                        }
+                    }else if($request->active == 2){
+                        if($employee->getFirstMedia('photo_profile_2')){
+                            $employee->addMedia($employee->getFirstMedia('photo_profile_2')->getPath())->toMediaCollection('photo_profile_active');
+                            $employee->media->where('collection_name','photo_profile_2')->each->delete();
+                        }else{
+                            $employee->media->where('collection_name','photo_profile_active')->each->delete();
+                        }
+                    }else if($request->active == 3){
+                        if($employee->getFirstMedia('photo_profile_3')){
+                            $employee->addMedia($employee->getFirstMedia('photo_profile_3')->getPath())->toMediaCollection('photo_profile_active');
+                            $employee->media->where('collection_name','photo_profile_3')->each->delete();
+                        }else{
+                            $employee->media->where('collection_name','photo_profile_active')->each->delete();
+                        }
+                    }else if($request->active == 4){
+                        if($employee->getFirstMedia('photo_profile_4')->getPath()){
+                            $employee->addMedia($employee->getFirstMedia('photo_profile_4')->getPath())->toMediaCollection('photo_profile_active');
+                            $employee->media->where('collection_name','photo_profile_4')->each->delete();
+                        }else{
+                            $employee->media->where('collection_name','photo_profile_active')->each->delete();
+                        }
+                    }
                 }
             
                
         }else{
             if(isset($request->file_input_1)){
                 if($request->active == 1){
+
+                    if($employee->getFirstMedia('photo_profile_active')){
+                    $active = $employee->getFirstMedia('photo_profile_active')->getPath();
+                    
+                    if(!$employee->getFirstMedia('photo_profile_1')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_1');
+                    }else if(!$employee->getFirstMedia('photo_profile_2')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_2');
+                    }else if(!$employee->getFirstMedia('photo_profile_3')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_3');
+                    }else if(!$employee->getFirstMedia('photo_profile_4')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_4');
+                    }
+                }
                     $employee->media->where('collection_name','photo_profile_active')->each->delete();
                     $employee->media->where('collection_name','photo_profile_1')->each->delete();
                     $employee->addMedia($request->file_input_1)->toMediaCollection('photo_profile_active');
@@ -83,6 +130,20 @@ class EmployeeProfileController extends Controller
             
             if(isset($request->file_input_2)){
                 if($request->active == 2){
+                    if($employee->getFirstMedia('photo_profile_active')){
+                        $active = $employee->getFirstMedia('photo_profile_active')->getPath();
+                        
+                        if(!$employee->getFirstMedia('photo_profile_1')){
+                            $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_1');
+                        }else if(!$employee->getFirstMedia('photo_profile_2')){
+                            $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_2');
+                        }else if(!$employee->getFirstMedia('photo_profile_3')){
+                            $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_3');
+                        }else if(!$employee->getFirstMedia('photo_profile_4')){
+                            $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_4');
+                        }
+                    }
+
                     $employee->media->where('collection_name','photo_profile_active')->each->delete();
                     $employee->media->where('collection_name','photo_profile_2')->each->delete();
                     $employee->addMedia($request->file_input_2)->toMediaCollection('photo_profile_active');
@@ -93,6 +154,20 @@ class EmployeeProfileController extends Controller
             }
             
             if(isset($request->file_input_3)){
+                if($employee->getFirstMedia('photo_profile_active')){
+                    $active = $employee->getFirstMedia('photo_profile_active')->getPath();
+                    
+                    if(!$employee->getFirstMedia('photo_profile_1')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_1');
+                    }else if(!$employee->getFirstMedia('photo_profile_2')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_2');
+                    }else if(!$employee->getFirstMedia('photo_profile_3')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_3');
+                    }else if(!$employee->getFirstMedia('photo_profile_4')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_4');
+                    }
+                }
+
                 if($request->active == 3){
                     $employee->media->where('collection_name','photo_profile_active')->each->delete();
                     $employee->media->where('collection_name','photo_profile_3')->each->delete();
@@ -104,6 +179,20 @@ class EmployeeProfileController extends Controller
             }
             
             if(isset($request->file_input_4)){
+                if($employee->getFirstMedia('photo_profile_active')){
+                    $active = $employee->getFirstMedia('photo_profile_active')->getPath();
+                    
+                    if(!$employee->getFirstMedia('photo_profile_1')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_1');
+                    }else if(!$employee->getFirstMedia('photo_profile_2')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_2');
+                    }else if(!$employee->getFirstMedia('photo_profile_3')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_3');
+                    }else if(!$employee->getFirstMedia('photo_profile_4')){
+                        $employee->addMediaFromUrl($active)->toMediaCollection('photo_profile_4');
+                    }
+                }
+                
                 if($request->active == 4){
                     $employee->media->where('collection_name','photo_profile_active')->each->delete();
                     $employee->media->where('collection_name','photo_profile_4')->each->delete();
