@@ -1,5 +1,22 @@
 let Workpackage = {
     init: function() {
+        function remove_element() {
+            if ($(".add-predecessor-modal")[0]){
+                // Do something if class exists
+                $('.add-predecessor-modal').remove();
+            }
+            if ($(".add-successor-modal")[0]){
+                // Do something if class exists
+                $('.add-successor-modal').remove();
+            }
+        };
+
+        //
+
+        $(".b-t-n").on("click", ".btn-add", function() {
+            remove_element();
+        });
+
         $(".nav-tabs").on("click", ".routine", function() {
             let basic = $(".basic_datatable").mDatatable();
 
@@ -66,6 +83,7 @@ let Workpackage = {
 
         //Basic taskcard Datatable
         $(".basic_datatable").on("click", ".material", function() {
+            remove_element()
             if (material_datatables_init == true) {
                 material_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
@@ -275,6 +293,7 @@ let Workpackage = {
         });
 
         $(".basic_datatable").on("click", ".tool", function() {
+            remove_element()
             if (tool_datatables_init == true) {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
@@ -295,6 +314,7 @@ let Workpackage = {
 
         //SIP taskcard Datatable
         $(".sip_datatable").on("click", ".material", function() {
+            remove_element()
             if (material_datatables_init == true) {
                 material_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
@@ -361,6 +381,7 @@ let Workpackage = {
             document.getElementById("sequence").value = sequence;
         });
         $(".sip_datatable").on("click", ".tool", function() {
+            remove_element()
             if (tool_datatables_init == true) {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
@@ -471,6 +492,7 @@ let Workpackage = {
             }
         });
         $(".cpcp_datatable").on("click", ".material", function() {
+            remove_element()
             if (material_datatables_init == true) {
                 material_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
@@ -490,6 +512,7 @@ let Workpackage = {
         });
 
         $(".cpcp_datatable").on("click", ".tool", function() {
+            remove_element()
             if (tool_datatables_init == true) {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
@@ -754,6 +777,45 @@ let Workpackage = {
             }
         });
 
+        $(".cmr-awl_datatable").on("click", ".material", function() {
+            remove_element()
+            if (material_datatables_init == true) {
+                material_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_material_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $(".cmr-awl_datatable").on("click", ".tool", function() {
+            remove_element()
+            if (tool_datatables_init == true) {
+                tool_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
         $("#adsb_datatable").on("click", ".instructions", function() {
             if (instruction_datatables_init == true) {
                 instruction_datatables_init = false;
@@ -772,6 +834,46 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
+        $(".ad-sb_datatable").on("click", ".material", function() {
+            remove_element()
+            if (material_datatables_init == true) {
+                material_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_material_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $(".ad-sb_datatable").on("click", ".tool", function() {
+            remove_element()
+            if (tool_datatables_init == true) {
+                tool_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
         $(".eo_datatable").on("click", ".predecessor-instruction", function() {
             if (predecessor_instruction_datatable_init == true) {
                 predecessor_instruction_datatable_init = false;
@@ -882,6 +984,44 @@ let Workpackage = {
             document.getElementById("uuid-instruction").value = triggeruuid;
             document.getElementById("sequence-instruction").value = sequence;
         });
+        $(".eo_datatable").on("click", ".material", function() {
+            remove_element()
+            if (material_datatables_init == true) {
+                material_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_material_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $(".eo_datatable").on("click", ".tool", function() {
+            remove_element()
+            if (tool_datatables_init == true) {
+                tool_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
         $(".ea_datatable").on("click", ".predecessor-instruction", function() {
             if (predecessor_instruction_datatable_init == true) {
                 predecessor_instruction_datatable_init = false;
@@ -898,6 +1038,44 @@ let Workpackage = {
                 document.getElementById("uuid-predecessor").value = triggeruuid;
                 predecessor_instruction_tc(triggeruuid);
                 $("#predecessor_instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $(".ea_datatable").on("click", ".material", function() {
+            remove_element()
+            if (material_datatables_init == true) {
+                material_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_material_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $(".ea_datatable").on("click", ".tool", function() {
+            remove_element()
+            if (tool_datatables_init == true) {
+                tool_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             }
