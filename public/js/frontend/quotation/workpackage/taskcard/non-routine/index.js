@@ -358,7 +358,7 @@ let NonRoutineWorkpackage = {
             ]
         });
         $('#m_accordion_5_item_6_head').on('click', function () {
-            let table = $('.si_datatable').mDatatable();
+            let table = $('.ea_datatable').mDatatable();
 
             table.originalDataSet = [];
             table.reload();
@@ -448,7 +448,7 @@ let NonRoutineWorkpackage = {
             ]
         });
         $('#m_accordion_5_item_7_head').on('click', function () {
-            let table = $('.si_datatable').mDatatable();
+            let table = $('.eo_datatable').mDatatable();
 
             table.originalDataSet = [];
             table.reload();
