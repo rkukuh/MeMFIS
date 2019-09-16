@@ -7,8 +7,8 @@ use App\Models\Type;
 use App\Models\HtCrr;
 use App\Models\Project;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\HtCrrStore;
-use App\Http\Requests\Frontend\HtCrrUpdate;
+use App\Http\Requests\Frontend\HtCrrItemStore;
+use App\Http\Requests\Frontend\HtCrrItemUpdate;
 
 class HtCrrItemsController extends Controller
 {
@@ -38,7 +38,7 @@ class HtCrrItemsController extends Controller
      * @param  \App\Http\Requests\Frontend\HtCrrStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(HtCrr $htcrr, HtCrrStore $request)
+    public function store(HtCrr $htcrr, HtCrrItemStore $request)
     {
         $htcrr->items()->attach($htcrr->id, [
             'item_id' => $request->item_id,
@@ -79,7 +79,7 @@ class HtCrrItemsController extends Controller
      * @param  \App\Models\HtCrr  $htCrr
      * @return \Illuminate\Http\Response
      */
-    public function update(HtCrrUpdate $request, HtCrr $htCrr)
+    public function update(HtCrrItemUpdate $request, HtCrr $htCrr)
     {
         //
     }
