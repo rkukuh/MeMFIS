@@ -448,7 +448,7 @@ let NonRoutineWorkpackage = {
             ]
         });
         $('#m_accordion_5_item_7_head').on('click', function () {
-            let table = $('.eo_datatable').mDatatable();
+            let table = $('.eo  _datatable').mDatatable();
 
             table.originalDataSet = [];
             table.reload();
