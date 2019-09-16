@@ -80,37 +80,6 @@ let TaskCard = {
         });
 
         $('.footer').on('click', '.add-taskcard', function () {
-            // taskcard_reset();
-            // let title = $('input[name=title]').val();
-            // let number = $('input[name=number]').val();
-            // let taskcard_non_routine_type = $('#taskcard_non_routine_type').val();
-            // let applicability_airplane = $('#applicability_airplane').val();
-            // let revision = $('input[name=revision]').val();
-            // let relationship = $('#relationship').val();
-            // let description = $('#description').val();
-            // let scheduled_priority_id = $('#scheduled_priority_id').val();
-            // let recurrence_id = $('#recurrence_id').val();
-            // let category = $('#category').val();
-            // let manual_affected_id = $('#manual_affected_id').val();
-
-            // let prior_to = $('input[name="prior_to"]:checked').val();
-            // let scheduled_priority_text = '';
-            // if(prior_to == 'date'){
-            //     scheduled_priority_text = $('#date').val();
-            // }
-            // else if (prior_to == 'hour'){
-            //     scheduled_priority_text = $('#hour').val();
-            // }
-            // else if(prior_to == 'cycle'){
-            //     scheduled_priority_text = $('#cycle').val();
-
-            // }
-
-            // let recurrence = $('input[name=recurrence]').val();
-            // let recurrence_select = $('#recurrence-select').val();
-
-            // let note = $('#note').val();
-
             let applicability_airplane = [];
             let i = 0;
             $("#applicability_airplane").val().forEach(function(entry) {
@@ -160,6 +129,8 @@ let TaskCard = {
             }
             else if($('input[name=prior_to]:checked').val() == 'cycle'){
                 data.append( "scheduled_priority_text", $('#cycle').val());
+            }else{
+                data.append("scheduled_priority_text", null);
             }
             data.append( "additionals",  internal_numberJSON);
             data.append( "recurrence_id", $('#recurrence_id').val());
@@ -184,10 +155,6 @@ let TaskCard = {
                 cache: false,
                 data: data,
                 url: '/taskcard-eo',
-
-                //     // scheduled_priority_text: prior_to_hour,
-                //     // scheduled_priority_text: prior_to_cycle,
-                // },
                 success: function (response) {
                     if (response.errors) {
                         if (response.errors.title) {
