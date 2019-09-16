@@ -64,8 +64,12 @@ let Employee_create_profile = {
                         timeOut: 5000
                     });
                     
-                    location.reload();
+                    $('#file-input-1').val('')
+                    $('#file-input-2').val('')
+                    $('#file-input-3').val('')
+                    $('#file-input-4').val('')
 
+                    location.reload();
                 }
                     }
                 });
