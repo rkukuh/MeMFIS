@@ -176,18 +176,6 @@ class TaskCardEOController extends Controller
         $this->decoder($request);
 
         if ($taskCard->update($request->all())) {
-            // if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
-            //     $taskCard->skills()->detach();
-            //     $taskCard->skills()->attach(Type::where('code','electrical')->first()->id);
-            //     $taskCard->skills()->attach(Type::where('code','radio')->first()->id);
-            //     $taskCard->skills()->attach(Type::where('code','instrument')->first()->id);
-            // }
-            // else{
-            //     if(sizeof($taskCard->skills) > 1 ){
-            //         $taskCard->skills()->detach();
-            //     }
-            //     $taskCard->skills()->sync($request->skill_id);
-            // }
             $taskCard->aircrafts()->sync($request->applicability_airplane);
 
             if($taskCard->thresholds)$taskCard->thresholds()->delete();
