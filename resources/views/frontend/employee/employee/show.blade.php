@@ -117,9 +117,7 @@
                         <div style="height:60px;width:100%;background:#e9ecef">
                             <div class="form-group m-form__group row p-3">
                                 <div class="col-sm-2 col-md-2 col-lg-2 d-flex justify-content-end">
-                                    <a href="" data-target="#modal_photo" data-toggle="modal">
-                                        <i class="la la-pencil" style="font-size:32px;"></i>
-                                    </a>
+                                  
                                 </div>
                                 <div class="col-sm-10 col-md-10 col-lg-10">
                                     <ul class="nav nav-tabs nav-fill" role="tablist">
@@ -147,7 +145,6 @@
                         </div>
                     </div>
 
-                    @include('frontend.employee.employee.modal')
                     <div class="m-portlet__body">
                         <div class="tab-content">
                             <div class="tab-pane active" id="m_tabs_2_1" role="tabpanel">
