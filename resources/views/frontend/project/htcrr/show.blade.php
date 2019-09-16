@@ -45,7 +45,7 @@
                                         @include('frontend.project.htcrr.manhour.show')
                                     </div>
                                     <div class="tab-pane" id="m_tabs_enginner" role="tabpanel">
-                                        @include('frontend.project.htcrr.engineer.index')
+                                        @include('frontend.project.htcrr.engineer.show')
                                     </div>
 
                                     <div class="form-group m-form__group row">

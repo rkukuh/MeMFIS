@@ -1,20 +1,19 @@
-{{-- @if(!empty($project_workpackage->engineers))
-    {{ dd("onok") }}
-@endif --}}
+@if(isset($htcrr_engineers))
 <div class="form-group m-form__group row px-4 pb-4">
     <div class="col-sm-12 col-md-12 col-lg-12">
-        @if(in_array('Airframe',$engineer_skills))
+        @if(in_array('Airframe',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Airframe
                 </label>
             </div>
-            @foreach($project_workpackage->engineers as $engineer)
-                @if($engineer->skill->name == 'Airframe')
+            @foreach($engineer_skills as $engineer)
+
+                @if($engineer->skill == 'Airframe')
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     @component('frontend.common.label.data-info')
-                        @slot('text', $engineer->engineer->first_name)
+                        @slot('text', $engineer->engineer_code)
                     @endcomponent
                 </div>
                 <div class="col-sm-3 col-md-3 col-lg-3">
@@ -26,18 +25,18 @@
             @endforeach
         </div>
         @endif
-        @if(in_array('Powerplant / Engine',$engineer_skills))
+        @if(in_array('Powerplant / Engine',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Powerplant
                 </label>
             </div>
-            @foreach($project_workpackage->engineers as $engineer)
-                @if($engineer->skill->name == 'Powerplant / Engine')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Powerplant / Engine')
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     @component('frontend.common.label.data-info')
-                        @slot('text', $engineer->engineer->first_name)
+                        @slot('text', $engineer->engineer_code)
                     @endcomponent
                 </div>
                 <div class="col-sm-3 col-md-3 col-lg-3">
@@ -49,18 +48,18 @@
             @endforeach
         </div>
         @endif
-        @if(in_array('Electrical',$engineer_skills))
+        @if(in_array('Electrical',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Electrical
                 </label>
             </div>
-            @foreach($project_workpackage->engineers as $engineer)
-                @if($engineer->skill->name == 'Electrical')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Electrical')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         @component('frontend.common.label.data-info')
-                            @slot('text', $engineer->engineer->first_name)
+                            @slot('text', $engineer->engineer_code)
                         @endcomponent
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -73,18 +72,18 @@
             </div>
         </div>
         @endif
-        @if(in_array('Radio',$engineer_skills))
+        @if(in_array('Radio',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Radio
                 </label>
             </div>
-            @foreach($project_workpackage->engineers as $engineer)
-                @if($engineer->skill->name == 'Radio')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Radio')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         @component('frontend.common.label.data-info')
-                            @slot('text', $engineer->engineer->first_name)
+                            @slot('text', $engineer->engineer_code)
                         @endcomponent
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -96,18 +95,18 @@
             @endforeach
         </div>
         @endif
-        @if(in_array('Instrument',$engineer_skills))
+        @if(in_array('Instrument',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Instrument
                 </label>
             </div>
-            @foreach($project_workpackage->engineers as $engineer)
-                @if($engineer->skill->name == 'Instrument')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Instrument')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         @component('frontend.common.label.data-info')
-                            @slot('text', $engineer->engineer->first_name)
+                            @slot('text', $engineer->engineer_code)
                         @endcomponent
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -119,18 +118,18 @@
             @endforeach
         </div>
         @endif
-        @if(in_array('Cabin Maintenance',$engineer_skills))
+        @if(in_array('Cabin Maintenance',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Cabin Maintenance
                 </label>
             </div>
-            @foreach($project_workpackage->engineers as $engineer)
-                @if($engineer->skill->name == 'Cabin Maintenance')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Cabin Maintenance')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                             @component('frontend.common.label.data-info')
-                                @slot('text', $engineer->engineer->first_name)
+                                @slot('text', $engineer->engineer_code)
                             @endcomponent
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -142,18 +141,18 @@
             @endforeach
         </div>
         @endif
-        @if(in_array('Run-Up',$engineer_skills))
+        @if(in_array('Run-Up',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Run Up
                 </label>
             </div>
-            @foreach($project_workpackage->engineers as $engineer)
-                @if($engineer->skill->name == 'Run-Up')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Run-Up')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                             @component('frontend.common.label.data-info')
-                                @slot('text', $engineer->engineer->first_name)
+                                @slot('text', $engineer->engineer_code)
                             @endcomponent
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -165,18 +164,18 @@
             @endforeach
         </div>
         @endif
-        @if(in_array('Repair',$engineer_skills))
+        @if(in_array('Repair',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Repair
                 </label>
             </div>
-            @foreach($project_workpackage->engineers as $engineer)
-                @if($engineer->skill->name == 'Repair')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Repair')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                             @component('frontend.common.label.data-info')
-                                @slot('text', $engineer->engineer->first_name)
+                                @slot('text', $engineer->engineer_code)
                             @endcomponent
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -188,18 +187,18 @@
             @endforeach
         </div>
         @endif
-        @if(in_array('Repainting',$engineer_skills))
+        @if(in_array('Repainting',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     Repainting
                 </label>
             </div>
-            @foreach($project_workpackage->engineers as $engineer)
-                @if($engineer->skill->name == 'Repainting')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'Repainting')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                             @component('frontend.common.label.data-info')
-                                @slot('text', $engineer->engineer->first_name)
+                                @slot('text', $engineer->engineer_code)
                             @endcomponent
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -211,18 +210,18 @@
             @endforeach
         </div>
         @endif
-        @if(in_array('NDI / NDT',$engineer_skills))
+        @if(in_array('NDI / NDT',$skills))
         <div class="form-group m-form__group row">
             <div class="col-sm-3 col-md-3 col-lg-3">
                 <label class="form-control-label">
                     NDI / NDT
                 </label>
             </div>
-            @foreach($project_workpackage->engineers as $engineer)
-                @if($engineer->skill->name == 'NDI / NDT')
+            @foreach($engineer_skills as $engineer)
+                @if($engineer->skill == 'NDI / NDT')
                     <div class="col-sm-6 col-md-6 col-lg-6">
                             @component('frontend.common.label.data-info')
-                                @slot('text', $engineer->engineer->first_name)
+                                @slot('text', $engineer->engineer_code)
                             @endcomponent
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
@@ -241,7 +240,7 @@
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
                     @component('frontend.common.label.data-info')
-                        @slot('text', $project_workpackage->tat)
+                        @slot('text', 'TAT')
                     @endcomponent
             </div>
         </div>
@@ -257,7 +256,7 @@
         </div>
     </div>
 </div>
-
+@endif
 
 @push('footer-scripts')
 <script src="{{ asset('js/frontend/functions/select2/airframe.js')}}"></script>
@@ -268,8 +267,6 @@
 <script src="{{ asset('js/frontend/functions/select2/instrument.js')}}"></script>
 {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/employee.js')}}"></script> --}}
 <script>
-    let project_uuid = '{{ $project->uuid }}';
-    let mhrs_pfrm_factor = '{{ $mhrs_pfrm_factor }}';
 
     if($('#employee_airframe ').length > 1){
         $('#employee_airframe ')[1].closest("div.col-sm-6.col-md-6.col-lg-6").remove();
