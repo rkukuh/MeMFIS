@@ -28,21 +28,6 @@ Route::name('testing.')->group(function () {
 
         });
 
-        Route::get('/validation-taskcard-item', function () {
-
-            $item = App\Models\Item::find('1');
-
-            $unit_input = App\Models\Unit::find('11');
-
-            $tc_i = $item;
-            if($tc_i->unit_id == $unit_input->id or $tc_i->units->where('uom.unit_id',$unit_input->id)->first() <> null){
-                dd('aman');
-            }
-            else{
-                dd('UOM have not Declared');
-            }
-        });
-
         Route::get('/wp', function () {
 
             $project_workpackage = App\Models\Pivots\ProjectWorkPackage::where('project_id',1)->where('workpackage_id',1)->first()->id;
