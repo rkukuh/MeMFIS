@@ -38,7 +38,7 @@ function successor_tc(triggeruuid) {
 
             ]
         })
-        $('<button type="button" data-toggle="modal" data-target="#add_modal_successor" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm add-successor-modal" id="successorBtn" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.modal-body .dataTables_filter');
+        // $('<button type="button" data-toggle="modal" data-target="#add_modal_successor" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm add-successor-modal" id="successorBtn" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.modal-body .dataTables_filter');
 
         $('.dataTable').on('click', '.delete-successor', function () {
             let triggeruuid = $(this).data('uuid');
@@ -165,7 +165,7 @@ function successor_instruction_tc(triggeruuid) {
 
         ]
     })
-    $('<button type="button" data-toggle="modal" data-target="#add_modal_successor_instruction" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm add-successor-instruction-modal" id="successorBtn" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.modal-body .dataTables_filter');
+    // $('<button type="button" data-toggle="modal" data-target="#add_modal_successor_instruction" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm add-successor-instruction-modal" id="successorBtn" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.modal-body .dataTables_filter');
 
     $('.dataTable').on('click', '.delete-successor-instruction', function () {
         let triggeruuid = $(this).data('uuid');
