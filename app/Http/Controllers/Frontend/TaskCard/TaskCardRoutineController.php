@@ -270,6 +270,7 @@ class TaskCardRoutineController extends Controller
             ->only(['name'])
             ->all();
         });
+        
         $temp = array_values($temp->toArray());
         foreach($temp as $station){
             array_push($tc_stations, $station["name"]);

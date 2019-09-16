@@ -24,7 +24,7 @@ class EmployeeDatatables extends Controller
         foreach($employees_data as $ed){
             $url = null;
             if($ed->getFirstMedia('photo_profile_active')){
-                $url = $ed->getFirstMedia('photo_profile_active')->getUrl();
+                $url = $ed->getFirstMedia('photo_profile_active')->getFullUrl();
             }
 
            $employees[$i] = [
