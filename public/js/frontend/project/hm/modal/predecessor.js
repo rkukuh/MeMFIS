@@ -47,9 +47,9 @@ function predecessor_tc(triggeruuid) {
             }
         ]
     });
-    $(
-        '<button type="button" data-toggle="modal" data-target="#add_modal_predecessor" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm add-predecessor-modal" id="predecessorBtn" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>'
-    ).appendTo(".modal-body .dataTables_filter");
+    // $(
+    //     '<button type="button" data-toggle="modal" data-target="#add_modal_predecessor" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm add-predecessor-modal" id="predecessorBtn" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>'
+    // ).appendTo(".modal-body .dataTables_filter");
 
     $(".dataTable").on("click", ".delete-predecessor", function() {
         let triggeruuid = $(this).data("uuid");
@@ -190,9 +190,9 @@ function predecessor_instruction_tc(triggeruuid) {
             }
         ]
     });
-    $(
-        '<button type="button" data-toggle="modal" data-target="#add_modal_predecessor_instruction" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm add-predecessor-instruction-modal" id="predecessorBtn" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>'
-    ).appendTo(".modal-body .dataTables_filter");
+    // $(
+    //     '<button type="button" data-toggle="modal" data-target="#add_modal_predecessor_instruction" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm add-predecessor-instruction-modal" id="predecessorBtn" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>'
+    // ).appendTo(".modal-body .dataTables_filter");
 
     $(".dataTable").on("click", ".delete-predecessor-instruction", function() {
         let triggeruuid = $(this).data("uuid");

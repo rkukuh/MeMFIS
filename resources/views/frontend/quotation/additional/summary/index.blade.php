@@ -146,8 +146,9 @@
                 </div>
             </div>
     </div>
-    @if(isset($quotation) && $quotation->currency->symbol !== "Rp")
-    <div class="form-group m-form__group row">
+    
+    <div class="form-group m-form__group row @if(isset($quotation) && $quotation->currency->symbol !== "Rp") hidden @endif" >
+        
         <div class="col-sm-5 col-md-5 col-lg-5">
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">
@@ -166,7 +167,6 @@
         <div class="col-sm-1 col-md-1 col-lg-1">
         </div>
     </div>
-    @endif
     <div class="form-group m-form__group row">
         <div class="col-sm-5 col-md-5 col-lg-5">
         </div>

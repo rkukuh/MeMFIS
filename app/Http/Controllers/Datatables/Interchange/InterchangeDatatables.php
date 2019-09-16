@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\Employee;
+namespace App\Http\Controllers\Datatables\Interchange;
 
-use App\Models\Employee;
-use App\Models\Type;
+use App\Models\Item;
+use App\Models\ListUtil;
+use Illuminate\Http\Request;
+use App\Models\Pivots\Interchange;
 use App\Http\Controllers\Controller;
 
-class EmployeeDatatables extends Controller
+class InterchangeDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,35 +17,9 @@ class EmployeeDatatables extends Controller
      */
     public function index()
     {
-        $employees_data = Employee::All();
+        $Interchanges = Interchange::with('item', 'alternate_item')->get();
 
-
-        $employees = [];
-
-        $i = 0;
-        foreach($employees_data as $ed){
-            $url = null;
-            if($ed->getFirstMedia('photo_profile_active')){
-                $url = $ed->getFirstMedia('photo_profile_active')->getFullUrl();
-            }
-
-           $employees[$i] = [
-            'uuid' => $ed->uuid,
-            'first_name' => $ed->first_name,
-            'last_name' => $ed->last_name,
-            'active_photo' => $url,
-            'code' => $ed->code,
-            'phones' => $ed->phones()->where('phones.type_id',Type::where('code','mobile')->first()->id)->first(),
-            'department' => $ed->department()->first(),
-            'position' => $ed->position()->first(),
-            'status' => $ed->statuses()->first(),
-            'hired_at' => $ed->joined_date
-           ];
-        $i++;
-        }
-
-        // dd($employees);
-        $data = $alldata = $employees;
+        $data = $alldata = json_decode($Interchanges);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -148,4 +124,5 @@ class EmployeeDatatables extends Controller
 
         return $util->filter($args, $operator);
     }
+
 }

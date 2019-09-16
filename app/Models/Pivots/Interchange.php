@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Pivot;
+namespace App\Models\Pivots;
 
 use App\Models\Item;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +11,7 @@ class Interchange extends Pivot
     use SoftDeletes;
 
     protected $table = 'interchanges';
-    
+
     protected $fillable = [
         'item_id',
         'alternate_item_id',

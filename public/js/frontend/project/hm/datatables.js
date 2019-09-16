@@ -322,6 +322,12 @@ let Datatables = {
             $("#cmrawl_datatable")
                 .DataTable()
                 .ajax.reload();
+            $("#ea_datatable")
+                .DataTable()
+                .ajax.reload();
+            $("#eo_datatable")
+                .DataTable()
+                .ajax.reload();
             $("#si_datatable")
                 .DataTable()
                 .ajax.reload();
@@ -595,17 +601,17 @@ let Datatables = {
                 material_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
                 material_tc(triggeruuid);
-                $("#m_datatable_material_routine_si_wp")
+                $("#m_datatable_material_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             } else {
                 let table = $(
-                    "#m_datatable_material_routine_si_wp"
+                    "#m_datatable_material_taskcard_wp"
                 ).DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("uuid");
                 material_tc(triggeruuid);
-                $("#m_datatable_material_routine_si_wp")
+                $("#m_datatable_material_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             }
@@ -841,15 +847,15 @@ let Datatables = {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
                 tool_tc(triggeruuid);
-                $("#m_datatable_tool_routine_si_wp")
+                $("#m_datatable_tool_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             } else {
-                let table = $("#m_datatable_tool_routine_si_wp").DataTable();
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("uuid");
                 tool_tc(triggeruuid);
-                $("#m_datatable_tool_routine_si_wp")
+                $("#m_datatable_tool_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             }
@@ -861,17 +867,17 @@ let Datatables = {
                 material_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
                 material_tc(triggeruuid);
-                $("#m_datatable_material_routine_si_wp")
+                $("#m_datatable_material_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             } else {
                 let table = $(
-                    "#m_datatable_material_routine_si_wp"
+                    "#m_datatable_material_taskcard_wp"
                 ).DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("uuid");
                 material_tc(triggeruuid);
-                $("#m_datatable_material_routine_si_wp")
+                $("#m_datatable_material_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             }
@@ -923,15 +929,15 @@ let Datatables = {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
                 tool_tc(triggeruuid);
-                $("#m_datatable_tool_routine_si_wp")
+                $("#m_datatable_tool_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             } else {
-                let table = $("#m_datatable_tool_routine_si_wp").DataTable();
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("uuid");
                 tool_tc(triggeruuid);
-                $("#m_datatable_tool_routine_si_wp")
+                $("#m_datatable_tool_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             }
@@ -1024,17 +1030,17 @@ let Datatables = {
                 material_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
                 material_tc(triggeruuid);
-                $("#m_datatable_material_routine_si_wp")
+                $("#m_datatable_material_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             } else {
                 let table = $(
-                    "#m_datatable_material_routine_si_wp"
+                    "#m_datatable_material_taskcard_wp"
                 ).DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("uuid");
                 material_tc(triggeruuid);
-                $("#m_datatable_material_routine_si_wp")
+                $("#m_datatable_material_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             }
@@ -1086,15 +1092,15 @@ let Datatables = {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
                 tool_tc(triggeruuid);
-                $("#m_datatable_tool_routine_si_wp")
+                $("#m_datatable_tool_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             } else {
-                let table = $("#m_datatable_tool_routine_si_wp").DataTable();
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("uuid");
                 tool_tc(triggeruuid);
-                $("#m_datatable_tool_routine_si_wp")
+                $("#m_datatable_tool_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             }
@@ -1431,6 +1437,44 @@ let Datatables = {
             });
         });
 
+        $(".ad-sb_datatable").on("click", ".material", function() {
+            if (material_datatables_init == true) {
+                material_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_material_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $(".ad-sb_datatable").on("click", ".tool", function() {
+            if (tool_datatables_init == true) {
+                tool_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+
         //CMR-AWL
 
         $(".cmr-awl_datatable").on("click", ".predecessor-instruction", function() {
@@ -1559,6 +1603,43 @@ let Datatables = {
                     }
                 }
             });
+        });
+
+        $(".cmr-awl_datatable").on("click", ".material", function() {
+            if (material_datatables_init == true) {
+                material_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_material_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $(".cmr-awl_datatable").on("click", ".tool", function() {
+            if (tool_datatables_init == true) {
+                tool_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
         });
 
         $(".ea_datatable").on("click", ".sequence-instruction", function() {
@@ -1701,6 +1782,42 @@ let Datatables = {
                     }
                 }
             });
+        });
+        $(".ea_datatable").on("click", ".material", function() {
+            if (material_datatables_init == true) {
+                material_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_material_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $(".ea_datatable").on("click", ".tool", function() {
+            if (tool_datatables_init == true) {
+                tool_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
         });
 
         $(".eo_datatable").on("click", ".sequence-instruction", function() {
@@ -1845,6 +1962,42 @@ let Datatables = {
                 }
             });
         });
+        $(".eo_datatable").on("click", ".material", function() {
+            if (material_datatables_init == true) {
+                material_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_material_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $(".eo_datatable").on("click", ".tool", function() {
+            if (tool_datatables_init == true) {
+                tool_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
 
         //SI taskcard Datatable
         $(".si_datatable").on("click", ".predecessor", function() {
@@ -1892,17 +2045,17 @@ let Datatables = {
                 material_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
                 material_tc_si(triggeruuid);
-                $("#m_datatable_material_routine_si_wp")
+                $("#m_datatable_material_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             } else {
                 let table = $(
-                    "#m_datatable_material_routine_si_wp"
+                    "#m_datatable_material_taskcard_wp"
                 ).DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("uuid");
                 material_tc_si(triggeruuid);
-                $("#m_datatable_material_routine_si_wp")
+                $("#m_datatable_material_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             }
@@ -1913,15 +2066,15 @@ let Datatables = {
                 tool_datatables_init = false;
                 triggeruuid = $(this).data("uuid");
                 tool_tc_si(triggeruuid);
-                $("#m_datatable_tool_routine_si_wp")
+                $("#m_datatable_tool_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             } else {
-                let table = $("#m_datatable_tool_routine_si_wp").DataTable();
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("uuid");
                 tool_tc_si(triggeruuid);
-                $("#m_datatable_tool_routine_si_wp")
+                $("#m_datatable_tool_taskcard_wp")
                     .DataTable()
                     .ajax.reload();
             }
