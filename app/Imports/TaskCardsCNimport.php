@@ -250,7 +250,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
         // - Table: accesses
         $accesses = [];
         if($row['access']){
-            foreach (explode(' ',$row['access']) as $access_name ) {
+            foreach (explode(';',$row['access']) as $access_name ) {
                 foreach ($airplanes as $airplane) {
                     if(isset($access_name)){
                         $access = Access::firstOrCreate(
