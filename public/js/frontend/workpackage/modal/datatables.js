@@ -97,7 +97,7 @@ function material_tc_si(triggeruuid) {
                 data: "pivot.quantity"
             },
             {
-                data: "unit.name"
+                data: "pivot.unit"
             }
         ]
     });
@@ -136,7 +136,7 @@ function tool_tc_si(triggeruuid) {
                 data: "pivot.quantity"
             },
             {
-                data: "unit.name"
+                data: "pivot.unit"
             }
         ]
     });
@@ -175,7 +175,7 @@ function material_tc_eo(triggeruuid) {
                 data: "pivot.quantity"
             },
             {
-                data: "unit.name"
+                data: "pivot.unit"
             }
         ]
     });
@@ -214,7 +214,7 @@ function tool_tc_eo(triggeruuid) {
                 data: "pivot.quantity"
             },
             {
-                data: "unit.name"
+                data: "pivot.unit"
             }
         ]
     });
