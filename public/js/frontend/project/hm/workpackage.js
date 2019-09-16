@@ -191,6 +191,8 @@ let Workpackage = {
             let description = $('#description').val();
             let otr_certification = $('#otr_certification').val();
             let mhrs = parseFloat(removal) + parseFloat(installation);
+            let sn_on = $('#sn_on').val();
+            let sn_off = $('#sn_off').val();
 
             $.ajax({
                 headers: {
@@ -200,14 +202,17 @@ let Workpackage = {
                 url: '/project-hm/htcrr',
                 data: {
                     _token: $('input[name=_token]').val(),
+                    sn_on:sn_on,
+                    is_rii:is_rii,
+                    sn_off:sn_off,
                     part_number: pn,
-                    description: description,
-                    skill_id: otr_certification,
-                    estimation_manhour: mhrs,
                     position: position,
+                    estimation_manhour: mhrs,
+                    description: description,
+                    project_id: project_uuid,
+                    skill_id: otr_certification,
                     removal_manhour_estimation: removal,
                     installation_manhour_estimation: installation,
-                    project_id: project_uuid,
                 },
                 success: function (data) {
                     if (data.errors) {

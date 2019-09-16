@@ -219,7 +219,9 @@ let Workpackage = {
             let description = $('#description').val();
             let otr_certification = $('#otr_certification').val();
             let mhrs = parseFloat(removal) + parseFloat(installation);
-            let serial_number = $('#sn_off').val();
+            let sn_on = $('#sn_on').val();
+            let sn_off = $('#sn_off').val();
+
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
             } else {
@@ -234,16 +236,17 @@ let Workpackage = {
                 url: '/project-hm/htcrr',
                 data: {
                     _token: $('input[name=_token]').val(),
+                    sn_on:sn_on,
+                    sn_off:sn_off,
+                    is_rii:is_rii,
                     part_number: pn,
-                    description: description,
-                    skill_id: otr_certification,
-                    estimation_manhour: mhrs,
                     position: position,
+                    estimation_manhour: mhrs,
+                    description: description,
+                    project_id: project_uuid,
+                    skill_id: otr_certification,
                     removal_manhour_estimation: removal,
                     installation_manhour_estimation: installation,
-                    project_id: project_uuid,
-                    is_rii:is_rii,
-                    serial_number:serial_number,
                 },
                 success: function (data) {
                     if (data.errors) {
