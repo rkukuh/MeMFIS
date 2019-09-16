@@ -116,8 +116,8 @@ class HtCrrController extends Controller
      */
     public function edit(HtCrr $htcrr)
     {
-            $htcrr->installation_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->first()->estimation_manhour;
-            $htcrr->removal_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->last()->estimation_manhour;
+            $htcrr->removal_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->first()->estimation_manhour;
+            $htcrr->installation_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->last()->estimation_manhour;
             $htcrr->pn .= Item::where('code',$htcrr->part_number)->first()->id;
 
             if(sizeof($htcrr->skills) == 3){
