@@ -74,6 +74,10 @@ class TaskCardEOController extends Controller
     {
         $this->decoder($request);
 
+        $additionals["internal_number"] = $request->additionals->internal_number;
+        $additionals["document_library"] = $request->document_library;
+        $request->merge(['additionals' => json_encode($additionals, true)]);
+
         if ($taskcard = TaskCard::create($request->all())) {
             $taskcard->aircrafts()->attach($request->applicability_airplane);
 
@@ -147,7 +151,7 @@ class TaskCardEOController extends Controller
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
         }
-
+        
         return view('frontend.task-card.nonroutine.eo.edit',[
             'tasks' => $this->task,
             'types' => $this->type,
@@ -174,6 +178,10 @@ class TaskCardEOController extends Controller
     public function update(TaskCardEOUpdate $request, Taskcard $taskCard)
     {
         $this->decoder($request);
+
+        $additionals["internal_number"] = $request->additionals->internal_number;
+        $additionals["document_library"] = $request->document_library;
+        $request->merge(['additionals' => json_encode($additionals, true)]);
 
         if ($taskCard->update($request->all())) {
             $taskCard->aircrafts()->sync($request->applicability_airplane);
@@ -236,11 +244,12 @@ class TaskCardEOController extends Controller
 
     public function decoder($req){
 
-        $req->applicability_airplane = json_decode($req->applicability_airplane);
-        $req->threshold_type = json_decode($req->threshold_type);
+        $req->additionals = json_decode($req->additionals);
         $req->repeat_type = json_decode($req->repeat_type);
-        $req->threshold_amount = json_decode($req->threshold_amount);
         $req->repeat_amount = json_decode($req->repeat_amount);
+        $req->threshold_type = json_decode($req->threshold_type);
+        $req->threshold_amount = json_decode($req->threshold_amount);
+        $req->applicability_airplane = json_decode($req->applicability_airplane);
 
         return $req;
     }
