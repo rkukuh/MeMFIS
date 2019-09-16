@@ -322,6 +322,12 @@ let Datatables = {
             $("#cmrawl_datatable")
                 .DataTable()
                 .ajax.reload();
+            $("#ea_datatable")
+                .DataTable()
+                .ajax.reload();
+            $("#eo_datatable")
+                .DataTable()
+                .ajax.reload();
             $("#si_datatable")
                 .DataTable()
                 .ajax.reload();
