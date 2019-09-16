@@ -77,6 +77,7 @@ class HtCrrController extends Controller
             'position' => $request->position,
             'estimation_manhour' => $request->removal_manhour_estimation,
             'part_number' => $request->part_number,
+            'serian_number' => $request->sn_off
         ]);
 
         $htcrr->progresses()->save(new Progress([
@@ -91,6 +92,7 @@ class HtCrrController extends Controller
             'project_id' => $request->project_id,
             'estimation_manhour' => $request->installation_manhour_estimation,
             'position' => $request->position,
+            'serian_number' => $request->sn_on
         ]);
         
         
@@ -116,8 +118,8 @@ class HtCrrController extends Controller
      */
     public function edit(HtCrr $htcrr)
     {
-            $htcrr->installation_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->first()->estimation_manhour;
-            $htcrr->removal_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->last()->estimation_manhour;
+            $htcrr->removal_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->first()->estimation_manhour;
+            $htcrr->installation_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->last()->estimation_manhour;
             $htcrr->pn .= Item::where('code',$htcrr->part_number)->first()->id;
 
             if(sizeof($htcrr->skills) == 3){
@@ -127,6 +129,7 @@ class HtCrrController extends Controller
                 $htcrr->skill_id .= $htcrr->skills->first()->skill_id;
             }
 
+            // dd($htcrr);
         return response()->json($htcrr);
     }
 

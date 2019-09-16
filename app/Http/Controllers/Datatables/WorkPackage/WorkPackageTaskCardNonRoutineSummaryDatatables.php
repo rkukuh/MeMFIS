@@ -27,6 +27,14 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
             }
         }
 
+        foreach($workPackage->eo_instructions as $taskcard){
+            foreach($taskcard->materials as $item){
+                $item->tackcard_number .= $taskcard->number;
+                $item->unit_name .= $item->unit->name;
+                array_push($items, $item);
+            }
+        }
+
         $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -134,6 +142,13 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
                 }
             }
         }
+        foreach($workPackage->eo_instructions as $taskcard){
+            foreach($taskcard->tools as $item){
+                $item->tackcard_number .= $taskcard->number;
+                $item->unit_name .= $item->unit->name;
+                array_push($items, $item);
+            }
+        }
 
         $data = $alldata = $items;
 
@@ -233,8 +248,8 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
     public function ad_sbMaterial(WorkPackage $workPackage)
     {
         $items =[];
-        foreach($workPackage->taskcards as $taskcard){
-            if($taskcard->type->code == 'ad' or $taskcard->type->code == 'sb'){
+        foreach($workPackage->eo_instructions as $taskcard){
+            if($taskcard->eo_header->type->code == 'ad' or $taskcard->eo_header->type->code == 'sb'){
                 foreach($taskcard->materials as $item){
                     $item->tackcard_number .= $taskcard->number;
                     $item->unit_name .= $item->unit->name;
@@ -242,7 +257,6 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
                 }
             }
         }
-
         $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -341,8 +355,8 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
     public function ad_sbTool(WorkPackage $workPackage)
     {
         $items =[];
-        foreach($workPackage->taskcards as $taskcard){
-            if($taskcard->type->code == 'ad' or $taskcard->type->code == 'sb'){
+        foreach($workPackage->eo_instructions as $taskcard){
+            if($taskcard->eo_header->type->code == 'ad' or $taskcard->eo_header->type->code == 'sb'){
                 foreach($taskcard->tools as $item){
                     $item->tackcard_number .= $taskcard->number;
                     $item->unit_name .= $item->unit->name;
@@ -449,8 +463,8 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
     public function cmr_awlMaterial(WorkPackage $workPackage)
     {
         $items =[];
-        foreach($workPackage->taskcards as $taskcard){
-            if($taskcard->type->code == 'cmr' or $taskcard->type->code == 'awl'){
+        foreach($workPackage->eo_instructions as $taskcard){
+            if($taskcard->eo_header->type->code == 'cmr' or $taskcard->eo_header->type->code == 'awl'){
                 foreach($taskcard->materials as $item){
                     $item->tackcard_number .= $taskcard->number;
                     $item->unit_name .= $item->unit->name;
@@ -557,8 +571,8 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
     public function cmr_awlTool(WorkPackage $workPackage)
     {
         $items =[];
-        foreach($workPackage->taskcards as $taskcard){
-            if($taskcard->type->code == 'cmr' or $taskcard->type->code == 'awl'){
+        foreach($workPackage->eo_instructions as $taskcard){
+            if($taskcard->eo_header->type->code == 'cmr' or $taskcard->eo_header->type->code == 'awl'){
                 foreach($taskcard->tools as $item){
                     $item->tackcard_number .= $taskcard->number;
                     $item->unit_name .= $item->unit->name;

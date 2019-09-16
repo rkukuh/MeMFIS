@@ -69,7 +69,7 @@ class QuotationWorkPackageTaskCardItemController extends Controller
      * @param  \App\Models\QuotationWorkPackageTaskCardItem  $quotationWorkPackageTaskCardItem
      * @return \Illuminate\Http\Response
      */
-    public function update(QuotationWorkPackageTaskCardItemUpdate $request, QuotationWorkPackageTaskCardItem $qtn_wp_tc_item)
+public function update(QuotationWorkPackageTaskCardItemUpdate $request, QuotationWorkPackageTaskCardItem $qtn_wp_tc_item)
     {
         $request->merge(['subtotal' => $request->quantity*$request->price_amount]);
 

@@ -71,15 +71,15 @@ let Quotation = {
                     }
                 },
                 {
-                    field: 'project.no_wo',
+                    field: 'quotationable.no_wo',
                     title: 'Work Order No',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'project.code',
-                    title: 'Project',
+                    field: 'quotationable.code',
+                    title: 'Project No',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
@@ -118,6 +118,12 @@ let Quotation = {
                 {
                     field: 'quotation_type',
                     title: 'Quotation Type',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'conducted_by',
+                    title: 'Approve By',
                     sortable: 'asc',
                     filterable: !1,
                 },

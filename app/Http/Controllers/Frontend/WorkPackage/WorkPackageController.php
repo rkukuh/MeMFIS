@@ -230,7 +230,7 @@ class WorkPackageController extends Controller
     {
         $tc = TaskCardWorkPackage::where('workpackage_id', $workPackage->id)->where('taskcard_id', $taskcard->id)
                 ->with('predecessors','successors')->first();
-
+        
         if($tc->predecessors()->exists()){
             $tc->predecessors()->delete();
         }
@@ -254,14 +254,13 @@ class WorkPackageController extends Controller
     {
         $eo_instruction = EOInstructionWorkPackage::where('workpackage_id', $workPackage->id)->where('eo_instruction_id', $instruction->id)->first();
 
-        // BACKEND BELUM JADI
-        // if($eo_instruction->predecessors()->exists()){
-        //     $eo_instruction->predecessors()->delete();
-        // }
+        if(sizeof($eo_instruction->predecessors) > 0){
+            $eo_instruction->predecessors()->delete();
+        }
 
-        // if($eo_instruction->successors()->exists()){
-        //     $eo_instruction->successors()->delete();
-        // }
+        if(sizeof($eo_instruction->successors) > 0){
+            $eo_instruction->successors()->delete();
+        }
 
         $eo_instruction->delete();
 

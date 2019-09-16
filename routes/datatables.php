@@ -38,7 +38,7 @@ Route::name('datatables.')->group(function () {
         Route::get('/role', 'RoleDatatables@index')->name('role.index');
         Route::get('/bank', 'BankDatatables@index')->name('bank.index');
         Route::get('/school-type', 'SchoolTypeDatatables@index')->name('school.index');
-        
+
         /** LICENSE */
 
         Route::get('/general-license', 'GeneralLicenseDatatables@index')->name('general-license.index');
@@ -234,6 +234,24 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{item}/units', 'ItemUnitDatatables@index')->name('units.index');
                 Route::get('/{item}/prices', 'ItemPriceDatatables@index')->name('prices.index');
                 Route::get('/{item}/storages', 'ItemStorageDatatables@index')->name('storages.index');
+
+            });
+
+        });
+
+        /** INTERCHANGE */
+
+        Route::name('interchange.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'interchange',
+                'namespace' => 'Interchange'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'InterchangeDatatables@index')->name('all');
 
             });
 
@@ -744,10 +762,10 @@ Route::name('datatables.')->group(function () {
 
                 Route::get('/{workPackage}/non-routine/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@nonRoutineMaterial')->name('workpackage.taskcard.nonroutine.material.summary');
                 Route::get('/{workPackage}/non-routine/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@nonRoutineTool')->name('workpackage.taskcard.nonroutine.tool.summary');
-                Route::get('/{workPackage}/cmr-awl/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@ad_sbMaterial')->name('workpackage.taskcard.cmr-awl.material.summary');
-                Route::get('/{workPackage}/cmr-awl/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@ad_sbTool')->name('workpackage.taskcard.cmr-awl.tool.summary');
-                Route::get('/{workPackage}/ad-sb/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@cmr_awlMaterial')->name('workpackage.taskcard.ad-sb.material.summary');
-                Route::get('/{workPackage}/ad-sb/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@cmr_awlTool')->name('workpackage.taskcard.ad-sb.tool.summary');
+                Route::get('/{workPackage}/cmr-awl/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@cmr_awlMaterial')->name('workpackage.taskcard.cmr-awl.material.summary');
+                Route::get('/{workPackage}/cmr-awl/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@cmr_awlTool')->name('workpackage.taskcard.cmr-awl.tool.summary');
+                Route::get('/{workPackage}/ad-sb/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@ad_sbMaterial')->name('workpackage.taskcard.ad-sb.material.summary');
+                Route::get('/{workPackage}/ad-sb/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@ad_sbTool')->name('workpackage.taskcard.ad-sb.tool.summary');
                 Route::get('/{workPackage}/si/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@siMaterial')->name('workpackage.taskcard.si.material.summary');
                 Route::get('/{workPackage}/si/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@siTool')->name('workpackage.taskcard.si.tool.summary');
 

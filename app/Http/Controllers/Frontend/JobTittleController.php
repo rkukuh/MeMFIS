@@ -75,10 +75,10 @@ class JobTittleController extends Controller
      */
     public function update(JobTittleUpdate $request, JobTittle $jobTittle)
     {
-        // $jobTittle->update($request->all());
+        $jobTittle->update($request->all());
 
         // TODO: Return error message as JSON
-        return response()->json('test');
+        return response()->json($jobTittle);
     }
 
     /**

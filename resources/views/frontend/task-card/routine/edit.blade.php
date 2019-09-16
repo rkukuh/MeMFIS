@@ -443,22 +443,19 @@
                                                 Documents library @include('frontend.common.label.optional')
                                             </label>
 
-
                                             <select id="document-library" name="document-library" class="form-control m-select2" multiple style="width:100%">
                                                 <option value="">
                                                     &mdash; Select a Document Library &mdash;
                                                 </option>
 
-                                                @if (isset($additionals->document_library))
+                                                @if (sizeof($additionals->document_library) > 0)
                                                     @foreach ($additionals->document_library as $document)
                                                         <option selected>
                                                             {{ $document }}
                                                         </option>
                                                     @endforeach
                                                 @endif
-
                                             </select>
-
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -482,7 +479,7 @@
                                             </label>
 
                                             <select id="station" name="station" class="form-control m-select2" multiple style="width:100%">
-                                                @foreach ( $stations as $station)
+                                                @foreach ( $taskcard->stations as $station)
                                                     <option value="{{ $station->uuid }}" @if( in_array($station->uuid, $tc_stations) ) selected @endif>
                                                         {{ $station->name }}
                                                     </option>

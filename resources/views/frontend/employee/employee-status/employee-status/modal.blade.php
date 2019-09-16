@@ -15,6 +15,11 @@
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="EmployeeStatusesForm">
                     <div class="m-portlet__body">
 
+                        @component('frontend.common.input.hidden')
+                        @slot('id', 'employee_uuid')
+                        @slot('name', 'employee_uuid')
+                        @endcomponent
+
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">

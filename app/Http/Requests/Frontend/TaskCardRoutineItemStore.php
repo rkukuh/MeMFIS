@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Frontend;
 
+use App\Models\Item;
+use App\Models\Unit;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -28,6 +30,7 @@ class TaskCardRoutineItemStore extends FormRequest
     {
         return [
             'item_id' => 'required',
+            'unit_id' => 'required',
             'quantity' => 'required',
         ];
     }
@@ -51,7 +54,18 @@ class TaskCardRoutineItemStore extends FormRequest
      */
     public function withValidator($validator)
     {
-        //
+        $validator->after(function ($validator) {
+            $item = Item::find($this->item_id);
+
+            $unit = Unit::find($this->unit_id);
+
+            if($item->unit_id == $unit->id or $item->units->where('uom.unit_id',$unit->id)->first() <> null){
+                //
+            }
+            else{
+                $validator->errors()->add('uom', 'UOM have not Declared');
+            }
+        });
     }
 
     protected function failedValidation(Validator $validator) {

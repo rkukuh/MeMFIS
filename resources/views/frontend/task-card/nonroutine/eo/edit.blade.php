@@ -223,26 +223,19 @@
                                                         <label class="form-control-label">
                                                             Documents library @include('frontend.common.label.optional')
                                                         </label>
-
-                                                        @php
-                                                            $documens = json_decode($taskCard->document_library, TRUE);
-                                                        @endphp
-
+            
                                                         <select id="document-library" name="document-library" class="form-control m-select2" multiple style="width:100%">
                                                             <option value="">
                                                                 &mdash; Select a Document Library &mdash;
                                                             </option>
-
-                                                            @if (isset($documens))
-                                                                @foreach ($documens as $document)
+                                                            @if ( sizeof(json_decode($additionals->document_library)) > 0 )
+                                                                @foreach (json_decode($additionals->document_library) as $document)
                                                                     <option selected>
                                                                         {{ $document }}
                                                                     </option>
                                                                 @endforeach
                                                             @endif
-
                                                         </select>
-
                                                     </div>
                                                 </div>
                                             </div>

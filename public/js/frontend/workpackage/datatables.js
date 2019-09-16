@@ -32,7 +32,7 @@ let Datatables = {
                     orderable: !1,
                     render: function(a, e, t, n) {
                         return (
-                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-basic" title="View" data-uuid="' +
+                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-basic" title="Use" data-uuid="' +
                             t.uuid +
                             '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                         );
@@ -72,7 +72,7 @@ let Datatables = {
                     orderable: !1,
                     render: function(a, e, t, n) {
                         return (
-                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-sip" title="View" data-uuid="' +
+                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-sip" title="Use" data-uuid="' +
                             t.uuid +
                             '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                         );
@@ -112,7 +112,7 @@ let Datatables = {
                     orderable: !1,
                     render: function(a, e, t, n) {
                         return (
-                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-cpcp" title="View" data-uuid="' +
+                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-cpcp" title="Use" data-uuid="' +
                             t.uuid +
                             '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                         );
@@ -222,7 +222,7 @@ let Datatables = {
                     orderable: !1,
                     render: function(a, e, t, n) {
                         return (
-                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-si" title="View" data-uuid="' +
+                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-si" title="Use" data-uuid="' +
                             t.uuid +
                             '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                         );
@@ -385,11 +385,10 @@ let Datatables = {
                     taskcard: $(this).data("uuid")
                 },
                 success: function(data) {
-                    if (data.errors) {
-                        // if (data.errors.name) {
-                        //     $('#name-error').html(data.errors.name[0]);
-                        //     document.getElementById('name').value = name;
-                        // }
+                    if (data.title == "Danger") {
+                        toastr.error("Task card alrady exists!", "Error", {
+                            timeOut: 5000
+                        });
                     } else {
                         $("#modal_sip").modal("hide");
 

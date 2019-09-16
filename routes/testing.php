@@ -14,6 +14,20 @@ Route::name('testing.')->group(function () {
 
         });
 
+        Route::get('/convert-unit-to-prelimary', function () {
+
+            $item = App\Models\Item::find('1');
+
+            $quantity_sekarang = 2;
+            $unit_sekarang = App\Models\Unit::find('11');
+
+            $qty_uom = $item->units->where('uom.unit_id',$unit_sekarang->id)->first()->uom->quantity; // quantity conversi
+
+            dd($qty_uom*$quantity_sekarang);
+
+
+        });
+
         Route::get('/wp', function () {
 
             $project_workpackage = App\Models\Pivots\ProjectWorkPackage::where('project_id',1)->where('workpackage_id',1)->first()->id;
@@ -93,7 +107,7 @@ Route::name('testing.')->group(function () {
                         'taskcard_id' => $tc->id,
                         'origin_taskcard' => $tc->toJson(),
                         'origin_taskcard_items' => $tc->items->toJson(),
-                    ]); 
+                    ]);
                                        // // echo $tc->title.'<br>';
                     // foreach($tc->items as $item){
                     //     echo $item->name.'<br>';

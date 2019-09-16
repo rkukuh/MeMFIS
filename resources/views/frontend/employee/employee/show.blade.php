@@ -49,7 +49,18 @@
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body p-0" style="position:relative">
                         <div class="m-card-user__pic mx-5">
-                            <img src="{{ asset('assets/metronic/app/media/img/users/user5.jpg') }}" class="m--img-rounded m--marginless" alt="" width="13%" style="position:absolute;top:22px;left:12px;border:4px solid white;z-index: 1;">
+                                @php
+                                $active = null;
+                                if(isset($photo_profile['active'])){
+                                    $active = $photo_profile['active'];
+                                }
+                            @endphp
+
+                        @if ($active != null)
+                        <img src="{{$active}}" class="m--img-rounded m--marginless" alt="{{$active}}" width="13%" style="position:absolute;top:22px;left:12px;border:4px solid white;z-index: 1;">    
+                        @else
+                        <img src="{{ asset('assets/metronic/app/media/img/users/user5.jpg') }}" class="m--img-rounded m--marginless" alt="" width="13%" style="position:absolute;top:22px;left:12px;border:4px solid white;z-index: 1;">
+                        @endif
                         </div>
                         <div class="jumbotron mb-0 pt-4" style="background:#294294;height:170px;">
                             <div class="row">
@@ -106,9 +117,7 @@
                         <div style="height:60px;width:100%;background:#e9ecef">
                             <div class="form-group m-form__group row p-3">
                                 <div class="col-sm-2 col-md-2 col-lg-2 d-flex justify-content-end">
-                                    <a href="" data-target="#modal_photo" data-toggle="modal">
-                                        <i class="la la-pencil" style="font-size:32px;"></i>
-                                    </a>
+                                  
                                 </div>
                                 <div class="col-sm-10 col-md-10 col-lg-10">
                                     <ul class="nav nav-tabs nav-fill" role="tablist">
@@ -136,7 +145,6 @@
                         </div>
                     </div>
 
-                    @include('frontend.employee.employee.modal')
                     <div class="m-portlet__body">
                         <div class="tab-content">
                             <div class="tab-pane active" id="m_tabs_2_1" role="tabpanel">

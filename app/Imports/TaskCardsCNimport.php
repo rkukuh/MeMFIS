@@ -189,13 +189,14 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
                     ->where('name', 'Basic')->first();
             }
         }
+
+        $additionals = [];
+        $additionals["internal_number"] = "";
+        $additionals["document_library"] = [];
         if( $row['company_task']) {
-            $additionals = [];
             $additionals["internal_number"] = $row['company_task'];
-            $additionals =  json_encode($additionals);
-        }else{
-            $additionals = null;
         }
+        $additionals =  json_encode($additionals);
 
         $taskcard =  new TaskCard([
             'number' => $row['number'],
@@ -214,6 +215,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
             'reference' => $row['reference'],
             'version' => json_encode(explode(';',$row['version'])),
             'description' => $row['description'],
+            'section' => json_encode([]),
             'additionals' => $additionals
         ]);
 
@@ -248,7 +250,7 @@ class TaskCardsCNimport implements ToModel, WithHeadingRow
         // - Table: accesses
         $accesses = [];
         if($row['access']){
-            foreach (explode(' ',$row['access']) as $access_name ) {
+            foreach (explode(';',$row['access']) as $access_name ) {
                 foreach ($airplanes as $airplane) {
                     if(isset($access_name)){
                         $access = Access::firstOrCreate(

@@ -50,7 +50,7 @@ class EmployeeTerminationController extends Controller
             $employeeTermination->addMedia($request->document)->toMediaCollection('document_employee_termiantion');
         }
 
-        $employee->delete();
+        // $employee->delete();
 
         return response()->json('Sukses');
     }

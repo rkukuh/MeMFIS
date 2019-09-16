@@ -267,6 +267,9 @@ var DatatableAutoColumnHideDemo = function () {
                 $("#total_discount").html(IDRformatter.format(TotalDiscount));
                 $("#total_discount").attr("value", TotalDiscount);
 
+                $("#grand_total").html(IDRformatter.format(grandtotal));
+                $("#grand_total").attr("value", grandtotal);
+
                 $("#grand_total_rupiah").html(IDRformatter.format(grandtotal));
                 $("#grand_total_rupiah").attr("value", grandtotal);
               }else{

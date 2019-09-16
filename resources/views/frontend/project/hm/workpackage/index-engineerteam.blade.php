@@ -54,8 +54,8 @@
                                         @include('frontend.project.hm.engineer.index')
                                     </div>
 
-                                    @include('frontend.project.hm.modal.material.routine-si')
-                                    @include('frontend.project.hm.modal.tool.routine-si')
+                                    @include('frontend.project.hm.modal.material.routine')
+                                    @include('frontend.project.hm.modal.tool.routine')
                                     @include('frontend.project.hm.modal.sequence')
                                     @include('frontend.project.hm.modal.sequence-instruction')
                                     @include('frontend.project.hm.modal.predecessor')

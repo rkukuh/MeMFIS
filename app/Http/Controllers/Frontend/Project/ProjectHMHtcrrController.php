@@ -46,7 +46,7 @@ class ProjectHMHtcrrController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Project $project,Request $request)
+    public function create(Project $project, Request $request)
     {
         $mhrs_pfrm_factor = $skills = $htcrr_engineers = $skill_list = [];
         $tat = 0;
@@ -126,67 +126,49 @@ class ProjectHMHtcrrController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project, WorkPackage $workPackage,Request $request)
+    public function show(Project $project, $temp )
     {
-        $mhrs_pfrm_factor = $skills = $subset = $taskcards = [];
-
+        $mhrs_pfrm_factor = $skills = $htcrr_engineers = $skill_list = [];
+        $tat = 0;
         $htcrrs = HtCrr::where('code',  'like', 'JCRI%')->where('project_id', $project->id)->get();
+        $data_json = json_decode($project->data_htcrr);
+        if (isset($data_json->engineer) && sizeof($data_json->skills) > 0) {
+            $htcrr_engineers = json_decode($project->data_htcrr)->engineer;
+            $engineer_qty = json_decode($project->data_htcrr)->engineer_qty;
+            $tat = json_decode($project->data_htcrr)->tat;
+            foreach (json_decode($project->data_htcrr)->skills as $key => $skill) {
+                $object = new stdClass();
+                $object->skill = $skill;
+                $object->engineer_code = $htcrr_engineers[$key];
+                $object->quantity = $engineer_qty[$key];
+                array_push($skills, $object);
+            }
 
-        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
-        ->where('workpackage_id',$workPackage->id)
-        ->with('taskcards')
-        ->first();
+            $skill_list = json_decode($project->data_htcrr)->skills;
 
-        foreach($project_workpackage->taskcards as $taskcard){
-            array_push($taskcards, $taskcard->taskcard_id);
-        }
-
-        $taskcards = TaskCard::whereIn('id',$taskcards)->get();
-
-        // get skill_id(s) from taskcards that are used in workpackage
-        // so only required skill will showed up
-        foreach($taskcards as $taskcard){
-            array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
-            $result = $taskcard->skills->map(function ($skills) {
-                return collect($skills->toArray())
-                    ->only(['name'])
-                    ->all();
-            });
-
-            array_push($subset , $result);
-        }
-
-        foreach ($subset as $value) {
-            foreach($value as $skill){
-                array_push($skills, $skill["name"]);
+        }else{
+            foreach($htcrrs as $htcrr){
+                if(isset($htcrr->skills)){
+                    foreach($htcrr->skills as $skill){
+                        array_push($skill_list, $skill->name);
+                    }
+                }
             }
         }
 
-        sort($skills);
-        $skills = array_unique($skills);
-        $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
-        $total_mhrs = $taskcards->sum('estimation_manhour') + $htcrrs->sum('estimation_manhour');
-        $total_pfrm_factor = $taskcards->sum('performance_factor');
-
-        //get employees
+        $total_mhrs = $htcrrs->sum('estimation_manhour');
         $employees = Employee::all();
-        $facilities = Facility::all();
-
-        $view = 'frontend.project.hm.workpackage.show';
+        $view = 'frontend.project.htcrr.show';
+        
         return view($view,[
-            'edit' => false,
-            'project' => $project,
-            'employees' => $employees,
-            // 'toolCount' => $toolCount,
-            'total_mhrs' => $total_mhrs,
-            'facilities' => $facilities,
-            'engineer_skills' => $skills,
-            'workPackage' => $workPackage,
-            'skills' => json_encode($skills),
-            // 'materialCount' => $materialCount,
-            'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
-            'total_pfrm_factor' => $total_pfrm_factor,
-            'project_workpackage' => $project_workpackage
+        'tat' => $tat,
+        'project' => $project,
+        'skills' => $skill_list,
+        'employees' => $employees,
+        'total_mhrs' => $total_mhrs,
+        'engineer_skills' => $skills,
+        'htcrr_engineers' => $htcrr_engineers,
+        'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
         ]);
     }
 
@@ -245,7 +227,7 @@ class ProjectHMHtcrrController extends Controller
         $skills = array_unique($skills);
 
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
-        $total_mhrs = $taskcards->sum('estimation_manhour') + $htcrrs->sum('estimation_manhour');
+        $total_mhrs = $htcrrs->sum('estimation_manhour');
         $total_pfrm_factor = $taskcards->sum('performance_factor');
 
         $employees = Employee::all();

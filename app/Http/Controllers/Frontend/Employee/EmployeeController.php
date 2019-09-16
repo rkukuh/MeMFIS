@@ -542,9 +542,11 @@ class EmployeeController extends Controller
         $account = $employee->user()->first();
 
         $account_role = null;
-        if(isset(User::find($employee->user()->first()->id)->role)){
-            $account_role = User::find($employee->user()->first()->id)->role;
-        } 
+        if(isset($employee->user()->first()->id)){
+            if(isset(User::find($employee->user()->first()->id)->role)){
+                $account_role = User::find($employee->user()->first()->id)->role;
+            } 
+        }
 
         //EMPLOYEE BANK CURRENT
         $bank = [];
@@ -572,6 +574,20 @@ class EmployeeController extends Controller
             $r++;
         }
 
+        //EMPLOYEE TERMINATION
+        $employee_termination = $employee->employee_termination()->first();
+        $document_termination = null;
+        if($employee_termination != null){
+            $document_termination = $employee_termination->getMedia('');
+        }
+        
+        //EMPLOYEE PHOTO PROFILE
+        $photo_profile = [];
+
+        if($employee->getFirstMedia('photo_profile_active')){
+            $photo_profile['active'] = $employee->getFirstMedia('photo_profile_active')->getUrl(); 
+        }
+
          return view('frontend.employee.employee.show',[
             'employee' => $employee,
             'age' => $age,
@@ -591,7 +607,10 @@ class EmployeeController extends Controller
             'account' => $account,
             'role' => $account_role,
             'bank' => $bank,
-            'bank_history' => $bank_history
+            'bank_history' => $bank_history,
+            'employee_termination' => $employee_termination,
+            'document_termination' => $document_termination,
+            'photo_profile' => $photo_profile
             ]);
     }
 
@@ -1038,6 +1057,29 @@ class EmployeeController extends Controller
             $r++;
         }
 
+        //EMPLOYEE PHOTO PROFILE
+        $photo_profile = [];
+
+        if($employee->getFirstMedia('photo_profile_1')){
+            $photo_profile['profile_1'] = $employee->getFirstMedia('photo_profile_1')->getUrl(); 
+        }
+
+        if($employee->getFirstMedia('photo_profile_2')){
+            $photo_profile['profile_2'] = $employee->getFirstMedia('photo_profile_2')->getUrl(); 
+        }
+
+        if($employee->getFirstMedia('photo_profile_3')){
+            $photo_profile['profile_3'] = $employee->getFirstMedia('photo_profile_3')->getUrl(); 
+        }
+
+        if($employee->getFirstMedia('photo_profile_4')){
+            $photo_profile['profile_4'] = $employee->getFirstMedia('photo_profile_4')->getUrl(); 
+        }
+
+        if($employee->getFirstMedia('photo_profile_active')){
+            $photo_profile['active'] = $employee->getFirstMedia('photo_profile_active')->getUrl(); 
+        }
+
         return view('frontend.employee.employee.edit',[
         'employee' => $employee,
         'age' => $age,
@@ -1058,7 +1100,8 @@ class EmployeeController extends Controller
         'workshift_history' => $workshift_history,
         'account' => $account,
         'bank' => $bank,
-        'bank_history' => $bank_history
+        'bank_history' => $bank_history,
+        'photo_profile' => $photo_profile
         ]);
     }
 

@@ -6,6 +6,7 @@ use App\Imports\UsersImport;
 use App\Imports\EnginesImport;
 use App\Imports\WorkAreasImport;
 use App\Imports\TaskCardsCNimport;
+use App\Imports\TaskCardsCPCPTriganaimport;
 use App\Imports\TaskCardsCNItemimport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
@@ -34,6 +35,11 @@ class OldDataController extends Controller
     public function taskCardsBoeing()
     {
         // Excel::import(new TaskCardsBoeingImport, $this->import_directory . 'taskcards-boeing-737.xlsx');
+    }
+
+    public function taskCardsCPCPTrigana()
+    {
+        Excel::import(new TaskCardsCPCPTriganaimport, $this->import_directory . 'tc-cpcp-trigana.xlsx');
     }
 
     public function taskCardsCN()

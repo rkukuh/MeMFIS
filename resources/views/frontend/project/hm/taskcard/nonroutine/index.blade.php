@@ -265,6 +265,16 @@
     </div>
 </div>
 
+@push('header-scripts')
+    <style>
+       @media (min-width: 992px){
+            .modal-xl {
+                max-width: 1300px !important;
+            }
+        }
+    </style>
+@endpush
+
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/project/hm/non-routine/index.js')}}"></script>
 @endpush

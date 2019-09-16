@@ -22,10 +22,16 @@ class EmployeeDatatables extends Controller
 
         $i = 0;
         foreach($employees_data as $ed){
+            $url = null;
+            if($ed->getFirstMedia('photo_profile_active')){
+                $url = $ed->getFirstMedia('photo_profile_active')->getFullUrl();
+            }
+
            $employees[$i] = [
             'uuid' => $ed->uuid,
             'first_name' => $ed->first_name,
             'last_name' => $ed->last_name,
+            'active_photo' => $url,
             'code' => $ed->code,
             'phones' => $ed->phones()->where('phones.type_id',Type::where('code','mobile')->first()->id)->first(),
             'department' => $ed->department()->first(),

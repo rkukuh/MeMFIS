@@ -678,15 +678,20 @@ let TaskCard = {
                 },
                 success: function (data) {
                     if (data.errors) {
-                        // if (data.errors.item_id) {
-                        //     $('#material-error').html(data.errors.item_id[0]);
-                        // }
+                        if (data.errors.item_id) {
+                            $('#material-error').html(data.errors.item_id[0]);
+                        }
 
-                        // if (data.errors.quantity) {
-                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
-                        // }
-                        // document.getElementById('material').value = material;
-                        // document.getElementById('quantity').value = quantity;
+                        if (data.errors.quantity) {
+                            $('#quantity_item-error').html(data.errors.quantity[0]);
+                        }
+
+                        if (data.errors.uom) {
+                            $('#unit_material-error').html(data.errors.uom[0]);
+                        }
+
+                        document.getElementById('material').value = material;
+                        document.getElementById('quantity').value = quantity;
 
                     } else {
 
@@ -1016,6 +1021,11 @@ let TaskCard = {
                         if (data.errors.quantity) {
                             $('#quantity-error').html(data.errors.quantity[0]);
                         }
+
+                        if (data.errors.uom) {
+                            $('#unit_tool-error').html(data.errors.uom[0]);
+                        }
+
                         document.getElementById('tool').value = tool;
                         document.getElementById('quantity').value = quantity;
                     } else {
@@ -1300,6 +1310,8 @@ $('.footer').on('click', '.add-taskcard', function () {
     }
     else if ($('input[name=prior_to]:checked').val() == 'cycle') {
         data.append("scheduled_priority_text", $('#cycle').val());
+    }else{
+        data.append("scheduled_priority_text", null);
     }
     data.append("recurrence_id", $('#recurrence_id').val());
     data.append("recurrence_amount", $('input[name=recurrence]').val());

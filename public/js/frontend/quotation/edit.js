@@ -427,14 +427,16 @@ let Quotation = {
         $('.footer').on('click', '.add-quotation', function () {
             calculate_total();
 
-            let is_ppn =  $('#is_ppn').prop("checked");
-            let ppn = 0;
-            if(is_ppn){
-                ppn = $('#grand_total_rupiah').attr("value") * 1.1;
-                is_ppn = 1;
+            let tax_type =  $('#is_ppn').prop("checked");
+            let ppn = tax_percentage = 0;
+            if(tax_type){
+                ppn = $('#grand_total_rupiah').attr("value") / 1.1 * 0.1;
+                tax_type = "include";
+                tax_percentage = 10;
             }else{
                 ppn = $('#grand_total_rupiah').attr("value") * 0.1;
-                is_ppn = 0;
+                tax_type = "exclude";
+                tax_percentage = 10;
             }
             let attention_name = $('#attention').val();
             let attention_phone = $('#phone').val();
@@ -493,7 +495,8 @@ let Quotation = {
             data.append("grandtotal", $('#grand_total').attr("value"));
             data.append("title", $('#title').val());
             data.append("ppn", ppn);
-            data.append("is_ppn",is_ppn);
+            data.append("tax_type",tax_type);
+            data.append("tax_percentage",tax_percentage);
             data.append("charge", JSON.stringify(charge));
             data.append('_method', 'PUT');
 
