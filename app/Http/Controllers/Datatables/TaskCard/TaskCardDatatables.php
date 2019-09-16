@@ -22,31 +22,25 @@ class TaskCardDatatables extends Controller
             if(isset($taskcard->workarea) ){
                 $taskcard->workarea_name .= $taskcard->workarea->name;
             }
-        }
-
-        foreach($alldata as $item){
-            if(isset($item->aircrafts) ){
-                for($index = 0; sizeof($item->aircrafts) > $index; $index++){
-                    if(sizeof($item->aircrafts)-1 == $index){
-                    $item->pesawat .= $item->aircrafts[$index]->name;
+            if(isset($taskcard->aircrafts) ){
+                for($index = 0; sizeof($taskcard->aircrafts) > $index; $index++){
+                    if(sizeof($taskcard->aircrafts)-1 == $index){
+                    $taskcard->pesawat .= $taskcard->aircrafts[$index]->name;
                     }
                     else{
-                    $item->pesawat .= $item->aircrafts[$index]->name.", ";
+                    $taskcard->pesawat .= $taskcard->aircrafts[$index]->name.", ";
                     }
                 }
             }
-        }
-
-        foreach($alldata as $item){
-            if(isset($item->skills) ){
-                if(sizeof($item->skills) == 3){
-                    $item->skill .= "ERI";
+            if(isset($taskcard->skills) ){
+                if(sizeof($taskcard->skills) == 3){
+                    $taskcard->skill .= "ERI";
                 }
-                else if(sizeof($item->skills) == 1){
-                    $item->skill .= $item->skills[0]->name;
+                else if(sizeof($taskcard->skills) == 1){
+                    $taskcard->skill .= $taskcard->skills[0]->name;
                 }
                 else{
-                    $item->skill .= '';
+                    $taskcard->skill .= '';
                 }
             }
         }
@@ -137,7 +131,7 @@ class TaskCardDatatables extends Controller
             'data' => $data,
         ];
 
-        echo json_encode($result, JSON_PRETTY_PRINT);
+        return response()->json($result);
     }
 
     /**

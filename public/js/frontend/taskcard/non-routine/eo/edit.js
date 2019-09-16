@@ -1300,6 +1300,8 @@ $('.footer').on('click', '.add-taskcard', function () {
     }
     else if ($('input[name=prior_to]:checked').val() == 'cycle') {
         data.append("scheduled_priority_text", $('#cycle').val());
+    }else{
+        data.append("scheduled_priority_text", null);
     }
     data.append("recurrence_id", $('#recurrence_id').val());
     data.append("recurrence_amount", $('input[name=recurrence]').val());

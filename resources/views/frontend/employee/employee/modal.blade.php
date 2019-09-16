@@ -26,7 +26,7 @@
         }else if(!isset($photo_profile['profile_4'])){
             $checked_4 = 'checked';
             if(isset($photo_profile['active'])){
-                $activ_4 = $photo_profile['active'];
+                $active_4 = $photo_profile['active'];
             }
         }     
         

@@ -203,6 +203,7 @@ class ItemDatatables extends Controller
         $columnsDefault = [
             'code'     => true,
             'name'     => true,
+            'description'    => true,
             'uuid'     => true,
             'Actions'      => true,
         ];

@@ -157,6 +157,16 @@
     <!--end::Item-->
 
 </div>
+@push('header-scripts')
+    <style>
+       @media (min-width: 992px){
+            .modal-xl {
+                max-width: 1300px !important;
+            }
+        }
+    </style>
+@endpush
+
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/project/hm/routine/index.js')}}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>

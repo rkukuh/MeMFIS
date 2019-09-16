@@ -46,7 +46,7 @@ class ProjectHMHtcrrController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Project $project,Request $request)
+    public function create(Project $project, Request $request)
     {
         $mhrs_pfrm_factor = $skills = $htcrr_engineers = $skill_list = [];
         $tat = 0;
@@ -158,6 +158,7 @@ class ProjectHMHtcrrController extends Controller
         }
 
         $view = 'frontend.project.htcrr.show';
+        
         return view($view,[
             'tat' => $tat,
             'project' => $project,

@@ -203,6 +203,7 @@ class ToolDatatables extends Controller
         $columnsDefault = [
             'code'     => true,
             'name'     => true,
+            'description'    => true,
             'uuid'     => true,
             'Actions'      => true,
         ];

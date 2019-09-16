@@ -20,8 +20,7 @@ class TaskCardEOItemsDatatables extends Controller
         //TODO API used is API's Datatables Metronic. FIX search Datatables API because not work
 
         foreach($taskcard->materials as $material){
-            $unit_id = $material->pivot->unit_id;
-            $material->pivot->unit .= Unit::find($unit_id)->name;
+            $material->pivot->unit .= Unit::find($material->pivot->unit_id)->name;
         }
 
         $data = $alldata = json_decode($taskcard->materials);
@@ -124,8 +123,7 @@ class TaskCardEOItemsDatatables extends Controller
         //TODO API used is API's Datatables Metronic. FIX search Datatables API because not work
 
         foreach($taskcard->tools as $tool){
-            $unit_id = $tool->pivot->unit_id;
-            $tool->pivot->unit .= Unit::find($unit_id)->name;
+            $tool->pivot->unit .= Unit::find($tool->pivot->unit_id)->name;
         }
 
         $data = $alldata = json_decode($taskcard->tools);

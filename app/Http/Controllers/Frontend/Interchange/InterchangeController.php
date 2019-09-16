@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Frontend\Interchange;
 
-use App\Models\Interchange;
+use App\Models\Item;
+use App\Models\Pivots\Interchange;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\InterchangeStore;
 use App\Http\Requests\Frontend\InterchangeUpdate;
@@ -37,7 +38,25 @@ class InterchangeController extends Controller
      */
     public function store(InterchangeStore $request)
     {
-        dd($request->all());
+        $item_id = $request->merge(['item_id' => Item::where('uuid',$request->item_id)->first()->id]);
+        $alternate_item_id = $request->merge(['alternate_item_id' => Item::where('uuid',$request->alternate_item_id)->first()->id]);
+        // dd($request->all());
+        if ($request->way == 1) {
+            $interchange =  Interchange::create($request->all());
+
+            $interchange =  Interchange::create([
+                'item_id' => $request->alternate_item_id,
+                'alternate_item_id' => $request->item_id
+            ]);
+
+            return response()->json($interchange);
+
+        }else{
+            $interchange =  Interchange::create($request->all());
+
+            return response()->json($interchange);
+        }
+
     }
 
     /**
@@ -57,9 +76,13 @@ class InterchangeController extends Controller
      * @param  \App\Models\Interchange  $interchange
      * @return \Illuminate\Http\Response
      */
-    public function edit(Interchange $interchange)
+    public function edit(Item $item,Item $alternateItem)
     {
-        return view('frontend.interchange.edit');
+        $Interchange = Interchange::where('item_id',$item->id)->where('alternate_item_id',$alternateItem->id)->first();
+
+        return view('frontend.interchange.edit', [
+            'Interchange' => $Interchange,
+        ]);
     }
 
     /**
@@ -80,8 +103,10 @@ class InterchangeController extends Controller
      * @param  \App\Models\Interchange  $interchange
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Interchange $interchange)
+    public function destroy(Item $item,Item $alternateItem)
     {
-        //
+        $Interchange = Interchange::where('item_id',$item->id)->where('alternate_item_id',$alternateItem->id)->first()->delete();
+
+        return response()->json($Interchange);
     }
 }
