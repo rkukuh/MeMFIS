@@ -520,7 +520,7 @@ let NonRoutineWorkpackage = {
                 filterable: !1,
             },
             {
-                field: 'removal_manhour_estimation',
+                field: 'removal',
                 title: 'Removal Mhrs Est.',
                 sortable: 'asc',
                 filterable: !1,
@@ -536,33 +536,6 @@ let NonRoutineWorkpackage = {
                 title: 'Skill',
                 sortable: 'asc',
                 filterable: !1,
-            },
-            {
-                field: 'material',
-                title: 'Material',
-                sortable: 'asc',
-                filterable: !1,
-                template: function (t, e, i) {
-                    return (
-                        '<button data-toggle="modal" data-target="#modal_material_htcrr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material_htcrr" title="Material" data-uuid=' +
-                        t.uuid +
-                        '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
-                    );
-                }
-
-            },
-            {
-                field: 'tool',
-                title: 'Tool',
-                sortable: 'asc',
-                filterable: !1,
-                template: function (t, e, i) {
-                    return (
-                        '<button data-toggle="modal" data-target="#modal_tool_htcrr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool_htcrr" title="Tool" data-uuid=' +
-                        t.uuid +
-                        '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                    );
-                }
             },
             ]
         });
