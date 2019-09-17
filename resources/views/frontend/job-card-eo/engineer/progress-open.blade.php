@@ -251,8 +251,8 @@
                         </div>
                         <div class="m-portlet m-portlet--mobile">
                             <div class="m-portlet__body">
-                                @if($jobcard->jobcardable->helper_quantity != 0)
                                 <table border="1px" width="100%" style="margin-top:10px">
+                                @if($jobcard->jobcardable->helper_quantity != 0)
                                     <tr>
                                         <td width="30%" style="background-color:beige;padding:10px;">
                                             Helper
@@ -288,6 +288,7 @@
                                         @endif
                                         </td>
                                     </tr>
+                                @endif
                                     <tr>
                                         <td width="30%" style="background-color:beige;padding:10px;">
                                             Station
@@ -302,7 +303,6 @@
                                         </td>
                                     </tr>
                                 </table>
-                                @endif
                                 <table border="1px" width="100%" style="margin-top:10px">
                                     <tr>
                                         <td align="center" style="background-color:beige;padding:10px;"><b>ACCOMPLISHMENT RECORD</b></td>
