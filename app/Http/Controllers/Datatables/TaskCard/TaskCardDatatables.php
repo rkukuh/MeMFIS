@@ -30,15 +30,7 @@ class TaskCardDatatables extends Controller
                 }
             }
             if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
-                }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
-                }
-                else{
-                    $taskcard->skill .= '';
-                }
+                $taskcard->skill .= $taskcard->skill;
             }
         }
 

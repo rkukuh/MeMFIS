@@ -32,7 +32,7 @@ class TaskCard extends MemfisModel
 
         /** EO Header */
         'revision',
-        'reference', 
+        'reference',
         'category_id',
         'scheduled_priority_id',
         'scheduled_priority_text',
@@ -305,5 +305,27 @@ class TaskCard extends MemfisModel
     public function getToolsAttribute()
     {
         return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
+    }
+
+    /**
+     * Get the task card's item: tool.
+     *
+     * @return string
+     */
+    public function getSkillAttribute()
+    {
+        if(isset($this->skills) ){
+            if(sizeof($this->skills) == 3){
+                $skill = "ERI";
+            }
+            else if(sizeof($this->skills) == 1){
+                $skill = $this->skills[0]->name;
+            }
+            else{
+                $skill = '';
+            }
+        }
+        return collect($skill);
+        // return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
     }
 }
