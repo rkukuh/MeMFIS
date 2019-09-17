@@ -32,8 +32,13 @@ Route::get('/jobcard-routine', function () {
     return $pdf->stream();
 });
 
-Route::get('/jobcard-eo', function () {
-    $pdf = \PDF::loadView('frontend/form/jobcard_eo');
+Route::get('/jobcard-eo-1page', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_eo_1page');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-eo-2page', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_eo_2page');
     return $pdf->stream();
 });
 
@@ -64,11 +69,6 @@ Route::get('/jobcard-routine2', function () {
 
 Route::get('/jobcard-si2', function () {
     $pdf = \PDF::loadView('frontend/form/jobcard_si2');
-    return $pdf->stream();
-});
-
-Route::get('/jobcard-eo2', function () {
-    $pdf = \PDF::loadView('frontend/form/jobcard_eo2');
     return $pdf->stream();
 });
 
@@ -178,11 +178,6 @@ Route::get('/additional-quotation-page3', function () {
 
 Route::get('/purchase-order-doc', function () {
     $pdf = \PDF::loadView('frontend/form/purchase_order');
-    return $pdf->stream();
-});
-
-Route::get('/jobcard-eo-doc', function () {
-    $pdf = \PDF::loadView('frontend/form/jobcard_eo_redesign');
     return $pdf->stream();
 });
 

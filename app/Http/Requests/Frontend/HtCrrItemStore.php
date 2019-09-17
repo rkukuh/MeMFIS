@@ -9,7 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class TaskCardRoutineItemStore extends FormRequest
+class HtCrrItemStore extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,9 +29,7 @@ class TaskCardRoutineItemStore extends FormRequest
     public function rules()
     {
         return [
-            'item_id' => 'required',
-            'unit_id' => 'required',
-            'quantity' => 'required',
+            //
         ];
     }
 
@@ -72,4 +70,3 @@ class TaskCardRoutineItemStore extends FormRequest
         throw new HttpResponseException(response()->json(['errors' => $validator->errors()]));
     }
 }
-

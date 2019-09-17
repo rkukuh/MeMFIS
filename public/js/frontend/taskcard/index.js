@@ -24,7 +24,8 @@ let TaskCard = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !0,
                 serverSorting: !1
             },
             layout: {
@@ -104,7 +105,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'workarea_name',
+                    field: 'workarea.name',
                     title: 'Work Area',
                     sortable: 'asc',
                     filterable: !1,
