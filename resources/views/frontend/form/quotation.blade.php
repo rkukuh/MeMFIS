@@ -248,7 +248,7 @@
                 <tr>
                     <th width="14%" valign="top">Exchange Rate</th>
                     <td width="1%" valign="top">:</td>
-                    <td width="35%" valign="top">{{$quotation->exchange_rate}}</td>
+                    <td width="35%" valign="top">Rp. {{number_format($quotation->exchange_rate)}}</td>
                     <th width="14%" valign="top">A/C Reg.</th>
                     <td width="1%" valign="top">:</td>
                     <td width="35%" valign="top">{{$quotation->quotationable->aircraft_register}}</td>
@@ -365,7 +365,13 @@
         <div class="container">
             <table width="100%" cellpadding="3">
                 <tr>
-                    <th width="50%" rowspan="6" valign="top">Term & Condition <br></th>
+                    <td width="50%" rowspan="6" valign="top"><b>Term & Condition</b><br>
+                        @if(isset($quotation->term_of_condition))
+                            {{$quotation->term_of_condition}}
+                        @else   
+                            -
+                        @endif
+                    </td>
                     <td width="25%" valign="top" align="left">Total</td>
                     <td width="25%" valign="top" align="right">{{ $quotation->currency->symbol }} {{ number_format( $subTotal, 2) }}</td>
                 </tr>
