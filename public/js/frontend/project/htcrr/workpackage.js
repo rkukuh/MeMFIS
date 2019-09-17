@@ -877,7 +877,7 @@ $('.footer-manhour').on('click', '.add-manhour', function () {
 $('.m_tabs_manhour').on('click', function () {
     if(anyChanges){
         $.ajax({
-        url: "/project-htcrr/"+Project_uuid+"/getManhours",
+        url: "/project-htcrr/"+project_uuid+"/getManhours",
         method: "get",
         success: function(dataFetched){
             $('#total_mhrs').html(dataFetched.total_mhrs);

@@ -72,7 +72,7 @@
 
 @push('footer-scripts')
     <script>
-        let Project_uuid = '{{ $project->uuid }}';
+        let project_uuid = '{{ $project->uuid }}';
         let anyChanges = false;
     </script>
     <script src="{{ asset('js/frontend/project/htcrr/workpackage.js') }}"></script>
