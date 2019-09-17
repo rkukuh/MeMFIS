@@ -58,8 +58,14 @@ class QuotationHtcrrController extends Controller
      */
     public function edit(Quotation $quotation)
     {
+        $project_htcrr = json_decode($quotation->quotationable->data_htcrr);
+        $quotation_htcrr = json_decode($quotation->data_htcrr);
+
+
         return view('frontend.quotation.htcrr.index',[
-            'quotation' => $quotation
+            'quotation' => $quotation,
+            'project_htcrr' => $project_htcrr,
+            'quotation_htcrr' => $quotation_htcrr
         ]);
     }
 

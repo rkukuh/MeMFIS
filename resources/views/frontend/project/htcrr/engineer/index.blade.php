@@ -656,7 +656,6 @@
 <script src="{{ asset('js/frontend/functions/select2/instrument.js')}}"></script>
 {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/employee.js')}}"></script> --}}
 <script>
-    let project_uuid = '{{ $project->uuid }}';
 
     if($('#employee_airframe ').length > 1){
         $('#employee_airframe ')[1].closest("div.col-sm-6.col-md-6.col-lg-6").remove();

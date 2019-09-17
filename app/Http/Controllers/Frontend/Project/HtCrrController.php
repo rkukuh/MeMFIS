@@ -44,7 +44,6 @@ class HtCrrController extends Controller
      */
     public function store(HtCrrStore $request)
     {
-
         $number = HtCrr::withTrashed()->where('parent_id',null)->count()+1;
         $request->merge(['code' => DocumentNumber::generate('JCRI-',$number)]);
         $request->merge(['part_number' => Item::where('id',$request->part_number)->first()->code]);
@@ -77,7 +76,7 @@ class HtCrrController extends Controller
             'position' => $request->position,
             'estimation_manhour' => $request->removal_manhour_estimation,
             'part_number' => $request->part_number,
-            'serian_number' => $request->sn_off
+            'serial_number' => $request->sn_off
         ]);
 
         $htcrr->progresses()->save(new Progress([
@@ -92,7 +91,7 @@ class HtCrrController extends Controller
             'project_id' => $request->project_id,
             'estimation_manhour' => $request->installation_manhour_estimation,
             'position' => $request->position,
-            'serian_number' => $request->sn_on
+            'serial_number' => $request->sn_on
         ]);
         
         
