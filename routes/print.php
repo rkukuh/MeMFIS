@@ -67,11 +67,6 @@ Route::get('/jobcard-si2', function () {
     return $pdf->stream();
 });
 
-Route::get('/jobcard-eo2', function () {
-    $pdf = \PDF::loadView('frontend/form/jobcard_eo2');
-    return $pdf->stream();
-});
-
 Route::get('/jobcard-sip', function () {
     $pdf = \PDF::loadView('frontend/form/jobcard_sip');
     return $pdf->stream();
@@ -178,11 +173,6 @@ Route::get('/additional-quotation-page3', function () {
 
 Route::get('/purchase-order-doc', function () {
     $pdf = \PDF::loadView('frontend/form/purchase_order');
-    return $pdf->stream();
-});
-
-Route::get('/jobcard-eo-doc', function () {
-    $pdf = \PDF::loadView('frontend/form/jobcard_eo_redesign');
     return $pdf->stream();
 });
 
