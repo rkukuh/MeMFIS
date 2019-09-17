@@ -25,7 +25,8 @@ let WorkProgressReportShow = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !0,
                 serverSorting: !1
             },
             layout: {
