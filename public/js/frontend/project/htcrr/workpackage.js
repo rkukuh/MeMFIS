@@ -620,7 +620,7 @@ function htcrr_tool(triggeruuid) {
                     toastr.success('Tool has been created.', 'Success', {
                         timeOut: 5000
                     });
-
+                    anyChanges = true;
                     // let table = $('.tools_datatable').mDatatable();
 
                     // table.originalDataSet = [];
@@ -769,6 +769,7 @@ function htcrr_material(triggeruuid) {
                     toastr.success('Material has been created.', 'Success', {
                         timeOut: 5000
                     });
+                    anyChanges = true;
 
                     $('#m_datatable_material_htcrr').DataTable().ajax.reload();
 

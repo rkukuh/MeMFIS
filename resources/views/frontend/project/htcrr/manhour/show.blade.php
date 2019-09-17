@@ -7,11 +7,11 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @if(isset($total_mhrs))
+                @if(isset($htcrr_infos->total_manhours))
                     @component('frontend.common.label.data-info')
                         @slot('id', 'total_mhrs')
                         @slot('name', 'total_mhrs')
-                        @slot('text', $total_mhrs)
+                        @slot('text', $htcrr_infos->total_manhours)
                     @endcomponent
                 @else
                     @include('frontend.common.label.data-info-nodata')
@@ -25,11 +25,11 @@
                 </label>
             </div>
             <div class="col-sm-3 col-md-3 col-lg-3">
-                @if(isset($project_workpackage->performance_factor))
+                @if(isset($htcrr_infos->performance_factor))
                     @component('frontend.common.label.data-info')
                         @slot('id', 'perfoma')
                         @slot('name', 'perfoma')
-                        @slot('text', $project_workpackage->performance_factor)
+                        @slot('text', $htcrr_infos->performance_factor)
                     @endcomponent
                 @else
                     @include('frontend.common.label.data-info-nodata')
@@ -44,11 +44,11 @@
                 </label>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6">
-                @if(isset($project_workpackage->total_manhours_with_performance_factor))
+                @if(isset($htcrr_infos->total_manhours_with_performance_factor))
                     @component('frontend.common.label.data-info')
                         @slot('id', 'total')
                         @slot('name', 'total')
-                        @slot('text', $project_workpackage->total_manhours_with_performance_factor)
+                        @slot('text', $htcrr_infos->total_manhours_with_performance_factor)
                     @endcomponent
                 @else
                     @include('frontend.common.label.data-info-nodata')

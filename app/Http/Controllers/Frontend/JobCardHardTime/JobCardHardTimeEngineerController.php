@@ -98,7 +98,12 @@ class JobCardHardTimeEngineerController extends Controller
     public function edit(HtCrr $htcrr)
     {
         $employees = Employee::all();
+        $code = explode("-", $htcrr->code);
         $progresses = $htcrr->progresses->where('progressed_by',Auth::id());
+        $serial_number = [];
+        $serial_number["on"]    = HtCrr::where('code', 'JINS-'.$code[1])->first()->serial_number;
+        $serial_number["off"]   = HtCrr::where('code', 'JREM-'.$code[1])->first()->serial_number;
+        dd($serial_number);
         if ($progresses->count() == 0 and $this->statuses->where('id',$htcrr->progresses->first()->status_id)->first()->code == "removal-open") {
             return view('frontend.job-card-hard-time.engineer.progress.removal.progress-open', [
                 'htcrr' => $htcrr,
