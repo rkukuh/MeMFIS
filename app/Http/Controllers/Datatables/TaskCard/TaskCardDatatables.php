@@ -16,12 +16,9 @@ class TaskCardDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = TaskCard::with('type','aircrafts','task')->get();
+        $data = $alldata = TaskCard::with('type','aircrafts','task','workarea')->get();
 
         foreach($alldata as $taskcard){
-            if(isset($taskcard->workarea) ){
-                $taskcard->workarea_name .= $taskcard->workarea->name;
-            }
             if(isset($taskcard->aircrafts) ){
                 for($index = 0; sizeof($taskcard->aircrafts) > $index; $index++){
                     if(sizeof($taskcard->aircrafts)-1 == $index){
@@ -33,15 +30,7 @@ class TaskCardDatatables extends Controller
                 }
             }
             if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
-                }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
-                }
-                else{
-                    $taskcard->skill .= '';
-                }
+                $taskcard->skill .= $taskcard->skill;
             }
         }
 
@@ -144,7 +133,7 @@ class TaskCardDatatables extends Controller
         // dd($request->taskcard_routine_type);
 
         $TaskCard = TaskCard::with('task','aircrafts','skills','type');
-        
+
         if (!empty($request->task_type_id)) {
             $TaskCard->whereHas('task', function ($query) use ($request) {
                 $query->where('task_id', $request->task_type_id);

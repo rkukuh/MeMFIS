@@ -25,7 +25,8 @@ let JobCard = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !0,
                 serverSorting: !1
             },
             layout: {
@@ -49,45 +50,46 @@ let JobCard = {
             },
             columns: [
                 {
-                    field: 'quotation.project.code',
+                    field: 'quotation.quotationable.code',
                     title: 'Project No',
                     sortable: 'asc',
                     filterable: !1,
-                },{
+                },
+                {
                     field: 'number',
                     title: 'JC No.',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="/jobcard-ppc/'+t.uuid+'">' + t.number + "</a>"
+                            return '<a href="/jobcard-ppc/'+t.uuid+'/edit">' + t.number + "</a>"
                     }
                 },
                 {
-                    field: 'jobcardable.number',
+                    field: 'tc_number',
                     title: 'TC No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcardable.title',
+                    field: 'tc_title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcardable.type.name',
+                    field: 'type_name',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcardable.task.name',
+                    field: 'task_name',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcardable.description',
+                    field: '',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -103,7 +105,7 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'skill_name',
+                    field: 'skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
@@ -188,7 +190,8 @@ let JobCard = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !0,
                 serverSorting: !1
             },
             layout: {
@@ -212,7 +215,7 @@ let JobCard = {
             },
             columns: [
                 {
-                    field: 'quotation.project.code',
+                    field: 'quotation.quotationable.code',
                     title: 'Project No',
                     sortable: 'asc',
                     filterable: !1,
@@ -227,25 +230,25 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'jobcardable.number',
+                    field: 'tc_number',
                     title: 'TC No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcardable.title',
+                    field: 'tc_title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcardable.type.name',
+                    field: 'type_name',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcardable.task.name',
+                    field: 'task_name',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
@@ -267,7 +270,7 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'skill_name',
+                    field: 'skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,

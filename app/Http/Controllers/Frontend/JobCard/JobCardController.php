@@ -146,7 +146,7 @@ class JobCardController extends Controller
     {
 
         $statuses = Status::ofJobCard()->get();
-        $jobcard = JobCard::where('uuid',$jobCard)->first();
+        $jobcard = JobCard::with('jobcardable','quotation')->where('uuid',$jobCard)->first();
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;
         }
@@ -189,412 +189,113 @@ class JobCardController extends Controller
         $manhours_break = $manhours_break/3600;
         $actual_manhours =number_format($manhours-$manhours_break, 2);
 
+        if($jobcard->jobcardable_type == "App\Models\TaskCard"){
 
-        $jobCard = JobCard::with('taskcard','quotation')->where('uuid',$jobCard)->first();
-
-        if($jobcard->jobcardable->type->code == "basic"){
             $rii_status = $jobcard->jobcardable->is_rii;
-            $helpers = $jobCard->helpers;
+            $helpers = $jobcard->helpers;
             $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
+            $lastStatus = Status::where('id',$jobcard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
+                $dateClosed = $jobcard->progresses->last()->created_at;
             }else{
                 $dateClosed = "-";
             }
-            if(sizeof($jobCard->approvals)==0){
+            if(sizeof($jobcard->approvals)==0){
                 $inspected_by = "-";
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
-                $inspected_at = $jobCard->approvals->first()->created_at;
+                $inspected_by = User::find($jobcard->approvals->first()->conducted_by)->name;
+                $inspected_at = $jobcard->approvals->first()->created_at;
             }
 
-            if(sizeof($jobCard->approvals)==1 or sizeof($jobCard->approvals)==0){
+            if(sizeof($jobcard->approvals)==1 or sizeof($jobcard->approvals)==0){
                 $rii_by = "-";
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
-                $rii_at = $jobCard->approvals->get(1)->created_at;
+                $rii_by = User::find($jobcard->approvals->get(1)->conducted_by)->name;
+                $rii_at = $jobcard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
+            if(sizeof($jobcard->progresses)>=0 and sizeof($jobcard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
-                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
+                $accomplished_by =  User::find($jobcard->progresses->get(1)->progressed_by)->name;
+                $accomplished_at =  $jobcard->progresses->get(1)->created_at;
             }
 
-            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
+            if(isset(User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name)){
+                $prepared_by = User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name;
             }else{
                 $prepared_by ="-";
             }
 
-            $pdf = \PDF::loadView('frontend/form/jobcard_basic',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed,
-                    'accomplished_by' => $accomplished_by,
-                    'accomplished_at' => $accomplished_at,
-                    'inspected_by' => $inspected_by,
-                    'inspected_at' => $inspected_at,
-                    'rii_by' => $rii_by,
-                    'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status,
-                    'helpers' => $helpers,
-                    'actual_manhours'=> $actual_manhours
-                    ]);
-            return $pdf->stream();
-        }
-        elseif($jobcard->jobcardable->type->code == "sip"){
-            $rii_status = $jobcard->jobcardable->is_rii;
-            $helpers = $jobCard->helpers;
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            if(sizeof($jobCard->approvals)==0){
-                $inspected_by = "-";
-                $inspected_at = "-";
-            }
-            else{
-                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
-                $inspected_at = $jobCard->approvals->first()->created_at;
-            }
+            if($jobcard->jobcardable->type->code == "basic"){
 
-            if(sizeof($jobCard->approvals)==1 or sizeof($jobCard->approvals)==0){
-                $rii_by = "-";
-                $rii_at = "-";
+                $pdf = \PDF::loadView('frontend/form/jobcard_basic',[
+                        'jobCard' => $jobcard,
+                        'username' => $username,
+                        'lastStatus' => $lastStatus,
+                        'dateClosed' => $dateClosed,
+                        'accomplished_by' => $accomplished_by,
+                        'accomplished_at' => $accomplished_at,
+                        'inspected_by' => $inspected_by,
+                        'inspected_at' => $inspected_at,
+                        'rii_by' => $rii_by,
+                        'rii_at' => $rii_at,
+                        'prepared_by' => $prepared_by,
+                        'rii_status' => $rii_status,
+                        'helpers' => $helpers,
+                        'actual_manhours'=> $actual_manhours
+                        ]);
+                return $pdf->stream();
             }
-            else{
-                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
-                $rii_at = $jobCard->approvals->get(1)->created_at;
-            }
+            elseif($jobcard->jobcardable->type->code == "sip"){
 
-            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
-                $accomplished_by = "-";
-                $accomplished_at = "-";
-            }else{
-                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
+                $pdf = \PDF::loadView('frontend/form/jobcard_sip',[
+                        'jobCard' => $jobcard,
+                        'username' => $username,
+                        'lastStatus' => $lastStatus,
+                        'dateClosed' => $dateClosed,
+                        'accomplished_by' => $accomplished_by,
+                        'accomplished_at' => $accomplished_at,
+                        'inspected_by' => $inspected_by,
+                        'inspected_at' => $inspected_at,
+                        'rii_by' => $rii_by,
+                        'rii_at' => $rii_at,
+                        'prepared_by' => $prepared_by,
+                        'rii_status' => $rii_status,
+                        'helpers' => $helpers,
+                        'actual_manhours'=> $actual_manhours
+                        ]);
+                return $pdf->stream();
             }
+            elseif($jobcard->jobcardable->type->code == "cpcp"){
 
-            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
-            }else{
-                $prepared_by ="-";
+                $pdf = \PDF::loadView('frontend/form/jobcard_cpcp',[
+                        'jobCard' => $jobcard,
+                        'username' => $username,
+                        'lastStatus' => $lastStatus,
+                        'dateClosed' => $dateClosed,
+                        'accomplished_by' => $accomplished_by,
+                        'accomplished_at' => $accomplished_at,
+                        'inspected_by' => $inspected_by,
+                        'inspected_at' => $inspected_at,
+                        'rii_by' => $rii_by,
+                        'rii_at' => $rii_at,
+                        'prepared_by' => $prepared_by,
+                        'rii_status' => $rii_status,
+                        'helpers' => $helpers,
+                        'actual_manhours'=> $actual_manhours
+                        ]);
+                return $pdf->stream();
             }
-
-            $pdf = \PDF::loadView('frontend/form/jobcard_sip',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed,
-                    'accomplished_by' => $accomplished_by,
-                    'accomplished_at' => $accomplished_at,
-                    'inspected_by' => $inspected_by,
-                    'inspected_at' => $inspected_at,
-                    'rii_by' => $rii_by,
-                    'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status,
-                    'helpers' => $helpers,
-                    'actual_manhours'=> $actual_manhours
-                    ]);
-            return $pdf->stream();
-        }
-        elseif($jobcard->jobcardable->type->code == "cpcp"){
-            $rii_status = $jobcard->jobcardable->is_rii;
-            $helpers = $jobCard->helpers;
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            if(sizeof($jobCard->approvals)==0){
-                $inspected_by = "-";
-                $inspected_at = "-";
-            }
-            else{
-                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
-                $inspected_at = $jobCard->approvals->first()->created_at;
-            }
-
-            if(sizeof($jobCard->approvals)==1 or sizeof($jobCard->approvals)==0){
-                $rii_by = "-";
-                $rii_at = "-";
-            }
-            else{
-                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
-                $rii_at = $jobCard->approvals->get(1)->created_at;
-            }
-
-            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
-                $accomplished_by = "-";
-                $accomplished_at = "-";
-            }else{
-                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
-            }
-
-            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
-            }else{
-                $prepared_by ="-";
-            }
-
-            $pdf = \PDF::loadView('frontend/form/jobcard_cpcp',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed,
-                    'accomplished_by' => $accomplished_by,
-                    'accomplished_at' => $accomplished_at,
-                    'inspected_by' => $inspected_by,
-                    'inspected_at' => $inspected_at,
-                    'rii_by' => $rii_by,
-                    'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status,
-                    'helpers' => $helpers,
-                    'actual_manhours'=> $actual_manhours
-                    ]);
-            return $pdf->stream();
-        }
-        elseif (($jobcard->jobcardable->type->code == "ad") or ($jobcard->jobcardable->type->code == "sb")) {
-            $rii_status = $jobcard->jobcardable->is_rii;
-            $helpers = $jobCard->helpers;
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            if(sizeof($jobCard->approvals)==0){
-                $inspected_by = "-";
-                $inspected_at = "-";
-            }
-            else{
-                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
-                $inspected_at = $jobCard->approvals->first()->created_at;
-            }
-
-            if(sizeof($jobCard->approvals)==1 or sizeof($jobCard->approvals)==0){
-                $rii_by = "-";
-                $rii_at = "-";
-            }
-            else{
-                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
-                $rii_at = $jobCard->approvals->get(1)->created_at;
-            }
-
-            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
-                $accomplished_by = "-";
-                $accomplished_at = "-";
-            }else{
-                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
-            }
-
-            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
-            }else{
-                $prepared_by ="-";
-            }
-
-            $pdf = \PDF::loadView('frontend/form/jobcard_adsb',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed,
-                    'accomplished_by' => $accomplished_by,
-                    'accomplished_at' => $accomplished_at,
-                    'inspected_by' => $inspected_by,
-                    'inspected_at' => $inspected_at,
-                    'rii_by' => $rii_by,
-                    'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status,
-                    'helpers' => $helpers,
-                    'actual_manhours'=> $actual_manhours
-                    ]);
-            return $pdf->stream();        }
-        elseif(($jobcard->jobcardable->type->code == "eo") or ($jobcard->jobcardable->type->code == "ea")){
-            $rii_status = $jobcard->jobcardable->is_rii;
-            $helpers = $jobCard->helpers;
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            if(sizeof($jobCard->approvals)==0){
-                $inspected_by = "-";
-                $inspected_at = "-";
-            }
-            else{
-                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
-                $inspected_at = $jobCard->approvals->first()->created_at;
-            }
-
-            if(sizeof($jobCard->approvals)==1 or sizeof($jobCard->approvals)==0){
-                $rii_by = "-";
-                $rii_at = "-";
-            }
-            else{
-                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
-                $rii_at = $jobCard->approvals->get(1)->created_at;
-            }
-
-            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
-                $accomplished_by = "-";
-                $accomplished_at = "-";
-            }else{
-                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
-            }
-
-            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
-            }else{
-                $prepared_by ="-";
-            }
-
-            $pdf = \PDF::loadView('frontend/form/jobcard_eo',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed,
-                    'accomplished_by' => $accomplished_by,
-                    'accomplished_at' => $accomplished_at,
-                    'inspected_by' => $inspected_by,
-                    'inspected_at' => $inspected_at,
-                    'rii_by' => $rii_by,
-                    'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status,
-                    'helpers' => $helpers,
-                    'actual_manhours'=> $actual_manhours
-                    ]);
-            return $pdf->stream();
-        }
-        elseif(($jobcard->jobcardable->type->code == "cmr") or ($jobcard->jobcardable->type->code == "awl")){
-            $rii_status = $jobcard->jobcardable->is_rii;
-            $helpers = $jobCard->helpers;
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            if(sizeof($jobCard->approvals)==0){
-                $inspected_by = "-";
-                $inspected_at = "-";
-            }
-            else{
-                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
-                $inspected_at = $jobCard->approvals->first()->created_at;
-            }
-
-            if(sizeof($jobCard->approvals)==1 or sizeof($jobCard->approvals)==0){
-                $rii_by = "-";
-                $rii_at = "-";
-            }
-            else{
-                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
-                $rii_at = $jobCard->approvals->get(1)->created_at;
-            }
-
-            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
-                $accomplished_by = "-";
-                $accomplished_at = "-";
-            }else{
-                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
-            }
-
-            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
-            }else{
-                $prepared_by ="-";
-            }
-
-            $pdf = \PDF::loadView('frontend/form/jobcard_cmrawl',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed,
-                    'accomplished_by' => $accomplished_by,
-                    'accomplished_at' => $accomplished_at,
-                    'inspected_by' => $inspected_by,
-                    'inspected_at' => $inspected_at,
-                    'rii_by' => $rii_by,
-                    'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status,
-                    'helpers' => $helpers,
-                    'actual_manhours'=> $actual_manhours
-                    ]);
-            return $pdf->stream();
-        }
-        elseif($jobcard->jobcardable->type->code == "si"){
-            $rii_status = $jobcard->jobcardable->is_rii;
-            $helpers = $jobCard->helpers;
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            if(sizeof($jobCard->approvals)==0){
-                $inspected_by = "-";
-                $inspected_at = "-";
-            }
-            else{
-                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
-                $inspected_at = $jobCard->approvals->first()->created_at;
-            }
-
-            if(sizeof($jobCard->approvals)==1 or sizeof($jobCard->approvals)==0){
-                $rii_by = "-";
-                $rii_at = "-";
-            }
-            else{
-                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
-                $rii_at = $jobCard->approvals->get(1)->created_at;
-            }
-
-            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
-                $accomplished_by = "-";
-                $accomplished_at = "-";
-            }else{
-                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
-            }
-
-            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
-            }else{
-                $prepared_by ="-";
-            }
+            elseif($jobcard->jobcardable->type->code == "si"){
 
             $pdf = \PDF::loadView('frontend/form/jobcard_si',[
-                    'jobCard' => $jobCard,
+                    'jobCard' => $jobcard,
                     'username' => $username,
                     'lastStatus' => $lastStatus,
                     'dateClosed' => $dateClosed,
@@ -609,69 +310,148 @@ class JobCardController extends Controller
                     'helpers' => $helpers,
                     'actual_manhours'=> $actual_manhours
                     ]);
-            return $pdf->stream();
-        }
-        elseif($jobcard->jobcardable->type->code == "preliminary"){
+                return $pdf->stream();
+            }
+            elseif($jobcard->jobcardable->type->code == "preliminary"){
+
+                $pdf = \PDF::loadView('frontend/form/preliminaryinspection-one',[
+                        'jobCard' => $jobcard,
+                        'username' => $username,
+                        'lastStatus' => $lastStatus,
+                        'dateClosed' => $dateClosed,
+                        'accomplished_by' => $accomplished_by,
+                        'accomplished_at' => $accomplished_at,
+                        'inspected_by' => $inspected_by,
+                        'inspected_at' => $inspected_at,
+                        'rii_by' => $rii_by,
+                        'rii_at' => $rii_at,
+                        'prepared_by' => $prepared_by,
+                        'rii_status' => $rii_status,
+                        'helpers' => $helpers,
+                        'actual_manhours'=> $actual_manhours
+                        ]);
+                return $pdf->stream();
+            }
+        }elseif($jobcard->jobcardable_type == "App\Models\EOInstruction"){
+
             $rii_status = $jobcard->jobcardable->is_rii;
-            $helpers = $jobCard->helpers;
+            $helpers = $jobcard->helpers;
             $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
+            $lastStatus = Status::where('id',$jobcard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
+                $dateClosed = $jobcard->progresses->last()->created_at;
             }else{
                 $dateClosed = "-";
             }
-            if(sizeof($jobCard->approvals)==0){
+            if(sizeof($jobcard->approvals)==0){
                 $inspected_by = "-";
                 $inspected_at = "-";
             }
             else{
-                $inspected_by = User::find($jobCard->approvals->first()->conducted_by)->name;
-                $inspected_at = $jobCard->approvals->first()->created_at;
+                $inspected_by = User::find($jobcard->approvals->first()->conducted_by)->name;
+                $inspected_at = $jobcard->approvals->first()->created_at;
             }
 
-            if(sizeof($jobCard->approvals)==1 or sizeof($jobCard->approvals)==0){
+            if(sizeof($jobcard->approvals)==1 or sizeof($jobcard->approvals)==0){
                 $rii_by = "-";
                 $rii_at = "-";
             }
             else{
-                $rii_by = User::find($jobCard->approvals->get(1)->conducted_by)->name;
-                $rii_at = $jobCard->approvals->get(1)->created_at;
+                $rii_by = User::find($jobcard->approvals->get(1)->conducted_by)->name;
+                $rii_at = $jobcard->approvals->get(1)->created_at;
             }
 
-            if(sizeof($jobCard->progresses)>=0 and sizeof($jobCard->progresses)<=1){
+            if(sizeof($jobcard->progresses)>=0 and sizeof($jobcard->progresses)<=1){
                 $accomplished_by = "-";
                 $accomplished_at = "-";
             }else{
-                $accomplished_by =  User::find($jobCard->progresses->get(1)->progressed_by)->name;
-                $accomplished_at =  $jobCard->progresses->get(1)->created_at;
+                $accomplished_by =  User::find($jobcard->progresses->get(1)->progressed_by)->name;
+                $accomplished_at =  $jobcard->progresses->get(1)->created_at;
             }
 
-            if(isset(User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobCard->quotation->quotationable->audits->first()->user_id)->name;
+            if(isset(User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name)){
+                $prepared_by = User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name;
             }else{
                 $prepared_by ="-";
             }
 
-            $pdf = \PDF::loadView('frontend/form/preliminaryinspection-one',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed,
-                    'accomplished_by' => $accomplished_by,
-                    'accomplished_at' => $accomplished_at,
-                    'inspected_by' => $inspected_by,
-                    'inspected_at' => $inspected_at,
-                    'rii_by' => $rii_by,
-                    'rii_at' => $rii_at,
-                    'prepared_by' => $prepared_by,
-                    'rii_status' => $rii_status,
-                    'helpers' => $helpers,
-                    'actual_manhours'=> $actual_manhours
+            if(($jobcard->jobcardable->eo_header->type->code == "ad") or ($jobcard->jobcardable->eo_header->type->code == "sb")) {
+                $pdf = \PDF::loadView('frontend/form/jobcard_adsb',[
+                            'jobCard' => $jobcard,
+                            'username' => $username,
+                            'lastStatus' => $lastStatus,
+                            'dateClosed' => $dateClosed,
+                            'accomplished_by' => $accomplished_by,
+                            'accomplished_at' => $accomplished_at,
+                            'inspected_by' => $inspected_by,
+                            'inspected_at' => $inspected_at,
+                            'rii_by' => $rii_by,
+                            'rii_at' => $rii_at,
+                            'prepared_by' => $prepared_by,
+                            'rii_status' => $rii_status,
+                            'helpers' => $helpers,
+                            'actual_manhours'=> $actual_manhours
+                        ]);
+                    return $pdf->stream(); 
+            }
+            elseif(($jobcard->jobcardable->eo_header->type->code == "cmr") or ($jobcard->jobcardable->eo_header->type->code == "awl")){
+                $pdf = \PDF::loadView('frontend/form/jobcard_cmrawl',[
+                            'jobCard' => $jobcard,
+                            'username' => $username,
+                            'lastStatus' => $lastStatus,
+                            'dateClosed' => $dateClosed,
+                            'accomplished_by' => $accomplished_by,
+                            'accomplished_at' => $accomplished_at,
+                            'inspected_by' => $inspected_by,
+                            'inspected_at' => $inspected_at,
+                            'rii_by' => $rii_by,
+                            'rii_at' => $rii_at,
+                            'prepared_by' => $prepared_by,
+                            'rii_status' => $rii_status,
+                            'helpers' => $helpers,
+                            'actual_manhours'=> $actual_manhours
+                        ]);
+                    return $pdf->stream();
+            }
+            elseif(($jobcard->jobcardable->eo_header->type->code == "eo") or ($jobcard->jobcardable->eo_header->type->code == "ea")){
+                if(sizeOf($jobcard->jobcardable->materials->toArray())<2 and sizeOf($jobcard->jobcardable->tools->toArray())<2){
+                    $pdf = \PDF::loadView('frontend/form/jobcard_eo_1page',[
+                        'jobCard' => $jobcard,
+                        'username' => $username,
+                        'lastStatus' => $lastStatus,
+                        'dateClosed' => $dateClosed,
+                        'accomplished_by' => $accomplished_by,
+                        'accomplished_at' => $accomplished_at,
+                        'inspected_by' => $inspected_by,
+                        'inspected_at' => $inspected_at,
+                        'rii_by' => $rii_by,
+                        'rii_at' => $rii_at,
+                        'prepared_by' => $prepared_by,
+                        'rii_status' => $rii_status,
+                        'helpers' => $helpers,
+                        'actual_manhours'=> $actual_manhours
                     ]);
-            return $pdf->stream();
-        // } else {
-            // ($jobCard->type->code == "htcrr") ||
+                return $pdf->stream();
+                }else{
+                    $pdf = \PDF::loadView('frontend/form/jobcard_eo_2page',[
+                        'jobCard' => $jobcard,
+                        'username' => $username,
+                        'lastStatus' => $lastStatus,
+                        'dateClosed' => $dateClosed,
+                        'accomplished_by' => $accomplished_by,
+                        'accomplished_at' => $accomplished_at,
+                        'inspected_by' => $inspected_by,
+                        'inspected_at' => $inspected_at,
+                        'rii_by' => $rii_by,
+                        'rii_at' => $rii_at,
+                        'prepared_by' => $prepared_by,
+                        'rii_status' => $rii_status,
+                        'helpers' => $helpers,
+                        'actual_manhours'=> $actual_manhours
+                    ]);
+
+                }
+            }
         }
     }
 }

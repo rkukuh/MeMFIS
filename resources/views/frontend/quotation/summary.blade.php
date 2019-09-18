@@ -154,7 +154,7 @@
             </div>
     </div>
  
-    <div class="form-group m-form__group row @if($quotation->currency->symbol !== "Rp")  @endif hidden">
+    <div class="form-group m-form__group row @if($quotation->currency->code == "idr") hidden @endif ">
         <div class="col-sm-5 col-md-5 col-lg-5">
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">

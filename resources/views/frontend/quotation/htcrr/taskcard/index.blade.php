@@ -14,7 +14,7 @@
                     @slot('id', 'description')
                     @slot('rows', '5')
                     @if(!empty($quotation->data_htcrr))
-                    @slot('value', json_decode($quotation->data_htcrr)->description)
+                    @slot('value', $quotation_htcrr->description)
                     @endif
                     @slot('id_error', 'description')
                 @endcomponent
@@ -28,8 +28,8 @@
                 @component('frontend.common.label.data-info')
                     @slot('id', 'total_mhrs')
                     @slot('name', 'total_mhrs')
-                    @slot('text', json_decode($quotation->quotationable->data_htcrr)->total_manhours_with_performance_factor)
-                    @slot('value', json_decode($quotation->quotationable->data_htcrr)->total_manhours_with_performance_factor)
+                    @slot('text', $project_htcrr->total_manhours_with_performance_factor)
+                    @slot('value', $project_htcrr->total_manhours_with_performance_factor)
                 @endcomponent
 
             </div>
@@ -42,7 +42,7 @@
                     @slot('name', 'rate')
                     @slot('id', 'rate')
                     @if(!empty($quotation->data_htcrr))
-                    @slot('value', json_decode($quotation->data_htcrr)->manhour_rate_amount)
+                    @slot('value', $quotation_htcrr->manhour_rate_amount)
                     @endif
                     @slot('id_error', 'rate')
                 @endcomponent
