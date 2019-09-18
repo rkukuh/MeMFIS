@@ -335,6 +335,7 @@ let Workpackage = {
                                 }
                             );
 
+                            anyChange = true;
                             let table = $('.basic_datatable').mDatatable();
 
                             table.originalDataSet = [];
@@ -382,6 +383,7 @@ let Workpackage = {
                                 }
                             );
 
+                            anyChange = true;
                             let table = $('.sip_datatable').mDatatable();
 
                             table.originalDataSet = [];
@@ -429,6 +431,7 @@ let Workpackage = {
                                 }
                             );
 
+                            anyChange = true;
                             let table = $('.cpcp_datatable').mDatatable();
 
                             table.originalDataSet = [];
@@ -476,6 +479,7 @@ let Workpackage = {
                                 }
                             );
 
+                            anyChange = true;
                             let table = $('.ad-sb_datatable').mDatatable();
 
                             table.originalDataSet = [];
@@ -523,6 +527,7 @@ let Workpackage = {
                                 }
                             );
 
+                            anyChange = true;
                             let table = $('.cmr-awl_datatable').mDatatable();
 
                             table.originalDataSet = [];
@@ -570,7 +575,56 @@ let Workpackage = {
                                 }
                             );
 
+                            anyChange = true;
                             let table = $('.si_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+
+                            $.each(errors.errors, function (index, value) {
+                                $('#delete-error').html(value);
+                            });
+                        }
+                    });
+                }
+
+            });
+        });
+
+        //Preliminary
+        $('.preliminary_datatable').on('click', '.delete', function () {
+            // let parent_id = $(this).closest('div[id="scrolling_both"]')[0];
+            // console.log(parent_id);
+            triggeruuid = $(this).data('uuid');
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'DELETE',
+                        url: '/WorkPackage/'+workPackage_uuid+'/taskcard/'+triggeruuid,
+                        success: function (data) {
+                            toastr.success('Taskcard has been deleted.', 'Deleted', {
+                                timeOut: 5000
+                                }
+                            );
+
+                            anyChange = true;
+                            let table = $('.preliminary_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();

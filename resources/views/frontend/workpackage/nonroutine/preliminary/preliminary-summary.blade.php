@@ -15,7 +15,7 @@
                             @include('frontend.common.label.summary')
 
                             <h3 class="m-portlet__head-text">
-                                AD/SB Taskcard
+                                Preliminary Taskcard
                             </h3>
                         </div>
                     </div>
@@ -25,68 +25,7 @@
     </div>
     <!--Begin::Section-->
     <div class="row">
-
-        <div class="col-xl-8">
-            <div class="m-portlet m-portlet--mobile ">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                            <h3 class="m-portlet__head-text">
-                                Skill Needed
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="m-portlet__body">
-                    <!--begin: Datatable -->
-                    <div class="table-responsive-xl text-center">
-                        <table class="table table-bordered ">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Airframe</th>
-                                    <th>Powerplant</th>
-                                    <th>Radio</th>
-                                    <th>Electrical</th>
-                                    <th>Instrument</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>@if( isset($otr["airframe"]) ) {{ $otr["airframe"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
-                                    <td>@if( isset($otr["powerplant"]) ) {{ $otr["powerplant"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
-                                    <td>@if( isset($otr["radio"]) ) {{ $otr["radio"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
-                                    <td>@if( isset($otr["electrical"]) ) {{ $otr["electrical"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
-                                    <td>@if( isset($otr["instrument"]) ) {{ $otr["instrument"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="table table-bordered ">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Run-Up</th>
-                                    <th>Repair</th>
-                                    <th>Repainting</th>
-                                    <th>Cabin Maintenance</th>
-                                    <th>NDI / NDT</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>@if( isset($otr["runup"]) ) {{ $otr["runup"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
-                                    <td>@if( isset($otr["repair"]) ) {{ $otr["repair"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
-                                    <td>@if( isset($otr["repainting"]) ) {{ $otr["repainting"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
-                                    <td>@if( isset($otr["cabin"]) ) {{ $otr["cabin"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
-                                    <td>@if( isset($otr["ndi-ndt"]) ) {{ $otr["ndi-ndt"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!--end: Datatable -->
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-4">
+        <div class="col-xl-12">
             <div class="m-widget29">
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-widget_content">
@@ -106,7 +45,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <!--End::Section-->
 
@@ -120,7 +58,9 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title"> <h1>Tool(s) Taskcard List</h1></span>
+                                <span class="m-accordion__item-title">
+                                    <h1>Tool(s) Taskcard List</h1>
+                                </span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
@@ -147,7 +87,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="adsb_tools_datatable" id="scrolling_both"></div>
+                                            <div class="preliminary_tools_datatable" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -165,7 +105,9 @@
                         <div class="m-accordion__item ">
                             <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_2_item_1_head" data-toggle="collapse" href="#m_accordion_2_item_1_body" aria-expanded="false">
                                 <span class="m-accordion__item-icon"></span>
-                                <span class="m-accordion__item-title"> <h1>Material(s) Taskcard List</h1></span>
+                                <span class="m-accordion__item-title">
+                                    <h1>Material(s) Taskcard List</h1>
+                                </span>
 
                                 <span class="m-accordion__item-mode"></span>
                             </div>
@@ -192,7 +134,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="adsb_materials_datatable" id="scrolling_both"></div>
+                                            <div class="preliminary_materials_datatable" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -208,7 +150,6 @@
                     <div class="flex">
                         <div class="action-buttons">
                             @include('frontend.common.buttons.back')
-
                         </div>
                     </div>
                 </div>
@@ -224,8 +165,7 @@
 @push('footer-scripts')
 <script>
     let workPackage_uuid = '{{ $workPackage->uuid }}';
-    let project_uuid = '{{ $project->uuid }}';
 </script>
-<script src="{{ asset('js/frontend/project/hm/non-routine/summary.js') }}"></script>
-{{-- <script src="{{ asset('js/frontend/project/item/form-reset.js') }}"></script> --}} 
+<script src="{{ asset('js/frontend/workpackage/non-routine/summary.js') }}"></script>
+<script src="{{ asset('js/frontend/workpackage/item/form-reset.js') }}"></script>
 @endpush

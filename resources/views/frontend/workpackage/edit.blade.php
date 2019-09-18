@@ -138,6 +138,7 @@
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
                                                     @include('frontend.workpackage.nonroutine.index')
+                                                    @include('frontend.workpackage.nonroutine.preliminary.modal')
                                                     @include('frontend.workpackage.nonroutine.adsb.modal')
                                                     @include('frontend.workpackage.nonroutine.cmrawl.modal')
                                                     @include('frontend.workpackage.nonroutine.si.modal')

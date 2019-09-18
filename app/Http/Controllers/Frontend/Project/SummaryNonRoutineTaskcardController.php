@@ -212,6 +212,68 @@ class SummaryNonRoutineTaskcardController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
+    public function preliminary(Project $project, WorkPackage $workPackage)
+    {
+        
+        $eri = 0;
+        $skills = $subset = [];
+        
+        $eri = 0;
+        $skills = $subset = $taskcards = [];
+
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
+        ->where('workpackage_id',$workPackage->id)
+        ->with('taskcards')
+        ->first();
+
+        foreach($project_workpackage->taskcards as $taskcard){
+            array_push($taskcards, $taskcard->taskcard_id);
+        }
+
+        $taskcards = TaskCard::whereIn('id',$taskcards)->get(); 
+        $taskcards = $taskcards->load('type')->where('type.code', 'preliminary');
+
+        // foreach($taskcards as $taskcard){
+        //     if (sizeof($taskcard->skills) > 1) {
+        //         $eri++;
+        //     }else{
+        //         $result = $taskcard->skills->map(function ($skills) {
+        //             return collect($skills->toArray())
+        //             ->only(['code'])
+        //             ->all();
+        //         });
+
+        //         array_push($subset, $result);
+        //     }
+        // }
+
+        // foreach ($subset as $value) {
+        //     foreach($value as $skill){
+        //         array_push($skills, $skill["code"]);
+        //     }
+        // }
+
+        $otr = array_count_values($skills);
+        $otr["eri"] = $eri;
+        $total_taskcard  = $taskcards->load('type')->where('type.code', 'preliminary')->count('uuid');
+        $total_manhour_taskcard  = $taskcards->load('type')->where('type.code', 'preliminary')->sum('estimation_manhour');
+        
+
+        return view('frontend.project.hm.taskcard.nonroutine.preliminary.preliminary-summary',[
+            'total_taskcard' => $total_taskcard,
+            'total_manhour_taskcard' => $total_manhour_taskcard,
+            'otr' => $otr,
+            'project' => $project,
+            'workPackage' => $workPackage
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
     public function ea(Project $project, WorkPackage $workPackage)
     {
         $total_manhour_taskcard = 0;
