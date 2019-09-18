@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-         </div>
+        </div>
     </div>
 </div>
 
@@ -70,7 +70,13 @@
     </script>
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/workpackage/job-request.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation/project.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/quotation/workpackage/taskcard/modal/datatables.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation/workpackage/taskcard/modal/successor-show.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation/workpackage/taskcard/modal/predecessor-show.js') }}"></script>
+
 
 @endpush
