@@ -279,6 +279,19 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
+     * One-to-Many: An employee may have zero or many attendance.
+     *
+     * This function will retrieve the employees of a attendance.
+     * See: EmployeeAttendance employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_attendace()
+    {
+        return $this->hasMany(EmployeeAttendance::class);
+    }
+
+    /**
      * One-to-Many: An Employee have one or many bpjs.
      *
      * This function will retrieve bpjs of a given Employee.
