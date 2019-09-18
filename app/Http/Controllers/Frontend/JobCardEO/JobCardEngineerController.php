@@ -214,7 +214,7 @@ class JobCardEngineerController extends Controller
                 }
             }
 
-            $request->merge(['station_id' => Station::where('uuid',$request->station)->first()->id]);
+            $request->merge(['station_id' => Station::where('uuid',$request->station)->first()]);
 
             $additionals['TSN'] = $request->tsn;
             $additionals['CSN'] = $request->csn;
@@ -263,6 +263,8 @@ class JobCardEngineerController extends Controller
                     ]));
                 }
             }
+
+            
 
             if ($request->discrepancy == 1) {
                 return redirect()->route('frontend.discrepancy.jobcard.engineer.discrepancy', $jobcard->uuid);
