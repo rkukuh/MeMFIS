@@ -81,7 +81,7 @@ let TaskCard = {
                     }
                 },
                 {
-                    field: 'jobcard.quotation.project.customer.name',
+                    field: 'customer_name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
@@ -93,14 +93,14 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft.name',
+                    field: 'aircraft',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
 
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_sn',
+                    field: 'aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
