@@ -79,25 +79,25 @@ let DefectCard = {
                     }
                 },
                 {
-                    field: 'jobcard.quotation.project.customer.name',
+                    field: 'jobcard.quotation.quotationable.customer.name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft.name',
+                    field: 'jobcard.quotation.quotationable.aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_register',
+                    field: 'jobcard.quotation.quotationable.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_sn',
+                    field: 'jobcard.quotation.quotationable.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
@@ -119,6 +119,23 @@ let DefectCard = {
                     title: 'Actual Mhrs.',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
                 },
                 {
                     field: 'progresses.0.status_id',
@@ -259,6 +276,23 @@ let DefectCard = {
                     title: 'Actual Mhrs.',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
                 },
                 {
                     field: 'status',
