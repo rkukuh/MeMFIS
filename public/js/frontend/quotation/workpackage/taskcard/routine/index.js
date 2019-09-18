@@ -11,7 +11,7 @@ let RoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/basic/',
+                        url: '/datatables/project/'+project_uuid+'/workpackage/'+workPackage_uuid+'/basic',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -48,45 +48,171 @@ let RoutineWorkpackage = {
                 }
             },
             columns: [{
-                    field: 'number',
-                    title: 'Taskcard Number',
-                    sortable: !1,
-                },
-                {
-                    field: 'title',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'task.name',
-                    title: 'Task',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'estimation_manhour',
-                    title: 'Manhour',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
+                field: 'taskcard.number',
+                title: 'Taskcard Number',
+                sortable: !1,
+            },
+            {
+                field: 'taskcard.title',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,template: function (t, e, i) {
+                    if((t.taskcard.type.code == "basic") || (t.taskcard.type.code == "sip") || (t.taskcard.type.code == "cpcp")){
+                        return '<a href="/taskcard-routine/'+t.taskcard.uuid+'">' + t.taskcard.title + "</a>"
+                    }
+                    else if ((t.taskcard.type.code == "ad") || (t.taskcard.type.code == "sb") || (t.taskcard.type.code == "eo") || (t.taskcard.type.code == "ea") || (t.taskcard.type.code == "htcrr") || (t.taskcard.type.code == "cmr") || (t.taskcard.type.code == "awl")){
+                        return '<a href="/taskcard-eo/'+t.taskcard.uuid+'">' + t.taskcard.title + "</a>"
+                    }
+                    else if(t.taskcard.type.code == "si"){
+                        return '<a href="/taskcard-si/'+t.taskcard.uuid+'">' + t.taskcard.title + "</a>"
+                    }
+                    else if(t.taskcard.type.code == "preliminary"){
+                        return '<a href="/preliminary/'+t.taskcard.uuid+'">' + t.taskcard.title + "</a>"
+                    } else {
+                        return (
+                            'dummy'
+                        );
+                    }
+                }
+            },
+            {
+                field: 'taskcard.skill',
+                title: 'Skill',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'taskcard.task.name',
+                title: 'Task',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'taskcard.estimation_manhour',
+                title: 'Manhour',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'taskcard.description',
+                title: 'Description',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    if (t.taskcard.description) {
+                        data = strtrunc(t.taskcard.description, 50);
+                        return (
+                            '<p>' + data + '</p>'
+                        );
+                    }
+
+                    return ''
+                }
+            },
+            {
+                field: 'material',
+                title: 'Material',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                    return (
+                        '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
+                        t.taskcard.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                    );
+                }
+
+            },
+            {
+                field: 'tool',
+                title: 'Tool',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                    return (
+                        '<button data-toggle="modal" data-target="#modal_tool_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+                        t.taskcard.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    );
+                }
+            },
+            {
+                field: 'sequence',
+                title: 'Sequence',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                    if(t.sequence){
+                        return (
+                            t.sequence
+                        );
+                    }else{
+                        return (
+                            '-'
+                        );
+                    }
+                }
+            },
+            {
+                field: 'predecessor',
+                title: 'Predecessor',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor" data-tc_uuid="' + t.taskcard.uuid + '" data-toggle="modal" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                }
+            },
+            {
+                field: 'successor',
+                title: 'Successor',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor" data-tc_uuid="' + t.taskcard.uuid + '" data-toggle="modal" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                }
+            },
+            {
+                field: 'is_rii',
+                title: 'RII',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                        if(t.is_rii == 1){
                             return (
-                                '<p>' + data + '</p>'
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="Rii" data-uuid='+t.uuid+' data-rii=1' +
+                            ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+                        else if(t.is_rii == 0  || t.is_rii == null){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
+                            ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
                         }
 
-                        return ''
-                    }
-                },
+                }
+            },
+            {
+                field: 'mandatory',
+                title: 'Mandatory',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                        if(t.is_mandatory == 1){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=1' +
+                            ' title="Mandatory"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+                        else if(t.is_mandatory == 0){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=0' +
+                            ' title="Not Mandatory"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
 
+                }
+            },
             ]
         });
         $('#m_accordion_1_item_1_head').on('click', function () {
@@ -102,7 +228,7 @@ let RoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/sip/',
+                        url: '/datatables/project/'+project_uuid+'/workpackage/'+workPackage_uuid+'/sip',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -139,44 +265,171 @@ let RoutineWorkpackage = {
                 }
             },
             columns: [{
-                    field: 'number',
-                    title: 'Taskcard Number',
-                    sortable: !1,
-                },
-                {
-                    field: 'title',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'task.name',
-                    title: 'Task',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'estimation_manhour',
-                    title: 'Manhour',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
+                field: 'taskcard.number',
+                title: 'Taskcard Number',
+                sortable: !1,
+            },
+            {
+                field: 'taskcard.title',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,template: function (t, e, i) {
+                    if((t.taskcard.type.code == "basic") || (t.taskcard.type.code == "sip") || (t.taskcard.type.code == "cpcp")){
+                        return '<a href="/taskcard-routine/'+t.taskcard.uuid+'">' + t.taskcard.title + "</a>"
+                    }
+                    else if ((t.taskcard.type.code == "ad") || (t.taskcard.type.code == "sb") || (t.taskcard.type.code == "eo") || (t.taskcard.type.code == "ea") || (t.taskcard.type.code == "htcrr") || (t.taskcard.type.code == "cmr") || (t.taskcard.type.code == "awl")){
+                        return '<a href="/taskcard-eo/'+t.taskcard.uuid+'">' + t.taskcard.title + "</a>"
+                    }
+                    else if(t.taskcard.type.code == "si"){
+                        return '<a href="/taskcard-si/'+t.taskcard.uuid+'">' + t.taskcard.title + "</a>"
+                    }
+                    else if(t.taskcard.type.code == "preliminary"){
+                        return '<a href="/preliminary/'+t.taskcard.uuid+'">' + t.taskcard.title + "</a>"
+                    } else {
+                        return (
+                            'dummy'
+                        );
+                    }
+                }
+            },
+            {
+                field: 'taskcard.skill',
+                title: 'Skill',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'taskcard.task.name',
+                title: 'Task',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'taskcard.estimation_manhour',
+                title: 'Manhour',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'taskcard.description',
+                title: 'Description',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    if (t.taskcard.description) {
+                        data = strtrunc(t.taskcard.description, 50);
+                        return (
+                            '<p>' + data + '</p>'
+                        );
+                    }
+
+                    return ''
+                }
+            },
+            {
+                field: 'material',
+                title: 'Material',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                    return (
+                        '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
+                        t.taskcard.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                    );
+                }
+
+            },
+            {
+                field: 'tool',
+                title: 'Tool',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                    return (
+                        '<button data-toggle="modal" data-target="#modal_tool_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+                        t.taskcard.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    );
+                }
+            },
+            {
+                field: 'sequence',
+                title: 'Sequence',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                    if(t.sequence){
+                        return (
+                            t.sequence
+                        );
+                    }else{
+                        return (
+                            '-'
+                        );
+                    }
+                }
+            },
+            {
+                field: 'predecessor',
+                title: 'Predecessor',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor" data-tc_uuid="' + t.taskcard.uuid + '" data-toggle="modal" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                }
+            },
+            {
+                field: 'successor',
+                title: 'Successor',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor" data-tc_uuid="' + t.taskcard.uuid + '" data-toggle="modal" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                }
+            },
+            {
+                field: 'is_rii',
+                title: 'RII',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                        if(t.is_rii == 1){
                             return (
-                                '<p>' + data + '</p>'
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="Rii" data-uuid='+t.uuid+' data-rii=1' +
+                            ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+                        else if(t.is_rii == 0  || t.is_rii == null){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
+                            ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
                         }
 
-                        return ''
-                    }
-                },
+                }
+            },
+            {
+                field: 'mandatory',
+                title: 'Mandatory',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                        if(t.is_mandatory == 1){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=1' +
+                            ' title="Mandatory"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+                        else if(t.is_mandatory == 0){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=0' +
+                            ' title="Not Mandatory"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+
+                }
+            }
             ]
         });
         $('#m_accordion_1_item_2_head').on('click', function () {
@@ -192,7 +445,7 @@ let RoutineWorkpackage = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/cpcp/',
+                        url: '/datatables/project/'+project_uuid+'/workpackage/'+workPackage_uuid+'/cpcp',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -229,44 +482,171 @@ let RoutineWorkpackage = {
                 }
             },
             columns: [{
-                    field: 'number',
-                    title: 'Taskcard Number',
-                    sortable: !1,
-                },
-                {
-                    field: 'title',
-                    title: 'Title',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'task.name',
-                    title: 'Task',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'estimation_manhour',
-                    title: 'Manhour',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
+                field: 'taskcard.number',
+                title: 'Taskcard Number',
+                sortable: !1,
+            },
+            {
+                field: 'taskcard.title',
+                title: 'Title',
+                sortable: 'asc',
+                filterable: !1,template: function (t, e, i) {
+                    if((t.taskcard.type.code == "basic") || (t.taskcard.type.code == "sip") || (t.taskcard.type.code == "cpcp")){
+                        return '<a href="/taskcard-routine/'+t.taskcard.uuid+'">' + t.taskcard.title + "</a>"
+                    }
+                    else if ((t.taskcard.type.code == "ad") || (t.taskcard.type.code == "sb") || (t.taskcard.type.code == "eo") || (t.taskcard.type.code == "ea") || (t.taskcard.type.code == "htcrr") || (t.taskcard.type.code == "cmr") || (t.taskcard.type.code == "awl")){
+                        return '<a href="/taskcard-eo/'+t.taskcard.uuid+'">' + t.taskcard.title + "</a>"
+                    }
+                    else if(t.taskcard.type.code == "si"){
+                        return '<a href="/taskcard-si/'+t.taskcard.uuid+'">' + t.taskcard.title + "</a>"
+                    }
+                    else if(t.taskcard.type.code == "preliminary"){
+                        return '<a href="/preliminary/'+t.taskcard.uuid+'">' + t.taskcard.title + "</a>"
+                    } else {
+                        return (
+                            'dummy'
+                        );
+                    }
+                }
+            },
+            {
+                field: 'taskcard.skill',
+                title: 'Skill',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'taskcard.task.name',
+                title: 'Task',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'taskcard.estimation_manhour',
+                title: 'Manhour',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
+                field: 'taskcard.description',
+                title: 'Description',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    if (t.taskcard.description) {
+                        data = strtrunc(t.taskcard.description, 50);
+                        return (
+                            '<p>' + data + '</p>'
+                        );
+                    }
+
+                    return ''
+                }
+            },
+            {
+                field: 'material',
+                title: 'Material',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                    return (
+                        '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
+                        t.taskcard.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                    );
+                }
+
+            },
+            {
+                field: 'tool',
+                title: 'Tool',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                    return (
+                        '<button data-toggle="modal" data-target="#modal_tool_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+                        t.taskcard.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    );
+                }
+            },
+            {
+                field: 'sequence',
+                title: 'Sequence',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                    if(t.sequence){
+                        return (
+                            t.sequence
+                        );
+                    }else{
+                        return (
+                            '-'
+                        );
+                    }
+                }
+            },
+            {
+                field: 'predecessor',
+                title: 'Predecessor',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor" data-tc_uuid="' + t.taskcard.uuid + '" data-toggle="modal" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                }
+            },
+            {
+                field: 'successor',
+                title: 'Successor',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t) {
+                    return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor" data-tc_uuid="' + t.taskcard.uuid + '" data-toggle="modal" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                }
+            },
+            {
+                field: 'is_rii',
+                title: 'RII',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                        if(t.is_rii == 1){
                             return (
-                                '<p>' + data + '</p>'
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="Rii" data-uuid='+t.uuid+' data-rii=1' +
+                            ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+                        else if(t.is_rii == 0  || t.is_rii == null){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill rii" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
+                            ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
                         }
 
-                        return ''
-                    }
-                },
+                }
+            },
+            {
+                field: 'mandatory',
+                title: 'Mandatory',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                        if(t.is_mandatory == 1){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=1' +
+                            ' title="Mandatory"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+                        else if(t.is_mandatory == 0){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=0' +
+                            ' title="Not Mandatory"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+
+                }
+            },
             ]
         });
         $('#m_accordion_1_item_3_head').on('click', function () {

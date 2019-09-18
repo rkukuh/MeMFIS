@@ -414,23 +414,43 @@ class JobCardController extends Controller
                     return $pdf->stream();
             }
             elseif(($jobcard->jobcardable->eo_header->type->code == "eo") or ($jobcard->jobcardable->eo_header->type->code == "ea")){
-                $pdf = \PDF::loadView('frontend/form/jobcard_eo',[
-                            'jobCard' => $jobcard,
-                            'username' => $username,
-                            'lastStatus' => $lastStatus,
-                            'dateClosed' => $dateClosed,
-                            'accomplished_by' => $accomplished_by,
-                            'accomplished_at' => $accomplished_at,
-                            'inspected_by' => $inspected_by,
-                            'inspected_at' => $inspected_at,
-                            'rii_by' => $rii_by,
-                            'rii_at' => $rii_at,
-                            'prepared_by' => $prepared_by,
-                            'rii_status' => $rii_status,
-                            'helpers' => $helpers,
-                            'actual_manhours'=> $actual_manhours
-                        ]);
-                    return $pdf->stream();
+                if(sizeOf($jobcard->jobcardable->materials->toArray())<2 and sizeOf($jobcard->jobcardable->tools->toArray())<2){
+                    $pdf = \PDF::loadView('frontend/form/jobcard_eo_1page',[
+                        'jobCard' => $jobcard,
+                        'username' => $username,
+                        'lastStatus' => $lastStatus,
+                        'dateClosed' => $dateClosed,
+                        'accomplished_by' => $accomplished_by,
+                        'accomplished_at' => $accomplished_at,
+                        'inspected_by' => $inspected_by,
+                        'inspected_at' => $inspected_at,
+                        'rii_by' => $rii_by,
+                        'rii_at' => $rii_at,
+                        'prepared_by' => $prepared_by,
+                        'rii_status' => $rii_status,
+                        'helpers' => $helpers,
+                        'actual_manhours'=> $actual_manhours
+                    ]);
+                return $pdf->stream();
+                }else{
+                    $pdf = \PDF::loadView('frontend/form/jobcard_eo_2page',[
+                        'jobCard' => $jobcard,
+                        'username' => $username,
+                        'lastStatus' => $lastStatus,
+                        'dateClosed' => $dateClosed,
+                        'accomplished_by' => $accomplished_by,
+                        'accomplished_at' => $accomplished_at,
+                        'inspected_by' => $inspected_by,
+                        'inspected_at' => $inspected_at,
+                        'rii_by' => $rii_by,
+                        'rii_at' => $rii_at,
+                        'prepared_by' => $prepared_by,
+                        'rii_status' => $rii_status,
+                        'helpers' => $helpers,
+                        'actual_manhours'=> $actual_manhours
+                    ]);
+
+                }
             }
         }
     }

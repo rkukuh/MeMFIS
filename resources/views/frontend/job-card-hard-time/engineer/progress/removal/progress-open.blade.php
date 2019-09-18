@@ -151,6 +151,7 @@
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('id', 'item_sn_removal')
                                                                                 @slot('name', 'item_sn_removal')
+                                                                                @slot('value', $htcrr)
                                                                                 @slot('id_error', 'item_sn_removal')
                                                                             @endcomponent
                                                                         </td>

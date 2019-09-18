@@ -126,7 +126,7 @@ class ProjectHMHtcrrController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project, $temp )
+    public function show(Project $project, $info)
     {
         $mhrs_pfrm_factor = $skills = $htcrr_engineers = $skill_list = [];
         $tat = 0;
@@ -134,6 +134,7 @@ class ProjectHMHtcrrController extends Controller
         $data_json = json_decode($project->data_htcrr);
         if (isset($data_json->engineer) && sizeof($data_json->skills) > 0) {
             $htcrr_engineers = json_decode($project->data_htcrr)->engineer;
+            $engineers = Employee::whereIn('code', $htcrr_engineers)->pluck('first_name');
             $engineer_qty = json_decode($project->data_htcrr)->engineer_qty;
             $tat = json_decode($project->data_htcrr)->tat;
             foreach (json_decode($project->data_htcrr)->skills as $key => $skill) {
@@ -156,19 +157,17 @@ class ProjectHMHtcrrController extends Controller
             }
         }
 
-        $total_mhrs = $htcrrs->sum('estimation_manhour');
-        $employees = Employee::all();
         $view = 'frontend.project.htcrr.show';
         
         return view($view,[
-        'tat' => $tat,
-        'project' => $project,
-        'skills' => $skill_list,
-        'employees' => $employees,
-        'total_mhrs' => $total_mhrs,
-        'engineer_skills' => $skills,
-        'htcrr_engineers' => $htcrr_engineers,
-        'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
+            'tat' => $tat,
+            'project' => $project,
+            'skills' => $skill_list,
+            'engineer_skills' => $skills,
+            'engineers' => $engineers,
+            'htcrr_engineers' => $htcrr_engineers,
+            'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
+            'htcrr_infos' => json_decode($project->data_htcrr)
         ]);
     }
 

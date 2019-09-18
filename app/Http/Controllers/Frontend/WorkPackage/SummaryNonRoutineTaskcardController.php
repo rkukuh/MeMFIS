@@ -13,6 +13,50 @@ use App\Http\Requests\Frontend\WorkPackageStore;
 use App\Http\Requests\Frontend\WorkPackageUpdate;
 class SummaryNonRoutineTaskcardController extends Controller
 {
+     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function preliminary(WorkPackage $workPackage)
+    {
+        $eri = 0;
+        $taskcards  = $workPackage->taskcards->load('type')->where('type.code', 'preliminary');
+        $skills = $subset = [];
+
+        // foreach($taskcards as $taskcard){
+        //     if (sizeof($taskcard->skills) > 1) {
+        //         $eri++;
+        //     }else{
+        //         $result = $taskcard->skills->map(function ($skills) {
+        //             return collect($skills->toArray())
+        //                 ->only(['code'])
+        //                 ->all();
+        //         });
+
+        //         array_push($subset , $result);
+        //     }
+        // }
+        
+        // foreach ($subset as $value) {
+        //     foreach($value as $skill){
+        //         array_push($skills, $skill["code"]);
+        //     }
+        // }
+
+        $otr = array_count_values($skills);
+        $otr["eri"] = $eri;
+        $total_taskcard  = $workPackage->taskcards->load('type')->where('type.code', 'preliminary')->count('uuid');
+        $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.code', 'preliminary')->sum('estimation_manhour');
+
+        return view('frontend.workpackage.nonroutine.preliminary.preliminary-summary',[
+            'total_taskcard' => $total_taskcard,
+            'total_manhour_taskcard' => $total_manhour_taskcard,
+            'otr' => $otr,
+            'workPackage' => $workPackage
+        ]);
+    }
     /**
      * Display the specified resource.
      *
