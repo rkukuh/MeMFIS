@@ -46,7 +46,7 @@ let QuotationProjectWorkpacage = {
             if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_tc(triggeruuid);
                 $("#predecessor_datatable")
                     .DataTable()
@@ -55,7 +55,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#predecessor_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_tc(triggeruuid);
                 $("#predecessor_datatable")
                     .DataTable()
@@ -66,7 +66,7 @@ let QuotationProjectWorkpacage = {
             if (successor_datatables_init == true) {
                 successor_datatables_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_tc(triggeruuid);
                 $("#successor_datatable")
                     .DataTable()
@@ -75,7 +75,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#successor_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_tc(triggeruuid);
                 $("#successor_datatable")
                     .DataTable()
@@ -128,7 +128,7 @@ let QuotationProjectWorkpacage = {
             if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_tc(triggeruuid);
                 $("#predecessor_datatable")
                     .DataTable()
@@ -137,7 +137,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#predecessor_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_tc(triggeruuid);
                 $("#predecessor_datatable")
                     .DataTable()
@@ -148,7 +148,7 @@ let QuotationProjectWorkpacage = {
             if (successor_datatables_init == true) {
                 successor_datatables_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_tc(triggeruuid);
                 $("#successor_datatable")
                     .DataTable()
@@ -157,7 +157,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#successor_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_tc(triggeruuid);
                 $("#successor_datatable")
                     .DataTable()
@@ -210,7 +210,7 @@ let QuotationProjectWorkpacage = {
             if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_tc(triggeruuid);
                 $("#predecessor_datatable")
                     .DataTable()
@@ -219,7 +219,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#predecessor_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_tc(triggeruuid);
                 $("#predecessor_datatable")
                     .DataTable()
@@ -230,7 +230,7 @@ let QuotationProjectWorkpacage = {
             if (successor_datatables_init == true) {
                 successor_datatables_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_tc(triggeruuid);
                 $("#successor_datatable")
                     .DataTable()
@@ -239,7 +239,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#successor_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_tc(triggeruuid);
                 $("#successor_datatable")
                     .DataTable()
@@ -271,7 +271,7 @@ let QuotationProjectWorkpacage = {
             if (predecessor_instruction_datatable_init == true) {
                 predecessor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_instruction_tc(triggeruuid);
                 $("#predecessor_instruction_datatable")
                     .DataTable()
@@ -280,7 +280,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#predecessor_instruction_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_instruction_tc(triggeruuid);
                 $("#predecessor_instruction_datatable")
                     .DataTable()
@@ -291,7 +291,7 @@ let QuotationProjectWorkpacage = {
             if (successor_instruction_datatable_init == true) {
                 successor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_instruction_tc(triggeruuid);
                 $("#successor_instruction_datatable")
                     .DataTable()
@@ -300,7 +300,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#successor_instruction_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_instruction_tc(triggeruuid);
                 $("#successor_instruction_datatable")
                     .DataTable()
@@ -349,7 +349,7 @@ let QuotationProjectWorkpacage = {
             if (predecessor_instruction_datatable_init == true) {
                 predecessor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_instruction_tc(triggeruuid);
                 $("#predecessor_instruction_datatable")
                     .DataTable()
@@ -358,7 +358,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#predecessor_instruction_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_instruction_tc(triggeruuid);
                 $("#predecessor_instruction_datatable")
                     .DataTable()
@@ -369,7 +369,7 @@ let QuotationProjectWorkpacage = {
             if (successor_instruction_datatable_init == true) {
                 successor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_instruction_tc(triggeruuid);
                 $("#successor_instruction_datatable")
                     .DataTable()
@@ -378,7 +378,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#successor_instruction_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_instruction_tc(triggeruuid);
                 $("#successor_instruction_datatable")
                     .DataTable()
@@ -440,7 +440,7 @@ let QuotationProjectWorkpacage = {
             if (predecessor_instruction_datatable_init == true) {
                 predecessor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_instruction_tc(triggeruuid);
                 $("#predecessor_instruction_datatable")
                     .DataTable()
@@ -449,7 +449,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#predecessor_instruction_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_instruction_tc(triggeruuid);
                 $("#predecessor_instruction_datatable")
                     .DataTable()
@@ -460,7 +460,7 @@ let QuotationProjectWorkpacage = {
             if (successor_instruction_datatable_init == true) {
                 successor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_instruction_tc(triggeruuid);
                 $("#successor_instruction_datatable")
                     .DataTable()
@@ -469,7 +469,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#successor_instruction_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_instruction_tc(triggeruuid);
                 $("#successor_instruction_datatable")
                     .DataTable()
@@ -519,7 +519,7 @@ let QuotationProjectWorkpacage = {
             if (predecessor_instruction_datatable_init == true) {
                 predecessor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_instruction_tc(triggeruuid);
                 $("#predecessor_instruction_datatable")
                     .DataTable()
@@ -528,7 +528,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#predecessor_instruction_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_instruction_tc(triggeruuid);
                 $("#predecessor_instruction_datatable")
                     .DataTable()
@@ -539,7 +539,7 @@ let QuotationProjectWorkpacage = {
             if (successor_instruction_datatable_init == true) {
                 successor_instruction_datatable_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_instruction_tc(triggeruuid);
                 $("#successor_instruction_datatable")
                     .DataTable()
@@ -548,7 +548,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#successor_instruction_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_instruction_tc(triggeruuid);
                 $("#successor_instruction_datatable")
                     .DataTable()
@@ -598,7 +598,7 @@ let QuotationProjectWorkpacage = {
             if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_tc(triggeruuid);
                 $("#predecessor_datatable")
                     .DataTable()
@@ -607,7 +607,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#predecessor_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_tc(triggeruuid);
                 $("#predecessor_datatable")
                     .DataTable()
@@ -618,7 +618,7 @@ let QuotationProjectWorkpacage = {
             if (successor_datatables_init == true) {
                 successor_datatables_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_tc(triggeruuid);
                 $("#successor_datatable")
                     .DataTable()
@@ -627,7 +627,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#successor_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_tc(triggeruuid);
                 $("#successor_datatable")
                     .DataTable()
@@ -680,7 +680,7 @@ let QuotationProjectWorkpacage = {
             if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_tc(triggeruuid);
                 $("#predecessor_datatable")
                     .DataTable()
@@ -689,7 +689,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#predecessor_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
+                
                 predecessor_tc(triggeruuid);
                 $("#predecessor_datatable")
                     .DataTable()
@@ -700,7 +700,7 @@ let QuotationProjectWorkpacage = {
             if (successor_datatables_init == true) {
                 successor_datatables_init = false;
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_tc(triggeruuid);
                 $("#successor_datatable")
                     .DataTable()
@@ -709,7 +709,7 @@ let QuotationProjectWorkpacage = {
                 let table = $("#successor_datatable").DataTable();
                 table.destroy();
                 triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-successor").value = triggeruuid;
+                
                 successor_tc(triggeruuid);
                 $("#successor_datatable")
                     .DataTable()
