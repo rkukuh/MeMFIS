@@ -373,7 +373,14 @@
         <div class="container">
             <table width="100%" cellpadding="3">
                 <tr>
-                    <td width="50%" rowspan="6" valign="top"><b>Term & Condition</b> <br> - PPN Include/Excluded </td>
+                    <td width="50%" rowspan="6" valign="top"><b>Term & Condition</b><br>
+                        {{-- @if(isset($quotation->term_of_condition))
+                            {{$quotation->term_of_condition}}
+                        @else   
+                            -
+                        @endif --}}
+                        PPN Include
+                    </td>
                     <td width="25%" valign="top" align="left">Total</td>
                     {{-- <td width="25%" valign="top" align="right">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal) }}</td> --}}
                     <td width="25%" valign="top" align="right">Rp. 10000</td>

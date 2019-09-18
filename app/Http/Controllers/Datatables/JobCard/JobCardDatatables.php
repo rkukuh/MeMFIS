@@ -20,23 +20,24 @@ class JobCardDatatables extends Controller
      */
     public function index()
     {
-        $JobCard = JobCard::with('quotation','quotation.quotationable')->get();
+        $JobCard = JobCard::with('quotation','quotation.quotationable','jobcardable')->get();
 
         foreach($JobCard as $taskcard){
-            $taskcard->task_name .= $taskcard->jobcardable->task;
-            $taskcard->task_name .= $taskcard->jobcardable->type;
-            if(isset($taskcard->jobcardable->skills) ){
-                if(sizeof($taskcard->jobcardable->skills) == 3){
-                    $taskcard->skill_name .= "ERI";
+            if($taskcard->jobcardable_type == "App\Models\TaskCard"){
+                $taskcard->tc_number .= $taskcard->jobcardable->number;
+                $taskcard->tc_title .= $taskcard->jobcardable->title;
+                if(isset($taskcard->jobcardable->task_id)){
+                    $taskcard->task_name .= $taskcard->jobcardable->task->name;
                 }
-                else if(sizeof($taskcard->jobcardable->skills) == 1){
-                    $taskcard->skill_name .= $taskcard->jobcardable->skills[0]->name;
-                }
-                else{
-                    $taskcard->skill_name .= '';
-                }
+                $taskcard->type_name .= $taskcard->jobcardable->type->name;
+                $taskcard->skill .= $taskcard->jobcardable->skill;
+            }else if($taskcard->jobcardable_type == "App\Models\EOInstruction"){
+                $taskcard->tc_number .= $taskcard->jobcardable->eo_header->number;
+                $taskcard->tc_title .= $taskcard->jobcardable->eo_header->title;
+                $taskcard->task_name .= "";
+                $taskcard->type_name .= $taskcard->jobcardable->eo_header->type->name;
+                $taskcard->skill .= $taskcard->jobcardable->eo_header->skill;
             }
-
 
             $count_user = $taskcard->progresses->groupby('progressed_by')->count()-1;
 

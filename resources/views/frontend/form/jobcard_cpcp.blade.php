@@ -435,7 +435,7 @@
         <tr>
           <td width="3%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
-          <td width="96%" valign="top">
+          <td width="46%" valign="top">
               @php
                $a = sizeof($helpers->toArray());
               @endphp
@@ -447,6 +447,15 @@
                     {{$helpers[$i]->first_name}}
                 @endfor
                 @endif
+          </td>
+          <td width="3%" valign="top">RII </td>
+          <td width="1%" valign="top">:</td>
+          <td width="46%" valign="top">
+            @if($jobCard->is_rii == '0')
+              No
+            @else
+              Yes
+            @endif
           </td>
         </tr>
       </table>

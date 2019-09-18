@@ -59,6 +59,15 @@ class ProjectHMWorkPackageTaskCardController extends Controller
      */
     public function store(Request $request,Project $project, WorkPackage $workpackage, TaskCard $taskcard)
     {
+        if($workpackage->is_template == 0){
+            $exists = $workpackage->taskcards->contains($taskcard->id);
+            if($exists){
+                return response()->json(['title' => "Danger"]);
+            }else{
+                $workpackage->taskcards()->attach($taskcard->id);    
+            }
+        }
+
         $project_wokpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workpackage->id)->first();
 
         $project_wokpackage_taskcard = ProjectWorkPackageTaskCard::where('project_workpackage_id',$project_wokpackage->id)->where('taskcard_id',$taskcard->id)->first();
