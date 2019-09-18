@@ -214,7 +214,7 @@ let JobCard = {
             },
             columns: [
                 {
-                    field: 'quotation.project.code',
+                    field: 'quotation.quotationable.code',
                     title: 'Project No',
                     sortable: 'asc',
                     filterable: !1,
