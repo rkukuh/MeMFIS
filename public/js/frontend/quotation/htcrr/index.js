@@ -77,7 +77,7 @@ let Htcrr = {
                 filterable: !1,
             },
             {
-                field: 'estimation_manhour',
+                field: 'installation',
                 title: 'Installation Mhrs Est.',
                 sortable: 'asc',
                 filterable: !1,
