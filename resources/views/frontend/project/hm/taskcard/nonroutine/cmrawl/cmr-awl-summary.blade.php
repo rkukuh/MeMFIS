@@ -147,7 +147,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="tools_datatable" id="scrolling_both"></div>
+                                            <div class="cmrawl_tools_datatable" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -192,7 +192,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="materials_datatable" id="scrolling_both"></div>
+                                            <div class="cmrawl_materials_datatable" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>
