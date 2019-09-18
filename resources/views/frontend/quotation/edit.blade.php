@@ -449,6 +449,7 @@
     let currency = '{{  $quotation->currency }}';
     let currencyCode = '{{  $quotation->currency->code }}';
 
+
     function myFunction(object) {
         // var numItems = $('.project').length
 
