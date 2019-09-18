@@ -308,6 +308,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{project}/workpackage/{workPackage}/ea', 'ProjectWorkPackageTaskCardNonRoutineDatatables@ea')->name('ea.index');
                 Route::get('/{project}/workpackage/{workPackage}/eo', 'ProjectWorkPackageTaskCardNonRoutineDatatables@eo')->name('eo.index');
                 Route::get('/{project}/workpackage/{workPackage}/si', 'ProjectWorkPackageTaskCardNonRoutineDatatables@si')->name('si.index');
+                Route::get('/{project}/workpackage/{workPackage}/preliminary', 'ProjectWorkPackageTaskCardNonRoutineDatatables@preliminary')->name('preliminary.index');
 
                 /** Items for summary */
 
@@ -541,6 +542,36 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** TASK CARD: Preliminary */
+
+        Route::name('taskcard-preliminary.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'taskcard-preliminary',
+                'namespace' => 'TaskCard'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'TaskCardPreliminaryDatatables@index')->name('all');
+                Route::get('/preliminary/modal', 'TaskCardPreliminaryDatatables@preliminaryModal')->name('preliminary.modal');
+
+                /** Polymorph */
+                // TODO: with (aircraft) Access
+                // TODO: with (aircraft) Zone
+
+                /** Transaction */
+                Route::get('/{taskcard}/tools', 'TaskCardPreliminaryItemsDatatables@tool')->name('tools.index');
+                Route::get('/{taskcard}/materials', 'TaskCardPreliminaryItemsDatatables@material')->name('materials.index');
+                Route::get('/{taskcard}/aircrafts', 'TaskCardPreliminaryAircraftsDatatables@index')->name('aircrafts.index');
+                Route::get('/{taskcard}/repeats', 'TaskCardPreliminaryMaintenanceCycleDatatables@repeat')->name('maintenance-cycle.repeats');
+                Route::get('/{taskcard}/thresholds', 'TaskCardPreliminaryMaintenanceCycleDatatables@threshold')->name('maintenance-cycle.thresholds');
+
+            });
+
+        });
+
         /** TASK RELEASE */
 
         Route::name('task-release-jobcard.')->group(function () {
@@ -738,6 +769,7 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{workPackage}/si', 'WorkPackageTaskCardNonRoutineDatatables@si')->name('si.index');
                 Route::get('/{workPackage}/ea', 'WorkPackageTaskCardNonRoutineDatatables@ea')->name('ea.index');
                 Route::get('/{workPackage}/eo', 'WorkPackageTaskCardNonRoutineDatatables@eo')->name('eo.index');
+                Route::get('/{workPackage}/preliminary', 'WorkPackageTaskCardNonRoutineDatatables@preliminary')->name('preliminary.index');
 
                 Route::get('/{workPackage}/general-tools', 'WorkPackageItemsDatatables@generalTool')->name('gen-tools.index');
                 Route::get('/{workPackage}/general-materials', 'WorkPackageItemsDatatables@generalMaterial')->name('gen-materials.index');
@@ -768,6 +800,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{workPackage}/ad-sb/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@ad_sbTool')->name('workpackage.taskcard.ad-sb.tool.summary');
                 Route::get('/{workPackage}/si/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@siMaterial')->name('workpackage.taskcard.si.material.summary');
                 Route::get('/{workPackage}/si/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@siTool')->name('workpackage.taskcard.si.tool.summary');
+                Route::get('/{workPackage}/preliminary/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@preliminaryMaterial')->name('workpackage.taskcard.preliminary.material.summary');
+                Route::get('/{workPackage}/preliminary/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@preliminaryTool')->name('workpackage.taskcard.preliminary.tool.summary');
 
             });
 
