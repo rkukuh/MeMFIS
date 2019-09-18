@@ -311,9 +311,22 @@
             <table style="border:1px solid  #d4d7db; margin-top:4px;" width="100%">
                 <tr>
                     <td style="border:1px solid  #d4d7db;" width="50%" height="35" valign="top">
-                       <span>Name/Sign : </span>  <span style="margin-left:20px;">Stamp :</span>
+                        <div style="position:relative">
+                            Name/Sign : 
+                            <div style="position:absolute; right:20px;">
+                                Stamp :
+                            </div>
+                        </div>
                     </td>
-                    <td style="border:1px solid  #d4d7db;" width="50%" height="35">asd</td>
+                    <td style="border:1px solid  #d4d7db;" width="50%" height="35" valign="top">
+                        <div style="position:relative">
+                            Customer Sign : 
+                            <div style="position:absolute; right:10px;">
+                                <img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">AGREE</span> <br>
+                                <img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">DISAGREE</span>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -335,7 +348,7 @@
                     <td width="15%" align="center">(Stamp + Sign)</td>
                 </tr>
                 <tr>
-                    <td width="6%" align="center" valign="top">-</td>
+                    <td width="6%" align="center" valign="top"></td>
                     <td width="40%" valign="top">-</td>
                     <td width="16%" align="center" valign="top">-</td>
                     <td width="8%" align="center" valign="top">-</td>
@@ -343,9 +356,16 @@
                     <td width="15%" align="center" valign="top">-</td>
                 </tr>
                 <tr>
-                    <td colspan="3">-</td>
-                    <td>-</td>
-                    <td colspan="2">-</td>
+                    <td colspan="3" valign="top"><b>Remark :</b> <br>* <span style="padding-left:1.1em">FOR RII</span> <br> ** <span style="padding-left:.5em">CHECK AS APPLICABLE </span><br> *** OTHER THAN ABOVE MENTIONED, DESCRIBE, SAY</td>
+                    <td valign="top" align="center"><b>Total</b> <div style="padding-top:12px">12012</div></td>
+                    <td colspan="2" valign="top">   
+                        <div style="position:relative">
+                            <b>RII Item :</b>
+                            <div style="position:absolute; right:0;top:42px;">
+                                (Stamp + Sign)
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
