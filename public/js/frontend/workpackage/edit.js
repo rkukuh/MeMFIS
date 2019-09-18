@@ -35,6 +35,11 @@ let Workpackage = {
         });
 
         $(".nav-tabs").on("click", ".non-routine", function() {
+            let Preliminary = $(".preliminary_datatable").mDatatable();
+
+            Preliminary.originalDataSet = [];
+            Preliminary.reload();
+
             let AdSb = $(".ad-sb_datatable").mDatatable();
 
             AdSb.originalDataSet = [];
@@ -185,6 +190,10 @@ let Workpackage = {
                         table.reload();
 
                         table = $(".si_datatable").mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
+
+                        table = $(".preliminary_datatable").mDatatable();
                         table.originalDataSet = [];
                         table.reload();
                     }
@@ -1400,6 +1409,135 @@ let Workpackage = {
                         );
 
                         let table = $(".si_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        //Preliminary taskcard Datatable
+        $(".preliminary_datatable").on("click", ".sequence", function() {
+            triggeruuid = $(this).data("uuid");
+            sequence = $(this).data("sequence");
+
+            document.getElementById("uuid").value = triggeruuid;
+            document.getElementById("sequence").value = sequence;
+        });
+        $(".preliminary_datatable").on("click", ".predecessor", function() {
+            if (predecessor_datatables_init == true) {
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#predecessor_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $(".preliminary_datatable").on("click", ".successor", function() {
+            if (successor_datatables_init == true) {
+                successor_datatables_init = false;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
+                successor_tc(triggeruuid);
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#successor_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
+                successor_tc(triggeruuid);
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $(".preliminary_datatable").on("click", ".material", function() {
+            if (material_datatables_init == true) {
+                material_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                material_tc_preliminary(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_material_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                material_tc_preliminary(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+        $(".preliminary_datatable").on("click", ".tool", function() {
+            if (tool_datatables_init == true) {
+                tool_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                tool_tc_preliminary(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                tool_tc_preliminary(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+        $(".preliminary_datatable").on("click", ".mandatory", function() {
+            triggeruuid = $(this).data("uuid");
+            mandatory = $(this).data("mandatory");
+            if (mandatory == 0) {
+                is_mandatory = 1;
+            } else if (mandatory == 1) {
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                type: "put",
+                url:
+                    "/workpackage/" +
+                    workPackage_uuid +
+                    "/mandatory/" +
+                    triggeruuid,
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    is_mandatory: is_mandatory
+                },
+                success: function(data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success(
+                            "Mandatory has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $(".preliminary_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
