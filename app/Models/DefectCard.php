@@ -214,6 +214,6 @@ class DefectCard extends MemfisModel
                 $skill = '';
             }
         }
-        return collect($skill);
+        return $skill;
     }
 }

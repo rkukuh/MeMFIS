@@ -325,6 +325,6 @@ class TaskCard extends MemfisModel
                 $skill = '';
             }
         }
-        return collect($skill);
+        return $skill;
     }
 }
