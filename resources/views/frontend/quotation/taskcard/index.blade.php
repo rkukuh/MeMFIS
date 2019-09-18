@@ -55,8 +55,8 @@
                     @slot('name', 'rate')
                     @slot('id', 'rate')
                     @slot('id_error', 'rate')
-                    @if(isset($job_request->pivot))
-                    @slot('value',$job_request->pivot->manhour_rate)
+                    @if(isset($job_request->pivot->manhour_rate_amount))
+                    @slot('value',$job_request->pivot->manhour_rate_amount)
                     @else
                     @slot('value', $quotation_workpackage->manhour_rate->rate)
                     @endif
