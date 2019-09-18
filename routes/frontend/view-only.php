@@ -95,11 +95,6 @@ Route::group([
         Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
         Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
 
-        /** IMPORT FINGERPRINT MACHINE */
-
-        Route::view('/import-fingerprint', 'frontend.import-fingerprint.index')->name('import-fingerprint.index');
-        Route::view('/import-fingerprint/create', 'frontend.import-fingerprint.create')->name('import-fingerprint.create');
-
         /** ATTENDANCE */
 
         Route::view('/attendance', 'frontend.attendance.index')->name('attendance.index');

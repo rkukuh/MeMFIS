@@ -18,12 +18,12 @@ class EmployeeAttendances extends Migration
             $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('employee_id');
             $table->date('date');
-            $table->time('in');
-            $table->time('out');
-            $table->bigInteger('late_in');
-            $table->bigInteger('earlier_out');
-            $table->bigInteger('overtime');
-            $table->string('status');
+            $table->time('in')->nullable();
+            $table->time('out')->nullable();
+            $table->bigInteger('late_in')->nullable();
+            $table->bigInteger('earlier_out')->nullable();
+            $table->bigInteger('overtime')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
