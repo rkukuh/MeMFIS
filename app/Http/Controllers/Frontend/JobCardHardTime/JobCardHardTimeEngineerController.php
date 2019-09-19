@@ -233,7 +233,7 @@ class JobCardHardTimeEngineerController extends Controller
             }
 
             foreach($htcrr->progresses->groupby('progressed_by') as $key => $value){
-                if($this->statuses->where('id',$htcrr->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed"){
+                if($this->statuses->where('id',$htcrr->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "removal-open"){
                     $htcrr->progresses()->save(new Progress([
                         'status_id' =>  $this->statuses->where('code','removal-closed')->first()->id,
                         'reason_id' =>  Type::ofHtCrrCloseReason()->where('uuid',$request->accomplishment)->first()->id,
@@ -287,7 +287,7 @@ class JobCardHardTimeEngineerController extends Controller
             }
 
             foreach($htcrr->progresses->groupby('progressed_by') as $key => $value){
-                if($this->statuses->where('id',$htcrr->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "closed"){
+                if($this->statuses->where('id',$htcrr->progresses->where('progressed_by',$key)->last()->status_id)->first()->code <> "removal-open"){
                     $htcrr->progresses()->save(new Progress([
                         'status_id' =>  $this->statuses->where('code','installation-closed')->first()->id,
                         'reason_id' =>  Type::ofHtCrrCloseReason()->where('uuid',$request->accomplishment)->first()->id,
