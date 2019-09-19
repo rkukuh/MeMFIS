@@ -11,7 +11,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/discrepancy/engineer',
+                        url: '/datatables/discrepancy/mechanic',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -151,14 +151,9 @@ let TaskCard = {
                                 'Engineer Approved'
                             );
                         }
-                        else if(t.status == "ppc"){
-                            return (
-                                'PPC Approved'
-                            );
-                        }
                         else{
                             return (
-                                ''
+                                'Approved'
                             );
                         }
                     }
@@ -176,7 +171,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'conducted_by',
+                    field: 'approved_by',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
@@ -199,9 +194,12 @@ let TaskCard = {
                                 '</a>'
                             );
                         }
-                        else if(t.status == "engineer" || t.status == "ppc"){
+                        else if(t.status == "engineer"){
                             return ('<a href="/discrepancy-engineer/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Show" data-id="' + t.uuid +'">' +
                             '<i class="la la-eye"></i>');
+
+                        }else{
+                            return ('');
                         }
                     }
                 }
@@ -252,51 +250,6 @@ let TaskCard = {
 
             });
         });
-
-        $('.Discrepancy_datatable').on('click', '.approve', function () {
-            let discrepancy_uuid = $(this).data('uuid');
-
-            swal({
-                title: 'Sure want to Approve?',
-                type: 'question',
-                confirmButtonText: 'Yes, Approve',
-                confirmButtonColor: '#34bfa3',
-                cancelButtonText: 'Cancel',
-                showCancelButton: true,
-            })
-            .then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                                'content'
-                            )
-                        },
-                        type: 'PUT',
-                        url: '/discrepancy/' + discrepancy_uuid + '/engineer/approve',
-                        success: function (data) {
-                            toastr.success('Discrepancy has been approved.', 'Approved', {
-                                    timeOut: 5000
-                                }
-                            );
-
-                            let table = $('.Discrepancy_datatable').mDatatable();
-
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function (jqXhr, json, errorThrown) {
-                            let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
-                            });
-                        }
-                    });
-                }
-            });
-        });
-
     }
 };
 
