@@ -748,7 +748,6 @@ function htcrr_material(triggeruuid) {
                 quantity: quantity,
                 unit_id: unit_material,
                 note: remark_material,
-
             },
             success: function (data) {
                 if (data.errors) {

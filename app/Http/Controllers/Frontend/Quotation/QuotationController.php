@@ -6,6 +6,7 @@ use Auth;
 use App\Models\Tax;
 use App\Models\Item;
 use App\Models\Type;
+use App\Models\HtCrr;
 use App\Models\Status;
 use App\Models\Project;
 use App\Models\JobCard;
@@ -610,6 +611,23 @@ class QuotationController extends Controller
                         array_push($discount, 0);
                 }
             }
+        }
+
+        $htcrrs = HtCrr::where('project_id',$quotation->quotationable->id)->whereNull('parent_id')->get();
+        $mats_tools_htcrr = QuotationHtcrrItem::where('quotation_id', $quotation->id)->sum('price_amount');
+        if (sizeof($htcrrs) > 0) {
+            $data_htcrr = json_decode($quotation->data_htcrr, true);
+            $htcrr_workpackage = new WorkPackage();
+            $htcrr_workpackage->code = "Workpackage HT CRR";
+            $htcrr_workpackage->title = "Workpackage HT CRR";
+            $htcrr_workpackage->description = $data_htcrr["description"];
+            $htcrr_workpackage->manhour_rate_amount = $data_htcrr["manhour_rate_amount"];
+            $htcrr_workpackage->total_manhours_with_performance_factor = $data_htcrr["total_manhours_with_performance_factor"];
+            $htcrr_workpackage->mat_tool_price = $mats_tools_htcrr;
+            $htcrr_workpackage->is_template = "htcrr";
+            $htcrr_workpackage->ac_type = $quotation->quotationable->aircraft->name;
+
+            $workpackages[sizeof($workpackages)] = $htcrr_workpackage;
         }
 
         $pdf = \PDF::loadView('frontend/form/quotation',[
