@@ -119,7 +119,9 @@
                                                 Inspection Type
                                             </td>
                                             <td width="70%" style="text-align:center">
+                                            @if(isset($jobcard->jobcardable->task))
                                                 {{$jobcard->jobcardable->task->name}}
+                                            @endif
                                             </td>
                                         </tr>
                                         <tr>
