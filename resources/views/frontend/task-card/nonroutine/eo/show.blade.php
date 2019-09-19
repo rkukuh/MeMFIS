@@ -230,25 +230,25 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @if( $taskcard->scheduled_priority_id == 77)
+                                                    @if( $taskcard->scheduled_priority_id == 144)
                                                         @slot('text', 'Next check / shop visit')
-                                                    @elseif( $taskcard->scheduled_priority_id == 78)
+                                                    @elseif( $taskcard->scheduled_priority_id == 145)
                                                         @slot('text', 'Next heavy maintenance visit')
-                                                    @elseif( $taskcard->scheduled_priority_id == 78)
+                                                    @elseif( $taskcard->scheduled_priority_id == 146)
                                                         @slot('text', 'As scheduled by PPC')
                                                     @else
-                                                        @slot('text', 'Next heavy maintenance visit')
+                                                        @slot('text', 'Prior To')
                                                     @endif
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6" id="prior_to">
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>
-                                                @if($taskcard->scheduled_priority_amount)
+                                                @if($taskcard->scheduled_priority_id == 147)
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-10 col-md-10 col-lg-10">
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', $taskcard->scheduled_priority_amount)
+                                                            @slot('text', $taskcard->scheduled_priority_text)
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
