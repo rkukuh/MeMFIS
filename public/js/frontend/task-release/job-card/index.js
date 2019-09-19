@@ -74,25 +74,25 @@ let TaskRelease = {
 
                 },
                 {
-                    field: 'quotation.project.customer.name',
+                    field: 'quotation.quotationable.customer.name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft.name',
+                    field: 'quotation.quotationable.aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_register',
+                    field: 'quotation.quotationable.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_sn',
+                    field: 'quotation.quotationable.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
@@ -114,6 +114,23 @@ let TaskRelease = {
                     title: 'Actual. Mhrs',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
                 },
                 {
                     field: 'status',

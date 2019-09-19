@@ -130,4 +130,42 @@ class SummaryNonRoutineTaskcardController extends Controller
         ]);
     }
 
+     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\WorkPackage  $workPackage
+     * @return \Illuminate\Http\Response
+     */
+    public function preliminary(Quotation $quotation, WorkPackage $workPackage)
+    {
+        $taskcards  = $workPackage->taskcards->load('type')->where('type.code', 'preliminary');
+        $skills = $subset = [];
+
+        foreach($taskcards as $taskcard){
+            $result = $taskcard->skills->map(function ($skills) {
+                return collect($skills->toArray())
+                    ->only(['code'])
+                    ->all();
+            });
+
+            array_push($subset , $result);
+        }
+        foreach ($subset as $value) {
+            foreach($value as $skill){
+                array_push($skills, $skill["code"]);
+            }
+        }
+        $otr = array_count_values($skills);
+        $total_taskcard  = $workPackage->taskcards->load('type')->where('type.code', 'preliminary')->count('uuid');
+        $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.code', 'preliminary')->sum('estimation_manhour');
+
+        return view('frontend.quotation.taskcard.nonroutine.preliminary.preliminary-summary',[
+            'total_taskcard' => $total_taskcard,
+            'total_manhour_taskcard' => $total_manhour_taskcard,
+            'quotation' => $quotation,
+            'otr' => $otr,
+            'workPackage' => $workPackage
+        ]);
+    }
+
 }
