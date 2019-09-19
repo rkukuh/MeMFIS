@@ -416,7 +416,6 @@ let Workpackage = {
             $.each($("input[name='propose[]']:checked"), function() {
                 propose.push($(this).val());
               });
-            // console.log(propose);
 
             $.ajax({
                 headers: {
@@ -605,9 +604,9 @@ function htcrr_tool(triggeruuid) {
             },
             success: function (data) {
                 if (data.errors) {
-                    // if (data.errors.item_id) {
-                    //     $('#tool-error').html(data.errors.item_id[0]);
-                    // }
+                    if (data.errors.uom) {
+                        $('#unit_material-error').html(data.errors.uom[0]);
+                    }
 
                     // if (data.errors.quantity) {
                     //     $('#quantity-error').html(data.errors.quantity[0]);
@@ -616,7 +615,7 @@ function htcrr_tool(triggeruuid) {
                     // document.getElementById('quantity').value = quantity;
                 } else {
 
-                    toastr.success('Tool has been created.', 'Success', {
+                    toastr.success('Tool has been added to taskcard.', 'Success', {
                         timeOut: 5000
                     });
                     anyChanges = true;
@@ -753,9 +752,9 @@ function htcrr_material(triggeruuid) {
             },
             success: function (data) {
                 if (data.errors) {
-                    // if (data.errors.item_id) {
-                    //     $('#material-error').html(data.errors.item_id[0]);
-                    // }
+                    if (data.errors.uom) {
+                        $('#unit_material-error').html(data.errors.uom[0]);
+                    }
 
                     // if (data.errors.quantity) {
                     //     $('#quantity_item-error').html(data.errors.quantity[0]);
@@ -765,7 +764,7 @@ function htcrr_material(triggeruuid) {
 
                 } else {
 
-                    toastr.success('Material has been created.', 'Success', {
+                    toastr.success('Material has been added to taskcard.', 'Success', {
                         timeOut: 5000
                     });
                     anyChanges = true;
