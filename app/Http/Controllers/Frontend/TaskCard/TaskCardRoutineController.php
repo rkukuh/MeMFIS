@@ -172,15 +172,15 @@ class TaskCardRoutineController extends Controller
             if($request->station){
                 foreach ($request->applicability_airplane as $airplane) {
                     if(isset($request->station)){
-                        $station = Station::firstOrCreate(
-                            ['name' => $request->station, 'stationable_id' => $airplane, 'stationable_type' => 'App\Models\Aircraft']
-                        );
+                        foreach($request->station as $station){
+                            $station = Station::firstOrCreate(
+                                ['name' => $station, 'stationable_id' => $airplane, 'stationable_type' => 'App\Models\Aircraft']
+                            );
+                            $taskcard->stations()->attach($station);
+                        }
                     }
-
-                    $taskcard->stations()->attach($station);
                 }
             }
-            // dd($taskcard);
             return response()->json($taskcard);
         }
 
@@ -239,27 +239,20 @@ class TaskCardRoutineController extends Controller
      */
     public function edit(TaskCard $taskCard)
     {
-        // dd($taskCard->stations);
-        $tc_stations = $aircraft_taskcards = [];
+        $tc_stations = $aircraft_taskcards = $access_taskcards = $zone_taskcards = $relation_taskcards = [];
 
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
         }
 
-        $access_taskcards = [];
-
         foreach($taskCard->accesses as $i => $access_taskcard){
             $access_taskcards[$i] =  $access_taskcard->pivot->access_id;
         }
-
-        $zone_taskcards = [];
 
         foreach($taskCard->zones as $i => $zone_taskcard){
             $zone_taskcards[$i] =  $zone_taskcard->id;
             
         }
-
-        $relation_taskcards = [];
 
         foreach($taskCard->related_to as $i => $relation_taskcard){
             $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
@@ -267,15 +260,16 @@ class TaskCardRoutineController extends Controller
 
         $temp = $taskCard->stations->map(function ($stations) {
             return collect($stations->toArray())
-            ->only(['name'])
+            ->only(['uuid'])
             ->all();
         });
-        
         $temp = array_values($temp->toArray());
+
         foreach($temp as $station){
-            array_push($tc_stations, $station["name"]);
+            array_push($tc_stations, $station["uuid"]);
         }
 
+        // dd(in_array("ca05f56a-bf54-467d-962c-88c3d819cffb", $tc_stations));
         return view('frontend.task-card.routine.edit', [
             'tasks' => $this->task,
             'types' => $this->type,
@@ -308,6 +302,7 @@ class TaskCardRoutineController extends Controller
     public function update(TaskCardRoutineUpdate $request, TaskCard $taskCard)
     {
         $this->decoder($request);
+        dd($request->station);
         $accesses = $zones = $additionals = [];
         
         $additionals["internal_number"] = $request->additionals->internal_number;
@@ -441,6 +436,7 @@ class TaskCardRoutineController extends Controller
 
         $req->zone = json_decode($req->zone);
         $req->access = json_decode($req->access);
+        $req->station = json_decode($req->station);
         $req->sections = json_decode($req->sections);
         $req->additionals = json_decode($req->additionals);
         $req->repeat_type = json_decode($req->repeat_type);
