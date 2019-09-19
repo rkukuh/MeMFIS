@@ -454,13 +454,14 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
         echo json_encode($result, JSON_PRETTY_PRINT);
 
     }
+    
     public function eaMaterial(WorkPackage $workPackage)
     {
         $items =[];
-        foreach($workPackage->taskcards as $taskcard){
-            if($taskcard->type->code == 'ea'){
-                foreach($taskcard->materials as $item){
-                    $item->tackcard_number .= $taskcard->number;
+        foreach($workPackage->eo_instructions as $taskcard){
+            if($taskcard->eo_header->type->code == 'ea'){
+                foreach($taskcard->tools as $item){
+                    $item->tackcard_number .= $taskcard->eo_header->number;
                     $item->unit_name .= $item->unit->name;
                     array_push($items, $item);
                 }
@@ -554,8 +555,8 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
         ];
 
         echo json_encode($result, JSON_PRETTY_PRINT);
-
     }
+    
 
     public function eaTool(WorkPackage $workPackage)
     {
@@ -989,6 +990,10 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+   
+
     public function siTool(WorkPackage $workPackage)
     {
         $items =[];
