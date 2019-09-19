@@ -176,7 +176,7 @@
                                                                                 @slot('id', 'is_rii_removal')
                                                                                 @slot('name', 'is_rii_removal')
                                                                                 @slot('text', 'IS RII?')
-                                                                                @if($htcrr_removal->is_null)
+                                                                                @if($htcrr_removal->is_rii == 1)
                                                                                 @slot('checked', 'checked')
                                                                                 @endif
                                                                                 @slot('value', 1)
@@ -474,7 +474,12 @@
                                                                                 @slot('id', 'is_rii_installation')
                                                                                 @slot('name', 'is_rii_installation')
                                                                                 @slot('text', 'IS RII?')
-                                                                                @slot('value', 1)
+                                                                                    @if( $htcrr_removal->is_rii == 1)
+                                                                                        @slot('value', 1)
+                                                                                        @slot('checked', 'checked')
+                                                                                    @else
+                                                                                        @slot('value', 0)
+                                                                                    @endif
                                                                                 @slot('size', '2')
                                                                                 @slot('style_div', 'margin-top:20px; padding:0;')
                                                                                 @slot('padding_left', '0')
