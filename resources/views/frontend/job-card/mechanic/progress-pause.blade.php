@@ -117,7 +117,9 @@
                                                 Inspection Type
                                             </td>
                                             <td width="70%" style="text-align:center">
+                                            @if(isset($jobcard->jobcardable->task))
                                                 {{$jobcard->jobcardable->task->name}}
+                                            @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -277,7 +279,7 @@
                                         <form method="POST" action="{{route('frontend.discrepancy.jobcard.mechanic.discrepancy.create',$jobcard->uuid)}}">
                                             {!! csrf_field() !!}
                                             @component('frontend.common.buttons.found')
-                                                @if(sizeOf($jobcard->defectcards) > 0)
+                                                @if(sizeOf($jobcard->defectcards) > 0 && $jobcard->jobcardable->type->code !== "preliminary")
                                                     @slot('disabled','disabled')
                                                 @endif
                                             @endcomponent
