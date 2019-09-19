@@ -139,19 +139,19 @@ class SummaryNonRoutineTaskcardController extends Controller
             $query->where('code', 'eo');
         })->whereNull('eo_instructions.deleted_at')->get();
         
-            foreach($taskcards as $eo_instruction){
-                if (sizeof($eo_instruction->skills) > 1) {
-                    $eri++;
-                }else{
-                    $result = $eo_instruction->skills->map(function ($skills) {
-                        return collect($skills->toArray())
-                        ->only(['code'])
-                        ->all();
-                    });
+        foreach($taskcards as $eo_instruction){
+            if (sizeof($eo_instruction->skills) > 1) {
+                $eri++;
+            }else{
+                $result = $eo_instruction->skills->map(function ($skills) {
+                    return collect($skills->toArray())
+                    ->only(['code'])
+                    ->all();
+                });
 
-                    array_push($subset , $result);
-                }
+                array_push($subset , $result);
             }
+        }
 
         foreach ($subset as $value) {
             foreach($value as $skill){
