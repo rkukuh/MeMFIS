@@ -91,7 +91,7 @@ class QuotationController extends Controller
         $project = Project::where('uuid',$request->project_id)->first();
 
         foreach ($project->workpackages as $workpackage){
-            $quotation->workpackages()->attach(WorkPackage::where('uuid',$workpackage->uuid)->first()->id);
+            $quotation->workpackages()->attach(WorkPackage::where('uuid',$workpackage->uuid)->first()->id, ['manhour_rate_id'=> $project->customer->levels->last()->id]);
         }
 
         // $quotation->progresses()->save(new Progress([

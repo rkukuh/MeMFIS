@@ -32,7 +32,7 @@
                                     @component('frontend.common.buttons.create-new')
                                         @slot('text', 'Preliminary')
                                         @slot('class', 'btn-add')
-                                        @slot('data_target', '#modal_ad_sb')
+                                        @slot('data_target', '#modal_preliminary')
                                     @endcomponent
                                     @component('frontend.common.buttons.summary')
                                         @slot('text', 'Preliminary Summary')

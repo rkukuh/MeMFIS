@@ -37,9 +37,12 @@
                     Manhours Price List @include('frontend.common.label.required')
                 </label>
                 @component('frontend.common.label.data-info')
-                    @slot('id', 'total_mhrs')
-                    @slot('name', 'total_mhrs')
-                    @slot('text', $project_workpackage->manhour_price_list)
+                    @slot('id', 'manhour_price_list')
+                    @slot('name', 'manhour_price_list')
+                    @if(isset($quotation_workpackage->manhour_rate))
+                    @slot('value', $quotation_workpackage->manhour_rate->rate)
+                    @slot('text', $quotation_workpackage->manhour_rate->rate)
+                    @endif
                 @endcomponent
 
             </div>
@@ -52,8 +55,10 @@
                     @slot('name', 'rate')
                     @slot('id', 'rate')
                     @slot('id_error', 'rate')
-                    @if(isset($job_request))
-                    @slot('value',$job_request->pivot->manhour_rate)
+                    @if(isset($job_request->pivot->manhour_rate_amount))
+                    @slot('value',$job_request->pivot->manhour_rate_amount)
+                    @else
+                    @slot('value', $quotation_workpackage->manhour_rate->rate)
                     @endif
                 @endcomponent
             </div>
