@@ -419,6 +419,19 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function itemUnits(Item $item)
+    {
+        $units = $item->units;
+        $units->push($item->unit);
+       
+        return json_encode($units);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function websiteType()
     {
         $websites = Type::ofWebsite()
