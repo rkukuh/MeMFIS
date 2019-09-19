@@ -348,10 +348,9 @@ let Workpackage = {
                     document.getElementById('position').value = data.position;
                     document.getElementById('installation').value = data.installation_mhrs;
                     document.getElementById('removal').value = data.removal_mhrs;
-                    document.getElementById('sn_off').value = data.serial_number;
+                    document.getElementById('sn_off').value = data.sn_off;
+                    document.getElementById('sn_on').value = data.sn_on;
                     document.getElementById('htcrr_uuid').value = data.uuid;
-                    
-                   
 
                     $.ajax({
                         url: '/get-items/',
