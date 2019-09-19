@@ -115,26 +115,32 @@
                             <tr>
                                 <td width="20%">Issued Date</td>
                                 <td width="1%">:</td>
-                                <td width="29%">Generate</td>
+                                <td width="29%">{{$defectcard->created_at}}</td>
                                 <td width="20%">Project No</td>
                                 <td width="1%">:</td>
-                                <td width="29%">Generate</td>
+                                <td width="29%">{{$defectcard->jobcard->quotation->quotationable->code}}</td>
                             </tr>
                             <tr>
                                 <td width="20%">Ref. JC No</td>
                                 <td width="1%">:</td>
-                                <td width="29%">Generate</td>
+                                <td width="29%">{{$defectcard->jobcard->number}}</td>
                                 <td width="20%">A/C Type</td>
                                 <td width="1%">:</td>
-                                <td width="29%">Generate</td>
+                                <td width="29%">{{$defectcard->jobcard->quotation->quotationable->aircraft->name}}</td>
                             </tr>
                             <tr>
                                 <td width="20%">Taskcard No.</td>
                                 <td width="1%">:</td>
-                                <td width="29%">Generate</td>
+                                <td width="29%">
+                                        @if($defectcard->jobcard->jobcardable_type == "App\Models\TaskCard")
+                                            {{$defectcard->jobcard->jobcardable->number}}
+                                        @elseif($defectcard->jobcard->jobcardable_type == "App\Models\EOInstruction")
+                                            {{$defectcard->jobcard->jobcardable->eo_header->number}}
+                                        @endif   
+                                </td>
                                 <td width="20%">A/C Reg</td>
                                 <td width="1%">:</td>
-                                <td width="29%">Generate</td>
+                                <td width="29%">{{$defectcard->jobcard->quotation->quotationable->aircraft_register}}</td>
                             </tr>
                             <tr>
                                 <td width="20%">Company Task</td>
@@ -142,7 +148,7 @@
                                 <td width="29%">Generate</td>
                                 <td width="20%">A/C S/N</td>
                                 <td width="1%">:</td>
-                                <td width="29%">Generate</td>
+                                <td width="29%">{{$defectcard->jobcard->quotation->quotationable->aircraft_sn}}</td>
                             </tr>
                         </table>
                         </div>
@@ -151,7 +157,7 @@
             </li>
             <li>
                 <div class="barcode">
-                    {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',4.5,4.5)!!}
+                    {!!DNS2D::getBarcodeHTML($defectcard->code, 'QRCODE',4.5,4.5)!!}
                 </div>
             </li>
         </ul>
@@ -170,13 +176,13 @@
                     <th align="center">Est. Mhrs</th>
                 </tr>
                 <tr>
+                    <td valign="top" align="center">{{$defectcard->skill}}</td>
+                    <td valign="top" align="center">{{$defectcard->ata}}</td>
                     <td valign="top" align="center">-</td>
-                    <td valign="top" align="center">-</td>
-                    <td valign="top" align="center">-</td>
-                    <td valign="top" align="center">-</td>
-                    <td valign="top" align="center">-</td>
-                    <td valign="top" align="center">-</td>
-                    <td valign="top" align="center">-</td>
+                    <td valign="top" align="center">{{$defectcard->sequence}}</td>
+                    <td valign="top" align="center">{{$defectcard->engineer_quantity}}</td>
+                    <td valign="top" align="center">{{$defectcard->helper_quantity}}</td>
+                    <td valign="top" align="center">{{$defectcard->estimation_manhour}}</td>
                 </tr>
             </table>
         </div>
@@ -188,7 +194,7 @@
                 <tr>
                     <td width="18%" valign="top">Complaint</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="81%" valign="top">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, quidem modi! Quia inventore ex porro nam repellat officia adipisci fugit odio ab? Quasi tempora ea quisquam laboriosam deleniti alias corrupti?</td>
+                    <td width="81%" valign="top">{{$defectcard->complaint}}</td>
                 </tr>
                 <tr>
                     <td width="18%" valign="top">Remark</td>
@@ -209,33 +215,97 @@
             </table>
             <table width="100%">
                 <tr>
-                    <td width="20%"><img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">1. REMOVE</span></td>
-                    <td width="20%"><img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">4. REPAIR</span></td>
-                    <td width="20%"><img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">7. TEST</span></td>
-                    <td width="20%"><img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">10. ....</span></td>
-                    <td width="20%" rowspan="3" valign="top" align="center">
+                    <td width="25%">
+                        @if(in_array('remove',$propose_corrections))
+                            <img src="./img/check.png" width="8"> <span style="margin-left:6px;">1. REMOVE</span>
+                        @else
+                            <img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">1. REMOVE</span>
+                        @endif
+                    </td>
+                    <td width="25%">
+                        @if(in_array('repair',$propose_corrections))
+                            <img src="./img/check.png" width="8"> <span style="margin-left:6px;">4. REPAIR</span>
+                        @else
+                            <img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">4. REPAIR</span>
+                        @endif
+                    </td>
+                    <td width="25%">
+                        @if(in_array('test',$propose_corrections))
+                            <img src="./img/check.png" width="8"> <span style="margin-left:6px;">7. TEST</span>
+                        @else
+                            <img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">7. TEST</span>
+                        @endif
+                    </td>
+                    <td width="25%" rowspan="3" valign="top" align="center">
                         <p>RII Req.</p>
                         <ul style="margin-left:-10px;">
-                            <li>
-                                <img src="./img/check-box-empty.png" alt="" width="8"> <span style="margin-left:6px;font-weight: bold;">YES</span>
+                            @if($defectcard->is_rii == 1)
+                            <li >
+                                
+                                <img src="./img/check.png" alt="" width="9"> <span style="margin-left:6px;font-weight: bold;">YES</span>
                             </li>
                             <li style="margin-left:12px;">
-                                <img src="./img/check.png" alt="" width="9"> <span style="margin-left:6px;font-weight: bold;">NO</span>
+                                
+                                <img src="./img/check-box-empty.png" alt="" width="8"> <span style="margin-left:6px;font-weight: bold;">NO</span>
                             </li>
+                            @else
+                            <li>
+                                
+                                <img src="./img/check-box-empty.png" alt="" width="9"> <span style="margin-left:6px;font-weight: bold;">YES</span>
+                            </li>
+                            <li style="margin-left:12px;">
+                                
+                                <img src="./img/check.png" alt="" width="9"> <span style="margin-left:6px;font-weight: bold;">NO</span>
+                            </li>    
+                            @endif
                         </ul>
                     </td>
                 </tr>
                 <tr>
-                    <td width="20%"><img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">2. INSTALL</span></td>
-                    <td width="20%"><img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">5. REPLACE</span></td>
-                    <td width="20%"><img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">8. SHOP VISIT</span></td>
-                    <td width="20%"><img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">11. ....</span></td>
+                    <td width="25%">
+                        @if(in_array('install',$propose_corrections))
+                            <img src="./img/check.png" width="8"> <span style="margin-left:6px;">2. INSTALL</span>
+                        @else
+                            <img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">2. INSTALL</span>
+                        @endif
+                    </td>
+                    <td width="25%">
+                        @if(in_array('replace',$propose_corrections))
+                            <img src="./img/check.png" width="8"> <span style="margin-left:6px;">5. REPLACE</span>
+                        @else
+                            <img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">5. REPLACE</span>
+                        @endif
+                    </td>
+                    <td width="25%">
+                        @if(in_array('shop-visit',$propose_corrections))
+                            <img src="./img/check.png" width="8"> <span style="margin-left:6px;">8. SHOP VISIT</span>
+                        @else
+                            <img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">8. SHOP VISIT</span>
+                        @endif
+                    </td>
                 </tr>
                 <tr>
-                    <td width="20%"><img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">3. RECTIFICATION</span></td>
-                    <td width="20%"><img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">6. NDT</span></td>
-                    <td width="20%"><img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">9. ....</span></td>
-                    <td width="20%"><img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">12. ....</span></td>
+                    <td width="25%">
+                        @if(in_array('rectification',$propose_corrections))
+                            <img src="./img/check.png" width="8"> <span style="margin-left:6px;">3. RECTIFICATION</span>
+                        @else
+                            <img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">3. RECTIFICATION</span>
+                        @endif
+                    </td>
+                    <td width="25%">
+                        @if(in_array('ndt',$propose_corrections))
+                            <img src="./img/check.png" width="8"> <span style="margin-left:6px;">6. NDT</span>
+                        @else
+                            <img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">6. NDT</span>
+                        @endif
+                    </td>
+                    <td width="25%">
+                        @if(in_array('other',$propose_corrections))
+                            <img src="./img/check.png" width="8"> <span style="margin-left:6px;">9. Other ( {{$text}} )</span>
+                        @else
+                            <img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">9. Other</span>
+                        @endif
+                    </td>
                 </tr>
             </table>
             <table style="border:1px solid  #d4d7db; margin-top:4px;" width="100%">

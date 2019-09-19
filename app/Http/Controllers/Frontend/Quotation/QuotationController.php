@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Quotation;
 
 use Auth;
+use App\User;
 use App\Models\Tax;
 use App\Models\Item;
 use App\Models\Type;
@@ -563,6 +564,7 @@ class QuotationController extends Controller
     public function print(Quotation $quotation)
     {
         $username = Auth::user()->name;
+        $created_by = User::find($quotation->audits->first()->user_id)->name;
         $discount = $rowTotal = $totalCharge = $totalFacility = $totalMatTool = $manhourPrice = [];
 
         if(json_decode($quotation->charge) !== null) {
@@ -614,6 +616,7 @@ class QuotationController extends Controller
 
         $pdf = \PDF::loadView('frontend/form/quotation',[
                 'username' => $username,
+                'created_by' => $created_by,
                 'quotation' => $quotation,
                 'subTotal' => array_sum($manhourPrice) + array_sum($totalFacility) + array_sum($totalMatTool),
                 'workpackages' => $workpackages,

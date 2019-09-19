@@ -24,8 +24,6 @@
         @include('frontend.project.hm.taskcard.nonroutine.ea.modal')
         @include('frontend.project.hm.taskcard.nonroutine.eo.modal')
         @include('frontend.project.hm.taskcard.nonroutine.modal')
-        @include('frontend.project.hm.modal.material.modal')
-        @include('frontend.project.hm.modal.tool.modal')
     </div>
 </div>
 @push('footer-scripts')

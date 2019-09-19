@@ -179,7 +179,7 @@
                                                                                 @slot('name', 'is_rii_removal')
                                                                                 @slot('disabled', 'disabled')
                                                                                 @slot('text', 'IS RII?')
-                                                                                @if($htcrr_removal->is_null)
+                                                                                @if($htcrr_removal->is_rii == 1)
                                                                                 @slot('checked', 'checked')
                                                                                 @endif
                                                                                 @slot('value', 1)
