@@ -828,7 +828,7 @@ let summarynonroutine = {
             // }
             ]
         });
-
+        // '/datatables/workpackage/'+workPackage_uuid+'/ea/tools'
         $('.ea_tools_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -938,7 +938,7 @@ let summarynonroutine = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/workpackage/'+workPackage_uuid+'/ea/materials',
+                        url: ' datatables/workpackage/'+workPackage_uuid+'/ea/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
