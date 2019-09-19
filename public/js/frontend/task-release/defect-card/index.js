@@ -70,13 +70,6 @@ let TaskRelease = {
                     }
                 },
                 {
-                    field: 'jobcard.company_task',
-                    title: 'Company Task No',
-                    sortable: 'asc',
-                    filterable: !1,
-
-                },
-                {
                     field: 'customer_name',
                     title: 'Customer',
                     sortable: 'asc',
