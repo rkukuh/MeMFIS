@@ -133,7 +133,7 @@
                                             Est.Mhrs
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->actual}}
+                                            {{$taskrelease->jobcardable->estimation_manhour}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -141,7 +141,7 @@
                                             Actual. Mhrs
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->jobcardable->estimation_manhour}}
+                                            {{$taskrelease->actual}}
                                         </td>
                                     </tr>
                                     <tr>
