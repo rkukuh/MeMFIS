@@ -171,10 +171,13 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'approved_by',
+                    field: '',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.created_at 
+                    }
                 },
                 {
                     field: 'Actions',

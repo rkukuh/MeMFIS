@@ -28,14 +28,23 @@ class DiscrepancyDatatables extends Controller
         foreach($DefectCard as $jobcard){
             $jobcard->taskcard_number   .= $jobcard->jobcard->jobcardable->number;
             $jobcard->customer_name     .= $jobcard->jobcard->quotation->quotationable->customer->name;
-            $jobcard->type              .= $jobcard->jobcard->jobcardable->type->name;
-            $jobcard->aircraft          .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
             $jobcard->aircraft_sn       .= $jobcard->jobcard->quotation->quotationable->aircraft_sn;
+            $jobcard->conducted_by      .= User::find($jobcard->approvals->last()->conducted_by)->name;
+            $jobcard->created_by        .= User::find($jobcard->audits->first()->user_id)->name;
+            $jobcard->updated_by        = User::find($jobcard->audits->last()->user_id)->name;
 
-            $jobcard->conducted_by  .= User::find($jobcard->approvals[0]->conducted_by)->name;
-            $jobcard->created_by    .= User::find($jobcard->audits->first()->user_id)->name;
-            $jobcard->updated_by    .= User::find($jobcard->audits->first()->user_id)->name;
 
+            if(isset($jobcard->jobcard->jobcardable->type->name)){
+                $jobcard->type          .= $jobcard->jobcard->jobcardable->type->name;
+            }else{
+                $jobcard->type          .= '';
+            }
+
+            if(isset( $jobcard->jobcard->quotation->quotationable->aircraft->name)){
+                $jobcard->aircraft      .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
+            }else{
+                $jobcard->aircraft      .= '';
+            }
 
             if(isset($jobcard->jobcard->jobcardable->skills) ){
                 if(sizeof($jobcard->jobcard->jobcardable->skills) == 3){
