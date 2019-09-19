@@ -173,14 +173,11 @@
                                                         Documents library @include('frontend.common.label.optional')
                                                     </label>
 
-                                                    @if (empty($taskcard->document_library))
+                                                    @if (empty(json_decode($additionals->document_library)))
                                                         @include('frontend.common.label.data-info-nodata')
                                                     @else
-                                                        @php
-                                                            $documents = json_decode($taskcard->document_library, TRUE);
-                                                        @endphp
                                                         <div class="d-flex justify-content-start">
-                                                            @foreach ($documents  as $document)
+                                                            @foreach (json_decode($additionals->document_library)  as $document)
                                                                 @component('frontend.common.label.badge')
                                                                     @slot('text', $document )
                                                                 @endcomponent
