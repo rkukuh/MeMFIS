@@ -171,21 +171,21 @@
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         Documents library @include('frontend.common.label.optional')
-                                                    </label>
+                                                    </label><br>
 
-                                                    @if (empty($taskcard->document_library))
+                                                    @if (sizeof(json_decode($additionals->document_library))== 0)
                                                         @include('frontend.common.label.data-info-nodata')
                                                     @else
                                                         @php
-                                                            $documents = json_decode($taskcard->document_library, TRUE);
+                                                            $documents = json_decode($additionals->document_library, TRUE);
                                                         @endphp
-                                                        <div class="d-flex justify-content-start">
+                                                        {{-- <div class="d-flex justify-content-start"> --}}
                                                             @foreach ($documents  as $document)
                                                                 @component('frontend.common.label.badge')
                                                                     @slot('text', $document )
                                                                 @endcomponent
                                                             @endforeach
-                                                        </div>
+                                                        {{-- </div> --}}
                                                     @endif
                                                 </div>
                                             </div>
