@@ -187,7 +187,7 @@ let TaskRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/taskrelease-defectcard/task-release/' + defectcard_uuid + '/',
+                        url: '/taskrelease-defectcard/' + defectcard_uuid + '/',
                         success: function (data) {
                             toastr.success('Defectcard has been released.', 'Deleted', {
                                     timeOut: 5000
