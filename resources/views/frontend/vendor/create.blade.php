@@ -388,11 +388,11 @@
                                                                 Select a Document Type
                                                             </option>
 
-                                                            {{-- @foreach ($documents as $document)
+                                                            @foreach ($documents as $document)
                                                             <option value="{{ $document->uuid }}">
                                                                 {{ $document->name }}
                                                             </option>
-                                                            @endforeach --}}
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-1 col-md-1 col-lg-1">
