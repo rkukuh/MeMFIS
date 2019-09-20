@@ -155,6 +155,69 @@
                                             </table>
                                         </div>
                                     </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Additional Project Title 
+                                            </label>
+
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '5')
+                                                @slot('id', 'additional_project_title')
+                                                @slot('name', 'additional_project_title')
+                                                @slot('text', 'Additional Project Title ')
+                                                @slot('id_error', 'additional_project_title')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <label class="form-control-label">
+                                                        Total Manhour
+                                                    </label>
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('id', 'estimation_manhour')
+                                                        @slot('name', 'estimation_manhour')
+                                                        @slot('text', number_format($project->defectcards()->sum('estimation_manhour',2)) )
+                                                        @slot('value', $project->defectcards()->sum('estimation_manhour'))
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <label class="form-control-label">
+                                                        Perfomance Factor
+                                                    </label>
+                                                    @component('frontend.common.input.number')
+                                                        @slot('id', 'performance_factor')
+                                                        @slot('name', 'performance_factor')
+                                                        @if(empty($project->data_defectcard))
+                                                            @slot('value', 1.6)
+                                                        @else 
+                                                            @slot('value', json_decode($project->data_defectcard)->performance_factor)
+                                                        @endif
+                                                        @slot('id_error', 'performance_factor')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <label class="form-control-label">
+                                                        Total With Performance Factor
+                                                    </label>
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('id', 'total_manhour')
+                                                        @slot('name', 'total_manhour')
+                                                        @if(empty($project->data_defectcard))
+                                                            @slot('text', $project->defectcards()->sum('estimation_manhour') * 1.6)
+                                                            @slot('value', $project->defectcards()->sum('estimation_manhour') * 1.6)
+                                                        @else 
+                                                        @slot('text', $project->defectcards()->sum('estimation_manhour') * json_decode($project->data_defectcard)->performance_factor)
+                                                        @slot('value', $project->defectcards()->sum('estimation_manhour') * json_decode($project->data_defectcard)->performance_factor)
+                                                        @endif
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
