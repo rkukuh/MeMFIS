@@ -149,7 +149,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="eo_tools_datatable" id="scrolling_both"></div>
+                                            <div class="eo_tools_datatables" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="eo_materials_datatable" id="scrolling_both"></div>
+                                            <div class="eo_materials_datatables" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>
