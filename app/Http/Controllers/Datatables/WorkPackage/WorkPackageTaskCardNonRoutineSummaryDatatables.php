@@ -460,14 +460,13 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
         $items =[];
         foreach($workPackage->eo_instructions as $taskcard){
             if($taskcard->eo_header->type->code == 'ea'){
-                foreach($taskcard->tools as $item){
+                foreach($taskcard->materials as $item){
                     $item->tackcard_number .= $taskcard->eo_header->number;
                     $item->unit_name .= $item->unit->name;
                     array_push($items, $item);
                 }
             }
         }
-
         $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -555,7 +554,9 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
         ];
 
         echo json_encode($result, JSON_PRETTY_PRINT);
+
     }
+
     
 
     public function eaTool(WorkPackage $workPackage)

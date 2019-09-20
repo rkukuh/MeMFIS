@@ -932,13 +932,13 @@ let summarynonroutine = {
             ]
         });
 
-        $('.ea_materials_datatable').mDatatable({
+        $('.ea_materials_datatables').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: ' datatables/workpackage/'+workPackage_uuid+'/ea/materials',
+                        url: '/datatables/workpackage/'+workPackage_uuid+'/ea/materials',
                         map: function (raw) {
                             let dataSet = raw;
 
