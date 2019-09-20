@@ -802,6 +802,8 @@ Route::name('datatables.')->group(function () {
                 Route::get('/{workPackage}/si/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@siTool')->name('workpackage.taskcard.si.tool.summary');
                 Route::get('/{workPackage}/ea/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@eaTool')->name('workpackage.taskcard.ea.tool.summary');
                 Route::get('/{workPackage}/ea/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@eaMaterial')->name('workpackage.taskcard.ea.material.summary');
+                Route::get('/{workPackage}/ea/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@eoTool')->name('workpackage.taskcard.eo.tool.summary');
+                Route::get('/{workPackage}/ea/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@eoMaterial')->name('workpackage.taskcard.eo.material.summary');
                 Route::get('/{workPackage}/preliminary/materials', 'WorkPackageTaskCardNonRoutineSummaryDatatables@preliminaryMaterial')->name('workpackage.taskcard.preliminary.material.summary');
                 Route::get('/{workPackage}/preliminary/tools', 'WorkPackageTaskCardNonRoutineSummaryDatatables@preliminaryTool')->name('workpackage.taskcard.preliminary.tool.summary');
 
