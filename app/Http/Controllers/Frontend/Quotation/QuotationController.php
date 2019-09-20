@@ -460,7 +460,7 @@ class QuotationController extends Controller
                         'origin_quotation' => null,
                         'origin_jobcardable' => $tc->toJson(),
                         'origin_jobcardable_items' => $tc->items->toJson(),
-                        'origin_jobcard_helpers' => null,
+                        'origin_jobcard_helpers' => $tc->helper_quantity->toJson(),
                     ]);
 
                     $jobcard->progresses()->save(new Progress([

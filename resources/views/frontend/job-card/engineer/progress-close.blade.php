@@ -222,13 +222,13 @@
                                                 @endif
                                             </td>
                                         </tr>
-                                        @if($jobcard->jobcardable->helper_quantity != 0)
+                                        @if(json_decode($origin_jobcard_helpers) != 0)
                                         <tr>
                                             <td width="30%" style="background-color:beige;padding:10px;">
                                                 Helper
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->jobcardable->helper_quantity}}
+                                                {{json_decode($origin_jobcard_helpers)}}
                                             </td>
                                         </tr>
                                         @endif

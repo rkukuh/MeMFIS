@@ -95,7 +95,6 @@ class JobCardEngineerController extends Controller
     public function edit(JobCard $jobcard)
     {
         $statuses = Status::ofJobCard()->get();
-        // $jobcard = JobCard::where('uuid', $jobcard->uuid)->first();
         foreach ($jobcard->helpers as $helper) {
             $helper->userID .= $helper->user->id;
         }

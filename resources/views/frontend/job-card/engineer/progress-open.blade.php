@@ -216,19 +216,19 @@
                                                 @endif
                                             </td>
                                         </tr>
-                                        @if($jobcard->jobcardable->helper_quantity != 0)
+                                        @if(json_decode($origin_jobcard_helpers) != 0)
                                         <tr>
                                             <td width="30%" style="background-color:beige;padding:10px;">
                                                 Helper
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->jobcardable->helper_quantity}}
+                                                {{json_decode($origin_jobcard_helpers)}}
                                             </td>
                                         </tr>
                                         @endif
 
                                     </table>
-                                    @if($jobcard->jobcardable->helper_quantity != 0)
+                                    @if(json_decode($origin_jobcard_helpers) > 0)
                                         <table border="1px" width="100%" style="margin-top:10px">
                                             <tr>
                                                 <td width="30%" style="background-color:beige;padding:10px;">
@@ -250,11 +250,12 @@
                                                     @endforeach
                                                 @else
                                                 <div class="m-grid">
-                                                    @for($index = 0; $index < $jobcard->jobcardable->helper_quantity; $index++)
+                                                    @for($index = 0; $index < json_decode($origin_jobcard_helpers); $index++)
                                                     <div class="m-grid-row">
                                                         <br>
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             @component('frontend.common.input.select2')
+                                                                @slot('id', 'helper_'.$index)
                                                                 @slot('text', 'helper')
                                                                 @slot('name', 'helper[]')
                                                                 @slot('class', 'helper')

@@ -9,12 +9,13 @@ $(document).ready(function () {
                 $('.helper').empty();
 
                 $('.helper').each(function(){
-                        $(this).append('<option value=""> Select a Helper </option>');
+                        $(this).prepend('<option value=""> Select a Helper </option>');
                         $.each(data, function (key, value) {
                             $('.helper').append(
                                 '<option value="' + key + '">' + value + '</option>'
                             );
                         });
+                        $(this).val("").select2();
                     }
                 );
 
