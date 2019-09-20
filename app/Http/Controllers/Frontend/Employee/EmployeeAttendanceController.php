@@ -140,16 +140,19 @@ class EmployeeAttendanceController extends Controller
                         if(!$employee->employee_attendace()->where('employee_attendances.date',$data_final[$i]['date'][$y]['date'])->first()){
                             $in = '00:00:00';
                             $out = '00:00:00';
-                            $late_in = 0;
                             $status = Status::where('code','discipline')->first()->id;
 
                             //IN & OUT
-                            if($data_final[$i]['date'][$y]['time']){
+                            if(reset($data_final[$i]['date'][$y]['time'])){
                                 $in = reset($data_final[$i]['date'][$y]['time']);
                             }
 
-                            if($data_final[$i]['date'][$y]['time']){
+                            if(end($data_final[$i]['date'][$y]['time'])){
                                 $out = end($data_final[$i]['date'][$y]['time']);
+                            }
+
+                            if($data_final[$i]['date'][$y]['time']){
+                                $out = $out;
                                 if($in == $out){
                                     $out = '00:00:00';
                                     $status = Status::where('code','undiscipline')->first()->id;
@@ -165,31 +168,30 @@ class EmployeeAttendanceController extends Controller
 
                             if(isset($employee_workshift->workshift_id)){
                                 $employee_schedule = WorkshiftSchedule::where('workshift_id',$employee_workshift->workshift_id)->get()->toArray();
-                                
+
                                 for ($v=0; $v < count($employee_schedule); $v++) { 
                                     if(strtolower($data_final[$i]['date'][$y]['days']) == $employee_schedule[$v]['days']){
                                         
                                         //LATE
-                                        if(strtotime(reset($data_final[$i]['date'][$y]['time'])) > strtotime($employee_schedule[0]['in'])){
-                                            if(!$employee_schedule[$v]['in'] == '00:00:00'){
-                                                $late = abs(strtotime(reset($data_final[$i]['date'][$y]['time'])) - strtotime($employee_schedule[$v]['in']));
+                                        if(strtotime($in) > strtotime($employee_schedule[$v]['in'])){
+                                            if($in != '00:00:00' && $employee_schedule[$v]['in'] != '00:00:00'){
+                                                $late = abs(strtotime($in) - strtotime($employee_schedule[$v]['in']));
                                             }
                                         };
 
                                         //EARLIER OUT
-                                        if(strtotime(end($data_final[$i]['date'][$y]['time'])) < strtotime($employee_schedule[0]['out'])){
-                                            if(!$employee_schedule[$v]['out'] == '00:00:00'){
-                                                $earlier_out = abs(strtotime($employee_schedule[$v]['out']) - strtotime(reset($data_final[$i]['date'][$y]['time'])));
+                                        if(strtotime($out) < strtotime($employee_schedule[$v]['out'])){
+                                            if($out != '00:00:00' && $employee_schedule[$v]['out'] != '00:00:00'){
+                                                $earlier_out = abs(strtotime($employee_schedule[$v]['out']) - strtotime($out));
                                             }
                                         };
 
                                         //OVERTIME
-                                        if(strtotime(end($data_final[$i]['date'][$y]['time'])) > strtotime($employee_schedule[0]['out'])){
-                                            if(!$employee_schedule[$v]['out'] == '00:00:00'){
-                                                $overtime = abs(strtotime(reset($data_final[$i]['date'][$y]['time'])) - strtotime($employee_schedule[$v]['out']));
+                                        if(strtotime($out) > strtotime($employee_schedule[$v]['out'])){
+                                            if($out != '00:00:00' && $employee_schedule[$v]['out'] != '00:00:00'){
+                                                $overtime = abs(strtotime($out) - strtotime($employee_schedule[$v]['out']));
                                             }
                                         };
-
                                     }   
                                 }
 
