@@ -11,7 +11,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/discrepancy',
+                        url: '/datatables/discrepancy/engineer',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -151,9 +151,14 @@ let TaskCard = {
                                 'Engineer Approved'
                             );
                         }
+                        else if(t.status == "ppc"){
+                            return (
+                                'PPC Approved'
+                            );
+                        }
                         else{
                             return (
-                                'Approved'
+                                ''
                             );
                         }
                     }
@@ -171,10 +176,13 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'approved_by',
+                    field: '',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.created_at 
+                    }
                 },
                 {
                     field: 'Actions',
@@ -194,10 +202,9 @@ let TaskCard = {
                                 '</a>'
                             );
                         }
-                        else if(t.status == "engineer"){
+                        else if(t.status == "engineer" || t.status == "ppc"){
                             return ('<a href="/discrepancy-engineer/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Show" data-id="' + t.uuid +'">' +
                             '<i class="la la-eye"></i>');
-
                         }else{
                             return ('');
                         }

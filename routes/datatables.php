@@ -716,7 +716,8 @@ Route::name('datatables.')->group(function () {
 
             ], function () {
 
-                Route::get('/', 'DiscrepancyDatatables@index')->name('all');
+                Route::get('/mechanic', 'DiscrepancyDatatables@mechanic')->name('mechanic');
+                Route::get('/engineer', 'DiscrepancyDatatables@engineer')->name('engineer');
                 Route::get('/ppc', 'DiscrepancyDatatables@ppc')->name('ppc');
                 Route::post('/filter', 'DiscrepancyDatatables@filter')->name('filter');
                 Route::get('/{discrepancy}/materials', 'DiscrepancyItemDatatables@material')->name('materials.index');

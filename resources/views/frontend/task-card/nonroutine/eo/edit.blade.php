@@ -844,7 +844,7 @@
         });
     </script>
 
-    <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script>
+    <!-- <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script> -->
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/taskcard-non-routine-type.js') }}"></script>

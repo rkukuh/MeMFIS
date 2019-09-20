@@ -236,7 +236,7 @@ $('select[name="status_jobcard"]').append('<option value="24">On Progress</optio
 $('select[name="status_jobcard"]').append('<option value="25">Pending/Pause</option>');
 $('select[name="status_jobcard"]').append('<option value="26">Closed</option>');
 $('select[name="status_jobcard"]').append('<option value="27">RELEASED</option>');
-$('select[name="status_jobcard"]').append('<option value="28">RII RELEASED</option>');
+$('select[name="status_jobcard"]').append('<option value="28">WAITING FOR RII</option>');
 
 $(document).ready(function () {
     $.ajax({

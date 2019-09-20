@@ -195,4 +195,25 @@ class DefectCard extends MemfisModel
     {
         return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
     }
+
+    /**
+     * Get the task card's Skill.
+     *
+     * @return string
+     */
+    public function getSkillAttribute()
+    {
+        if(isset($this->skills) ){
+            if(sizeof($this->skills) == 3){
+                $skill = "ERI";
+            }
+            else if(sizeof($this->skills) == 1){
+                $skill = $this->skills[0]->name;
+            }
+            else{
+                $skill = '';
+            }
+        }
+        return $skill;
+    }
 }
