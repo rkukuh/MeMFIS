@@ -343,7 +343,7 @@ class QuotationController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function approve(Quotation $quotation)
+    public function approve(Quotation $quotation, Request $request)
     {
         $amount = 0;
         $error_messages = $work_progress= [];
@@ -397,6 +397,7 @@ class QuotationController extends Controller
         $quotation->approvals()->save(new Approval([
             'approvable_id' => $quotation->id,
             'conducted_by' => Auth::id(),
+            'note' => $request->note,
             'is_approved' => 1
         ]));
 
