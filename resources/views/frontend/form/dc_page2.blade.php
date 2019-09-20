@@ -81,7 +81,7 @@
             <table width="100%" style="font-size: 22px;">
                 <tr>
                     <td width="55%"></td>
-                    <td width="45%" align="center">DC No. : <span>DC-022877</span></td>
+                    <td width="45%" align="center">DC No. : <span>{{$defectcard->code}}</span></td>
                 </tr>
             </table>
         </div>
@@ -107,16 +107,24 @@
                         <th align="center">ON</th>
                         <th align="center">OFF</th> 
                     </tr>
+                    @if(empty($defectcard->materials->toArray()))
+                        <tr>
+                            <td colspan="8" align="center">empty</td>
+                        </tr>
+                    @endif
+                    @php $i = 1;  @endphp
+                    @foreach($defectcard->materials as $material)
                     <tr>
-                        <td align="center" valign="top">asd</td>
-                        <td valign="top">asd</td>
-                        <td align="center" valign="top">asd</td>
-                        <td align="center" valign="top">asd</td>
-                        <td align="center" valign="top">asd</td>
-                        <td align="center" valign="top">asd</td>
-                        <td align="center" valign="top">asd</td>
-                        <td align="center" valign="top">asd</td>
+                        <td align="center" valign="top">{{$i++}}</td>
+                        <td align="center" valign="top">{{$material->name}}</td>
+                        <td align="center" valign="top">{{$material->code}}</td>
+                        <td align="center" valign="top">{{$material->pivot->sn_on}}</td>
+                        <td align="center" valign="top">{{$material->pivot->sn_off}}</td>
+                        <td align="center" valign="top">{{$material->pivot->quantity}}</td>
+                        <td align="center" valign="top">{{$material->pivot->ipc_ref}}</td>
+                        <td align="center" valign="top">{{$material->pivot->note}}</td>
                     </tr>
+                    @endforeach
                 </table>
             </div>
         </div>

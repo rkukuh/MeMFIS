@@ -214,6 +214,7 @@ class TaskCardRoutineController extends Controller
             $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
         }
 
+        // dd($this->work_area);
         return view('frontend.task-card.routine.show', [
             'types' => $this->type,
             'tasks' => $this->task,

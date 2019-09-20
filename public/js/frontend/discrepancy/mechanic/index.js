@@ -1,13 +1,17 @@
-let TaskRelease = {
+let TaskCard = {
     init: function () {
+        function strtrunc(str, max, add) {
+            add = add || '...';
+            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+        };
 
-        $('.taskrelease_datatable').mDatatable({
+        $('.Discrepancy_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/task-release-defectcard',
+                        url: '/datatables/discrepancy/mechanic',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -51,22 +55,29 @@ let TaskRelease = {
                 },
                 {
                     field: 'code',
-                    title: 'Defect No',
+                    title: 'Discrepancy No',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="/taskrelease-defectcard/'+t.uuid+'/edit">' + t.code + "</a>"
+                        return '<a href="/defectcard/'+t.uuid+'/">' + t.code + "</a>"
                     }
                 },
                 {
-                    field: 'number',
-                    title: 'Job Card No',
+                    field: 'jobcard.number',
+                    title: 'JobCard Reference',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return (
-                            '<a href="/jobcard-ppc/'+t.jobcard.uuid+'">' + t.jobcard.number + "</a>"
-                        );
+                        return '<a href="/jobcard-ppc/'+t.jobcard.uuid+'">' + t.jobcard.number + "</a>"
+                    }
+                },
+                {
+                    field: 'jobcard.jobcardable.number',
+                    title: 'Taskcard No',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return '<a href="/taskcard/'+t.jobcard.jobcardable.uuid+'">' + t.jobcard.jobcardable.number + "</a>"
                     }
                 },
                 {
@@ -76,25 +87,27 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.quotationable.aircraft.name',
+                    field: 'jobcard.jobcardable.type.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.quotationable.aircraft_register',
+                    field: 'aircraft',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
+
                 },
                 {
-                    field: 'jobcard.quotation.quotationable.aircraft_sn',
+                    field: 'aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
+
                 },
                 {
-                    field: 'skill_name',
+                    field: 'jobcardSkill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
@@ -102,12 +115,6 @@ let TaskRelease = {
                 {
                     field: 'estimation_manhour',
                     title: 'Mhrs Est.',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'actual_manhour',
-                    title: 'Actual Mhrs.',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -129,45 +136,93 @@ let TaskRelease = {
                     }
                 },
                 {
-                    field: 'status',
+                    field: 'Status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        if(t.status == "mechanic"){
+                            return (
+                                'Open'
+                            );
+                        }
+                        else if(t.status == "engineer"){
+                            return (
+                                'Engineer Approved'
+                            );
+                        }
+                        else{
+                            return (
+                                'Approved'
+                            );
+                        }
+                    }
+                },
+                {
+                    field: '',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.created_by + '<br>' + t.create_date 
+                    }
+                },
+                {
+                    field: '',
+                    title: 'Updated By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.updated_by + '<br>' + t.update_date 
+                    }
+                },
+                {
+                    field: '',
+                    title: 'Approved By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.conducted_at 
+                    }
                 },
                 {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.status == 'Closed'){
+                        if(t.status == "mechanic"){
                             return (
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
-                                    '<i class="la la-check-circle"></i>' +
+                                '<a href="/discrepancy-engineer/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                    '<i class="la la-pencil"></i>' +
                                 '</a>' +
-                                '<a href="/defectcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-external-link"></i>' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-trash"></i>' +
+                                '</a>'+
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-check"></i>' +
                                 '</a>'
                             );
+                        }
+                        else if(t.status == "engineer"){
+                            return ('<a href="/discrepancy-engineer/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Show" data-id="' + t.uuid +'">' +
+                            '<i class="la la-eye"></i>');
+
                         }else{
-                            return (
-                                '<a href="/defectcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-external-link"></i>' +
-                                '</a>'
-                            );
+                            return ('');
                         }
                     }
                 }
             ]
         });
 
-        $('.taskrelease_datatable').on('click', '.release', function () {
-            let defectcard_uuid = $(this).data('uuid');
+        let remove = $('.Discrepancy_datatable').on('click', '.delete', function () {
+            let discrepancy_uuid = $(this).data('uuid');
 
             swal({
-                title: 'Sure want to Release?',
+                title: 'Sure want to remove?',
                 type: 'question',
-                confirmButtonText: 'Yes, Release',
-                confirmButtonColor: '#34bfa3',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
                 cancelButtonText: 'Cancel',
                 showCancelButton: true,
             })
@@ -179,15 +234,15 @@ let TaskRelease = {
                                 'content'
                             )
                         },
-                        type: 'PUT',
-                        url: '/taskrelease-defectcard/task-release/' + defectcard_uuid + '/',
+                        type: 'DELETE',
+                        url: '/discrepancy-engineer/' + discrepancy_uuid + '',
                         success: function (data) {
-                            toastr.success('Defectcard has been released.', 'Deleted', {
-                                    timeOut: 5000
+                            toastr.success('Discrepancy has been deleted.', 'Deleted', {
+                                timeOut: 5000
                                 }
                             );
 
-                            let table = $('.taskrelease_datatable').mDatatable();
+                            let table = $('.Discrepancy_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -201,12 +256,12 @@ let TaskRelease = {
                         }
                     });
                 }
+
             });
         });
-
     }
 };
 
 jQuery(document).ready(function () {
-    TaskRelease.init();
+    TaskCard.init();
 });

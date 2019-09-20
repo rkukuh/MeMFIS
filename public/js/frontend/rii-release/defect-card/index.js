@@ -67,27 +67,6 @@ let RiiRelease = {
                         }
                 },
                 {
-                    field: 'company',
-                    title: 'Company Task No',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        if(t.jobcard.jobcardable.additionals){
-                            let company = t.jobcard.jobcardable.additionals;
-                            obj = JSON.parse(company);
-                            // console.log()
-                            return (
-                                obj.internal_number
-                            );
-                        }
-                        else{
-                            return(
-                                ''
-                            );
-                        }
-                    }
-                },
-                {
                     field: 'customer_name',
                     title: 'Customer',
                     sortable: 'asc',
