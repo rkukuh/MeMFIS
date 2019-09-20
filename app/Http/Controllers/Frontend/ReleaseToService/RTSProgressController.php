@@ -9,6 +9,7 @@ use App\Models\JobCard;
 use App\Models\Project;
 use App\Models\Progress;
 use App\Models\Quotation;
+use App\Models\DefectCard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\RTSStore;
 use App\Http\Requests\Frontend\RTSUpdate;
@@ -39,7 +40,9 @@ class RTSProgressController extends Controller
             $quotations = Quotation::where('quotationable_id',$project->id)->get();
 
             $taskcard_number = "";
-            $running_taslcard = "";
+            $defectcard_number = "";
+            $running_taskcard = "";
+            $running_defectcard = "";
             $mandatory_taskcard = "";
             foreach($quotations as $quotation){
                 $jobcards = JobCard::where('quotation_id',$quotation->id)->get();
@@ -57,22 +60,51 @@ class RTSProgressController extends Controller
                     }else{
                         if($jobcard->is_rii == 1){
                             if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "rii-released" and Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "open"){
-                                $running_taslcard = $running_taslcard.", ".$jobcard->jobcardable->number;
+                                $running_taskcard = $running_taskcard.", ".$jobcard->jobcardable->number;
                             }
-                            elseif(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "rii-released"){
-                                $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
-                            }
+                            // elseif(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "rii-released"){
+                            //     $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
+                            // }
                         }else{
                             if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"  and Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "open"){
-                                $running_taslcard = $running_taslcard.", ".$jobcard->jobcardable->number;
+                                $running_taskcard = $running_taskcard.", ".$jobcard->jobcardable->number;
                             }
-                            elseif(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"){
-                                $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
-                            }
+                            // elseif(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "released"){
+                            //     $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
+                            // }
+                        }
+                    }
+                }
+
+                $childs = $quotation->childs;
+                    foreach($childs as $child){
+                        $defectcards = DefectCard::where('quotation_additional_id',$child->id)->get();
+                        foreach($defectcards as $defectcard){
+                            // dump(Status::where('id',$defectcard->progresses->last()->status_id)->first()->code);
+                            if($defectcard->is_rii == 1){
+                                // dump('1');
+                                if(Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "rii-released" and Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "open"){
+                                    $running_defectcard = $running_defectcard.", ".$defectcard->code;
+                                }
+                                // elseif(Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "rii-released"){
+                                //     $defectcard_number = $defectcard_number.", ".$defectcard->code;
+                                // }
+                            }else{
+                                // dump('0');
+                                if(Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "released"  and Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "open"){
+                                    $running_defectcard = $running_defectcard.", ".$defectcard->code;
+                                    // dump('a');
+                                }
+                                // elseif(Status::where('id',$defectcard->progresses->last()->status_id)->first()->code <> "released"){
+                                //     $defectcard_number = $defectcard_number.", ".$defectcard->code;
+                                //     dump('b');
+                                // }
                         }
                     }
                 }
             }
+
+            // dd( $running_defectcard);
 
             if($mandatory_taskcard <> ""){
                 $error_notification = array(
@@ -82,7 +114,7 @@ class RTSProgressController extends Controller
                 );
                 return redirect()->route('frontend.rts-progress.index')->with($error_notification);
             }
-            if($running_taslcard <> ""){
+            if($running_taskcard <> ""){
                 $error_notification = array(
                     'message' => "There are jobcard running",
                     'title' => "Danger",
@@ -91,9 +123,18 @@ class RTSProgressController extends Controller
 
                 return redirect()->route('frontend.rts-progress.index')->with($error_notification);
             }
+            if($running_defectcard <> ""){
+                $error_notification = array(
+                    'message' => "There are defectcard running",
+                    'title' => "Danger",
+                    'alert-type' => "error"
+                );
+
+                return redirect()->route('frontend.rts-progress.index')->with($error_notification);
+            }
 
             $taskcard_number = substr($taskcard_number, 2);
-            // dd($taskcard_number);
+            $defectcard_number = substr($defectcard_number, 2);
 
             $projects = Project::all();
             $rts = RTS::where('project_id',$project->id)->first();
@@ -101,7 +142,8 @@ class RTSProgressController extends Controller
                 'rts' => $rts,
                 'projec' => $project,
                 'projects' => $projects,
-                'taskcard_number' =>$taskcard_number
+                'taskcard_number' =>$taskcard_number,
+                'defectcard_number' =>$defectcard_number
             ]);
         }
     }
