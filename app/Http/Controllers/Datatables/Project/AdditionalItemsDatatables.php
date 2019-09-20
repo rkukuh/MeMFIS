@@ -17,12 +17,16 @@ class AdditionalItemsDatatables extends Controller
      */
     public function material(Request $request)
     {
-        $defectcards = DefectCard::whereIn('uuid', $request->uuids)->get();
-        $materials = [];
-        foreach($defectcards as $defectcard){
-            foreach($defectcard->materials as $item){
-                array_push($materials, $item);
+        if(isset($request->uuids)){
+            $defectcards = DefectCard::whereIn('uuid', $request->uuids)->get();
+            $materials = [];
+            foreach($defectcards as $defectcard){
+                foreach($defectcard->materials as $item){
+                    array_push($materials, $item);
+                }
             }
+        }else{
+            $materials = [];
         }
 
         $data = $alldata = $materials;
@@ -122,12 +126,16 @@ class AdditionalItemsDatatables extends Controller
      */
     public function tool(Request $request)
     {
-        $defectcards = DefectCard::whereIn('uuid', $request->uuids)->get();
-        $tools = [];
-        foreach($defectcards as $defectcard){
-            foreach($defectcard->tools as $items){
-                array_push($tools, $items);
-            }
+        if(isset($request->uuids)){
+            $defectcards = DefectCard::whereIn('uuid', $request->uuids)->get();
+            $tools = [];
+            foreach($defectcards as $defectcard){
+                foreach($defectcard->tools as $items){
+                    array_push($tools, $items);
+                }
+            }    
+        }else{
+            $tools = [];
         }
 
         $data = $alldata = $tools;

@@ -170,7 +170,7 @@
                                                                                 @slot('id', 'is_rii_removal')
                                                                                 @slot('name', 'is_rii_removal')
                                                                                 @slot('text', 'IS RII?')
-                                                                                @if($htcrr_removal->is_null)
+                                                                                @if($htcrr_removal->is_rii == 1)
                                                                                 @slot('checked', 'checked')
                                                                                 @endif
                                                                                 @slot('value', 1)
@@ -461,7 +461,7 @@
                                                                                 @slot('id', 'is_rii_installation')
                                                                                 @slot('name', 'is_rii_installation')
                                                                                 @slot('text', 'IS RII?')
-                                                                                @if($htcrr_installation->is_null)
+                                                                                @if($htcrr_installation->is_rii == 1)
                                                                                 @slot('checked', 'checked')
                                                                                 @endif
                                                                                 @slot('value', 1)

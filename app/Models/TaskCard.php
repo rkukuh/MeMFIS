@@ -308,7 +308,7 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * Get the task card's item: tool.
+     * Get the task card's Skill.
      *
      * @return string
      */
@@ -325,7 +325,6 @@ class TaskCard extends MemfisModel
                 $skill = '';
             }
         }
-        return collect($skill);
-        // return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
+        return $skill;
     }
 }

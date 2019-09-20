@@ -71,7 +71,7 @@
 @endsection
 
 @push('footer-scripts')
-<script src="{{ asset('js/frontend/discrepancy/engineer/index.js') }}"></script>
+<script src="{{ asset('js/frontend/discrepancy/mechanic/index.js') }}"></script>
 <script>
     $("#code").focus();
 </script>

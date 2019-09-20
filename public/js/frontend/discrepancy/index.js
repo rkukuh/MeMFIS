@@ -112,6 +112,23 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
+                },
+                {
                     field: 'Status',
                     title: 'Status',
                     sortable: 'asc',
@@ -127,9 +144,14 @@ let TaskCard = {
                                 'Engineer Approved'
                             );
                         }
+                        else if(t.status == "ppc"){
+                            return (
+                                'PPC Approved'
+                            );
+                        }
                         else{
                             return (
-                                'Approved'
+                                ''
                             );
                         }
                     }
@@ -147,7 +169,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'approved_by',
+                    field: 'conducted_by',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
@@ -157,7 +179,7 @@ let TaskCard = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.status == "approved"){
+                        if(t.status == "ppc"){
                             return ('<a href="/discrepancy-ppc/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Show" data-id="' + t.uuid +'">' +
                             '<i class="la la-eye"></i>');
                         }else{
