@@ -194,7 +194,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="ea_materials_datatable" id="scrolling_both"></div>
+                                            <div class="ea_materials_datatables" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>

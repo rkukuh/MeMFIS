@@ -250,9 +250,17 @@
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', $taskcard->work_area)
+                                                @slot('text',$taskcard->workarea->name)
                                             @endcomponent
                                             @endif
+
+
+                                            {{-- @foreach ($work_areas as $work_area)
+                                            <option value="{{ $work_area->id }}"
+                                                @if ($work_area->id == $taskcard->work_area) selected @endif>
+                                                {{ $work_area->name }}
+                                            </option>
+                                        @endforeach --}}
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
