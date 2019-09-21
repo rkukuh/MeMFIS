@@ -98,6 +98,10 @@ class JobCardEngineerController extends Controller
         foreach ($jobcard->helpers as $helper) {
             $helper->userID .= $helper->user->id;
         }
+        $helper_quantity = json_decode($jobcard->origin_jobcard_helpers);
+        if($helper_quantity == null ){
+            $helper_quantity = 0;
+        }
         $manhours = 0;
         foreach ($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values) {
             $date1 = null;
@@ -152,6 +156,7 @@ class JobCardEngineerController extends Controller
                 'progresses' => $progresses,
                 'status' => $this->statuses->where('code', 'open')->first(),
                 'employees' => $employees,
+                'helper_quantity' => $helper_quantity,
             ]);
         } else if ($this->statuses->where('id', $progresses->last()->status_id)->first()->code == "progress") {
             return view('frontend.job-card-eo.engineer.progress-resume', [
@@ -166,6 +171,7 @@ class JobCardEngineerController extends Controller
                 'progresses' => $progresses,
                 'pending' => $this->statuses->where('code', 'pending')->first(),
                 'closed' => $this->statuses->where('code', 'closed')->first(),
+                'helper_quantity' => $helper_quantity,
             ]);
         } else if ($this->statuses->where('id', $progresses->last()->status_id)->first()->code == "pending") {
             return view('frontend.job-card-eo.engineer.progress-pause', [
@@ -176,6 +182,7 @@ class JobCardEngineerController extends Controller
                 'progresses' => $progresses,
                 'open' => $this->statuses->where('code', 'open')->first(),
                 'closed' => $this->statuses->where('code', 'closed')->first(),
+                'helper_quantity' => $helper_quantity,
             ]);
         } else if ($this->statuses->where('id', $progresses->last()->status_id)->first()->code == "closed") {
             return view('frontend.job-card-eo.engineer.progress-close', [
@@ -185,6 +192,7 @@ class JobCardEngineerController extends Controller
                 'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
                 'actual' => $actual,
+                'helper_quantity' => $helper_quantity,
             ]);
         } else {
             return view('frontend.job-card-eo.engineer.progress-close', [
@@ -193,6 +201,7 @@ class JobCardEngineerController extends Controller
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
+                'helper_quantity' => $helper_quantity,
             ]);
         }
     }
