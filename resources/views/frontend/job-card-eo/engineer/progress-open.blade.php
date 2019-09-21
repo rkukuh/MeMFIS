@@ -186,13 +186,13 @@
                                                     @endif
                                                 </td>
                                             </tr>
-                                            @if(json_decode($origin_jobcard_helpers) > 0)
+                                            @if($helper_quantity > 0)
                                             <tr>
                                                 <td width="30%" style="background-color:beige;padding:10px;">
                                                     Helper
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{ json_decode($origin_jobcard_helpers) }}
+                                                    {{ $helper_quantity }}
                                                 </td>
                                             </tr>
                                             @endif
@@ -261,7 +261,7 @@
                         <div class="m-portlet m-portlet--mobile">
                             <div class="m-portlet__body">
                                 <table border="1px" width="100%" style="margin-top:10px">
-                                @if(json_decode($origin_jobcard_helpers) > 0)
+                                @if($helper_quantity > 0)
                                     <tr>
                                         <td width="30%" style="background-color:beige;padding:10px;">
                                             Helper
@@ -282,7 +282,7 @@
                                             </div>
                                             @endforeach
                                         @else
-                                            @for($i=0 ; $i < json_decode($origin_jobcard_helpers); $i++)
+                                            @for($i=0 ; $i < $helper_quantity; $i++)
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     @component('frontend.common.input.select2')
