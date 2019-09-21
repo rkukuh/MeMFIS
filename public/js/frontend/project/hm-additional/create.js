@@ -1,6 +1,5 @@
 let AdditionalTaskCreate = (function() {
     let t ={
-
             data: {
                 type: 'remote',
                 source: {
@@ -374,4 +373,11 @@ let AdditionalTaskCreate = (function() {
 
 jQuery(document).ready(function () {
     AdditionalTaskCreate.init();
+    let defect_card_datatable = $('#defect_card_datatable').mDatatable();
+    $("#defect_card_datatable").on("click", "tr", function(e){
+        let total_manhour = [];
+        let selected = defect_card_datatable.checkbox().getSelectedId();
+        console.log(selected);
+       
+    });
 });

@@ -214,6 +214,12 @@
                                                         @slot('value', $project->defectcards()->sum('estimation_manhour') * json_decode($project->data_defectcard)->performance_factor)
                                                         @endif
                                                     @endcomponent
+                                                    @component('frontend.common.buttons.create_repeater')
+                                                        @slot('id', 'update_manhour')
+                                                        @slot('name', 'update_manhour')
+                                                        @slot('class', 'update_manhour')
+                                                        @slot('style', 'margin-top:32.5px')
+                                                    @endcomponent
                                                 </div>
                                             </div>
                                         </div>
