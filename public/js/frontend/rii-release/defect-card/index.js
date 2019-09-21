@@ -67,27 +67,6 @@ let RiiRelease = {
                         }
                 },
                 {
-                    field: 'company',
-                    title: 'Company Task No',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        if(t.jobcard.jobcardable.additionals){
-                            let company = t.jobcard.jobcardable.additionals;
-                            obj = JSON.parse(company);
-                            // console.log()
-                            return (
-                                obj.internal_number
-                            );
-                        }
-                        else{
-                            return(
-                                ''
-                            );
-                        }
-                    }
-                },
-                {
                     field: 'customer_name',
                     title: 'Customer',
                     sortable: 'asc',
@@ -174,7 +153,7 @@ let RiiRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/riirelease-defectcard/rii-release/' + defectcard_uuid + '/',
+                        url: '/riirelease-defectcard/' + defectcard_uuid + '/',
                         success: function (data) {
                             toastr.success('Defectcard has been released.', 'Deleted', {
                                     timeOut: 5000

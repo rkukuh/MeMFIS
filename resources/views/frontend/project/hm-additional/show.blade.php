@@ -155,6 +155,61 @@
                                             </table>
                                         </div>
                                     </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <label class="form-control-label">
+                                                Additional Project Title 
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', '')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <label class="form-control-label">
+                                                        Total Manhour
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', number_format($project->defectcards()->sum('estimation_manhour',2)))
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <label class="form-control-label">
+                                                        Perfomance Factor
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @if(empty($project->data_defectcard))
+                                                            @slot('text', 1.6)
+                                                        @else 
+                                                            @slot('text', json_decode($project->data_defectcard)->performance_factor)
+                                                        @endif
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-4 col-md-4 col-lg-4">
+                                                    <label class="form-control-label">
+                                                        Total With Performance Factor
+                                                    </label>
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('id', 'total_manhour')
+                                                        @slot('name', 'total_manhour')
+                                                        @if(empty($project->data_defectcard))
+                                                            @slot('text', $project->defectcards()->sum('estimation_manhour') * 1.6)
+                                                            @slot('value', $project->defectcards()->sum('estimation_manhour') * 1.6)
+                                                        @else 
+                                                        @slot('text', $project->defectcards()->sum('estimation_manhour') * json_decode($project->data_defectcard)->performance_factor)
+                                                        @slot('value', $project->defectcards()->sum('estimation_manhour') * json_decode($project->data_defectcard)->performance_factor)
+                                                        @endif
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <hr>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">

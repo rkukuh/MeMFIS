@@ -37,7 +37,7 @@ Route::name('frontend.')->group(function () {
             Route::name('defectcard.')->group(function () {
 
                 Route::prefix('defectcard')->group(function () {
-                    //
+                    Route::get('/{defectcard}/print', 'DefectCardController@print')->name('print');
                 });
 
             });

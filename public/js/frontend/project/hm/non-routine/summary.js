@@ -828,7 +828,7 @@ let summarynonroutine = {
             // }
             ]
         });
-
+        // '/datatables/workpackage/'+workPackage_uuid+'/ea/tools'
         $('.ea_tools_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -932,7 +932,7 @@ let summarynonroutine = {
             ]
         });
 
-        $('.ea_materials_datatable').mDatatable({
+        $('.ea_materials_datatables').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -1035,7 +1035,7 @@ let summarynonroutine = {
             ]
         });
 
-        $('.eo_materials_datatable').mDatatable({
+        $('.eo_materials_datatables').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -1138,7 +1138,7 @@ let summarynonroutine = {
             ]
         });
 
-        $('.eo_tools_datatable').mDatatable({
+        $('.eo_tools_datatables').mDatatable({
             data: {
                 type: 'remote',
                 source: {

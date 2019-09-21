@@ -308,7 +308,7 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * Get the task card's item: tool.
+     * Get the task card's Skill.
      *
      * @return string
      */

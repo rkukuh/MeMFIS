@@ -400,25 +400,17 @@ class JobCardDatatables extends Controller
     public function material(JobCard $jobcard)
     {
         //TODO API used is API's Datatables Metronic. FIX search Datatables API because not work
-        $taskcard = TaskCard::find($jobcard->taskcard_id);
-
+        $taskcard = TaskCard::find($jobcard->task_id);
+       
         $items =[];
-        if ($taskcard->type->code == "eo"){
-            foreach($taskcard->eo_instructions as $instructions){
-                foreach($instructions->materials as $material){
+        
+                foreach($jobcard->jobcardable->materials as $material){
                     $unit_id = $material->pivot->unit_id;
                     $material->unit_name .= Unit::find($unit_id)->name;
                     array_push($items, $material);
                 }
-            }
-        }else{
-            foreach($taskcard->materials as $material){
-                    $unit_id = $material->pivot->unit_id;
-                    $material->unit_name .= Unit::find($unit_id)->name;
-                    array_push($items, $material);
-            }
-        }
-
+      
+        
         $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -520,21 +512,13 @@ class JobCardDatatables extends Controller
         $taskcard = TaskCard::find($jobcard->taskcard_id);
 
         $items =[];
-        if ($taskcard->type->code == "eo"){
-            foreach($taskcard->eo_instructions as $instructions){
-                foreach($instructions->tools as $tool){
-                    $unit_id = $tool->pivot->unit_id;
-                    $tool->unit_name .= Unit::find($unit_id)->name;
-                    array_push($items, $tool);
-                }
-            }
-        }else{
-            foreach($taskcard->tools as $tool){
-                $unit_id = $tool->pivot->unit_id;
-                $tool->unit_name .= Unit::find($unit_id)->name;
-                array_push($items, $tool);
-            }
-        }
+     
+        foreach($jobcard->jobcardable->tools as $tool){
+            $unit_id = $tool->pivot->unit_id;
+            $tool->unit_name .= Unit::find($unit_id)->name;
+            array_push($items, $tool);
+        }     
+       
 
         $data = $alldata = $items;
 
