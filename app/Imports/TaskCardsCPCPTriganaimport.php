@@ -21,7 +21,7 @@ class TaskCardsCPCPTriganaimport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        dump($row['number']);
+        // dump($row['number']);
         /** Set the task type */
         switch ($row['task_type']) {
             case 'GENERAL VISUAL':
@@ -144,7 +144,7 @@ class TaskCardsCPCPTriganaimport implements ToModel, WithHeadingRow
                     ]);
             }
         }
-        dump($row['type']);
+        // dump($row['type']);
         switch($row['type']){
             case 'BASIC':
                 $taskcard_type = Type::ofTaskCardTypeRoutine()
@@ -190,7 +190,7 @@ class TaskCardsCPCPTriganaimport implements ToModel, WithHeadingRow
                     ->where('name', 'Basic')->first();
             }
         }
-        dump($taskcard_type->name);
+        // dump($taskcard_type->name);
 
         $additionals = [];
         $additionals["internal_number"] = "";
@@ -255,7 +255,7 @@ class TaskCardsCPCPTriganaimport implements ToModel, WithHeadingRow
             foreach (explode(';',$row['access']) as $access_name ) {
                 foreach ($airplanes as $airplane) {
                     if(isset($access_name)){
-                        
+
                         $access = Access::firstOrCreate(
                             ['name' => $access_name, 'accessable_id' => $airplane->id, 'accessable_type' => 'App\Models\Aircraft']
                         );

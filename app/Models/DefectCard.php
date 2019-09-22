@@ -172,6 +172,20 @@ class DefectCard extends MemfisModel
                     ->withTimestamps();
     }
 
+    /**
+     * Many-to-Many: A defect card may have zero or many aircraft's zone.
+     *
+     * This function will retrieve all the aircraft's zones of a defect card.
+     * See: Zone's defectcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function zones()
+    {
+        return $this->belongsToMany(Zone::class, 'defectcard_zone', 'defectcard_id', 'zone_id')
+                    ->withTimestamps();
+    }
+
     /*************************************** ACCESSOR ****************************************/
 
     /**
@@ -203,7 +217,7 @@ class DefectCard extends MemfisModel
      */
     public function getSkillAttribute()
     {
-        if(isset($this->skills) ){
+        if(isset($this->skills) ) {
             if(sizeof($this->skills) == 3){
                 $skill = "ERI";
             }
@@ -214,6 +228,7 @@ class DefectCard extends MemfisModel
                 $skill = '';
             }
         }
+
         return $skill;
     }
 }

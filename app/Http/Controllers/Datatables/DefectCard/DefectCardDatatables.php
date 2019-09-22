@@ -105,19 +105,22 @@ class DefectCardDatatables extends Controller
             elseif($jobcard->is_rii == 0 and $jobcard->approvals->count()== 3){
                 $jobcard->status .= 'Released';
             }
-            elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','closed')->first()->id){
-                $jobcard->status .= 'Closed';
-            }
-            elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','pending')->first()->id){
-                $jobcard->status .= 'Pending';
-            }
-            elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','progress')->first()->id){
-                $jobcard->status .= 'Progress';
-            }
-            elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','open')->first()->id){
+            if($jobcard->progresses->where('progressed_by',Auth::id())->first() == null){
                 $jobcard->status .= 'Open';
+            }else{
+                if($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','closed')->first()->id){
+                    $jobcard->status .= 'Closed';
+                }
+                elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','pending')->first()->id){
+                    $jobcard->status .= 'Pending';
+                }
+                elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','progress')->first()->id){
+                    $jobcard->status .= 'Progress';
+                }
+                elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','open')->first()->id){
+                    $jobcard->status .= 'Open';
+                }
             }
-
         }
 
         $data = $alldata = json_decode($DefectCard);
