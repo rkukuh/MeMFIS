@@ -270,9 +270,9 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * Many-to-Many: A task card may have zero or many (aircraft) zone.
+     * Many-to-Many: A task card may have zero or many aircraft's zone.
      *
-     * This function will retrieve all the (aircraft) zones of a task card.
+     * This function will retrieve all the aircraft's zones of a task card.
      * See: Zone's taskcards() method for the inverse
      *
      * @return mixed
