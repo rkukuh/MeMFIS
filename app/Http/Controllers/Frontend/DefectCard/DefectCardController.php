@@ -136,6 +136,7 @@ class DefectCardController extends Controller
      */
     public function print(DefectCard $defectcard)
     {
+        // dd($defectcard);
         $m = new Merger();
 
         $propose_corrections = $defectcard->propose_corrections->pluck('code')->toArray();
@@ -156,12 +157,12 @@ class DefectCardController extends Controller
         $pdf->loadHTML($view2)->setPaper('a4', 'landscape');
         $m->addRaw($pdf->output());
 
-        file_put_contents('storage/DefectCard/'.$defectcard->code.'.pdf', $m->merge());
+        file_put_contents('storage/DefectCard/'.$defectcard->uuid.'.pdf', $m->merge());
         $invnoabc = new \PDF;
-        $invnoabc = $defectcard->code.'.pdf';
+        $invnoabc = $defectcard->uuid.'.pdf';
 
         return response()->file(
-            public_path('storage/DefectCard/'.$defectcard->code.'.pdf')
+            public_path('storage/DefectCard/'.$defectcard->uuid.'.pdf')
         );
     }
 }

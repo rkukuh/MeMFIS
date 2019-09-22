@@ -18,11 +18,9 @@ class TaskReleaseJobCardDatatables extends Controller
      */
     public function index()
     {
-        $JobCards = JobCard::with('quotation')->get();
-
+        $JobCards = JobCard::with('quotation','quotation.quotationable','quotation.quotationable.customer','quotation.quotationable.aircraft')->get();
         foreach($JobCards as $jobcard){
 
-            $jobcard->aircraft_name .= $jobcard->quotation->quotationable->aircraft->name;
             if(isset($jobcard->jobcardable->skills) ){
                 if(sizeof($jobcard->jobcardable->skills) == 3){
                     $jobcard->skill_name .= "ERI";
@@ -35,13 +33,12 @@ class TaskReleaseJobCardDatatables extends Controller
                 }
             }
 
-            $jobcard->customer_name .= $jobcard->quotation->quotationable->customer->name;
             if($jobcard->jobcardable->additionals <> null){
                 $addtional = json_decode($jobcard->jobcardable->additionals);
                 $jobcard->company_task .= $addtional->internal_number;
             }
             else{
-                $jobcard->company_task .= "";
+                $jobcard->company_task .= "-";
 
             }
 

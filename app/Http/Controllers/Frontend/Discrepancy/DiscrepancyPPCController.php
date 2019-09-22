@@ -68,7 +68,7 @@ class DiscrepancyPPCController extends Controller
             'propose_corrections' => $propose_corrections,
             'propose_correction_text' => $propose_correction_text,
         ]);
-        
+
     }
 
     /**
@@ -126,16 +126,16 @@ class DiscrepancyPPCController extends Controller
             }
         }
 
-        $discrepancy->approvals()->save(new Approval([
-            'approvable_id' => $discrepancy->id,
-            'conducted_by' => Auth::id(),
-            'is_approved' => 1
-        ]));
+        // $discrepancy->approvals()->save(new Approval([
+        //     'approvable_id' => $discrepancy->id,
+        //     'conducted_by' => Auth::id(),
+        //     'is_approved' => 1
+        // ]));
 
-        $discrepancy->progresses()->save(new Progress([
-            'status_id' =>  Status::ofDefectcard()->where('code','open')->first()->id,
-            'progressed_by' => Auth::id()
-        ]));
+        // $discrepancy->progresses()->save(new Progress([
+        //     'status_id' =>  Status::ofDefectcard()->where('code','open')->first()->id,
+        //     'progressed_by' => Auth::id()
+        // ]));
 
         return response()->json($discrepancy);
     }
