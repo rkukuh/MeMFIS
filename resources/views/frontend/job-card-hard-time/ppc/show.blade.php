@@ -186,7 +186,11 @@
                                                             <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                                                 <div class="flex">
                                                                     <div class="action-buttons">
-                                                                        @include('frontend.common.buttons.print')
+                                                                    @component('frontend.common.buttons.print')
+                                                                        @slot('id', 'ppc-print')
+                                                                        @slot('name', 'ppc-print')
+                                                                        @slot('href', route('frontend.jobcard.hardtime.print',['uuid' => $jobcard->uuid]) )
+                                                                    @endcomponent
                                                                         @include('frontend.common.buttons.back')
 
                                                                     </div>
@@ -323,7 +327,11 @@
                                                             <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                                                 <div class="flex">
                                                                     <div class="action-buttons">
-                                                                        @include('frontend.common.buttons.print')
+                                                                    @component('frontend.common.buttons.print')
+                                                                        @slot('id', 'ppc-print')
+                                                                        @slot('name', 'ppc-print')
+                                                                        @slot('href', route('frontend.jobcard.hardtime.print',['uuid' => $jobcard->uuid]) )
+                                                                    @endcomponent
                                                                         @include('frontend.common.buttons.back')
 
                                                                     </div>
