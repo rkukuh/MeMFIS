@@ -7,8 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use App\Models\WorkshiftSchedule;
 use App\Models\Status;
+use App\Models\AttendanceFile;
 use App\Models\EmployeeWorkshift;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Frontend\EmployeeAttendanceStore;
 
 class EmployeeAttendanceController extends Controller
@@ -42,7 +45,32 @@ class EmployeeAttendanceController extends Controller
     public function store(EmployeeAttendanceStore $request)
     {
         if(isset($request->document)){
-            $data = 'D:\Documents\KHRISNA\WORK\memfis data\BRC2190960192_attlog.dat';
+            $file = $request->file('document');
+            $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME);
+            $filename = $name.'.'.$file->getClientOriginalExtension();
+            
+            $exist = Storage::disk('local')->url('attendance_files/'.$file->getClientOriginalName());
+        
+            if($exist){
+                $random = str_random(5);
+                $filename = $name.'_'.$random.'.'.$file->getClientOriginalExtension();
+                $name = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME).'_'.$random;
+            }
+
+            $path = $file->storeAs(
+                'attendance_files',$filename
+            );
+
+            $storagePath = Storage::disk('local')->path($path);
+            AttendanceFile::create([
+                'uuid' => Str::uuid(),
+                'name' => $name,
+                'filename' => $filename,
+                'path' => $storagePath,
+                'imported_by' => Employee::where('user_id',Auth::id())->first()->id
+            ]);
+            
+            $data = $storagePath;
             $lines = file($data);
             $rows = [];
 
@@ -151,14 +179,6 @@ class EmployeeAttendanceController extends Controller
                                 $out = end($data_final[$i]['date'][$y]['time']);
                             }
 
-                            if($data_final[$i]['date'][$y]['time']){
-                                $out = $out;
-                                if($in == $out){
-                                    $out = '00:00:00';
-                                    $status = Status::where('code','undiscipline')->first()->id;
-                                }
-                            }
-
                             //CHECK LATE OR OVERTIME
                             $employee_workshift = EmployeeWorkshift::where('employee_id', $employee->id)->first();
                             
@@ -192,8 +212,31 @@ class EmployeeAttendanceController extends Controller
                                                 $overtime = abs(strtotime($out) - strtotime($employee_schedule[$v]['out']));
                                             }
                                         };
+
                                     }   
                                 }
+                            }else{
+
+                                //LATE
+                                if(strtotime($in) > strtotime('07:30:00')){
+                                    if($in != '00:00:00'){
+                                        $late = abs(strtotime($in) - strtotime('07:30:00'));
+                                    }
+                                };
+
+                                //EARLIER OUT
+                                if(strtotime($out) < strtotime(strtotime('16:30:00'))){
+                                    if($out != '00:00:00'){
+                                        $earlier_out = abs(strtotime('16:30:00') - strtotime($out));
+                                    }
+                                };
+
+                                //OVERTIME
+                                if(strtotime($out) > strtotime('16:30:00')){
+                                    if($out != '00:00:00'){
+                                        $overtime = abs(strtotime($out) - strtotime('16:30:00'));
+                                    }
+                                };
 
                             }
                             
@@ -201,6 +244,17 @@ class EmployeeAttendanceController extends Controller
                             //CHECK ABSENCE
                             if(!$data_final[$i]['date'][$y]['time'] && !$data_final[$i]['date'][$y]['time']){
                                 $status = Status::where('code','absence')->first()->id;
+                            }
+
+                            //IN & OUT II
+                            if($data_final[$i]['date'][$y]['time']){
+                                if($in == $out){
+                                    $out = '00:00:00';
+                                    $late = 0;
+                                    $earlier_out = 0;
+                                    $overtime = 0;
+                                    $status = Status::where('code','undiscipline')->first()->id;
+                                }
                             }
 
                             $employee->employee_attendace()->create([
@@ -220,8 +274,7 @@ class EmployeeAttendanceController extends Controller
                 }
             } 
 
-            dd('sukses');//[0]['date'][0]['time'][0]);
-
+            return redirect('import-fingerprint');
         }
     }
 
