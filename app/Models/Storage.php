@@ -17,6 +17,19 @@ class Storage extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * M-M Polymorphic: A storage can be filled from many entities.
+     *
+     * This function will get all the Companies that are filled to a given storage.
+     * See: Company's storages() method for the inverse
+     *
+     * @return mixed
+     */
+    public function companies()
+    {
+        return $this->morphedByMany(Company::class, 'storageable');
+    }
+
+    /**
      * One-to-Many: A GRN may have one storage.
      *
      * This function will retrieve all the GRNs of a storage.

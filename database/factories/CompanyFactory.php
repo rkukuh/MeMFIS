@@ -2,6 +2,7 @@
 
 use App\Models\Type;
 use App\Models\Company;
+use App\Models\Storage;
 use App\Models\BankAccount;
 use Faker\Generator as Faker;
 
@@ -29,6 +30,12 @@ $factory->afterCreating(Company::class, function ($company, $faker) {
     
     if ($faker->boolean) {
         $company->bank_accounts()->saveMany(factory(BankAccount::class, rand(1, 3))->make());
+    }
+
+    // Storage
+    
+    if ($faker->boolean) {
+        $company->storages()->save(Storage::get()->random());
     }
 
 });
