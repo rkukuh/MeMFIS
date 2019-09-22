@@ -86,14 +86,14 @@ class JobCardDatatables extends Controller
             foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
                 $date1 = null;
                 foreach($values as $value){
-                    if($this->statuses->where('id',$value->status_id)->first()->code <> "open" or $this->statuses->where('id',$value->status_id)->first()->code <> "released" or $this->statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
+                    if($statuses->where('id',$value->status_id)->first()->code <> "open" or $statuses->where('id',$value->status_id)->first()->code <> "released" or $statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
                         if($jobcard->helpers->where('userID',$key)->first() == null){
                             if($date1 <> null){
                                 $t1 = Carbon::parse($date1);
                                 $t2 = Carbon::parse($value->created_at);
                                 $diff = $t1->diffInSeconds($t2);
                                 $manhours += + $diff;
-                            }elseif($this->statuses->where('id',$value->status_id)->first()->code == "progress" ) {
+                            }elseif($statuses->where('id',$value->status_id)->first()->code == "progress" ) {
                                 $t1 = Carbon::now($date1);
                                 $t2 = Carbon::parse($value->created_at);
                                 $diff = $t1->diffInSeconds($t2);
@@ -109,7 +109,7 @@ class JobCardDatatables extends Controller
             $manhours_break = 0;
             foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
                 for($i=0; $i<sizeOf($values->toArray()); $i++){
-                    if($this->statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
+                    if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
                         if($jobcard->helpers->where('userID',$key)->first() == null){
                             if($date1 <> null){
                                 if($i+1 < sizeOf($values->toArray())){
