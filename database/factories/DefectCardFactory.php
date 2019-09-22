@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Approval;
 use App\Models\Progress;
 use App\Models\Employee;
+use App\Models\Aircraft;
 use App\Models\Quotation;
 use App\Models\DefectCard;
 use Faker\Generator as Faker;
@@ -40,6 +41,20 @@ $factory->define(DefectCard::class, function (Faker $faker) {
 /** CALLBACKS */
 
 $factory->afterCreating(DefectCard::class, function ($defectcard, $faker) {
+
+    // Aircraft's Zone
+
+    $aircraft = null;
+
+    if (Aircraft::count()) {
+        $aircraft = Aircraft::get()->random();
+    } else {
+        $aircraft = factory(Aircraft::class)->create();
+    }
+
+    if ($faker->boolean) {
+        $defectcard->zones()->saveMany($aircraft->zones);
+    }
 
     // Approval
 
