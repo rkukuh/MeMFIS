@@ -186,7 +186,16 @@
                                                     @endif
                                                 </td>
                                             </tr>
-
+                                            @if($helper_quantity > 0)
+                                            <tr>
+                                                <td width="30%" style="background-color:beige;padding:10px;">
+                                                    Helper
+                                                </td>
+                                                <td width="70%" style="text-align:center">
+                                                    {{ $helper_quantity }}
+                                                </td>
+                                            </tr>
+                                            @endif
                                         </table>
                                     </div>
                                 </div>
@@ -252,7 +261,7 @@
                         <div class="m-portlet m-portlet--mobile">
                             <div class="m-portlet__body">
                                 <table border="1px" width="100%" style="margin-top:10px">
-                                @if($jobcard->jobcardable->helper_quantity != 0)
+                                @if($helper_quantity > 0)
                                     <tr>
                                         <td width="30%" style="background-color:beige;padding:10px;">
                                             Helper
@@ -273,10 +282,11 @@
                                             </div>
                                             @endforeach
                                         @else
-                                            @for($i=1 ; $i <= $jobcard->jobcardable->helper_quantity; $i++)
+                                            @for($i=0 ; $i < $helper_quantity; $i++)
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     @component('frontend.common.input.select2')
+                                                        @slot('id', 'helper_'.$i)
                                                         @slot('text', 'helper')
                                                         @slot('name', 'helper[]')
                                                         @slot('class', 'helper')
@@ -407,22 +417,5 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/helper.js')}}"></script>
     @endif
     <script src="{{ asset('js/frontend/functions/select2/helper.js')}}"></script>
-<!--
-    <script>
-        $( document ).ready(function() {
-        let helpers = {!! $jobcard->helpers !!}
-        console.log($('select[name^=helper]').length);
-        $('select[name^=helper]').each()
-        $('select[name^=helper]').select2();
-        // $('select[name^=helper] option[value='+helpers[key].code+']').attr('selected','selected');
-        });
 
-    </script> -->
-    <script>
-        $( document ).ready(function() {
-            $('.helper').each( function() {
-            //    $(this).select2();
-            });
-        });
-    </script>
 @endpush

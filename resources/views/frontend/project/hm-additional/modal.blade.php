@@ -34,6 +34,7 @@
         </div>
     </div>
 </div>
+
 @push('footer-scripts')
     <script>
         $('.modal-footer').on('click', '.create', function () {

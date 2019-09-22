@@ -44,7 +44,7 @@ class RIIReleaseDefectCardDatatables extends Controller
         // }
 
         // $data = $alldata = json_decode($JobCard);
-        $DefectCard =DefectCard::with('jobcard','jobcard.quotation','jobcard.taskcard','progresses')
+        $DefectCard =DefectCard::with('jobcard','jobcard.quotation','jobcard.jobcardable','progresses')
                                             ->where('is_rii', '1')
                                             ->whereHas('progresses', function ($query) {
                                             $query->where('status_id', Status::where('code','released')->where('of','defectcard')->first()->id);
@@ -58,15 +58,7 @@ class RIIReleaseDefectCardDatatables extends Controller
             $defectcard->customer_name .= $defectcard->jobcard->quotation->quotationable->customer->name;
 
             if(isset($defectcard->jobcard->jobcardable->skills) ){
-                if(sizeof($defectcard->jobcard->jobcardable->skills) == 3){
-                    $defectcard->jobcard->skill_name .= "ERI";
-                }
-                else if(sizeof($defectcard->jobcard->jobcardable->skills) == 1){
-                    $defectcard->jobcard->skill_name .= $defectcard->jobcard->jobcardable->skills[0]->name;
-                }
-                else{
-                    $defectcard->jobcard->skill_name .= '';
-                }
+                $defectcard->jobcard->skill_name .= $defectcard->skill;
             }
 
             Status::find($defectcard->progresses->last()->status_id)->name;

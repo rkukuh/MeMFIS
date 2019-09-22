@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\DefectCard;
 
+use Auth;
 use Carbon\Carbon;
 use App\Models\Status;
 use App\Models\Project;
@@ -69,8 +70,6 @@ class DefectCardDatatables extends Controller
             $manhours = $manhours/3600;
             $manhours_break = 0;
             foreach($defectcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                // dump(sizeOf($values->toArray()));
-                // dump($values);
                 for($i=0; $i<sizeOf($values->toArray()); $i++){
                     if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
                         if($defectcard->helpers->where('userID',$key)->first() == null){
@@ -90,45 +89,31 @@ class DefectCardDatatables extends Controller
             $manhours_break = $manhours_break/3600;
             $actual_manhours =number_format($manhours-$manhours_break, 2);
             $jobcard->actual .= $actual_manhours;
-                // dd($jobcard->progresses);
-            $count_user = $defectcard->progresses->groupby('progressed_by')->count();
 
-            // dd($count_user);
+            $count_user = $jobcard->progresses->groupby('progressed_by')->count()-1;
+
             $status = [];
-            foreach($defectcard->progresses->groupby('progressed_by') as $key => $value){
-                if(Status::ofDefectCard()->where('id',$defectcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
-                    array_push($status, 'Pending');
-                }
-            }
 
-            if($jobcard->is_rii == 1 and $jobcard->approvals->count()==4){
+            if($jobcard->is_rii == 1 and $jobcard->approvals->count()== 4){
                 $jobcard->status .= 'Released';
             }
-            elseif($jobcard->is_rii == 1 and $jobcard->approvals->count()==3 and $jobcard->progresses->where('status_id', Status::ofDefectCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() <> $count_user){
-                    $jobcard->status .= 'Waiting for RII';
+            else if($jobcard->is_rii == 1 and $jobcard->approvals->count()== 3){
+                $jobcard->status .= 'Waiting for RII';
             }
-            elseif($jobcard->is_rii == 0 and sizeof($jobcard->approvals)==3){
-                if($jobcard->progresses->where('status_id', Status::ofDefectCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-                    $jobcard->status .= 'Released';
-                }
+            elseif($jobcard->is_rii == 0 and $jobcard->approvals->count()== 3){
+                $jobcard->status .= 'Released';
             }
-            elseif($jobcard->progresses->where('status_id', Status::ofDefectCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
+            elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','closed')->first()->id){
                 $jobcard->status .= 'Closed';
             }
-            elseif(sizeof($status) == $count_user and $count_user <> 0){
+            elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','pending')->first()->id){
                 $jobcard->status .= 'Pending';
             }
-            elseif(sizeof($status) <> $count_user and $count_user <> 0){
+            elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','progress')->first()->id){
                 $jobcard->status .= 'Progress';
             }
-            elseif($jobcard->progresses->count()==1){
+            elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','open')->first()->id){
                 $jobcard->status .= 'Open';
-            }
-            elseif($jobcard->approvals->count()==2){
-                $jobcard->status .= 'PPC Approved';
-            }
-            elseif($jobcard->approvals->count()==1){
-                $jobcard->status .= 'Engineer Approved';
             }
 
         }

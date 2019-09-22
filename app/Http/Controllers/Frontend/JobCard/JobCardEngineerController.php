@@ -97,6 +97,10 @@ class JobCardEngineerController extends Controller
     public function edit(JobCard $jobcard)
     {
         $statuses = Status::ofJobCard()->get();
+        $helper_quantity = json_decode($jobcard->origin_jobcard_helpers);
+        if($helper_quantity == null ){
+            $helper_quantity = 0;
+        }
         $jobcard = JobCard::where('uuid',$jobcard->uuid)->first();
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;
@@ -154,6 +158,7 @@ class JobCardEngineerController extends Controller
                 'progresses' => $progresses,
                 'status' => $this->statuses->where('code','open')->first(),
                 'employees' => $employees,
+                'helper_quantity' => $helper_quantity
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "progress"){
@@ -168,6 +173,7 @@ class JobCardEngineerController extends Controller
                 'progresses' => $progresses,
                 'pending' => $this->statuses->where('code','pending')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
+                'helper_quantity' => $helper_quantity
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "pending"){
@@ -178,6 +184,7 @@ class JobCardEngineerController extends Controller
                 'progresses' => $progresses,
                 'open' => $this->statuses->where('code','open')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
+                'helper_quantity' => $helper_quantity
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "closed"){
@@ -187,6 +194,7 @@ class JobCardEngineerController extends Controller
                 'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
                 'actual' => $actual,
+                'helper_quantity' => $helper_quantity
             ]);
         }
         else{
@@ -195,6 +203,7 @@ class JobCardEngineerController extends Controller
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
                 'progresses' => $progresses,
+                'helper_quantity' => $helper_quantity
             ]);
         }
     }

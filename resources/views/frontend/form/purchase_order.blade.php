@@ -199,23 +199,25 @@
                     <th valign="top" width="12%">Rp. 1.221.232</th>
                 </tr>
                 <tr>
-                    <td valign="top" width="78%">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates veritatis accusantium lorem</td>
+                    <td valign="top" width="78%">Lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint laborum architecto nemo facilis magni eos unde aperiam eius alias cupiditate, consequuntur fugit, voluptatum cumque autem? Sapiente, architecto! Nesciunt, dolores suscipit. ipsum dolor sit amet consectetur adipisicing elit. Voluptates veritatis accusantium lorem</td>
                     <th valign="top" width="8%">PPN 10%</th>
                     <th valign="top" width="2%">:</th>
                     <th valign="top" width="12%">Rp. 1.221.232</th>
                 </tr>
             </table>
-            <div style="width:100%;position:relative;margin-top:10px;">
-                <img src="./img/form/printoutpurchase-order/PO.jpg" width="30%" alt="" style="position:absolute;right:158px;">
+            <div style="position:relative;">
+                <div style="width:100%;position:relative;margin-top:10px;">
+                    <img src="./img/form/printoutpurchase-order/PO.jpg" width="30%" alt="" style="position:absolute;right:158px;">
+                </div>
+                <table width="100%" style="margin-top:11px;z-index:1">
+                    <tr>
+                        <th valign="top" width="78%">Term of Payment : 30 Days / cash</th>
+                        <th valign="top" width="8%" style="color:white;">Grandtotal</th>
+                        <th valign="top" width="2%" style="color:white;">:</th>
+                        <th valign="top" width="12%" style="color:white;">Rp. 1.221.232</th>
+                    </tr>
+                </table>
             </div>
-            {{-- <table width="100%" style="margin-top:8px;" border="1">
-                <tr>
-                    <th valign="top" width="78%">Term of Payment : 30 Days / cash</th>
-                    <th valign="top" width="8%">Grandtotal</th>
-                    <th valign="top" width="2%">:</th>
-                    <th valign="top" width="12%">Rp. 1.221.232</th>
-                </tr>
-            </table> --}}
         </div>
     </div>
 

@@ -153,7 +153,7 @@ let RiiRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/riirelease-defectcard/rii-release/' + defectcard_uuid + '/',
+                        url: '/riirelease-defectcard/' + defectcard_uuid + '/',
                         success: function (data) {
                             toastr.success('Defectcard has been released.', 'Deleted', {
                                     timeOut: 5000

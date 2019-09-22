@@ -163,7 +163,7 @@ let TaskCard = {
             data.append("document", $('#document').val());
             data.append("reference", $('#service_bulletin').val());
             data.append("stringer", JSON.stringify( $('#stringer').val()) );
-            data.append("station", $('#station').val());
+            data.append("station", JSON.stringify( $('#station').val()) );
             data.append("section", JSON.stringify(sections));
             data.append("fileInput", document.getElementById('taskcard').files[0]);
 

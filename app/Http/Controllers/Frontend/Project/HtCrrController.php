@@ -117,18 +117,19 @@ class HtCrrController extends Controller
      */
     public function edit(HtCrr $htcrr)
     {
-            $htcrr->removal_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->first()->estimation_manhour;
-            $htcrr->installation_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->last()->estimation_manhour;
-            $htcrr->pn .= Item::where('code',$htcrr->part_number)->first()->id;
+        $htcrr->removal_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->first()->estimation_manhour;
+        $htcrr->installation_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->last()->estimation_manhour;
+        $htcrr->sn_off .= $htcrr->childs[0]->serial_number;
+        $htcrr->sn_on .= $htcrr->childs[1]->serial_number;
+        $htcrr->pn .= Item::where('code',$htcrr->part_number)->first()->id;
 
-            if(sizeof($htcrr->skills) == 3){
-                $htcrr->skill_id .= Type::ofTaskCardSkill()->where('code','eri')->first()->id;
-            }
-            else if(sizeof($htcrr->skills) == 1){
-                $htcrr->skill_id .= $htcrr->skills->first()->skill_id;
-            }
+        if(sizeof($htcrr->skills) == 3){
+            $htcrr->skill_id .= Type::ofTaskCardSkill()->where('code','eri')->first()->id;
+        }
+        else if(sizeof($htcrr->skills) == 1){
+            $htcrr->skill_id .= $htcrr->skills->first()->skill_id;
+        }
 
-            // dd($htcrr);
         return response()->json($htcrr);
     }
 

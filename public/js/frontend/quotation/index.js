@@ -247,13 +247,38 @@ let Quotation = {
         $('.m_datatable').on('click', '.approve', function () {
             let quotation_uuid = $(this).data('id');
 
+            Swal.fire({
+                showLoaderOnConfirm: true,
+                preConfirm: (login) => {
+                  return fetch(`//api.github.com/users/${login}`)
+                    .then(response => {
+                      if (!response.ok) {
+                        throw new Error(response.statusText)
+                      }
+                      return response.json()
+                    })
+                    .catch(error => {
+                      Swal.showValidationMessage(
+                        `Request failed: ${error}`
+                      )
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+              })
+
             swal({
                 title: 'Sure want to Approve?',
+                text: "Whose approval (Customer side)?",
                 type: 'question',
+                input: 'text',
+                inputAttributes: {
+                  autocapitalize: 'on'
+                },
                 confirmButtonText: 'Yes, Approve',
                 confirmButtonColor: '#34bfa3',
                 cancelButtonText: 'Cancel',
                 showCancelButton: true,
+                showLoaderOnConfirm: true,
             })
             .then(result => {
                 if (result.value) {
@@ -264,6 +289,9 @@ let Quotation = {
                             )
                         },
                         type: 'POST',
+                        data: {
+                            note:result.value 
+                        },
                         url: '/quotation/' + quotation_uuid + '/approve',
                         success: function (data) {
                             toastr.success('Quotation has been approved.', 'Approved', {
