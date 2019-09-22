@@ -57,6 +57,19 @@ class Department extends MemfisModel
     }
 
     /**
+     * M-M Polymorphic: A storage can be filled from many entities.
+     *
+     * This function will get all the storages that are filled from a given Department.
+     * See: Storage's departments() method for the inverse
+     *
+     * @return mixed
+     */
+    public function storages()
+    {
+        return $this->morphToMany(Storage::class, 'storageable');
+    }
+
+    /**
      * One-to-Many: A Department may have zero or many type.
      *
      * This function will retrieve the type of an Department.
