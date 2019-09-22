@@ -140,8 +140,8 @@ class TaskCardsCNItemimport implements ToModel, WithHeadingRow
                 'note' => $row['description'],
                 'quantity' => $row['qty'],
             ]);
-            if(empty($item)){ dump($item); }
-            if(empty($taskcard)){ dump($taskcard); }
+            // if(empty($item)){ dump($item); }
+            // if(empty($taskcard)){ dump($taskcard); }
         }
 
 

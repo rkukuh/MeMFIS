@@ -314,17 +314,20 @@ class TaskCard extends MemfisModel
      */
     public function getSkillAttribute()
     {
+
         if(isset($this->skills) ){
-            if(sizeof($this->skills) == 3){
-                $skill = "ERI";
-            }
-            else if(sizeof($this->skills) == 1){
-                $skill = $this->skills[0]->name;
-            }
-            else{
-                $skill = '';
+            switch (sizeof($this->skills)) {
+                case 3:
+                    $skill = "ERI";
+                    break;
+                case 1:
+                    $skill = $this->skills[0]->name;
+                    break;
+                default:
+                    $skill = '';
             }
         }
+
         return $skill;
     }
 }
