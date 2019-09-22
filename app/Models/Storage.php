@@ -19,6 +19,19 @@ class Storage extends MemfisModel
     /**
      * M-M Polymorphic: A storage can be filled from many entities.
      *
+     * This function will get all the company's Branches that are filled to a given storage.
+     * See: Branch's storages() method for the inverse
+     *
+     * @return mixed
+     */
+    public function branches()
+    {
+        return $this->morphedByMany(Branch::class, 'storageable');
+    }
+
+    /**
+     * M-M Polymorphic: A storage can be filled from many entities.
+     *
      * This function will get all the Companies that are filled to a given storage.
      * See: Company's storages() method for the inverse
      *
