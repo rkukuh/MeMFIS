@@ -268,7 +268,9 @@
                                 <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                     <div class="flex">
                                         <div class="action-buttons">
-                                            @include('frontend.common.buttons.print')
+                                            {{-- @include('') --}}
+                                            @component('frontend.common.buttons.print')
+                                            @slot('href', route('frontend.project-hm.summary.cmr-awl', ['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )                                             @endcomponent
                                             @include('frontend.common.buttons.back')
 
                                         </div>
