@@ -7,7 +7,7 @@ let ImportFingerprint = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/employee/attendance',
+                        url: '/datatables/employee/attendance-file',
                         map: function (raw) {
                             let dataSet = raw;
 
