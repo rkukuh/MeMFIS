@@ -12,6 +12,7 @@ Route::name('frontend.')->group(function () {
         /** PROJECT */
 
         Route::namespace('Project')->group(function () {
+            Route::post('/project-hm-additional/calculateManhours','ProjectHMAdditionalController@calculateManhours')->name('project-hm-additional.calculateManhours');
 
             Route::resource('project', 'ProjectController');
             Route::post('/project/{project}/approve', 'ProjectController@approve')->name('project.approve');
@@ -31,7 +32,6 @@ Route::name('frontend.')->group(function () {
             Route::post('/project-hm-additional/{project}/destroy','ProjectHMAdditionalController@destroy')->name('project-hm-additional.destroy');
             Route::get('/project-hm-additional/{project}/summary','ProjectHMAdditionalController@summary')->name('project-hm-additional.summary');
             Route::post('/project-hm-additional/{project}/additional-store','ProjectHMAdditionalController@additionalStore')->name('project-hm-additional.store.data');
-
 
             Route::resource('project-workshop', 'ProjectWorkshopController', [
                 'parameters' => ['project-workshop' => 'project']

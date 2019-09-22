@@ -339,6 +339,9 @@ let AdditionalTaskCreate = (function() {
             $('.add-project-additional').on('click', function () {
                 let data = new FormData();
                 data.append("defectcard_uuid", UUID);
+                data.append("estimation_manhour", $("#estimation_manhour").attr('value'));
+                data.append("performance_factor", $("#performance_factor").val());
+                data.append("total_manhour_with_performance_factor", $("#total_manhour").attr('value'));
 
                 $.ajax({
                     headers: {
@@ -357,7 +360,7 @@ let AdditionalTaskCreate = (function() {
                             toastr.success('Project Aditional has been created.', 'Success', {
                                 timeOut: 5000
                             });
-                            window.location.href = '/project-hm-additional/'+data.uuid+'/edit';
+                            // window.location.href = '/project-hm-additional/'+data.uuid+'/edit';
 
                         }
                     }
@@ -373,11 +376,29 @@ let AdditionalTaskCreate = (function() {
 
 jQuery(document).ready(function () {
     AdditionalTaskCreate.init();
-    let defect_card_datatable = $('#defect_card_datatable').mDatatable();
     $("#defect_card_datatable").on("click", "tr", function(e){
-        let total_manhour = [];
-        let selected = defect_card_datatable.checkbox().getSelectedId();
-        console.log(selected);
-       
+        let numberFormat = new Intl.NumberFormat('id', { maximumSignificantDigits: 3, maximumFractionDigits: 2, minimumFractionDigits: 2});
+        let performance_factor = $("#performance_factor").val();
+        let defect_card_datatable = $('#defect_card_datatable').mDatatable();
+        let uuids = defect_card_datatable.checkbox().getSelectedId();
+        let data = new FormData();
+        data.append("uuids", JSON.stringify(uuids) );
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'POST',
+            url: '/project-hm-additional/calculateManhours',
+            processData: false,
+            contentType: false,
+            cache: false,
+            data:data,
+            success: function (data) {
+                $('#estimation_manhour').html(data);
+                $('#estimation_manhour').attr('value', data);
+                $('#total_manhour').html(numberFormat.format(data * performance_factor));
+                $('#total_manhour').attr('value', data * performance_factor);
+            }
+        });
     });
 });
