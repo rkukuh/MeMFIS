@@ -675,7 +675,7 @@ class FillComboxController extends Controller
      */
     public function projectAdditional()
     {
-        $projects = Project::with('approvals')->where('parent_id',null)->pluck('title','uuid');
+        $projects = Project::with('approvals')->where('parent_id',null)->pluck('code','uuid');
 
         return json_encode($projects);
     }

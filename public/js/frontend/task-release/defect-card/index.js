@@ -70,13 +70,6 @@ let TaskRelease = {
                     }
                 },
                 {
-                    field: 'jobcard.company_task',
-                    title: 'Company Task No',
-                    sortable: 'asc',
-                    filterable: !1,
-
-                },
-                {
                     field: 'customer_name',
                     title: 'Customer',
                     sortable: 'asc',
@@ -187,7 +180,7 @@ let TaskRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/taskrelease-defectcard/task-release/' + defectcard_uuid + '/',
+                        url: '/taskrelease-defectcard/' + defectcard_uuid + '/',
                         success: function (data) {
                             toastr.success('Defectcard has been released.', 'Deleted', {
                                     timeOut: 5000

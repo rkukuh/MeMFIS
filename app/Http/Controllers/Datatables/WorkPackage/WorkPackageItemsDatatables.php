@@ -211,10 +211,17 @@ class WorkPackageItemsDatatables extends Controller
     public function material(WorkPackage $workPackage)
     {
         $items =[];
-
         foreach($workPackage->taskcards as $taskcard){
             foreach($taskcard->materials as $item){
                 $item->tackcard_number .= $taskcard->number;
+                $item->unit_name .= $item->unit->name;
+                array_push($items, $item);
+            }
+        }
+
+        foreach($workPackage->eo_instructions as $eo_instruction){
+            foreach($eo_instruction->materials as $item){
+                $item->tackcard_number .= $eo_instruction->eo_header->number;
                 $item->unit_name .= $item->unit->name;
                 array_push($items, $item);
             }
@@ -321,6 +328,14 @@ class WorkPackageItemsDatatables extends Controller
         foreach($workPackage->taskcards as $taskcard){
             foreach($taskcard->tools as $item){
                 $item->tackcard_number .= $taskcard->number;
+                $item->unit_name .= $item->unit->name;
+                array_push($items, $item);
+            }
+        }
+
+        foreach($workPackage->eo_instructions as $eo_instruction){
+            foreach($eo_instruction->tools as $item){
+                $item->tackcard_number .= $eo_instruction->eo_header->number;
                 $item->unit_name .= $item->unit->name;
                 array_push($items, $item);
             }

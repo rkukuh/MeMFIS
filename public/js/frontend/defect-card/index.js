@@ -138,7 +138,7 @@ let DefectCard = {
                     }
                 },
                 {
-                    field: 'progresses.0.status_id',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,

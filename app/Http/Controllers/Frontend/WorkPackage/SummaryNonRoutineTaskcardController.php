@@ -25,26 +25,6 @@ class SummaryNonRoutineTaskcardController extends Controller
         $taskcards  = $workPackage->taskcards->load('type')->where('type.code', 'preliminary');
         $skills = $subset = [];
 
-        // foreach($taskcards as $taskcard){
-        //     if (sizeof($taskcard->skills) > 1) {
-        //         $eri++;
-        //     }else{
-        //         $result = $taskcard->skills->map(function ($skills) {
-        //             return collect($skills->toArray())
-        //                 ->only(['code'])
-        //                 ->all();
-        //         });
-
-        //         array_push($subset , $result);
-        //     }
-        // }
-        
-        // foreach ($subset as $value) {
-        //     foreach($value as $skill){
-        //         array_push($skills, $skill["code"]);
-        //     }
-        // }
-
         $otr = array_count_values($skills);
         $otr["eri"] = $eri;
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.code', 'preliminary')->count('uuid');
@@ -74,7 +54,6 @@ class SummaryNonRoutineTaskcardController extends Controller
         })->whereNull('eo_instructions.deleted_at')->get();
        
             foreach($taskcards as $eo_instruction){
-
                 if (sizeof($eo_instruction->skills) > 1) {
                     $eri++;
                 }else{
@@ -83,7 +62,7 @@ class SummaryNonRoutineTaskcardController extends Controller
                         ->only(['code'])
                         ->all();
                     });
-
+                    
                     array_push($subset , $result);
                 }
             }
@@ -94,7 +73,7 @@ class SummaryNonRoutineTaskcardController extends Controller
             }
         }
 
-        $otr = array_count_values($skill);       
+        $otr = array_count_values($skills);       
         $otr["eri"] = $eri;
       
         $total_taskcard  = $taskcards->count();
@@ -160,19 +139,19 @@ class SummaryNonRoutineTaskcardController extends Controller
             $query->where('code', 'eo');
         })->whereNull('eo_instructions.deleted_at')->get();
         
-            foreach($taskcards as $eo_instruction){
-                if (sizeof($eo_instruction->skills) > 1) {
-                    $eri++;
-                }else{
-                    $result = $eo_instruction->skills->map(function ($skills) {
-                        return collect($skills->toArray())
-                        ->only(['code'])
-                        ->all();
-                    });
+        foreach($taskcards as $eo_instruction){
+            if (sizeof($eo_instruction->skills) > 1) {
+                $eri++;
+            }else{
+                $result = $eo_instruction->skills->map(function ($skills) {
+                    return collect($skills->toArray())
+                    ->only(['code'])
+                    ->all();
+                });
 
-                    array_push($subset , $result);
-                }
+                array_push($subset , $result);
             }
+        }
 
         foreach ($subset as $value) {
             foreach($value as $skill){

@@ -7,6 +7,7 @@ use App\User;
 use App\Models\Tax;
 use App\Models\Item;
 use App\Models\Type;
+use App\Models\HtCrr;
 use App\Models\Status;
 use App\Models\Project;
 use App\Models\JobCard;
@@ -343,7 +344,7 @@ class QuotationController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function approve(Quotation $quotation)
+    public function approve(Quotation $quotation, Request $request)
     {
         $amount = 0;
         $error_messages = $work_progress= [];
@@ -397,6 +398,7 @@ class QuotationController extends Controller
         $quotation->approvals()->save(new Approval([
             'approvable_id' => $quotation->id,
             'conducted_by' => Auth::id(),
+            'note' => $request->note,
             'is_approved' => 1
         ]));
 
@@ -459,7 +461,7 @@ class QuotationController extends Controller
                         'origin_quotation' => null,
                         'origin_jobcardable' => $tc->toJson(),
                         'origin_jobcardable_items' => $tc->items->toJson(),
-                        'origin_jobcard_helpers' => null,
+                        'origin_jobcard_helpers' => $tc->helper_quantity->toJson(),
                     ]);
 
                     $jobcard->progresses()->save(new Progress([
@@ -575,6 +577,10 @@ class QuotationController extends Controller
 
         $workpackages = $quotation->workpackages;
         foreach($workpackages as $key => $workPackage){
+            $workPackage->jobrequest_description = $workPackage->pivot->description;
+            $workPackage->jobrequest_manhour_rate_amount = $workPackage->pivot->manhour_rate_amount;
+            $workPackage->jobrequest_discount_value = $workPackage->pivot->discount_value;
+            $workPackage->jobrequest_discount_type = $workPackage->pivot->discount_type;
             $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
@@ -586,7 +592,7 @@ class QuotationController extends Controller
             if($project_workpackage){
                 //total manhour price
                 $workPackage->total_manhours_with_performance_factor = $project_workpackage->total_manhours_with_performance_factor;
-                array_push($manhourPrice, $workPackage->total_manhours_with_performance_factor * $quotation_workpackage->manhour_rate);
+                array_push($manhourPrice, $workPackage->total_manhours_with_performance_factor * $quotation_workpackage->manhour_rate_amount);
 
                 //totalfacility price
                 $ProjectWorkPackageFacility = ProjectWorkPackageFacility::where('project_workpackage_id',$project_workpackage->id)
@@ -603,10 +609,12 @@ class QuotationController extends Controller
             if($quotation_workpackage){
                 switch($quotation_workpackage->discount_type){
                     case "amount":
-                        array_push($discount, $quotation_workpackage->discount_value);
+                        $disc = $quotation_workpackage->discount_value;
+                        array_push($discount, $disc);
                         break;
                     case "percentage":
-                        array_push($discount, ($manhourPrice[$key] + $totalFacility[$key] + $totalMatTool[$key]) * ($quotation_workpackage->discount_value / 100) );
+                        $disc =  ($manhourPrice[$key] + $totalFacility[$key] + $totalMatTool[$key]) * ($quotation_workpackage->discount_value / 100);
+                        array_push($discount, $disc);
                         break;
                     default:
                         array_push($discount, 0);
@@ -614,15 +622,62 @@ class QuotationController extends Controller
             }
         }
 
+        $htcrrs = HtCrr::where('project_id',$quotation->quotationable->id)->whereNull('parent_id')->get();
+        $mats_tools_htcrr = QuotationHtcrrItem::where('quotation_id', $quotation->id)->sum('price_amount');
+        if (sizeof($htcrrs) > 0) {
+            $data_htcrr = json_decode($quotation->data_htcrr, true);
+            $htcrr_workpackage = new WorkPackage();
+            $htcrr_workpackage->code = "Workpackage HT CRR";
+            $htcrr_workpackage->title = "Workpackage HT CRR";
+            $htcrr_workpackage->jobrequest_description = $data_htcrr["description"];
+            $htcrr_workpackage->jobrequest_manhour_rate_amount = $data_htcrr["manhour_rate_amount"];
+            $htcrr_workpackage->total_manhours_with_performance_factor = $data_htcrr["total_manhours_with_performance_factor"];
+            $htcrr_workpackage->mat_tool_price = $mats_tools_htcrr;
+            $htcrr_workpackage->is_template = "htcrr";
+            $htcrr_workpackage->ac_type = $quotation->quotationable->aircraft->name;
+
+            //total manhour price
+            array_push($manhourPrice, $htcrr_workpackage->total_manhours_with_performance_factor * $htcrr_workpackage->jobrequest_manhour_rate_amount);
+
+            //totalfacility price
+            array_push($totalFacility, 0);
+
+            //items price
+            array_push($totalMatTool, $htcrr_workpackage->mat_tool_price);
+
+            if(isset($data_htcrr->discount_value)){
+                switch($data_htcrr->discount_type){
+                    case "amount":
+                        $disc = $data_htcrr->discount_value;
+                        array_push($discount, $disc);
+                        break;
+                    case "percentage":
+                        $disc =  ($manhourPrice[$key] + $totalFacility[$key] + $totalMatTool[$key]) * ($data_htcrr->discount_value / 100);
+                        array_push($discount, $disc);
+                        break;
+                    default:
+                        array_push($discount, 0);
+                }
+                $htcrr_workpackage->jobrequest_discount_value = $data_htcrr->discount_value;
+                $htcrr_workpackage->jobrequest_discount_type = $data_htcrr->discount_type;
+            }else{
+                $htcrr_workpackage->jobrequest_discount_value = null;
+                $htcrr_workpackage->jobrequest_discount_type = null;
+            }
+
+            $workpackages[sizeof($workpackages)] = $htcrr_workpackage;
+        }
+
         $pdf = \PDF::loadView('frontend/form/quotation',[
                 'username' => $username,
                 'created_by' => $created_by,
                 'quotation' => $quotation,
                 'subTotal' => array_sum($manhourPrice) + array_sum($totalFacility) + array_sum($totalMatTool),
-                'workpackages' => $workpackages,
+                'jobRequest' => $workpackages,
                 'totalCharge' => array_sum($totalCharge),
                 'attention' => json_decode($quotation->attention),
-                'discount' => array_sum($discount)
+                'discount' => array_sum($discount),
+                'created_by' => $quotation->audits->first()->user
                 ]);
 
         return $pdf->stream();

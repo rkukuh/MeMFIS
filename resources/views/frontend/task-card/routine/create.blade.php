@@ -385,6 +385,7 @@
                                             @slot('text', 'Station')
                                             @slot('name', 'station')
                                             @slot('id_error', 'station')
+                                            @slot('multiple', 'multiple')
                                         @endcomponent
                                     </div>
                                 </div>

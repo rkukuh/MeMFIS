@@ -159,16 +159,22 @@ let TaskCard = {
                     }
                 },
                 {
-                    field: 'created_by',
+                    field: '',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.created_by + '<br>' + t.create_date 
+                    }
                 },
                 {
-                    field: 'updated_by',
+                    field: '',
                     title: 'Updated By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.updated_by + '<br>' + t.update_date 
+                    }
                 },
                 {
                     field: '',
@@ -176,7 +182,7 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return t.conducted_by + '<br>' + t.created_at 
+                        return t.conducted_by + '<br>' + t.conducted_at 
                     }
                 },
                 {

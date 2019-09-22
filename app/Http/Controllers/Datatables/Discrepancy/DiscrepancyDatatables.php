@@ -177,8 +177,6 @@ class DiscrepancyDatatables extends Controller
         foreach($DefectCard as $jobcard){
             $jobcard->taskcard_number   .= $jobcard->jobcard->jobcardable->number;
             $jobcard->customer_name     .= $jobcard->jobcard->quotation->quotationable->customer->name;
-            $jobcard->type              .= $jobcard->jobcard->jobcardable->type->name;
-            $jobcard->aircraft          .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
             $jobcard->aircraft_sn       .= $jobcard->jobcard->quotation->quotationable->aircraft_sn;
 
             $jobcard->conducted_by  .= User::find($jobcard->approvals->last()->conducted_by)->name;
@@ -188,6 +186,18 @@ class DiscrepancyDatatables extends Controller
 
             if(isset($jobcard->jobcard->jobcardable->skills) ){
                 $jobcard->jobcardSkill .= $jobcard->jobcard->jobcardable->skill;
+            }
+
+            if(isset($jobcard->jobcard->jobcardable->type->name)){
+                $jobcard->type          .= $jobcard->jobcard->jobcardable->type->name;
+            }else{
+                $jobcard->type          .= '';
+            }
+
+            if(isset( $jobcard->jobcard->quotation->quotationable->aircraft->name)){
+                $jobcard->aircraft      .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
+            }else{
+                $jobcard->aircraft      .= '';
             }
 
             if($jobcard->approvals->count() == 0){
