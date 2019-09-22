@@ -49,6 +49,8 @@ class DefectCardDatatables extends Controller
             foreach($defectcard->helpers as $helper){
                 $helper->userID .= $helper->user->id;
             }
+            
+            //calculating defect card's actual manhours 
             $manhours = 0;
             foreach($defectcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
                 $date1 = null;
