@@ -221,36 +221,27 @@ class JobCardDatatables extends Controller
      */
     public function filter(Request $request)
     {
-        $JobCard = JobCard::with('taskcard');
-
+        $JobCard = JobCard::with('jobcardable','jobcardable.task','jobcardable.aircrafts','jobcardable.skills','jobcardable.type')->first();
+        // dd($JobCard);
         if (!empty($request->task_type_id)) {
-            $JobCard->whereHas('taskcard.task', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable.task', function ($query) use ($request) {
                 $query->where('task_id', $request->task_type_id);
             });
         }
         if (!empty($request->aircrafts)) {
-            $JobCard->whereHas('taskcard.aircrafts', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable.aircrafts', function ($query) use ($request) {
                 $query->whereIn('aircraft_id', $request->aircrafts);
             });
         }
         if (!empty($request->skills)) {
-            $JobCard->whereHas('taskcard.skills', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable.skills', function ($query) use ($request) {
                 $query->where('skill_id', $request->skills);
             });
         }
-        if (!empty($request->project_no)) {
-            $JobCard->orderBy('project_no', $request->project_no);
-        }
         if (!empty($request->taskcard_routine_type)) {
-            $JobCard->whereHas('taskcard.type', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable.type', function ($query) use ($request) {
                 $query->where('type_id', $request->taskcard_routine_type);
             });
-        }
-        if (!empty($request->date_issued)) {
-            $JobCard->orderBy('created_at', $request->date_issued);
-        }
-        if (!empty($request->jc_no)) {
-            $JobCard->orderBy('number', $request->jc_no);
         }
         if (!empty($request->customer)) {
             $JobCard->whereHas('customer', function ($query) use ($request) {
