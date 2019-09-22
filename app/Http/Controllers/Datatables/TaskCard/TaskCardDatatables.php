@@ -16,9 +16,9 @@ class TaskCardDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = TaskCard::with('type','aircrafts','task','workarea')->get();
+        $taskcards = TaskCard::with('type','aircrafts','task','workarea')->get();
 
-        foreach($alldata as $taskcard){
+        foreach($taskcards as $taskcard){
             if(isset($taskcard->aircrafts) ){
                 for($index = 0; sizeof($taskcard->aircrafts) > $index; $index++){
                     if(sizeof($taskcard->aircrafts)-1 == $index){
@@ -34,7 +34,7 @@ class TaskCardDatatables extends Controller
             }
         }
 
-        $data = $alldata = json_decode($alldata);
+        $data = $alldata = json_decode($taskcards);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
