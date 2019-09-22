@@ -72,12 +72,12 @@
                                             <div class="d-flex justify-content-end mt-4 search">
                                                 @include('frontend.common.buttons.filter')
                                             </div>
+                                            <div class="col-lg-12">
+                                                @include('frontend.job-card.filter')
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-12">
-                                @include('frontend.job-card.filter')
                             </div>
                             <div class="row align-items-center">
                                 <div class="col-xl-12 order-2 order-xl-1">

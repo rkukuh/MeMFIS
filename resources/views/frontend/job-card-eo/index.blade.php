@@ -70,6 +70,12 @@
                                                     @endcomponent()
                                                 </div>
                                             </form>
+                                            <div class="d-flex justify-content-end mt-4 search">
+                                                @include('frontend.common.buttons.filter')
+                                            </div>
+                                            <div class="col-lg-12">
+                                                @include('frontend.job-card-eo.filter')
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
