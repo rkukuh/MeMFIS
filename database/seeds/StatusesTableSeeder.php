@@ -19,5 +19,6 @@ class StatusesTableSeeder extends Seeder
         $this->call(StatusesOfMarital::class);
         $this->call(StatusesOfProject::class);
         $this->call(StatusesOfQuotation::class);
+        $this->call(StatusesOfAttendance::class);
     }
 }
