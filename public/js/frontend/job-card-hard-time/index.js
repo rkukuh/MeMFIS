@@ -65,26 +65,16 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'part_number',
+                    field: 'item.code',
                     title: 'Part Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'item.name',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return '-'
-                    }
                 },
                 {
                     field: 'skill_name',
@@ -200,26 +190,16 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'part_number',
+                    field: 'item.name',
                     title: 'Part Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'item.name',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return '-'
-                    }
                 },
                 {
                     field: 'skill_name',

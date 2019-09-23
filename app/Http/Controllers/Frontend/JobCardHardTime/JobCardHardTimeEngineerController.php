@@ -195,7 +195,7 @@ class JobCardHardTimeEngineerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(JobCardUpdate $request, HtCrr $htcrr)
-    { 
+    {
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'removal-open'){
             $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
             $htcrr_removal->update(['serial_number' => $request->item_sn_removal, 'description' => $request->description_removal, 'is_rii' => $request->is_rii_removal, 'conducted_by' => Auth::id() , 'conducted_at' => Carbon::now() ]);
