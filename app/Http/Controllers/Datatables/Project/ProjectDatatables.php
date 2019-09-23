@@ -29,12 +29,13 @@ class ProjectDatatables extends Controller
                 $project->status .= 'Project Open';
             }elseif(sizeof($project->approvals->toArray()) == 1){
                 $project->status .= 'Project Approved';
-                $project->conducted_by.= User::find($project->approvals[0]->conducted_by)->name;
+                $project->conducted_by.= User::find($project->approvals->first()->conducted_by)->name;
+                $project->approval_time .= $project->approvals->first()->created_at;
 
             }elseif(sizeof($project->approvals->toArray()) == 2){
                 $project->status .= 'Quotation Approved';
-                $project->conducted_by.= User::find($project->approvals[0]->conducted_by)->name;
-
+                $project->conducted_by.= User::find($project->approvals->first()->conducted_by)->name;
+                $project->approval_time .= $project->approvals->first()->created_at;
             }
             else{
                 $project->status .= (sizeof($project->approvals->toArray())).'?'; // *Find bug size of approve

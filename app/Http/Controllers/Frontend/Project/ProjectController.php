@@ -124,7 +124,7 @@ class ProjectController extends Controller
         $pwt = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$pw)->get();
         $pwt_json = $pwt->toJson();
 
-        $project->origin_project = $project->toJson();
+        $project->origin_parent_project = $project->toJson();
         $project->origin_project_workpackages = $pw_json;
         $project->origin_project_workpackage_engineers = $pwe_json;
         $project->origin_project_workpackage_facilities = $pwf_json;
