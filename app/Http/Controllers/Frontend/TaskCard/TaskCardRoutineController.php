@@ -391,9 +391,7 @@ class TaskCardRoutineController extends Controller
                 }
             }
 
-            if(is_array($request->station && sizeof($request->station) > 0)){
-            $request->station = explode(',', $request->station);
-            if(sizeof($request->station) > 0){
+            if(is_array($request->station) && sizeof($request->station) > 0){
                 $station_array = [];
                 foreach ($request->applicability_airplane as $airplane) {
                     if(isset($request->station)){
@@ -406,7 +404,6 @@ class TaskCardRoutineController extends Controller
                     }
                     $taskCard->stations()->sync($station_array);
                 }
-            }
         }
 
             if ($request->hasFile('fileInput')) {
