@@ -303,7 +303,6 @@ class TaskCardRoutineController extends Controller
     public function update(TaskCardRoutineUpdate $request, TaskCard $taskCard)
     {
         $this->decoder($request);
-        dd($request->station);
         $accesses = $zones = $additionals = [];
         
         $additionals["internal_number"] = $request->additionals->internal_number;
@@ -392,6 +391,7 @@ class TaskCardRoutineController extends Controller
                 }
             }
 
+            if(is_array($request->station && sizeof($request->station) > 0)){
             $request->station = explode(',', $request->station);
             if(sizeof($request->station) > 0){
                 $station_array = [];
@@ -407,6 +407,7 @@ class TaskCardRoutineController extends Controller
                     $taskCard->stations()->sync($station_array);
                 }
             }
+        }
 
             if ($request->hasFile('fileInput')) {
                 $data = $request->input('image');
