@@ -80,6 +80,26 @@
                     </span>
                 </div>
             </div>
+            <div class="form-group m-form__group row px-5">
+                <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                    <div class="flex">
+                        <div class="action-buttons">
+                            @role('employee')
+                                @component('frontend.common.buttons.submit')
+                                @slot('type','button')
+                                @slot('id', 'edit-account')
+                                @slot('class', 'edit-account')
+                                @endcomponent
+
+
+                                @include('frontend.common.buttons.reset')
+
+                                @include('frontend.common.buttons.back')
+                            @endrole
+                        </div>
+                    </div>
+                </div>
+            </div>
         </fieldset>
     </div>
 </div>
