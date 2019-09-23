@@ -72,7 +72,7 @@
                                                                             Job Card No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-
+                                                                            {{$htcrr->childs->get(0)->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -80,6 +80,7 @@
                                                                             CRI No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -87,6 +88,7 @@
                                                                             A/C Type
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->aircraft->name}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -94,6 +96,7 @@
                                                                             A/C Reg
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->aircraft_register}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -101,6 +104,7 @@
                                                                             A/C Serial Number
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->aircraft_sn}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -108,6 +112,7 @@
                                                                             Project No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -115,7 +120,7 @@
                                                                             Item Description
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            Generated
+                                                                            {{$htcrr->item->description}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -123,7 +128,7 @@
                                                                             Item Part Number
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            Generated
+                                                                            {{$htcrr->item->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -131,6 +136,7 @@
                                                                             Position
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->position}}
                                                                         </td>
                                                                     </tr>
                                                             </table>
@@ -140,12 +146,7 @@
                                                                             Item S/N Off
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            @component('frontend.common.input.text')
-                                                                                @slot('id', 'item_sn_removal')
-                                                                                @slot('name', 'item_sn_removal')
-                                                                                @slot('id_error', 'item_sn_removal')
-                                                                                @slot('value', $htcrr_removal->serial_number)
-                                                                            @endcomponent
+                                                                            {{$htcrr_removal->serial_number}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -153,12 +154,7 @@
                                                                             Remark
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            @component('frontend.common.input.textarea')
-                                                                                @slot('rows', '5')
-                                                                                @slot('id', 'description_removal')
-                                                                                @slot('name', 'description_removal')
-                                                                                @slot('value', $htcrr_removal->description)
-                                                                            @endcomponent
+                                                                            {{$htcrr_removal->description}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -399,7 +395,7 @@
                                                                             Job Card No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-
+                                                                            {{$htcrr->childs->get(1)->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -407,6 +403,7 @@
                                                                             CRI No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -414,6 +411,7 @@
                                                                             A/C Type
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->aircraft->name}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -421,6 +419,7 @@
                                                                             A/C Reg
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->aircraft_register}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -428,6 +427,7 @@
                                                                             A/C Serial Number
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->aircraft_sn}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -435,6 +435,7 @@
                                                                             Project No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->project->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -442,7 +443,7 @@
                                                                             Item Description
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            Generated
+                                                                            {{$htcrr->item->description}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -450,6 +451,7 @@
                                                                             Position
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
+                                                                            {{$htcrr->position}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -478,12 +480,7 @@
                                                                             Item P/N ON
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            @component('frontend.common.input.text')
-                                                                                @slot('id', 'item_pn_installation')
-                                                                                @slot('name', 'item_pn_installation')
-                                                                                @slot('id_error', 'item_pn_installation')
-                                                                                @slot('value', $htcrr_installation->part_number)
-                                                                            @endcomponent
+                                                                            {{$htcrr_installation->part_number}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -491,12 +488,7 @@
                                                                             Item S/N ON
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            @component('frontend.common.input.text')
-                                                                                @slot('id', 'item_sn_installation')
-                                                                                @slot('name', 'item_sn_installation')
-                                                                                @slot('id_error', 'item_sn_installation')
-                                                                                @slot('value', $htcrr_installation->serial_number)
-                                                                            @endcomponent
+                                                                            {{$htcrr_installation->serial_number}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -504,12 +496,7 @@
                                                                             Remark
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            @component('frontend.common.input.textarea')
-                                                                                @slot('rows', '5')
-                                                                                @slot('id', 'description_installation')
-                                                                                @slot('name', 'description_installation')
-                                                                                @slot('value', $htcrr_installation->description)
-                                                                            @endcomponent
+                                                                            {{$htcrr_installation->description}}
                                                                         </td>
                                                                     </tr>
                                                             </table>
