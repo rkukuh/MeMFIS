@@ -50,13 +50,13 @@ let Workpackage = {
                 sortable: !1,
             },
             {
-                field: 'part_number',
+                field: 'item.code',
                 title: 'P/N',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'item_description',
+                field: 'item.name',
                 title: 'Item Description',
                 sortable: 'asc',
                 filterable: !1,
@@ -90,9 +90,9 @@ let Workpackage = {
                         }
                     };
                         return '<span class="m-badge ' + e[t.is_rii].class + ' m-badge--wide">' + e[t.is_rii].title + "</span>"
-                    
+
                 }
-                
+
             },
             {
                 field: 'removal',
@@ -112,7 +112,7 @@ let Workpackage = {
                 sortable: 'asc',
                 filterable: !1,
             },
-           
+
             {
                 field: 'material',
                 title: 'Material',
@@ -147,7 +147,7 @@ let Workpackage = {
                 overflow: 'visible',
                 template: function (t, e, i) {
                     return (
-                      
+
                         '<button data-toggle="modal" data-target="#modal_ht_crr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-htcrr" title="Edit" data-uuid_htcrr=' +
                         t.uuid +
                         '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
@@ -165,11 +165,11 @@ let Workpackage = {
                     return (
                         '<button data-toggle="modal" data-target="#modal_workshop_task" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air btn-primary" style="display:inline-block;" title="Create Workshop Task" data-uuid=' +
                         t.uuid +
-                        '>\t\t\t\t\t\t\tWorkshop\t\t\t\t\t\t</button>\t\t\t\t\t\t' 
-                        // + 
+                        '>\t\t\t\t\t\t\tWorkshop\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        // +
                         // '<button data-toggle="modal" data-target="#" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air btn-primary" style="display:inline-block;" title="Create Workshop Task" data-uuid=' +
                         // t.uuid +
-                        // '>\t\t\t\t\t\t\tSub count\t\t\t\t\t\t</button>\t\t\t\t\t\t'                   
+                        // '>\t\t\t\t\t\t\tSub count\t\t\t\t\t\t</button>\t\t\t\t\t\t'
 );
                 }
             }
@@ -239,7 +239,7 @@ let Workpackage = {
                     sn_on:sn_on,
                     sn_off:sn_off,
                     is_rii:is_rii,
-                    part_number: pn,
+                    item_id: pn,
                     position: position,
                     estimation_manhour: mhrs,
                     description: description,
@@ -255,7 +255,7 @@ let Workpackage = {
                         toastr.success('HT/CRR has been created.', 'Success', {
                             timeOut: 5000
                         });
-                        
+
                         $('#modal_ht_crr').modal('hide');
 
                         $('#modal_ht_crr').on('hidden.bs.modal', function (e) {
@@ -266,9 +266,9 @@ let Workpackage = {
                             .find("input[type=checkbox], input[type=radio]")
                                 .prop("checked", "")
                                 .end()
-                            .find("select")
-                                .select2('val','All')
-                                .end();
+                            // .find("select")
+                            //     .select2('val','All')
+                            //     .end();
                         })
 
                         let table = $('.ht_crr_datatable').mDatatable();
@@ -336,7 +336,7 @@ let Workpackage = {
 
 
             let uuid_htcrr = $(this).data('uuid_htcrr');
-         
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -353,7 +353,7 @@ let Workpackage = {
                     document.getElementById('htcrr_uuid').value = data.uuid;
 
                     $.ajax({
-                        url: '/get-items/',
+                        url: '/get-items-uuid/',
                         type: 'GET',
                         dataType: 'json',
                         success: function (data2) {
@@ -396,7 +396,7 @@ let Workpackage = {
             });
 
         });
-       
+
         $('.modal-footer').on('click', '.edit-htcrr', function () {
             let htcrr_uuid = $('#htcrr_uuid').val();
             let pn = $('#item').val();
@@ -425,7 +425,7 @@ let Workpackage = {
                 url: '/htcrr/' + htcrr_uuid ,
                 data: {
                     _token: $('input[name=_token]').val(),
-                    part_number: pn,
+                    item_id: pn,
                     description: description,
                     skill_id: otr_certification,
                     estimation_manhour: mhrs,
@@ -588,7 +588,7 @@ function htcrr_tool(triggeruuid) {
         let unit_tool = $('#unit_tool').val();
         let quantity = $('input[name=quantity]').val();
         let remark_tool = $('#remark_tool').val();
-        
+
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -824,7 +824,7 @@ function htcrr_material(triggeruuid) {
         $('#add_material_modal').modal('show');
     });
 
-    
+
 
 };
 

@@ -44,9 +44,11 @@ class HtCrrController extends Controller
      */
     public function store(HtCrrStore $request)
     {
+        // dd(Item::where('uuid',$request->part_number)->first()->id);
         $number = HtCrr::withTrashed()->where('parent_id',null)->count()+1;
         $request->merge(['code' => DocumentNumber::generate('JCRI-',$number)]);
-        $request->merge(['part_number' => Item::where('id',$request->part_number)->first()->code]);
+        $request->merge(['item_id' => Item::where('uuid',$request->item_id)->first()->id]);
+        // dd($request->item_id);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
         $request->merge(['type_id' => Type::ofHtCrrType()->where('code','parent')->first()->id]);
         $htcrr = HtCrr::create($request->all());
@@ -56,7 +58,7 @@ class HtCrrController extends Controller
             'progressed_by' => Auth::id()
         ]));
 
-      
+
         if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
             $htcrr->skills()->attach(Type::where('code','electrical')->first()->id);
             $htcrr->skills()->attach(Type::where('code','radio')->first()->id);
@@ -75,7 +77,7 @@ class HtCrrController extends Controller
             'project_id' => $request->project_id,
             'position' => $request->position,
             'estimation_manhour' => $request->removal_manhour_estimation,
-            'part_number' => $request->part_number,
+            'item_id' => $request->item_id,
             'serial_number' => $request->sn_off
         ]);
 
@@ -91,10 +93,11 @@ class HtCrrController extends Controller
             'project_id' => $request->project_id,
             'estimation_manhour' => $request->installation_manhour_estimation,
             'position' => $request->position,
+            'item_id' => $request->item_id,
             'serial_number' => $request->sn_on
         ]);
-        
-        
+
+
         return response()->json($htcrr);
     }
 
@@ -121,7 +124,7 @@ class HtCrrController extends Controller
         $htcrr->installation_mhrs .= HtCrr::where('parent_id',$htcrr->id)->get()->last()->estimation_manhour;
         $htcrr->sn_off .= $htcrr->childs[0]->serial_number;
         $htcrr->sn_on .= $htcrr->childs[1]->serial_number;
-        $htcrr->pn .= Item::where('code',$htcrr->part_number)->first()->id;
+        $htcrr->pn .= Item::find($htcrr->item_id)->uuid;
 
         if(sizeof($htcrr->skills) == 3){
             $htcrr->skill_id .= Type::ofTaskCardSkill()->where('code','eri')->first()->id;
@@ -143,7 +146,7 @@ class HtCrrController extends Controller
     public function update(HtCrrUpdate $request, HtCrr $htcrr)
     {
         // dd($request->all());
-        $request->merge(['part_number' => Item::where('id',$request->part_number)->first()->code]);
+        $request->merge(['item_id' => Item::where('uuid',$request->item_id)->first()->id]);
         $request->merge(['project_id' => Project::where('uuid',$request->project_id)->first()->id]);
         $request->merge(['type_id' => Type::ofHtCrrType()->where('code','parent')->first()->id]);
         $htcrr->update($request->all());
@@ -165,7 +168,7 @@ class HtCrrController extends Controller
 
         $htcrr = HtCrr::where('parent_id', $parent_id)->where('type_id', Type::ofHtCrrType()->where('code','removal')->first()->id)->first();
         $htcrr->position = $request->position;
-        $htcrr->part_number = $request->part_number;
+        $htcrr->item_id = $request->item_id;
         $htcrr->estimation_manhour = $request->removal_manhour_estimation;
         $htcrr->save();
 

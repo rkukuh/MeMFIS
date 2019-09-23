@@ -12,7 +12,7 @@
                 <div class="form-group m-form__group row ">
                     <div class="col-sm-6 col-md-6 col-lg-6 hidden">
                         <label class="form-control-label">
-                            CRI No 
+                            CRI No
                         </label>
 
                         @component('frontend.common.input.text')
@@ -141,10 +141,10 @@
                         @slot('name', 'is_rii')
                         @slot('text', 'RII?')
                         @slot('value', 1)
-                        
+
                         @endcomponent
 
-                      
+
                     </div>
 
                 </div>
@@ -232,5 +232,5 @@
 <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/item-uuid.js') }}"></script>
 @endpush
