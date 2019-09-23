@@ -159,12 +159,18 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Area/Zone
+                                                Zone
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text',  $discrepancy->jobcard->jobcardable->work_area)
-                                            @endcomponent
+                                            @if ($taskcard->zones->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @foreach ($discrepancy->zones  as $zone)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $zone->name )
+                                                        @endcomponent
+                                                    @endforeach
+                                            @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">

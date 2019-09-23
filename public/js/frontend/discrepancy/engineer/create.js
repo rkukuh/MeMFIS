@@ -12,7 +12,15 @@ let Discrepancy = {
             };
         });
         let simpan = $('.footer').on('click', '.add-discrepancy', function () {
+            let zone = [];
+            i = 0;
+            $("#zone").val().forEach(function(entry) {
+                zone[i] = entry;
+                i++;
+            });
+
             let uuid = $('input[name=uuid]').val();
+            zone = JSON.stringify(zone);
             let engineer_qty = $('input[name=engineer_qty]').val();
             let helper_quantity =  $('input[name=helper_quantity]').val();
             let manhours =  $('input[name=manhours]').val();
@@ -54,6 +62,7 @@ let Discrepancy = {
                     propose: propose,
                     propose_correction_text: other,
                     is_rii:is_rii,
+                    zone:zone,
                 },
                 success: function (data) {
                     if (data.errors) {
