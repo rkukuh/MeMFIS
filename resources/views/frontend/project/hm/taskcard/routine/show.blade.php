@@ -140,7 +140,22 @@
             </div>
         </div>
         <!--end::Item-->
-
+        @if($workPackage->is_template == 0)
+        <div class="form-group m-form__group row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="action-buttons m--align-center">
+                @component('frontend.common.buttons.summary')
+                    @slot('text', 'Blank Work Package Summary')
+                    @slot('href', route('frontend.workPackage.summary.workpackage', $workPackage->uuid) )
+                @endcomponent
+                @component('frontend.common.buttons.summary')
+                    @slot('text', 'routine Summary')
+                    @slot('href', route('frontend.workPackage.summary.routine', $workPackage->uuid) )
+                @endcomponent
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
     @push('footer-scripts')
         <script src="{{ asset('js/frontend/project/hm/routine/show.js')}}"></script>
