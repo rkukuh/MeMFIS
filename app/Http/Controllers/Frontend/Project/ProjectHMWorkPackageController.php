@@ -207,10 +207,7 @@ class ProjectHMWorkPackageController extends Controller
                     array_push($subset , $result[0]);
                 }
             }
-
-            array_push($subset , $result);
         }
-
 
         foreach ($subset as $value) {
             foreach($value as $skill){
