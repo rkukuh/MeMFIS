@@ -20,6 +20,7 @@ use App\Http\Requests\Frontend\ProjectHMStore;
 use App\Http\Requests\Frontend\ProjectHMUpdate;
 use App\Models\EOInstruction;
 use App\Models\Manhour;
+use stdClass;
 
 class ProjectHMWorkPackageController extends Controller
 {
@@ -112,10 +113,12 @@ class ProjectHMWorkPackageController extends Controller
 
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
+        $engineer_qty["ERI"] = 0;
         foreach($taskcards as $taskcard){
             array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
             if(sizeof($taskcard->skills) > 1){
-                array_push($subset , "ERI");
+                $tempArray["name"] = "ERI";
+                array_push($subset , $tempArray);
                 $engineer_qty["ERI"] += $taskcard->engineer_quantity;
             }else{
                 $result = $taskcard->skills->map(function ($skills) {
@@ -123,14 +126,15 @@ class ProjectHMWorkPackageController extends Controller
                         ->only(['name'])
                         ->all();
                 });
-                // $engineer_qty[$result[0]["name"]] += $taskcard->engineer_quantity;
-                array_push($subset , $result);
+                if(isset($result[0])){
+                    array_push($subset , $result[0]);
+                }
             }
         }
-        // dd($engineer_qty);
+
         foreach ($subset as $value) {
             foreach($value as $skill){
-                array_push($skills, $skill["name"]);
+                array_push($skills, $skill);
             }
         }
 
@@ -144,21 +148,16 @@ class ProjectHMWorkPackageController extends Controller
         $employees = Employee::all();
         $facilities = Facility::all();
 
-        // $materialCount = $workPackage->items->count();
-        // $toolCount = $workPackage->tools->count();
-
         $view = 'frontend.project.hm.workpackage.show';
         return view($view,[
             'edit' => false,
             'project' => $project,
             'employees' => $employees,
-            // 'toolCount' => $toolCount,
             'total_mhrs' => $total_mhrs,
             'facilities' => $facilities,
             'engineer_skills' => $skills,
             'workPackage' => $workPackage,
             'skills' => json_encode($skills),
-            // 'materialCount' => $materialCount,
             'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
             'total_pfrm_factor' => $total_pfrm_factor,
             'project_workpackage' => $project_workpackage
@@ -195,11 +194,19 @@ class ProjectHMWorkPackageController extends Controller
         $taskcards = $taskcards_routine->merge($taskcards_non_routine);
         foreach($taskcards as $taskcard){
             array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
-            $result = $taskcard->skills->map(function ($skills) {
-                return collect($skills->toArray())
-                    ->only(['name'])
-                    ->all();
-            });
+            if(sizeof($taskcard->skills) > 1){
+                $tempArray["name"] = "ERI";
+                array_push($subset , $tempArray);
+            }else{
+                $result = $taskcard->skills->map(function ($skills) {
+                    return collect($skills->toArray())
+                        ->only(['name'])
+                        ->all();
+                });
+                if(isset($result[0])){
+                    array_push($subset , $result[0]);
+                }
+            }
 
             array_push($subset , $result);
         }
@@ -207,7 +214,7 @@ class ProjectHMWorkPackageController extends Controller
 
         foreach ($subset as $value) {
             foreach($value as $skill){
-                array_push($skills, $skill["name"]);
+                array_push($skills, $skill);
             }
         }
 
