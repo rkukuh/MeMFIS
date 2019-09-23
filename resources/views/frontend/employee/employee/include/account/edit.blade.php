@@ -103,32 +103,32 @@
             </div>
 
             <div class="form-group m-form__group row px-5">
-                    <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                        <div class="flex">
-                            <div class="action-buttons">
-                                @if ($account == null)
-                                @component('frontend.common.buttons.submit')
-                                @slot('type','button')
-                                @slot('id', 'create-account')
-                                @slot('class', 'create-account')
-                                @endcomponent
-                                @else    
-                                @component('frontend.common.buttons.submit')
-                                @slot('type','button')
-                                @slot('id', 'edit-account')
-                                @slot('class', 'edit-account')
-                                @endcomponent
-                                @endif
-                                
-    
-                                @include('frontend.common.buttons.reset')
-    
-                                @include('frontend.common.buttons.back')
-    
-                            </div>
+                <div class="col-sm-12 col-md-12 col-lg-12 footer">
+                    <div class="flex">
+                        <div class="action-buttons">
+                            @if ($account == null)
+                            @component('frontend.common.buttons.submit')
+                            @slot('type','button')
+                            @slot('id', 'create-account')
+                            @slot('class', 'create-account')
+                            @endcomponent
+                            @else    
+                            @component('frontend.common.buttons.submit')
+                            @slot('type','button')
+                            @slot('id', 'edit-account')
+                            @slot('class', 'edit-account')
+                            @endcomponent
+                            @endif
+                            
+
+                            @include('frontend.common.buttons.reset')
+
+                            @include('frontend.common.buttons.back')
+
                         </div>
                     </div>
                 </div>
+            </div>
         </fieldset>
     </div>
 </div>
