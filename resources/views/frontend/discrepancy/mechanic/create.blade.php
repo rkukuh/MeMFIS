@@ -167,14 +167,16 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Area/Zone
+                                                Zone
                                             </label>
 
                                             @component('frontend.common.input.select2')
-                                                @slot('text', 'Work Area')
-                                                @slot('id', 'work_area')
-                                                @slot('name', 'work_area')
-                                                @slot('id_error', 'work-area')
+                                                @slot('id', 'zone')
+                                                @slot('text', 'Zone')
+                                                @slot('name', 'zone')
+                                                @slot('id_error', 'zone')
+                                                @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -468,6 +470,6 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/work-area.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>
 @endpush
