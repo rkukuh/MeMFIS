@@ -72,7 +72,7 @@
                                                                             Job Card No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-
+                                                                            {{$htcrr->childs->get(0)->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -120,7 +120,7 @@
                                                                             Item Description
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->description}}
+                                                                            {{$htcrr->item->description}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -128,7 +128,7 @@
                                                                             Item Part Number
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->part_number}}
+                                                                            {{$htcrr->item->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -413,7 +413,7 @@
                                                                             Job Card No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-
+                                                                            {{$htcrr->childs->get(1)->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -461,7 +461,7 @@
                                                                             Item Description
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->description}}
+                                                                            {{$htcrr->item->description}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
