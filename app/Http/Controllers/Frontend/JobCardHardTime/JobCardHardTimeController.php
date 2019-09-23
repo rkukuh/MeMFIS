@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\JobCardHardTime;
 
 use Auth;
 use Validator;
+use App\Models\Type;
 use App\Models\HtCrr;
 use App\Models\Status;
 use Illuminate\Http\Request;
@@ -64,26 +65,48 @@ class JobCardHardTimeController extends Controller
      */
     public function edit(HtCrr $htcrr)
     {
-        //TODO Validasi User'skill with HtCrr Skill
-        if($htcrr->progresses->first()->progressed_by == Auth::id()){
-            $error_notification = array(
-                'message' => "You can't run this jobcard",
-                'title' => "Danger",
-                'alert-type' => "error"
-            );
-            return redirect()->route('frontend.jobcard.hardtime.index')->with($error_notification);
-        }else{
-            foreach($htcrr->helpers as $helper){
-                $helper->userID .= $helper->user->id;
-            }
+        if($htcrr->type->code == 'parent'){
+            //TODO Validasi User'skill with HtCrr Skill
+            if($htcrr->progresses->first()->progressed_by == Auth::id()){
+                $error_notification = array(
+                    'message' => "You can't run this jobcard",
+                    'title' => "Danger",
+                    'alert-type' => "error"
+                );
+                return redirect()->route('frontend.jobcard.hardtime.index')->with($error_notification);
+            }else{
+                foreach($htcrr->helpers as $helper){
+                    $helper->userID .= $helper->user->id;
+                }
 
-            if($htcrr->helpers->where('userID',Auth::id())->first() == null){
-                return redirect()->route('frontend.jobcard-hardtime-engineer.edit',$htcrr->uuid);
-            }
-            else{
+                if($htcrr->helpers->where('userID',Auth::id())->first() == null){
+                    return redirect()->route('frontend.jobcard-hardtime-engineer.edit',$htcrr->uuid);
+                }
+                else{
 
-                return redirect()->route('frontend.jobcard-hardtime-mechanic.edit',$htcrr->uuid);
+                    return redirect()->route('frontend.jobcard-hardtime-mechanic.edit',$htcrr->uuid);
+                }
             }
+        }elseif($htcrr->type->code == 'removal'){
+            $htcrr = $htcrr->parent;
+            $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
+            $htcrr_installation = $htcrr->childs()->where('type_id', Type::where('code','installation')->where('of','htcrr-type')->first()->id)->first();
+
+            return view('frontend.job-card-hard-time.engineer.progress.removal.progress-close', [
+                'htcrr' => $htcrr,
+                'htcrr_removal' => $htcrr_removal,
+                'htcrr_installation' => $htcrr_installation
+            ]);
+        }elseif($htcrr->type->code == 'installation'){
+            $htcrr = $htcrr->parent;
+            $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
+            $htcrr_installation = $htcrr->childs()->where('type_id', Type::where('code','installation')->where('of','htcrr-type')->first()->id)->first();
+
+            return view('frontend.job-card-hard-time.engineer.progress.installation.progress-close', [
+                'htcrr' => $htcrr,
+                'htcrr_removal' => $htcrr_removal,
+                'htcrr_installation' => $htcrr_installation
+            ]);
         }
     }
 
