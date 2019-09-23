@@ -56,56 +56,36 @@
                                                 <legend class="w-auto">Project</legend>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <label class="form-control-label">
-                                                                    Work Order @include('frontend.common.label.required')
-                                                                </label>
+                                                        <label class="form-control-label">
+                                                            Work Order @include('frontend.common.label.required')
+                                                        </label>
 
-                                                                @component('frontend.common.input.select2')
-                                                                    @slot('text', 'Work Order')
-                                                                    @slot('id', 'work-order')
-                                                                    @slot('name', 'work-order')
-                                                                    @slot('id_error', 'work-order')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
+                                                        @component('frontend.common.input.select2')
+                                                            @slot('text', 'Work Order')
+                                                            @slot('id', 'work-order')
+                                                            @slot('name', 'work-order')
+                                                            @slot('id_error', 'work-order')
+                                                        @endcomponent
+                                                    </div>
                                                         <input type="hidden" id="customer_id" name="customer_id">
 
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <label class="form-control-label">
-                                                                    Project title
-                                                                </label>
-                                                                @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <label class="form-control-label">
-                                                                    Project Number
-                                                                </label>
-                                                                @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'project_number')
-                                                                    @slot('text', 'P-01/HMxxxxx')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <label class="form-control-label">
-                                                                    Intruction
-                                                                </label>
-                                                                @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
+                                                        <label class="form-control-label">
+                                                            Project Number
+                                                        </label>
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('id', 'project_number')
+                                                            @slot('text', 'P-01/HMxxxxx')
+                                                        @endcomponent
+                                                    </div>
+
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <label class="form-control-label">
+                                                            Project title
+                                                        </label>
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', '..........')
+                                                        @endcomponent
                                                     </div>
                                                 </div>
                                             </fieldset>
