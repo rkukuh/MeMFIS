@@ -258,7 +258,7 @@ class QuotationController extends Controller
     public function update(QuotationUpdate $request, Quotation $quotation)
     {
         $attention = $scheduled_payment_amount = [];
-        
+
         $request->scheduled_payment_amount = json_decode($request->scheduled_payment_amount);
         if(sizeof($request->scheduled_payment_amount) > 0){
             foreach ($request->scheduled_payment_amount as $value) {
@@ -461,7 +461,7 @@ class QuotationController extends Controller
                         'origin_quotation' => null,
                         'origin_jobcardable' => $tc->toJson(),
                         'origin_jobcardable_items' => $tc->items->toJson(),
-                        'origin_jobcard_helpers' => $tc->helper_quantity->toJson(),
+                        // 'origin_jobcard_helpers' => $tc->helper_quantity->toJson(),
                     ]);
 
                     $jobcard->progresses()->save(new Progress([
