@@ -107,8 +107,32 @@
                                             @php
                                                 $joined_date = $employee->joined_date;
                                                 $formatJoinedDate = strtotime($joined_date);
+
+                                                $time = time() - $formatJoinedDate; 
+                                                
+                                                $time = ($time<1)? 1 : $time;
+                                                $tokens = array (
+                                                    31536000 => 'year',
+                                                    2592000 => 'month'
+                                                );
+                                                $i = 0;
+                                                $since_year = 0;
+                                                $since_month = 0;
+                                                foreach ($tokens as $unit => $u) {
+                                                    if ($time < $unit) continue;
+                                                    $numberOfUnits[$i] = floor($time / $unit);
+                                                    $i++;
+                                                }
+
+                                                if(isset($numberOfUnits[0])){
+                                                    $since_year = $numberOfUnits[0];
+                                                }
+
+                                                if(isset($numberOfUnits[1])){
+                                                    $since_month = $numberOfUnits[1];
+                                                }
                                             @endphp
-                                        <h6>Employee Since <span>{{ date('F', $formatJoinedDate) }}</span>  {{ date('d,Y', $formatJoinedDate) }} - 2 Year 2 Month</h6>
+                                        <h6>Employee Since <span>{{ date('F', $formatJoinedDate) }}</span>  {{ date('d,Y', $formatJoinedDate) }} - {{ $since_year }} Year {{ $since_month }} Month</h6>
                                         </div>
                                     </div>
                                 </div>
