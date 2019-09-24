@@ -68,7 +68,11 @@ let Quotation = {
                     filterable: !1,
                     width: 150,
                     template: function (t) {
-                        return '<a href="/quotation/'+t.uuid+'">' + t.number + "</a>"
+                        if(t.quotation_type == "Quotation Project"){
+                            return '<a href="/quotation/'+t.uuid+'">' + t.number + "</a>"
+                        }else{
+                            return '<a href="/quotation-additional/'+t.uuid+'">' + t.number + "</a>"
+                        }
                     }
                 },
                 {

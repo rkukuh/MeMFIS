@@ -49,7 +49,6 @@ class QuotationAdditionalDatatables extends Controller
         $total_item_price = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.taskcard','item','unit','price')->where('quotation_id', $quotation->id)
         ->sum('subtotal');
     
-        // dd($json_data->total_manhour);
         $workpackage = new stdClass();
         $workpackage->code = $quotation->title;
         $workpackage->description =  $quotation->title;

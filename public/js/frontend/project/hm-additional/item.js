@@ -54,7 +54,7 @@ function additional_materials_get_datatable(uuids){
                 },
                 {
                     field: 'description',
-                    title: 'Tool Description',
+                    title: 'Material Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -65,29 +65,29 @@ function additional_materials_get_datatable(uuids){
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'pivot.note',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
-                }
+                // {
+                //     field: 'Actions',
+                //     sortable: !1,
+                //     overflow: 'visible',
+                //     template: function (t, e, i) {
+                //         return (
+                //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
+                //                 '<i class="la la-trash"></i>' +
+                //             '</a>'
+                //         );
+                //     }
+                // }
             ]
             });
 
@@ -165,13 +165,13 @@ function additional_tools_get_datatable(uuids){
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'pivot.note',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,

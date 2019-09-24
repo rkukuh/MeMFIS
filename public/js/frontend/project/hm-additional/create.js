@@ -152,7 +152,7 @@ let AdditionalTaskCreate = (function() {
                 },
                 {
                     field: 'description',
-                    title: 'Tool Description',
+                    title: 'Material Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -163,29 +163,29 @@ let AdditionalTaskCreate = (function() {
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'pivot.note',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
-                }
+                // {
+                //     field: 'Actions',
+                //     sortable: !1,
+                //     overflow: 'visible',
+                //     template: function (t, e, i) {
+                //         return (
+                //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
+                //                 '<i class="la la-trash"></i>' +
+                //             '</a>'
+                //         );
+                //     }
+                // }
                 ]
             });
             $('.tools_datatable').mDatatable({
@@ -254,29 +254,29 @@ let AdditionalTaskCreate = (function() {
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'pivot.note',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
-                    }
-                }
+                // {
+                //     field: 'Actions',
+                //     sortable: !1,
+                //     overflow: 'visible',
+                //     template: function (t, e, i) {
+                //         return (
+                //             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" title="Delete" data-uuid="' + t.uuid + '">' +
+                //                 '<i class="la la-trash"></i>' +
+                //             '</a>'
+                //         );
+                //     }
+                // }
                 ]
             });
 
@@ -339,8 +339,9 @@ let AdditionalTaskCreate = (function() {
             $('.add-project-additional').on('click', function () {
                 let data = new FormData();
                 data.append("defectcard_uuid", UUID);
-                data.append("estimation_manhour", $("#estimation_manhour").attr('value'));
+                data.append("title", $("#additional_project_title").val());
                 data.append("performance_factor", $("#performance_factor").val());
+                data.append("estimation_manhour", $("#estimation_manhour").attr('value'));
                 data.append("total_manhour_with_performance_factor", $("#total_manhour").attr('value'));
 
                 $.ajax({
