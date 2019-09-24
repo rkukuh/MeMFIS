@@ -60,7 +60,7 @@ let AdditionalTaskShow = {
             },
             {
                 field: 'description',
-                title: 'Tool Description',
+                title: 'Material Description',
                 sortable: 'asc',
                 filterable: !1,
             },
@@ -71,13 +71,13 @@ let AdditionalTaskShow = {
                 filterable: !1,
             },
             {
-                field: 'pivot.unit_id',
+                field: 'unit.name',
                 title: 'Unit',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'description',
+                field: 'pivot.note',
                 title: 'Description',
                 sortable: 'asc',
                 filterable: !1,
@@ -150,13 +150,13 @@ let AdditionalTaskShow = {
                 filterable: !1,
             },
             {
-                field: 'pivot.unit_id',
+                field: 'unit.name',
                 title: 'Unit',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'description',
+                field: 'pivot.note',
                 title: 'Description',
                 sortable: 'asc',
                 filterable: !1,

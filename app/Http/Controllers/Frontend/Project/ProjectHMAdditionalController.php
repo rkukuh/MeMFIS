@@ -257,8 +257,10 @@ class ProjectHMAdditionalController extends Controller
         $request->uuids = json_decode($request->uuids);
         if(sizeof($request->uuids) > 1){
             $estimation_manhour = DefectCard::whereIn('uuid',$request->uuids)->sum('estimation_manhour');
-        }else{
+        }elseif(sizeof($request->uuids) == 1){
             $estimation_manhour = DefectCard::where('uuid',$request->uuids)->sum('estimation_manhour');
+        }else{
+            $estimation_manhour = 0;
         }
 
         return response()->json($estimation_manhour);
