@@ -314,7 +314,6 @@ $('.modal-footer').on('click', '.add-item-price', function () {
     let unit_id =$('#unit_id').val();
     let note =$('#note').val();
     let triggerid = $('input[name=uuid]').val();
-    console.log(triggerid);
 
     $.ajax({
         headers: {
@@ -422,6 +421,7 @@ $('.htcrr_materials_datatable').on('click','.edit-item-price', function edit () 
         }
     });
 });
+
 $('.htcrr_tools_datatable').on('click','.edit-item-price', function edit () {
     let triggerid = $(this).data('uuid');
     $("#modal_item_price").val(triggerid);
