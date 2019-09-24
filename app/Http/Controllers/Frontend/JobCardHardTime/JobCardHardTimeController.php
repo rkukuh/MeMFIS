@@ -143,12 +143,12 @@ class JobCardHardTimeController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'code' => 'required|exists:htcrr,code'
-          ]);
+        ]);
 
-          if ($validator->fails()) {
+        if ($validator->fails()) {
             return
             redirect()->route('frontend.jobcard.hardtime.index')->withErrors($validator)->withInput();
-          }
+        }
 
         $search = HtCrr::where('code',$request->code)->first();
 
@@ -161,140 +161,11 @@ class JobCardHardTimeController extends Controller
      * @param  \App\Models\JobCard  $jobCard
      * @return \Illuminate\Http\Response
      */
-    public function print($jobCard)
+    public function print(HtCrr $htcrr)
     {
-        $jobCard = JobCard::with('taskcard','quotation')->whereHas('taskcard', function ($query) use ($jobCard) {
-            $query->where('uuid',$jobCard);
-        })->first();
-
-        if($jobcard->jobcardable->type->code == "basic"){
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            $pdf = \PDF::loadView('frontend/form/jobcard_basic',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
-                    ]);
-            return $pdf->stream();
-        }
-        elseif($jobcard->jobcardable->type->code == "sip"){
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            $pdf = \PDF::loadView('frontend/form/jobcard_sip',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
-                    ]);
-            return $pdf->stream();
-        }
-        elseif($jobcard->jobcardable->type->code == "cpcp"){
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            $pdf = \PDF::loadView('frontend/form/jobcard_cpcp',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
-                    ]);
-            return $pdf->stream();
-        }
-        elseif (($jobcard->jobcardable->type->code == "ad") or ($jobcard->jobcardable->type->code == "sb")) {
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            $pdf = \PDF::loadView('frontend/form/jobcard_adsb',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
-                    ]);
-            return $pdf->stream();        }
-        elseif(($jobcard->jobcardable->type->code == "eo") or ($jobcard->jobcardable->type->code == "ea")){
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            $pdf = \PDF::loadView('frontend/form/jobcard_eo',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
-                    ]);
-            return $pdf->stream();
-        }
-        elseif(($jobcard->jobcardable->type->code == "cmr") or ($jobcard->jobcardable->type->code == "awl")){
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            $pdf = \PDF::loadView('frontend/form/jobcard_cmrawl',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
-                    ]);
-            return $pdf->stream();
-        }
-        elseif($jobcard->jobcardable->type->code == "si"){
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            $pdf = \PDF::loadView('frontend/form/jobcard_si',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
-                    ]);
-            return $pdf->stream();
-        }
-        elseif($jobcard->jobcardable->type->code == "preliminary"){
-            $username = Auth::user()->name;
-            $lastStatus = Status::where('id',$jobCard->progresses->last()->status_id)->first()->name;
-            if($lastStatus == "CLOSED"){
-                $dateClosed = $jobCard->progresses->last()->created_at;
-            }else{
-                $dateClosed = "-";
-            }
-            $pdf = \PDF::loadView('frontend/form/preliminaryinspection-one',[
-                    'jobCard' => $jobCard,
-                    'username' => $username,
-                    'lastStatus' => $lastStatus,
-                    'dateClosed' => $dateClosed
-                    ]);
-            return $pdf->stream();
-        // } else {
-            // ($jobCard->type->code == "htcrr") ||
-        }
+        $pdf = \PDF::loadView('frontend/form/jobcard_cri',[
+            'htcrr' => $htcrr,
+        ]);
+    return $pdf->stream();
     }
 }
