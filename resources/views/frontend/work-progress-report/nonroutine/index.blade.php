@@ -154,7 +154,6 @@
         </div>
     </div>
     @endif
-
     @if( isset($jobcards["cmr-awl"]) )
     <div class="col-sm-{{$col['non-routine']}} col-md-{{$col['non-routine']}} col-lg-{{$col['non-routine']}}">
         <div class="m-portlet  m-portlet--full-height ">
@@ -344,13 +343,13 @@
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__text">
-                                        {{ $jobcards["cmr-awl"]["done"] / array_sum($jobcards["cmr-awl"]) }}%
+                                        {{ $jobcards["si"]["done"] / array_sum($jobcards["si"]) }}%
                                     </span>		
                                 </div>
                             </div>               	 
                             <div class="m--space-10"></div>
                             <div class="progress m-progress--sm">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $jobcards["cmr-awl"]['done'] / array_sum($jobcards["cmr-awl"]) * 100 }}%;" aria-valuenow="{{ $jobcards["cmr-awl"]['done'] / array_sum($jobcards["cmr-awl"]) * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $jobcards["si"]['done'] / array_sum($jobcards["si"]) * 100 }}%;" aria-valuenow="{{ $jobcards["si"]['done'] / array_sum($jobcards["si"]) * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
