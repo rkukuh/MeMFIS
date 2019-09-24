@@ -27,9 +27,5 @@
 </div>
 
 @push('footer-scripts')
-<script src="{{ asset('js/frontend/employee/employee/education/create.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/select2/qualification.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/select2/field-of-study.js') }}"></script>
-
 <script src="{{ asset('js/frontend/functions/datepicker/graduation-date.js')}}"></script>
 @endpush
