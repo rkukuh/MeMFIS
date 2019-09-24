@@ -75,7 +75,8 @@ class WorkPackageController extends Controller
     public function addTaskCard(Request $request, WorkPackage $workPackage)
     {
         $tc = TaskCard::where('uuid', $request->taskcard)->first();
-        $exists = $workPackage->taskcards->contains($tc->id);
+        $TaskCardWorkPackage = TaskCardWorkPackage::Where('workpackage_id',$workPackage->id)->get();
+        $exists = $TaskCardWorkPackage->where('deleted_at',null)->where('taskcard_id',$tc->id)->first();
         if($exists){
             return response()->json(['title' => "Danger"]);
         }else{
@@ -94,7 +95,8 @@ class WorkPackageController extends Controller
     public function addInstruction(Request $request, WorkPackage $workPackage)
     {
         $tc = EOInstruction::where('uuid', $request->taskcard)->first();
-        $exists = $workPackage->eo_instructions->contains($tc->id);
+        $EOInstructionWorkPackage = EOInstructionWorkPackage::Where('workpackage_id',$workPackage->id)->get();
+        $exists = $EOInstructionWorkPackage->where('deleted_at',null)->where('eo_instruction_id',$tc->id)->first();
         if($exists){
             return response()->json(['title' => "Danger"]);
         }else{
@@ -230,7 +232,7 @@ class WorkPackageController extends Controller
     {
         $tc = TaskCardWorkPackage::where('workpackage_id', $workPackage->id)->where('taskcard_id', $taskcard->id)
                 ->with('predecessors','successors')->first();
-        
+
         if($tc->predecessors()->exists()){
             $tc->predecessors()->delete();
         }
