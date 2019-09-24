@@ -204,8 +204,6 @@
                                         @endif
                                     </td>
                                 </tr>
-
-
                                 <tr>
                                     <td width="20%">Inspection Type</td>
                                     <td width="1%">:</td>
