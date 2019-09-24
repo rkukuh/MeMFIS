@@ -286,7 +286,7 @@ class ProjectDatatables extends Controller
      */
     public function selectedDefectCard(Project $project)
     {
-        $defectcards = DefectCard::with('jobcard')->where('project_additional_id', $project->id)->get();
+        $defectcards = DefectCard::with('jobcard','jobcard.jobcardable')->where('project_additional_id', $project->id)->get();
 
         // RecordID
 

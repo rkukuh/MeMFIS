@@ -138,14 +138,18 @@ class QuotationAdditionalController extends Controller
      */
     public function show(Quotation $quotation)
     {
-        $projects = Project::get();
         $attention = json_decode($quotation->attention);
-		$charges = json_decode($quotation->charge);
+        $charges = json_decode($quotation->charge);
+        $data_defectcard = json_decode($quotation->data_defectcard);
+        $total_manhour = $data_defectcard->total_manhour;
         return view('frontend.quotation.additional.show',[
             'charges' => $charges,
             'quotation' => $quotation,
-            'project' => $quotation->project,
+            'attention' => $attention,
+            'total_manhour' => $total_manhour,
             'currencies' => $this->currencies,
+            'data_defectcard' => $data_defectcard,
+            'project' => $quotation->quotationable,
         ]);
     }
 
