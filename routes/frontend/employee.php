@@ -13,6 +13,7 @@ Route::name('frontend.')->group(function () {
 
             Route::resource('employee', 'EmployeeController');
             Route::resource('statuses', 'EmployeeStatusesController');
+            Route::resource('import-fingerprint', 'EmployeeAttendanceController');
 
             Route::name('employee.')->group(function () {
                 Route::prefix('employee')->group(function () {

@@ -98,3 +98,5 @@
         @endcomponent
     </div>
 </div>
+
+@include('frontend.employee.employee.include.workshift.modal-history')

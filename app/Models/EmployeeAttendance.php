@@ -11,6 +11,7 @@ class EmployeeAttendance extends Model
     protected $fillable = [
         'uuid',
         'employee_id',
+        'statuses_id',
         'date',
         'in',
         'out',
@@ -31,5 +32,18 @@ class EmployeeAttendance extends Model
     public function employee()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    /**
+     * One-to-One: An Employee have one Status Attendance.
+     *
+     * This function will retrieve Status Attendance of a given Employee.
+     * See: Status employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function statuses()
+    {
+        return $this->belongsTo(Status::class);
     }
 }

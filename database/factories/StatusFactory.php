@@ -19,6 +19,7 @@ $factory->define(Status::class, function (Faker $faker) {
             'employment',
             'defectcard',
             'customer-component-repair',
+            'attendance'
         ])
     ];
 
@@ -32,3 +33,4 @@ $factory->state(Status::class, 'quotation', ['of' => 'quotation']);
 $factory->state(Status::class, 'employment', ['of' => 'employment']);
 $factory->state(Status::class, 'defecetcard', ['of' => 'defecetcard']);
 $factory->state(Status::class, 'customer-component-repair', ['of' => 'customer-component-repair']);
+$factory->state(Status::class, 'attendance', ['of' => 'attendance']);

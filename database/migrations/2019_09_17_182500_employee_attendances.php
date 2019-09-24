@@ -20,15 +20,20 @@ class EmployeeAttendances extends Migration
             $table->date('date');
             $table->time('in');
             $table->time('out');
-            $table->bigInteger('late_in');
-            $table->bigInteger('earlier_out');
-            $table->bigInteger('overtime');
-            $table->string('status');
+            $table->bigInteger('late_in')->nullable();
+            $table->bigInteger('earlier_out')->nullable();
+            $table->bigInteger('overtime')->nullable();
+            $table->unsignedBigInteger('statuses_id');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('employee_id')
             ->references('id')->on('employees')
+            ->onUpdate('cascade')
+            ->onDelete('restrict');
+
+            $table->foreign('statuses_id')
+            ->references('id')->on('statuses')
             ->onUpdate('cascade')
             ->onDelete('restrict');
         });

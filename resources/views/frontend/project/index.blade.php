@@ -106,11 +106,5 @@
 <script src="{{ asset('js/frontend/project/index.js')}}"></script>
 <script src="{{ asset('js/frontend/functions/select2/project-additional.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/project-additional.js') }}"></script>
-<script>
-    $(document).ready(function() {
-        $('#project-additional').select2({
-            dropdownParent: $('#modal_addtional_task')
-        });
-    });
-</script>
+
 @endpush

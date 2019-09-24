@@ -299,6 +299,14 @@ class SummaryNonRoutineTaskcardController extends Controller
             }
         }
 
+        foreach ($subset as $value) {
+            foreach($value as $skill){
+                array_push($skills, $skill["code"]);
+            }
+        }
+
+        $otr = array_count_values($skills);
+
         $adsb  = $workPackage->eo_instructions()->with('eo_header.type')
         ->whereHas('eo_header.type', function ($query) {
             $query->where('code', 'ad')->orWhere('code','sb');
@@ -325,7 +333,6 @@ class SummaryNonRoutineTaskcardController extends Controller
         $otr["eri"] = $eri;
         $total_taskcard  = $taskcards->count();
         $total_manhour_taskcard  = $taskcards->sum('estimation_manhour') + $workPackage->taskcards->load('type')->where('type.code', 'si')->sum('estimation_manhour');
-
         return view('frontend.workpackage.nonroutine.summary',[
             'total_taskcard' => $total_taskcard,
             'total_manhour_taskcard' => $total_manhour_taskcard,

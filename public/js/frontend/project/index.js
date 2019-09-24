@@ -119,10 +119,17 @@ let Aircraft = {
                     filterable: !1,
                 },
                 {
-                    field: 'conducted_by',
+                    field: '',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        if(t.conducted_by){
+                            return t.conducted_by+" "+t.approval_time;
+                        }else{
+                            return "-";
+                        }
+                    }
                 },
                 {
                     field: 'Actions',

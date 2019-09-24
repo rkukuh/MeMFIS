@@ -510,7 +510,6 @@ let Datatables = {
         });
 
         $("#preliminary_datatable").on("click", ".select-preliminary", function() {
-            alert('select prelim'); 
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")

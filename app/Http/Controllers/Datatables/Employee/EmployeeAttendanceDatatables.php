@@ -1,79 +1,41 @@
 <?php
 
-namespace App\Http\Controllers\Datatables\Quotation;
+namespace App\Http\Controllers\Datatables\Employee;
 
-use App\Models\Unit;
-use App\Models\Item;
-use App\Models\HtCrr;
-use App\Models\Project;
-use App\Models\TaskCard;
-use App\Models\ListUtil;
-use App\Models\Quotation;
-use App\Models\DefectCard;
-use App\Models\WorkPackage;
-use Illuminate\Http\Request;
-use App\Models\QuotationHtcrrItem;
+use App\Models\AttendanceFile;
+use App\Models\Employee;
 use App\Http\Controllers\Controller;
-use App\Models\QuotationDefectCardItem;
-use App\Models\QuotationWorkPackageTaskCardItem;
-use stdClass;
 
-class QuotationAdditionalDatatables extends Controller
+class EmployeeAttendanceDatatables extends Controller
 {
-    /**
-     * Show data from model with flter on datatable.
-     *
-     * @param $list, $args, $operator
-     * @return \Illuminate\Http\Response
-     */
-    public function list_filter($list, $args = array(), $operator = 'AND')
-    {
-        if (! is_array($list)) {
-            return array();
+
+    public function index(){
+    $employee_attendances = AttendanceFile::All();
+
+
+        $attendances = [];
+
+        $i = 0;
+        foreach($employee_attendances as $ea){
+
+           $imported_by = Employee::find($ea->imported_by);
+           $name = $imported_by->first_name.' '.$imported_by->last_name;
+           $date = strtotime($ea->created_at);
+
+           if($imported_by->last_name == $imported_by->first_name){
+                $name = $imported_by->first_name;
+           }
+
+           $attendances[$i] = [
+                'imported_date' => date('d-m-Y, H:i:s',$date),
+                'filename' => $ea->filename,
+                'imported_by' => $name
+           ];
+        $i++;
         }
 
-        $util = new ListUtil($list);
-
-        return $util->filter($args, $operator);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function jobRequest(Quotation $quotation)
-    {
-        $workpackages = []; $json_data = json_decode($quotation->data_defectcard);
-
-        $total_item_price = QuotationDefectCardItem::with('defectcard.jobcard','defectcard.jobcard.taskcard','item','unit','price')->where('quotation_id', $quotation->id)
-        ->sum('subtotal');
-    
-        $workpackage = new stdClass();
-        $workpackage->code = $quotation->title;
-        $workpackage->description =  $quotation->title;
-        $workpackage->mat_tool_price = $total_item_price;
-        if(isset($json_data)){
-            if(isset($json_data->discount_type)){
-                $workpackage->discount_type = $json_data->discount_type;
-                $workpackage->discount_value = $json_data->discount_value;
-            }else{
-                $workpackage->discount_type = null;
-                $workpackage->discount_value = null;
-            }
-
-            $workpackage->total_manhours_with_performance_factor = $json_data->total_manhour;
-            $workpackage->manhour_rate_amount = $json_data->manhour_rate;
-        }else{
-            $workpackage->discount_type = null;
-            $workpackage->discount_value = null;
-            $workpackage->manhour_rate_amount = 0;
-            $workpackage->total_manhours_with_performance_factor = 0;
-        }
-
-        array_push($workpackages, $workpackage);
-
-        $data = $alldata = $workpackages;
+        // dd($employees);
+        $data = $alldata = $attendances;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

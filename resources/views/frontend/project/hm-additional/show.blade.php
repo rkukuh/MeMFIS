@@ -162,7 +162,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', '')
+                                                @slot('text', $project->title)
                                             @endcomponent
                                         </div>
                                     </div>
