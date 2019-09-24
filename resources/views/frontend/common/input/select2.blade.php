@@ -6,7 +6,8 @@
     style="{{ $style or 'width:100%' }}"
     {{ $multiple or '' }}
     {{ $disabled or ''}}
-    value="{{ $value or ''}}"
+    {{ $required or ''}}
+    value="{{ $value or ''}}" 
     > 
 
     <option value="">

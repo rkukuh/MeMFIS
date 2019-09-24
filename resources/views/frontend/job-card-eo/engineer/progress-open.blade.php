@@ -309,6 +309,7 @@
                                                 @slot('name', 'station')
                                                 @slot('id', 'station')
                                                 @slot('id_error', 'station')
+                                                @slot('required', 'required')
                                             @endcomponent
                                         </td>
                                     </tr>
