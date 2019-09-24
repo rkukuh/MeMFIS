@@ -52,7 +52,8 @@
                             <div class="m-portlet__body">
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <table class="table table-striped table-bordered second" width="100%" cellpadding="4">
+                                        <table class="table table-striped table-bordered second" width="100%"
+                                            cellpadding="4">
                                             <tr>
                                                 <td align="center" width="14%"><b>Date</b></td>
                                                 <td align="center" width="16%"><b>Project No.</b></td>
@@ -79,19 +80,23 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="m-portlet__head">
                                                     <div class="m-portlet__head-tools">
-                                                        <ul class="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x" role="tablist">
+                                                        <ul class="nav nav-tabs m-tabs-line m-tabs-line--primary m-tabs-line--2x"
+                                                            role="tablist">
                                                             <li class="nav-item m-tabs__item">
-                                                                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tabs_6_1" role="tab">
+                                                                <a class="nav-link m-tabs__link active"
+                                                                    data-toggle="tab" href="#m_tabs_6_1" role="tab">
                                                                     <i class="la la-bell-o"></i> General
                                                                 </a>
                                                             </li>
                                                             <li class="nav-item m-tabs__item">
-                                                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_2" role="tab">
+                                                                <a class="nav-link m-tabs__link" data-toggle="tab"
+                                                                    href="#m_tabs_6_2" role="tab">
                                                                     <i class="la la-bell-o"></i> Contact
                                                                 </a>
                                                             </li>
                                                             <li class="nav-item m-tabs__item">
-                                                                <a class="nav-link m-tabs__link " data-toggle="tab" href="#m_tabs_6_3" role="tab">
+                                                                <a class="nav-link m-tabs__link " data-toggle="tab"
+                                                                    href="#m_tabs_6_3" role="tab">
                                                                     <i class="la la-cog"></i> Address
                                                                 </a>
                                                             </li>
@@ -110,8 +115,9 @@
                                                                     </label>
 
                                                                     @component('frontend.common.label.data-info')
-                                                                        @slot('text', $quotation->quotationable->customer->name)
-                                                                        @slot('id', 'name')
+                                                                    @slot('text',
+                                                                    $quotation->quotationable->customer->name)
+                                                                    @slot('id', 'name')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -122,8 +128,8 @@
                                                                     </label>
 
                                                                     @component('frontend.common.label.data-info')
-                                                                        @slot('text', $attention->name)
-                                                                        @slot('id', 'name')
+                                                                    @slot('text', $attention->name)
+                                                                    @slot('id', 'name')
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -132,8 +138,9 @@
                                                                     </label>
 
                                                                     @component('frontend.common.label.data-info')
-                                                                        @slot('text', $quotation->quotationable->customer->levels->last()->name)
-                                                                        @slot('id', 'level')
+                                                                    @slot('text',
+                                                                    $quotation->quotationable->customer->levels->last()->name)
+                                                                    @slot('id', 'level')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -148,8 +155,8 @@
                                                                     </label>
 
                                                                     @component('frontend.common.label.data-info')
-                                                                        @slot('text', $attention->phone)
-                                                                        @slot('id', 'phone')
+                                                                    @slot('text', $attention->phone)
+                                                                    @slot('id', 'phone')
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -158,8 +165,8 @@
                                                                     </label>
 
                                                                     @component('frontend.common.label.data-info')
-                                                                        @slot('text', $attention->fax)
-                                                                        @slot('id', 'fax')
+                                                                    @slot('text', $attention->fax)
+                                                                    @slot('id', 'fax')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -170,8 +177,8 @@
                                                                     </label>
 
                                                                     @component('frontend.common.label.data-info')
-                                                                        @slot('text', $attention->email)
-                                                                        @slot('id', 'email')
+                                                                    @slot('text', $attention->email)
+                                                                    @slot('id', 'email')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -186,8 +193,8 @@
                                                                     </label>
 
                                                                     @component('frontend.common.label.data-info')
-                                                                        @slot('text', $attention->address)
-                                                                        @slot('id', 'name')
+                                                                    @slot('text', $attention->address)
+                                                                    @slot('id', 'name')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -229,8 +236,8 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', $quotation->requested_at)
-                                                            @slot('id', 'name')
+                                                        @slot('text', $quotation->requested_at)
+                                                        @slot('id', 'name')
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -239,8 +246,8 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', $quotation->valid_until)
-                                                            @slot('id', 'name')
+                                                        @slot('text', $quotation->valid_until)
+                                                        @slot('id', 'name')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -257,8 +264,8 @@
                                                         @foreach ($currencies as $currency)
                                                         @if ($currency->id == $quotation->currency_id)
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('id', 'Currency')
-                                                            @slot('text', $currency->name.'('.$currency->symbol.')')
+                                                        @slot('id', 'Currency')
+                                                        @slot('text', $currency->name.'('.$currency->symbol.')')
                                                         @endcomponent
                                                         @endif
                                                         @endforeach
@@ -271,8 +278,8 @@
 
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', number_format($quotation->exchange_rate))
-                                                            @slot('id', 'name')
+                                                        @slot('text', number_format($quotation->exchange_rate))
+                                                        @slot('id', 'name')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -288,8 +295,8 @@
 
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $quotation->title)
-                                            @slot('id', 'name')
+                                        @slot('text', $quotation->title)
+                                        @slot('id', 'name')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -301,8 +308,8 @@
 
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $quotation->description)
-                                            @slot('id', 'name')
+                                        @slot('text', $quotation->description)
+                                        @slot('id', 'name')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -313,7 +320,8 @@
                                             <legend class="w-auto">Schedule of Payment</legend>
                                             <div class="form-group m-form__group row p-2">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
-                                                    <table id="scheduled_payments_datatables" class="table table-striped table-bordered" width="100%">
+                                                    <table id="scheduled_payments_datatables"
+                                                        class="table table-striped table-bordered" width="100%">
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -325,8 +333,8 @@
                                             Term and Condition
                                         </label>
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $quotation->term_of_condition)
-                                            @slot('id', 'name')
+                                        @slot('text', $quotation->term_of_condition)
+                                        @slot('id', 'name')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -335,13 +343,16 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <ul class="nav nav-tabs" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active show defectcard" data-toggle="tab" href="#" data-target="#m_tabs_1_1">Defect Card List</a>
+                                                <a class="nav-link active show defectcard" data-toggle="tab" href="#"
+                                                    data-target="#m_tabs_1_1">Defect Card List</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link items" data-toggle="tab" href="#m_tabs_1_2">Material(s) & Tool List(s)</a>
+                                                <a class="nav-link items" data-toggle="tab"
+                                                    href="#m_tabs_1_2">Material(s) & Tool List(s)</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link summary" data-toggle="tab" href="#m_tabs_1_3">Summary</a>
+                                                <a class="nav-link summary" data-toggle="tab"
+                                                    href="#m_tabs_1_3">Summary</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content">
@@ -362,7 +373,7 @@
                                         <div class="flex">
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.back')
-                                                    @slot('href', route('frontend.workpackage.index'))
+                                                @slot('href', route('frontend.workpackage.index'))
                                                 @endcomponent
                                             </div>
                                         </div>
