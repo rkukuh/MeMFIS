@@ -228,12 +228,6 @@ class QuotationAdditionalController extends Controller
         $request->merge(['project_id' => $project->id]);
         $request->merge(['customer_id' => $project->customer->id]);
 
-        
-        //TODO change
-        $request->merge(['subtotal' => 0]);
-        $request->merge(['grandtotal' => 0]);
-        $request->merge(['ppn' => 0]);
-
         // dd($request->all());
         $quotation->update($request->all());
 
