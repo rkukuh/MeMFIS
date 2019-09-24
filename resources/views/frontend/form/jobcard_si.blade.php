@@ -1,318 +1,557 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
     <style>
-        td{
-          font-size: 12px;
+        header {
+            position: fixed;
+            top: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 3cm;
         }
 
-        h1{
-          font-size: 40px;
+        footer {
+            position: fixed;
+            bottom: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 1.5cm;
         }
 
-        .table-style{
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+            font-size: 12px;
+        }
+
+        ul li {
+            display: inline-block;
+        }
+
+        table {
             border-collapse: collapse;
         }
 
-        .table-style td{
-          border-left: 1px solid black;
-          border-right: 1px solid black;
-          border-bottom: 1px solid black;
-
-        }
-        
-        .date-footer{
-          position: absolute; 
-          top:130px; 
-          left:2px;
+        .container {
+            width: 100%;
+            margin: 0 36px;
         }
 
-        .name-footer{
-          position: absolute;
-          top: 108px;
-          width: 100%;
-          text-align: center;
+        #header {
+            margin-top: 10px;
         }
 
-        .barcode{
-          position: relative;
-          right:50%;
-          left: 50%;
+        #content {
+            margin-top: 168px;
         }
+
+        #content .jobcard-info fieldset legend {
+            font-size: 20px;
+            font-weight: bold;
+            color: cornflowerblue;
+        }
+
+        #content .jobcard-info .jobcard-info-detail table tr td {
+            vertical-align: top;
+        }
+
+        #content .jobcard-info .jobcard-info-detail {
+            margin-top: 12px;
+        }
+
+        #content .barcode {
+            margin-left: 16px;
+            margin-top: -112px;
+        }
+
+        #content2 {
+            margin-top: -30px;
+        }
+
+        #content3 {
+            margin-top: 7px;
+        }
+
+        #content3 .table1 {
+            padding-left: 7px;
+        }
+
+        #content4,
+        #content5 {
+            margin-top: 20px;
+        }
+
+        #content4 .table-mt {
+            border: 2px solid #d4d7db;
+        }
+
+        #content4 .table-mt tr td {
+            border-left: 1px solid #d4d7db;
+            border-right: 1px solid #d4d7db;
+            border-top: 1px solid #d4d7db;
+            border-bottom: 1px solid #d4d7db;
+        }
+
+        #content5 .head {
+            width: 100%;
+            height: 40px;
+            background: #f7dd16;
+            border-radius: 9px 9px 0px 0px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        #content5 .body {
+            width: 100%;
+            border-left: 4px solid #d4d7db;
+            border-right: 4px solid #d4d7db;
+            border-bottom: 4px solid #d4d7db;
+        }
+
+        #content5 .body table tr td {
+            border-left: 1px solid #d4d7db;
+        }
+
+        #content6 {
+            margin-top: 150px;
+        }
+
+        #content6 .table-mt tr td {
+            border-left: 1px solid #d4d7db;
+            border-right: 1px solid #d4d7db;
+            border-top: 1px solid #d4d7db;
+            border-bottom: 1px solid #d4d7db;
+        }
+
+        #content7 {
+            margin-top: 15px;
+        }
+
+        #content7 .table-mt tr td {
+            border-left: 1px solid #d4d7db;
+            border-right: 1px solid #d4d7db;
+            border-top: 1px solid #d4d7db;
+            border-bottom: 1px solid #d4d7db;
+        }
+
+        .page_break {
+            page-break-before: always;
+        }
+
+        /* <div class="page_break"></div> */
 
     </style>
 </head>
+
 <body>
-    <table width="100%">
-        <tr>
-            <td width="30%">
-                <center>
-                    <img src="img/LogoMMF.png" alt="logo" height="80px">
-                    <P>Juanda International Airport <br> Surabaya Indonesia</P>
-                </center>
-            </td>
-            <td width="40%">
-                <center>
-                    <h1>
-                        JOB CARD<span style="font-weight: lighter; font-size: 25px;">(Special Instuction)</span>
-                    </h1>
-                </center>
-            </td>
-            <td width="30%">
-                <center>
-                    <div class="barcode">
-                      {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5,5)!!}
-                      <p style="margin-right:50%"><b>NO :</b> Generate</p>
-                    </div>
-                </center>
 
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" style="border-top:1px solid black;" width="100%">
-        <tr>
-            <td width="30%">
-                Phone : <span>0812323123212</span> 
-            </td>
-            <td width="30%">
-                Fax : <span>Generate</span> 
-            </td>
-            <td width="40%">
-                Email : <span>pibnu86@gmail.com</span> 
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="14%">
-                <div style="position: absolute;">
-                    SI Task No
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="14%">
-                <div style="position: absolute;">
-                    A/C Type
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="15%">
-                <div style="position: absolute;">
-                    A/C S/N
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="15%">
-                <div style="position: absolute;">
-                    A/C Reg
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="29%">
-                <div style="position: absolute;">
-                    Inspection Type
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="13%">
-                <div style="position: absolute;">
-                    Project No
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="24%">
-                <div style="position: absolute;">
-                    Skill
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="16%">
-                <div style="position: absolute;">
-                    Est. Mhrs
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="17%">
-                <div style="position: absolute;">
-                    Actual. Mhrs
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="22%">
-                <div style="position: absolute;">
-                    Work Area
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="21%">
-                <div style="position: absolute;">
-                    Data Issue
-                </div>
-                <br>
-                <span><center>Generate</center></span> 
-            </td>
-        </tr>
-    </table> 
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="50%" height="20">
-              <div style="position: absolute;">
-                Title
-              </div>
-              <br>
-              <span><center>Generate</center></span> 
-            </td>
-            <td width="50%" height="20">
-              <div style="position: absolute;">
-                Refrence
-              </div>
-              <br>
-              <span><center>Generate</center></span>
-            </td>
-        </tr>
-    </table>
+    <header id="header">
+        <img src="./img/form/printoutjobcardsi/HeaderJobCardSI.png" alt="" width="100%">
+    </header>
+    <footer style="margin-top:14px;">
+        <div class="container">
+            <span style="margin-left:6px">Prepared By : {{$prepared_by}};{{$jobCard->created_at}}
+                &nbsp;&nbsp;&nbsp;&nbsp; Printed By :{{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
+        </div>
+        <img src="./img/form/printoutjobcardsi/FooterJobCardSI.png" width="100%" alt="">
+    </footer>
 
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="100%" height="35">
-              <div style="position: absolute;">
-                Description
-              </div>
-              <br>
-              <span><center>Generate</center></span> 
-            </td>
-        </tr>
-    </table>
-    
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="50%" height="100">
-              <div style="position: absolute;">
-                Material(s) :
-              </div>
-              <br>
-              <span><center>Generate</center></span> 
-            </td>
-            <td width="50%" height="100">
-              <div style="position: absolute;">
-                Tool(s) :
-              </div>
-              <br>
-              <span><center>Generate</center></span>
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="100%" height="50 ">
-              <div style="position: absolute;">
-                Accomplishment Record:
-              </div>
-              <br>
-              <span><center>Generate</center></span> 
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="18%">
-                <div style="position: absolute;">
-                    Discrepancies Found : 
-                </div>
-                <br><br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="22%">
-                <div style="position: absolute;">
-                    Transfer to Detect Card No :
-                </div>
-                <br><br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="17%">
-                <div style="position: absolute;">
-                    Status : 
-                </div>
-                <br><br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="22%">
-                <div style="position: absolute;">
-                    Data Issued : 
-                </div>
-                <br><br>
-                <span><center>Generate</center></span> 
-            </td>
-            <td style="position: relative;" width="21%">
-                <div style="position: absolute;">
-                    Data Close : 
-                </div>
-                <br><br>
-                <span><center>Generate</center></span> 
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="100%" height="20">
-              <div style="position: absolute;">
-                Helper
-              </div>
-              <br>
-              <span><center>Generate</center></span> 
-            </td>
-        </tr>
-    </table>
-    <table class="table-style" width="100%">
-        <tr>
-            <td style="position: relative;" width="30%" height="120">
-              <div style="position: absolute;">
-                <b>Accomplished By :</b> 
-              </div>
-              
-              <div class="name-footer">Name</div>
+    <div id="content">
+        <ul>
+            <li>
+                <div class="jobcard-info">
+                    <fieldset>
+                        <legend>JC No : {{$jobCard->number}}</legend>
+                        <div class="jobcard-info-detail">
+                            <table width="80%" cellpadding="3">
+                                <tr>
+                                    <td width="20%">SI Task No</td>
+                                    <td width="1%">:</td>
+                                    <td width="29%">Generate</td>
+                                    <td width="20%">AC/Type</td>
+                                    <td width="1%">:</td>
+                                    <td width="29%">
+                                        @if($jobCard->quotation->quotationable->aircraft->name)
+                                        {{$jobCard->quotation->quotationable->aircraft->name}}
+                                        @else
+                                        -
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20%">Project No</td>
+                                    <td width="1%">:</td>
+                                    <td width="29%">
+                                        @if($jobCard->quotation->quotationable->code)
+                                        {{$jobCard->quotation->quotationable->code}}
+                                        @else
+                                        -
+                                        @endif
+                                    </td>
+                                    <td width="20%">A/C Reg</td>
+                                    <td width="1%">:</td>
+                                    <td width="29%">
+                                        @if($jobCard->quotation->quotationable->aircraft_register)
+                                        {{$jobCard->quotation->quotationable->aircraft_register}}
+                                        @else
+                                        -
+                                        @endif
+                                    </td>
+                                </tr>
 
-              <div class="date-footer">
-                  Date : <span>(Date & Time)</span>
-              </div>
-            <td style="position: relative;" width="30%" height="120">
-              <div style="position: absolute;">
-                <b>Inspected By :</b> 
-              </div>
 
-              <div class="name-footer">Name</div>
+                                <tr>
+                                    <td width="20%">Inspection Type</td>
+                                    <td width="1%">:</td>
+                                    <td width="29%"></td>
+                                    <td width="20%">A/C S/N</td>
+                                    <td width="1%">:</td>
+                                    <td width="29%">
+                                        @if($jobCard->quotation->quotationable->aircraft_sn)
+                                        {{$jobCard->quotation->quotationable->aircraft_sn}}
+                                        @else
+                                        -
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20%">Issued Date</td>
+                                    <td width="1%">:</td>
+                                    <td width="29%">
+                                        @if($jobCard->created_at)
+                                        {{ date('d-M-Y', strtotime($jobCard->created_at)) }}
+                                        @else
+                                        -
+                                        @endif
+                                    </td>
+                                </tr>
 
-              <div class="date-footer">
-                  Date : <span>(Date & Time)</span>
-              </div>
-            </td>
-            <td style="position: relative;" width="30%" height="120">
-              <div style="position: absolute;">
-                <b>Rill By :</b>
-              </div>
-              
-              <div class="name-footer">Name</div>
+                            </table>
+                        </div>
+                    </fieldset>
+                </div>
+            </li>
+            <li>
+                <div class="barcode">
+                    {!!DNS2D::getBarcodeHTML($jobCard->number, 'QRCODE',4.5,4.5)!!}
+                </div>
+            </li>
+        </ul>
+    </div>
 
-              <div class="date-footer">
-                  Date : <span>(Date & Time)</span>
-              </div>
-                
-            </td>
-        </tr>
-    </table>
+    <div id="content2">
+        <div class="container">
+            <table width="100%" cellpadding="4">
+                <tr style="position: relative;">
+                    <td width="18%">
+                        <div style="position: absolute;">
+                            Title
+                        </div>
+                    </td>
+                    <td width="1%">
+                        <div style="position: absolute;">
+                            :
+                        </div>
+                    </td>
+                    <td width="81%">
+                        @if($jobCard->jobcardable->title)
+                        {{$jobCard->jobcardable->title}}
+                        @else
+                        -
+                        @endif
+                    </td>
+                </tr>
+                <tr style="position: relative;">
+                    <td width="18%">
+                        <div style="position: absolute;">
+                            Description
+                        </div>
+                    </td>
+                    <td width="1%">
+                        <div style="position: absolute;">
+                            :
+                        </div>
+                    </td>
+                    <td width="81%">
+                        @if($jobCard->jobcardable->description)
+                        {{$jobCard->jobcardable->description}}
+                        @else
+                        -
+                        @endif
+                    </td>
+                </tr>
+                <tr style="position: relative;">
+                    <td width="18%">
+                        <div style="position: absolute;">
+                            Reference
+                        </div>
+                    </td>
+                    <td width="1%">
+                        <div style="position: absolute;">
+                            :
+                        </div>
+                    </td>
+                    <td width="81%">
+                        @if($jobCard->jobcardable->reference)
+                        {{$jobCard->jobcardable->reference}}
+                        @else
+                        -
+                        @endif
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
+    <div id="content3">
+        <div class="container">
+            <table width="100%" class="table1">
+                <tr>
+                    <td width="17%">Skill</td>
+                    <td width="47%" align="center">Work Area</td>
+                    <td width="15%" align="center">Mhrs Estimation</td>
+                    <td width="20%" align="right">Actual Mhrs</td>
+                </tr>
+            </table>
+            <div style="width:100%;min-height:20px;border: 3px solid #d4d7db;border-radius: 10px;">
+                <table width="100%" cellpadding="10">
+                    <tr>
+                        <td width="18%" valign="top">
+                            @if(sizeof($jobCard->jobcardable->skills) == 3)
+                            ERI
+                            @elseif(sizeof($jobCard->jobcardable->skills) == 1)
+                            {{$jobCard->jobcardable->skills[0]->name}}
+                            @else
+                            -
+                            @endif
+                        </td>
+                        <td width="47%" align="center" valign="top">
+                            @if($jobCard->jobcardable->work_area != null)
+                            {{$jobCard->jobcardable->workarea->name}}
+                            @else
+                            -
+                            @endif
+                        </td>
+                        <td width="15%" align="center" valign="top">
+                            @if($jobCard->jobcardable->estimation_manhour)
+                            {{$jobCard->jobcardable->estimation_manhour}}
+                            @else
+                            -
+                            @endif
+                        </td>
+                        <td width="20%" align="right" valign="top">
+                            {{$actual_manhours}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="content4">
+        <div class="container">
+            <table width="100%" cellpadding="8" class="table-mt">
+                <tr>
+                    <td colspan="2" height="55" valign="top">
+                        Accomplishment Record : <br><br>
+                        <span>
+                            {{$jobCard->progresses->last()->reason_text}}
+                            {{-- @if()
+                {{}}
+                            @else
+                            -
+                            @endif --}}
+                        </span>
+                    </td>
+                </tr>
+                <tr style="position: relative;">
+                    <td width="50%" height="35">
+                        <div style="position: absolute;">
+                            Discrepancy Found :
+                        </div>
+                        @if($lastStatus=="OPEN")
+                        <center>
+                            <div style="margin-left:100px;margin-top:12px;">
+                                <ul>
+                                    <li>
+                                        <img src="./img/check-box-empty.png" alt="" width="10"> <span
+                                            style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                                    </li>
+                                    <li style="margin-left:12px;">
+                                        <img src="./img/check-box-empty.png" alt="" width="11"> <span
+                                            style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </center>
+                        @else
+                        <center>
+                            <div style="margin-left:100px;margin-top:12px;">
+                                <ul>
+                                    <li>
+                                        <img @if(sizeof($jobCard->defectcards) <> 0)
+                                            src="./img/check.png"
+                                            @else
+                                            src="./img/check-box-empty.png"
+                                            @endif
+                                            alt="" width="10"> <span
+                                                style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                                    </li>
+                                    <li style="margin-left:12px;">
+                                        <img @if(sizeof($jobCard->defectcards) == 0)
+                                        src="./img/check.png"
+                                        @else
+                                        src="./img/check-box-empty.png"
+                                        @endif
+                                        alt="" width="11"> <span
+                                            style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </center>
+                        @endif
+                    </td>
+                    <td width="50%" height="35" valign="center">
+                        Transfer to Defect Card No : <br><br>
+                        <span>
+                            @if(sizeof($jobCard->defectcards) <> 0)
+                                {{$jobCard->defectcards->first()->code}}
+                                @endif
+                        </span>
+                    </td>
+                </tr>
+            </table>
+            <table width="100%" style="margin-top: 12px;">
+                <tr>
+                    <td width="3%" valign="top">Helper </td>
+                    <td width="1%" valign="top">:</td>
+                    <td width="96%" valign="top">
+                        @php
+                        $a = sizeof($helpers->toArray());
+                        @endphp
+                        @if($a >0)
+                        @for ($i = 0; $i < $a-1; $i++) {{$helpers[$i]->first_name}},&nbsp; @endfor @for ($i=$a-1; $i <
+                            $a; $i++) {{$helpers[$i]->first_name}} @endfor @endif </td> </tr> </table> </div> </div>
+                            <div id="content5">
+                            <div class="container">
+                                <div class="head">
+                                    <table width="100%" cellpadding="10">
+                                        <tr>
+                                            <td width="33%" align="center">Accomplished By</td>
+                                            <td width="33%" align="center">Inspected By</td>
+                                            <td width="34%" align="center">RII By</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="body">
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="33%" height="100" align="center" valign="bottom">
+                                                <div style="width:100%;height:20px;text-align:center">
+                                                    {{$accomplished_by}}</div>
+                                                <div style="width:100%;height:20px;text-align:left;padding-left:5px;">
+                                                    Date : <span>{{$accomplished_at}}</span></div>
+                                            </td>
+                                            <td width="33%" height="100" align="center" valign="bottom">
+                                                <div style="width:100%;height:20px;text-align:center">{{$inspected_by}}
+                                                </div>
+                                                <div style="width:100%;height:20px;text-align:left;padding-left:5px;">
+                                                    Date : <span>{{$inspected_at}}</span></div>
+                                            </td>
+                                            <td width="34%" height="100" align="center" valign="bottom"
+                                                @if($rii_status==0) style="background:grey" @endif>
+                                                @if($rii_status==1)
+                                                <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
+                                                <div style="width:100%;height:20px;text-align:left;padding-left:5px;">
+                                                    Date : <span>{{$rii_at}}</span></div>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+        </div>
+
+        <div class="page_break">
+            <div id="content6">
+                <div class="container">
+                    <table width="100%" cellpadding="8" border="1" class="table-mt">
+                        <tr style="background: #d4d7db;">
+                            <th colspan="5" align="center">Material(s)</th>
+                        </tr>
+                        <thead>
+                            <tr style="background: #d4d7db;">
+                                <th width="2%" align="center">No</th>
+                                <th width="18%" align="center">Part Number</th>
+                                <th width="50%" align="center">Item Description</th>
+                                <th width="15%" align="center">Qty</th>
+                                <th width="15%" align="center">Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(empty($jobCard->jobcardable->materials->toArray()))
+                            <tr>
+                                <td colspan="5" align="center">empty</td>
+                            </tr>
+                            @endif
+                            @php $i = 1; @endphp
+                            @foreach($jobCard->jobcardable->materials as $material)
+                            <tr>
+                                <td align="center" valign="top" width="2%">{{$i++}}</td>
+                                <td align="center" valign="top" width="18%">{{$material->code}}</td>
+                                <td align="left" valign="top" width="50%">{{$material->name}}</td>
+                                <td align="center" valign="top" width="15%">{{$material->pivot->quantity}}</td>
+                                <td align="center" valign="top" width="15%">
+                                    {{App\Models\Unit::find($material->pivot->unit_id)->name}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="content7">
+                <div class="container">
+                    <table width="100%" cellpadding="8" border="1" class="table-mt">
+                        <tr style="background: #d4d7db;">
+                            <th colspan="5" align="center">Tool(s)</th>
+                        </tr>
+                        <thead>
+                            <tr style="background: #d4d7db;">
+                                <th width="2%" align="center">No</th>
+                                <th width="18%" align="center">Part Number</th>
+                                <th width="50%" align="center">Item Description</th>
+                                <th width="15%" align="center">Qty</th>
+                                <th width="15%" align="center">Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(empty($jobCard->jobcardable->tools->toArray()))
+                            <tr>
+                                <td colspan="5" align="center">empty</td>
+                            </tr>
+                            @endif
+                            @php $i = 1; @endphp
+                            @foreach($jobCard->jobcardable->tools as $tool)
+                            <tr>
+                                <td align="center" valign="top" width="2%">{{$i++}}</td>
+                                <td align="center" valign="top" width="18%">{{$tool->code}}</td>
+                                <td align="left" valign="top" width="50%">{{$tool->name}}</td>
+                                <td align="center" valign="top" width="15%">{{$tool->pivot->quantity}}</td>
+                                <td align="center" valign="top" width="15%">
+                                    {{App\Models\Unit::find($tool->pivot->unit_id)->name}}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
 </body>
+
 </html>
