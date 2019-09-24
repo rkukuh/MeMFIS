@@ -65,6 +65,12 @@ let Htcrr = {
                 filterable: !1,
             },
             {
+                field: 'item_description',
+                title: 'item Description',
+                sortable: 'asc',
+                filterable: !1,
+            },
+            {
                 field: 'position',
                 title: 'Position',
                 sortable: 'asc',
