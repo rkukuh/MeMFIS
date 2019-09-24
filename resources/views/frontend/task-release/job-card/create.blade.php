@@ -25,27 +25,6 @@
                         <form id="itemform" name="itemform">
                             <div class="m-portlet__body">
                                 <table border="1px" width="100%">
-                                    {{-- <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Total Task Card(s)
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            1000 Item (s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Total Manhour(s) (included performance factor)
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            500 mhrs
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="100%" colspan="2" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Skill Needed
-                                        </td>
-                                    </tr> --}}
                                     <tr>
                                         <td width="30%" style="background-color:beige;padding:10px;">
                                             Job Card No
@@ -141,7 +120,11 @@
                                             Actual. Mhrs
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->actual}}
+                                        @if($actual)
+                                            {{$actual}}
+                                        @else
+                                            - 
+                                        @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -183,7 +166,11 @@
                                             Description
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->jobcardable->Description}}
+                                            @if($taskrelease->jobcardable->Description)
+                                                {{$taskrelease->jobcardable->Description}}
+                                            @else
+                                                -
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
