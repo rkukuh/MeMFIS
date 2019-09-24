@@ -139,13 +139,12 @@ class ProjectHMAdditionalController extends Controller
     public function update(Request $request, Project $project)
     {
         $defectcard_uuids = explode(",",$request->defectcard_uuid);
-        foreach($defectcard_uuids as $defectcard_uuid){
-            $defectcard = DefectCard::where('uuid',$defectcard_uuid)->first();
-            $defectcard->project_additional_id = $project->id;
-
-            $defectcard->save();
-
-        }
+        $project->update($request->all());
+        // foreach($defectcard_uuids as $defectcard_uuid){
+        //     $defectcard = DefectCard::where('uuid',$defectcard_uuid)->first();
+        //     $defectcard->project_additional_id = $project->id;
+        //     $defectcard->save();
+        // }
 
         return response()->json($project);
     }

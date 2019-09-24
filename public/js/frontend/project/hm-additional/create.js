@@ -339,8 +339,9 @@ let AdditionalTaskCreate = (function() {
             $('.add-project-additional').on('click', function () {
                 let data = new FormData();
                 data.append("defectcard_uuid", UUID);
-                data.append("estimation_manhour", $("#estimation_manhour").attr('value'));
+                data.append("title", $("#additional_project_title").val());
                 data.append("performance_factor", $("#performance_factor").val());
+                data.append("estimation_manhour", $("#estimation_manhour").attr('value'));
                 data.append("total_manhour_with_performance_factor", $("#total_manhour").attr('value'));
 
                 $.ajax({
