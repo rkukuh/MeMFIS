@@ -549,8 +549,6 @@ jQuery(document).ready(function () {
 });
 
 $('.footer-additional').on('click', '.update-additional-data', function () {
-    console.log($("#additional_project_title").val());
-
     let total_manhours = $("#estimation_manhour").attr('value');
     let additional_project_title = $("#additional_project_title").val();
     let performance_factor = $("#performance_factor").val();
