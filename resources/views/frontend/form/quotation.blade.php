@@ -414,8 +414,11 @@
                         
                     </td>
                     <td width="50%" align="center">
+                        @if(isset($quotation->approvals->last()->note))
+                        <b> {{ $quotation->approvals->last()->note }} </b><br>
+                        @else
                         <b> {{ $quotation->quotationable->customer->name }} </b><br>
-                     
+                        @endif
                     </td>
                 </tr>
             </table>
@@ -551,8 +554,11 @@
                             <b> {{ $username }}</b><br>
                         </td>
                         <td width="50%" align="center">
-                            <b>  {{ $quotation->quotationable->customer->name }} </b><br>
-                            
+                            @if(isset($quotation->approvals->last()->note))
+                            <b> {{ $quotation->approvals->last()->note }} </b><br>
+                            @else
+                            <b> {{ $quotation->quotationable->customer->name }} </b><br>
+                            @endif
                         </td>
                     </tr>
                 </table>
