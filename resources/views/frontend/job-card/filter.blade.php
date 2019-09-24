@@ -1,43 +1,7 @@
 <div class="advanceFilter">
     <div class="hidden" id="advanceFilter">
         <div class="form-group m-form__group row">
-            <div class="col-sm-3 col-md-3 col-lg-3">
-                <label class="form-control-label">
-                    Date Issued
-                </label>
-                @component('frontend.common.input.select2')
-                    @slot('text', 'Date Issued')
-                    @slot('id', 'date_issued')
-                    @slot('name', 'date_issued')
-                    @slot('id_error', 'date_issued')
-                    @slot('class','filter')
-                @endcomponent
-            </div>
-            <div class="col-sm-3 col-md-3 col-lg-3">
-                <label class="form-control-label">
-                    JC No
-                </label>
-                @component('frontend.common.input.select2')
-                    @slot('text', 'JC No')
-                    @slot('id', 'jc_no')
-                    @slot('name', 'jc_no')
-                    @slot('id_error', 'jc_no')
-                    @slot('class','filter')
-                @endcomponent
-            </div>
-            <div class="col-sm-3 col-md-3 col-lg-3">
-                <label class="form-control-label">
-                    Project No
-                </label>
-                @component('frontend.common.input.select2')
-                    @slot('text', 'Project No')
-                    @slot('id', 'project_no')
-                    @slot('name', 'project_no')
-                    @slot('id_error', 'project_no')
-                    @slot('class','filter')
-                @endcomponent
-            </div>
-            <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="col-sm-4 col-md-4 col-lg-4">
                 <label class="form-control-label">
                     Customer
                 </label>
@@ -49,7 +13,7 @@
                     @slot('class','filter')
                 @endcomponent
             </div>
-            <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="col-sm-4 col-md-4 col-lg-4">
                 <label class="form-control-label">
                     A/C Type
                 </label>
@@ -62,7 +26,7 @@
                     @slot('class','filter')
                 @endcomponent
             </div>
-            <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="col-sm-4 col-md-4 col-lg-4">
                 <label class="form-control-label">
                     Task
                 </label>
@@ -74,7 +38,7 @@
                     @slot('class','filter')
                 @endcomponent
             </div>
-            <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="col-sm-4 col-md-4 col-lg-4">
                 <label class="form-control-label">
                     Skill
                 </label>
@@ -86,7 +50,7 @@
                     @slot('class','filter')
                 @endcomponent
             </div>
-            <div class="col-sm-3 col-md-3 col-lg-3">
+            <div class="col-sm-4 col-md-4 col-lg-4">
                 <label class="form-control-label">
                     Taskcard Type
                 </label>
@@ -99,7 +63,7 @@
                     @slot('class','filter')
                 @endcomponent
             </div>
-            <div class="col-sm-2 col-md-2 col-lg-2">
+            <div class="col-sm-4 col-md-4 col-lg-4">
                 <label class="form-control-label">
                     Status Jobcard
                 </label>

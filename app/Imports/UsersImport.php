@@ -26,7 +26,7 @@ class UsersImport implements ToModel, WithHeadingRow
             'name' => ucwords(strtolower($row['nama'])),
             'email' => !empty($row['email']) ? strtolower($row['email']) : str_slug(strtolower($row['nama'])) . '@example.org',
             'password' => Hash::make('employee'),
-            'is_active' => $faker->boolean()
+            'is_active' => $faker->boolean
         ]);
 
         $user->save();

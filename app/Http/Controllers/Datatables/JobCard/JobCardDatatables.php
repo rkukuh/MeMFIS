@@ -79,7 +79,10 @@ class JobCardDatatables extends Controller
             foreach($jobcard->helpers as $helper){
                 $helper->userID .= $helper->user->id;
             }
+
+            //calculate actual manhours
             $manhours = 0;
+
             foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
                 $date1 = null;
                 foreach($values as $value){
@@ -89,19 +92,22 @@ class JobCardDatatables extends Controller
                                 $t1 = Carbon::parse($date1);
                                 $t2 = Carbon::parse($value->created_at);
                                 $diff = $t1->diffInSeconds($t2);
-                                $manhours = $manhours + $diff;
+                                $manhours += + $diff;
+                            }elseif($statuses->where('id',$value->status_id)->first()->code == "progress" ) {
+                                $t1 = Carbon::now($date1);
+                                $t2 = Carbon::parse($value->created_at);
+                                $diff = $t1->diffInSeconds($t2);
+                                $manhours += + $diff;
                             }
                             $date1 = $value->created_at;
                         }
                     }
-
                 }
             }
+    
             $manhours = $manhours/3600;
             $manhours_break = 0;
             foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                // dump(sizeOf($values->toArray()));
-                // dump($values);
                 for($i=0; $i<sizeOf($values->toArray()); $i++){
                     if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
                         if($jobcard->helpers->where('userID',$key)->first() == null){
@@ -110,17 +116,16 @@ class JobCardDatatables extends Controller
                                     $t2 = Carbon::parse($values[$i]->created_at);
                                     $t3 = Carbon::parse($values[$i+1]->created_at);
                                     $diff = $t2->diffInSeconds($t3);
-                                    $manhours_break = $manhours_break + $diff;
+                                    $manhours_break += $diff;
                                 }
                             }
                         }
                     }
                 }
             }
-            // dd('s');
 
             $manhours_break = $manhours_break/3600;
-            $actual_manhours =number_format($manhours-$manhours_break, 2);
+            $actual_manhours = number_format($manhours-$manhours_break, 2);
             $taskcard->actual .= $actual_manhours;
 
         }
@@ -221,36 +226,27 @@ class JobCardDatatables extends Controller
      */
     public function filter(Request $request)
     {
-        $JobCard = JobCard::with('taskcard');
-
+        $JobCard = JobCard::with('jobcardable','jobcardable.task','jobcardable.aircrafts','jobcardable.skills','jobcardable.type')->first();
+        // dd($JobCard);
         if (!empty($request->task_type_id)) {
-            $JobCard->whereHas('taskcard.task', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable.task', function ($query) use ($request) {
                 $query->where('task_id', $request->task_type_id);
             });
         }
         if (!empty($request->aircrafts)) {
-            $JobCard->whereHas('taskcard.aircrafts', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable.aircrafts', function ($query) use ($request) {
                 $query->whereIn('aircraft_id', $request->aircrafts);
             });
         }
         if (!empty($request->skills)) {
-            $JobCard->whereHas('taskcard.skills', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable.skills', function ($query) use ($request) {
                 $query->where('skill_id', $request->skills);
             });
         }
-        if (!empty($request->project_no)) {
-            $JobCard->orderBy('project_no', $request->project_no);
-        }
         if (!empty($request->taskcard_routine_type)) {
-            $JobCard->whereHas('taskcard.type', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable.type', function ($query) use ($request) {
                 $query->where('type_id', $request->taskcard_routine_type);
             });
-        }
-        if (!empty($request->date_issued)) {
-            $JobCard->orderBy('created_at', $request->date_issued);
-        }
-        if (!empty($request->jc_no)) {
-            $JobCard->orderBy('number', $request->jc_no);
         }
         if (!empty($request->customer)) {
             $JobCard->whereHas('customer', function ($query) use ($request) {

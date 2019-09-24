@@ -268,11 +268,18 @@
                                 <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                     <div class="flex">
                                         <div class="action-buttons">
+<<<<<<< HEAD
                                             {{-- @include('') --}}
                                             @component('frontend.common.buttons.print')
                                             @slot('href', route('frontend.project-hm.summary.cmr-awl', ['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )                                             @endcomponent
+=======
+                                            @component('frontend.common.buttons.print')
+                                                @slot('id', 'ppc-print')
+                                                @slot('name', 'ppc-print')
+                                                @slot('href', route('frontend.jobcard.print',['uuid' => $jobcard->uuid]) )
+                                            @endcomponent
+>>>>>>> origin/Iqbal
                                             @include('frontend.common.buttons.back')
-
                                         </div>
                                     </div>
                                 </div>

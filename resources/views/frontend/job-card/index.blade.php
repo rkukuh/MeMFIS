@@ -56,7 +56,6 @@
                                                 {!! csrf_field() !!}
                                                 <div class="m-input-icon m-input-icon--left">
                                                     <input type="text" class="form-control m-input" id="number" name="number" placeholder="Search...">
-
                                                     <span class="m-input-icon__icon m-input-icon__icon--left">
                                                         <span><i class="la la-search"></i></span>
                                                     </span>
@@ -70,6 +69,12 @@
                                                     @endcomponent()
                                                 </div>
                                             </form>
+                                            <div class="d-flex justify-content-end mt-4 search">
+                                                @include('frontend.common.buttons.filter')
+                                            </div>
+                                            <div class="col-lg-12">
+                                                @include('frontend.job-card.filter')
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

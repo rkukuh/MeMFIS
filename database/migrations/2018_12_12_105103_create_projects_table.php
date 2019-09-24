@@ -26,7 +26,7 @@ class CreateProjectsTable extends Migration
             $table->string('aircraft_sn');
             $table->json('data_defectcard')->nullable();
             $table->json('data_htcrr')->nullable();
-            $table->json('origin_project')->nullable();
+            $table->json('origin_parent_project')->nullable();
             $table->json('origin_project_workpackages')->nullable();
             $table->json('origin_project_workpackage_engineers')->nullable();
             $table->json('origin_project_workpackage_facilities')->nullable();

@@ -53,7 +53,7 @@ $factory->define(Project::class, function (Faker $faker) {
 
             return $faker->randomElement([null, json_encode($data)]);
         },
-        'origin_project' => null,
+        'origin_parent_project' => null,
         'origin_project_workpackages' => null,
         'origin_project_workpackage_engineers' => null,
         'origin_project_workpackage_facilities' => null,

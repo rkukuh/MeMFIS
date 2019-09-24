@@ -33,9 +33,9 @@ $('.filter').on('change', function () {
             status_jobcard: status_jobcard,
         },
         success: function(response) {
-            let table = $('.job_card_engineer_datatable').mDatatable();
+            let table = $('.job_card_datatable_ppc').mDatatable();
             table.destroy();
-            table = $('.job_card_engineer_datatable').mDatatable({
+            table = $('.job_card_datatable_ppc').mDatatable({
                 data: {
                     type: "local",
                     source: response,
