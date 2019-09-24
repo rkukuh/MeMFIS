@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend\Quotation;
 
 use App\Models\Quotation;
+use App\Models\Manhour;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -60,10 +61,11 @@ class QuotationHtcrrController extends Controller
     {
         $project_htcrr = json_decode($quotation->quotationable->data_htcrr);
         $quotation_htcrr = json_decode($quotation->data_htcrr);
-
+        $manhour_rate = Manhour::where('level',$quotation->quotationable->customer->levels->last()->score)->first();
 
         return view('frontend.quotation.htcrr.index',[
             'quotation' => $quotation,
+            'manhour_rate' => $manhour_rate,
             'project_htcrr' => $project_htcrr,
             'quotation_htcrr' => $quotation_htcrr
         ]);
