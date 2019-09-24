@@ -330,6 +330,7 @@ let AdditionalTaskQtnEdit = {
                 }
             ]
         });
+        
         $('.defect_card_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -596,6 +597,7 @@ let AdditionalTaskQtnEdit = {
                 }
             });
         });
+
         $('.tools_datatable').on('click','.edit-item-price', function edit () {
             // save_changes_button();
 
@@ -723,6 +725,7 @@ let AdditionalTaskQtnEdit = {
                 }
             });
         });
+
         $('.nav-tabs').on('click', '.items', function () {
 
             let table = $('.materials_datatable').mDatatable();

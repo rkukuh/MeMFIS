@@ -349,6 +349,15 @@ class QuotationController extends Controller
         $amount = 0;
         $error_messages = $work_progress= [];
         $scheduled_payment_amounts = json_decode($quotation->scheduled_payment_amount);
+        if(empty($scheduled_payment_amounts)){
+            $error_message = array(
+                'message' => "Scheduled payment total hasn't been filled yet",
+                'title' => $quotation->number,
+                'alert-type' => "error"
+            );
+            array_push($error_messages, $error_message);
+            return response()->json(['error' => $error_messages], '403');
+        }
         foreach($scheduled_payment_amounts as $scheduled_payment_amount){
             $amount += $scheduled_payment_amount->amount;
             array_push($work_progress, $scheduled_payment_amount->work_progress);
@@ -423,6 +432,12 @@ class QuotationController extends Controller
         $ProjectWorkPackageTaskCard = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
         foreach($ProjectWorkPackageTaskCard as $taskcard){
                 $tc = $taskcard->taskcard;
+                $helper_quantity = $tc->helper_quantity;
+                if(empty($$helper_quantity)){
+                    $helper_quantity = null;
+                }else{
+                    $helper_quantity = $helper_quantity->toJson();
+                }
 
                 if(Type::where('id',$tc->type_id)->first()->code == "basic"){
                     $tc_code = 'BSC';
@@ -461,7 +476,7 @@ class QuotationController extends Controller
                         'origin_quotation' => null,
                         'origin_jobcardable' => $tc->toJson(),
                         'origin_jobcardable_items' => $tc->items->toJson(),
-                        'origin_jobcard_helpers' => $tc->helper_quantity->toJson(),
+                        'origin_jobcard_helpers' => $helper_quantity,
                     ]);
 
                     $jobcard->progresses()->save(new Progress([

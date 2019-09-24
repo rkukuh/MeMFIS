@@ -113,6 +113,7 @@ class TaskReleaseJobCardController extends Controller
             'materials' => $taskrelease->jobcardable->materials,
             'tools' => $taskrelease->jobcardable->tools,
             'status' => $status,
+            'actual' => $actual,
 
         ]);
     }

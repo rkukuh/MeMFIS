@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class TaskCardWorkPackage extends Pivot
 {
     use SoftDeletes;
+    
+    protected $dates = ['deleted_at'];
 
     protected $table = 'taskcard_workpackage';
 

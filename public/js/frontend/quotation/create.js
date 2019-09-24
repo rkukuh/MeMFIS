@@ -95,6 +95,9 @@ let Quotation = {
                                     });
                                 }
                             }
+
+                            $("#term_of_payment").val(response.payment_term);
+                            
                         }
                     });
                     if (workpackage_datatables_init == true) {

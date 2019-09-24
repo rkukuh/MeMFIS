@@ -162,10 +162,11 @@
                                             </label>
 
                                             @component('frontend.common.input.textarea')
-                                                @slot('rows', '5')
                                                 @slot('id', 'additional_project_title')
                                                 @slot('name', 'additional_project_title')
                                                 @slot('text', 'Additional Project Title ')
+                                                @slot('value', $project->title)
+                                                @slot('rows', '5')
                                                 @slot('id_error', 'additional_project_title')
                                             @endcomponent
                                         </div>
