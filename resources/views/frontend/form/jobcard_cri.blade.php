@@ -106,6 +106,10 @@
         margin-bottom: 4px;
     }
 
+    #content5-repeat{
+        margin-top:12px;
+    }
+
     #content5 .head,
     #content5-repeat .head{
       width: 100%;
@@ -236,21 +240,6 @@
         </div>
     </div>
 
-    <div id="content4">
-        <div class="container">
-            <table width="100%" cellpadding="2">
-                    <tr style="background:#d4d7db">
-                        <td align="center" width="50%">Material(s)</td>
-                        <td align="center" width="50%">Tool(s)</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" height="23">Lorem <br> lorem </td>
-                        <td valign="top" height="23"></td>
-                    </tr>
-            </table>
-        </div>
-    </div>
-
     <div id="content5">
         <div class="container">
                 <div class="head">
@@ -265,15 +254,15 @@
                 <div class="body">
                 <table width="100%">
                     <tr>
-                    <td width="33%" height="19%" align="center" valign="bottom">
+                    <td width="33%" height="100px" align="center" valign="bottom">
                         <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
                         <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
                     </td>
-                    <td width="33%" height="19%" align="center" valign="bottom">
+                    <td width="33%" height="100px" align="center" valign="bottom">
                         <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
                         <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
                     </td>
-                    <td width="34%" height="19%" align="center" valign="bottom">
+                    <td width="34%" height="100px" align="center" valign="bottom">
                         <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
                         <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
                     </td>
@@ -330,21 +319,6 @@
         </div>
     </div>
 
-    <div id="content4-repeat">
-        <div class="container">
-            <table width="100%" cellpadding="2">
-                    <tr style="background:#d4d7db">
-                        <td align="center" width="50%">Material(s)</td>
-                        <td align="center" width="50%">Tool(s)</td>
-                    </tr>
-                    <tr>
-                        <td valign="top" height="23"></td>
-                        <td valign="top" height="23"></td>
-                    </tr>
-            </table>
-        </div>
-    </div>
-
     <div id="content5-repeat">
         <div class="container">
                 <div class="head">
@@ -374,6 +348,21 @@
                         </tr>
                     </table>
                 </div>
+        </div>
+    </div>
+
+    <div id="content4-repeat">
+        <div class="container">
+            <table width="100%" cellpadding="2">
+                    <tr style="background:#d4d7db">
+                        <td align="center" width="50%">Material(s)</td>
+                        <td align="center" width="50%">Tool(s)</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" height="23"></td>
+                        <td valign="top" height="23"></td>
+                    </tr>
+            </table>
         </div>
     </div>
 
