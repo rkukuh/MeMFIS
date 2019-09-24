@@ -60,14 +60,13 @@ class DiscrepancyDatatables extends Controller
                     $jobcard->jobcardSkill .= '';
                 }
             }
-
-            if(sizeOf($jobcard->approvals) == 0){
+            if($jobcard->approvals->count() == 0){
                 $jobcard->status .= 'mechanic';
             }
-            elseif(sizeOf($jobcard->approvals) == 1){
+            else if($jobcard->approvals->count() == 1){
                 $jobcard->status .= 'engineer';
             }
-            else{
+            else if($jobcard->approvals->count() == 2){
                 $jobcard->status .= 'ppc';
             }
         }

@@ -153,7 +153,7 @@ let TaskCard = {
                         }
                         else{
                             return (
-                                'Approved'
+                                'Mechanic Approved'
                             );
                         }
                     }
