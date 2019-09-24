@@ -2,146 +2,143 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        header {
-            position: fixed;
-            top: 0cm;
-            left: 0cm;
-            right: 0cm;
-            height: 3cm;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    header {
+      position: fixed;
+      top: 0cm;
+      left: 0cm;
+      right: 0cm;
+      height: 3cm;
+    }
+    footer {
+      position: fixed;
+      bottom: 0cm;
+      left: 0cm;
+      right: 0cm;
+      height: 1cm;
+    }
+    html,body{
+      padding: 0;
+      margin: 0;
+      font-size: 12px;
+    }
 
-        footer {
-            position: fixed;
-            bottom: 0cm;
-            left: 0cm;
-            right: 0cm;
-            height: 1cm;
-        }
+    ul li{
+      display: inline-block;
+    }
 
-        html,
-        body {
-            padding: 0;
-            margin: 0;
-            font-size: 12px;
-        }
+    table{
+      border-collapse: collapse;
+    }
 
-        ul li {
-            display: inline-block;
-        }
+    .container{
+      width: 100%;
+      margin: 0 36px;
+    }
 
-        table {
-            border-collapse: collapse;
-        }
+    #header{
+      margin-top:10px;
+    }
 
-        .container {
-            width: 100%;
-            margin: 0 36px;
-        }
+    #content{
+      margin-top:168px;
+    }
 
-        #header {
-            margin-top: 10px;
-        }
+    #content .jobcard-info fieldset legend{
+      font-size: 20px;
+      font-weight: bold;
+      color: cornflowerblue;
+    }
 
-        #content {
-            margin-top: 168px;
-        }
+    #content .jobcard-info .jobcard-info-detail table tr td{
+      vertical-align: top;
+    }
 
-        #content .jobcard-info fieldset legend {
-            font-size: 20px;
-            font-weight: bold;
-            color: cornflowerblue;
-        }
+    #content .jobcard-info .jobcard-info-detail{
+      margin-top: 12px;
+    }
 
-        #content .jobcard-info .jobcard-info-detail table tr td {
-            vertical-align: top;
-        }
+    #content .barcode{
+      margin-left:16px;
+      margin-top: -92px;
+    }
 
-        #content .jobcard-info .jobcard-info-detail {
-            margin-top: 12px;
-        }
+    #content2{
+        margin-top:-28px;
+    }
 
-        #content .barcode {
-            margin-left: 16px;
-            margin-top: -92px;
-        }
+    #content2 table,
+    #content2-repeat table{
+        border:1px solid  #d4d7db;
+    }
 
-        #content2 {
-            margin-top: -28px;
-        }
+    #content2 table tr td,
+    #content2-repeat table tr td{
+        border:1px solid  #d4d7db;
+    }
 
-        #content2 table,
-        #content2-repeat table {
-            border: 1px solid #d4d7db;
-        }
+    #content3, #content4, #content5,
+    #content2-repeat,
+    #content3-repeat,
+    #content4-repeat{
+        margin-top:4px;
+    }
 
-        #content2 table tr td,
-        #content2-repeat table tr td {
-            border: 1px solid #d4d7db;
-        }
+    #content3 table tr td,
+    #content3-repeate table tr td{
+        height:6%;
+    }
 
-        #content3,
-        #content4,
-        #content5,
-        #content2-repeat,
-        #content3-repeat,
-        #content4-repeat {
-            margin-top: 4px;
-        }
+    #content4 table,
+    #content4-repeat table{
+        border:1px solid  #d4d7db;
+    }
 
-        #content3 table tr td,
-        #content3-repeate table tr td {
-            height: 6%;
-        }
+    #content4 table tr td,
+    #content4-repeat table tr td{
+        border:1px solid  #d4d7db;
+    }
 
-        #content4 table,
-        #content4-repeat table {
-            border: 1px solid #d4d7db;
-        }
+    #content4-repeat{
+        margin-bottom: 4px;
+    }
 
-        #content4 table tr td,
-        #content4-repeat table tr td {
-            border: 1px solid #d4d7db;
-        }
+    #content5-repeat{
+        margin-top:12px;
+    }
 
-        #content4-repeat {
-            margin-bottom: 4px;
-        }
+    #content5 .head,
+    #content5-repeat .head{
+      width: 100%;
+      height: 30px;
+      background: #f7dd16;
+      border-radius: 9px 9px 0px 0px;
+      font-weight: bold;
+      font-size: 12px;
+    }
 
-        #content5 .head,
-        #content5-repeat .head {
-            width: 100%;
-            height: 30px;
-            background: #f7dd16;
-            border-radius: 9px 9px 0px 0px;
-            font-weight: bold;
-            font-size: 12px;
-        }
+    #content5 .body,
+    #content5-repeat .body{
+      width: 100%;
+      border-left:  4px solid  #d4d7db;
+      border-right:  4px solid  #d4d7db;
+      border-bottom:  4px solid  #d4d7db;
+      font-size: 10px;
+    }
 
-        #content5 .body,
-        #content5-repeat .body {
-            width: 100%;
-            border-left: 4px solid #d4d7db;
-            border-right: 4px solid #d4d7db;
-            border-bottom: 4px solid #d4d7db;
-            font-size: 10px;
-        }
+    #content5 .body table tr td,
+    #content5-repeat .body table tr td{
+      border-left: 1px solid  #d4d7db;
+    }
 
-        #content5 .body table tr td,
-        #content5-repeat .body table tr td {
-            border-left: 1px solid #d4d7db;
-        }
+    .page_break { page-break-before: always; }
+    /* <div class="page_break"></div> */
 
-        .page_break {
-            page-break-before: always;
-        }
-
-        /* <div class="page_break"></div> */
-    </style>
+  </style>
 </head>
 
 <body>
@@ -245,21 +242,6 @@
         </div>
     </div>
 
-    <div id="content4">
-        <div class="container">
-            <table width="100%" cellpadding="2">
-                <tr style="background:#d4d7db">
-                    <td align="center" width="50%">Material(s)</td>
-                    <td align="center" width="50%">Tool(s)</td>
-                </tr>
-                <tr>
-                    <td valign="top" height="23">Lorem <br> lorem </td>
-                    <td valign="top" height="23"></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
     <div id="content5">
         <div class="container">
             <div class="head">
@@ -274,21 +256,18 @@
             <div class="body">
                 <table width="100%">
                     <tr>
-                        <td width="33%" height="19%" align="center" valign="bottom">
-                            <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
-                            <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date &
-                                    Time</span></div>
-                        </td>
-                        <td width="33%" height="19%" align="center" valign="bottom">
-                            <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
-                            <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date &
-                                    Time</span></div>
-                        </td>
-                        <td width="34%" height="19%" align="center" valign="bottom">
-                            <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
-                            <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date &
-                                    Time</span></div>
-                        </td>
+                    <td width="33%" height="100px" align="center" valign="bottom">
+                        <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
+                        <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
+                    </td>
+                    <td width="33%" height="100px" align="center" valign="bottom">
+                        <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
+                        <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
+                    </td>
+                    <td width="34%" height="100px" align="center" valign="bottom">
+                        <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
+                        <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
+                    </td>
                     </tr>
                 </table>
             </div>
@@ -342,21 +321,6 @@
         </div>
     </div>
 
-    <div id="content4-repeat">
-        <div class="container">
-            <table width="100%" cellpadding="2">
-                <tr style="background:#d4d7db">
-                    <td align="center" width="50%">Material(s)</td>
-                    <td align="center" width="50%">Tool(s)</td>
-                </tr>
-                <tr>
-                    <td valign="top" height="23"></td>
-                    <td valign="top" height="23"></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
     <div id="content5-repeat">
         <div class="container">
             <div class="head">
@@ -389,6 +353,21 @@
                     </tr>
                 </table>
             </div>
+        </div>
+    </div>
+
+    <div id="content4-repeat">
+        <div class="container">
+            <table width="100%" cellpadding="2">
+                    <tr style="background:#d4d7db">
+                        <td align="center" width="50%">Material(s)</td>
+                        <td align="center" width="50%">Tool(s)</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" height="23"></td>
+                        <td valign="top" height="23"></td>
+                    </tr>
+            </table>
         </div>
     </div>
 

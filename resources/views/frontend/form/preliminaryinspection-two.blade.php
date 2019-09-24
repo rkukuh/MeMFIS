@@ -6,6 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
+
+    header {
+      position: fixed;
+      top: 0cm;
+      left: 0cm;
+      right: 0cm;
+      height: 3cm;
+    }
+    footer {
+      position: fixed;
+      bottom: 0cm;
+      left: 0cm;
+      right: 0cm;
+      height: 1.5cm;
+    }
     html,body{
       padding: 0;
       margin: 0;
@@ -30,7 +45,7 @@
     }
 
     #content{
-      margin-top:27px;
+      margin-top:168px;
     }
     
     #content .jobcard-info fieldset legend{
@@ -77,10 +92,18 @@
 </head>
 <body>
   
-  <div id="header">
-    <img src="./img/form/printoutpreliminaryinspection/HeaderPreliminaryInspection.jpg" alt=""width="100%">
-  </div>
 
+
+  <header id="header">
+    <img src="./img/form/printoutpreliminaryinspection/HeaderPreliminaryInspection.png" alt=""width="100%">
+  </header>
+  <footer style="margin-top:14px;">
+    <div class="container">
+      <span style="margin-left:6px">Prepared By : lorem &nbsp;&nbsp;&nbsp;&nbsp; Printed By : lorem ; lorem</span>
+    </div>
+    <img src="./img/form/printoutpreliminaryinspection/FooterPreliminaryInspection.png" width="100%" alt="" >
+  </footer>
+  
   <div id="content">
     <ul>
       <li>
@@ -255,18 +278,5 @@
       </div>
     </div>
   </div>
-
-  <div style="position:absolute;bottom:0;">
-    <div class="container">
-      <table width="100%">
-          <tr>
-            <td width="50%">Issued By : Name PPC</td>
-            <td width="50%" align="right">Page 2/2</td>
-          </tr>
-      </table>
-    </div>
-    <img src="./img/form/printoutpreliminaryinspection/FooterPreliminaryInspection.jpg" width="100%" alt="" srcset="">
-  </div>
-
 </body>
 </html>
