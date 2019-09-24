@@ -162,7 +162,7 @@
                                                 Zone
                                             </label>
 
-                                            @if ($taskcard->zones->isEmpty())
+                                            @if ($discrepancy->zones->isEmpty())
                                                     @include('frontend.common.label.data-info-nodata')
                                                 @else
                                                     @foreach ($discrepancy->zones  as $zone)
@@ -456,7 +456,10 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/job-card/discrepancy/edit.js') }}"></script>
+    <script>
+        let discrepancy_uuid = '{{$discrepancy->uuid}}';
+    </script>
+    <script src="{{ asset('js/frontend/job-card/discrepancy/show.js') }}"></script>
     <script src="{{ asset('js/frontend/job-card/discrepancy/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
