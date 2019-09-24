@@ -168,12 +168,18 @@ let TaskCard = {
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.created_at 
+                    }
                 },
                 {
                     field: 'updated_by',
                     title: 'Updated By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.created_at 
+                    }
                 },
                 {
                     field: '',

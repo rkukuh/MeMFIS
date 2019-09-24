@@ -183,6 +183,11 @@ class DiscrepancyDatatables extends Controller
             $jobcard->created_by    .= User::find($jobcard->audits->first()->user_id)->name;
             $jobcard->updated_by    .= User::find($jobcard->audits->last()->user_id)->name;
 
+            $jobcard->conducted_at      .= $jobcard->approvals->last()->created_at;
+            $jobcard->create_date       .= $jobcard->audits->first()->created_at;
+            $jobcard->update_date       .= $jobcard->audits->last()->updated_at;
+
+
 
             if(isset($jobcard->jobcard->jobcardable->skills) ){
                 $jobcard->jobcardSkill .= $jobcard->jobcard->jobcardable->skill;
@@ -339,6 +344,12 @@ class DiscrepancyDatatables extends Controller
             $jobcard->conducted_by.= User::find($jobcard->approvals->last()->conducted_by)->name;
             $jobcard->created_by .= User::find($jobcard->audits->first()->user_id)->name;
             $jobcard->updated_by .= User::find($jobcard->audits->first()->user_id)->name;
+
+            $jobcard->conducted_at      .= $jobcard->approvals->last()->created_at;
+            $jobcard->create_date       .= $jobcard->audits->first()->created_at;
+            $jobcard->update_date       .= $jobcard->audits->last()->updated_at;
+
+            
         }
 
         $data = $alldata = json_decode($DefectCard);
