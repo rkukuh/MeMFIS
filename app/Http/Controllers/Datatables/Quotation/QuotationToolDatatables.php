@@ -265,7 +265,7 @@ class QuotationToolDatatables extends Controller
     public function htcrr(Quotation $quotation, WorkPackage $workPackage)
     {
         $htcrrtools = $tools = [];
-        $htcrrs = HtCrr::whereNull('parent_id')->where('project_id', $quotation->project_id)->get();
+        $htcrrs = HtCrr::whereNull('parent_id')->where('project_id', $quotation->quotationable->id)->get();
         // -Get Items from htcrr
         foreach($htcrrs as $htcrr){
             foreach($htcrr->tools as $tool){

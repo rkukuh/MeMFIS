@@ -266,7 +266,7 @@ class QuotationItemDatatables extends Controller
     public function htcrr(Quotation $quotation)
     {
         $htcrrmaterials = $materials = [];
-        $htcrrs = HtCrr::whereNull('parent_id')->where('project_id', $quotation->project_id)->get();
+        $htcrrs = HtCrr::whereNull('parent_id')->where('project_id', $quotation->quotationable->id)->get();
         // -Get Items from htcrr
         foreach($htcrrs as $htcrr){
             foreach($htcrr->materials as $material){
