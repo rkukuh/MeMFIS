@@ -1,14 +1,14 @@
-<div class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg m-accordion--toggle-arrow" id="m_accordion_1" role="tablist">
+<div class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg m-accordion--toggle-arrow" id="m_accordion_item" role="tablist">
     <!--begin::Item-->
     <div class="m-accordion__item ">
-        <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_1_item_1_head" data-toggle="collapse" href="#m_accordion_1_item_1_body" aria-expanded="  false">
+        <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_items_item_1_head" data-toggle="collapse" href="#m_accordion_items_item_1_body" aria-expanded="  false">
             <span class="m-accordion__item-icon"></span>
             <span class="m-accordion__item-title">Routine Tool(S) List</span>
 
             <span class="m-accordion__item-mode"></span>
         </div>
 
-        <div class="m-accordion__item-body collapse" id="m_accordion_1_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_1_item_1_head" data-parent="#m_accordion_1">
+        <div class="m-accordion__item-body collapse" id="m_accordion_items_item_1_body" class=" " role="tabpanel" aria-labelledby="m_accordion_items_item_1_head" data-parent="#m_accordion_1">
             <div class="m-accordion__item-content">
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
@@ -46,14 +46,14 @@
 
     <!--begin::Item-->
     <div class="m-accordion__item ">
-        <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_2_item_2_head" data-toggle="collapse" href="#m_accordion_2_item_2_body" aria-expanded="  false">
+        <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_items_item_2_head" data-toggle="collapse" href="#m_accordion_items_item_2_body" aria-expanded="  false">
             <span class="m-accordion__item-icon"></span>
             <span class="m-accordion__item-title">Routine Material(S) List</span>
 
             <span class="m-accordion__item-mode"></span>
         </div>
 
-        <div class="m-accordion__item-body collapse" id="m_accordion_2_item_2_body" class=" " role="tabpanel" aria-labelledby="m_accordion_2_item_2_head" data-parent="#m_accordion_1">
+        <div class="m-accordion__item-body collapse" id="m_accordion_items_item_2_body" class=" " role="tabpanel" aria-labelledby="m_accordion_items_item_2_head" data-parent="#m_accordion_1">
             <div class="m-accordion__item-content">
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
@@ -91,14 +91,14 @@
 
     <!--begin::Item-->
     <div class="m-accordion__item ">
-        <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_3_item_3_head" data-toggle="collapse" href="#m_accordion_3_item_3_body" aria-expanded="  false">
+        <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_items_item_3_head" data-toggle="collapse" href="#m_accordion_items_item_3_body" aria-expanded="  false">
             <span class="m-accordion__item-icon"></span>
             <span class="m-accordion__item-title">Non Routine Tool(S) List</span>
 
             <span class="m-accordion__item-mode"></span>
         </div>
 
-        <div class="m-accordion__item-body collapse" id="m_accordion_3_item_3_body" class=" " role="tabpanel" aria-labelledby="m_accordion_3_item_3_head" data-parent="#m_accordion_1">
+        <div class="m-accordion__item-body collapse" id="m_accordion_items_item_3_body" class=" " role="tabpanel" aria-labelledby="m_accordion_items_item_3_head" data-parent="#m_accordion_1">
             <div class="m-accordion__item-content">
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
@@ -136,14 +136,14 @@
 
     <!--begin::Item-->
     <div class="m-accordion__item ">
-        <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_4_item_4_head" data-toggle="collapse" href="#m_accordion_4_item_4_body" aria-expanded="  false">
+        <div class="m-accordion__item-head collapsed" srole="tab" id="m_accordion_items_item_4_head" data-toggle="collapse" href="#m_accordion_items_item_4_body" aria-expanded="  false">
             <span class="m-accordion__item-icon"></span>
             <span class="m-accordion__item-title">Non Routine Material(S) List</span>
 
             <span class="m-accordion__item-mode"></span>
         </div>
 
-        <div class="m-accordion__item-body collapse" id="m_accordion_4_item_4_body" class=" " role="tabpanel" aria-labelledby="m_accordion_4_item_4_head" data-parent="#m_accordion_1">
+        <div class="m-accordion__item-body collapse" id="m_accordion_items_item_4_body" class=" " role="tabpanel" aria-labelledby="m_accordion_items_item_4_head" data-parent="#m_accordion_1">
             <div class="m-accordion__item-content">
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">

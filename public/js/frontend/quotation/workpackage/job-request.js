@@ -1,3 +1,31 @@
+$("#m_accordion_items_item_1_head").on('click', function(){
+    let table = $('.routine_tools_datatable').mDatatable();
+
+    table.originalDataSet = [];
+    table.reload();
+});
+
+$("#m_accordion_items_item_2_head").on('click', function(){
+    let table = $('.routine_materials_datatable').mDatatable();
+
+    table.originalDataSet = [];
+    table.reload();
+});
+
+$("#m_accordion_items_item_3_head").on('click', function(){
+    let table = $('.non_routine_tools_datatable').mDatatable();
+
+    table.originalDataSet = [];
+    table.reload();
+});
+
+$("#m_accordion_items_item_4_head").on('click', function(){
+    let table = $('.non_routine_materials_datatable').mDatatable();
+
+    table.originalDataSet = [];
+    table.reload();
+});
+
 let JobRequest = {
     init: function() {
 
@@ -1237,9 +1265,12 @@ let JobRequest = {
             });
 
         });
+
+
     }
 };
 
 jQuery(document).ready(function() {
     JobRequest.init();
+
 });
