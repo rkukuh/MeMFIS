@@ -22,7 +22,7 @@ class CreateHtcrrTable extends Migration
             $table->unsignedBigInteger('project_id');
             $table->string('position')->nullable();
             $table->string('serial_number')->nullable();
-            $table->string('part_number')->nullable();
+            $table->unsignedBigInteger('item_id');
             $table->timestamp('conducted_at')->nullable();
             $table->unsignedBigInteger('conducted_by')->nullable();
             $table->unsignedDecimal('estimation_manhour', 8, 2)->nullable();
@@ -45,6 +45,11 @@ class CreateHtcrrTable extends Migration
 
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('item_id')
+                    ->references('id')->on('items')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->foreign('parent_id')
                 ->references('id')->on('htcrr')

@@ -59,7 +59,7 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/defectcard/'+t.uuid+'/">' + t.code + "</a>"
+                        return '<a href="/discrepancy/'+t.uuid+'/">' + t.code + "</a>"
                     }
                 },
                 {
@@ -161,18 +161,27 @@ let TaskCard = {
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
+                     template: function (t, e, i) {
+                        return t.created_by + '<br>' + t.create_date 
+                    }
                 },
                 {
                     field: 'updated_by',
                     title: 'Updated By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.updated_by + '<br>' + t.update_date 
+                    }
                 },
                 {
                     field: 'conducted_by',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.conducted_at 
+                    }
                 },
                 {
                     field: 'Actions',

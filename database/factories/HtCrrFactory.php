@@ -15,12 +15,12 @@ use Faker\Generator as Faker;
 $factory->define(HtCrr::class, function (Faker $faker) {
 
     $number = $faker->unixTime();
-    
+
     $disc_type = $faker->randomElement(['percentage', 'amount']);
-                
+
     if ($disc_type == 'percentage') {
         $disc_value = $faker->randomElement([5, 10, 15, 20, 25]);
-    } 
+    }
     else if ($disc_type == 'amount') {
         $disc_value = rand(1, 10) * 100000;
     }
@@ -33,12 +33,12 @@ $factory->define(HtCrr::class, function (Faker $faker) {
             if (Project::count()) {
                 return Project::get()->random()->id;
             }
-            
+
             return factory(Project::class)->create()->id;
         },
         'position' => 'Pos-' . ucfirst($faker->word),
         'serial_number' => null,
-        'part_number' => null,
+        'item_id' => Item::get()->random()->id,
         'conducted_at' => null,
         'conducted_by' => null,
         'estimation_manhour' => 0,
@@ -69,7 +69,7 @@ $factory->state(HtCrr::class, 'removal', function ($faker) {
     return [
         'type_id' => Type::ofHtCrrType()->where('name', 'removal')->first()->id,
         'serial_number' => 'S/N-' . $faker->randomNumber,
-        'part_number' => 'P/N-' . $faker->randomNumber,
+        'item_id' => Item::get()->random()->id,
         'conducted_at' => Carbon::now()->subWeeks(rand(1, 3)),
         'conducted_by' => Employee::get()->random()->id,
         'estimation_manhour' => $faker->randomFloat(2, 0, 9999),
@@ -83,7 +83,7 @@ $factory->state(HtCrr::class, 'installation', function ($faker) {
     return [
         'type_id' => Type::ofHtCrrType()->where('name', 'installation')->first()->id,
         'serial_number' => 'S/N-' . $faker->randomNumber,
-        'part_number' => 'P/N-' . $faker->randomNumber,
+        'item_id' => Item::get()->random()->id,
         'conducted_at' => Carbon::now()->subWeeks(rand(1, 3)),
         'conducted_by' => Employee::get()->random()->id,
         'estimation_manhour' => $faker->randomFloat(2, 0, 9999),

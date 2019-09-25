@@ -59,7 +59,7 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/defectcard/'+t.uuid+'/">' + t.code + "</a>"
+                        return '<a href="/discrepancy/'+t.uuid+'/">' + t.code + "</a>"
                     }
                 },
                 {
@@ -153,7 +153,7 @@ let TaskCard = {
                         }
                         else{
                             return (
-                                'Approved'
+                                'Mechanic Approved'
                             );
                         }
                     }
@@ -164,7 +164,7 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return t.created_by + '<br>' + t.create_date 
+                        return t.created_by + '<br>' + t.create_date
                     }
                 },
                 {
@@ -173,7 +173,7 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return t.updated_by + '<br>' + t.update_date 
+                        return t.updated_by + '<br>' + t.update_date
                     }
                 },
                 {
@@ -182,7 +182,7 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return t.conducted_by + '<br>' + t.conducted_at 
+                        return t.conducted_by + '<br>' + t.conducted_at
                     }
                 },
                 {

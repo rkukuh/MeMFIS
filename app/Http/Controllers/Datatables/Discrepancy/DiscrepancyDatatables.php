@@ -23,17 +23,26 @@ class DiscrepancyDatatables extends Controller
         // ->has('approvals', '<=', 1)
         // ->orWhereDoesntHave('approvals') //? Yang ditampilkan adalah discrepancy yang dibuat mechanic saya. yang perlu di approve engineer
         ->get();
-        
-        
+
         foreach($DefectCard as $jobcard){
             $jobcard->taskcard_number   .= $jobcard->jobcard->jobcardable->number;
             $jobcard->customer_name     .= $jobcard->jobcard->quotation->quotationable->customer->name;
             $jobcard->aircraft_sn       .= $jobcard->jobcard->quotation->quotationable->aircraft_sn;
-            $jobcard->conducted_by      .= User::find($jobcard->approvals->last()->conducted_by)->name;
+            if($jobcard->approvals->toArray() == []){
+                $conducted_by = "";
+                $conducted_at = "";
+
+            }
+            else{
+                $conducted_by = User::find($jobcard->approvals->last()->conducted_by)->name;
+                $conducted_at = $jobcard->approvals->last()->created_at;
+            }
+
+            $jobcard->conducted_by      .=$conducted_by;
             $jobcard->created_by        .= User::find($jobcard->audits->first()->user_id)->name;
             $jobcard->updated_by        .= User::find($jobcard->audits->last()->user_id)->name;
 
-            $jobcard->conducted_at      .= $jobcard->approvals->last()->created_at;
+            $jobcard->conducted_at      .= $conducted_at;
             $jobcard->create_date       .= $jobcard->audits->first()->created_at;
             $jobcard->update_date       .= $jobcard->audits->last()->updated_at;
 
@@ -172,17 +181,28 @@ class DiscrepancyDatatables extends Controller
         // ->has('approvals', '<=', 1)
         // ->orWhereDoesntHave('approvals') //? Yang ditampilkan adalah discrepancy yang dibuat mechanic saya. yang perlu di approve engineer
         ->get();
-        
-        
+
+
         foreach($DefectCard as $jobcard){
             $jobcard->taskcard_number   .= $jobcard->jobcard->jobcardable->number;
             $jobcard->customer_name     .= $jobcard->jobcard->quotation->quotationable->customer->name;
             $jobcard->aircraft_sn       .= $jobcard->jobcard->quotation->quotationable->aircraft_sn;
+            if($jobcard->approvals->toArray() == []){
+                $conducted_by = "";
+                $conducted_at = "";
 
-            $jobcard->conducted_by  .= User::find($jobcard->approvals->last()->conducted_by)->name;
+            }
+            else{
+                $conducted_by = User::find($jobcard->approvals->last()->conducted_by)->name;
+                $conducted_at = $jobcard->approvals->last()->created_at;
+            }
+
+            $jobcard->conducted_by      .=$conducted_by;
             $jobcard->created_by    .= User::find($jobcard->audits->first()->user_id)->name;
             $jobcard->updated_by    .= User::find($jobcard->audits->last()->user_id)->name;
-
+            $jobcard->conducted_at      .= $conducted_at;
+            $jobcard->create_date       .= $jobcard->audits->first()->created_at;
+            $jobcard->update_date       .= $jobcard->audits->last()->updated_at;
 
             if(isset($jobcard->jobcard->jobcardable->skills) ){
                 $jobcard->jobcardSkill .= $jobcard->jobcard->jobcardable->skill;
@@ -339,6 +359,12 @@ class DiscrepancyDatatables extends Controller
             $jobcard->conducted_by.= User::find($jobcard->approvals->last()->conducted_by)->name;
             $jobcard->created_by .= User::find($jobcard->audits->first()->user_id)->name;
             $jobcard->updated_by .= User::find($jobcard->audits->first()->user_id)->name;
+
+            $jobcard->conducted_at      .= $jobcard->approvals->last()->created_at;
+            $jobcard->create_date       .= $jobcard->audits->first()->created_at;
+            $jobcard->update_date       .= $jobcard->audits->last()->updated_at;
+
+            
         }
 
         $data = $alldata = json_decode($DefectCard);

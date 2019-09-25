@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Discrepancy;
 
+use App\Models\Zone;
 use App\Models\Type;
 use App\Models\JobCard;
 use App\Models\DefectCard;
@@ -13,6 +14,12 @@ use App\Http\Requests\Frontend\DiscrepancyUpdate;
 
 class DiscrepancyMechanicController extends Controller
 {
+    protected $zones;
+
+    public function __construct()
+    {
+        $this->zones = Zone::get();
+    }
 
     /**
      * Display a listing of the resource.
@@ -104,12 +111,18 @@ class DiscrepancyMechanicController extends Controller
             $propose_correction_text =  $defectcard->pivot->propose_correction_text;
         }
 
+        foreach($discrepancy->zones as $i => $zone_taskcard){
+            $zone_discrepancies[$i] =  $zone_taskcard->id;
+        }
+
         $skill = Type::ofTaskCardSkill()->get();
 
 
         return view('frontend.discrepancy.mechanic.edit', [
             'discrepancy' => $discrepancy,
             'skills' => $skill,
+            'zones' => $this->zones,
+            'zone_discrepancies' => $zone_discrepancies,
             'propose_corrections' => $propose_corrections,
             'propose_correction_text' => $propose_correction_text,
         ]);
@@ -124,9 +137,27 @@ class DiscrepancyMechanicController extends Controller
      */
     public function update(DiscrepancyUpdate $request,DefectCard $discrepancy)
     {
+        $zone = json_decode($request->zone);
+        $zones = [];
+
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
 
         $discrepancy->update($request->all());
+
+        if($zone){
+            foreach ($zone as $zone_name ) {
+                if(isset($zone_name)){
+                    $airplane = JobCard::find($request->jobcard_id)->quotation->quotationable->aircraft->id;
+                    $zone = Zone::firstOrCreate(
+                        ['name' => $zone_name, 'zoneable_id' => $airplane, 'zoneable_type' => 'App\Models\Aircraft']
+                    );
+                    array_push($zones, $zone->id);
+                }
+            }
+
+            $discrepancy->zones()->sync($zones);
+
+        }
 
         if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
             $discrepancy->skills()->detach();

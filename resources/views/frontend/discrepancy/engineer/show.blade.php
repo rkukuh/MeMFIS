@@ -159,12 +159,18 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Area/Zone
+                                                Zone
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text',  $discrepancy->jobcard->jobcardable->work_area)
-                                            @endcomponent
+                                            @if ($discrepancy->zones->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @foreach ($discrepancy->zones  as $zone)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $zone->name )
+                                                        @endcomponent
+                                                    @endforeach
+                                            @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -450,7 +456,10 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/job-card/discrepancy/edit.js') }}"></script>
+    <script>
+        let discrepancy_uuid = '{{$discrepancy->uuid}}';
+    </script>
+    <script src="{{ asset('js/frontend/job-card/discrepancy/show.js') }}"></script>
     <script src="{{ asset('js/frontend/job-card/discrepancy/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>

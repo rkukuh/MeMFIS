@@ -179,16 +179,28 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Area/Zone
+                                                Zone
                                             </label>
 
-                                            @if(isset($discrepancy->jobcard->jobcardable->work_area))
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text',  $discrepancy->jobcard->jobcardable->work_area)
-                                                @endcomponent
-                                            @else
-                                                @include('frontend.common.label.data-info-nodata')
-                                            @endif
+                                            <select id="zone" name="zone" class="form-control m-select2" multiple style="width:100%">
+                                                @if ($discrepancy->zones->isEmpty())
+                                                    @foreach ($zones as $zone)
+                                                        <option value="{{ $zone->name }}">
+                                                            {{ $zone->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($zones as $zone)
+                                                        <option value="{{ $zone->name }}"
+                                                            @if(in_array( $zone->id ,$zone_discrepancies)) selected @endif>
+                                                            {{ $zone->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                            @component('frontend.common.label.help-text')
+                                                @slot('help_text','You can chose multiple value')
+                                            @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -537,4 +549,5 @@
 
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
 @endpush

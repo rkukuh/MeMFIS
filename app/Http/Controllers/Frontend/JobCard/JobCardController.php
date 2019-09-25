@@ -66,27 +66,37 @@ class JobCardController extends Controller
      */
     public function edit(JobCard $jobcard)
     {
-        if($jobcard->jobcardable_type == "App\Models\TaskCard"){
-            //TODO Validasi User'skill with JobCard Skill
-            foreach($jobcard->helpers as $helper){
-                $helper->userID .= $helper->user->id;
-            }
-            if($jobcard->helpers->where('userID',Auth::id())->first() == null){
-                return redirect()->route('frontend.jobcard-engineer.edit',$jobcard->uuid);
-            }
-            else{
-                return redirect()->route('frontend.jobcard-mechanic.edit',$jobcard->uuid);
-            }
-        }else if($jobcard->jobcardable_type == "App\Models\EOInstruction"){
-            //TODO Validasi User'skill with JobCard Skill
-            foreach($jobcard->helpers as $helper){
-                $helper->userID .= $helper->user->id;
-            }
-            if($jobcard->helpers->where('userID',Auth::id())->first() == null){
-                return redirect()->route('frontend.jobcard-eo-engineer.edit',$jobcard->uuid);
-            }
-            else{
-                return redirect()->route('frontend.jobcard-eo-mechanic.edit',$jobcard->uuid);
+         //TODO Validasi User'skill with HtCrr Skill
+        if($jobcard->progresses->first()->progressed_by == Auth::id()){
+            $error_notification = array(
+                'message' => "You can't run this taskcard",
+                'title' => "Danger",
+                'alert-type' => "error"
+            );
+            return redirect()->route('frontend.jobcard.hardtime.index')->with($error_notification);
+        }else{
+            if($jobcard->jobcardable_type == "App\Models\TaskCard"){
+                //TODO Validasi User'skill with JobCard Skill
+                foreach($jobcard->helpers as $helper){
+                    $helper->userID .= $helper->user->id;
+                }
+                if($jobcard->helpers->where('userID',Auth::id())->first() == null){
+                    return redirect()->route('frontend.jobcard-engineer.edit',$jobcard->uuid);
+                }
+                else{
+                    return redirect()->route('frontend.jobcard-mechanic.edit',$jobcard->uuid);
+                }
+            }else if($jobcard->jobcardable_type == "App\Models\EOInstruction"){
+                //TODO Validasi User'skill with JobCard Skill
+                foreach($jobcard->helpers as $helper){
+                    $helper->userID .= $helper->user->id;
+                }
+                if($jobcard->helpers->where('userID',Auth::id())->first() == null){
+                    return redirect()->route('frontend.jobcard-eo-engineer.edit',$jobcard->uuid);
+                }
+                else{
+                    return redirect()->route('frontend.jobcard-eo-mechanic.edit',$jobcard->uuid);
+                }
             }
         }
     }
@@ -392,7 +402,7 @@ class JobCardController extends Controller
                             'helpers' => $helpers,
                             'actual_manhours'=> $actual_manhours
                         ]);
-                    return $pdf->stream(); 
+                    return $pdf->stream();
             }
             elseif(($jobcard->jobcardable->eo_header->type->code == "cmr") or ($jobcard->jobcardable->eo_header->type->code == "awl")){
                 $pdf = \PDF::loadView('frontend/form/jobcard_cmrawl',[

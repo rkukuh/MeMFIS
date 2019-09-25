@@ -15,7 +15,7 @@ class HtCrr extends MemfisModel
         'project_id',
         'position',
         'serial_number',
-        'part_number',
+        'item_id',
         'conducted_at',
         'conducted_by',
         'estimation_manhour',
@@ -94,6 +94,16 @@ class HtCrr extends MemfisModel
     {
         return $this->belongsToMany(Employee::class, 'employee_htcrr', 'htcrr_id', 'employee_id')
                     ->withTimestamps();
+    }
+
+    /**
+     * One-Way: An item is an item.
+     *
+     * @return mixed
+     */
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
     }
 
     /**
