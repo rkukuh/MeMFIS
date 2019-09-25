@@ -515,6 +515,7 @@
                                                                                 @slot('id', 'item_sn_installation')
                                                                                 @slot('editable', 'readonly')
                                                                                 @slot('name', 'item_sn_installation')
+                                                                                @slot('value', $htcrr_installation->serial_number)
                                                                                 @slot('id_error', 'item_sn_installation')
                                                                             @endcomponent
                                                                         </td>

@@ -510,6 +510,8 @@
                                                                                 @slot('text', 'title')
                                                                                 @slot('id', 'item_sn_installation')
                                                                                 @slot('name', 'item_sn_installation')
+                                                                                @slot('value', $htcrr_installation->serial_number)
+                                                                                @slot('value', $htcrr_installation->serial_number)
                                                                                 @slot('id_error', 'title')
                                                                             @endcomponent
                                                                         </td>

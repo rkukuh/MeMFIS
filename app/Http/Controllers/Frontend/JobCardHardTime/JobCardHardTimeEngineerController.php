@@ -101,17 +101,18 @@ class JobCardHardTimeEngineerController extends Controller
         $code = explode("-", $htcrr->code);
         $progresses = $htcrr->progresses->where('progressed_by',Auth::id());
         $serial_number = [];
-        $serial_number["on"]    = HtCrr::where('code', 'JINS-'.$code[1])->first()->serial_number;
-        $serial_number["off"]   = HtCrr::where('code', 'JREM-'.$code[1])->first()->serial_number;
+        $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
+        $htcrr_installation = $htcrr->childs()->where('type_id', Type::where('code','installation')->where('of','htcrr-type')->first()->id)->first();
         if ($progresses->count() == 0 and $this->statuses->where('id',$htcrr->progresses->first()->status_id)->first()->code == "removal-open") {
             return view('frontend.job-card-hard-time.engineer.progress.removal.progress-open', [
                 'htcrr' => $htcrr,
                 'status' => $this->statuses->where('code','removal-open')->first(),
+                'htcrr_removal' => $htcrr_removal,
+                'htcrr_installation' => $htcrr_installation,
                 'employees' => $employees,
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "removal-progress"){
-            $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
 
             return view('frontend.job-card-hard-time.engineer.progress.removal.progress-resume', [
                 'break' => $this->break,
@@ -120,30 +121,29 @@ class JobCardHardTimeEngineerController extends Controller
                 'accomplished' => $this->accomplished,
                 'htcrr' => $htcrr,
                 'htcrr_removal' => $htcrr_removal,
+                'htcrr_installation' => $htcrr_installation,
                 'pending' => $this->statuses->where('code','removal-pending')->first(),
                 'closed' => $this->statuses->where('code','removal-closed')->first(),
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "removal-pending"){
-            $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
             return view('frontend.job-card-hard-time.engineer.progress.removal.progress-pause', [
                 'htcrr' => $htcrr,
                 'htcrr_removal' => $htcrr_removal,
+                'htcrr_installation' => $htcrr_installation,
                 'open' => $this->statuses->where('code','removal-progress')->first(),
                 'closed' => $this->statuses->where('code','removal-closed')->first(),
             ]);
         }
         else if ($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "installation-open") {
-            $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
             return view('frontend.job-card-hard-time.engineer.progress.installation.progress-open', [
                 'htcrr' => $htcrr,
                 'htcrr_removal' => $htcrr_removal,
+                'htcrr_installation' => $htcrr_installation,
                 'status' => $this->statuses->where('code','installation-open')->first(),
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "installation-progress"){
-            $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
-            $htcrr_installation = $htcrr->childs()->where('type_id', Type::where('code','installation')->where('of','htcrr-type')->first()->id)->first();
             return view('frontend.job-card-hard-time.engineer.progress.installation.progress-resume', [
                 'break' => $this->break,
                 'waiting' => $this->waiting,
@@ -157,8 +157,7 @@ class JobCardHardTimeEngineerController extends Controller
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "installation-pending"){
-            $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
-            $htcrr_installation = $htcrr->childs()->where('type_id', Type::where('code','installation')->where('of','htcrr-type')->first()->id)->first();
+           
             return view('frontend.job-card-hard-time.engineer.progress.installation.progress-pause', [
                 'htcrr' => $htcrr,
                 'htcrr_removal' => $htcrr_removal,
@@ -168,8 +167,6 @@ class JobCardHardTimeEngineerController extends Controller
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "installation-closed"){
-            $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
-            $htcrr_installation = $htcrr->childs()->where('type_id', Type::where('code','installation')->where('of','htcrr-type')->first()->id)->first();
             return view('frontend.job-card-hard-time.engineer.progress.installation.progress-close', [
                 'htcrr' => $htcrr,
                 'htcrr_removal' => $htcrr_removal,
@@ -177,8 +174,6 @@ class JobCardHardTimeEngineerController extends Controller
             ]);
         }
         else{
-            $htcrr_removal = $htcrr->childs()->where('type_id', Type::where('code','removal')->where('of','htcrr-type')->first()->id)->first();
-            $htcrr_installation = $htcrr->childs()->where('type_id', Type::where('code','installation')->where('of','htcrr-type')->first()->id)->first();
             return view('frontend.job-card-hard-time.engineer.progress.installation.progress-close', [
                 'htcrr' => $htcrr,
                 'htcrr_removal' => $htcrr_removal,
