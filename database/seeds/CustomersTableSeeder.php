@@ -46,10 +46,10 @@ class CustomersTableSeeder extends Seeder
             }    
 
             $customer = Customer::create([
-                'attention' => json_encode($attentions),
+                'name' => $faker->company,
                 'code' => "auto-generate",
+                'attention' => json_encode($attentions),
                 'payment_term' => $faker->randomDigitNotNull,
-                'name' => $faker->name,
             ]);
 
             if ($customer) {
