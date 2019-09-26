@@ -41,6 +41,7 @@ Route::name('frontend.')->group(function () {
                     Route::post('/{employee}/benefit-approval', 'EmployeeBenefitController@approval');
                     Route::post('/{employee}/benefit-reject', 'EmployeeBenefitController@reject');
                     Route::resource('/{employee}/account', 'EmployeeUserController');
+                    Route::put('account-pass/{account}', 'EmployeeUserController@update_pass');
                     Route::resource('/{employee}/bank', 'EmployeeBankController');
                     Route::resource('/{employee}/workshift', 'EmployeeWorkshiftController');
                     Route::resource('/{employee}/termination', 'EmployeeTerminationController');

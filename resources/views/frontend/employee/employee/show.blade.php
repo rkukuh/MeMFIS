@@ -118,7 +118,7 @@
                                                 $i = 0;
                                                 $since_year = 0;
                                                 $since_month = 0;
-                                                foreach ($tokens as $unit => $text) {
+                                                foreach ($tokens as $unit => $u) {
                                                     if ($time < $unit) continue;
                                                     $numberOfUnits[$i] = floor($time / $unit);
                                                     $i++;
