@@ -1,3 +1,13 @@
+@role('employee')
+@if($account != null)
+        @component('frontend.common.input.hidden')
+        @slot('id', 'account_uuid')
+        @slot('name', 'account_uuid')
+        @slot('value', $account->uuid)
+        @endcomponent
+@endif
+@endrole
+
 <div class="form-group m-form__group row">
     <div class="col-sm-12 col-md-12 col-lg-12">
         <fieldset class="border p-2">
@@ -38,12 +48,14 @@
             <div class="form-group m-form__group row">
                 <div class="col-sm-6 col-md-6 col-lg-6">
                     <label class="form-control-label">
-                        Passoword  
+                        Password  
                     </label>
 
                     @component('frontend.common.input.password')
-                        @slot('text', $password)
-                        @slot('disabled','disabled')
+                        @slot('text', 'Password')
+                        @slot('id', 'password')
+                        @slot('name', 'password')
+                        @slot('id_error', 'password')
                     @endcomponent
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -53,10 +65,9 @@
 
                     @component('frontend.common.input.password')
                         @slot('text', 'Confirm Password')
-                        @slot('id', 'confirm_password')
-                        @slot('name', 'confirm_password')
-                        @slot('id_error', 'confirm_password')
-                        @slot('disabled','disabled')
+                        @slot('id', 'password_confirmation')
+                        @slot('name', 'password_confirmation')
+                        @slot('id_error', 'password_confirmation')
                     @endcomponent
                 </div>
             </div>
@@ -87,8 +98,8 @@
                             @role('employee')
                                 @component('frontend.common.buttons.submit')
                                 @slot('type','button')
-                                @slot('id', 'edit-account')
-                                @slot('class', 'edit-account')
+                                @slot('id', 'edit-account-pass')
+                                @slot('class', 'edit-account-pass')
                                 @endcomponent
 
 
@@ -157,8 +168,6 @@
 
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/functions/select2/role.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/bank.js') }}"></script>
     <script src="{{ asset('js/frontend/employee/employee/create_account.js') }}"></script>
     <script>
     
@@ -172,4 +181,6 @@
     });
 
     </script>
+
+<script src="{{ asset('js/frontend/employee/employee/edit_account_pass.js') }}"></script>
 @endpush

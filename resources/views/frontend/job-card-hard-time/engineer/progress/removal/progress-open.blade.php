@@ -151,7 +151,7 @@
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('id', 'item_sn_removal')
                                                                                 @slot('name', 'item_sn_removal')
-                                                                                @slot('value', $htcrr->serial_number)
+                                                                                @slot('value', $htcrr_removal->serial_number)
                                                                                 @slot('id_error', 'item_sn_removal')
                                                                             @endcomponent
                                                                         </td>
@@ -316,6 +316,7 @@
                                                                                 @slot('id', 'item_sn_installtation')
                                                                                 @slot('name', 'item_sn_installtation')
                                                                                 @slot('id_error', 'title')
+                                                                                @slot('value', $htcrr_installation->serial_number)
                                                                             @endcomponent
                                                                         </td>
                                                                     </tr>

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\Frontend\EmployeeUserStore;
 use App\Http\Requests\Frontend\EmployeeUserUpdate;
+use App\Http\Requests\Frontend\EmployeeUserPassUpdate;
 use App\Http\Controllers\Controller;
 
 class EmployeeUserController extends Controller
@@ -123,5 +124,14 @@ class EmployeeUserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function update_pass(EmployeeUserPassUpdate $request,User $account){
+
+        $account->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        return response()->json('Sukses');
     }
 }

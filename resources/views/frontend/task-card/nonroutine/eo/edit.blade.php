@@ -812,6 +812,14 @@
             $('#recurrence').removeAttr("disabled");
             $('#recurrence-select').removeAttr("disabled");
             $('#recurrence-select').select2();
+        }
+
+        // Scheduled Priority *
+        if(view_scheduled_priority_id == "Prior to"){
+            $("#prior_to").removeClass("hidden");
+            $('#prior_to_date').removeAttr("disabled");
+            $('#prior_to_hours').removeAttr("disabled");
+            $('#prior_to_cycle').removeAttr("disabled");
             switch(rdo_Scheduled){
                 case 'date':
                     $("#prior_to_date").prop('checked', true);
@@ -830,14 +838,6 @@
                     break;
 
             }
-        }
-
-        // Scheduled Priority *
-        if(view_scheduled_priority_id == "Prior to"){
-            $("#prior_to").removeClass("hidden");
-            $('#prior_to_date').removeAttr("disabled");
-            $('#prior_to_hours').removeAttr("disabled");
-            $('#prior_to_cycle').removeAttr("disabled");
         }
 
 

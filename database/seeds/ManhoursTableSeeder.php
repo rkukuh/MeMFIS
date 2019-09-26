@@ -13,23 +13,23 @@ class ManhoursTableSeeder extends Seeder
     public function run()
     {
         Manhour::create([
-            'rate' => null,
+            'rate' => 15,
             'level' => '1',
         ]);
         Manhour::create([
-            'rate' => null,
+            'rate' => 25,
             'level' => '2',
         ]);
         Manhour::create([
-            'rate' => null,
+            'rate' => 35,
             'level' => '3',
         ]);
         Manhour::create([
-            'rate' => null,
+            'rate' => 45,
             'level' => '4',
         ]);
         Manhour::create([
-            'rate' => null,
+            'rate' => 55,
             'level' => '5',
         ]);
 

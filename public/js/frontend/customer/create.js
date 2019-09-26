@@ -23,7 +23,6 @@ let Customer = {
             let type_phone_array = [];
             $('#type_phone ').each(function (i) {
                 if($(this).is(':checked')){
-                    console.log($(this).val());
                     type_phone_array[i] = $(this).val();
                 }
             });
@@ -44,7 +43,6 @@ let Customer = {
 
             $('#type_fax ').each(function (i) {
                 if($(this).is(':checked')){
-                    console.log($(this).val());
                     type_fax_array[i] = $(this).val();
                 }
             });
@@ -77,7 +75,6 @@ let Customer = {
             let type_email_array = [];
             $('#type_email ').each(function (i) {
                 if($(this).is(':checked')){
-                    console.log($(this).val());
                     type_email_array[i] = $(this).val();
                 }
             });
