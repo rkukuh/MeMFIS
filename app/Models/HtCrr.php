@@ -247,7 +247,7 @@ class HtCrr extends MemfisModel
      *
      * @return string
      */
-    public function getActualManhourhAttribute()
+    public function getActualManhourAttribute()
     {
         $statuses = Status::ofHtCrr()->get();
         foreach($this->helpers as $helper){
