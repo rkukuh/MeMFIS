@@ -303,7 +303,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-lg-6">
                 <div class="m-portlet  m-portlet--full-height ">
                     <div class="m-portlet__head">
@@ -336,7 +336,7 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                    {{-- <div class="m-timeline-2__item">
+                                    <div class="m-timeline-2__item">
                                         <span class="m-timeline-2__item-time">10:00</span>
                                         <div class="m-timeline-2__item-cricle">
                                             <i class="fa fa-genderless m--font-danger"></i>
@@ -409,14 +409,14 @@
                                         <div class="m-timeline-2__item-text m--padding-top-5">
                                             Received a new feedback on <a href="#" class="m-link m-link--brand m--font-bolder">FinancePro App</a> product.
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
 
