@@ -168,7 +168,7 @@ class EmployeeAttendanceController extends Controller
                         if(!$employee->employee_attendace()->where('employee_attendances.date',$data_final[$i]['date'][$y]['date'])->first()){
                             $in = '00:00:00';
                             $out = '00:00:00';
-                            $status = Status::where('code','discipline')->first()->id;
+                            $status = Status::where('code','normal')->first()->id;
 
                             //IN & OUT
                             if(reset($data_final[$i]['date'][$y]['time'])){
@@ -179,7 +179,7 @@ class EmployeeAttendanceController extends Controller
                                 $out = end($data_final[$i]['date'][$y]['time']);
                             }
 
-                            //CHECK LATE OR OVERTIME
+                            //CHECK LATE,EARLIER OR OVERTIME
                             $employee_workshift = EmployeeWorkshift::where('employee_id', $employee->id)->first();
                             
                             $late = 0;
@@ -196,6 +196,7 @@ class EmployeeAttendanceController extends Controller
                                         if(strtotime($in) > strtotime($employee_schedule[$v]['in'])){
                                             if($in != '00:00:00' && $employee_schedule[$v]['in'] != '00:00:00'){
                                                 $late = abs(strtotime($in) - strtotime($employee_schedule[$v]['in']));
+                                                $status = Status::where('code','undiscipline')->first()->id;
                                             }
                                         };
 
@@ -203,6 +204,7 @@ class EmployeeAttendanceController extends Controller
                                         if(strtotime($out) < strtotime($employee_schedule[$v]['out'])){
                                             if($out != '00:00:00' && $employee_schedule[$v]['out'] != '00:00:00'){
                                                 $earlier_out = abs(strtotime($employee_schedule[$v]['out']) - strtotime($out));
+                                                $status = Status::where('code','undiscipline')->first()->id;
                                             }
                                         };
 
@@ -210,17 +212,24 @@ class EmployeeAttendanceController extends Controller
                                         if(strtotime($out) > strtotime($employee_schedule[$v]['out'])){
                                             if($out != '00:00:00' && $employee_schedule[$v]['out'] != '00:00:00'){
                                                 $overtime = abs(strtotime($out) - strtotime($employee_schedule[$v]['out']));
+                                                $status = Status::where('code','normal')->first()->id;
                                             }
                                         };
 
+                                    }else{
+                                        //CHECK ABSENCE
+                                        $status = null;
                                     }   
                                 }
                             }else{
-
+                                if(strtolower($data_final[$i]['date'][$y]['days']) == 'saturday' || strtolower($data_final[$i]['date'][$y]['days']) == 'sunday'){
+                                    $status = null;
+                                }else{
                                 //LATE
                                 if(strtotime($in) > strtotime('07:30:00')){
                                     if($in != '00:00:00'){
                                         $late = abs(strtotime($in) - strtotime('07:30:00'));
+                                        $status = Status::where('code','undiscipline')->first()->id;
                                     }
                                 };
 
@@ -228,6 +237,7 @@ class EmployeeAttendanceController extends Controller
                                 if(strtotime($out) < strtotime(strtotime('16:30:00'))){
                                     if($out != '00:00:00'){
                                         $earlier_out = abs(strtotime('16:30:00') - strtotime($out));
+                                        $status = Status::where('code','undiscipline')->first()->id;
                                     }
                                 };
 
@@ -235,16 +245,17 @@ class EmployeeAttendanceController extends Controller
                                 if(strtotime($out) > strtotime('16:30:00')){
                                     if($out != '00:00:00'){
                                         $overtime = abs(strtotime($out) - strtotime('16:30:00'));
+                                        $status = Status::where('code','normal')->first()->id;
                                     }
                                 };
 
+                                //CHECK ABSENCE
+                                if(!$data_final[$i]['date'][$y]['time'] && !$data_final[$i]['date'][$y]['time']){
+                                    $status = Status::where('code','absence')->first()->id;
+                                }
+                            }
                             }
                             
-
-                            //CHECK ABSENCE
-                            if(!$data_final[$i]['date'][$y]['time'] && !$data_final[$i]['date'][$y]['time']){
-                                $status = Status::where('code','absence')->first()->id;
-                            }
 
                             //IN & OUT II
                             if($data_final[$i]['date'][$y]['time']){
@@ -257,6 +268,7 @@ class EmployeeAttendanceController extends Controller
                                 }
                             }
 
+                            // dd(strtolower($data_final[$i]['date'][$y]['days']),$status);
                             $employee->employee_attendace()->create([
                                 'uuid' => Str::uuid(),
                                 'date' => $data_final[$i]['date'][$y]['date'],

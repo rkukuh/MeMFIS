@@ -38,6 +38,7 @@ Route::name('datatables.')->group(function () {
         Route::get('/role', 'RoleDatatables@index')->name('role.index');
         Route::get('/bank', 'BankDatatables@index')->name('bank.index');
         Route::get('/school-type', 'SchoolTypeDatatables@index')->name('school.index');
+        Route::get('/attendance', 'AttendanceDatatables@index')->name('attendance.index');
 
         /** LICENSE */
 
