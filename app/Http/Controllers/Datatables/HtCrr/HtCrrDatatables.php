@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Datatables\HtCrr;
 
+use Auth;
 use App\Models\Type;
 use App\Models\Item;
 use App\Models\HtCrr;
+use App\Models\Status;
 use App\Models\TaskCard;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
@@ -31,6 +33,42 @@ class HtCrrDatatables extends Controller
             $installation =HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','installation')->first()->id)->first()->estimation_manhour;
 
             $data->installation.= $installation;
+
+            if($data->is_rii == 1 and $data->approvals->count() == 2){
+                $data->status .= 'Released';
+            }
+            else if($data->is_rii == 1 and $data->approvals->count() == 1){
+                $data->status .= 'Waiting for RII';
+            }
+            elseif($data->is_rii == 0 and $data->approvals->count() == 1){
+                $data->status .= 'Released';
+            }
+            elseif($data->progresses->where('progressed_by',Auth::id())->first() == null){
+                $data->status .= 'Open Removal';
+            }else{
+                if($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','installation-closed')->first()->id){
+                    $data->status .= 'Installation Closed';
+                }
+                elseif($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','installation-pending')->first()->id){
+                    $data->status .= 'Installation Pending';
+                }
+                elseif($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','installation-progress')->first()->id){
+                    $data->status .= 'Installation Progress';
+                }
+                elseif($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','installation-open')->first()->id){
+                    $data->status .= 'Installation Open';
+                }
+                elseif($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','removal-closed')->first()->id){
+                    $data->status .= 'Removal Closed';
+                }
+                elseif($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','removal-pending')->first()->id){
+                    $data->status .= 'Removal Pending';
+                }
+                elseif($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','removal-progress')->first()->id){
+                    $data->status .= 'Removal Progress';
+                }
+
+            }
 
         }
 
