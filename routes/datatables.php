@@ -608,6 +608,23 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        Route::name('task-release-htcrr.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'task-release-htcrr',
+                'namespace' => 'TaskRelease'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'TaskReleaseHtCrrDatatables@index')->name('all');
+                Route::post('/filter', 'TaskReleaseHtCrrDatatables@filter')->name('filter');
+
+            });
+
+        });
+
         /** RII RELEASE */
 
         Route::name('rii-release-jobcard.')->group(function () {
