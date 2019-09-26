@@ -43,6 +43,19 @@ class HtCrr extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * Polymorphic: An entity can have zero or many approvals.
+     *
+     * This function will get all HtCrr's approvals.
+     * See: Approvals's approvable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function approvals()
+    {
+        return $this->morphMany(Approval::class, 'approvable');
+    }
+
+    /**
      * One-to-Many (self-join): An HTCRR may have none or many sub-HTCRR.
      *
      * This function will retrieve the sub-HTCRR of an HTCRR, if any.
