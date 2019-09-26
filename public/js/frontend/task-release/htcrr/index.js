@@ -13,7 +13,7 @@ let TaskRelease = {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
-                            console.log(dataSet);
+                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
@@ -44,56 +44,29 @@ let TaskRelease = {
             },
             columns: [
                 {
-                    field: 'created_at',
-                    title: 'Date',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'jobcardable.number',
-                    title: 'TaskCard No',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'number',
-                    title: 'Job Card No',
+                    field: 'code',
+                    title: 'HTCRR No.',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return (
-                            '<a href="/taskrelease-jobcard/'+t.uuid+'/edit">' + t.number + "</a>"
-                        );
+                            return '<a href="/jobcard-hardtime/'+t.uuid+'/edit">' + t.code + "</a>"
                     }
                 },
                 {
-                    field: 'company_task',
-                    title: 'Company Task No',
-                    sortable: 'asc',
-                    filterable: !1,
-
-                },
-                {
-                    field: 'quotation.quotationable.customer.name',
-                    title: 'Customer',
+                    field: 'project.code',
+                    title: 'Project No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.quotationable.aircraft.name',
-                    title: 'A/C Type',
+                    field: 'item.code',
+                    title: 'Part Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.quotationable.aircraft_register',
-                    title: 'A/C Reg',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'quotation.quotationable.aircraft_sn',
-                    title: 'A/C Serial No',
+                    field: 'item.name',
+                    title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -104,14 +77,14 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcardable.estimation_manhour',
-                    title: 'Mhrs',
+                    field: 'removal',
+                    title: 'Removal Manhour Est',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'actual',
-                    title: 'Actual. Mhrs',
+                    field: 'installation',
+                    title: 'Installation Manhour Est',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -143,18 +116,18 @@ let TaskRelease = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.status == 'Closed'){
+                        if(t.status == 'Installation Closed'){
                             return (
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check-circle"></i>' +
                                 '</a>' +
-                                '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/jobcard-hardtime/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
                         }else{
                             return (
-                                '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/jobcard-hardtime/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend\TaskRelease;
 use Auth;
 use carbon\Carbon;
 use App\Models\Status;
-use App\Models\JobCard;
+use App\Models\HtCrr;
 use App\Models\Approval;
 use App\Models\Progress;
 use App\Models\Inspection;
@@ -63,18 +63,9 @@ class TaskReleaseHtCrrController extends Controller
      * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $taskrelease)
+    public function edit(HtCrr $taskrelease)
     {
-        $status = Status::ofJobCard()->where('id',$taskrelease->progresses->last()->status_id)->first()->code;
-
-
-        return view('frontend.task-release.job-card.create', [
-            'taskrelease' => $taskrelease,
-            'materials' => $taskrelease->jobcardable->materials,
-            'tools' => $taskrelease->jobcardable->tools,
-            'status' => $status,
-
-        ]);
+        //
     }
 
     /**
@@ -84,9 +75,9 @@ class TaskReleaseHtCrrController extends Controller
      * @param  \App\Models\TaskCard  $taskCard
      * @return \Illuminate\Http\Response
      */
-    public function update(JobCardUpdate $request, JobCard $taskrelease)
+    public function update(JobCardUpdate $request, HtCrr $taskrelease)
     {
-        $status = Status::ofJobcard()->where('code','released')->first()->id;
+        $status = Status::ofHtCrr()->where('code','released')->first()->id;
 
         $taskrelease->progresses()->save(new Progress([
             'status_id' => $status,
