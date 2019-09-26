@@ -663,6 +663,24 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        Route::name('rii-release-htcrr.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'rii-release-htcrr',
+                'namespace' => 'RIIRelease'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'RIIReleaseHtCrrDatatables@index')->name('all');
+                Route::post('/filter', 'RIIReleaseHtCrrDatatables@filter')->name('filter');
+
+
+            });
+
+        });
+
         /** Release To Service */
 
         Route::name('release-to-service.')->group(function () {
