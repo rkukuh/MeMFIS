@@ -74,59 +74,7 @@ class JobCardDatatables extends Controller
                 $taskcard->status .= 'Open';
             }
 
-            $statuses = Status::ofJobCard()->get();
-            $jobcard = JobCard::where('uuid',$taskcard->uuid)->first();
-            foreach($jobcard->helpers as $helper){
-                $helper->userID .= $helper->user->id;
-            }
-
-            //calculate actual manhours
-            $manhours = 0;
-
-            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                $date1 = null;
-                foreach($values as $value){
-                    if($statuses->where('id',$value->status_id)->first()->code <> "open" or $statuses->where('id',$value->status_id)->first()->code <> "released" or $statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
-                        if($jobcard->helpers->where('userID',$key)->first() == null){
-                            if($date1 <> null){
-                                $t1 = Carbon::parse($date1);
-                                $t2 = Carbon::parse($value->created_at);
-                                $diff = $t1->diffInSeconds($t2);
-                                $manhours += + $diff;
-                            }elseif($statuses->where('id',$value->status_id)->first()->code == "progress" ) {
-                                $t1 = Carbon::now($date1);
-                                $t2 = Carbon::parse($value->created_at);
-                                $diff = $t1->diffInSeconds($t2);
-                                $manhours += + $diff;
-                            }
-                            $date1 = $value->created_at;
-                        }
-                    }
-                }
-            }
-    
-            $manhours = $manhours/3600;
-            $manhours_break = 0;
-            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                for($i=0; $i<sizeOf($values->toArray()); $i++){
-                    if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
-                        if($jobcard->helpers->where('userID',$key)->first() == null){
-                            if($date1 <> null){
-                                if($i+1 < sizeOf($values->toArray())){
-                                    $t2 = Carbon::parse($values[$i]->created_at);
-                                    $t3 = Carbon::parse($values[$i+1]->created_at);
-                                    $diff = $t2->diffInSeconds($t3);
-                                    $manhours_break += $diff;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            $manhours_break = $manhours_break/3600;
-            $actual_manhours = number_format($manhours-$manhours_break, 2);
-            $taskcard->actual .= $actual_manhours;
+            $taskcard->actual .= $taskcard->ActualManhour;
 
         }
 
@@ -397,16 +345,16 @@ class JobCardDatatables extends Controller
     {
         //TODO API used is API's Datatables Metronic. FIX search Datatables API because not work
         $taskcard = TaskCard::find($jobcard->task_id);
-       
+
         $items =[];
-        
+
                 foreach($jobcard->jobcardable->materials as $material){
                     $unit_id = $material->pivot->unit_id;
                     $material->unit_name .= Unit::find($unit_id)->name;
                     array_push($items, $material);
                 }
-      
-        
+
+
         $data = $alldata = $items;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -508,13 +456,13 @@ class JobCardDatatables extends Controller
         $taskcard = TaskCard::find($jobcard->taskcard_id);
 
         $items =[];
-     
+
         foreach($jobcard->jobcardable->tools as $tool){
             $unit_id = $tool->pivot->unit_id;
             $tool->unit_name .= Unit::find($unit_id)->name;
             array_push($items, $tool);
-        }     
-       
+        }
+
 
         $data = $alldata = $items;
 

@@ -73,7 +73,7 @@ class JobCardController extends Controller
                 'title' => "Danger",
                 'alert-type' => "error"
             );
-            return redirect()->route('frontend.jobcard.hardtime.index')->with($error_notification);
+            return redirect()->route('frontend.jobcard.index')->with($error_notification);
         }else{
             if($jobcard->jobcardable_type == "App\Models\TaskCard"){
                 //TODO Validasi User'skill with JobCard Skill

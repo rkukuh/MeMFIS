@@ -25,7 +25,7 @@ let Htcrr = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -53,19 +53,19 @@ let Htcrr = {
                 sortable: !1,
             },
             {
-                field: 'part_number',
+                field: 'item.code',
                 title: 'P/N',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'description',
+                field: 'item.name',
                 title: 'Title',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'item_description',
+                field: 'item.description',
                 title: 'item Description',
                 sortable: 'asc',
                 filterable: !1,

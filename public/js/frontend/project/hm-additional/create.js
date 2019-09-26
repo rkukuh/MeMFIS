@@ -19,7 +19,7 @@ let AdditionalTaskCreate = (function() {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -117,7 +117,7 @@ let AdditionalTaskCreate = (function() {
                     },
                     pageSize: 10,
                     serverPaging: !0,
-                    serverFiltering: !0,
+                    serverFiltering: !1,
                     serverSorting: !0
                 },
                 layout: {
@@ -208,7 +208,7 @@ let AdditionalTaskCreate = (function() {
                     },
                     pageSize: 10,
                     serverPaging: !0,
-                    serverFiltering: !0,
+                    serverFiltering: !1,
                     serverSorting: !0
                 },
                 layout: {
@@ -361,7 +361,7 @@ let AdditionalTaskCreate = (function() {
                             toastr.success('Project Aditional has been created.', 'Success', {
                                 timeOut: 5000
                             });
-                            // window.location.href = '/project-hm-additional/'+data.uuid+'/edit';
+                            window.location.href = '/project-hm-additional/'+data.uuid+'/edit';
 
                         }
                     }

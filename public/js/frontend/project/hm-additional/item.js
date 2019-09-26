@@ -19,7 +19,7 @@ function additional_materials_get_datatable(uuids){
                     source: response,
                     pageSize: 10,
                     serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                     serverSorting: !1
                 },
                 layout: {
@@ -119,7 +119,7 @@ function additional_tools_get_datatable(uuids){
                     source: response2,
                     pageSize: 10,
                     serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                     serverSorting: !1
                 },
                 layout: {
