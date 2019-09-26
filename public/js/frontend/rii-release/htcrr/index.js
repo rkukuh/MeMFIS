@@ -44,70 +44,29 @@ let RiiRelease = {
             },
             columns: [
                 {
-                    field: 'created_at',
-                    title: 'Date',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'jobcardable.number',
-                    title: 'TaskCard No',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'number',
-                    title: 'Job Card No',
+                    field: 'code',
+                    title: 'HTCRR No.',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return (
-                            '<a href="/riirelease-jobcard/'+t.uuid+'/edit">' + t.number + "</a>"
-                        );
+                            return '<a href="/jobcard-hardtime/'+t.uuid+'/edit">' + t.code + "</a>"
                     }
                 },
                 {
-                    field: 'company',
-                    title: 'Company Task No',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        if(t.jobcardable.additionals){
-                            let company = t.jobcardable.additionals;
-                            obj = JSON.parse(company);
-                            // console.log()
-                            return (
-                                obj.internal_number
-                            );
-                        }
-                        else{
-                            return(
-                                ''
-                            );
-                        }
-                    }
-                },
-                {
-                    field: 'quotation.project.customer.name',
-                    title: 'Customer',
+                    field: 'project.code',
+                    title: 'Project No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft.name',
-                    title: 'A/C Type',
+                    field: 'item.code',
+                    title: 'Part Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_register',
-                    title: 'A/C Reg',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'quotation.project.aircraft_sn',
-                    title: 'A/C Serial No',
+                    field: 'item.name',
+                    title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -118,16 +77,33 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcardable.estimation_manhour',
-                    title: 'Mhrs',
+                    field: 'removal',
+                    title: 'Removal Manhour Est',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'actual',
-                    title: 'Actual. Mhrs',
+                    field: 'installation',
+                    title: 'Installation Manhour Est',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
                 },
                 {
                     field: 'status',
@@ -142,7 +118,7 @@ let RiiRelease = {
                     template: function (t, e, i) {
                         if(t.status == 'Released'){
                             return (
-                                '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/jobcard-hardtime/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
@@ -151,7 +127,7 @@ let RiiRelease = {
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check-circle"></i>' +
                                 '</a>' +
-                                '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/jobcard-hardtime/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Datatables\RIIRelease;
 
+use Auth;
 use Carbon\Carbon;
+use App\Models\Type;
+use App\Models\HtCrr;
 use App\Models\Status;
-use App\Models\JobCard;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,36 +20,63 @@ class RIIReleaseHtCrrDatatables extends Controller
      */
     public function index()
     {
-        $JobCard =JobCard::with('quotation','progresses')
+        $HtCrr =HtCrr::with('project','item','progresses')
                                             ->where('is_rii','1')
                                             ->whereHas('progresses', function ($query) {
-                                            $query->where('status_id', Status::where('code','released')->where('of','jobcard')->first()->id);
+                                            $query->where('status_id', Status::where('code','released')->where('of','htcrr')->first()->id);
                                             })
                                             ->get();
 
-        foreach($JobCard as $Jobcard){
-            $Jobcard->aircraft_name .= $Jobcard->quotation->quotationable->aircraft->name;
+        foreach($HtCrr as $data){
 
-            $Jobcard->customer_name .= $Jobcard->quotation->quotationable->customer->name;
+            $data->skill_name.= $data->skill;
 
-            $Jobcard->skill_name .= $Jobcard->jobcardable->skill;
+            $removal =HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','removal')->first()->id)->first()->estimation_manhour;
 
-            Status::find($Jobcard->progresses->last()->status_id)->name;
-            if(Status::find($Jobcard->progresses->last()->status_id)->name == 'RELEASED'){
-                $Jobcard->status .= 'Waiting for RII';
+            $data->removal.= $removal;
+
+            $installation =HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','installation')->first()->id)->first()->estimation_manhour;
+
+            $data->installation.= $installation;
+
+            if($data->is_rii == 1 and $data->approvals->count() == 2){
+                $data->status .= 'Released';
+            }
+            else if($data->is_rii == 1 and $data->approvals->count() == 1){
+                $data->status .= 'Waiting for RII';
+            }
+            elseif($data->is_rii == 0 and $data->approvals->count() == 1){
+                $data->status .= 'Released';
+            }
+            elseif($data->progresses->where('progressed_by',Auth::id())->first() == null){
+                $data->status .= 'Open Removal';
             }else{
-                if(Status::find($Jobcard->progresses->last()->status_id)->name == 'RII RELEASED'){
-                    $Jobcard->status .= 'Released';
-                }else{
-                    $Jobcard->status .= Status::find($Jobcard->progresses->last()->status_id)->name;
+                if($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','installation-closed')->first()->id){
+                    $data->status .= 'Installation Closed';
+                }
+                elseif($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','installation-pending')->first()->id){
+                    $data->status .= 'Installation Pending';
+                }
+                elseif($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','installation-progress')->first()->id){
+                    $data->status .= 'Installation Progress';
+                }
+                elseif($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','installation-open')->first()->id){
+                    $data->status .= 'Installation Open';
+                }
+                elseif($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','removal-closed')->first()->id){
+                    $data->status .= 'Removal Closed';
+                }
+                elseif($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','removal-pending')->first()->id){
+                    $data->status .= 'Removal Pending';
+                }
+                elseif($data->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofhtcrr()->where('code','removal-progress')->first()->id){
+                    $data->status .= 'Removal Progress';
                 }
             }
 
-            $Jobcard->actual .= $Jobcard->ActualManhour;
-
         }
 
-        $data = $alldata = json_decode($JobCard);
+        $data = $alldata = json_decode(collect(array_values($HtCrr->whereIn('status',['Waiting for RII','Released'])->all())));
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

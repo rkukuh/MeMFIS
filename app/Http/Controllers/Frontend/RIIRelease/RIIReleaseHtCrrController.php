@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend\RIIRelease;
 use Auth;
 use carbon\Carbon;
 use App\Models\Status;
-use App\Models\JobCard;
+use App\Models\HtCrr;
 use App\Models\Approval;
 use App\Models\Progress;
 use App\Models\Inspection;
@@ -65,15 +65,7 @@ class RIIReleaseHtCrrController extends Controller
      */
     public function edit(JobCard $riirelease)
     {
-        $status = Status::ofJobCard()->where('id',$riirelease->progresses->last()->status_id)->first()->code;
-
-        return view('frontend.rii-release.job-card.create', [
-            'taskrelease' => $riirelease,
-            'materials' => $riirelease->jobcardable->materials,
-            'tools' => $riirelease->jobcardable->tools,
-            'status' => $status,
-
-        ]);
+       //
     }
 
     /**
@@ -83,9 +75,9 @@ class RIIReleaseHtCrrController extends Controller
      * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function update(JobCardUpdate $request, JobCard $riirelease)
+    public function update(JobCardUpdate $request, HtCrr $riirelease)
     {
-        $status = Status::ofJobcard()->where('code','rii-released')->first()->id;
+        $status = Status::ofHtCrr()->where('code','rii-released')->first()->id;
 
         $riirelease->progresses()->save(new Progress([
             'status_id' => $status,
