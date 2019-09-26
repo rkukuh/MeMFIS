@@ -221,8 +221,8 @@
             </div>
           </td>
           <td width="81%">
-            @if($jobCard->jobcardable->title)
-            {{$jobCard->jobcardable->title}}
+            @if($jobCard->jobcardable->eo_header->title)
+            {{$jobCard->jobcardable->eo_header->title}}
             @else
               -
             @endif
@@ -259,7 +259,7 @@
             </div>
           </td>
           <td width="81%">
-            @if($jobCard->jobcardable->reference)
+            @if($jobCard->jobcardable->eo_header->reference)
             {{$jobCard->jobcardable->reference}}
             @else
               -
