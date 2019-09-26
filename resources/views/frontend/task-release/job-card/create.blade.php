@@ -120,11 +120,7 @@
                                             Actual. Mhrs
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                        @if($actual)
-                                            {{$actual}}
-                                        @else
-                                            - 
-                                        @endif
+                                            {{$taskrelease->ActualManhour}}
                                         </td>
                                     </tr>
                                     <tr>
