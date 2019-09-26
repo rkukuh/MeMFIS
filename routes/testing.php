@@ -28,11 +28,6 @@ Route::name('testing.')->group(function () {
 
         });
 
-        Route::get('/j', function () {
-            $j = App\Models\JobCard::find(2)->ActualManhour;
-
-            dump($j);
-        });
         Route::get('/wp', function () {
 
             $project_workpackage = App\Models\Pivots\ProjectWorkPackage::where('project_id',1)->where('workpackage_id',1)->first()->id;
