@@ -43,7 +43,7 @@ class RIIReleaseJobCardDatatables extends Controller
                 }
             }
 
-            $jobcard->actual .= $jobcard->ActualManhour;
+            $Jobcard->actual .= $Jobcard->ActualManhour;
 
         }
 

@@ -21,7 +21,7 @@ class TaskReleaseJobCardDatatables extends Controller
         $JobCards = JobCard::with('quotation','quotation.quotationable','quotation.quotationable.customer','quotation.quotationable.aircraft')->get();
         foreach($JobCards as $jobcard){
 
-            $Jobcard->skill_name .= $Jobcard->jobcardable->skill;
+            $jobcard->skill_name .= $jobcard->jobcardable->skill;
 
             if($jobcard->jobcardable->additionals <> null){
                 $addtional = json_decode($jobcard->jobcardable->additionals);
