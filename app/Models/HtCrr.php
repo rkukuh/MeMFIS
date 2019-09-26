@@ -111,6 +111,19 @@ class HtCrr extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many inspections.
+     *
+     * This function will get all JobCard's inspections.
+     * See: Inspection's inspectable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function inspections()
+    {
+        return $this->morphMany(Progress::class, 'inspectable');
+    }
+
+    /**
      * One-Way: An item is an item.
      *
      * @return mixed
