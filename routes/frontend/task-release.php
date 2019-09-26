@@ -35,6 +35,18 @@ Route::name('frontend.')->group(function () {
 
             });
 
+            Route::name('taskrelease-htcrr.')->group(function () {
+
+                Route::prefix('taskrelease-htcrr')->group(function () {
+
+                    Route::resource('', 'TaskReleaseHtCrrController', [
+                        'parameters' => ['' => 'taskrelease']
+                    ]);
+
+                });
+
+            });
+
         });
 
     });

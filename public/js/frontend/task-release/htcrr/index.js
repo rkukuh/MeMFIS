@@ -6,7 +6,7 @@ let TaskRelease = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/task-release-jobcard',
+                        url: '/datatables/task-release-htcrr',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -184,7 +184,7 @@ let TaskRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/taskrelease-jobcard/' + jobcard_uuid + '/',
+                        url: '/taskrelease-htcrr/' + jobcard_uuid + '/',
                         success: function (data) {
                             toastr.success('Task has been released.', 'Released', {
                                     timeOut: 5000

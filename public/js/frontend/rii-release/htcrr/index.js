@@ -7,7 +7,7 @@ let RiiRelease = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/rii-release-jobcard',
+                        url: '/datatables/rii-release-htcrr',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -180,7 +180,7 @@ let RiiRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/riirelease-jobcard/' + jobcard_uuid + '/',
+                        url: '/riirelease-htcrr/' + jobcard_uuid + '/',
                         success: function (data) {
                             toastr.success('RII has been released.', 'Released', {
                                     timeOut: 5000
