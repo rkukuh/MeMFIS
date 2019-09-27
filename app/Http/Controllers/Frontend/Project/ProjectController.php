@@ -109,9 +109,13 @@ class ProjectController extends Controller
     public function approve(Project $project)
     {
         $error_messages = [];
-        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
+        $total_manhours = ProjectWorkPackage::where('project_id',$project->id)
             ->pluck('total_manhours');
-        if(in_array(null, $project_workpackage->toArray(), true)){
+
+        $tat = ProjectWorkPackage::where('project_id',$project->id)
+        ->pluck('tat');
+
+        if(in_array(null, $total_manhours->toArray(), true)){
             $error_message = array(
                 'message' => "some of workpackage total manhours hasn't been filled yet",
                 'title' => $project->number,
@@ -120,7 +124,17 @@ class ProjectController extends Controller
             array_push($error_messages, $error_message);
             return response()->json(['error' => $error_messages], '403');
         }
-        
+
+        if(in_array(null, $tat->toArray(), true)){
+            $error_message = array(
+                'message' => "some of workpackage TAT hasn't been calculated yet",
+                'title' => $project->number,
+                'alert-type' => "error"
+            );
+            array_push($error_messages, $error_message);
+            return response()->json(['error' => $error_messages], '403');
+        }
+
         $pw_json = $project->workpackages->toJson();
 
         $pw = ProjectWorkPackage::where('project_id',$project->id)->pluck('id');
