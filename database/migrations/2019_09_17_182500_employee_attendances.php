@@ -23,7 +23,7 @@ class EmployeeAttendances extends Migration
             $table->bigInteger('late_in')->nullable();
             $table->bigInteger('earlier_out')->nullable();
             $table->bigInteger('overtime')->nullable();
-            $table->unsignedBigInteger('statuses_id');
+            $table->unsignedBigInteger('statuses_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
