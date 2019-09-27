@@ -175,8 +175,7 @@ class CustomerController extends Controller
         $websites = Type::ofWebsite()->get();
         $attentions = json_decode($customer->attention);
         $levels = Level::where('of','customer')->get();
-    //    dd($customer->websites);
-    //    dd($levels);
+
         return view('frontend.customer.edit', [
             'customer' => $customer,
             'attentions' => $attentions,

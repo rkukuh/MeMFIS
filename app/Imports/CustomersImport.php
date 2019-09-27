@@ -25,15 +25,11 @@ class CustomersImport implements ToModel, WithHeadingRow
         $level = Level::ofCustomer()->where('score', $row['level'])->first();
 
         $attentions = [];
-        $temp_email = $temp_number = [];
         $attn_phones = explode(";", $row["attn_phone"]);
-        array_push($temp_number, $attn_phones);
-
         $attn_emails = explode(";", $row["attn_email"]);
-        array_push($temp_email, $attn_emails);
 
-        $contact['emails']   = $temp_email;
-        $contact['phones']   = $temp_number;
+        $contact['emails']   = $attn_emails;
+        $contact['phones']   = $attn_phones;
         $contact['name']     = $row["attention"];
         $contact['fax']      = $row["attn_fax"];
         $contact['ext']      = $row["attn_ext"];
