@@ -7,6 +7,7 @@ use App\Models\ListUtil;
 use App\Models\TaskCard;
 use Illuminate\Http\Request;
 use App\Models\EOInstruction;
+use App\Models\Pivots\EOInstructionWorkPackage;
 use App\Http\Controllers\Controller;
 
 class WorkPackageTaskCardNonRoutineDatatables extends Controller
@@ -134,24 +135,36 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function ad_sb(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->eo_instructions()->with('eo_header.type')
-                                    ->whereHas('eo_header.type', function ($query) {
-                                        $query->where('code', 'ad')->orWhere('code','sb');
-                                    })->whereNull('eo_instructions.deleted_at')->get();
-        // dd($workPackages);
-        foreach($workPackages as $taskcard){
-            if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
-                }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
-                }
-                else{
-                    $taskcard->skill .= '';
-                }
+        $workPackages = EOInstructionWorkPackage::with('eo_instruction','eo_instruction.eo_header.type','eo_instruction.eo_header.task')
+                                ->where('workpackage_id',$workPackage->id)
+                                ->whereHas('eo_instruction.eo_header.type', function ($query) {
+                                    $query->where('code', 'ad')->orWhere('code','sb');
+                                })->whereNull('deleted_at')
+                                ->get();
+
+        foreach($workPackages as $workPackage){
+            if(isset($workPackage->taskcard->skills) ){
+                $workPackage->skill .= $workPackage->taskcard->skill;
             }
         }
+        // $workPackages = $workPackage->eo_instructions()->with('eo_header.type')
+        //                             ->whereHas('eo_header.type', function ($query) {
+        //                                 $query->where('code', 'ad')->orWhere('code','sb');
+        //                             })->whereNull('eo_instructions.deleted_at')->get();
+        // // dd($workPackages);
+        // foreach($workPackages as $taskcard){
+        //     if(isset($taskcard->skills) ){
+        //         if(sizeof($taskcard->skills) == 3){
+        //             $taskcard->skill .= "ERI";
+        //         }
+        //         else if(sizeof($taskcard->skills) == 1){
+        //             $taskcard->skill .= $taskcard->skills[0]->name;
+        //         }
+        //         else{
+        //             $taskcard->skill .= '';
+        //         }
+        //     }
+        // }
 
         $data = $alldata = json_decode($workPackages);
 
