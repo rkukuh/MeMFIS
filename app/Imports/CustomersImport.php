@@ -16,126 +16,121 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class CustomersImport implements ToModel, WithHeadingRow
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
     public function model(array $row)
     {
-        $level = Level::ofCustomer()->where('score',$row['level'])->first();
-            
-            $attentions = [];
-            
+        $level = Level::ofCustomer()->where('score', $row['level'])->first();
 
-            $temp_email = $temp_number = [];
-            $attn_phones = explode(";", $row["attn_phone"]);
-            array_push($temp_number, $attn_phones);
-        
-            $attn_emails = explode(";", $row["attn_email"]);
-            array_push($temp_email, $attn_emails);
+        $attentions = [];
+        $temp_email = $temp_number = [];
+        $attn_phones = explode(";", $row["attn_phone"]);
+        array_push($temp_number, $attn_phones);
 
-            $contact['emails']   = $temp_email;
-            $contact['phones']   = $temp_number;
-            $contact['name']     = $row["attention"];
-            $contact['fax']      = $row["attn_fax"];
-            $contact['ext']      = $row["attn_ext"];
-            $contact['position'] = $row["jabatan"];
-            array_push($attentions, $contact);
+        $attn_emails = explode(";", $row["attn_email"]);
+        array_push($temp_email, $attn_emails);
 
-            $customer = Customer::create([
-                'name' => $row['name'],
-                'code' => "auto-generate",
-                'attention' => json_encode($attentions),
-                'payment_term' => $row['term_of_payment'],
-            ]);
+        $contact['emails']   = $temp_email;
+        $contact['phones']   = $temp_number;
+        $contact['name']     = $row["attention"];
+        $contact['fax']      = $row["attn_fax"];
+        $contact['ext']      = $row["attn_ext"];
+        $contact['position'] = $row["jabatan"];
+        array_push($attentions, $contact);
 
-            if ($customer) {
-                $customer->levels()->attach($level);
-                
-                $types = explode(";", $row["website_type"]);
-                $urls = explode(";", $row["website"]);                
-                
-                if( $row["website_type"]){
-                    if(sizeof($urls) == sizeof($types)){
-                        foreach($urls as $key => $url){
-                            dump($urls[$key]);
-                            dump($types[$key]);
+        $customer = Customer::create([
+            'name' => $row['name'],
+            'code' => "auto-generate",
+            'attention' => json_encode($attentions),
+            'payment_term' => $row['term_of_payment'],
+        ]);
 
-                            $website_type = Type::ofWebsite()->where("name", $types[$key])->first();
-                            $customer->websites()->save(new Website([
-                                'url' => $urls[$key],
-                                'type_id' => $website_type->id,
-                            ]));  
-                        }
+        if ($customer) {
+            $customer->levels()->attach($level);
+
+            $types = explode(";", $row["website_type"]);
+            $urls = explode(";", $row["website"]);
+
+            if ($row["website_type"]) {
+                if (sizeof($urls) == sizeof($types)) {
+                    foreach ($urls as $key => $url) {
+
+                        $website_type = Type::ofWebsite()->where("name", $types[$key])->first();
+                        $customer->websites()->save(new Website([
+                            'url' => $urls[$key],
+                            'type_id' => $website_type->id,
+                        ]));
                     }
                 }
-                   
-                $types = explode(";", $row["phone_type"]);
-                $exts = explode(";", $row["ext"]);
-                $phones = explode(";", $row["phone"]);
-                
-                if( $row["phone_type"]){
-                    if(sizeof($phones) == sizeof($types)){
-                        foreach($phones as $key => $phone){
-                            dump($phones[$key]);
-                            dump($types[$key]);
-                            $phone_types = Type::ofPhone()->where("name", $types[$key])->first();
-                        
+            }
+
+            $types = explode(";", $row["phone_type"]);
+            $exts = explode(";", $row["ext"]);
+            $phones = explode(";", $row["phone"]);
+
+            if ($row["phone_type"]) {
+                if (sizeof($phones) == sizeof($types)) {
+                    foreach ($phones as $key => $phone) {
+                        $phone_types = Type::ofPhone()->where("name", $types[$key])->first();
+                        if(array_key_exists($key, $exts)){
                             $customer->phones()->save(new Phone([
                                 'number' => $phone,
                                 'ext' => $exts[$key],
                                 'type_id' => $phone_types->id,
                             ]));
-                        }
-                    }
-                }
-                   
-                $types = explode(";", $row["fax_type"]);
-                $faxes = explode(";", $row["fax"]);
-                
-                if( $row["fax_type"]){
-                    if(sizeof($faxes) == sizeof($types)){
-                        
-                        foreach($faxes as $key => $fax){
-                            dump($faxes[$key]);
-                            dump($types[$key]);
-                        $fax_type = Type::ofFax()->where("name", $types[$key])->first();
-                            $customer->faxes()->save(new Fax([
-                                'number' => $fax,
-                                'type_id' => $fax_type->id,
+                        }else{
+                            $customer->phones()->save(new Phone([
+                                'number' => $phone,
+                                'type_id' => $phone_types->id,
                             ]));
                         }
                     }
-                }
-                   
-                $types = explode(";", $row["email_type"]);
-                $emails = explode(";", $row["email"]);
-                
-                if( $row["email_type"]){
-                    if(sizeof($emails) == sizeof($types)){
-                        foreach($emails as $key => $email){
-                        dump($emails[$key]);
-                        dump($types[$key]);
-                        $email_type = Type::ofEmail()->where("name", $types[$key])->first();
-                            $customer->emails()->save(new Email([
-                                'address' => $email,
-                                'type_id' =>  $email_type->id,
-                            ]));
-                        }
-                    }
-                }
-                   
-            if($row["address"]){
-                $addresses = explode(";", $row["address"]);
-                    $address_type = Type::where('of','address')->where('name','Company')->first();
-                    foreach($addresses as $address) {
-                        $customer->addresses()->save(new Address([
-                            'address' => $address,
-                            'type_id' => $address_type->id
-                        ]));
-                    }
-                    
                 }
             }
+
+            $types = explode(";", $row["fax_type"]);
+            $faxes = explode(";", $row["fax"]);
+
+            if ($row["fax_type"]) {
+                if (sizeof($faxes) == sizeof($types)) {
+
+                    foreach ($faxes as $key => $fax) {
+                        $fax_type = Type::ofFax()->where("name", $types[$key])->first();
+                        $customer->faxes()->save(new Fax([
+                            'number' => $fax,
+                            'type_id' => $fax_type->id,
+                        ]));
+                    }
+                }
+            }
+
+            $types = explode(";", $row["email_type"]);
+            $emails = explode(";", $row["email"]);
+
+            if ($row["email_type"]) {
+                if (sizeof($emails) == sizeof($types)) {
+                    foreach ($emails as $key => $email) {
+                        $email_type = Type::ofEmail()->where("name", $types[$key])->first();
+                        $customer->emails()->save(new Email([
+                            'address' => $email,
+                            'type_id' =>  $email_type->id,
+                        ]));
+                    }
+                }
+            }
+
+            if ($row["address"]) {
+                $addresses = explode(";", $row["address"]);
+                $address_type = Type::where('of', 'address')->where('name', 'Company')->first();
+                foreach ($addresses as $address) {
+                    $customer->addresses()->save(new Address([
+                        'address' => $address,
+                        'type_id' => $address_type->id
+                    ]));
+                }
+            }
+        }
     }
 }
