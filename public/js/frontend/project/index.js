@@ -265,9 +265,12 @@ let Aircraft = {
                         },
                         error: function (jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
+                            $.each(errors.error, function (index, value) {
+                                toastr.error(value.message, value.title, {
+                                    "closeButton": true,
+                                    "timeOut": "0",
+                                }
+                            );
                             });
                         }
                     });
