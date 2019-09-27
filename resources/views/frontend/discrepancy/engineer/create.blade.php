@@ -128,14 +128,16 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Qty Engineer @include('frontend.common.label.required')
+                                                Zone
                                             </label>
 
-                                            @component('frontend.common.input.number')
-                                                    @slot('text', 'Engineer Quantity')
-                                                    @slot('id', 'engineer_qty')
-                                                    @slot('name', 'engineer_qty')
-                                                    @slot('id_error', 'engineer_qty')
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'zone')
+                                                @slot('text', 'Zone')
+                                                @slot('name', 'zone')
+                                                @slot('id_error', 'zone')
+                                                @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -149,34 +151,6 @@
                                                 @slot('id', 'ata')
                                                 @slot('name', 'ata')
                                                 @slot('text', 'ATA')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Qty Helper @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.number')
-                                                    @slot('text', 'Helper Quantity')
-                                                    @slot('id', 'helper_quantity')
-                                                    @slot('name', 'helper_quantity')
-                                                    @slot('id_error', 'helper_quantity')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Zone
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('id', 'zone')
-                                                @slot('text', 'Zone')
-                                                @slot('name', 'zone')
-                                                @slot('id_error', 'zone')
-                                                @slot('multiple','multiple')
-                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -210,6 +184,80 @@
                                                 @slot('name', 'is_rii')
                                                 @slot('text', 'RII?')
                                             @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                                    <label class="form-control-label">
+                                                        Reference
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                                    <label class="form-control-label">
+                                                        Helper
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-2 col-md-2 col-lg-2">
+                                                </div>
+                                            </div>
+                                            <div class="repeaterHelper">
+                                                <div class="repeaterRow">
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                                            @component('frontend.common.input.text')
+                                                                @slot('name', 'reference_array')
+                                                                @slot('text', 'Reference')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                                            @component('frontend.common.input.select2')
+                                                                @slot('name', 'helper')
+                                                                @slot('text', 'helper')
+                                                                @slot('class', 'helper')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                            @component('frontend.common.buttons.delete_repeater')
+                                                                @slot('class', 'DeleteRow')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                            @component('frontend.common.buttons.create_repeater')
+                                                                @slot('class', 'AddRow')
+                                                            @endcomponent
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="repeaterRow CopyHelper hidden">
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                                            @component('frontend.common.input.text')
+                                                                @slot('name', 'reference_array')
+                                                                @slot('text', 'Reference')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                                            @component('frontend.common.input.select2')
+                                                                @slot('name', 'helper')
+                                                                @slot('text', 'helper')
+                                                                @slot('class', 'helper')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                            @component('frontend.common.buttons.delete_repeater')
+                                                                @slot('class', 'DeleteRow')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                            @component('frontend.common.buttons.create_repeater')
+                                                                @slot('class', 'AddRow')
+                                                            @endcomponent
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -471,10 +519,16 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/discrepancy/engineer/create.js') }}"></script>
     <script src="{{ asset('js/frontend/discrepancy/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/repeater.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/helper.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/helper.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 @endpush
