@@ -128,37 +128,6 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Qty Engineer
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $discrepancy->engineer_quantity)
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                ATA
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                               @slot('text',  $discrepancy->ata)
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Qty Helper
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $discrepancy->helper_quantity)
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 Zone
                                             </label>
 
@@ -171,6 +140,17 @@
                                                         @endcomponent
                                                     @endforeach
                                             @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                ATA
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                               @slot('text',  $discrepancy->ata)
+                                            @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -203,6 +183,34 @@
                                                     @slot('checked', 'checked')
                                                 @endif
                                             @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Reference
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Helper
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generated')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generated')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
