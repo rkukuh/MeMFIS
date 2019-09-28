@@ -56,24 +56,5 @@ class UsersTableSeeder extends Seeder
             'joined_date' => Carbon::now()->toDateString(),
             'updated_at' => null
         ]);
-
-        $user = User::create([
-            'name'      => 'Husni',
-            'email'     => 'husni@smartaircraft.id',
-            'password'  => Hash::make('admin'),
-            'is_active' => 1,
-        ]);
-
-        $user->assignRole(
-            Role::where('name', 'admin')->first()
-        );
-
-        $user->employee()->create([
-            'code' => 'SU-' . Carbon::now()->timestamp,
-            'first_name' => 'Husni',
-            'last_name'  => 'Admin',
-            'joined_date' => Carbon::now()->toDateString(),
-            'updated_at' => null
-        ]);
     }
 }

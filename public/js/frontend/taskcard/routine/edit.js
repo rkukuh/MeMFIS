@@ -777,25 +777,13 @@ let TaskCard = {
 
             let threshold_type = [];
             $('select[name^="threshold_type"]').each(function(i) {
-                // if($(this).val() == 'Select'){
-                    // $(this).siblings(".select2-container").css('border', '5px solid red');
-                    // status = false;
-                // }else{
-                    // $(this).siblings(".select2-container").css('border', '2px grey');
-                    threshold_type[i] = $(this).val();
-                // }
+                threshold_type[i] = $(this).val();
             });
             threshold_type = threshold_type.filter(Boolean);
 
             let repeat_type = [];
             $('select[name^="repeat_type"]').each(function(i) {
-                // if($(this).val() == 'Select'){
-                    // $(this).siblings(".select2-container").css('border', '5px solid red');
-                    // status = false;
-                // }else{
-                    // $(this).siblings(".select2-container").css('border', '2px grey');
-                    repeat_type[i] = $(this).val();
-                // }
+                repeat_type[i] = $(this).val();
             });
             repeat_type = repeat_type.filter(Boolean);
 
@@ -815,7 +803,6 @@ let TaskCard = {
                 sections[i] = entry;
                 i++;
             });
-            console.log(sections);
 
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
@@ -971,4 +958,6 @@ $(document).ready(function () {
 });
 jQuery(document).ready(function () {
     TaskCard.init();
+    console.log($("#effectivity"));
+    console.log($("input [name=effectivity]"));
 });
