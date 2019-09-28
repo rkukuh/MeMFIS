@@ -43,54 +43,7 @@ class DefectCardDatatables extends Controller
                 }
             }
 
-
-            $statuses = Status::ofDefectCard()->get();
-            $defectcard = DefectCard::where('uuid',$jobcard->uuid)->first();
-            foreach($defectcard->helpers as $helper){
-                $helper->userID .= $helper->user->id;
-            }
-            
-            //calculating defect card's actual manhours 
-            $manhours = 0;
-            foreach($defectcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                $date1 = null;
-                foreach($values as $value){
-                    if($statuses->where('id',$value->status_id)->first()->code <> "open" or $statuses->where('id',$value->status_id)->first()->code <> "released" or $statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
-                        if($jobcard->helpers->where('userID',$key)->first() == null){
-                            if($date1 <> null){
-                                $t1 = Carbon::parse($date1);
-                                $t2 = Carbon::parse($value->created_at);
-                                $diff = $t1->diffInSeconds($t2);
-                                $manhours = $manhours + $diff;
-                            }
-                            $date1 = $value->created_at;
-                        }
-                    }
-
-                }
-            }
-            $manhours = $manhours/3600;
-            $manhours_break = 0;
-            foreach($defectcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                for($i=0; $i<sizeOf($values->toArray()); $i++){
-                    if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
-                        if($defectcard->helpers->where('userID',$key)->first() == null){
-                            if($date1 <> null){
-                                if($i+1 < sizeOf($values->toArray())){
-                                    $t2 = Carbon::parse($values[$i]->created_at);
-                                    $t3 = Carbon::parse($values[$i+1]->created_at);
-                                    $diff = $t2->diffInSeconds($t3);
-                                    $manhours_break = $manhours_break + $diff;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            $manhours_break = $manhours_break/3600;
-            $actual_manhours =number_format($manhours-$manhours_break, 2);
-            $jobcard->actual .= $actual_manhours;
+            $jobcard->actual .= $jobcard->ActualManhour;
 
             $count_user = $jobcard->progresses->groupby('progressed_by')->count()-1;
 
@@ -105,7 +58,7 @@ class DefectCardDatatables extends Controller
             elseif($jobcard->is_rii == 0 and $jobcard->approvals->count()== 3){
                 $jobcard->status .= 'Released';
             }
-            if($jobcard->progresses->where('progressed_by',Auth::id())->first() == null){
+            elseif($jobcard->progresses->where('progressed_by',Auth::id())->first() == null){
                 $jobcard->status .= 'Open';
             }else{
                 if($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','closed')->first()->id){

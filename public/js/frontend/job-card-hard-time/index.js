@@ -112,7 +112,7 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'unit',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -237,7 +237,7 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'unit',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,

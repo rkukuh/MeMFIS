@@ -417,9 +417,9 @@
                                                         Effectivity @include('frontend.common.label.optional')
                                                     </label>
                                                     @component('frontend.common.input.text')
-                                                        @slot('text', 'Effectifity')
-                                                        @slot('id', 'effectifity')
-                                                        @slot('name', 'effectifity')
+                                                        @slot('id', 'effectivity')
+                                                        @slot('text', 'Effectivity')
+                                                        @slot('name', 'effectivity')
                                                         @slot('value', $taskcard->effectivity)
                                                     @endcomponent
                                                 </div>

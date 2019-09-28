@@ -138,8 +138,7 @@
                                                                     </label>
 
                                                                     @component('frontend.common.label.data-info')
-                                                                    @slot('text',
-                                                                    $quotation->quotationable->customer->levels->last()->name)
+                                                                    @slot('text', $quotation->quotationable->customer->levels->last()->name)
                                                                     @slot('id', 'level')
                                                                     @endcomponent
                                                                 </div>
@@ -198,29 +197,28 @@
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
-                                                            <!-- <div class="form-group m-form__group row">
-                                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                        <label class="form-control-label">
-                                                                            City
-                                                                        </label>
+                                                            <div class="form-group m-form__group row">
+                                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                    <label class="form-control-label">
+                                                                        City
+                                                                    </label>
 
-                                                                        @component('frontend.common.label.data-info')
-                                                                                @slot('text', $attention->fax)
-                                                                                @slot('id', 'name')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                        <label class="form-control-label">
-                                                                            Country
-                                                                        </label>
-
-                                                                        @component('frontend.common.label.data-info')
-                                                                                @slot('text', $attention->fax)
-                                                                                @slot('id', 'name')
-                                                                        @endcomponent
-                                                                    </div>
+                                                                    @component('frontend.common.label.data-info')
+                                                                            @slot('text', $attention->fax)
+                                                                            @slot('id', 'name')
+                                                                    @endcomponent
                                                                 </div>
-                                                            </div> -->
+                                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                    <label class="form-control-label">
+                                                                        Country
+                                                                    </label>
+
+                                                                    @component('frontend.common.label.data-info')
+                                                                            @slot('text', $attention->fax)
+                                                                            @slot('id', 'name')
+                                                                    @endcomponent
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -293,10 +291,9 @@
                                             Quotation Title
                                         </label>
 
-
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', $quotation->title)
-                                        @slot('id', 'name')
+                                            @slot('text', $quotation->title)
+                                            @slot('id', 'name')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -306,28 +303,23 @@
                                             Description
                                         </label>
 
-
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', $quotation->description)
-                                        @slot('id', 'name')
+                                            @slot('text', $quotation->description)
+                                            @slot('id', 'name')
                                         @endcomponent
                                     </div>
                                 </div>
-
                                 <div class="form-group m-form__group row mb-0">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <fieldset class="border p-2">
-                                            <legend class="w-auto">Schedule of Payment</legend>
-                                            <div class="form-group m-form__group row p-2">
-                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                    <table id="scheduled_payments_datatables"
-                                                        class="table table-striped table-bordered" width="100%">
-                                                </div>
-                                            </div>
+                                            <legend class="w-auto">Scheduled Payment :</legend>
+                                            <table id="scheduled_payments_datatables" class="table table-striped table-bordered" width="100%">
+                                                <tfoot><th></th><th></th><th colspan="2"></th></tfoot>
+                                            </table>
                                         </fieldset>
                                     </div>
                                 </div>
-                                <div class="form-group m-form__group row" style="margin-top:-12px;">
+                                <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <label class="form-control-label">
                                             Term and Condition

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\MemfisModel;
 
 class JobCard extends MemfisModel
@@ -160,5 +161,64 @@ class JobCard extends MemfisModel
     public function statuses()
     {
         return $this->morphMany(Status::class, 'statusable');
+    }
+
+    /*************************************** ACCESSOR ****************************************/
+
+    /**
+     * Get the actual manhour jobcard.
+     *
+     * @return string
+     */
+    public function getActualManhourAttribute()
+    {
+        $statuses = Status::ofJobCard()->get();
+        foreach($this->helpers as $helper){
+            $helper->userID .= $helper->user->id;
+        }
+
+        $manhours = 0;
+
+        foreach($this->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            $date1 = null;
+            foreach($values as $value){
+                // dump($statuses->where('id',$value->status_id)->first()->code);
+                if($statuses->where('id',$value->status_id)->first()->code <> "open" and $statuses->where('id',$value->status_id)->first()->code <> "released" and $statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
+                    if($this->helpers->where('userID',$key)->first() == null){
+                        if($date1 <> null){
+                            $t1 = Carbon::parse($date1);
+                            $t2 = Carbon::parse($value->created_at);
+                            $diff = $t1->diffInSeconds($t2);
+                            $manhours += + $diff;
+                        }
+                        $date1 = $value->created_at;
+                    }
+                }
+            }
+        }
+
+        $manhours = $manhours/3600;
+        $manhours_break = 0;
+        foreach($this->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            for($i=0; $i<sizeOf($values->toArray()); $i++){
+                if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
+                    if($this->helpers->where('userID',$key)->first() == null){
+                        if($date1 <> null){
+                            if($i+1 < sizeOf($values->toArray())){
+                                $t2 = Carbon::parse($values[$i]->created_at);
+                                $t3 = Carbon::parse($values[$i+1]->created_at);
+                                $diff = $t2->diffInSeconds($t3);
+                                $manhours_break += $diff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        $manhours_break = $manhours_break/3600;
+        $actual_manhours = number_format($manhours-$manhours_break, 2);
+
+        return $actual_manhours;
     }
 }

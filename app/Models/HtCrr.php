@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\MemfisModel;
 
 class HtCrr extends MemfisModel
@@ -40,6 +41,19 @@ class HtCrr extends MemfisModel
     protected $dates = ['conducted_at'];
 
     /*************************************** RELATIONSHIP ****************************************/
+
+    /**
+     * Polymorphic: An entity can have zero or many approvals.
+     *
+     * This function will get all HtCrr's approvals.
+     * See: Approvals's approvable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function approvals()
+    {
+        return $this->morphMany(Approval::class, 'approvable');
+    }
 
     /**
      * One-to-Many (self-join): An HTCRR may have none or many sub-HTCRR.
@@ -94,6 +108,19 @@ class HtCrr extends MemfisModel
     {
         return $this->belongsToMany(Employee::class, 'employee_htcrr', 'htcrr_id', 'employee_id')
                     ->withTimestamps();
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many inspections.
+     *
+     * This function will get all JobCard's inspections.
+     * See: Inspection's inspectable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function inspections()
+    {
+        return $this->morphMany(Progress::class, 'inspectable');
     }
 
     /**
@@ -239,5 +266,113 @@ class HtCrr extends MemfisModel
     public function getToolsAttribute()
     {
         return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
+    }
+
+    /**
+     * Get the actual manhour.
+     *
+     * @return string
+     */
+    public function getActualManhourAttribute()
+    {
+        $statuses = Status::ofHtCrr()->get();
+        foreach($this->helpers as $helper){
+            $helper->userID .= $helper->user->id;
+        }
+        $manhours_removal = 0;
+        $manhours_installation = 0;
+        foreach($this->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            $date1_removal = null;
+            $date1_installation = null;
+            foreach($values as $value){
+                if($statuses->where('id',$value->status_id)->first()->code <> "removal-open" and $statuses->where('id',$value->status_id)->first()->code <> "installation-open" and $statuses->where('id',$value->status_id)->first()->code <> "released" and $statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
+                    if (strpos($statuses->where('id',$value->status_id)->first()->code , "removal") !== false) {
+                        if($this->helpers->where('userID',$key)->first() == null){
+                            if($date1_removal <> null){
+                                $t1 = Carbon::parse($date1_removal);
+                                $t2 = Carbon::parse($value->created_at);
+                                $diff = $t1->diffInSeconds($t2);
+                                $manhours_removal = $manhours_removal + $diff;
+                            }
+                            $date1_removal = $value->created_at;
+                        }
+                    }
+                    else if(strpos($statuses->where('id',$value->status_id)->first()->code , "installation") !== false){
+                        if($this->helpers->where('userID',$key)->first() == null){
+                            if($date1_installation <> null){
+                                $t3 = Carbon::parse($date1_installation);
+                                $t4 = Carbon::parse($value->created_at);
+                                $diff2 = $t3->diffInSeconds($t4);
+                                $manhours_installation = $manhours_installation + $diff2;
+                            }
+                            $date1_installation = $value->created_at;
+                        }
+                    }
+                }
+            }
+        }
+        $manhours_removal = $manhours_removal/3600;
+        $manhours_installation = $manhours_installation/3600;
+        $manhours_break_removal = 0;
+        $manhours_break_installation = 0;
+        foreach($this->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            for($i=0; $i<sizeOf($values->toArray()); $i++){
+                if ($statuses->where('id',$values[$i]->status_id)->first()->code == "removal-pending") {
+                    if($this->helpers->where('userID',$key)->first() == null){
+                        if($date1_removal <> null){
+                            if($i+1 < sizeOf($values->toArray())){
+                                $t5 = Carbon::parse($values[$i]->created_at);
+                                $t6 = Carbon::parse($values[$i+1]->created_at);
+                                $diff3 = $t5->diffInSeconds($t6);
+                                $manhours_break_removal = $manhours_break_removal + $diff3;
+                            }
+                        }
+                    }
+                }
+                else if($statuses->where('id',$values[$i]->status_id)->first()->code  == "installation-pending"){
+                    if($this->helpers->where('userID',$key)->first() == null){
+                        if($date1_installation <> null){
+                            if($i+1 < sizeOf($values->toArray())){
+                                $t7 = Carbon::parse($values[$i]->created_at);
+                                $t8 = Carbon::parse($values[$i+1]->created_at);
+                                $diff4 = $t7->diffInSeconds($t8);
+                                $manhours_break_installation = $manhours_break_installation + $diff4;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        $manhours_break_removal = $manhours_break_removal/3600;
+        $manhours_break_installation = $manhours_break_installation/3600;
+        $actual_manhours_removal = number_format($manhours_removal-$manhours_break_removal, 2);
+        $actual_manhours_installation = number_format($manhours_installation-$manhours_break_installation, 2);
+        $actual_manhours = number_format($actual_manhours_removal+$actual_manhours_installation, 2);
+
+        return array('actual_manhours' => $actual_manhours, 'actual_manhours_removal' => $actual_manhours_removal, 'actual_manhours_installation' => $actual_manhours_installation);
+    }
+
+    /**
+     * Get the task card's Skill.
+     *
+     * @return string
+     */
+    public function getSkillAttribute()
+    {
+
+        if(isset($this->skills) ){
+            switch (sizeof($this->skills)) {
+                case 3:
+                    $skill = "ERI";
+                    break;
+                case 1:
+                    $skill = $this->skills[0]->name;
+                    break;
+                default:
+                    $skill = '';
+            }
+        }
+
+        return $skill;
     }
 }

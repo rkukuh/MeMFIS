@@ -173,7 +173,7 @@
                                 <tr>
                                     <td width="20%">SI Task No</td>
                                     <td width="1%">:</td>
-                                    <td width="29%">Generate</td>
+                                    <td width="29%">{{$jobCard->jobcardable->number}}</td>
                                     <td width="20%">AC/Type</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
@@ -205,9 +205,15 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width="20%">Inspection Type</td>
+                                    <td width="20%">Issued Date</td>
                                     <td width="1%">:</td>
-                                    <td width="29%"></td>
+                                    <td width="29%">
+                                        @if($jobCard->created_at)
+                                        {{ date('d-M-Y', strtotime($jobCard->created_at)) }}
+                                        @else
+                                        -
+                                        @endif
+                                    </td>
                                     <td width="20%">A/C S/N</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
@@ -218,18 +224,6 @@
                                         @endif
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td width="20%">Issued Date</td>
-                                    <td width="1%">:</td>
-                                    <td width="29%">
-                                        @if($jobCard->created_at)
-                                        {{ date('d-M-Y', strtotime($jobCard->created_at)) }}
-                                        @else
-                                        -
-                                        @endif
-                                    </td>
-                                </tr>
-
                             </table>
                         </div>
                     </fieldset>

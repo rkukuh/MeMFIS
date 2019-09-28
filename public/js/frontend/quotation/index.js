@@ -181,7 +181,6 @@ let Quotation = {
                                 );
                             }
                             else{
-                                console.log(t.quotation_type);
                                 return (
                                     '<a href="/quotation-additional/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                         '<i class="la la-pencil"></i>' +
@@ -251,24 +250,6 @@ let Quotation = {
         $('.m_datatable').on('click', '.approve', function () {
             let quotation_uuid = $(this).data('id');
 
-            Swal.fire({
-                showLoaderOnConfirm: true,
-                preConfirm: (login) => {
-                  return fetch(`//api.github.com/users/${login}`)
-                    .then(response => {
-                      if (!response.ok) {
-                        throw new Error(response.statusText)
-                      }
-                      return response.json()
-                    })
-                    .catch(error => {
-                      Swal.showValidationMessage(
-                        `Request failed: ${error}`
-                      )
-                    })
-                },
-                allowOutsideClick: () => !Swal.isLoading()
-              })
 
             swal({
                 title: 'Sure want to Approve?',
