@@ -65,7 +65,18 @@
                                                     Task Card No
                                                 </td>
                                                 <td width="70%" style="text-align:center">
+                                                    @if (strpos($jobcard->number,'JBSC') !== FALSE )
                                                     {{$jobcard->jobcardable->number}}
+
+                                                    @elseif(strpos($jobcard->number,'JSIP') !== FALSE)
+                                                    {{$jobcard->jobcardable->number}}
+
+                                                    @elseif(strpos($jobcard->number,'JCPC') !== FALSE)
+                                                    {{$jobcard->jobcardable->number}}
+
+                                                    @else
+                                                    {{$jobcard->jobcardable->eo_header->number}}
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr>
@@ -185,7 +196,18 @@
                                                     Title
                                                 </td>
                                                 <td width="70%" style="text-align:center">
+                                                    @if (strpos($jobcard->number,'JBSC') !== FALSE )
+                                                    {{$jobcard->jobcardable->title}}
+
+                                                    @elseif(strpos($jobcard->number,'JSIP') !== FALSE)
+                                                    {{$jobcard->jobcardable->title}}
+
+                                                    @elseif(strpos($jobcard->number,'JCPC') !== FALSE)
+                                                    {{$jobcard->jobcardable->title}}
+
+                                                    @else
                                                     {{$jobcard->jobcardable->eo_header['title']}}
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr>
