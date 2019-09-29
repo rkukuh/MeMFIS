@@ -212,11 +212,14 @@
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-5 col-md-5 col-lg-5">
-                                                            @component('frontend.common.input.select2')
-                                                                @slot('name', 'helper')
-                                                                @slot('text', 'helper')
-                                                                @slot('class', 'helper')
-                                                            @endcomponent
+                                                        <select name="helper" style="width:100%" class="form-control helper">
+                                                            <option value="">
+                                                                Select a Helper
+                                                            </option>
+                                                            @foreach($helpers as $helper)
+                                                                <option value="{{ $helper->uuid }}">{{ $helper->first_name }}</option>
+                                                            @endforeach
+                                                        </select>
                                                         </div>
                                                         <div class="col-sm-1 col-md-1 col-lg-1">
                                                             @component('frontend.common.buttons.delete_repeater')
@@ -239,11 +242,14 @@
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-5 col-md-5 col-lg-5">
-                                                            @component('frontend.common.input.select2')
-                                                                @slot('name', 'helper')
-                                                                @slot('text', 'helper')
-                                                                @slot('class', 'helper')
-                                                            @endcomponent
+                                                        <select name="helper" style="width:100%" class="form-control">
+                                                            <option value="">
+                                                                Select a Helper
+                                                            </option>
+                                                            @foreach($helpers as $helper)
+                                                                <option value="{{ $helper->uuid }}">{{ $helper->first_name }}</option>
+                                                            @endforeach
+                                                        </select>
                                                         </div>
                                                         <div class="col-sm-1 col-md-1 col-lg-1">
                                                             @component('frontend.common.buttons.delete_repeater')
@@ -525,7 +531,6 @@
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/helper.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/helper.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>

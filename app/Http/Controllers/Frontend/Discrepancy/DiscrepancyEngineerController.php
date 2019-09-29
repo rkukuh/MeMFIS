@@ -16,7 +16,7 @@ use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\DiscrepancyStore;
 use App\Http\Requests\Frontend\DiscrepancyUpdate;
-
+use App\Models\Employee;
 
 class DiscrepancyEngineerController extends Controller
 {
@@ -44,8 +44,11 @@ class DiscrepancyEngineerController extends Controller
      */
     public function create(JobCard $jobcard)
     {
+        $helpers = Employee::get();
+
         return view('frontend.discrepancy.engineer.create', [
             'jobcard' => $jobcard,
+            'helpers' => $helpers
         ]);
     }
 
