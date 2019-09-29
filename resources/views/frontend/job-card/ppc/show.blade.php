@@ -185,7 +185,7 @@
                                                     Title
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{$jobcard->jobcardable->title}}
+                                                    {{$jobcard->jobcardable->eo_header['title']}}
                                                 </td>
                                             </tr>
                                             <tr>
