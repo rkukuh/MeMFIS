@@ -193,7 +193,7 @@
                                                     Description
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{$jobcard->jobcardable->Description}}
+                                                    {{$jobcard->jobcardable->description}}
                                                 </td>
                                             </tr>
                                             @if($helper_quantity != 0)
