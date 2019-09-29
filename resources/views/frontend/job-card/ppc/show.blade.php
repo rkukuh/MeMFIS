@@ -130,6 +130,8 @@
                                                 <td width="70%" style="text-align:center">
                                                 @if(isset($jobcard->jobcardable->task))
                                                     {{$jobcard->jobcardable->task->name}}
+                                                @else
+                                                -
                                                 @endif
                                                 </td>
                                             </tr>
@@ -188,7 +190,11 @@
                                                     Reference
                                                 </td>
                                                 <td width="70%" style="text-align:center">
+                                                    @if(isset($jobcard->jobcardable->reference))
                                                     {{$jobcard->jobcardable->reference}}
+                                                    @else
+                                                    -
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr>
