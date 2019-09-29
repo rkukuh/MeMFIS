@@ -215,8 +215,8 @@
                                                 Description
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                @if($jobcard->jobcardable->Description)
-                                                {{$jobcard->jobcardable->Description}}
+                                                @if($jobcard->jobcardable->description)
+                                                {{$jobcard->jobcardable->description}}
                                                 @else
                                                 -
                                                 @endif
