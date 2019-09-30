@@ -6,9 +6,7 @@ use Auth;
 use Validator;
 use App\Models\Zone;
 use App\Models\Type;
-use App\Models\Status;
 use App\Models\JobCard;
-use App\Models\Progress;
 use App\Models\Approval;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
@@ -16,7 +14,7 @@ use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\DiscrepancyStore;
 use App\Http\Requests\Frontend\DiscrepancyUpdate;
-use App\Models\Employee;
+
 
 class DiscrepancyEngineerController extends Controller
 {
@@ -44,11 +42,8 @@ class DiscrepancyEngineerController extends Controller
      */
     public function create(JobCard $jobcard)
     {
-        $helpers = Employee::get();
-
         return view('frontend.discrepancy.engineer.create', [
             'jobcard' => $jobcard,
-            'helpers' => $helpers
         ]);
     }
 
@@ -61,6 +56,8 @@ class DiscrepancyEngineerController extends Controller
     public function store(DiscrepancyStore $request)
     {
         $zone = json_decode($request->zone);
+        $helpers = json_decode($request->helper_array);
+        dd($helpers);
         $zones = [];
 
         $request->merge(['code' => DocumentNumber::generate('JDEF-', DefectCard::withTrashed()->count()+1)]);
