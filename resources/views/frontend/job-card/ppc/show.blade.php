@@ -65,7 +65,18 @@
                                                     Task Card No
                                                 </td>
                                                 <td width="70%" style="text-align:center">
+                                                    @if (strpos($jobcard->number,'JBSC') !== FALSE )
                                                     {{$jobcard->jobcardable->number}}
+
+                                                    @elseif(strpos($jobcard->number,'JSIP') !== FALSE)
+                                                    {{$jobcard->jobcardable->number}}
+
+                                                    @elseif(strpos($jobcard->number,'JCPC') !== FALSE)
+                                                    {{$jobcard->jobcardable->number}}
+
+                                                    @else
+                                                    {{$jobcard->jobcardable->eo_header->number}}
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr>
@@ -119,6 +130,8 @@
                                                 <td width="70%" style="text-align:center">
                                                 @if(isset($jobcard->jobcardable->task))
                                                     {{$jobcard->jobcardable->task->name}}
+                                                @else
+                                                -
                                                 @endif
                                                 </td>
                                             </tr>
@@ -177,7 +190,11 @@
                                                     Reference
                                                 </td>
                                                 <td width="70%" style="text-align:center">
+                                                    @if(isset($jobcard->jobcardable->reference))
                                                     {{$jobcard->jobcardable->reference}}
+                                                    @else
+                                                    -
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr>
@@ -185,7 +202,18 @@
                                                     Title
                                                 </td>
                                                 <td width="70%" style="text-align:center">
+                                                    @if (strpos($jobcard->number,'JBSC') !== FALSE )
                                                     {{$jobcard->jobcardable->title}}
+
+                                                    @elseif(strpos($jobcard->number,'JSIP') !== FALSE)
+                                                    {{$jobcard->jobcardable->title}}
+
+                                                    @elseif(strpos($jobcard->number,'JCPC') !== FALSE)
+                                                    {{$jobcard->jobcardable->title}}
+
+                                                    @else
+                                                    {{$jobcard->jobcardable->eo_header['title']}}
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr>
@@ -193,7 +221,7 @@
                                                     Description
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{$jobcard->jobcardable->Description}}
+                                                    {{$jobcard->jobcardable->description}}
                                                 </td>
                                             </tr>
                                             @if($helper_quantity != 0)

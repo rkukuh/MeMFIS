@@ -329,8 +329,8 @@
                                                 </label>
                                                 @component('frontend.common.label.data-info')
                                                     @slot('id', 'scheduled_payment_type')
-                                                    @slot('text','Scheduled payment type')
-                                                    @slot('value','Scheduled payment type')
+                                                    {{-- @slot('text','Scheduled payment type')
+                                                    @slot('value','Scheduled payment type') --}}
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -339,8 +339,8 @@
                                                 </label>
                                                 @component('frontend.common.label.data-info')
                                                     @slot('id', 'scheduled_payment_amount')
-                                                    @slot('text','Scheduled payment amount')
-                                                    @slot('value','Scheduled payment amount')
+                                                    {{-- @slot('text','Scheduled payment amount')
+                                                    @slot('value','Scheduled payment amount') --}}
                                                 @endcomponent
                                             </div>
                                         </div>
