@@ -50,11 +50,12 @@ let Discrepancy = {
             let allData = helper_datatable.rows().data();
             for(let ind = 0 ; ind < allData.length ; ind++){
                 let container = [];
-                container[0] = allData[ind]["helper"];
-                container[1] = allData[ind]["reference"];
+                container[0] = allData[ind]["code"];
+                container[1] = allData[ind]["helper"];
+                container[2] = allData[ind]["reference"];
                 helper_array.push(container);
             }
-            helper_array = json.encode(helper_array);
+            helper_array = JSON.stringify(helper_array);
 
             $.ajax({
                 headers: {
@@ -203,6 +204,10 @@ let helper = {
             data: dataSet,
             columns: [
                 { 
+                  title: "NIM",
+                  data: "code"
+                },
+                { 
                   title: "Helper",
                   data: "helper"
                 },
@@ -219,11 +224,13 @@ let helper = {
         } );
 
         $('.add_helper').on('click', function () {
+            let fname = $("#defectcard_helper option:selected").text();
             let defectcard_helper = $('#defectcard_helper').val();
             let reference = $("#reference").val();
 
             let newRow = [];
-            newRow["helper"] = defectcard_helper;
+            newRow["code"] = defectcard_helper;
+            newRow["helper"] = fname;
             newRow["reference"] = reference;
             helper.row.add( newRow ).draw();
             

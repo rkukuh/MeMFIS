@@ -54,5 +54,5 @@
     
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/employee.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/employee-name.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/employee.js')}}"></script>
 @endpush
