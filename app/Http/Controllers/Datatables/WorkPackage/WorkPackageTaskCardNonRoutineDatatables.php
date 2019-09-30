@@ -19,11 +19,13 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function preliminary(WorkPackage $workPackage)
     {
+       
         $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('code', 'preliminary');
-                                    })->whereNull('taskcards.deleted_at')->get();
+                        ->whereHas('type', function ($query) {
+                            $query->where('code', 'preliminary');
+                        })->whereNull('taskcards.deleted_at')->get();
 
+        
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){
                 if(sizeof($taskcard->skills) == 3){
@@ -263,10 +265,12 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function cmr_awl(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->eo_instructions()->with('eo_header.type')
-                                    ->whereHas('eo_header.type', function ($query) {
-                                        $query->where('code', 'cmr')->orWhere('code','awl');
-                                    })->whereNull('eo_instructions.deleted_at')->get();
+       
+        $workPackages = EOInstructionWorkPackage::with('eo_instruction','eo_instruction.eo_header.type','eo_instruction.eo_header.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereHas('eo_instruction.eo_header.type', function ($query) {
+                        $query->where('code', 'cmr')->orWhere('code','awl');
+                        })->whereNull('deleted_at')->get();
 
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){
@@ -670,10 +674,12 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function ea(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->eo_instructions()->with('eo_header.type')
-                                    ->whereHas('eo_header.type', function ($query) {
-                                        $query->where('code', 'ea');
-                                    })->whereNull('eo_instructions.deleted_at')->get();
+        $workPackages = EOInstructionWorkPackage::with('eo_instruction','eo_instruction.eo_header.type','eo_instruction.eo_header.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereHas('eo_instruction.eo_header.type', function ($query) {
+                            $query->where('code', 'ea');
+                        })->whereNull('deleted_at')->get();
+
 
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){
@@ -786,10 +792,13 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function eo(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->eo_instructions()->with('eo_header.type')
-                                    ->whereHas('eo_header.type', function ($query) {
-                                        $query->where('code', 'eo');
-                                    })->whereNull('eo_instructions.deleted_at')->get();
+        $workPackages = EOInstructionWorkPackage::with('eo_instruction','eo_instruction.eo_header.type','eo_instruction.eo_header.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereHas('eo_instruction.eo_header.type', function ($query) {
+                            $query->where('code', 'eo');
+                        })->whereNull('deleted_at')
+                        ->get();
+                                   
 
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){
