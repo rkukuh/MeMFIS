@@ -244,7 +244,7 @@ class DefectCardEngineerController extends Controller
     public function add_helper(DefectCard $DefectCard, Request $request)
     {
         $employee = Employee::where('code', $request->helper)->first();
-        $DefectCard->helpers()->attach($employee->id);
+        $DefectCard->helpers()->attach($employee->id, ['additionals' => $request->reference]);
         $DefectCard->current_helpers = $DefectCard->helpers()->count();
 
         return response()->json($DefectCard);

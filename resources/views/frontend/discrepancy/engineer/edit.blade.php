@@ -213,80 +213,6 @@
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-5 col-md-5 col-lg-5">
-                                                    <label class="form-control-label">
-                                                        Reference
-                                                    </label>
-                                                </div>
-                                                <div class="col-sm-5 col-md-5 col-lg-5">
-                                                    <label class="form-control-label">
-                                                        Helper
-                                                    </label>
-                                                </div>
-                                                <div class="col-sm-2 col-md-2 col-lg-2">
-                                                </div>
-                                            </div>
-                                            <div class="repeaterHelper">
-                                                <div class="repeaterRow">
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                                            @component('frontend.common.input.text')
-                                                                @slot('name', 'reference_array')
-                                                                @slot('text', 'Reference')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                                            @component('frontend.common.input.select2')
-                                                                @slot('name', 'helper')
-                                                                @slot('text', 'helper')
-                                                                @slot('class', 'helper')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                            @component('frontend.common.buttons.delete_repeater')
-                                                                @slot('class', 'DeleteRow')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                            @component('frontend.common.buttons.create_repeater')
-                                                                @slot('class', 'AddRow')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="repeaterRow CopyHelper hidden">
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                                            @component('frontend.common.input.text')
-                                                                @slot('name', 'reference_array')
-                                                                @slot('text', 'Reference')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-5 col-md-5 col-lg-5">
-                                                            @component('frontend.common.input.select2')
-                                                                @slot('name', 'helper')
-                                                                @slot('text', 'helper')
-                                                                @slot('class', 'helper')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                            @component('frontend.common.buttons.delete_repeater')
-                                                                @slot('class', 'DeleteRow')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-1 col-md-1 col-lg-1">
-                                                            @component('frontend.common.buttons.create_repeater')
-                                                                @slot('class', 'AddRow')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
                                                 Complaint @include('frontend.common.label.optional')
                                             </label>
@@ -483,6 +409,39 @@
                 </div>
             </div>
             <div class="col-lg-5">
+            <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
+                                    Helper(s) List
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                            <button data-toggle="modal" data-target="#modal_helper" type="button" href="#" 
+                                            class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-md add-helper" title="Add Helper" >
+                                            <i class="la la-plus-circle"></i> Add Helper</button>
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            @include('frontend.discrepancy.engineer.modal-helper')
+                            <div class="defectcard_helper_edit_datatable" id="scrolling_both"></div>
+                        </div>
+                    </div>
+                </div>
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -580,6 +539,9 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let discrepancy_uuid = '{{$discrepancy->uuid}}';
+    </script>
     <script src="{{ asset('js/frontend/discrepancy/engineer/edit.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
@@ -596,11 +558,12 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/helper.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/helper.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/helpers.js') }}"></script>
+
 @endpush

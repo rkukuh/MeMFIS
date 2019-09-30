@@ -20,8 +20,6 @@ let Discrepancy = {
 
             let uuid = $('input[name=uuid]').val();
             zone = JSON.stringify(zone);
-            let engineer_qty = $('input[name=engineer_qty]').val();
-            let helper_quantity =  $('input[name=helper_quantity]').val();
             let jobcard_id =  $('input[name=jobcard_id]').val();
             let manhours =  $('input[name=manhours]').val();
             let description = $('#description').val();
@@ -41,7 +39,18 @@ let Discrepancy = {
             $.each($("input[name='propose[]']:checked"), function() {
                 propose.push($(this).val());
               });
-            // console.log(propose);
+
+            let helper_array = [];
+            let helper_datatable = $('#helper_datatable').DataTable();
+            let allData = helper_datatable.rows().data();
+            for(let ind = 0 ; ind < allData.length ; ind++){
+                let container = [];
+                container[0] = allData[ind]["code"];
+                container[1] = allData[ind]["helper"];
+                container[2] = allData[ind]["reference"];
+                helper_array.push(container);
+            }
+            helper_array = JSON.stringify(helper_array);
 
             $.ajax({
                 headers: {
@@ -52,8 +61,7 @@ let Discrepancy = {
                 data: {
                     _token: $('input[name=_token]').val(),
                     jobcard_id: jobcard_id,
-                    engineer_quantity: engineer_qty,
-                    helper_quantity: helper_quantity,
+                    helper_array: helper_array,
                     estimation_manhour: manhours,
                     description: description,
                     complaint: complaint,

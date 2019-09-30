@@ -106,8 +106,11 @@ class DiscrepancyPPCController extends Controller
             $zone_discrepancies[$i] =  $zone_taskcard->id;
         }
 
+        $skill = Type::ofTaskCardSkill()->get();
+
         return view('frontend.discrepancy.ppc.edit', [
             'discrepancy' => $discrepancy,
+            'skills' => $skill,
             'zones' => $this->zones,
             'zone_discrepancies' => $zone_discrepancies,
             'propose_corrections' => $propose_corrections,
@@ -127,8 +130,6 @@ class DiscrepancyPPCController extends Controller
     {
         $zone = json_decode($request->zone);
         $zones = [];
-
-        $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
 
         $discrepancy->update($request->all());
 
@@ -163,16 +164,16 @@ class DiscrepancyPPCController extends Controller
             }
         }
 
-        // $discrepancy->approvals()->save(new Approval([
-        //     'approvable_id' => $discrepancy->id,
-        //     'conducted_by' => Auth::id(),
-        //     'is_approved' => 1
-        // ]));
+        $discrepancy->approvals()->save(new Approval([
+            'approvable_id' => $discrepancy->id,
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
+        ]));
 
-        // $discrepancy->progresses()->save(new Progress([
-        //     'status_id' =>  Status::ofDefectcard()->where('code','open')->first()->id,
-        //     'progressed_by' => Auth::id()
-        // ]));
+        $discrepancy->progresses()->save(new Progress([
+            'status_id' =>  Status::ofDefectcard()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
 
         return response()->json($discrepancy);
     }
