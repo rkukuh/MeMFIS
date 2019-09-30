@@ -52,7 +52,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                     @component('frontend.common.buttons.update')
-                                        @slot('class', 'discount-htcrr')
+                                        @slot('class', 'discount-additional')
                                         @slot('type', 'button')
                                     @endcomponent
                                     @component('frontend.common.buttons.reset')
