@@ -39,6 +39,9 @@ class OldDataImport extends Command
     public function handle()
     {
         ini_set('memory_limit', '-1');
+                
+        $this->line('Importing: Customers');
+        app()->make(OldDataController::class)->customers();
 
         $this->line('Importing: Engines');
         app()->make(OldDataController::class)->engines();
@@ -60,7 +63,6 @@ class OldDataImport extends Command
 
         $this->line('Importing: Materials and Tools for CN');
         app()->make(OldDataController::class)->materialsAndToolsCN();
-        
 
         $this->line('Syncing: Task Card\'s Items for CN');
         app()->make(OldDataController::class)->taskCardCNItems();

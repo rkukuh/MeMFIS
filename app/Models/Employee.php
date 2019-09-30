@@ -133,6 +133,7 @@ class Employee extends MemfisModel implements HasMedia
     public function defectcards()
     {
         return $this->belongsToMany(DefectCard::class, 'defectcard_employee', 'employee_id', 'defectcard_id')
+                    ->withPivot('additionals')
                     ->withTimestamps();
     }
 
@@ -422,6 +423,9 @@ class Employee extends MemfisModel implements HasMedia
     public function jobcards()
     {
         return $this->belongsToMany(JobCard::class, 'employee_jobcard', 'employee_id', 'jobcard_id')
+                    ->withPivot(
+                        'additionals'
+                    )
                     ->withTimestamps();
     }
 

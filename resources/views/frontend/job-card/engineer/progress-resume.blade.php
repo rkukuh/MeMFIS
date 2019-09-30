@@ -207,8 +207,8 @@
                                                 Description
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                @if($jobcard->jobcardable->Description)
-                                                {{$jobcard->jobcardable->Description}}
+                                                @if($jobcard->jobcardable->description)
+                                                {{$jobcard->jobcardable->description}}
                                                 @else
                                                 -
                                                 @endif
@@ -316,7 +316,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-lg-6">
                 <div class="m-portlet  m-portlet--full-height ">
                     <div class="m-portlet__head">
@@ -507,7 +507,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
 

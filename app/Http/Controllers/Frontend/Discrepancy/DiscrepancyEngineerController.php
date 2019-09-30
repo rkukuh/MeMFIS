@@ -6,10 +6,9 @@ use Auth;
 use Validator;
 use App\Models\Zone;
 use App\Models\Type;
-use App\Models\Status;
 use App\Models\JobCard;
-use App\Models\Progress;
 use App\Models\Approval;
+use App\Models\Employee;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Helpers\DocumentNumber;
@@ -58,11 +57,19 @@ class DiscrepancyEngineerController extends Controller
     public function store(DiscrepancyStore $request)
     {
         $zone = json_decode($request->zone);
+        $helpers = json_decode($request->helper_array);
         $zones = [];
 
         $request->merge(['code' => DocumentNumber::generate('JDEF-', DefectCard::withTrashed()->count()+1)]);
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
+        $request->merge(['engineer_quantity' => 1]);
+        $request->merge(['helper_quantity' => sizeof($helpers)]);
         $defectcard = DefectCard::create($request->all());
+
+        foreach($helpers as $helper){
+            $employee = Employee::where('code', $helper[0])->first();
+            $defectcard->helpers()->attach($employee->id, ['additionals' => $helper[2]]);
+        }
 
         if($zone){
             foreach ($zone as $zone_name ) {
@@ -187,8 +194,6 @@ class DiscrepancyEngineerController extends Controller
     {
         $zone = json_decode($request->zone);
         $zones = [];
-
-        $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
 
         $discrepancy->update($request->all());
 

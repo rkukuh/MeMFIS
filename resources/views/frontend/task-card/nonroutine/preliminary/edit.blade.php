@@ -153,19 +153,15 @@
                                                         Documents library @include('frontend.common.label.optional')
                                                     </label>
 
-                                                    @php
-                                                        $documens = json_decode($taskcard->document_library, TRUE);
-                                                    @endphp
-
                                                     <select id="document-library" name="document-library" class="form-control m-select2" multiple style="width:100%">
                                                         <option value="">
                                                             &mdash; Select a Document Library &mdash;
                                                         </option>
 
-                                                        @if (isset($documens))
-                                                            @foreach ($documens as $document)
+                                                        @if (isset($additionals->document_library))
+                                                            @foreach ($additionals->document_library as $document_library)
                                                                 <option selected>
-                                                                    {{ $document }}
+                                                                    {{ $document_library }}
                                                                 </option>
                                                             @endforeach
                                                         @endif

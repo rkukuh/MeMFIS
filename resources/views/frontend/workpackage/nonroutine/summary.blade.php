@@ -105,6 +105,10 @@
                                         <span>CMR/AWL</span>
                                         <span class="m--font-brand">{{$cmrawl}}</span>
                                     </div>
+                                    <div class="m-widget_content-item pl-5">
+                                        <span>PRELIMINARY</span>
+                                        <span class="m--font-brand">{{$preliminary}}</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row align-items-center">

@@ -41,7 +41,7 @@ let TaskCard = {
 
             let internal_number = { internal_number: $('input[name=company_number]').val() };
             let internal_numberJSON = JSON.stringify(internal_number);
-
+            
             var data = new FormData();
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());

@@ -6,7 +6,6 @@ let NonRoutineWorkpackage = {
                 ? str.substring(0, max) + add
                 : str;
         }
-
         $(".preliminary_datatable").mDatatable({
             data: {
                 type: "remote",
@@ -112,6 +111,18 @@ let NonRoutineWorkpackage = {
                             return "dummy";
                         }
                     }
+                },
+                {
+                    field: "skill",
+                    title: "Skill",
+                    sortable: "asc",
+                    filterable: !1
+                },
+                {
+                    field: "task.name",
+                    title: "Task",
+                    sortable: "asc",
+                    filterable: !1
                 },
                 {
                     field: "estimation_manhour",
@@ -250,7 +261,7 @@ let NonRoutineWorkpackage = {
                 }
             ]
         });
-
+     
         $(".ad-sb_datatable").mDatatable({
             data: {
                 type: "remote",
@@ -298,58 +309,58 @@ let NonRoutineWorkpackage = {
             },
             columns: [
                 {
-                    field: "eo_header.number",
+                    field: "eo_instruction.eo_header.number",
                     title: "Taskcard Number",
                     sortable: !1
                 },
                 {
-                    field: "eo_header.title",
+                    field: "eo_instruction.eo_header.title",
                     title: "Title",
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
                         if (
-                            t.eo_header.type.code == "basic" ||
-                            t.eo_header.type.code == "sip" ||
-                            t.eo_header.type.code == "cpcp"
+                            t.eo_instruction.eo_header.type.code == "basic" ||
+                            t.eo_instruction.eo_header.type.code == "sip" ||
+                            t.eo_instruction.eo_header.type.code == "cpcp"
                         ) {
                             return (
                                 '<a href="/taskcard-routine/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
                         } else if (
-                            t.eo_header.type.code == "ad" ||
-                            t.eo_header.type.code == "sb" ||
-                            t.eo_header.type.code == "eo" ||
-                            t.eo_header.type.code == "ea" ||
-                            t.eo_header.type.code == "htcrr" ||
-                            t.eo_header.type.code == "cmr" ||
-                            t.eo_header.type.code == "awl"
+                            t.eo_instruction.eo_header.type.code == "ad" ||
+                            t.eo_instruction.eo_header.type.code == "sb" ||
+                            t.eo_instruction.eo_header.type.code == "eo" ||
+                            t.eo_instruction.eo_header.type.code == "ea" ||
+                            t.eo_instruction.eo_header.type.code == "htcrr" ||
+                            t.eo_instruction.eo_header.type.code == "cmr" ||
+                            t.eo_instruction.eo_header.type.code == "awl"
                         ) {
                             return (
                                 '<a href="/taskcard-eo/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.eo_header.type.code == "si") {
+                        } else if (t.eo_instruction.eo_header.type.code == "si") {
                             return (
                                 '<a href="/taskcard-si/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.eo_header.type.code == "preliminary") {
+                        } else if (t.eo_instruction.eo_header.type.code == "preliminary") {
                             return (
                                 '<a href="/preliminary/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
                         } else {
@@ -364,25 +375,25 @@ let NonRoutineWorkpackage = {
                     filterable: !1
                 },
                 {
-                    field: "task.name",
+                    field: "eo_instruction.eo_header.task.name",
                     title: "Task",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: "estimation_manhour",
+                    field: "eo_instruction.eo_header.estimation_manhour",
                     title: "Manhour",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: "description",
+                    field: "eo_instruction.description",
                     title: "Description",
                     sortable: "asc",
                     filterable: !1,
                     template: function(t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
+                        if (t.eo_instruction.description) {
+                            data = strtrunc(t.eo_instruction.description, 50);
                             return "<p>" + data + "</p>";
                         }
 
@@ -397,7 +408,7 @@ let NonRoutineWorkpackage = {
                     template: function(t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_material_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
                         );
                     }
@@ -410,7 +421,7 @@ let NonRoutineWorkpackage = {
                     template: function(t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_tool_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
                     }
@@ -421,21 +432,21 @@ let NonRoutineWorkpackage = {
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
-                        if (t.pivot.sequence) {
+                        if (t.sequence) {
                             return (
-                                t.pivot.sequence +
+                                t.sequence +
                                 '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
-                                t.pivot.sequence +
+                                t.sequence +
                                 " data-uuid=" +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                             );
                         } else {
                             return (
                                 '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
-                                t.pivot.sequence +
+                                t.sequence +
                                 " data-uuid=" +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                             );
                         }
@@ -449,7 +460,7 @@ let NonRoutineWorkpackage = {
                     template: function(t) {
                         return (
                             '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor-modal-instruction predecessor-instruction"  data-tc_uuid="' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '" data-toggle="modal" data-target="#modal_predecessor_instruction"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                         );
                     }
@@ -462,7 +473,7 @@ let NonRoutineWorkpackage = {
                     template: function(t) {
                         return (
                             '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor-modal-instruction successor-instruction"  data-tc_uuid="' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '" data-toggle="modal" data-target="#modal_successor_instruction"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                         );
                     }
@@ -473,17 +484,17 @@ let NonRoutineWorkpackage = {
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
-                        if (t.pivot.is_mandatory == 1) {
+                        if (t.is_mandatory == 1) {
                             return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid=' +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 " data-mandatory=1" +
                                 ' title="Mandatory"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
-                        } else if (t.pivot.is_mandatory == 0) {
+                        } else if (t.is_mandatory == 0) {
                             return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid=' +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 " data-mandatory=0" +
                                 ' title="Not Mandatory"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
@@ -497,7 +508,7 @@ let NonRoutineWorkpackage = {
                     template: function(t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-instruction" title="Delete" data-uuid="' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '">' +
                             '<i class="la la-trash"></i>' +
                             "</a>"
@@ -553,58 +564,58 @@ let NonRoutineWorkpackage = {
             },
             columns: [
                 {
-                    field: "eo_header.number",
+                    field: "eo_instruction.eo_header.number",
                     title: "Taskcard Number",
                     sortable: !1
                 },
                 {
-                    field: "title",
+                    field: "eo_instruction.eo_header.title",
                     title: "Title",
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
                         if (
-                            t.eo_header.type.code == "basic" ||
-                            t.eo_header.type.code == "sip" ||
-                            t.eo_header.type.code == "cpcp"
+                            t.eo_instruction.eo_header.type.code == "basic" ||
+                            t.eo_instruction.eo_header.type.code == "sip" ||
+                            t.eo_instruction.eo_header.type.code == "cpcp"
                         ) {
                             return (
                                 '<a href="/taskcard-routine/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
                         } else if (
-                            t.eo_header.type.code == "ad" ||
-                            t.eo_header.type.code == "sb" ||
-                            t.eo_header.type.code == "eo" ||
-                            t.eo_header.type.code == "ea" ||
-                            t.eo_header.type.code == "htcrr" ||
-                            t.eo_header.type.code == "cmr" ||
-                            t.eo_header.type.code == "awl"
+                            t.eo_instruction.eo_header.type.code == "ad" ||
+                            t.eo_instruction.eo_header.type.code == "sb" ||
+                            t.eo_instruction.eo_header.type.code == "eo" ||
+                            t.eo_instruction.eo_header.type.code == "ea" ||
+                            t.eo_instruction.eo_header.type.code == "htcrr" ||
+                            t.eo_instruction.eo_header.type.code == "cmr" ||
+                            t.eo_instruction.eo_header.type.code == "awl"
                         ) {
                             return (
                                 '<a href="/taskcard-eo/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.eo_header.type.code == "si") {
+                        } else if (t.eo_instruction.eo_header.type.code == "si") {
                             return (
                                 '<a href="/taskcard-si/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.eo_header.type.code == "preliminary") {
+                        } else if (t.eo_instruction.eo_header.type.code == "preliminary") {
                             return (
                                 '<a href="/preliminary/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
                         } else {
@@ -619,25 +630,25 @@ let NonRoutineWorkpackage = {
                     filterable: !1
                 },
                 {
-                    field: "task.name",
+                    field: "eo_instruction.eo_header.task.name",
                     title: "Task",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: "estimation_manhour",
+                    field: "eo_instruction.eo_header.estimation_manhour",
                     title: "Manhour",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: "description",
+                    field: "eo_instruction.description",
                     title: "Description",
                     sortable: "asc",
                     filterable: !1,
                     template: function(t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
+                        if (t.eo_instruction.description) {
+                            data = strtrunc(t.eo_instruction.description, 50);
                             return "<p>" + data + "</p>";
                         }
 
@@ -652,7 +663,7 @@ let NonRoutineWorkpackage = {
                     template: function(t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_material_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
                         );
                     }
@@ -665,7 +676,7 @@ let NonRoutineWorkpackage = {
                     template: function(t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_tool_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
                     }
@@ -676,21 +687,21 @@ let NonRoutineWorkpackage = {
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
-                        if (t.pivot.sequence) {
+                        if (t.sequence) {
                             return (
-                                t.pivot.sequence +
+                                t.sequence +
                                 '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
-                                t.pivot.sequence +
+                                t.sequence +
                                 " data-uuid=" +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                             );
                         } else {
                             return (
                                 '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
-                                t.pivot.sequence +
+                                t.sequence +
                                 " data-uuid=" +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                             );
                         }
@@ -704,7 +715,7 @@ let NonRoutineWorkpackage = {
                     template: function(t) {
                         return (
                             '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor-modal-instruction predecessor-instruction"  data-tc_uuid="' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '" data-toggle="modal" data-target="#modal_predecessor_instruction"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                         );
                     }
@@ -717,7 +728,7 @@ let NonRoutineWorkpackage = {
                     template: function(t) {
                         return (
                             '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor-modal-instruction successor-instruction"  data-tc_uuid="' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '" data-toggle="modal" data-target="#modal_successor_instruction"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                         );
                     }
@@ -728,17 +739,17 @@ let NonRoutineWorkpackage = {
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
-                        if (t.pivot.is_mandatory == 1) {
+                        if (t.is_mandatory == 1) {
                             return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid=' +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 " data-mandatory=1" +
                                 ' title="Mandatory"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
-                        } else if (t.pivot.is_mandatory == 0) {
+                        } else if (t.is_mandatory == 0) {
                             return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid=' +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 " data-mandatory=0" +
                                 ' title="Not Mandatory"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
@@ -752,7 +763,7 @@ let NonRoutineWorkpackage = {
                     template: function(t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-instruction" title="Delete" data-uuid="' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '">' +
                             '<i class="la la-trash"></i>' +
                             "</a>"
@@ -761,7 +772,7 @@ let NonRoutineWorkpackage = {
                 }
             ]
         });
-
+       
         $(".si_datatable").mDatatable({
             data: {
                 type: "remote",
@@ -1018,6 +1029,7 @@ let NonRoutineWorkpackage = {
             ]
         });
 
+      
         $(".ea_datatable").mDatatable({
             data: {
                 type: "remote",
@@ -1065,58 +1077,58 @@ let NonRoutineWorkpackage = {
             },
             columns: [
                 {
-                    field: "eo_header.number",
+                    field: "eo_instruction.eo_header.number",
                     title: "Taskcard Number",
                     sortable: !1
                 },
                 {
-                    field: "title",
+                    field: "eo_instruction.eo_header.title",
                     title: "Title",
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
                         if (
-                            t.eo_header.type.code == "basic" ||
-                            t.eo_header.type.code == "sip" ||
-                            t.eo_header.type.code == "cpcp"
+                            t.eo_instruction.eo_header.type.code == "basic" ||
+                            t.eo_instruction.eo_header.type.code == "sip" ||
+                            t.eo_instruction.eo_header.type.code == "cpcp"
                         ) {
                             return (
                                 '<a href="/taskcard-routine/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
                         } else if (
-                            t.eo_header.type.code == "ad" ||
-                            t.eo_header.type.code == "sb" ||
-                            t.eo_header.type.code == "eo" ||
-                            t.eo_header.type.code == "ea" ||
-                            t.eo_header.type.code == "htcrr" ||
-                            t.eo_header.type.code == "cmr" ||
-                            t.eo_header.type.code == "awl"
+                            t.eo_instruction.eo_header.type.code == "ad" ||
+                            t.eo_instruction.eo_header.type.code == "sb" ||
+                            t.eo_instruction.eo_header.type.code == "eo" ||
+                            t.eo_instruction.eo_header.type.code == "ea" ||
+                            t.eo_instruction.eo_header.type.code == "htcrr" ||
+                            t.eo_instruction.eo_header.type.code == "cmr" ||
+                            t.eo_instruction.eo_header.type.code == "awl"
                         ) {
                             return (
                                 '<a href="/taskcard-eo/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.eo_header.type.code == "si") {
+                        } else if (t.eo_instruction.eo_header.type.code == "si") {
                             return (
                                 '<a href="/taskcard-si/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.eo_header.type.code == "preliminary") {
+                        } else if (t.eo_instruction.eo_header.type.code == "preliminary") {
                             return (
                                 '<a href="/preliminary/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
                         } else {
@@ -1131,25 +1143,25 @@ let NonRoutineWorkpackage = {
                     filterable: !1
                 },
                 {
-                    field: "task.name",
+                    field: "eo_instruction.eo_header.task.name",
                     title: "Task",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: "estimation_manhour",
+                    field: "eo_instruction.eo_header.estimation_manhour",
                     title: "Manhour",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: "description",
+                    field: "eo_instruction.description",
                     title: "Description",
                     sortable: "asc",
                     filterable: !1,
                     template: function(t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
+                        if (t.eo_instruction.description) {
+                            data = strtrunc(t.eo_instruction.description, 50);
                             return "<p>" + data + "</p>";
                         }
 
@@ -1164,7 +1176,7 @@ let NonRoutineWorkpackage = {
                     template: function(t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_material_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
                         );
                     }
@@ -1177,7 +1189,7 @@ let NonRoutineWorkpackage = {
                     template: function(t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_tool_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
                     }
@@ -1188,21 +1200,21 @@ let NonRoutineWorkpackage = {
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
-                        if (t.pivot.sequence) {
+                        if (t.sequence) {
                             return (
-                                t.pivot.sequence +
+                                t.sequence +
                                 '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
-                                t.pivot.sequence +
+                                t.sequence +
                                 " data-uuid=" +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                             );
                         } else {
                             return (
                                 '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
-                                t.pivot.sequence +
+                                t.sequence +
                                 " data-uuid=" +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                             );
                         }
@@ -1216,7 +1228,7 @@ let NonRoutineWorkpackage = {
                     template: function(t) {
                         return (
                             '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor-modal-instruction predecessor-instruction"  data-tc_uuid="' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '" data-toggle="modal" data-target="#modal_predecessor_instruction"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                         );
                     }
@@ -1229,7 +1241,7 @@ let NonRoutineWorkpackage = {
                     template: function(t) {
                         return (
                             '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor-modal-instruction successor-instruction"  data-tc_uuid="' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '" data-toggle="modal" data-target="#modal_successor_instruction"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                         );
                     }
@@ -1240,17 +1252,17 @@ let NonRoutineWorkpackage = {
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
-                        if (t.pivot.is_mandatory == 1) {
+                        if (t.is_mandatory == 1) {
                             return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid=' +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 " data-mandatory=1" +
                                 ' title="Mandatory"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
-                        } else if (t.pivot.is_mandatory == 0) {
+                        } else if (t.is_mandatory == 0) {
                             return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid=' +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 " data-mandatory=0" +
                                 ' title="Not Mandatory"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
@@ -1264,7 +1276,7 @@ let NonRoutineWorkpackage = {
                     template: function(t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-instruction" title="Delete" data-uuid="' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '">' +
                             '<i class="la la-trash"></i>' +
                             "</a>"
@@ -1273,6 +1285,7 @@ let NonRoutineWorkpackage = {
                 }
             ]
         });
+
 
         $(".eo_datatable").mDatatable({
             data: {
@@ -1321,58 +1334,58 @@ let NonRoutineWorkpackage = {
             },
             columns: [
                 {
-                    field: "eo_header.number",
+                    field: "eo_instruction.eo_header.number",
                     title: "Taskcard Number",
                     sortable: !1
                 },
                 {
-                    field: "title",
+                    field: "eo_instruction.eo_header.title",
                     title: "Title",
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
                         if (
-                            t.eo_header.type.code == "basic" ||
-                            t.eo_header.type.code == "sip" ||
-                            t.eo_header.type.code == "cpcp"
+                            t.eo_instruction.eo_header.type.code == "basic" ||
+                            t.eo_instruction.eo_header.type.code == "sip" ||
+                            t.eo_instruction.eo_header.type.code == "cpcp"
                         ) {
                             return (
                                 '<a href="/taskcard-routine/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
                         } else if (
-                            t.eo_header.type.code == "ad" ||
-                            t.eo_header.type.code == "sb" ||
-                            t.eo_header.type.code == "eo" ||
-                            t.eo_header.type.code == "ea" ||
-                            t.eo_header.type.code == "htcrr" ||
-                            t.eo_header.type.code == "cmr" ||
-                            t.eo_header.type.code == "awl"
+                            t.eo_instruction.eo_header.type.code == "ad" ||
+                            t.eo_instruction.eo_header.type.code == "sb" ||
+                            t.eo_instruction.eo_header.type.code == "eo" ||
+                            t.eo_instruction.eo_header.type.code == "ea" ||
+                            t.eo_instruction.eo_header.type.code == "htcrr" ||
+                            t.eo_instruction.eo_header.type.code == "cmr" ||
+                            t.eo_instruction.eo_header.type.code == "awl"
                         ) {
                             return (
                                 '<a href="/taskcard-eo/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.eo_header.type.code == "si") {
+                        } else if (t.eo_instruction.eo_header.type.code == "si") {
                             return (
                                 '<a href="/taskcard-si/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
-                        } else if (t.eo_header.type.code == "preliminary") {
+                        } else if (t.eo_instruction.eo_header.type.code == "preliminary") {
                             return (
                                 '<a href="/preliminary/' +
-                                t.eo_header.uuid +
+                                t.eo_instruction.eo_header.uuid +
                                 '">' +
-                                t.eo_header.title +
+                                t.eo_instruction.eo_header.title +
                                 "</a>"
                             );
                         } else {
@@ -1387,25 +1400,25 @@ let NonRoutineWorkpackage = {
                     filterable: !1
                 },
                 {
-                    field: "task.name",
+                    field: "eo_instruction.eo_header.task.name",
                     title: "Task",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: "estimation_manhour",
+                    field: "eo_instruction.eo_header.estimation_manhour",
                     title: "Manhour",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: "description",
+                    field: "eo_instruction.description",
                     title: "Description",
                     sortable: "asc",
                     filterable: !1,
                     template: function(t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
+                        if (t.eo_instruction.description) {
+                            data = strtrunc(t.eo_instruction.description, 50);
                             return "<p>" + data + "</p>";
                         }
 
@@ -1420,7 +1433,7 @@ let NonRoutineWorkpackage = {
                     template: function(t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_material_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
                         );
                     }
@@ -1433,7 +1446,7 @@ let NonRoutineWorkpackage = {
                     template: function(t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_tool_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
                     }
@@ -1444,21 +1457,21 @@ let NonRoutineWorkpackage = {
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
-                        if (t.pivot.sequence) {
+                        if (t.sequence) {
                             return (
-                                t.pivot.sequence +
+                                t.sequence +
                                 '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
-                                t.pivot.sequence +
+                                t.sequence +
                                 " data-uuid=" +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                             );
                         } else {
                             return (
                                 '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
-                                t.pivot.sequence +
+                                t.sequence +
                                 " data-uuid=" +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                             );
                         }
@@ -1472,7 +1485,7 @@ let NonRoutineWorkpackage = {
                     template: function(t) {
                         return (
                             '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor-modal-instruction predecessor-instruction"  data-tc_uuid="' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '" data-toggle="modal" data-target="#modal_predecessor_instruction"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                         );
                     }
@@ -1485,7 +1498,7 @@ let NonRoutineWorkpackage = {
                     template: function(t) {
                         return (
                             '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor-modal-instruction successor-instruction"  data-tc_uuid="' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '" data-toggle="modal" data-target="#modal_successor_instruction"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                         );
                     }
@@ -1496,17 +1509,17 @@ let NonRoutineWorkpackage = {
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
-                        if (t.pivot.is_mandatory == 1) {
+                        if (t.is_mandatory == 1) {
                             return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid=' +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 " data-mandatory=1" +
                                 ' title="Mandatory"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
-                        } else if (t.pivot.is_mandatory == 0) {
+                        } else if (t.is_mandatory == 0) {
                             return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid=' +
-                                t.uuid +
+                                t.eo_instruction.uuid +
                                 " data-mandatory=0" +
                                 ' title="Not Mandatory"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
                             );
@@ -1520,7 +1533,7 @@ let NonRoutineWorkpackage = {
                     template: function(t, e, i) {
                         return (
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-instruction" title="Delete" data-uuid="' +
-                            t.uuid +
+                            t.eo_instruction.uuid +
                             '">' +
                             '<i class="la la-trash"></i>' +
                             "</a>"

@@ -25,15 +25,10 @@ class StatusesOfAttendance extends Seeder
         ]);
 
         Status::create([
-            'code' => 'discipline',
-            'name' => 'DISCIPLINE',
+            'code' => 'normal',
+            'name' => 'NORMAL',
             'of'   => 'attendance',
         ]);
 
-        Status::create([
-            'code' => 'late',
-            'name' => 'LATE',
-            'of'   => 'attendance',
-        ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Import;
 
 use App\Imports\UsersImport;
 use App\Imports\EnginesImport;
+use App\Imports\CustomersImport;
 use App\Imports\WorkAreasImport;
 use App\Imports\TaskCardsCNimport;
 use App\Imports\TaskCardsCPCPTriganaimport;
@@ -62,5 +63,10 @@ class OldDataController extends Controller
     public function users()
     {
         Excel::import(new UsersImport, $this->import_directory . 'users.xlsx');
+    }
+
+    public function customers()
+    {
+        Excel::import(new CustomersImport, $this->import_directory . 'customer.xlsx');
     }
 }

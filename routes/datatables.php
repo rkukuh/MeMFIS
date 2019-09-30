@@ -38,6 +38,7 @@ Route::name('datatables.')->group(function () {
         Route::get('/role', 'RoleDatatables@index')->name('role.index');
         Route::get('/bank', 'BankDatatables@index')->name('bank.index');
         Route::get('/school-type', 'SchoolTypeDatatables@index')->name('school.index');
+        Route::get('/attendance', 'AttendanceDatatables@index')->name('attendance.index');
 
         /** LICENSE */
 
@@ -608,6 +609,23 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        Route::name('task-release-htcrr.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'task-release-htcrr',
+                'namespace' => 'TaskRelease'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'TaskReleaseHtCrrDatatables@index')->name('all');
+                Route::post('/filter', 'TaskReleaseHtCrrDatatables@filter')->name('filter');
+
+            });
+
+        });
+
         /** RII RELEASE */
 
         Route::name('rii-release-jobcard.')->group(function () {
@@ -640,6 +658,24 @@ Route::name('datatables.')->group(function () {
                 /** Master Data */
                 Route::get('/', 'RIIReleaseDefectCardDatatables@index')->name('all');
                 Route::post('/filter', 'RIIReleaseDefectCardDatatables@filter')->name('filter');
+
+
+            });
+
+        });
+
+        Route::name('rii-release-htcrr.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'rii-release-htcrr',
+                'namespace' => 'RIIRelease'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'RIIReleaseHtCrrDatatables@index')->name('all');
+                Route::post('/filter', 'RIIReleaseHtCrrDatatables@filter')->name('filter');
 
 
             });

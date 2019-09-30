@@ -128,37 +128,6 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Qty Engineer
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $discrepancy->engineer_quantity)
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                ATA
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                               @slot('text',  $discrepancy->ata)
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Qty Helper
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $discrepancy->helper_quantity)
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 Zone
                                             </label>
 
@@ -171,6 +140,17 @@
                                                         @endcomponent
                                                     @endforeach
                                             @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                ATA
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                               @slot('text',  $discrepancy->ata)
+                                            @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -369,6 +349,35 @@
                 </div>
             </div>
             <div class="col-lg-5">
+            <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
+                                    Helper(s) List
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="defectcard_helper_datatable" id="scrolling_both"></div>
+                        </div>
+                    </div>
+                </div>
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -394,8 +403,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            {{-- @include('frontend.job-card.engineer.discrepancy.item.tool.index') --}}
 
                             <div class="tools_datatable" id="scrolling_both"></div>
 
@@ -460,6 +467,7 @@
         let discrepancy_uuid = '{{$discrepancy->uuid}}';
     </script>
     <script src="{{ asset('js/frontend/job-card/discrepancy/show.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/helpers.js') }}"></script>
     <script src="{{ asset('js/frontend/job-card/discrepancy/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>

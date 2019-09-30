@@ -43,13 +43,6 @@ class DefectCardDatatables extends Controller
                 }
             }
 
-
-            $statuses = Status::ofDefectCard()->get();
-            $defectcard = DefectCard::where('uuid',$jobcard->uuid)->first();
-            foreach($defectcard->helpers as $helper){
-                $helper->userID .= $helper->user->id;
-            }
-
             $jobcard->actual .= $jobcard->ActualManhour;
 
             $count_user = $jobcard->progresses->groupby('progressed_by')->count()-1;
@@ -65,7 +58,7 @@ class DefectCardDatatables extends Controller
             elseif($jobcard->is_rii == 0 and $jobcard->approvals->count()== 3){
                 $jobcard->status .= 'Released';
             }
-            if($jobcard->progresses->where('progressed_by',Auth::id())->first() == null){
+            elseif($jobcard->progresses->where('progressed_by',Auth::id())->first() == null){
                 $jobcard->status .= 'Open';
             }else{
                 if($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','closed')->first()->id){

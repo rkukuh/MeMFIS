@@ -43,6 +43,19 @@ class HtCrr extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * Polymorphic: An entity can have zero or many approvals.
+     *
+     * This function will get all HtCrr's approvals.
+     * See: Approvals's approvable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function approvals()
+    {
+        return $this->morphMany(Approval::class, 'approvable');
+    }
+
+    /**
      * One-to-Many (self-join): An HTCRR may have none or many sub-HTCRR.
      *
      * This function will retrieve the sub-HTCRR of an HTCRR, if any.
@@ -95,6 +108,19 @@ class HtCrr extends MemfisModel
     {
         return $this->belongsToMany(Employee::class, 'employee_htcrr', 'htcrr_id', 'employee_id')
                     ->withTimestamps();
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many inspections.
+     *
+     * This function will get all JobCard's inspections.
+     * See: Inspection's inspectable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function inspections()
+    {
+        return $this->morphMany(Progress::class, 'inspectable');
     }
 
     /**
@@ -324,5 +350,29 @@ class HtCrr extends MemfisModel
         $actual_manhours = number_format($actual_manhours_removal+$actual_manhours_installation, 2);
 
         return array('actual_manhours' => $actual_manhours, 'actual_manhours_removal' => $actual_manhours_removal, 'actual_manhours_installation' => $actual_manhours_installation);
+    }
+
+    /**
+     * Get the task card's Skill.
+     *
+     * @return string
+     */
+    public function getSkillAttribute()
+    {
+
+        if(isset($this->skills) ){
+            switch (sizeof($this->skills)) {
+                case 3:
+                    $skill = "ERI";
+                    break;
+                case 1:
+                    $skill = $this->skills[0]->name;
+                    break;
+                default:
+                    $skill = '';
+            }
+        }
+
+        return $skill;
     }
 }

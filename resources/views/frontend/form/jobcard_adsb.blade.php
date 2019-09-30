@@ -146,7 +146,7 @@
                         </td>
                       </tr>
                       <tr>
-                        <td width="20%">SB Ref.No.</td>
+                        <td width="20%">Reference</td>
                         <td width="1%">:</td>
                         <td width="29%">Generate</td>
                         <td width="20%">AC/Type</td>

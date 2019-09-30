@@ -16,7 +16,8 @@ class CreateDefectcardEmployeeTable extends Migration
         Schema::create('defectcard_employee', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('defectcard_id');
-            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('employee_id');            
+            $table->string('additionals')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

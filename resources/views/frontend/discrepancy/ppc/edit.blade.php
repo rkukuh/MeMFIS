@@ -73,13 +73,16 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Discrepenct No
+                                                Sequence No
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text',  $discrepancy->code)
+                                            @component('frontend.common.input.number')
+                                                @slot('id', 'sequence')
+                                                @slot('name', 'sequence')
+                                                @slot('text', 'Sequence')
+                                                @slot('value',  $discrepancy->sequence)
                                             @endcomponent
-                                            <input type="hidden"id="uuid" name="uuid" value="{{$discrepancy->uuid}}">
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -96,6 +99,8 @@
                                             <label class="form-control-label">
                                                 JC No Refference
                                             </label>
+                                            <input type="hidden"id="uuid" name="uuid" value="{{$discrepancy->uuid}}">
+
                                             <input type="hidden"id="jobcard_id" name="jobcard_id" value="{{$discrepancy->jobcard->uuid}}">
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $discrepancy->jobcard->number)
@@ -114,55 +119,25 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Sequence No
+                                                Skill
                                             </label>
+                                            <select id="otr_certification" name="otr_certification" class="form-control m-select2" style="width:100%">
+                                                <option value="">
+                                                    &mdash; Select a Skill &mdash;
+                                                </option>
 
-                                            @component('frontend.common.label.data-info')
-                                                 @slot('text',  $discrepancy->sequence)
-                                            @endcomponent
+                                                @foreach ($skills as $skill)
+                                                    <option value="{{ $skill->id }}"
+                                                        @if ($skill->name == "ERI" && sizeof($discrepancy->skills) == 3) selected @elseif($skill->id == $discrepancy->skills[0]->id) selected @endif>
+                                                        {{ $skill->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Qty Engineer
-                                            </label>
-
-                                            @component('frontend.common.input.number')
-                                                @slot('text', 'Engineer Quantity')
-                                                @slot('id', 'engineer_qty')
-                                                @slot('value', $discrepancy->engineer_quantity)
-                                                @slot('name', 'engineer_qty')
-                                                @slot('id_error', 'engineer_qty')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                ATA
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text',  $discrepancy->ata)
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Qty Helper
-                                            </label>
-
-                                            @component('frontend.common.input.number')
-                                                @slot('text', 'Helper Quoantity')
-                                                @slot('id', 'helper_quantity')
-                                                @slot('value', $discrepancy->helper_quantity)
-                                                @slot('name', 'helper_quantity')
-                                                @slot('id_error', 'helper_quantity')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Area/Zone
+                                                Zone
                                             </label>
 
                                             <select id="zone" name="zone" class="form-control m-select2" multiple style="width:100%">
@@ -185,6 +160,20 @@
                                                 @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                ATA
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'ata')
+                                                @slot('name', 'ata')
+                                                @slot('text', 'ATA')
+                                                @slot('value', $discrepancy->ata)
+                                            @endcomponent
+                                        </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Est. Mhrs
@@ -202,42 +191,24 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Skill
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @if(sizeof($discrepancy->jobcard->jobcardable->skills) == 3)
-                                                    @slot('text', 'ERI')
-                                                @elseif(sizeof($discrepancy->jobcard->jobcardable->skills) == 1)
-                                                    @slot('text', $discrepancy->jobcard->jobcardable->skills[0]->name)
-                                                @else
-                                                    @include('frontend.common.label.data-info-nodata')
-                                                @endif
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                RII
-                                            </label>
-
-                                            @component('frontend.common.input.checkbox')
-                                                @slot('id', 'is_rii')
-                                                @slot('name', 'is_rii')
-                                                @slot('text', 'IS RII?')
-                                                @if ($discrepancy->is_rii == 1)
-                                                        @slot('checked', 'checked')
-                                                    @endif
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 Attachment @include('frontend.common.label.optional')
                                             </label>
                                             <br>
 
                                             <input type="file" id="file" multiple name="name">
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                            </label>
+
+                                            @component('frontend.common.input.checkbox')
+                                                @slot('id', 'is_rii')
+                                                @slot('name', 'is_rii')
+                                                @slot('text', 'RII?')
+                                                @if ($discrepancy->is_rii == 1)
+                                                    @slot('checked', 'checked')
+                                                @endif
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -438,6 +409,39 @@
                 </div>
             </div>
             <div class="col-lg-5">
+            <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
+                                    Helper(s) List
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                            <button data-toggle="modal" data-target="#modal_helper" type="button" href="#" 
+                                            class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-md add-helper" title="Add Helper" >
+                                            <i class="la la-plus-circle"></i> Add Helper</button>
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            @include('frontend.discrepancy.engineer.modal-helper')
+                            <div class="defectcard_helper_edit_datatable" id="scrolling_both"></div>
+                        </div>
+                    </div>
+                </div>
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -535,7 +539,14 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/discrepancy/edit.js') }}"></script>
+    <script>
+        let discrepancy_uuid = '{{$discrepancy->uuid}}';
+    </script>
+    <script src="{{ asset('js/frontend/discrepancy/engineer/edit.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/discrepancy/repeater.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
@@ -546,11 +557,13 @@
     <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/helper.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/helpers.js') }}"></script>
+
 @endpush
