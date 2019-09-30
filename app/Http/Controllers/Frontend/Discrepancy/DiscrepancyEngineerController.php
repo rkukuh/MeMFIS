@@ -192,10 +192,13 @@ class DiscrepancyEngineerController extends Controller
      */
     public function update(DiscrepancyUpdate $request,DefectCard $discrepancy)
     {
+        $helpers = json_decode($request->helper_array);
         $zone = json_decode($request->zone);
         $zones = [];
 
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
+        $request->merge(['engineer_quantity' => 1]);
+        $request->merge(['helper_quantity' => sizeof($helpers)]);
 
         $discrepancy->update($request->all());
 

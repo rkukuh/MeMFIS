@@ -106,8 +106,11 @@ class DiscrepancyPPCController extends Controller
             $zone_discrepancies[$i] =  $zone_taskcard->id;
         }
 
+        $skill = Type::ofTaskCardSkill()->get();
+
         return view('frontend.discrepancy.ppc.edit', [
             'discrepancy' => $discrepancy,
+            'skills' => $skill,
             'zones' => $this->zones,
             'zone_discrepancies' => $zone_discrepancies,
             'propose_corrections' => $propose_corrections,

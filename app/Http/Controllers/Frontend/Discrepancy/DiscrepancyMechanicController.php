@@ -117,7 +117,6 @@ class DiscrepancyMechanicController extends Controller
 
         $skill = Type::ofTaskCardSkill()->get();
 
-
         return view('frontend.discrepancy.mechanic.edit', [
             'discrepancy' => $discrepancy,
             'skills' => $skill,
