@@ -131,8 +131,6 @@ class DiscrepancyPPCController extends Controller
         $zone = json_decode($request->zone);
         $zones = [];
 
-        $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
-
         $discrepancy->update($request->all());
 
         if($zone){
@@ -166,16 +164,16 @@ class DiscrepancyPPCController extends Controller
             }
         }
 
-        // $discrepancy->approvals()->save(new Approval([
-        //     'approvable_id' => $discrepancy->id,
-        //     'conducted_by' => Auth::id(),
-        //     'is_approved' => 1
-        // ]));
+        $discrepancy->approvals()->save(new Approval([
+            'approvable_id' => $discrepancy->id,
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
+        ]));
 
-        // $discrepancy->progresses()->save(new Progress([
-        //     'status_id' =>  Status::ofDefectcard()->where('code','open')->first()->id,
-        //     'progressed_by' => Auth::id()
-        // ]));
+        $discrepancy->progresses()->save(new Progress([
+            'status_id' =>  Status::ofDefectcard()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
 
         return response()->json($discrepancy);
     }
