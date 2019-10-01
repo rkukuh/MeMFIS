@@ -79,6 +79,7 @@ class DummyDataSeeder extends Seeder
         $this->call(Inspections::class);
         $this->call(Interchanges::class);
         $this->call(InventoryIns::class);
+        $this->call(InventoryOuts::class);
 
         /** LICENSE */
 

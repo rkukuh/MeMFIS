@@ -38,6 +38,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('threshold', 'ThresholdController');
         Route::resource('inspection', 'InspectionController');
         Route::resource('inventory-in', 'InventoryInController');
+        Route::resource('inventory-out', 'InventoryOutController');
 
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']

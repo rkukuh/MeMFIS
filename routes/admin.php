@@ -40,6 +40,7 @@ Route::name('admin.')->group(function () {
         Route::resource('inspection', 'InspectionController');
         Route::resource('interchange', 'InterchangeController');
         Route::resource('inventory-in', 'InventoryInController');
+        Route::resource('inventory-out', 'InventoryOutController');
 
         /** MASTER */
 

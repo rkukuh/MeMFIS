@@ -81,6 +81,7 @@ class DatabaseSeeder extends Seeder
         $this->call(InspectionsTableSeeder::class);
         $this->call(InterchangesTableSeeder::class);
         $this->call(InventoryInsTableSeeder::class);
+        $this->call(InventoryOutsTableSeeder::class);
 
         /** LICENSE */
 
