@@ -66,7 +66,7 @@ let PurchaseOrder = {
                 filterable: !1,
             },
             {
-                field: 'pivot.unit_id',
+                field: 'unit_name',
                 title: 'Unit',
                 sortable: 'asc',
                 filterable: !1,
