@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\GoodsReceived;
 
+use App\Models\Unit;
 use App\Models\GoodsReceived;
 use App\Models\ListUtil;
 use Illuminate\Http\Order;
@@ -16,7 +17,13 @@ class ItemGoodsReceivedDatatables extends Controller
      */
     public function index(GoodsReceived $goodReceived)
     {
-        $data = $alldata = json_decode($goodReceived->items);
+        $goodReceiveds = $goodReceived->items;
+
+        foreach($goodReceiveds as $goodReceived){
+            $goodReceived->unit_name .= Unit::find($goodReceived->pivot->unit_id)->name;
+        }
+
+        $data = $alldata = json_decode($goodReceiveds);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
