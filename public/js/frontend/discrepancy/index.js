@@ -87,7 +87,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.jobcardable.type.name',
+                    field: 'jc_type',
                     title: 'TC Type',
                     sortable: 'asc',
                     filterable: !1,
