@@ -79,7 +79,7 @@ let goods_received_note_show = {
                     width: 150,
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'unit_name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
