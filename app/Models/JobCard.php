@@ -221,4 +221,5 @@ class JobCard extends MemfisModel
 
         return $actual_manhours;
     }
+    
 }
