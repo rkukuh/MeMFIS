@@ -13,7 +13,6 @@ Route::name('datatables.')->group(function () {
         /** INITIAL DATA */
 
         Route::get('/unit', 'UnitDatatables@index')->name('unit.index');
-        Route::get('/journal', 'JournalDatatables@index')->name('journal.index');
 
         /** POLYMORPH */
         // For every polymorph cases, create a grouped route for them

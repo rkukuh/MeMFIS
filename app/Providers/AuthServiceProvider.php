@@ -40,7 +40,6 @@ class AuthServiceProvider extends ServiceProvider
         Models\Benefit::class => Policies\BenefitPolicy::class,
         Models\Address::class => Policies\AddressPolicy::class,
         Models\License::class => Policies\LicensePolicy::class,
-        Models\Journal::class => Policies\JournalPolicy::class,
         Models\Version::class => Policies\VersionPolicy::class,
         Models\Website::class => Policies\WebsitePolicy::class,
         Models\Project::class => Policies\ProjectPolicy::class,

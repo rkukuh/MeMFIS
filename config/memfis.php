@@ -26,7 +26,6 @@ return [
         'htcrr' => 20,
         'items' => 20,
         'jobcards' => 20,
-        'journals' => 20,
         'languages' => 20,
         'licenses' => 20,
         'levels' => 20,

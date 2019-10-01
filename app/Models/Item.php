@@ -25,7 +25,6 @@ class Item extends MemfisModel implements HasMedia
         'is_stock',
         'is_ppn',
         'ppn_amount',
-        'account_code',
     ];
 
     /***************************************** OVERRIDE *******************************************/
@@ -164,19 +163,6 @@ class Item extends MemfisModel implements HasMedia
         return $this->belongsToMany(Item::class, 'interchanges', 'item_id', 'alternate_item_id')
                     ->using(Interchange::class)
                     ->withTimestamps();
-    }
-
-    /**
-     * One-to-Many: An item may have zero or one account code (journal).
-     *
-     * This function will retrieve the account code (journal) of an item.
-     * See: Journal's items() method for the inverse
-     *
-     * @return mixed
-     */
-    public function journal()
-    {
-        return $this->belongsTo(Journal::class, 'account_code');
     }
 
     /**
@@ -371,19 +357,6 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /***************************************** ACCESSOR ******************************************/
-
-    /**
-     * Get the item's account code and name.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function getAccountCodeAndNameAttribute($value)
-    {
-        if (isset($this->journal)) {
-            return $this->journal->code.' - '.$this->journal->name;
-        }
-    }
 
     /**
      * Get the item's single category.

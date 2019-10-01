@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UnitsTableSeeder::class);
         $this->call(LevelsTableSeeder::class);
         $this->call(StatusesTableSeeder::class);
-        $this->call(JournalsTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(CurrenciesTableSeeder::class);
         

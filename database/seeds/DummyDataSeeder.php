@@ -23,7 +23,6 @@ class DummyDataSeeder extends Seeder
         $this->call(Units::class);
         $this->call(Levels::class);
         $this->call(Statuses::class);
-        $this->call(Journals::class);
         $this->call(Categories::class);
         $this->call(Currencies::class);
 
