@@ -28,4 +28,22 @@ class InventoryOut extends MemfisModel
     {
         return $this->morphTo();
     }
+
+    /**
+     * Many-to-Many: An InventoryOut may have one or many item.
+     *
+     * This function will retrieve all the items of an InventoryOut.
+     * See: Item's inventory_outs() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'inventoryout_item', 'inventoryout_id', 'item_id')
+                    ->withPivot(
+                        'quantity',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
 }

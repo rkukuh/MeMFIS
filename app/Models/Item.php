@@ -184,6 +184,24 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
+     * Many-to-Many: An InventoryOut may have one or many item.
+     *
+     * This function will retrieve all the InventoryOuts of an item.
+     * See: InventoryOut's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function inventory_outs()
+    {
+        return $this->belongsToMany(InventoryOut::class)
+                    ->withPivot(
+                        'quantity',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
      * One-to-Many: A manufacturer can create zero or many items.
      *
      * This function will get a manufacturer of an item.
