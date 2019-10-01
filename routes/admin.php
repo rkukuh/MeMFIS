@@ -39,6 +39,7 @@ Route::name('admin.')->group(function () {
         Route::resource('threshold', 'ThresholdController');
         Route::resource('inspection', 'InspectionController');
         Route::resource('interchange', 'InterchangeController');
+        Route::resource('inventory-in', 'InventoryInController');
 
         /** MASTER */
 

@@ -80,6 +80,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProgressesTableSeeder::class);
         $this->call(InspectionsTableSeeder::class);
         $this->call(InterchangesTableSeeder::class);
+        $this->call(InventoryInsTableSeeder::class);
 
         /** LICENSE */
 
