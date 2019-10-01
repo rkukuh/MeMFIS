@@ -17,6 +17,7 @@ class CreateInventoryInTable extends Migration
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             // other columns goes here
+            $table->morphs('inventoryinable');
             $table->timestamps();
             $table->softDeletes();
         });
