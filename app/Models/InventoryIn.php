@@ -28,4 +28,22 @@ class InventoryIn extends MemfisModel
     {
         return $this->morphTo();
     }
+
+    /**
+     * Many-to-Many: An InventoryIn may have one or many item.
+     *
+     * This function will retrieve all the items of an InventoryIn.
+     * See: Item's inventory_ins() method for the inverse
+     *
+     * @return mixed
+     */
+    public function items()
+    {
+        return $this->belongsToMany(Item::class, 'inventoryin_item', 'inventoryin_id', 'item_id')
+                    ->withPivot(
+                        'quantity',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
 }
