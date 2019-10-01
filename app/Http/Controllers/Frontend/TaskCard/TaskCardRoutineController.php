@@ -94,7 +94,9 @@ class TaskCardRoutineController extends Controller
                 }
             }  
         }else{
-            $this->createTaskcard($request);
+            $taskcard = $this->createTaskcard($request);
+
+            return response()->json($taskcard->original);
         }
 
         if(in_array(true, $checker)){
@@ -105,7 +107,9 @@ class TaskCardRoutineController extends Controller
             );
             return response()->json(['error' => [$error_message]], '403');
         }else{
-            $this->createTaskcard($request);
+            $taskcard = $this->createTaskcard($request);
+
+            return response()->json($taskcard->original);
         }
     }
 

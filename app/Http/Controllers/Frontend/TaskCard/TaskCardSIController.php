@@ -73,7 +73,9 @@ class TaskCardSIController extends Controller
                 }
             }  
         }else{
-            $this->createTaskcard($request);
+            $taskcard = $this->createTaskcard($request);
+
+            return response()->json($taskcard->original);
         }
 
         if(in_array(true, $checker)){
@@ -84,7 +86,9 @@ class TaskCardSIController extends Controller
             );
             return response()->json(['error' => [$error_message]], '403');
         }else{
-            $this->createTaskcard($request);
+            $taskcard = $this->createTaskcard($request);
+
+            return response()->json($taskcard->original);
         }
         
     }

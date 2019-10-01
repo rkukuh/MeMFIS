@@ -88,7 +88,9 @@ class TaskCardEOController extends Controller
                 }
             }  
         }else{
-            $this->createTaskcard($request);
+            $taskcard = $this->createTaskcard($request);
+
+            return response()->json($taskcard->original);
         }
 
         if(in_array(true, $checker)){
@@ -99,7 +101,9 @@ class TaskCardEOController extends Controller
             );
             return response()->json(['error' => [$error_message]], '403');
         }else{
-            $this->createTaskcard($request);
+            $taskcard = $this->createTaskcard($request);
+
+            return response()->json($taskcard->original);
         }
     }
 
@@ -279,7 +283,5 @@ class TaskCardEOController extends Controller
             return response()->json($taskcard);
         }
 
-        // TODO: Return error message as JSON
-        return false;
     }
 }
