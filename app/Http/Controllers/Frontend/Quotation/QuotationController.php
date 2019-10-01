@@ -646,21 +646,21 @@ class QuotationController extends Controller
             //items price
             array_push($totalMatTool, $htcrr_workpackage->mat_tool_price);
 
-            if(isset($data_htcrr->discount_value)){
-                switch($data_htcrr->discount_type){
+            if(isset($data_htcrr["discount_value"])){
+                switch($data_htcrr["discount_type"]){
                     case "amount":
-                        $disc = $data_htcrr->discount_value;
+                        $disc = $data_htcrr["discount_value"];
                         array_push($discount, $disc);
                         break;
                     case "percentage":
-                        $disc =  ($manhourPrice[$key] + $totalFacility[$key] + $totalMatTool[$key]) * ($data_htcrr->discount_value / 100);
+                        $disc =  ($manhourPrice[(sizeof($manhourPrice) - 1)] + $totalFacility[(sizeof($totalFacility) - 1)] + $totalMatTool[(sizeof($totalMatTool) - 1)]) * ($data_htcrr["discount_value"] / 100);
                         array_push($discount, $disc);
                         break;
                     default:
                         array_push($discount, 0);
                 }
-                $htcrr_workpackage->jobrequest_discount_value = $data_htcrr->discount_value;
-                $htcrr_workpackage->jobrequest_discount_type = $data_htcrr->discount_type;
+                $htcrr_workpackage->jobrequest_discount_value = $data_htcrr["discount_value"];
+                $htcrr_workpackage->jobrequest_discount_type = $data_htcrr["discount_type"];
             }else{
                 $htcrr_workpackage->jobrequest_discount_value = null;
                 $htcrr_workpackage->jobrequest_discount_type = null;
