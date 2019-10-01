@@ -451,6 +451,7 @@ class SummaryNonRoutineTaskcardController extends Controller
                 })
                 ->count();
 
+        
         foreach ($subset as $value) {
             foreach($value as $skill){
                 array_push($skills, $skill["code"]);
