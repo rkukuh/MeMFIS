@@ -352,8 +352,8 @@ class DiscrepancyDatatables extends Controller
                 $jobcard->status .= 'ppc';
             }
 
-            $jobcard->taskcard_number .= $jobcard->jobcard->jobcardable->number;
-            $jobcard->customer_name .= $jobcard->jobcard->quotation->quotationable->customer->name;
+            $jobcard->taskcard_number   .= $jobcard->jobcard->jobcardable->number;
+            $jobcard->customer_name     .= $jobcard->jobcard->quotation->quotationable->customer->name;
             
             if($jobcard->jobcard->jobcardable_type == 'App\Models\TaskCard'){
                 $jobcard->jc_type .= $jobcard->jobcard->jobcardable->type->name;
@@ -361,10 +361,10 @@ class DiscrepancyDatatables extends Controller
                 $jobcard->jc_type .= $jobcard->jobcard->jobcardable->eo_header->type->name;
             }
            
-            $jobcard->aircraft .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
-            $jobcard->conducted_by.= User::find($jobcard->approvals->last()->conducted_by)->name;
-            $jobcard->created_by .= User::find($jobcard->audits->first()->user_id)->name;
-            $jobcard->updated_by .= User::find($jobcard->audits->first()->user_id)->name;
+            $jobcard->aircraft      .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
+            $jobcard->conducted_by  .= User::find($jobcard->approvals->last()->conducted_by)->name;
+            $jobcard->created_by    .= User::find($jobcard->audits->first()->user_id)->name;
+            $jobcard->updated_by    .= User::find($jobcard->audits->first()->user_id)->name;
 
             $jobcard->conducted_at      .= $jobcard->approvals->last()->created_at;
             $jobcard->create_date       .= $jobcard->audits->first()->created_at;
