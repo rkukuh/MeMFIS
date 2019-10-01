@@ -285,6 +285,8 @@ class SummaryNonRoutineTaskcardController extends Controller
             ->orWhere('code','ea')->orWhere('code','eo');
         })->whereNull('eo_instructions.deleted_at')->get();
 
+        $taskcards = $taskcards->merge($workPackage->taskcards->load('type')->where('type.code', 'si'));
+        $taskcards = $taskcards->merge($workPackage->taskcards->load('type')->where('type.code', 'preliminary'));
         foreach($taskcards as $eo_instruction){
             if (sizeof($eo_instruction->skills) > 1) {
                 $eri++;
