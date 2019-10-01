@@ -251,8 +251,7 @@ let TaskCard = {
                     let errors = jqXhr.responseJSON;
                     $.each(errors.error, function (index, value) {
                             toastr.error(value.message, value.title, {
-                                "closeButton": true,
-                                "timeOut": "0",
+                                timeOut: 5000
                             }
                         );
                     });
