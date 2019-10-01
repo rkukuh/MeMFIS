@@ -150,5 +150,9 @@ class DatabaseSeeder extends Seeder
         /** PURCHASE ORDER's ITEMs */
 
         $this->call(PurchaseOrderItemsTableSeeder::class);
+
+        /** TRIGGER-ONLY */
+
+        $this->call(FefoInsTableSeeder::class);
     }
 }

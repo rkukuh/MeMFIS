@@ -150,5 +150,9 @@ class DummyDataSeeder extends Seeder
         /** PURCHASE ORDER's ITEMs */
 
         $this->call(PurchaseOrderItems::class);
+
+        /** TRIGGER-ONLY */
+
+        $this->call(FefoIns::class);
     }
 }
