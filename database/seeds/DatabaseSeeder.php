@@ -154,5 +154,6 @@ class DatabaseSeeder extends Seeder
         /** TRIGGER-ONLY */
 
         $this->call(FefoInsTableSeeder::class);
+        $this->call(FefoOutsTableSeeder::class);
     }
 }

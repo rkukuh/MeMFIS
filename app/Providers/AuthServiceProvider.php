@@ -38,6 +38,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Repeat::class => Policies\RepeatPolicy::class,
         Models\Branch::class => Policies\BranchPolicy::class,
         Models\FefoIn::class => Policies\FefoInPolicy::class,
+        Models\FefoOut::class => Policies\FefoOutPolicy::class,
         Models\Benefit::class => Policies\BenefitPolicy::class,
         Models\Address::class => Policies\AddressPolicy::class,
         Models\License::class => Policies\LicensePolicy::class,

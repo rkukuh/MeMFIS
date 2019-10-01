@@ -154,5 +154,6 @@ class DummyDataSeeder extends Seeder
         /** TRIGGER-ONLY */
 
         $this->call(FefoIns::class);
+        $this->call(FefoOuts::class);
     }
 }
