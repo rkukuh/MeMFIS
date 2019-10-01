@@ -74,36 +74,36 @@ class TaskCardRoutineController extends Controller
     public function store(TaskCardRoutineStore $request)
     {
         $this->decoder($request);
+        // $aircrafts = Aircraft::whereIn('id', $request->applicability_airplane)->pluck('id');
+        
         $checker = [];
         // get all the taskcard with the same number
         $taskcards = TaskCard::where('number', $request->number)->get();
-
         if(sizeof($taskcards) > 0){
             // to check all internal number every taskcard
             foreach($taskcards as $taskcard){
                 $taskcard->additionals = json_decode($taskcard->additionals);
                 $zones = $taskcard->zones()->pluck('name')->toArray();
+
                 // check if the internal number are the same 
                 if($request->additionals->internal_number == $taskcard->additionals->internal_number){
-                    //check if the zones got any diffrents if yes, it's okay, if not, then it's identical taskcard
-                    $diff = array_diff($zones, $request->zone);
-                    if(sizeof($zones) == sizeof($request->zone)){
-                        array_push($checker, $diff);
-                    }
+                    // TODO : check even they are have the same zone's name but have a diffrent airplane type, it's okay
+                    //check if the zones got any diffrents if yes (not empty), it's okay, if not (empty), then it's identical taskcard
+                    $diff = array_diff( $request->zone , $zones);
+                    array_push($checker, empty($diff));
                 }
             }  
         }else{
+            $this->createTaskcard($request);
+        }
+
+        if(in_array(true, $checker)){
             $error_message = array(
                 'message' => "a taskcard with same number, company number and zones already exists",
                 'title' => "Taskcard already exists!",
                 'alert-type' => "error"
             );
-            return response()->json(['error' => $error_message], '403');
-        }
-        
-        
-        if(empty($checker[0])){
-            
+            return response()->json(['error' => [$error_message]], '403');
         }else{
             $this->createTaskcard($request);
         }

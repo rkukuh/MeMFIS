@@ -244,8 +244,18 @@ let TaskCard = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/taskcard-routine/' + response.uuid + '/edit';
+                        window.location.href = '/taskcard-routine/' + response.uuid + '/edit';
                     }
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    let errors = jqXhr.responseJSON;
+                    $.each(errors.error, function (index, value) {
+                            toastr.error(value.message, value.title, {
+                                "closeButton": true,
+                                "timeOut": "0",
+                            }
+                        );
+                    });
                 }
             });
         });
