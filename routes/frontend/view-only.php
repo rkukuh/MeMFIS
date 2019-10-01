@@ -130,6 +130,14 @@ Route::group([
         Route::view('/propose-leave/approve-type-1', 'frontend.propose-leave.propose-leave.approve-type-1')->name('propose-leave.approve-type-1');
         Route::view('/propose-leave/approve-type-2', 'frontend.propose-leave.propose-leave.approve-type-2')->name('propose-leave.approve-type-2');
 
+
+        Route::view('/open', 'frontend.defect-card.progress.progress-open')->name('progress.open');
+        Route::view('/pause', 'frontend.defect-card.progress.progress-pause')->name('progress.pause');
+        Route::view('/resume', 'frontend.defect-card.progress.progress-resume')->name('progress.resume');
+        Route::view('/close', 'frontend.defect-card.progress.progress-close')->name('progress.close');
+        Route::view('/waiting-rii', 'frontend.defect-card.progress.waiting-rii')->name('progress.waiting-rii');
+        Route::view('/release', 'frontend.defect-card.progress.release')->name('progress.release');
+
     });
 
 });
