@@ -204,7 +204,7 @@ let InventoryIn = {
                             )
                         },
                         type: 'POST',
-                        url: '/inventory/' + inventory_uuid + '/approve',
+                        url: '/inventory-in/' + inventory_uuid + '/approve',
                         success: function (data) {
                             toastr.success('Inventory has been approved.', 'Approved', {
                                     timeOut: 5000
