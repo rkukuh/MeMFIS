@@ -211,7 +211,7 @@
 
 @push('footer-scripts')
 
-    <script src="{{ asset('js/frontend/material-request-jobcard/show.js') }}"></script>
+    <script src="{{ asset('js/frontend/material-request-jobcard/hm/show.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
