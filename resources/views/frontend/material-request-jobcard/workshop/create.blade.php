@@ -63,18 +63,6 @@
                                                 @slot('id_error','requested_at')
                                             @endcomponent
                                         </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Storage
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Storage')
-                                                @slot('id', 'item_storage_id')
-                                                @slot('name', 'item_storage_id')
-                                                @slot('id_error', 'item_storage_id')
-                                            @endcomponent
-                                        </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -91,22 +79,24 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Location 
+                                                Storage
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Storage')
+                                                @slot('id', 'item_storage_id')
+                                                @slot('name', 'item_storage_id')
+                                                @slot('id_error', 'item_storage_id')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Project No.
+                                                Workshop
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('id', 'project_number')
                                                 @slot('text', 'generate')
                                             @endcomponent
                                         </div>
@@ -128,21 +118,19 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        A/C Type
+                                                        Part Number
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('id', 'actype')
                                                         @slot('text', 'Generate')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        A/C Reg
+                                                        Item Description
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('id', 'acreg')
                                                         @slot('text', 'Generate')
                                                     @endcomponent
                                                 </div>

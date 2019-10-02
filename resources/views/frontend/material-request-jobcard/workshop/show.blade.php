@@ -60,15 +60,6 @@
                                                 @slot('text', 'generate')
                                             @endcomponent
                                         </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Storage
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
-                                            @endcomponent
-                                        </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -82,7 +73,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Location 
+                                                Storage
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -93,7 +84,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Project No.
+                                                Workshop
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -115,7 +106,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        A/C Type
+                                                       Part Number
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
@@ -124,7 +115,7 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        A/C Reg
+                                                        Item Description
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
