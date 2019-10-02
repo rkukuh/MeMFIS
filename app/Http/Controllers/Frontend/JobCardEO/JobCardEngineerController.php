@@ -223,7 +223,10 @@ class JobCardEngineerController extends Controller
                 }
             }
 
-            $request->merge(['station_id' => Station::where('uuid',$request->station)->first()->id]);
+            $station = Station::firstOrCreate(
+                ['name' => $request->station, 'stationable_id' => $jobcard->quotation->quotationable->aircraft->id, 'stationable_type' => 'App\Models\Aircraft']
+            );
+            $request->merge(['station_id' => $station->id]);
 
             $additionals['TSN'] = $request->tsn;
             $additionals['CSN'] = $request->csn;
