@@ -867,6 +867,22 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** Inventory In */
+
+        Route::name('inventory-in.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'inventory-in',
+                'namespace' => 'InventoryIn'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'InventoryInDatatables@index')->name('all');
+            });
+        });
+
         Route::get('/testing', 'UnitDatatables@index')->name('testing.index');
 
 

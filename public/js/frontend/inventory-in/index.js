@@ -10,7 +10,7 @@ let InventoryIn = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/quotation',
+                        url: '/datatables/inventory-in',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -68,7 +68,7 @@ let InventoryIn = {
                     filterable: !1,
                     width: 150,
                     template: function (t) {
-                        return '<a href="/quotation/'+t.uuid+'">' + t.number + "</a>"
+                        return '<a href="/inventory-in/'+t.uuid+'">' + t.number + "</a>"
                     }
                 },
                 {
@@ -121,7 +121,7 @@ let InventoryIn = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/quotation/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="/inventory-in/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
                             '</a>' +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
@@ -130,7 +130,7 @@ let InventoryIn = {
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +
                                 '<i class="la la-check"></i>' +
                             '</a>'+
-                            '<a href="quotation/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
+                            '<a href="inventory-in/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'
 
@@ -141,7 +141,7 @@ let InventoryIn = {
         });
 
         $('.inventory_in_datatable').on('click', '.delete', function () {
-            let quotation_uuid = $(this).data('id');
+            let inventory_uuid = $(this).data('id');
 
             swal({
                 title: 'Sure want to remove?',
@@ -160,9 +160,9 @@ let InventoryIn = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/quotation/' + quotation_uuid + '',
+                        url: '/inventory-in/' + inventory_uuid + '',
                         success: function (data) {
-                            toastr.success('Quotation has been deleted.', 'Deleted', {
+                            toastr.success('Inventory has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
@@ -185,7 +185,7 @@ let InventoryIn = {
         });
 
         $('.inventory_in_datatable').on('click', '.approve', function () {
-            let quotation_uuid = $(this).data('id');
+            let inventory_uuid = $(this).data('id');
 
             swal({
                 title: 'Sure want to Approve?',
@@ -204,9 +204,9 @@ let InventoryIn = {
                             )
                         },
                         type: 'POST',
-                        url: '/quotation/' + quotation_uuid + '/approve',
+                        url: '/inventory/' + inventory_uuid + '/approve',
                         success: function (data) {
-                            toastr.success('Quotation has been approved.', 'Approved', {
+                            toastr.success('Inventory has been approved.', 'Approved', {
                                     timeOut: 5000
                                 }
                             );

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\InventoryIn;
 
 use App\Models\InventoryIn;
 use App\Http\Controllers\Controller;
@@ -16,7 +16,7 @@ class InventoryInController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.inventory-in.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class InventoryInController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.inventory-in.create');
     }
 
     /**
@@ -48,7 +48,7 @@ class InventoryInController extends Controller
      */
     public function show(InventoryIn $inventoryIn)
     {
-        //
+        return view('frontend.inventory-in.show');
     }
 
     /**
@@ -59,7 +59,7 @@ class InventoryInController extends Controller
      */
     public function edit(InventoryIn $inventoryIn)
     {
-        //
+        return view('frontend.inventory-in.edit');
     }
 
     /**
