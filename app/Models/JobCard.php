@@ -221,5 +221,17 @@ class JobCard extends MemfisModel
 
         return $actual_manhours;
     }
+
+    /**
+     * Get the last status inserted for jobcard.
+     *
+     * @return string
+     */
+    public function getStatusAttribute()
+    {
+        $status = Status::ofJobCard()->find($this->progresses->last()->status_id);
+        
+        return $status->name;
+    }
     
 }
