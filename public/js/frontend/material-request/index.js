@@ -48,6 +48,17 @@ let MaterialRequest = {
             },
             columns: [
                 {
+                    field: '#',
+                    title: 'No',
+                    width:'40',
+                    sortable: 'asc',
+                    filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {   
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
+                },
+                {
                     field: 'requested_at',
                     title: 'Date',
                     sortable: 'asc',
@@ -63,7 +74,7 @@ let MaterialRequest = {
                 },
                 {
                     field: 'number',
-                    title: 'Type',
+                    title: 'JC No.',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
@@ -73,45 +84,28 @@ let MaterialRequest = {
                 },
                 {
                     field: 'project.no_wo',
-                    title: 'Ref No.',
+                    title: 'Storage',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'project.code',
-                    title: 'Warehouse Location',
+                    field: 'project.no_wo',
+                    title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'description',
-                    title: 'Description',
+                    field: 'project.no_wo',
+                    title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
-
+                    width: 150
                 },
                 {
                     field: '',
                     title: 'Created By',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'status',
-                    title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
                 },

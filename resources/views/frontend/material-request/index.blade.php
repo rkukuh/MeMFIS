@@ -53,9 +53,6 @@
                                 <div class="row align-items-center">
                                     <div class="col-xl-8 order-2 order-xl-1">
                                         <div class="form-group m-form__group row align-items-center">
-                                            <div class="col-md-2">
-                                                @include('frontend.common.buttons.filter')
-                                            </div>
                                             <div class="col-md-4">
                                                 <div class="m-input-icon m-input-icon--left">
                                                     <input type="text" class="form-control m-input" placeholder="Search..."
@@ -65,23 +62,14 @@
                                                     </span>
                                                 </div>
                                             </div>
+                                            @include('frontend.common.buttons.filter')
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
-                                            <a href="{{route('frontend.material-request.project.create')}}" class="m-btn btn btn-primary">
-                                                <span>
-                                                    <i class="la la-plus-circle"></i>
-                                                <span>Project</span>
-                                                </span>
-                                            </a>
-                                            <a href="{{route('frontend.material-request.general.create')}}" class="btn btn-primary m-btn m-btn--pill-last">
-                                                <span>
-                                                    <i class="la la-plus-circle"></i>
-                                                <span>General</span>
-                                                </span>
-                                            </a>
-                                        </div>
+                                        @component('frontend.common.buttons.create')
+                                            @slot('text', 'Material Request')
+                                            @slot('href', route('frontend.material-request.project.create') )
+                                        @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
