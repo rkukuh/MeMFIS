@@ -682,14 +682,6 @@
                     </span>
                 </a>
             </li>
-            {{-- <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.material-request.index') }}" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-list-3"></i>
-                    <span class="m-menu__link-text">
-                        Material Request
-                    </span>
-                </a>
-            </li> --}}
             <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"><a href="javascript:;" class="m-menu__link m-menu__toggle"
                 title="Non functional dummy link"><i class="m-menu__link-icon flaticon-list-3"></i><span class="m-menu__link-text">Material Request Jobcard</span><i class="m-menu__ver-arrow la la-angle-right"></i></a>
                 <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
@@ -704,15 +696,15 @@
                             <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
                                 <ul class="m-menu__subnav">
                                     <li class="m-menu__item " aria-haspopup="true"><a
-                                            href="{{ route('frontend.taskcard-routine.create') }}" class="m-menu__link "><i
+                                            href="{{ route('frontend.material-request-jobcard.hm.create') }}" class="m-menu__link "><i
                                                 class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
                                                 class="m-menu__link-text">HM</span></a></li>
                                     <li class="m-menu__item " aria-haspopup="true"><a
-                                            href="{{ route('frontend.taskcard-routine.create') }}" class="m-menu__link "><i
+                                            href="{{ route('frontend.material-request-jobcard.workshop.create') }}" class="m-menu__link "><i
                                                 class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
                                                 class="m-menu__link-text">Workshop</span></a></li>
                                     <li class="m-menu__item " aria-haspopup="true"><a
-                                        href="{{ route('frontend.taskcard-routine.create') }}" class="m-menu__link "><i
+                                        href="{{ route('frontend.material-request-jobcard.defect-card.create') }}" class="m-menu__link "><i
                                             class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
                                             class="m-menu__link-text">Defect Card</span></a></li>
                                 </ul>
