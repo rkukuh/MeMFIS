@@ -16,7 +16,16 @@ class ApprovalObserver
     {
         switch ($approval->approvable_type) {
             case 'App\Models\GoodsReceived':
-                    //
+                $inv_in = $approval->approvable->inventoryin()->create([
+                ]);
+
+                foreach($approval->approvable->items as $item){
+                    $inv_in->items()->attach($item->pivot->item_id, [
+                        'quantity' => $item->pivot->quantity,
+                        'note' => $item->pivot->note,
+                    ]);
+                }
+
                 break;
             case 'App\Models\InventoryIn':
                     //
