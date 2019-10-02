@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.material-request.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.material-request-jobcard.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Material Request Project
                             </span>
@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.create-new')
+                                @include('frontend.common.label.edit')
 
                                 <h3 class="m-portlet__head-text">
                                     Material Request Project
@@ -213,7 +213,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @include('frontend.material-request.modal')
+                                                        @include('frontend.material-request-jobcard.modal')
                                                         <div class="material_request_project_datatable" id="material_request_project_datatable"></div>
                                                     </div>
                                                 </div>
@@ -239,7 +239,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -251,7 +250,7 @@
 
 @push('footer-scripts')
 
-    <script src="{{ asset('js/frontend/material-request/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/material-request-jobcard/edit.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 

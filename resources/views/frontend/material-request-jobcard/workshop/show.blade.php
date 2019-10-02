@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    Material Request general
+                    Material Request Project
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -17,9 +17,9 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.material-request.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.material-request-jobcard.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                Material Request General
+                                Material Request Project
                             </span>
                         </a>
                     </li>
@@ -41,7 +41,7 @@
                                 @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
-                                    Material Request General
+                                    Material Request Project
                                 </h3>
                             </div>
                         </div>
@@ -53,11 +53,11 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Date
+                                                Date 
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -66,18 +66,18 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                General Type
+                                                Ref Job Card No.
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -86,19 +86,52 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Departement 
-                                            </label> 
+                                                Project No.
+                                            </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', 'generate')
                                             @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Section Code
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        A/C Type
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        A/C Reg
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -106,7 +139,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -117,7 +150,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -159,7 +192,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @include('frontend.material-request.modal')
+                                                        @include('frontend.material-request-jobcard.modal')
                                                         <div class="material_request_project_datatable" id="material_request_project_datatable"></div>
                                                     </div>
                                                 </div>
@@ -176,7 +209,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -188,12 +220,11 @@
 
 @push('footer-scripts')
 
-    <script src="{{ asset('js/frontend/material-request/show.js') }}"></script>
+    <script src="{{ asset('js/frontend/material-request-jobcard/show.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/general-type.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
@@ -203,4 +234,7 @@
 
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
 @endpush

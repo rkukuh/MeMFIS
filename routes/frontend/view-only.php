@@ -54,15 +54,19 @@ Route::group([
 
         /** Material Request */
 
-        Route::view('/material-request', 'frontend.material-request.index')->name('material-request.index');
+        Route::view('/material-request-jobcard', 'frontend.material-request-jobcard.index')->name('material-request-jobcard.index');
 
-        Route::view('/material-request/general/create', 'frontend.material-request.general.create')->name('material-request.general.create');
-        Route::view('/material-request/general/edit', 'frontend.material-request.general.edit')->name('material-request.general.edit');
-        Route::view('/material-request/general/show', 'frontend.material-request.general.show')->name('material-request.general.show');
+        Route::view('/material-request-jobcard/hm/create', 'frontend.material-request-jobcard.hm.create')->name('material-request-jobcard.hm.create');
+        Route::view('/material-request-jobcard/hm/edit', 'frontend.material-request-jobcard.hm.edit')->name('material-request-jobcard.hm.edit');
+        Route::view('/material-request-jobcard/hm/show', 'frontend.material-request-jobcard.hm.show')->name('material-request-jobcard.hm.show');
 
-        Route::view('/material-request/project/create', 'frontend.material-request.project.create')->name('material-request.project.create');
-        Route::view('/material-request/project/edit', 'frontend.material-request.project.edit')->name('material-request.project.edit');
-        Route::view('/material-request/project/show', 'frontend.material-request.project.show')->name('material-request.project.show');
+        Route::view('/material-request-jobcard/defect-card/create', 'frontend.material-request-jobcard.defect-card.create')->name('material-request-jobcard.defect-card.create');
+        Route::view('/material-request-jobcard/defect-card/edit', 'frontend.material-request-jobcard.defect-card.edit')->name('material-request-jobcard.defect-card.edit');
+        Route::view('/material-request-jobcard/defect-card/show', 'frontend.material-request-jobcard.defect-card.show')->name('material-request-jobcard.defect-card.show');
+
+        Route::view('/material-request-jobcard/workshop/create', 'frontend.material-request-jobcard.workshop.create')->name('material-request-jobcard.workshop.create');
+        Route::view('/material-request-jobcard/workshop/edit', 'frontend.material-request-jobcard.workshop.edit')->name('material-request-jobcard.workshop.edit');
+        Route::view('/material-request-jobcard/workshop/show', 'frontend.material-request-jobcard.workshop.show')->name('material-request-jobcard.workshop.show');
 
         /** Tool Request */
 
