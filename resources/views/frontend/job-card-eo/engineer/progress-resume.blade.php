@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.journal.index') }}" class="m-nav__link">
+                        <a href="#" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Job Card
                             </span>
@@ -272,7 +272,7 @@
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $jobcard->station->name)
                                             @endcomponent
-                                        @else 
+                                        @else
                                             @component('frontend.common.label.data-info-nodata')
                                             @endcomponent
                                         @endif
