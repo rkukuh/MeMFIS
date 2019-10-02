@@ -122,11 +122,8 @@
                                                         Stock Qty
                                                     </label>
                     
-                                                    @component('frontend.common.input.number')
-                                                        @slot('text', ' Stock Qty')
-                                                        @slot('id', ' stock_qty_1')
-                                                        @slot('name', 'stock_qty_1')
-                                                        @slot('id_error', 'stock_qty_1')
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -134,11 +131,8 @@
                                                         Stock Qty
                                                     </label>
                     
-                                                    @component('frontend.common.input.number')
-                                                        @slot('text', 'Stock Qty')
-                                                        @slot('id', 'stock_qty_2')
-                                                        @slot('name', 'stock_qty_2')
-                                                        @slot('id_error', 'stock_qty_2')
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -152,11 +146,8 @@
                                                         Reserved Qty
                                                     </label>
                     
-                                                    @component('frontend.common.input.number')
-                                                        @slot('text', 'Reserved Qty')
-                                                        @slot('id', ' reserved_qty')
-                                                        @slot('name', 'reserved_qty')
-                                                        @slot('id_error', 'reserved_qty')
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -164,11 +155,8 @@
                                                         Total Stock
                                                     </label>
                     
-                                                    @component('frontend.common.input.number')
-                                                        @slot('text', 'Total Stock')
-                                                        @slot('id', 'total_stock')
-                                                        @slot('name', 'total_stock')
-                                                        @slot('id_error', 'total_stock')
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
                                                     @endcomponent
                                                 </div>
                                             </div>
