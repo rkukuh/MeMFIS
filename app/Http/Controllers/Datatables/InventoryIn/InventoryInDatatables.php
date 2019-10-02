@@ -112,7 +112,7 @@ class InventoryInDatatables extends Controller
      */
     public function filter(Request $request)
     {
-        $inventories = Quotation::with('project');
+        $inventories = InventoryIn::with('project');
 
         // if (!empty($request->quotation_type_filter)) {
         //     $inventories->whereHas('taskcard.task', function ($query) use ($request) {
@@ -133,14 +133,14 @@ class InventoryInDatatables extends Controller
         }
         $inventories = $inventories->get();
 
-        foreach($inventories as $quotation){
-            if(!empty($quotation->approvals->toArray())){
-                $quotation->status .= 'Approved';
+        foreach($inventories as $inventory){
+            if(!empty($inventory->approvals->toArray())){
+                $inventory->status .= 'Approved';
             }else{
-                $quotation->status .= '';
+                $inventory->status .= '';
 
             }
-            $quotation->customer = $quotation->quotationable->customer;
+            $inventory->customer = $inventory->inventoryinable->customer;
         }
         $data = $alldata = json_decode($inventories);
 
@@ -236,9 +236,9 @@ class InventoryInDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function facilities(Quotation $quotation,WorkPackage $workPackage)
+    public function facilities(InventoryIn $inventory,WorkPackage $workPackage)
     {
-        $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
+        $project_workpackage = ProjectWorkPackage::where('project_id',$inventory->inventoryinable->id)
             ->where('workpackage_id',$workPackage->id)
             ->first();
 
