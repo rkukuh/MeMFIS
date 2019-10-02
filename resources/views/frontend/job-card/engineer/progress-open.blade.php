@@ -19,7 +19,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.journal.index') }}" class="m-nav__link">
+                        <a href="#" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Job Card
                             </span>

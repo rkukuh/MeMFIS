@@ -41,7 +41,6 @@ class StorageController extends Controller
             'code' => $request->code,
             'name' => $request->name,
             'description' => $request->description,
-            'account_code' => $request->accountcode,
             'is_active' => $request->active,
         ]);
 

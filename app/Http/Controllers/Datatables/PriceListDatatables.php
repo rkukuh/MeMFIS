@@ -20,7 +20,7 @@ class PriceListDatatables extends Controller
     public function item() 
     // item , manhour, facility = prices
     {
-        $items = Item::with('unit', 'journal', 'prices')->get();
+        $items = Item::with('unit', 'prices')->get();
         
         foreach($items as $item){
             $item->unit_name    .= $item->unit->name;

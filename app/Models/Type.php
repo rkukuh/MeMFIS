@@ -270,17 +270,6 @@ class Type extends MemfisModel
     }
 
     /**
-     * Scope a query to only include type of Journal.
-     *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeOfJournal(Builder $query)
-    {
-        return $query->where('of', 'journal');
-    }
-
-    /**
      * Scope a query to only include type of Aircraft Maintenance Cycle.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
@@ -579,19 +568,6 @@ class Type extends MemfisModel
     public function faxes()
     {
         return $this->hasMany(Fax::class);
-    }
-
-    /**
-     * One-to-Many: A journal may have zero or many type.
-     *
-     * This function will retrieve all journals of a type.
-     * See: Journal's type() method for the inverse
-     *
-     * @return mixed
-     */
-    public function journals()
-    {
-        return $this->hasMany(Journal::class);
     }
 
     /**

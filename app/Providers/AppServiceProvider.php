@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Item;
+use App\Models\Approval;
 use App\Observers\ItemObserver;
+use App\Observers\ApprovalObserver;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -18,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Item::observe(ItemObserver::class);
+        Approval::observe(ApprovalObserver::class);
 
         View::share('browser_key', 'AIzaSyDcEAVCwHf0OtZ4jKB3aVOE_auka3pLPQU');
         View::share('server_key', 'AIzaSyByaynCk7vcuS66I4S6Ed46IgreC54UVEg');

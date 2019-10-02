@@ -13,7 +13,6 @@ use App\Models\Access;
 use App\Models\Project;
 use App\Models\License;
 use App\Models\Storage;
-use App\Models\Journal;
 use App\Models\Station;
 use App\Models\Facility;
 use App\Models\Customer;
@@ -31,19 +30,6 @@ use App\Models\Pivots\EmployeeLicense;
 
 class FillComboxController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function accountCodes()
-    {
-        $accountCodes = Journal::pluck('code', 'id');
-
-        return json_encode($accountCodes);
-
-    }
-
     /**
      * Display a listing of the resource.
      *

@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.journal.index') }}" class="m-nav__link">
+                        <a href="#" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Job Card
                             </span>
@@ -296,13 +296,13 @@
                                 <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                     <div class="flex">
                                         <div class="action-buttons">
-                                     
+
                                             @component('frontend.common.buttons.print')
                                                 @slot('id', 'ppc-print')
                                                 @slot('name', 'ppc-print')
                                                 @slot('href', route('frontend.jobcard.print',['uuid' => $jobcard->uuid]) )
                                             @endcomponent
-                                      
+
                                         </div>
                                     </div>
                                 </div>
