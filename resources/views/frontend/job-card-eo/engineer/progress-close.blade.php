@@ -250,36 +250,37 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
+                            <div class="form-group m-form__group row">
                             <table border="1px" width="100%" style="margin-top:10px">
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Helper
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            @if(isset($jobcard->helpers))
-                                                @foreach($jobcard->helpers as $key => $helper)
-                                                   {{$key + 1}}. {{ $helper->first_name }} <br>
-                                                @endforeach
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Station
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            @if( isset($jobcard->station) )
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text', $jobcard->station->name)
-                                                @endcomponent
-                                            @else 
-                                                @component('frontend.common.label.data-info-nodata')
-                                                @endcomponent
-                                            @endif
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                        Helper
+                                    </td>
+                                    <td width="70%" style="text-align:center">
+                                        @if(isset($jobcard->helpers))
+                                            @foreach($jobcard->helpers as $key => $helper)
+                                                {{$key + 1}}. {{ $helper->first_name }} <br>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                        Station
+                                    </td>
+                                    <td width="70%" style="text-align:center">
+                                        @if( isset($jobcard->station) )
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', $jobcard->station->name)
+                                            @endcomponent
+                                        @else 
+                                            @component('frontend.common.label.data-info-nodata')
+                                            @endcomponent
+                                        @endif
+                                    </td>
+                                </tr>
                             </table>
-
+                            
                             <table border="1px" width="100%" style="margin-top:10px">
                                 <tr>
                                     <td align="center" style="background-color:beige;padding:10px;"><b>ACCOMPLISHMENT RECORD</b></td>

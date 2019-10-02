@@ -230,6 +230,8 @@ class JobCardEngineerController extends Controller
 
             $additionals['TSN'] = $request->tsn;
             $additionals['CSN'] = $request->csn;
+            $additionals['weight_change'] = $request->weight_change;
+            $additionals['center_of_gravity'] = $request->center_of_gravity;
 
             $jobcard->additionals =json_encode($additionals);
             $jobcard->station_id = $request->station_id;
