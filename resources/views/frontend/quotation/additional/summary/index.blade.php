@@ -126,9 +126,9 @@
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
                         @component('frontend.common.input.number')
-                            @slot('id', 'charge')
-                            @slot('name', 'charge')
-                            @slot('class', 'charge')
+                            @slot('id', 'charges')
+                            @slot('name', 'charges')
+                            @slot('class', 'charges')
                             @slot('value' , 0)
                             @slot('min', 0)
                         @endcomponent

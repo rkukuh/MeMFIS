@@ -138,7 +138,11 @@
                                             Sequence
                                         </td>
                                         <td width="70%" style="text-align:center">
+                                            @if($taskrelease->jobcardable->sequence)
                                             {{$taskrelease->jobcardable->sequence}}
+                                            @else
+                                            -
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -146,7 +150,11 @@
                                             Referencce
                                         </td>
                                         <td width="70%" style="text-align:center">
+                                            @if($taskrelease->jobcardable->reference)
                                             {{$taskrelease->jobcardable->reference}}
+                                            @else
+                                            -
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -162,8 +170,8 @@
                                             Description
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            @if($taskrelease->jobcardable->Description)
-                                                {{$taskrelease->jobcardable->Description}}
+                                            @if($taskrelease->jobcardable->description)
+                                                {{$taskrelease->jobcardable->description}}
                                             @else
                                                 -
                                             @endif
@@ -182,7 +190,7 @@
                                             Accomplishment Notes By
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
+                                           xxx
                                         </td>
                                     </tr>
                                     <tr>

@@ -144,10 +144,10 @@ class JobCardEngineerController extends Controller
         $progresses = $jobcard->progresses->where('progressed_by', Auth::id());
         // dd($this->statuses->where('id', $progresses->last()->status_id)->first()->code);
         $employees = Employee::all();
+
         foreach ($progresses as $progress) {
             $progress->status .= Status::where('id', $progress->status_id)->first()->name;
         }
-
         if ($progresses->count() == 0 and $this->statuses->where('id', $jobcard->progresses->first()->status_id)->first()->code == "open") {
             return view('frontend.job-card-eo.engineer.progress-open', [
                 'jobcard' => $jobcard,

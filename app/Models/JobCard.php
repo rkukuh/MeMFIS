@@ -63,6 +63,9 @@ class JobCard extends MemfisModel
     public function helpers()
     {
         return $this->belongsToMany(Employee::class, 'employee_jobcard', 'jobcard_id', 'employee_id')
+                    ->withPivot(
+                        'additionals'
+                    )
                     ->withTimestamps();
     }
 
@@ -105,9 +108,6 @@ class JobCard extends MemfisModel
     public function logbooks()
     {
         return $this->belongsToMany(Type::class, 'jobcard_logbooks', 'jobcard_id', 'logbook_id')
-                    ->withPivot(
-                        'additionals'
-                    )
                     ->withTimestamps();
     }
 
@@ -221,4 +221,5 @@ class JobCard extends MemfisModel
 
         return $actual_manhours;
     }
+    
 }

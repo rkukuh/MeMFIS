@@ -50,13 +50,13 @@ let Workpackage = {
                 sortable: !1,
             },
             {
-                field: 'part_number',
+                field: 'item.code',
                 title: 'P/N',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'name',
+                field: 'item.name',
                 title: 'Item Description',
                 sortable: 'asc',
                 filterable: !1,

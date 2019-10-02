@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\EOInstruction;
 use App\Models\Pivots\EOInstructionWorkPackage;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\TaskCardWorkPackage;
 
 class WorkPackageTaskCardNonRoutineDatatables extends Controller
 {
@@ -19,13 +20,13 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function preliminary(WorkPackage $workPackage)
     {
-       
-        $workPackages = $workPackage->taskcards()->with('type')
-                        ->whereHas('type', function ($query) {
-                            $query->where('code', 'preliminary');
-                        })->whereNull('taskcards.deleted_at')->get();
+        $workPackages = TaskCardWorkPackage::with('taskcard','taskcard.type','taskcard.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereHas('taskcard.type', function ($query) {
+                            $query->where('name', 'preliminary');
+                        })->whereNull('deleted_at')
+                        ->get();
 
-        
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){
                 if(sizeof($taskcard->skills) == 3){
@@ -558,11 +559,14 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
      */
     public function si(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('code', 'si');
-                                    })->whereNull('taskcards.deleted_at')->get();
 
+        $workPackages = TaskCardWorkPackage::with('taskcard','taskcard.type','taskcard.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereHas('taskcard.type', function ($query) {
+                            $query->where('code', 'si');
+                        })->whereNull('deleted_at')
+                        ->get();
+        
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){
                 if(sizeof($taskcard->skills) == 3){

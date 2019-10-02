@@ -200,7 +200,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group m-form__group row mt-5">
+                                                    <div class="form-group m-form__group row mt-5" hidden>
                                                         <div class="col-lg-6">
                                                             <div class="m-portlet  m-portlet--full-height ">
                                                                 <div class="m-portlet__head">
@@ -535,7 +535,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group m-form__group row mt-5">
+                                                    <div class="form-group m-form__group row mt-5" hidden>
                                                         <div class="col-lg-6">
                                                             <div class="m-portlet  m-portlet--full-height ">
                                                                 <div class="m-portlet__head">

@@ -419,10 +419,10 @@ class QuotationController extends Controller
         foreach($ProjectWorkPackageTaskCard as $taskcard){
                 $tc = $taskcard->taskcard;
                 $helper_quantity = $tc->helper_quantity;
-                if(empty($$helper_quantity)){
+                if(empty($helper_quantity)){
                     $helper_quantity = null;
                 }else{
-                    $helper_quantity = $helper_quantity->toJson();
+                    $helper_quantity = json_encode($helper_quantity);
                 }
 
                 if(Type::where('id',$tc->type_id)->first()->code == "basic"){
@@ -478,6 +478,12 @@ class QuotationController extends Controller
         foreach($ProjectWorkPackageTaskCard as $eo_instruction){
             $tc = $eo_instruction->eo_instruction->eo_header;
             $tc_inscrtuction = $eo_instruction->eo_instruction;
+            $helper_quantity = $eo_instruction->eo_instruction->helper_quantity;
+            if(empty($helper_quantity)){
+                $helper_quantity = null;
+            }else{
+                $helper_quantity = json_encode($helper_quantity);
+            }
 
             if(Type::where('id',$tc->type_id)->first()->code == "cmr"){
                 $tc_code = 'CMR';
@@ -522,7 +528,7 @@ class QuotationController extends Controller
                 'origin_quotation' => null,
                 'origin_jobcardable' => $eo_instruction->eo_instruction->toJson(),
                 'origin_jobcardable_items' => $eo_instruction->eo_instruction->items->toJson(),
-                'origin_jobcard_helpers' => null,
+                'origin_jobcard_helpers' => $helper_quantity,
             ]);
 
             $jobcard->progresses()->save(new Progress([
@@ -646,21 +652,21 @@ class QuotationController extends Controller
             //items price
             array_push($totalMatTool, $htcrr_workpackage->mat_tool_price);
 
-            if(isset($data_htcrr->discount_value)){
-                switch($data_htcrr->discount_type){
+            if(isset($data_htcrr["discount_value"])){
+                switch($data_htcrr["discount_type"]){
                     case "amount":
-                        $disc = $data_htcrr->discount_value;
+                        $disc = $data_htcrr["discount_value"];
                         array_push($discount, $disc);
                         break;
                     case "percentage":
-                        $disc =  ($manhourPrice[$key] + $totalFacility[$key] + $totalMatTool[$key]) * ($data_htcrr->discount_value / 100);
+                        $disc =  ($manhourPrice[(sizeof($manhourPrice) - 1)] + $totalFacility[(sizeof($totalFacility) - 1)] + $totalMatTool[(sizeof($totalMatTool) - 1)]) * ($data_htcrr["discount_value"] / 100);
                         array_push($discount, $disc);
                         break;
                     default:
                         array_push($discount, 0);
                 }
-                $htcrr_workpackage->jobrequest_discount_value = $data_htcrr->discount_value;
-                $htcrr_workpackage->jobrequest_discount_type = $data_htcrr->discount_type;
+                $htcrr_workpackage->jobrequest_discount_value = $data_htcrr["discount_value"];
+                $htcrr_workpackage->jobrequest_discount_type = $data_htcrr["discount_type"];
             }else{
                 $htcrr_workpackage->jobrequest_discount_value = null;
                 $htcrr_workpackage->jobrequest_discount_type = null;

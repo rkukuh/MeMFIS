@@ -34,9 +34,13 @@ class JobCardDatatables extends Controller
             }else if($taskcard->jobcardable_type == "App\Models\EOInstruction"){
                 $taskcard->tc_number .= $taskcard->jobcardable->eo_header->number;
                 $taskcard->tc_title .= $taskcard->jobcardable->eo_header->title;
-                $taskcard->task_name .= "";
+                $taskcard->task_name .= "-";
                 $taskcard->type_name .= $taskcard->jobcardable->eo_header->type->name;
-                $taskcard->skill .= $taskcard->jobcardable->eo_header->skill;
+                if(sizeof($taskcard->jobcardable->skills) > 1){
+                    $taskcard->skill .= $taskcard->jobcardable->skills->first()->name;
+                }else{
+                    $taskcard->skill .= "ERI";
+                }
             }
 
             $count_user = $taskcard->progresses->groupby('progressed_by')->count()-1;
