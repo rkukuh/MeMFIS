@@ -18,11 +18,11 @@ class CreateFefoInTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('storage_id');
-            $table->timestamp('fefo_in_at');
+            $table->timestamp('fefo_in_at')->nullable();
             $table->double('quantity');
             $table->double('used_quantity')->default(0);;
             $table->string('serial_no')->nullable();
-            $table->timestamp('expired_at');
+            $table->timestamp('expired_at')->nullable();
             // refno inv in tapi kedepan bisa banyak
             // polymorp book item untuk project atau jobcard khusus
             $table->timestamps();
