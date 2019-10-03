@@ -329,7 +329,7 @@
           <td width="4%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="28%" valign="top">Yemimul</td>
-          <td width="33%" valign="top" align="center">Status : <span>Single</span></td>
+          <td width="33%" valign="top" align="center">Status : <span>{{ $jobCard->status }}</span></td>
           <td width="34%" valign="top" align="right">Data Close : <span>10-07-1994</span></td>
         </tr>
       </table>

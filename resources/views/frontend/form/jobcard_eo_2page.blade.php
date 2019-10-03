@@ -154,7 +154,7 @@
             <table width="100%">
                 <tr>
                     <td valign="top" width="36%">Print By : <span>name:timestamp</span></td>
-                    <td valign="top" width="25%">Status : <span>Open</span></td>
+                    <td valign="top" width="25%">Status : <span>{{ $jobCard->status }}</span></td>
                     <td valign="top" width="39%">Date Close : <span>time</span></td>
                 </tr>
             </table>

@@ -397,12 +397,7 @@
               @endif --}}
           </td>
           <td width="33%" valign="top" align="center">Status :
-              generate
-              {{-- @if()
-              {{}}
-              @else
-                -
-              @endif --}}
+          {{ $jobCard->status }}
           </td>
           <td width="34%" valign="top" align="right">Data Close :
               generate
