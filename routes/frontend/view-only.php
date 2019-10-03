@@ -72,14 +72,6 @@ Route::group([
 
         Route::view('/tool-request-jobcard', 'frontend.tool-request-jobcard.index')->name('tool-request-jobcard.index');
 
-        // Route::view('/tool-request/general/create', 'frontend.tool-request.general.create')->name('tool-request.general.create');
-        // Route::view('/tool-request/general/edit', 'frontend.tool-request.general.edit')->name('tool-request.general.edit');
-        // Route::view('/tool-request/general/show', 'frontend.tool-request.general.show')->name('tool-request.general.show');
-
-        // Route::view('/tool-request/project/create', 'frontend.tool-request.project.create')->name('tool-request.project.create');
-        // Route::view('/tool-request/project/edit', 'frontend.tool-request.project.edit')->name('tool-request.project.edit');
-        // Route::view('/tool-request/project/show', 'frontend.tool-request.project.show')->name('tool-request.project.show');
-
         Route::view('/tool-request-jobcard/hm/create', 'frontend.tool-request-jobcard.hm.create')->name('tool-request-jobcard.hm.create');
         Route::view('/tool-request-jobcard/hm/edit', 'frontend.tool-request-jobcard.hm.edit')->name('tool-request-jobcard.hm.edit');
         Route::view('/tool-request-jobcard/hm/show', 'frontend.tool-request-jobcard.hm.show')->name('tool-request-jobcard.hm.show');
