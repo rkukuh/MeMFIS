@@ -248,7 +248,7 @@
 
 @push('footer-scripts')
 
-    <script src="{{ asset('js/frontend/tool-request/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/tool-request-jobcard/workshop/create.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
