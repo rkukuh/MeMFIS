@@ -48,70 +48,60 @@ let ToolRequest = {
             },
             columns: [
                 {
-                    field: 'requested_at',
+                    field: '#',
+                    title: 'No',
+                    width:'40',
+                    sortable: 'asc',
+                    filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {   
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
+                },
+                {
+                    field: '',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'customer.name',
+                    field: '',
                     title: 'Tool Request No.',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'number',
-                    title: 'Type',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        return '<a href="/quotation/'+t.uuid+'">' + t.number + "</a>"
-                    }
-                },
-                {
-                    field: 'project.no_wo',
-                    title: 'Ref No.',
+                    field: '',
+                    title: 'JC No.',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
-                },
-                {
-                    field: 'project.code',
-                    title: 'Warehouse Location',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150
-                },
-                {
-                    field: 'description',
-                    title: 'Description',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
-
                 },
                 {
                     field: '',
-                    title: 'Created By',
+                    title: 'Storage',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: '',
+                    title: 'Loaned To',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: 'status',
+                    title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: 'status',
-                    title: 'Status',
+                    title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
                 },
