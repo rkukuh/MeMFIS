@@ -42,11 +42,17 @@ let ToolRequestCreate = {
                     }
                 }
             },
-            columns: [{
-                    field: 'id',
-                    title: '#',
-                    sortable: !1,
-                    width: 40
+            columns: [
+                {
+                    field: '#',
+                    title: 'No',
+                    width:'40',
+                    sortable: 'asc',
+                    filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {   
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
                 },
                 {
                     field: 'quotation_number',
@@ -56,28 +62,42 @@ let ToolRequestCreate = {
                     width: 150
                 },
                 {
-                    field: 'customer',
+                    field: '',
+                    title: 'Serial Number',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: '',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'valid_until',
+                    field: '',
+                    title: 'Expired Date',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: '',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'status',
+                    field: '',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: 'status',
+                    field: '',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
@@ -95,6 +115,9 @@ let ToolRequestCreate = {
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
                             t.uuid +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '<i class="la la-exchange"></i>' +
+                            '</a>'+
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
                             '</a>'
