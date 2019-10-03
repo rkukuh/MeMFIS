@@ -281,7 +281,9 @@
         <tr>
           <td colspan="2" height="55" valign="top">
               Accomplishment Record : <br><br>
-              <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, iusto esse similique quod ducimus cupiditate voluptate voluptatem reprehenderit molestias facere earum quidem non harum dolore expedita at illo dolores odio!</span>
+              <span>
+                {{ $jobCard->progresses->last()->reason_text }}
+            </span>
           </td>
         </tr>
         <tr style="position: relative;">

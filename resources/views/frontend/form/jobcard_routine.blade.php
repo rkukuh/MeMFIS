@@ -227,6 +227,9 @@
             <td style="position: relative;" width="100%" height="50 ">
               <div style="position: absolute;">
                 Accomplishment Record:
+                <span>
+                    {{ $jobCard->progresses->last()->reason_text }}
+                </span>
               </div>
               <br>
               <span><center>Generate</center></span> 

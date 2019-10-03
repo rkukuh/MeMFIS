@@ -364,12 +364,7 @@
           <td colspan="2" height="55" valign="top">
               Accomplishment Record : <br><br>
               <span>
-                {{$jobCard->progresses->last()->reason_text}}
-                {{-- @if()
-                {{}}
-                @else
-                  -
-                @endif --}}
+                  {{ $jobCard->progresses->last()->reason_text }}
               </span>
           </td>
         </tr>

@@ -131,7 +131,7 @@
       <li>
         <div class="jobcard-info">
             <fieldset>
-                <legend>JC No : 123456</legend>
+                <legend>JC No : {{ $jobCard->number }}</legend>
                 <div class="jobcard-info-detail">
                   <table width="80%" cellpadding="3">
                       <tr>
@@ -285,11 +285,11 @@
           <tr>
             <td width="25%" valign="top">
               @if(sizeof($jobCard->jobcardable->skills) == 3)
-                  @slot('text', 'ERI')
+                  ERI
               @elseif(sizeof($jobCard->jobcardable->skills) == 1)
-                  @slot('text', $jobCard->jobcardable->skills[0]->name)
+                  {{ $jobCardjobCard->jobcardable->skills->last()->name }}
               @else
-                  @slot('text', '-')
+                  -
               @endif
             </td>
             <td width="25%" align="center" valign="top">
@@ -342,12 +342,7 @@
           <td colspan="2" height="35" valign="top">
               Accomplishment Record : <br><br>
               <span>
-                generate
-                {{-- @if()
-                {{}}
-                @else
-                  -
-                @endif --}}
+                  {{ $jobCard->progresses->last()->reason_text }}
               </span>
           </td>
         </tr>
