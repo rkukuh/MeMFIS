@@ -91,6 +91,18 @@ Route::group([
         Route::view('/inventory-in/edit', 'frontend.inventory-in.edit')->name('inventory-in.edit');
         Route::view('/inventory-in/show', 'frontend.inventory-in.show')->name('inventory-in.show');
 
+        /** Inventory Out */
+
+        Route::view('/inventory-out/tool', 'frontend.inventory-out.tool.index')->name('inventory-out-tool.index');
+        Route::view('/inventory-out/tool/create', 'frontend.inventory-out.tool.create')->name('inventory-out-tool.create');
+        Route::view('/inventory-out/tool/edit', 'frontend.inventory-out.tool.edit')->name('inventory-out-tool.edit');
+        Route::view('/inventory-out/tool/show', 'frontend.inventory-out.tool.show')->name('inventory-out-tool.show');
+
+        Route::view('/inventory-out/material', 'frontend.inventory-out.material.index')->name('inventory-out-material.index');
+        Route::view('/inventory-out/material/create', 'frontend.inventory-out.material.create')->name('inventory-out-material.create');
+        Route::view('/inventory-out/material/edit', 'frontend.inventory-out.material.edit')->name('inventory-out-material.edit');
+        Route::view('/inventory-out/material/show', 'frontend.inventory-out.material.show')->name('inventory-out-material.show');
+
         /** GSE-Tool Returned */
 
         Route::view('/gse-tool-returned', 'frontend.gse-tool-returned.index')->name('gse-tool-returned.index');
