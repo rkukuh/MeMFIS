@@ -53,16 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Date     
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'generate')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Storage     
+                                                Date   
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -73,7 +64,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Ref Tool Request No.     
+                                                Ref. Doc No.   
                                             </label>
 
                                             @component('frontend.common.label.data-info')
@@ -82,11 +73,31 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Location
+                                                Ref. Quotation Workshop 
                                             </label>
-                                          
+
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', 'generate')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Storage   
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Section Code
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -137,9 +148,6 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                         @include('frontend.inventory-in.modal')
@@ -153,6 +161,13 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('type','button')
+                                                        @slot('id', 'add-inventory-in')
+                                                        @slot('class', 'add-inventory-in')
+                                                    @endcomponent
+
+                                                    @include('frontend.common.buttons.reset')
 
                                                     @include('frontend.common.buttons.back')
 
@@ -172,18 +187,6 @@
 @endsection
 
 @push('footer-scripts')
-
-    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
-
     <script src="{{ asset('js/frontend/inventory-in/show.js') }}"></script>
     <script src="{{ asset('js/frontend/inventory-in/form-reset.js') }}"></script>
 @endpush

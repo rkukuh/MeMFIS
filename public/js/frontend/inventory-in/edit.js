@@ -1,4 +1,4 @@
-let InventoryInShow = {
+let InventoryInCreate = {
     init: function () {
         $('.item_datatable').mDatatable({
             data: {
@@ -53,7 +53,8 @@ let InventoryInShow = {
                     template: function (row, index, datatable) {   
                         return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
-                },{
+                },
+                {
                     field: 'code',
                     title: 'Part Number',
                     sortable: 'asc',
@@ -69,19 +70,19 @@ let InventoryInShow = {
                     filterable: !1,
                 },
                 {
-                    field: 'name',
+                    field: '',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'qty',
                     title: 'Expired Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'qty',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
@@ -93,7 +94,7 @@ let InventoryInShow = {
                     filterable: !1,
                 },
                 {
-                    field: "",
+                    field: "description",
                     title: "Remark",
                 },
                 {
@@ -101,6 +102,18 @@ let InventoryInShow = {
                     width: 110,
                     sortable: !1,
                     overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_item" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-instruction_uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                            t.uuid +
+                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                '<i class="la la-trash"></i>' +
+                            '</a>'
+                        );
+                    }
                 }
 
             ]
@@ -170,5 +183,5 @@ let InventoryInShow = {
 };
 
 jQuery(document).ready(function () {
-    InventoryInShow.init();
+    InventoryInCreate.init();
 });
