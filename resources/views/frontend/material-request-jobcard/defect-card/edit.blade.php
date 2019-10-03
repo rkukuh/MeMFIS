@@ -70,11 +70,11 @@
                                                 Ref Job Card No. @include('frontend.common.label.required')
                                             </label>
 
-                                            @include('frontend.common.warehouse.index')
+                                            @include('frontend.common.ref-jobcard-number.index')
 
                                             @component('frontend.common.input.hidden')
-                                                @slot('id', 'warehouse')
-                                                @slot('name', 'warehouse')
+                                                @slot('id', 'jobcard_number')
+                                                @slot('name', 'jobcard_number')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
