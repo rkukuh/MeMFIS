@@ -226,7 +226,7 @@
                                     <td width="1%">:</td>
                                     <td width="29%">
                                         @if($jobCard->quotation->quotationable->aircraft_sn)
-                                            {{$jobCard->quotation->quotationable->aircraft_sn}}
+                                        {{$jobCard->quotation->quotationable->aircraft_sn}}
                                         @else
                                         -
                                         @endif
@@ -300,26 +300,22 @@
                         <tr>
                             <td valign="top" width="20%" style="border-left: none;">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">Major modification</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Major modification</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">Next check/shop visit</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Next check/shop visit</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">One-Time</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">One-Time</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">MM</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">MM</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%" style="border-right: none;">Wt Change</td>
@@ -327,26 +323,22 @@
                         <tr>
                             <td valign="top" width="20%" style="border-left: none;">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">Minor modification</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Minor modification</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">Next heavy maint.visit</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Next heavy maint.visit</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%" style="border-bottom: 1px solid  #d4d7db;">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">As require</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">As require</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">IPC</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">IPC</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%" style="border-right: none;"></td>
@@ -354,56 +346,45 @@
                         <tr>
                             <td valign="top" width="20%" style="border-left: none;">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">Repair/Deviation</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Repair/Deviation</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%" style="border-bottom: 1px solid  #d4d7db;">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">As schedule by PPC</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">As schedule by PPC</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">Repactive(Interval in hrs,</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Repactive(Interval in hrs,</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">WOM</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">WOM</span>
                                 </div>
                             </td>
-                            <td valign="top" width="20%" align="center"
-                                style="border-right: none; color:red;border-bottom: 1px solid  #d4d7db;">55,01 <span
-                                    style="color:black;">lbs</span></td>
+                            <td valign="top" width="20%" align="center" style="border-right: none; color:red;border-bottom: 1px solid  #d4d7db;">55,01 <span style="color:black;">lbs</span></td>
                         </tr>
                         <tr>
                             <td valign="top" width="20%" style="border-left: none;">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">Inspection</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Inspection</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">Prior to (date,hrs,cyc)</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Prior to (date,hrs,cyc)</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%">
                                 <div class="checkbox">
-                                    <img src="" alt="" width="10"> <span
-                                        style="margin-left:18px;">cyc,days,months)</span>
+                                    <img src="" alt="" width="10"> <span style="margin-left:18px;">cyc,days,months)</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"
-                                        style="border-bottom: 1px solid  #d4d7db;"> <span
-                                        style="margin-left:5px;">OHM</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10" style="border-bottom: 1px solid  #d4d7db;"> <span style="margin-left:5px;">OHM</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%" style="border-right: none;">CG Charge</td>
@@ -411,8 +392,7 @@
                         <tr>
                             <td valign="top" width="20%" style="border-left: none;">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">Maint PRGM change</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Maint PRGM change</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%">
@@ -421,8 +401,7 @@
                             </td>
                             <td valign="top" width="20%">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">Other</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Other</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%" style="border-right: none;"></td>
@@ -430,8 +409,7 @@
                         <tr>
                             <td valign="top" width="20%" style="border-left: none;">
                                 <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                        style="margin-left:5px;">Fleet Standart</span>
+                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Fleet Standart</span>
                                 </div>
                             </td>
                             <td valign="top" width="20%">
@@ -440,9 +418,7 @@
                             </td>
                             <td valign="top" width="20%">
                             </td>
-                            <td valign="top" width="20%" align="center"
-                                style="border-right: none;color:red;border-bottom: 1px solid  #d4d7db;">40.02 <span
-                                    style="color:black;">%mac</span></td>
+                            <td valign="top" width="20%" align="center" style="border-right: none;color:red;border-bottom: 1px solid  #d4d7db;">40.02 <span style="color:black;">%mac</span></td>
                         </tr>
                     </table>
                 </div>
@@ -472,21 +448,17 @@
                         <td valign="top" align="center" width="3%" style="border-top:none;color:red;">15.01</td>
                         <td valign="top" align="center" width="24%" style="border-top:none;border-right:none;">
                             <div class="checkbox">
-                                <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                    style="margin-left:5px;">A/C Log Book</span>
+                                <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">A/C Log Book</span>
                             </div>
                         </td>
-                        <td valign="top" align="center" width="24%"
-                            style="border-top:none;border-left:none;border-right:none;">
+                        <td valign="top" align="center" width="24%" style="border-top:none;border-left:none;border-right:none;">
                             <div class="checkbox">
-                                <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                    style="margin-left:5px;">ENG. Log Book</span>
+                                <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">ENG. Log Book</span>
                             </div>
                         </td>
                         <td valign="top" align="center" width="24%" style="border-top:none;border-left:none;">
                             <div class="checkbox">
-                                <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                    style="margin-left:5px;">APU Log Book</span>
+                                <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">APU Log Book</span>
                             </div>
                         </td>
                         <td valign="top" align="center" width="22%" style="border-top:none;color:red;">40.02</td>
@@ -504,7 +476,7 @@
                                                 @else
                                                 src="./img/check-box-empty.png"
                                                 @endif
-                                                alt="" width="10"> 
+                                                alt="" width="10">
                                                 <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                                         </li>
                                         <li style="margin-left:12px;">
@@ -513,7 +485,7 @@
                                             @else
                                             src="./img/check-box-empty.png"
                                             @endif
-                                            alt="" width="11"> 
+                                            alt="" width="11">
                                             <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
                                         </li>
                                     </ul>
@@ -553,10 +525,19 @@
                             <div style="width:100%;height:20px;text-align:center;padding-left:5px;">name :
                                 timestamp</span></div>
                         </td>
-                        <td width="34%" height="50" align="center" valign="bottom" @if(1==0) style="background:grey"
-                            @endif>
-                            @if(1==1)
-                            <div style="width:100%;height:20px;text-align:center;padding-left:5px;">name : timestamp
+                        <td width="34%" height="50" align="center" valign="bottom" @if(1==0) style="background:grey" @endif>
+                            @if($rii_status==1)
+                            valign="bottom"
+                            @else
+                            valign="middle"
+                            @endif
+                            >
+                            @if($rii_status==1)
+                            <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
+                            <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$rii_at}}</span></div>
+                            @else
+                            <div>
+                                <img src="./img/RII.png" alt="" width="230px">
                             </div>
                             @endif
                         </td>

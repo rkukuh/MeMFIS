@@ -286,7 +286,7 @@
                         </tr>
                         <tr>
                             <td valign="top" width="20%">
-                            @if(isset($eo_additionals->scheduled_priority_text) && $eo_additionals->scheduled_priority_text !== "null")  {{ $eo_additionals->scheduled_priority_text }}  @endif
+                                @if(isset($eo_additionals->scheduled_priority_text) && $eo_additionals->scheduled_priority_text !== "null") {{ $eo_additionals->scheduled_priority_text }} @endif
                             </td>
                             <td valign="top" width="20%" style="border-bottom: 1px solid  #d4d7db;">
                                 {{ $eo_additionals->recurrence_text }} {{ $eo_additionals->recurrence_type }}
@@ -306,12 +306,12 @@
                     <tr>
                         <td valign="top" align="center">
                             @foreach($jobCard->jobcardable->materials as $material)
-                                {{$material->code}} | {{$material->name}} | {{$material->pivot->quantity}} | {{App\Models\Unit::find($material->pivot->unit_id)->name}}
+                            {{$material->code}} | {{$material->name}} | {{$material->pivot->quantity}} | {{App\Models\Unit::find($material->pivot->unit_id)->name}}
                             @endforeach
                         </td>
                         <td valign="top" align="center">
                             @foreach($jobCard->jobcardable->tools as $tool)
-                                {{$tool->code}} | {{$tool->name}} | {{$tool->pivot->quantity}} | {{App\Models\Unit::find($tool->pivot->unit_id)->name}}
+                            {{$tool->code}} | {{$tool->name}} | {{$tool->pivot->quantity}} | {{App\Models\Unit::find($tool->pivot->unit_id)->name}}
                             @endforeach
                         </td>
                     </tr>
@@ -338,25 +338,21 @@
                         <td valign="top" align="center" width="22%" style="border-bottom:none;"><b>STATION</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" align="center" width="3%" >{{ json_decode($jobCard->additionals)->TSN }}</td>
-                        <td valign="top" align="center" width="3%" >{{ json_decode($jobCard->additionals)->CSN }}</td>
+                        <td valign="top" align="center" width="3%">{{ json_decode($jobCard->additionals)->TSN }}</td>
+                        <td valign="top" align="center" width="3%">{{ json_decode($jobCard->additionals)->CSN }}</td>
                         <td valign="top" align="center" width="24%" style="border-top:none;border-right:none;">
                             <div class="checkbox">
-                                <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span
-                                    style="margin-left:5px;">A/C Log Book</span>
+                                <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">A/C Log Book</span>
                             </div>
                         </td>
-                        <td valign="top" align="center" width="24%"
-                            style="border-top:none;border-left:none;border-right:none;">
+                        <td valign="top" align="center" width="24%" style="border-top:none;border-left:none;border-right:none;">
                             <div class="checkbox">
-                                <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span
-                                    style="margin-left:5px;">ENG. Log Book</span>
+                                <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">ENG. Log Book</span>
                             </div>
                         </td>
                         <td valign="top" align="center" width="24%" style="border-top:none;border-left:none;">
                             <div class="checkbox">
-                                <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span
-                                    style="margin-left:5px;">APU Log Book</span>
+                                <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">APU Log Book</span>
                             </div>
                         </td>
                         <td valign="top" align="center" width="22%" style="border-top:none;color:red;">{{ $jobCard->station }}</td>
@@ -374,7 +370,7 @@
                                                 @else
                                                 src="./img/check-box-empty.png"
                                                 @endif
-                                                alt="" width="10"> 
+                                                alt="" width="10">
                                                 <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                                         </li>
                                         <li style="margin-left:12px;">
@@ -383,7 +379,7 @@
                                             @else
                                             src="./img/check-box-empty.png"
                                             @endif
-                                            alt="" width="11"> 
+                                            alt="" width="11">
                                             <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
                                         </li>
                                     </ul>
@@ -423,10 +419,19 @@
                             <div style="width:100%;height:20px;text-align:center;padding-left:5px;">name :
                                 timestamp</span></div>
                         </td>
-                        <td width="34%" height="50" align="center" valign="bottom" @if(1==0) style="background:grey"
-                            @endif>
-                            @if(1==1)
-                            <div style="width:100%;height:20px;text-align:center;padding-left:5px;">name : timestamp
+                        <td width="34%" height="50" align="center" valign="bottom" @if(1==0) style="background:grey" @endif>
+                            @if($rii_status==1)
+                            valign="bottom"
+                            @else
+                            valign="middle"
+                            @endif
+                            >
+                            @if($rii_status==1)
+                            <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
+                            <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$rii_at}}</span></div>
+                            @else
+                            <div>
+                                <img src="./img/RII.png" alt="" width="230px">
                             </div>
                             @endif
                         </td>

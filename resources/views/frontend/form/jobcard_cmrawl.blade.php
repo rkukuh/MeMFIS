@@ -123,7 +123,6 @@
         }
 
         /* <div class="page_break"></div> */
-
     </style>
 </head>
 
@@ -290,30 +289,30 @@
                 <table width="100%" cellpadding="10">
                     <tr>
                         <td width="25%" valign="top">
-                          @if(sizeof($jobCard->jobcardable->skills) == 3)
+                            @if(sizeof($jobCard->jobcardable->skills) == 3)
                             @slot('text', 'ERI')
                             @elseif(sizeof($jobCard->jobcardable->skills) == 1)
                             @slot('text', $jobCard->jobcardable->skills[0]->name)
                             @else
                             @slot('text', '-')
-                            @endif 
-                          </td>
-                        <td width="25%" align="center" valign="top"> 
-                          @if($jobCard->jobcardable->work_area != null)
+                            @endif
+                        </td>
+                        <td width="25%" align="center" valign="top">
+                            @if($jobCard->jobcardable->work_area != null)
                             {{$jobCard->jobcardable->workarea->name}}
                             @else
                             -
-                            @endif 
-                          </td>
+                            @endif
+                        </td>
                         <td width="25%" align="center" valign="top">
-                          @if($jobCard->jobcardable->estimation_manhour)
+                            @if($jobCard->jobcardable->estimation_manhour)
                             {{$jobCard->jobcardable->estimation_manhour}}
                             @else
                             -
                             @endif
-                          </td>
-                        <td width="25%" align="right" valign="top"> 
-                          {{$actual_manhours}}
+                        </td>
+                        <td width="25%" align="right" valign="top">
+                            {{$actual_manhours}}
                         </td>
                     </tr>
                 </table>
@@ -364,7 +363,7 @@
                                             @else
                                             src="./img/check-box-empty.png"
                                             @endif
-                                            alt="" width="10"> 
+                                            alt="" width="10">
                                             <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                                     </li>
                                     <li style="margin-left:12px;">
@@ -373,7 +372,7 @@
                                         @else
                                         src="./img/check-box-empty.png"
                                         @endif
-                                        alt="" width="11"> 
+                                        alt="" width="11">
                                         <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
                                     </li>
                                 </ul>
@@ -423,9 +422,20 @@
                                     Time</span></div>
                         </td>
                         <td width="34%" height="53%" align="center" valign="bottom">
-                            <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
-                            <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date &
-                                    Time</span></div>
+                            @if($rii_status==1)
+                            valign="bottom"
+                            @else
+                            valign="middle"
+                            @endif
+                            >
+                            @if($rii_status==1)
+                            <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
+                            <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$rii_at}}</span></div>
+                            @else
+                            <div>
+                                <img src="./img/RII.png" alt="" width="230px">
+                            </div>
+                            @endif
                         </td>
                     </tr>
                 </table>
