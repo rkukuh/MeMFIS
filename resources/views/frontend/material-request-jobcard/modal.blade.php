@@ -128,7 +128,7 @@
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Stock Qty
+                                                        Qty Form
                                                     </label>
                     
                                                     @component('frontend.common.label.data-info')

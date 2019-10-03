@@ -6,7 +6,7 @@
                 @include('frontend.common.label.create-new')
 
                 <h5 class="modal-title" id="TitleModalInstruction">
-                    Tool Request Project
+                    Tool Request Jobcard
 
                     <small id="instruction" class="m--font-focus"></small>
                 </h5>
@@ -19,16 +19,36 @@
                     <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Part Number
+                                </label>
+
+                                @component('frontend.common.label.data-info')
+                                    @slot('text', 'generate')
+                                @endcomponent
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Item Description
+                                </label>
+
+                                @component('frontend.common.label.data-info')
+                                    @slot('text', 'generate')
+                                @endcomponent
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
-                                    Tool
+                                    Item
                                 </label>
 
                                 @component('frontend.common.input.select2')
-                                    @slot('text', 'Tool')
-                                    @slot('id', 'tool')
-                                    @slot('name', 'tool')
-                                    @slot('id_error', 'tool')
+                                    @slot('text', 'Item')
+                                    @slot('id', 'item')
+                                    @slot('name', 'item')
+                                    @slot('id_error', 'item')
                                     @slot('style', 'width:100%')
                                 @endcomponent
                             </div>
@@ -36,7 +56,7 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Qty 
+                                    Serial Number
                                 </label>
         
                                 @component('frontend.common.input.number')
@@ -48,15 +68,51 @@
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
-                                    Unit
+                                    Expired Date
                                 </label>
 
-                                @component('frontend.common.input.select2')
-                                    @slot('text', 'Unit')
-                                    @slot('id', 'unit_id')
-                                    @slot('name', 'unit_id')
-                                    @slot('id_error', 'unit')
+                                @component('frontend.common.label.data-info')
+                                    @slot('text', 'generate')
                                 @endcomponent
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row ">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Jobcard Qty 
+                                </label>
+        
+                                @component('frontend.common.label.data-info')
+                                    @slot('text', 'generate')
+                                @endcomponent
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <div class="form-group m-form__group row ">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                           Qty Request
+                                        </label>
+        
+                                        @component('frontend.common.input.number')
+                                            @slot('text', 'Qty Request')
+                                            @slot('id', 'qty_request')
+                                            @slot('name', 'qty_request')
+                                            @slot('id_error', 'qty_request')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                            Unit
+                                        </label>
+        
+                                        @component('frontend.common.input.select2')
+                                            @slot('text', 'Unit')
+                                            @slot('id', 'unit_id')
+                                            @slot('name', 'unit_id')
+                                            @slot('id_error', 'unit')
+                                        @endcomponent
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
@@ -72,6 +128,61 @@
                                     @slot('text', 'Remark')
                                     @slot('required', 'required')
                                 @endcomponent
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row ">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <fieldset class="border p-1">
+                                    <legend class="w-auto font-weight-bold">Stock Information</legend>
+                                    <div class="form-group m-form__group row ">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="form-group m-form__group row ">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Stock Qty
+                                                    </label>
+                    
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Qty Form
+                                                    </label>
+                    
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row ">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <div class="form-group m-form__group row ">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Reserved Qty
+                                                    </label>
+                    
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Total Stock
+                                                    </label>
+                    
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
                             </div>
                         </div>
                     </div>
