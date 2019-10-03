@@ -358,21 +358,13 @@
               <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
               <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
             </td>
-            <td width="34%" height="46%" align="center" valign="bottom">
-              @if($rii_status==1)
-                valign="bottom"
-              @else
-                valign="middle"
-              @endif
-              >
-              @if($rii_status==1)
+            <td width="34%" height="100" align="center" valign="bottom"
+                @if($rii_status==0) style="background:grey" @endif>
+                @if($rii_status==1)
                 <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
-                <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$rii_at}}</span></div>
-              @else
-                <div>
-                  <img src="./img/RII.png" alt="" width="230px">
-                </div>
-              @endif
+                <div style="width:100%;height:20px;text-align:left;padding-left:5px;">
+                    Date : <span>{{$rii_at}}</span></div>
+                @endif
             </td>
           </tr>
         </table>
