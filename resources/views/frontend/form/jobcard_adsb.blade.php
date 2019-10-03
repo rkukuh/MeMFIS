@@ -287,7 +287,7 @@
               @if(sizeof($jobCard->jobcardable->skills) == 3)
                   ERI
               @elseif(sizeof($jobCard->jobcardable->skills) == 1)
-                  {{ $jobCardjobCard->jobcardable->skills->last()->name }}
+                  {{ $jobCard->jobcardable->skills->last()->name }}
               @else
                   -
               @endif
@@ -379,12 +379,7 @@
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
               <span>
-                  generate
-                  {{-- @if()
-                  {{}}
-                  @else
-                    -
-                  @endif --}}
+              @if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif
               </span>
           </td>
         </tr>

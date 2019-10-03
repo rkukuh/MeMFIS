@@ -318,7 +318,9 @@
           </td>
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime dolorum esse fugiat ex illo ab quae ducimus et.
+              <span>
+              @if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif
+              </span>
           </td>
         </tr>
       </table>
