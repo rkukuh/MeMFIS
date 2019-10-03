@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.tool-request.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.tool-request-jobcard.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Tool Request
                             </span>
@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
-                                            <a href="{{route('frontend.tool-request.project.create')}}" class="m-btn btn btn-primary">
+                                            {{-- <a href="{{route('frontend.tool-request.project.create')}}" class="m-btn btn btn-primary">
                                                 <span>
                                                     <i class="la la-plus-circle"></i>
                                                 <span>Project</span>
@@ -80,7 +80,7 @@
                                                     <i class="la la-plus-circle"></i>
                                                 <span>General</span>
                                                 </span>
-                                            </a>
+                                            </a> --}}
                                         </div>
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -89,7 +89,7 @@
                             </div>
 
                             <div class="col-lg-12">
-                                @include('frontend.tool-request.filter')
+                                @include('frontend.tool-request-jobcard.filter')
                             </div>
                             <div class="m_datatable" id="scrolling_both"></div>
                         </div>
