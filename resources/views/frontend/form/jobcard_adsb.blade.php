@@ -384,11 +384,7 @@
           <td width="4%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="28%" valign="top">
-            @if(sizeof($jobCard->helpers) > 0 )
-              {{ join(',', $jobCard->helpers->pluck('first_name')) }}
-            @else
-              0
-            @endif
+            {{ $helper }}
           </td>
           <td width="33%" valign="top" align="center">Status :
           {{ $jobCard->status }}

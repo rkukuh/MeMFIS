@@ -298,7 +298,7 @@
                 Helper
               </div>
               <br>
-              <span><center>Generate</center></span> 
+              <span><center>{{ $helper }}</center></span> 
             </td>
         </tr>
     </table>

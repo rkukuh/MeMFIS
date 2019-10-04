@@ -363,7 +363,11 @@ class JobCardController extends Controller
             $eo_additionals->manual_affected_text = $jobcard->jobcardable->eo_header->manual_affected_text;
 
             $rii_status = $jobcard->jobcardable->is_rii;
-            $helpers = $jobcard->helpers;
+            if(sizeof($jobcard->helpers) > 0){
+                $helpers = join(',', $jobcard->helpers->pluck('first_name'));
+            }else{
+                $helpers = '-'
+            }
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobcard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
