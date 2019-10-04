@@ -70,11 +70,11 @@
                                                 Ref Job Card No. @include('frontend.common.label.required')
                                             </label>
 
-                                            @include('frontend.common.ref-jobcard-number.index')
-
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'jobcard_number')
-                                                @slot('name', 'jobcard_number')
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Ref Job Card No.')
+                                                @slot('id', 'ref_jobcard')
+                                                @slot('name', 'ref_jobcard')
+                                                @slot('id_error', 'ref_jobcard')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -256,6 +256,7 @@
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/ref-jobcard.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
