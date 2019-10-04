@@ -384,23 +384,17 @@
           <td width="4%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="28%" valign="top">
-              generate
-              {{-- @if()
-              {{}}
-              @else
-                -
-              @endif --}}
+            @if(sizeof($jobCard->helpers) > 0 )
+              {{ join(',', $jobCard->helpers->pluck('first_name')) }}
+            @else
+              0
+            @endif
           </td>
           <td width="33%" valign="top" align="center">Status :
           {{ $jobCard->status }}
           </td>
-          <td width="34%" valign="top" align="right">Data Close :
-              generate
-              {{-- @if()
-              {{}}
-              @else
-                -
-              @endif --}}
+          <td width="34%" valign="top" align="right">Date Close :
+              {{ $jobCard->progresses->last()->created_at }}
           </td>
         </tr>
       </table>

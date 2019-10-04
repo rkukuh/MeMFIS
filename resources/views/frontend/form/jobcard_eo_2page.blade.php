@@ -155,7 +155,7 @@
                 <tr>
                     <td valign="top" width="36%">Print By : <span>{{ Auth::user()->name }}:{{ $now }}</span></td>
                     <td valign="top" width="25%">Status : <span>{{ $jobCard->status }}</span></td>
-                    <td valign="top" width="39%">Date Close : <span>time</span></td>
+                    <td valign="top" width="39%">Date Close : <span>{{ $dateClosed }}</span></td>
                 </tr>
             </table>
         </div>
@@ -167,7 +167,7 @@
             <li>
                 <div class="jobcard-info">
                     <fieldset>
-                        <legend>JC No : 123312323</legend>
+                        <legend>JC No : {{ $jobCard->number }}</legend>
                         <div class="jobcard-info-detail">
                             <table width="80%" cellpadding="3">
                                 <tr>
