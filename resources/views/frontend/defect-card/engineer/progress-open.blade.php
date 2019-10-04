@@ -419,7 +419,6 @@
                         <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
                             <div class="row align-items-center">
                                 <div class="col-xl-12 order-12 order-xl-12 m--align-right">
-                                        <div class="defectcard_helper_datatable" id="scrolling_both"></div>
                                         @if($defectcard->helpers()->count() < $defectcard->helper_quantity)
                                         <button data-toggle="modal" data-target="#modal_helper" type="button" href="#" 
                                         class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-md add-helper" title="Add Helper" 

@@ -56,15 +56,52 @@ class PreliminaryController extends Controller
     public function store(PreliminaryStore $request)
     {
         $this->decoder($request);
+        $checker = [];
+        // get all the taskcard with the same number
+        $taskcards = TaskCard::where('number', $request->number)->get();
+        if(sizeof($taskcards) > 0){
+            // to check all internal number every taskcard
+            foreach($taskcards as $taskcard){
+                $taskcard->additionals = json_decode($taskcard->additionals);
+                // check if the internal number are the same 
+                if($request->additionals->internal_number == $taskcard->additionals->internal_number){
+                array_push($checker, true);
+                }else{
+                array_push($checker, false);
+                }
+            }  
+        }else{
+            $additionals["internal_number"] = $request->additionals->internal_number;
+            $additionals["document_library"] = $request->document_library;
+            $request->merge(['additionals' => json_encode($additionals, true)]);
 
-        if ($taskcard = TaskCard::create($request->all())) {
-            $taskcard->aircrafts()->attach($request->applicability_airplane);
+            if ($taskcard = TaskCard::create($request->all())) {
+                $taskcard->aircrafts()->attach($request->applicability_airplane);
 
-            return response()->json($taskcard);
+                return response()->json($taskcard);
+            }
         }
 
-        // TODO: Return error message as JSON
-        return false;
+        if(in_array(true, $checker)){
+            $error_message = array(
+                'message' => "a taskcard with same number and company number already exists",
+                'title' => "Taskcard already exists!",
+                'alert-type' => "error"
+            );
+            return response()->json(['error' => [$error_message]], '403');
+        }else{
+            $additionals["internal_number"] = $request->additionals->internal_number;
+            $additionals["document_library"] = $request->document_library;
+            $request->merge(['additionals' => json_encode($additionals, true)]);
+
+            if ($taskcard = TaskCard::create($request->all())) {
+                $taskcard->aircrafts()->attach($request->applicability_airplane);
+
+                return response()->json($taskcard);
+            }
+        }
+
+
     }
 
     /**
@@ -142,11 +179,13 @@ class PreliminaryController extends Controller
 
     public function decoder($req){
 
-        $req->applicability_airplane = json_decode($req->applicability_airplane);
-        $req->threshold_type = json_decode($req->threshold_type);
+        $req->additionals = json_decode($req->additionals);
         $req->repeat_type = json_decode($req->repeat_type);
-        $req->threshold_amount = json_decode($req->threshold_amount);
         $req->repeat_amount = json_decode($req->repeat_amount);
+        $req->threshold_type = json_decode($req->threshold_type);
+        $req->threshold_amount = json_decode($req->threshold_amount);
+        $req->document_library = json_decode($req->document_library);
+        $req->applicability_airplane = json_decode($req->applicability_airplane);
 
         return $req;
     }

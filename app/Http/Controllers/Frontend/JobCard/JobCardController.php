@@ -6,6 +6,7 @@ use Auth;
 use App\User;
 use Validator;
 use Carbon\Carbon;
+use App\Models\Type;
 use App\Models\Status;
 use App\Models\JobCard;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\JobCardStore;
 use App\Http\Requests\Frontend\JobCardUpdate;
+use stdClass;
 
 class JobCardController extends Controller
 {
@@ -154,12 +156,13 @@ class JobCardController extends Controller
      */
     public function print($jobCard)
     {
-
+        $now = Carbon::now();
         $statuses = Status::ofJobCard()->get();
         $jobcard = JobCard::with('jobcardable','quotation')->where('uuid',$jobCard)->first();
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;
         }
+
         $manhours = null;
         foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
             $date1 = null;
@@ -258,6 +261,7 @@ class JobCardController extends Controller
                         'prepared_by' => $prepared_by,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
+                        'now' => $now,
                         'actual_manhours'=> $actual_manhours
                         ]);
                 return $pdf->stream();
@@ -278,6 +282,7 @@ class JobCardController extends Controller
                         'prepared_by' => $prepared_by,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
+                        'now' => $now,
                         'actual_manhours'=> $actual_manhours
                         ]);
                 return $pdf->stream();
@@ -298,6 +303,7 @@ class JobCardController extends Controller
                         'prepared_by' => $prepared_by,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
+                        'now' => $now,
                         'actual_manhours'=> $actual_manhours
                         ]);
                 return $pdf->stream();
@@ -318,6 +324,7 @@ class JobCardController extends Controller
                     'prepared_by' => $prepared_by,
                     'rii_status' => $rii_status,
                     'helpers' => $helpers,
+                    'now' => $now,
                     'actual_manhours'=> $actual_manhours
                     ]);
                 return $pdf->stream();
@@ -338,11 +345,22 @@ class JobCardController extends Controller
                         'prepared_by' => $prepared_by,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
+                        'now' => $now,
                         'actual_manhours'=> $actual_manhours
                         ]);
                 return $pdf->stream();
             }
         }elseif($jobcard->jobcardable_type == "App\Models\EOInstruction"){
+            $eo_additionals = new stdClass;
+
+            $eo_additionals->scheduled_priority = Type::find($jobcard->jobcardable->eo_header->scheduled_priority_id)->name;
+            $eo_additionals->scheduled_priority_text = $jobcard->jobcardable->eo_header->scheduled_priority_text;
+            $eo_additionals->scheduled_priority_type = $jobcard->jobcardable->eo_header->scheduled_priority_type;
+            $eo_additionals->recurrence = Type::find($jobcard->jobcardable->eo_header->recurrence_id)->name;
+            $eo_additionals->recurrence_text = $jobcard->jobcardable->eo_header->recurrence_text;
+            $eo_additionals->recurrence_type = $jobcard->jobcardable->eo_header->recurrence_type;
+            $eo_additionals->manual_affected = Type::find($jobcard->jobcardable->eo_header->manual_affected_id)->name;
+            $eo_additionals->manual_affected_text = $jobcard->jobcardable->eo_header->manual_affected_text;
 
             $rii_status = $jobcard->jobcardable->is_rii;
             $helpers = $jobcard->helpers;
@@ -400,6 +418,7 @@ class JobCardController extends Controller
                             'prepared_by' => $prepared_by,
                             'rii_status' => $rii_status,
                             'helpers' => $helpers,
+                            'now' => $now,
                             'actual_manhours'=> $actual_manhours
                         ]);
                     return $pdf->stream();
@@ -419,6 +438,7 @@ class JobCardController extends Controller
                             'prepared_by' => $prepared_by,
                             'rii_status' => $rii_status,
                             'helpers' => $helpers,
+                            'now' => $now,
                             'actual_manhours'=> $actual_manhours
                         ]);
                     return $pdf->stream();
@@ -439,7 +459,8 @@ class JobCardController extends Controller
                         'prepared_by' => $prepared_by,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
-                        'actual_manhours'=> $actual_manhours
+                        'now' => $now,
+                        'eo_additionals'=> $eo_additionals
                     ]);
                 return $pdf->stream();
                 }else{
@@ -457,7 +478,8 @@ class JobCardController extends Controller
                         'prepared_by' => $prepared_by,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
-                        'actual_manhours'=> $actual_manhours
+                        'now' => $now,
+                        'eo_additionals'=> $eo_additionals
                     ]);
 
                 }

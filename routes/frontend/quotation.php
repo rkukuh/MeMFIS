@@ -21,6 +21,7 @@ Route::name('frontend.')->group(function () {
                 Route::get('/create/{project}','QuotationAdditionalController@create')->name('quotation-additional.create');
                 Route::post('/{quotation}/discount','QuotationAdditionalController@discount')->name('quotation-additional.discount');
                 Route::post('/{quotation}/approve', 'QuotationAdditionalController@approve')->name('quotation.approve');
+                Route::get('/{quotation}/print', 'QuotationAdditionalController@print');
             });
 
             Route::prefix('quotation')->group(function () {

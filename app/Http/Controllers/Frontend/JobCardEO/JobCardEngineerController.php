@@ -144,10 +144,10 @@ class JobCardEngineerController extends Controller
         $progresses = $jobcard->progresses->where('progressed_by', Auth::id());
         // dd($this->statuses->where('id', $progresses->last()->status_id)->first()->code);
         $employees = Employee::all();
+
         foreach ($progresses as $progress) {
             $progress->status .= Status::where('id', $progress->status_id)->first()->name;
         }
-
         if ($progresses->count() == 0 and $this->statuses->where('id', $jobcard->progresses->first()->status_id)->first()->code == "open") {
             return view('frontend.job-card-eo.engineer.progress-open', [
                 'jobcard' => $jobcard,
@@ -223,10 +223,15 @@ class JobCardEngineerController extends Controller
                 }
             }
 
-            $request->merge(['station_id' => Station::where('uuid',$request->station)->first()->id]);
+            $station = Station::firstOrCreate(
+                ['name' => $request->station, 'stationable_id' => $jobcard->quotation->quotationable->aircraft->id, 'stationable_type' => 'App\Models\Aircraft']
+            );
+            $request->merge(['station_id' => $station->id]);
 
             $additionals['TSN'] = $request->tsn;
             $additionals['CSN'] = $request->csn;
+            $additionals['weight_change'] = $request->weight_change;
+            $additionals['center_of_gravity'] = $request->center_of_gravity;
 
             $jobcard->additionals =json_encode($additionals);
             $jobcard->station_id = $request->station_id;

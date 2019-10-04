@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.workpackage.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.inventory-in.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Inventory In
                             </span>

@@ -78,6 +78,7 @@ class ProjectHMWorkPackageEOInstructionController extends Controller
         }else{
                 $project_wokpackage->eo_instructions()->create([
                 'eo_instruction_id' => $instruction->id,
+                'is_rii' => EOInstruction::find($instruction->id)->is_rii,
             ]);
 
             return response()->json($project_wokpackage);

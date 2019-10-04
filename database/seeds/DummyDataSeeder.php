@@ -23,7 +23,6 @@ class DummyDataSeeder extends Seeder
         $this->call(Units::class);
         $this->call(Levels::class);
         $this->call(Statuses::class);
-        $this->call(Journals::class);
         $this->call(Categories::class);
         $this->call(Currencies::class);
 
@@ -79,6 +78,8 @@ class DummyDataSeeder extends Seeder
         $this->call(Progresses::class);
         $this->call(Inspections::class);
         $this->call(Interchanges::class);
+        $this->call(InventoryIns::class);
+        $this->call(InventoryOuts::class);
 
         /** LICENSE */
 
@@ -149,5 +150,10 @@ class DummyDataSeeder extends Seeder
         /** PURCHASE ORDER's ITEMs */
 
         $this->call(PurchaseOrderItems::class);
+
+        /** TRIGGER-ONLY */
+
+        $this->call(FefoIns::class);
+        $this->call(FefoOuts::class);
     }
 }

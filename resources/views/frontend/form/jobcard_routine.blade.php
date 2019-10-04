@@ -227,6 +227,9 @@
             <td style="position: relative;" width="100%" height="50 ">
               <div style="position: absolute;">
                 Accomplishment Record:
+                <span>
+                    {{ $jobCard->progresses->last()->reason_text }}
+                </span>
               </div>
               <br>
               <span><center>Generate</center></span> 
@@ -240,21 +243,37 @@
                     Discrepancies Found : 
                 </div>
                 <br><br>
-                <span><center>Generate</center></span> 
+                <span><center>
+                        <img @if(sizeof($jobCard->defectcards) <> 0)
+                            src="./img/check.png"
+                            @else
+                            src="./img/check-box-empty.png"
+                            @endif
+                            alt="" width="10"> 
+                            <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                    
+                        <img @if(sizeof($jobCard->defectcards) == 0)
+                        src="./img/check.png"
+                        @else
+                        src="./img/check-box-empty.png"
+                        @endif
+                        alt="" width="11"> 
+                        <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                    </center></span> 
             </td>
             <td style="position: relative;" width="22%">
                 <div style="position: absolute;">
                     Transfer to Detect Card No :
                 </div>
                 <br><br>
-                <span><center>Generate</center></span> 
+                <span><center>@if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif</center></span> 
             </td>
             <td style="position: relative;" width="17%">
                 <div style="position: absolute;">
                     Status : 
                 </div>
                 <br><br>
-                <span><center>Generate</center></span> 
+                <span><center>{{ $jobCard->status }}</center></span> 
             </td>
             <td style="position: relative;" width="22%">
                 <div style="position: absolute;">

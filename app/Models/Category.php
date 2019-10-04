@@ -12,7 +12,6 @@ class Category extends MemfisModel
         'code',
         'name',
         'of',
-        'account_code',
     ];
 
     /******************************************* BOOT ********************************************/

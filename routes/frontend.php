@@ -17,7 +17,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('unit', 'UnitController');
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
-        Route::resource('journal', 'JournalController');
 
         /** POLYMORPH */
 
@@ -38,6 +37,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('progress', 'ProgressController');
         Route::resource('threshold', 'ThresholdController');
         Route::resource('inspection', 'InspectionController');
+        Route::resource('inventory-out', 'InventoryOutController');
 
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']
@@ -87,14 +87,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('eo-instruction-wp', 'EOInstructionWorkPackageController');
         Route::resource('eo-instruction-wp-successor', 'EOInstructionWorkPackageSuccessorController');
         Route::resource('eo-instruction-wp-predecessor', 'EOInstructionWorkPackagePredecessorController');
-
-
-        Route::view('/open', 'frontend.defect-card.progress.progress-open')->name('progress.open');
-        Route::view('/pause', 'frontend.defect-card.progress.progress-pause')->name('progress.pause');
-        Route::view('/resume', 'frontend.defect-card.progress.progress-resume')->name('progress.resume');
-        Route::view('/close', 'frontend.defect-card.progress.progress-close')->name('progress.close');
-        Route::view('/waiting-rii', 'frontend.defect-card.progress.waiting-rii')->name('progress.waiting-rii');
-        Route::view('/release', 'frontend.defect-card.progress.release')->name('progress.release');
 
     });
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Datatables\PurchaseRequest;
 
 use App\Models\PurchaseRequest;
 use App\Models\Type;
+use App\Models\Unit;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -316,7 +317,13 @@ class GeneralPurchaseRequestDatatables extends Controller
      */
     public function pr_item(PurchaseRequest $purchaseRequest)
     {
-        $data = $alldata = json_decode($purchaseRequest->items);
+        $purchaseRequests = $purchaseRequest->items;
+
+        foreach($purchaseRequests as $purchaseRequest){
+            $purchaseRequest->unit_name .= Unit::find($purchaseRequest->pivot->unit_id)->name;
+        }
+
+        $data = $alldata = json_decode($purchaseRequests);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

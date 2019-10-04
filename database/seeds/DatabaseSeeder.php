@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UnitsTableSeeder::class);
         $this->call(LevelsTableSeeder::class);
         $this->call(StatusesTableSeeder::class);
-        $this->call(JournalsTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(CurrenciesTableSeeder::class);
         
@@ -81,6 +80,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ProgressesTableSeeder::class);
         $this->call(InspectionsTableSeeder::class);
         $this->call(InterchangesTableSeeder::class);
+        $this->call(InventoryInsTableSeeder::class);
+        $this->call(InventoryOutsTableSeeder::class);
 
         /** LICENSE */
 
@@ -149,5 +150,10 @@ class DatabaseSeeder extends Seeder
         /** PURCHASE ORDER's ITEMs */
 
         $this->call(PurchaseOrderItemsTableSeeder::class);
+
+        /** TRIGGER-ONLY */
+
+        $this->call(FefoInsTableSeeder::class);
+        $this->call(FefoOutsTableSeeder::class);
     }
 }

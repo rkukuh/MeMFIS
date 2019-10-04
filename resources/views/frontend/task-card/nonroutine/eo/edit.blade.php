@@ -873,9 +873,9 @@
     <script src="{{ asset('js/frontend/functions/select2/document-library.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
