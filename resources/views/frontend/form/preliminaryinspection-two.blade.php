@@ -99,7 +99,7 @@
   </header>
   <footer style="margin-top:14px;">
     <div class="container">
-      <span style="margin-left:6px">Prepared By : {{ $jobCard->quotation->quotationable->audits->first()->user->name }} &nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{ Auth::user()->name }} </span>
+      <span style="margin-left:6px">Prepared By : {{ $prepared_by }} &nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{ Auth::user()->name }} </span>
     </div>
     <img src="./img/form/printoutpreliminaryinspection/FooterPreliminaryInspection.png" width="100%" alt="" >
   </footer>
@@ -126,7 +126,7 @@
                         <td width="29%">{{ $jobCard->quotation->quotationable->code }}</td>
                         <td width="20%">Est. Mhrs</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{ json_decode($jobCard->origin_jobcardable)->estimation_manhour }}</td>
+                        <td width="29%">{{ $taskcard->estimation_manhour }}</td>
                       </tr>
                       <tr>
                         <td width="20%"></td>

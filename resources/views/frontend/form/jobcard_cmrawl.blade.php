@@ -157,11 +157,10 @@
                                 <tr>
                                     <td width="20%">Task No</td>
                                     <td width="1%">:</td>
-                                    <td width="29%">Generate</td>
+                                    <td width="29%">{{ $jobCard->job}}</td>
                                     <td width="20%">AC/Type</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
-
                                         @if($jobCard->quotation->quotationable->aircraft->name)
                                         {{$jobCard->quotation->quotationable->aircraft->name}}
                                         @else
@@ -189,9 +188,9 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td width="20%">Inspection Type</td>
-                                    <td width="1%">:</td>
-                                    <td width="29%">Generate</td>
+                                    <td width="20%"></td>
+                                    <td width="1%"></td>
+                                    <td width="29%"></td>
                                     <td width="20%">A/C S/N</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
@@ -436,7 +435,7 @@
                 <tr>
                     <td width="8%">Prepared By</td>
                     <td width="1%">:</td>
-                    <td width="91%">{{ $jobCard->quotation->quotationable->audits->first()->user->name }};{{$jobCard->created_at}} </td>
+                    <td width="91%">{{ $prepared_by }};{{$jobCard->created_at}} </td>
                 </tr>
             </table>
         </div>

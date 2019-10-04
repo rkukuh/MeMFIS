@@ -220,7 +220,6 @@
                                         @else
                                         -
                                         @endif
-                                        Generate
                                     </td>
                                     <td width="20%">A/C S/N</td>
                                     <td width="1%">:</td>
@@ -271,7 +270,7 @@
                     </tr>
                     <tr>
                         <td valign="top" align="center">Cabin Maintenance</td>
-                        <td valign="top" align="center">Generate dr Type Taskcard</td>
+                        <td valign="top" align="center">{{ $jobCard->jobcardable->type->name }}</td>
                         <td valign="top" align="center">0.25</td>
                         <td valign="top" align="center"></td>
                     </tr>

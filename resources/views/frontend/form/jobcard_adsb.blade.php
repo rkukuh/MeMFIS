@@ -390,7 +390,7 @@
           {{ $jobCard->status }}
           </td>
           <td width="34%" valign="top" align="right">Date Close :
-              {{ $jobCard->progresses->last()->created_at }}
+              {{ $dateClosed }}
           </td>
         </tr>
       </table>
@@ -434,7 +434,7 @@
         <tr>
           <td width="10%">Prepared By</td>
           <td width="1%">:</td>
-          <td width="90%">{{ $jobCard->quotation->quotationable->audits->first()->user->name }};{{$jobCard->created_at}} </td>
+          <td width="90%">{{ $prepared_by }};{{$jobCard->created_at}} </td>
         </tr>
       </table>
     </div>
