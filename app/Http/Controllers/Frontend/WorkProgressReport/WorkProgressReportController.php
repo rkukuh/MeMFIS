@@ -61,10 +61,15 @@ class WorkProgressReportController extends Controller
      */
     public function show(Project $project)
     {
-        $jobcards = $statusses_routine = $statusses_non_routine =  $statusses_additionals = $basic =  $sip =  $cpcp =  $additional =  $adsb =  $cmr_awl =  $si =  $ea =  $eo =  $ht_crr = $manhours = [];
+        $jobcards = $statusses_routine = $statusses_non_routine =  $statusses_additionals = $basic =  $sip =  $cpcp =  $additional =  $adsb =  $cmr_awl =  $si =  $ea =  $eo =  $ht_crr = $manhours = $statusses = [];
         
         $tat = ProjectWorkpackage::where('project_id', $project->id)->sum('tat');
-        $attention = json_decode($project->quotations->first()->attention);
+        if(isset($project->quotations->first()->attention)){
+            $attention = json_decode($project->quotations->first()->attention);
+        }else{
+            $attention = null;
+        }
+
         if(isset($project->data_htcrr)){
             $tat += json_decode($project->data_htcrr)->tat;
         }
@@ -266,7 +271,7 @@ class WorkProgressReportController extends Controller
         $this->counting($ht_crr, "ht-crr");
         $this->counting($additional, "additionals");
 
-        if (isset($this->col["routine"])) {
+        if (isset($this->col["routine"]) && sizeof(array_unique($this->col["routine"])) !== 0) {
             $this->col["routine"] = 12 / sizeof( array_unique( $this->col["routine"] ) );
         }else{
             $this->col["routine"] = 12;
@@ -279,6 +284,7 @@ class WorkProgressReportController extends Controller
         }else {
             $this->col["non-routine"] = 12;
         }
+
 
         return view('frontend.work-progress-report.show',[
             'col' => $this->col,
@@ -500,6 +506,16 @@ class WorkProgressReportController extends Controller
             
             return;
         }else{
+            // $container = [];
+            // if( isset($counter["open"]) ){ $container['open'] = $counter["open"]; } else{ $container["open"] = 0; }
+            // if( isset($counter["progress"]) ){ $container["progress"] = $counter["progress"]; } else{ $container["progress"] = 0; }
+            // if( isset($counter["pending"]) ){ $container["pending"] = $counter["pending"]; } else{ $container["pending"] = 0; }
+            // if( isset($counter["closed"]) ){ $container["closed"] = $counter["closed"]; } else{ $container["closed"] = 0; }
+            // if( isset($counter["released"]) ){ $container["released"] = $counter["released"]; } else{ $container["released"] = 0; }
+            // if( isset($counter["rii-released"]) ){ $container["rii-released "] = $counter["rii-released"]; } else{ $container["rii-released"] = 0; }
+            // if( $container["released"] > 0 || $container["rii-released"] > 0 ){ $container["done"] = $container["rii-released"] + $container["released"]; } else{ $container["done"] = 0; }
+            // $this->jobcard[$attribute] = $container;
+
             return;
         }
     }
