@@ -242,7 +242,7 @@ class JobCardController extends Controller
 
             if(isset(User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name)){
                 $prepared_by = User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name;
-                $prepared_at = $jobcard->quotation->quotationable->audits->first()->user_id;
+                $prepared_at = $jobcard->created_at;
             }else{
                 $prepared_by = "-";
                 $prepared_at = "-";
@@ -262,6 +262,7 @@ class JobCardController extends Controller
                         'rii_by' => $rii_by,
                         'rii_at' => $rii_at,
                         'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
                         'now' => $now,
@@ -284,6 +285,7 @@ class JobCardController extends Controller
                         'rii_by' => $rii_by,
                         'rii_at' => $rii_at,
                         'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
                         'now' => $now,
@@ -306,6 +308,7 @@ class JobCardController extends Controller
                         'rii_by' => $rii_by,
                         'rii_at' => $rii_at,
                         'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
                         'now' => $now,
@@ -328,6 +331,7 @@ class JobCardController extends Controller
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                     'rii_status' => $rii_status,
                     'helpers' => $helpers,
                     'now' => $now,
@@ -350,6 +354,7 @@ class JobCardController extends Controller
                         'rii_by' => $rii_by,
                         'rii_at' => $rii_at,
                         'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
                         'now' => $now,
@@ -428,6 +433,7 @@ class JobCardController extends Controller
                             'rii_by' => $rii_by,
                             'rii_at' => $rii_at,
                             'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                             'rii_status' => $rii_status,
                             'helpers' => $helpers,
                             'now' => $now,
@@ -449,6 +455,7 @@ class JobCardController extends Controller
                             'rii_by' => $rii_by,
                             'rii_at' => $rii_at,
                             'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                             'rii_status' => $rii_status,
                             'helpers' => $helpers,
                             'now' => $now,
@@ -471,6 +478,7 @@ class JobCardController extends Controller
                         'rii_by' => $rii_by,
                         'rii_at' => $rii_at,
                         'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
                         'now' => $now,
@@ -491,6 +499,7 @@ class JobCardController extends Controller
                         'rii_by' => $rii_by,
                         'rii_at' => $rii_at,
                         'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
                         'now' => $now,

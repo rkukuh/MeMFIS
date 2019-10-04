@@ -155,7 +155,7 @@
     </header>
     <footer style="margin-top:14px;">
         <div class="container">
-            <span style="margin-left:6px">Prepared By : {{$prepared_by}};{{$jobCard->created_at}}
+            <span style="margin-left:6px">Prepared By : {{$prepared_by}};{{ $prepared_at }}
                 &nbsp;&nbsp;&nbsp;&nbsp; Printed By :{{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
         </div>
         <img src="./img/form/printoutjobcardsi/FooterJobCardSI.png" width="100%" alt="">

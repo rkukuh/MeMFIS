@@ -153,7 +153,7 @@
   </header>
   <footer>
     <div class="container">
-      <span style="margin-left:6px">Prepared By :{{$prepared_by}};{{$jobCard->created_at}}&nbsp;&nbsp;&nbsp;&nbsp; Printed By :{{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
+      <span style="margin-left:6px">Prepared By :{{$prepared_by}};{{ $prepared_at }}&nbsp;&nbsp;&nbsp;&nbsp; Printed By :{{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
     </div>
     <img src="./img/form/printoutjobcardsip/FooterJobCardRoutine.png" width="100%" alt="">
   </footer>

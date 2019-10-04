@@ -435,7 +435,7 @@
                 <tr>
                     <td width="8%">Prepared By</td>
                     <td width="1%">:</td>
-                    <td width="91%">{{ $prepared_by }};{{$jobCard->created_at}} </td>
+                    <td width="91%">{{ $prepared_by }};{{ $prepared_at }} </td>
                 </tr>
             </table>
         </div>

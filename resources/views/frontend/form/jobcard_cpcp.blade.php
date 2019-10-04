@@ -147,7 +147,7 @@
   </header>
   <footer style="margin-top:14px;">
     <div class="container">
-      <span style="margin-left:6px">Prepared By : {{$prepared_by}};{{$jobCard->created_at}}&nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
+      <span style="margin-left:6px">Prepared By : {{$prepared_by}};{{ $prepared_at }}&nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
     </div>
     <img src="./img/form/printoutjobcardcpcp/FooterJobCardRoutine.png" width="100%" alt="" >
   </footer>
@@ -348,11 +348,11 @@
               @endif
             </td>
             <td width="20%" align="right" valign="top">
-              generate
-              {{-- @if()
+              @if($actual_manhours)
+                {{ $actual_manhours }}
               @else
                 -
-              @endif --}}
+              @endif 
             </td>
           </tr>
         </table>
