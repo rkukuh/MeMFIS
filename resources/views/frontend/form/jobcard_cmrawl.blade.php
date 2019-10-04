@@ -153,16 +153,25 @@
                                         -
                                         @endif
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td width="20%">Task No</td>
-                                    <td width="1%">:</td>
-                                    <td width="29%">{{ $jobCard->job}}</td>
                                     <td width="20%">AC/Type</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
                                         @if($jobCard->quotation->quotationable->aircraft->name)
                                         {{$jobCard->quotation->quotationable->aircraft->name}}
+                                        @else
+                                        -
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="20%">Task No</td>
+                                    <td width="1%">:</td>
+                                    <td width="29%">{{ $taskcard->eo_header->number }}</td>
+                                    <td width="20%">A/C Reg</td>
+                                    <td width="1%">:</td>
+                                    <td width="29%">
+                                        @if($jobCard->quotation->quotationable->aircraft_register)
+                                        {{$jobCard->quotation->quotationable->aircraft_register}}
                                         @else
                                         -
                                         @endif
@@ -177,20 +186,6 @@
                                         -
                                         @endif
                                     </td>
-                                    <td width="20%">A/C Reg</td>
-                                    <td width="1%">:</td>
-                                    <td width="29%">
-                                        @if($jobCard->quotation->quotationable->aircraft_register)
-                                        {{$jobCard->quotation->quotationable->aircraft_register}}
-                                        @else
-                                        -
-                                        @endif
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="20%"></td>
-                                    <td width="1%"></td>
-                                    <td width="29%"></td>
                                     <td width="20%">A/C S/N</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
@@ -388,7 +383,7 @@
                 <tr>
                     <td width="4%" valign="top">Helper </td>
                     <td width="1%" valign="top">:</td>
-                    <td width="28%" valign="top"> {{ $helper }} </td>
+                    <td width="28%" valign="top"> {{ $helpers }} </td>
                     <td width="33%" valign="top" align="center">Status : <span>{{ $jobCard->status }}</span></td>
                     <td width="34%" valign="top" align="right">Data Close : <span>10-07-1994</span></td>
                 </tr>

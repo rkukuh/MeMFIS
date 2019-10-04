@@ -384,7 +384,7 @@
           <td width="4%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="28%" valign="top">
-            {{ $helper }}
+            {{ $helpers }}
           </td>
           <td width="33%" valign="top" align="center">Status :
           {{ $jobCard->status }}

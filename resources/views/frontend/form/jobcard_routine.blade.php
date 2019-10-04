@@ -298,7 +298,7 @@
                 Helper
               </div>
               <br>
-              <span><center>{{ $helper }}</center></span> 
+              <span><center>{{ $helpers }}</center></span> 
             </td>
         </tr>
     </table>

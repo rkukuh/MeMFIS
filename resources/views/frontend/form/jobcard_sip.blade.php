@@ -430,7 +430,7 @@
           <td width="3%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="46%" valign="top">
-          {{ $helper }}
+          {{ $helpers }}
          </td>   
           <td width="3%" valign="top">RII </td>
           <td width="1%" valign="top">:</td>
