@@ -159,7 +159,7 @@ class JobCardController extends Controller
         $now = Carbon::now();
         $statuses = Status::ofJobCard()->get();
         $jobcard = JobCard::with('jobcardable','quotation')->where('uuid',$jobCard)->first();
-        $taskcard = json_decode($jobCard->jobcardable->origin_jobcardable);
+        $taskcard = json_decode($jobcard->origin_jobcardable);
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;
         }
@@ -241,7 +241,7 @@ class JobCardController extends Controller
             }
 
             if(isset(User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name;
+                $prepared_by = $jobcard->quotation->quotationable->approvals->first()->conductedBy->full_name;
                 $prepared_at = $jobcard->created_at;
             }else{
                 $prepared_by = "-";
@@ -331,7 +331,7 @@ class JobCardController extends Controller
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
-                        'prepared_at' => $prepared_at,
+                    'prepared_at' => $prepared_at,
                     'rii_status' => $rii_status,
                     'helpers' => $helpers,
                     'now' => $now,
@@ -379,7 +379,7 @@ class JobCardController extends Controller
             if(sizeof($jobcard->helpers) > 0){
                 $helpers = join(',', $jobcard->helpers->pluck('first_name'));
             }else{
-                $helpers = '-'
+                $helpers = '-';
             }
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobcard->progresses->last()->status_id)->first()->name;
@@ -415,9 +415,11 @@ class JobCardController extends Controller
             }
 
             if(isset(User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name;
+                $prepared_by = $jobcard->quotation->quotationable->approvals->first()->conductedBy->full_name;
+                $prepared_at = $jobcard->created_at;
             }else{
-                $prepared_by ="-";
+                $prepared_by = "-";
+                $prepared_at = "-";
             }
 
             if(($jobcard->jobcardable->eo_header->type->code == "ad") or ($jobcard->jobcardable->eo_header->type->code == "sb")) {
@@ -433,7 +435,7 @@ class JobCardController extends Controller
                             'rii_by' => $rii_by,
                             'rii_at' => $rii_at,
                             'prepared_by' => $prepared_by,
-                        'prepared_at' => $prepared_at,
+                            'prepared_at' => $prepared_at,
                             'rii_status' => $rii_status,
                             'helpers' => $helpers,
                             'now' => $now,
@@ -455,7 +457,7 @@ class JobCardController extends Controller
                             'rii_by' => $rii_by,
                             'rii_at' => $rii_at,
                             'prepared_by' => $prepared_by,
-                        'prepared_at' => $prepared_at,
+                            'prepared_at' => $prepared_at,
                             'rii_status' => $rii_status,
                             'helpers' => $helpers,
                             'now' => $now,

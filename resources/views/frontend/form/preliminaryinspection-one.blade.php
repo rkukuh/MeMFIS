@@ -322,7 +322,7 @@
                       </div>
                       <span style="position:absolute;top:60px;left:0">Number of discrepencies {{ sizeof($jobCard->defectcards) }} item(s)</span>
                   </td>
-                  <td width="50%" height="60" valign="top" style="position:relative;">Inspection performed by : {{ $jobCard->progresses->first()->progressedBy->first_name }} </td>
+                  <td width="50%" height="60" valign="top" style="position:relative;">Inspection performed by : {{ $jobCard->progresses->first()->progressedBy->full_name }} </td>
               </tr>
           </table>
       </div>
