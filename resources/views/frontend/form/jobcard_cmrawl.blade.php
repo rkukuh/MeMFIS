@@ -434,9 +434,9 @@
             </div>
             <table width="100%" style="margin-top: 12px;">
                 <tr>
-                    <td width="8%">Issued By</td>
+                    <td width="8%">Prepared By</td>
                     <td width="1%">:</td>
-                    <td width="91%">Name PPC</td>
+                    <td width="91%">{{ $jobCard->quotation->quotationable->audits->first()->user->name }};{{$jobCard->created_at}} </td>
                 </tr>
             </table>
         </div>

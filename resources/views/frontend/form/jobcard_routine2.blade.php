@@ -148,7 +148,7 @@
   </header>
   <footer style="margin-top:14px;">
     <div class="container">
-      <span style="margin-left:6px">Issued By : Name PPC;Timestamp &nbsp;&nbsp;&nbsp;&nbsp; Printed By : Name;Timestamp</span>
+      <span style="margin-left:6px">Prepared By : {{ $jobCard->quotation->quotationable->audits->first()->user->name }};{{$jobCard->created_at}} &nbsp;&nbsp;&nbsp;&nbsp; Printed By : Name;Timestamp</span>
     </div>
     <img src="./img/form/printoutjobcardroutine/FooterJobCardRoutine.png" width="100%" alt="" >
   </footer>
