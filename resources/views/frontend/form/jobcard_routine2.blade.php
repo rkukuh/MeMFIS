@@ -281,7 +281,9 @@
         <tr>
           <td colspan="2" height="55" valign="top">
               Accomplishment Record : <br><br>
-              <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, iusto esse similique quod ducimus cupiditate voluptate voluptatem reprehenderit molestias facere earum quidem non harum dolore expedita at illo dolores odio!</span>
+              <span>
+                {{ $jobCard->progresses->last()->reason_text }}
+            </span>
           </td>
         </tr>
         <tr style="position: relative;">
@@ -292,19 +294,33 @@
             <center>
               <div style="margin-left:100px;margin-top:12px;">
                 <ul>
-                  <li>
-                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
-                  </li>
-                  <li style="margin-left:12px;">
-                    <img src="./img/check.png" alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
-                  </li>
+                    <li>
+                        <img @if(sizeof($jobCard->defectcards) <> 0)
+                            src="./img/check.png"
+                            @else
+                            src="./img/check-box-empty.png"
+                            @endif
+                            alt="" width="10"> 
+                            <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                    </li>
+                    <li style="margin-left:12px;">
+                        <img @if(sizeof($jobCard->defectcards) == 0)
+                        src="./img/check.png"
+                        @else
+                        src="./img/check-box-empty.png"
+                        @endif
+                        alt="" width="11"> 
+                        <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                    </li>
                 </ul>
               </div>
             </center>
           </td>
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime dolorum esse fugiat ex illo ab quae ducimus et.
+              <span>
+              @if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif
+              </span>
           </td>
         </tr>
       </table>
@@ -313,7 +329,7 @@
           <td width="4%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="28%" valign="top">Yemimul</td>
-          <td width="33%" valign="top" align="center">Status : <span>Single</span></td>
+          <td width="33%" valign="top" align="center">Status : <span>{{ $jobCard->status }}</span></td>
           <td width="34%" valign="top" align="right">Data Close : <span>10-07-1994</span></td>
         </tr>
       </table>
@@ -342,9 +358,13 @@
               <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
               <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
             </td>
-            <td width="34%" height="46%" align="center" valign="bottom">
-              <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
-              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
+            <td width="34%" height="100" align="center" valign="bottom"
+                @if($rii_status==0) style="background:grey" @endif>
+                @if($rii_status==1)
+                <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
+                <div style="width:100%;height:20px;text-align:left;padding-left:5px;">
+                    Date : <span>{{$rii_at}}</span></div>
+                @endif
             </td>
           </tr>
         </table>

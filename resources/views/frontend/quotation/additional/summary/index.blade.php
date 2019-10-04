@@ -126,9 +126,9 @@
                     </div>
                     <div class="col-sm-3 col-md-3 col-lg-3">
                         @component('frontend.common.input.number')
-                            @slot('id', 'charge')
-                            @slot('name', 'charge')
-                            @slot('class', 'charge')
+                            @slot('id', 'charges')
+                            @slot('name', 'charges')
+                            @slot('class', 'charges')
                             @slot('value' , 0)
                             @slot('min', 0)
                         @endcomponent
@@ -146,9 +146,7 @@
                 </div>
             </div>
     </div>
-    
-    <div class="form-group m-form__group row @if(isset($quotation) && $quotation->currency->symbol !== "Rp") hidden @endif" >
-        
+    <div class="form-group m-form__group row @if(isset($quotation) && $quotation->currency->symbol == "Rp") hidden @endif" >
         <div class="col-sm-5 col-md-5 col-lg-5">
         </div>
         <div class="col-sm-2 col-md-2 col-lg-2">

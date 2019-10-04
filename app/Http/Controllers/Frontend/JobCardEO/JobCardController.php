@@ -135,7 +135,6 @@ class JobCardController extends Controller
      */
     public function print($jobCard)
     {
-
         $statuses = Status::ofJobCard()->get();
         $jobcard = JobCard::where('uuid',$jobCard)->first();
         foreach($jobcard->helpers as $helper){
@@ -178,7 +177,7 @@ class JobCardController extends Controller
             }
         }
         $manhours_break = $manhours_break/3600;
-        $actual_manhours =number_format($manhours-$manhours_break, 2);
+        $actual_manhours = number_format($manhours-$manhours_break, 2);
 
 
         $jobCard = JobCard::with('taskcard','quotation')->where('uuid',$jobCard)->first();
@@ -464,6 +463,10 @@ class JobCardController extends Controller
                 $prepared_by ="-";
             }
 
+            $eo_additionals = [];
+
+            dd($jobCard);
+            
             $pdf = \PDF::loadView('frontend/form/jobcard_eo',[
                     'jobCard' => $jobCard,
                     'username' => $username,
@@ -478,7 +481,6 @@ class JobCardController extends Controller
                     'prepared_by' => $prepared_by,
                     'rii_status' => $rii_status,
                     'helpers' => $helpers,
-                    'actual_manhours'=> $actual_manhours
                     ]);
             return $pdf->stream();
         }

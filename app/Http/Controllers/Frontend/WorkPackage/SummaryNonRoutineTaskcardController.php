@@ -285,6 +285,8 @@ class SummaryNonRoutineTaskcardController extends Controller
             ->orWhere('code','ea')->orWhere('code','eo');
         })->whereNull('eo_instructions.deleted_at')->get();
 
+        $taskcards = $taskcards->merge($workPackage->taskcards->load('type')->where('type.code', 'si'));
+        $taskcards = $taskcards->merge($workPackage->taskcards->load('type')->where('type.code', 'preliminary'));
         foreach($taskcards as $eo_instruction){
             if (sizeof($eo_instruction->skills) > 1) {
                 $eri++;
@@ -328,6 +330,8 @@ class SummaryNonRoutineTaskcardController extends Controller
         })->whereNull('eo_instructions.deleted_at')->count();
 
         $si  = $workPackage->taskcards->load('type')->where('type.code', 'si')->count('uuid');
+        
+        $preliminary = $workPackage->taskcards->load('type')->where('type.code', 'preliminary')->count('uuid');
 
         $otr = array_count_values($skills);
         $otr["eri"] = $eri;
@@ -343,6 +347,7 @@ class SummaryNonRoutineTaskcardController extends Controller
             'si' => $si,
             'ea' => $ea,
             'eo' => $eo,
+            'preliminary' => $preliminary,
         ]);
     }
 

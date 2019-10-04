@@ -398,7 +398,7 @@ class QuotationAdditionalController extends Controller
             }
         }
 
-        $pdf = \PDF::loadView('frontend/form/quotation',[
+        $pdf = \PDF::loadView('frontend/form/additional_quotation_1',[
                 'username' => $username,
                 'quotation' => $quotation,
                 'workpackages' => $workpackages,

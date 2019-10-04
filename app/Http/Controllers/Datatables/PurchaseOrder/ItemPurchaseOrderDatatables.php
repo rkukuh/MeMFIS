@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Datatables\PurchaseOrder;
 
 use App\Models\PurchaseOrder;
+use App\Models\Unit;
 use App\Models\ListUtil;
 use Illuminate\Http\Order;
 use App\Http\Controllers\Controller;
@@ -16,7 +17,13 @@ class ItemPurchaseOrderDatatables extends Controller
      */
     public function index(PurchaseOrder $purchaseOrder)
     {
-        $data = $alldata = json_decode($purchaseOrder->items);
+        $purchaseOrders = $purchaseOrder->items;
+
+        foreach($purchaseOrders as $purchaseOrder){
+            $purchaseOrder->unit_name .= Unit::find($purchaseOrder->pivot->unit_id)->name;
+        }
+
+        $data = $alldata = json_decode($purchaseOrders);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

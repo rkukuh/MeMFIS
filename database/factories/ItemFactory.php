@@ -4,7 +4,6 @@ use App\Models\Unit;
 use App\Models\Item;
 use Spatie\Tags\Tag;
 use App\Models\Price;
-use App\Models\Journal;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use Faker\Generator as Faker;
@@ -61,12 +60,6 @@ $factory->afterCreating(Item::class, function ($item, $faker) {
         for ($i = 1; $i <= rand(1, 5); $i++) {
             $item->interchanges()->save(Item::get()->random());
         }
-    }
-
-    // Journal
-
-    if ($faker->boolean) {
-        $item->journal()->associate(Journal::get()->random())->save();
     }
 
     // Price

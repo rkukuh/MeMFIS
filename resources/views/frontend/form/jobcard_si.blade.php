@@ -353,12 +353,7 @@
                     <td colspan="2" height="55" valign="top">
                         Accomplishment Record : <br><br>
                         <span>
-                            {{$jobCard->progresses->last()->reason_text}}
-                            {{-- @if()
-                {{}}
-                            @else
-                            -
-                            @endif --}}
+                            {{ $jobCard->progresses->last()->reason_text }}
                         </span>
                     </td>
                 </tr>
@@ -392,8 +387,8 @@
                                             @else
                                             src="./img/check-box-empty.png"
                                             @endif
-                                            alt="" width="10"> <span
-                                                style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                                            alt="" width="10"> 
+                                            <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                                     </li>
                                     <li style="margin-left:12px;">
                                         <img @if(sizeof($jobCard->defectcards) == 0)
@@ -401,8 +396,8 @@
                                         @else
                                         src="./img/check-box-empty.png"
                                         @endif
-                                        alt="" width="11"> <span
-                                            style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                                        alt="" width="11"> 
+                                        <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
                                     </li>
                                 </ul>
                             </div>
@@ -412,9 +407,7 @@
                     <td width="50%" height="35" valign="center">
                         Transfer to Defect Card No : <br><br>
                         <span>
-                            @if(sizeof($jobCard->defectcards) <> 0)
-                                {{$jobCard->defectcards->first()->code}}
-                                @endif
+                        @if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif
                         </span>
                     </td>
                 </tr>

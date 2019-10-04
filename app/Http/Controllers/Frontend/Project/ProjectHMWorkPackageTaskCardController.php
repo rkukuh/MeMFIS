@@ -64,7 +64,7 @@ class ProjectHMWorkPackageTaskCardController extends Controller
             if($exists){
                 return response()->json(['title' => "Danger"]);
             }else{
-                $workpackage->taskcards()->attach($taskcard->id);    
+                $workpackage->taskcards()->attach($taskcard->id);
             }
         }
 
@@ -77,6 +77,7 @@ class ProjectHMWorkPackageTaskCardController extends Controller
         }else{
             $project_wokpackage->taskcards()->create([
                 'taskcard_id' => $taskcard->id,
+                'is_rii' => TaskCard::find($taskcard->id)->is_rii,
             ]);
 
             return response()->json($project_wokpackage);

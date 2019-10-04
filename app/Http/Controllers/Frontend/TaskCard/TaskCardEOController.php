@@ -73,55 +73,38 @@ class TaskCardEOController extends Controller
     public function store(TaskCardEOStore $request)
     {
         $this->decoder($request);
-
-        $additionals["internal_number"] = $request->additionals->internal_number;
-        $additionals["document_library"] = $request->document_library;
-        $request->merge(['additionals' => json_encode($additionals, true)]);
-
-        if ($taskcard = TaskCard::create($request->all())) {
-            $taskcard->aircrafts()->attach($request->applicability_airplane);
-
-            if(is_array($request->threshold_type)){
-                for ($i=0; $i < sizeof($request->threshold_type) ; $i++) {
-                    if($request->threshold_type[$i] !== "Select Threshold"){
-                        if($request->threshold_amount[$i] == ''){
-                            $request->threshold_amount[$i] = null;
-                        }
-                        $taskcard->thresholds()->save(new Threshold([
-                            'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
-                            'amount' => $request->threshold_amount[$i],
-                        ]));
-                    }
+        $checker = [];
+        // get all the taskcard with the same number
+        $taskcards = TaskCard::where('number', $request->number)->get();
+        if(sizeof($taskcards) > 0){
+            // to check all internal number every taskcard
+            foreach($taskcards as $taskcard){
+                $taskcard->additionals = json_decode($taskcard->additionals);
+                // check if the internal number are the same 
+                if($request->additionals->internal_number == $taskcard->additionals->internal_number){
+                array_push($checker, true);
+                }else{
+                array_push($checker, false);
                 }
-            }
-    
-            if(is_array($request->repeat_type)){
-                for ($i=0; $i < sizeof($request->repeat_type) ; $i++) {
-                    if($request->repeat_type[$i] !== "Select Repeat"){
-                        if($request->repeat_amount[$i] == ''){
-                            $request->repeat_amount[$i] = null;
-                        }
-                        $taskcard->repeats()->save(new Repeat([
-                            'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
-                            'amount' => $request->repeat_amount[$i],
-                        ]));
-                    }
-                }
-            }
+            }  
+        }else{
+            $taskcard = $this->createTaskcard($request);
 
-            if ($request->hasFile('fileInput')) {
-                $data = $request->input('image');
-                $photo = $request->file('fileInput')->getClientOriginalName();
-                $destination = 'master/taskcard/non-routine/';
-                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
-            }
-
-            return response()->json($taskcard);
+            return response()->json($taskcard->original);
         }
 
-        // TODO: Return error message as JSON
-        return false;
+        if(in_array(true, $checker)){
+            $error_message = array(
+                'message' => "a taskcard with same number and company number already exists",
+                'title' => "Taskcard already exists!",
+                'alert-type' => "error"
+            );
+            return response()->json(['error' => [$error_message]], '403');
+        }else{
+            $taskcard = $this->createTaskcard($request);
 
+            return response()->json($taskcard->original);
+        }
     }
 
     /**
@@ -252,5 +235,53 @@ class TaskCardEOController extends Controller
         $req->applicability_airplane = json_decode($req->applicability_airplane);
 
         return $req;
+    }
+
+    public function createTaskcard($request){
+        $additionals["internal_number"] = $request->additionals->internal_number;
+        $additionals["document_library"] = $request->document_library;
+        $request->merge(['additionals' => json_encode($additionals, true)]);
+
+        if ($taskcard = TaskCard::create($request->all())) {
+            $taskcard->aircrafts()->attach($request->applicability_airplane);
+
+            if(is_array($request->threshold_type)){
+                for ($i=0; $i < sizeof($request->threshold_type) ; $i++) {
+                    if($request->threshold_type[$i] !== "Select Threshold"){
+                        if($request->threshold_amount[$i] == ''){
+                            $request->threshold_amount[$i] = null;
+                        }
+                        $taskcard->thresholds()->save(new Threshold([
+                            'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
+                            'amount' => $request->threshold_amount[$i],
+                        ]));
+                    }
+                }
+            }
+    
+            if(is_array($request->repeat_type)){
+                for ($i=0; $i < sizeof($request->repeat_type) ; $i++) {
+                    if($request->repeat_type[$i] !== "Select Repeat"){
+                        if($request->repeat_amount[$i] == ''){
+                            $request->repeat_amount[$i] = null;
+                        }
+                        $taskcard->repeats()->save(new Repeat([
+                            'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
+                            'amount' => $request->repeat_amount[$i],
+                        ]));
+                    }
+                }
+            }
+
+            if ($request->hasFile('fileInput')) {
+                $data = $request->input('image');
+                $photo = $request->file('fileInput')->getClientOriginalName();
+                $destination = 'master/taskcard/non-routine/';
+                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+            }
+
+            return response()->json($taskcard);
+        }
+
     }
 }

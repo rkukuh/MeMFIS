@@ -101,7 +101,7 @@ var DatatableAutoColumnHideDemo = function () {
           template: function (t, e, i) {
             if(t.discount_value == null && t.discount_type == null){
                   return (
-                      '<button data-toggle="modal" data-target="#discount_htcrr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
+                      '<button data-toggle="modal" data-target="#discount_additional" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount" title="Tool" data-uuid=' +
                       t.uuid +
                       '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                     );
@@ -110,13 +110,13 @@ var DatatableAutoColumnHideDemo = function () {
                   if(t.discount_type ==  'amount'){
                     if(currency.id == 1){
                       return (
-                        IDRformatter.format(t.discount_value)+'<button data-toggle="modal" data-target="#discount_htcrr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount_htcrr" title="Tool" data-uuid=' +
+                        IDRformatter.format(t.discount_value)+'<button data-toggle="modal" data-target="#discount_additional" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount_additional" title="Tool" data-uuid=' +
                         t.uuid +
                         '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                       );
                     }else{
                       return (
-                        ForeignFormatter.format(t.discount_value)+'<button data-toggle="modal" data-target="#discount_htcrr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount_htcrr" title="Tool" data-uuid=' +
+                        ForeignFormatter.format(t.discount_value)+'<button data-toggle="modal" data-target="#discount_additional" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount_additional" title="Tool" data-uuid=' +
                         t.uuid +
                         '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                       );
@@ -125,7 +125,7 @@ var DatatableAutoColumnHideDemo = function () {
                   }
                   else if(t.discount_type == 'percentage'){
                       return (
-                          t.discount_value+'%'+'<button data-toggle="modal" data-target="#discount_htcrr" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount_htcrr" title="Tool" data-uuid=' +
+                          t.discount_value+'%'+'<button data-toggle="modal" data-target="#discount_additional" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill discount_additional" title="Tool" data-uuid=' +
                           t.uuid +
                           '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                       );
@@ -177,7 +177,7 @@ var DatatableAutoColumnHideDemo = function () {
                 $("#grand_total_rupiah").html(IDRformatter.format(totalRupiah));
                 $("#grand_total_rupiah").attr("value", totalRupiah);
               }
-              // calculate_total();
+              calculate_total();
               
               if(currency.id == 1){
               return (

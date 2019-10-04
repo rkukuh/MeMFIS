@@ -11,7 +11,6 @@ use App\Models\Access;
 use App\Models\Project;
 use App\Models\License;
 use App\Models\Storage;
-use App\Models\Journal;
 use App\Models\Customer;
 use App\Models\Vendor;
 use App\Models\Aircraft;

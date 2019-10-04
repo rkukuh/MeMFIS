@@ -74,7 +74,7 @@ let PurchaseRequest = {
                     title: "Request Qty"
                 },
                 {
-                    field: "pivot.unit_id",
+                    field: "unit_name",
                     title: "Unit"
                 },
                 {

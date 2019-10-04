@@ -7,7 +7,6 @@ use App\Models\Email;
 use App\Models\Level;
 use App\Models\Address;
 use App\Models\Website;
-use App\Models\Journal;
 use App\Models\Document;
 use App\Models\Customer;
 use App\Models\BankAccount;
@@ -81,12 +80,6 @@ $factory->afterCreating(Customer::class, function ($customer, $faker) {
 
     if ($faker->boolean) {
         $customer->faxes()->saveMany(factory(Fax::class, rand(1, 2))->make());
-    }
-
-    // Journal
-
-    if ($faker->boolean) {
-        $customer->journal()->associate(Journal::get()->random())->save();
     }
 
     // Level

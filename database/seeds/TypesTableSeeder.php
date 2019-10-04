@@ -33,7 +33,6 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfJobCardCloseReason::class);
         $this->call(TypesOfJobCardLogBook::class);
         $this->call(TypesOfJobCardPauseReason::class);
-        $this->call(TypesOfJournal::class);
         $this->call(TypesOfMaintenanceCycle::class);
         $this->call(TypesOfPhone::class);
         $this->call(TypesOfProject::class);

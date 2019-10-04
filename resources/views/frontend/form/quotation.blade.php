@@ -416,9 +416,8 @@
                     <td width="50%" align="center">
                         @if(isset($quotation->approvals->last()->note))
                         <b> {{ $quotation->approvals->last()->note }} </b><br>
-                        @else
-                        <b> {{ $quotation->quotationable->customer->name }} </b><br>
                         @endif
+                        <b> {{ $quotation->quotationable->customer->name }} </b><br>
                     </td>
                 </tr>
             </table>

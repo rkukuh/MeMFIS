@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.journal.index') }}" class="m-nav__link">
+                        <a href="#" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Job Card
                             </span>
@@ -65,7 +65,18 @@
                                                     Task Card No
                                                 </td>
                                                 <td width="70%" style="text-align:center">
+                                                    @if (strpos($jobcard->number,'JBSC') !== FALSE )
                                                     {{$jobcard->jobcardable->number}}
+
+                                                    @elseif(strpos($jobcard->number,'JSIP') !== FALSE)
+                                                    {{$jobcard->jobcardable->number}}
+
+                                                    @elseif(strpos($jobcard->number,'JCPC') !== FALSE)
+                                                    {{$jobcard->jobcardable->number}}
+
+                                                    @else
+                                                    {{$jobcard->jobcardable->eo_header->number}}
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr>
@@ -119,6 +130,8 @@
                                                 <td width="70%" style="text-align:center">
                                                 @if(isset($jobcard->jobcardable->task))
                                                     {{$jobcard->jobcardable->task->name}}
+                                                @else
+                                                -
                                                 @endif
                                                 </td>
                                             </tr>
@@ -177,7 +190,11 @@
                                                     Reference
                                                 </td>
                                                 <td width="70%" style="text-align:center">
+                                                    @if(isset($jobcard->jobcardable->reference))
                                                     {{$jobcard->jobcardable->reference}}
+                                                    @else
+                                                    -
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr>
@@ -185,7 +202,18 @@
                                                     Title
                                                 </td>
                                                 <td width="70%" style="text-align:center">
+                                                    @if (strpos($jobcard->number,'JBSC') !== FALSE )
                                                     {{$jobcard->jobcardable->title}}
+
+                                                    @elseif(strpos($jobcard->number,'JSIP') !== FALSE)
+                                                    {{$jobcard->jobcardable->title}}
+
+                                                    @elseif(strpos($jobcard->number,'JCPC') !== FALSE)
+                                                    {{$jobcard->jobcardable->title}}
+
+                                                    @else
+                                                    {{$jobcard->jobcardable->eo_header['title']}}
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr>
@@ -193,7 +221,7 @@
                                                     Description
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{$jobcard->jobcardable->Description}}
+                                                    {{$jobcard->jobcardable->description}}
                                                 </td>
                                             </tr>
                                             @if($helper_quantity != 0)
@@ -268,13 +296,13 @@
                                 <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                     <div class="flex">
                                         <div class="action-buttons">
-                                     
+
                                             @component('frontend.common.buttons.print')
                                                 @slot('id', 'ppc-print')
                                                 @slot('name', 'ppc-print')
                                                 @slot('href', route('frontend.jobcard.print',['uuid' => $jobcard->uuid]) )
                                             @endcomponent
-                                      
+
                                         </div>
                                     </div>
                                 </div>
@@ -284,7 +312,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" hidden>
             <div class="col-lg-6">
                 <div class="m-portlet  m-portlet--full-height ">
                     <div class="m-portlet__head">
@@ -476,7 +504,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" hidden>
             <div class="col-lg-6">
                 <div class="m-portlet  m-portlet--full-height ">
                     <div class="m-portlet__head">

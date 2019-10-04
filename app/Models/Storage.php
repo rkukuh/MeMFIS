@@ -11,7 +11,6 @@ class Storage extends MemfisModel
         'name',
         'is_active',
         'description',
-        'account_code',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/

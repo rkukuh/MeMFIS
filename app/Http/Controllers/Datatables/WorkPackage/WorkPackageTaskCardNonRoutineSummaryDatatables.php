@@ -17,8 +17,9 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
     public function nonRoutineMaterial(WorkPackage $workPackage)
     {
         $items =[];
+
         foreach($workPackage->taskcards as $taskcard){
-            if($taskcard->type->of == 'taskcard-type-non-routine'){
+            if($taskcard->type->code == 'taskcard-type-non-routine'){
                 foreach($taskcard->materials as $item){
                     $item->tackcard_number .= $taskcard->eo_header->number;
                     $item->unit_name .= $item->unit->name;
@@ -26,7 +27,7 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
                 }
             }
         }
-
+       
         foreach($workPackage->eo_instructions as $taskcard){
             foreach($taskcard->materials as $item){
                 $item->tackcard_number .= $taskcard->eo_header->number;
@@ -134,7 +135,7 @@ class WorkPackageTaskCardNonRoutineSummaryDatatables extends Controller
     {
         $items =[];
         foreach($workPackage->taskcards as $taskcard){
-            if($taskcard->type->of == 'taskcard-type-non-routine'){
+            if($taskcard->type->code == 'taskcard-type-non-routine'){
                 foreach($taskcard->tools as $item){
                     $item->tackcard_number .= $taskcard->eo_header->number;
                     $item->unit_name .= $item->unit->name;
