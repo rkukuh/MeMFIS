@@ -60,18 +60,6 @@ Route::group([
         Route::view('/material-request-jobcard/edit', 'frontend.material-request-jobcard.edit')->name('material-request-jobcard.edit');
         Route::view('/material-request-jobcard/show', 'frontend.material-request-jobcard.show')->name('material-request-jobcard.show');
 
-        // Route::view('/material-request-jobcard/hm/create', 'frontend.material-request-jobcard.hm.create')->name('material-request-jobcard.hm.create');
-        // Route::view('/material-request-jobcard/hm/edit', 'frontend.material-request-jobcard.hm.edit')->name('material-request-jobcard.hm.edit');
-        // Route::view('/material-request-jobcard/hm/show', 'frontend.material-request-jobcard.hm.show')->name('material-request-jobcard.hm.show');
-
-        // Route::view('/material-request-jobcard/defect-card/create', 'frontend.material-request-jobcard.defect-card.create')->name('material-request-jobcard.defect-card.create');
-        // Route::view('/material-request-jobcard/defect-card/edit', 'frontend.material-request-jobcard.defect-card.edit')->name('material-request-jobcard.defect-card.edit');
-        // Route::view('/material-request-jobcard/defect-card/show', 'frontend.material-request-jobcard.defect-card.show')->name('material-request-jobcard.defect-card.show');
-
-        // Route::view('/material-request-jobcard/workshop/create', 'frontend.material-request-jobcard.workshop.create')->name('material-request-jobcard.workshop.create');
-        // Route::view('/material-request-jobcard/workshop/edit', 'frontend.material-request-jobcard.workshop.edit')->name('material-request-jobcard.workshop.edit');
-        // Route::view('/material-request-jobcard/workshop/show', 'frontend.material-request-jobcard.workshop.show')->name('material-request-jobcard.workshop.show');
-
         /** Tool Request */
 
         Route::view('/tool-request-jobcard', 'frontend.tool-request-jobcard.index')->name('tool-request-jobcard.index');
@@ -79,18 +67,6 @@ Route::group([
         Route::view('/tool-request-jobcard/create', 'frontend.tool-request-jobcard.create')->name('tool-request-jobcard.create');
         Route::view('/tool-request-jobcard/edit', 'frontend.tool-request-jobcard.edit')->name('tool-request-jobcard.edit');
         Route::view('/tool-request-jobcard/show', 'frontend.tool-request-jobcard.show')->name('tool-request-jobcard.show');
-
-        // Route::view('/tool-request-jobcard/hm/create', 'frontend.tool-request-jobcard.hm.create')->name('tool-request-jobcard.hm.create');
-        // Route::view('/tool-request-jobcard/hm/edit', 'frontend.tool-request-jobcard.hm.edit')->name('tool-request-jobcard.hm.edit');
-        // Route::view('/tool-request-jobcard/hm/show', 'frontend.tool-request-jobcard.hm.show')->name('tool-request-jobcard.hm.show');
-
-        // Route::view('/tool-request-jobcard/defect-card/create', 'frontend.tool-request-jobcard.defect-card.create')->name('tool-request-jobcard.defect-card.create');
-        // Route::view('/tool-request-jobcard/defect-card/edit', 'frontend.tool-request-jobcard.defect-card.edit')->name('tool-request-jobcard.defect-card.edit');
-        // Route::view('/tool-request-jobcard/defect-card/show', 'frontend.tool-request-jobcard.defect-card.show')->name('tool-request-jobcard.defect-card.show');
-
-        // Route::view('/tool-request-jobcard/workshop/create', 'frontend.tool-request-jobcard.workshop.create')->name('tool-request-jobcard.workshop.create');
-        // Route::view('/tool-request-jobcard/workshop/edit', 'frontend.tool-request-jobcard.workshop.edit')->name('tool-request-jobcard.workshop.edit');
-        // Route::view('/tool-request-jobcard/workshop/show', 'frontend.tool-request-jobcard.workshop.show')->name('tool-request-jobcard.workshop.show');
 
         /** Inventory In */
 

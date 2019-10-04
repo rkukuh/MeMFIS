@@ -89,5 +89,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/tool-request/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/tool-request-jobcard/index.js')}}"></script>
 @endpush
