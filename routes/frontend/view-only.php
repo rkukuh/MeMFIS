@@ -105,10 +105,10 @@ Route::group([
 
         /** Material Request */
 
-        Route::view('/material-request', 'frontend.material-request.index')->name('material-request.index');
-        Route::view('/material-request/create', 'frontend.material-request.create')->name('material-request.create');
-        Route::view('/material-request/edit', 'frontend.material-request.edit')->name('material-request.edit');
-        Route::view('/material-request/show', 'frontend.material-request.show')->name('material-request.show');
+        Route::view('/material-transfer', 'frontend.material-transfer.index')->name('material-transfer.index');
+        Route::view('/material-transfer/create', 'frontend.material-transfer.create')->name('material-transfer.create');
+        Route::view('/material-transfer/edit', 'frontend.material-transfer.edit')->name('material-transfer.edit');
+        Route::view('/material-transfer/show', 'frontend.material-transfer.show')->name('material-transfer.show');
 
         /** GSE-Tool Returned */
 
