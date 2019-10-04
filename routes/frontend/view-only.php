@@ -103,6 +103,13 @@ Route::group([
         Route::view('/inventory-out/material/edit', 'frontend.inventory-out.material.edit')->name('inventory-out-material.edit');
         Route::view('/inventory-out/material/show', 'frontend.inventory-out.material.show')->name('inventory-out-material.show');
 
+        /** Material Request */
+
+        Route::view('/material-request', 'frontend.material-request.index')->name('material-request.index');
+        Route::view('/material-request/create', 'frontend.material-request.create')->name('material-request.create');
+        Route::view('/material-request/edit', 'frontend.material-request.edit')->name('material-request.edit');
+        Route::view('/material-request/show', 'frontend.material-request.show')->name('material-request.show');
+
         /** GSE-Tool Returned */
 
         Route::view('/gse-tool-returned', 'frontend.gse-tool-returned.index')->name('gse-tool-returned.index');
