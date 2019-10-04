@@ -168,7 +168,7 @@
                                     <input type="checkbox"> NO
                                 </form>
                             </td>
-                            <td colspan="2">697-769-9</td>
+                            <td colspan="2">@if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif</td>
                         </tr>
                         </tr>
                         <tr class="border">

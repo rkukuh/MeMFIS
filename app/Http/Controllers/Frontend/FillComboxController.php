@@ -405,12 +405,14 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function itemUnits(Item $item)
+    public function itemUnits($item)
     {
-        $units = $item->units;
-        $units->push($item->unit);
+        $item = Item::find($item);
+        $unit = $item->unit()->pluck('name', 'id');
+        $units = $item->units()->pluck('name', 'unit_id');
+        $uom = $unit->toArray() + $units->toArray();
        
-        return json_encode($units);
+        return json_encode($uom);
     }
 
     /**

@@ -19,6 +19,7 @@ class CreateFefoOutTable extends Migration
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('storage_id');
             $table->unsignedBigInteger('fefo_in_id');
+            $table->timestamp('fefo_out_at');
             $table->double('quantity');
             $table->string('serial_no')->nullable();
             // refno inv out tapi kedepan bisa banyak

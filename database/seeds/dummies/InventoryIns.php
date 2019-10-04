@@ -12,6 +12,6 @@ class InventoryIns extends Seeder
      */
     public function run()
     {
-        //
+        factory(InventoryIn::class, config('memfis.dummies.inventory_ins'))->create();
     }
 }

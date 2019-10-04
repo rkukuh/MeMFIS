@@ -18,6 +18,7 @@ class CreateInventoryinItemTable extends Migration
             $table->unsignedBigInteger('inventoryin_id');
             $table->unsignedBigInteger('item_id');
             $table->double('quantity');
+            $table->string('serial_no');
             $table->string('note')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -39,6 +39,19 @@ class GoodsReceived extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or one inventory in.
+     *
+     * This function will get all TaskCard's quotations.
+     * See: Inventory's inventory() method for the inverse
+     *
+     * @return mixed
+     */
+    public function inventoryin()
+    {
+        return $this->morphOne(InventoryIn::class, 'inventoryinable');
+    }
+
+    /**
      * Many-to-Many: A GRN may have zero or many item.
      *
      * This function will retrieve all the items of a GRN.
