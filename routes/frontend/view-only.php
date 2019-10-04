@@ -110,6 +110,13 @@ Route::group([
         Route::view('/material-transfer/edit', 'frontend.material-transfer.edit')->name('material-transfer.edit');
         Route::view('/material-transfer/show', 'frontend.material-transfer.show')->name('material-transfer.show');
 
+        /** Category Item */
+
+        Route::view('/category-item', 'frontend.category-item.index')->name('category-item.index');
+        Route::view('/category-item/create', 'frontend.category-item.create')->name('category-item.create');
+        Route::view('/category-item/edit', 'frontend.category-item.edit')->name('category-item.edit');
+        Route::view('/category-item/show', 'frontend.category-item.show')->name('category-item.show');
+
         /** GSE-Tool Returned */
 
         Route::view('/gse-tool-returned', 'frontend.gse-tool-returned.index')->name('gse-tool-returned.index');
