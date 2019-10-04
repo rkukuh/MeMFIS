@@ -68,7 +68,7 @@
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                         @component('frontend.common.buttons.create')
                                             @slot('text', 'Tool Request')
-                                            @slot('href', route('frontend.tool-request-jobcard.hm.create') )
+                                            @slot('href', route('frontend.tool-request-jobcard.create') )
                                         @endcomponent
 
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
