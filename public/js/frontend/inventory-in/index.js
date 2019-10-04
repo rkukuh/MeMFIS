@@ -48,22 +48,33 @@ let InventoryIn = {
             },
             columns: [
                 {
-                    field: 'requested_at',
+                    field: '#',
+                    title: 'No',
+                    width:'40',
+                    sortable: 'asc',
+                    filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {   
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
+                },
+                {
+                    field: '',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'customer.name',
+                    field: '',
                     title: 'Inventory In No.',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'number',
-                    title: 'Ref No.',
+                    field: '',
+                    title: 'Ref Doc',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
@@ -72,42 +83,32 @@ let InventoryIn = {
                     }
                 },
                 {
-                    field: 'project.no_wo',
-                    title: 'Warehouse Location',
+                    field: '',
+                    title: 'Storage',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'project.code',
-                    title: 'Description',
+                    field: '',
+                    title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'description',
-                    title: 'Returned By',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        if (t.description) {
-                            data = strtrunc(t.description, 50);
-                            return (
-                                '<p>' + data + '</p>'
-                            );
-                        }
-
-                        return ''
-                    }
-
-                },
-                {
-                    field: 'created_by',
+                    field: '',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
+                    width: 150
+                },
+                {
+                    field: '',
+                    title: 'Returned By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
                 },
                 {
                     field: '',

@@ -405,12 +405,26 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function itemUnits(Item $item)
+    public function itemUnits($item)
     {
-        $units = $item->units;
-        $units->push($item->unit);
-       
-        return json_encode($units);
+        $item = Item::find($item);
+        $unit = $item->unit()->pluck('name', 'id');
+        $units = $item->units()->pluck('name', 'unit_id');
+        $uom = $unit->toArray() + $units->toArray();
+
+        return json_encode($uom);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function iterchange(Item $item)
+    {
+        $interchange = $item->interchanges()->pluck('name', 'uuid');
+
+        return json_encode($interchange);
     }
 
     /**

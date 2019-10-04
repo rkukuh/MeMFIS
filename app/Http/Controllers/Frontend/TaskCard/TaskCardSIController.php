@@ -73,6 +73,7 @@ class TaskCardSIController extends Controller
                 }
             }  
         }else{
+            
             $taskcard = $this->createTaskcard($request);
 
             return response()->json($taskcard->original);
@@ -122,6 +123,7 @@ class TaskCardSIController extends Controller
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
         }
+
         return view('frontend.task-card.nonroutine.si.edit', [
             'taskcard' => $taskCard,
             'skills' => $this->skill,
@@ -145,6 +147,10 @@ class TaskCardSIController extends Controller
         //TODO Data binding not work
 
         $this->decoder($request);
+
+        $additionals["internal_number"] = $request->additionals->internal_number;
+        $additionals["document_library"] = $request->document_library;
+        $request->merge(['additionals' => json_encode($additionals, true)]);
 
         $taskCard = TaskCard::where('uuid',$taskCard)->first();
         if($request->work_area){
@@ -218,16 +224,22 @@ class TaskCardSIController extends Controller
 
     public function decoder($req){
 
-        $req->applicability_airplane = json_decode($req->applicability_airplane);
-        $req->threshold_type = json_decode($req->threshold_type);
+        $req->additionals = json_decode($req->additionals);
         $req->repeat_type = json_decode($req->repeat_type);
-        $req->threshold_amount = json_decode($req->threshold_amount);
         $req->repeat_amount = json_decode($req->repeat_amount);
+        $req->threshold_type = json_decode($req->threshold_type);
+        $req->threshold_amount = json_decode($req->threshold_amount);
+        $req->document_library = json_decode($req->document_library);
+        $req->applicability_airplane = json_decode($req->applicability_airplane);
 
         return $req;
     }
 
     public function createTaskcard($request){
+
+        $additionals["internal_number"] = $request->additionals->internal_number;
+        $additionals["document_library"] = $request->document_library;
+        $request->merge(['additionals' => json_encode($additionals, true)]);
 
         if($request->work_area){
             $request->work_area = Type::firstOrCreate(

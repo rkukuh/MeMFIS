@@ -42,7 +42,18 @@ let InventoryInShow = {
                     }
                 }
             },
-            columns: [{
+            columns: [
+                {
+                    field: '#',
+                    title: 'No',
+                    width:'40',
+                    sortable: 'asc',
+                    filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {   
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
+                },{
                     field: 'code',
                     title: 'Part Number',
                     sortable: 'asc',
@@ -52,25 +63,37 @@ let InventoryInShow = {
                     }
                 },
                 {
+                    field: '',
+                    title: 'Serial Number',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'name',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'qty',
-                    title: 'Quantity',
+                    field: '',
+                    title: 'Expired Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: '',
+                    title: 'Qty',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: '',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: "description",
+                    field: "",
                     title: "Remark",
                 },
                 {
