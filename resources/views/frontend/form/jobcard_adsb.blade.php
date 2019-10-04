@@ -144,11 +144,6 @@
                             -
                           @endif
                         </td>
-                      </tr>
-                      <tr>
-                        <td width="20%">Reference</td>
-                        <td width="1%">:</td>
-                        <td width="29%">Generate</td>
                         <td width="20%">AC/Type</td>
                         <td width="1%">:</td>
                         <td width="29%">
@@ -180,9 +175,9 @@
                         </td>
                       </tr>
                       <tr>
-                        <td width="20%">Inspection Type</td>
-                        <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="20%"></td>
+                        <td width="1%"></td>
+                        <td width="29%"></td>
                         <td width="20%">A/C S/N</td>
                         <td width="1%">:</td>
                         <td width="29%">
