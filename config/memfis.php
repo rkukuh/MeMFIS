@@ -24,6 +24,7 @@ return [
         'facilities' => 20,
         'goods-received' => 20,
         'htcrr' => 20,
+        'inventory_ins' => 20,
         'items' => 20,
         'jobcards' => 20,
         'languages' => 20,
@@ -67,6 +68,5 @@ return [
         'leavetypes' => 20,
         'holidays' => 20,
         'workshifts' => 20,
-        'inventory_ins' => 20,
     ],
 ];
