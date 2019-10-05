@@ -9,6 +9,7 @@ class InventoryIn extends MemfisModel
     protected $table = 'inventory_in';
 
     protected $fillable = [
+        'number',
         'branch_id',
         'storage_id',
         'inventoried_at',
