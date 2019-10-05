@@ -8,7 +8,10 @@ use Faker\Generator as Faker;
 
 $factory->define(InventoryIn::class, function (Faker $faker) {
 
+    $number = $faker->unixTime();
+
     return [
+        'number' => 'INV-IN-DUM-' . $number,
         'storage_id' => function () {
             if (Storage::count()) {
                 return Storage::get()->random()->id;
