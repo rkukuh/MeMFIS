@@ -9,9 +9,15 @@ class InventoryIn extends MemfisModel
     protected $table = 'inventory_in';
 
     protected $fillable = [
+        'branch_id',
+        'storage_id',
+        'inventoried_at',
         'inventoryinable_type',
         'inventoryinable_id',
+        'description',
     ];
+
+    protected $dates = ['inventoried_at'];
 
     /*************************************** RELATIONSHIP ****************************************/
 
