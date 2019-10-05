@@ -18,7 +18,7 @@
                             -
                         </li>
                         <li class="m-nav__item">
-                            <a href="{{ route('frontend.journal.index') }}" class="m-nav__link">
+                            <a href="#" class="m-nav__link">
                                 <span class="m-nav__link-text">
                                     Job Card
                                 </span>
@@ -396,7 +396,7 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/station.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/station-uuid.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/station.js')}}"></script>
 
 {{-- @if(sizeof($jobcard->helpers) == 0) --}}
 <script src="{{ asset('js/frontend/functions/fill-combobox/helper.js')}}"></script>

@@ -16,7 +16,6 @@ Route::name('admin.')->group(function () {
         Route::resource('unit', 'UnitController');
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
-        Route::resource('journal', 'JournalController');
         Route::resource('currency', 'CurrencyController');
 
         /** POLYMORPH */
@@ -40,6 +39,8 @@ Route::name('admin.')->group(function () {
         Route::resource('threshold', 'ThresholdController');
         Route::resource('inspection', 'InspectionController');
         Route::resource('interchange', 'InterchangeController');
+        Route::resource('inventory-in', 'InventoryInController');
+        Route::resource('inventory-out', 'InventoryOutController');
 
         /** MASTER */
 

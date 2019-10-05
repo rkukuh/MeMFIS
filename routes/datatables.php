@@ -13,7 +13,6 @@ Route::name('datatables.')->group(function () {
         /** INITIAL DATA */
 
         Route::get('/unit', 'UnitDatatables@index')->name('unit.index');
-        Route::get('/journal', 'JournalDatatables@index')->name('journal.index');
 
         /** POLYMORPH */
         // For every polymorph cases, create a grouped route for them
@@ -866,6 +865,22 @@ Route::name('datatables.')->group(function () {
 
             });
 
+        });
+
+        /** Inventory In */
+
+        Route::name('inventory-in.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'inventory-in',
+                'namespace' => 'InventoryIn'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'InventoryInDatatables@index')->name('all');
+            });
         });
 
         Route::get('/testing', 'UnitDatatables@index')->name('testing.index');

@@ -147,7 +147,7 @@
   </header>
   <footer style="margin-top:14px;">
     <div class="container">
-      <span style="margin-left:6px">Prepared By : {{$prepared_by}};{{$jobCard->created_at}}&nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
+      <span style="margin-left:6px">Prepared By : {{$prepared_by}};{{ $prepared_at }}&nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
     </div>
     <img src="./img/form/printoutjobcardcpcp/FooterJobCardRoutine.png" width="100%" alt="" >
   </footer>
@@ -348,11 +348,11 @@
               @endif
             </td>
             <td width="20%" align="right" valign="top">
-              generate
-              {{-- @if()
+              @if($actual_manhours)
+                {{ $actual_manhours }}
               @else
                 -
-              @endif --}}
+              @endif 
             </td>
           </tr>
         </table>
@@ -367,12 +367,7 @@
           <td colspan="2" height="55" valign="top">
               Accomplishment Record : <br><br>
               <span>
-                {{$jobCard->progresses->last()->reason_text}}
-                {{-- @if()
-                {{}}
-                @else
-                  -
-                @endif --}}
+                  {{ $jobCard->progresses->last()->reason_text }}
               </span>
           </td>
         </tr>
@@ -424,9 +419,7 @@
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
               <span>
-                  @if(sizeof($jobCard->defectcards) <> 0)
-                  {{$jobCard->defectcards->first()->code}}
-                  @endif
+              @if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif
               </span>
           </td>
         </tr>
@@ -436,17 +429,7 @@
           <td width="3%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="46%" valign="top">
-              @php
-               $a = sizeof($helpers->toArray());
-              @endphp
-                @if($a >0)
-                @for ($i = 0; $i < $a-1; $i++)
-                {{$helpers[$i]->first_name}},&nbsp;
-                @endfor
-                @for ($i = $a-1; $i < $a; $i++)
-                    {{$helpers[$i]->first_name}}
-                @endfor
-                @endif
+            {{ $helpers }}
           </td>
           <td width="3%" valign="top">RII </td>
           <td width="1%" valign="top">:</td>
@@ -484,21 +467,13 @@
               <div style="width:100%;height:20px;text-align:center">{{$inspected_by}}</div>
               <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$inspected_at}}</span></div>
             </td>
-            <td width="34%" height="100" align="center" 
-            @if($rii_status==1)
-              valign="bottom"
-            @else
-              valign="middle"
-            @endif
-            >
-            @if($rii_status==1)
-              <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
-              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$rii_at}}</span></div>
-            @else
-              <div>
-                <img src="./img/RII.png" alt="" width="230px">
-              </div>
-            @endif
+            <td width="34%" height="100" align="center" valign="bottom"
+                @if($rii_status==0) style="background:grey" @endif>
+                @if($rii_status==1)
+                <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
+                <div style="width:100%;height:20px;text-align:left;padding-left:5px;">
+                    Date : <span>{{$rii_at}}</span></div>
+                @endif
             </td>
           </tr>
         </table>

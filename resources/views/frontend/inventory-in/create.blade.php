@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.workpackage.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.inventory-in.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Inventory In
                             </span>
@@ -63,6 +63,34 @@
                                                 @slot('id_error','requested_at')
                                             @endcomponent
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Ref. Doc No. @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('id', 'tool')
+                                                @slot('text', 'Ref Tool Request No.')
+                                                @slot('name', 'tool')
+                                                @slot('id_error','tool')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Ref. Quotation Workshop 
+                                            </label>
+
+                                            @include('frontend.common.ref-quotation-workshop.index')
+
+                                            @component('frontend.common.input.hidden')
+                                                @slot('id', 'quotaion_workshop')
+                                                @slot('name', 'quotaion_workshop')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Storage @include('frontend.common.label.required')
@@ -75,27 +103,16 @@
                                                 @slot('id_error', 'item_storage_id')
                                             @endcomponent
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Ref Tool Request No. @include('frontend.common.label.required')
+                                                Section Code
                                             </label>
 
                                             @component('frontend.common.input.text')
-                                                @slot('id', 'tool')
-                                                @slot('text', 'Ref Tool Request No.')
-                                                @slot('name', 'tool')
-                                                @slot('id_error','tool')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Location
-                                            </label>
-                                          
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', 'Section Code')
+                                                @slot('id', 'section_code')
+                                                @slot('name', 'section_code')
+                                                @slot('id_error', 'section_code')
                                             @endcomponent
                                         </div>
                                     </div>

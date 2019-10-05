@@ -75,7 +75,11 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_title')
+                                                                    @if($attention)
                                                                     @slot('text', $attention->address)
+                                                                    @else
+                                                                    @slot('text', '-')
+                                                                    @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -87,7 +91,11 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_title')
+                                                                    @if($attention)
                                                                     @slot('text', $attention->phone)
+                                                                    @else
+                                                                    @slot('text', '-')
+                                                                    @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -100,7 +108,11 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_number')
+                                                                    @if($attention)
                                                                     @slot('text', $attention->fax)
+                                                                    @else
+                                                                    @slot('text', '-')
+                                                                    @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -110,7 +122,11 @@
                                                                     Attention
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
+                                                                    @if($attention)
                                                                     @slot('text', $attention->name)
+                                                                    @else
+                                                                    @slot('text', '-')
+                                                                    @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -120,7 +136,11 @@
                                                                     Email
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
+                                                                    @if($attention)
                                                                     @slot('text', $attention->email)
+                                                                    @else
+                                                                    @slot('text', '-')
+                                                                    @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -179,7 +199,11 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6 align-self-center">
                                                                 <div class="form-group m-form__group row">
                                                                     <div class="col-md-8">
+                                                                        @if(isset($jobcards["all"]))
                                                                         <h1 style="font-size: 4rem;text-align:right;">{{ number_format($jobcards["all"]["done"]) }} <span style="font-size: 2rem;">of</span>  {{ number_format(array_sum($jobcards["all"])) }} <br> <span style="font-size: 2rem;">Task Finished</span></h1>
+                                                                        @else
+                                                                        <h1 style="font-size: 4rem;text-align:right;">0 <span style="font-size: 2rem;">of</span>  0<br> <span style="font-size: 2rem;">Task Finished</span></h1>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </div>					 

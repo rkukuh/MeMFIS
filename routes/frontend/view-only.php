@@ -54,34 +54,68 @@ Route::group([
 
         /** Material Request */
 
-        Route::view('/material-request', 'frontend.material-request.index')->name('material-request.index');
+        Route::view('/material-request-jobcard', 'frontend.material-request-jobcard.index')->name('material-request-jobcard.index');
 
-        Route::view('/material-request/general/create', 'frontend.material-request.general.create')->name('material-request.general.create');
-        Route::view('/material-request/general/edit', 'frontend.material-request.general.edit')->name('material-request.general.edit');
-        Route::view('/material-request/general/show', 'frontend.material-request.general.show')->name('material-request.general.show');
+        Route::view('/material-request-jobcard/hm/create', 'frontend.material-request-jobcard.hm.create')->name('material-request-jobcard.hm.create');
+        Route::view('/material-request-jobcard/hm/edit', 'frontend.material-request-jobcard.hm.edit')->name('material-request-jobcard.hm.edit');
+        Route::view('/material-request-jobcard/hm/show', 'frontend.material-request-jobcard.hm.show')->name('material-request-jobcard.hm.show');
 
-        Route::view('/material-request/project/create', 'frontend.material-request.project.create')->name('material-request.project.create');
-        Route::view('/material-request/project/edit', 'frontend.material-request.project.edit')->name('material-request.project.edit');
-        Route::view('/material-request/project/show', 'frontend.material-request.project.show')->name('material-request.project.show');
+        Route::view('/material-request-jobcard/defect-card/create', 'frontend.material-request-jobcard.defect-card.create')->name('material-request-jobcard.defect-card.create');
+        Route::view('/material-request-jobcard/defect-card/edit', 'frontend.material-request-jobcard.defect-card.edit')->name('material-request-jobcard.defect-card.edit');
+        Route::view('/material-request-jobcard/defect-card/show', 'frontend.material-request-jobcard.defect-card.show')->name('material-request-jobcard.defect-card.show');
+
+        Route::view('/material-request-jobcard/workshop/create', 'frontend.material-request-jobcard.workshop.create')->name('material-request-jobcard.workshop.create');
+        Route::view('/material-request-jobcard/workshop/edit', 'frontend.material-request-jobcard.workshop.edit')->name('material-request-jobcard.workshop.edit');
+        Route::view('/material-request-jobcard/workshop/show', 'frontend.material-request-jobcard.workshop.show')->name('material-request-jobcard.workshop.show');
 
         /** Tool Request */
 
-        Route::view('/tool-request', 'frontend.tool-request.index')->name('tool-request.index');
+        Route::view('/tool-request-jobcard', 'frontend.tool-request-jobcard.index')->name('tool-request-jobcard.index');
 
-        Route::view('/tool-request/general/create', 'frontend.tool-request.general.create')->name('tool-request.general.create');
-        Route::view('/tool-request/general/edit', 'frontend.tool-request.general.edit')->name('tool-request.general.edit');
-        Route::view('/tool-request/general/show', 'frontend.tool-request.general.show')->name('tool-request.general.show');
+        Route::view('/tool-request-jobcard/hm/create', 'frontend.tool-request-jobcard.hm.create')->name('tool-request-jobcard.hm.create');
+        Route::view('/tool-request-jobcard/hm/edit', 'frontend.tool-request-jobcard.hm.edit')->name('tool-request-jobcard.hm.edit');
+        Route::view('/tool-request-jobcard/hm/show', 'frontend.tool-request-jobcard.hm.show')->name('tool-request-jobcard.hm.show');
 
-        Route::view('/tool-request/project/create', 'frontend.tool-request.project.create')->name('tool-request.project.create');
-        Route::view('/tool-request/project/edit', 'frontend.tool-request.project.edit')->name('tool-request.project.edit');
-        Route::view('/tool-request/project/show', 'frontend.tool-request.project.show')->name('tool-request.project.show');
+        Route::view('/tool-request-jobcard/defect-card/create', 'frontend.tool-request-jobcard.defect-card.create')->name('tool-request-jobcard.defect-card.create');
+        Route::view('/tool-request-jobcard/defect-card/edit', 'frontend.tool-request-jobcard.defect-card.edit')->name('tool-request-jobcard.defect-card.edit');
+        Route::view('/tool-request-jobcard/defect-card/show', 'frontend.tool-request-jobcard.defect-card.show')->name('tool-request-jobcard.defect-card.show');
+
+        Route::view('/tool-request-jobcard/workshop/create', 'frontend.tool-request-jobcard.workshop.create')->name('tool-request-jobcard.workshop.create');
+        Route::view('/tool-request-jobcard/workshop/edit', 'frontend.tool-request-jobcard.workshop.edit')->name('tool-request-jobcard.workshop.edit');
+        Route::view('/tool-request-jobcard/workshop/show', 'frontend.tool-request-jobcard.workshop.show')->name('tool-request-jobcard.workshop.show');
 
         /** Inventory In */
 
-        Route::view('/inventory-in', 'frontend.inventory-in.index')->name('inventory-in.index');
-        Route::view('/inventory-in/create', 'frontend.inventory-in.create')->name('inventory-in.create');
-        Route::view('/inventory-in/edit', 'frontend.inventory-in.edit')->name('inventory-in.edit');
-        Route::view('/inventory-in/show', 'frontend.inventory-in.show')->name('inventory-in.show');
+        // Route::view('/inventory-in', 'frontend.inventory-in.index')->name('inventory-in.index');
+        // Route::view('/inventory-in/create', 'frontend.inventory-in.create')->name('inventory-in.create');
+        // Route::view('/inventory-in/edit', 'frontend.inventory-in.edit')->name('inventory-in.edit');
+        // Route::view('/inventory-in/show', 'frontend.inventory-in.show')->name('inventory-in.show');
+
+        /** Inventory Out */
+
+        Route::view('/inventory-out/tool', 'frontend.inventory-out.tool.index')->name('inventory-out-tool.index');
+        Route::view('/inventory-out/tool/create', 'frontend.inventory-out.tool.create')->name('inventory-out-tool.create');
+        Route::view('/inventory-out/tool/edit', 'frontend.inventory-out.tool.edit')->name('inventory-out-tool.edit');
+        Route::view('/inventory-out/tool/show', 'frontend.inventory-out.tool.show')->name('inventory-out-tool.show');
+
+        Route::view('/inventory-out/material', 'frontend.inventory-out.material.index')->name('inventory-out-material.index');
+        Route::view('/inventory-out/material/create', 'frontend.inventory-out.material.create')->name('inventory-out-material.create');
+        Route::view('/inventory-out/material/edit', 'frontend.inventory-out.material.edit')->name('inventory-out-material.edit');
+        Route::view('/inventory-out/material/show', 'frontend.inventory-out.material.show')->name('inventory-out-material.show');
+
+        /** Material Request */
+
+        Route::view('/material-transfer', 'frontend.material-transfer.index')->name('material-transfer.index');
+        Route::view('/material-transfer/create', 'frontend.material-transfer.create')->name('material-transfer.create');
+        Route::view('/material-transfer/edit', 'frontend.material-transfer.edit')->name('material-transfer.edit');
+        Route::view('/material-transfer/show', 'frontend.material-transfer.show')->name('material-transfer.show');
+
+        /** Category Item */
+
+        Route::view('/category-item', 'frontend.category-item.index')->name('category-item.index');
+        Route::view('/category-item/create', 'frontend.category-item.create')->name('category-item.create');
+        Route::view('/category-item/edit', 'frontend.category-item.edit')->name('category-item.edit');
+        Route::view('/category-item/show', 'frontend.category-item.show')->name('category-item.show');
 
         /** GSE-Tool Returned */
 
@@ -129,6 +163,14 @@ Route::group([
         Route::view('/propose-leave/edit', 'frontend.propose-leave.propose-leave.edit')->name('propose-leave.edit');
         Route::view('/propose-leave/approve-type-1', 'frontend.propose-leave.propose-leave.approve-type-1')->name('propose-leave.approve-type-1');
         Route::view('/propose-leave/approve-type-2', 'frontend.propose-leave.propose-leave.approve-type-2')->name('propose-leave.approve-type-2');
+
+
+        Route::view('/open', 'frontend.defect-card.progress.progress-open')->name('progress.open');
+        Route::view('/pause', 'frontend.defect-card.progress.progress-pause')->name('progress.pause');
+        Route::view('/resume', 'frontend.defect-card.progress.progress-resume')->name('progress.resume');
+        Route::view('/close', 'frontend.defect-card.progress.progress-close')->name('progress.close');
+        Route::view('/waiting-rii', 'frontend.defect-card.progress.waiting-rii')->name('progress.waiting-rii');
+        Route::view('/release', 'frontend.defect-card.progress.release')->name('progress.release');
 
     });
 

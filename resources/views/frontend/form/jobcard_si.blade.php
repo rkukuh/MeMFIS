@@ -145,7 +145,6 @@
         }
 
         /* <div class="page_break"></div> */
-
     </style>
 </head>
 
@@ -156,7 +155,7 @@
     </header>
     <footer style="margin-top:14px;">
         <div class="container">
-            <span style="margin-left:6px">Prepared By : {{$prepared_by}};{{$jobCard->created_at}}
+            <span style="margin-left:6px">Prepared By : {{$prepared_by}};{{ $prepared_at }}
                 &nbsp;&nbsp;&nbsp;&nbsp; Printed By :{{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
         </div>
         <img src="./img/form/printoutjobcardsi/FooterJobCardSI.png" width="100%" alt="">
@@ -353,12 +352,7 @@
                     <td colspan="2" height="55" valign="top">
                         Accomplishment Record : <br><br>
                         <span>
-                            {{$jobCard->progresses->last()->reason_text}}
-                            {{-- @if()
-                {{}}
-                            @else
-                            -
-                            @endif --}}
+                            {{ $jobCard->progresses->last()->reason_text }}
                         </span>
                     </td>
                 </tr>
@@ -372,12 +366,10 @@
                             <div style="margin-left:100px;margin-top:12px;">
                                 <ul>
                                     <li>
-                                        <img src="./img/check-box-empty.png" alt="" width="10"> <span
-                                            style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                                        <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                                     </li>
                                     <li style="margin-left:12px;">
-                                        <img src="./img/check-box-empty.png" alt="" width="11"> <span
-                                            style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                                        <img src="./img/check-box-empty.png" alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
                                     </li>
                                 </ul>
                             </div>
@@ -392,8 +384,8 @@
                                             @else
                                             src="./img/check-box-empty.png"
                                             @endif
-                                            alt="" width="10"> <span
-                                                style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                                            alt="" width="10">
+                                            <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                                     </li>
                                     <li style="margin-left:12px;">
                                         <img @if(sizeof($jobCard->defectcards) == 0)
@@ -401,8 +393,8 @@
                                         @else
                                         src="./img/check-box-empty.png"
                                         @endif
-                                        alt="" width="11"> <span
-                                            style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                                        alt="" width="11">
+                                        <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
                                     </li>
                                 </ul>
                             </div>
@@ -412,9 +404,7 @@
                     <td width="50%" height="35" valign="center">
                         Transfer to Defect Card No : <br><br>
                         <span>
-                            @if(sizeof($jobCard->defectcards) <> 0)
-                                {{$jobCard->defectcards->first()->code}}
-                                @endif
+                            @if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif
                         </span>
                     </td>
                 </tr>
@@ -428,9 +418,7 @@
                         $a = sizeof($helpers->toArray());
                         @endphp
                         @if($a >0)
-                        @for ($i = 0; $i < $a-1; $i++) {{$helpers[$i]->first_name}},&nbsp; @endfor @for ($i=$a-1; $i <
-                            $a; $i++) {{$helpers[$i]->first_name}} @endfor @endif </td> </tr> </table> </div> </div>
-                            <div id="content5">
+                        @for ($i = 0; $i < $a-1; $i++) {{$helpers[$i]->first_name}},&nbsp; @endfor @for ($i=$a-1; $i < $a; $i++) {{$helpers[$i]->first_name}} @endfor @endif </td> </tr> </table> </div> </div> <div id="content5">
                             <div class="container">
                                 <div class="head">
                                     <table width="100%" cellpadding="10">
@@ -456,8 +444,7 @@
                                                 <div style="width:100%;height:20px;text-align:left;padding-left:5px;">
                                                     Date : <span>{{$inspected_at}}</span></div>
                                             </td>
-                                            <td width="34%" height="100" align="center" valign="bottom"
-                                                @if($rii_status==0) style="background:grey" @endif>
+                                            <td width="34%" height="100" align="center" valign="bottom" @if($rii_status==0) style="background:grey" @endif>
                                                 @if($rii_status==1)
                                                 <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
                                                 <div style="width:100%;height:20px;text-align:left;padding-left:5px;">

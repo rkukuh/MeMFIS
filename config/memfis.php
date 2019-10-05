@@ -26,7 +26,6 @@ return [
         'htcrr' => 20,
         'items' => 20,
         'jobcards' => 20,
-        'journals' => 20,
         'languages' => 20,
         'licenses' => 20,
         'levels' => 20,
@@ -67,6 +66,7 @@ return [
         'jobtittles' => 20,
         'leavetypes' => 20,
         'holidays' => 20,
-        'workshifts' => 20
+        'workshifts' => 20,
+        'inventory_ins' => 20,
     ],
 ];

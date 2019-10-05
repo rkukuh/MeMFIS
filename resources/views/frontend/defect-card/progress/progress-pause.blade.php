@@ -19,7 +19,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.journal.index') }}" class="m-nav__link">
+                        <a href="#" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Defect Card
                             </span>
@@ -59,7 +59,7 @@
                                                 Date
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                               
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -67,7 +67,7 @@
                                                 Defect Card No.
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -75,7 +75,7 @@
                                                 Ref Jobcard No.
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -83,7 +83,7 @@
                                                 Additional Project No.
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -91,7 +91,7 @@
                                                 A/C Type
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -99,7 +99,7 @@
                                                 A/C Reg
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                               
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -107,7 +107,7 @@
                                                 A/C Serial Number
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -115,7 +115,7 @@
                                                 ATA
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                           
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -123,7 +123,7 @@
                                                 Zone
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -131,7 +131,7 @@
                                                 Complaint
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -139,7 +139,7 @@
                                                 Mhrs Est.
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                               
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -147,7 +147,7 @@
                                                 Skill
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -155,7 +155,7 @@
                                                 RII
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -163,7 +163,7 @@
                                                 Remark
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -171,7 +171,7 @@
                                                 Created By
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -179,7 +179,7 @@
                                                 Status
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                               
+
                                             </td>
                                         </tr>
 
@@ -303,7 +303,7 @@
                             <div class="form-group m-form__group row mt-4">
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <label class="form-control-label">
-                                        Engineer 
+                                        Engineer
                                     </label>
 
                                     @component('frontend.common.label.data-info')
@@ -320,7 +320,7 @@
                                                 <label class="form-control-label">
                                                 Reference
                                                 </label>
-                
+
                                                 @component('frontend.common.input.text')
                                                     @slot('name', 'refrence')
                                                     @slot('text', 'Refrence')
@@ -330,7 +330,7 @@
                                                 <label class="form-control-label">
                                                 Helper
                                                 </label>
-                
+
                                                 @component('frontend.common.label.data-info')
                                                     @slot('text', 'generated')
                                                 @endcomponent
@@ -417,11 +417,11 @@
                                         <div class="action-buttons">
 
                                             @include('frontend.common.buttons.resume')
-                                            
+
                                             @component('frontend.common.buttons.close')
                                                 @slot('class', 'ml-2')
                                             @endcomponent
-    
+
 
                                             @include('frontend.common.buttons.back')
                                         </div>

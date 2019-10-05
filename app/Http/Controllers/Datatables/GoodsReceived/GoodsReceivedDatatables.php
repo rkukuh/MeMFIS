@@ -16,7 +16,7 @@ class GoodsReceivedDatatables extends Controller
      */
     public function index()
     {
-        $GoodsReceiveds = GoodsReceived::with('purchase_order','purchase_order.purchase_request','vendor')->get();
+        $GoodsReceiveds = GoodsReceived::with('purchase_order','purchase_order.purchase_request')->get();
 
         foreach($GoodsReceiveds as $GoodsReceived){
             if($GoodsReceived->deleted_at <> null){
