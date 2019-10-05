@@ -107,7 +107,7 @@
   </header>
   <footer style="margin-top:14px;">
     <div class="container">
-      <span style="margin-left:6px">Prepared By : lorem &nbsp;&nbsp;&nbsp;&nbsp; Printed By : lorem ; lorem</span>
+      <span style="margin-left:6px">Prepared By : {{ $prepared_by }} &nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{ Auth::user()->name }}</span>
     </div>
     <img src="./img/form/printoutpreliminaryinspection/FooterPreliminaryInspection.png" width="100%" alt="" >
   </footer>
@@ -134,7 +134,7 @@
                         <td width="29%">{{ $jobCard->quotation->quotationable->code }}</td>
                         <td width="20%">Est. Mhrs</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{ json_decode($jobCard->origin_jobcardable)->estimation_manhour }}</td>
+                        <td width="29%">{{ $taskcard->estimation_manhour }}</td>
                       </tr>
                       <tr>
                         <td width="20%"></td>
@@ -300,24 +300,30 @@
                       (use attached sheet to write up the discrepency)
                       <div style="position:absolute;top:-6px;left:90px;">
                         <ul>
-                            <li>
-                                <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
-                            </li>
-                            <li style="margin-left:12px;">
-                                <img src="./img/check.png" alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
-                            </li>
+                          <li>
+                              <img @if(sizeof($jobCard->defectcards) <> 0)
+                                  src="./img/check.png"
+                                  @else
+                                  src="./img/check-box-empty.png"
+                                  @endif
+                                  alt="" width="10"> 
+                                  <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                          </li>
+                          <li style="margin-left:12px;">
+                              <img @if(sizeof($jobCard->defectcards) == 0)
+                              src="./img/check.png"
+                              @else
+                              src="./img/check-box-empty.png"
+                              @endif
+                              alt="" width="11"> 
+                              <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                          </li>
                         </ul>
                       </div>
-                      <span style="position:absolute;top:60px;left:0">Number od discrepencies {{ sizeof($jobCard->defectcards) }} item(s)</span>
+                      <span style="position:absolute;top:60px;left:0">Number of discrepencies {{ sizeof($jobCard->defectcards) }} item(s)</span>
                   </td>
-                  <td width="50%" height="60" valign="top" style="position:relative;">Inspection performed by : {{ $jobCard->progresses->first()->progressedBy->first_name }} </td>
+                  <td width="50%" height="60" valign="top" style="position:relative;">Inspection performed by : {{ $jobCard->progresses->first()->progressedBy->full_name }} </td>
               </tr>
-          </table>
-          <table width="100%" style="margin-top: 4px;">
-                <tr>
-                    <td width="50%">Issued By : Name PPC</td>
-                    <td width="50%" align="right"></td>
-                </tr>
           </table>
       </div>
   </div>

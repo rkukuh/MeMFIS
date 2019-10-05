@@ -153,9 +153,9 @@
         <div class="container">
             <table width="100%">
                 <tr>
-                    <td valign="top" width="36%">Print By : <span>name:timestamp</span></td>
+                    <td valign="top" width="36%">Print By : <span>{{ Auth::user()->name }}:{{ $now }}</span></td>
                     <td valign="top" width="25%">Status : <span>{{ $jobCard->status }}</span></td>
-                    <td valign="top" width="39%">Date Close : <span>time</span></td>
+                    <td valign="top" width="39%">Date Close : <span>{{ $dateClosed }}</span></td>
                 </tr>
             </table>
         </div>
@@ -167,7 +167,7 @@
             <li>
                 <div class="jobcard-info">
                     <fieldset>
-                        <legend>JC No : 123312323</legend>
+                        <legend>JC No : {{ $jobCard->number }}</legend>
                         <div class="jobcard-info-detail">
                             <table width="80%" cellpadding="3">
                                 <tr>
@@ -220,7 +220,6 @@
                                         @else
                                         -
                                         @endif
-                                        Generate
                                     </td>
                                     <td width="20%">A/C S/N</td>
                                     <td width="1%">:</td>
@@ -271,7 +270,7 @@
                     </tr>
                     <tr>
                         <td valign="top" align="center">Cabin Maintenance</td>
-                        <td valign="top" align="center">Generate dr Type Taskcard</td>
+                        <td valign="top" align="center">{{ $jobCard->jobcardable->type->name }}</td>
                         <td valign="top" align="center">0.25</td>
                         <td valign="top" align="center"></td>
                     </tr>

@@ -153,7 +153,7 @@
   </header>
   <footer>
     <div class="container">
-      <span style="margin-left:6px">Prepared By :{{$prepared_by}};{{$jobCard->created_at}}&nbsp;&nbsp;&nbsp;&nbsp; Printed By :{{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
+      <span style="margin-left:6px">Prepared By :{{$prepared_by}};{{ $prepared_at }}&nbsp;&nbsp;&nbsp;&nbsp; Printed By :{{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
     </div>
     <img src="./img/form/printoutjobcardsip/FooterJobCardRoutine.png" width="100%" alt="">
   </footer>
@@ -430,11 +430,9 @@
           <td width="3%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="46%" valign="top">
-            @php
-            $a = sizeof($helpers->toArray());
-            @endphp
-            @if($a >0)
-            @for ($i = 0; $i < $a-1; $i++) {{$helpers[$i]->first_name}},&nbsp; @endfor @for ($i=$a-1; $i < $a; $i++) {{$helpers[$i]->first_name}} @endfor @endif </td> <td width="3%" valign="top">RII </td>
+          {{ $helpers }}
+         </td>   
+          <td width="3%" valign="top">RII </td>
           <td width="1%" valign="top">:</td>
           <td width="46%" valign="top">
             @if($jobCard->is_rii == '0')

@@ -128,7 +128,7 @@
                 <tr>
                     <td valign="top" width="36%">Print By : <span>{{ Auth::user()->name }}:{{ $now }}</span></td>
                     <td valign="top" width="25%">Status : <span>{{ $jobCard->status }}</span></td>
-                    <td valign="top" width="39%">Date Close : <span>time</span></td>
+                    <td valign="top" width="39%">Date Close : <span>{{ $dateClosed }}</span></td>
                 </tr>
             </table>
         </div>
@@ -254,8 +254,8 @@
                         <td valign="top" align="center" width="50%"><b>References</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" align="center" height="5%">{{ json_decode($jobCard->origin_jobcardable)->description }}</td>
-                        <td valign="top" align="center" height="5%">{{ json_decode($jobCard->origin_jobcardable)->eo_header->reference }}</td>
+                        <td valign="top" align="center" height="5%">{{ $taskcard->description }}</td>
+                        <td valign="top" align="center" height="5%">{{ $taskcard->eo_header->reference }}</td>
                     </tr>
                 </table>
                 <table width="100%" cellpadding="4">
