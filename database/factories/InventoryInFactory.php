@@ -16,17 +16,15 @@ $factory->define(InventoryIn::class, function (Faker $faker) {
             
             return factory(Storage::class)->create()->id;
         },
-        'inventoried_at' => $faker->randomElement(Carbon::now()),
-        // 'inventoryinable_type' => 'App\Models\GoodsReceived',
-        // 'inventoryinable_id' => function () {
-        //     if (GoodsReceived::count()) {
-        //         return GoodsReceived::get()->random()->id;
-        //     }
+        'inventoried_at' => Carbon::now(),
+        'inventoryinable_type' => 'App\Models\GoodsReceived',
+        'inventoryinable_id' => function () {
+            if (GoodsReceived::count()) {
+                return GoodsReceived::get()->random()->id;
+            }
 
-        //     return factory(GoodsReceived::class)->create()->id;
-        // },
-        'inventoryinable_type' => null,
-        'inventoryinable_id' => null,
+            return factory(GoodsReceived::class)->create()->id;
+        },
         'description' => $faker->randomElement([null, $faker->sentence]),
     ];
 
