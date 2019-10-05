@@ -219,7 +219,7 @@ class EmployeeAttendanceController extends Controller
                                     }else{
                                         //CHECK ABSENCE
                                         $status = null;
-                                    }   
+                                    }  
                                 }
                             }else{
                                 if(strtolower($data_final[$i]['date'][$y]['days']) == 'saturday' || strtolower($data_final[$i]['date'][$y]['days']) == 'sunday'){
@@ -268,7 +268,6 @@ class EmployeeAttendanceController extends Controller
                                 }
                             }
 
-                            // dd(strtolower($data_final[$i]['date'][$y]['days']),$status);
                             $employee->employee_attendace()->create([
                                 'uuid' => Str::uuid(),
                                 'date' => $data_final[$i]['date'][$y]['date'],
