@@ -19,8 +19,8 @@ class CreateInventoryInTable extends Migration
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->unsignedBigInteger('storage_id');
             $table->timestamp('inventoried_at');
-            $table->text('description');
-            $table->morphs('inventoryinable');
+            $table->morphs('inventoryinable')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
