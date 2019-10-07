@@ -406,7 +406,7 @@ let Datatables = {
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error("Task card alrady exists!", "Error", {
+                            toastr.error("Task card already exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
@@ -457,7 +457,7 @@ let Datatables = {
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error("Task card alrady exists!", "Error", {
+                            toastr.error("Task card already exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
@@ -508,7 +508,7 @@ let Datatables = {
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error("Task card alrady exists!", "Error", {
+                            toastr.error("Task card already exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
@@ -599,7 +599,7 @@ let Datatables = {
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error("Task card alrady exists!", "Error", {
+                            toastr.error("Task card already exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
@@ -649,7 +649,7 @@ let Datatables = {
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error("Task card alrady exists!", "Error", {
+                            toastr.error("Task card already exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
@@ -1353,7 +1353,7 @@ let Datatables = {
                         } else {
                             if (data.title == "Danger") {
                                 toastr.error(
-                                    "Instruction alrady exists!",
+                                    "Instruction already exists!",
                                     "Error",
                                     {
                                         timeOut: 5000
