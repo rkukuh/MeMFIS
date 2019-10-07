@@ -1,6 +1,17 @@
-let MaterialRequestCreate = {
+let ToolRequestCreate = {
     init: function () {
-        $('.material_request_project_datatable').mDatatable({
+
+        $('#jc_ref_no').on('click', function () {
+            $('#ref_project').prop("disabled", true);
+            $('#ref_jobcard').removeAttr("disabled");
+        });
+
+        $('#project_ref_no').on('click', function () {
+            $('#ref_jobcard').prop("disabled", true);
+            $('#ref_project').removeAttr("disabled");
+        });
+
+        $('.tool_request_project_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -90,14 +101,14 @@ let MaterialRequestCreate = {
                     width: 150
                 },
                 {
-                    field: 'status',
+                    field: '',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: 'status',
+                    field: '',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
@@ -110,7 +121,7 @@ let MaterialRequestCreate = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_material_request" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-instruction_uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_tool_request" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-instruction_uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
@@ -184,7 +195,7 @@ let MaterialRequestCreate = {
             });
         });
 
-        $('.footer').on('click', '.add-goods-received', function () {
+        $('.footer').on('click', '.add-tool-request', function () {
             let received_at = $('input[name=date]').val();
             let received_by = $('#received-by').val();
             let ref_po = $('input[name=ref-po]').val();
@@ -237,5 +248,5 @@ let MaterialRequestCreate = {
 };
 
 jQuery(document).ready(function () {
-    MaterialRequestCreate.init();
+    ToolRequestCreate.init();
 });

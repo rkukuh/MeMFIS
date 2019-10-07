@@ -109,11 +109,12 @@
                                                             <label class="form-control-label">
                                                                 Received By @include('frontend.common.label.required')
                                                             </label>
-                                                            @component('frontend.common.input.text')
-                                                                @slot('id', 'received-by')
-                                                                @slot('text', 'received-by')
-                                                                @slot('name', 'received-by')
-                                                                @slot('id_error', 'received-by')
+
+                                                            @component('frontend.common.input.select2')
+                                                                @slot('id', 'employee')
+                                                                @slot('text', 'employee')
+                                                                @slot('name', 'employee')
+                                                                @slot('id_error', 'employee')
                                                             @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -237,5 +238,7 @@
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/employee.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/employee-uuid.js') }}"></script>
 
 @endpush

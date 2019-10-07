@@ -18,12 +18,12 @@ class CreateFefoInTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('storage_id');
-            $table->unsignedBigInteger('inventoryin_id'); //?
+            $table->unsignedBigInteger('inventoryin_id');
             $table->timestamp('fefoin_at')->nullable();
             $table->double('quantity');
             $table->double('used_quantity')->default(0);;
             $table->string('serial_number')->nullable();
-            $table->unsignedBigInteger('grn_id');
+            $table->unsignedBigInteger('grn_id')->nullable();
             $table->double('price')->nullable();
             $table->timestamp('expired_at')->nullable();
             $table->timestamps();

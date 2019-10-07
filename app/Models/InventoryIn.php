@@ -9,12 +9,17 @@ class InventoryIn extends MemfisModel
     protected $table = 'inventory_in';
 
     protected $fillable = [
+        'number',
+        'storage_id',
+        'inventoried_at',
         'inventoryinable_type',
         'inventoryinable_id',
+        'description',
     ];
 
-    /*************************************** RELATIONSHIP ****************************************/
+    protected $dates = ['inventoried_at'];
 
+    /*************************************** RELATIONSHIP ****************************************/
 
     /**
      * One-to-Many: A fefo in must have an inventory in
@@ -26,7 +31,7 @@ class InventoryIn extends MemfisModel
      */
     public function fefoIn()
     {
-        return $this->hasMany(FefoIn::class);
+        return $this->hasMany(FefoIn::class, 'inventoryin_id');
     }
 
     /**
@@ -55,8 +60,13 @@ class InventoryIn extends MemfisModel
     {
         return $this->belongsToMany(Item::class, 'inventoryin_item', 'inventoryin_id', 'item_id')
                     ->withPivot(
+                        'unit_id',
+                        'serial_number',
                         'quantity',
-                        'note'
+                        'quantity_in_primary_unit',
+                        'purchased_price',
+                        'total',
+                        'description'
                     )
                     ->withTimestamps();
     }

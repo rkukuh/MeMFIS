@@ -1,5 +1,16 @@
-let MaterialRequestCreate = {
+let MaterialRequestEdit = {
     init: function () {
+
+        $('#jc_ref_no').on('click', function () {
+            $('#ref_project').prop("disabled", true);
+            $('#ref_jobcard').removeAttr("disabled");
+        });
+
+        $('#project_ref_no').on('click', function () {
+            $('#ref_jobcard').prop("disabled", true);
+            $('#ref_project').removeAttr("disabled");
+        });
+
         $('.material_request_project_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -237,5 +248,5 @@ let MaterialRequestCreate = {
 };
 
 jQuery(document).ready(function () {
-    MaterialRequestCreate.init();
+    MaterialRequestEdit.init();
 });

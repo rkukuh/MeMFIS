@@ -42,11 +42,13 @@ class ItemGoodsReceivedController extends Controller
      */
     public function store(GoodsReceivedStore $request,GoodsReceived $goodsReceived, Item $item)
     {
+        $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
         $goodsReceived->items()->attach([$item->id => [
             'quantity'=> $request->quantity,
             'already_received_amount'=> 2,// TODO ask whats is it?
             'unit_id' => $request->unit_id,
             'quantity_unit' => $request->quantity,
+            'price' => $price,
             'note' => $request->note,
             ]
         ]);

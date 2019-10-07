@@ -19,12 +19,12 @@ class CreateFefoOutTable extends Migration
             $table->unsignedBigInteger('fefoin_id');
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('storage_id');
-            $table->unsignedBigInteger('inventoryout_id'); //?
+            $table->unsignedBigInteger('inventoryout_id');
             $table->timestamp('fefoout_at');
             $table->double('quantity');
             $table->double('used_quantity')->default(0);;
             $table->string('serial_number')->nullable();
-            $table->unsignedBigInteger('grn_id');
+            $table->unsignedBigInteger('grn_id')->nullable();
             $table->double('price')->nullable();
             $table->timestamp('expired_at')->nullable();
             $table->timestamps();
