@@ -17,18 +17,12 @@ class CreateInventoryInTable extends Migration
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
-            $table->unsignedBigInteger('branch_id')->nullable();
             $table->unsignedBigInteger('storage_id');
             $table->timestamp('inventoried_at');
             $table->morphs('inventoryinable');
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('branch_id')
-                ->references('id')->on('branches')
-                ->onUpdate('cascade')
-                ->onDelete('restrict');
 
             $table->foreign('storage_id')
                 ->references('id')->on('storages')

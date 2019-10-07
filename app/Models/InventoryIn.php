@@ -10,7 +10,6 @@ class InventoryIn extends MemfisModel
 
     protected $fillable = [
         'number',
-        'branch_id',
         'storage_id',
         'inventoried_at',
         'inventoryinable_type',
@@ -22,6 +21,19 @@ class InventoryIn extends MemfisModel
 
     /*************************************** RELATIONSHIP ****************************************/
 
+    /**
+     * One-to-Many: A fefo in must have an inventory in
+     *
+     * This function will retrieve all the fefo in of an inventory in.
+     * See: Fefo In's inventoryIn() method for the inverse
+     *
+     * @return mixed
+     */
+    public function fefoIn()
+    {
+        return $this->hasMany(FefoIn::class, 'inventoryin_id');
+    }
+    
     /**
      * Polymorphic: An entity can have zero or many InventoryIns.
      *
@@ -48,8 +60,13 @@ class InventoryIn extends MemfisModel
     {
         return $this->belongsToMany(Item::class, 'inventoryin_item', 'inventoryin_id', 'item_id')
                     ->withPivot(
+                        'unit_id',
+                        'serial_number',
                         'quantity',
-                        'note'
+                        'quantity_in_primary_unit',
+                        'purchased_price',
+                        'total',
+                        'description'
                     )
                     ->withTimestamps();
     }
