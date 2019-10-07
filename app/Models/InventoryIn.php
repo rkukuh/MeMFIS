@@ -23,6 +23,19 @@ class InventoryIn extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * M-M Polymorphic: A branch can be applied to many entities.
+     *
+     * This function will get all the branches that are applied to a given InventoryIn.
+     * See: Branch's inventory_ins() method for the inverse
+     *
+     * @return mixed
+     */
+    public function branches()
+    {
+        return $this->morphToMany(Branch::class, 'branchable');
+    }
+
+    /**
      * Polymorphic: An entity can have zero or many InventoryIns.
      *
      * This function will get all of the owning inventoryinable models.

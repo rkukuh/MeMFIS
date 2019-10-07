@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Branch;
 use App\Models\Storage;
 use App\Models\InventoryIn;
 use App\Models\GoodsReceived;
@@ -30,5 +31,19 @@ $factory->define(InventoryIn::class, function (Faker $faker) {
         },
         'description' => $faker->randomElement([null, $faker->sentence]),
     ];
+
+});
+
+/** CALLBACKS */
+
+$factory->afterCreating(InventoryIn::class, function ($inventory_in, $faker) {
+
+    // Branch
+    
+    if ($faker->boolean) {
+        for ($i = 1; $i <= rand(1, 3); $i++) {
+            $inventory_in->branches()->save(Branch::get()->random());
+        }
+    }
 
 });
