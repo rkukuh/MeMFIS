@@ -33,7 +33,7 @@ class InventoryIn extends MemfisModel
     {
         return $this->hasMany(FefoIn::class, 'inventoryin_id');
     }
-    
+
     /**
      * Polymorphic: An entity can have zero or many InventoryIns.
      *

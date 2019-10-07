@@ -31,8 +31,7 @@ class ApprovalObserver
                         'serial_number' => $item->pivot->serial_number,
                         'quantity' => $item->pivot->quantity,
                         'quantity_in_primary_unit' => 1,
-                        'purchased_price' => 1,
-                        // 'purchased_price' => $item->pivot->price,
+                        'purchased_price' => $item->pivot->price,
                         'total' => 1*$item->pivot->price,
                         'description' => $item->pivot->note,
                     ]);
@@ -43,10 +42,10 @@ class ApprovalObserver
                         'storage_id' =>  $approval->approvable->storage_id,
                         'fefoin_at' =>  $approval->approvable->received_at,
                         'quantity' => $item->pivot->quantity,
-                        // 'serial_number' => $approval->approvable->pivot->serial_number,
+                        'serial_number' => $item->pivot->serial_number,
                         'grn_id' => $approval->approvable->id,
                         'price' => $item->pivot->price,
-                        // 'expired_at' => $approval->approvable->pivot->expired_at,
+                        'expired_at' => $item->pivot->expired_at,
                     ]);
                 }
 
