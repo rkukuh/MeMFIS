@@ -15,6 +15,20 @@ class InventoryIn extends MemfisModel
 
     /*************************************** RELATIONSHIP ****************************************/
 
+
+    /**
+     * One-to-Many: A fefo in must have an inventory in
+     *
+     * This function will retrieve all the fefo in of an inventory in.
+     * See: Fefo In's inventoryIn() method for the inverse
+     *
+     * @return mixed
+     */
+    public function fefoIn()
+    {
+        return $this->hasMany(FefoIn::class);
+    }
+
     /**
      * Polymorphic: An entity can have zero or many InventoryIns.
      *
