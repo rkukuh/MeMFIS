@@ -45,6 +45,8 @@ class DatabaseSeeder extends Seeder
         $this->call(VendorsTableSeeder::class);
         $this->call(FacilitiesTableSeeder::class);
 
+        $this->call(OvertimesTableSeeder::class);
+
         /** POLYMORPH */
 
         $this->call(FaxesTableSeeder::class);

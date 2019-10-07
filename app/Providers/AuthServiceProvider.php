@@ -78,6 +78,12 @@ class AuthServiceProvider extends ServiceProvider
         Models\QuotationWorkPackageHtcrrItem::class => Policies\QuotationWorkPackageHtcrrItemPolicy::class,
         Models\TaskCardWorkPackagePredecessor::class => Policies\TaskCardWorkPackagePredecessorPolicy::class,
         Models\QuotationWorkPackageTaskCardItem::class => Policies\QuotationWorkPackageTaskCardItemPolicy::class,
+<<<<<<< Updated upstream
+=======
+        Models\EOInstructionWorkPackageSuccessor::class => Policies\EOInstructionWorkPackageSuccessorPolicy::class,
+        Models\EOInstructionWorkPackagePredecessor::class => Policies\EOInstructionWorkPackagePredecessorPolicy::class,
+        Models\Overtime::class => Policies\OvertimePolicy::class,
+>>>>>>> Stashed changes
     ];
 
     /**

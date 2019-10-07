@@ -60,6 +60,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('department', 'DepartmentController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
+        Route::resource('overtime', 'OvertimeController');
 
         /** CERTIFICATION */
 
