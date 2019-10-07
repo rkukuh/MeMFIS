@@ -5,6 +5,7 @@ use App\Models\Storage;
 use App\Models\InventoryIn;
 use App\Models\GoodsReceived;
 use App\Models\Item;
+use App\Models\Unit;
 use Faker\Generator as Faker;
 
 $factory->define(InventoryIn::class, function (Faker $faker) {
@@ -39,6 +40,7 @@ $factory->afterCreating(InventoryIn::class, function ($inventory_in, $faker) {
 
     if ($faker->boolean) {
         $item = null;
+        $price = rand(100, 200) * 100000;
 
         for ($i = 1; $i <= rand(5, 10); $i++) {
             if (Item::count()) {
@@ -47,9 +49,19 @@ $factory->afterCreating(InventoryIn::class, function ($inventory_in, $faker) {
                 $item = factory(Item::class)->create();
             }
 
+            if (Unit::count()) {
+                $unit = Unit::get()->random();
+            } else {
+                $unit = factory(Unit::class)->create();
+            }
+
             $inventory_in->items()->save($item, [
                 'quantity' => rand(1, 10),
+                'quantity_in_primary_unit' => rand(1, 10),
+                'unit_id' => $unit->id,
                 'note' => $faker->randomElement([null, $faker->sentence]),
+                'purchased_price' => $price,
+                'total' => $price,
             ]);
         }
     }
