@@ -578,4 +578,18 @@ class Employee extends MemfisModel implements HasMedia
     {
         return $this->hasMany(EmployeeHistories::class);
     }
+
+    /*************************************** ACCESSOR ****************************************/
+
+    /**
+     * Get the Employee's full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        $full_name = $this->first_name." ".$this->last_name;
+        
+        return $full_name;
+    }
 }

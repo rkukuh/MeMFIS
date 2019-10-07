@@ -159,6 +159,7 @@ class JobCardController extends Controller
         $now = Carbon::now();
         $statuses = Status::ofJobCard()->get();
         $jobcard = JobCard::with('jobcardable','quotation')->where('uuid',$jobCard)->first();
+        $taskcard = json_decode($jobcard->origin_jobcardable);
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;
         }
@@ -205,7 +206,11 @@ class JobCardController extends Controller
         if($jobcard->jobcardable_type == "App\Models\TaskCard"){
 
             $rii_status = $jobcard->jobcardable->is_rii;
-            $helpers = $jobcard->helpers;
+            if(sizeof($jobcard->helpers) > 0){
+                $helpers = join(',', $jobcard->helpers->pluck('full_name'));
+            }else{
+                $helpers = '-';
+            }
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobcard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -219,7 +224,7 @@ class JobCardController extends Controller
             }
             else{
                 $inspected_by = User::find($jobcard->approvals->first()->conducted_by)->name;
-                $inspected_at = $jobcard->approvals->first()->created_at;
+                $inspected_at = date('d-M-Y', strtotime($jobcard->approvals->first()->created_at));
             }
 
             if(sizeof($jobcard->approvals)==1 or sizeof($jobcard->approvals)==0){
@@ -228,7 +233,7 @@ class JobCardController extends Controller
             }
             else{
                 $rii_by = User::find($jobcard->approvals->get(1)->conducted_by)->name;
-                $rii_at = $jobcard->approvals->get(1)->created_at;
+                $rii_at = date('d-M-Y', strtotime($jobcard->approvals->get(1)->created_at));
             }
 
             if(sizeof($jobcard->progresses)>=0 and sizeof($jobcard->progresses)<=1){
@@ -236,13 +241,15 @@ class JobCardController extends Controller
                 $accomplished_at = "-";
             }else{
                 $accomplished_by =  User::find($jobcard->progresses->get(1)->progressed_by)->name;
-                $accomplished_at =  $jobcard->progresses->get(1)->created_at;
+                $accomplished_at =  date('d-M-Y', strtotime($jobcard->progresses->get(1)->created_at));
             }
 
             if(isset(User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name;
+                $prepared_by = $jobcard->quotation->quotationable->approvals->first()->conductedBy->full_name;
+                $prepared_at = date('d-M-Y', strtotime($jobcard->created_at));
             }else{
-                $prepared_by ="-";
+                $prepared_by = "-";
+                $prepared_at = "-";
             }
 
             if($jobcard->jobcardable->type->code == "basic"){
@@ -259,10 +266,12 @@ class JobCardController extends Controller
                         'rii_by' => $rii_by,
                         'rii_at' => $rii_at,
                         'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
                         'now' => $now,
-                        'actual_manhours'=> $actual_manhours
+                        'actual_manhours'=> $actual_manhours,
+                        'taskcard' => $taskcard
                         ]);
                 return $pdf->stream();
             }
@@ -280,10 +289,12 @@ class JobCardController extends Controller
                         'rii_by' => $rii_by,
                         'rii_at' => $rii_at,
                         'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
                         'now' => $now,
-                        'actual_manhours'=> $actual_manhours
+                        'actual_manhours'=> $actual_manhours,
+                        'taskcard' => $taskcard
                         ]);
                 return $pdf->stream();
             }
@@ -301,10 +312,12 @@ class JobCardController extends Controller
                         'rii_by' => $rii_by,
                         'rii_at' => $rii_at,
                         'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
                         'now' => $now,
-                        'actual_manhours'=> $actual_manhours
+                        'actual_manhours'=> $actual_manhours,
+                        'taskcard' => $taskcard
                         ]);
                 return $pdf->stream();
             }
@@ -322,10 +335,12 @@ class JobCardController extends Controller
                     'rii_by' => $rii_by,
                     'rii_at' => $rii_at,
                     'prepared_by' => $prepared_by,
+                    'prepared_at' => $prepared_at,
                     'rii_status' => $rii_status,
                     'helpers' => $helpers,
                     'now' => $now,
-                    'actual_manhours'=> $actual_manhours
+                    'actual_manhours'=> $actual_manhours,
+                    'taskcard' => $taskcard
                     ]);
                 return $pdf->stream();
             }
@@ -343,10 +358,12 @@ class JobCardController extends Controller
                         'rii_by' => $rii_by,
                         'rii_at' => $rii_at,
                         'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
                         'now' => $now,
-                        'actual_manhours'=> $actual_manhours
+                        'actual_manhours'=> $actual_manhours,
+                        'taskcard' => $taskcard
                         ]);
                 return $pdf->stream();
             }
@@ -363,7 +380,11 @@ class JobCardController extends Controller
             $eo_additionals->manual_affected_text = $jobcard->jobcardable->eo_header->manual_affected_text;
 
             $rii_status = $jobcard->jobcardable->is_rii;
-            $helpers = $jobcard->helpers;
+            if(sizeof($jobcard->helpers) > 0){
+                $helpers = join(',', $jobcard->helpers->pluck('full_name'));
+            }else{
+                $helpers = '-';
+            }
             $username = Auth::user()->name;
             $lastStatus = Status::where('id',$jobcard->progresses->last()->status_id)->first()->name;
             if($lastStatus == "CLOSED"){
@@ -377,7 +398,7 @@ class JobCardController extends Controller
             }
             else{
                 $inspected_by = User::find($jobcard->approvals->first()->conducted_by)->name;
-                $inspected_at = $jobcard->approvals->first()->created_at;
+                $inspected_at = date('d-M-Y', strtotime($jobcard->approvals->first()->created_at));
             }
 
             if(sizeof($jobcard->approvals)==1 or sizeof($jobcard->approvals)==0){
@@ -386,7 +407,7 @@ class JobCardController extends Controller
             }
             else{
                 $rii_by = User::find($jobcard->approvals->get(1)->conducted_by)->name;
-                $rii_at = $jobcard->approvals->get(1)->created_at;
+                $rii_at = date('d-M-Y', strtotime($jobcard->approvals->get(1)->created_at));
             }
 
             if(sizeof($jobcard->progresses)>=0 and sizeof($jobcard->progresses)<=1){
@@ -394,13 +415,15 @@ class JobCardController extends Controller
                 $accomplished_at = "-";
             }else{
                 $accomplished_by =  User::find($jobcard->progresses->get(1)->progressed_by)->name;
-                $accomplished_at =  $jobcard->progresses->get(1)->created_at;
+                $accomplished_at =  date('d-M-Y', strtotime($jobcard->progresses->get(1)->created_at));
             }
 
             if(isset(User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name)){
-                $prepared_by = User::find($jobcard->quotation->quotationable->audits->first()->user_id)->name;
+                $prepared_by = $jobcard->quotation->quotationable->approvals->first()->conductedBy->full_name;
+                $prepared_at = date('d-M-Y', strtotime($jobcard->created_at));
             }else{
-                $prepared_by ="-";
+                $prepared_by = "-";
+                $prepared_at = "-";
             }
 
             if(($jobcard->jobcardable->eo_header->type->code == "ad") or ($jobcard->jobcardable->eo_header->type->code == "sb")) {
@@ -416,10 +439,12 @@ class JobCardController extends Controller
                             'rii_by' => $rii_by,
                             'rii_at' => $rii_at,
                             'prepared_by' => $prepared_by,
+                            'prepared_at' => $prepared_at,
                             'rii_status' => $rii_status,
                             'helpers' => $helpers,
                             'now' => $now,
-                            'actual_manhours'=> $actual_manhours
+                            'actual_manhours'=> $actual_manhours,
+                            'taskcard' => $taskcard
                         ]);
                     return $pdf->stream();
             }
@@ -436,10 +461,12 @@ class JobCardController extends Controller
                             'rii_by' => $rii_by,
                             'rii_at' => $rii_at,
                             'prepared_by' => $prepared_by,
+                            'prepared_at' => $prepared_at,
                             'rii_status' => $rii_status,
                             'helpers' => $helpers,
                             'now' => $now,
-                            'actual_manhours'=> $actual_manhours
+                            'actual_manhours'=> $actual_manhours,
+                            'taskcard' => $taskcard
                         ]);
                     return $pdf->stream();
             }
@@ -457,10 +484,12 @@ class JobCardController extends Controller
                         'rii_by' => $rii_by,
                         'rii_at' => $rii_at,
                         'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
                         'now' => $now,
-                        'eo_additionals'=> $eo_additionals
+                        'eo_additionals'=> $eo_additionals,
+                        'taskcard' => $taskcard
                     ]);
                 return $pdf->stream();
                 }else{
@@ -476,10 +505,12 @@ class JobCardController extends Controller
                         'rii_by' => $rii_by,
                         'rii_at' => $rii_at,
                         'prepared_by' => $prepared_by,
+                        'prepared_at' => $prepared_at,
                         'rii_status' => $rii_status,
                         'helpers' => $helpers,
                         'now' => $now,
-                        'eo_additionals'=> $eo_additionals
+                        'eo_additionals'=> $eo_additionals,
+                        'taskcard' => $taskcard
                     ]);
 
                 }

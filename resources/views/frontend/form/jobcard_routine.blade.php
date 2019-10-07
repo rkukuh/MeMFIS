@@ -60,8 +60,8 @@
             <td width="30%" align="left" valign="center">
                 
                     <div class="barcode">
-                      {!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE',5,5)!!}
-                      <p style="margin-right:50%"><b>NO : </b> generate</p>
+                      {!!DNS2D::getBarcodeHTML($jobCard->number, 'QRCODE',5,5)!!}
+                      <p style="margin-right:50%"><b>NO : </b> {{ $jobCard->number }}</p>
                     </div>
       
 
@@ -298,7 +298,7 @@
                 Helper
               </div>
               <br>
-              <span><center>Generate</center></span> 
+              <span><center>{{ $helpers }}</center></span> 
             </td>
         </tr>
     </table>

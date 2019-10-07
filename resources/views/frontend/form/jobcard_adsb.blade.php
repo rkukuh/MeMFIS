@@ -384,23 +384,13 @@
           <td width="4%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="28%" valign="top">
-              generate
-              {{-- @if()
-              {{}}
-              @else
-                -
-              @endif --}}
+            {{ $helpers }}
           </td>
           <td width="33%" valign="top" align="center">Status :
           {{ $jobCard->status }}
           </td>
-          <td width="34%" valign="top" align="right">Data Close :
-              generate
-              {{-- @if()
-              {{}}
-              @else
-                -
-              @endif --}}
+          <td width="34%" valign="top" align="right">Date Close :
+              {{ $dateClosed }}
           </td>
         </tr>
       </table>
@@ -442,9 +432,9 @@
       </div>
       <table width="100%" style="margin-top: 12px;">
         <tr>
-          <td width="8%">Issued By</td>
+          <td width="10%">Prepared By</td>
           <td width="1%">:</td>
-          <td width="91%">Name PPC</td>
+          <td width="90%">{{ $prepared_by }};{{ $prepared_at }} </td>
         </tr>
       </table>
     </div>

@@ -148,7 +148,7 @@
   </header>
   <footer style="margin-top:14px;">
     <div class="container">
-      <span style="margin-left:6px">Issued By : Name PPC;Timestamp &nbsp;&nbsp;&nbsp;&nbsp; Printed By : Name;Timestamp</span>
+      <span style="margin-left:6px">Prepared By : {{ $prepared_by }};{{ $prepared_at }} &nbsp;&nbsp;&nbsp;&nbsp; Printed By : Name;Timestamp</span>
     </div>
     <img src="./img/form/printoutjobcardroutine/FooterJobCardRoutine.png" width="100%" alt="" >
   </footer>
@@ -158,7 +158,7 @@
       <li>
         <div class="jobcard-info">
             <fieldset>
-                <legend>JC No : 123456</legend>
+                <legend>JC No : {{ $jobCard->number }}</legend>
                 <div class="jobcard-info-detail">
                   <table width="80%" cellpadding="3">
                       <tr>
@@ -328,7 +328,7 @@
         <tr>
           <td width="4%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
-          <td width="28%" valign="top">Yemimul</td>
+          <td width="28%" valign="top">{{ $helpers }}</td>
           <td width="33%" valign="top" align="center">Status : <span>{{ $jobCard->status }}</span></td>
           <td width="34%" valign="top" align="right">Data Close : <span>10-07-1994</span></td>
         </tr>
