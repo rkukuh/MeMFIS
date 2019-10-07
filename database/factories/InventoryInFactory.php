@@ -1,11 +1,12 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Item;
+use App\Models\Unit;
+use App\Models\Branch;
 use App\Models\Storage;
 use App\Models\InventoryIn;
 use App\Models\GoodsReceived;
-use App\Models\Item;
-use App\Models\Unit;
 use Faker\Generator as Faker;
 
 $factory->define(InventoryIn::class, function (Faker $faker) {
@@ -39,6 +40,14 @@ $factory->define(InventoryIn::class, function (Faker $faker) {
 
 $factory->afterCreating(InventoryIn::class, function ($inventory_in, $faker) {
 
+    // Branch
+    
+    if ($faker->boolean) {
+        for ($i = 1; $i <= rand(1, 3); $i++) {
+            $inventory_in->branches()->save(Branch::get()->random());
+        }
+    }
+
     // Item
 
     if ($faker->boolean) {
@@ -59,13 +68,15 @@ $factory->afterCreating(InventoryIn::class, function ($inventory_in, $faker) {
             }
 
             $inventory_in->items()->save($item, [
+                'serial_number' => null,
                 'quantity' => rand(1, 10),
                 'quantity_in_primary_unit' => rand(1, 10),
                 'unit_id' => $unit->id,
-                'description' => $faker->randomElement([null, $faker->sentence]),
                 'purchased_price' => $price,
                 'total' => $price,
+                'description' => $faker->randomElement([null, $faker->sentence]),
             ]);
         }
     }
+
 });
