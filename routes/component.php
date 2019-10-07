@@ -44,7 +44,6 @@ Route::name('component.')->group(function () {
         Route::get('get-iterchanges/{item}', 'FillComboxController@iterchange')->name('get-iterchanges');
         Route::get('get-payment-term', 'FillComboxController@paymentTerm')->name('get-payment-term');
         Route::get('get-pr-types', 'FillComboxController@purchaseRequestType')->name('get-pr-types');
-        Route::get('get-accountcodes', 'FillComboxController@accountCodes')->name('get-accountcodes');
         Route::get('get-website-types', 'FillComboxController@websiteType')->name('get-website-types');
         Route::get('get-employees-data', 'FillComboxController@employees')->name('get-employees-data');
         Route::get('get-employees-uuid', 'FillComboxController@employeeUuid')->name('get-employees-uuid');
