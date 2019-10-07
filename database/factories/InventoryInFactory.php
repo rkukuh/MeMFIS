@@ -10,12 +10,15 @@ use Faker\Generator as Faker;
 
 $factory->define(InventoryIn::class, function (Faker $faker) {
 
+    $number = $faker->unixTime();
+
     return [
+        'number' => 'INV-IN-DUM-' . $number,
         'storage_id' => function () {
             if (Storage::count()) {
                 return Storage::get()->random()->id;
             }
-            
+
             return factory(Storage::class)->create()->id;
         },
         'inventoried_at' => Carbon::now(),
@@ -59,7 +62,7 @@ $factory->afterCreating(InventoryIn::class, function ($inventory_in, $faker) {
                 'quantity' => rand(1, 10),
                 'quantity_in_primary_unit' => rand(1, 10),
                 'unit_id' => $unit->id,
-                'note' => $faker->randomElement([null, $faker->sentence]),
+                'description' => $faker->randomElement([null, $faker->sentence]),
                 'purchased_price' => $price,
                 'total' => $price,
             ]);
