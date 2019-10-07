@@ -127,10 +127,12 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function sip(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type','task')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'SIP');
-                                    })->whereNull('taskcards.deleted_at')->get();
+        $workPackages = TaskCardWorkPackage::with('taskcard','taskcard.type','taskcard.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereHas('taskcard.type', function ($query) {
+                            $query->where('name', 'SIP');
+                        })->whereNull('deleted_at')
+                        ->get();
 
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){
@@ -243,10 +245,12 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function cpcp(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type','task')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'CPCP');
-                                    })->whereNull('taskcards.deleted_at')->get();
+        $workPackages = TaskCardWorkPackage::with('taskcard','taskcard.type','taskcard.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereHas('taskcard.type', function ($query) {
+                            $query->where('name', 'CPCP');
+                        })->whereNull('deleted_at')
+                        ->get();
 
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){

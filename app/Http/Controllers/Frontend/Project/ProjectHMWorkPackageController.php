@@ -12,6 +12,8 @@ use App\Models\Facility;
 use App\Models\WorkPackage;
 use App\Models\TaskCard;
 use App\Models\ProjectWorkPackageEngineer;
+use App\Models\Pivots\TaskCardWorkPackage;
+use App\Models\Pivots\EOInstructionWorkPackage;
 use App\Models\HtCrr;
 use App\Models\Pivots\ProjectWorkPackage;
 use Illuminate\Http\Request;
@@ -61,23 +63,37 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function store(Request $request, Project $project)
     {
-        $project->workpackages()->attach(WorkPackage::where('uuid',$request->workpackage)->first()->id);
+        $workPackage = WorkPackage::where('uuid',$request->workpackage)->first();
+        
+        $routines = TaskCardWorkPackage::with('taskcard','taskcard.type','taskcard.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereNull('deleted_at')
+                        ->get();
 
+        $nonroutines = EOInstructionWorkPackage::with('eo_instruction','eo_instruction.eo_header.type','eo_instruction.eo_header.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereNull('deleted_at')
+                        ->get();
+
+        $project->workpackages()->attach($workPackage->id);
+        
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',WorkPackage::where('uuid',$request->workpackage)->first()->id)->first();
-        foreach($project_workpackage->workpackage->taskcards as $taskcard){
+        
+        foreach($routines as $routine){
             $project_workpackage->taskcards()->create([
-                'taskcard_id' => $taskcard->id,
-                'is_rii' => $taskcard->is_rii,
-                'sequence' => $taskcard->pivot->sequence,
-                'is_mandatory' => $taskcard->pivot->is_mandatory,
+                'taskcard_id' => $routine->taskcard->id,
+                'is_rii' => $routine->taskcard->is_rii,
+                'sequence' => $routine->sequence,
+                'is_mandatory' => $routine->is_mandatory,
             ]);
         }
-        foreach($project_workpackage->workpackage->eo_instructions as $eo_instructions){
+        
+        foreach($nonroutines as $eo_instructions){
             $project_workpackage->eo_instructions()->create([
-                'eo_instruction_id' => $eo_instructions->id,
-                'is_rii' => $eo_instructions->is_rii,
-                'sequence' => $eo_instructions->pivot->sequence,
-                'is_mandatory' => $eo_instructions->pivot->is_mandatory,
+                'eo_instruction_id' => $eo_instructions->eo_instruction->id,
+                'is_rii' => $eo_instructions->eo_instruction->is_rii,
+                'sequence' => $eo_instructions->sequence,
+                'is_mandatory' => $eo_instructions->is_mandatory,
             ]);
         }
 
