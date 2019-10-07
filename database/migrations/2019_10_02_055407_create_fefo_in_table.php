@@ -18,13 +18,14 @@ class CreateFefoInTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('storage_id');
-            $table->timestamp('fefo_in_at')->nullable();
+            $table->unsignedBigInteger('inventoryin_id'); //?
+            $table->timestamp('fefoin_at')->nullable();
             $table->double('quantity');
             $table->double('used_quantity')->default(0);;
-            $table->string('serial_no')->nullable();
+            $table->string('serial_number')->nullable();
+            $table->unsignedBigInteger('grn_id');
+            $table->double('price')->nullable();
             $table->timestamp('expired_at')->nullable();
-            // refno inv in tapi kedepan bisa banyak
-            // polymorp book item untuk project atau jobcard khusus
             $table->timestamps();
             $table->softDeletes();
 
@@ -35,6 +36,16 @@ class CreateFefoInTable extends Migration
 
             $table->foreign('storage_id')
                     ->references('id')->on('storages')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('inventoryin_id')
+                    ->references('id')->on('inventory_in')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('grn_id')
+                    ->references('id')->on('goods_received')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
