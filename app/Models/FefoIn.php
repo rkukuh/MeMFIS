@@ -9,7 +9,16 @@ class FefoIn extends MemfisModel
     protected $table = 'fefo_in';
 
     protected $fillable = [
-        //
+        'item_id',
+        'storage_id',
+        'inventoryin_id',
+        'fefoin_at',
+        'quantity',
+        'used_quantity',
+        'serial_number',
+        'grn_id',
+        'price',
+        'expired_at',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
@@ -24,6 +33,7 @@ class FefoIn extends MemfisModel
      */
     public function inventoryIn()
     {
-        return $this->belongsTo(InventoryIn::class);
+        return $this->belongsTo(InventoryIn::class, 'inventoryin_id');
+
     }
 }
