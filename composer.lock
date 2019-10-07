@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36964216c33d713bf86fe18dc8cc129d",
+    "content-hash": "a693de052ce96e0706d863f995b2cada",
     "packages": [
         {
             "name": "anahkiasen/underscore-php",
@@ -111,6 +111,46 @@
                 "pdf"
             ],
             "time": "2019-08-23T14:30:33+00:00"
+        },
+        {
+            "name": "directoryxx/finac",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/directoryxx/finac.git",
+                "reference": "fc44936a26667ce99b1838305b99a6c315b40156"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/directoryxx/finac/zipball/fc44936a26667ce99b1838305b99a6c315b40156",
+                "reference": "fc44936a26667ce99b1838305b99a6c315b40156",
+                "shasum": ""
+            },
+            "require": {
+                "ramsey/uuid": "^3.8"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Directoryxx\\Finac\\FAServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Directoryxx\\Finac\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "directoryx",
+                    "email": "anggawijaya4567@gmail.com"
+                }
+            ],
+            "description": "FA Module for Memfis",
+            "time": "2019-09-30T00:10:40+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -7948,7 +7988,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "directoryxx/finac": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
