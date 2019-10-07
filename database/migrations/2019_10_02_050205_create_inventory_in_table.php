@@ -17,6 +17,7 @@ class CreateInventoryInTable extends Migration
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('storage_id')->nullable();
+            $table->string('number')->nullable();
             $table->timestamp('inventoried_at');
             $table->morphs('inventoryinable');
             $table->text('description')->nullable();
