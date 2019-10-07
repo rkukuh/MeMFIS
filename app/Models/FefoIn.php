@@ -21,6 +21,8 @@ class FefoIn extends MemfisModel
         'expired_at',
     ];
 
+    protected $dates = ['fefoin_at','expired_at'];
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**

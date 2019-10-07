@@ -17,6 +17,8 @@ class InventoryIn extends MemfisModel
         'description',
     ];
 
+    protected $dates = ['inventoried_at'];
+
     /*************************************** RELATIONSHIP ****************************************/
 
 
