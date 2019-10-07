@@ -2,7 +2,10 @@
 
 namespace App\Observers;
 
+use App\Models\FefoIn;
 use App\Models\Approval;
+use App\Models\InventoryIn;
+use App\Helpers\DocumentNumber;
 
 class ApprovalObserver
 {
@@ -17,12 +20,33 @@ class ApprovalObserver
         switch ($approval->approvable_type) {
             case 'App\Models\GoodsReceived':
                 $inv_in = $approval->approvable->inventoryin()->create([
+                    'storage_id' => $approval->approvable->storage_id,
+                    'number' => DocumentNumber::generate('INV-IN-', InventoryIn::withTrashed()->count()+1),
+                    'inventoried_at' => $approval->approvable->received_at,
                 ]);
 
                 foreach($approval->approvable->items as $item){
                     $inv_in->items()->attach($item->pivot->item_id, [
+                        'unit_id' => $item->pivot->unit_id,
+                        'serial_number' => $item->pivot->serial_number,
                         'quantity' => $item->pivot->quantity,
-                        'note' => $item->pivot->note,
+                        'quantity_in_primary_unit' => 1,
+                        'purchased_price' => 1,
+                        // 'purchased_price' => $item->pivot->price,
+                        'total' => 1*$item->pivot->price,
+                        'description' => $item->pivot->note,
+                    ]);
+
+                    FefoIn::create([
+                        'inventoryin_id' => $inv_in->id,
+                        'item_id' => $item->pivot->item_id,
+                        'storage_id' =>  $approval->approvable->storage_id,
+                        'fefoin_at' =>  $approval->approvable->received_at,
+                        'quantity' => $item->pivot->quantity,
+                        // 'serial_number' => $approval->approvable->pivot->serial_number,
+                        'grn_id' => $approval->approvable->id,
+                        'price' => $item->pivot->price,
+                        // 'expired_at' => $approval->approvable->pivot->expired_at,
                     ]);
                 }
 

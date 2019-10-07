@@ -162,6 +162,20 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function employeeUuid()
+    {
+        $employees = Employee::selectRaw('uuid, CONCAT(first_name, " ", last_name) as name')
+                    ->pluck('name', 'uuid');
+
+        return json_encode($employees);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function aviationDegrees()
     {
         $aviation_degrees = Type::ofAviationDegree()

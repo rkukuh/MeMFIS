@@ -47,6 +47,7 @@ Route::name('component.')->group(function () {
         Route::get('get-accountcodes', 'FillComboxController@accountCodes')->name('get-accountcodes');
         Route::get('get-website-types', 'FillComboxController@websiteType')->name('get-website-types');
         Route::get('get-employees-data', 'FillComboxController@employees')->name('get-employees-data');
+        Route::get('get-employees-uuid', 'FillComboxController@employeeUuid')->name('get-employees-uuid');
         Route::get('get-address-types', 'FillComboxController@addressType')->name('get-address-types');
         Route::get('get-manufacturers', 'FillComboxController@manufacturer')->name('get-manufacturers');
         Route::get('get-takcard-types', 'FillComboxController@taskcardType')->name('get-takcard-types');
