@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -26,6 +27,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->call(function () {
+            DB::table('inventory_out')->where('created_at', '<', Carbon::now()->subMinutes(10)->toDateTimeString()->doesnthave('approvals'))->delete();
+        })->daily();
     }
 
     /**
