@@ -145,30 +145,14 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
                                 })->whereNull('deleted_at')
                                 ->get();
 
-        foreach($workPackages as $workPackage){
-            if(isset($workPackage->taskcard->skills) ){
-                $workPackage->skill .= $workPackage->taskcard->skill;
+        foreach($workPackages as $taskcard){
+            $taskcard->task .= $taskcard->eo_instruction->eo_header->task;
+
+            if(isset($taskcard->eo_instruction->skills) ){
+                $taskcard->skill .= $taskcard->eo_instruction->skill;
             }
         }
-        // $workPackages = $workPackage->eo_instructions()->with('eo_header.type')
-        //                             ->whereHas('eo_header.type', function ($query) {
-        //                                 $query->where('code', 'ad')->orWhere('code','sb');
-        //                             })->whereNull('eo_instructions.deleted_at')->get();
-        // // dd($workPackages);
-        // foreach($workPackages as $taskcard){
-        //     if(isset($taskcard->skills) ){
-        //         if(sizeof($taskcard->skills) == 3){
-        //             $taskcard->skill .= "ERI";
-        //         }
-        //         else if(sizeof($taskcard->skills) == 1){
-        //             $taskcard->skill .= $taskcard->skills[0]->name;
-        //         }
-        //         else{
-        //             $taskcard->skill .= '';
-        //         }
-        //     }
-        // }
-
+       
         $data = $alldata = json_decode($workPackages);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
@@ -274,16 +258,10 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
                         })->whereNull('deleted_at')->get();
 
         foreach($workPackages as $taskcard){
-            if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
-                }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
-                }
-                else{
-                    $taskcard->skill .= '';
-                }
+            $taskcard->task .= $taskcard->eo_instruction->eo_header->task;
+
+            if(isset($taskcard->eo_instruction->skills) ){
+                $taskcard->skill .= $taskcard->eo_instruction->skill;
             }
         }
 
@@ -568,17 +546,8 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
                         ->get();
         
         foreach($workPackages as $taskcard){
-            if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
-                }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
-                }
-                else{
-                    $taskcard->skill .= '';
-                }
-            }
+            $taskcard->task .= $taskcard->taskcard->task;
+            $taskcard->skill .= $taskcard->taskcard->skill;
         }
 
         $data = $alldata = json_decode($workPackages);
@@ -686,16 +655,9 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
 
 
         foreach($workPackages as $taskcard){
-            if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
-                }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
-                }
-                else{
-                    $taskcard->skill .= '';
-                }
+            $taskcard->task .= $taskcard->eo_instruction->eo_header->task;
+            if(isset($taskcard->eo_instruction->skills) ){
+                $taskcard->skill .= $taskcard->eo_instruction->skill;
             }
         }
 
@@ -805,16 +767,9 @@ class WorkPackageTaskCardNonRoutineDatatables extends Controller
                                    
 
         foreach($workPackages as $taskcard){
-            if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
-                }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
-                }
-                else{
-                    $taskcard->skill .= '';
-                }
+            $taskcard->task .= $taskcard->eo_instruction->eo_header->task;
+            if(isset($taskcard->eo_instruction->skills) ){
+                $taskcard->skill .= $taskcard->eo_instruction->skill;
             }
         }
 
