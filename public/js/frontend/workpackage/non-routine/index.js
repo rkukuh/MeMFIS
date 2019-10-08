@@ -78,13 +78,7 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
-                    field: 'skill',
-                    title: 'Skill',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'taskcard.task.name',
+                    field: 'task',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
@@ -271,6 +265,7 @@ let NonRoutineWorkpackage = {
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
+                        console.log(t);
                         if (
                             t.eo_instruction.eo_header.type.code == "basic" ||
                             t.eo_instruction.eo_header.type.code == "sip" ||
@@ -327,13 +322,13 @@ let NonRoutineWorkpackage = {
                     filterable: !1
                 },
                 {
-                    field: "eo_instruction.eo_header.task.name",
+                    field: "task",
                     title: "Task",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: "eo_instruction.eo_header.estimation_manhour",
+                    field: "eo_instruction.estimation_manhour",
                     title: "Manhour",
                     sortable: "asc",
                     filterable: !1
@@ -582,13 +577,13 @@ let NonRoutineWorkpackage = {
                     filterable: !1
                 },
                 {
-                    field: "eo_instruction.eo_header.task.name",
+                    field: "task",
                     title: "Task",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: "eo_instruction.eo_header.estimation_manhour",
+                    field: "eo_instruction.estimation_manhour",
                     title: "Manhour",
                     sortable: "asc",
                     filterable: !1
@@ -802,7 +797,7 @@ let NonRoutineWorkpackage = {
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.task.name',
+                    field: 'task',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
@@ -1044,13 +1039,13 @@ let NonRoutineWorkpackage = {
                     filterable: !1
                 },
                 {
-                    field: "eo_instruction.eo_header.task.name",
+                    field: "task",
                     title: "Task",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: "eo_instruction.eo_header.estimation_manhour",
+                    field: "eo_instruction.estimation_manhour",
                     title: "Manhour",
                     sortable: "asc",
                     filterable: !1
@@ -1301,13 +1296,13 @@ let NonRoutineWorkpackage = {
                     filterable: !1
                 },
                 {
-                    field: "eo_instruction.eo_header.task.name",
+                    field: "task",
                     title: "Task",
                     sortable: "asc",
                     filterable: !1
                 },
                 {
-                    field: "eo_instruction.eo_header.estimation_manhour",
+                    field: "eo_instruction.estimation_manhour",
                     title: "Manhour",
                     sortable: "asc",
                     filterable: !1
