@@ -149,7 +149,7 @@ let PurchaseRequest = {
                         type: 'PUT',
                         url: '/purchase-request/' +  purchase_request_uuid +'/project/approve',
                         success: function (data) {
-                            toastr.success('Goods Received has been Approved.', 'Approved', {
+                            toastr.success('Purchase Request has been Approved.', 'Approved', {
                                 timeOut: 5000
                                 }
                             );
@@ -192,7 +192,7 @@ let PurchaseRequest = {
                         type: 'DELETE',
                         url: '/purchase-request-project/' + purchase_request_uuid + '',
                         success: function (data) {
-                            toastr.success('Material has been deleted.', 'Deleted', {
+                            toastr.success('Purchase Request has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );

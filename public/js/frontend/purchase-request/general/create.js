@@ -33,7 +33,7 @@ let PurchaseRequestGeneral = {
                         //    taskcard_reset();
 
 
-                        toastr.success('Taskcard has been created.', 'Success', {
+                        toastr.success('Purchase Request been created.', 'Success', {
                             timeOut: 5000
                         });
 
