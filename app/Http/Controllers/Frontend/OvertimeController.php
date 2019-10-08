@@ -113,7 +113,8 @@ class OvertimeController extends Controller
      */
     public function edit(Overtime $overtime)
     {
-        //
+        // $theOvertime = blg::findOrFail($id);
+        return view("frontend.overtime.edit",["overtime" => $overtime]);
     }
 
     /**

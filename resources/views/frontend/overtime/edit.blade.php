@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.attendance.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.overtime.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Propose Overtime
                             </span>
@@ -67,6 +67,7 @@
                                                 @component('frontend.common.label.data-info')
                                                     @slot('id', 'employee')
                                                     @slot('text', 'generate from user login')
+                                                    @slot('value',$overtime->nrp."-".$overtime->employee_name)
                                                 @endcomponent
                                             @endrole
                                         </div>
@@ -80,6 +81,7 @@
                                                 @slot('id', 'date')
                                                 @slot('name', 'date')
                                                 @slot('id_error', 'date')
+                                                @slot('value',$overtime->date)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -94,6 +96,7 @@
                                                     @component('frontend.common.input.timepicker')
                                                         @slot('id', 'start_time')
                                                         @slot('class','m_timepicker_1 text-center')
+                                                        @slot('value',$overtime->start_time)
                                                     @endcomponent
                                                   
                                                 </div>
@@ -105,6 +108,7 @@
                                                     @component('frontend.common.input.timepicker')
                                                         @slot('id', 'end_time')
                                                         @slot('class','m_timepicker_1 text-center')
+                                                        @slot('value',$overtime->end_time)
                                                     @endcomponent
                                                     
                                                 </div>
@@ -150,6 +154,7 @@
                                                 @slot('id', 'description')
                                                 @slot('name', 'description')
                                                 @slot('text', 'Description')
+                                                @slot('value',$overtime->desc)
                                             @endcomponent
                                         </div>
                                     </div>
