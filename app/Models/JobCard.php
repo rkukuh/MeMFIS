@@ -227,7 +227,7 @@ class JobCard extends MemfisModel
      *
      * @return string
      */
-    public function getStatusAttribute()
+    public function getStatusNameAttribute()
     {
         $status = Status::ofJobCard()->find($this->progresses->last()->status_id);
         
