@@ -87,7 +87,7 @@ let PurchaseRequest = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_general_update" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-remark='+t.pivot.note+' data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_general" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.uuid+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-remark='+t.pivot.note+' data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
@@ -172,27 +172,53 @@ let PurchaseRequest = {
             });
         });
 
+        // $('#modal_general').on('hidden.bs.modal', function () {
+        //     alert('s');
+        // })
+
         $('.item_datatable').on('click', '.edit-item', function () {
             let unit_id = $(this).data('unit');
 
-            $('select[name="unit_material"]').empty();
+            $.ajax({
+                url: '/get-items-uuid/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    $('select[name="item"]').empty();
+
+                    $.each(data, function (key, value) {
+                        if (key == uuid) {
+                            $('select[name="item"]').append(
+                                '<option value="' + key + '" selected>' + value + '</option>'
+                            );
+                        } else {
+                            $('select[name="item"]').append(
+                                '<option value="' + key + '">' + value + '</option>'
+                            );
+                        }
+
+                    });
+                }
+            });
+            $("#item").attr('disabled', true);
 
             $.ajax({
-                url: '/get-units',
+                url: '/get-item-unit-uuid/'+ $(this).data('item'),
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
                     let index = 1;
 
-                    $('select[name="unit_material"]').empty();
+                    $('select[name="unit_id"]').empty();
 
                     $.each(data, function (key, value) {
                         if (key == unit_id) {
-                            $('select[name="unit_material"]').append(
+                            $('select[name="unit_id"]').append(
                                 '<option value="' + key + '" selected>' + value + '</option>'
                             );
                         } else {
-                            $('select[name="unit_material"]').append(
+                            $('select[name="unit_id"]').append(
                                 '<option value="' + key + '">' + value + '</option>'
                             );
                         }
@@ -201,10 +227,10 @@ let PurchaseRequest = {
                 }
             });
 
-            document.getElementById('material').innerText = $(this).data('item');
-            document.getElementById('qty-material').value = $(this).data('quantity');
+            // document.getElementById('material').innerText = $(this).data('item');
+            document.getElementById('qty').value = $(this).data('quantity');
             document.getElementById('uuid').value = $(this).data('uuid');
-            document.getElementById('remark-material').value = $(this).data('remark');
+            document.getElementById('remark').value = $(this).data('remark');
         });
 
         $(".modal-footer").on("click", ".update-item", function() {

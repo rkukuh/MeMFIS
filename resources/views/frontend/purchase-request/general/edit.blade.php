@@ -155,7 +155,6 @@
                                                             </div>
                                                         </div>
                                                         @include('frontend.purchase-request.general.modal')
-                                                        @include('frontend.purchase-request.general.modal-edit')
                                                         <div class="item_datatable" id="scrolling_both"></div>
                                                     </div>
                                                 </div>
