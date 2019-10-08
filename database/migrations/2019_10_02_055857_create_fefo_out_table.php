@@ -16,16 +16,24 @@ class CreateFefoOutTable extends Migration
         Schema::create('fefo_out', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
+            $table->unsignedBigInteger('fefoin_id');
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('storage_id');
-            $table->unsignedBigInteger('fefo_in_id');
-            $table->timestamp('fefo_out_at');
+            $table->unsignedBigInteger('inventoryout_id');
+            $table->timestamp('fefoout_at');
             $table->double('quantity');
-            $table->string('serial_no')->nullable();
-            // refno inv out tapi kedepan bisa banyak
-            // polymorp book item untuk project atau jobcard khusus
+            $table->double('used_quantity')->default(0);;
+            $table->string('serial_number')->nullable();
+            $table->unsignedBigInteger('grn_id')->nullable();
+            $table->double('price')->nullable();
+            $table->timestamp('expired_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('fefoin_id')
+                    ->references('id')->on('fefo_in')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->foreign('item_id')
                     ->references('id')->on('items')
@@ -37,8 +45,13 @@ class CreateFefoOutTable extends Migration
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 
-            $table->foreign('fefo_in_id')
-                    ->references('id')->on('fefo_in')
+            $table->foreign('inventoryout_id')
+                    ->references('id')->on('inventory_in')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('grn_id')
+                    ->references('id')->on('goods_received')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

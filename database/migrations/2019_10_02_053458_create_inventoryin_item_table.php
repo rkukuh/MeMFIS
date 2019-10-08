@@ -17,9 +17,13 @@ class CreateInventoryinItemTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('inventoryin_id');
             $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('unit_id');
+            $table->string('serial_number')->nullable();
             $table->double('quantity');
-            $table->string('serial_no');
-            $table->string('note')->nullable();
+            $table->double('quantity_in_primary_unit');
+            $table->double('purchased_price');
+            $table->double('total');
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
@@ -30,6 +34,11 @@ class CreateInventoryinItemTable extends Migration
 
             $table->foreign('item_id')
                     ->references('id')->on('items')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('unit_id')
+                    ->references('id')->on('units')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });

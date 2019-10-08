@@ -1247,7 +1247,7 @@ let Workpackage = {
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error("Instruction alrady exists!", "Error", {
+                            toastr.error("Instruction already exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {

@@ -16,20 +16,15 @@ class CreateInventoryInTable extends Migration
         Schema::create('inventory_in', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            $table->unsignedBigInteger('branch_id');
-            $table->unsignedBigInteger('warehouse_id');
+            $table->string('number');
+            $table->unsignedBigInteger('storage_id');
             $table->timestamp('inventoried_at');
-            $table->text('description');
             $table->morphs('inventoryinable');
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('branch_id')
-                ->references('id')->on('branches')
-                ->onUpdate('cascade')
-                ->onDelete('restrict');
-
-            $table->foreign('warehouse_id')
+            $table->foreign('storage_id')
                 ->references('id')->on('storages')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');

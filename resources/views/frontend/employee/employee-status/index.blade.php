@@ -38,9 +38,9 @@
                                 <span class="m-portlet__head-icon m--hide">
                                     <i class="la la-gear"></i>
                                 </span>
-    
+
                                 @include('frontend.common.label.datalist')
-    
+
                                 <h3 class="m-portlet__head-text">
                                     Employement Status
                                 </h3>
@@ -88,7 +88,6 @@
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datetimepicker.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox.js')}}"></script>
     <script src="{{ asset('js/frontend/employee/employee-status/employee-status/index.js')}}"></script>
     <script src="{{ asset('js/frontend/employee/employee-status/job-title/index.js')}}"></script>
 @endpush

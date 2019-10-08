@@ -101,7 +101,7 @@ class InventoryInDatatables extends Controller
                 ],
             'data' => $data,
         ];
-
+// dd(json_encode($result));
         echo json_encode($result, JSON_PRETTY_PRINT);
     }
 

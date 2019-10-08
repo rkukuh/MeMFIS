@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\GoodsReceived;
 use Auth;
 use Carbon\Carbon;
 use App\Models\Storage;
+use App\Models\Employee;
 use App\Models\Approval;
 use App\Models\PurchaseOrder;
 use App\Models\GoodsReceived;
@@ -47,6 +48,7 @@ class GoodsReceivedController extends Controller
         $request->merge(['purchase_order_id' => PurchaseOrder::where('uuid',$request->purchase_order_id)->first()->id]);
         $request->merge(['storage_id' => Storage::where('uuid',$request->storage_id)->first()->id]);
         $request->merge(['received_at' => Carbon::parse($request->received_at)]);
+        $request->merge(['received_by' => Employee::where('uuid',$request->received_by)->first()->user->id]);
 
         $additionals = null;
 

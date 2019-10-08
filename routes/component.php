@@ -41,11 +41,12 @@ Route::name('component.')->group(function () {
         Route::get('get-storages-combobox', 'FillComboxController@storages')->name('get-storages');
         Route::get('get-repeat-types', 'FillComboxController@repeatType')->name('get-repeat-types');
         Route::get('get-categories-item', 'FillComboxController@categories')->name('get-categories');
+        Route::get('get-iterchanges/{item}', 'FillComboxController@iterchange')->name('get-iterchanges');
         Route::get('get-payment-term', 'FillComboxController@paymentTerm')->name('get-payment-term');
         Route::get('get-pr-types', 'FillComboxController@purchaseRequestType')->name('get-pr-types');
-        Route::get('get-accountcodes', 'FillComboxController@accountCodes')->name('get-accountcodes');
         Route::get('get-website-types', 'FillComboxController@websiteType')->name('get-website-types');
         Route::get('get-employees-data', 'FillComboxController@employees')->name('get-employees-data');
+        Route::get('get-employees-uuid', 'FillComboxController@employeeUuid')->name('get-employees-uuid');
         Route::get('get-address-types', 'FillComboxController@addressType')->name('get-address-types');
         Route::get('get-manufacturers', 'FillComboxController@manufacturer')->name('get-manufacturers');
         Route::get('get-takcard-types', 'FillComboxController@taskcardType')->name('get-takcard-types');
