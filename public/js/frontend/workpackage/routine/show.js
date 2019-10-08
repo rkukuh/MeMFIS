@@ -48,24 +48,24 @@ let RoutineWorkpackageShow = {
                 }
             },
             columns: [{
-                    field: 'number',
+                    field: 'taskcard.number',
                     title: 'Taskcard Number',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
+                    field: 'taskcard.title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'task.name',
+                    field: 'taskcard.task.name',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'taskcard.description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -88,7 +88,7 @@ let RoutineWorkpackageShow = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_material_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                            t.uuid +
+                            t.taskcard.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
                         );
                     }
@@ -102,7 +102,7 @@ let RoutineWorkpackageShow = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_tool_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
+                            t.taskcard.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
                     }
@@ -114,8 +114,8 @@ let RoutineWorkpackageShow = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence='+t.pivot.sequence+' data-uuid=' +
-                            t.uuid +
+                            '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence='+t.sequence+' data-uuid=' +
+                            t.taskcard.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
                     }
@@ -144,13 +144,13 @@ let RoutineWorkpackageShow = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            if(t.pivot.is_mandatory == 1){
+                            if(t. is_mandatory == 1){
                                 return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=1' +
                                 ' title="Mandatory"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
                                 );
                             }
-                            else if(t.pivot.is_mandatory == 0){
+                            else if(t.is_mandatory == 0){
                                 return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=0' +
                                 ' title="Not Mandatory"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
@@ -216,24 +216,24 @@ let RoutineWorkpackageShow = {
                 }
             },
             columns: [{
-                    field: 'number',
+                    field: 'taskcard.number',
                     title: 'Taskcard Number',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
+                    field: 'taskcard.title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'task.name',
+                    field: 'taskcard.task.name',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'taskcard.description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -256,7 +256,7 @@ let RoutineWorkpackageShow = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_material_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                            t.uuid +
+                            t.taskcard.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
                         );
                     }
@@ -270,7 +270,7 @@ let RoutineWorkpackageShow = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_tool_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
+                            t.taskcard.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
                     }
@@ -283,7 +283,7 @@ let RoutineWorkpackageShow = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
+                            t.taskcard.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
                     }
@@ -312,13 +312,13 @@ let RoutineWorkpackageShow = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            if(t.pivot.is_mandatory == 1){
+                            if(t.is_mandatory == 1){
                                 return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=1' +
                                 ' title="Mandatory"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
                                 );
                             }
-                            else if(t.pivot.is_mandatory == 0){
+                            else if(t.is_mandatory == 0){
                                 return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=0' +
                                 ' title="Not Mandatory"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
@@ -384,24 +384,24 @@ let RoutineWorkpackageShow = {
                 }
             },
             columns: [{
-                    field: 'number',
+                    field: 'taskcard.number',
                     title: 'Taskcard Number',
                     sortable: !1,
                 },
                 {
-                    field: 'title',
+                    field: 'taskcard.title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'task.name',
+                    field: 'taskcard.task.name',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'taskcard.description',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -424,7 +424,7 @@ let RoutineWorkpackageShow = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_material_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
-                            t.uuid +
+                            t.taskcard.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
                         );
                     }
@@ -438,7 +438,7 @@ let RoutineWorkpackageShow = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_tool_taskcard_wp" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
+                            t.taskcard.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
                     }
@@ -451,7 +451,7 @@ let RoutineWorkpackageShow = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.uuid +
+                            t.taskcard.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
                         );
                     }
@@ -480,13 +480,13 @@ let RoutineWorkpackageShow = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            if(t.pivot.is_mandatory == 1){
+                            if(t.is_mandatory == 1){
                                 return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=1' +
                                 ' title="Mandatory"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
                                 );
                             }
-                            else if(t.pivot.is_mandatory == 0){
+                            else if(t.is_mandatory == 0){
                                 return (
                                 '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill mandatory" title="Mandatory" data-uuid='+t.uuid+' data-mandatory=0' +
                                 ' title="Not Mandatory"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
