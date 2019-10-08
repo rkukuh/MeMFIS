@@ -67,7 +67,7 @@
 
         #content .barcode {
             margin-left: 16px;
-            margin-top: -112px;
+            margin-top: -1px;
         }
 
         #content2 {
@@ -223,8 +223,8 @@
                             :
                         </div>
                     </td>
-                    <td width="81%"> @if($jobCard->jobcardable->title)
-                        {{$jobCard->jobcardable->title}}
+                    <td width="81%"> @if($jobCard->jobcardable->eo_header->title)
+                        {{$jobCard->jobcardable->eo_header->title}}
                         @else
                         -
                         @endif
@@ -258,8 +258,8 @@
                             :
                         </div>
                     </td>
-                    <td width="81%">@if($jobCard->jobcardable->reference)
-                        {{$jobCard->jobcardable->reference}}
+                    <td width="81%">@if($jobCard->jobcardable->eo_header->reference)
+                        {{$jobCard->jobcardable->eo_header->reference}}
                         @else
                         -
                         @endif
@@ -324,15 +324,17 @@
                 <tr>
                     <td height="15%" valign="top">
                         <span>
-                            @foreach($jobCard->jobcardable->items as $material)
-                            {{$material->name}} - {{$material->pivot->quantity}} {{$material->pivot->unit_id}} <br>
-                            @endforeach
+                        @foreach($jobCard->jobcardable->materials as $material)
+                            {{$material->code}} | {{$material->name}} | {{$material->pivot->quantity}} | {{App\Models\Unit::find($material->pivot->unit_id)->name}}
+                        @endforeach
                         </span>
                     </td>
                     <td height="15%" valign="top">
-                        <span>Lorem Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis iste
-                            blanditiis repellendus minima iusto laborum nihil eaque cum? Veritatis eligendi est
-                            adipisci, exercitationem eaque in repellendus odio incidunt error doloribus?</span>
+                        <span>
+                        @foreach($jobCard->jobcardable->tools as $tool)
+                            {{$tool->code}} | {{$tool->name}} | {{$tool->pivot->quantity}} | {{App\Models\Unit::find($tool->pivot->unit_id)->name}}
+                        @endforeach
+                        </span>
                     </td>
                 </tr>
                 <tr>
