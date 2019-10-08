@@ -46,10 +46,10 @@ class DiscrepancyDatatables extends Controller
             $jobcard->create_date       .= $jobcard->audits->first()->created_at;
             $jobcard->update_date       .= $jobcard->audits->last()->updated_at;
 
-            if(isset($jobcard->jobcard->jobcardable->type->name)){
-                $jobcard->type          .= $jobcard->jobcard->jobcardable->type->name;
+            if(isset($jobcard->jobcard->jobcardable->eo_header->type->name)){
+                $jobcard->type_name          .= $jobcard->jobcard->jobcardable->eo_header->type->name;
             }else{
-                $jobcard->type          .= '';
+                $jobcard->type_name          .= '';
             }
 
             if(isset( $jobcard->jobcard->quotation->quotationable->aircraft->name)){
@@ -205,13 +205,21 @@ class DiscrepancyDatatables extends Controller
             $jobcard->update_date       .= $jobcard->audits->last()->updated_at;
 
             if(isset($jobcard->jobcard->jobcardable->skills) ){
-                $jobcard->jobcardSkill .= $jobcard->jobcard->jobcardable->skill;
+                if(sizeof($jobcard->jobcard->jobcardable->skills) == 3){
+                    $jobcard->jobcardSkill .= "ERI";
+                }
+                else if(sizeof($jobcard->jobcard->jobcardable->skills) == 1){
+                    $jobcard->jobcardSkill .= $jobcard->jobcard->jobcardable->skills[0]->name;
+                }
+                else{
+                    $jobcard->jobcardSkill .= '';
+                }
             }
 
-            if(isset($jobcard->jobcard->jobcardable->type->name)){
-                $jobcard->type          .= $jobcard->jobcard->jobcardable->type->name;
+            if(isset($jobcard->jobcard->jobcardable->eo_header->type->name)){
+                $jobcard->type_name          .= $jobcard->jobcard->jobcardable->eo_header->type->name;
             }else{
-                $jobcard->type          .= '';
+                $jobcard->type_name          .= '';
             }
 
             if(isset( $jobcard->jobcard->quotation->quotationable->aircraft->name)){
