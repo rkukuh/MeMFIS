@@ -97,9 +97,9 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
                                                 </li>
-                                                <li class="nav-item">
+                                                <!-- <li class="nav-item">
                                                     <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">Material(s) & Tool(s)</a>
-                                                </li>
+                                                </li> -->
                                             </ul>
 
                                             <div class="tab-content">
@@ -141,6 +141,13 @@
                                                     @include('frontend.workpackage.item.show')
                                                 </div>
                                             </div>
+
+                                            @include('frontend.workpackage.modal.material.taskcard')
+                                            @include('frontend.workpackage.modal.tool.taskcard')
+                                            @include('frontend.workpackage.modal.predecessor')
+                                            @include('frontend.workpackage.modal.successor')
+                                            @include('frontend.workpackage.modal.predecessor-instruction')
+                                            @include('frontend.workpackage.modal.successor-instruction')
                                         </div>
                                     </div>
                                 </div>

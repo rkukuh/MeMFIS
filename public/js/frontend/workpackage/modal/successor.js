@@ -83,6 +83,36 @@ function successor_tc(triggeruuid) {
         });
 };
 
+function successor_tc_show(triggeruuid) {
+    $("#successor_datatable").DataTable({
+        "dom": '<"top"f>rt<"bottom">pl',
+        responsive: !0,
+        searchDelay: 500,
+        processing: !0,
+        serverSide: !0,
+        lengthMenu: [5, 10, 25, 50],
+        pageLength: 5,
+        ajax: "/datatables/workpackage/"+workPackage_uuid+"/taskcard/"+triggeruuid+"/successor",
+        columns: [
+            {
+                data: "number"
+            },
+            {
+                data: "title"
+            },
+            {
+                data: "work_area"
+            },
+            {
+                data: "estimation_manhour"
+            },
+            {
+                data: "order"
+            }
+        ]
+    })
+};
+
 $('.modal-footer').on('click', '.add-successor', function () {
     let tcuuid =$('#uuid-successor').val();
     let taskcard_successor =$('#taskcard_successor').val();
@@ -206,6 +236,37 @@ function successor_instruction_tc(triggeruuid) {
             }
         });
     });
+};
+
+function successor_instruction_tc_show(triggeruuid) {
+    $("#successor_instruction_datatable").DataTable({
+        "dom": '<"top"f>rt<"bottom">pl',
+        responsive: !0,
+        searchDelay: 500,
+        processing: !0,
+        serverSide: !0,
+        lengthMenu: [5, 10, 25, 50],
+        pageLength: 5,
+        ajax: "/datatables/workpackage/"+workPackage_uuid+"/instruction/"+triggeruuid+"/successor",
+        columns: [
+            {
+                data: "number"
+            },
+            {
+                data: "title"
+            },
+            {
+                data: "work_area"
+            },
+            {
+                data: "estimation_manhour"
+            },
+            {
+                data: "order"
+            }
+        ],
+    })
+
 };
 
 $('.modal-footer').on('click', '.add-successor-instruction', function () {

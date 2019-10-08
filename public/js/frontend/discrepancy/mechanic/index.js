@@ -68,7 +68,8 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/jobcard-ppc/'+t.jobcard.uuid+'">' + t.jobcard.number + "</a>"
+                        return '<a href="/jobcard/'+t.jobcard.uuid+'/edit">' + t.jobcard.number + "</a>"
+
                     }
                 },
                 {
@@ -87,7 +88,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.jobcardable.type.name',
+                    field: 'type_name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
