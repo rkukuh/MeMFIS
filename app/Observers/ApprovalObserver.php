@@ -26,11 +26,12 @@ class ApprovalObserver
                 ]);
 
                 foreach($approval->approvable->items as $item){
+                    $qty_uom = $item->units->where('uom.unit_id',$item->pivot->unit_id)->first()->uom->quantity;
                     $inv_in->items()->attach($item->pivot->item_id, [
                         'unit_id' => $item->pivot->unit_id,
                         'serial_number' => $item->pivot->serial_number,
                         'quantity' => $item->pivot->quantity,
-                        'quantity_in_primary_unit' => 1,
+                        'quantity_in_primary_unit' => $qty_uom*$item->pivot->quantity,
                         'purchased_price' => $item->pivot->price,
                         'total' => 1*$item->pivot->price,
                         'description' => $item->pivot->note,
@@ -41,7 +42,7 @@ class ApprovalObserver
                         'item_id' => $item->pivot->item_id,
                         'storage_id' =>  $approval->approvable->storage_id,
                         'fefoin_at' =>  $approval->approvable->received_at,
-                        'quantity' => $item->pivot->quantity,
+                        'quantity' => $qty_uom*$item->pivot->quantity,
                         'serial_number' => $item->pivot->serial_number,
                         'grn_id' => $approval->approvable->id,
                         'price' => $item->pivot->price,
