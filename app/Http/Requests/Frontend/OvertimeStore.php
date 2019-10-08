@@ -5,6 +5,7 @@ namespace App\Http\Requests\Frontend;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\OvertimeDateRule;
 use App\Rules\OvertimeTimesRule;
+// use Auth
 
 class OvertimeStore extends FormRequest
 {
@@ -26,6 +27,7 @@ class OvertimeStore extends FormRequest
     public function rules()
     {
         return [
+            "search-journal-val" => auth()->user()->hasRole("admin") ? "required" : "",
             "date" => ["bail","required", new OvertimeDateRule],
             "start_time" => "required",
             "end_time" => ["required",new OvertimeTimesRule($this->request->get("start_time"))],

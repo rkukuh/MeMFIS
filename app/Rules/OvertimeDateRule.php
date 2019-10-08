@@ -28,8 +28,8 @@ class OvertimeDateRule implements Rule
     {
         $timestamp_now = Carbon::now("Asia/Jakarta");
         $date_now = $timestamp_now->format("Y-m-d");
-        $to_carbon = Carbon::parse($value,"Asia/Jakarta");
-        $difference = $to_carbon->diffInDays($date_now);
+        $date_value = Carbon::parse($value,"Asia/Jakarta");
+        $difference = $date_value->diffInDays($date_now);
         return $difference <=7;
     }
 
