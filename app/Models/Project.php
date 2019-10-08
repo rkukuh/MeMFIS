@@ -152,23 +152,22 @@ class Project extends MemfisModel
     }
 
     /**
-     * One-to-Many: A purchase request may have zero or one project
+     * Polymorphic: An entity can have zero or many purchase requests.
      *
-     * This function will retrieve all the purchase requests of a project.
-     * See: PurchaseRequest's project() method for the inverse
+     * This function will get all Project's purchase requests.
+     * See: PurchaseRequest's purchase_requestable() method for the inverse
      *
      * @return mixed
      */
     public function purchase_requests()
     {
-        return $this->belongsToMany(PurchaseRequest::class)
-                    ->withTimestamps();
+        return $this->morphMany(PurchaseRequest::class, 'purchase_requestable');
     }
 
     /**
      * Polymorphic: An entity can have zero or many quotations.
      *
-     * This function will get all TaskCard's quotations.
+     * This function will get all Project's quotations.
      * See: Quotation's quotationable() method for the inverse
      *
      * @return mixed

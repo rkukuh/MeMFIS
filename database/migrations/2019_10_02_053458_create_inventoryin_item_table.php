@@ -17,10 +17,10 @@ class CreateInventoryinItemTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('inventoryin_id');
             $table->unsignedBigInteger('item_id');
-            $table->unsignedBigInteger('unit_id');
             $table->string('serial_number')->nullable();
             $table->double('quantity');
             $table->double('quantity_in_primary_unit');
+            $table->unsignedBigInteger('unit_id');
             $table->double('purchased_price');
             $table->double('total');
             $table->string('description')->nullable();

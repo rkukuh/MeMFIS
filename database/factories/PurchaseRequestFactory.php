@@ -22,13 +22,14 @@ $factory->define(PurchaseRequest::class, function (Faker $faker) {
 
             return factory(Type::class)->states('purchase-request')->create()->id;
         },
-        'project_id' => function () use ($faker) {
+        'purchase_requestable_id' => function () {
             if (Project::count()) {
                 return Project::get()->random()->id;
             }
 
-            return $faker->randomElement([null, factory(Project::class)->create()->id]);
+            return factory(Project::class)->create()->id;
         },
+        'purchase_requestable_type' => 'App\Models\Project',
         'requested_at' => $faker->randomElement([null, Carbon::now()]),
         'required_at' => $faker->randomElement([null, Carbon::now()]),
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),

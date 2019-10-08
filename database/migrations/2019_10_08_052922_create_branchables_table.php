@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePromoablesTable extends Migration
+class CreateBranchablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,15 @@ class CreatePromoablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('promoables', function (Blueprint $table) {
+        Schema::create('branchables', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('promo_id');
-            $table->morphs('promoable');
-            $table->double('value');
-            $table->double('amount');
+            $table->unsignedBigInteger('branch_id');
+            $table->morphs('branchable');
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('promo_id')
-                    ->references('id')->on('promos')
+            $table->foreign('branch_id')
+                    ->references('id')->on('branches')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
         });
@@ -36,6 +34,6 @@ class CreatePromoablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('promoables');
+        Schema::dropIfExists('branchables');
     }
 }
