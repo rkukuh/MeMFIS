@@ -48,7 +48,8 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <form id="itemform" name="itemform">
+                            <form id="itemform" name="itemform" method="POST" action="{{ route('frontend.overtime.store') }}">
+                                @csrf
                                 <div class="m-portlet__body">
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -71,7 +72,7 @@
                                             @endrole
                                         </div>
 
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 form-group{{$errors->has("date") ? " has-error" : ""}}">
                                             <label class="form-control-label">
                                                 Date @include('frontend.common.label.optional') 
                                             </label>
@@ -81,32 +82,36 @@
                                                 @slot('name', 'date')
                                                 @slot('id_error', 'date')
                                             @endcomponent
+                                            <small class="text-danger">{{ $errors->first('date') }}</small>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="col-sm-6 col-md-6 col-lg-6 form-group{{$errors->has("start_time") ? " has-error" : ""}}">
                                                     <label class="form-control-label">
                                                         Start Time  @include('frontend.common.label.optional')
                                                     </label>
 
                                                     @component('frontend.common.input.timepicker')
                                                         @slot('id', 'start_time')
+                                                        @slot('name', 'start_time')
                                                         @slot('class','m_timepicker_1 text-center')
                                                     @endcomponent
+                                                    <small class="text-danger">{{ $errors->first('start_time') }}</small>
                                                   
                                                 </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="col-sm-6 col-md-6 col-lg-6 form-group{{$errors->has("end_time") ? " has-error" : ""}}">
                                                     <label class="form-control-label">
                                                         End Time @include('frontend.common.label.optional')
                                                     </label>
         
                                                     @component('frontend.common.input.timepicker')
                                                         @slot('id', 'end_time')
+                                                        @slot('name', 'end_time')
                                                         @slot('class','m_timepicker_1 text-center')
                                                     @endcomponent
-                                                    
+                                                    <small class="text-danger">{{ $errors->first('end_time') }}</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -140,7 +145,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="col-sm-12 col-md-12 col-lg-12 form-group{{$errors->has("description") ? " has-error" : ""}}">
                                             <label class="form-control-label">
                                                 Description 
                                             </label>
@@ -151,6 +156,10 @@
                                                 @slot('name', 'description')
                                                 @slot('text', 'Description')
                                             @endcomponent
+                                            <small class="text-danger">{{ $errors->first('description') }}</small>
+                                            {{-- @if ($errors->get("description") != null)
+                                                <span><p style="color: red;">{{$errors->get("description")[0]}}</p></span>
+                                            @endif --}}
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -158,7 +167,7 @@
                                             <div class="flex">
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
+                                                        {{-- @slot('type','submit') --}}
                                                         @slot('id', 'add-overtime')
                                                         @slot('class', 'add-overtime')
                                                     @endcomponent

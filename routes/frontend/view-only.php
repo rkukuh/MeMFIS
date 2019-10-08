@@ -117,10 +117,10 @@ Route::group([
 
         /** OVERTIME */
 
-        Route::view('/overtime', 'frontend.overtime.index')->name('overtime.index');
-        Route::view('/overtime/create', 'frontend.overtime.create')->name('overtime.create');
-        Route::view('/overtime/edit', 'frontend.overtime.edit')->name('overtime.edit');
-        Route::view('/overtime/approve', 'frontend.overtime.approve')->name('overtime.approve');
+        // Route::view('/overtime', 'frontend.overtime.index')->name('overtime.index');
+        // Route::view('/overtime/create', 'frontend.overtime.create')->name('overtime.create');
+        // Route::view('/overtime/edit', 'frontend.overtime.edit')->name('overtime.edit');
+        // Route::view('/overtime/approve', 'frontend.overtime.approve')->name('overtime.approve');
 
         /** PROPOSE LEAVE */
 

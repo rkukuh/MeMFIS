@@ -62,6 +62,8 @@ class DatabaseSeeder extends Seeder
         
         $this->call(BankAccountsTableSeeder::class);
 
+        $this->call(OvertimesTableSeeder::class);
+
         /** POLYMORPH */
 
         $this->call(FaxesTableSeeder::class);

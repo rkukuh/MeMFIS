@@ -70,6 +70,7 @@ Route::name('admin.')->group(function () {
         Route::resource('bank-account', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
+        Route::resource('overtime', 'OvertimeController');
 
         /** LICENSE */
 
