@@ -19,9 +19,10 @@ class GoodsReceived extends MemfisModel
         'description',
         'additionals',
         'origin_vendor_coa',
+        'expired_at',
     ];
 
-    protected $dates = ['received_at'];
+    protected $dates = ['received_at','expired_at'];
 
     /*************************************** RELATIONSHIP ****************************************/
 
@@ -63,12 +64,14 @@ class GoodsReceived extends MemfisModel
     {
         return $this->belongsToMany(Item::class)
                     ->withPivot(
+                        'serial_number',
                         'quantity',
                         'quantity_unit',
                         'unit_id',
                         'price',
                         'already_received_amount',
-                        'note'
+                        'note',
+                        'expired_at'
                     )
                     ->withTimestamps();
     }

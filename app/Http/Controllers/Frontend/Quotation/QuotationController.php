@@ -418,7 +418,14 @@ class QuotationController extends Controller
         $ProjectWorkPackageTaskCard = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$ProjectWorkPackage)->get();
         foreach($ProjectWorkPackageTaskCard as $taskcard){
                 $tc = $taskcard->taskcard;
+                // try to call all the taskcard's relationships before change it into json
+                $tc->task = $tc->task;
+                $tc->skill = $tc->skill;
+                $tc->workarea = $tc->workarea;
+                $tc->category = $tc->category;
+
                 $helper_quantity = $tc->helper_quantity;
+
                 if(empty($helper_quantity)){
                     $helper_quantity = null;
                 }else{

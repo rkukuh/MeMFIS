@@ -119,7 +119,7 @@ class WorkProgressReportController extends Controller
 
         foreach($htcrrs as $jobcard){
             $jobcard->actual_manhours = array_sum($jobcard->actual_manhour);
-            $jobcard->tc_type = $jobcard->type->code;
+            $jobcard->tc_type = "htcrr";
             $jobcard->of = $jobcard->type->of;
             $jobcards["non_routine"] += 1;
         }
@@ -127,10 +127,10 @@ class WorkProgressReportController extends Controller
         $jobcard_nonrotine = $jobcard_nonrotine->merge($htcrrs);
         $jobcard_all = $jobcard_routine->merge($jobcard_nonrotine);
         $jobcard_all = $jobcard_all->merge($additionals);
-
+        
         $jobcards["overall"] = $jobcard_all->count(); 
         
-        $jobcards["overall_done"] = $jobcards["routine_done"] = $jobcards["non_routine_done"] = $jobcards["additionals"] = 0;
+        $jobcards["overall_done"] = $jobcards["routine_done"] = $jobcards["non_routine_done"] = $jobcards["additionals"] = $jobcards["htcrr"] = 0;
         
         foreach($jobcard_all as $key => $jobcard){
             $statusses[$key] = $jobcard->progresses->last()->status_id;
@@ -139,9 +139,12 @@ class WorkProgressReportController extends Controller
                 array_push($statusses_routine, $jobcard->progresses->last()->status_id);
             }elseif($jobcard->of == 'taskcard-type-non-routine'){
                 array_push($statusses_non_routine, $jobcard->progresses->last()->status_id);
+            }elseif($jobcard->of == 'htcrr-type'){
+                array_push($statusses_non_routine, $jobcard->progresses->last()->status_id);
             }else{
                 array_push($statusses_additionals, $jobcard->progresses->last()->status_id);
             }
+
 
             switch($jobcard->tc_type){
                 case 'basic':
@@ -174,11 +177,12 @@ class WorkProgressReportController extends Controller
                 case 'awl':
                     array_push($cmr_awl, $jobcard->progresses->last()->status_id);
                     break;
+                case 'htcrr':
+                    array_push($ht_crr, $jobcard->progresses->last()->status_id);
+                    break;
                 case 'additionals':
                     array_push($additional, $jobcard->progresses->last()->status_id);
                     break;
-                default:
-                    array_push($ht_crr, $jobcard->progresses->last()->status_id);
             }
         }
 
@@ -281,6 +285,7 @@ class WorkProgressReportController extends Controller
         $this->counting($ht_crr, "ht-crr");
         $this->counting($additional, "additionals");
 
+
         if (isset($this->col["routine"]) && sizeof(array_unique($this->col["routine"])) !== 0) {
             $this->col["routine"] = 12 / sizeof( array_unique( $this->col["routine"] ) );
         }else{
@@ -294,7 +299,6 @@ class WorkProgressReportController extends Controller
         }else {
             $this->col["non-routine"] = 12;
         }
-
 
         return view('frontend.work-progress-report.show',[
             'col' => $this->col,
@@ -471,7 +475,14 @@ class WorkProgressReportController extends Controller
             $container = [];
             $counter = array_count_values($counter);
             foreach($counter as $key => $value ){
-                $counter[Status::find($key)->code] = $value;
+                $code = Status::find($key)->code;
+                if (strpos($code, 'removal-') !== false) {
+                    $code = str_replace('removal-','',$code);
+                }
+                if (strpos($code, 'installation-') !== false) {
+                    $code = str_replace('installation-','',$code);
+                }
+                $counter[$code] = $value;
             }
         
             if( isset($counter["open"]) ){ $container['open'] = $counter["open"]; } else{ $container["open"] = 0; }

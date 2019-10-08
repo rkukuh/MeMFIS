@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.create-new')
+                                @include('frontend.common.label.show')
 
                                 <h3 class="m-portlet__head-text">
                                     Material Request Jobcard
@@ -53,28 +53,11 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Date @include('frontend.common.label.required')
+                                                Date 
                                             </label>
 
-                                            @component('frontend.common.input.datepicker')
-                                                @slot('id', 'date')
-                                                @slot('text', 'Date')
-                                                @slot('name', 'date')
-                                                @slot('id_error','requested_at')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Ref Job Card No. @include('frontend.common.label.required')
-                                            </label>
-
-                                            @include('frontend.common.ref-jobcard-number.index')
-
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'jobcard_number')
-                                                @slot('name', 'jobcard_number')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -82,12 +65,52 @@
                                                 Storage
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Storage')
-                                                @slot('id', 'item_storage_id')
-                                                @slot('name', 'item_storage_id')
-                                                @slot('id_error', 'item_storage_id')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                                    @component('frontend.common.input.radio')
+                                                        @slot('id', 'jc_ref_no')
+                                                        @slot('name', 'ref_no')
+                                                        @slot('value', 'jc_ref_no')
+                                                        @slot('checked','checked')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-11 col-md-11 col-lg-11">
+                                                    <label class="form-control-label">
+                                                        JC Ref No. @include('frontend.common.label.required')
+                                                    </label>
+        
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                                    @component('frontend.common.input.radio')
+                                                        @slot('id', 'project_ref_no')
+                                                        @slot('name', 'ref_no')
+                                                        @slot('value', 'project_ref_no')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-11 col-md-11 col-lg-11">
+                                                    <label class="form-control-label">
+                                                        Project Ref No. @include('frontend.common.label.required')
+                                                    </label>
+        
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', 'generate')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -97,8 +120,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('id', 'project_number')
-                                                @slot('text', 'generate setelah select ref jc HM')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -106,11 +128,8 @@
                                                 Section Code
                                             </label>
 
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'Section Code')
-                                                @slot('id', 'section_code')
-                                                @slot('name', 'section_code')
-                                                @slot('id_error', 'section_code')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -123,8 +142,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('id', 'actype')
-                                                        @slot('text', 'generate setelah select ref jc HM')
+                                                        @slot('text', 'generate')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -133,8 +151,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('id', 'acreg')
-                                                        @slot('text', 'generate setelah select ref jc HM')
+                                                        @slot('text', 'generate')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -144,11 +161,8 @@
                                                 Recieved By 
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Recieved By')
-                                                @slot('id', 'received-by')
-                                                @slot('name', 'received-by')
-                                                @slot('id_error', 'received-by')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -158,11 +172,8 @@
                                                 Remark
                                             </label>
 
-                                            @component('frontend.common.input.textarea')
-                                                @slot('rows', '5')
-                                                @slot('id', 'description')
-                                                @slot('name', 'description')
-                                                @slot('text', 'Description')
+                                            @component('frontend.common.label.data-info')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -201,15 +212,6 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div> 
-                                                                <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                                    @component('frontend.common.buttons.create-new')
-                                                                        @slot('text', 'Item')
-                                                                        @slot('data_target', '#modal_material_request')
-                                                                    @endcomponent
-                    
-                            
-                                                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -224,22 +226,12 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
-                                                    @component('frontend.common.buttons.submit')
-                                                        @slot('type','button')
-                                                        @slot('id', 'add-workpackage')
-                                                        @slot('class', 'add-workpackage')
-                                                    @endcomponent
-
-                                                    @include('frontend.common.buttons.reset')
-
                                                     @include('frontend.common.buttons.back')
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -250,22 +242,5 @@
 @endsection
 
 @push('footer-scripts')
-
-    <script src="{{ asset('js/frontend/material-request-jobcard/hm/create.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/item.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js') }}"></script>
+    <script src="{{ asset('js/frontend/material-request-jobcard/show.js') }}"></script>
 @endpush

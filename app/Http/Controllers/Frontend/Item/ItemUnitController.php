@@ -40,11 +40,18 @@ class ItemUnitController extends Controller
      */
     public function store(Item $item, ItemUnitStore $request)
     {
-        $item->units()->attach($request->unit_id, [
-            'quantity' => $request->uom_quantity
-        ]);
+        $unit = Unit::find($request->unit_id);
+        $ItemUnit = ItemUnit::where('item_id', $item->id)->get();
+        $exists = $ItemUnit->where('deleted_at',null)->where('unit_id',$unit->id)->first();
+        if($exists){
+            return response()->json(['title' => "Danger"]);
+        }else{
+            $item->units()->attach($request->unit_id, [
+                'quantity' => $request->uom_quantity
+            ]);
 
-        return response()->json($item);
+            return response()->json($item);
+        }
     }
 
     /**

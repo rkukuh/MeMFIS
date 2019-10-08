@@ -115,7 +115,7 @@ let Attendance = {
                     filterable: !1,
                     template: function (t, e, i) {
                         // if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                        //     return '<a data-toggle="modal" data-target="#modal_transaction_overtime" href="#">' + "Transaction No" + "</a>"
+                            return '<a data-toggle="modal" data-target="#modal_transaction_overtime" href="#">' + "Transaction No" + "</a>"
                         // }
                         // else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
                         //     return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
@@ -128,14 +128,14 @@ let Attendance = {
                     title: 'Leaves Remark',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t, e, i) {
+                    template: function (t, e, i) {
                         // if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                        //     return '<a data-toggle="modal" data-target="#modal_transaction_leave" href="#">' + "Transaction No" + "</a>"
+                            return '<a data-toggle="modal" data-target="#modal_transaction_leave" href="#">' + "Transaction No" + "</a>"
                         // }
                         // else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
                         //     return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
                         // }
-                    // }
+                    }
 
                 },
                 {
@@ -143,14 +143,14 @@ let Attendance = {
                     title: 'Correction Remark',
                     sortable: 'asc',
                     filterable: !1,
-                    // template: function (t, e, i) {
+                    template: function (t, e, i) {
                         // if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
-                        //     return '<a data-toggle="modal" data-target="#modal_transaction_correction" href="#">' + "Transaction No" + "</a>"
+                            return '<a data-toggle="modal" data-target="#modal_transaction_correction" href="#">' + "Transaction No" + "</a>"
                         // }
                         // else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                        //     return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
+                            // return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
                         // }
-                    // }
+                    }
 
                 },
                 {

@@ -162,6 +162,20 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function employeeUuid()
+    {
+        $employees = Employee::selectRaw('uuid, CONCAT(first_name, " ", last_name) as name')
+                    ->pluck('name', 'uuid');
+
+        return json_encode($employees);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function aviationDegrees()
     {
         $aviation_degrees = Type::ofAviationDegree()
@@ -411,8 +425,20 @@ class FillComboxController extends Controller
         $unit = $item->unit()->pluck('name', 'id');
         $units = $item->units()->pluck('name', 'unit_id');
         $uom = $unit->toArray() + $units->toArray();
-       
+
         return json_encode($uom);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function iterchange(Item $item)
+    {
+        $interchange = $item->interchanges()->pluck('name', 'uuid');
+
+        return json_encode($interchange);
     }
 
     /**
