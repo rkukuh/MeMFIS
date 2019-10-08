@@ -1052,27 +1052,6 @@ let Workpackage = {
             }
         });
 
-        $(".ea_datatable").on("click", ".predecessor-instruction", function() {
-            if (predecessor_instruction_datatable_init == true) {
-                predecessor_instruction_datatable_init = false;
-                triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
-                predecessor_instruction_tc(triggeruuid);
-                $("#predecessor_instruction_datatable")
-                    .DataTable()
-                    .ajax.reload();
-            } else {
-                let table = $("#predecessor_instruction_datatable").DataTable();
-                table.destroy();
-                triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
-                predecessor_instruction_tc(triggeruuid);
-                $("#predecessor_instruction_datatable")
-                    .DataTable()
-                    .ajax.reload();
-            }
-        });
-
         $(".ea_datatable").on("click", ".material", function() {
             remove_element()
             if (material_datatables_init == true) {
@@ -1129,6 +1108,27 @@ let Workpackage = {
                 document.getElementById("uuid-successor").value = triggeruuid;
                 successor_instruction_tc(triggeruuid);
                 $("#successor_instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+        $(".ea_datatable").on("click", ".predecessor-instruction", function() {
+            if (predecessor_instruction_datatable_init == true) {
+                predecessor_instruction_datatable_init = false;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
+                predecessor_instruction_tc(triggeruuid);
+                $("#predecessor_instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#predecessor_instruction_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
+                predecessor_instruction_tc(triggeruuid);
+                $("#predecessor_instruction_datatable")
                     .DataTable()
                     .ajax.reload();
             }

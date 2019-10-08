@@ -265,7 +265,6 @@ let NonRoutineWorkpackage = {
                     sortable: "asc",
                     filterable: !1,
                     template: function(t, e, i) {
-                        console.log(t);
                         if (
                             t.eo_instruction.eo_header.type.code == "basic" ||
                             t.eo_instruction.eo_header.type.code == "sip" ||
@@ -378,40 +377,53 @@ let NonRoutineWorkpackage = {
                     title: "Sequence",
                     sortable: "asc",
                     filterable: !1,
-                    // template: function(t, e, i) {
-                    //     if (t.sequence) {
-                    //         return (
-                    //             t.sequence 
-                    //         );
-                    //     } 
-                    // }
+                    template: function(t, e, i) {
+                        if (t.sequence) {
+                            return (
+                                t.sequence +
+                                '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
+                                t.sequence +
+                                " data-uuid=" +
+                                t.eo_instruction.uuid +
+                                '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            );
+                        } else {
+                            return (
+                                '<button data-toggle="modal" data-target="#instruction_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence=' +
+                                t.sequence +
+                                " data-uuid=" +
+                                t.eo_instruction.uuid +
+                                '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            );
+                        }
+                    }
                 },
-                // {
-                //     field: "predecessor",
-                //     title: "Predecessor",
-                //     sortable: "asc",
-                //     filterable: !1,
-                //     template: function(t) {
-                //         return (
-                //             '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor-modal-instruction predecessor-instruction"  data-tc_uuid="' +
-                //             t.eo_instruction.uuid +
-                //             '" data-toggle="modal" data-target="#modal_predecessor_instruction"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
-                //         );
-                //     }
-                // },
-                // {
-                //     field: "successor",
-                //     title: "Successor",
-                //     sortable: "asc",
-                //     filterable: !1,
-                //     template: function(t) {
-                //         return (
-                //             '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor-modal-instruction successor-instruction"  data-tc_uuid="' +
-                //             t.eo_instruction.uuid +
-                //             '" data-toggle="modal" data-target="#modal_successor_instruction"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
-                //         );
-                //     }
-                // },
+                {
+                    field: "predecessor",
+                    title: "Predecessor",
+                    sortable: "asc",
+                    filterable: !1,
+                    template: function(t) {
+                        return (
+                            '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor-modal-instruction predecessor-instruction"  data-tc_uuid="' +
+                            t.eo_instruction.uuid +
+                            '" data-toggle="modal" data-target="#modal_predecessor_instruction"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                        );
+                    }
+                },
+                {
+                    field: "successor",
+                    title: "Successor",
+                    sortable: "asc",
+                    filterable: !1,
+                    template: function(t) {
+                        return (
+                            '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor-modal-instruction successor-instruction"  data-tc_uuid="' +
+                            t.eo_instruction.uuid +
+                            '" data-toggle="modal" data-target="#modal_successor_instruction"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                        );
+                    }
+                },
                 {
                     field: "mandatory",
                     title: "Mandatory",

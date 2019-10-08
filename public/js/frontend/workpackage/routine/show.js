@@ -112,13 +112,6 @@ let RoutineWorkpackageShow = {
                     title: 'Sequence',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence='+t.sequence+' data-uuid=' +
-                            t.taskcard.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        );
-                    }
                 },
                 {
                     field: 'predecessor',
@@ -126,7 +119,7 @@ let RoutineWorkpackageShow = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill " data-toggle="modal" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                        return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor-modal predecessor" data-toggle="modal"  data-tc_uuid="' + t.taskcard.uuid + '" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                     }
                 },
                 {
@@ -135,7 +128,7 @@ let RoutineWorkpackageShow = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="modal" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor-modal successor" data-toggle="modal"  data-tc_uuid="' + t.taskcard.uuid + '" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                     }
                 },
                 {
@@ -280,13 +273,6 @@ let RoutineWorkpackageShow = {
                     title: 'Sequence',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.taskcard.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        );
-                    }
                 },
                 {
                     field: 'predecessor',
@@ -294,7 +280,7 @@ let RoutineWorkpackageShow = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill " data-toggle="modal" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                        return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor-modal predecessor" data-toggle="modal"  data-tc_uuid="' + t.taskcard.uuid + '" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                     }
                 },
                 {
@@ -303,7 +289,7 @@ let RoutineWorkpackageShow = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="modal" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor-modal successor" data-toggle="modal"  data-tc_uuid="' + t.taskcard.uuid + '" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                     }
                 },
                 {
@@ -448,13 +434,6 @@ let RoutineWorkpackageShow = {
                     title: 'Sequence',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
-                            t.taskcard.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        );
-                    }
                 },
                 {
                     field: 'predecessor',
@@ -462,7 +441,7 @@ let RoutineWorkpackageShow = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill " data-toggle="modal" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                        return '<button type="button" id="predecessor" name="predecessor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill predecessor-modal predecessor" data-toggle="modal"  data-tc_uuid="' + t.taskcard.uuid + '" data-target="#modal_predecessor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                     }
                 },
                 {
@@ -471,7 +450,7 @@ let RoutineWorkpackageShow = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="modal" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                        return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill successor-modal successor" data-toggle="modal"  data-tc_uuid="' + t.taskcard.uuid + '" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
                     }
                 },
                 {
