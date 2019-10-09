@@ -73,10 +73,9 @@
                                     </label>
 
                                     @component('frontend.common.input.select2')
-                                        @slot('text', 'Discount')
-                                        @slot('name', 'discount-type')
-                                        @slot('class', 'discount-type')
                                         @slot('id', 'discount-type')
+                                        @slot('name', 'discount-type')
+                                        @slot('text', 'Discount')
                                         @slot('id_error', 'discount-type')
                                     @endcomponent
                                 </div>

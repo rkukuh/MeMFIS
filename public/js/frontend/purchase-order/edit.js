@@ -227,7 +227,13 @@ let PurchaseOrder = {
                         );
 
                         let table = $(".item_datatable").mDatatable();
-
+                        let subtotal = 0;
+                        let dataSet = table.originalDataSet;
+                        $.each(dataSet, function( index, data ) {
+                            subtotal += data.pivot.subtotal_after_discount;
+                        });
+                        $("#sub_total").html(subtotal);
+                        $("#sub_total").val(subtotal);
                         table.originalDataSet = [];
                         table.reload();
 
@@ -330,6 +336,7 @@ let PurchaseOrder = {
                 exchange_rate.attr("readonly", false);
             }
         });
+
         $('.footer').on('click', '.add-po', function () {
             let number = $('input[name=number]').val();
             let currency = $('#currency').val();

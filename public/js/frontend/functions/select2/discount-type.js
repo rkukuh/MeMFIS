@@ -1,4 +1,4 @@
-let TypeSelect2 = {
+let DiscountTypeSelect2 = {
     init: function () {
         $('select[name^="discount-type"]').append(
             '<option value="amount">Amount</option>',
@@ -12,5 +12,5 @@ let TypeSelect2 = {
 };
 
 jQuery(document).ready(function () {
-    TypeSelect2.init();
+    DiscountTypeSelect2.init();
 });
