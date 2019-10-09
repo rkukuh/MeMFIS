@@ -2,7 +2,8 @@
 
 namespace App\Console;
 
-use DB;
+use Carbon\Carbon;
+use App\Models\InventoryOut;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -25,11 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
         $schedule->call(function () {
-            DB::table('inventory_out')->where('created_at', '<', Carbon::now()->subMinutes(10)->toDateTimeString()->doesnthave('approvals'))->delete();
-        })->daily();
+            InventoryOut::where('created_at','<',Carbon::now()->subMinutes(10)->toDateTimeString())->delete();
+        })->everyMinute();
     }
 
     /**
