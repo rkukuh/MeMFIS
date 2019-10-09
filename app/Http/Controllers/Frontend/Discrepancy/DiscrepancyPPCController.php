@@ -164,16 +164,13 @@ class DiscrepancyPPCController extends Controller
             }
         }
 
-        $discrepancy->approvals()->save(new Approval([
-            'approvable_id' => $discrepancy->id,
-            'conducted_by' => Auth::id(),
-            'is_approved' => 1
-        ]));
-
-        $discrepancy->progresses()->save(new Progress([
-            'status_id' =>  Status::ofDefectcard()->where('code','open')->first()->id,
-            'progressed_by' => Auth::id()
-        ]));
+        // if(sizeof($discrepancy->approvals) == 1){
+            $discrepancy->approvals()->save(new Approval([
+                'approvable_id' => $discrepancy->id,
+                'conducted_by' => Auth::id(),
+                'is_approved' => 1
+            ]));
+        // }
 
         return response()->json($discrepancy);
     }
