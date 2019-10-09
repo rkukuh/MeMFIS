@@ -130,13 +130,15 @@ class DiscrepancyPPCController extends Controller
     {
         $zone = json_decode($request->zone);
         $zones = [];
-
+        $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
+        $jobcard = JobCard::find($request->jobcard_id)->first();
+        $aircraft = $jobcard->quotation->quotationable->aircraft;
         $discrepancy->update($request->all());
 
         if($zone){
             foreach ($zone as $zone_name ) {
                 if(isset($zone_name)){
-                    $airplane = JobCard::find($request->jobcard_id)->quotation->quotationable->aircraft->id;
+                    $airplane = $aircraft->id;
                     $zone = Zone::firstOrCreate(
                         ['name' => $zone_name, 'zoneable_id' => $airplane, 'zoneable_type' => 'App\Models\Aircraft']
                     );
@@ -164,16 +166,14 @@ class DiscrepancyPPCController extends Controller
             }
         }
 
-        $discrepancy->approvals()->save(new Approval([
-            'approvable_id' => $discrepancy->id,
-            'conducted_by' => Auth::id(),
-            'is_approved' => 1
-        ]));
-
-        $discrepancy->progresses()->save(new Progress([
-            'status_id' =>  Status::ofDefectcard()->where('code','open')->first()->id,
-            'progressed_by' => Auth::id()
-        ]));
+        // in case updated again, sehingga approvals jumlahnya sesuai
+        if(sizeof($discrepancy->approvals) == 1){
+            $discrepancy->approvals()->save(new Approval([
+                'approvable_id' => $discrepancy->id,
+                'conducted_by' => Auth::id(),
+                'is_approved' => 1
+            ]));
+        }
 
         return response()->json($discrepancy);
     }

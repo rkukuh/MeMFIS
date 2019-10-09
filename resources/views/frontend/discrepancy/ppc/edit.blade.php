@@ -542,7 +542,7 @@
     <script>
         let discrepancy_uuid = '{{$discrepancy->uuid}}';
     </script>
-    <script src="{{ asset('js/frontend/discrepancy/engineer/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/ppc/edit.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
 
