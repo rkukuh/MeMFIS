@@ -18,7 +18,7 @@ class OvertimeDatatables extends Controller
             $employee_data = $od->employee;
             $formated_start = Carbon::parse($od->start,"Asia/Jakarta")->toTimeString();
             $formated_end = Carbon::parse($od->end,"Asia/Jakarta")->toTimeString();
-            $formatted_date = Carbon::parse($od->created_at,"Asia/Jakarta")->toDateTimeString();
+            $formatted_date = Carbon::parse($od->date,"Asia/Jakarta")->toDateString();
             $status_name = $od->statuses->name;
             // $formated_time =
             $overtime[$i] = [

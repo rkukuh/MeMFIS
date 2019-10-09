@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\OvertimeDateRule;
+use App\Rules\OvertimeTimesRule;
 
 class OvertimeUpdate extends FormRequest
 {
@@ -13,7 +15,7 @@ class OvertimeUpdate extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,11 @@ class OvertimeUpdate extends FormRequest
     public function rules()
     {
         return [
-            //
+            "search-journal-val" => auth()->user()->hasRole("admin") ? "required" : "",
+            "date" => ["bail","required", new OvertimeDateRule],
+            "start_time" => "required",
+            "end_time" => ["required",new OvertimeTimesRule($this->request->get("start_time"))],
+            "description" => "bail|required|min:5|max:100"
         ];
     }
 }

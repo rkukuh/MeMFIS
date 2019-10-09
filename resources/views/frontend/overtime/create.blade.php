@@ -161,9 +161,6 @@
                                                 @slot('text', 'Description')
                                             @endcomponent
                                             <small class="text-danger">{{ $errors->first('description') }}</small>
-                                            {{-- @if ($errors->get("description") != null)
-                                                <span><p style="color: red;">{{$errors->get("description")[0]}}</p></span>
-                                            @endif --}}
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">

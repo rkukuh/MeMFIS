@@ -10,6 +10,7 @@ class Overtime extends MemfisModel
         "uuid",
         "employee_id",
         "statuses_id",
+        "date",
         "start",
         "end",
         "total",

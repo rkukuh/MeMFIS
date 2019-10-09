@@ -55,42 +55,31 @@ class OvertimeController extends Controller
         $date = $request->input("date");
         $start = $request->input("start_time");
         $end = $request->input("end_time");
-        
-        
+        $start_diff = Carbon::parse($date." ".$start,"Asia/Jakarta");
+        $end_diff = Carbon::parse($date." ".$end,"Asia/Jakarta");
+        $time_diff = $start_diff->diff($end_diff)->format("%H:%I:%S");
         $desc = $request->input("description");
-        $timestamp_start = Carbon::parse($date." ".$start,"Asia/Jakarta");
-        $timestamp_end = Carbon::parse($date." ". $end,"Asia/Jakarta");
-        $time_diff = $timestamp_start->diff($timestamp_end)->format("%H:%I:%S");
+        // $timestamp_start = Carbon::parse($date." ".$start,"Asia/Jakarta");
+        // $timestamp_end = Carbon::parse($date." ". $end,"Asia/Jakarta");
+        // ->format("%H:%I:%S")
         
         $status = Status::ofOvertime()->where('code','open')->first()->id;
 
-        $overtime_data = Overtime::create([
+        Overtime::create([
                 "uuid" => Str::uuid(),
                 "employee_id" => $employee_id,
-                "start" => $timestamp_start,
-                "end" => $timestamp_end,
                 "date" => $date,
+                "start" => $start,
+                "end" => $end,
                 "desc" => $desc,
                 "total" => $time_diff,
                 "statuses_id" => $status
             ]
         );
 
-        // dd($overtime_data)
-        // $employee->employee_attendace()->create([
-        //     'uuid' => Str::uuid(),
-        //     'date' => $data_final[$i]['date'][$y]['date'],
-        //     'in' => $in,
-        //     'out' => $out,
-        //     'late_in' => $late,
-        //     'earlier_out' => $earlier_out,
-        //     'overtime' => $overtime,
-        //     'statuses_id' => $status
-        // ]);
-
         // return response()->json($overtime_data);
 
-        return redirect('frontend.overtime.index');
+        return redirect()->route('frontend.overtime.index');
     }
     
 
@@ -113,8 +102,9 @@ class OvertimeController extends Controller
      */
     public function edit(Overtime $overtime)
     {
-        // $theOvertime = blg::findOrFail($id);
-        return view("frontend.overtime.edit",["overtime" => $overtime]);
+        // $theOvertime = Overtime::findOrFail($overtime->id);
+        $employee_data = $overtime->employee;
+        return view("frontend.overtime.edit",["overtime" => $overtime,"employee" => $employee_data]);
     }
 
     /**
@@ -126,7 +116,44 @@ class OvertimeController extends Controller
      */
     public function update(OvertimeUpdate $request, Overtime $overtime)
     {
-        //
+        // dd($request->validated());
+        $overtime_data = Overtime::findOrFail($overtime->id);
+        $validated = $request->validated();
+        
+        $isAdmin = Auth::user()->hasRole("admin");
+        $employee_id = Auth::id();
+        if ($isAdmin) {
+            $uuid = $validated["search-journal-val"];
+            $employee_id = Employee::where("uuid",$uuid)->first()->id;
+        }
+
+        $date = $validated["date"];
+        $start =$validated["start_time"];
+        $end = $validated["end_time"];
+        $start_diff = Carbon::parse($date." ".$start,"Asia/Jakarta");
+        $end_diff = Carbon::parse($date." ".$end,"Asia/Jakarta");
+        $time_diff = $start_diff->diff($end_diff)->format("%H:%I:%S");
+        $desc = $validated["description"];
+        
+        $status = $overtime->statuses_id;
+
+        $data = [
+                "uuid" => $overtime->uuid,
+                "employee_id" => $employee_id,
+                "date" => $date,
+                "start" => $start,
+                "end" => $end,
+                "desc" => $desc,
+                "total" => $time_diff,
+                "statuses_id" => $status
+            ]
+;
+        $overtime_data->fill($data);
+        $overtime_data->save();
+
+        // $request->session()->flash("success", $title . " is successfully updated");
+        // return redirect()->route("blogposts.show",["blogpost" => $blogpost->id]);
+        return redirect()->route('frontend.overtime.index');
     }
 
     /**
