@@ -38,4 +38,38 @@ class FefoIn extends MemfisModel
         return $this->belongsTo(InventoryIn::class, 'inventoryin_id');
 
     }
+
+    /**
+     * This function will get a item of an fofo in.
+     *
+     * @return mixed
+     */
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
+
+    /**
+     * This function will get a storage of an fofo in.
+     *
+     * @return mixed
+     */
+    public function storage()
+    {
+        return $this->belongsTo(Storage::class);
+    }
+
+    /***************************************** ACCESSOR ******************************************/
+
+    /**
+     * Get the Stock's item.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getItemStorageWithBookMiAttribute($value)
+    {
+        dd($value);
+        // return optional($this->categories->first());
+    }
 }

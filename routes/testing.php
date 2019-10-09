@@ -14,6 +14,14 @@ Route::name('testing.')->group(function () {
 
         });
 
+        Route::get('/check', function () {
+            $test  = new App\Models\CheckStock;
+
+            $result = $test->item('a7455650-b740-47ec-9a30-ffbfdcc2446b');
+            dd($result);
+
+        });
+
         Route::get('/convert-unit-to-prelimary', function () {
 
             $item = App\Models\Item::find('1');
