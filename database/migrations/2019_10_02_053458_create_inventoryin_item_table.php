@@ -24,6 +24,7 @@ class CreateInventoryinItemTable extends Migration
             $table->double('purchased_price');
             $table->double('total');
             $table->string('description')->nullable();
+            $table->timestamp('expired_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
