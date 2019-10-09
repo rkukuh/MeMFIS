@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend\InventoryIn;
 
+use Auth;
+use App\Models\Approval;
 use App\Models\InventoryIn;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\InventoryInStore;
@@ -83,5 +85,22 @@ class InventoryInController extends Controller
     public function destroy(InventoryIn $inventoryIn)
     {
         $inventoryIn->delete();
+    }
+
+    /**
+     * Approve the specified resource from storage.
+     *
+     * @param  \App\Models\GoodsReceived  $goodsReceived
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(InventoryIn $inventoryIn)
+    {
+        $inventoryIn->approvals()->save(new Approval([
+            'approvable_id' => $inventoryIn->id,
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
+        ]));
+
+        return response()->json($inventoryIn);
     }
 }
