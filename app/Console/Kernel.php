@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            InventoryOut::where('created_at','<',Carbon::now()->subMinutes(10)->toDateTimeString())->delete();
+            InventoryOut::where('created_at','<',Carbon::now()->subMinutes(10)->toDateTimeString())->doesnthave('approvals')->delete();
         })->everyMinute();
     }
 
