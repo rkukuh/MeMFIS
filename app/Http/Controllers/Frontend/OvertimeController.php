@@ -91,7 +91,20 @@ class OvertimeController extends Controller
      */
     public function show(Overtime $overtime)
     {
-        //
+        $theOvertime = Overtime::findOrFail($overtime->id);
+        $status_data = $overtime->statuses()->first()->name;
+        $employee_data = $overtime->employee()->first()->first_name. " - " . $overtime->employee()->first()->code;
+        // $total_in_diff = Carbon::parse($overtime->total,"Asia/Jakarta")->format("%H %I %S");
+        $date = $overtime->date;
+        $start = $overtime->start;
+        $end = $overtime->end;
+        $start_diff = Carbon::parse($date." ".$start,"Asia/Jakarta");
+        $end_diff = Carbon::parse($date." ".$end,"Asia/Jakarta");
+        $total_in_diff = $start_diff->diff($end_diff)->format("%H Hours %I Minutes %S Seconds");
+        
+        // error_log("WOI ".$overtime->uuid);
+        // return view("frontend.overtime.show",["overtime" => $overtime, "employee" => $employee_data]);\
+        return response()->json(["overtime" => $overtime,"status"=>$status_data,"employee" => $employee_data,"total_diff" => $total_in_diff]);
     }
 
     /**
@@ -102,9 +115,10 @@ class OvertimeController extends Controller
      */
     public function edit(Overtime $overtime)
     {
-        // $theOvertime = Overtime::findOrFail($overtime->id);
-        $employee_data = $overtime->employee;
-        return view("frontend.overtime.edit",["overtime" => $overtime,"employee" => $employee_data]);
+        $theOvertime = Overtime::findOrFail($overtime->id);
+        $employee_data = $overtime->employee()->first()->code." - ".$overtime->employee()->first()->first_name;
+        $employee_uuid = $overtime->employee()->first()->uuid;
+        return view("frontend.overtime.edit",["overtime" => $overtime,"employee" => $employee_data,"employee_uuid" => $employee_uuid]);
     }
 
     /**
@@ -167,8 +181,16 @@ class OvertimeController extends Controller
         //
     }
 
-    public function approve(Overtime $overtime, Request $request)
+    public function approve()
     {
-        # code...
+        // dd($data);
+        // error_log("MLEBU COI");
+        return response()->json(["test" => "WKWKWK"]);
+        // $overtime->approvals()->save(new Approval([
+        //     'approvable_id' => $overtime->id,
+        //     'conducted_by' => Auth::id(),
+        //     'note' => $request->note,
+        //     'is_approved' => 1
+        // ]));
     }
 }

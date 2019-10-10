@@ -31,10 +31,10 @@ class OvertimeDatatables extends Controller
         
         // if empty, then quit.
         if (empty($overtime)) {
-            error_log("Setop");
+            // error_log("Setop");
             return response()->json($overtime);
         }
-        error_log("Lanjot");
+        // error_log("Lanjot");
 
         $data = $alldata = $overtime;
 
@@ -135,7 +135,15 @@ class OvertimeDatatables extends Controller
                 $formated_end = Carbon::parse($od->end,"Asia/Jakarta")->toTimeString();
                 $formatted_date = Carbon::parse($od->date,"Asia/Jakarta")->toDateString();
                 $status_name = $od->statuses->name;
-                // $formated_time =
+                $approvals = $od->approvals->toArray();
+                $isApproved = "Approved";
+                // check approvals
+                if (empty($approvals)) {
+                    $isApproved = "Approved";
+                }else{
+                    $isApproved = "Not Approved";
+                }
+
                 $overtime[$i] = [
                     "date" => $formatted_date,
                     "uuid" => $od->uuid,
@@ -146,7 +154,8 @@ class OvertimeDatatables extends Controller
                     "total" => $od->total,
                     "desc" => $od->desc,
                     "status" => $status_name,
-                    "id" => $od->id
+                    "id" => $od->id,
+                    "isApproved"-> $isApproved
                 ];
                 $i++;
             }   
