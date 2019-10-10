@@ -106,7 +106,7 @@ let InventoryIn = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -120,7 +120,7 @@ let InventoryIn = {
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'conducted_by',
                     title: 'Approve By',
                     sortable: 'asc',
                     filterable: !1,
@@ -151,7 +151,7 @@ let InventoryIn = {
         });
 
         $('.inventory_in_datatable').on('click', '.delete', function () {
-            let inventory_uuid = $(this).data('id');
+            let inventory_uuid = $(this).data('uuid');
 
             swal({
                 title: 'Sure want to remove?',
@@ -177,7 +177,7 @@ let InventoryIn = {
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.inventory_in_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();

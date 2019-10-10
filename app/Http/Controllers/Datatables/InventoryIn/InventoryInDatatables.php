@@ -16,7 +16,19 @@ class InventoryInDatatables extends Controller
      */
     public function index()
     {
-        $inventories = InventoryIn::with('items')->get();
+        $inventories = InventoryIn::with('items', 'approvals')->get();
+        foreach ($inventories as $inventory) {
+            if (!empty($inventory->approvals->first())) {
+                $inventory->status .= 'Approved';
+
+                if (isset($inventory->approvals)) {
+                    $conducted_by  = User::find($inventory->approvals->first()->conducted_by);
+                    $inventory->conducted_by .= $conducted_by->name;
+                } else {
+                    $inventory->conducted_by .= '';
+                }
+            }
+        }
         $data = $alldata = json_decode($inventories);
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
