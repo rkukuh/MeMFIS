@@ -190,7 +190,7 @@ let PurchaseOrder = {
             let price = $('#price').val();
             let ppn = $('#ppn').val();
             let discount = $('#discount').val();
-            // let discount_type = $('#discount-type').val();
+            let discount_type = $('#discount-type-po').val();
             let remark_material = $('#remark_material').val();
 
             $.ajax({
@@ -204,8 +204,8 @@ let PurchaseOrder = {
                     unit_id:unit_id,
                     price:price,
                     ppn:ppn,
-                    // discount:discount,
-                    // discount_type:discount_type,
+                    discount:discount,
+                    discount_type:discount_type,
                     note:remark_material,
                 },
                 success: function(response) {

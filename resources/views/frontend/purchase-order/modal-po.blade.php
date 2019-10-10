@@ -74,11 +74,11 @@
                                     </label>
 
                                     @component('frontend.common.input.select2')
-                                        @slot('text', 'Discount')
-                                        @slot('name', 'discount-type-po')
-                                        @slot('id', 'discount-type-po')
-                                        @slot('class', 'discount-type-po')
-                                        @slot('id_error', 'discount-type-po')
+                                        @slot('text', 'Promo')
+                                        @slot('name', 'promo')
+                                        @slot('id', 'promo')
+                                        @slot('class', 'promo')
+                                        @slot('id_error', 'promo')
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">

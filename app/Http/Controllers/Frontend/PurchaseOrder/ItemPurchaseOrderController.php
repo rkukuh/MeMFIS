@@ -78,16 +78,22 @@ class ItemPurchaseOrderController extends Controller
      */
     public function update(PurchaseOrderUpdate $request, PurchaseOrder $purchaseOrder, Item $item)
     {
+        $subtotal_before_discount = $request->quantity*$request->price;
+        $discount_amount = 0;
+        if($request->discount_type == "percentage"){
+            $discount_amount = $subtotal_before_discount * ($request->discount_value / 100);
+        }
+        
         $purchaseOrder->items()->updateExistingPivot($item->id,
                     ['unit_id'=>$request->unit_id,
                     'quantity'=> $request->quantity,
                     'price'=> $request->price,
                     // 'tax_percent'=> $request->ppn,
                     // 'tax_amount'=> $request->ppn,
-                    'subtotal_before_discount'=> $request->quantity*$request->price ,
+                    'subtotal_before_discount'=> $subtotal_before_discount ,
                     'discount_type'=> $request->discount_type ,
                     'discount_value'=> $request->discount_value ,
-                    'subtotal_after_discount'=> $request->quantity*$request->price ,
+                    'subtotal_after_discount'=> $subtotal_before_discount - $discount_amount,
                     'note' => $request->note]);
 
         return response()->json($purchaseOrder);

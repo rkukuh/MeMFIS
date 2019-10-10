@@ -412,8 +412,8 @@
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/vendor.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/discount-type.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/promo.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/promo.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
