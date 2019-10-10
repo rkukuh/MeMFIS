@@ -39,7 +39,13 @@ class InventoryInController extends Controller
      */
     public function store(InventoryInStore $request)
     {
-        dd($request->all());
+        $request->merge(['received_by' => Auth::id()]);
+        $request->merge(['inventoryinable_type' => 'App\Models\InventoryIn']);
+        $request->merge(['inventoryinable_id' => InventoryIn::withTrashed()->count()+1]);
+
+        $inventoryIn = InventoryIn::create($request->all());
+
+        return response()->json($inventoryIn);
     }
 
     /**
