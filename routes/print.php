@@ -181,6 +181,34 @@ Route::get('/purchase-order-doc', function () {
     return $pdf->stream();
 });
 
+
+Route::get('/nonroutine-ad', function () {
+    $pdf = \PDF::loadView('frontend/form/airworthiness_directive');
+    return $pdf->stream();
+});
+
+Route::get('/nonroutine-awl', function () {
+    $pdf = \PDF::loadView('frontend/form/airworthiness_limitations');
+    return $pdf->stream();
+});
+
+
+Route::get('/nonroutine-cmr', function () {
+    $pdf = \PDF::loadView('frontend/form/certification_maintenance_requirement');
+    return $pdf->stream();
+});
+
+
+Route::get('/nonroutine-ea', function () {
+    $pdf = \PDF::loadView('frontend/form/ea');
+    return $pdf->stream();
+});
+
+Route::get('/nonroutine-sb', function () {
+    $pdf = \PDF::loadView('frontend/form/sb');
+    return $pdf->stream();
+});
+
 Route::get('/dc', function () {
     // $m = new iio\libmergepdf\Merger();
 
