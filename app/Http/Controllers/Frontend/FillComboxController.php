@@ -818,7 +818,7 @@ class FillComboxController extends Controller
      */
     public function promo()
     {
-        $promo = Promo::pluck('name', 'uuid');
+        $promo = Promo::where('code','like','discount%')->pluck('name', 'uuid');
 
         return json_encode($promo);
 

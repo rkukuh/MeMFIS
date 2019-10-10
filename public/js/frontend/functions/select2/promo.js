@@ -1,6 +1,6 @@
 let PromoSelect2 = {
     init: function () {        
-        $('select[name="promo"], #promo_validate').select2({
+        $('select[name="promo-type"], #promo-type_validate').select2({
             placeholder: 'Select a Promo'
         });
     }
