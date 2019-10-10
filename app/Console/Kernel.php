@@ -29,6 +29,9 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             InventoryOut::where('created_at','<',Carbon::now()->subMinutes(10)->toDateTimeString())->doesnthave('approvals')->delete();
         })->everyMinute();
+        // $schedule->call(function () { //? Waiting Entity Created
+        //     Motation::where('created_at','<',Carbon::now()->subMinutes(10)->toDateTimeString())->doesnthave('approvals')->delete();
+        // })->everyMinute();
     }
 
     /**
