@@ -3,38 +3,38 @@
 namespace App\Http\Controllers\Datatables;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employee;
 use App\Models\Overtime;
 use Carbon\Carbon;
+use Auth;
 
 class OvertimeDatatables extends Controller
 {
     public function index()
     {
-        $overtime_datas = Overtime::all();
-        $overtime = [];
-
+        $isAdmin = Auth::user()->hasRole("admin");
+        $overtime_datas = null;
         $i = 0;
-        foreach($overtime_datas as $od){
-            $employee_data = $od->employee;
-            $formated_start = Carbon::parse($od->start,"Asia/Jakarta")->toTimeString();
-            $formated_end = Carbon::parse($od->end,"Asia/Jakarta")->toTimeString();
-            $formatted_date = Carbon::parse($od->date,"Asia/Jakarta")->toDateString();
-            $status_name = $od->statuses->name;
-            // $formated_time =
-            $overtime[$i] = [
-                "date" => $formatted_date,
-                "uuid" => $od->uuid,
-                "nrp" => $employee_data->code,
-                "employee_name" => $employee_data->first_name,
-                "start" => $formated_start,
-                "end" => $formated_end,
-                "total" => $od->total,
-                "desc" => $od->desc,
-                "status" => $status_name,
-                "id" => $od->id
-            ];
-            $i++;
+        $overtime = null;
+        if ($isAdmin) {
+            $overtime_datas = Overtime::all();
+            $overtime = $this->getAllData($i,$overtime_datas);
+            // $uuid = $validated["search-journal-val"];
+            // $employee_id = Employee::where("uuid",$uuid)->first()->id;
+        }else{
+            $employee_id = Auth::id();
+            $overtime_datas = Employee::find($employee_id)->overtime;
+            $overtime = $this->getAllData($i,$overtime_datas);
+            // $overtime = ($i,$overtime_datas);
+            // echo json_encode($overtime_datas,JSON_PRETTY_PRINT);
         }
+        
+        // if empty, then quit.
+        if (empty($overtime)) {
+            error_log("Setop");
+            return response()->json($overtime);
+        }
+        error_log("Lanjot");
 
         $data = $alldata = $overtime;
 
@@ -123,5 +123,34 @@ class OvertimeDatatables extends Controller
         ];
 
         echo json_encode($result, JSON_PRETTY_PRINT);
+    }
+
+    private function getAllData($i,$overtime_datas)
+    {
+        $overtime = [];
+        if (!empty($overtime_datas)) {
+            foreach($overtime_datas as $od){
+                $employee_data = $od->employee;
+                $formated_start = Carbon::parse($od->start,"Asia/Jakarta")->toTimeString();
+                $formated_end = Carbon::parse($od->end,"Asia/Jakarta")->toTimeString();
+                $formatted_date = Carbon::parse($od->date,"Asia/Jakarta")->toDateString();
+                $status_name = $od->statuses->name;
+                // $formated_time =
+                $overtime[$i] = [
+                    "date" => $formatted_date,
+                    "uuid" => $od->uuid,
+                    "nrp" => $employee_data->code,
+                    "employee_name" => $employee_data->first_name,
+                    "start" => $formated_start,
+                    "end" => $formated_end,
+                    "total" => $od->total,
+                    "desc" => $od->desc,
+                    "status" => $status_name,
+                    "id" => $od->id
+                ];
+                $i++;
+            }   
+        }
+        return $overtime;
     }
 }
