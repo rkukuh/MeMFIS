@@ -85,8 +85,8 @@ class ItemPurchaseOrderController extends Controller
                     // 'tax_percent'=> $request->ppn,
                     // 'tax_amount'=> $request->ppn,
                     'subtotal_before_discount'=> $request->quantity*$request->price ,
-                    // 'discount_type'=> $request->discount_type ,
-                    // 'discount_value'=> $request->discount_value ,
+                    'discount_type'=> $request->discount_type ,
+                    'discount_value'=> $request->discount_value ,
                     'subtotal_after_discount'=> $request->quantity*$request->price ,
                     'note' => $request->note]);
 
