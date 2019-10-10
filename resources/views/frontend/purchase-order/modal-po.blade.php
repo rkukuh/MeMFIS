@@ -37,6 +37,7 @@
                                     <label class="form-control-label">
                                         Unit
                                     </label>
+                                    
                                     @component('frontend.common.input.select2')
                                         @slot('text', 'Unit')
                                         @slot('name','unit_id')
@@ -74,10 +75,10 @@
 
                                     @component('frontend.common.input.select2')
                                         @slot('text', 'Discount')
-                                        @slot('name', 'discount-type')
-                                        @slot('class', 'discount-type')
-                                        @slot('id', 'discount-type')
-                                        @slot('id_error', 'discount-type')
+                                        @slot('name', 'discount-type-po')
+                                        @slot('id', 'discount-type-po')
+                                        @slot('class', 'discount-type-po')
+                                        @slot('id_error', 'discount-type-po')
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
