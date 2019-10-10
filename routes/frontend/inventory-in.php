@@ -14,7 +14,8 @@ Route::name('frontend.')->group(function () {
         Route::namespace('InventoryIn')->group(function () {
 
             Route::resource('inventory-in', 'InventoryInController');
+            Route::put('inventory-in/{inventoryIn}/approve', 'InventoryInController@approve')->name('inventory-in.approve');
 
         });
-    }); 
+    });
 });

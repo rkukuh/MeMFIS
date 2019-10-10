@@ -13,9 +13,9 @@ use Faker\Generator as Faker;
 $factory->define(GoodsReceived::class, function (Faker $faker) {
 
     $number = $faker->unixTime();
-    $plate_no = strtoupper($faker->randomLetter) . ' ' 
-                . $faker->numberBetween(1000, 9999) . ' ' 
-                . strtoupper($faker->randomLetter) 
+    $plate_no = strtoupper($faker->randomLetter) . ' '
+                . $faker->numberBetween(1000, 9999) . ' '
+                . strtoupper($faker->randomLetter)
                 . strtoupper($faker->randomLetter);
 
     return [
@@ -90,11 +90,11 @@ $factory->afterCreating(GoodsReceived::class, function ($goods_received, $faker)
             ]);
         }
     }
-    
+
     // Approval
 
-    if ($faker->boolean) {
-        $goods_received->approvals()->save(factory(Approval::class)->make());
-    }
+    // if ($faker->boolean) {
+    //     $goods_received->approvals()->save(factory(Approval::class)->make());
+    // }
 
 });
