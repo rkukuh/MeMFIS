@@ -27,6 +27,7 @@ use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\EmployeeLicense;
+use App\Models\InventoryIn;
 
 class FillComboxController extends Controller
 {
@@ -810,4 +811,15 @@ class FillComboxController extends Controller
 
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function inventoryIn()
+    {
+        $number = InventoryIn::pluck('number');
+
+        return json_encode($number);
+    }
 }
