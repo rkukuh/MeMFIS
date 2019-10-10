@@ -17,6 +17,17 @@ let PurchaseOrder = {
                                 dataSet = raw.data;
                             }
 
+
+                            let subtotal = discount = 0;
+                            $.each(dataSet, function( index, data ) {
+                                subtotal += data.pivot.subtotal_after_discount;
+                                discount += data.discount;
+                            });
+                            $("#sub_total").html(subtotal);
+                            $("#sub_total").val(subtotal);
+                            $("#grand_total").html(discount);
+                            $("#grand_total").val(discount);
+
                             return dataSet;
                         }
                     }
@@ -84,7 +95,7 @@ let PurchaseOrder = {
                 filterable: !1,
             },
             {
-                field: 'pivot.discount_amount',
+                field: 'discount',
                 title: 'Disc PR',
                 sortable: 'asc',
                 filterable: !1,
@@ -127,6 +138,7 @@ let PurchaseOrder = {
             }
             ]
         });
+
 
         $('.item_datatable').on('click', '.edit-item', function () {
             $.ajax({
@@ -227,13 +239,17 @@ let PurchaseOrder = {
                         );
 
                         let table = $(".item_datatable").mDatatable();
-                        let subtotal = 0;
+                        let subtotal = discount = 0;
                         let dataSet = table.originalDataSet;
                         $.each(dataSet, function( index, data ) {
                             subtotal += data.pivot.subtotal_after_discount;
+                            discount += data.discount;
                         });
                         $("#sub_total").html(subtotal);
                         $("#sub_total").val(subtotal);
+                        $("#grand_total").html(discount);
+                        $("#grand_total").val(discount);
+
                         table.originalDataSet = [];
                         table.reload();
 

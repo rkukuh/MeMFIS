@@ -310,7 +310,7 @@
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'sub_total')
                                                                     @slot('class', 'sub_total')
-                                                                    @slot('text', 'generate semua total ditabel')
+                                                                    @slot('text', '0')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -323,18 +323,18 @@
                                                             </div>
                                                             <div class="col-sm-1 col-md-1 col-lg-1">
                                                                 @component('frontend.common.input.checkbox')
-                                                                    @slot('id', 'is_ppn_include')
-                                                                    @slot('name', 'is_ppn_include')
-                                                                    @slot('value', 1.1)
+                                                                    @slot('id', 'is_ppn')
+                                                                    @slot('name', 'is_ppn')
+                                                                    @slot('value', 'include')
                                                                     @slot('text', 'Include')
                                                                     @slot('style_div','margin-top:15px')
                                                                 @endcomponent
                                                             </div>
                                                             <div class="col-sm-1 col-md-1 col-lg-1">
                                                                 @component('frontend.common.input.checkbox')
-                                                                    @slot('id', 'is_ppn_exclude')
-                                                                    @slot('name', 'is_ppn_exclude')
-                                                                    @slot('value', 1.1)
+                                                                    @slot('id', 'is_ppn')
+                                                                    @slot('name', 'is_ppn')
+                                                                    @slot('value', 'exclude')
                                                                     @slot('text', 'Exclude')
                                                                     @slot('style_div','margin-top:15px')
                                                                 @endcomponent
@@ -349,9 +349,9 @@
                                                             </div>
                                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'sub_total')
-                                                                    @slot('class', 'sub_total')
-                                                                    @slot('text', 'menghitung nilai total & biaya lainnya')
+                                                                    @slot('id', 'grand_total')
+                                                                    @slot('class', 'grand_total')
+                                                                    @slot('text', '0')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
