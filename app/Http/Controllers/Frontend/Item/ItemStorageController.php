@@ -40,12 +40,19 @@ class ItemStorageController extends Controller
      */
     public function store(Item $item, ItemStorageStore $request)
     {
-        $item->storages()->attach($request->storage_id, [
-            'min' => $request->min,
-            'max' => $request->max
-        ]);
+        $storage = Storage::find($request->storage_id);
+        $ItemStorage = ItemStorage::where('item_id', $item->id)->get();
+        $exists = $ItemStorage->where('deleted_at',null)->where('storage_id',$storage->id)->first();
+        if($exists){
+            return response()->json(['title' => "Danger"]);
+        }else{
+            $item->storages()->attach($request->storage_id, [
+                'min' => $request->min,
+                'max' => $request->max
+            ]);
 
-        return response()->json($item);
+            return response()->json($item);
+        }
     }
 
     /**
@@ -80,9 +87,7 @@ class ItemStorageController extends Controller
      */
     public function update(Item $item, ItemStorageUpdate $request)
     {
-        $item->storages()->detach($request->storage);
-
-        $item->storages()->attach($request->storage_id, [
+        $item->storages()->updateExistingPivot($request->storage_id, [
             'min' => $request->min,
             'max' => $request->max
         ]);
@@ -100,7 +105,7 @@ class ItemStorageController extends Controller
     public function destroy(Item $item,Storage $storage)
     {
         $item->storages()->detach($storage);
-        
+
         return response()->json($item);
     }
 }

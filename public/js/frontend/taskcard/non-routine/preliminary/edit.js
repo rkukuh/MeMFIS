@@ -20,7 +20,7 @@ let TaskCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -104,7 +104,7 @@ let TaskCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -189,7 +189,7 @@ let TaskCard = {
                 pageSize: 10,
                 perpage: 5,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -261,7 +261,7 @@ let TaskCard = {
                 pageSize: 10,
                 perpage: 5,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -446,8 +446,18 @@ let TaskCard = {
                         // document.getElementById('uom_quantity').value = '';
 
                         // $('#item_unit_id').select2('val', 'All');
-
-
+                        $('#modal_item').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end()
+                            .find("select")
+                                .select2('val','All')
+                                .end();
+                        })
                     }
                 }
             });
@@ -497,6 +507,19 @@ let TaskCard = {
                         // document.getElementById('uom_quantity').value = '';
 
                         // $('#item_unit_id').select2('val', 'All');
+                        
+                        $('#modal_tool').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end()
+                            .find("select")
+                                .select2('val','All')
+                                .end();
+                        })
 
 
                     }
@@ -721,13 +744,13 @@ let TaskCard = {
             var data = new FormData();
             data.append( "title", $('input[name=title]').val());
             data.append( "number", $('input[name=number]').val());
-            data.append( "work_area", $('#work_area').val());
             data.append( "applicability_airplane", JSON.stringify($('#applicability_airplane').val()));
             data.append( "estimation_manhour", $('input[name=manhour]').val());
             data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
             data.append( "helper_quantity", $('input[name=helper_quantity]').val());
             data.append( "description", $('#instruction').val());
-            data.append(" additionals",  internal_numberJSON);
+            data.append( "document_library", JSON.stringify($('#document-library').val()));
+            data.append( "additionals",  internal_numberJSON);
 
             data.append('_method', 'PUT');
 

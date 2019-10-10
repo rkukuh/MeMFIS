@@ -18,93 +18,33 @@ class RIIReleaseJobCardDatatables extends Controller
      */
     public function index()
     {
-        $JobCard =JobCard::with('taskcard','quotation','progresses')
-                                            ->whereHas('taskcard', function ($query) {
-                                            $query->where('is_rii', '1');
-                                            })
+        $JobCard =JobCard::with('quotation','progresses')
+                                            ->where('is_rii','1')
                                             ->whereHas('progresses', function ($query) {
                                             $query->where('status_id', Status::where('code','released')->where('of','jobcard')->first()->id);
                                             })
                                             ->get();
 
-        foreach($JobCard as $aircraft){
-            $aircraft->aircraft_name .= $aircraft->quotation->project->aircraft->name;
-        }
-
-        foreach($JobCard as $status){
-            Status::find($status->progresses->last()->status_id)->name;
-            if(Status::find($status->progresses->last()->status_id)->name == 'RELEASED'){
-                $status->status .= 'Waiting for RII';
-            }else{
-                $status->status .=Status::find($status->progresses->last()->status_id)->name;
-
-            }
-        }
-
-
-        foreach($JobCard as $taskcard){
-            if(isset($taskcard->taskcard->skills) ){
-                if(sizeof($taskcard->taskcard->skills) == 3){
-                    $taskcard->skill_name .= "ERI";
-                }
-                else if(sizeof($taskcard->taskcard->skills) == 1){
-                    $taskcard->skill_name .= $taskcard->taskcard->skills[0]->name;
-                }
-                else{
-                    $taskcard->skill_name .= '';
-                }
-            }
-        }
-
         foreach($JobCard as $Jobcard){
-            $statuses = Status::ofJobCard()->get();
-            $jobcard = JobCard::where('uuid',$Jobcard->uuid)->first();
-            foreach($jobcard->helpers as $helper){
-                $helper->userID .= $helper->user->id;
-            }
-            $manhours = 0;
-            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                $date1 = null;
-                foreach($values as $value){
-                    if($statuses->where('id',$value->status_id)->first()->code <> "open"){
-                        if($jobcard->helpers->where('userID',$key)->first() == null){
-                            if($date1 <> null){
-                                $t1 = Carbon::parse($date1);
-                                $t2 = Carbon::parse($value->created_at);
-                                $diff = $t1->diffInSeconds($t2);
-                                $manhours = $manhours + $diff;
-                            }
-                            $date1 = $value->created_at;
-                        }
-                    }
+            $Jobcard->aircraft_name .= $Jobcard->quotation->quotationable->aircraft->name;
 
+            $Jobcard->customer_name .= $Jobcard->quotation->quotationable->customer->name;
+
+            $Jobcard->skill_name .= $Jobcard->jobcardable->skill;
+
+            Status::find($Jobcard->progresses->last()->status_id)->name;
+            if(Status::find($Jobcard->progresses->last()->status_id)->name == 'RELEASED'){
+                $Jobcard->status .= 'Waiting for RII';
+            }else{
+                if(Status::find($Jobcard->progresses->last()->status_id)->name == 'RII RELEASED'){
+                    $Jobcard->status .= 'Released';
+                }else{
+                    $Jobcard->status .= Status::find($Jobcard->progresses->last()->status_id)->name;
                 }
             }
-            $manhours = $manhours/3600;
-            $manhours_break = 0;
-            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                for($i=0; $i<sizeOf($values->toArray()); $i++){
-                    if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
-                        if($jobcard->helpers->where('userID',$key)->first() == null){
-                            if($date1 <> null){
-                                if($i+1 < sizeOf($values->toArray())){
-                                    $t2 = Carbon::parse($values[$i]->created_at);
-                                    $t3 = Carbon::parse($values[$i+1]->created_at);
-                                    $diff = $t2->diffInSeconds($t3);
-                                    $manhours_break = $manhours_break + $diff;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            $manhours_break = $manhours_break/3600;
-            $actual_manhours =number_format($manhours-$manhours_break, 2);
-            $Jobcard->actual .= $actual_manhours;
-        }
 
-        foreach($JobCard as $customer){
-            $customer->customer_name .= $customer->quotation->customer;
+            $Jobcard->actual .= $Jobcard->ActualManhour;
+
         }
 
         $data = $alldata = json_decode($JobCard);
@@ -203,10 +143,10 @@ class RIIReleaseJobCardDatatables extends Controller
      */
     public function filter(Request $request)
     {
-        $JobCard=JobCard::with('taskcard');
+        $JobCard=JobCard::with('jobcardable');
 
         if (!empty($request->task_type_id)) {
-            $JobCard->whereHas('taskcard', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable', function ($query) use ($request) {
                 $query->where('task_id', $request->task_type_id);
             });
         }

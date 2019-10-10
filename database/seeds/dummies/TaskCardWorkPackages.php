@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\TaskCardWorkPackage;
 use Illuminate\Database\Seeder;
+use App\Models\TaskCardWorkPackage;
 
 class TaskCardWorkPackages extends Seeder
 {

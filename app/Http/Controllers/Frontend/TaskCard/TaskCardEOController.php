@@ -73,41 +73,38 @@ class TaskCardEOController extends Controller
     public function store(TaskCardEOStore $request)
     {
         $this->decoder($request);
-
-        if ($taskcard = TaskCard::create($request->all())) {
-            $taskcard->aircrafts()->attach($request->applicability_airplane);
-
-            for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
-                if($request->threshold_type[$i] !== "Select Threshold"){
-                    $taskcard->thresholds()->save(new Threshold([
-                        'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
-                        'amount' => $request->threshold_amount[$i],
-                    ]));
+        $checker = [];
+        // get all the taskcard with the same number
+        $taskcards = TaskCard::where('number', $request->number)->get();
+        if(sizeof($taskcards) > 0){
+            // to check all internal number every taskcard
+            foreach($taskcards as $taskcard){
+                $taskcard->additionals = json_decode($taskcard->additionals);
+                // check if the internal number are the same 
+                if($request->additionals->internal_number == $taskcard->additionals->internal_number){
+                array_push($checker, true);
+                }else{
+                array_push($checker, false);
                 }
-            }
+            }  
+        }else{
+            $taskcard = $this->createTaskcard($request);
 
-            for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) {
-                if($request->repeat_type[$i] !== "Select Repeat"){
-                    $taskcard->repeats()->save(new Repeat([
-                        'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
-                        'amount' => $request->repeat_amount[$i],
-                    ]));
-                }
-            }
-
-            if ($request->hasFile('fileInput')) {
-                $data = $request->input('image');
-                $photo = $request->file('fileInput')->getClientOriginalName();
-                $destination = 'master/taskcard/non-routine/';
-                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
-            }
-
-            return response()->json($taskcard);
+            return response()->json($taskcard->original);
         }
 
-        // TODO: Return error message as JSON
-        return false;
+        if(in_array(true, $checker)){
+            $error_message = array(
+                'message' => "a taskcard with same number and company number already exists",
+                'title' => "Taskcard already exists!",
+                'alert-type' => "error"
+            );
+            return response()->json(['error' => [$error_message]], '403');
+        }else{
+            $taskcard = $this->createTaskcard($request);
 
+            return response()->json($taskcard->original);
+        }
     }
 
     /**
@@ -119,7 +116,8 @@ class TaskCardEOController extends Controller
     public function show(TaskCard $taskCard)
     {
         return view('frontend.task-card.nonroutine.eo.show',[
-            'taskcard' => $taskCard
+            'taskcard' => $taskCard,
+            'additionals' => json_decode($taskCard->additionals)
         ]);
     }
 
@@ -136,8 +134,7 @@ class TaskCardEOController extends Controller
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
         }
-
-
+        
         return view('frontend.task-card.nonroutine.eo.edit',[
             'tasks' => $this->task,
             'types' => $this->type,
@@ -150,6 +147,7 @@ class TaskCardEOController extends Controller
             'scheduled_priorities' => $this->scheduled_priorities,
             'affected_manuals' => $this->affected_manuals,
             'MaintenanceCycles' => $this->maintenanceCycle,
+            'additionals' => json_decode($taskCard->additionals)
         ]);
     }
 
@@ -164,40 +162,43 @@ class TaskCardEOController extends Controller
     {
         $this->decoder($request);
 
+        $additionals["internal_number"] = $request->additionals->internal_number;
+        $additionals["document_library"] = $request->document_library;
+        $request->merge(['additionals' => json_encode($additionals, true)]);
+
         if ($taskCard->update($request->all())) {
-            if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
-                $taskCard->skills()->detach();
-                $taskCard->skills()->attach(Type::where('code','electrical')->first()->id);
-                $taskCard->skills()->attach(Type::where('code','radio')->first()->id);
-                $taskCard->skills()->attach(Type::where('code','instrument')->first()->id);
-            }
-            else{
-                if(sizeof($taskCard->skills) > 1 ){
-                    $taskCard->skills()->detach();
-                }
-                $taskCard->skills()->sync($request->skill_id);
-            }
             $taskCard->aircrafts()->sync($request->applicability_airplane);
+
             if($taskCard->thresholds)$taskCard->thresholds()->delete();
             if($taskCard->repeats)$taskCard->repeats()->delete();
 
-            if(is_array($request->threshold_amount)){
-                for ($i=0; $i < sizeof($request->threshold_amount) ; $i++) {
-                    $taskCard->thresholds()->save(new Threshold([
-                        'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
-                        'amount' => $request->threshold_amount[$i],
+            if(is_array($request->threshold_type)){
+                for ($i=0; $i < sizeof($request->threshold_type) ; $i++) {
+                    if($request->threshold_type[$i] !== "Select Threshold"){
+                        if($request->threshold_amount[$i] == ''){
+                            $request->threshold_amount[$i] = null;
+                        }
+                        $taskCard->thresholds()->save(new Threshold([
+                            'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
+                            'amount' => $request->threshold_amount[$i],
                         ]));
                     }
                 }
+            }
 
-            if(is_array($request->repeat_amount)){
-                for ($i=0; $i < sizeof($request->repeat_amount) ; $i++) {
-                    $taskCard->repeats()->save(new Repeat([
-                        'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
-                        'amount' => $request->repeat_amount[$i],
+            if(is_array($request->repeat_type)){
+                for ($i=0; $i < sizeof($request->repeat_type) ; $i++) {
+                    if($request->repeat_type[$i] !== "Select Repeat"){
+                        if($request->repeat_amount[$i] == ''){
+                            $request->repeat_amount[$i] = null;
+                        }
+                        $taskCard->repeats()->save(new Repeat([
+                            'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
+                            'amount' => $request->repeat_amount[$i],
                         ]));
                     }
                 }
+            }
 
             if ($request->hasFile('fileInput')) {
                 $data = $request->input('image');
@@ -226,12 +227,61 @@ class TaskCardEOController extends Controller
 
     public function decoder($req){
 
-        $req->applicability_airplane = json_decode($req->applicability_airplane);
-        $req->threshold_type = json_decode($req->threshold_type);
+        $req->additionals = json_decode($req->additionals);
         $req->repeat_type = json_decode($req->repeat_type);
-        $req->threshold_amount = json_decode($req->threshold_amount);
         $req->repeat_amount = json_decode($req->repeat_amount);
+        $req->threshold_type = json_decode($req->threshold_type);
+        $req->threshold_amount = json_decode($req->threshold_amount);
+        $req->applicability_airplane = json_decode($req->applicability_airplane);
 
         return $req;
+    }
+
+    public function createTaskcard($request){
+        $additionals["internal_number"] = $request->additionals->internal_number;
+        $additionals["document_library"] = $request->document_library;
+        $request->merge(['additionals' => json_encode($additionals, true)]);
+
+        if ($taskcard = TaskCard::create($request->all())) {
+            $taskcard->aircrafts()->attach($request->applicability_airplane);
+
+            if(is_array($request->threshold_type)){
+                for ($i=0; $i < sizeof($request->threshold_type) ; $i++) {
+                    if($request->threshold_type[$i] !== "Select Threshold"){
+                        if($request->threshold_amount[$i] == ''){
+                            $request->threshold_amount[$i] = null;
+                        }
+                        $taskcard->thresholds()->save(new Threshold([
+                            'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
+                            'amount' => $request->threshold_amount[$i],
+                        ]));
+                    }
+                }
+            }
+    
+            if(is_array($request->repeat_type)){
+                for ($i=0; $i < sizeof($request->repeat_type) ; $i++) {
+                    if($request->repeat_type[$i] !== "Select Repeat"){
+                        if($request->repeat_amount[$i] == ''){
+                            $request->repeat_amount[$i] = null;
+                        }
+                        $taskcard->repeats()->save(new Repeat([
+                            'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
+                            'amount' => $request->repeat_amount[$i],
+                        ]));
+                    }
+                }
+            }
+
+            if ($request->hasFile('fileInput')) {
+                $data = $request->input('image');
+                $photo = $request->file('fileInput')->getClientOriginalName();
+                $destination = 'master/taskcard/non-routine/';
+                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+            }
+
+            return response()->json($taskcard);
+        }
+
     }
 }

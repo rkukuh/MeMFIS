@@ -19,7 +19,8 @@ let PurchaseOrder = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -52,14 +53,14 @@ let PurchaseOrder = {
                     }
                 },
                 {
-                    field: 'ordered_at',
-                    title: 'Date',
+                    field: 'vendor.code',
+                    title: 'PR Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'valid_until',
-                    title: 'Valid Until',
+                    field: 'ordered_at',
+                    title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -76,8 +77,20 @@ let PurchaseOrder = {
                     filterable: !1,
                 },
                 {
+                    field: 'valid_until',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: '',
-                    title: 'Approved By',
+                    title: '1st Approved',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: '',
+                    title: '2nd Approved By',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -86,17 +99,21 @@ let PurchaseOrder = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid +'">' +
-                                '<i class="la la-check-square-o"></i>' +
-                            '</a>' +
-                            '<a href="/purchase-order/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'
-                        );
+                        if(t.status == "Approved"){
+                            return "";
+                        }else{
+                            return (
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid +'">' +
+                                    '<i class="la la-check"></i>' +
+                                '</a>' +
+                                '<a href="/purchase-order/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
+                                    '<i class="la la-pencil"></i>' +
+                                '</a>' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-trash"></i>' +
+                                '</a>'
+                            );
+                        }
                     }
                 }
             ]

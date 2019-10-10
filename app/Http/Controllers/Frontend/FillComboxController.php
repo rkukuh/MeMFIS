@@ -13,7 +13,7 @@ use App\Models\Access;
 use App\Models\Project;
 use App\Models\License;
 use App\Models\Storage;
-use App\Models\Journal;
+use App\Models\Station;
 use App\Models\Facility;
 use App\Models\Customer;
 use App\Models\Aircraft;
@@ -23,24 +23,13 @@ use App\Models\Employee;
 use App\Models\TaskCard;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
+use App\Models\PurchaseOrder;
+use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\EmployeeLicense;
 
 class FillComboxController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function accountCodes()
-    {
-        $accountCodes = Journal::pluck('code', 'id');
-
-        return json_encode($accountCodes);
-
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -163,6 +152,20 @@ class FillComboxController extends Controller
     {
         $employees = Employee::selectRaw('id, CONCAT(first_name, " ", middle_name ," ", last_name) as name')
                     ->pluck('name', 'id');
+
+        return json_encode($employees);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function employeeUuid()
+    {
+        $employees = Employee::selectRaw('uuid, CONCAT(first_name, " ", last_name) as name')
+                    ->pluck('name', 'uuid');
 
         return json_encode($employees);
 
@@ -325,6 +328,19 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function itemUUID()
+    {
+        $items = Item::with('categories')
+                 ->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name','uuid');
+
+        return $items;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function customer()
     {
         $customers = Customer::pluck('name', 'uuid');
@@ -396,6 +412,47 @@ class FillComboxController extends Controller
                         ->pluck('name', 'id');
 
         return json_encode($units);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function itemUnits($item)
+    {
+        $item = Item::find($item);
+        $unit = $item->unit()->pluck('name', 'id');
+        $units = $item->units()->pluck('name', 'unit_id');
+        $uom = $unit->toArray() + $units->toArray();
+
+        return json_encode($uom);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function itemUnitUuid(Item $item)
+    {
+        $unit = $item->unit()->pluck('name', 'id');
+        $units = $item->units()->pluck('name', 'unit_id');
+        $uom = $unit->toArray() + $units->toArray();
+
+        return json_encode($uom);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function iterchange(Item $item)
+    {
+        $interchange = $item->interchanges()->pluck('name', 'uuid');
+
+        return json_encode($interchange);
     }
 
     /**
@@ -608,11 +665,71 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function poMaterial(purchaseOrder $purchaseOrder)
+    {
+        $items = $purchaseOrder->items->pluck('name','uuid');
+
+        return $items;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function project()
     {
-        $projects = Project::pluck('title','id');
+        $projects = Project::with('approvals')->whereHas('approvals')->pluck('title','uuid');
 
         return json_encode($projects);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function projectQuotation()
+    {
+        $projects = Project::has('quotations')->pluck('title','uuid');
+
+        return json_encode($projects);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function projectAdditional()
+    {
+        $projects = Project::with('approvals')->where('parent_id',null)->pluck('code','uuid');
+
+        return json_encode($projects);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function projectAdditionalApproved()
+    {
+        $projects = Project::with('approvals')->where('parent_id','<>',null)->whereHas('approvals')->pluck('title','uuid');
+
+        return json_encode($projects);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function purchaseRequestType()
+    {
+        $PRs = Type::where('of','purchase-request')->where('name','<>','Project')->pluck('name','uuid');
+
+        return json_encode($PRs);
     }
 
     /**
@@ -634,7 +751,7 @@ class FillComboxController extends Controller
      */
     public function workOrder()
     {
-        $work_order = Project::pluck('no_wo','uuid');
+        $work_order = Project::with('approvals')->whereHas('approvals')->pluck('no_wo','uuid');
 
         return json_encode($work_order);
     }
@@ -677,6 +794,19 @@ class FillComboxController extends Controller
                               ->pluck('name', 'uuid');
 
         return json_encode($customerLevel);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function station()
+    {
+        $station = station::pluck('name', 'uuid');
+
+        return json_encode($station);
 
     }
 

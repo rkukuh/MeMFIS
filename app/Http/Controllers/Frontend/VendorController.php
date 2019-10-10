@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Vendor;
+use App\Models\Type;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\VendorStore;
 use App\Http\Requests\Frontend\VendorUpdate;
@@ -26,7 +27,11 @@ class VendorController extends Controller
      */
     public function create()
     {
-        return view('frontend.vendor.create');
+        $documents = Type::ofDocument()->get();
+
+        return view('frontend.vendor.create',[
+            'documents' => $documents
+        ]);
     }
 
     /**
@@ -64,7 +69,11 @@ class VendorController extends Controller
      */
     public function edit(Vendor $vendor)
     {
-        return response()->json($vendor);
+        $documents = Type::ofDocument()->get();
+
+        return view('frontend.vendor.edit',[
+            'documents' => $documents
+        ]);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\Item;
 use App\Models\Item;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
+use App\Models\Price;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Http\Controllers\Controller;
@@ -61,6 +62,11 @@ class ToolController extends Controller
         if ($tool = Item::create($request->all())) {
             $tool->categories()->attach($request->category);
             $tool->syncTags($tags);
+
+            for($i=1;$i<=5;$i++){
+                $tool->prices()
+                ->save(new Price (['amount' =>0,'level' =>$i]));
+            }
 
             return response()->json($tool);
         }

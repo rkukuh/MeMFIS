@@ -24,7 +24,7 @@ let summary = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -77,13 +77,13 @@ let summary = {
 
             },
             {
-                field: 'description',
+                field: 'pivot.note',
                 title: 'Remarks',
                 sortable: 'asc',
                 filterable: !1,
                 template: function (t) {
-                    if (t.description) {
-                        data = strtrunc(t.description, 50);
+                    if (t.pivot.note) {
+                        data = strtrunc(t.pivot.note, 50);
                         return (
                             '<p>' + data + '</p>'
                         );
@@ -107,7 +107,7 @@ let summary = {
             ]
         });
 
-        $('.general_items_datatable').mDatatable({
+        $('.general_materials_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -127,7 +127,7 @@ let summary = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -180,13 +180,13 @@ let summary = {
 
             },
             {
-                field: 'description',
+                field: 'pivot.note',
                 title: 'Remarks',
                 sortable: 'asc',
                 filterable: !1,
                 template: function (t) {
-                    if (t.description) {
-                        data = strtrunc(t.description, 50);
+                    if (t.pivot.note) {
+                        data = strtrunc(t.pivot.note, 50);
                         return (
                             '<p>' + data + '</p>'
                         );

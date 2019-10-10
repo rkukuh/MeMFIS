@@ -16,6 +16,14 @@ class Project extends MemfisModel
         'no_wo',
         'aircraft_register',
         'aircraft_sn',
+        'data_defectcard',
+        'data_htcrr',
+        'origin_parent_project',
+        'origin_project_workpackages',
+        'origin_project_workpackage_engineers',
+        'origin_project_workpackage_facilities',
+        'origin_project_workpackage_manhours',
+        'origin_project_workpackage_taskcards',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
@@ -93,7 +101,7 @@ class Project extends MemfisModel
      *
      * @return mixed
      */
-    public function htcrr()
+    public function htcrrs()
     {
         return $this->hasMany(HtCrr::class);
     }
@@ -144,30 +152,29 @@ class Project extends MemfisModel
     }
 
     /**
-     * One-to-Many: A purchase request may have zero or one project
+     * Polymorphic: An entity can have zero or many purchase requests.
      *
-     * This function will retrieve all the purchase requests of a project.
-     * See: PurchaseRequest's project() method for the inverse
+     * This function will get all Project's purchase requests.
+     * See: PurchaseRequest's purchase_requestable() method for the inverse
      *
      * @return mixed
      */
     public function purchase_requests()
     {
-        return $this->belongsToMany(PurchaseRequest::class)
-                    ->withTimestamps();
+        return $this->morphMany(PurchaseRequest::class, 'purchase_requestable');
     }
 
     /**
-     * One-to-Many: A quotation may have one project.
+     * Polymorphic: An entity can have zero or many quotations.
      *
-     * This function will retrieve all the quotations of a project.
-     * See: Quotation's project() method for the inverse
+     * This function will get all Project's quotations.
+     * See: Quotation's quotationable() method for the inverse
      *
      * @return mixed
      */
     public function quotations()
     {
-        return $this->hasMany(Quotation::class);
+        return $this->morphMany(Quotation::class, 'quotationable');
     }
 
     /**

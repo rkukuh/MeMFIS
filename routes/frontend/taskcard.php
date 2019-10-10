@@ -81,8 +81,8 @@ Route::name('frontend.')->group(function () {
                 Route::prefix('preliminary')->group(function () {
 
                     /** Transaction: Item */
-                    // Route::post('/{preliminary}/item', 'TaskCardSIItemController@store')->name('item.store');
-                    // Route::delete('/{preliminary}/{item}/item', 'TaskCardSIItemController@destroy')->name('item.destroy');
+                    Route::post('/{preliminary}/item', 'TaskCardSIItemController@store')->name('item.store');
+                    Route::delete('/{preliminary}/{item}/item', 'TaskCardSIItemController@destroy')->name('item.destroy');
 
                 });
 

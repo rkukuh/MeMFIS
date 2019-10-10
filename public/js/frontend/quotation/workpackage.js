@@ -25,7 +25,7 @@ $('.workpackage_datatable').mDatatable({
         },
         pageSize: 10,
         serverPaging: !0,
-        serverFiltering: !0,
+        serverFiltering: !1,
         serverSorting: !0
     },
     layout: {
@@ -60,7 +60,7 @@ $('.workpackage_datatable').mDatatable({
             filterable: !1,
         },
         {
-            field: 'aircraft.name',
+            field: 'ac_type',
             title: 'A/C Type',
             sortable: 'asc',
             filterable: !1,

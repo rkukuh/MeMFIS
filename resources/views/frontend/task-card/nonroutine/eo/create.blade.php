@@ -167,7 +167,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Task Card Attachment @include('frontend.common.label.required')
+                                                        Task Card Attachment @include('frontend.common.label.optional')
                                                     </label>
 
                                                     @component('frontend.common.input.upload')
@@ -182,12 +182,12 @@
                                                     </label>
 
                                                     @component('frontend.common.input.select2')
-                                                        @slot('text', 'Document')
-                                                        @slot('id', 'document')
-                                                        @slot('name', 'document')
+                                                        @slot('id', 'document-library')
+                                                        @slot('text', 'document-library')
+                                                        @slot('name', 'document-library')
                                                         @slot('multiple','multiple')
+                                                        @slot('id_error', 'document-library')
                                                         @slot('help_text','You can chose multiple value')
-                                                        @slot('id_error', 'document')
                                                     @endcomponent
 
                                                 </div>
@@ -347,7 +347,7 @@
                                                         <option value="">
                                                             Select Recurrence
                                                         </option>
-                                                        <option value="cyrcle">
+                                                        <option value="cycle">
                                                             Cycle
                                                         </option>
                                                         <option value="hourly">
@@ -574,37 +574,37 @@
         autoExpand(event.target);
         }, false);
         $(document).ready(function () {
-          $(".js-example-tags").select2();
-          var counter = 0;
-          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
-          $("#addrow").on("click", function () {
-              var x = 1;
-              var newRow = $("<tr>");
-              var cols = "";
-              x = x+1;
-              cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
-              cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
-              cols += '<option value"">Select Threshold</option>';
-              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
-                  if(maintenanceCycles[i].id == 1){
-                  }else{
-                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
-                  }
-              };
-              cols += '</select></td>';
-              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
-              newRow.append(cols);
-              $("table.threshold").append(newRow);
-              $('.select').select2();
-              counter++;
-          });
-          $("table.threshold").on("click", ".ibtnDel", function (event) {
-              if (counter >= 1) {
-                  $(this).closest("tr").remove();
-                  counter -= 1
-              }
-          });
-          $("#addrow2").on("click", function () {
+            $(".js-example-tags").select2();
+            var counter = 0;
+            var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+            $("#addrow").on("click", function () {
+                var x = 1;
+                var newRow = $("<tr>");
+                var cols = "";
+                x = x+1;
+                cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
+                cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
+                cols += '<option value"">Select Threshold</option>';
+                for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                    if(maintenanceCycles[i].id == 1){
+                    }else{
+                    cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                    }
+                };
+                cols += '</select></td>';
+                cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+                newRow.append(cols);
+                $("table.threshold").append(newRow);
+                $('.select').select2();
+                counter++;
+            });
+            $("table.threshold").on("click", ".ibtnDel", function (event) {
+                if (counter >= 1) {
+                    $(this).closest("tr").remove();
+                    counter -= 1
+                }
+            });
+            $("#addrow2").on("click", function () {
                 var x = 1;
                 var newRow = $("<tr>");
                 var cols = "";
@@ -663,6 +663,8 @@
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
 
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/create.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/document-library.js') }}"></script>
 
     {{-- <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script> --}}
 @endpush

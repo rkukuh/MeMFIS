@@ -2,6 +2,11 @@
 let TaskCard = {
     init: function () {
         let taskcard_uuid = $('#uuid_taskcard').val();
+        function strtrunc(str, max, add) {
+            add = add || '...';
+            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+        };
+
         $('.instruction_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -22,7 +27,7 @@ let TaskCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -46,13 +51,13 @@ let TaskCard = {
             },
             columns: [
                 {
-                    field: 'work_area',
+                    field: 'workarea_name',
                     title: 'Work Area',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
@@ -64,20 +69,24 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'engineer_quantity',
-                    title: 'Engineer Quantity',
+                    field: 'description',
+                    title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
-                },
-                {
-                    field: 'helper_quantity',
-                    title: 'Helper Quantity',
-                    sortable: 'asc',
-                    filterable: !1,
+                    template: function (t) {
+                        if (t.description) {
+                            data = strtrunc(t.description, 50);
+                            return (
+                                '<p>' + data + '</p>'
+                            );
+                        }
+
+                        return ''
+                    }
                 },
                 {
                     field: 'is_rii',
-                    title: 'Rii?',
+                    title: 'RII',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
@@ -94,13 +103,6 @@ let TaskCard = {
 
                         return '<span class="m-badge ' + e[t.is_rii].class + ' m-badge--wide">' + e[t.is_rii].title + "</span>"
                     }
-
-                },
-                {
-                    field: 'performance_factor',
-                    title: 'Performance Factor',
-                    sortable: 'asc',
-                    filterable: !1,
                 },
                 {
                     field: 'sequence',
@@ -174,7 +176,7 @@ let TaskCard = {
                 pageSize: 10,
                 perpage: 5,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -246,7 +248,7 @@ let TaskCard = {
                 pageSize: 10,
                 perpage: 5,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -408,7 +410,7 @@ let TaskCard = {
         //         pageSize: 10,
         //         perpage: 5,
         //         serverPaging: !0,
-        //         serverFiltering: !0,
+        //         serverFiltering: !1,
         //         serverSorting: !0
         //     },
         //     layout: {
@@ -480,7 +482,7 @@ let TaskCard = {
         //         pageSize: 10,
         //         perpage: 5,
         //         serverPaging: !0,
-        //         serverFiltering: !0,
+        //         serverFiltering: !1,
         //         serverSorting: !0
         //     },
         //     layout: {
@@ -676,15 +678,20 @@ let TaskCard = {
                 },
                 success: function (data) {
                     if (data.errors) {
-                        // if (data.errors.item_id) {
-                        //     $('#material-error').html(data.errors.item_id[0]);
-                        // }
+                        if (data.errors.item_id) {
+                            $('#material-error').html(data.errors.item_id[0]);
+                        }
 
-                        // if (data.errors.quantity) {
-                        //     $('#quantity_item-error').html(data.errors.quantity[0]);
-                        // }
-                        // document.getElementById('material').value = material;
-                        // document.getElementById('quantity').value = quantity;
+                        if (data.errors.quantity) {
+                            $('#quantity_item-error').html(data.errors.quantity[0]);
+                        }
+
+                        if (data.errors.uom) {
+                            $('#unit_material-error').html(data.errors.uom[0]);
+                        }
+
+                        document.getElementById('material').value = material;
+                        document.getElementById('quantity').value = quantity;
 
                     } else {
 
@@ -695,7 +702,20 @@ let TaskCard = {
                         $('#m_datatable_item').DataTable().ajax.reload();
 
                         $('#add_modal_material').modal('hide');
+                        // material_modal_reset();
 
+                        $('#add_modal_material').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end()
+                            .find("select")
+                                .select2('val','All')
+                                .end();
+                        })
                     }
                 }
             });
@@ -719,6 +739,7 @@ let TaskCard = {
                     document.getElementById('performa').value = data.performance_factor;
                     document.getElementById('helper_quantity').value = data.helper_quantity;
                     document.getElementById('engineer_quantity').value = data.engineer_quantity;
+                    document.getElementById('instuction_description').value = data.description;
                     document.getElementById('sequence').value = data.sequence;
                     document.getElementById('uuid').value = data.uuid;
                     if (data.is_rii == 1) {
@@ -782,6 +803,7 @@ let TaskCard = {
             let engineer_quantity = $('input[name=engineer_quantity]').val();
             let sequence = $('input[name=sequence]').val();
             let otr_certification = $('#otr_certification').val();
+            let description = $('#instuction_description').val();
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
             } else {
@@ -802,6 +824,7 @@ let TaskCard = {
                     engineer_quantity: engineer_quantity,
                     sequence: sequence,
                     skill_id: otr_certification,
+                    description:description,
                     is_rii: is_rii,
                 },
                 success: function (data) {
@@ -854,6 +877,7 @@ let TaskCard = {
 
                     } else {
 
+
                         toastr.success('Instruction has been created.', 'Success', {
                             timeOut: 5000
                         });
@@ -863,6 +887,7 @@ let TaskCard = {
                         table.originalDataSet = [];
                         table.reload();
                         $('#modal_instruction').modal('hide');
+                        instruction_reset();
                     }
                 }
             });
@@ -878,6 +903,7 @@ let TaskCard = {
             let engineer_quantity = $('input[name=engineer_quantity]').val();
             let sequence = $('input[name=sequence]').val();
             let otr_certification = $('#otr_certification').val();
+            let description = $('#instuction_description').val();
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
             } else {
@@ -899,6 +925,7 @@ let TaskCard = {
                     sequence: sequence,
                     skill_id: otr_certification,
                     is_rii: is_rii,
+                    description:description
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -959,6 +986,7 @@ let TaskCard = {
                         table.originalDataSet = [];
                         table.reload();
                         $('#modal_instruction').modal('hide');
+                        instruction_reset();
                     }
                 }
             });
@@ -993,6 +1021,11 @@ let TaskCard = {
                         if (data.errors.quantity) {
                             $('#quantity-error').html(data.errors.quantity[0]);
                         }
+
+                        if (data.errors.uom) {
+                            $('#unit_tool-error').html(data.errors.uom[0]);
+                        }
+
                         document.getElementById('tool').value = tool;
                         document.getElementById('quantity').value = quantity;
                     } else {
@@ -1004,9 +1037,19 @@ let TaskCard = {
                         $('#m_datatable_tool').DataTable().ajax.reload();
 
                         $('#add_modal_tool').modal('hide');
-                        // document.getElementById('uom_quantity').value = '';
 
-                        // $('#item_unit_id').select2('val', 'All');
+                        $('#add_modal_tool').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end()
+                            .find("select")
+                                .select2('val','All')
+                                .end();
+                        })
 
 
                     }
@@ -1157,17 +1200,23 @@ $(document).ready(function () {
     $('#prior_to_date').on('click', function () {
         $('#date').removeAttr("disabled");
         $('#hour').prop("disabled", true);
+        document.getElementById('hour').value = '';
         $('#cycle').prop("disabled", true);
+        document.getElementById('cycle').value = '';
     });
     $('#prior_to_hours').on('click', function () {
         $('#hour').removeAttr("disabled");
         $('#date').prop("disabled", true);
+        document.getElementById('date').value = '';
         $('#cycle').prop("disabled", true);
+        document.getElementById('cycle').value = '';
     });
     $('#prior_to_cycle').on('click', function () {
         $('#cycle').removeAttr("disabled");
         $('#date').prop("disabled", true);
+        document.getElementById('date').value = '';
         $('#hour').prop("disabled", true);
+        document.getElementById('hour').value = '';
     });
 
     $('select[name="recurrence_id"]').on('change', function () {
@@ -1267,18 +1316,21 @@ $('.footer').on('click', '.add-taskcard', function () {
     }
     else if ($('input[name=prior_to]:checked').val() == 'cycle') {
         data.append("scheduled_priority_text", $('#cycle').val());
+    }else{
+        data.append("scheduled_priority_text", null);
     }
     data.append("recurrence_id", $('#recurrence_id').val());
     data.append("recurrence_amount", $('input[name=recurrence]').val());
     data.append("recurrence_type", $('#recurrence-select').val());
     data.append("manual_affected_id", $('#manual_affected_id').val());
-    data.append("manual_affected", $('#note').val());
+    data.append("manual_affected_text", $('#note').val());
     data.append("threshold_type", JSON.stringify(threshold_type));
     data.append("repeat_type", JSON.stringify(repeat_type));
     data.append("threshold_amount", JSON.stringify(threshold_amount));
     data.append("repeat_amount", JSON.stringify(repeat_amount));
     data.append("category_id", $('#category').val());
     data.append("additionals",  internal_numberJSON);
+    data.append("document_library", JSON.stringify($('#document-library').val()));
     data.append("fileInput", document.getElementById('taskcard').files[0]);
     data.append('_method', 'PUT');
 
@@ -1385,6 +1437,7 @@ $('.footer').on('click', '.add-taskcard', function () {
                 document.getElementById('scheduled_priority_id').value = scheduled_priority_id;
                 document.getElementById('recurrence_id').value = recurrence_id;
                 document.getElementById('manual_affected_id').value = manual_affected_id;
+                document.getElementById('taskcard').value = taskcard;
 
             } else {
                 //    taskcard_reset();

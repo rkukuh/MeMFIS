@@ -7,9 +7,12 @@ use App\Models\TaskCard;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
 use Faker\Generator as Faker;
+use App\Models\EOInstruction;
 use App\Models\QuotationWorkPackageTaskCardItem;
 
 $factory->define(QuotationWorkPackageTaskCardItem::class, function (Faker $faker) {
+
+    $tc_or_eo = $faker->randomElement(['taskcard', 'eo_instruction']);
 
     return [
         'quotation_id' => function () {
@@ -18,8 +21,15 @@ $factory->define(QuotationWorkPackageTaskCardItem::class, function (Faker $faker
         'workpackage_id'=> function (array $data) {
             return WorkPackage::get()->random()->id;
         },
-        'taskcard_id'=> function (array $data) {
-            return TaskCard::get()->random()->id;
+        'taskcard_id'=> function (array $data) use ($tc_or_eo) {
+            if ($tc_or_eo == 'taskcard') {
+                return TaskCard::get()->random()->id;
+            }
+        },
+        'eo_instruction_id'=> function (array $data) use ($tc_or_eo) {
+            if ($tc_or_eo == 'eo_instruction') {
+                return EOInstruction::get()->random()->id;
+            }
         },
         'item_id'=> function (array $data) {
             return Item::get()->random()->id;

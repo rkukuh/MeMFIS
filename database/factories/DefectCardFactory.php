@@ -8,6 +8,8 @@ use App\Models\JobCard;
 use App\Models\Project;
 use App\Models\Approval;
 use App\Models\Progress;
+use App\Models\Employee;
+use App\Models\Aircraft;
 use App\Models\Quotation;
 use App\Models\DefectCard;
 use Faker\Generator as Faker;
@@ -27,6 +29,11 @@ $factory->define(DefectCard::class, function (Faker $faker) {
         'is_rii' => $faker->boolean,
         'complaint' => $faker->randomElement([null, $faker->text]),
         'description' => $faker->randomElement([null, $faker->text]),
+        'origin_jobcard' => null,
+        'origin_project_additional' => null,
+        'origin_quotation_additional' => null,
+        'origin_defectcard_items' => null,
+        'origin_defectcard_propose_corrections' => null,
     ];
 
 });
@@ -35,10 +42,30 @@ $factory->define(DefectCard::class, function (Faker $faker) {
 
 $factory->afterCreating(DefectCard::class, function ($defectcard, $faker) {
 
+    // Aircraft's Zone
+
+    $aircraft = null;
+
+    if (Aircraft::count()) {
+        $aircraft = Aircraft::get()->random();
+    } else {
+        $aircraft = factory(Aircraft::class)->create();
+    }
+
+    if ($faker->boolean) {
+        $defectcard->zones()->saveMany($aircraft->zones);
+    }
+
     // Approval
 
     if ($faker->boolean) {
         $defectcard->approvals()->save(factory(Approval::class)->make());
+    }
+
+    // Helper (Employee)
+
+    for ($i = 0; $i < rand(1, 3); $i++) {
+        $defectcard->helpers()->save(Employee::get()->random());
     }
 
     // Item
@@ -97,6 +124,19 @@ $factory->afterCreating(DefectCard::class, function ($defectcard, $faker) {
             $propose_correction, [
             'propose_correction_text' => $faker->randomElement([null, $faker->sentence]),
         ]);
+    }
+
+    // Skill
+
+    for ($i = 1; $i <= rand(1, 3); $i++) {
+        if (Type::ofTaskCardSkill()->count()) {
+            $skill = Type::ofTaskCardSkill()->get()->random();
+        }
+        else {
+            $skill = factory(Type::class)->states('taskcard-skill')->create();
+        }
+
+        $defectcard->skills()->attach($skill);
     }
     
 });

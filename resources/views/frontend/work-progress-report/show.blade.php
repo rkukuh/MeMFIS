@@ -53,7 +53,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <fieldset class="border p-2">
-                                                <legend class="w-auto">Customer Name (<span>PT. Sejahterah</span>)</legend>
+                                                <legend class="w-auto">Customer Name (<span>{{ $project->customer->name }}</span>)</legend>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <div class="form-group m-form__group row">
@@ -63,7 +63,7 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text', $project->no_wo)
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -75,7 +75,11 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
+                                                                    @if($attention)
+                                                                    @slot('text', $attention->address)
+                                                                    @else
+                                                                    @slot('text', '-')
+                                                                    @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -87,7 +91,11 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
+                                                                    @if($attention)
+                                                                    @slot('text', $attention->phone)
+                                                                    @else
+                                                                    @slot('text', '-')
+                                                                    @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -100,17 +108,25 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'project_number')
-                                                                    @slot('text', 'P-01/HMxxxxx')
+                                                                    @if($attention)
+                                                                    @slot('text', $attention->fax)
+                                                                    @else
+                                                                    @slot('text', '-')
+                                                                    @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>
                                                         <div class="form-group m-form__group row">
                                                             <div class="col-sm-12 col-md-12 col-lg-12">
                                                                 <label class="form-control-label">
-                                                                    Attn
+                                                                    Attention
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
+                                                                    @if($attention)
+                                                                    @slot('text', $attention->name)
+                                                                    @else
+                                                                    @slot('text', '-')
+                                                                    @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -120,7 +136,11 @@
                                                                     Email
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
+                                                                    @if($attention)
+                                                                    @slot('text', $attention->email)
+                                                                    @else
+                                                                    @slot('text', '-')
+                                                                    @endif
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -142,13 +162,13 @@
                                                     <td align="center" width="14%"><b>A/C SN</b></td>
                                                 </tr>
                                                 <tr>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
-                                                    <td align="center" valign="top">Generate</td>
+                                                    <td align="center" valign="top">{{ $project->code }}</td>
+                                                    <td align="center" valign="top">{{ date("D, d-m-Y", strtotime($project->created_at)) }}</td>
+                                                    <td align="center" valign="top">{{ $tat }} day(s)</td>
+                                                    <td align="center" valign="top">{{ $project->title }}</td>
+                                                    <td align="center" valign="top">{{ $project->aircraft->name }}</td>
+                                                    <td align="center" valign="top">{{ $project->aircraft_register }}</td>
+                                                    <td align="center" valign="top">{{ $project->aircraft_sn }}</td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -171,7 +191,7 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                                 <div class="m-widget16__stats">
                                                                     <div class="m-widget16__visual">
-                                                                        <div id="m_chart_support_tickets" style="height: 350px">
+                                                                        <div id="m_chart_overall_progress" style="height: 350px">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -179,7 +199,11 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6 align-self-center">
                                                                 <div class="form-group m-form__group row">
                                                                     <div class="col-md-8">
-                                                                        <h1 style="font-size: 4rem;text-align:right;">3.385 <span style="font-size: 2rem;">of</span>  5000 <br> <span style="font-size: 2rem;">Task Finished</span></h1>
+                                                                        @if(isset($jobcards["all"]))
+                                                                        <h1 style="font-size: 4rem;text-align:right;">{{ number_format($jobcards["all"]["done"]) }} <span style="font-size: 2rem;">of</span>  {{ number_format(array_sum($jobcards["all"])) }} <br> <span style="font-size: 2rem;">Task Finished</span></h1>
+                                                                        @else
+                                                                        <h1 style="font-size: 4rem;text-align:right;">0 <span style="font-size: 2rem;">of</span>  0<br> <span style="font-size: 2rem;">Task Finished</span></h1>
+                                                                        @endif
                                                                     </div>
                                                                 </div>
                                                             </div>					 
@@ -212,7 +236,7 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                                 <div class="m-widget16__stats">
                                                                     <div class="m-widget16__visual">
-                                                                        <div id="m_chart_support_tickets" style="height: 150px">
+                                                                        <div id="m_chart_routine" style="height: 150px">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -220,7 +244,11 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6 align-self-center">
                                                                 <div class="form-group m-form__group row">
                                                                     <div class="col-md-8">
-                                                                        <h1 style="font-size: 2rem;text-align:right;">3.385 <span style="font-size: 1rem;">of</span>  5000 <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                    @if(isset($jobcards["routine"]))
+                                                                        <h1 style="font-size: 2rem;text-align:right;">{{ number_format($jobcards["routine"]["done"]) }} <span style="font-size: 1rem;">of</span>  {{ number_format(array_sum($jobcards["routine"])) }} <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                    @else 
+                                                                        <h1 style="font-size: 2rem;text-align:right;">0 <span style="font-size: 1rem;">of</span>  0 <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                    @endif
                                                                     </div>
                                                                 </div>
                                                             </div>					 
@@ -251,7 +279,7 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                                 <div class="m-widget16__stats">
                                                                     <div class="m-widget16__visual">
-                                                                        <div id="m_chart_support_tickets" style="height: 150px">
+                                                                        <div id="m_chart_non_routine" style="height: 150px">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -259,7 +287,11 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6 align-self-center">
                                                                 <div class="form-group m-form__group row">
                                                                     <div class="col-md-8">
-                                                                        <h1 style="font-size: 2rem;text-align:right;">3.385 <span style="font-size: 1rem;">of</span>  5000 <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                    @if(isset($jobcards["non-routine"]))
+                                                                        <h1 style="font-size: 2rem;text-align:right;">{{ number_format($jobcards["non-routine"]["done"]) }} <span style="font-size: 1rem;">of</span>  {{ number_format(array_sum($jobcards["non-routine"])) }} <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                    @else 
+                                                                        <h1 style="font-size: 2rem;text-align:right;">0 <span style="font-size: 1rem;">of</span>  0 <br> <span style="font-size: 1rem;">Task Finished</span></h1>
+                                                                    @endif
                                                                     </div>
                                                                 </div>
                                                             </div>					 
@@ -378,6 +410,9 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let project_uuid = '{{ $project->uuid }}';
+    </script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/work-progress-report/show.js') }}"></script>
 @endpush

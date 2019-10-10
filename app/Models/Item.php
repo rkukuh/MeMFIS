@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\MemfisModel;
 use Spatie\Tags\HasTags;
+use App\Models\Pivots\Interchange;
 use Spatie\MediaLibrary\Models\Media;
+use App\Models\Pivots\PurchaseOrderItem;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -23,7 +25,6 @@ class Item extends MemfisModel implements HasMedia
         'is_stock',
         'is_ppn',
         'ppn_amount',
-        'account_code',
     ];
 
     /***************************************** OVERRIDE *******************************************/
@@ -122,8 +123,10 @@ class Item extends MemfisModel implements HasMedia
         return $this->belongsToMany(GoodsReceived::class)
                     ->withPivot(
                         'quantity',
-                        'already_received',
+                        'quantity_unit',
                         'unit_id',
+                        'price',
+                        'already_received_amount',
                         'note'
                     )
                     ->withTimestamps();
@@ -137,7 +140,7 @@ class Item extends MemfisModel implements HasMedia
      *
      * @return mixed
      */
-    public function htcrr()
+    public function htcrrs()
     {
         return $this->belongsToMany(HtCrr::class)
                     ->withPivot(
@@ -149,16 +152,53 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /**
-     * One-to-Many: An item may have zero or one account code (journal).
+     * One-Way: An item may have zero or many interchanges.
      *
-     * This function will retrieve the account code (journal) of an item.
-     * See: Journal's items() method for the inverse
+     * This function will retrieve all the interchanges of an item.
      *
      * @return mixed
      */
-    public function journal()
+    public function interchanges()
     {
-        return $this->belongsTo(Journal::class, 'account_code');
+        return $this->belongsToMany(Item::class, 'interchanges', 'item_id', 'alternate_item_id')
+                    ->using(Interchange::class)
+                    ->withTimestamps();
+    }
+
+    /**
+     * Many-to-Many: An InventoryIn may have one or many item.
+     *
+     * This function will retrieve all the InventoryIns of an item.
+     * See: InventoryIn's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function inventory_ins()
+    {
+        return $this->belongsToMany(InventoryIn::class)
+                    ->withPivot(
+                        'quantity',
+                        'note'
+                    )
+                    ->withTimestamps();
+    }
+
+    /**
+     * Many-to-Many: An InventoryOut may have one or many item.
+     *
+     * This function will retrieve all the InventoryOuts of an item.
+     * See: InventoryOut's items() method for the inverse
+     *
+     * @return mixed
+     */
+    public function inventory_outs()
+    {
+        return $this->belongsToMany(InventoryOut::class)
+                    ->withPivot(
+                        'quantity',
+                        'note'
+                    )
+                    ->withTimestamps();
     }
 
     /**
@@ -216,13 +256,15 @@ class Item extends MemfisModel implements HasMedia
     public function purchase_orders()
     {
         return $this->belongsToMany(PurchaseOrder::class)
+                    ->using(PurchaseOrderItem::class)
                     ->withPivot(
                         'quantity',
+                        'quantity_unit',
                         'unit_id',
                         'price',
+                        'tax_percent',
+                        'tax_amount',
                         'subtotal_before_discount',
-                        'discount_amount',
-                        'discount_percentage',
                         'subtotal_after_discount',
                         'note'
                     )
@@ -239,9 +281,10 @@ class Item extends MemfisModel implements HasMedia
      */
     public function purchase_requests()
     {
-        return $this->belongsToMany(PurchaseRequest::class)
+        return $this->belongsToMany(PurchaseRequest::class, 'item_purchase_request', 'purchase_request_id', 'item_id')
                     ->withPivot(
                         'quantity',
+                        'quantity_unit',
                         'unit_id',
                         'note'
                     )
@@ -350,19 +393,6 @@ class Item extends MemfisModel implements HasMedia
     }
 
     /***************************************** ACCESSOR ******************************************/
-
-    /**
-     * Get the item's account code and name.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function getAccountCodeAndNameAttribute($value)
-    {
-        if (isset($this->journal)) {
-            return $this->journal->code.' - '.$this->journal->name;
-        }
-    }
 
     /**
      * Get the item's single category.

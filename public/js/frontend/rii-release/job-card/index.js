@@ -19,7 +19,8 @@ let RiiRelease = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -49,7 +50,7 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'jobcardable.number',
                     title: 'TaskCard No',
                     sortable: 'asc',
                     filterable: !1,
@@ -61,7 +62,7 @@ let RiiRelease = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<a href="/riirelease-jobcard/rii-release/'+t.uuid+'/edit">' + t.number + "</a>"
+                            '<a href="/riirelease-jobcard/'+t.uuid+'/edit">' + t.number + "</a>"
                         );
                     }
                 },
@@ -71,8 +72,8 @@ let RiiRelease = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        if(t.taskcard.additionals){
-                            let company = t.taskcard.additionals;
+                        if(t.jobcardable.additionals){
+                            let company = t.jobcardable.additionals;
                             obj = JSON.parse(company);
                             // console.log()
                             return (
@@ -87,7 +88,7 @@ let RiiRelease = {
                     }
                 },
                 {
-                    field: 'quotation.customer.name',
+                    field: 'quotation.project.customer.name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
@@ -117,7 +118,7 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.estimation_manhour',
+                    field: 'jobcardable.estimation_manhour',
                     title: 'Mhrs',
                     sortable: 'asc',
                     filterable: !1,
@@ -139,9 +140,9 @@ let RiiRelease = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.status == 'RII RELEASED'){
+                        if(t.status == 'Released'){
                             return (
-                                '<a href="/jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
@@ -150,7 +151,7 @@ let RiiRelease = {
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check-circle"></i>' +
                                 '</a>' +
-                                '<a href="/jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
@@ -179,7 +180,7 @@ let RiiRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/riirelease-jobcard/rii-release/' + jobcard_uuid + '/',
+                        url: '/riirelease-jobcard/' + jobcard_uuid + '/',
                         success: function (data) {
                             toastr.success('RII has been released.', 'Released', {
                                     timeOut: 5000

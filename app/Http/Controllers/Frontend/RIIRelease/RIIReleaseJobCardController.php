@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\RIIRelease;
 
 use Auth;
+use carbon\Carbon;
 use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Approval;
@@ -21,7 +22,7 @@ class RIIReleaseJobCardController extends Controller
      */
     public function index()
     {
-        return view('frontend.rii-release.index');
+        return view('frontend.rii-release.job-card.index');
     }
 
     /**
@@ -64,8 +65,14 @@ class RIIReleaseJobCardController extends Controller
      */
     public function edit(JobCard $riirelease)
     {
-        return view('frontend.rii-release.create', [
-            'riirelease' => $riirelease,
+        $status = Status::ofJobCard()->where('id',$riirelease->progresses->last()->status_id)->first()->code;
+
+        return view('frontend.rii-release.job-card.create', [
+            'taskrelease' => $riirelease,
+            'materials' => $riirelease->jobcardable->materials,
+            'tools' => $riirelease->jobcardable->tools,
+            'status' => $status,
+
         ]);
     }
 
@@ -92,7 +99,8 @@ class RIIReleaseJobCardController extends Controller
 
         $riirelease->approvals()->save(new Approval([
             'approvable_id' => $riirelease->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
         ]));
 
         return response()->json($riirelease);

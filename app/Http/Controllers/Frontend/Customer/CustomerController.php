@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend\Customer;
 
+use Carbon\Carbon;
 use App\Models\Fax;
 use App\Models\Type;
 use App\Models\Email;
@@ -51,6 +52,7 @@ class CustomerController extends Controller
      */
     public function store(CustomerStore $request)
     {
+        
         $attentions = [];
         $level = Level::where('uuid',$request->level)->first();
         for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
@@ -70,15 +72,17 @@ class CustomerController extends Controller
         if ($customer = Customer::create($request->all())) {
             $customer->levels()->attach($level);
 
+
             if(is_array($request->website_array)){
+                $customer->websites()->delete();
                 for ($i=0; $i < sizeof($request->website_array) ; $i++) {
-                        if($request->website_type[$i] !== null && isset($request->website_array[$i])){
+                    if(isset($request->website_array[$i])){
                         $website_type = Type::ofWebsite()->where('uuid',$request->type_website_array[$i])->first();
                         $customer->websites()->save(new Website([
                             'url' => $request->website_array[$i],
                             'type_id' => $website_type->id,
-                        ]));
-                    }
+                            ]));
+                        }
                 }
             }
 
@@ -106,15 +110,16 @@ class CustomerController extends Controller
                     }
                 }
             }
-
+            
             if(is_array($request->email_array)){
                 for ($i=0; $i < sizeof($request->email_array) ; $i++) {
-                    $email_type = Type::ofEmail()->where('code',$request->type_email_array[$i])->first();
-
-                    $customer->emails()->save(new Email([
-                        'address' => $request->email_array[$i],
-                        'type_id' => $email_type->id,
-                    ]));
+                    if(isset($request->email_array[$i])){
+                        $email_type = Type::ofEmail()->where('code',$request->type_email_array[$i])->first();
+                        $customer->emails()->save(new Email([
+                            'address' => $request->email_array[$i],
+                            'type_id' => $email_type->id,
+                        ]));
+                    }
                 }
             }
 
@@ -170,8 +175,7 @@ class CustomerController extends Controller
         $websites = Type::ofWebsite()->get();
         $attentions = json_decode($customer->attention);
         $levels = Level::where('of','customer')->get();
-    //    dd($customer->websites);
-    //    dd($levels);
+
         return view('frontend.customer.edit', [
             'customer' => $customer,
             'attentions' => $attentions,
@@ -190,7 +194,6 @@ class CustomerController extends Controller
      */
     public function update(CustomerUpdate $request, Customer $customer)
     {
-        // dd(sizeof($request->email_array));
         $attentions = [];
         $level = Level::where('uuid',$request->level)->first();
         for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
@@ -206,20 +209,27 @@ class CustomerController extends Controller
         }
 
         $request->merge(['attention' => json_encode($attentions)]);
-        if(is_array($request->website_array)){
-            for ($i=0; $i < sizeof($request->website_array) ; $i++) {
-                if(isset($request->website_array[$i])){
-                    $website_type = Type::ofWebsite()->where('uuid',$request->type_website_array[$i])->first();
-                    $res = $customer->websites()->save(new Website([
-                        'url' => $request->website_array[$i],
-                        'type_id' => $website_type->id,
-                        ]));
-                    }
-            }
+        if($request->active == "on"){
+            $request->merge(['banned_at' => null]);
+        }else{
+            $request->merge(['banned_at' => Carbon::now() ]);
         }
         if ($customer->update($request->all())) {
-            
+
             $customer->levels()->attach($level);
+            
+            if(is_array($request->website_array)){
+                $customer->websites()->delete();
+                for ($i=0; $i < sizeof($request->website_array) ; $i++) {
+                    if(isset($request->website_array[$i])){
+                        $website_type = Type::ofWebsite()->where('uuid',$request->type_website_array[$i])->first();
+                        $customer->websites()->save(new Website([
+                            'url' => $request->website_array[$i],
+                            'type_id' => $website_type->id,
+                            ]));
+                        }
+                }
+            }
 
             if(is_array($request->phone_array)){
                 $customer->phones()->delete();
@@ -234,8 +244,8 @@ class CustomerController extends Controller
             }
 
             if(is_array($request->fax_array)){
+                $customer->faxes()->delete();
                 for ($i=0; $i < sizeof($request->fax_array) ; $i++) {
-                    $customer->faxes()->delete();
                     if(isset($request->fax_array[$i])){
                         $fax_type = Type::ofFax()->where('code',$request->type_fax_array[$i])->first();
                         $customer->faxes()->save(new Fax([
@@ -249,15 +259,16 @@ class CustomerController extends Controller
             if(is_array($request->email_array)){
                 $customer->emails()->delete();
                 for ($i=0; $i < sizeof($request->email_array) ; $i++) {
-                    $email_type = Type::ofEmail()->where('code',$request->type_email_array[$i])->first();
-                    $res = $customer->emails()->save(new Email([
-                        'address' => $request->email_array[$i],
-                        'type_id' => $email_type->id,
-                    ]));
+                    if (isset($request->email_array[$i])) {
+                        $email_type = Type::ofEmail()->where('code', $request->type_email_array[$i])->first();
+                        $customer->emails()->save(new Email([
+                            'address' => $request->email_array[$i],
+                            'type_id' => $email_type->id,
+                        ]));
+                    }
                 }
             }
 
-            // if(is_array($request->document_array)){
             if(is_array($request->type_document_array)){
                 $customer->documents()->delete();
                 for ($i=0; $i < sizeof($request->type_document_array) ; $i++) {

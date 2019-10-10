@@ -2,14 +2,24 @@
 
 namespace App\Http\Controllers\Frontend\Discrepancy;
 
+use App\Models\Zone;
 use App\Models\Type;
 use App\Models\JobCard;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\DiscrepancyStore;
+use App\Http\Requests\Frontend\DiscrepancyUpdate;
+
 
 class DiscrepancyMechanicController extends Controller
 {
+    protected $zones;
+
+    public function __construct()
+    {
+        $this->zones = Zone::get();
+    }
 
     /**
      * Display a listing of the resource.
@@ -18,7 +28,8 @@ class DiscrepancyMechanicController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.discrepancy.mechanic.index');
+
     }
 
     /**
@@ -40,10 +51,46 @@ class DiscrepancyMechanicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DiscrepancyStore $request)
     {
+        $zone = json_decode($request->zone);
+        $helpers = json_decode($request->helper_array);
+        $zones = [];
+
+        $request->merge(['code' => DocumentNumber::generate('JDEF-', DefectCard::withTrashed()->count()+1)]);
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
+        $request->merge(['engineer_quantity' => 1]);
+        $request->merge(['helper_quantity' => sizeof($helpers)]);
         $defectcard = DefectCard::create($request->all());
+
+        foreach($helpers as $helper){
+            $employee = Employee::where('code', $helper[0])->first();
+            $defectcard->helpers()->attach($employee->id, ['additionals' => $helper[2]]);
+        }
+
+        if($zone){
+            foreach ($zone as $zone_name ) {
+                if(isset($zone_name)){
+                    $airplane = JobCard::find($request->jobcard_id)->quotation->quotationable->aircraft->id;
+                    $zone = Zone::firstOrCreate(
+                        ['name' => $zone_name, 'zoneable_id' => $airplane, 'zoneable_type' => 'App\Models\Aircraft']
+                    );
+                    array_push($zones, $zone->id);
+                }
+            }
+
+            $defectcard->zones()->attach($zones);
+
+        }
+
+        if(Type::where('id',$request->skill_id)->where('of','taskcard-skill')->first()->code == 'eri'){
+            $defectcard->skills()->attach(Type::where('code','electrical')->first()->id);
+            $defectcard->skills()->attach(Type::where('code','radio')->first()->id);
+            $defectcard->skills()->attach(Type::where('code','instrument')->first()->id);
+        }
+        else{
+            $defectcard->skills()->attach($request->skill_id);
+        }
 
         if($request->propose){
             foreach($request->propose as $propose ){
@@ -91,8 +138,17 @@ class DiscrepancyMechanicController extends Controller
             $propose_correction_text =  $defectcard->pivot->propose_correction_text;
         }
 
+        foreach($discrepancy->zones as $i => $zone_taskcard){
+            $zone_discrepancies[$i] =  $zone_taskcard->id;
+        }
+
+        $skill = Type::ofTaskCardSkill()->get();
+
         return view('frontend.discrepancy.mechanic.edit', [
             'discrepancy' => $discrepancy,
+            'skills' => $skill,
+            'zones' => $this->zones,
+            'zone_discrepancies' => $zone_discrepancies,
             'propose_corrections' => $propose_corrections,
             'propose_correction_text' => $propose_correction_text,
         ]);
@@ -105,11 +161,40 @@ class DiscrepancyMechanicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,DefectCard $discrepancy)
+    public function update(DiscrepancyUpdate $request,DefectCard $discrepancy)
     {
-        $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
+        $zone = json_decode($request->zone);
+        $zones = [];
 
         $discrepancy->update($request->all());
+
+        if($zone){
+            foreach ($zone as $zone_name ) {
+                if(isset($zone_name)){
+                    $airplane = JobCard::find($request->jobcard_id)->quotation->quotationable->aircraft->id;
+                    $zone = Zone::firstOrCreate(
+                        ['name' => $zone_name, 'zoneable_id' => $airplane, 'zoneable_type' => 'App\Models\Aircraft']
+                    );
+                    array_push($zones, $zone->id);
+                }
+            }
+
+            $discrepancy->zones()->sync($zones);
+
+        }
+
+        if(Type::where('id',$request->skill_id)->first()->code == 'eri'){
+            $discrepancy->skills()->detach();
+            $discrepancy->skills()->attach(Type::where('code','electrical')->first()->id);
+            $discrepancy->skills()->attach(Type::where('code','radio')->first()->id);
+            $discrepancy->skills()->attach(Type::where('code','instrument')->first()->id);
+        }
+        else{
+            if(sizeof($discrepancy->skills) > 1 ){
+                $discrepancy->skills()->detach();
+            }
+            $discrepancy->skills()->sync($request->skill_id);
+        }
 
         $discrepancy->propose_corrections()->detach();
 
@@ -126,6 +211,13 @@ class DiscrepancyMechanicController extends Controller
                 }
             }
         }
+
+        $discrepancy->approvals()->save(new Approval([
+            'approvable_id' => $discrepancy->id,
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
+        ]));
+
         return response()->json($discrepancy);
     }
 

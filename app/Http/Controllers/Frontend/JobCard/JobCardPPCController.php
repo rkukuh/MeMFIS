@@ -48,10 +48,16 @@ class JobCardPPCController extends Controller
      */
     public function show(JobCard $jobcard)
     {
+        $helper_quantity = json_decode($jobcard->origin_jobcard_helpers);
+        if($helper_quantity == null ){
+            $helper_quantity = 0;
+        }
+        
         return view('frontend.job-card.ppc.show', [
             'jobcard' => $jobcard,
-            'materials' => $jobcard->taskcard->materials,
-            'tools' => $jobcard->taskcard->tools,
+            'materials' => $jobcard->jobcardable->materials,
+            'tools' => $jobcard->jobcardable->tools,
+            'helper_quantity' => $helper_quantity
         ]);
     }
 

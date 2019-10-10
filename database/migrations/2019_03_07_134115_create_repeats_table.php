@@ -18,7 +18,7 @@ class CreateRepeatsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->morphs('repeatable');
             $table->unsignedBigInteger('type_id');
-            $table->integer('amount');
+            $table->integer('amount')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -31,15 +31,16 @@ class CreateTaskcardsTable extends Migration
             $table->string('effectivity')->nullable();
             $table->unsignedDecimal('performance_factor', 8, 2)->nullable();
             $table->integer('sequence')->nullable();
-            $table->json('stringer')->nullable(); // for CPCP only
             $table->json('version')->nullable();
+            $table->json('stringer')->nullable(); // for CPCP only
+            $table->json('section')->nullable(); // for CPCP only
             $table->string('ata')->nullable();
             $table->longText('description')->nullable();
             $table->json('additionals')->nullable();
 
             /** EO Header */
             $table->string('revision')->nullable();
-            $table->string('reference')->nullable();
+            $table->string('reference')->nullable(); // juga digunakan untuk Reference Service Bulletin pada CPCP.
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('scheduled_priority_id')->nullable();
             $table->string('scheduled_priority_text')->nullable();
@@ -58,39 +59,39 @@ class CreateTaskcardsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('type_id')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('task_id')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('work_area')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('category_id')
-                    ->references('id')->on('categories')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('categories')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('scheduled_priority_id')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('recurrence_id')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('manual_affected_id')
-                    ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('types')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->index('number');
             $table->index('title');

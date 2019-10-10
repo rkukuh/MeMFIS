@@ -196,19 +196,37 @@
                                                 </div>
                                                 <div class="col-xl-12 order-1 order-xl-2 m--align-right">
                                                     <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
-                                                        <button data-target="#modal_project" data-toggle="modal" type="button" class="m-btn btn btn-primary" >
+                                                    <a href="{{ route('frontend.project-htcrr.project-htcrr.create', [
+                                                        'project' => $project->uuid
+                                                    ]) }}" class="m-btn btn btn-primary">
                                                             <span>
                                                                 <i class="la la-plus-circle"></i>
-                                                            <span>Work Package</span>
+                                                            <span>HTCRR</span>
                                                             </span>
-                                                        </button>
+                                                        </a>
 
-                                                        <button data-target="#modal_blank_project" data-toggle="modal" type="button" class="m-btn btn btn-primary modal_blank_project" >
-                                                            <span>
-                                                                <i class="la la-plus-circle"></i>
-                                                            <span>Blank Work Package</span>
-                                                            </span>
-                                                        </button>
+                                                        <div class="m-btn-group btn-group" role="group">
+                                                            <button id="btnGroupDrop1" type="button" class="btn btn-primary m-btn m-btn--pill-last dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <span>
+                                                                    <i class="la la-plus-circle"></i>
+                                                                <span>Workpackage</span>
+                                                                </span>
+                                                            </button>
+                                                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                                <button data-target="#modal_project" data-toggle="modal" type="button" class="dropdown-item modal_blank_project" >
+                                                                    <span>
+                                                                        <i class="la la-plus-circle"></i>
+                                                                    <span>Workpackage</span>
+                                                                    </span>
+                                                                </button>
+                                                                <button data-target="#modal_blank_project" data-toggle="modal" type="button" class="dropdown-item modal_blank_project" >
+                                                                    <span>
+                                                                        <i class="la la-plus-circle"></i>
+                                                                    <span>Blank Workpackage</span>
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -291,7 +309,6 @@
         let project_uuid = '{{ $project->uuid }}';
     </script>
 
-
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-airplane.js') }}"></script> --}}
 
@@ -307,6 +324,7 @@
     {{-- <script src="{{ asset('js/frontend/project/create.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/project/form-reset.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script> --}}
+    
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script> --}}
     <script src="{{ asset('js/frontend/project/hm/edit.js') }}"></script>

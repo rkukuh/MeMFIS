@@ -115,6 +115,12 @@ let TaskCard = {
                 repeat_amount[i] = $(this).val();
             });
 
+            let sections = [];
+            i = 0;
+            $("#section").val().forEach(function(entry) {
+                sections[i] = entry;
+                i++;
+            });
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
             } else {
@@ -128,33 +134,38 @@ let TaskCard = {
             let internal_numberJSON = JSON.stringify(internal_number);
 
             let data = new FormData();
-            data.append( "title", $('input[name=title]').val());
-            data.append( "number", $('input[name=number]').val());
-            data.append( "type_id", $('#taskcard_routine_type').val());
-            data.append( "applicability_airplane", JSON.stringify(applicability_airplane));
-            data.append( "task_id", $('#task_type_id').val());
-            data.append( "skill_id", $('#otr_certification').val());
-            data.append( "estimation_manhour", $('#manhour').val());
-            data.append( "performance_factor", $('input[name=performa]').val());
-            data.append( "helper_quantity", $('input[name=helper_quantity]').val());
-            data.append( "engineer_quantity", $('input[name=engineer_quantity]').val());
-            data.append( "ata", $('input[name=ata]').val());
-            data.append( "work_area", $('#work_area').val());
-            data.append( "access", JSON.stringify(access));
-            data.append( "zone", JSON.stringify(zone));
-            data.append( "source", $('input[name=source]').val());
-            data.append( "relationship", JSON.stringify(relationship));
-            data.append( "version", JSON.stringify($('#version').val()));
-            data.append( "effectivity", $('input[name=effectivity]').val());
-            data.append( "description", $('#description').val());
-            data.append( "threshold_type", JSON.stringify(threshold_type));
-            data.append( "repeat_type", JSON.stringify(repeat_type));
-            data.append( "threshold_amount", JSON.stringify(threshold_amount));
-            data.append( "repeat_amount", JSON.stringify(repeat_amount));
-            data.append( "additionals",  internal_numberJSON);
-            data.append( "is_rii", is_rii);
-            data.append( "fileInput", document.getElementById('taskcard').files[0]);
-
+            data.append("number", $('input[name=number]').val());
+            data.append("title", $('input[name=title]').val());
+            data.append("type_id", $('#taskcard_routine_type').val());
+            data.append("task_id", $('#task_type_id').val());
+            data.append("work_area", $('#work_area').val());
+            data.append("estimation_manhour", $('#manhour').val());
+            data.append("engineer_quantity", $('input[name=engineer_quantity]').val());
+            data.append("helper_quantity", $('input[name=helper_quantity]').val());
+            data.append("applicability_airplane", JSON.stringify(applicability_airplane));
+            data.append("skill_id", $('#otr_certification').val());
+            data.append("is_rii", is_rii);
+            data.append("effectivity", $('input[name=effectivity]').val());
+            data.append("performance_factor", $('input[name=performa]').val());
+            data.append("access", JSON.stringify(access));
+            data.append("document_library", JSON.stringify($('#document-library').val()));
+            data.append("ata", $('input[name=ata]').val());
+            data.append("description", $('#description').val());
+            data.append("additionals",  internal_numberJSON);
+            data.append("zone", JSON.stringify(zone));
+            data.append("source", $('input[name=source]').val());
+            data.append("relationship", JSON.stringify(relationship));
+            data.append("version", JSON.stringify($('#version').val()));
+            data.append("threshold_amount", JSON.stringify(threshold_amount));
+            data.append("threshold_type", JSON.stringify(threshold_type));
+            data.append("repeat_amount", JSON.stringify(repeat_amount));
+            data.append("repeat_type", JSON.stringify(repeat_type));
+            data.append("document", $('#document').val());
+            data.append("reference", $('#service_bulletin').val());
+            data.append("stringer", JSON.stringify( $('#stringer').val()) );
+            data.append("station", JSON.stringify( $('#station').val()) );
+            data.append("section", JSON.stringify(sections));
+            data.append("fileInput", document.getElementById('taskcard').files[0]);
 
             $.ajax({
                 headers: {
@@ -235,6 +246,15 @@ let TaskCard = {
 
                         window.location.href = '/taskcard-routine/' + response.uuid + '/edit';
                     }
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    let errors = jqXhr.responseJSON;
+                    $.each(errors.error, function (index, value) {
+                            toastr.error(value.message, value.title, {
+                                timeOut: 5000
+                            }
+                        );
+                    });
                 }
             });
         });

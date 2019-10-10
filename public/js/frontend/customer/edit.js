@@ -1,64 +1,6 @@
 let Customer = {
     init: function () {
-        $('.customer_document_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/customer/'+ customer_uuid +'/document',
-                        map: function (raw) {
-                            let dataSet = raw;
 
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            perpage: 3,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [3, 5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'number',
-                    title: 'Document Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'type.name',
-                    title: 'Type Document',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-            ]
-        });
-        
         $('.customer_address_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -79,7 +21,7 @@ let Customer = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -109,637 +51,8 @@ let Customer = {
                     sortable: 'asc',
                     filterable: !1,
                 },
-                {
-                    field: 'type.name',
-                    title: 'Type Address',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
             ]
         });
-
-        $('.customer_phone_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/customer/'+ customer_uuid +'/phone',
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            perpage: 3,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [3, 5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'number',
-                    title: 'Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t){
-                        return '<span>'+t.number+'</span>'
-                    }
-                },
-                {
-                    field: 'type.name',
-                    title: 'Type Phone',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'is_active',
-                    title: 'Active',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if(t.is_active == 1){
-                            return ' <span class="m-switch  m-switch--outline m-switch--icon m-switch--md">'+
-                            '<label>'+
-                            '<input type="checkbox" checked name="" id="">'+
-                            '<span></span>'+
-                            '</label>'+
-                            '</span>'
-
-                        }
-                        else{
-                            return ' <span class="m-switch  m-switch--outline m-switch--icon m-switch--md">'+
-                            '<label>'+
-                            '<input type="checkbox" name="" id="">'+
-                            '<span></span>'+
-                            '</label>'+
-                            '</span>'
-
-                        }
-                    }
-                },
-            ]
-        });
-
-        $('.customer_email_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/customer/'+ customer_uuid +'/email',
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            perpage: 3,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [3, 5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'address',
-                    title: 'Email',
-                    sortable: 'asc',
-                    filterable: !1,
-
-                },
-                {
-                    field: 'type.name',
-                    title: 'Type Email',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'is_active',
-                    title: 'Active',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if(t.is_active == 1){
-                            return ' <span class="m-switch  m-switch--outline m-switch--icon m-switch--md">'+
-                            '<label>'+
-                            '<input type="checkbox" checked name="" id="">'+
-                            '<span></span>'+
-                            '</label>'+
-                            '</span>'
-
-                        }
-                        else{
-                            return ' <span class="m-switch  m-switch--outline m-switch--icon m-switch--md">'+
-                            '<label>'+
-                            '<input type="checkbox" name="" id="">'+
-                            '<span></span>'+
-                            '</label>'+
-                            '</span>'
-
-                        }
-                    }
-                },
-            ]
-        });
-
-        $('.customer_fax_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/customer/'+ customer_uuid +'/fax',
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            perpage: 3,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [3, 5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'number',
-                    title: 'Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'type.name',
-                    title: 'Type Fax',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'is_active',
-                    title: 'Active',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        if(t.is_active == 1){
-                            return ' <span class="m-switch  m-switch--outline m-switch--icon m-switch--md">'+
-                            '<label>'+
-                            '<input type="checkbox" checked name="" id="">'+
-                            '<span></span>'+
-                            '</label>'+
-                            '</span>'
-
-                        }
-                        else{
-                            return ' <span class="m-switch  m-switch--outline m-switch--icon m-switch--md">'+
-                            '<label>'+
-                            '<input type="checkbox" name="" id="">'+
-                            '<span></span>'+
-                            '</label>'+
-                            '</span>'
-
-                        }
-                    }
-                },
-            ]
-        });
-
-        $('.customer_website_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/customer/'+ customer_uuid +'/website',
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            perpage: 3,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [3, 5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'url',
-                    title: 'URL',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'type.name',
-                    title: 'Type Fax',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-            ]
-        });
-
-        // $('.customer_address_datatable').mDatatable({
-        //     data: {
-        //         type: 'remote',
-        //         source: {
-        //             read: {
-        //                 method: 'GET',
-        //                 url: '/datatables/customer/'+ customer_uuid +'/document',
-        //                 map: function (raw) {
-        //                     let dataSet = raw;
-
-        //                     if (typeof raw.data !== 'undefined') {
-        //                         dataSet = raw.data;
-        //                     }
-
-        //                     return dataSet;
-        //                 }
-        //             }
-        //         },
-        //         pageSize: 10,
-        //         serverPaging: !0,
-        //         serverFiltering: !0,
-        //         serverSorting: !0
-        //     },
-        //     layout: {
-        //         theme: 'default',
-        //         class: '',
-        //         scroll: false,
-        //         footer: !1
-        //     },
-        //     sortable: !0,
-        //     perpage: 3,
-        //     filterable: !1,
-        //     pagination: !0,
-        //     search: {
-        //         input: $('#generalSearch')
-        //     },
-        //     toolbar: {
-        //         items: {
-        //             pagination: {
-        //                 pageSizeSelect: [3, 5, 10, 20, 30, 50, 100]
-        //             }
-        //         }
-        //     },
-        //     columns: [
-        //         {
-        //             field: 'number',
-        //             title: 'Document Number',
-        //             sortable: 'asc',
-        //             filterable: !1,
-        //         },
-        //         {
-        //             field: 'type.name',
-        //             title: 'Type Document',
-        //             sortable: 'asc',
-        //             filterable: !1,
-        //         },
-        //         {
-        //             field: 'Actions',
-        //             width: 110,
-        //             title: 'Actions',
-        //             sortable: !1,
-        //             overflow: 'visible',
-        //             template: function (t, e, i) {
-        //                 return (
-        //                     '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-        //                     t.id +
-        //                     ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
-        //                 );
-        //             }
-        //         }
-        //     ]
-        // });
-
-        $('.customer_phone_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/customer',
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            perpage: 3,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [3, 5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'name',
-                    title: 'Name',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.id +
-                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
-                        );
-                    }
-                }
-            ]
-        });
-
-        $('.customer_email_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/customer',
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            perpage: 3,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [3, 5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'name',
-                    title: 'Name',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.id +
-                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
-                        );
-                    }
-                }
-            ]
-        });
-
-        $('.customer_fax_datatable').mDatatable({
-            data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/customer',
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
-                pageSize: 10,
-                serverPaging: !0,
-                serverFiltering: !0,
-                serverSorting: !0
-            },
-            layout: {
-                theme: 'default',
-                class: '',
-                scroll: false,
-                footer: !1
-            },
-            sortable: !0,
-            perpage: 3,
-            filterable: !1,
-            pagination: !0,
-            search: {
-                input: $('#generalSearch')
-            },
-            toolbar: {
-                items: {
-                    pagination: {
-                        pageSizeSelect: [3, 5, 10, 20, 30, 50, 100]
-                    }
-                }
-            },
-            columns: [
-                {
-                    field: 'name',
-                    title: 'Name',
-                    sortable: 'asc',
-                    filterable: !1,
-                },
-                {
-                    field: 'Actions',
-                    width: 110,
-                    title: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.id +
-                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
-                        );
-                    }
-                }
-            ]
-        });
-
-
-        // let edit = $('.m_datatable').on('click', '.edit', function () {
-        //     $('#button').show();
-        //     $('#simpan').text('Perbarui');
-
-        //     let triggerid = $(this).data('id');
-
-        //     $.ajax({
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         },
-        //         type: 'get',
-        //         url: '/customer/' + triggerid + '/edit',
-        //         success: function (data) {
-        //             document.getElementById('id').value = data.id;
-        //             document.getElementById('name').value = data.name;
-
-        //             $('.btn-success').addClass('update');
-        //             $('.btn-success').removeClass('add');
-        //         },
-        //         error: function (jqXhr, json, errorThrown) {
-        //             let errorsHtml = '';
-        //             let errors = jqXhr.responseJSON;
-
-        //             $.each(errors.errors, function (index, value) {
-        //                 $('#kategori-error').html(value);
-        //             });
-        //         }
-        //     });
-        // });        
 
         let update = $('.footer').on('click', '.edit-customer', function () {
 
@@ -749,6 +62,7 @@ let Customer = {
             let payment_term = $('input[name=term_of_payment]').val();
             let account_code = $('#account_code').val();
             let level = $('select[name="customer-level"]').val();
+            let active = $('#active').val();
 
             let phone_array = [];
             $('input[name^=phone_array]').each(function (i) {
@@ -764,9 +78,16 @@ let Customer = {
 
             let type_phone_array = [];
             $('#type_phone ').each(function (i) {
-                type_phone_array[i] = $(this).val();
+                if($(this).is(':checked')){
+                    console.log($(this).val());
+                    type_phone_array[i] = $(this).val();
+                }
             });
-            type_phone_array.pop();
+            type_phone_array = type_phone_array.filter(function (el) {
+
+                return el != null && el != "";
+            
+              });
 
             let fax_array = [];
             $('#fax ').each(function (i) {
@@ -776,9 +97,16 @@ let Customer = {
 
             let type_fax_array = [];
             $('#type_fax ').each(function (i) {
-                type_fax_array[i] = $(this).val();
+                if($(this).is(':checked')){
+                    console.log($(this).val());
+                    type_fax_array[i] = $(this).val();
+                }
             });
-            type_fax_array.pop();
+            type_fax_array = type_fax_array.filter(function (el) {
+
+                return el != null && el != "";
+            
+              });
 
             let website_array = [];
             $('#website ').each(function (i) {
@@ -800,9 +128,16 @@ let Customer = {
 
             let type_email_array = [];
             $('#type_email ').each(function (i) {
-                type_email_array[i] = $(this).val();
+                if($(this).is(':checked')){
+                    console.log($(this).val());
+                    type_email_array[i] = $(this).val();
+                }
             });
-            type_email_array.pop();
+            type_email_array = type_email_array.filter(function (el) {
+
+                return el != null && el != "";
+            
+              });
 
             let document_array = [];
             $('#email ').each(function (i) {
@@ -823,7 +158,7 @@ let Customer = {
                 $(this).val().forEach(function(entry) {
                     attn_phone_array_row[ai] = entry;
                     ai++;
-                });;
+                });
                 attn_phone_array.push(attn_phone_array_row);
             });
             attn_phone_array.pop();
@@ -859,7 +194,7 @@ let Customer = {
                 $(this).val().forEach(function(entry) {
                     attn_email_array_row[ai] = entry;
                    ai++;
-               });;
+               });
                attn_email_array.push(attn_email_array_row);
             });
             attn_email_array.pop();
@@ -894,10 +229,15 @@ let Customer = {
                     attn_fax_array:attn_fax_array,
                     attn_email_array:attn_email_array,
                     level:level,
-                    // banned: banned
+                    active: active
                 },
                 success: function (data) {
                     if (data.errors) {
+                        if (data.errors.name) {
+                            $('#level-error').html(data.errors.level[0]);
+
+                        }
+
                         $.each(data.errors, function (key, value) {
                             var name = $("input[name='"+key+"']");
                             if(key.indexOf(".") != -1){
@@ -905,7 +245,7 @@ let Customer = {
                               name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
                             }
                             name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
-                          }); 
+                          });
 
                     } else {
                         $('#modal_customer').modal('hide');
@@ -946,7 +286,7 @@ let Customer = {
                               name = $("input[name='"+arr[0]+"']:eq("+arr[1]+")");
                             }
                             name.parent().find("div.form-control-feedback.text-danger").html(value[0]);
-                          }); 
+                          });
                     } else {
                         $('#modal_address').modal('hide');
 

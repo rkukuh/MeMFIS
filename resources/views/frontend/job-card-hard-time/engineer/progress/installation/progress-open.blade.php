@@ -72,7 +72,7 @@
                                                                             Job Card No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-
+                                                                            {{$htcrr->childs->get(0)->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -120,7 +120,7 @@
                                                                             Item Description
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->description}}
+                                                                            {{$htcrr->item->description}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -128,7 +128,7 @@
                                                                             Item Part Number
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->part_number}}
+                                                                            {{$htcrr->item->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -176,7 +176,7 @@
                                                                                 @slot('id', 'is_rii_removal')
                                                                                 @slot('name', 'is_rii_removal')
                                                                                 @slot('text', 'IS RII?')
-                                                                                @if($htcrr_removal->is_null)
+                                                                                @if($htcrr_removal->is_rii == 1)
                                                                                 @slot('checked', 'checked')
                                                                                 @endif
                                                                                 @slot('value', 1)
@@ -201,7 +201,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group m-form__group row mt-5">
+                                                    <div class="form-group m-form__group row mt-5" hidden>
                                                         <div class="col-lg-6">
                                                             <div class="m-portlet  m-portlet--full-height ">
                                                                 <div class="m-portlet__head">
@@ -405,7 +405,7 @@
                                                                             Job Card No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-
+                                                                            {{$htcrr->childs->get(1)->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -453,7 +453,7 @@
                                                                             Item Description
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->description}}
+                                                                            {{$htcrr->item->description}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -474,7 +474,12 @@
                                                                                 @slot('id', 'is_rii_installation')
                                                                                 @slot('name', 'is_rii_installation')
                                                                                 @slot('text', 'IS RII?')
-                                                                                @slot('value', 1)
+                                                                                    @if( $htcrr_removal->is_rii == 1)
+                                                                                        @slot('value', 1)
+                                                                                        @slot('checked', 'checked')
+                                                                                    @else
+                                                                                        @slot('value', 0)
+                                                                                    @endif
                                                                                 @slot('size', '2')
                                                                                 @slot('style_div', 'margin-top:20px; padding:0;')
                                                                                 @slot('padding_left', '0')
@@ -505,6 +510,8 @@
                                                                                 @slot('text', 'title')
                                                                                 @slot('id', 'item_sn_installation')
                                                                                 @slot('name', 'item_sn_installation')
+                                                                                @slot('value', $htcrr_installation->serial_number)
+                                                                                @slot('value', $htcrr_installation->serial_number)
                                                                                 @slot('id_error', 'title')
                                                                             @endcomponent
                                                                         </td>

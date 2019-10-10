@@ -48,15 +48,17 @@
                                     <th>Radio</th>
                                     <th>Electrical</th>
                                     <th>Instrument</th>
+                                    <th>ERI</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>@if( isset($otr["airframe"]) ) {{ $otr["airframe"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["powerplant"]) ) {{ $otr["powerplant"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["radio"]) ) {{ $otr["radio"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["electrical"]) ) {{ $otr["electrical"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["instrument"]) ) {{ $otr["instrument"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["airframe"]) ) {{ $otr["airframe"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["powerplant"]) ) {{ $otr["powerplant"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["radio"]) ) {{ $otr["radio"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["electrical"]) ) {{ $otr["electrical"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["instrument"]) ) {{ $otr["instrument"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["eri"]) ) {{ $otr["eri"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -72,11 +74,11 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>@if( isset($otr["runup"]) ) {{ $otr["runup"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["repair"]) ) {{ $otr["repair"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["repainting"]) ) {{ $otr["repainting"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["cabin"]) ) {{ $otr["cabin"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["ndi-ndt"]) ) {{ $otr["ndi-ndt"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["runup"]) ) {{ $otr["runup"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["repair"]) ) {{ $otr["repair"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["repainting"]) ) {{ $otr["repainting"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["cabin"]) ) {{ $otr["cabin"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["ndi-ndt"]) ) {{ $otr["ndi-ndt"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
                                 </tr>
                             </tbody>
                         </table>

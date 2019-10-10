@@ -49,15 +49,17 @@
                                     <th>Radio</th>
                                     <th>Electrical</th>
                                     <th>Instrument</th>
+                                    <th>ERI</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>@if( isset($otr["airframe"]) ) {{ $otr["airframe"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["powerplant"]) ) {{ $otr["powerplant"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["radio"]) ) {{ $otr["radio"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["electrical"]) ) {{ $otr["electrical"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["instrument"]) ) {{ $otr["instrument"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["airframe"]) ) {{ $otr["airframe"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["powerplant"]) ) {{ $otr["powerplant"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["radio"]) ) {{ $otr["radio"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["electrical"]) ) {{ $otr["electrical"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["instrument"]) ) {{ $otr["instrument"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["eri"]) ) {{ $otr["eri"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -73,11 +75,11 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>@if( isset($otr["runup"]) ) {{ $otr["runup"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["repair"]) ) {{ $otr["repair"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["repainting"]) ) {{ $otr["repainting"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["cabin"]) ) {{ $otr["cabin"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["ndi-ndt"]) ) {{ $otr["ndi-ndt"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["runup"]) ) {{ $otr["runup"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["repair"]) ) {{ $otr["repair"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["repainting"]) ) {{ $otr["repainting"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["cabin"]) ) {{ $otr["cabin"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["ndi-ndt"]) ) {{ $otr["ndi-ndt"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -93,24 +95,39 @@
                     <div class="m-widget_content">
                         <h3 class="m-widget_content-title">Non Routine Taskcard</h3>
                         <div class="m-widget_content-items">
-                            <div class="m-widget_content-item">
-                                <span>AD/SB</span>
-                                <span class="m--font-accent">{{$adsb}}</span>
+                            <div class="row align-items-center">
+                                <div class="col-xl-12">
+                                    <div class="m-widget_content-item">
+                                        <span>AD/SB</span>
+                                        <span class="m--font-accent">{{$adsb}}</span>
+                                    </div>
+                                    <div class="m-widget_content-item pl-5">
+                                        <span>CMR/AWL</span>
+                                        <span class="m--font-brand">{{$cmrawl}}</span>
+                                    </div>
+                                    <div class="m-widget_content-item pl-5">
+                                        <span>PRELIMINARY</span>
+                                        <span class="m--font-brand">{{$preliminary}}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="m-widget_content-item">
-                                <span>CMR/AWL</span>
-                                <span class="m--font-brand">{{$cmrawl}}</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>Special Instruction (SI)</span>
-                                <span class="m--font-focus">{{$si}}</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>Total</span>
-                                <span>{{$adsb+$cmrawl+$si}}</span>
+                            <div class="row align-items-center">
+                                <div class="col-xl-12">
+                                    <div class="m-widget_content-item">
+                                        <span>SI</span>
+                                        <span class="m--font-focus">{{$si}}</span>
+                                    </div>
+                                    <div class="m-widget_content-item pl-5">
+                                        <span>EA</span>
+                                        <span class="m--font-accent">{{$ea}}</span>
+                                    </div>
+                                    <div class="m-widget_content-item pl-5">
+                                        <span>EO</span>
+                                        <span class="m--font-brand">{{$eo}}</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="m-portlet m-portlet--mobile">

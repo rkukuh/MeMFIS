@@ -9,15 +9,16 @@ class PurchaseRequest extends MemfisModel
     protected $fillable = [
         'number',
         'type_id',
+        'purchase_requestable_type',
+        'purchase_requestable_id',
         'requested_at',
         'required_at',
-        'project_id',
         'description',
     ];
 
     protected $dates = [
-        'requested_at', 
-        'required_at', 
+        'requested_at',
+        'required_at',
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
@@ -25,7 +26,7 @@ class PurchaseRequest extends MemfisModel
     /**
      * Polymorphic: An entity can have zero or many approvals.
      *
-     * This function will get all Quotation's approvals.
+     * This function will get all PurchaseRequest's approvals.
      * See: Approvals's approvable() method for the inverse
      *
      * @return mixed
@@ -45,26 +46,13 @@ class PurchaseRequest extends MemfisModel
      */
     public function items()
     {
-        return $this->belongsToMany(Item::class)
+        return $this->belongsToMany(Item::class, 'item_purchase_request', 'purchase_request_id', 'item_id')
                     ->withPivot(
                         'quantity',
+                        'quantity_unit',
                         'unit_id',
                         'note'
                     )
-                    ->withTimestamps();
-    }
-
-    /**
-     * One-to-Many: A purchase request may have zero or one project
-     *
-     * This function will retrieve the project of a purchase request.
-     * See: Project's purchase_requests() method for the inverse
-     *
-     * @return mixed
-     */
-    public function project()
-    {
-        return $this->belongsTo(Project::class)
                     ->withTimestamps();
     }
 
@@ -79,6 +67,20 @@ class PurchaseRequest extends MemfisModel
     public function purchase_orders()
     {
         return $this->hasMany(PurchaseOrder::class);
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many purchase requests.
+     *
+     * This function will get all of the owning purchase_requestable models.
+     * See:
+     * - Project's purchase_requests() method for the inverse
+     *
+     * @return mixed
+     */
+    public function purchase_requestable()
+    {
+        return $this->morphTo();
     }
 
     /**

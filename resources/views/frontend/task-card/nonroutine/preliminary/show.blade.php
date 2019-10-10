@@ -105,13 +105,32 @@
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Manhour Estimation @include('frontend.common.label.required')
-                                            </label>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Manhour Estimation @include('frontend.common.label.required')
+                                                    </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', $taskCard->estimation_manhour)
-                                            @endcomponent
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $taskCard->estimation_manhour)
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Documents library @include('frontend.common.label.optional')
+                                                    </label>
+
+                                                    @if (empty($additionals->document_library))
+                                                        @include('frontend.common.label.data-info-nodata')
+                                                    @else
+                                                        @foreach ($additionals->document_library  as $document_library)
+                                                            @component('frontend.common.label.badge')
+                                                                @slot('text', $document_library )
+                                                            @endcomponent
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">

@@ -23,7 +23,8 @@ let TaskCard = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -78,16 +79,19 @@ let TaskCard = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        return (
-                            '<a href="/rts/'+t.uuid+'/project" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
+                        if(t.status == 'RTS'){
+                            return (
+                            '<a href="rts/'+t.rts.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
+                                '<i class="la la-print"></i>' +
                             '</a>'
-                            // '<a href="rts/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
-                            //     '<i class="la la-print"></i>' +
-                            // '</a>'
-
-                        );
-
+                            );
+                        }else{
+                            return (
+                                '<a href="/rts/'+t.uuid+'/project" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                    '<i class="la la-pencil"></i>' +
+                                '</a>'
+                            );
+                        }
                     }
                 }
             ]

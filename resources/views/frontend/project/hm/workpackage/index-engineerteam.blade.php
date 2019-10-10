@@ -15,7 +15,7 @@
                             @include('frontend.common.label.show')
 
                             <h3 class="m-portlet__head-text">
-                                Project View
+                                Project View - {{ $workPackage->title }}
                             </h3>
                         </div>
                     </div>
@@ -53,12 +53,19 @@
                                     <div class="tab-pane active show" id="m_tabs_enginner" role="tabpanel">
                                         @include('frontend.project.hm.engineer.index')
                                     </div>
-                                    
-                                    @include('frontend.project.hm.modal.material.routine-si')
-                                    @include('frontend.project.hm.modal.tool.routine-si')
+
+                                    @include('frontend.project.hm.modal.material.routine')
+                                    @include('frontend.project.hm.modal.tool.routine')
                                     @include('frontend.project.hm.modal.sequence')
+                                    @include('frontend.project.hm.modal.sequence-instruction')
                                     @include('frontend.project.hm.modal.predecessor')
                                     @include('frontend.project.hm.modal.successor')
+                                    @include('frontend.project.hm.modal.predecessor-instruction')
+                                    @include('frontend.project.hm.modal.successor-instruction')
+                                    @include('frontend.project.hm.modal.create-predecessor')
+                                    @include('frontend.project.hm.modal.create-successor')
+                                    @include('frontend.project.hm.modal.create-predecessor-instruction')
+                                    @include('frontend.project.hm.modal.create-successor-instruction')
 
 
                                     <div class="form-group m-form__group row">
@@ -88,8 +95,18 @@
 @push('footer-scripts')
     <script>
         let workPackage_uuid = '{{ $workPackage->uuid }}';
+        let Project_uuid = '{{ $project->uuid }}';
         let anyChanges = false;
     </script>
     <script src="{{ asset('js/frontend/project/hm/workpackage.js') }}"></script>
     <script src="{{ asset('js/frontend/project/hm/repeater.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/modal/datatables.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/project/hm/modal/successor.js') }}"></script>
+    <script src="{{ asset('js/frontend/project/hm/modal/predecessor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/taskcard-predecessor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/taskcard-successor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/instructon-predecessor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/instruction-successor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard.js') }}"></script>
 @endpush

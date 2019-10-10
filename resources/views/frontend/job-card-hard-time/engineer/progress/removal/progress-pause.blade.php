@@ -72,7 +72,7 @@
                                                                             Job Card No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-
+                                                                            {{$htcrr->childs->get(0)->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -120,7 +120,7 @@
                                                                             Item Description
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->description}}
+                                                                            {{$htcrr->item->description}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -128,7 +128,7 @@
                                                                             Item Part Number
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->part_number}}
+                                                                            {{$htcrr->item->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -149,6 +149,7 @@
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('id', 'item_sn_removal')
                                                                                 @slot('name', 'item_sn_removal')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('id_error', 'item_sn_removal')
                                                                                 @slot('value', $htcrr_removal->serial_number)
                                                                             @endcomponent
@@ -161,6 +162,7 @@
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.textarea')
                                                                                 @slot('rows', '5')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('id', 'description_removal')
                                                                                 @slot('name', 'description_removal')
                                                                                 @slot('value', $htcrr_removal->description)
@@ -176,7 +178,8 @@
                                                                                 @slot('id', 'is_rii_removal')
                                                                                 @slot('name', 'is_rii_removal')
                                                                                 @slot('text', 'IS RII?')
-                                                                                @if($htcrr_removal->is_null)
+                                                                                @slot('disabled', 'disabled')
+                                                                                @if($htcrr_removal->is_rii == 1)
                                                                                 @slot('checked', 'checked')
                                                                                 @endif
                                                                                 @slot('value', 1)
@@ -203,7 +206,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group m-form__group row mt-5">
+                                                    <div class="form-group m-form__group row mt-5" hidden>
                                                         <div class="col-lg-6">
                                                             <div class="m-portlet  m-portlet--full-height ">
                                                                 <div class="m-portlet__head">
@@ -407,7 +410,7 @@
                                                                             Job Card No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-
+                                                                            {{$htcrr->childs->get(1)->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -474,6 +477,7 @@
                                                                             @component('frontend.common.input.checkbox')
                                                                                 @slot('id', 'is_rii')
                                                                                 @slot('name', 'is_rii')
+                                                                                @slot('disabled', 'disabled')
                                                                                 @slot('text', 'IS RII?')
                                                                                 @if($htcrr->position == 1)
                                                                                     @slot('checked', 'checked')
@@ -494,6 +498,7 @@
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('text', 'title')
                                                                                 @slot('id', 'title')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('name', 'title')
                                                                                 @slot('id_error', 'title')
                                                                             @endcomponent
@@ -507,6 +512,7 @@
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('text', 'title')
                                                                                 @slot('id', 'title')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('name', 'title')
                                                                                 @slot('id_error', 'title')
                                                                             @endcomponent
@@ -519,6 +525,7 @@
                                                                         <td width="70%" style="text-align:center">
                                                                             @component('frontend.common.input.textarea')
                                                                                 @slot('rows', '5')
+                                                                                @slot('editable', 'readonly')
                                                                                 @slot('id', 'description')
                                                                                 @slot('name', 'description')
                                                                                 @slot('text', 'Description')
@@ -539,7 +546,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group m-form__group row mt-5">
+                                                    <div class="form-group m-form__group row mt-5" hidden>
                                                         <div class="col-lg-6">
                                                             <div class="m-portlet  m-portlet--full-height ">
                                                                 <div class="m-portlet__head">

@@ -23,9 +23,10 @@ class TaskCard extends MemfisModel
         'effectivity',
         'performance_factor',
         'sequence',
-        'stringer',
         'version',
-        'tat',
+        'stringer',
+        'section',
+        'ata',
         'description',
         'additionals',
 
@@ -106,16 +107,16 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * One-to-Many (with JSON data): A jobcard must have a taskcard
+     * Polymorphic: An entity can have zero or many jobcards.
      *
-     * This function will retrieve all the jobcards of a taskcard.
-     * See: JobCard's taskcard() method for the inverse
+     * This function will get all TaskCard's jobcards.
+     * See: JobCard's jobcardable() method for the inverse
      *
      * @return mixed
      */
     public function jobcards()
     {
-        return $this->hasMany(JobCard::class);
+        return $this->morphMany(JobCard::class, 'jobcardable');
     }
 
     /**
@@ -170,7 +171,7 @@ class TaskCard extends MemfisModel
     public function skills()
     {
         return $this->belongsToMany(Type::class, 'skill_taskcard', 'taskcard_id', 'skill_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -227,10 +228,21 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * One-to-Many: A task card may have one workarea.
+     * One-Way: A task card may have one category.
+     *
+     * This function will retrieve the category of a task card.
+     *
+     * @return mixed
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    /**
+     * One-Way: A task card may have one workarea.
      *
      * This function will retrieve the workarea of a task card.
-     * See: Type's workarea() method for the inverse
      *
      * @return mixed
      */
@@ -240,7 +252,7 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * Many-to-Many: A task card may have one or many workpackage.
+     * Many-to-Many: A Work Package may have one or many Task Card.
      *
      * This function will retrieve all the work packages of a task card.
      * See: WorkPackage's taskcards() method for the inverse
@@ -258,16 +270,16 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * Many-to-Many: A task card may have zero or many (aircraft) zone.
+     * Many-to-Many: A task card may have zero or many aircraft's zone.
      *
-     * This function will retrieve all the (aircraft) zones of a task card.
+     * This function will retrieve all the aircraft's zones of a task card.
      * See: Zone's taskcards() method for the inverse
      *
      * @return mixed
      */
     public function zones()
     {
-        return $this->belongsToMany(Access::class, 'taskcard_zone', 'taskcard_id', 'zone_id')
+        return $this->belongsToMany(Zone::class, 'taskcard_zone', 'taskcard_id', 'zone_id')
                     ->withTimestamps();
     }
 
@@ -293,5 +305,29 @@ class TaskCard extends MemfisModel
     public function getToolsAttribute()
     {
         return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
+    }
+
+    /**
+     * Get the task card's Skill.
+     *
+     * @return string
+     */
+    public function getSkillAttribute()
+    {
+
+        if(isset($this->skills) ){
+            switch (sizeof($this->skills)) {
+                case 3:
+                    $skill = "ERI";
+                    break;
+                case 1:
+                    $skill = $this->skills[0]->name;
+                    break;
+                default:
+                    $skill = '';
+            }
+        }
+
+        return $skill;
     }
 }

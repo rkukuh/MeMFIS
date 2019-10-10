@@ -19,7 +19,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.journal.index') }}" class="m-nav__link">
+                        <a href="#" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Job Card
                             </span>
@@ -67,7 +67,7 @@
                                                 Task Card No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->taskcard->number}}
+                                                {{$taskcard->number}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -75,7 +75,7 @@
                                                 A/C Type
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->quotation->project->aircraft->name}}
+                                                {{$jobcard->quotation->quotationable->aircraft->name}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -83,7 +83,7 @@
                                                 A/C Reg
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->quotation->project->aircraft_register}}
+                                                {{$jobcard->quotation->quotationable->aircraft_register}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -91,7 +91,7 @@
                                                 A/C Serial Number
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->quotation->project->aircraft_sn}}
+                                                {{$jobcard->quotation->quotationable->aircraft_sn}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -99,8 +99,8 @@
                                                 Company Task No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                @if(isset(json_decode($jobcard->taskcard->additionals)->internal_number))
-                                                    {{json_decode($jobcard->taskcard->additionals)->internal_number}}
+                                                @if(isset(json_decode($taskcard->additionals)->internal_number))
+                                                    {{json_decode($taskcard->additionals)->internal_number}}
                                                 @else
                                                     -
                                                 @endif
@@ -111,7 +111,7 @@
                                                 Project No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->quotation->project->code}}
+                                                {{$jobcard->quotation->quotationable->code}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -119,7 +119,9 @@
                                                 Inspection Type
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->taskcard->task->name}}
+                                            @if(isset($taskcard->task))
+                                                {{$taskcard->task->name}}
+                                            @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -127,12 +129,10 @@
                                                 Skill
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                @if(sizeof($jobcard->taskcard->skills) == 3)
-                                                    ERI
-                                                @elseif(sizeof($jobcard->taskcard->skills) == 1)
-                                                    {{$jobcard->taskcard->skills[0]->name}}
+                                                @if($jobcard->jobcardable->skill)
+                                                {{ $jobcard->jobcardable->skill }}
                                                 @else
-                                                    -
+                                                -
                                                 @endif
                                             </td>
                                         </tr>
@@ -141,7 +141,11 @@
                                                 Est. Mhrs
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->taskcard->estimation_manhour}}
+                                                @if($taskcard->estimation_manhour)
+                                                {{$taskcard->estimation_manhour}}
+                                                @else
+                                                -
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -149,8 +153,8 @@
                                                 Work Area
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                @if(isset($jobcard->taskcard->workarea->name))
-                                                    {{$jobcard->taskcard->workarea->name}}
+                                                @if(isset($taskcard->workarea->name))
+                                                    {{$taskcard->workarea->name}}
                                                 @endif
                                             </td>
                                         </tr>
@@ -159,7 +163,11 @@
                                                 Sequence
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->taskcard->sequence}}
+                                                @if($taskcard->sequence)
+                                                {{$taskcard->sequence}}
+                                                @else
+                                                -
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -167,7 +175,7 @@
                                                 RII
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                @if($jobcard->taskcard->is_rii == 1)
+                                                @if($jobcard->is_rii == 1)
                                                     Yes
                                                 @else
                                                     No
@@ -179,7 +187,11 @@
                                                 Reference
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->taskcard->reference}}
+                                                @if($taskcard->reference)
+                                                {{$taskcard->reference}}
+                                                @else
+                                                -
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -187,7 +199,7 @@
                                                 Title
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->taskcard->title}}
+                                                {{$taskcard->title}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -195,22 +207,26 @@
                                                 Description
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->taskcard->Description}}
+                                                @if($taskcard->description)
+                                                {{$taskcard->description}}
+                                                @else
+                                                -
+                                                @endif
                                             </td>
                                         </tr>
-                                        @if($jobcard->taskcard->helper_quantity != 0)
+                                        @if($helper_quantity != 0)
                                         <tr>
                                             <td width="30%" style="background-color:beige;padding:10px;">
                                                 Helper
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->taskcard->helper_quantity}}
+                                                {{$helper_quantity}}
                                             </td>
                                         </tr>
                                         @endif
 
                                     </table>
-                                    @if($jobcard->taskcard->helper_quantity != 0)
+                                    @if($helper_quantity > 0)
                                         <table border="1px" width="100%" style="margin-top:10px">
                                             <tr>
                                                 <td width="30%" style="background-color:beige;padding:10px;">
@@ -232,11 +248,12 @@
                                                     @endforeach
                                                 @else
                                                 <div class="m-grid">
-                                                    @for($index = 0; $index < 4; $index++)
+                                                    @for($index = 0; $index < $helper_quantity; $index++)
                                                     <div class="m-grid-row">
                                                         <br>
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             @component('frontend.common.input.select2')
+                                                                @slot('id', 'helper_'.$index)
                                                                 @slot('text', 'helper')
                                                                 @slot('name', 'helper[]')
                                                                 @slot('class', 'helper')
@@ -258,7 +275,7 @@
                             </div>
 
                             <div class="form-group m-form__group row">
-                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
                                     <table class="table table-striped table-bordered second" width="100%" cellpadding="4">
                                         <tr>
                                             <td colspan="5" align="center"><b>Material(s) Required</b></td>
@@ -284,7 +301,10 @@
                                         @endforeach
                                     </table>
                                 </div>
-                                <div class="col-sm-6 col-md-6 col-lg-6">
+                            </div>
+
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
                                     <table class="table table-striped table-bordered second" width="100%" cellpadding="4">
                                         <tr>
                                             <td colspan="5" align="center"><b>Tool(s) Required / Special Tooling</b></td>
@@ -320,6 +340,8 @@
                                                 {!! csrf_field() !!}
                                                 <input type="hidden" name="progress" value="{{$status->uuid}}">
                                                 @include('frontend.common.buttons.execute')
+                                                @include('frontend.common.buttons.back')
+
                                         </div>
                                     </div>
                                 </div>

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Frontend\Discrepancy;
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\DefectCard;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\DiscrepancyItemStore;
+use App\Http\Requests\Frontend\DiscrepancyItemUpdate;
+
 
 class DiscrepancyItemController extends Controller
 {
@@ -37,7 +39,7 @@ class DiscrepancyItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,DefectCard $discrepancy)
+    public function store(DiscrepancyItemStore $request,DefectCard $discrepancy)
     {
         $discrepancy->items()->attach($discrepancy->id, [
             'item_id' => $request->item_id,
@@ -84,7 +86,7 @@ class DiscrepancyItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DefectCard $discrepancy,Item $item)
+    public function update(DiscrepancyItemUpdate $request, DefectCard $discrepancy,Item $item)
     {
         $discrepancy->items()->updateExistingPivot($item, [
             'item_id' => $request->item_id,

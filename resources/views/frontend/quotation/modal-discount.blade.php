@@ -28,6 +28,7 @@
                                 @component('frontend.common.input.select2')
                                     @slot('text', 'Discount')
                                     @slot('name', 'discount-type')
+                                    @slot('class', 'discount-type')
                                     @slot('id', 'discount-type')
                                     @slot('id_error', 'discount-type')
                                 @endcomponent
@@ -58,7 +59,8 @@
                                     @component('frontend.common.buttons.reset')
                                         @slot('class', 'reset-sequance')
                                     @endcomponent
-                                @include('frontend.common.buttons.close')
+
+                                    @include('frontend.common.buttons.close')
                             </div>
                         </div>
                     </div>

@@ -5,17 +5,23 @@ let TaskCard = {
             $('#prior_to_date').on('click', function () {
                 $('#date').removeAttr("disabled");
                 $('#hour').prop("disabled", true);
+                document.getElementById('hour').value = '';
                 $('#cycle').prop("disabled", true);
+                document.getElementById('cycle').value = '';
             });
             $('#prior_to_hours').on('click', function () {
                 $('#hour').removeAttr("disabled");
                 $('#date').prop("disabled", true);
+                document.getElementById('date').value = '';
                 $('#cycle').prop("disabled", true);
+                document.getElementById('cycle').value = '';
             });
             $('#prior_to_cycle').on('click', function () {
                 $('#cycle').removeAttr("disabled");
                 $('#date').prop("disabled", true);
+                document.getElementById('date').value = '';
                 $('#hour').prop("disabled", true);
+                document.getElementById('hour').value = '';
             });
 
             $('select[name="recurrence_id"]').on('change', function () {
@@ -74,37 +80,6 @@ let TaskCard = {
         });
 
         $('.footer').on('click', '.add-taskcard', function () {
-            // taskcard_reset();
-            // let title = $('input[name=title]').val();
-            // let number = $('input[name=number]').val();
-            // let taskcard_non_routine_type = $('#taskcard_non_routine_type').val();
-            // let applicability_airplane = $('#applicability_airplane').val();
-            // let revision = $('input[name=revision]').val();
-            // let relationship = $('#relationship').val();
-            // let description = $('#description').val();
-            // let scheduled_priority_id = $('#scheduled_priority_id').val();
-            // let recurrence_id = $('#recurrence_id').val();
-            // let category = $('#category').val();
-            // let manual_affected_id = $('#manual_affected_id').val();
-
-            // let prior_to = $('input[name="prior_to"]:checked').val();
-            // let scheduled_priority_text = '';
-            // if(prior_to == 'date'){
-            //     scheduled_priority_text = $('#date').val();
-            // }
-            // else if (prior_to == 'hour'){
-            //     scheduled_priority_text = $('#hour').val();
-            // }
-            // else if(prior_to == 'cycle'){
-            //     scheduled_priority_text = $('#cycle').val();
-
-            // }
-
-            // let recurrence = $('input[name=recurrence]').val();
-            // let recurrence_select = $('#recurrence-select').val();
-
-            // let note = $('#note').val();
-
             let applicability_airplane = [];
             let i = 0;
             $("#applicability_airplane").val().forEach(function(entry) {
@@ -145,6 +120,7 @@ let TaskCard = {
             data.append( "description", $('#description').val());
             data.append( "scheduled_priority_id", $('#scheduled_priority_id').val());
             data.append( "scheduled_priority_type", $('input[name=prior_to]:checked').val());
+            data.append( "document_library", JSON.stringify($('#document-library').val()));
             if($('input[name=prior_to]:checked').val() == 'date'){
                 data.append( "scheduled_priority_text", $('#date').val());
             }
@@ -153,13 +129,15 @@ let TaskCard = {
             }
             else if($('input[name=prior_to]:checked').val() == 'cycle'){
                 data.append( "scheduled_priority_text", $('#cycle').val());
+            }else{
+                data.append("scheduled_priority_text", null);
             }
             data.append( "additionals",  internal_numberJSON);
             data.append( "recurrence_id", $('#recurrence_id').val());
             data.append( "recurrence_amount", $('input[name=recurrence]').val());
             data.append( "recurrence_type", $('#recurrence-select').val());
             data.append( "manual_affected_id", $('#manual_affected_id').val());
-            data.append( "manual_affected", $('#note').val());
+            data.append( "manual_affected_text", $('#note').val());
             data.append( "threshold_type", JSON.stringify(threshold_type));
             data.append( "repeat_type", JSON.stringify(repeat_type));
             data.append( "threshold_amount", JSON.stringify(threshold_amount));
@@ -177,10 +155,6 @@ let TaskCard = {
                 cache: false,
                 data: data,
                 url: '/taskcard-eo',
-
-                //     // scheduled_priority_text: prior_to_hour,
-                //     // scheduled_priority_text: prior_to_cycle,
-                // },
                 success: function (response) {
                     if (response.errors) {
                         if (response.errors.title) {
@@ -275,7 +249,8 @@ let TaskCard = {
                         document.getElementById('recurrence_id').value = recurrence_id;
                         document.getElementById('manual_affected_id').value = manual_affected_id;
                         document.getElementById('description').value = data.getAll('description');
-
+                        // file upload
+                        document.getElementById('taskcard').value = taskcard;
 
 
                     } else {
@@ -288,6 +263,15 @@ let TaskCard = {
 
                         window.location.href = '/taskcard-eo/'+response.uuid+'/edit';
                     }
+                },
+                error: function (jqXhr, json, errorThrown) {
+                    let errors = jqXhr.responseJSON;
+                    $.each(errors.error, function (index, value) {
+                            toastr.error(value.message, value.title, {
+                                timeOut: 5000
+                            }
+                        );
+                    });
                 }
             });
         });

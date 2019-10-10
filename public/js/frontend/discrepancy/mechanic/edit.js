@@ -12,12 +12,21 @@ let Discrepancy = {
             };
         });
         let simpan = $('.footer').on('click', '.edit-discrepancy', function () {
+            let zone = [];
+            i = 0;
+            $("#zone").val().forEach(function(entry) {
+                zone[i] = entry;
+                i++;
+            });
+
             let uuid = $('input[name=uuid]').val();
-            let engineer_qty = $('input[name=engineer_qty]').val();
-            let helper_quantity =  $('input[name=helper_quantity]').val();
+            zone = JSON.stringify(zone);
             let jobcard_id =  $('input[name=jobcard_id]').val();
             let manhours =  $('input[name=manhours]').val();
             let description = $('#description').val();
+            let ata = $('#ata').val();
+            let skill_id = $('#otr_certification').val();
+            let sequence = $('#sequence').val();
             let complaint = $('#complaint').val();
             let other = $('#other_text').val();
 
@@ -30,8 +39,7 @@ let Discrepancy = {
             let propose = [];
             $.each($("input[name='propose[]']:checked"), function() {
                 propose.push($(this).val());
-              });
-            // console.log(propose);
+            });
 
             $.ajax({
                 headers: {
@@ -42,14 +50,16 @@ let Discrepancy = {
                 data: {
                     _token: $('input[name=_token]').val(),
                     jobcard_id: jobcard_id,
-                    engineer_quantity: engineer_qty,
-                    helper_quantity: helper_quantity,
                     estimation_manhour: manhours,
                     description: description,
                     complaint: complaint,
+                    ata: ata,
+                    skill_id: skill_id,
+                    sequence: sequence,
                     propose: propose,
                     propose_correction_text: other,
                     is_rii:is_rii,
+                    zone:zone,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -101,7 +111,8 @@ let Item = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -446,7 +457,8 @@ let Item = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {

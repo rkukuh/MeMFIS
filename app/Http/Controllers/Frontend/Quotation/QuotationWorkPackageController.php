@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Frontend\Quotation;
 
 use App\Models\Quotation;
-use App\Models\Project;
-use App\Models\Aircraft;
-use App\Models\Customer;
 use App\Models\WorkPackage;
 use App\Models\Pivots\ProjectWorkPackage;
+use App\Models\Pivots\QuotationWorkPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\QuotationStore;
@@ -55,22 +53,24 @@ class QuotationWorkPackageController extends Controller
      */
     public function show(Quotation $quotation, WorkPackage $workPackage)
     {
+        $quotation_workpackage = QuotationWorkPackage::where('quotation_id', $quotation->id)->where('workpackage_id', $workPackage->id)->first();
         $job_request = $quotation->workpackages()->where('quotation_id',$quotation->id)
         ->where('workpackage_id',$workPackage->id)
         ->first();
-        $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+        $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
         ->where('workpackage_id',$workPackage->id)
         ->first();
         $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
         $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
         return view('frontend.quotation.workpackage.index',[
-            'workPackage' => $workPackage,
-            'total_mhrs' => $total_mhrs,
-            'total_pfrm_factor' => $total_pfrm_factor,
-            'project' => $quotation->project->uuid,
             'quotation' => $quotation,
+            'total_mhrs' => $total_mhrs,
             'job_request' => $job_request,
+            'workPackage' => $workPackage,
+            'total_pfrm_factor' => $total_pfrm_factor,
+            'project' => $quotation->quotationable->uuid,
             'project_workpackage' => $project_workpackage,
+            'quotation_workpackage' => $quotation_workpackage,
         ]);
     }
 
@@ -86,7 +86,7 @@ class QuotationWorkPackageController extends Controller
         ->where('workpackage_id',$workPackage->id)
         ->first();
 
-        $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->project->id)
+        $project_workpackage = ProjectWorkPackage::where('project_id',$quotation->quotationable->id)
         ->where('workpackage_id',$workPackage->id)
         ->first();
 
@@ -96,11 +96,11 @@ class QuotationWorkPackageController extends Controller
             'workPackage' => $workPackage,
             'total_mhrs' => $total_mhrs,
             'total_pfrm_factor' => $total_pfrm_factor,
-            'project' => $quotation->project->uuid,
+            'project' => $quotation->quotationable->uuid,
             'quotation' => $quotation,
             'job_request' => $job_request,
             'project_workpackage' => $project_workpackage,
-         ]);
+        ]);
     }
 
     /**
@@ -112,7 +112,7 @@ class QuotationWorkPackageController extends Controller
      */
     public function update(Request $request, Quotation $quotation, WorkPackage $workPackage)
     {
-        return response()->json($quotation->workpackages()->updateExistingPivot($workPackage, ['manhour_total'=>$request->manhour_total,'manhour_rate'=>$request->manhour_rate,'description'=>$request->description]));
+        return response()->json($quotation->workpackages()->updateExistingPivot($workPackage, ['manhour_total'=>$request->manhour_total,'manhour_rate_amount'=>$request->manhour_rate,'description'=>$request->description]));
     }
 
     /**

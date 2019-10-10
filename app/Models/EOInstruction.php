@@ -37,6 +37,19 @@ class EOInstruction extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many jobcards.
+     *
+     * This function will get all EOInstruction's jobcards.
+     * See: JobCard's jobcardable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function jobcards()
+    {
+        return $this->morphMany(JobCard::class, 'jobcardable');
+    }
+
+    /**
      * Many-to-Many: A task card (EO) may have zero or many items.
      *
      * This function will retrieve all the items of a task card (EO).
@@ -66,7 +79,38 @@ class EOInstruction extends MemfisModel
     public function skills()
     {
         return $this->belongsToMany(Type::class, 'eo_instruction_skill', 'eo_instruction_id', 'skill_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
+    }
+
+    /**
+     * One-to-Many: A task card may have one workarea.
+     *
+     * This function will retrieve the workarea of a task card.
+     * See: Type's workarea() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workarea()
+    {
+        return $this->belongsTo(Type::class, 'work_area');
+    }
+
+    /**
+     * Many-to-Many: A Work Package may have one or many EO-Instruction.
+     *
+     * This function will retrieve all the work packages of a task card.
+     * See: WorkPackage's eo_instructions() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workpackages()
+    {
+        return $this->belongsToMany(WorkPackage::class, 'eo_instruction_workpackage', 'eo_instruction_id', 'workpackage_id')
+                    ->withPivot(
+                        'sequence',
+                        'is_mandatory'
+                    )
+                    ->withTimestamps();
     }
 
     /*************************************** ACCESSOR ****************************************/
@@ -78,7 +122,9 @@ class EOInstruction extends MemfisModel
      */
     public function getMaterialsAttribute()
     {
-        return collect(array_values($this->items->load('unit')->where('categories.0.code', 'raw')->all()));
+        return collect(array_values($this->items->load('unit')
+                                                ->whereIn('categories.0.code', ['raw', 'cons', 'comp'])
+                                                ->all()));
     }
 
     /**
@@ -89,5 +135,29 @@ class EOInstruction extends MemfisModel
     public function getToolsAttribute()
     {
         return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
+    }
+
+    /**
+     * Get the task card's Skill.
+     *
+     * @return string
+     */
+    public function getSkillAttribute()
+    {
+
+        if(isset($this->skills) ){
+            switch (sizeof($this->skills)) {
+                case 3:
+                    $skill = "ERI";
+                    break;
+                case 1:
+                    $skill = $this->skills[0]->name;
+                    break;
+                default:
+                    $skill = '';
+            }
+        }
+
+        return $skill;
     }
 }

@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use App\Models\Pivots\QuotationWorkPackage;
 
 class Quotation extends MemfisModel
 {
     protected $fillable = [
         'number',
         'parent_id',
-        'project_id',
+        'quotationable_type',
+        'quotationable_id',
         'attention',
         'requested_at',
         'valid_until',
@@ -19,8 +21,6 @@ class Quotation extends MemfisModel
         'exchange_rate',
         'subtotal',
         'charge',
-        'ppn',
-        'is_ppn',
         'grandtotal',
         'title',
         'scheduled_payment_type',
@@ -28,6 +28,16 @@ class Quotation extends MemfisModel
         'term_of_payment',
         'term_of_condition',
         'description',
+        'data_defectcard',
+        'data_htcrr',
+        'origin_project',
+        'origin_currency',
+        'origin_scheduled_payment_type',
+        'origin_quotation',
+        'origin_quotation_workpackages',
+        'origin_quotation_workpackage_items',
+        'origin_quotation_workpackage_taskcard_items',
+        'origin_quotation_htcrr_items',
     ];
 
     protected $dates = ['requested_at', 'valid_until'];
@@ -134,19 +144,6 @@ class Quotation extends MemfisModel
     }
 
     /**
-     * One-to-Many: A quotation may have one project.
-     *
-     * This function will retrieve the project of a quotation.
-     * See: Project's quotations() method for the inverse
-     *
-     * @return mixed
-     */
-    public function project()
-    {
-        return $this->belongsTo(Project::class);
-    }
-
-    /**
      * Polymorphic: An entity can have zero or many progresses.
      *
      * This function will get all Quotation's progresses.
@@ -160,6 +157,33 @@ class Quotation extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or many quotations.
+     *
+     * This function will get all of the owning quotationable models.
+     * See:
+     * - Project's quotations() method for the inverse
+     *
+     * @return mixed
+     */
+    public function quotationable()
+    {
+        return $this->morphTo();
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many taxes.
+     *
+     * This function will get all Quotation's taxes.
+     * See: Tax's taxable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taxes()
+    {
+        return $this->morphMany(Tax::class, 'taxable');
+    }
+
+    /**
      * Many-to-Many: A quotation may have one or many workpackage.
      *
      * This function will retrieve all the workpackages of a quotation.
@@ -170,9 +194,11 @@ class Quotation extends MemfisModel
     public function workpackages()
     {
         return $this->belongsToMany(WorkPackage::class, 'quotation_workpackage', 'quotation_id', 'workpackage_id')
+                    ->using(QuotationWorkPackage::class)
                     ->withPivot(
                         'manhour_total',
-                        'manhour_rate',
+                        'manhour_rate_id',
+                        'manhour_rate_amount',
                         'discount_type',
                         'discount_value',
                         'description'

@@ -25,10 +25,11 @@ Route::name('frontend.')->group(function () {
 
                 Route::prefix('riirelease-jobcard')->group(function () {
 
-                    Route::resource('rii-release', 'RIIReleaseJobCardController', [
-                        'parameters' => ['rii-release' => 'riirelease']
+                    Route::resource('/', 'RIIReleaseJobCardController',
+                    [
+                        'parameters' => ['' => 'riirelease']
                     ]);
-                    
+
                 });
 
             });
@@ -37,8 +38,20 @@ Route::name('frontend.')->group(function () {
 
                 Route::prefix('riirelease-defectcard')->group(function () {
 
-                    Route::resource('rii-release', 'RIIReleaseDefectCardController', [
-                        'parameters' => ['rii-release' => 'riirelease']
+                    Route::resource('/', 'RIIReleaseDefectCardController', [
+                        'parameters' => ['' => 'riirelease']
+                    ]);
+
+                });
+
+            });
+
+            Route::name('riirelease-htcrr.')->group(function () {
+
+                Route::prefix('riirelease-htcrr')->group(function () {
+
+                    Route::resource('/', 'RIIReleaseHtCrrController', [
+                        'parameters' => ['' => 'riirelease']
                     ]);
 
                 });

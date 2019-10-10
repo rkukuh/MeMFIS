@@ -68,7 +68,7 @@
                                     </label>
 
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', $defectcard->jobcard->quotation->project->aircraft->name)
+                                        @slot('text', $defectcard->jobcard->quotation->quotationable->aircraft->name)
                                     @endcomponent
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                                     </label>
 
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', $defectcard->jobcard->quotation->project->aircraft_register)
+                                        @slot('text', $defectcard->jobcard->quotation->quotationable->aircraft_register)
                                     @endcomponent
                                 </div>
                             </div>
@@ -108,7 +108,7 @@
                                     </label>
 
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', $defectcard->jobcard->quotation->project->aircraft_sn)
+                                        @slot('text', $defectcard->jobcard->quotation->quotationable->aircraft_sn)
                                     @endcomponent
                                 </div>
                             </div>
@@ -119,7 +119,7 @@
                                     </label>
 
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', $defectcard->jobcard->taskcard->sequence)
+                                        @slot('text', $defectcard->jobcard->jobcardable->sequence)
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -139,7 +139,7 @@
                                     </label>
 
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', 'Generated')
+                                        @slot('text', $defectcard->ata)
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -158,9 +158,9 @@
                                         Area/Zone
                                     </label>
 
-                                    @if (isset($defectcard->jobcard->taskcard->workarea->name))
+                                    @if (isset($defectcard->jobcard->jobcardable->workarea->name))
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $defectcard->jobcard->taskcard->workarea->name)
+                                            @slot('text', $defectcard->jobcard->jobcardable->workarea->name)
                                         @endcomponent
                                     @else
                                         @component('frontend.common.label.data-info')
@@ -185,10 +185,10 @@
                                     </label>
 
                                     @component('frontend.common.label.data-info')
-                                        @if(sizeof($defectcard->jobcard->taskcard->skills) == 3)
+                                        @if(sizeof($defectcard->jobcard->jobcardable->skills) == 3)
                                             @slot('text', 'ERI')
-                                        @elseif(sizeof($defectcard->jobcard->taskcard->skills) == 1)
-                                            @slot('text', $defectcard->jobcard->taskcard->skills[0]->name)
+                                        @elseif(sizeof($defectcard->jobcard->jobcardable->skills) == 1)
+                                            @slot('text', $defectcard->jobcard->jobcardable->skills[0]->name)
                                         @else
                                             @include('frontend.common.label.data-info-nodata')
                                         @endif
@@ -230,7 +230,7 @@
                                     </label>
 
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', 'Generated')
+                                       @slot('text', $defectcard->description)
                                     @endcomponent
                                 </div>
                             </div>
@@ -409,6 +409,41 @@
                             @include('frontend.common.label.datalist')
 
                             <h3 class="m-portlet__head-text">
+                                Helper(s) List
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet m-portlet--mobile">
+                    <div class="m-portlet__body">
+                        <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                            <div class="row align-items-center">
+                                <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                        @if($defectcard->helpers()->count() < $defectcard->helper_quantity)
+                                        <button data-toggle="modal" data-target="#modal_helper" type="button" href="#" 
+                                        class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-md add-helper" title="Add Helper" 
+                                data-defect_card="{{$defectcard->uuid}}"><i class="la la-plus-circle"></i> Add Helper</button>
+                                        @endif
+                                    <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                </div>
+                            </div>
+                        </div>
+                        @include('frontend.defect-card.engineer.modal-helper')
+                        <div class="helpers_datatable" id="scrolling_both"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon m--hide">
+                                <i class="la la-gear"></i>
+                            </span>
+
+                            @include('frontend.common.label.datalist')
+
+                            <h3 class="m-portlet__head-text">
                                 Tool(s) List
                             </h3>
                         </div>
@@ -420,10 +455,11 @@
                             <div class="row align-items-center">
                                 <div class="col-xl-12 order-12 order-xl-12 m--align-right">
                                     <div class="defectcard_tool_datatable" id="scrolling_both"></div>
+                                    
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
                             </div>
-                        </div>
+                        </div>                       
                         <div class="tools_datatable" id="scrolling_both"></div>
                     </div>
                 </div>
@@ -468,4 +504,5 @@
         let uuid = '{{$defectcard->uuid}}';
    </script>
     <script src="{{ asset('js/frontend/defect-card/items.js')}}"></script>
+    <script src="{{ asset('js/frontend/defect-card/helpers.js')}}"></script>
 @endpush

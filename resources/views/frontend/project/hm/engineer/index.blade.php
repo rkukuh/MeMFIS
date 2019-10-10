@@ -1,6 +1,3 @@
-{{-- @if(!empty($project_workpackage->engineers))
-    {{ dd("onok") }}
-@endif --}}
 <div class="form-group m-form__group row px-4 pb-4">
     <div class="col-sm-12 col-md-12 col-lg-12">
         @if(in_array('Airframe',$engineer_skills))
@@ -53,6 +50,7 @@
                     @slot('class', 'engineer_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
+                    @slot('value', $engineers_quantity["airframe"])
                 @endcomponent
             </div>
                 @component('frontend.common.input.hidden')
@@ -112,6 +110,7 @@
                     @slot('id_error', 'powerplant_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
+                    @slot('value', $engineers_quantity["powerplant"])
                 @endcomponent
             </div>
             @component('frontend.common.input.hidden')
@@ -171,6 +170,7 @@
                     @slot('id_error', 'electrical_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
+                    @slot('value', $engineers_quantity["electrical"])
                 @endcomponent
             </div>
             @component('frontend.common.input.hidden')
@@ -231,6 +231,8 @@
                         @slot('input_append', 'person')
                         @if(!empty($engineer))
                         @slot('value', $engineer->quantity)
+                        @else
+                        @slot('value', $engineers_quantity["radio"])
                         @endif
                         @slot('min',0)
                     @endcomponent
@@ -292,6 +294,7 @@
                         @slot('id_error', 'instrument_qty')
                         @slot('input_append', 'person')
                         @slot('min',0)
+                        @slot('value', $engineers_quantity["instrument"])
                     @endcomponent
                 </div>
                 @component('frontend.common.input.hidden')
@@ -347,9 +350,11 @@
                     @slot('id', 'cabin_qty')
                     @slot('text', 'Cabin Quantity')
                     @slot('name', 'cabin_qty')
+                    @slot('class', 'engineer_qty')
                     @slot('id_error', 'cabin_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
+                    @slot('value', $engineers_quantity["cabin"])
                 @endcomponent
             </div>
             @component('frontend.common.input.hidden')
@@ -469,6 +474,8 @@
                     @slot('input_append', 'person')
                     @if(!empty($engineer))
                     @slot('value', $engineer->quantity)
+                    @else
+                    @slot('value', $engineers_quantity["repair"])
                     @endif
                     @slot('min',0)
                 @endcomponent
@@ -530,6 +537,7 @@
                     @slot('id_error', 'repainting_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
+                    @slot('value', $engineers_quantity["repainting"])
                 @endcomponent
             </div>
             @component('frontend.common.input.hidden')
@@ -590,6 +598,8 @@
                     @slot('input_append', 'person')
                     @if(!empty($engineer))
                     @slot('value', $engineer->quantity)
+                    @else
+                    @slot('value', $engineers_quantity["ndi-ndt"])
                     @endif
                     @slot('min',0)
                 @endcomponent
@@ -713,11 +723,11 @@
     $('#calculate').on('click',function(){
         let engineer_qty = tat = 0;
         $('.engineer_qty').each(function(){
-            engineer_qty = engineer_qty + parseInt($(this).val());
+            engineer_qty = engineer_qty + parseFloat($(this).val());
         });
         let divider = engineer_qty * 6.5;
         if($('#default').prop("checked")){
-            let mhrs = parseInt(mhrs_pfrm_factor);
+            let mhrs = parseFloat(mhrs_pfrm_factor);
             tat = mhrs / divider;
         }else{
             let mhrs = total_mhrs * 1.6;

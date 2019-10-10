@@ -20,7 +20,7 @@ let Workpackage3 = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -113,7 +113,7 @@ let Workpackage3 = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -205,7 +205,7 @@ let Workpackage3 = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -298,7 +298,7 @@ let Workpackage3 = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -390,7 +390,7 @@ let Workpackage3 = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -483,7 +483,7 @@ let Workpackage3 = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -588,6 +588,10 @@ let Workpackage3 = {
                             $('#unit_material-error').html(data.errors.unit_id[0]);
                         }
 
+                        if (data.errors.uom) {
+                            $('#unit_material-error').html(data.errors.uom[0]);
+                        }
+
                         document.getElementById('quantity').value = quantity;
 
                     } else {
@@ -680,6 +684,10 @@ let Workpackage3 = {
 
                         if (data.errors.unit_id) {
                             $('#unit_tool-error').html(data.errors.unit_id[0]);
+                        }
+
+                        if (data.errors.uom) {
+                            $('#unit_tool-error').html(data.errors.uom[0]);
                         }
 
                         document.getElementById('quantity').value = quantity;

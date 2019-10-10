@@ -83,7 +83,6 @@
                                             <label class="form-control-label">
                                                 Company Task Number @include('frontend.common.label.optional')
                                             </label>
-
                                             @if (empty($additionals))
                                                 @component('frontend.common.input.text')
                                                     @slot('id', 'company_number')
@@ -96,7 +95,9 @@
                                                     @slot('id', 'company_number')
                                                     @slot('text', 'Company Task Number')
                                                     @slot('name', 'company_number')
-                                                    @slot('value', $additionals->company_task)
+                                                    @if(isset($additionals))
+                                                        @slot('value', $additionals->internal_number)
+                                                    @endif
                                                     @slot('id_error', 'company_number')
                                                 @endcomponent
                                             @endif
@@ -302,13 +303,13 @@
                                             <select id="access" name="access" class="form-control m-select2" multiple style="width:100%">
                                                 @if ($taskcard->accesses->isEmpty())
                                                     @foreach ($accesses as $access)
-                                                        <option value="{{ $access->id }}">
+                                                        <option value="{{ $access->name }}">
                                                             {{ $access->name }}
                                                         </option>
                                                     @endforeach
                                                 @else
                                                     @foreach ($accesses as $access)
-                                                        <option value="{{ $access->id }}"
+                                                        <option value="{{ $access->name }}"
                                                             @if(in_array( $access->id ,$access_taskcards)) selected @endif>
                                                             {{ $access->name }}
                                                         </option>
@@ -329,13 +330,13 @@
                                             <select id="zone" name="zone" class="form-control m-select2" multiple style="width:100%">
                                                 @if ($taskcard->zones->isEmpty())
                                                     @foreach ($zones as $zone)
-                                                        <option value="{{ $zone->id }}">
+                                                        <option value="{{ $zone->name }}">
                                                             {{ $zone->name }}
                                                         </option>
                                                     @endforeach
                                                 @else
                                                     @foreach ($zones as $zone)
-                                                        <option value="{{ $zone->id }}"
+                                                        <option value="{{ $zone->name }}"
                                                             @if(in_array( $zone->id ,$zone_taskcards)) selected @endif>
                                                             {{ $zone->name }}
                                                         </option>
@@ -416,9 +417,9 @@
                                                         Effectivity @include('frontend.common.label.optional')
                                                     </label>
                                                     @component('frontend.common.input.text')
-                                                        @slot('text', 'Effectifity')
-                                                        @slot('id', 'effectifity')
-                                                        @slot('name', 'effectifity')
+                                                        @slot('id', 'effectivity')
+                                                        @slot('text', 'Effectivity')
+                                                        @slot('name', 'effectivity')
                                                         @slot('value', $taskcard->effectivity)
                                                     @endcomponent
                                                 </div>
@@ -442,15 +443,19 @@
                                                 Documents library @include('frontend.common.label.optional')
                                             </label>
 
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Document')
-                                                @slot('id', 'document')
-                                                @slot('name', 'document')
-                                                @slot('multiple','multiple')
-                                                @slot('help_text','You can chose multiple value')
-                                                @slot('id_error', 'document')
-                                            @endcomponent
+                                            <select id="document-library" name="document-library" class="form-control m-select2" multiple style="width:100%">
+                                                <option value="">
+                                                    &mdash; Select a Document Library &mdash;
+                                                </option>
 
+                                                @if (sizeof($additionals->document_library) > 0)
+                                                    @foreach ($additionals->document_library as $document)
+                                                        <option selected>
+                                                            {{ $document }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -463,6 +468,7 @@
                                                 @slot('id', 'stringer')
                                                 @slot('text', 'Stringer')
                                                 @slot('name', 'stringer')
+                                                @slot('value', json_decode($taskCard->stringer))
                                                 @slot('id_error', 'stringer')
                                             @endcomponent
                                         </div>
@@ -471,13 +477,22 @@
                                             <label class="form-control-label">
                                                 Station @include('frontend.common.label.optional')
                                             </label>
-
-                                            @component('frontend.common.input.text')
-                                                @slot('id', 'station')
-                                                @slot('text', 'Station')
-                                                @slot('name', 'station')
-                                                @slot('id_error', 'station')
-                                            @endcomponent
+                                            <select id="station" name="station" class="form-control m-select2" multiple style="width:100%">
+                                                @if(isset($taskcard->stations) && sizeof($taskcard->stations) > 0)
+                                                    @foreach ($stations as $station)
+                                                        <option value="{{ $station->name }}"
+                                                            @if(in_array( $station->uuid ,$tc_stations)) selected @endif>
+                                                            {{ $station->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($stations as $station)
+                                                        <option value="{{ $station->name }}">
+                                                            {{ $station->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -488,8 +503,8 @@
 
                                             @component('frontend.common.input.text')
                                                 @slot('id', 'service_bulletin')
-                                                @slot('text', 'Service Bulletins')
                                                 @slot('name', 'service_bulletin')
+                                                @slot('value', $taskCard->reference)
                                             @endcomponent
 
                                         </div>
@@ -498,6 +513,15 @@
                                                 Section(s) @include('frontend.common.label.optional')
                                             </label>
 
+                                            @if(isset($taskCard->section))
+                                            <select id="section" name="section" class="form-control m-select2" multiple style="width:100%">
+                                                @foreach (json_decode($taskCard->section) as $section)
+                                                    <option value="{{ $section }}" selected >
+                                                        {{ $section }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @else
                                             @component('frontend.common.input.select2')
                                                 @slot('id', 'section')
                                                 @slot('text', 'Section')
@@ -506,6 +530,7 @@
                                                 @slot('multiple','multiple')
                                                 @slot('help_text','You can chose multiple value')
                                             @endcomponent
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -519,7 +544,7 @@
                                                         <td width="45%">
                                                             <input type="number" required="required" class="form-control" name="threshold_amount[]"/>
                                                         </td>
-                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select</option>
+                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value="">Select Threshold</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                         <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
                                                         @endforeach
@@ -536,7 +561,7 @@
                                                         <td width="45%">
                                                             <input type="number" required="required" class="form-control" name="threshold_amount[]" value="{{ $taskcard->thresholds[$i]->amount }}"/>
                                                         </td>
-                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value"">Select</option>
+                                                        <td width="50%"><select name="threshold_type[]"  class="select form-control js-example-tags"><option value="">Select Repeats</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                         <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->thresholds[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
                                                         @endforeach
@@ -567,7 +592,7 @@
                                                     <tr>
                                                         <td width="45%"><input type="number" required="required" class="form-control" name="repeat_amount[]"/></td>
                                                         <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
-                                                        <option value"">Select </option>
+                                                        <option value="">Select Threshold</option>
                                                         @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                         <option value="{{$maintenanceCycle->uuid}}">{{$maintenanceCycle->name}}</option>
                                                         @endforeach
@@ -583,7 +608,7 @@
                                                 <tr>
                                                     <td width="45%"><input type="text" required="required" class="form-control" name="repeat_amount[]" value="{{ $taskcard->repeats[$i]->amount }}"/></td>
                                                     <td width="50%"><select name="repeat_type[]"  class="select form-control js-example-tags">
-                                                    <option value"">Select</option>
+                                                    <option value="">Select Repeat</option>
                                                     @foreach ($MaintenanceCycles as $maintenanceCycle)
                                                     <option value="{{$maintenanceCycle->uuid}}" @if($taskcard->repeats[$i]->type->uuid == $maintenanceCycle->uuid) selected @endif>{{$maintenanceCycle->name}}</option>
                                                     @endforeach
@@ -858,44 +883,44 @@
         let taskcard_uuid = '{{$taskcard->uuid}}';
         $('.js-example-tags').select2();
         $(document).ready(function () {
-          var counterThresholds = {!! sizeof($taskcard->thresholds) !!};
-          var counterRepeats = {!! sizeof($taskcard->repeats) !!};
-          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
-          $("#addrow").on("click", function () {
-              var x = 1;
-              var newRow = $("<tr>");
-              var cols = "";
-              x = x+1;
-              cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
-              cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
-              cols += '<option value"">Select</option>';
-              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
-                  if(maintenanceCycles[i].id == 1){
-                  }else{
-                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
-                  }
-              };
-              cols += '</select></td>';
-              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
-              newRow.append(cols);
-              $("table.threshold").append(newRow);
-              $('.select').select2();
-              counterThresholds++;
-          });
-          $("table.threshold").on("click", ".ibtnDel", function (event) {
-              if (counterThresholds >= 1) {
-                  $(this).closest("tr").remove();
-                  counterThresholds -= 1
-              }
-          });
-          $("#addrow2").on("click", function () {
+            var counterThresholds = {!! sizeof($taskcard->thresholds) !!};
+            var counterRepeats = {!! sizeof($taskcard->repeats) !!};
+            var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+            $("#addrow").on("click", function () {
+                var x = 1;
+                var newRow = $("<tr>");
+                var cols = "";
+                x = x+1;
+                cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
+                cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
+                cols += '<option value="">Select Threshold</option>';
+                for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                    if(maintenanceCycles[i].id == 1){
+                    }else{
+                    cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                    }
+                };
+                cols += '</select></td>';
+                cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+                newRow.append(cols);
+                $("table.threshold").append(newRow);
+                $('.select').select2();
+                counterThresholds++;
+            });
+            $("table.threshold").on("click", ".ibtnDel", function (event) {
+                if (counterThresholds >= 1) {
+                    $(this).closest("tr").remove();
+                    counterThresholds -= 1
+                }
+            });
+            $("#addrow2").on("click", function () {
                 var x = 1;
                 var newRow = $("<tr>");
                 var cols = "";
                 x = x+1;
                 cols += '<td width="45%"><input type="text" required="required" class="form-control"  name="repeat_amount[]"/></td>';
                 cols += '<td width="50%"><select name="repeat_type[]" class="select form-control ">';
-                cols += '<option value"">Select</option>';
+                cols += '<option value="">Select Repeat</option>';
                 for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
                     if(maintenanceCycles[i].id == 1){
                     }else{
@@ -910,7 +935,6 @@
                 counterRepeats++;
             });
             $("table.repeat").on("click", ".ibtnDel", function (event) {
-                console.log("Repeats count : "+counterRepeats);
                 if (counterRepeats >= 1) {
                     $(this).closest("tr").remove();
                     counterRepeats -= 1
@@ -920,9 +944,9 @@
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool-uom.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
@@ -944,6 +968,8 @@
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/station.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/threshold-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/threshold-type.js') }}"></script>
 
@@ -954,15 +980,14 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/applicability-engine.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/section.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/section.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/applicability-airplane.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/document-library.js') }}"></script>
 
     <script src="{{ asset('js/frontend/taskcard/routine/edit.js') }}"></script>
 

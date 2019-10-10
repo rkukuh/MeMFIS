@@ -1,6 +1,5 @@
 let TaskRelease = {
     init: function () {
-
         $('.taskrelease_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -14,12 +13,14 @@ let TaskRelease = {
                             if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
+                            console.log(dataSet);
                             return dataSet;
                         }
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -49,7 +50,7 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'jobcardable.number',
                     title: 'TaskCard No',
                     sortable: 'asc',
                     filterable: !1,
@@ -61,37 +62,37 @@ let TaskRelease = {
                     filterable: !1,
                     template: function (t, e, i) {
                         return (
-                            '<a href="/taskrelease-jobcard/task-release/'+t.uuid+'/edit">' + t.number + "</a>"
+                            '<a href="/taskrelease-jobcard/'+t.uuid+'/edit">' + t.number + "</a>"
                         );
                     }
                 },
                 {
-                    field: 'pesawat',
+                    field: 'company_task',
                     title: 'Company Task No',
                     sortable: 'asc',
                     filterable: !1,
 
                 },
                 {
-                    field: 'quotation.customer.name',
+                    field: 'quotation.quotationable.customer.name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft.name',
+                    field: 'quotation.quotationable.aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_register',
+                    field: 'quotation.quotationable.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_sn',
+                    field: 'quotation.quotationable.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
@@ -103,7 +104,7 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.estimation_manhour',
+                    field: 'jobcardable.estimation_manhour',
                     title: 'Mhrs',
                     sortable: 'asc',
                     filterable: !1,
@@ -113,6 +114,23 @@ let TaskRelease = {
                     title: 'Actual. Mhrs',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
                 },
                 {
                     field: 'status',
@@ -125,18 +143,18 @@ let TaskRelease = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.status == 'CLOSED'){
+                        if(t.status == 'Closed'){
                             return (
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check-circle"></i>' +
                                 '</a>' +
-                                '<a href="/jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
                         }else{
                             return (
-                                '<a href="/jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
@@ -166,7 +184,7 @@ let TaskRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/taskrelease-jobcard/task-release/' + jobcard_uuid + '/',
+                        url: '/taskrelease-jobcard/' + jobcard_uuid + '/',
                         success: function (data) {
                             toastr.success('Task has been released.', 'Released', {
                                     timeOut: 5000

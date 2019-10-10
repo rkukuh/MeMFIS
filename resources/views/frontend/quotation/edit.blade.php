@@ -68,7 +68,7 @@
                                                                     &mdash; Select a Work Order &mdash;
                                                                 </option>
                                                                 @foreach ($projects as $project)
-                                                                <option value="{{ $project->uuid }}" @if ($project->no_wo === $quotation->project->no_wo) selected @endif>
+                                                                <option value="{{ $project->uuid }}" @if ($project->no_wo === $quotation->quotationable->no_wo) selected @endif>
                                                                     {{ $project->no_wo }}
                                                                 </option>
                                                                 @endforeach
@@ -82,11 +82,11 @@
                                                             </label>
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('id', 'project_number')
-                                                                @slot('text', $quotation->project->title)
+                                                                @slot('text', $quotation->quotationable->title)
                                                             @endcomponent
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" id="customer_id" name="customer_id" value="{{ $quotation->project->customer->uuid }}">
+                                                    <input type="hidden" id="customer_id" name="customer_id" value="{{ $quotation->quotationable->customer->uuid }}">
 
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -97,7 +97,7 @@
                                                             </label>
                                                             @component('frontend.common.label.data-info')
                                                                 @slot('id', 'project_number')
-                                                                @slot('text', $quotation->project->code)
+                                                                @slot('text', $quotation->quotationable->code)
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -153,7 +153,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                                @slot('text', 'XXX')
+                                                                                @slot('text', $quotation->quotationable->customer->name)
                                                                                 @slot('id', 'name')
                                                                             @endcomponent
                                                                         </div>
@@ -163,7 +163,6 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                                @slot('text', 'Bp. Romdani')
                                                                                 @slot('id', 'attention')
                                                                                 @slot('name', 'attention')
                                                                             @endcomponent
@@ -205,7 +204,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.input.select2')
-                                                                                @slot('text', '+62xxxxxxx / 07777777')
+                                                                                @slot('text', 'example@email.com')
                                                                                 @slot('id', 'email')
                                                                                 @slot('name', 'email')
                                                                             @endcomponent
@@ -322,102 +321,6 @@
 
                                             </div>
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Scheduled Payment Type @include('frontend.common.label.required')
-                                                </label>
-
-                                                <select name="scheduled_payment_type" id="scheduled_payment_type" class="form-control m-select2">
-                                                    <option value="59" @if($quotation->scheduled_payment_type == 59) selected @endif>By Date</option>
-                                                    <option value="60" @if($quotation->scheduled_payment_type == 60) selected @endif>By Project Progress</option>
-                                                </select>
-
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Scheduled Payment @include('frontend.common.label.required')
-                                                </label>
-                                                @if(isset($scheduled_payment_amount))
-                                                <div class="repeaterScheduledPayment">
-                                                    @foreach($scheduled_payment_amount as $spa)
-                                                    <div class="repeaterRow">
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-8 col-md-8 col-lg-8">
-                                                            @component('frontend.common.input.text')
-                                                                @slot('name', 'scheduled_payment')
-                                                                @slot('id', 'scheduled_payment')
-                                                                @slot('value', $spa)
-                                                                @slot('text', 'Phone')
-                                                                @slot('id_error', 'scheduled_payment_amount')
-                                                            @endcomponent
-                                                            </div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                @component('frontend.common.buttons.create_repeater')
-                                                                    @slot('class', 'AddRow')
-                                                                @endcomponent
-                                                            </div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                @component('frontend.common.buttons.delete_repeater')
-                                                                    @slot('class', 'DeleteRow')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    @endforeach
-                                                </div>
-                                                @else
-                                                <div class="repeaterScheduledPayment">
-                                                    <div class="repeaterRow">
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-8 col-md-8 col-lg-8">
-                                                                @component('frontend.common.input.text')
-                                                                    @slot('name', 'scheduled_payment')
-                                                                    @slot('id', 'scheduled_payment')
-                                                                    @slot('text', 'Phone')
-                                                                    @slot('id_error', 'scheduled_payment_amount')
-                                                                @endcomponent
-                                                            </div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                @component('frontend.common.buttons.create_repeater')
-                                                                    @slot('class', 'AddRow')
-                                                                @endcomponent
-                                                            </div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                @component('frontend.common.buttons.delete_repeater')
-                                                                    @slot('class', 'DeleteRow')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @endif
-                                                <div class="repeaterScheduledPayment">
-                                                    <div class="repeaterRow Copy hidden">
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-8 col-md-8 col-lg-8">
-                                                                @component('frontend.common.input.text')
-                                                                    @slot('name', 'scheduled_payment')
-                                                                    @slot('id', 'scheduled_payment')
-                                                                    @slot('text', 'Phone')
-                                                                    @slot('id_error', 'scheduled_payment_amount')
-                                                                @endcomponent
-                                                            </div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                @component('frontend.common.buttons.create_repeater')
-                                                                    @slot('class', 'AddRow')
-                                                                @endcomponent
-                                                            </div>
-                                                            <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                @component('frontend.common.buttons.delete_repeater')
-                                                                    @slot('class', 'DeleteRow')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
@@ -439,7 +342,7 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <label class="form-control-label">
-                                            Quotation Subject @include('frontend.common.label.required')
+                                            Description @include('frontend.common.label.optional')
                                         </label>
 
                                         @component('frontend.common.input.textarea')
@@ -478,8 +381,9 @@
                                             </li>
                                         </ul>
                                         <div class="tab-content">
-                                            @include('frontend.quotation.summaryEdit')
+                                            @include('frontend.quotation.summary')
                                             @include('frontend.quotation.modal-discount')
+                                            @include('frontend.quotation.htcrr.modal-discount-htcrr')
                                         </div>
                                     </div>
                                 </div>
@@ -540,10 +444,11 @@
 @endpush
 @push('footer-scripts')
 <script>
-    let project_id = '{{  $quotation->project->uuid }}';
+    let project_id = '{{  $quotation->quotationable->uuid }}';
     let quotation_uuid = '{{  $quotation->uuid }}';
     let currency = '{{  $quotation->currency }}';
     let currencyCode = '{{  $quotation->currency->code }}';
+
 
     function myFunction(object) {
         // var numItems = $('.project').length
@@ -576,10 +481,12 @@
 </script>
 
 <script type="text/javascript">
+    let dataSet = {!! $quotation->scheduled_payment_amount !!}
+
     $(document).ready(function() {
         let attentions = $('#attentions-val').val();
         let attention = $('#attention-val').val();
-        // attention = JSON.parse(attention)[0];
+        
         if (attentions) {
             let attn = JSON.parse(attentions);
             $('select[name="attention"]').empty();
@@ -640,7 +547,7 @@
         console.log(JSON.stringify(ajaxdata));
     });
 </script>
-<script>
+{{-- <script>
     function initMap() {
         var myLatLng = {
             lat: -7.265757,
@@ -658,16 +565,19 @@
             title: 'Hello World!'
         });
     }
-</script>
+</script> --}}
+<script src="{{ asset('js/custom.js') }}"></script>
+
 <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
+{{-- <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script> --}}
 
 <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
-<script src="{{ asset('js/custom.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/fill-combobox/discount-type.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
 
@@ -677,16 +587,16 @@
 <script src="{{ asset('js/frontend/functions/select2/fax.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/address.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/charge-type.js') }}"></script>
 
 <script src="{{ asset('js/frontend/quotation/summary.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/form-reset.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/datepicker/scheduled-payment.js')}}"></script>
 <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
 <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 <script src="{{ asset('js/frontend/quotation/workpackage-edit.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/edit.js') }}"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="{{ asset('js/frontend/quotation/scheduled-payment.js') }}"></script>
 <script src="{{ asset('js/frontend/quotation/repeater.js') }}"></script>
 
 @endpush

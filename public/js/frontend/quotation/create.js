@@ -5,7 +5,7 @@ let Quotation = {
         $('select[name="currency"]').on('change', function () {
             let exchange_id = this.options[this.selectedIndex].innerHTML;
             let exchange_rate = $('input[name=exchange]');
-            if (exchange_id === "Rupiah (Rp)") {
+            if (exchange_id.includes("Rp")) {
                 exchange_rate.val(1);
                 exchange_rate.attr("readonly", true);
             } else {
@@ -29,13 +29,41 @@ let Quotation = {
                         url: '/label/get-customer/' + data.customer.uuid,
                         type: 'GET',
                         dataType: 'json',
-                        success: function (respone) {
-                            let res = JSON.parse(respone);
+                        success: function (response) {
+                            let res = JSON.parse(response.attention);
                             $('select[name="attention"]').empty();
                             $('select[name="phone"]').empty();
                             $('select[name="email"]').empty();
                             $('select[name="fax"]').empty();
                             $('select[name="address"]').empty();
+                            if(response.addresses.length){
+                                $.each(response.addresses, function( index, value ) {
+                                    $('select[name="address"]').append(
+                                        '<option value="' + value.address + '">' + value.address + '</option>'
+                                    );
+                                });
+                            }
+                            if(response.emails.length){
+                                $.each(response.emails, function( index, value ) {
+                                    $('select[name="email"]').append(
+                                        '<option value="' + value.address + '">' + value.address + '</option>'
+                                    );
+                                });
+                            }
+                            if(response.faxes.length){
+                                $.each(response.faxes, function( index, value ) {
+                                    $('select[name="fax"]').append(
+                                        '<option value="' + value.number + '">' +value.number + '</option>'
+                                    );
+                                });
+                            }
+                            if(response.phones.length){
+                                $.each(response.phones, function( index, value ) {
+                                    $('select[name="phone"]').append(
+                                        '<option value="' + value.number + '">' + value.number + '</option>'
+                                    );
+                                });
+                            }
                             for (var i = 0; i < res.length; i++) {
                                 if(res[i].name){
                                     $('select[name="attention"]').append(
@@ -43,12 +71,12 @@ let Quotation = {
                                     );
                                 }
                                 if(res[i].address){
-                                    $('select[name="attention"]').append(
+                                    $('select[name="address"]').append(
                                         '<option value="' + res[i].address + '">' + res[i].address + '</option>'
                                     );
                                 }
                                 if(res[i].fax){
-                                    $('select[name="attention"]').append(
+                                    $('select[name="fax"]').append(
                                         '<option value="' + res[i].fax + '">' + res[i].fax + '</option>'
                                     );
                                 }
@@ -67,6 +95,9 @@ let Quotation = {
                                     });
                                 }
                             }
+
+                            $("#term_of_payment").val(response.payment_term);
+                            
                         }
                     });
                     if (workpackage_datatables_init == true) {
@@ -84,76 +115,6 @@ let Quotation = {
                 }
             });
 
-            let customer_uuid = $('#customer_id')[0].value;
-            let phone = $('#phone');
-            let fax = $('#fax');
-            let addresses = $('#address');
-            let emails = $('#email');
-            // emptying options
-            phone.empty();
-            fax.empty();
-            addresses.empty();
-            emails.empty();
-            let phoneNumber = "";
-
-            // $.ajax({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     },
-            //     type: 'GET',
-            //     dataType: "json",
-            //     url: '/label/get-customer/'+customer_uuid,
-            //     success: function (data) {
-            //         // adding customer phones  option on selectBox inside identifier
-            //         if(jQuery.isEmptyObject(data.phones)){
-            //             console.log('empty phones');
-            //         }else{
-            //             console.log('get the phones data');
-            //             $.each( data.phones, function( key, value ) {
-            //                 if(value.ext === null){
-            //                     phoneNumber = value.number;
-            //                 }else{
-            //                     phoneNumber = value.number+' Ext. '+value.ext;
-            //                 }
-            //                 let phoneNumberOption = new Option(phoneNumber,value.uuid);
-            //                 phone.append(phoneNumberOption);
-            //             });
-            //         }
-
-            //         // adding customer faxes  option on selectBox inside identifier
-            //         if(jQuery.isEmptyObject(data.faxes)){
-            //             console.log('empty faxes');
-            //         }else{
-            //             console.log('get the faxes data');
-            //             $.each( data.faxes, function( key, value ) {
-            //                 let faxNumberOption = new Option( value.number,value.uuid);
-            //                 fax.append(faxNumberOption);
-            //             });
-            //         }
-
-            //         // Adding customer addresses option on selectBox inside identifier
-            //         if(jQuery.isEmptyObject(data.addresses)){
-            //             console.log('empty addresses');
-            //         }else{
-            //             console.log('get the addresses data');
-            //             $.each( data.addresses, function( key, value ) {
-            //                 let addressesOption = new Option( value.address,value.uuid);
-            //                 addresses.append(addressesOption);
-            //             });
-            //         }
-
-            //         // Adding customer emails option on selectBox inside identifier
-            //         if(jQuery.isEmptyObject(data.emails)){
-            //             console.log('empty emails');
-            //         }else{
-            //             console.log('get the emails data');
-            //             $.each( data.emails, function( key, value ) {
-            //                 let emailsOption = new Option( value.address,value.uuid);
-            //                 emails.append(emailsOption);
-            //             });
-            //         }
-            //     }
-            // });
         });
 
         $('select[name="scheduled_payment_type"]').on('change', function () {
@@ -187,18 +148,18 @@ let Quotation = {
             let attention_fax = $('#fax').val();
             let attention_email = $('#email').val();
             let attention_address = $('#address').val();
-            let scheduled_payment_array = [];
-            let type = $('#scheduled_payment_type').children("option:selected").html();
-            if(type === "By Date"){
-                $('select[name^=scheduled_payment] ').each(function (i) {
-                    scheduled_payment_array[i] = $(this).val();
-                });
-            }else{
-                $('#scheduled_payment ').each(function (i) {
-                    scheduled_payment_array[i] = parseInt($(this).val());
-                });
-            }
-            scheduled_payment_array.pop();
+            let scheduled_payment_amount_array = [];
+            let scheduled_payment_note_array = [];
+            // let type = $('#scheduled_payment_type').children("option:selected").html();
+
+            // $('#scheduled_payment ').each(function (i) {
+            //     scheduled_payment_amount_array[i] = parseInt($(this).val());
+            // });
+
+            // $('#scheduled_payment_note ').each(function (i) {
+            //     scheduled_payment_note_array[i] = $(this).val();
+            // });
+            // scheduled_payment_array.pop();
             let data = new FormData();
             data.append("project_id", $('#work-order').val());
             data.append("customer_id", $('#customer_id').val());
@@ -208,8 +169,8 @@ let Quotation = {
             data.append("term_of_payment", $('#term_of_payment').val());
             data.append("term_of_condition", $('#term_and_condition').val());
             data.append("exchange_rate", $('#exchange').val());
-            data.append("scheduled_payment_type", $('#scheduled_payment_type').val());
-            data.append("scheduled_payment_amount", JSON.stringify(scheduled_payment_array));
+            // data.append("scheduled_payment_amount", JSON.stringify(scheduled_payment_amount_array));
+            // data.append("scheduled_payment_note", JSON.stringify(scheduled_payment_note_array));
             data.append("attention_name", attention_name);
             data.append("attention_phone", attention_phone);
             data.append("attention_fax", attention_fax);
@@ -221,8 +182,6 @@ let Quotation = {
             data.append("title", $('#title').val());
             data.append("description", $('#description').val());
             data.append("top_description", $('#term_and_condition').val());
-            data.append("title", $('#title').val());
-
 
             $.ajax({
                 headers: {
@@ -274,7 +233,6 @@ let Quotation = {
                         });
 
                         window.location.href = '/quotation/' + data.uuid + '/edit';
-
 
                     }
                 }

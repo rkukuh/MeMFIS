@@ -11,7 +11,6 @@ use App\Models\Access;
 use App\Models\Project;
 use App\Models\License;
 use App\Models\Storage;
-use App\Models\Journal;
 use App\Models\Customer;
 use App\Models\Vendor;
 use App\Models\Aircraft;
@@ -75,8 +74,8 @@ class FillLabelController extends Controller
     public function customer(Customer $customer)
     {
         $customer->load('phones','faxes','emails','addresses')->get();
-
-        return json_encode($customer->attention);
+        
+        return json_encode($customer);
     }
 
 }

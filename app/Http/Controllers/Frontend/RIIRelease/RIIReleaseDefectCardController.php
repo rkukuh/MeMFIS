@@ -7,6 +7,8 @@ use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Approval;
 use App\Models\Progress;
+use App\Models\DefectCard;
+use App\Models\Inspection;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\JobCardStore;
 use App\Http\Requests\Frontend\JobCardUpdate;
@@ -20,7 +22,7 @@ class RIIReleaseDefectCardController extends Controller
      */
     public function index()
     {
-        return view('frontend.rii-release.index');
+        return view('frontend.rii-release.defect-card.index');
     }
 
     /**
@@ -30,7 +32,7 @@ class RIIReleaseDefectCardController extends Controller
      */
     public function create()
     {
-        return view('frontend.rii-release.create');
+        return view('frontend.rii-release.defect-card.create');
     }
 
     /**
@@ -61,9 +63,24 @@ class RIIReleaseDefectCardController extends Controller
      * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function edit(JobCard $riirelease)
+    public function edit(DefectCard $riirelease)
     {
-       //
+        $propose_corrections = array();
+        foreach($riirelease->propose_corrections as $i => $defectCard){
+            $this->propose_corrections[$i] =  $defectCard->code;
+        }
+
+        $propose_correction_text = '';
+        foreach($riirelease->propose_corrections as $i => $defectCard){
+            $this->propose_correction_text =  $defectCard->pivot->propose_correction_text;
+        }
+
+        return view('frontend.rii-release.defect-card.create', [
+            'riirelease' => $riirelease,
+            'propose_corrections' => $propose_corrections,
+            'propose_correction_text' => $propose_correction_text,
+
+        ]);
     }
 
     /**
@@ -73,22 +90,26 @@ class RIIReleaseDefectCardController extends Controller
      * @param  \App\Models\JobCard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function update(JobCardUpdate $request, JobCard $riirelease)
+    public function update(JobCardUpdate $request, DefectCard $riirelease)
     {
-        $status = Status::ofJobcard()->where('code','rii-released')->first()->id;
+        $status = Status::ofDefectcard()->where('code','rii-released')->first()->id;
 
         $riirelease->progresses()->save(new Progress([
             'status_id' => $status,
             'progressed_by' => Auth::id()
         ]));
 
-        $riirelease->approvals()->save(new Approval([
-            'approvable_id' => $riirelease->id,
-            'approved_by' => Auth::id(),
+        $riirelease->inspections()->save(new Inspection([
+            'is_rii' => '1',
+            'inspected_by' => Auth::id()
         ]));
 
-        return response()->json($riirelease);
-    }
+        $riirelease->approvals()->save(new Approval([
+            'approvable_id' => $riirelease->id,
+            'conducted_by' => Auth::id(),
+        ]));
+
+        return response()->json($riirelease);    }
 
     /**
      * Remove the specified resource from storage.

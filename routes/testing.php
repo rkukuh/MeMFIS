@@ -14,6 +14,54 @@ Route::name('testing.')->group(function () {
 
         });
 
+        Route::get('/check', function () {
+            $test  = new App\Models\CheckStock;
+
+            $result = $test->item('a7455650-b740-47ec-9a30-ffbfdcc2446b');
+            dd($result);
+
+        });
+
+        Route::get('/convert-unit-to-prelimary', function () {
+
+            $item = App\Models\Item::find('1');
+
+            $quantity_sekarang = 2;
+            $unit_sekarang = App\Models\Unit::find('11');
+
+            $qty_uom = $item->units->where('uom.unit_id',$unit_sekarang->id)->first()->uom->quantity; // quantity conversi
+
+            dd($qty_uom*$quantity_sekarang);
+
+
+        });
+
+        Route::get('/wp', function () {
+
+            $project_workpackage = App\Models\Pivots\ProjectWorkPackage::where('project_id',1)->where('workpackage_id',1)->first()->id;
+            $tes = App\Models\ProjectWorkPackageTaskCard::with('taskcard','taskcard.type','taskcard.task')->where('project_workpackage_id',$project_workpackage)
+            ->whereHas('taskcard', function ($query) {
+                $query->whereHas('type', function ($query) {
+                        $query->where('name', 'Basic');
+                    });
+                        // $query->where('task_id', $request->task_type_id);
+                //     });
+            })->get();
+            // dd($tes);
+
+            foreach($tes as $te){
+                // dump($te->taskcard->type->name);
+                dump($te);
+            }
+
+            // whereIn
+            // $taskcards = $project_workpackage->taskcards;
+
+            // foreach($taskcards as $taskcard){
+            //     dump($taskcard->taskcard);
+            // }
+        });
+
         Route::view('/select2', 'frontend/testing/select2')->name('select2');
         Route::get('test', 'Frontend\FillComboxController@test')->name('test');
         Route::view('/taskcard-wip', 'frontend/testing/taskcard-wip')->name('taskcard');
@@ -34,7 +82,7 @@ Route::name('testing.')->group(function () {
         Route::view('/test11', 'frontend/testing/ibnu/mi');
         Route::view('/test31', 'frontend/testing/ibnu/rir');
         Route::view('/testing', 'frontend/testing/ibnu/testing');
-                // Route::view('/jcprint', 'frontend/job-card/print');
+        // Route::view('/jcprint', 'frontend/job-card/print');
         Route::view('/jcprintraw', 'frontend/form/jobcard');
         Route::resource('setting', 'Frontend\SettingController');
 
@@ -42,6 +90,7 @@ Route::name('testing.')->group(function () {
             $pdf = \PDF::loadView('frontend/form/jobcard');
             return $pdf->stream();
         });
+
         Route::get('/barcode-print', function () {
             $pdf = \PDF::loadView('frontend/form/barcode');
             return $pdf->stream();
@@ -64,9 +113,10 @@ Route::name('testing.')->group(function () {
                     App\Models\JobCard::create([
                         'number' => 'JC-DUM-'.md5(uniqid(rand(), true)),
                         'taskcard_id' => $tc->id,
-                        'data_taskcard' => $tc->toJson(),
-                        'data_taskcard_items' => $tc->items->toJson(),
-                    ]);                    // // echo $tc->title.'<br>';
+                        'origin_taskcard' => $tc->toJson(),
+                        'origin_taskcard_items' => $tc->items->toJson(),
+                    ]);
+                                       // // echo $tc->title.'<br>';
                     // foreach($tc->items as $item){
                     //     echo $item->name.'<br>';
                     // }

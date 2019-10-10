@@ -62,7 +62,7 @@
                                                 @component('frontend.common.input.text')
                                                     @slot('id', 'number')
                                                     @slot('name', 'number')
-                                                    @slot('value', 'PR-2121212')
+                                                    @slot('value', $purchaseRequest->number)
                                                     @slot('id_error','number')
                                                     @slot('editable','disabled')
                                                 @endcomponent
@@ -74,12 +74,10 @@
                                                     Ref Project No. @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.select2')
-                                                    @slot('id', 'project')
-                                                    @slot('text', 'project')
-                                                    @slot('name', 'project')
-                                                    @slot('id_error', 'project')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $purchaseRequest->project->code)
                                                 @endcomponent
+
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <div class="form-group m-form__group row">
@@ -87,11 +85,12 @@
                                                         <label class="form-control-label">
                                                             Date @include('frontend.common.label.required')
                                                         </label>
-        
+
                                                         @component('frontend.common.input.datepicker')
                                                             @slot('id', 'date')
                                                             @slot('text', 'Date')
                                                             @slot('name', 'date')
+                                                            @slot('value', $purchaseRequest->requested_at)
                                                             @slot('id_error', 'date')
                                                         @endcomponent
                                                     </div>
@@ -99,11 +98,12 @@
                                                         <label class="form-control-label">
                                                             Date Required @include('frontend.common.label.required')
                                                         </label>
-        
+
                                                         @component('frontend.common.input.datepicker')
                                                             @slot('id', 'date-required')
                                                             @slot('text', 'Date Required')
                                                             @slot('name', 'date-required')
+                                                            @slot('value', $purchaseRequest->required_at)
                                                             @slot('id_error', 'date-required')
                                                         @endcomponent
                                                     </div>
@@ -115,12 +115,12 @@
                                                 <label class="form-control-label">
                                                     Description @include('frontend.common.label.optional')
                                                 </label>
-    
+
                                                 @component('frontend.common.input.textarea')
                                                     @slot('rows', '10')
                                                     @slot('id', 'description')
                                                     @slot('name', 'description')
-                                                    @slot('text', 'Description')
+                                                    @slot('value', $purchaseRequest->description)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -161,17 +161,13 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                                                    @component('frontend.common.buttons.create-new')
-                                                                        @slot('text', 'Item')
-                                                                        @slot('data_target', '#modal_item')
-                                                                    @endcomponent
-                    
-                            
+
                                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @include('frontend.purchase-request.project.modal')
+                                                        @include('frontend.purchase-request.general.modal-edit')
+
                                                         <div class="item_datatable" id="scrolling_both"></div>
                                                     </div>
                                                 </div>
@@ -184,8 +180,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-pr')
-                                                        @slot('class', 'add-pr')
+                                                        @slot('id', 'update-pr')
+                                                        @slot('class', 'update-pr')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -230,6 +226,8 @@
 
 @push('footer-scripts')
     <script>
+        let pr_uuid = '{{$purchaseRequest->uuid}}';
+
         var autoExpand = function (field) {
 
         // Reset field height
@@ -255,12 +253,8 @@
         }, false);
     </script>
 
-
-    <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/purchase-request/project/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/purchase-request/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/project/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/project/form-reset.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-required.js')}}"></script>

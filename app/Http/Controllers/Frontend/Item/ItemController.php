@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\Item;
 use App\Models\Item;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
+use App\Models\Price;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Http\Controllers\Controller;
@@ -61,6 +62,11 @@ class ItemController extends Controller
         if ($item = Item::create($request->all())) {
             $item->categories()->attach($request->category);
             $item->syncTags($tags);
+
+            for($i=1;$i<=5;$i++){
+                $item->prices()
+                ->save(new Price (['amount' =>0,'level' =>$i]));
+            }
 
             return response()->json($item);
         }

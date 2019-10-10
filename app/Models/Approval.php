@@ -9,7 +9,10 @@ class Approval extends MemfisModel
     protected $fillable = [
         'approvable_type',
         'approvable_id',
-        'approved_by',
+        'is_approved',
+        'conducted_by',
+        'note',
+        'created_at'
     ];
 
     /*************************************** RELATIONSHIP ****************************************/
@@ -43,8 +46,8 @@ class Approval extends MemfisModel
      *
      * @return mixed
      */
-    public function approvedBy()
+    public function conductedBy()
     {
-        return $this->belongsTo(Employee::class, 'approved_by');
+        return $this->belongsTo(Employee::class, 'conducted_by');
     }
 }

@@ -4,23 +4,58 @@ namespace App\Models;
 
 use App\User;
 use App\MemfisModel;
+use Spatie\Tags\HasTags;
 use App\Models\Pivots\EmployeeLicense;
+use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Employee extends MemfisModel
+class Employee extends MemfisModel implements HasMedia
 {
+
+    use HasTags;
+    use HasMediaTrait;
+
     protected $fillable = [
         'code',
         'user_id',
         'first_name',
-        'middle_name',
         'last_name',
         'dob',
+        'dob_place',
         'gender',
-        'hired_at',
+        'religion',
+        'marital_status',
+        'nationality',
+        'country',
+        'city',
+        'zip',
+        'joined_date',
+        'job_tittle_id',
+        'position_id',
+        'statuses_id',
+        'department_id',
+        'indirect_supervisor_id',
+        'supervisor_id',
+        'created_at',
+        'updated_at'
     ];
 
-    protected $dates = ['hired_at'];
+    protected $timestamp = false;
 
+// ----------------------------------------OVERIDE-----------------------------------------------//
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('id_card')
+             ->singleFile();
+    }
+    
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('thumb')
+             ->width(45)
+             ->height(45);
+    }
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
@@ -56,8 +91,22 @@ class Employee extends MemfisModel
      * @return mixed
      */
     public function approvals()
+    
     {
         return $this->hasMany(Approval::class);
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many bank accounts.
+     *
+     * This function will get all Employee's bank accounts.
+     * See: BankAccount's bank_accountable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function bank_accounts()
+    {
+        return $this->morphMany(BankAccount::class, 'bank_accountable');
     }
 
     /**
@@ -68,9 +117,24 @@ class Employee extends MemfisModel
      *
      * @return mixed
      */
-    public function conducted_htcrr()
+    public function conducted_htcrrs()
     {
         return $this->hasMany(HtCrr::class, 'conducted_by');
+    }
+
+    /**
+     * Many-to-Many: A Defect Card may have zero or many helper.
+     *
+     * This function will retrieve all the Defect Cards of a helper.
+     * See: DefectCard's helpers() method for the inverse
+     *
+     * @return mixed
+     */
+    public function defectcards()
+    {
+        return $this->belongsToMany(DefectCard::class, 'defectcard_employee', 'employee_id', 'defectcard_id')
+                    ->withPivot('additionals')
+                    ->withTimestamps();
     }
 
     /**
@@ -124,6 +188,163 @@ class Employee extends MemfisModel
     }
 
     /**
+     * One-to-One: An Employee have one Jobtittle.
+     *
+     * This function will retrieve Job Tittle of a given Employee.
+     * See: Jobtittle employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function job_tittle()
+    {
+        return $this->belongsTo(JobTittle::class);
+    }
+
+    /**
+     * One-to-One: An Employee have one Position.
+     *
+     * This function will retrieve Position of a given Employee.
+     * See: Position employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
+
+    /**
+     * One-to-One: An Employee have one Status.
+     *
+     * This function will retrieve Status of a given Employee.
+     * See: Status employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function statuses()
+    {
+        return $this->belongsTo(Status::class);
+    }
+
+    /**
+     * One-to-One: An Employee have one Department.
+     *
+     * This function will retrieve Department of a given Employee.
+     * See: Department employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    /**
+     * One-to-Many: An Employee have one or many Workshift or History.
+     *
+     * This function will retrieve Workshift of a given Employee.
+     * See: EmployeeWorkshift employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function workshift()
+    {
+        return $this->hasMany(EmployeeWorkshift::class);
+    }
+
+    /**
+     * One-to-Many: An Employee have one or many benefit.
+     *
+     * This function will retrieve benefit of a given Employee.
+     * See: employee_benefit employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_benefit()
+    {
+        return $this->hasMany(EmployeeBenefit::class);
+    }
+
+
+    /**
+     * One-to-One: An employee may have zero or one termination.
+     *
+     * This function will retrieve the employees of a termination.
+     * See: EmployeeTermination employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_termination()
+    {
+        return $this->hasMany(EmployeeTermination::class);
+    }
+
+    /**
+     * One-to-Many: An employee may have zero or many attendance.
+     *
+     * This function will retrieve the employees of a attendance.
+     * See: EmployeeAttendance employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_attendace()
+    {
+        return $this->hasMany(EmployeeAttendance::class);
+    }
+
+    /**
+     * One-to-Many: An Employee have one or many bpjs.
+     *
+     * This function will retrieve bpjs of a given Employee.
+     * See: employee_bpjs employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_bpjs()
+    {
+        return $this->hasMany(EmployeeBPJS::class);
+    }
+
+    /**
+     * One-to-Many: An Employee have one or many provisions.
+     *
+     * This function will retrieve provisions of a given Employee.
+     * See: employee_provisions employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_provisions()
+    {
+        return $this->hasMany(EmployeeProvisions::class);
+    }
+
+    /**
+     * One-to-Many (self-join): A indirect supervisor may have none or many employee
+     *
+     * This function will retrieve the indirect supervisor of an employee, if any.
+     * See: Employee indirect_supervisor() method for the inverse
+     *
+     * @return mixed
+     */
+    public function indirect_supervisor()
+    {
+        return $this->belongsTo(Employee::class, 'indirect_supervisor_id');
+    }
+
+    /**
+     * One-to-Many (self-join): A supervisor may have none or many employee
+     *
+     * This function will retrieve the supervisor of an employee, if any.
+     * See: Employee supervisor() method for the inverse
+     *
+     * @return mixed
+     */
+    public function supervisor()
+    {
+        return $this->belongsTo(Employee::class, 'supervisor_id');
+    }
+
+    /**
      * One-to-Many: A GRN may have one approver.
      *
      * This function will retrieve all the GRNs of an approver.
@@ -150,6 +371,21 @@ class Employee extends MemfisModel
     }
 
     /**
+     * Many-to-Many: A HTCRR may have zero or many engineer.
+     *
+     * This function will retrieve all the HTCRRs of a engineer.
+     * See: HtCrr's helpers() method for the inverse
+     *
+     * @return mixed
+     */
+    public function htcrr_engineers()
+    {
+        return $this->belongsToMany(HtCrr::class, 'htcrr_engineers', 'employee_id', 'htcrr_id')
+                    ->withPivot('quantity')
+                    ->withTimestamps();
+    }
+
+    /**
      * Many-to-Many: A HTCRR may have zero or many helper.
      *
      * This function will retrieve all the HTCRRs of a helper.
@@ -157,10 +393,10 @@ class Employee extends MemfisModel
      *
      * @return mixed
      */
-    public function htcrr()
+    public function htcrr_helpers()
     {
         return $this->belongsToMany(HtCrr::class, 'employee_htcrr', 'employee_id', 'htcrr_id')
-                    ->withTimestamps();;
+                    ->withTimestamps();
     }
 
     /**
@@ -187,7 +423,10 @@ class Employee extends MemfisModel
     public function jobcards()
     {
         return $this->belongsToMany(JobCard::class, 'employee_jobcard', 'employee_id', 'jobcard_id')
-                    ->withTimestamps();;
+                    ->withPivot(
+                        'additionals'
+                    )
+                    ->withTimestamps();
     }
 
     /**
@@ -302,17 +541,16 @@ class Employee extends MemfisModel
     }
 
     /**
-     * Many-to-Many: An employee may have zero or many schools.
+     * One-to-Many: An employee may have zero or many schools.
      *
      * This function will retrieve all the schools of an employee.
-     * See: School's employees() method for the inverse
+     * See: EmployeeSchool employee() method for the inverse
      *
      * @return mixed
      */
-    public function schools()
+    public function employee_school()
     {
-        return $this->belongsToMany(School::class)
-                    ->withTimestamps();
+        return $this->hasMany(EmployeeSchool::class);
     }
 
     /**
@@ -326,5 +564,32 @@ class Employee extends MemfisModel
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * One-to-Many: A Employee may have one or many history.
+     *
+     * This function will retrieve all the history of a given BPJS.
+     * See: EmployeeHistory employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function history()
+    {
+        return $this->hasMany(EmployeeHistories::class);
+    }
+
+    /*************************************** ACCESSOR ****************************************/
+
+    /**
+     * Get the Employee's full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        $full_name = $this->first_name." ".$this->last_name;
+        
+        return $full_name;
     }
 }

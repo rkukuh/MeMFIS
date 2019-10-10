@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Frontend\PurchaseOrder;
 
+use Auth;
 use Carbon\Carbon;
 use App\Models\Type;
+use App\Models\Vendor;
+use App\Models\Approval;
+use App\Models\Currency;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\PurchaseOrderStore;
 use App\Http\Requests\Frontend\PurchaseOrderUpdate;
@@ -40,6 +45,7 @@ class PurchaseOrderController extends Controller
      */
     public function store(PurchaseOrderStore $request)
     {
+        $request->merge(['number' => DocumentNumber::generate('PO-', PurchaseOrder::withTrashed()->count()+1)]);
         $request->merge(['purchase_request_id' => PurchaseRequest::where('uuid',$request->purchase_request_id)->first()->id]);
         $request->merge(['ordered_at' => Carbon::parse($request->ordered_at)]);
         $request->merge(['valid_until' => Carbon::parse($request->valid_until)]);
@@ -48,6 +54,17 @@ class PurchaseOrderController extends Controller
         $request->merge(['top_type' => Type::where('code',$request->top_type)->first()->id]);
 
         $purchaseOrder = PurchaseOrder::create($request->all());
+
+        $items = PurchaseRequest::find($request->purchase_request_id)->items;
+
+        foreach($items as $item){
+            $purchaseOrder->items()->attach([$item->pivot->item_id => [
+                'quantity'=> $item->pivot->quantity,
+                'quantity_unit' => $item->pivot->quantity_unit,
+                'unit_id' => $item->pivot->unit_id
+                ]
+            ]);
+        }
 
         return response()->json($purchaseOrder);
     }
@@ -60,7 +77,15 @@ class PurchaseOrderController extends Controller
      */
     public function show(PurchaseOrder $purchaseOrder)
     {
+        if(Type::find($purchaseOrder->top_type)->code == "cash"){
+            $top = "cash";
+        }
+        else{
+            $top = "by-date";
+        }
+
         return view('frontend.purchase-order.show', [
+            'top' => $top,
             'purchaseOrder' => $purchaseOrder,
         ]);
     }
@@ -73,7 +98,16 @@ class PurchaseOrderController extends Controller
      */
     public function edit(PurchaseOrder $purchaseOrder)
     {
+        if(Type::find($purchaseOrder->top_type)->code == "cash"){
+            $top = "cash";
+        }
+        else{
+            $top = "by-date";
+        }
         return view('frontend.purchase-order.edit', [
+            'top' => $top,
+            'vendors' => Vendor::all(),
+            'currencies' => Currency::all(),
             'purchaseOrder' => $purchaseOrder,
         ]);
 
@@ -88,7 +122,15 @@ class PurchaseOrderController extends Controller
      */
     public function update(PurchaseOrderUpdate $request, PurchaseOrder $purchaseOrder)
     {
-        //
+        $request->merge(['ordered_at' => Carbon::parse($request->ordered_at)]);
+        $request->merge(['valid_until' => Carbon::parse($request->valid_until)]);
+        $request->merge(['ship_at' => Carbon::parse($request->ship_at)]);
+        $request->merge(['top_start_at' => Carbon::parse($request->top_start_at)]);
+        $request->merge(['top_type' => Type::where('code',$request->top_type)->first()->id]);
+
+        $purchaseOrder->update($request->all());
+
+        return response()->json($purchaseOrder);
     }
 
     /**
@@ -112,6 +154,12 @@ class PurchaseOrderController extends Controller
      */
     public function approve(PurchaseOrder $purchaseOrder)
     {
+        $purchaseOrder->approvals()->save(new Approval([
+            'approvable_id' => $purchaseOrder->id,
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
+        ]));
+
         return response()->json($purchaseOrder);
     }
 }

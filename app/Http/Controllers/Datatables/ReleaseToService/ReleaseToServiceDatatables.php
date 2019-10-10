@@ -24,38 +24,10 @@ class ReleaseToServiceDatatables extends Controller
                     $query->where('status_id', Status::where('code','rts')->where('of','project')->first()->id);
                     })->get();
 
-        foreach($alldata as $rts){
-            $rts->customer_name .= $rts->customer->name;
-        }
-
         foreach($alldata as $project){
-            $quotations = Quotation::where('project_id',$project->id)->get();
-            $status = "-";
-            foreach($quotations as $quotation){
-                $jobcards = JobCard::where('quotation_id',$quotation->id)->get();
-                foreach($jobcards as $jobcard){
-                    if(sizeof($jobcard->progresses) <> 0){
-                        if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "closed"){
-                            $status = "IN-PROGRESS";
-                        }
-                    }
-                }
-                if(Status::where('id',$project->progresses->last()->status_id)->first()->code == 'open' and $quotation->jobcards->count() == 0){
-                    $status = 'OPEN';
-                }
-            }
-            if(sizeof($project->approvals->toArray()) == 1){
-                $project->status .= 'Project Approved';
-            }
-            elseif(sizeof($project->approvals->toArray()) == 2){
-                $project->status .= 'Quotation Approved';
-            }
-            elseif($status == "-"){
-                $project->status .= 'Closed';
-            }
-            else{
-                $project->status .= $status;
-            }
+            $project->customer_name .= $project->customer->name;
+            $quotations = Quotation::where('quotationable_id',$project->id)->get();
+                $project->status .= 'RTS';
         }
 
         $data = $alldata = json_decode($alldata);
@@ -158,12 +130,10 @@ class ReleaseToServiceDatatables extends Controller
                     $query->where('status_id','<>', Status::where('code','rts')->where('of','project')->first()->id);
                     })->get();
 
-        foreach($alldata as $rts){
-            $rts->customer_name .= $rts->customer->name;
-        }
-
         foreach($alldata as $project){
-            $quotations = Quotation::where('project_id',$project->id)->get();
+            $project->customer_name .= $project->customer->name;
+
+            $quotations = Quotation::where('quotationable_id',$project->id)->get();
             $status = "-";
             foreach($quotations as $quotation){
                 $jobcards = JobCard::where('quotation_id',$quotation->id)->get();
@@ -178,7 +148,10 @@ class ReleaseToServiceDatatables extends Controller
                     $status = 'OPEN';
                 }
             }
-            if(sizeof($project->approvals->toArray()) == 1){
+            if(Status::where('id',$project->progresses->last()->status_id)->first()->code == 'rts'){
+                $project->status = 'RTS';
+            }
+            elseif(sizeof($project->approvals->toArray()) == 1){
                 $project->status .= 'Project Approved';
             }
             elseif(sizeof($project->approvals->toArray()) == 2){

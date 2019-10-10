@@ -6,6 +6,7 @@ use App\Models\TaskCard;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\EOInstruction;
 
 class EOInstructionsDatatables extends Controller
 {
@@ -16,8 +17,29 @@ class EOInstructionsDatatables extends Controller
      */
     public function index(TaskCard $taskcard)
     {
-        $data = $alldata = json_decode($taskcard->eo_instructions);
+       
+        foreach($taskcard->eo_instructions as $item){
+            if(isset($item->skills) ){
+                if(sizeof($item->skills) == 3){
+                    $item->skill .= "ERI";
+                }
+                else if(sizeof($item->skills) == 1){
+                    $item->skill .= $item->skills[0]->name;
+                }
+                else{
+                    $item->skill .= '';
+                }
+            }
+        }
 
+        foreach($taskcard->eo_instructions as $item){
+            if(isset($item->workarea) ){
+                $item->workarea_name .= $item->workarea->name;
+            }
+        }
+
+        $data = $alldata = json_decode($taskcard->eo_instructions);
+        
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
         $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])

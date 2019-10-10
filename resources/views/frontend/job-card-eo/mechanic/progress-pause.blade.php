@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.journal.index') }}" class="m-nav__link">
+                        <a href="#" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Job Card
                             </span>
@@ -57,7 +57,7 @@
                                                 Job Card No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->number}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -65,7 +65,7 @@
                                                 Task Card EO No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->jobcardable->eo_header->number}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -73,7 +73,7 @@
                                                 Project No
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->quotationable->code}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -81,7 +81,7 @@
                                                 A/C Type
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->quotationable->aircraft->name}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -89,7 +89,7 @@
                                                 A/C Reg
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->quotationable->aircraft_register}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -97,15 +97,7 @@
                                                 A/C Serial Number
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td width="30%" style="background-color:beige;padding:10px;">
-                                                Rev No
-                                            </td>
-                                            <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->quotation->quotationable->aircraft_sn}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -113,7 +105,11 @@
                                                 Refrences
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                @if($jobcard->jobcardable->eo_header->reference)
+                                                {{$jobcard->jobcardable->eo_header->reference}}
+                                                @else
+                                                -
+                                                @endif
                                             </td>
                                         </tr>
                                         <tr>
@@ -121,7 +117,7 @@
                                                 Title
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->jobcardable->eo_header->title}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -129,7 +125,7 @@
                                                 Instruction
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->jobcardable->description}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -137,7 +133,7 @@
                                                 Category
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{$jobcard->jobcardable->eo_header->type->name}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -145,7 +141,7 @@
                                                 Scheduled Priority
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{App\Models\Type::find($jobcard->jobcardable->eo_header->scheduled_priority_id)->name}} {{$jobcard->jobcardable->eo_header->scheduled_priority_text}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -153,7 +149,7 @@
                                                 Recurrence
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{App\Models\Type::find($jobcard->jobcardable->eo_header->recurrence_id)->name}} {{$jobcard->jobcardable->eo_header->recurrence_amount}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -161,7 +157,7 @@
                                                 Manuals Affected
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                {{App\Models\Type::find($jobcard->jobcardable->eo_header->manual_affected_id)->name}} {{$jobcard->jobcardable->eo_header->manual_affected_text}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -169,15 +165,24 @@
                                                 Skill
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
-                                            </td>
+                                                @if(sizeof($jobcard->jobcardable->skills) == 3)
+                                                    ERI
+                                                @elseif(sizeof($jobcard->jobcardable->skills) == 1)
+                                                    {{$jobcard->jobcardable->skills[0]->name}}
+                                                @else
+                                                    -
+                                                @endif                                            </td>
                                         </tr>
                                         <tr>
                                             <td width="30%" style="background-color:beige;padding:10px;">
                                                 RII
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                Generated
+                                                @if($jobcard->is_rii == 1)
+                                                    Yes
+                                                @else
+                                                    No
+                                                @endif
                                             </td>
                                         </tr>
 
@@ -186,119 +191,151 @@
                             </div>
                         </div>
                     </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-                            <h1>Material(s) Required</h1>
-                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
-                                    <div class="col-xl-6 order-2 order-xl-1">
-                                        <div class="form-group m-form__group row align-items-center">
-                                            <div class="col-md-6">
-                                                <div class="m-input-icon m-input-icon--left">
-                                                    <input type="text" class="form-control m-input" placeholder="Search..."
-                                                        id="generalSearch">
-                                                    <span class="m-input-icon__icon m-input-icon__icon--left">
-                                                        <span><i class="la la-search"></i></span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    
-                            <div class="basic_datatable wp-datatable" id="scrolling_both"></div>
-                        </div>
-                    </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-                            <h1>Tool(s) Required / Special Tooling</h1>
-                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
-                                <div class="row align-items-center">
-                                    <div class="col-xl-6 order-2 order-xl-1">
-                                        <div class="form-group m-form__group row align-items-center">
-                                            <div class="col-md-6">
-                                                <div class="m-input-icon m-input-icon--left">
-                                                    <input type="text" class="form-control m-input" placeholder="Search..."
-                                                        id="generalSearch">
-                                                    <span class="m-input-icon__icon m-input-icon__icon--left">
-                                                        <span><i class="la la-search"></i></span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    
-                            <div class="basic_datatable wp-datatable" id="scrolling_both"></div>
-
-                        </div>
-                    </div>
-                    <div class="m-portlet m-portlet--mobile">
-                        <div class="m-portlet__body">
-                            <table border="1px" width="100%" style="margin-top:10px">
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Helper
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                        {{-- @if(isset($jobcard->helpers))
-                                            @foreach($jobcard->helpers as $helper)    
-                                            <div class="row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <select name="helper" style="width:100%" class="form-control m-select2">
-                                                        <option value=""></option>
-                                                        @foreach($employees as $employee)
-                                                        <option value="{{ $employee->code }}" @if($employee->code == $helper->code) selected @endif>{{ $employee->first_name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        @else
-                                            <div class="row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    @component('frontend.common.input.select2')
-                                                        @slot('text', 'helper')
-                                                        @slot('name', 'helper')
-                                                        @slot('id_error', 'helper')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                        @endif --}}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Station
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            @component('frontend.common.input.number')
-                                                @slot('name', 'csn')
-                                            @endcomponent
-                                        </td>
-                                    </tr>
+                    <div class="form-group m-form__group row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <table class="table table-striped table-bordered second" width="100%" cellpadding="4">
+                                <tr>
+                                    <td colspan="5" align="center"><b>Material(s) Required</b></td>
+                                </tr>
+                                <tr>
+                                    <td width="5%" align="center"><b>No</b></td>
+                                    <td width="20%" align="center"><b>Part Number</b></td>
+                                    <td width="50%" align="center"><b>Item Description</b></td>
+                                    <td width="10%" align="center"><b>Qty</b></td>
+                                    <td width="15%" align="center"><b>Unit</b></td>
+                                </tr>
+                                @php
+                                $i=1;
+                                @endphp
+                                @foreach ($materials as $material)
+                                <tr>
+                                    <td width="5%" align="center" valign="top">{{$i++}}</td>
+                                    <td width="20%" align="center" valign="top">{{$material->code}}</td>
+                                    <td width="50%" valign="top">{{$material->name}}</td>
+                                    <td width="10%" align="center" valign="top">{{$material->pivot->quantity}}</td>
+                                    <td width="15%" align="center" valign="top">{{App\Models\Unit::find($material->pivot->unit_id)->name}}</td>
+                                </tr>
+                                @endforeach
                             </table>
+                        </div>
+                    </div>
+
+                    <div class="form-group m-form__group row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <table class="table table-striped table-bordered second" width="100%" cellpadding="4">
+                                <tr>
+                                    <td colspan="5" align="center"><b>Tool(s) Required / Special Tooling</b></td>
+                                </tr>
+                                <tr>
+                                    <td width="5%" align="center"><b>No</b></td>
+                                    <td width="20%" align="center"><b>Part Number</b></td>
+                                    <td width="50%" align="center"><b>Item Description</b></td>
+                                    <td width="10%" align="center"><b>Qty</b></td>
+                                    <td width="15%" align="center"><b>Unit</b></td>
+                                </tr>
+                                @php
+                                $j=1;
+                                @endphp
+                                @foreach ($tools as $tool)
+                                <tr>
+                                    <td width="5%" align="center" valign="top">{{$j++}}</td>
+                                    <td width="20%" align="center" valign="top">{{$tool->code}}</td>
+                                    <td width="50%" valign="top">{{$tool->name}}</td>
+                                    <td width="10%" align="center" valign="top">{{$tool->pivot->quantity}}</td>
+                                    <td width="15%" align="center" valign="top">{{App\Models\Unit::find($tool->pivot->unit_id)->name}}</td>
+                                </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                        <div class="form-group m-form__group row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <table border="1px" width="100%" style="margin-top:10px">
+                                        <tr>
+                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                Helper
+                                            </td>
+                                            <td width="70%" style="text-align:center">
+                                                @if(isset($jobcard->helpers))
+                                                    @foreach($jobcard->helpers as $key => $helper)
+                                                        {{$key + 1}}. {{ $helper->first_name }} <br>
+                                                    @endforeach
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                Station
+                                            </td>
+                                            <td width="70%" style="text-align:center">
+                                                @if( isset($jobcard->station) )
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $jobcard->station->name)
+                                                    @endcomponent
+                                                @else 
+                                                    @component('frontend.common.label.data-info-nodata')
+                                                    @endcomponent
+                                                @endif
+                                            </td>
+                                        </tr>
+    ]                               </table>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <table border="1px" width="100%" style="margin-top:10px">
+                                        <tr>
+                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                Weight Change
+                                            </td>
+                                            <td width="70%" style="text-align:center">
+                                                @component('frontend.common.label.data-info')
+                                                    @if($additionals->weight_change != null)
+                                                        @slot('text', $additionals->weight_change)
+                                                    @else
+                                                        @slot('text', '-')
+                                                    @endif
+                                                @endcomponent
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                Center Of Gravity Change
+                                            </td>
+                                            <td width="70%" style="text-align:center">
+                                                @component('frontend.common.label.data-info')
+                                                    @if($additionals->center_of_gravity != null)
+                                                        @slot('text', $additionals->center_of_gravity)
+                                                    @else
+                                                        @slot('text', '-')
+                                                    @endif
+                                                @endcomponent
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
 
                             <table border="1px" width="100%" style="margin-top:10px">
                                 <tr>
                                     <td align="center" style="background-color:beige;padding:10px;"><b>ACCOMPLISHMENT RECORD</b></td>
                                 </tr>
                             </table>
+                            @php $additionals = json_decode($jobcard->additionals) @endphp
 
                             <div class="form-group m-form__group row mt-1">
                                 <div class="col-sm-3 col-md-3 col-lg-3">
                                     <div class="form-group m-form__group row mt-3">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                TSN 
+                                                TSN
                                             </label>
-
-                                            @component('frontend.common.input.number')
-                                                @slot('text', 'Tsn')
-                                                @slot('name', 'tsn')
+                                            @component('frontend.common.label.data-info')
+                                                @if($additionals->TSN != null)
+                                                    @slot('text', $additionals->TSN)
+                                                @else
+                                                    @slot('text', '-')
+                                                @endif
                                             @endcomponent
                                         </div>
                                     </div>
@@ -307,10 +344,12 @@
                                             <label class="form-control-label">
                                                 CSN
                                             </label>
-
-                                            @component('frontend.common.input.number')
-                                                @slot('text', 'Csn')
-                                                @slot('name', 'csn')
+                                            @component('frontend.common.label.data-info')
+                                                @if($additionals->CSN != null)
+                                                    @slot('text', $additionals->CSN)
+                                                @else
+                                                    @slot('text', '-')
+                                                @endif
                                             @endcomponent
                                         </div>
                                     </div>
@@ -323,25 +362,40 @@
                                         <tr height="80">
                                             <td align="center">
                                                 @component('frontend.common.input.checkbox')
-                                                    @slot('id', '')
-                                                    @slot('name', '')
+                                                    @slot('id', 'ac')
+                                                    @slot('name', 'logbook[]')
                                                     @slot('text', 'A/C Log Book')
+                                                    @slot('value', 'ac-logbook')
+                                                    @if (in_array('ac-logbook', $logbooks))
+                                                        @slot('checked', 'checked')
+                                                    @endif
+                                                    @slot('disabled', 'disabled')
                                                     @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </td>
                                             <td align="center">
                                                 @component('frontend.common.input.checkbox')
-                                                    @slot('id', '')
-                                                    @slot('name', '')
-                                                    @slot('text', 'A/C Log Book')
+                                                    @slot('id', 'eng')
+                                                    @slot('name', 'logbook[]')
+                                                    @slot('text', 'ENG. Log Book')
+                                                    @slot('value', 'eng-logbook')
+                                                    @if (in_array('eng-logbook', $logbooks))
+                                                        @slot('checked', 'checked')
+                                                    @endif
+                                                    @slot('disabled', 'disabled')
                                                     @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </td>
                                             <td align="center">
                                                 @component('frontend.common.input.checkbox')
-                                                    @slot('id', '')
-                                                    @slot('name', '')
-                                                    @slot('text', 'A/C Log Book')
+                                                    @slot('id', 'apu')
+                                                    @slot('name', 'logbook[]')
+                                                    @slot('text', 'APU Log Book')
+                                                    @slot('value', 'apu-logbook')
+                                                    @if (in_array('apu-logbook', $logbooks))
+                                                        @slot('checked', 'checked')
+                                                    @endif
+                                                    @slot('disabled', 'disabled')
                                                     @slot('style_div','margin-top:30px')
                                                 @endcomponent
                                             </td>
@@ -353,15 +407,18 @@
                             <div class="form-group m-form__group row">
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="action-buttons d-flex flex-row-reverse">
-                                        <form method="POST" action="{{route('frontend.discrepancy.jobcard.engineer.discrepancy.create','')}}">
+                                        <form method="POST" action="{{route('frontend.discrepancy.jobcard.mechanic.discrepancy.create',$jobcard->uuid)}}">
                                             {!! csrf_field() !!}
-                                            @include('frontend.common.buttons.found')
+                                            @component('frontend.common.buttons.found')
+                                                @if(sizeOf($jobcard->defectcards) > 0)
+                                                    @slot('disabled','disabled')
+                                                @endif
+                                            @endcomponent
                                         </form>
-
-                                        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed mr-2" method="POST" action="{{route('frontend.jobcard-engineer.update','')}}" id="WorkpackageForm">
+                                        <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed mr-2" method="POST" action="{{route('frontend.jobcard-eo-mechanic.update',$jobcard->uuid)}}" id="WorkpackageForm">
                                             {{method_field('PATCH')}}
                                             {!! csrf_field() !!}
-                                            <input type="hidden" name="progress" value="">
+                                            <input type="hidden" name="progress" value="{{$open->uuid}}">
 
                                             @include('frontend.common.buttons.resume')
                                         </form>
@@ -381,12 +438,14 @@
     <script src="{{ asset('js/frontend/functions/reset.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/type.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/type.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/station.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/station.js')}}"></script>
 
 {{-- @if(sizeof($jobcard->helpers) == 0) --}}
 <script src="{{ asset('js/frontend/functions/fill-combobox/helper.js')}}"></script>
 {{-- @endif --}}
 <script src="{{ asset('js/frontend/functions/select2/helper.js')}}"></script>
-{{-- <!-- 
+{{-- <!--
     <script>
         $( document ).ready(function() {
         let helpers = {!! $jobcard->helpers !!}
@@ -395,7 +454,7 @@
         $('select[name^=helper]').select2().trigger('change');
         // $('select[name^=helper] option[value='+helpers[key].code+']').attr('selected','selected');
         });
-        
+
     </script> -->
     <script>
         $( document ).ready(function() {
@@ -404,7 +463,7 @@
             });
         console.log($('.helper').length);
         });
-        
+
     </script> --}}
 
 

@@ -23,7 +23,8 @@ let Quotation = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -67,19 +68,23 @@ let Quotation = {
                     filterable: !1,
                     width: 150,
                     template: function (t) {
-                        return '<a href="/quotation/'+t.uuid+'">' + t.number + "</a>"
+                        if(t.quotation_type == "Quotation Project"){
+                            return '<a href="/quotation/'+t.uuid+'">' + t.number + "</a>"
+                        }else{
+                            return '<a href="/quotation-additional/'+t.uuid+'">' + t.number + "</a>"
+                        }
                     }
                 },
                 {
-                    field: 'project.no_wo',
+                    field: 'quotationable.no_wo',
                     title: 'Work Order No',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'project.code',
-                    title: 'Project',
+                    field: 'quotationable.code',
+                    title: 'Project No',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
@@ -103,8 +108,27 @@ let Quotation = {
 
                 },
                 {
+                    field: 'created_by',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+
+                {
                     field: 'status',
                     title: 'Status',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'quotation_type',
+                    title: 'Quotation Type',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'conducted_by',
+                    title: 'Approve By',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -113,36 +137,66 @@ let Quotation = {
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.status == 'Approved'){
-                            return (
-                                '<a href="/quotation/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'+
-                                '<a href="quotation/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-print"></i>' +
-                                '</a>'
+                        if(t.quotation_type == "Quotation Project"){
+                            if(t.status == 'Approved'){
+                                return (
+                                    // '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
+                                    //     '<i class="la la-trash"></i>' +
+                                    // '</a>'+
+                                    '<a href="quotation/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
+                                        '<i class="la la-print"></i>' +
+                                    '</a>'
 
-                            );
-                        }
-                        else{
-                            return (
-                                '<a href="/quotation/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'+
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +
-                                    '<i class="la la-check"></i>' +
-                                '</a>'+
-                                '<a href="quotation/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-print"></i>' +
-                                '</a>'
+                                );
+                            }
+                            else{
+                                return (
+                                    '<a href="/quotation/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                        '<i class="la la-pencil"></i>' +
+                                    '</a>' +
+                                    // '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
+                                    //     '<i class="la la-trash"></i>' +
+                                    // '</a>'+
+                                    '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +
+                                        '<i class="la la-check"></i>' +
+                                    '</a>'+
+                                    '<a href="quotation/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
+                                        '<i class="la la-print"></i>' +
+                                    '</a>'
 
-                            );
+                                );
+                            }
+
+                        }else if(t.quotation_type == "Additional Quotation"){
+                            // quotation-additional/
+                            if(t.status == 'Approved'){
+                                return (
+                                    // '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
+                                    //     '<i class="la la-trash"></i>' +
+                                    // '</a>'+
+                                    '<a href="quotation-additional/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
+                                        '<i class="la la-print"></i>' +
+                                    '</a>'
+
+                                );
+                            }
+                            else{
+                                return (
+                                    '<a href="/quotation-additional/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                        '<i class="la la-pencil"></i>' +
+                                    '</a>' +
+                                    // '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-id="' + t.uuid + '">' +
+                                    //     '<i class="la la-trash"></i>' +
+                                    // '</a>'+
+                                    '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve-additional" title="Approve Additional" data-id="' + t.uuid + '">' +
+                                        '<i class="la la-check"></i>' +
+                                    '</a>'+
+                                    '<a href="quotation-additional/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
+                                        '<i class="la la-print"></i>' +
+                                    '</a>'
+
+                                );
+                            }
                         }
                     }
                 }
@@ -196,6 +250,63 @@ let Quotation = {
         $('.m_datatable').on('click', '.approve', function () {
             let quotation_uuid = $(this).data('id');
 
+
+            swal({
+                title: 'Sure want to Approve?',
+                text: "Whose approval (Customer side)?",
+                type: 'question',
+                input: 'text',
+                inputAttributes: {
+                  autocapitalize: 'on'
+                },
+                confirmButtonText: 'Yes, Approve',
+                confirmButtonColor: '#34bfa3',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+                showLoaderOnConfirm: true,
+            })
+            .then(result => {
+                if (result.value) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                'content'
+                            )
+                        },
+                        type: 'POST',
+                        data: {
+                            note:result.value 
+                        },
+                        url: '/quotation/' + quotation_uuid + '/approve',
+                        success: function (data) {
+                            toastr.success('Quotation has been approved.', 'Approved', {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $('.m_datatable').mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+                            $.each(errors.error, function (index, value) {
+                                toastr.error(value.message, value.title, {
+                                    "closeButton": true,
+                                    "timeOut": "0",
+                                }
+                            );
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        $('.m_datatable').on('click', '.approve-additional', function () {
+            let quotation_uuid = $(this).data('id');
+
             swal({
                 title: 'Sure want to Approve?',
                 type: 'question',
@@ -213,7 +324,7 @@ let Quotation = {
                             )
                         },
                         type: 'POST',
-                        url: '/quotation/' + quotation_uuid + '/approve',
+                        url: '/quotation-additional/' + quotation_uuid + '/approve',
                         success: function (data) {
                             toastr.success('Quotation has been approved.', 'Approved', {
                                     timeOut: 5000
@@ -227,9 +338,12 @@ let Quotation = {
                         },
                         error: function (jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
+                            $.each(errors.error, function (index, value) {
+                                toastr.error(value.message, value.title, {
+                                    "closeButton": true,
+                                    "timeOut": "0",
+                                }
+                            );
                             });
                         }
                     });

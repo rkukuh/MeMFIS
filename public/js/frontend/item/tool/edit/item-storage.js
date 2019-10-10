@@ -66,20 +66,26 @@ let ItemStorage = {
                         document.getElementById('max').value = max;
 
                     } else {
-                        $('#modal_storage_stock').modal('hide');
+                        if (data.title == "Danger") {
+                            toastr.error("Storage already exists!", "Error", {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $('#modal_storage_stock').modal('hide');
 
-                        errorMessageStorage();
+                            errorMessageStorage();
 
-                        toastr.success('Storage Stock has been created.', 'Success', {
-                            timeOut: 5000
-                        });
+                            toastr.success('Storage Stock has been created.', 'Success', {
+                                timeOut: 5000
+                            });
 
-                        minmaxstock_reset();
+                            minmaxstock_reset();
 
-                        let table = $('.item_storage_datatable').mDatatable();
+                            let table = $('.item_storage_datatable').mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
                     }
                 }
             });
@@ -208,7 +214,7 @@ let ItemStorage = {
                             table.reload();
                         },
                         error: function (jqXhr, json, errorThrown) {
-        
+
                             let errorsHtml = '';
                             let errors = jqXhr.responseJSON;
 

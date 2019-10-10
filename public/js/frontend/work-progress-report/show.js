@@ -25,7 +25,8 @@ let WorkProgressReportShow = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -58,37 +59,37 @@ let WorkProgressReportShow = {
                     }
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'jobcardable.number',
                     title: 'Project No.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.title',
+                    field: 'jobcardable.title',
                     title: 'Title Taskcard',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.type.name',
+                    field: 'jobcardable.type.name',
                     title: 'Taskcard Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.task.name',
+                    field: 'jobcardable.task.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.description',
+                    field: 'jobcardable.description',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        if (t.taskcard.description) {
-                            data = strtrunc(t.taskcard.description, 50);
+                        if (t.jobcardable.description) {
+                            data = strtrunc(t.jobcardable.description, 50);
                             return (
                                 '<p>' + data + '</p>'
                             );
@@ -98,7 +99,7 @@ let WorkProgressReportShow = {
                     }
                 },
                 {
-                    field: 'taskcard.skill.name',
+                    field: 'jobcardable.skill.name',
                     title: 'Mhrs',
                     sortable: 'asc',
                     filterable: !1,
@@ -119,7 +120,58 @@ let WorkProgressReportShow = {
                 }
             ]
         });
+        
+        $.ajax({
+            url : '/morris/get-overall/'+ project_uuid,    
+            method : 'get',
+            dataType : 'json'
+        }).done(function(data){
+            Morris.Donut({
+                element: 'm_chart_overall_progress',
+                labelColor: "#a7a7c2",
+                data: data,
+                resize: true,
+                colors: [mApp.getColor("accent"), mApp.getColor("brand"), mApp.getColor("danger"), '#1ab394', '#54cdb4','#1ab394']
+            });
+    
+        }).fail(function(){
+    
+        });
 
+        $.ajax({
+            url : '/morris/get-routine/'+ project_uuid,    
+            method : 'get',
+            dataType : 'json'
+        }).done(function(data){
+            Morris.Donut({
+                element: 'm_chart_routine',
+                labelColor: "#a7a7c2",
+                data: data,
+                resize: true,
+                colors: [mApp.getColor("accent"), mApp.getColor("brand"), mApp.getColor("danger"), '#1ab394', '#54cdb4','#1ab394']
+            });
+    
+        }).fail(function(){
+    
+        });
+
+        $.ajax({
+            url : '/morris/get-non-routine/'+ project_uuid,    
+            method : 'get',
+            dataType : 'json'
+        }).done(function(data){
+            Morris.Donut({
+                element: 'm_chart_non_routine',
+                labelColor: "#a7a7c2",
+                data: data,
+                resize: true,
+                colors: [mApp.getColor("accent"), mApp.getColor("brand"), mApp.getColor("danger"), '#1ab394', '#54cdb4','#1ab394']
+            });
+    
+        }).fail(function(){
+    
+        });
+      
     }
 };
 

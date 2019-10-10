@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\Discrepancy;
 
 use Auth;
+use App\Models\Zone;
 use App\Models\Type;
 use App\Models\Status;
 use App\Models\JobCard;
@@ -13,6 +14,12 @@ use App\Http\Controllers\Controller;
 
 class DiscrepancyPPCController extends Controller
 {
+    protected $zones;
+
+    public function __construct()
+    {
+        $this->zones = Zone::get();
+    }
 
     /**
      * Display a listing of the resource.
@@ -53,7 +60,28 @@ class DiscrepancyPPCController extends Controller
      */
     public function show(DefectCard $discrepancy)
     {
-        return view('frontend.discrepancy.ppc.show');
+        $propose_corrections = array();
+        foreach($discrepancy->propose_corrections as $i => $defectcard){
+            $propose_corrections[$i] =  $defectcard->code;
+        }
+
+        $propose_correction_text = '';
+        foreach($discrepancy->propose_corrections as $i => $defectcard){
+            $propose_correction_text =  $defectcard->pivot->propose_correction_text;
+        }
+
+        foreach($discrepancy->zones as $i => $zone_taskcard){
+            $zone_discrepancies[$i] =  $zone_taskcard->id;
+        }
+
+        return view('frontend.discrepancy.ppc.show', [
+            'discrepancy' => $discrepancy,
+            'zones' => $this->zones,
+            'zone_discrepancies' => $zone_discrepancies,
+            'propose_corrections' => $propose_corrections,
+            'propose_correction_text' => $propose_correction_text,
+        ]);
+
     }
 
     /**
@@ -74,8 +102,17 @@ class DiscrepancyPPCController extends Controller
             $propose_correction_text =  $defectcard->pivot->propose_correction_text;
         }
 
+        foreach($discrepancy->zones as $i => $zone_taskcard){
+            $zone_discrepancies[$i] =  $zone_taskcard->id;
+        }
+
+        $skill = Type::ofTaskCardSkill()->get();
+
         return view('frontend.discrepancy.ppc.edit', [
             'discrepancy' => $discrepancy,
+            'skills' => $skill,
+            'zones' => $this->zones,
+            'zone_discrepancies' => $zone_discrepancies,
             'propose_corrections' => $propose_corrections,
             'propose_correction_text' => $propose_correction_text,
 
@@ -91,9 +128,27 @@ class DiscrepancyPPCController extends Controller
      */
     public function update(Request $request,DefectCard $discrepancy)
     {
+        $zone = json_decode($request->zone);
+        $zones = [];
         $request->merge(['jobcard_id' => JobCard::where('uuid',$request->jobcard_id)->first()->id]);
-
+        $jobcard = JobCard::find($request->jobcard_id)->first();
+        $aircraft = $jobcard->quotation->quotationable->aircraft;
         $discrepancy->update($request->all());
+
+        if($zone){
+            foreach ($zone as $zone_name ) {
+                if(isset($zone_name)){
+                    $airplane = $aircraft->id;
+                    $zone = Zone::firstOrCreate(
+                        ['name' => $zone_name, 'zoneable_id' => $airplane, 'zoneable_type' => 'App\Models\Aircraft']
+                    );
+                    array_push($zones, $zone->id);
+                }
+            }
+
+            $discrepancy->zones()->sync($zones);
+
+        }
 
         $discrepancy->propose_corrections()->detach();
 
@@ -111,15 +166,14 @@ class DiscrepancyPPCController extends Controller
             }
         }
 
-        $discrepancy->approvals()->save(new Approval([
-            'approvable_id' => $discrepancy->id,
-            'approved_by' => Auth::id(),
-        ]));
-
-        $discrepancy->progresses()->save(new Progress([
-            'status_id' =>  Status::ofDefectcard()->where('code','open')->first()->id,
-            'progressed_by' => Auth::id()
-        ]));
+        // in case updated again, sehingga approvals jumlahnya sesuai
+        if(sizeof($discrepancy->approvals) == 1){
+            $discrepancy->approvals()->save(new Approval([
+                'approvable_id' => $discrepancy->id,
+                'conducted_by' => Auth::id(),
+                'is_approved' => 1
+            ]));
+        }
 
         return response()->json($discrepancy);
     }
@@ -147,8 +201,15 @@ class DiscrepancyPPCController extends Controller
     {
         $discrepancy->approvals()->save(new Approval([
             'approvable_id' => $discrepancy->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
         ]));
+
+        $discrepancy->progresses()->save(new Progress([
+            'status_id' =>  Status::ofDefectcard()->where('code','open')->first()->id,
+            'progressed_by' => Auth::id()
+        ]));
+
 
         return response()->json($discrepancy);
     }

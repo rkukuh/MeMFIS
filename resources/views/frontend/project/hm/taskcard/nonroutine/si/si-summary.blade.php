@@ -52,11 +52,11 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>@if( isset($otr["airframe"]) ) {{ $otr["airframe"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["powerplant"]) ) {{ $otr["powerplant"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["radio"]) ) {{ $otr["radio"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["electrical"]) ) {{ $otr["electrical"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["instrument"]) ) {{ $otr["instrument"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["airframe"]) ) {{ $otr["airframe"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["powerplant"]) ) {{ $otr["powerplant"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["radio"]) ) {{ $otr["radio"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["electrical"]) ) {{ $otr["electrical"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["instrument"]) ) {{ $otr["instrument"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -72,11 +72,11 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>@if( isset($otr["runup"]) ) {{ $otr["runup"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["repair"]) ) {{ $otr["repair"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["repainting"]) ) {{ $otr["repainting"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["cabin"]) ) {{ $otr["cabin"] }} @else 0 @endif</td>
-                                    <td>@if( isset($otr["ndi-ndt"]) ) {{ $otr["ndi-ndt"] }} @else 0 @endif</td>
+                                    <td>@if( isset($otr["runup"]) ) {{ $otr["runup"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["repair"]) ) {{ $otr["repair"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["repainting"]) ) {{ $otr["repainting"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["cabin"]) ) {{ $otr["cabin"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
+                                    <td>@if( isset($otr["ndi-ndt"]) ) {{ $otr["ndi-ndt"] }} taskcard(s) @else 0 taskcard(s) @endif</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -221,9 +221,10 @@
 @endsection
 
 @push('footer-scripts')
-    <script>
-        let workPackage_uuid = '{{ $workPackage->uuid }}';
-    </script>
-    <script src="{{ asset('js/frontend/workpackage/non-routine/summary.js') }}"></script>
-    <script src="{{ asset('js/frontend/workpackage/item/form-reset.js') }}"></script>
+<script>
+    let workPackage_uuid = '{{ $workPackage->uuid }}';
+    let project_uuid = '{{ $project->uuid }}';
+</script>
+<script src="{{ asset('js/frontend/project/hm/non-routine/summary.js') }}"></script>
+{{-- <script src="{{ asset('js/frontend/project/item/form-reset.js') }}"></script> --}}
 @endpush

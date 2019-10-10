@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Datatables\DefectCard;
 
+use Auth;
+use Carbon\Carbon;
+use App\Models\Status;
 use App\Models\Project;
 use App\Models\JobCard;
 use App\Models\ListUtil;
@@ -19,33 +22,58 @@ class DefectCardDatatables extends Controller
      */
     public function index()
     {
-        $DefectCard=DefectCard::with('jobcard','progresses')->get();
+        $DefectCard = DefectCard::with('jobcard','progresses')
+                        ->has('approvals','>',1) //? harus di approve engineer dan mechanic
+                        ->get();
 
         foreach($DefectCard as $jobcard){
-            $jobcard->taskcard_number .= $jobcard->jobcard->taskcard->number;
-        }
+            $jobcard->customer_name .= $jobcard->jobcard->quotation->quotationable->customer->name;
+            $jobcard->taskcard_number .= $jobcard->jobcard->jobcardable->number;
+            $jobcard->aircraft .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
 
-        foreach($DefectCard as $jobcard){
-            $jobcard->customer_name .= $jobcard->jobcard->quotation->project->customer->name;
-        }
-
-        foreach($DefectCard as $jobcard){
-            if(isset($jobcard->jobcard->taskcard->skills) ){
-                if(sizeof($jobcard->jobcard->taskcard->skills) == 3){
+            if(isset($jobcard->jobcard->jobcardable->skills) ){
+                if(sizeof($jobcard->jobcard->jobcardable->skills) == 3){
                     $jobcard->skill .= "ERI";
                 }
-                else if(sizeof($jobcard->jobcard->taskcard->skills) == 1){
-                    $jobcard->skill .= $jobcard->jobcard->taskcard->skills[0]->name;
+                else if(sizeof($jobcard->jobcard->jobcardable->skills) == 1){
+                    $jobcard->skill .= $jobcard->jobcard->jobcardable->skills[0]->name;
                 }
                 else{
                     $jobcard->skill .= '';
                 }
             }
 
-        }
+            $jobcard->actual .= $jobcard->ActualManhour;
 
-        foreach($DefectCard as $jobcard){
-            $jobcard->aircraft .= $jobcard->jobcard->quotation->project->aircraft->name;
+            $count_user = $jobcard->progresses->groupby('progressed_by')->count()-1;
+
+            $status = [];
+
+            if($jobcard->is_rii == 1 and $jobcard->approvals->count()== 4){
+                $jobcard->status .= 'Released';
+            }
+            else if($jobcard->is_rii == 1 and $jobcard->approvals->count()== 3){
+                $jobcard->status .= 'Waiting for RII';
+            }
+            elseif($jobcard->is_rii == 0 and $jobcard->approvals->count()== 3){
+                $jobcard->status .= 'Released';
+            }
+            elseif($jobcard->progresses->where('progressed_by',Auth::id())->first() == null){
+                $jobcard->status .= 'Open';
+            }else{
+                if($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','closed')->first()->id){
+                    $jobcard->status .= 'Closed';
+                }
+                elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','pending')->first()->id){
+                    $jobcard->status .= 'Pending';
+                }
+                elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','progress')->first()->id){
+                    $jobcard->status .= 'Progress';
+                }
+                elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','open')->first()->id){
+                    $jobcard->status .= 'Open';
+                }
+            }
         }
 
         $data = $alldata = json_decode($DefectCard);
@@ -144,23 +172,23 @@ class DefectCardDatatables extends Controller
      */
     public function project()
     {
-        $DefectCard=DefectCard::with('jobcard','progresses')->get();
+        $DefectCard=DefectCard::with('jobcard','progresses')->has('approvals','>',1)->get();
 
         foreach($DefectCard as $jobcard){
-            $jobcard->taskcard_number .= $jobcard->jobcard->taskcard->number;
+            $jobcard->taskcard_number .= $jobcard->jobcard->jobcardable->number;
         }
 
         foreach($DefectCard as $jobcard){
-            $jobcard->customer_name .= $jobcard->jobcard->quotation->project->customer->name;
+            $jobcard->customer_name .= $jobcard->jobcard->quotation->quotationable->customer->name;
         }
 
         foreach($DefectCard as $jobcard){
-            if(isset($jobcard->taskcard->skills) ){
-                if(sizeof($jobcard->taskcard->skills) == 3){
+            if(isset($jobcard->jobcardable->skills) ){
+                if(sizeof($jobcard->jobcardable->skills) == 3){
                     $jobcard->skill .= "ERI";
                 }
-                else if(sizeof($jobcard->taskcard->skills) == 1){
-                    $jobcard->skill .= $jobcard->taskcard->skills[0]->name;
+                else if(sizeof($jobcard->jobcardable->skills) == 1){
+                    $jobcard->skill .= $jobcard->jobcardable->skills[0]->name;
                 }
                 else{
                     $jobcard->skill .= '';
@@ -170,7 +198,7 @@ class DefectCardDatatables extends Controller
         }
 
         foreach($DefectCard as $jobcard){
-            $jobcard->aircraft .= $jobcard->jobcard->quotation->project->aircraft->name;
+            $jobcard->aircraft .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
         }
 
         $data = $alldata = json_decode($DefectCard);
@@ -269,7 +297,7 @@ class DefectCardDatatables extends Controller
      */
     public function show(Project $project)
     {
-        $quotation = Quotation::where('project_id',$project->id)->first()->id;
+        $quotation = Quotation::where('quotationable_id',$project->id)->first()->id;
 
         $defectcard = DefectCard::with('jobcard')
                                 ->whereHas('jobcard', function ($query) use ($quotation){

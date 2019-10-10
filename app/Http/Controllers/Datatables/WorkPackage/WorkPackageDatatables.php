@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Datatables\WorkPackage;
 use App\User;
 use App\Models\WorkPackage;
 use App\Models\Pivots\TaskCardWorkPackage;
+use App\Models\Pivots\EOInstructionWorkPackage;
 use App\Models\TaskCard;
 use App\Models\ListUtil;
+use App\Models\EOInstruction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,7 +21,7 @@ class WorkPackageDatatables extends Controller
      */
     public function index()
     {
-        $workpackages = WorkPackage::with('aircraft')->get();
+        $workpackages = WorkPackage::with('aircraft')->where('is_template',1)->get();
 
         foreach($workpackages as $workpackage){
             if($workpackage->audits->first()->user_id == null){
@@ -226,7 +228,7 @@ class WorkPackageDatatables extends Controller
         }
 
         // get all raw data
-        $workpackages = WorkPackage::with('aircraft')->get();
+        $workpackages = WorkPackage::with('aircraft')->where('is_template',1)->get();
 
         foreach($workpackages as $workpackage){
             $workpackage->aircraft_name = $workpackage->aircraft->name;
@@ -316,7 +318,7 @@ class WorkPackageDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function predecessorModal(WorkPackage $workPackage,TaskCard $taskcard){
+    public function predecessorTaskCardModal(WorkPackage $workPackage,TaskCard $taskcard){
         function filterArray( $array, $allowed = [] ) {
             return array_filter(
                 $array,
@@ -401,7 +403,7 @@ class WorkPackageDatatables extends Controller
         }
 
         // get all raw data
-        $taskcards  = TaskCardWorkPackage::with('taskcard')->where('taskcard_id', $taskcard->id)->where('workpackage_id',$workPackage->id)->with('predecessors')->first();
+        $taskcards  = TaskCardWorkPackage::with('taskcard','predecessors')->where('taskcard_id', $taskcard->id)->where('workpackage_id',$workPackage->id)->first();
 
         foreach($taskcards->predecessors as $taskcard){
                 $TaskCard = TaskCard::find($taskcard->previous);
@@ -495,7 +497,7 @@ class WorkPackageDatatables extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function successorModal(WorkPackage $workPackage, TaskCard $taskcard){
+    public function successorTaskCardModal(WorkPackage $workPackage, TaskCard $taskcard){
         function filterArray( $array, $allowed = [] ) {
             return array_filter(
                 $array,
@@ -590,6 +592,363 @@ class WorkPackageDatatables extends Controller
         }
 
         $alldata = json_decode( $taskcards->successors, true);
+
+        $data = [];
+        // internal use; filter selected columns only from raw data
+        foreach ( $alldata as $d ) {
+            $data[] = filterArray( $d, $columnsDefault );
+        }
+
+        // count data
+        $totalRecords = $totalDisplay = count( $data );
+
+        // filter by general search keyword
+        if ( isset( $_REQUEST['search'] ) ) {
+            $data         = filterKeyword( $data, $_REQUEST['search'] );
+            $totalDisplay = count( $data );
+        }
+
+        if ( isset( $_REQUEST['columns'] ) && is_array( $_REQUEST['columns'] ) ) {
+            foreach ( $_REQUEST['columns'] as $column ) {
+                if ( isset( $column['search'] ) ) {
+                    $data         = filterKeyword( $data, $column['search'], $column['data'] );
+                    $totalDisplay = count( $data );
+                }
+            }
+        }
+
+        // sort
+        if ( isset( $_REQUEST['order'][0]['column'] ) && $_REQUEST['order'][0]['dir'] ) {
+            $column = $_REQUEST['order'][0]['column'];
+            $dir    = $_REQUEST['order'][0]['dir'];
+            usort( $data, function ( $a, $b ) use ( $column, $dir ) {
+                $a = array_slice( $a, $column, 1 );
+                $b = array_slice( $b, $column, 1 );
+                $a = array_pop( $a );
+                $b = array_pop( $b );
+
+                if ( $dir === 'asc' ) {
+                    return $a > $b ? true : false;
+                }
+
+                return $a < $b ? true : false;
+            } );
+        }
+
+        // pagination length
+        if ( isset( $_REQUEST['length'] ) ) {
+            $data = array_splice( $data, $_REQUEST['start'], $_REQUEST['length'] );
+        }
+
+        // return array values only without the keys
+        if ( isset( $_REQUEST['array_values'] ) && $_REQUEST['array_values'] ) {
+            $tmp  = $data;
+            $data = [];
+            foreach ( $tmp as $d ) {
+                $data[] = array_values( $d );
+            }
+        }
+
+        $secho = 0;
+        if ( isset( $_REQUEST['sEcho'] ) ) {
+            $secho = intval( $_REQUEST['sEcho'] );
+        }
+
+        $result = [
+            'iTotalRecords'        => $totalRecords,
+            'iTotalDisplayRecords' => $totalDisplay,
+            'sEcho'                => $secho,
+            'sColumns'             => '',
+            'aaData'               => $data,
+        ];
+
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+        echo json_encode( $result, JSON_PRETTY_PRINT );
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function predecessorInstructionModal(WorkPackage $workPackage,EOInstruction $instruction){
+        function filterArray( $array, $allowed = [] ) {
+            return array_filter(
+                $array,
+                function ( $val, $key ) use ( $allowed ) { // N.b. $val, $key not $key, $val
+                    return isset( $allowed[ $key ] ) && ( $allowed[ $key ] === true || $allowed[ $key ] === $val );
+                },
+                ARRAY_FILTER_USE_BOTH
+            );
+        }
+
+        function filterKeyword( $data, $search, $field = '' ) {
+            $filter = '';
+            if ( isset( $search['value'] ) ) {
+                $filter = $search['value'];
+            }
+            if ( ! empty( $filter ) ) {
+                if ( ! empty( $field ) ) {
+                    if ( strpos( strtolower( $field ), 'date' ) !== false ) {
+                        // filter by date range
+                        $data = filterByDateRange( $data, $filter, $field );
+                    } else {
+                        // filter by column
+                        $data = array_filter( $data, function ( $a ) use ( $field, $filter ) {
+                            return (boolean) preg_match( "/$filter/i", $a[ $field ] );
+                        } );
+                    }
+
+                } else {
+                    // general filter
+                    $data = array_filter( $data, function ( $a ) use ( $filter ) {
+                        return (boolean) preg_grep( "/$filter/i", (array) $a );
+                    } );
+                }
+            }
+
+            return $data;
+        }
+
+        function filterByDateRange( $data, $filter, $field ) {
+            // filter by range
+            if ( ! empty( $range = array_filter( explode( '|', $filter ) ) ) ) {
+                $filter = $range;
+            }
+
+            if ( is_array( $filter ) ) {
+                foreach ( $filter as &$date ) {
+                    // hardcoded date format
+                    $date = date_create_from_format( 'm/d/Y', stripcslashes( $date ) );
+                }
+                // filter by date range
+                $data = array_filter( $data, function ( $a ) use ( $field, $filter ) {
+                    // hardcoded date format
+                    $current = date_create_from_format( 'm/d/Y', $a[ $field ] );
+                    $from    = $filter[0];
+                    $to      = $filter[1];
+                    if ( $from <= $current && $to >= $current ) {
+                        return true;
+                    }
+
+                    return false;
+                } );
+            }
+
+            return $data;
+        }
+
+        $columnsDefault = [
+            'number'     => true,
+            'title'     => true,
+            'work_area'     => true,
+            'estimation_manhour'     => true,
+            'uuid'     => true,
+            'order'     => true,
+            'Actions'      => true,
+        ];
+
+        if ( isset( $_REQUEST['columnsDef'] ) && is_array( $_REQUEST['columnsDef'] ) ) {
+            $columnsDefault = [];
+            foreach ( $_REQUEST['columnsDef'] as $field ) {
+                $columnsDefault[ $field ] = true;
+            }
+        }
+
+        // get all raw data
+        $instructions  = EOInstructionWorkPackage::with('eo_instruction','predecessors')->where('eo_instruction_id', $instruction->id)->where('workpackage_id',$workPackage->id)->first();
+
+        foreach($instructions->predecessors as $taskcard){
+                $TaskCard = TaskCard::find($taskcard->previous);
+                $taskcard->number .= $TaskCard->number;
+                $taskcard->title .= $TaskCard->title;
+                $taskcard->work_area .= $TaskCard->workarea->name;
+                $taskcard->estimation_manhour .= $TaskCard->estimation_manhour;
+        }
+
+        $alldata = json_decode( $instructions->predecessors, true);
+
+        $data = [];
+        // internal use; filter selected columns only from raw data
+        foreach ( $alldata as $d ) {
+            $data[] = filterArray( $d, $columnsDefault );
+        }
+
+        // count data
+        $totalRecords = $totalDisplay = count( $data );
+
+        // filter by general search keyword
+        if ( isset( $_REQUEST['search'] ) ) {
+            $data         = filterKeyword( $data, $_REQUEST['search'] );
+            $totalDisplay = count( $data );
+        }
+
+        if ( isset( $_REQUEST['columns'] ) && is_array( $_REQUEST['columns'] ) ) {
+            foreach ( $_REQUEST['columns'] as $column ) {
+                if ( isset( $column['search'] ) ) {
+                    $data         = filterKeyword( $data, $column['search'], $column['data'] );
+                    $totalDisplay = count( $data );
+                }
+            }
+        }
+
+        // sort
+        if ( isset( $_REQUEST['order'][0]['column'] ) && $_REQUEST['order'][0]['dir'] ) {
+            $column = $_REQUEST['order'][0]['column'];
+            $dir    = $_REQUEST['order'][0]['dir'];
+            usort( $data, function ( $a, $b ) use ( $column, $dir ) {
+                $a = array_slice( $a, $column, 1 );
+                $b = array_slice( $b, $column, 1 );
+                $a = array_pop( $a );
+                $b = array_pop( $b );
+
+                if ( $dir === 'asc' ) {
+                    return $a > $b ? true : false;
+                }
+
+                return $a < $b ? true : false;
+            } );
+        }
+
+        // pagination length
+        if ( isset( $_REQUEST['length'] ) ) {
+            $data = array_splice( $data, $_REQUEST['start'], $_REQUEST['length'] );
+        }
+
+        // return array values only without the keys
+        if ( isset( $_REQUEST['array_values'] ) && $_REQUEST['array_values'] ) {
+            $tmp  = $data;
+            $data = [];
+            foreach ( $tmp as $d ) {
+                $data[] = array_values( $d );
+            }
+        }
+
+        $secho = 0;
+        if ( isset( $_REQUEST['sEcho'] ) ) {
+            $secho = intval( $_REQUEST['sEcho'] );
+        }
+
+        $result = [
+            'iTotalRecords'        => $totalRecords,
+            'iTotalDisplayRecords' => $totalDisplay,
+            'sEcho'                => $secho,
+            'sColumns'             => '',
+            'aaData'               => $data,
+        ];
+
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+        echo json_encode( $result, JSON_PRETTY_PRINT );
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function successorInstructionModal(WorkPackage $workPackage, EOInstruction $instruction){
+        function filterArray( $array, $allowed = [] ) {
+            return array_filter(
+                $array,
+                function ( $val, $key ) use ( $allowed ) { // N.b. $val, $key not $key, $val
+                    return isset( $allowed[ $key ] ) && ( $allowed[ $key ] === true || $allowed[ $key ] === $val );
+                },
+                ARRAY_FILTER_USE_BOTH
+            );
+        }
+
+        function filterKeyword( $data, $search, $field = '' ) {
+            $filter = '';
+            if ( isset( $search['value'] ) ) {
+                $filter = $search['value'];
+            }
+            if ( ! empty( $filter ) ) {
+                if ( ! empty( $field ) ) {
+                    if ( strpos( strtolower( $field ), 'date' ) !== false ) {
+                        // filter by date range
+                        $data = filterByDateRange( $data, $filter, $field );
+                    } else {
+                        // filter by column
+                        $data = array_filter( $data, function ( $a ) use ( $field, $filter ) {
+                            return (boolean) preg_match( "/$filter/i", $a[ $field ] );
+                        } );
+                    }
+
+                } else {
+                    // general filter
+                    $data = array_filter( $data, function ( $a ) use ( $filter ) {
+                        return (boolean) preg_grep( "/$filter/i", (array) $a );
+                    } );
+                }
+            }
+
+            return $data;
+        }
+
+        function filterByDateRange( $data, $filter, $field ) {
+            // filter by range
+            if ( ! empty( $range = array_filter( explode( '|', $filter ) ) ) ) {
+                $filter = $range;
+            }
+
+            if ( is_array( $filter ) ) {
+                foreach ( $filter as &$date ) {
+                    // hardcoded date format
+                    $date = date_create_from_format( 'm/d/Y', stripcslashes( $date ) );
+                }
+                // filter by date range
+                $data = array_filter( $data, function ( $a ) use ( $field, $filter ) {
+                    // hardcoded date format
+                    $current = date_create_from_format( 'm/d/Y', $a[ $field ] );
+                    $from    = $filter[0];
+                    $to      = $filter[1];
+                    if ( $from <= $current && $to >= $current ) {
+                        return true;
+                    }
+
+                    return false;
+                } );
+            }
+
+            return $data;
+        }
+
+        $columnsDefault = [
+            'number'     => true,
+            'title'     => true,
+            'work_area'     => true,
+            'estimation_manhour'     => true,
+            'uuid'     => true,
+            'order'     => true,
+            'Actions'      => true,
+        ];
+
+        if ( isset( $_REQUEST['columnsDef'] ) && is_array( $_REQUEST['columnsDef'] ) ) {
+            $columnsDefault = [];
+            foreach ( $_REQUEST['columnsDef'] as $field ) {
+                $columnsDefault[ $field ] = true;
+            }
+        }
+
+        // get all raw data
+        $instructions  = EOInstructionWorkPackage::with('eo_instruction','successors')->where('eo_instruction_id', $instruction->id)->where('workpackage_id',$workPackage->id)->first();
+        foreach($instructions->successors as $taskcard){
+                $TaskCard = TaskCard::find($taskcard->next);
+                $taskcard->number .= $TaskCard->number;
+                $taskcard->title .= $TaskCard->title;
+                $taskcard->work_area .= $TaskCard->workarea->name;
+                $taskcard->estimation_manhour .= $TaskCard->estimation_manhour;
+        }
+
+        $alldata = json_decode( $instructions->successors, true);
 
         $data = [];
         // internal use; filter selected columns only from raw data

@@ -16,9 +16,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $Types = Type::ofJournal()->pluck('name', 'id');
-
-        return json_encode($Types);
+        // 
     }
 
     /**

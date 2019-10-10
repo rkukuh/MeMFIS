@@ -48,4 +48,17 @@ class Handler extends ExceptionHandler
     {
         return parent::render($request, $exception);
     }
+
+    /**
+     *  Ignition package.
+     *
+     */
+    protected function whoopsHandler()
+{
+    try {
+        return app(\Whoops\Handler\HandlerInterface::class);
+    } catch (\Illuminate\Contracts\Container\BindingResolutionException $e) {
+        return (new \Illuminate\Foundation\Exceptions\WhoopsHandler)->forDebug();
+    }
+}
 }

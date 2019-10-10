@@ -23,7 +23,8 @@ let TaskCard = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -46,6 +47,13 @@ let TaskCard = {
                 }
             },
             columns: [
+                {
+                    field: '',
+                    title: 'No Project',
+                    sortable: 'asc',
+                    filterable: !1,
+
+                },
 
                 {
                     field: 'created_at',

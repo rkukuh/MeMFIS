@@ -76,8 +76,11 @@
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-5 col-md-5 col-lg-5">
-                                        <select name="customer-level" class="form-control select">
-                                        </select>
+                                        @component('frontend.common.input.select2')
+                                            @slot('name','customer-level')
+                                            @slot('id','customer-level')
+                                            @slot('id_error', 'level')
+                                        @endcomponent
                                     </div>
                                     <div class="col-sm-7 col-md-7 col-lg-7">
                                         @component('frontend.common.input.number')
@@ -129,10 +132,10 @@
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         @component('frontend.common.input.radio')
-                                                            @slot('text', 'Work')
+                                                            @slot('text', 'Company')
                                                             @slot('name', 'type_phone_1')
                                                             @slot('id', 'type_phone')
-                                                            @slot('value', 'work')
+                                                            @slot('value', 'company')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('id', 'type_phone')
@@ -169,10 +172,10 @@
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         @component('frontend.common.input.radio')
-                                                            @slot('text', 'Work')
+                                                            @slot('text', 'Company')
                                                             @slot('name', 'type_phone')
                                                             @slot('id', 'type_phone')
-                                                            @slot('value', 'work')
+                                                            @slot('value', 'company')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('id', 'type_phone')
@@ -223,10 +226,10 @@
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         @component('frontend.common.input.radio')
-                                                            @slot('text', 'Work')
+                                                            @slot('text', 'Company')
                                                             @slot('name', 'type_fax')
                                                             @slot('id', 'type_fax')
-                                                            @slot('value', 'work')
+                                                            @slot('value', 'company')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('name', 'type_fax')
@@ -257,10 +260,10 @@
                                                         </div>
                                                         <div class="col-sm-3 col-md-3 col-lg-3">
                                                             @component('frontend.common.input.radio')
-                                                                @slot('text', 'Work')
+                                                                @slot('text', 'Company')
                                                                 @slot('name', 'type_fax')
                                                                 @slot('id', 'type_fax')
-                                                                @slot('value', 'work')
+                                                                @slot('value', 'company')
                                                             @endcomponent
                                                             @component('frontend.common.input.radio')
                                                                 @slot('name', 'type_fax')
@@ -375,7 +378,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-5 col-md-5 col-lg-5">
                                                 <label class="form-control-label">
-                                                    Email @include('frontend.common.label.required')
+                                                    Email @include('frontend.common.label.optional')
                                                 </label>
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -397,10 +400,10 @@
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         @component('frontend.common.input.radio')
-                                                            @slot('text', 'Work')
+                                                            @slot('text', 'Company')
                                                             @slot('name', 'type_email')
                                                             @slot('id', 'type_email')
-                                                            @slot('value', 'work')
+                                                            @slot('value', 'company')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('name', 'type_email')
@@ -431,10 +434,10 @@
                                                     </div>
                                                     <div class="col-sm-3 col-md-3 col-lg-3">
                                                         @component('frontend.common.input.radio')
-                                                            @slot('text', 'Work')
+                                                            @slot('text', 'Company')
                                                             @slot('name', 'type_email')
                                                             @slot('id', 'type_email')
-                                                            @slot('value', 'work')
+                                                            @slot('value', 'company')
                                                         @endcomponent
                                                         @component('frontend.common.input.radio')
                                                             @slot('name', 'type_email')
@@ -654,7 +657,6 @@
                                                         </label>
 
                                                         @component('frontend.common.input.text')
-                                                            @slot('text', 'John Wick')
                                                             @slot('name', 'attn-name')
                                                         @endcomponent
                                                     </div>
@@ -664,13 +666,12 @@
                                                         </label>
 
                                                         @component('frontend.common.input.text')
-                                                            @slot('text', 'Purchasing')
                                                             @slot('name', 'attn-position')
                                                         @endcomponent
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <label class="form-control-label">
                                                             Phone
                                                         </label>
@@ -682,7 +683,7 @@
                                                             @slot('multiple','multiple')
                                                         @endcomponent
                                                     </div>
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    <div class="col-sm-2 col-md-2 col-lg-2 hidden">
                                                         <label class="form-control-label">
                                                             Extension
                                                         </label>
@@ -751,7 +752,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <label class="form-control-label">
                                                             Phone
                                                         </label>
@@ -762,7 +763,7 @@
                                                             @slot('multiple', 'multiple')
                                                         @endcomponent
                                                     </div>
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                    <div class="col-sm-2 col-md-2 col-lg-2 hidden">
                                                         <label class="form-control-label">
                                                             Extension
                                                         </label>
@@ -839,7 +840,6 @@
 @push('footer-scripts')
 <script>
     $( document ).ready(function() {
-        $('.select').select2();
         $('.selectWebsite').select2();
         $('.selectDocument').select2();
     });

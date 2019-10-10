@@ -80,7 +80,7 @@
                                         @endcomponent
                                     </div>
 
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="col-sm-3 col-md-3 col-lg-3">
                                         <label class="form-control-label">
                                             A/C Reg @include('frontend.common.label.required')
                                         </label>
@@ -89,10 +89,19 @@
                                             @slot('text', $project->aircraft_register)
                                         @endcomponent
                                     </div>
+                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                        <label class="form-control-label">
+                                            A/C Serial Number @include('frontend.common.label.required')
+                                        </label>
+
+                                        @component('frontend.common.label.data-info')
+                                            @slot('text', $project->aircraft_sn)
+                                        @endcomponent
+                                    </div>
                                 </div>
 
                                 <div class="form-group m-form__group row">
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
                                             Aircraft Total Time @include('frontend.common.label.optional')
                                         </label>
@@ -102,6 +111,18 @@
                                         @slot('text', 'Total Time')
                                         @slot('name', 'total_time')
                                         @slot('id_error', 'total_time')
+                                        @endcomponent
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <label class="form-control-label">
+                                            Aircraft Total Cycle @include('frontend.common.label.optional')
+                                        </label>
+
+                                        @component('frontend.common.input.number')
+                                        @slot('id', 'total_cycle')
+                                        @slot('text', 'Total Cycle')
+                                        @slot('name', 'total_cycle')
+                                        @slot('id_error', 'total_cyle')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -160,7 +181,7 @@
                                         @slot('rows', '5')
                                         @slot('id', 'exceptions')
                                         @slot('name', 'exceptions')
-                                        @slot('text', 'xceptions')
+                                        @slot('value', $taskcard_number)
                                         @slot('disabled', 'disabled')
                                         @endcomponent
                                     </div>
@@ -175,6 +196,7 @@
                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                 @component('frontend.common.input.checkbox')
                                                 @slot('id', 'DGCA')
+                                                @slot('checked', 'checked')
                                                 @slot('name', 'approval[]')
                                                 @slot('text', 'Indonesia DGCA No : 145D-093')
                                                 @slot('value', 'Indonesia DGCA No : 145D-093')

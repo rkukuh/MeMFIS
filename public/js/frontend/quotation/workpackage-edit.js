@@ -25,7 +25,7 @@ $('.workpackage_datatable').mDatatable({
         },
         pageSize: 10,
         serverPaging: !0,
-        serverFiltering: !0,
+        serverFiltering: !1,
         serverSorting: !0
     },
     layout: {
@@ -59,7 +59,11 @@ $('.workpackage_datatable').mDatatable({
             sortable: 'asc',
             filterable: !1,
             template: function (t) {
-                return '<a href="/quotation/'+quotation_uuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
+                if(t.uuid){
+                    return '<a href="/quotation/'+quotation_uuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
+                }else{
+                    return '<a href="/quotation/htcrr/'+quotation_uuid+'/edit">' + t.title + "</a>"
+                }
             }
         },
         {

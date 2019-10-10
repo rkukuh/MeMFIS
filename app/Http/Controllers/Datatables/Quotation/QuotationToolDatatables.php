@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Datatables\Quotation;
 
 use App\Models\Unit;
 use App\Models\Item;
+use App\Models\HtCrr;
+use App\Models\Project;
 use App\Models\TaskCard;
 use App\Models\ListUtil;
 use App\Models\Quotation;
 use App\Models\WorkPackage;
-use App\Models\QuotationWorkPackageTaskCardItem;
 use Illuminate\Http\Request;
+use App\Models\QuotationHtcrrItem;
 use App\Http\Controllers\Controller;
+use App\Models\QuotationWorkPackageTaskCardItem;
 
 class QuotationToolDatatables extends Controller
 {
@@ -21,44 +24,31 @@ class QuotationToolDatatables extends Controller
      */
     public function routine(Quotation $quotation, WorkPackage $workPackage)
     {
-        $tools = $routinetools = [];
-
-        // Get tools from non-routine taskcards -
-        $taskcards = $workPackage->taskcards()->with('type')
-        ->whereHas('type', function ($query) {
-            $query->where('of', 'taskcard-type-routine');
-        })->get();
-
-        foreach($taskcards as $taskcard){
-            $items = $taskcard->tools;
-            foreach($items as $item){
-                array_push($tools, $item);
-            }
-        }
-        // -Get tools from non-routine taskcards
-
-        foreach($tools as $tool){
-            $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
-            ->where('quotation_id', $quotation->id)
-            ->where('item_id', $tool->id)
-            ->get();
-            if(sizeof($items) > 0){
-                foreach($items as $item){
-                    array_push($routinetools, $item);
-                }
-            }
-        }
+        $routinetools = QuotationWorkPackageTaskCardItem::with('taskcard','item','unit','price')->where('quotation_id', $quotation->id)
+                ->where('workpackage_id', $workPackage->id)
+                ->whereHas('taskcard', function ($query) {
+                        $query->wherehas('type', function ($query2) {
+                            $query2->where('of','taskcard-type-routine');
+                        });
+                })
+                ->whereHas('item', function ($query) {
+                        $query->whereHas('categories', function ($query) {
+                            $query->where('code','tool');
+                        });
+                })
+                ->get();
 
         foreach($routinetools as $routinetool){
-            $routinetool->tc .= TaskCard::find($routinetool->taskcard_id)->number;
-            $routinetool->pn .= Item::find($routinetool->item_id)->code;
-            $routinetool->title .= Item::find($routinetool->item_id)->name;
-            $routinetool->unit_tool .= Unit::find($routinetool->unit_id)->name;
-            $routinetool->unitPrice .= null;
+            if($routinetool->item->prices->last() <> null){
+                $routinetool->unitPrice .= $routinetool->item->prices()->where('level', $quotation->quotationable->customer->levels->last()->score)->first()->amount;
+            }
+            else{
+                $routinetool->unitPrice .= 0;
+            }
+
         }
 
-
-        $data = $alldata = $routinetools;
+        $data = $alldata = json_decode($routinetools);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -154,45 +144,157 @@ class QuotationToolDatatables extends Controller
      */
     public function non_routine(Quotation $quotation, WorkPackage $workPackage)
     {
-        $tools = $nonroutinetools = [];
+        $nonroutinetools = QuotationWorkPackageTaskCardItem::with('taskcard','item','unit','price')->where('quotation_id', $quotation->id)
+        ->where('workpackage_id', $workPackage->id)
+        ->whereHas('taskcard', function ($query) {
+                $query->wherehas('type', function ($query2) {
+                    $query2->where('of','taskcard-type-non-routine');
+                });
+        })
+        ->whereHas('item', function ($query) {
+                $query->whereHas('categories', function ($query) {
+                    $query->where('code','tool');
+                });
+        })
+        ->get();
 
-        // Get tools from non-routine taskcards -
-        $taskcards = $workPackage->taskcards()->with('type')
-        ->whereHas('type', function ($query) {
-            $query->where('of', 'taskcard-type-non-routine');
-        })->get();
+        foreach($nonroutinetools as $nonroutinetool){
+            if($nonroutinetool->item->prices->last() <> null){
+                $nonroutinetool->unitPrice .= $nonroutinetool->item->prices()->where('level', $quotation->quotationable->customer->levels->last()->score)->first()->amount;
+            }
+            else{
+                $nonroutinetool->unitPrice .= 0;
+            }
 
-        foreach($taskcards as $taskcard){
-            $items = $taskcard->tools;
-            foreach($items as $item){
-                array_push($tools, $item);
+        }
+
+        $data = $alldata = json_decode($nonroutinetools);
+
+        $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
+
+        $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
+                    ? $datatable['query']['generalSearch'] : '';
+
+        if (! empty($filter)) {
+            $data = array_filter($data, function ($a) use ($filter) {
+                return (boolean)preg_grep("/$filter/i", (array)$a);
+            });
+
+            unset($datatable['query']['generalSearch']);
+        }
+
+        $query = isset($datatable['query']) && is_array($datatable['query']) ? $datatable['query'] : null;
+
+        if (is_array($query)) {
+            $query = array_filter($query);
+
+            foreach ($query as $key => $val) {
+                $data = $this->list_filter($data, [$key => $val]);
             }
         }
-        // -Get tools from non-routine taskcards
-        // dd($tools);
+
+        $sort  = ! empty($datatable['sort']['sort']) ? $datatable['sort']['sort'] : 'asc';
+        $field = ! empty($datatable['sort']['field']) ? $datatable['sort']['field'] : 'RecordID';
+
+        $meta    = [];
+        $page    = ! empty($datatable['pagination']['page']) ? (int)$datatable['pagination']['page'] : 1;
+        $perpage = ! empty($datatable['pagination']['perpage']) ? (int)$datatable['pagination']['perpage'] : -1;
+
+        $pages = 1;
+        $total = count($data);
+
+        usort($data, function ($a, $b) use ($sort, $field) {
+            if (! isset($a->$field) || ! isset($b->$field)) {
+                return false;
+            }
+
+            if ($sort === 'asc') {
+                return $a->$field > $b->$field ? true : false;
+            }
+
+            return $a->$field < $b->$field ? true : false;
+        });
+
+        if ($perpage > 0) {
+            $pages  = ceil($total / $perpage);
+            $page   = max($page, 1);
+            $page   = min($page, $pages);
+            $offset = ($page - 1) * $perpage;
+
+            if ($offset < 0) {
+                $offset = 0;
+            }
+
+            $data = array_slice($data, $offset, $perpage, true);
+        }
+
+        $meta = [
+            'page'    => $page,
+            'pages'   => $pages,
+            'perpage' => $perpage,
+            'total'   => $total,
+        ];
+
+        if (isset($datatable['requestIds']) && filter_var($datatable['requestIds'], FILTER_VALIDATE_BOOLEAN)) {
+            $meta['rowIds'] = array_map(function ($row) {
+                return $row->RecordID;
+            }, $alldata);
+        }
+
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+        $result = [
+            'meta' => $meta + [
+                    'sort'  => $sort,
+                    'field' => $field,
+                ],
+            'data' => $data,
+        ];
+
+        echo json_encode($result, JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function htcrr(Quotation $quotation, WorkPackage $workPackage)
+    {
+        $htcrrtools = $tools = [];
+        $htcrrs = HtCrr::whereNull('parent_id')->where('project_id', $quotation->quotationable->id)->get();
+        // -Get Items from htcrr
+        foreach($htcrrs as $htcrr){
+            foreach($htcrr->tools as $tool){
+                array_push($tools, $tool);
+
+            }
+        }
 
         foreach($tools as $tool){
-            $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
+            $items = QuotationHtcrrItem::where('htcrr_id', $tool->pivot->pivotParent->id)
             ->where('quotation_id', $quotation->id)
             ->where('item_id', $tool->id)
             ->get();
             if(sizeof($items) > 0){
                 foreach($items as $item){
-                    array_push($nonroutinetools, $item);
+                    array_push($htcrrtools, $item);
                 }
             }
         }
 
-        foreach($nonroutinetools as $nonroutinetool){
-            $nonroutinetool->tc .= TaskCard::find($nonroutinetool->taskcard_id)->number;
-            $nonroutinetool->pn .= Item::find($nonroutinetool->item_id)->code;
-            $nonroutinetool->title .= Item::find($nonroutinetool->item_id)->name;
-            $nonroutinetool->unit_tool .= Unit::find($nonroutinetool->unit_id)->name;
-            $nonroutinetool->unitPrice .= null;
+        foreach($htcrrtools as $htcrrtool){
+            $htcrrtool->tc .= $htcrrtool->htcrr->code;
+            $htcrrtool->pn .= Item::find($htcrrtool->item_id)->code;
+            $htcrrtool->title .= Item::find($htcrrtool->item_id)->name;
+            $htcrrtool->unit_tool .= $htcrrtool->unit->name;
+            $htcrrtool->unitPrice .= null;
         }
 
-
-        $data = $alldata = $nonroutinetools;
+        $data = $alldata = $htcrrtools;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

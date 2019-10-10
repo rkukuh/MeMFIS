@@ -8,7 +8,12 @@ use App\Models\Aircraft;
 use App\Models\Customer;
 use App\Models\Approval;
 use App\Models\WorkPackage;
+use App\Models\ProjectWorkPackageEngineer;
+use App\Models\ProjectWorkPackageFacility;
+use App\Models\ProjectWorkPackageManhour;
+use App\Models\ProjectWorkPackageTaskCard;
 use App\Http\Controllers\Controller;
+use App\Models\Pivots\ProjectWorkPackage;
 use App\Http\Requests\Frontend\ProjectHMStore;
 use App\Http\Requests\Frontend\ProjectHMUpdate;
 
@@ -103,9 +108,61 @@ class ProjectController extends Controller
      */
     public function approve(Project $project)
     {
+        $error_messages = [];
+        $total_manhours = ProjectWorkPackage::where('project_id',$project->id)
+            ->pluck('total_manhours');
+
+        $tat = ProjectWorkPackage::where('project_id',$project->id)
+        ->pluck('tat');
+
+        if(in_array(null, $total_manhours->toArray(), true)){
+            $error_message = array(
+                'message' => "some of workpackage total manhours hasn't been filled yet",
+                'title' => $project->number,
+                'alert-type' => "error"
+            );
+            array_push($error_messages, $error_message);
+            return response()->json(['error' => $error_messages], '403');
+        }
+
+        if(in_array(null, $tat->toArray(), true)){
+            $error_message = array(
+                'message' => "some of workpackage TAT hasn't been calculated yet",
+                'title' => $project->number,
+                'alert-type' => "error"
+            );
+            array_push($error_messages, $error_message);
+            return response()->json(['error' => $error_messages], '403');
+        }
+
+        $pw_json = $project->workpackages->toJson();
+
+        $pw = ProjectWorkPackage::where('project_id',$project->id)->pluck('id');
+
+        $pwe = ProjectWorkPackageEngineer::whereIn('project_workpackage_id',$pw)->get();
+        $pwe_json = $pwe->toJson();
+
+        $pwf = ProjectWorkPackageFacility::whereIn('project_workpackage_id',$pw)->get();
+        $pwf_json = $pwf->toJson();
+
+        $pwm = ProjectWorkPackageManhour::whereIn('project_workpackage_id',$pw)->get();
+        $pwm_json = $pwm->toJson();
+
+        $pwt = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$pw)->get();
+        $pwt_json = $pwt->toJson();
+
+        $project->origin_parent_project = $project->toJson();
+        $project->origin_project_workpackages = $pw_json;
+        $project->origin_project_workpackage_engineers = $pwe_json;
+        $project->origin_project_workpackage_facilities = $pwf_json;
+        $project->origin_project_workpackage_manhours = $pwm_json;
+        $project->origin_project_workpackage_taskcards = $pwt_json;
+        $project->save();
+
         $project->approvals()->save(new Approval([
             'approvable_id' => $project->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
         ]));
 
         return response()->json($project);

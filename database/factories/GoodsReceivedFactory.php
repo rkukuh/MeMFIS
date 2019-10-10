@@ -13,23 +13,13 @@ use Faker\Generator as Faker;
 $factory->define(GoodsReceived::class, function (Faker $faker) {
 
     $number = $faker->unixTime();
-    $plate_no = strtoupper($faker->randomLetter) . ' ' 
-                . $faker->numberBetween(1000, 9999) . ' ' 
-                . strtoupper($faker->randomLetter) 
+    $plate_no = strtoupper($faker->randomLetter) . ' '
+                . $faker->numberBetween(1000, 9999) . ' '
+                . strtoupper($faker->randomLetter)
                 . strtoupper($faker->randomLetter);
 
     return [
         'number' => 'GRN-DUM-' . $number,
-        'received_by' => function () {
-            if (Employee::count()) {
-                return Employee::get()->random()->id;
-            }
-
-            return factory(Employee::class)->create()->id;
-        },
-        'received_at' => $faker->randomElement([null, Carbon::now()]),
-        'vehicle_no' => $faker->randomElement([null, $plate_no]),
-        'container_no' => $faker->randomElement([null, 'CON-' . $faker->numberBetween(1000, 9999)]),
         'purchase_order_id' => function () {
             if (PurchaseOrder::count()) {
                 return PurchaseOrder::get()->random()->id;
@@ -37,6 +27,16 @@ $factory->define(GoodsReceived::class, function (Faker $faker) {
 
             return factory(PurchaseOrder::class)->create()->id;
         },
+        'received_by' => function () {
+            if (Employee::count()) {
+                return Employee::get()->random()->id;
+            }
+
+            return factory(Employee::class)->create()->id;
+        },
+        'received_at' => Carbon::now(),
+        'vehicle_no' => $plate_no,
+        'container_no' => 'CON-' . $faker->numberBetween(1000, 9999),
         'storage_id' => function () {
             if (Storage::count()) {
                 return Storage::get()->random()->id;
@@ -45,6 +45,15 @@ $factory->define(GoodsReceived::class, function (Faker $faker) {
             return factory(Storage::class)->create()->id;
         },
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
+        'additionals' => function () use ($faker) {
+            $additionals = [
+                'SupplierRefNo' => 'TC-INT-DUM-' . $faker->unixTime(),
+                'SupplierRefDate' => Carbon::now(),
+            ];
+
+            return $faker->randomElement([null, json_encode($additionals)]);
+        },
+        'origin_vendor_coa' => null,
     ];
 
 });
@@ -73,17 +82,19 @@ $factory->afterCreating(GoodsReceived::class, function ($goods_received, $faker)
 
             $goods_received->items()->save($item, [
                 'quantity' => rand(1, 10),
-                'already_received' => rand(2, 3),
+                'quantity_unit' => rand(1, 10),
                 'unit_id' => $unit->id,
+                'price' => rand(100, 200) * 100000,
+                'already_received_amount' => rand(2, 3),
                 'note' => $faker->randomElement([null, $faker->sentence]),
             ]);
         }
     }
-    
+
     // Approval
 
-    if ($faker->boolean) {
-        $goods_received->approvals()->save(factory(Approval::class)->make());
-    }
+    // if ($faker->boolean) {
+    //     $goods_received->approvals()->save(factory(Approval::class)->make());
+    // }
 
 });

@@ -8,6 +8,7 @@ use App\Models\Type;
 use App\Models\Status;
 use App\Models\Approval;
 use App\Models\Progress;
+use App\Models\Employee;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -75,9 +76,23 @@ class DefectCardEngineerController extends Controller
      * @param  \App\Models\DefectCard  $defectCard
      * @return \Illuminate\Http\Response
      */
-    public function show(DefectCard $defectCard)
+    public function show(DefectCard $defectcard)
     {
-        return view('frontend.defect-card.engineer.progress');
+        $this->propose_corrections = array();
+        foreach($defectcard->propose_corrections as $i => $defectCard){
+            $this->propose_corrections[$i] =  $defectCard->code;
+        }
+
+        $this->propose_correction_text = '';
+        foreach($defectcard->propose_corrections as $i => $defectCard){
+            $this->propose_correction_text =  $defectCard->pivot->propose_correction_text;
+        }
+
+        return view('frontend.defect-card.engineer.progress-close', [
+            'defectcard' => $defectcard,
+            'propose_corrections' => $this->propose_corrections,
+            'propose_correction_text' => $this->propose_correction_text,
+        ]);
     }
 
     /**
@@ -179,7 +194,8 @@ class DefectCardEngineerController extends Controller
 
             $defectcard->approvals()->save(new Approval([
                 'approvable_id' => $defectcard->id,
-                'approved_by' => Auth::id(),
+                'conducted_by' => Auth::id(),
+                'is_approved' => 1
             ]));
             return redirect()->route('frontend.defectcard-engineer.index')->with($this->notification);
         }
@@ -200,7 +216,7 @@ class DefectCardEngineerController extends Controller
     /**
      * Search the specified resource from storage.
      *
-     * @param  \App\Models\JobCard  $jobCard
+     * @param  \App\Models\DefectCard  $DefectCard
      * @return \Illuminate\Http\Response
      */
     public function search(Request $request)
@@ -217,5 +233,34 @@ class DefectCardEngineerController extends Controller
         $search = DefectCard::where('code',$request->code)->first();
 
         return redirect()->route('frontend.defectcard-engineer.edit',$search->uuid);
+    }
+
+    /**
+     * Add helper for related defect card in storage .
+     *
+     * @param  \App\Models\DefectCard  $DefectCard
+     * @return \Illuminate\Http\Response
+     */
+    public function add_helper(DefectCard $DefectCard, Request $request)
+    {
+        $employee = Employee::where('code', $request->helper)->first();
+        $DefectCard->helpers()->attach($employee->id, ['additionals' => $request->reference]);
+        $DefectCard->current_helpers = $DefectCard->helpers()->count();
+
+        return response()->json($DefectCard);
+    }
+
+    /**
+     * Remove helper for related defect card in storage .
+     *
+     * @param  \App\Models\DefectCard  $DefectCard
+     * @return \Illuminate\Http\Response
+     */
+    public function remove_helper(DefectCard $DefectCard,Employee $helper)
+    {
+        $DefectCard->helpers()->detach($helper->id);
+        $DefectCard->current_helpers = $DefectCard->helpers()->count();
+        
+        return response()->json($DefectCard);
     }
 }

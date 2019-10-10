@@ -60,7 +60,7 @@
 
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Generated')
+                                                    @slot('text', $purchaseRequest->number)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -71,7 +71,7 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Generated')
+                                                    @slot('text', $purchaseRequest->project->code)
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -80,18 +80,18 @@
                                                         <label class="form-control-label">
                                                             Date @include('frontend.common.label.required')
                                                         </label>
-        
+
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', 'Generated')
+                                                            @slot('text', $purchaseRequest->requested_at)
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
                                                             Date Required @include('frontend.common.label.required')
                                                         </label>
-        
+
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', 'Generated')
+                                                            @slot('text', $purchaseRequest->required_at)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -102,9 +102,9 @@
                                                 <label class="form-control-label">
                                                     Description @include('frontend.common.label.optional')
                                                 </label>
-    
+
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Generated')
+                                                    @slot('text', $purchaseRequest->description)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -149,7 +149,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @include('frontend.purchase-request.project.modal')
                                                         <div class="item_datatable" id="scrolling_both"></div>
                                                     </div>
                                                 </div>
@@ -200,6 +199,8 @@
 
 @push('footer-scripts')
     <script>
+        let pr_uuid = '{{$purchaseRequest->uuid}}';
+
         var autoExpand = function (field) {
 
         // Reset field height
@@ -229,7 +230,7 @@
     <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/purchase-request/project/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/project/show.js') }}"></script>
     <script src="{{ asset('js/frontend/purchase-request/form-reset.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>

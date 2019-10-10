@@ -15,8 +15,8 @@ Route::name('frontend.')->group(function () {
 
                 Route::prefix('taskrelease-jobcard')->group(function () {
 
-                    Route::resource('task-release', 'TaskReleaseJobCardController', [
-                        'parameters' => ['task-release' => 'taskrelease']
+                    Route::resource('/', 'TaskReleaseJobCardController', [
+                        'parameters' => ['' => 'taskrelease']
                     ]);
 
                 });
@@ -27,12 +27,24 @@ Route::name('frontend.')->group(function () {
 
                 Route::prefix('taskrelease-defectcard')->group(function () {
 
-                    Route::resource('task-release', 'TaskReleaseDefectCardController', [
-                        'parameters' => ['task-release' => 'taskrelease']
+                    Route::resource('', 'TaskReleaseDefectCardController', [
+                        'parameters' => ['' => 'taskrelease']
                     ]);
 
                 });
-                
+
+            });
+
+            Route::name('taskrelease-htcrr.')->group(function () {
+
+                Route::prefix('taskrelease-htcrr')->group(function () {
+
+                    Route::resource('', 'TaskReleaseHtCrrController', [
+                        'parameters' => ['' => 'taskrelease']
+                    ]);
+
+                });
+
             });
 
         });

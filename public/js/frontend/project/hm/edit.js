@@ -25,7 +25,7 @@ let Project = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -59,11 +59,15 @@ let Project = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/project-hm/'+project_uuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
+                        if(t.uuid){
+                            return '<a href="/project-hm/'+project_uuid+'/workpackage/'+t.uuid+'">' + t.title + "</a>"
+                        }else{
+                            return '<a href="/project-htcrr/' + project_uuid + '/project-htcrr/create">' + t.title + "</a>"
+                        }
                     }
                 },
                 {
-                    field: 'aircraft.name',
+                    field: 'ac_type',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
@@ -89,14 +93,23 @@ let Project = {
                     sortable: !1,
                     overflow: 'visible',
                         template: function (t, e, i) {
-                            return (
-                                '<a href="/project-hm/' + project_uuid + '/workpackage/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-workpackage" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
+                            if(t.uuid){
+                                return (
+                                    '<a href="/project-hm/' + project_uuid + '/workpackage/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                        '<i class="la la-pencil"></i>' +
+                                    '</a>' +
+                                    '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-workpackage" title="Delete" data-uuid="' + t.uuid + '">' +
+                                        '<i class="la la-trash"></i>' +
+                                    '</a>'
+                                );
+                            }else{
+                                return (
+                                    '<a href="/project-htcrr/' + project_uuid + '/project-htcrr/create" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                        '<i class="la la-pencil"></i>' +
+                                    '</a>'
+                                );
+                            }
+
                         }
                 }
             ]
@@ -230,12 +243,19 @@ let Project = {
             });
         });
 
-        
+
         $(".modal_blank_project").on("click", function() {
             let aircraft_val = $("#applicability_airplane").val();
             let aircraft_text = $("#applicability_airplane option:selected").text();
             $("#aircraft_type_modal").html(aircraft_text);
             $("#aircraft_type_modal").val(aircraft_val);
+
+            $('#modal_blank_project').on('show.bs.modal', function (e) {
+                $(this)
+                .find("input,textarea")
+                    .val('')
+                    .end()
+            })
         });
 
         $('.add-blank-workpackage').on('click', function () {
@@ -286,14 +306,42 @@ let Project = {
                 type: 'GET',
                 dataType: "json",
                 url: '/label/get-customer/'+customer_uuid,
-                success: function (respone) {
-                    if (respone) {
-                        let res = JSON.parse(respone);
+                success: function (response) {
+                    if (response) {
+                        let res = JSON.parse(response.attention);
                             $('select[name="attention"]').empty();
                             $('select[name="phone"]').empty();
                             $('select[name="email"]').empty();
                             $('select[name="fax"]').empty();
                             $('select[name="address"]').empty();
+                            if(response.addresses.length){
+                                $.each(response.addresses, function( index, value ) {
+                                    $('select[name="address"]').append(
+                                        '<option value="' + value.address + '">' + value.address + '</option>'
+                                    );
+                                });
+                            }
+                            if(response.emails.length){
+                                $.each(response.emails, function( index, value ) {
+                                    $('select[name="email"]').append(
+                                        '<option value="' + value.address + '">' + value.address + '</option>'
+                                    );
+                                });
+                            }
+                            if(response.faxes.length){
+                                $.each(response.faxes, function( index, value ) {
+                                    $('select[name="fax"]').append(
+                                        '<option value="' + value.number + '">' +value.number + '</option>'
+                                    );
+                                });
+                            }
+                            if(response.phones.length){
+                                $.each(response.phones, function( index, value ) {
+                                    $('select[name="phone"]').append(
+                                        '<option value="' + value.number + '">' + value.number + '</option>'
+                                    );
+                                });
+                            }
                             for (var i = 0; i < res.length; i++) {
                                 if(res[i].name){
                                     $('select[name="attention"]').append(
@@ -342,7 +390,6 @@ let Project = {
             data.append("aircraft_id", $('#applicability_airplane').val());
             data.append("aircraft_register", $('input[name=reg]').val());
             data.append("aircraft_sn", $('input[name=serial-number]').val());
-            data.append("code", 'Dummy COde');
             data.append("fileInput", document.getElementById('work-order-attachment').files[0]);
             data.append('_method', 'PUT');
 

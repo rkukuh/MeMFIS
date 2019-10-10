@@ -27,7 +27,6 @@ $('.filter').on('change', function () {
             task_type_id: task_type_id,
             aircrafts: aircrafts,
             skills: skills,
-            // task_card_no: task_card_no,
         },
         success: function(response) {
             let table = $('.taskcard_datatable').mDatatable();
@@ -37,7 +36,8 @@ $('.filter').on('change', function () {
                     type: "local",
                     source: response,
                     pageSize: 10,
-                    serverPaging: !1,
+                    serverPaging: !0,
+                serverFiltering: !1,
                     serverSorting: !1
                 },
                 layout: {
@@ -198,13 +198,24 @@ $('.filter').on('change', function () {
                 ]
             });
 
-            // table.reload();
-
         }
     });
 });
 
 $(document).ready(function () {
+    $.ajax({
+        url: '/get-takcard-routine-types/',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $.each(data, function (key, value) {
+                $('#taskcard_routine_type').append(
+                    '<option value="' + key + '">' + value + '</option>'
+                );
+            });
+        }
+    });
+
     $.ajax({
         url: '/get-takcard-non-routine-types/',
         type: 'GET',
@@ -213,9 +224,23 @@ $(document).ready(function () {
             $.each(data, function (key, value) {
                 $('#taskcard_routine_type').append(
                     '<option value="' + key + '">' + value + '</option>'
-                ).trigger('init');
+                );
             });
         }
     });
+
+    $.ajax({
+        url: '/get-takcard-si-types/',
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $.each(data, function (key, value) {
+                $('#taskcard_routine_type').append(
+                    '<option value="' + key + '">' + value + '</option>'
+                );
+            });
+        }
+    });
+
 });
 

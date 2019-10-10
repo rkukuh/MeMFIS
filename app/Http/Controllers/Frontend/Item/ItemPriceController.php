@@ -37,11 +37,11 @@ class ItemPriceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(PriceStore $request, Item $item)
-    {
-        for ($i=0; $i < sizeof($request->price) ; $i++) {
+    {   
+        for ($i=0; $i < sizeof($request->price); $i++) {
             $item->prices()->save(new Price (['amount' =>$request->price[$i],'level' =>$request->level[$i]]));
+           
         }
-
         return response()->json($item);
     }
 
@@ -62,7 +62,7 @@ class ItemPriceController extends Controller
      * @param  \App\Models\Price  $price
      * @return \Illuminate\Http\Response
      */
-    public function edit(Item $item, $price)
+    public function edit(Item $item)
     {
         return response()->json($item->prices);
     }
@@ -71,12 +71,16 @@ class ItemPriceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\PriceUpdate  $request
-     * @param  \App\Models\Price  $price
+     * @param  \App\Models\Item  $Item
      * @return \Illuminate\Http\Response
      */
-    public function update(PriceUpdate $request, Price $price)
+    public function update(PriceUpdate $request, Item $item)
     {
-        //
+        foreach($request->uuid as $key => $uuid){
+            Price::where('uuid', $uuid)->update(['amount' => $request->price[$key], 'level' => $request->level[$key]]);
+        }
+
+        return response()->json($item->prices);
     }
 
     /**

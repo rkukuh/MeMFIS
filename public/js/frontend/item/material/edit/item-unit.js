@@ -36,25 +36,30 @@ let ItemUnit = {
                         document.getElementById('uom_quantity').value = uom_quantity;
                         document.getElementById('item_unit_id').value = item_unit_id;
                     } else {
-                        let table = $('.item_unit_datatable').mDatatable();
+                        if (data.title == "Danger") {
+                            toastr.error("Unit UOM already exists!", "Error", {
+                                timeOut: 5000
+                            });
+                        } else {
+                            let table = $('.item_unit_datatable').mDatatable();
 
-                        table.originalDataSet = [];
-                        table.reload();
-                        errorMessageUom();
+                            table.originalDataSet = [];
+                            table.reload();
+                            errorMessageUom();
 
-                        $('#modal_uom').modal('hide');
+                            $('#modal_uom').modal('hide');
 
-                        toastr.success('Item UoM has been created.', 'Success', {
-                            timeOut: 5000
-                        });
+                            toastr.success('Item UoM has been created.', 'Success', {
+                                timeOut: 5000
+                            });
 
-                        document.getElementById('uom_quantity').value = '';
+                            document.getElementById('uom_quantity').value = '';
 
-                        $('#item_unit_id').select2('val', 'All');
-            
-                        $('#uom_quantity-error').html('');
-                        $('#item_unit-error').html('');
-            
+                            $('#item_unit_id').select2('val', 'All');
+
+                            $('#uom_quantity-error').html('');
+                            $('#item_unit-error').html('');
+                        }
                     }
                 }
             });

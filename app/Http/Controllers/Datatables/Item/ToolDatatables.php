@@ -16,10 +16,10 @@ class ToolDatatables extends Controller
      */
     public function index()
     {
-        $items = Item::with('unit', 'journal','categories')
-        ->whereHas('categories', function ($query) {
-            $query->where('code', 'tool');
-        })->get();
+        $items = Item::with('unit', 'categories')
+                        ->whereHas('categories', function ($query) {
+                            $query->where('code', 'tool');
+                        })->get();
 
         $data = $alldata = json_decode($items);
 
@@ -203,6 +203,7 @@ class ToolDatatables extends Controller
         $columnsDefault = [
             'code'     => true,
             'name'     => true,
+            'description'    => true,
             'uuid'     => true,
             'Actions'      => true,
         ];

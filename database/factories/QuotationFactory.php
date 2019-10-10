@@ -1,11 +1,13 @@
 <?php
 
 use Carbon\Carbon;
+use App\Models\Tax;
 use App\Models\Type;
 use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Status;
 use App\Models\Project;
+use App\Models\Manhour;
 use App\Models\Customer;
 use App\Models\Currency;
 use App\Models\TaskCard;
@@ -22,16 +24,11 @@ $factory->define(Quotation::class, function (Faker $faker) {
     return [
         'number' => 'QTN-DUM-' . $number,
         'parent_id' => null,
-        'project_id' => function () {
-            if (Project::count()) {
-                return Project::get()->random()->id;
-            }
-
-            return factory(Project::class)->create()->id;
-        },
         'attention' => function (array $quotation) {
             return Customer::get()->random()->attention;
         },
+        'quotationable_id' => Project::get()->random()->id,
+        'quotationable_type' => 'App\Models\Project',
         'requested_at' => $faker->randomElement([null, Carbon::now()]),
         'valid_until' => $faker->randomElement([null, Carbon::now()]),
         'currency_id' => function () {
@@ -56,7 +53,6 @@ $factory->define(Quotation::class, function (Faker $faker) {
 
             return $faker->randomElement([null, json_encode($charges)]);
         },
-        'ppn' => $faker->randomElement([null, 10]),
         'grandtotal' => rand(101, 200) * 1000000,
         'scheduled_payment_type' => function () {
             if (Type::ofScheduledPayment()->count()) {
@@ -79,6 +75,34 @@ $factory->define(Quotation::class, function (Faker $faker) {
         },
         'term_of_condition' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
         'description' => $faker->randomElement([null, $faker->paragraph(rand(10, 20))]),
+        'data_defectcard' => function () use ($faker) {
+            $data['manhour_total'] = null;
+            $data['manhour_rate_id'] = null;
+            $data['manhour_rate_amount'] = null;
+            $data['discount_type'] = null;
+            $data['discount_value'] = null;
+            $data['description'] = null;
+
+            return $faker->randomElement([null, json_encode($data)]);
+        },
+        'data_htcrr' => function () use ($faker) {
+            $data['manhour_total'] = null;
+            $data['manhour_rate_id'] = null;
+            $data['manhour_rate_amount'] = null;
+            $data['discount_type'] = null;
+            $data['discount_value'] = null;
+            $data['description'] = null;
+
+            return $faker->randomElement([null, json_encode($data)]);
+        },
+        'origin_project' => null,
+        'origin_currency' => null,
+        'origin_scheduled_payment_type' => null,
+        'origin_quotation' => null,
+        'origin_quotation_workpackages' => null,
+        'origin_quotation_workpackage_items' => null,
+        'origin_quotation_workpackage_taskcard_items' => null,
+        'origin_quotation_htcrr_items' => null,
     ];
 
 });
@@ -136,6 +160,14 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
         ])
     );
 
+    // Tax
+
+    if ($faker->boolean) {
+        for ($i = 1; $i <= rand(1, 3); $i++) {
+            $quotation->taxes()->save(factory(Tax::class)->make());
+        }
+    }
+
     // WorkPackage
 
     if ($faker->boolean) {
@@ -164,7 +196,8 @@ $factory->afterCreating(Quotation::class, function ($quotation, $faker) {
 
             $quotation->workpackages()->save($workpackage, [
                 'manhour_total' => rand(10, 20),
-                'manhour_rate' => rand(10, 20) * 1000000,
+                'manhour_rate_id' => Manhour::get()->random()->id,
+                'manhour_rate_amount' => rand(10, 20) * 1000000,
                 'discount_type' => $disc_type,
                 'discount_value' => $disc_value,
                 'description' => $faker->randomElement([null, $faker->sentence]),

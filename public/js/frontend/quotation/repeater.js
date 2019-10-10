@@ -27,7 +27,7 @@ $("div.repeaterScheduledPayment").on("click", ".AddRow", function (event) {
 
 $("div.repeaterScheduledPayment").on("click", ".DeleteRow", function (event) {
     let counter = $("div.repeaterScheduledPayment > div.repeaterRow").length;
-    if (counter > 2) {
+    if (counter > 1) {
         $(this).closest(".repeaterRow").slideUp("swing", function () { $(this).remove(); });
     }
 });

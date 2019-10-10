@@ -66,7 +66,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text',  $discrepancy->jobcard->quotation->quotationable->aircraft->name)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -77,7 +77,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text',  $discrepancy->sequence)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -86,7 +86,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->jobcard->quotation->quotationable->aircraft_register)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -97,7 +97,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->jobcard->number)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -106,7 +106,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->jobcard->quotation->quotationable->aircraft_sn)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -117,17 +117,29 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @if(sizeof($discrepancy->jobcard->jobcardable->skills) == 3)
+                                                    @slot('text', 'ERI')
+                                                @elseif(sizeof($discrepancy->jobcard->jobcardable->skills) == 1)
+                                                    @slot('text', $discrepancy->jobcard->jobcardable->skills[0]->name)
+                                                @else
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @endif
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Qty Engineer
+                                                Zone
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
+                                            @if ($discrepancy->zones->isEmpty())
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @foreach ($discrepancy->zones  as $zone)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $zone->name )
+                                                        @endcomponent
+                                                    @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -137,27 +149,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Qty Helper
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Area/Zone
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                               @slot('text',  $discrepancy->ata)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -166,7 +158,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->estimation_manhour)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -187,6 +179,9 @@
                                                 @slot('id', 'is_rii')
                                                 @slot('name', 'is_rii')
                                                 @slot('text', 'RII?')
+                                                @if ($discrepancy->is_rii == 1)
+                                                    @slot('checked', 'checked')
+                                                @endif
                                             @endcomponent
                                         </div>
                                     </div>
@@ -197,7 +192,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->complaint)
                                             @endcomponent
                                         </div>
                                     </div>
@@ -343,18 +338,8 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('text', $discrepancy->description)
                                             @endcomponent
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-12 col-md-12 col-lg-12 footer">
-                                            <div class="flex">
-                                                <div class="action-buttons">
-                                                    @include('frontend.common.buttons.back')
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -364,6 +349,35 @@
                 </div>
             </div>
             <div class="col-lg-5">
+            <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
+                                    Helper(s) List
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="defectcard_helper_datatable" id="scrolling_both"></div>
+                        </div>
+                    </div>
+                </div>
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -389,6 +403,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="tools_datatable" id="scrolling_both"></div>
 
                         </div>
@@ -419,6 +434,9 @@
                                     </div>
                                 </div>
                             </div>
+
+                            {{-- @include('frontend.job-card.engineer.discrepancy.item.item.index') --}}
+
                             <div class="materials_datatable" id="scrolling_both"></div>
                         </div>
                     </div>
@@ -445,6 +463,19 @@
 @endpush
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/job-card/discrepancy/edit.js') }}"></script>
+    <script>
+        let discrepancy_uuid = '{{$discrepancy->uuid}}';
+    </script>
+    <script src="{{ asset('js/frontend/job-card/discrepancy/show.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/helpers.js') }}"></script>
     <script src="{{ asset('js/frontend/job-card/discrepancy/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
+
 @endpush

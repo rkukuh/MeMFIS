@@ -25,25 +25,41 @@ class DatabaseSeeder extends Seeder
         $this->call(UnitsTableSeeder::class);
         $this->call(LevelsTableSeeder::class);
         $this->call(StatusesTableSeeder::class);
-        $this->call(JournalsTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(CurrenciesTableSeeder::class);
         
         /** MASTER */
         
+        $this->call(TaxesTableSeeder::class);
+        $this->call(BanksTableSeeder::class);
+        $this->call(StoragesTableSeeder::class);
+        $this->call(CompaniesTableSeeder::class);
+        $this->call(BranchesTableSeeder::class);
         $this->call(ManufacturersTableSeeder::class);
         $this->call(AircraftsTableSeeder::class);
         $this->call(LanguagesTableSeeder::class);
         $this->call(SchoolsTableSeeder::class);
-        $this->call(DepartmentsTableSeeder::class);
         $this->call(EmployeesTableSeeder::class);
-        $this->call(StoragesTableSeeder::class);
         $this->call(ItemsTableSeeder::class);
         $this->call(LicensesTableSeeder::class);
         $this->call(CertificationsTableSeeder::class);
         $this->call(CustomersTableSeeder::class);
         $this->call(VendorsTableSeeder::class);
         $this->call(FacilitiesTableSeeder::class);
+        $this->call(ManhoursTableSeeder::class);
+        $this->call(PromosTableSeeder::class);
+        
+        $this->call(DepartmentsTableSeeder::class);
+        $this->call(BenefitsTableSeeder::class);
+        $this->call(PositionsTableSeeder::class);
+        $this->call(LeavePeriodsTableSeeder::class);
+        $this->call(BPJSSTableSeeder::class);
+        $this->call(JobTittlesTableSeeder::class);
+        $this->call(LeaveTypesTableSeeder::class);
+        $this->call(HolidaysTableSeeder::class);
+        $this->call(WorkshiftsTableSeeder::class);
+        
+        $this->call(BankAccountsTableSeeder::class);
 
         /** POLYMORPH */
 
@@ -63,6 +79,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ApprovalsTableSeeder::class);
         $this->call(ProgressesTableSeeder::class);
         $this->call(InspectionsTableSeeder::class);
+        $this->call(InterchangesTableSeeder::class);
+        $this->call(InventoryInsTableSeeder::class);
+        $this->call(InventoryOutsTableSeeder::class);
 
         /** LICENSE */
 
@@ -96,24 +115,45 @@ class DatabaseSeeder extends Seeder
         $this->call(ProjectWorkPackageEngineersTableSeeder::class);
         $this->call(ProjectWorkPackageManhoursTableSeeder::class);
         $this->call(ProjectWorkPackageFacilitiesTableSeeder::class);
+        $this->call(ProjectWorkPackageTaskCardsTableSeeder::class);
+        $this->call(ProjectWorkPackageEOInstructionsTableSeeder::class);
 
         /** WORKPACKAGE's TASKCARDs */
 
         $this->call(TaskCardWorkPackagesTableSeeder::class);
-        $this->call(TaskCardWorkPackagePredecessorsTableSeeder::class);
         $this->call(TaskCardWorkPackageSuccessorsTableSeeder::class);
+        $this->call(TaskCardWorkPackagePredecessorsTableSeeder::class);
+
+        /** WORKPACKAGE's EO-INSTRUCTIONs */
+
+        $this->call(EOInstructionWorkPackagesTableSeeder::class);
+        $this->call(EOInstructionWorkPackageSuccessorsTableSeeder::class);
+        $this->call(EOInstructionWorkPackagePredecessorsTableSeeder::class);
 
         /** QUOTATION's WORKPACKAGEs */
 
         $this->call(QuotationWorkPackagesTableSeeder::class);
         $this->call(QuotationWorkPackageItemsTableSeeder::class);
 
-        /** QUOTATION's WORKPACKAGE's TASKCARD's */
+        /** QUOTATION's WORKPACKAGE's TASKCARDs */
         
         $this->call(QuotationWorkPackageTaskCardItemsTableSeeder::class);
 
-        /** QUOTATION's WORKPACKAGE's HT/CRR's */
+        /** QUOTATION's HT/CRRs */
 
-        $this->call(QuotationWorkPackageHtcrrItemsTableSeeder::class);
+        $this->call(QuotationHtcrrItemsTableSeeder::class);
+
+        /** QUOTATION's DEFECTCARDs */
+
+        $this->call(QuotationDefectCardItemsTableSeeder::class);
+
+        /** PURCHASE ORDER's ITEMs */
+
+        $this->call(PurchaseOrderItemsTableSeeder::class);
+
+        /** TRIGGER-ONLY */
+
+        $this->call(FefoInsTableSeeder::class);
+        $this->call(FefoOutsTableSeeder::class);
     }
 }

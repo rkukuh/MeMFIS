@@ -3,21 +3,23 @@
 namespace App\Models;
 
 use App\MemfisModel;
+use App\Models\Pivots\PurchaseOrderItem;
 
 class PurchaseOrder extends MemfisModel
 {
     protected $fillable = [
         'number',
-        'vendor_id',
         'purchase_request_id',
+        'vendor_id',
         'ordered_at',
         'valid_until',
+        'valid_at',
         'shipping_address',
         'ship_at',
         'currency_id',
         'exchange_rate',
+        'subtotal',
         'total_before_tax',
-        'tax_amount',
         'total_after_tax',
         'top_type',
         'top_day_amount',
@@ -26,9 +28,10 @@ class PurchaseOrder extends MemfisModel
     ];
 
     protected $dates = [
-        'ordered_at', 
-        'valid_until', 
-        'ship_at', 
+        'ordered_at',
+        'valid_until',
+        'valid_at',
+        'ship_at',
         'top_start_at',
     ];
 
@@ -37,7 +40,7 @@ class PurchaseOrder extends MemfisModel
     /**
      * Polymorphic: An entity can have zero or many approvals.
      *
-     * This function will get all Quotation's approvals.
+     * This function will get all PurchaseOrder's approvals.
      * See: Approvals's approvable() method for the inverse
      *
      * @return mixed
@@ -84,17 +87,30 @@ class PurchaseOrder extends MemfisModel
     public function items()
     {
         return $this->belongsToMany(Item::class)
+                    ->using(PurchaseOrderItem::class)
                     ->withPivot(
                         'quantity',
+                        'quantity_unit',
                         'unit_id',
                         'price',
                         'subtotal_before_discount',
-                        'discount_percentage',
-                        'discount_amount',
                         'subtotal_after_discount',
                         'note'
                     )
                     ->withTimestamps();
+    }
+
+    /**
+     * M-M Polymorphic: A promo can be applied to many entities.
+     *
+     * This function will get all the promos that are applied to a given PO.
+     * See: Promo's purchase_orders() method for the inverse
+     *
+     * @return mixed
+     */
+    public function promos()
+    {
+        return $this->morphToMany(Promo::class, 'promoable');
     }
 
     /**
@@ -108,6 +124,19 @@ class PurchaseOrder extends MemfisModel
     public function purchase_request()
     {
         return $this->belongsTo(PurchaseRequest::class);
+    }
+
+    /**
+     * Polymorphic: An entity can have zero or many taxes.
+     *
+     * This function will get all PurchaseOrder's taxes.
+     * See: Tax's taxable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function taxes()
+    {
+        return $this->morphMany(Tax::class, 'taxable');
     }
 
     /**

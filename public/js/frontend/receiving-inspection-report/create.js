@@ -19,7 +19,8 @@ let receiving_inspection_report = {
                   }
               },
               pageSize: 10,
-              serverPaging: !1,
+              serverPaging: !0,
+                serverFiltering: !1,
               serverSorting: !1
           },
           layout: {

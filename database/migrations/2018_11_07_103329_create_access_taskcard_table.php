@@ -15,8 +15,8 @@ class CreateAccessTaskcardTable extends Migration
     {
         Schema::create('access_taskcard', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('taskcard_id');
             $table->unsignedBigInteger('access_id');
+            $table->unsignedBigInteger('taskcard_id');
             $table->timestamps();
             $table->softDeletes();
 

@@ -62,6 +62,7 @@
                                                     </span>
                                                 </div>
                                             </div>
+                                            @include('frontend.common.buttons.filter')
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
@@ -73,6 +74,9 @@
                                         <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-lg-12">
+                                @include('frontend.vendor.filter')
                             </div>
                             <div class="vendor_datatable" id="scrolling_both"></div>
                         </div>

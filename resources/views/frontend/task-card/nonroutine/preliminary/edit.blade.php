@@ -86,7 +86,7 @@
                                                 Company Task Number @include('frontend.common.label.optional')
                                             </label>
 
-                                            @if (empty($taskCard->additionals))
+                                            @if (empty($additionals))
                                                 @component('frontend.common.input.text')
                                                     @slot('id', 'company_number')
                                                     @slot('text', 'Company Task Number')
@@ -98,7 +98,9 @@
                                                     @slot('id', 'company_number')
                                                     @slot('text', 'Company Task Number')
                                                     @slot('name', 'company_number')
-                                                    @slot('value', json_decode($taskCard->additionals)->internal_number)
+                                                    @if(isset($additionals))
+                                                    @slot('value', $additionals->internal_number)
+                                                    @endif
                                                     @slot('id_error', 'company_number')
                                                 @endcomponent
                                             @endif
@@ -132,17 +134,42 @@
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Manhour Estimation @include('frontend.common.label.required')
-                                            </label>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Manhour Estimation @include('frontend.common.label.required')
+                                                    </label>
 
-                                            @component('frontend.common.input.decimal')
-                                                @slot('id', 'manhour')
-                                                @slot('text', 'Manhour')
-                                                @slot('name', 'manhour')
-                                                @slot('id_error', 'manhour')
-                                                @slot('value', $taskcard->estimation_manhour)
-                                            @endcomponent
+                                                    @component('frontend.common.input.decimal')
+                                                        @slot('id', 'manhour')
+                                                        @slot('text', 'Manhour')
+                                                        @slot('name', 'manhour')
+                                                        @slot('id_error', 'manhour')
+                                                        @slot('value', $taskcard->estimation_manhour)
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Documents library @include('frontend.common.label.optional')
+                                                    </label>
+
+                                                    <select id="document-library" name="document-library" class="form-control m-select2" multiple style="width:100%">
+                                                        <option value="">
+                                                            &mdash; Select a Document Library &mdash;
+                                                        </option>
+
+                                                        @if (isset($additionals->document_library))
+                                                            @foreach ($additionals->document_library as $document_library)
+                                                                <option selected>
+                                                                    {{ $document_library }}
+                                                                </option>
+                                                            @endforeach
+                                                        @endif
+
+                                                    </select>
+
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
@@ -420,38 +447,38 @@
         }, false);
 
         $(document).ready(function () {
-          $(".js-example-tags").select2();
-          var counterThresholds = {!! sizeof($taskcard->thresholds) !!};
-          var counterRepeats = {!! sizeof($taskcard->repeats) !!};
-          var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
-          $("#addrow").on("click", function () {
-              var x = 1;
-              var newRow = $("<tr>");
-              var cols = "";
-              x = x+1;
-              cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
-              cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
-              cols += '<option value"">Select Threshold</option>';
-              for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
-                  if(maintenanceCycles[i].id == 1){
-                  }else{
-                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
-                  }
-              };
-              cols += '</select></td>';
-              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
-              newRow.append(cols);
-              $("table.threshold").append(newRow);
-              $('.select').select2();
-              counterThresholds++;
-          });
-          $("table.threshold").on("click", ".ibtnDel", function (event) {
-              if (counterThresholds >= 1) {
-                  $(this).closest("tr").remove();
-                  counterThresholds -= 1
-              }
-          });
-          $("#addrow2").on("click", function () {
+            $(".js-example-tags").select2();
+            var counterThresholds = {!! sizeof($taskcard->thresholds) !!};
+            var counterRepeats = {!! sizeof($taskcard->repeats) !!};
+            var maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+            $("#addrow").on("click", function () {
+                var x = 1;
+                var newRow = $("<tr>");
+                var cols = "";
+                x = x+1;
+                cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
+                cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
+                cols += '<option value"">Select Threshold</option>';
+                for (var i = 0; i < (maintenanceCycles.length - 1); i++) {
+                    if(maintenanceCycles[i].id == 1){
+                    }else{
+                    cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                    }
+                };
+                cols += '</select></td>';
+                cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+                newRow.append(cols);
+                $("table.threshold").append(newRow);
+                $('.select').select2();
+                counterThresholds++;
+            });
+            $("table.threshold").on("click", ".ibtnDel", function (event) {
+                if (counterThresholds >= 1) {
+                    $(this).closest("tr").remove();
+                    counterThresholds -= 1
+                }
+            });
+            $("#addrow2").on("click", function () {
                 var x = 1;
                 var newRow = $("<tr>");
                 var cols = "";
@@ -485,9 +512,9 @@
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool-uom.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
@@ -523,6 +550,8 @@
 
     <script src="{{ asset('js/frontend/functions/select2/repeat-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/repeat-type.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/document-library.js') }}"></script>
 
     {{-- <script src="{{ asset('js/frontend/taskcard/form-reset.js') }}"></script> --}}
 @endpush

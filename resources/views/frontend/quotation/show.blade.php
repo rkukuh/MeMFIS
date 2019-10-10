@@ -64,7 +64,7 @@
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', $quotation->project->no_wo)
+                                                                @slot('text', $quotation->quotationable->no_wo)
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -75,7 +75,7 @@
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', $quotation->project->title)
+                                                                @slot('text', $quotation->quotationable->title)
                                                             @endcomponent
                                                         </div>
                                                     </div>
@@ -147,7 +147,7 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                                @slot('text', 'XXX')
+                                                                                @slot('text', $quotation->quotationable->customer->name)
                                                                                 @slot('id', 'name')
                                                                             @endcomponent
                                                                         </div>
@@ -157,10 +157,10 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                            @if(isset($attention->name))
+                                                                            @if(isset($attention->name) && $attention->name !== "null")
                                                                                 @slot('text', $attention->name)
                                                                             @else
-                                                                                @slot('text', 'name')
+                                                                                @slot('text', '-')
                                                                             @endif
                                                                                 @slot('id', 'attention')
                                                                                 @slot('name', 'attention')
@@ -178,12 +178,12 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                            @if(isset($attention->phone))
+                                                                            @if(isset($attention->phone) && $attention->phone !== "null")
                                                                                 @slot('text', $attention->phone)
                                                                             @else
-                                                                                @slot('text', 'phone')
+                                                                                @slot('text', '-')
                                                                             @endif
-                                                                                @slot('text', '+62xxxxxxx / 07777777')
+                                                                                @slot('name', 'attn-phone')
                                                                                 @slot('id', 'phone')
                                                                             @endcomponent
 
@@ -194,11 +194,12 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                            @if(isset($attention->fax))
+                                                                            @if(isset($attention->fax) && $attention->fax !== "null")
                                                                                 @slot('text', $attention->fax)
                                                                             @else
-                                                                                @slot('text', 'fax')
+                                                                                @slot('text', '-')
                                                                             @endif
+                                                                                @slot('name', 'attn-fax')
                                                                                 @slot('id', 'fax')
                                                                             @endcomponent
                                                                         </div>
@@ -210,10 +211,10 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                            @if(isset($attention->email))
+                                                                            @if(isset($attention->email) && $attention->email !== "null")
                                                                                 @slot('text', $attention->email)
                                                                             @else
-                                                                                @slot('text', 'email')
+                                                                                @slot('text', '-')
                                                                             @endif
                                                                                 @slot('id', 'email')
                                                                             @endcomponent
@@ -231,10 +232,10 @@
                                                                             </label>
 
                                                                             @component('frontend.common.label.data-info')
-                                                                            @if(isset($attention->address))
+                                                                            @if(isset($attention->address) && $attention->address !== "null")
                                                                                 @slot('text', $attention->address)
                                                                             @else
-                                                                                @slot('text', 'address')
+                                                                                @slot('text', '-')
                                                                             @endif
                                                                                 @slot('id', 'address')
                                                                             @endcomponent
@@ -328,7 +329,8 @@
                                                 </label>
                                                 @component('frontend.common.label.data-info')
                                                     @slot('id', 'scheduled_payment_type')
-                                                    @slot('text','Scheduled payment type')
+                                                    {{-- @slot('text','Scheduled payment type')
+                                                    @slot('value','Scheduled payment type') --}}
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
@@ -337,7 +339,8 @@
                                                 </label>
                                                 @component('frontend.common.label.data-info')
                                                     @slot('id', 'scheduled_payment_amount')
-                                                    @slot('text','Scheduled payment amount')
+                                                    {{-- @slot('text','Scheduled payment amount')
+                                                    @slot('value','Scheduled payment amount') --}}
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -358,7 +361,7 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <label class="form-control-label">
-                                            Quotation Subject @include('frontend.common.label.required')
+                                            Description @include('frontend.common.label.required')
                                         </label>
 
                                         @component('frontend.common.label.data-info')
@@ -398,6 +401,27 @@
                                                 <div class="summary_datatable" id="scrolling_both"></div>
                                                 <br>
                                                 <hr>
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-5 col-md-5 col-lg-5">
+                                                    </div>
+                                                    <div class="col-sm-2 col-md-2 col-lg-2">
+                                                        <div class="m--align-left" style="padding-top:15px">
+                                                            Total Discount
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3 col-md-3 col-lg-3">
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('id', 'total_discount')
+                                                            @slot('class', 'total_discount')
+                                                            @slot('text', '0')
+                                                            @slot('value', '0')
+                                                        @endcomponent
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                    </div>
+                                                    <div class="col-sm-1 col-md-1 col-lg-1">
+                                                    </div>
+                                                </div>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
                                                     </div>
@@ -542,7 +566,7 @@
 
 @push('footer-scripts')
 <script>
-    let project_id = '{{  $quotation->project->uuid }}';
+    let project_id = '{{  $quotation->quotationable->uuid }}';
     let currency = '{{  $quotation->currency_id }}';
     let currencyCode = '{{  $quotation->currency->code }}';
 </script>

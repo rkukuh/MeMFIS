@@ -54,27 +54,6 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                                Date @include('frontend.common.label.required')
-                                                            </label>
-
-                                                            @component('frontend.common.input.datepicker')
-                                                                @slot('id', 'date')
-                                                                @slot('text', 'Date')
-                                                                @slot('name', 'date')
-                                                                @slot('id_error', 'date')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         Ref PO @include('frontend.common.label.required')
                                                     </label>
@@ -84,77 +63,6 @@
                                                         @slot('id', 'ref-po')
                                                         @slot('name', 'ref-po')
                                                     @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Vendor @include('frontend.common.label.required')
-                                                    </label>
-                                                    <div class="row">
-                                                        <div class="col-sm-4 col-md-4 col-lg-4">
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('id', 'vendor-code')
-                                                                @slot('text', '-')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-8 col-md-8 col-lg-8">
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('id', 'vendor-name')
-                                                                @slot('text', '-')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Purchase Request Number @include('frontend.common.label.required')
-                                                    </label>
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('id', 'pr-number')
-                                                        @slot('text', '-')
-                                                    @endcomponent
-
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <div class="row">
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                                Vendor DO No.
-                                                            </label>
-
-                                                            @component('frontend.common.input.text')
-                                                                @slot('id', 'do-no')
-                                                                @slot('text', 'do-no')
-                                                                @slot('name', 'do-no')
-                                                                @slot('id_error', 'do-no')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <label class="form-control-label">
-                                                                DO Ref Date
-                                                            </label>
-
-                                                            @component('frontend.common.input.datepicker')
-                                                                @slot('text', 'ref-date')
-                                                                @slot('name', 'ref-date')
-                                                                @slot('id', 'ref-date')
-                                                            @endcomponent
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        Project Number @include('frontend.common.label.required')
-                                                    </label>
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('id', 'project-number')
-                                                        @slot('text', '-')
-                                                    @endcomponent
-
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
@@ -171,8 +79,107 @@
                                             </div>
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="row">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                <label class="form-control-label">
+                                                                    Delivery Order Number @include('frontend.common.label.required')
+                                                                </label>
+                                                                @component('frontend.common.input.text')
+                                                                    @slot('id', 'deliv-number')
+                                                                    @slot('name', 'deliv-number')
+                                                                    @slot('text', 'Deliv Number')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                                <label class="form-control-label">
+                                                                    DO Date
+                                                                </label>
+
+                                                                @component('frontend.common.input.datepicker')
+                                                                    @slot('text', 'Do Date')
+                                                                    @slot('name', 'do-date')
+                                                                    @slot('id', 'do-date')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <div class="row">
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <label class="form-control-label">
+                                                                Received By @include('frontend.common.label.required')
+                                                            </label>
+
+                                                            @component('frontend.common.input.select2')
+                                                                @slot('id', 'employee')
+                                                                @slot('text', 'employee')
+                                                                @slot('name', 'employee')
+                                                                @slot('id_error', 'employee')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                            <label class="form-control-label">
+                                                                Date @include('frontend.common.label.required')
+                                                            </label>
+
+                                                            @component('frontend.common.input.datepicker')
+                                                                @slot('id', 'date')
+                                                                @slot('text', 'Date')
+                                                                @slot('name', 'date')
+                                                                @slot('id_error', 'date')
+                                                            @endcomponent
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Description @include('frontend.common.label.required')
+                                                        Purchase Request Number
+                                                    </label>
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('id', 'pr-number')
+                                                        @slot('text', '-')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Vendor
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('id', 'vendor-code')
+                                                        @slot('text', '-')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Project Number
+                                                    </label>
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('id', 'project-number')
+                                                        @slot('text', '- ?')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Vehicle No
+                                                    </label>
+
+                                                    @component('frontend.common.input.text')
+                                                        @slot('id', 'vehicle-no')
+                                                        @slot('text', 'vehicle-no')
+                                                        @slot('name', 'vehicle-no')
+                                                        @slot('id_error', 'vehicle-no')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label class="form-control-label">
+                                                        Description
                                                     </label>
 
                                                     @component('frontend.common.input.textarea')
@@ -183,40 +190,13 @@
                                                         @slot('id_error', 'description')
                                                     @endcomponent
                                                 </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <div class="form-group m-form__group row" style="margin-top:22px">
-                                                        <label for="example-text-input" class="col-2 col-form-label">Received By</label>
-                                                        <div class="col-10">
-                                                            @component('frontend.common.input.select2')
-                                                                @slot('id', 'received-by')
-                                                                @slot('text', 'received-by')
-                                                                @slot('name', 'received-by')
-                                                                @slot('id_error', 'received-by')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group m-form__group row" >
-                                                        <label for="example-text-input" class="col-2 col-form-label">Vehicle No</label>
-                                                        <div class="col-10">
-                                                            @component('frontend.common.input.text')
-                                                                @slot('id', 'vehicle-no')
-                                                                @slot('text', 'vehicle-no')
-                                                                @slot('name', 'vehicle-no')
-                                                                @slot('id_error', 'vehicle-no')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group m-form__group row" >
-                                                        <label for="example-text-input" class="col-2 col-form-label">Container No</label>
-                                                        <div class="col-10">
-                                                            @component('frontend.common.input.text')
-                                                                @slot('id', 'container-no')
-                                                                @slot('text', 'container-no')
-                                                                @slot('name', 'container-no')
-                                                                @slot('id_error', 'container-no')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
+                                            </div>
+                                            <hr>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+
+                                                    @include('frontend.goods-received-note.modal')
+                                                    <div class="purchase_order_datatable" id="purchase_order_datatable"></div>
                                                 </div>
                                             </div>
                                             <div class="form-group m-form__group row">
@@ -237,11 +217,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                    <div class="purchase_order_datatable" id="purchase_order_datatable"></div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -257,9 +232,13 @@
 @push('footer-scripts')
 
     <script src="{{ asset('js/frontend/good-received-note/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/select2/received-by.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/datepicker/ref-date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/do-date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/employee.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/employee-uuid.js') }}"></script>
 
 @endpush

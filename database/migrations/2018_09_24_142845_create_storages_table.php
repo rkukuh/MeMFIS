@@ -20,14 +20,8 @@ class CreateStoragesTable extends Migration
             $table->string('name');
             $table->boolean('is_active')->default(true);
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('account_code')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('account_code')
-                  ->references('id')->on('journals')
-                  ->onUpdate('cascade')
-                  ->onDelete('restrict');
 
             $table->index('code');
             $table->index('name');

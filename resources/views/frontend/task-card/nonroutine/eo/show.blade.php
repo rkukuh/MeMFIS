@@ -83,7 +83,7 @@
                                                         @slot('text', json_decode($taskcard->additionals)->internal_number))
                                                     @endcomponent
                                                 @endif
-                                             </div>
+                                            </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -145,14 +145,12 @@
                                                     Category @include('frontend.common.label.required')
                                                 </label>
 
-                                                @if (empty($taskcard->category_id))
-                                                    @include('frontend.common.label.data-info-nodata')
+                                                @if(isset($taskcard->category_id))
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $taskcard->category->name)
+                                                    @endcomponent
                                                 @else
-                                                    <div style="background-color:beige; padding:15px;" class="">
-                                                        @foreach($taskcard->related_to  as $related)
-                                                            {{ $related->number }},
-                                                        @endforeach
-                                                    </div>
+                                                    @include('frontend.common.label.data-info-nodata')
                                                 @endif
                                             </div>
                                             <div class="form-group m-form__group row">
@@ -173,7 +171,22 @@
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
                                                         Documents library @include('frontend.common.label.optional')
-                                                    </label>
+                                                    </label><br>
+
+                                                    @if (sizeof(json_decode($additionals->document_library))== 0)
+                                                        @include('frontend.common.label.data-info-nodata')
+                                                    @else
+                                                        @php
+                                                            $documents = json_decode($additionals->document_library, TRUE);
+                                                        @endphp
+                                                        {{-- <div class="d-flex justify-content-start"> --}}
+                                                            @foreach ($documents  as $document)
+                                                                @component('frontend.common.label.badge')
+                                                                    @slot('text', $document )
+                                                                @endcomponent
+                                                            @endforeach
+                                                        {{-- </div> --}}
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -217,25 +230,25 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @if( $taskcard->scheduled_priority_id == 77)
+                                                    @if( $taskcard->scheduled_priority_id == 144)
                                                         @slot('text', 'Next check / shop visit')
-                                                    @elseif( $taskcard->scheduled_priority_id == 78)
+                                                    @elseif( $taskcard->scheduled_priority_id == 145)
                                                         @slot('text', 'Next heavy maintenance visit')
-                                                    @elseif( $taskcard->scheduled_priority_id == 78)
+                                                    @elseif( $taskcard->scheduled_priority_id == 146)
                                                         @slot('text', 'As scheduled by PPC')
                                                     @else
-                                                        @slot('text', 'Next heavy maintenance visit')
+                                                        @slot('text', 'Prior To')
                                                     @endif
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6" id="prior_to">
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>
-                                                @if($taskcard->scheduled_priority_amount)
+                                                @if($taskcard->scheduled_priority_id == 147)
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-10 col-md-10 col-lg-10">
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', $taskcard->scheduled_priority_amount)
+                                                            @slot('text', $taskcard->scheduled_priority_text)
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
@@ -290,33 +303,35 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @if( $taskcard->manual_affected_id == 69)
+                                                    @if( $taskcard->manual_affected_id == 136)
                                                         @slot('text', 'MM')
-                                                    @elseif( $taskcard->manual_affected_id == 70)
+                                                    @elseif( $taskcard->manual_affected_id == 137)
                                                         @slot('text', 'IPC')
-                                                    @elseif( $taskcard->manual_affected_id == 71)
+                                                    @elseif( $taskcard->manual_affected_id == 138)
                                                         @slot('text', 'WDM')
-                                                    @elseif( $taskcard->manual_affected_id == 72)
+                                                    @elseif( $taskcard->manual_affected_id == 139)
                                                         @slot('text', 'OHM')
                                                     @else
                                                         @slot('text', 'Other')
                                                     @endif
                                                 @endcomponent
                                             </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="note_div">
+                                            @if($taskcard->manual_affected_id == 140)
+                                            <div class="col-sm-6 col-md-6 col-lg-6" id="note_div">
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>
 
-                                                @if($taskcard->manual_affected)
+                                                @if(isset($taskcard->manual_affected_text))
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', $taskcard->manual_affected)
+                                                            @slot('text', $taskcard->manual_affected_text)
                                                         @endcomponent
                                                     </div>
                                                 </div>
                                                 @endif
                                             </div>
+                                            @endif
                                         </div>
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -412,8 +427,8 @@
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
                             @include('frontend.task-card.nonroutine.eo.instruction.modal')
-                            @include('frontend.task-card.nonroutine.eo.tool.modal')
-                            @include('frontend.task-card.nonroutine.eo.item.modal')
+                            @include('frontend.task-card.nonroutine.eo.tool.show')
+                            @include('frontend.task-card.nonroutine.eo.item.show')
 
                             <div class="instruction_datatable" id="instruction_datatable"></div>
                         </div>
@@ -445,6 +460,11 @@
 @endpush
 
 @push('footer-scripts')
+
+    <script>
+        let taskcard_uuid = '{{$taskcard->uuid}}';
+    </script>
+
     <script>
         var autoExpand = function (field) {
 
@@ -469,10 +489,6 @@
         if (event.target.tagName.toLowerCase() !== 'textarea') return;
         autoExpand(event.target);
         }, false);
-    </script>
-
-    <script>
-        let taskcard_uuid = '{{$taskcard->uuid}}';
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
@@ -509,4 +525,7 @@
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/show.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/item/show.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/tool/show.js') }}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush

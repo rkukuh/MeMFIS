@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Frontend\GoodsReceived;
 
+use Auth;
 use Carbon\Carbon;
 use App\Models\Storage;
+use App\Models\Employee;
+use App\Models\Approval;
 use App\Models\PurchaseOrder;
 use App\Models\GoodsReceived;
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\GoodsReceivedStore;
 use App\Http\Requests\Frontend\GoodsReceivedUpdate;
@@ -40,12 +44,37 @@ class GoodsReceivedController extends Controller
      */
     public function store(GoodsReceivedStore $request)
     {
+        $request->merge(['number' => DocumentNumber::generate('GRN-', GoodsReceived::withTrashed()->count()+1)]);
         $request->merge(['purchase_order_id' => PurchaseOrder::where('uuid',$request->purchase_order_id)->first()->id]);
         $request->merge(['storage_id' => Storage::where('uuid',$request->storage_id)->first()->id]);
         $request->merge(['received_at' => Carbon::parse($request->received_at)]);
+        $request->merge(['received_by' => Employee::where('uuid',$request->received_by)->first()->user->id]);
+
+        $additionals = null;
+
+        $additionals['SupplierRefNo'] = $request->do_no;
+        $additionals['SupplierRefDate'] = $request->do_date;
+
+        $request->merge(['additionals' => json_encode($additionals)]);
 
         $goodsReceived = GoodsReceived::create($request->all());
 
+    //     @if(isset(json_decode($jobCard->taskcard->additionals)->internal_number))
+    //     {{json_decode($jobCard->taskcard->additionals)->internal_number}}
+    // @else
+    //     -
+    // @endif
+
+        // $items = PurchaseOrder::find($request->purchase_order_id)->items;
+
+        // foreach($items as $item){
+        //     $goodsReceived->items()->attach([$item->pivot->item_id => [
+        //         'quantity'=> $item->pivot->quantity,
+                // 'already_received'=> 2,// TODO ask whats is it?
+        //         'unit_id' => $item->pivot->unit_id
+        //         ]
+        //     ]);
+        // }
 
         return response()->json($goodsReceived);
     }
@@ -60,6 +89,7 @@ class GoodsReceivedController extends Controller
     {
         return view('frontend.goods-received-note.show', [
             'goodsReceived' => $goodsReceived,
+            'additionals' => json_decode($goodsReceived->additionals)
         ]);
 
     }
@@ -74,6 +104,7 @@ class GoodsReceivedController extends Controller
     {
         return view('frontend.goods-received-note.edit', [
             'goodsReceived' => $goodsReceived,
+            'additionals' => json_decode($goodsReceived->additionals)
         ]);
 
     }
@@ -87,7 +118,13 @@ class GoodsReceivedController extends Controller
      */
     public function update(GoodsReceivedUpdate $request, GoodsReceived $goodsReceived)
     {
-        //
+        $request->merge(['storage_id' => Storage::where('uuid',$request->storage_id)->first()->id]);
+        $request->merge(['received_at' => Carbon::parse($request->received_at)]);
+
+        $goodsReceived->update($request->all());
+
+        return response()->json($goodsReceived);
+
     }
 
     /**
@@ -111,6 +148,12 @@ class GoodsReceivedController extends Controller
      */
     public function approve(GoodsReceived $goodsReceived)
     {
+        $goodsReceived->approvals()->save(new Approval([
+            'approvable_id' => $goodsReceived->id,
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
+        ]));
+
         return response()->json($goodsReceived);
     }
 }

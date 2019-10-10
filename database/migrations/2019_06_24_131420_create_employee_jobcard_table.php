@@ -17,6 +17,7 @@ class CreateEmployeeJobcardTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('jobcard_id');
             $table->unsignedBigInteger('employee_id');
+            $table->string('additionals')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

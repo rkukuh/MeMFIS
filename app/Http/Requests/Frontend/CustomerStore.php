@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Frontend;
 
-use App\Models\Journal;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -29,10 +28,9 @@ class CustomerStore extends FormRequest
     {
         return [
             'name' => 'required|min:3|max:50',
+            'level' => 'required',
             'phone_array.*' => 'required',
             'phone_array' => 'array|min:1',
-            'email_array.*' => 'required',
-            'email_array' => 'array|min:1',
         ];
     }
 
@@ -45,7 +43,6 @@ class CustomerStore extends FormRequest
     {
         return [
             'phone_array.*.required' => 'The phone field is required.',
-            'email_array.*.required' => 'The email field is required.',
         ];
     }
 
@@ -57,11 +54,7 @@ class CustomerStore extends FormRequest
      */
     public function withValidator($validator)
     {
-        $validator->after(function ($validator) {
-            $this->merge([
-                'account_code' => optional(Journal::where('uuid', $this->account_code)->first())->id
-            ]);
-        });
+        // 
     }
 
     protected function failedValidation(Validator $validator) {

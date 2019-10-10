@@ -1,18 +1,43 @@
 
 
+function calculate_total() {
+    let value = [];
+    let inputs = $(".charges");
+    let currency = $("#currency").val();
+    let exchange_rate = $("#exchange").val();
+    let grandTotal = grandTotalRupiah = 0;
+    //get all values
+    for (let i = 0; i < inputs.length; i++) {
+        value[i] = parseFloat($(inputs[i]).val());
+    }
+    const arrSum = arr => arr.reduce((a, b) => a + b, 0);
+    let total_discount = $("#total_discount").attr("value");
+    let subTotal = $('#sub_total').attr("value");
+    grandTotal = parseFloat(subTotal) - parseFloat(total_discount) + parseFloat(arrSum(value));
+
+    if(currency !== 1){
+        grandTotalRupiah = ( parseFloat(subTotal) - parseFloat(total_discount) + parseFloat(arrSum(value)) ) * exchange_rate;
+    }
+
+    $('#grand_total').attr("value", grandTotal);
+    $('#grand_total_rupiah').attr("value", grandTotalRupiah);
+    $('#grand_total').html(ForeignFormatter.format(grandTotal));
+    $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
+}
+
 let Quotation = {
     init: function () {
         let exchange_rate_value = $('input[name=exchange]').val();
         $(document).ready(function () {
             let GTotal = 0;
             if(currency == 1){
-                GTotal = IDRformatter.format(document.getElementById("grand_total_rupiah").innerHTML);
-                document.getElementById("grand_total_rupiah").innerHTML = GTotal;
+                GTotal = IDRformatter.format($("#grand_total_rupiah").html());
+                $("#grand_total_rupiah").html(GTotal);
             }else{
-                GTotal = ForeignFormatter.format(document.getElementById("grand_total").innerHTML);
-                document.getElementById("grand_total").innerHTML = GTotal;
-                GTotal = IDRformatter.format(document.getElementById("grand_total_rupiah").innerHTML);
-                document.getElementById("grand_total_rupiah").innerHTML = GTotal;
+                GTotal = ForeignFormatter.format($("#grand_total").html());
+                $("#grand_total").html(GTotal);
+                GTotal = IDRformatter.format($("#grand_total_rupiah").html());
+                $("#grand_total_rupiah").html(GTotal);
             }
         });
 
@@ -28,35 +53,6 @@ let Quotation = {
             }
         });
 
-        let edit = $(".m_datatable").on("click", ".edit", function () {
-            $("#button").show();
-            $("#simpan").text("Perbarui");
-
-            let triggerid = $(this).data("id");
-
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-                },
-                type: "get",
-                url: "/category/" + triggerid + "/edit",
-                success: function (data) {
-                    document.getElementById("id").value = data.id;
-                    document.getElementById("name").value = data.name;
-
-                    $(".btn-success").addClass("update");
-                    $(".btn-success").removeClass("add");
-                },
-                error: function (jqXhr, json, errorThrown) {
-                    let errorsHtml = "";
-                    let errors = jqXhr.responseJSON;
-
-                    $.each(errors.errors, function (index, value) {
-                        $("#kategori-error").html(value);
-                    });
-                }
-            });
-        });
 
         let workpackage_datatables_init = true;
         $(document).ready(function () {
@@ -98,14 +94,42 @@ let Quotation = {
                 url: '/label/get-customer/' + customer_uuid,
                 type: 'GET',
                 dataType: "json",
-                success: function (respone) {
-                    if (respone) {
-                        let res = JSON.parse(respone);
+                success: function (response) {
+                    if (response) {
+                        let res = JSON.parse(response.attention);
                         $('select[name="attention"]').empty();
                         $('select[name="phone"]').empty();
                         $('select[name="email"]').empty();
                         $('select[name="fax"]').empty();
                         $('select[name="address"]').empty();
+                        if(response.addresses.length){
+                            $.each(response.addresses, function( index, value ) {
+                                $('select[name="address"]').append(
+                                    '<option value="' + value.address + '">' + value.address + '</option>'
+                                );
+                            });
+                        }
+                        if(response.emails.length){
+                            $.each(response.emails, function( index, value ) {
+                                $('select[name="email"]').append(
+                                    '<option value="' + value.address + '">' + value.address + '</option>'
+                                );
+                            });
+                        }
+                        if(response.faxes.length){
+                            $.each(response.faxes, function( index, value ) {
+                                $('select[name="fax"]').append(
+                                    '<option value="' + value.number + '">' +value.number + '</option>'
+                                );
+                            });
+                        }
+                        if(response.phones.length){
+                            $.each(response.phones, function( index, value ) {
+                                $('select[name="phone"]').append(
+                                    '<option value="' + value.number + '">' + value.number + '</option>'
+                                );
+                            });
+                        }
                         for (var i = 0; i < res.length; i++) {
                             if (res[i].name) {
                                 $('select[name="attention"]').append(
@@ -113,12 +137,12 @@ let Quotation = {
                                 );
                             }
                             if (res[i].address) {
-                                $('select[name="attention"]').append(
+                                $('select[name="address"]').append(
                                     '<option value="' + res[i].address + '">' + res[i].address + '</option>'
                                 );
                             }
                             if (res[i].fax) {
-                                $('select[name="attention"]').append(
+                                $('select[name="fax"]').append(
                                     '<option value="' + res[i].fax + '">' + res[i].fax + '</option>'
                                 );
                             }
@@ -138,8 +162,7 @@ let Quotation = {
                             }
                         }
                     } else {
-                        console.log("empty");
-
+                        // console.log("empty");
                     }
 
                 }
@@ -150,28 +173,50 @@ let Quotation = {
             document.getElementById("workpackage_uuid").value = $(this).data('uuid');
         });
 
-        $('.calculate').on('click', function calculate_total() {
-            let value = [];
-            let inputs = $(".charge");
-            let currency = $("#currency").val();
-            let exchange_rate = $("#exchange").val();
-            let grandTotal = grandTotalRupiah = 0;
-            //get all values
-            for (let i = 0; i < inputs.length; i++) {
-                value[i] = parseInt($(inputs[i]).val());
-            }
-            const arrSum = arr => arr.reduce((a, b) => a + b, 0);
-            let subTotal = $('#sub_total').attr("value");
-            grandTotal = parseInt(subTotal) + parseInt(arrSum(value));
+        $('.calculate').on('click', function () {
+            calculate_total();
+        });
 
-            if(currency !== 1){
-                grandTotalRupiah = ( parseInt(subTotal) + parseInt(arrSum(value)) ) * exchange_rate;
-            }
-                        
-            $('#grand_total').attr("value", grandTotal);
-            $('#grand_total_rupiah').attr("value", grandTotalRupiah);
-            $('#grand_total').html("$ "+ForeignFormatter.format(grandTotal));
-            $('#grand_total_rupiah').html(IDRformatter.format(grandTotalRupiah));
+        $('.action-buttons').on('click', '.discount-htcrr', function () {
+            let type = $('select[name="discount-type-htcrr"]').val();
+            let discount = $('input[name="discount-htcrr"').val();
+            let quotation = $('#quotation_uuid').val();
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/quotation/' + quotation + '/htcrr/discount',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    discount_type: type,
+                    discount_value: discount,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $('#discount').modal('hide');
+
+
+                        toastr.success('Discount has been updated.', 'Success', {
+                            timeOut: 5000
+                        });
+
+
+                        let table = $('.summary_datatable').mDatatable();
+
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
         });
 
         $('.action-buttons').on('click', '.discount', function () {
@@ -221,9 +266,11 @@ let Quotation = {
         $('.nav-tabs').on('click', '.workpackage', function () {
             let workpackage = $('.workpackage_datatable').mDatatable();
 
-            workpackage.originalDataSet = [];
+            workpackage.scheduled_paymen_dataSet = [];
             workpackage.reload();
         });
+
+
 
         $('.nav-tabs').on('click', '.summary', function () {
 
@@ -231,9 +278,9 @@ let Quotation = {
 
             summary.originalDataSet = [];
             summary.reload();
-            
+
             let value = [];
-            let inputs = $(".charge");
+            let inputs = $(".charges");
             let currency = $("#currency").val();
             let exchange_rate = $("#exchange").val();
             let grandTotal = grandTotalRupiah = 0;
@@ -248,7 +295,7 @@ let Quotation = {
             if(currency !== 1){
                 grandTotalRupiah = ( parseInt(subTotal) + parseInt(arrSum(value)) ) * exchange_rate;
             }
-                        
+
             $('#grand_total').attr("value", grandTotal);
             $('#grand_total_rupiah').attr("value", grandTotalRupiah);
             $('#grand_total').html("$ "+ForeignFormatter.format(grandTotal));
@@ -376,36 +423,41 @@ let Quotation = {
                 });
             }
         });
-        
+
         $('.footer').on('click', '.add-quotation', function () {
-            let is_ppn =  $('#is_ppn').prop("checked");
-            let ppn = 0;
-            if(is_ppn){
-                ppn = $('#grand_total').attr("value") * 1.1;
-                is_ppn = 1;
+            calculate_total();
+
+            let tax_type =  $('#is_ppn').prop("checked");
+            let ppn = tax_percentage = 0;
+            if(tax_type){
+                ppn = $('#grand_total_rupiah').attr("value") / 1.1 * 0.1;
+                tax_type = "include";
+                tax_percentage = 10;
             }else{
-                ppn = $('#grand_total').attr("value") * 0.1;
-                is_ppn = 0;
+                ppn = $('#grand_total_rupiah').attr("value") * 0.1;
+                tax_type = "exclude";
+                tax_percentage = 10;
             }
             let attention_name = $('#attention').val();
             let attention_phone = $('#phone').val();
             let attention_fax = $('#fax').val();
             let attention_email = $('#email').val();
             let attention_address = $('#address').val();
+
             let scheduled_payment_array = [];
-            let type = $('#scheduled_payment_type').children("option:selected").html();
-            if(type === "By Date"){
-                $('select[name^=scheduled_payment] ').each(function (i) {
-                    scheduled_payment_array[i] = $(this).val();
-                });
-            }else{
-                $('#scheduled_payment ').each(function (i) {
-                    scheduled_payment_array[i] = parseInt($(this).val());
-                });
+            let scheduled_payment_datatable = $('#scheduled_payments_datatables').DataTable();
+            let allData = scheduled_payment_datatable.rows().data();
+            for(let ind = 0 ; ind < allData.length ; ind++){
+                let container = [];
+                container[0] = allData[ind]["amount"];
+                container[1] = allData[ind]["amount_percentage"];
+                container[2] = allData[ind]["description"];
+                container[3] = allData[ind]["work_progress"];
+                scheduled_payment_array.push(container);
             }
-            scheduled_payment_array.pop();
+            
             let charge = [];
-            let chargeInputs = $('input[name^="charge"]');
+            let chargeInputs = $('input[type="number"][name^="charge"]');
             //get all values
             for (let i = 0; i < chargeInputs.length; i++) {
                 charge[i] = parseInt($(chargeInputs[i]).val());
@@ -413,8 +465,8 @@ let Quotation = {
             charge.pop();
             let chargeType = [];
             //get all values
-            $("select[name^=charge_type]").each(function() {
-                chargeType.push($(this).children("option:selected").val());
+            $("input[name^=charge_type]").each(function() {
+                chargeType.push($(this).val());
               });
             chargeType.pop();
 
@@ -443,7 +495,8 @@ let Quotation = {
             data.append("grandtotal", $('#grand_total').attr("value"));
             data.append("title", $('#title').val());
             data.append("ppn", ppn);
-            data.append("is_ppn",is_ppn);
+            data.append("tax_type",tax_type);
+            data.append("tax_percentage",tax_percentage);
             data.append("charge", JSON.stringify(charge));
             data.append('_method', 'PUT');
 
@@ -504,4 +557,17 @@ let Quotation = {
 
 jQuery(document).ready(function () {
     Quotation.init();
+    $.each($('.scheduledPayment'), function () {
+        $(this).addClass("scheduledPayment");
+        $(this).val("");
+        $(this).datetimepicker({
+            format: "yyyy-mm-dd",
+            todayHighlight: !0,
+            autoclose: !0,
+            startView: 2,
+            minView: 2,
+            forceParse: 0,
+            pickerPosition: "bottom-left"
+        });
+    });
 });

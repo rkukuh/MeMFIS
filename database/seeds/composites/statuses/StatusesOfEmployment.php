@@ -13,6 +13,30 @@ class StatusesOfEmployment extends Seeder
     public function run()
     {
         Status::create([
+            'code' => 'spk',
+            'name' => 'Surat Perintah Kerja',
+            'of'   => 'employment',
+        ]);
+
+        Status::create([
+            'code' => 'outsource',
+            'name' => 'Outsource',
+            'of'   => 'employment',
+        ]);
+
+        Status::create([
+            'code' => 'pkwt',
+            'name' => 'Perjanjian Kerja Waktu Tertentu',
+            'of'   => 'employment',
+        ]);
+
+        Status::create([
+            'code' => 'permanent',
+            'name' => 'Permanent',
+            'of'   => 'employment',
+        ]);
+
+        Status::create([
             'code' => 'part-time',
             'name' => 'Part Time',
             'of'   => 'employment',

@@ -21,7 +21,8 @@ let DefectCard = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -69,34 +70,34 @@ let DefectCard = {
                     }
                 },
                 {
-                    field: 'jobcard.taskcard.number',
+                    field: 'jobcard.jobcardable.number',
                     title: 'TC No',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/taskcard/'+t.jobcard.taskcard.uuid+'">' + t.jobcard.taskcard.number + "</a>"
+                        return '<a href="/taskcard/'+t.jobcard.jobcardable.uuid+'">' + t.jobcard.jobcardable.number + "</a>"
                     }
                 },
                 {
-                    field: 'jobcard.quotation.project.customer.name',
-                    title: 'Cusromer',
+                    field: 'jobcard.quotation.quotationable.customer.name',
+                    title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft.name',
+                    field: 'jobcard.quotation.quotationable.aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_register',
+                    field: 'jobcard.quotation.quotationable.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_sn',
+                    field: 'jobcard.quotation.quotationable.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
@@ -108,13 +109,36 @@ let DefectCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.taskcard.estimation_manhour',
-                    title: 'Mhrs',
+                    field: 'estimation_manhour',
+                    title: 'Mhrs Est.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'progresses.0.status_id',
+                    field: 'actual',
+                    title: 'Actual Mhrs.',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
+                },
+                {
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -125,7 +149,7 @@ let DefectCard = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="jobcard/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="defectcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'
                         );
@@ -140,7 +164,7 @@ let DefectCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/defectcard/project',
+                        url: '/datatables/defectcard/',
 
                         map: function (raw) {
                             let dataSet = raw;
@@ -154,7 +178,8 @@ let DefectCard = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -189,7 +214,7 @@ let DefectCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="/defectcard-engineer/'+t.uuid+'/edit ">' + t.code + "</a>"
+                            return '<a href="/defectcard/'+t.uuid+'/edit ">' + t.code + "</a>"
                     }
                 },
                 {
@@ -202,52 +227,75 @@ let DefectCard = {
                     }
                 },
                 {
-                    field: 'jobcard.taskcard.number',
+                    field: 'jobcard.jobcardable.number',
                     title: 'TC No',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/taskcard/'+t.jobcard.taskcard.uuid+'">' + t.jobcard.taskcard.number + "</a>"
+                        return '<a href="/taskcard/'+t.jobcard.jobcardable.uuid+'">' + t.jobcard.jobcardable.number + "</a>"
                     }
                 },
                 {
-                    field: 'jobcard.quotation.project.customer.name',
-                    title: 'Cusromer',
+                    field: 'jobcard.quotation.quotationable.customer.name',
+                    title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft.name',
+                    field: 'jobcard.quotation.quotationable.aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_register',
+                    field: 'jobcard.quotation.quotationable.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_sn',
+                    field: 'jobcard.quotation.quotationable.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.taskcard.skill.name',
+                    field: 'skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.taskcard.estimation_manhour',
-                    title: 'Mhrs',
+                    field: 'estimation_manhour',
+                    title: 'Mhrs Est.',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'progresses.0.status_id',
+                    field: 'actual',
+                    title: 'Actual Mhrs.',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
+                },
+                {
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -258,7 +306,7 @@ let DefectCard = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="jobcard/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="defectcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'
                         );

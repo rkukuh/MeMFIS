@@ -19,7 +19,7 @@
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right">
                     @component('frontend.common.buttons.summary')
                         @slot('text', 'Basic Summary')
-                        @slot('href', '#' ) )
+                        @slot('href', route('frontend.workPackage.summary.basic', $workPackage->uuid ))
                     @endcomponent
 
                     <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -51,7 +51,7 @@
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right">
                     @component('frontend.common.buttons.summary')
                         @slot('text', 'SIP Summary')
-                        @slot('href', '#') )
+                        @slot('href', route('frontend.workPackage.summary.sip', $workPackage->uuid ) )
                     @endcomponent
 
 
@@ -84,7 +84,7 @@
                 <div class="col-xl-6 order-1 order-xl-2 m--align-right">
                     @component('frontend.common.buttons.summary')
                         @slot('text', 'CPCP Summary')
-                        @slot('href', '#')
+                        @slot('href', route('frontend.workPackage.summary.cpcp', $workPackage->uuid ))
                     @endcomponent
 
 

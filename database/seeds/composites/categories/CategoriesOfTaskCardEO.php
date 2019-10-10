@@ -47,5 +47,41 @@ class CategoriesOfTaskCardEO extends Seeder
             'name' => 'Fleet Standard',
             'of' => 'taskcard-eo',
         ]);
+
+        Category::create([
+            'code' => 'replacement',
+            'name' => 'Replacement',
+            'of' => 'taskcard-eo',
+        ]);
+        
+        Category::create([
+            'code' => 'installation',
+            'name' => 'Installation',
+            'of' => 'taskcard-eo',
+        ]);
+
+        Category::create([
+            'code' => 'modification',
+            'name' => 'Modification',
+            'of' => 'taskcard-eo',
+        ]);
+
+        Category::create([
+            'code' => 'check',
+            'name' => 'Check',
+            'of' => 'taskcard-eo',
+        ]);
+
+        Category::create([
+            'code' => 'lubrication',
+            'name' => 'Lubrication',
+            'of' => 'taskcard-eo',
+        ]);
+
+        Category::create([
+            'code' => 'test',
+            'name' => 'Test',
+            'of' => 'taskcard-eo',
+        ]);
     }
 }

@@ -37,7 +37,7 @@
                                     @endcomponent
                                     @component('frontend.common.buttons.summary')
                                         @slot('text', 'Basic Summary')
-                                        @slot('href', route('frontend.project-hm.summary.basic', $workPackage->uuid) )
+                                        @slot('href', route('frontend.project-hm.summary.basic', ['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )
                                     @endcomponent
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
@@ -88,7 +88,7 @@
                                     @endcomponent
                                     @component('frontend.common.buttons.summary')
                                         @slot('text', 'SIP Summary')
-                                        @slot('href', route('frontend.project-hm.summary.sip', $workPackage->uuid) )
+                                        @slot('href', route('frontend.project-hm.summary.sip', ['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )
                                     @endcomponent
                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                 </div>
@@ -141,7 +141,7 @@
                                 @endcomponent
                                 @component('frontend.common.buttons.summary')
                                     @slot('text', 'CPCP Summary')
-                                    @slot('href', route('frontend.project-hm.summary.cpcp', $workPackage->uuid) )
+                                    @slot('href', route('frontend.project-hm.summary.cpcp', ['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )
                                 @endcomponent
                                 <div class="m-separator m-separator--dashed d-xl-none"></div>
                             </div>
@@ -155,10 +155,34 @@
         </div>
     </div>
     <!--end::Item-->
-
+    @if($workPackage->is_template == 0)
+    <div class="form-group m-form__group row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="action-buttons m--align-center">
+            @component('frontend.common.buttons.summary')
+                @slot('text', 'Blank Work Package Summary')
+                @slot('href', route('frontend.workPackage.summary.workpackage', $workPackage->uuid) )
+            @endcomponent
+            @component('frontend.common.buttons.summary')
+                @slot('text', 'routine Summary')
+                @slot('href', route('frontend.workPackage.summary.routine', $workPackage->uuid) )
+            @endcomponent
+            </div>
+        </div>
+    </div>
+    @endif
 </div>
+@push('header-scripts')
+    <style>
+       @media (min-width: 992px){
+            .modal-xl {
+                max-width: 1300px !important;
+            }
+        }
+    </style>
+@endpush
+
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/project/routine/index.js')}}"></script>
-    <script src="{{ asset('js/frontend/project/hm/datatables.js')}}"></script>
+    <script src="{{ asset('js/frontend/project/hm/routine/index.js')}}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush

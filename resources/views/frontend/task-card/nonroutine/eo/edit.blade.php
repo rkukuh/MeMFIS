@@ -68,25 +68,17 @@
                                             </div>
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Type @include('frontend.common.label.required')
+                                                    Title @include('frontend.common.label.required')
                                                 </label>
 
-                                                <select id="taskcard_non_routine_type" name="taskcard_non_routine_type" class="form-control m-select2" multiple style="width:100%">
-                                                    @if ( empty($taskCard->type_id) )
-                                                        @foreach ($types as $type)
-                                                            <option value="{{ $type->id }}">
-                                                                {{ $type->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    @else
-                                                        @foreach ($types as $type)
-                                                            <option value="{{ $type->id }}"
-                                                                @if($type->id == $taskCard->type_id) selected @endif>
-                                                                {{ $type->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    @endif
-                                                </select>
+                                                @component('frontend.common.input.text')
+                                                    @slot('id', 'title')
+                                                    @slot('text', 'Title')
+                                                    @slot('name', 'title')
+                                                    @slot('id_error', 'title')
+                                                    @slot('value',$taskCard->title)
+                                                @endcomponent
+
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -107,7 +99,9 @@
                                                         @slot('id', 'company_number')
                                                         @slot('text', 'Company Task Number')
                                                         @slot('name', 'company_number')
-                                                        @slot('value', json_decode($taskCard->additionals)->internal_number)
+                                                        @if(isset($additionals))
+                                                        @slot('value', $additionals->internal_number)
+                                                        @endif
                                                         @slot('id_error', 'company_number')
                                                     @endcomponent
                                                 @endif
@@ -146,19 +140,26 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Title @include('frontend.common.label.required')
+                                                    Type @include('frontend.common.label.required')
                                                 </label>
 
-                                                @component('frontend.common.input.text')
-                                                    @slot('id', 'title')
-                                                    @slot('text', 'Title')
-                                                    @slot('name', 'title')
-                                                    @slot('id_error', 'title')
-                                                    @slot('value',$taskCard->title)
-                                                @endcomponent
-
+                                                <select id="taskcard_non_routine_type" name="taskcard_non_routine_type" class="form-control m-select2" style="width:100%">
+                                                    @if ( empty($taskCard->type_id) )
+                                                        @foreach ($types as $type)
+                                                            <option value="{{ $type->id }}">
+                                                                {{ $type->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($types as $type)
+                                                            <option value="{{ $type->id }}"
+                                                                @if($type->id == $taskCard->type_id) selected @endif>
+                                                                {{ $type->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
                                             </div>
-
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
                                                     Effectivity (A/C Type) @include('frontend.common.label.required')
@@ -222,16 +223,19 @@
                                                         <label class="form-control-label">
                                                             Documents library @include('frontend.common.label.optional')
                                                         </label>
-
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('text', 'Document')
-                                                            @slot('id', 'document')
-                                                            @slot('name', 'document')
-                                                            @slot('multiple','multiple')
-                                                            @slot('help_text','You can chose multiple value')
-                                                            @slot('id_error', 'document')
-                                                        @endcomponent
-
+            
+                                                        <select id="document-library" name="document-library" class="form-control m-select2" multiple style="width:100%">
+                                                            <option value="">
+                                                                &mdash; Select a Document Library &mdash;
+                                                            </option>
+                                                            @if ( sizeof(json_decode($additionals->document_library)) > 0 )
+                                                                @foreach (json_decode($additionals->document_library) as $document)
+                                                                    <option selected>
+                                                                        {{ $document }}
+                                                                    </option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -390,7 +394,6 @@
                                                     <div class="col-sm-10 col-md-10 col-lg-10">
                                                         @component('frontend.common.input.number')
                                                             @slot('id', 'hour')
-                                                            @slot('text', 'hour')
                                                             @slot('name', 'hour')
                                                             @slot('disabled', 'disabled')
                                                             @slot('input_append', 'Hours')
@@ -424,7 +427,7 @@
                                                 </label>
 
                                                 <select id="recurrence_id" name="recurrence_id" class="form-control m-select2" style="width:100%">
-                                                     @if ( empty($taskCard->recurrence_id))
+                                                    @if ( empty($taskCard->recurrence_id))
                                                         @foreach ($recurrences as $recurrence)
                                                             <option value="{{ $recurrence->id }}" name-value="{{ $recurrence->name }}">
                                                                 {{ $recurrence->name }}
@@ -510,7 +513,7 @@
                                                     @slot('name', 'note')
                                                     @slot('text', 'Note')
                                                     @slot('disabled', 'disabled')
-                                                    @slot('value',$taskCard->manual_affected)
+                                                    @slot('value',$taskCard->manual_affected_text)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -729,40 +732,40 @@
         }, false);
         $(document).ready(function () {
 
-          $(".js-example-tags").select2();
-          let counterThresholds = {!! sizeof($taskCard->thresholds) !!};
-          let counterRepeats = {!! sizeof($taskCard->repeats) !!};
+            $(".js-example-tags").select2();
+            let counterThresholds = {!! sizeof($taskCard->thresholds) !!};
+            let counterRepeats = {!! sizeof($taskCard->repeats) !!};
 
-          let maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
-          $("#addrow").on("click", function () {
-              let x = 1;
-              let newRow = $("<tr>");
-              let cols = "";
-              x = x+1;
-              cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
-              cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
-              cols += '<option value"">Select Threshold</option>';
-              for (let i = 0; i < (maintenanceCycles.length - 1); i++) {
-                  if(maintenanceCycles[i].id == 1){
-                  }else{
-                  cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
-                  }
-              };
-              cols += '</select></td>';
-              cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
-              newRow.append(cols);
-              $("table.threshold").append(newRow);
-              $('.select').select2();
-              counterThresholds++;
-          });
-          $("table.threshold").on("click", ".ibtnDel", function (event) {
-              if (counterThresholds >= 1) {
-                  $(this).closest("tr").remove();
-                  counterThresholds -= 1
-              }
-          });
+            let maintenanceCycles = {!! json_encode($MaintenanceCycles->toArray()) !!}
+            $("#addrow").on("click", function () {
+                let x = 1;
+                let newRow = $("<tr>");
+                let cols = "";
+                x = x+1;
+                cols += '<td width="45%"><input type="text" required="required" class="form-control" name="threshold_amount[]"/></td>';
+                cols += '<td width="50%"><select name="threshold_type[]" class="select form-control ">';
+                cols += '<option value"">Select Threshold</option>';
+                for (let i = 0; i < (maintenanceCycles.length - 1); i++) {
+                    if(maintenanceCycles[i].id == 1){
+                    }else{
+                    cols += '<option value="' + maintenanceCycles[i].uuid + '" >' + maintenanceCycles[i].name + ' </option>';
+                    }
+                };
+                cols += '</select></td>';
+                cols += '<td width="5%"><div data-repeater-delete="" class="btn btn-danger btn-sm ibtnDel" value="Delete"><span><i class="la la-trash-o"></i></span></div></td>';
+                newRow.append(cols);
+                $("table.threshold").append(newRow);
+                $('.select').select2();
+                counterThresholds++;
+            });
+            $("table.threshold").on("click", ".ibtnDel", function (event) {
+                if (counterThresholds >= 1) {
+                    $(this).closest("tr").remove();
+                    counterThresholds -= 1
+                }
+            });
 
-          $("#addrow2").on("click", function () {
+            $("#addrow2").on("click", function () {
                 let x = 1;
                 let newRow = $("<tr>");
                 let cols = "";
@@ -795,11 +798,8 @@
         let view_manual_affected_id = $('#manual_affected_id').children("option:selected").attr("name-value");
 
         let rdo_Scheduled = '{{$taskCard->scheduled_priority_type}}';
-        let amount_Scheduled = '{{$taskCard->scheduled_priority_amount}}';
+        let amount_Scheduled = '{{ $taskCard->scheduled_priority_text }}';
 
-        console.log(view_scheduled_priority_id);
-        console.log(view_recurrence_id);
-        console.log(view_manual_affected_id);
         // Manuals Affected
         if(view_manual_affected_id == "Other"){
             $("#note_div").removeClass("hidden");
@@ -812,6 +812,14 @@
             $('#recurrence').removeAttr("disabled");
             $('#recurrence-select').removeAttr("disabled");
             $('#recurrence-select').select2();
+        }
+
+        // Scheduled Priority *
+        if(view_scheduled_priority_id == "Prior to"){
+            $("#prior_to").removeClass("hidden");
+            $('#prior_to_date').removeAttr("disabled");
+            $('#prior_to_hours').removeAttr("disabled");
+            $('#prior_to_cycle').removeAttr("disabled");
             switch(rdo_Scheduled){
                 case 'date':
                     $("#prior_to_date").prop('checked', true);
@@ -832,19 +840,11 @@
             }
         }
 
-        // Scheduled Priority *
-        if(view_scheduled_priority_id == "Prior to"){
-            $("#prior_to").removeClass("hidden");
-            $('#prior_to_date').removeAttr("disabled");
-            $('#prior_to_hours').removeAttr("disabled");
-            $('#prior_to_cycle').removeAttr("disabled");
-        }
-
 
         });
     </script>
 
-    <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script>
+    <!-- <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script> -->
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/taskcard-non-routine-type.js') }}"></script>
@@ -868,11 +868,14 @@
     <script src="{{ asset('js/frontend/functions/fill-combobox/repeat-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/action-botton/eo-instruction.js') }}"></script>
     <script src="{{ asset('js/frontend/taskcard/non-routine/eo/form-reset-instruction.js') }}"></script>
+    <script src="{{ asset('js/frontend/taskcard/non-routine/eo/form-reset-material.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/document-library.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>

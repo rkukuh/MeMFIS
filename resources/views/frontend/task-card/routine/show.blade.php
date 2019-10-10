@@ -62,28 +62,31 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Company Task Number @include('frontend.common.label.optional')
-                                            </label>
-                                            @if (empty($taskcard->additionals))
-                                                @include('frontend.common.label.data-info-nodata')
-                                            @else
-                                                @component('frontend.common.label.data-info')
-                                                {{-- @if(isset($taskcard->additionals)) --}}
-                                                    @slot('text', json_decode($taskcard->additionals)->internal_number)
-                                                {{-- @endif --}}
-                                                @endcomponent
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
                                                 Task Card Number @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.label.data-info')
                                                 @slot('text', $taskcard->number)
                                             @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Company Task Number @include('frontend.common.label.optional')
+                                            </label>
+                                            @if (empty($taskcard->additionals))
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
+                                                @component('frontend.common.label.data-info')
+                                                @if(isset($additionals))
+                                                    @slot('text', $additionals->internal_number)
+                                                @else
+                                                    @slot('text', '-')
+                                                @endif
+                                                @endcomponent
+                                            @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -93,7 +96,7 @@
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
                                                 <div style="background-color:beige; padding:15px;" class="">
-                                                    {{ $taskcard->type->name }},
+                                                    {{ $taskcard->type->name }}
                                                 </div>
                                             @endif
                                         </div>
@@ -128,7 +131,7 @@
                                                         @include('frontend.common.label.data-info-nodata')
                                                     @else
                                                         <div style="background-color:beige; padding:15px;" class="">
-                                                            {{ $taskcard->ata }},
+                                                            {{ $taskcard->ata }}
                                                         </div>
                                                     @endif
 
@@ -156,7 +159,7 @@
                                             </label>
                                             @if (isset($taskcard->task->name))
                                                 <div style="background-color:beige; padding:15px;" class="">
-                                                    {{ $taskcard->task->name }},
+                                                    {{ $taskcard->task->name }}
                                                 </div>
                                             @else
                                                 @include('frontend.common.label.data-info')
@@ -247,9 +250,17 @@
                                                 @include('frontend.common.label.data-info-nodata')
                                             @else
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', $taskcard->work_area)
+                                                @slot('text',$taskcard->workarea->name)
                                             @endcomponent
                                             @endif
+
+
+                                            {{-- @foreach ($work_areas as $work_area)
+                                            <option value="{{ $work_area->id }}"
+                                                @if ($work_area->id == $taskcard->work_area) selected @endif>
+                                                {{ $work_area->name }}
+                                            </option>
+                                        @endforeach --}}
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -329,7 +340,7 @@
                                                     </label>
 
                                                     <div>
-                                                        @if (empty($taskcard->version))
+                                                        @if (sizeof(json_decode($taskcard->version)) == 0)
                                                             @include('frontend.common.label.data-info-nodata')
                                                         @else
                                                             @php
@@ -379,10 +390,90 @@
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Documents library @include('frontend.common.label.optional')
+                                            </label><br>
+
+                                            @if (sizeof($additionals->document_library) == 0)
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @else
+                                                @if(isset($additionals))
+                                                    @foreach ($additionals->document_library  as $document)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $document )
+                                                        @endcomponent
+                                                    @endforeach
+                                                @endif
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="stringer_div">
+                                            <label class="form-control-label">
+                                                Stringer @include('frontend.common.label.optional')
                                             </label>
 
+                                            @if(isset($taskcard->stringer))
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', json_decode($taskcard->stringer))
+                                                @endcomponent
+                                            @else
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @endif
                                         </div>
-                                   </div>
+
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="station_div">
+                                            <label class="form-control-label">
+                                                Station @include('frontend.common.label.optional')
+                                            </label>
+
+                                            <div>
+                                                @if (sizeof($taskcard->stations) == 0)
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @foreach ($taskcard->stations as $station)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $station->name )
+                                                        @endcomponent
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="service_bulletin_div">
+                                            <label class="form-control-label">
+                                                Ref. Service Bulletins @include('frontend.common.label.optional')
+                                            </label>
+
+                                            @if(isset($taskcard->reference))
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $taskcard->reference)
+                                                @endcomponent
+                                            @else
+                                                @include('frontend.common.label.data-info-nodata')
+                                            @endif
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6 hidden" id="section_div">
+                                            <label class="form-control-label">
+                                                Section(s) @include('frontend.common.label.optional')
+                                            </label>
+
+                                            <div>
+                                                @if (sizeof(json_decode($taskcard->section)) == 0)
+                                                    @include('frontend.common.label.data-info-nodata')
+                                                @else
+                                                    @php
+                                                        $sections = json_decode($taskcard->section, TRUE);
+                                                    @endphp
+
+                                                    @foreach ($sections as $section)
+                                                        @component('frontend.common.label.badge')
+                                                            @slot('text', $section )
+                                                        @endcomponent
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -614,6 +705,13 @@
 @push('footer-scripts')
     <script>
         let taskcard_uuid = '{{ $taskcard->uuid }}';
+        let taskcard_routine_type = "{{ $taskcard->type->name }}"; 
+        if (taskcard_routine_type.trim() == "CPCP") {
+        $("#station_div").removeClass("hidden");
+        $("#stringer_div").removeClass("hidden");
+        $("#service_bulletin_div").removeClass("hidden");
+        $("#section_div").removeClass("hidden");
+    }
     </script>
 
     <script src="{{ asset('js/frontend/taskcard/routine/show.js') }}"></script>

@@ -57,6 +57,7 @@ let TaskCard = {
             data.append( "repeat_type", JSON.stringify(repeat_type));
             data.append( "threshold_amount", JSON.stringify(threshold_amount));
             data.append( "repeat_amount", JSON.stringify(repeat_amount));
+            data.append( "document_library", JSON.stringify($('#document-library').val()));
             data.append( "additionals",  internal_numberJSON);
             data.append( "fileInput", document.getElementById('taskcard').files[0]);
 
@@ -133,6 +134,15 @@ let TaskCard = {
 
                                 window.location.href = '/taskcard-si/'+response.uuid+'/edit';
                             }
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+                            $.each(errors.error, function (index, value) {
+                                    toastr.error(value.message, value.title, {
+                                        timeOut: 5000
+                                    }
+                                );
+                            });
                         }
                     });
 

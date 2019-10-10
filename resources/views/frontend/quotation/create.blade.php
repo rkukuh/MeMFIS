@@ -56,56 +56,37 @@
                                                 <legend class="w-auto">Project</legend>
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <label class="form-control-label">
-                                                                    Work Order @include('frontend.common.label.required')
-                                                                </label>
+                                                        <label class="form-control-label">
+                                                            Work Order @include('frontend.common.label.required')
+                                                        </label>
 
-                                                                @component('frontend.common.input.select2')
-                                                                    @slot('text', 'Work Order')
-                                                                    @slot('id', 'work-order')
-                                                                    @slot('name', 'work-order')
-                                                                    @slot('id_error', 'work-order')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
+                                                        @component('frontend.common.input.select2')
+                                                            @slot('text', 'Work Order')
+                                                            @slot('id', 'work-order')
+                                                            @slot('name', 'work-order')
+                                                            @slot('id_error', 'work-order')
+                                                        @endcomponent
+                                                    </div>
                                                         <input type="hidden" id="customer_id" name="customer_id">
 
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <label class="form-control-label">
-                                                                    Project title
-                                                                </label>
-                                                                @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'project_title')
-                                                                    @slot('text', '..........')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <label class="form-control-label">
-                                                                    Project Number
-                                                                </label>
-                                                                @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'project_number')
-                                                                    @slot('text', 'P-01/HMxxxxx')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group m-form__group row">
-                                                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                <label class="form-control-label">
-                                                                    Intruction
-                                                                </label>
-                                                                @component('frontend.common.label.data-info')
-                                                                    @slot('text', '..........')
-                                                                @endcomponent
-                                                            </div>
-                                                        </div>
+                                                        <label class="form-control-label">
+                                                            Project Number
+                                                        </label>
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('id', 'project_number')
+                                                            @slot('text', 'P-01/HMxxxxx')
+                                                        @endcomponent
+                                                    </div>
+
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <label class="form-control-label">
+                                                            Project title
+                                                        </label>
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('id', 'project_title')
+                                                            @slot('text', '..........')
+                                                        @endcomponent
                                                     </div>
                                                 </div>
                                             </fieldset>
@@ -147,7 +128,7 @@
                                                                                 </label>
 
                                                                                 @component('frontend.common.label.data-info')
-                                                                                    @slot('text', 'XXX')
+                                                                                    @slot('text', 'Customer Name')
                                                                                     @slot('id', 'name')
                                                                                 @endcomponent
                                                                             </div>
@@ -157,7 +138,7 @@
                                                                                 </label>
 
                                                                                 @component('frontend.common.input.select2')
-                                                                                    @slot('text', 'Bp. Romdani')
+                                                                                    @slot('text', 'Customer Name')
                                                                                     @slot('id', 'attention')
                                                                                     @slot('name', 'attention')
                                                                                 @endcomponent
@@ -174,7 +155,7 @@
                                                                                 </label>
 
                                                                                 @component('frontend.common.input.select2')
-                                                                                    @slot('text', '+62xxxxxxx / 07777777')
+                                                                                    @slot('text', 'Customer Phone')
                                                                                     @slot('id', 'phone')
                                                                                     @slot('name', 'phone')
                                                                                 @endcomponent
@@ -186,7 +167,7 @@
                                                                                     </label>
 
                                                                                     @component('frontend.common.input.select2')
-                                                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                                                        @slot('text', 'Customer Fax')
                                                                                         @slot('id', 'fax')
                                                                                         @slot('name', 'fax')
                                                                                     @endcomponent
@@ -199,7 +180,7 @@
                                                                                 </label>
 
                                                                                 @component('frontend.common.input.select2')
-                                                                                    @slot('text', '+62xxxxxxx / 07777777')
+                                                                                    @slot('text', 'example@email.com')
                                                                                     @slot('id', 'email')
                                                                                     @slot('name', 'email')
                                                                                 @endcomponent
@@ -223,7 +204,7 @@
                                                                                 @endcomponent
                                                                             </div>
                                                                         </div>
-                                                                        <div id="map"></div>
+                                                                        {{-- <div id="map"></div> --}}
 
                                                                     </div>
                                                                 </div>
@@ -311,73 +292,87 @@
 
                                                 </div>
                                             </div>
-                                            <div class="form-group m-form__group row">
+                                            {{-- <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label class="form-control-label">
+                                                        Scheduled Payment @include('frontend.common.label.required')
+                                                    </label>
                                                     <div class="form-group m-form__group row">
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="col-sm-5 col-md-5 col-lg-5">
                                                             <label class="form-control-label">
-                                                                Scheduled Payment Type @include('frontend.common.label.required')
+                                                                Progress
                                                             </label>
-                                                            <select id="scheduled_payment_type" name="scheduled_payment_type" class="form-control">
-                                                                <option value="">
-                                                                    Select a schedule payment
-                                                                </option>
-                                                            </select>
                                                         </div>
-                                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <div class="col-sm-5 col-md-5 col-lg-5">
                                                             <label class="form-control-label">
-                                                                Scheduled Payment @include('frontend.common.label.required')
+                                                                Note
                                                             </label>
-                                                            <div class="repeaterScheduledPayment">
-                                                                <div class="repeaterRow">
-                                                                    <div class="form-group m-form__group row">
-                                                                        <div class="col-sm-8 col-md-8 col-lg-8">
-                                                                            @component('frontend.common.input.text')
-                                                                            @slot('name', 'scheduled_payment')
-                                                                            @slot('id', 'scheduled_payment')
-                                                                            @slot('text', 'Phone')
-                                                                            @slot('id_error', 'scheduled_payment_amount')
-                                                                            @endcomponent
-                                                                        </div>
-                                                                        <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                            @component('frontend.common.buttons.create_repeater')
-                                                                                @slot('class', 'AddRow')
-                                                                            @endcomponent
-                                                                        </div>
-                                                                        <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                            @component('frontend.common.buttons.delete_repeater')
-                                                                                @slot('class', 'DeleteRow')
-                                                                            @endcomponent
-                                                                        </div>
-                                                                    </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="repeaterScheduledPayment">
+                                                        <div class="repeaterRow">
+                                                            <div class="form-group m-form__group row">
+                                                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                    @component('frontend.common.input.text')
+                                                                    @slot('name', 'scheduled_payment')
+                                                                    @slot('id', 'scheduled_payment')
+                                                                    @slot('autocomplete', 'off')
+                                                                    @slot('id_error', 'scheduled_payment_amount')
+                                                                    @endcomponent
                                                                 </div>
-                                                            </div>
-                                                            <div class="repeaterRow Copy hidden">
-                                                                <div class="form-group m-form__group row">
-                                                                    <div class="col-sm-8 col-md-8 col-lg-8">
-                                                                        @component('frontend.common.input.text')
-                                                                        @slot('name', 'scheduled_payment')
-                                                                        @slot('id', 'scheduled_payment')
-                                                                        @slot('text', 'Phone')
-                                                                        @slot('id_error', 'scheduled_payment_amount')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                        @component('frontend.common.buttons.create_repeater')
-                                                                            @slot('class', 'AddRow')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                                        @component('frontend.common.buttons.delete_repeater')
-                                                                            @slot('class', 'DeleteRow')
-                                                                        @endcomponent
-                                                                    </div>
+                                                                <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                    @component('frontend.common.input.text')
+                                                                    @slot('name', 'scheduled_payment_note')
+                                                                    @slot('id', 'scheduled_payment_note')
+                                                                    @slot('autocomplete', 'off')
+                                                                    @slot('id_error', 'scheduled_payment_amount')
+                                                                    @endcomponent
+                                                                </div>
+                                                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                    @component('frontend.common.buttons.create_repeater')
+                                                                        @slot('class', 'AddRow')
+                                                                    @endcomponent
+                                                                </div>
+                                                                <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                    @component('frontend.common.buttons.delete_repeater')
+                                                                        @slot('class', 'DeleteRow')
+                                                                    @endcomponent
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="repeaterRow Copy hidden">
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                @component('frontend.common.input.text')
+                                                                @slot('name', 'scheduled_payment')
+                                                                @slot('id', 'scheduled_payment')
+                                                                @slot('autocomplete', 'off')
+                                                                @slot('id_error', 'scheduled_payment_amount')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                @component('frontend.common.input.text')
+                                                                @slot('name', 'scheduled_payment_note')
+                                                                @slot('id', 'scheduled_payment_note')
+                                                                @slot('autocomplete', 'off')
+                                                                @slot('id_error', 'scheduled_payment_amount')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.buttons.create_repeater')
+                                                                    @slot('class', 'AddRow')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.buttons.delete_repeater')
+                                                                    @slot('class', 'DeleteRow')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -398,7 +393,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
-                                                Quotation Subject @include('frontend.common.label.required')
+                                                Description @include('frontend.common.label.optional')
                                             </label>
 
                                             @component('frontend.common.input.textarea')
@@ -497,6 +492,7 @@
 
     <script type="text/javascript">
         $("#type_website").on('change', function() {
+            
         });
         let simpan = $('.tes').on('click', '.save', function () {
         var usertype=[];
@@ -506,10 +502,9 @@
         });
         var ajaxdata={"UserType":usertype};
 
-        console.log(JSON.stringify(ajaxdata));
         });
     </script>
-    <script>
+    {{-- <script>
         function initMap() {
             var myLatLng = {lat: -7.265757, lng: 112.734146};
 
@@ -524,10 +519,10 @@
                 title       : 'Hello World!'
             });
         }
-    </script>
+    </script> --}}
     <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script>
+    {{-- <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ $browser_key }}&callback=initMap"></script> --}}
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     {{-- <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script> --}}

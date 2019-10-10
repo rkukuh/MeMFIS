@@ -31,7 +31,7 @@ class Manufacturer extends MemfisModel
     /**
      * One-to-Many: A manufacturer may have zero or many aircrafts.
      *
-     * This function will retrieve the aircrafts of a manufacturer.
+     * This function will retrieve all the aircrafts of a manufacturer.
      * See: Aircraft's manufacturer() method for the inverse
      *
      * @return mixed

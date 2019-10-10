@@ -25,7 +25,8 @@ let JobCard = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -49,46 +50,52 @@ let JobCard = {
             },
             columns: [
                 {
+                    field: 'quotation.quotationable.code',
+                    title: 'Project No',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'number',
                     title: 'JC No.',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="/jobcard-ppc/'+t.uuid+'">' + t.number + "</a>"
+                            return '<a href="/jobcard-ppc/'+t.uuid+'/">' + t.number + "</a>"
                     }
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'tc_number',
                     title: 'TC No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.title',
+                    field: 'tc_title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.type.name',
+                    field: 'type_name',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.task.name',
+                    field: 'task_name',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.description',
+                    field: '',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        if (t.taskcard.description) {
-                            data = strtrunc(t.taskcard.description, 50);
+                        if (t.jobcardable.description) {
+                            data = strtrunc(t.jobcardable.description, 50);
                             return (
                                 '<p>' + data + '</p>'
                             );
@@ -98,7 +105,7 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'taskcard.skill.name',
+                    field: 'skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
@@ -131,7 +138,7 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'taskcard.estimation_manhour',
+                    field: 'jobcardable.estimation_manhour',
                     title: 'Est. Mhrs',
                     sortable: 'asc',
                     filterable: !1,
@@ -141,6 +148,23 @@ let JobCard = {
                     title: 'Actual. Mhrs',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
                 },
                 {
                     field: 'status',
@@ -183,7 +207,8 @@ let JobCard = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -207,46 +232,52 @@ let JobCard = {
             },
             columns: [
                 {
+                    field: 'quotation.quotationable.code',
+                    title: 'Project No',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'number',
                     title: 'JC No.',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="/jobcard-engineer/'+t.uuid+'/edit">' + t.number + "</a>"
+                            return '<a href="/jobcard/'+t.uuid+'/edit">' + t.number + "</a>"
                     }
                 },
                 {
-                    field: 'taskcard.number',
+                    field: 'tc_number',
                     title: 'TC No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.title',
+                    field: 'tc_title',
                     title: 'Title',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.type.name',
+                    field: 'type_name',
                     title: 'Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.task.name',
+                    field: 'task_name',
                     title: 'Task',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'taskcard.description',
+                    field: '',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        if (t.taskcard.description) {
-                            data = strtrunc(t.taskcard.description, 50);
+                        if (t.jobcardable.description) {
+                            data = strtrunc(t.jobcardable.description, 50);
                             return (
                                 '<p>' + data + '</p>'
                             );
@@ -256,7 +287,7 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'taskcard.skill.name',
+                    field: 'skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
@@ -289,7 +320,7 @@ let JobCard = {
                     }
                 },
                 {
-                    field: 'taskcard.estimation_manhour',
+                    field: 'jobcardable.estimation_manhour',
                     title: 'Est. Mhrs',
                     sortable: 'asc',
                     filterable: !1,
@@ -299,6 +330,23 @@ let JobCard = {
                     title: 'Actual. Mhrs',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
                 },
                 {
                     field: 'status',

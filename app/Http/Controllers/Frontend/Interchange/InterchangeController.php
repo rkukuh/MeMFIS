@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Frontend\Interchange;
 
-use Illuminate\Http\Request;
+use App\Models\Item;
+use App\Models\Pivots\Interchange;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\InterchangeStore;
+use App\Http\Requests\Frontend\InterchangeUpdate;
 
 class InterchangeController extends Controller
 {
@@ -30,21 +33,39 @@ class InterchangeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\InterchangeStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InterchangeStore $request)
     {
-        //
+        $item_id = $request->merge(['item_id' => Item::where('uuid',$request->item_id)->first()->id]);
+        $alternate_item_id = $request->merge(['alternate_item_id' => Item::where('uuid',$request->alternate_item_id)->first()->id]);
+        // dd($request->all());
+        if ($request->way == 1) {
+            $interchange =  Interchange::create($request->all());
+
+            $interchange =  Interchange::create([
+                'item_id' => $request->alternate_item_id,
+                'alternate_item_id' => $request->item_id
+            ]);
+
+            return response()->json($interchange);
+
+        }else{
+            $interchange =  Interchange::create($request->all());
+
+            return response()->json($interchange);
+        }
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Interchange  $interchange
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Interchange $interchange)
     {
         return view('frontend.interchange.show');
     }
@@ -52,22 +73,26 @@ class InterchangeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Interchange  $interchange
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Item $item,Item $alternateItem)
     {
-        return view('frontend.interchange.edit');
+        $Interchange = Interchange::where('item_id',$item->id)->where('alternate_item_id',$alternateItem->id)->first();
+
+        return view('frontend.interchange.edit', [
+            'Interchange' => $Interchange,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\Frontend\InterchangeUpdate  $request
+     * @param  \App\Models\Interchange  $interchange
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(InterchangeUpdate $request, Interchange $interchange)
     {
         //
     }
@@ -75,11 +100,13 @@ class InterchangeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Interchange  $interchange
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Item $item,Item $alternateItem)
     {
-        //
+        $Interchange = Interchange::where('item_id',$item->id)->where('alternate_item_id',$alternateItem->id)->first()->delete();
+
+        return response()->json($Interchange);
     }
 }

@@ -18,20 +18,16 @@ class CreatePurchaseRequestsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->unsignedBigInteger('type_id');
+            $table->string('purchase_requestable_type');
+            $table->unsignedBigInteger('purchase_requestable_id');
             $table->timestamp('requested_at')->nullable();
             $table->timestamp('required_at')->nullable();
-            $table->unsignedBigInteger('project_id')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('type_id')
                     ->references('id')->on('types')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
-
-            $table->foreign('project_id')
-                    ->references('id')->on('projects')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');
 

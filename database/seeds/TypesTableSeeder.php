@@ -15,10 +15,14 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfAPERI::class);
         $this->call(TypesOfARC::class);
         $this->call(TypesOfAviationDegree::class);
+        $this->call(TypesOfBenefitBaseCalculation::class);
+        $this->call(TypesOfBenefitProrateCalculation::class);
         $this->call(TypesOfCapability::class);
+        $this->call(TypesOfCompany::class);
         $this->call(TypesOfDefectCardCloseReason::class);
         $this->call(TypesOfDefectCardPauseReason::class);
         $this->call(TypesOfDefectCardProposeCorrection::class);
+        $this->call(TypesOfDepartment::class);
         $this->call(TypesOfDocument::class);
         $this->call(TypesOfEligibility::class);
         $this->call(TypesOfEmail::class);
@@ -26,9 +30,9 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfHtCrrCloseReason::class);
         $this->call(TypesOfHtCrrPauseReason::class);
         $this->call(TypesOfHtCrrType::class);
-        $this->call(TypesOfJobCardPauseReason::class);
         $this->call(TypesOfJobCardCloseReason::class);
-        $this->call(TypesOfJournal::class);
+        $this->call(TypesOfJobCardLogBook::class);
+        $this->call(TypesOfJobCardPauseReason::class);
         $this->call(TypesOfMaintenanceCycle::class);
         $this->call(TypesOfPhone::class);
         $this->call(TypesOfProject::class);
@@ -43,6 +47,7 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfTaskCardSkill::class);
         $this->call(TypesOfTaskCardTask::class);
         $this->call(TypesOfTaskCardType::class);
+        $this->call(TypesOfTax::class);
         $this->call(TypesOfTermOfPayment::class);
         $this->call(TypesOfUnit::class);
         $this->call(TypesOfWebsite::class);

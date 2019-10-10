@@ -148,7 +148,7 @@
   </header>
   <footer style="margin-top:14px;">
     <div class="container">
-      <span style="margin-left:6px">Prepared By : {{$prepared_by}};{{$jobCard->created_at}} &nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
+      <span style="margin-left:6px">Prepared By : {{$prepared_by}};{{ $prepared_at }} &nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span>
     </div>
     <img src="./img/form/printoutjobcardbasic/FooterJobCardRoutine.png" width="100%" alt="" >
   </footer>
@@ -173,14 +173,14 @@
                         </td>
                         <td width="20%">Inspection Type</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{$jobCard->taskcard->task->name}}</td>
+                        <td width="29%">{{$jobCard->jobcardable->task->name}}</td>
                       </tr>
                       <tr>
                         <td width="20%">Taskcard No</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                          @if($jobCard->taskcard->number)
-                          {{$jobCard->taskcard->number}}
+                          @if($jobCard->jobcardable->number)
+                          {{$jobCard->jobcardable->number}}
                           @else
                             -
                           @endif
@@ -188,8 +188,8 @@
                         <td width="20%">AC/Type</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                          @if($jobCard->quotation->project->aircraft->name)
-                          {{$jobCard->quotation->project->aircraft->name}}
+                          @if($jobCard->quotation->quotationable->aircraft->name)
+                          {{$jobCard->quotation->quotationable->aircraft->name}}
                           @else
                             -
                           @endif
@@ -199,8 +199,8 @@
                         <td width="20%">Project No</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                            @if($jobCard->quotation->project->code)
-                            {{$jobCard->quotation->project->code}}
+                            @if($jobCard->quotation->quotationable->code)
+                            {{$jobCard->quotation->quotationable->code}}
                             @else
                               -
                             @endif
@@ -208,8 +208,8 @@
                         <td width="20%">A/C Reg</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                            @if($jobCard->quotation->project->aircraft_register)
-                            {{$jobCard->quotation->project->aircraft_register}}
+                            @if($jobCard->quotation->quotationable->aircraft_register)
+                            {{$jobCard->quotation->quotationable->aircraft_register}}
                             @else
                               -
                             @endif
@@ -219,8 +219,8 @@
                         <td width="20%">Company Task</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                            @if(isset(json_decode($jobCard->taskcard->additionals)->internal_number))
-                                {{json_decode($jobCard->taskcard->additionals)->internal_number}}
+                            @if(isset(json_decode($jobCard->jobcardable->additionals)->internal_number))
+                                {{json_decode($jobCard->jobcardable->additionals)->internal_number}}
                             @else
                                 -
                             @endif
@@ -228,8 +228,8 @@
                         <td width="20%">A/C S/N</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                            @if($jobCard->quotation->project->aircraft_sn)
-                            {{$jobCard->quotation->project->aircraft_sn}}
+                            @if($jobCard->quotation->quotationable->aircraft_sn)
+                            {{$jobCard->quotation->quotationable->aircraft_sn}}
                             @else
                               -
                             @endif
@@ -263,8 +263,8 @@
             </div>
           </td>
           <td width="81%">
-            @if($jobCard->taskcard->title)
-              {{$jobCard->taskcard->title}}
+            @if($jobCard->jobcardable->title)
+              {{$jobCard->jobcardable->title}}
             @else
               -
             @endif
@@ -282,8 +282,8 @@
             </div>
           </td>
           <td width="81%">
-            @if($jobCard->taskcard->description)
-              {{$jobCard->taskcard->description}}
+            @if($jobCard->jobcardable->description)
+              {{$jobCard->jobcardable->description}}
             @else
               -
             @endif
@@ -301,8 +301,8 @@
             </div>
           </td>
           <td width="81%">
-              @if($jobCard->taskcard->reference)
-              {{$jobCard->taskcard->reference}}
+              @if($jobCard->jobcardable->reference)
+              {{$jobCard->jobcardable->reference}}
               @else
                 -
               @endif
@@ -326,24 +326,24 @@
         <table width="100%" cellpadding="10">
           <tr>
             <td width="18%" valign="top">
-                @if(sizeof($jobCard->taskcard->skills) == 3)
+                @if(sizeof($jobCard->jobcardable->skills) == 3)
                   ERI
-                @elseif(sizeof($jobCard->taskcard->skills) == 1)
-                  {{$jobCard->taskcard->skills[0]->name}}
+                @elseif(sizeof($jobCard->jobcardable->skills) == 1)
+                  {{$jobCard->jobcardable->skills[0]->name}}
                 @else
                   -
                 @endif
             </td>
             <td width="47%" align="center" valign="top">
-              @if($jobCard->taskcard->workarea->name)
-                {{$jobCard->taskcard->workarea->name}}
+              @if($jobCard->jobcardable->work_area != null)
+                {{$jobCard->jobcardable->workarea->name}}
               @else
                 -
               @endif
             </td>
             <td width="15%" align="center" valign="top">
-              @if($jobCard->taskcard->estimation_manhour)
-              {{$jobCard->taskcard->estimation_manhour}}
+              @if($jobCard->jobcardable->estimation_manhour)
+              {{$jobCard->jobcardable->estimation_manhour}}
               @else
                 -
               @endif
@@ -364,12 +364,7 @@
           <td colspan="2" height="55" valign="top">
               Accomplishment Record : <br><br>
               <span>
-                {{$jobCard->progresses->last()->reason_text}}
-                {{-- @if()
-                {{}}
-                @else
-                  -
-                @endif --}}
+                  {{ $jobCard->progresses->last()->reason_text }}
               </span>
           </td>
         </tr>
@@ -421,9 +416,7 @@
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
               <span>
-                @if(sizeof($jobCard->defectcards) <> 0)
-                {{$jobCard->defectcards->first()->code}}
-                @endif
+              @if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif
               </span>
           </td>
         </tr>
@@ -432,18 +425,17 @@
         <tr>
           <td width="3%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
-          <td width="96%" valign="top">
-              @php
-              $a = sizeof($helpers->toArray());
-              @endphp
-              @if($a >0)
-                @for ($i = 0; $i < $a-1; $i++)
-                  {{$helpers[$i]->first_name}},&nbsp;
-                @endfor
-                @for ($i = $a-1; $i < $a; $i++)
-                    {{$helpers[$i]->first_name}}
-                @endfor
-              @endif
+          <td width="46%" valign="top">
+            {{ $helpers }}
+          </td>
+          <td width="3%" valign="top">RII </td>
+          <td width="1%" valign="top">:</td>
+          <td width="46%" valign="top">
+            @if($jobCard->is_rii == '0')
+              No
+            @else
+              Yes
+            @endif
           </td>
         </tr>
       </table>
@@ -473,14 +465,12 @@
               <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$inspected_at}}</span></div>
             </td>
             <td width="34%" height="100" align="center" valign="bottom"
-            @if($rii_status==0)
-              style="background:grey"
-            @endif
-            >
-            @if($rii_status==1)
-              <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
-              <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$rii_at}}</span></div>
-            @endif
+                @if($rii_status==0) style="background:grey" @endif>
+                @if($rii_status==1)
+                <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
+                <div style="width:100%;height:20px;text-align:left;padding-left:5px;">
+                    Date : <span>{{$rii_at}}</span></div>
+                @endif
             </td>
           </tr>
         </table>
@@ -505,13 +495,13 @@
             </tr>
           </thead>
           <tbody>
-            @if(empty($jobCard->taskcard->materials->toArray()))
+            @if(empty($jobCard->jobcardable->materials->toArray()))
                 <tr>
                     <td colspan="5" align="center">empty</td>
                 </tr>
             @endif
             @php $i = 1;  @endphp
-            @foreach($jobCard->taskcard->materials as $material)
+            @foreach($jobCard->jobcardable->materials as $material)
             <tr>
                 <td align="center" valign="top" width="2%">{{$i++}}</td>
                 <td align="center" valign="top" width="18%">{{$material->code}}</td>
@@ -540,13 +530,13 @@
             </tr>
           </thead>
           <tbody>
-              @if(empty($jobCard->taskcard->tools->toArray()))
+              @if(empty($jobCard->jobcardable->tools->toArray()))
                   <tr>
                       <td colspan="5" align="center">empty</td>
                   </tr>
               @endif
               @php $i = 1;  @endphp
-              @foreach($jobCard->taskcard->tools as $tool)
+              @foreach($jobCard->jobcardable->tools as $tool)
               <tr>
                   <td align="center" valign="top" width="2%">{{$i++}}</td>
                   <td align="center" valign="top" width="18%">{{$tool->code}}</td>

@@ -19,7 +19,8 @@ let DcProject = {
                   }
               },
               pageSize: 10,
-              serverPaging: !1,
+              serverPaging: !0,
+                serverFiltering: !1,
               serverSorting: !1
           },
           layout: {
@@ -54,47 +55,47 @@ let DcProject = {
                   sortable: 'asc',
                   filterable: !1,
                   template: function (t) {
-                      return '<a href="/project-hm/'+t.jobcard.quotation.project.uuid+'">' + t.jobcard.quotation.project.code + "</a>"
+                      return '<a href="/project-hm/'+t.jobcard.quotation.quotationable.uuid+'">' + t.jobcard.quotation.quotationable.code + "</a>"
                   }
               },
               {
-                  field: 'jobcard.quotation.project.no_wo',
+                  field: 'jobcard.quotation.quotationable.no_wo',
                   title: 'Work Order No',
                   sortable: 'asc',
                   filterable: !1,
               },
               {
-                  field: 'jobcard.quotation.project.title',
+                  field: 'jobcard.quotation.quotationable.title',
                   title: 'Project Title',
                   sortable: 'asc',
                   filterable: !1,
               },
               {
-                  field: 'jobcard.quotation.project.customer.name',
+                  field: 'jobcard.quotation.quotationable.customer.name',
                   title: 'Customer',
                   sortable: 'asc',
                   filterable: !1,
               },
               {
-                  field: 'jobcard.quotation.project.aircraft.name',
+                  field: 'jobcard.quotation.quotationable.aircraft.name',
                   title: 'A/C Type',
                   sortable: 'asc',
                   filterable: !1,
               },
               {
-                  field: 'jobcard.quotation.project.aircraft_register',
+                  field: 'jobcard.quotation.quotationable.aircraft_register',
                   title: 'A/C Reg',
                   sortable: 'asc',
                   filterable: !1,
               },
               {
-                  field: 'jobcard.quotation.project.aircraft_sn',
+                  field: 'jobcard.quotation.quotationable.aircraft_sn',
                   title: 'A/C Serial No',
                   sortable: 'asc',
                   filterable: !1,
               },
               {
-                  field: 'payment_term',
+                  field: '',
                   title: 'Created By',
                   sortable: 'asc',
                   filterable: !1,
@@ -105,7 +106,7 @@ let DcProject = {
                   overflow: 'visible',
                   template: function (t, e, i) {
                       return (
-                          '<a href="defectcard-project/'+t.jobcard.quotation.project.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                          '<a href="defectcard-project/'+t.jobcard.quotation.quotationable.uuid+'" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                               '<i class="la la-pencil"></i>' +
                           '</a>'
                       );

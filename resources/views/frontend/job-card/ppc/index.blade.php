@@ -72,7 +72,7 @@
 
                         </div>
                         <div class="col-lg-12">
-                                @include('frontend.job-card.filter')
+                                @include('frontend.job-card.ppc.filter')
                             </div>
                         <div class="job_card_datatable_ppc" id="scrolling_both"></div>
 

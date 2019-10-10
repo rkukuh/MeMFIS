@@ -15,7 +15,7 @@
                         @include('frontend.common.label.show')
 
                         <h3 class="m-portlet__head-text">
-                          Project View
+                          Project View - {{ $workPackage->title }}
                         </h3>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
             </div>
-         </div>
+        </div>
     </div>
 </div>
 
@@ -64,12 +64,19 @@
 @push('footer-scripts')
     <script>
         let workPackage_uuid = '{{ $workPackage->uuid }}';
-        let project_uuid = '{{  $quotation->project->uuid }}';
+        let project_uuid = '{{  $quotation->quotationable->uuid }}';
+        let currencyCode = '{{  $quotation->currency->code }}';
         let quotation_uuid = '{{ $quotation->uuid }}';
     </script>
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/workpackage/job-request.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/quotation/workpackage/taskcard/modal/datatables.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation/workpackage/taskcard/modal/successor-show.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation/workpackage/taskcard/modal/predecessor-show.js') }}"></script>
+    <script src="{{ asset('js/frontend/quotation/project.js') }}"></script>
+
 
 @endpush

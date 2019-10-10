@@ -58,14 +58,10 @@
                                                     Purchase Request Number
                                                 </label>
 
-
-                                                @component('frontend.common.input.text')
-                                                    @slot('id', 'number')
-                                                    @slot('name', 'number')
-                                                    @slot('value', 'PR-2121212')
-                                                    @slot('id_error','number')
-                                                    @slot('editable','disabled')
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('text', $purchaseRequest->number)
                                                 @endcomponent
+
                                             </div>
                                         </div>
                                         <div class="form-group m-form__group row">
@@ -78,6 +74,7 @@
                                                     @slot('id', 'date')
                                                     @slot('text', 'Date')
                                                     @slot('name', 'date')
+                                                    @slot('value', $purchaseRequest->requested_at)
                                                     @slot('id_error', 'date')
                                                 @endcomponent
                                             </div>
@@ -90,6 +87,7 @@
                                                     @slot('id', 'date-required')
                                                     @slot('text', 'Date Required')
                                                     @slot('name', 'date-required')
+                                                    @slot('value', $purchaseRequest->required_at)
                                                     @slot('id_error', 'date-required')
                                                 @endcomponent
                                             </div>
@@ -99,12 +97,13 @@
                                                         <label class="form-control-label">
                                                             Description @include('frontend.common.label.optional')
                                                         </label>
-            
+
                                                         @component('frontend.common.input.textarea')
                                                             @slot('rows', '10')
                                                             @slot('id', 'description')
                                                             @slot('name', 'description')
                                                             @slot('text', 'Description')
+                                                            @slot('value', $purchaseRequest->description)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -147,10 +146,10 @@
                                                                 <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                                     @component('frontend.common.buttons.create-new')
                                                                         @slot('text', 'Item')
-                                                                        @slot('data_target', '#modal_item')
+                                                                        @slot('data_target', '#modal_general')
                                                                     @endcomponent
-                    
-                            
+
+
                                                                     <div class="m-separator m-separator--dashed d-xl-none"></div>
                                                                 </div>
                                                             </div>
@@ -168,8 +167,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-pr')
-                                                        @slot('class', 'add-pr')
+                                                        @slot('id', 'update-pr')
+                                                        @slot('class', 'update-pr')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -214,6 +213,8 @@
 
 @push('footer-scripts')
     <script>
+        let pr_uuid = '{{$purchaseRequest->uuid}}';
+
         var autoExpand = function (field) {
 
         // Reset field height
@@ -240,8 +241,8 @@
     </script>
 
 
-    <script src="{{ asset('js/frontend/purchase-request/general/create.js') }}"></script>
-    <script src="{{ asset('js/frontend/purchase-request/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/general/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/purchase-request/general/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-required.js')}}"></script>
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>

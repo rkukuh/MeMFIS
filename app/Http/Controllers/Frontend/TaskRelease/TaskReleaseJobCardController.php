@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\TaskRelease;
 
 use Auth;
+use carbon\Carbon;
 use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\Approval;
@@ -21,7 +22,7 @@ class TaskReleaseJobCardController extends Controller
      */
     public function index()
     {
-        return view('frontend.task-release.index');
+        return view('frontend.task-release.job-card.index');
     }
 
     /**
@@ -64,8 +65,15 @@ class TaskReleaseJobCardController extends Controller
      */
     public function edit(JobCard $taskrelease)
     {
-        return view('frontend.task-release.create', [
+        $status = Status::ofJobCard()->where('id',$taskrelease->progresses->last()->status_id)->first()->code;
+
+
+        return view('frontend.task-release.job-card.create', [
             'taskrelease' => $taskrelease,
+            'materials' => $taskrelease->jobcardable->materials,
+            'tools' => $taskrelease->jobcardable->tools,
+            'status' => $status,
+
         ]);
     }
 
@@ -92,7 +100,8 @@ class TaskReleaseJobCardController extends Controller
 
         $taskrelease->approvals()->save(new Approval([
             'approvable_id' => $taskrelease->id,
-            'approved_by' => Auth::id(),
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
         ]));
 
         return response()->json($taskrelease);

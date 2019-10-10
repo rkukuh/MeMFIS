@@ -11,7 +11,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/discrepancy',
+                        url: '/datatables/discrepancy/engineer',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -23,7 +23,8 @@ let TaskCard = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -58,7 +59,7 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/defectcard/'+t.uuid+'/">' + t.code + "</a>"
+                        return '<a href="/discrepancy/'+t.uuid+'/">' + t.code + "</a>"
                     }
                 },
                 {
@@ -67,66 +68,154 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/jobcard-ppc/'+t.jobcard.uuid+'">' + t.jobcard.number + "</a>"
+                        return '<a href="/jobcard/'+t.jobcard.uuid+'/edit">' + t.jobcard.number + "</a>"
                     }
                 },
                 {
-                    field: 'jobcard.taskcard.number',
+                    field: 'jobcard.jobcardable.number',
                     title: 'Taskcard No',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/taskcard/'+t.jobcard.taskcard.uuid+'">' + t.jobcard.taskcard.number + "</a>"
+                        return '<a href="/taskcard/'+t.jobcard.jobcardable.uuid+'">' + t.jobcard.jobcardable.number + "</a>"
                     }
                 },
                 {
-                    field: 'jobcard.quotation.project.customer.name',
+                    field: 'customer_name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.taskcard.type.name',
-                    title: 'TC Type',
+                    field: 'type_name',
+                    title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft.name',
-                    title: 'A/C',
+                    field: 'aircraft',
+                    title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
 
                 },
                 {
-                    field: 'jobcard.taskcard.skill.name',
+                    field: 'aircraft_sn',
+                    title: 'A/C Serial No',
+                    sortable: 'asc',
+                    filterable: !1,
+
+                },
+                {
+                    field: 'jobcardSkill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.taskcard.estimation_manhour',
-                    title: 'Manhours',
+                    field: 'estimation_manhour',
+                    title: 'Mhrs Est.',
                     sortable: 'asc',
                     filterable: !1,
                 },
+                {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
+                },
+                {
+                    field: 'Status',
+                    title: 'Status',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        if(t.status == "mechanic"){
+                            return (
+                                'Open'
+                            );
+                        }
+                        else if(t.status == "engineer"){
+                            return (
+                                'Engineer Approved'
+                            );
+                        }
+                        else if(t.status == "ppc"){
+                            return (
+                                'PPC Approved'
+                            );
+                        }
+                        else{
+                            return (
+                                ''
+                            );
+                        }
+                    }
+                },
+                {
+                    field: 'created_by',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.created_by + '<br>' + t.create_date
+                    }
 
+                },
+                {
+                    field: 'updated_by',
+                    title: 'Updated By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.updated_by + '<br>' + t.update_date
+                    }
+
+                },
+                {
+                    field: '',
+                    title: 'Approved By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.conducted_at
+                    }
+                },
                 {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        return (
-                            '<a href="/discrepancy-engineer/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
-                            '</a>'+
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-check"></i>' +
-                            '</a>'
-                        );
+                        if(t.status == "mechanic"){
+                            return (
+                                '<a href="/discrepancy-engineer/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                    '<i class="la la-pencil"></i>' +
+                                '</a>' +
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-trash"></i>' +
+                                '</a>'+
+                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
+                                    '<i class="la la-check"></i>' +
+                                '</a>'
+                            );
+                        }
+                        else if(t.status == "engineer" || t.status == "ppc"){
+                            return ('<a href="/discrepancy-engineer/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Show" data-id="' + t.uuid +'">' +
+                            '<i class="la la-eye"></i>');
+                        }else{
+                            return ('');
+                        }
                     }
                 }
             ]

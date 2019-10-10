@@ -10,12 +10,19 @@ use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Facility;
 use App\Models\WorkPackage;
+use App\Models\TaskCard;
 use App\Models\ProjectWorkPackageEngineer;
+use App\Models\Pivots\TaskCardWorkPackage;
+use App\Models\Pivots\EOInstructionWorkPackage;
+use App\Models\HtCrr;
 use App\Models\Pivots\ProjectWorkPackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ProjectHMStore;
 use App\Http\Requests\Frontend\ProjectHMUpdate;
+use App\Models\EOInstruction;
+use App\Models\Manhour;
+use stdClass;
 
 class ProjectHMWorkPackageController extends Controller
 {
@@ -56,7 +63,39 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function store(Request $request, Project $project)
     {
-        $project->workpackages()->attach(WorkPackage::where('uuid',$request->workpackage)->first()->id);
+        $workPackage = WorkPackage::where('uuid',$request->workpackage)->first();
+        
+        $routines = TaskCardWorkPackage::with('taskcard','taskcard.type','taskcard.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereNull('deleted_at')
+                        ->get();
+
+        $nonroutines = EOInstructionWorkPackage::with('eo_instruction','eo_instruction.eo_header.type','eo_instruction.eo_header.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereNull('deleted_at')
+                        ->get();
+
+        $project->workpackages()->attach($workPackage->id);
+        
+        $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',WorkPackage::where('uuid',$request->workpackage)->first()->id)->first();
+        
+        foreach($routines as $routine){
+            $project_workpackage->taskcards()->create([
+                'taskcard_id' => $routine->taskcard->id,
+                'is_rii' => $routine->taskcard->is_rii,
+                'sequence' => $routine->sequence,
+                'is_mandatory' => $routine->is_mandatory,
+            ]);
+        }
+        
+        foreach($nonroutines as $eo_instructions){
+            $project_workpackage->eo_instructions()->create([
+                'eo_instruction_id' => $eo_instructions->eo_instruction->id,
+                'is_rii' => $eo_instructions->eo_instruction->is_rii,
+                'sequence' => $eo_instructions->sequence,
+                'is_mandatory' => $eo_instructions->is_mandatory,
+            ]);
+        }
 
         return response()->json($project);
     }
@@ -69,59 +108,82 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function show(Project $project, WorkPackage $workPackage,Request $request)
     {
-        $mhrs_pfrm_factor = $skills = $subset = [];
+        $mhrs_pfrm_factor = $skills = $subset = $taskcards_routine = $taskcards_non_routine = $taskcards = $engineers_quantity = [];
+
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
+        ->with('taskcards')
         ->first();
+
+        foreach($project_workpackage->taskcards as $taskcard){
+            array_push($taskcards_routine, $taskcard->taskcard_id);
+        }
+
+        foreach($project_workpackage->eo_instructions as $taskcard){
+            array_push($taskcards_non_routine, $taskcard->eo_instruction_id);
+        }
+
+        $taskcards_routine = TaskCard::whereIn('id',$taskcards_routine)->get();
+        $taskcards_non_routine = EOInstruction::whereIn('id',$taskcards_non_routine)->get();
+        $taskcards = $taskcards_routine->merge($taskcards_non_routine);
+
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
-        foreach($workPackage->taskcards as $taskcard){
-            array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
-            $result = $taskcard->skills->map(function ($skills) {
-                return collect($skills->toArray())
-                    ->only(['name'])
-                    ->all();
-            });
-
-            array_push($subset , $result);
+        $index_skills = Type::ofTaskCardSkill()->get();
+        foreach($index_skills as $skill){
+            $engineers_quantity[$skill->code] = 0;
         }
-        foreach ($subset as $value) {
-            foreach($value as $skill){
-                array_push($skills, $skill["name"]);
+
+        foreach($taskcards as $taskcard){
+            array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
+            if(sizeof($taskcard->skills) > 1){
+                $tempArray["name"] = "ERI";
+                array_push($subset , $tempArray);
+                $engineers_quantity["eri"] += $taskcard->engineer_quantity;
+            }else{
+                if(sizeof($taskcard->skills) > 0){
+                    $engineers_quantity[$taskcard->skills[0]->code] += $taskcard->engineer_quantity; 
+                }
+                $result = $taskcard->skills->map(function ($skills) {
+                    return collect($skills->toArray())
+                        ->only(['name'])
+                        ->all();
+                });
+                if(isset($result[0])){
+                    array_push($subset , $result[0]);
+                }
             }
         }
+
+        foreach ($subset as $value) {
+            foreach($value as $skill){
+                array_push($skills, $skill);
+            }
+        }
+
         sort($skills);
         $skills = array_unique($skills);
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
-        $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
-        $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
-        $edit = false;
+        $total_mhrs = $taskcards->sum('estimation_manhour');
+        $total_pfrm_factor = $taskcards->sum('performance_factor');
 
         //get employees
         $employees = Employee::all();
         $facilities = Facility::all();
-        $materialCount = $workPackage->items->count();
-        $toolCount = $workPackage->tools->count();
 
-        // dd($project_workpackage);
-        if ($request->anyChanges) {
-            $view = 'frontend.project.hm.workpackage.index-engineerteam';
-        }else{
-            $view = 'frontend.project.hm.workpackage.index';
-        }
+        $view = 'frontend.project.hm.workpackage.show';
         return view($view,[
-            'edit' => $edit,
+            'edit' => false,
             'project' => $project,
             'employees' => $employees,
-            'toolCount' => $toolCount,
             'total_mhrs' => $total_mhrs,
             'facilities' => $facilities,
             'engineer_skills' => $skills,
             'workPackage' => $workPackage,
             'skills' => json_encode($skills),
-            'materialCount' => $materialCount,
             'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
             'total_pfrm_factor' => $total_pfrm_factor,
+            'engineers_quantity' => $engineers_quantity,
             'project_workpackage' => $project_workpackage
         ]);
     }
@@ -134,41 +196,70 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function edit(Project $project, WorkPackage $workPackage,Request $request)
     {
-        $mhrs_pfrm_factor = $skills = $subset = [];
-            
+
+        $mhrs_pfrm_factor = $skills = $subset = $taskcards_routine = $taskcards_non_routine = $taskcards = $engineers_quantity = [];
+
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
         ->where('workpackage_id',$workPackage->id)
+        ->with('taskcards')
         ->first();
+
         // get skill_id(s) from taskcards that are used in workpackage
         // so only required skill will showed up
-        foreach($workPackage->taskcards as $taskcard){
-            array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
-            $result = $taskcard->skills->map(function ($skills) {
-                return collect($skills->toArray())
-                    ->only(['name'])
-                    ->all();
-            });
-
-            array_push($subset , $result);
+        foreach($project_workpackage->taskcards as $taskcard){
+            array_push($taskcards_routine, $taskcard->taskcard_id);
         }
-        foreach ($subset as $value) {
-            foreach($value as $skill){
-                array_push($skills, $skill["name"]);
+
+        foreach($project_workpackage->eo_instructions as $taskcard){
+            array_push($taskcards_non_routine, $taskcard->eo_instruction_id);
+        }
+
+        $taskcards_routine = TaskCard::whereIn('id',$taskcards_routine)->get();
+        $taskcards_non_routine = EOInstruction::whereIn('id',$taskcards_non_routine)->get();
+        $taskcards = $taskcards_routine->merge($taskcards_non_routine);
+
+        $index_skills = Type::ofTaskCardSkill()->get();
+        foreach($index_skills as $skill){
+            $engineers_quantity[$skill->code] = 0;
+        }
+
+        foreach($taskcards as $taskcard){
+            array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
+            if(sizeof($taskcard->skills) > 1){
+                $tempArray["name"] = "ERI";
+                array_push($subset , $tempArray);
+                $engineers_quantity["eri"] += $taskcard->engineer_quantity; 
+            }else{
+                if(sizeof($taskcard->skills) > 0){
+                    $engineers_quantity[$taskcard->skills[0]->code] += $taskcard->engineer_quantity; 
+                }
+                $result = $taskcard->skills->map(function ($skills) {
+                    return collect($skills->toArray())
+                        ->only(['name'])
+                        ->all();
+                });
+                if(isset($result[0])){
+                    array_push($subset , $result[0]);
+                }
             }
         }
+
+        foreach ($subset as $value) {
+            foreach($value as $skill){
+                array_push($skills, $skill);
+            }
+        }
+
         sort($skills);
         $skills = array_unique($skills);
 
         $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
-        $total_mhrs = $workPackage->taskcards->sum('estimation_manhour');
-        $total_pfrm_factor = $workPackage->taskcards->sum('performance_factor');
-        $edit = true;
+        $total_mhrs = $taskcards->sum('estimation_manhour');
+        $total_pfrm_factor = $taskcards->sum('performance_factor');
 
         $employees = Employee::all();
         $facilities = Facility::all();
-        
-        $materialCount = $workPackage->items->count();
-        $toolCount = $workPackage->tools->count();
+
 
         if ($request->anyChanges) {
             $view = 'frontend.project.hm.workpackage.index-engineerteam';
@@ -176,18 +267,17 @@ class ProjectHMWorkPackageController extends Controller
             $view = 'frontend.project.hm.workpackage.index';
         }
         return view($view,[
-            'edit' => $edit,
+            'edit' => true,
             'project' => $project,
             'employees' => $employees,
-            'toolCount' => $toolCount,
             'total_mhrs' => $total_mhrs,
             'facilities' => $facilities,
             'engineer_skills' => $skills,
             'workPackage' => $workPackage,
             'skills' => json_encode($skills),
-            'materialCount' => $materialCount,
             'mhrs_pfrm_factor' => $mhrs_pfrm_factor,
             'total_pfrm_factor' => $total_pfrm_factor,
+            'engineers_quantity' => $engineers_quantity,
             'project_workpackage' => $project_workpackage,
         ]);
     }
@@ -238,7 +328,7 @@ class ProjectHMWorkPackageController extends Controller
                 ]);
             }
         }
-        
+
         return response()->json($project_workpackage);
     }
 
@@ -251,15 +341,17 @@ class ProjectHMWorkPackageController extends Controller
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
             ->where('workpackage_id',$workpackage->id)
             ->first();
+            
+        $manhour_price =   Manhour::first()->rate; 
 
         $project_workpackage->update([
             'performance_factor' =>  $request->performa_used,
             'total_manhours' =>  $request->manhour,
-            'total_manhours_with_performance_factor' =>  $request->total,
+            'total_manhours_with_performance_factor' =>  $request->total
             ]);
 
         return response()->json($project_workpackage);
-        
+
     }
 
     /**
@@ -271,9 +363,11 @@ class ProjectHMWorkPackageController extends Controller
         $project_workpackage = ProjectWorkPackage::where('project_id',$project->id)
             ->where('workpackage_id',$workpackage->id)
             ->first();
+
         if(sizeof($project_workpackage->facilities) > 0){
             $project_workpackage->facilities()->delete();
         }
+
         foreach($request->facility_array as $facility){
             $facility = Facility::where('uuid', $facility)->first()->id;
             $project_workpackage->facilities()->create([
@@ -292,8 +386,6 @@ class ProjectHMWorkPackageController extends Controller
      */
     public function destroy(Project $project, WorkPackage $workPackage)
     {
-        // $project_workpackage = ProjectWorkPackage::where('project_id', $project->id)->where('workpackage_id',$workPackage->id)->first();
-        // $project_workpackage->delete();
         $project->workpackages()->updateExistingPivot($workPackage,[
             'deleted_at' => Carbon::now()
         ]);
@@ -307,7 +399,7 @@ class ProjectHMWorkPackageController extends Controller
      * @param  \App\Models\WorkPackage  $workPackage
      * @return \Illuminate\Http\Response
      */
-    public function summary(WorkPackage $workPackage)
+    public function summary(Project $project, WorkPackage $workPackage)
     {
         $skills = $subset = [];
 
@@ -393,16 +485,33 @@ class ProjectHMWorkPackageController extends Controller
      *
      * @param  \App\Models\WorkPackage  $workPackage
      */
-    public function getManhours(WorkPackage $workPackage){
-        $data = $mhrs_pfrm_factor = [];
-        foreach($workPackage->taskcards as $taskcard){
+    public function getManhours(Project $project, WorkPackage $workPackage){
+
+        $data = $mhrs_pfrm_factor = $taskcards_routine = $taskcards_non_routine = $taskcards = [];
+
+        $project_workpackage = ProjectWorkPackage::where('project_id', $project->id)
+                    ->where('workpackage_id', $workPackage->id)->first();
+
+        foreach($project_workpackage->taskcards as $taskcard){
+            array_push($taskcards_routine, $taskcard->taskcard_id);
+        }
+
+        foreach($project_workpackage->eo_instructions as $taskcard){
+            array_push($taskcards_non_routine, $taskcard->eo_instruction_id);
+        }
+
+        $taskcards_routine = TaskCard::whereIn('id',$taskcards_routine)->get();
+        $taskcards_non_routine = EOInstruction::whereIn('id',$taskcards_non_routine)->get();
+        $taskcards = $taskcards_routine->merge($taskcards_non_routine);
+
+        foreach($taskcards as $taskcard){
             array_push($mhrs_pfrm_factor, $taskcard->estimation_manhour * $taskcard->performance_factor);
         }
-        $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
-        $data["total_mhrs"] = $workPackage->taskcards->sum('estimation_manhour');
-        $data["mhrs_pfrm_factor"] = $workPackage->taskcards->sum('estimation_manhour') * 1.6;
-        $data["mhrs_tc_pfrm_factor"]  = $mhrs_pfrm_factor;
 
+        $mhrs_pfrm_factor = array_sum($mhrs_pfrm_factor);
+        $data["total_mhrs"] = $taskcards->sum('estimation_manhour');
+        $data["mhrs_pfrm_factor"] = ( $taskcards->sum('estimation_manhour') )* 1.6;
+        $data["mhrs_tc_pfrm_factor"]  = $mhrs_pfrm_factor;
         return response()->json($data);
     }
 }

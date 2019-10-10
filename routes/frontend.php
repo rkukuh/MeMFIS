@@ -10,8 +10,6 @@ Route::name('frontend.')->group(function () {
     ], function () {
 
         Route::view('/dashboard', 'frontend.dashboard')->name('dashboard');
-        Route::view('/purchase-request', 'frontend.purchase-request.index')->name('purchase-request.index');
-        Route::view('/purchase-request/create', 'frontend.purchase-request.create')->name('purchase-request.create');
 
         /** INITIAL DATA */
 
@@ -19,11 +17,11 @@ Route::name('frontend.')->group(function () {
         Route::resource('unit', 'UnitController');
         Route::resource('level', 'LevelController');
         Route::resource('status', 'StatusController');
-        Route::resource('journal', 'JournalController');
 
         /** POLYMORPH */
 
         Route::resource('fax', 'FaxController');
+        Route::resource('tax', 'TaxController');
         Route::resource('zone', 'ZoneController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
@@ -35,10 +33,11 @@ Route::name('frontend.')->group(function () {
         Route::resource('station', 'StationController');
         Route::resource('category', 'CategoryController');
         Route::resource('document', 'DocumentController');
-        Route::resource('threshold', 'ThresholdController');
         Route::resource('approval', 'ApprovalController');
         Route::resource('progress', 'ProgressController');
+        Route::resource('threshold', 'ThresholdController');
         Route::resource('inspection', 'InspectionController');
+        Route::resource('inventory-out', 'InventoryOutController');
 
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']
@@ -50,14 +49,26 @@ Route::name('frontend.')->group(function () {
         /** MASTER */
 
         Route::resource('user', 'UserController');
+        Route::resource('bpjs', 'BPJSController');
+        Route::resource('bank', 'BankController');
+        Route::resource('promo', 'PromoController');
         Route::resource('school', 'SchoolController');
         Route::resource('vendor', 'VendorController');
+        Route::resource('branch', 'BranchController');
         Route::resource('storage', 'StorageController');
         Route::resource('license', 'LicenseController');
+        // Route::resource('manhour', 'ManhourController');
+        Route::resource('benefit', 'BenefitController');
+        Route::resource('company', 'CompanyController');
+        Route::resource('holiday', 'HolidayController');
         Route::resource('language', 'LanguageController');
         Route::resource('currency', 'CurrencyController');
         Route::resource('facility', 'FacilityController');
+        Route::resource('workshift', 'WorkshiftController');
+        Route::resource('leave-type', 'LeaveTypeController');
+        Route::resource('job-tittle', 'JobTittleController');
         Route::resource('department', 'DepartmentController');
+        Route::resource('leave-period','LeavePeriodController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
 
@@ -71,50 +82,11 @@ Route::name('frontend.')->group(function () {
         Route::resource('general-license', 'GeneralLicenseController');
         Route::resource('employee-license', 'EmployeeLicenseController');
 
-        /** Jobcard EO */
+        /** WORKPACKAGE's EO-INSTRUCTIONs */
 
-        Route::view('/jobcard-eo', 'frontend.job-card-eo.index')->name('jobcard-eo.index');
-
-        Route::view('/jobcard-eo-mechanic-progress-open', 'frontend.job-card-eo.mechanic.progress-open')->name('jobcard-eo.mechanic.progress-open');
-        Route::view('/jobcard-eo-mechanic-progress-resume', 'frontend.job-card-eo.mechanic.progress-resume')->name('jobcard-eo.mechanic.progress-resume');
-        Route::view('/jobcard-eo-mechanic-progress-pause', 'frontend.job-card-eo.mechanic.progress-pause')->name('jobcard-eo.mechanic.progress-pause');
-
-        Route::view('/jobcard-eo-engineer-progress-open', 'frontend.job-card-eo.engineer.progress-open')->name('jobcard-eo.engineer.progress-open');
-        Route::view('/jobcard-eo-engineer-progress-resume', 'frontend.job-card-eo.engineer.progress-resume')->name('jobcard-eo.engineer.progress-resume');
-        Route::view('/jobcard-eo-engineer-progress-pause', 'frontend.job-card-eo.engineer.progress-pause')->name('jobcard-eo.engineer.progress-pause');
-
-        Route::view('/jobcard-eo-ppc', 'frontend.job-card-eo-ppc.index')->name('jobcard-eo.ppc.index');
-
-        /** Work Progress Report */
-
-        Route::view('/work-progress-report', 'frontend.work-progress-report.index')->name('work-progress-report.index');
-        Route::view('/work-progress-report/show', 'frontend.work-progress-report.show')->name('work-progress-report.show');
-
-        /** Additional Task */
-
-        Route::view('/additional-task', 'frontend.project.additional.index')->name('additional-task.index');
-        Route::view('/additional-task/create', 'frontend.project.additional.create')->name('additional-task.create');
-        Route::view('/additional-task/edit', 'frontend.project.additional.edit')->name('additional-task.edit');
-        Route::view('/additional-task/show', 'frontend.project.additional.show')->name('additional-task.show');
-        Route::view('/additional-task/summary', 'frontend.project.additional.summary')->name('additional-task.summary');
-
-         /** Purchase Request */
-
-         Route::view('/purchase-request/general/create', 'frontend.purchase-request.general.create')->name('purchase-request.general.create');
-         Route::view('/purchase-request/general/edit', 'frontend.purchase-request.general.edit')->name('purchase-request.general.edit');
-         Route::view('/purchase-request/general/show', 'frontend.purchase-request.general.show')->name('purchase-request.general.show');
-
-         Route::view('/purchase-request/project/create', 'frontend.purchase-request.project.create')->name('purchase-request.project.create');
-         Route::view('/purchase-request/project/edit', 'frontend.purchase-request.project.edit')->name('purchase-request.project.edit');
-         Route::view('/purchase-request/project/show', 'frontend.purchase-request.project.show')->name('purchase-request.project.show');
-
-        /** QUOTATION's WORKPACKAGE's TASKCARD's */
-
-         Route::resource('qtn-wp-tc-item', 'QuotationWorkPackageTaskCardItemController');
-
-         /** QUOTATION's WORKPACKAGE's HT/CRR's */
-
-         Route::resource('qtn-wp-htcrr-item', 'QuotationWorkPackageHtcrrItemController');
+        Route::resource('eo-instruction-wp', 'EOInstructionWorkPackageController');
+        Route::resource('eo-instruction-wp-successor', 'EOInstructionWorkPackageSuccessorController');
+        Route::resource('eo-instruction-wp-predecessor', 'EOInstructionWorkPackagePredecessorController');
 
     });
 

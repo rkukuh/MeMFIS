@@ -7,8 +7,8 @@ use App\Models\Type;
 use App\Models\HtCrr;
 use App\Models\Project;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\HtCrrStore;
-use App\Http\Requests\Frontend\HtCrrUpdate;
+use App\Http\Requests\Frontend\HtCrrItemStore;
+use App\Http\Requests\Frontend\HtCrrItemUpdate;
 
 class HtCrrItemsController extends Controller
 {
@@ -38,16 +38,16 @@ class HtCrrItemsController extends Controller
      * @param  \App\Http\Requests\Frontend\HtCrrStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(HtCrr $htCrr, HtCrrStore $request)
+    public function store(HtCrr $htcrr, HtCrrItemStore $request)
     {
-        $htCrr->items()->attach($htCrr->id, [
+        $htcrr->items()->attach($htcrr->id, [
             'item_id' => $request->item_id,
             'unit_id' => $request->unit_id,
             'quantity' => $request->quantity,
             'note' => $request->note
         ]);
 
-        return response()->json($htCrr);
+        return response()->json($htcrr);
     }
 
     /**
@@ -79,7 +79,7 @@ class HtCrrItemsController extends Controller
      * @param  \App\Models\HtCrr  $htCrr
      * @return \Illuminate\Http\Response
      */
-    public function update(HtCrrUpdate $request, HtCrr $htCrr)
+    public function update(HtCrrItemUpdate $request, HtCrr $htCrr)
     {
         //
     }
@@ -90,10 +90,10 @@ class HtCrrItemsController extends Controller
      * @param  \App\Models\HtCrr  $htCrr
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HtCrr $htCrr, Item $item)
+    public function destroy(HtCrr $htcrr, Item $item)
     {
-        $htCrr->items()->detach($item);
+        $htcrr->items()->detach($item);
 
-        return response()->json($htCrr);
+        return response()->json($htcrr);
     }
 }

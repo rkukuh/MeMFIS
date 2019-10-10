@@ -23,6 +23,15 @@
       </div>
 
       <div class="facility_datatable" id="scrolling_both"></div>
+      <div class="form-group m-form__group row">
+          <div class="col-sm-12 col-md-12 col-lg-12 footer">
+              <div class="flex">
+                  <div class="action-buttons">
+                      @include('frontend.common.buttons.back')
+                  </div>
+              </div>
+          </div>
+      </div>
   </div>
 </div>
 @include('frontend.quotation.facility.modal')
@@ -42,7 +51,7 @@
                     map: function (raw) {
                     let dataSet = raw;
                     let total = subtotal = 0;
-                    
+
                     if (typeof raw.data !== 'undefined') {
                         dataSet = raw.data;
                     }
@@ -51,7 +60,8 @@
                 }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !0,
                 serverSorting: !1
 
             },
@@ -104,7 +114,7 @@
                 title: "Price",
                 template: function (t, e, i) {
                     return (
-                        IDRformatter.format(t.price_amount)
+                        ForeignFormatter.format(t.price_amount)
                     );
             }
             }, {
@@ -154,7 +164,7 @@
                     }
                     $('#price_amount').val(data.price_amount);
                     $('#marketing_note').val(data.note);
-                    
+
                     $('.btn-success').addClass('update');
                     $('.btn-success').removeClass('add');
                 },
@@ -176,7 +186,6 @@
             let price_amount =$('#price_amount').val();
             let marketing_note = $('#marketing_note').val();
 
-            console.log($('#facility_name'));
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -207,7 +216,7 @@
                     } else {
                         $('#facility_price').modal('hide');
 
-                        toastr.success('Aircraft has been updated.', 'Success', {
+                        toastr.success('Facility has been updated.', 'Success', {
                             timeOut: 5000
                         });
 
@@ -223,7 +232,7 @@
         }
     };
 
-    
+
 
 
 jQuery(document).ready(function () {

@@ -72,7 +72,7 @@
                                                                             Job Card No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-
+                                                                            {{$htcrr->childs->get(0)->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -120,7 +120,7 @@
                                                                             Item Description
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->description}}
+                                                                            {{$htcrr->item->description}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -128,7 +128,7 @@
                                                                             Item Part Number
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->part_number}}
+                                                                            {{$htcrr->item->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -151,6 +151,7 @@
                                                                             @component('frontend.common.input.text')
                                                                                 @slot('id', 'item_sn_removal')
                                                                                 @slot('name', 'item_sn_removal')
+                                                                                @slot('value', $htcrr_removal->serial_number)
                                                                                 @slot('id_error', 'item_sn_removal')
                                                                             @endcomponent
                                                                         </td>
@@ -215,7 +216,7 @@
                                                                             Job Card No
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-
+                                                                            {{$htcrr->childs->get(1)->code}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -263,7 +264,7 @@
                                                                             Item Description
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->description}}
+                                                                            {{$htcrr->item->description}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -315,6 +316,7 @@
                                                                                 @slot('id', 'item_sn_installtation')
                                                                                 @slot('name', 'item_sn_installtation')
                                                                                 @slot('id_error', 'title')
+                                                                                @slot('value', $htcrr_installation->serial_number)
                                                                             @endcomponent
                                                                         </td>
                                                                     </tr>

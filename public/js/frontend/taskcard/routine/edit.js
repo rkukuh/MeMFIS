@@ -19,7 +19,7 @@ let TaskCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -281,7 +281,7 @@ let TaskCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -372,7 +372,7 @@ let TaskCard = {
                 pageSize: 10,
                 perpage: 5,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -444,7 +444,7 @@ let TaskCard = {
                 pageSize: 10,
                 perpage: 5,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -521,10 +521,15 @@ let TaskCard = {
                         }
 
                         if (data.errors.quantity) {
-                            $('#quantity_item-error').html(data.errors.quantity[0]);
+                            $('#quantity_material-error').html(data.errors.quantity[0]);
                         }
+
+                        if (data.errors.uom) {
+                            $('#unit_material-error').html(data.errors.uom[0]);
+                        }
+
                         document.getElementById('material').value = material;
-                        document.getElementById('quantity_item').value = quantity;
+                        document.getElementById('quantity_material').value = quantity;
 
                     } else {
 
@@ -537,6 +542,20 @@ let TaskCard = {
                         table.originalDataSet = [];
                         table.reload();
                         $('#modal_item').modal('hide');
+
+                        $('#modal_item').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end()
+                            .find("select")
+                                .select2('val','All')
+                                .end();
+                        })
+
 
                     }
                 }
@@ -570,6 +589,11 @@ let TaskCard = {
                         if (data.errors.quantity) {
                             $('#quantity-error').html(data.errors.quantity[0]);
                         }
+
+                        if (data.errors.uom) {
+                            $('#unit_tool-error').html(data.errors.uom[0]);
+                        }
+
                         document.getElementById('tool').value = tool;
                         document.getElementById('quantity_tool').value = quantity;
                     } else {
@@ -584,6 +608,19 @@ let TaskCard = {
                         table.reload();
 
                         $('#modal_tool').modal('hide');
+
+                        $('#modal_tool').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end()
+                            .find("select")
+                                .select2('val','All')
+                                .end();
+                        })
 
                     }
                 }
@@ -740,25 +777,13 @@ let TaskCard = {
 
             let threshold_type = [];
             $('select[name^="threshold_type"]').each(function(i) {
-                // if($(this).val() == 'Select'){
-                    // $(this).siblings(".select2-container").css('border', '5px solid red');
-                    // status = false;
-                // }else{
-                    // $(this).siblings(".select2-container").css('border', '2px grey');
-                    threshold_type[i] = $(this).val();
-                // }
+                threshold_type[i] = $(this).val();
             });
             threshold_type = threshold_type.filter(Boolean);
 
             let repeat_type = [];
             $('select[name^="repeat_type"]').each(function(i) {
-                // if($(this).val() == 'Select'){
-                    // $(this).siblings(".select2-container").css('border', '5px solid red');
-                    // status = false;
-                // }else{
-                    // $(this).siblings(".select2-container").css('border', '2px grey');
-                    repeat_type[i] = $(this).val();
-                // }
+                repeat_type[i] = $(this).val();
             });
             repeat_type = repeat_type.filter(Boolean);
 
@@ -766,13 +791,18 @@ let TaskCard = {
             $('input[name^="threshold_amount"]').each(function(i) {
                 threshold_amount[i] = $(this).val();
             });
-            threshold_amount = threshold_amount.filter(Boolean);
 
             let repeat_amount = [];
             $('input[name^="repeat_amount"]').each(function(i) {
                 repeat_amount[i] = $(this).val();
             });
-            repeat_amount = repeat_amount.filter(Boolean);
+
+            let sections = [];
+            i = 0;
+            $("#section").val().forEach(function(entry) {
+                sections[i] = entry;
+                i++;
+            });
 
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
@@ -803,20 +833,23 @@ let TaskCard = {
             data.append("source", $('input[name=source]').val());
             data.append("relationship", JSON.stringify(relationship));
             data.append("version", JSON.stringify($('#version').val()));
+            data.append("document_library", JSON.stringify($('#document-library').val()));
             data.append("effectivity", $('input[name=effectivity]').val());
             data.append("description", $('#description').val());
+            data.append("document", $('#document').val());
             data.append("threshold_type", JSON.stringify(threshold_type));
             data.append("repeat_type", JSON.stringify(repeat_type));
             data.append("threshold_amount", JSON.stringify(threshold_amount));
             data.append("repeat_amount", JSON.stringify(repeat_amount));
             data.append("is_rii", is_rii);
             data.append("additionals",  internal_numberJSON);
+            data.append("ata", $('input[name=ata]').val());
+            data.append("reference", $('#service_bulletin').val());
+            data.append("stringer", JSON.stringify($('#stringer').val()));
+            data.append("station", JSON.stringify($('#station').val()));
+            data.append("section", JSON.stringify(sections));
             data.append("fileInput", document.getElementById('taskcard').files[0]);
             data.append('_method', 'PUT');
-
-            for(let pair of data.entries()) {
-                console.log(pair[0]+ ', '+ pair[1]);
-            }
 
             $.ajax({
                 headers: {
@@ -829,7 +862,6 @@ let TaskCard = {
                 contentType: false,
                 cache: false,
                 success: function (response) {
-                    console.log(response);
                     if (response.errors) {
                         if (response.errors.title) {
                             $('#title-error').html(response.errors.title[0]);
@@ -899,14 +931,13 @@ let TaskCard = {
     }
 };
 $(document).ready(function () {
-    let taskcard_routine_type = $('select[name="taskcard_routine_type"]').val();
-    if (this.options[this.selectedIndex].text == "CPCP") {
+    let taskcard_routine_type = $('select[name="taskcard_routine_type"] option:selected').html();
+    if (taskcard_routine_type.trim() == "CPCP") {
         $("#station_div").removeClass("hidden");
         $("#stringer_div").removeClass("hidden");
         $("#service_bulletin_div").removeClass("hidden");
         $("#section_div").removeClass("hidden");
     }
-
 
     $('select[name="taskcard_routine_type"]').on('change', function () {
         if (this.options[this.selectedIndex].text == "CPCP") {
@@ -915,8 +946,6 @@ $(document).ready(function () {
         $("#service_bulletin_div").removeClass("hidden");
         $("#section_div").removeClass("hidden");
         document.getElementById('threshold').innerHTML = 'Implementation Age';
-
-
         } else {
             $("#station_div").addClass("hidden");
             $("#stringer_div").addClass("hidden");
@@ -929,4 +958,6 @@ $(document).ready(function () {
 });
 jQuery(document).ready(function () {
     TaskCard.init();
+    console.log($("#effectivity"));
+    console.log($("input [name=effectivity]"));
 });

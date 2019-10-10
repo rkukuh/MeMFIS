@@ -69,7 +69,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $defectcard->jobcard->quotation->project->aircraft->name)
+                                            @slot('text', $defectcard->jobcard->quotation->quotationable->aircraft->name)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $defectcard->jobcard->quotation->project->aircraft_register)
+                                            @slot('text', $defectcard->jobcard->quotation->quotationable->aircraft_register)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $defectcard->jobcard->quotation->project->aircraft_sn)
+                                            @slot('text', $defectcard->jobcard->quotation->quotationable->aircraft_sn)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $defectcard->jobcard->taskcard->sequence)
+                                            @slot('text', $defectcard->jobcard->jobcardable->sequence)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -140,7 +140,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', 'Generated')
+                                            @slot('text', $defectcard->ata)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -159,9 +159,9 @@
                                             Area/Zone
                                         </label>
 
-                                        @if (isset($defectcard->jobcard->taskcard->workarea->name))
+                                        @if (isset($defectcard->jobcard->jobcardable->workarea->name))
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', $defectcard->jobcard->taskcard->workarea->name)
+                                                @slot('text', $defectcard->jobcard->jobcardable->workarea->name)
                                             @endcomponent
                                         @else
                                             @component('frontend.common.label.data-info')
@@ -186,10 +186,10 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @if(sizeof($defectcard->jobcard->taskcard->skills) == 3)
+                                            @if(sizeof($defectcard->jobcard->jobcardable->skills) == 3)
                                                 @slot('text', 'ERI')
-                                            @elseif(sizeof($defectcard->jobcard->taskcard->skills) == 1)
-                                                @slot('text', $defectcard->jobcard->taskcard->skills[0]->name)
+                                            @elseif(sizeof($defectcard->jobcard->jobcardable->skills) == 1)
+                                                @slot('text', $defectcard->jobcard->jobcardable->skills[0]->name)
                                             @else
                                                 @include('frontend.common.label.data-info-nodata')
                                             @endif
@@ -231,7 +231,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', 'Generated')
+                                            @slot('text', $defectcard->description)
                                         @endcomponent
                                     </div>
                                 </div>

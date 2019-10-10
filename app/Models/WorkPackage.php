@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\MemfisModel;
 use App\Models\Pivots\ProjectWorkPackage;
+use App\Models\Pivots\QuotationWorkPackage;
 
 class WorkPackage extends MemfisModel
 {
@@ -30,6 +31,24 @@ class WorkPackage extends MemfisModel
     public function aircraft()
     {
         return $this->belongsTo(Aircraft::class);
+    }
+
+    /**
+     * Many-to-Many: A Work Package may have one or many EO-Instruction.
+     *
+     * This function will retrieve all the EO-instructions of a work package.
+     * See: EOInstruction's workpackages() method for the inverse
+     *
+     * @return mixed
+     */
+    public function eo_instructions()
+    {
+        return $this->belongsToMany(EOInstruction::class, 'eo_instruction_workpackage', 'workpackage_id', 'eo_instruction_id')
+                    ->withPivot(
+                        'sequence',
+                        'is_mandatory'
+                    )
+                    ->withTimestamps();
     }
 
     /**
@@ -82,9 +101,11 @@ class WorkPackage extends MemfisModel
     public function quotations()
     {
         return $this->belongsToMany(Quotation::class, 'quotation_workpackage', 'workpackage_id', 'quotation_id')
+                    ->using(QuotationWorkPackage::class)
                     ->withPivot(
                         'manhour_total',
-                        'manhour_rate',
+                        'manhour_rate_id',
+                        'manhour_rate_amount',
                         'discount_type',
                         'discount_value',
                         'description'
@@ -93,7 +114,7 @@ class WorkPackage extends MemfisModel
     }
 
     /**
-     * Many-to-Many: A task card may have one or many workpackage.
+     * Many-to-Many: A Work Package may have one or many Task Card.
      *
      * This function will retrieve all the task cards of a work package.
      * See: TaskCard's workpackages() method for the inverse

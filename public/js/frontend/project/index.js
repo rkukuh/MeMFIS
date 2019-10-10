@@ -20,7 +20,8 @@ let Aircraft = {
                     }
                 },
                 pageSize: 10,
-                serverPaging: !1,
+                serverPaging: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -51,11 +52,16 @@ let Aircraft = {
                 },
                 {
                     field: 'code',
-                    title: 'Code',
+                    title: 'Project No',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/project-hm/'+t.uuid+'">' + t.code + "</a>"
+                        if(t.parent_id == null){
+                            return '<a href="/project-hm/'+t.uuid+'">' + t.code + "</a>"
+                        }
+                        else{
+                            return '<a href="/project-hm-additional/'+t.uuid+'">' + t.code + "</a>"
+                        }
                     }
                 },
                 {
@@ -101,37 +107,66 @@ let Aircraft = {
                     filterable: !1,
                 },
                 {
+                    field: 'project_type',
+                    title: 'Project Type',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'created_by',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
+                    field: '',
+                    title: 'Approved By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        if(t.conducted_by){
+                            return t.conducted_by+" "+t.approval_time;
+                        }else{
+                            return "-";
+                        }
+                    }
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.status == 'Project Approved' || t.status == 'Quotation Approved'){
-                            return (
-                                '<a href="/project-hm/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'
-                            );
-                        }else{
-                            return (
-                                '<a href="/project-hm/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                                    '<i class="la la-pencil"></i>' +
-                                '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
-                                '</a>'+
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-check"></i>' +
-                                '</a>'
-                            );
+                        if(t.parent_id == null){
+                            if(t.status == 'Project Approved' || t.status == 'Quotation Approved'){
+                                return (
+                                    ''
+                                );
+                            }else{
+                                return (
+                                    '<a href="/project-hm/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                        '<i class="la la-pencil"></i>' +
+                                    '</a>' +
+                                    '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
+                                        '<i class="la la-check"></i>' +
+                                    '</a>'
+                                );
+                            }
+                        }
+                        else{
+                            if(t.status == 'Project Approved' || t.status == 'Quotation Approved'){
+                                return (
+                                    ''
+                                );
+                            }else{
+                                return (
+                                    '<a href="/project-hm-additional/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                        '<i class="la la-pencil"></i>' +
+                                    '</a>' +
+                                    '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid + '">' +
+                                        '<i class="la la-check"></i>' +
+                                    '</a>'
+                                );
+                            }
                         }
                     }
                 }
@@ -200,8 +235,8 @@ let Aircraft = {
             let project_uuid = $(this).data('uuid');
 
             swal({
-                title: 'Sure want to Approve?',
-                type: 'question',
+                title: 'Are you sure do you want to approve this transaction?',
+                type: 'warning',
                 confirmButtonText: 'Yes, Approve',
                 confirmButtonColor: '#34bfa3',
                 cancelButtonText: 'Cancel',
@@ -230,9 +265,12 @@ let Aircraft = {
                         },
                         error: function (jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
+                            $.each(errors.error, function (index, value) {
+                                toastr.error(value.message, value.title, {
+                                    "closeButton": true,
+                                    "timeOut": "0",
+                                }
+                            );
                             });
                         }
                     });

@@ -351,12 +351,12 @@
                                         </label>
 
                                         @component('frontend.common.input.select2')
-                                            @slot('text', 'Document')
-                                            @slot('id', 'document')
-                                            @slot('name', 'document')
+                                            @slot('id', 'document-library')
+                                            @slot('text', 'document-library')
+                                            @slot('name', 'document-library')
                                             @slot('multiple','multiple')
+                                            @slot('id_error', 'document-library')
                                             @slot('help_text','You can chose multiple value')
-                                            @slot('id_error', 'document')
                                         @endcomponent
 
                                     </div>
@@ -380,11 +380,12 @@
                                             Station @include('frontend.common.label.optional')
                                         </label>
 
-                                        @component('frontend.common.input.text')
+                                        @component('frontend.common.input.select2')
                                             @slot('id', 'station')
                                             @slot('text', 'Station')
                                             @slot('name', 'station')
                                             @slot('id_error', 'station')
+                                            @slot('multiple', 'multiple')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -680,6 +681,9 @@
 <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/work-area.js') }}"></script>
 
+<script src="{{ asset('js/frontend/functions/select2/station.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/station.js') }}"></script>
+
 <script src="{{ asset('js/frontend/functions/select2/threshold-type.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/threshold-type.js') }}"></script>
 
@@ -692,12 +696,13 @@
 <script src="{{ asset('js/frontend/functions/select2/taskcard-relationship.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard-relationship.js') }}"></script>
 
-<script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script> -->
 
 <script src="{{ asset('js/frontend/functions/select2/section.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/section.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/version.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/document-library.js') }}"></script>
 
 <script src="{{ asset('js/frontend/taskcard/routine/create.js') }}"></script>
 
@@ -740,6 +745,7 @@
         });
     });
 </script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         var counter = 0;
@@ -785,7 +791,7 @@
             "UserType": usertype
         };
 
-        console.log(JSON.stringify(ajaxdata));
+        // console.log(JSON.stringify(ajaxdata));
     });
 </script>
 @endpush

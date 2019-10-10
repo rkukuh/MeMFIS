@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Datatables\Project;
 
+use App\Models\Type;
 use App\Models\HtCrr;
 use App\Models\Project;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
+use App\Models\Item;
 use App\Http\Controllers\Controller;
 
 class HtCrrDatatables extends Controller
@@ -17,8 +19,9 @@ class HtCrrDatatables extends Controller
      */
     public function index(Project $project)
     {
-        $HtCrr =HtCrr::where('project_id',$project->id)->where('parent_id',null)->get();
+        $HtCrr = HtCrr::with('item')->where('project_id',$project->id)->where('parent_id',null)->get();
         foreach($HtCrr as $data){
+
             if(isset($data->skills) ){
                 if(sizeof($data->skills) == 3){
                     $data->skill_name .= "ERI";
@@ -29,7 +32,16 @@ class HtCrrDatatables extends Controller
                 else{
                     $data->skill_name .= '';
                 }
+
             }
+
+            $removal = HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','removal')->first()->id)->first()->estimation_manhour;
+
+            $data->removal.= $removal;
+
+            $installation =HtCrr::where('parent_id',$data->id)->where('type_id',Type::ofHtCrrType()->where('code','installation')->first()->id)->first()->estimation_manhour;
+
+            $data->installation.= $installation;
         }
 
         $data = $alldata = json_decode($HtCrr);

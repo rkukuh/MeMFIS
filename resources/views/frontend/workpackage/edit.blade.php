@@ -111,7 +111,7 @@
                                                     <a class="nav-link non-routine" data-toggle="tab" href="#m_tabs_1_2">Non Routine</a>
                                                 </li>
                                                 <!-- <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">General Tool(s) & Material(s)</a>
+                                                    <a class="nav-link" data-toggle="tab" href="#m_tabs_1_3">Material(s) & Tool(s)</a>
                                                 </li> -->
                                             </ul>
 
@@ -126,11 +126,11 @@
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Work Package Summary')
-                                                                @slot('href', route('frontend.workPackage.summary.workpackage', $workPackage->uuid) )
+                                                                @slot('href', route('frontend.workPackage.summary.workpackage',$workPackage->uuid) )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Routine Summary')
-                                                                @slot('href', route('frontend.workPackage.summary.routine', $workPackage->uuid) )
+                                                                @slot('href', route('frontend.workPackage.summary.routine',$workPackage->uuid) )
                                                             @endcomponent
                                                             </div>
                                                         </div>
@@ -138,19 +138,23 @@
                                                 </div>
                                                 <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
                                                     @include('frontend.workpackage.nonroutine.index')
+                                                    @include('frontend.workpackage.nonroutine.preliminary.modal')
                                                     @include('frontend.workpackage.nonroutine.adsb.modal')
                                                     @include('frontend.workpackage.nonroutine.cmrawl.modal')
                                                     @include('frontend.workpackage.nonroutine.si.modal')
+                                                    @include('frontend.workpackage.nonroutine.ea.modal')
+                                                    @include('frontend.workpackage.nonroutine.eo.modal')
+                                                    @include('frontend.workpackage.nonroutine.modal')
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <div class="action-buttons m--align-center">
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Work Package Summary')
-                                                                @slot('href', route('frontend.workPackage.summary.workpackage', $workPackage->uuid) )
+                                                                @slot('href', route('frontend.workPackage.summary.workpackage',$workPackage->uuid) )
                                                             @endcomponent
                                                             @component('frontend.common.buttons.summary')
                                                                 @slot('text', 'Non-routine Summary')
-                                                                @slot('href', route('frontend.workPackage.summary.nonroutine', $workPackage->uuid) )
+                                                                @slot('href', route('frontend.workPackage.summary.nonroutine',$workPackage->uuid) )
                                                             @endcomponent
                                                             </div>
                                                         </div>
@@ -164,10 +168,15 @@
                                             @include('frontend.workpackage.modal.material.taskcard')
                                             @include('frontend.workpackage.modal.tool.taskcard')
                                             @include('frontend.workpackage.modal.sequence')
+                                            @include('frontend.workpackage.modal.sequence-instruction')
                                             @include('frontend.workpackage.modal.predecessor')
                                             @include('frontend.workpackage.modal.successor')
+                                            @include('frontend.workpackage.modal.predecessor-instruction')
+                                            @include('frontend.workpackage.modal.successor-instruction')
                                             @include('frontend.workpackage.modal.create-predecessor')
                                             @include('frontend.workpackage.modal.create-successor')
+                                            @include('frontend.workpackage.modal.create-predecessor-instruction')
+                                            @include('frontend.workpackage.modal.create-successor-instruction')
 
                                         </div>
                                     </div>
@@ -212,6 +221,11 @@
 
         .margin-info {
             margin-left: 5px
+        } 
+        @media (min-width: 992px){
+            .modal-xl {
+                max-width: 1300px !important;
+            }
         }
     </style>
 @endpush
@@ -235,6 +249,9 @@
 
     <script src="{{ asset('js/frontend/functions/select2/taskcard-predecessor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/taskcard-successor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/instructon-predecessor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/instruction-successor.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/fill-combobox/taskcard.js') }}"></script>
 
     <script src="{{ asset('js/frontend/workpackage/edit.js') }}"></script>

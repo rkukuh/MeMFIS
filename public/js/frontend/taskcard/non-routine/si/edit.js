@@ -20,7 +20,7 @@ let TaskCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -104,7 +104,7 @@ let TaskCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -189,7 +189,7 @@ let TaskCard = {
                 pageSize: 10,
                 perpage: 5,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -261,7 +261,7 @@ let TaskCard = {
                 pageSize: 10,
                 perpage: 5,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -429,6 +429,11 @@ let TaskCard = {
                         if (data.errors.quantity) {
                             $('#quantity_item-error').html(data.errors.quantity[0]);
                         }
+
+                        if (data.errors.uom) {
+                            $('#unit_material-error').html(data.errors.uom[0]);
+                        }
+
                         document.getElementById('material').value = material;
                         document.getElementById('quantity').value = quantity;
 
@@ -447,7 +452,18 @@ let TaskCard = {
 
                         // $('#item_unit_id').select2('val', 'All');
 
-
+                        $('#modal_item').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end()
+                            .find("select")
+                                .select2('val','All')
+                                .end();
+                        })
                     }
                 }
             });
@@ -480,6 +496,11 @@ let TaskCard = {
                         if (data.errors.quantity) {
                             $('#quantity-error').html(data.errors.quantity[0]);
                         }
+
+                        if (data.errors.uom) {
+                            $('#unit_tool-error').html(data.errors.uom[0]);
+                        }
+
                         document.getElementById('tool').value = tool;
                         document.getElementById('quantity').value = quantity;
                     } else {
@@ -497,8 +518,18 @@ let TaskCard = {
                         // document.getElementById('uom_quantity').value = '';
 
                         // $('#item_unit_id').select2('val', 'All');
-
-
+                        $('#modal_tool').on('hidden.bs.modal', function (e) {
+                            $(this)
+                            .find("input,textarea")
+                                .val('')
+                                .end()
+                            .find("input[type=checkbox], input[type=radio]")
+                                .prop("checked", "")
+                                .end()
+                            .find("select")
+                                .select2('val','All')
+                                .end();
+                        })
                     }
                 }
             });
@@ -733,6 +764,7 @@ let TaskCard = {
             data.append( "repeat_type", JSON.stringify(repeat_type));
             data.append( "threshold_amount", JSON.stringify(threshold_amount));
             data.append( "repeat_amount", JSON.stringify(repeat_amount));
+            data.append( "document_library", JSON.stringify($('#document-library').val()));
             data.append( "additionals",  internal_numberJSON);
             data.append( "fileInput", document.getElementById('taskcard').files[0]);
             data.append('_method', 'PUT');

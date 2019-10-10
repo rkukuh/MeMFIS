@@ -15,7 +15,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id=InstructionForm">
+                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="InstructionForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
@@ -131,6 +131,19 @@
                                         @endcomponent
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Description @include('frontend.common.label.required')
+                                </label>
+
+                                @component('frontend.common.input.textarea')
+                                    @slot('rows', '3')
+                                    @slot('id', 'instuction_description')
+                                    @slot('name', 'instuction_description')
+                                    @slot('text', 'Description')
+                                    @slot('description', 'text')
+                                @endcomponent
                             </div>
                         </div>
                     </div>

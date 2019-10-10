@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Datatables\Quotation;
 
 use App\Models\Unit;
 use App\Models\Item;
+use App\Models\HtCrr;
+use App\Models\Project;
 use App\Models\TaskCard;
 use App\Models\ListUtil;
-use App\Models\WorkPackage;
 use App\Models\Quotation;
-use App\Models\QuotationWorkPackageTaskCardItem;
+use App\Models\WorkPackage;
 use Illuminate\Http\Request;
+use App\Models\QuotationHtcrrItem;
 use App\Http\Controllers\Controller;
+use App\Models\QuotationWorkPackageTaskCardItem;
 
 class QuotationItemDatatables extends Controller
 {
@@ -21,43 +24,31 @@ class QuotationItemDatatables extends Controller
      */
     public function routine(Quotation $quotation, WorkPackage $workPackage)
     {
-        $routinematerials = $materials = [];
-
-        // Get Items from routine taskcards -
-        $taskcards = $workPackage->taskcards()->with('type')
-        ->whereHas('type', function ($query) {
-            $query->where('of', 'taskcard-type-routine');
-        })->get();
-
-        foreach($taskcards as $taskcard){
-            $items = $taskcard->materials;
-            foreach($items as $item){
-                array_push($materials, $item);
-            }
-        }
-        // -Get Items from routine taskcards
-
-        foreach($materials as $material){
-            $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
-            ->where('quotation_id', $quotation->id)
-            ->where('item_id', $material->id)
-            ->get();
-            if(sizeof($items) > 0){
-                foreach($items as $item){
-                    array_push($routinematerials, $item);
-                }
-            }
-        }
+        $routinematerials = QuotationWorkPackageTaskCardItem::with('taskcard','item','unit','price')->where('quotation_id', $quotation->id)
+        ->where('workpackage_id', $workPackage->id)
+        ->whereHas('taskcard', function ($query) {
+                $query->wherehas('type', function ($query2) {
+                    $query2->where('of','taskcard-type-routine');
+                });
+        })
+        ->whereHas('item', function ($query) {
+                $query->whereHas('categories', function ($query) {
+                    $query->whereIn('code', ['raw', 'cons', 'comp']);
+                });
+        })
+        ->get();
 
         foreach($routinematerials as $routinematerial){
-            $routinematerial->tc .= TaskCard::find($routinematerial->taskcard_id)->number;
-            $routinematerial->pn .= Item::find($routinematerial->item_id)->code;
-            $routinematerial->title .= Item::find($routinematerial->item_id)->name;
-            $routinematerial->unit_material .= Unit::find($routinematerial->unit_id)->name;
-            $routinematerial->unitPrice .= null;
+            if($routinematerial->item->prices->last() <> null){
+                $routinematerial->unitPrice .= $routinematerial->item->prices()->where('level', $quotation->quotationable->customer->levels->last()->score)->first()->amount;
+            }
+            else{
+                $routinematerial->unitPrice .= 0;
+            }
+
         }
 
-        $data = $alldata = $routinematerials;
+        $data = $alldata = json_decode($routinematerials);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
@@ -153,41 +144,158 @@ class QuotationItemDatatables extends Controller
      */
     public function non_routine(Quotation $quotation, WorkPackage $workPackage)
     {
-        $nonroutinematerials = $materials = [];
 
-        // Get Items from non-routine taskcards -
-        $taskcards = $workPackage->taskcards()->with('type')
-        ->whereHas('type', function ($query) {
-            $query->where('of', 'taskcard-type-non-routine');
-        })->get();
-        foreach($taskcards as $taskcard){
-            $items = $taskcard->materials;
-            foreach($items as $item){
-                array_push($materials, $item);
+        $nonroutinematerials = QuotationWorkPackageTaskCardItem::with('taskcard','item','unit','price')->where('quotation_id', $quotation->id)
+        ->where('workpackage_id', $workPackage->id)
+        ->whereHas('taskcard', function ($query) {
+                $query->wherehas('type', function ($query2) {
+                    $query2->where('of','taskcard-type-non-routine');
+                });
+        })
+        ->whereHas('item', function ($query) {
+                $query->whereHas('categories', function ($query) {
+                    $query->whereIn('code', ['raw', 'cons', 'comp']);
+                });
+        })
+        ->get();
+
+        foreach($nonroutinematerials as $nonroutinematerial){
+            if($nonroutinematerial->item->prices->last() <> null){
+                $nonroutinematerial->unitPrice .= $nonroutinematerial->item->prices()->where('level', $quotation->quotationable->customer->levels->last()->score)->first()->amount;
+            }
+            else{
+                $nonroutinematerial->unitPrice .= 0;
+            }
+
+        }
+
+        $data = $alldata = json_decode($nonroutinematerials);
+
+        $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
+
+        $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
+                    ? $datatable['query']['generalSearch'] : '';
+
+        if (! empty($filter)) {
+            $data = array_filter($data, function ($a) use ($filter) {
+                return (boolean)preg_grep("/$filter/i", (array)$a);
+            });
+
+            unset($datatable['query']['generalSearch']);
+        }
+
+        $query = isset($datatable['query']) && is_array($datatable['query']) ? $datatable['query'] : null;
+
+        if (is_array($query)) {
+            $query = array_filter($query);
+
+            foreach ($query as $key => $val) {
+                $data = $this->list_filter($data, [$key => $val]);
             }
         }
-        // -Get Items from non-routine taskcards
+
+        $sort  = ! empty($datatable['sort']['sort']) ? $datatable['sort']['sort'] : 'asc';
+        $field = ! empty($datatable['sort']['field']) ? $datatable['sort']['field'] : 'RecordID';
+
+        $meta    = [];
+        $page    = ! empty($datatable['pagination']['page']) ? (int)$datatable['pagination']['page'] : 1;
+        $perpage = ! empty($datatable['pagination']['perpage']) ? (int)$datatable['pagination']['perpage'] : -1;
+
+        $pages = 1;
+        $total = count($data);
+
+        usort($data, function ($a, $b) use ($sort, $field) {
+            if (! isset($a->$field) || ! isset($b->$field)) {
+                return false;
+            }
+
+            if ($sort === 'asc') {
+                return $a->$field > $b->$field ? true : false;
+            }
+
+            return $a->$field < $b->$field ? true : false;
+        });
+
+        if ($perpage > 0) {
+            $pages  = ceil($total / $perpage);
+            $page   = max($page, 1);
+            $page   = min($page, $pages);
+            $offset = ($page - 1) * $perpage;
+
+            if ($offset < 0) {
+                $offset = 0;
+            }
+
+            $data = array_slice($data, $offset, $perpage, true);
+        }
+
+        $meta = [
+            'page'    => $page,
+            'pages'   => $pages,
+            'perpage' => $perpage,
+            'total'   => $total,
+        ];
+
+        if (isset($datatable['requestIds']) && filter_var($datatable['requestIds'], FILTER_VALIDATE_BOOLEAN)) {
+            $meta['rowIds'] = array_map(function ($row) {
+                return $row->RecordID;
+            }, $alldata);
+        }
+
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+        $result = [
+            'meta' => $meta + [
+                    'sort'  => $sort,
+                    'field' => $field,
+                ],
+            'data' => $data,
+        ];
+
+        echo json_encode($result, JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function htcrr(Quotation $quotation)
+    {
+        $htcrrmaterials = $materials = [];
+        $htcrrs = HtCrr::whereNull('parent_id')->where('project_id', $quotation->quotationable->id)->get();
+        // -Get Items from htcrr
+        foreach($htcrrs as $htcrr){
+            foreach($htcrr->materials as $material){
+                array_push($materials, $material);
+
+            }
+        }
+
         foreach($materials as $material){
-            $items = QuotationWorkPackageTaskCardItem::where('workpackage_id', $workPackage->id)
+            $items = QuotationHtcrrItem::where('htcrr_id', $material->pivot->pivotParent->id)
             ->where('quotation_id', $quotation->id)
             ->where('item_id', $material->id)
             ->get();
             if(sizeof($items) > 0){
                 foreach($items as $item){
-                    array_push($nonroutinematerials, $item);
+                    array_push($htcrrmaterials, $item);
                 }
             }
         }
 
-        foreach($nonroutinematerials as $nonroutinematerial){
-            $nonroutinematerial->tc .= TaskCard::find($nonroutinematerial->taskcard_id)->number;
-            $nonroutinematerial->pn .= Item::find($nonroutinematerial->item_id)->code;
-            $nonroutinematerial->title .= Item::find($nonroutinematerial->item_id)->name;
-            $nonroutinematerial->unit_material .= Unit::find($nonroutinematerial->unit_id)->name;
-            $nonroutinematerial->unitPrice .= null;
+        foreach($htcrrmaterials as $htcrrmaterial){
+            $htcrrmaterial->tc .= $htcrrmaterial->htcrr->code;
+            $htcrrmaterial->pn .= Item::find($htcrrmaterial->item_id)->code;
+            $htcrrmaterial->title .= Item::find($htcrrmaterial->item_id)->name;
+            $htcrrmaterial->unit_material .= $htcrrmaterial->unit->name;
+            $htcrrmaterial->unitPrice .= null;
         }
 
-        $data = $alldata = $nonroutinematerials;
+        $data = $alldata = $htcrrmaterials;
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

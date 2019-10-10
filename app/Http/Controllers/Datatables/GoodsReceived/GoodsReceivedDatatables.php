@@ -16,7 +16,21 @@ class GoodsReceivedDatatables extends Controller
      */
     public function index()
     {
-        $data = $alldata = json_decode(GoodsReceived::with('approvedBy','purchase_order')->get());
+        $GoodsReceiveds = GoodsReceived::with('purchase_order','purchase_order.purchase_request')->get();
+
+        foreach($GoodsReceiveds as $GoodsReceived){
+            if($GoodsReceived->deleted_at <> null){
+                $GoodsReceived->status .= 'Void';
+            }
+            else if(!empty($GoodsReceived->approvals->toArray())){
+                $GoodsReceived->status .= 'Approved';
+            }else{
+                $GoodsReceived->status .= '';
+
+            }
+        }
+
+        $data = $alldata = json_decode($GoodsReceiveds);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 
