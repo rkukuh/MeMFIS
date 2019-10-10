@@ -57,10 +57,10 @@
                                         </label>
 
                                         @component('frontend.common.input.datepicker')
-                                        @slot('id', 'date')
-                                        @slot('text', 'Date')
-                                        @slot('name', 'date')
-                                        @slot('id_error','requested_at')
+                                            @slot('id', 'date')
+                                            @slot('text', 'Date')
+                                            @slot('name', 'date')
+                                            @slot('id_error','requested_at')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -71,10 +71,10 @@
                                         </label>
 
                                         @component('frontend.common.input.select2')
-                                        @slot('text', 'Ref Doc No.')
-                                        @slot('id', 'number')
-                                        @slot('name', 'number')
-                                        @slot('id_error','number')
+                                            @slot('text', 'Ref Doc No.')
+                                            @slot('id', 'number')
+                                            @slot('name', 'number')
+                                            @slot('id_error','number')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -85,8 +85,8 @@
                                         @include('frontend.common.ref-quotation-workshop.index')
 
                                         @component('frontend.common.input.hidden')
-                                        @slot('id', 'quotaion_workshop')
-                                        @slot('name', 'quotaion_workshop')
+                                            @slot('id', 'quotation_workshop')
+                                            @slot('name', 'quotation_workshop')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -97,10 +97,10 @@
                                         </label>
 
                                         @component('frontend.common.input.select2')
-                                        @slot('text', 'Storage')
-                                        @slot('id', 'item_storage_id')
-                                        @slot('name', 'item_storage_id')
-                                        @slot('id_error', 'item_storage_id')
+                                            @slot('text', 'Storage')
+                                            @slot('id', 'item_storage_id')
+                                            @slot('name', 'item_storage_id')
+                                            @slot('id_error', 'item_storage_id')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -123,10 +123,10 @@
                                         </label>
 
                                         @component('frontend.common.input.textarea')
-                                        @slot('rows', '5')
-                                        @slot('id', 'remark')
-                                        @slot('name', 'remark')
-                                        @slot('text', 'Remark')
+                                            @slot('rows', '5')
+                                            @slot('id', 'remark')
+                                            @slot('name', 'remark')
+                                            @slot('text', 'Remark')
                                         @endcomponent
                                     </div>
                                 </div>
