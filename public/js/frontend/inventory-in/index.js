@@ -69,24 +69,21 @@ let InventoryIn = {
                     }
                 },
                 {
-                    field: 'inventoryinable_id',
-                    title: 'Inventory In No.',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                    template: function (t) {
-                        return t.inventoryinable_id
-                    }
-                },
-                {
                     field: 'number',
-                    title: 'Ref Doc',
+                    title: 'Inventory In No.',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                     template: function (t) {
                         return '<a href="/inventory-in/' + t.uuid + '">' + t.number + "</a>"
                     }
+                },
+                {
+                    field: '',
+                    title: 'Ref Doc',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
                 },
                 {
                     field: 'storage_id',
@@ -99,11 +96,14 @@ let InventoryIn = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'description',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 150,
+                    template: function (t) {
+                        return t.description
+                    }
                 },
                 {
                     field: '',
