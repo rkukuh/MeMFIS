@@ -134,46 +134,79 @@ let InventoryInCreate = {
             });
         });
 
-        $('.footer').on('click', '.add-pr', function () {
-            let number = $('input[name=number]').val();
-            let type_id = $('input[name=type]').val();
-            // let project_id = $('input[name=project]').val();
+        // $('.footer').on('click', '.add-pr', function () {
+        //     let number = $('input[name=number]').val();
+        //     let type_id = $('input[name=type]').val();
+        //     // let project_id = $('input[name=project]').val();
+        //     let date = $('input[name=date]').val();
+        //     let date_required = $('input[name=date-required]').val();
+        //     let description = $('#description').val();
+
+        //     $.ajax({
+        //         headers: {
+        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //         },
+        //         url: '/purchase-request',
+        //         type: 'POST',
+        //         data: {
+        //             number:number,
+        //             type_id:type_id,
+        //             requested_at:date,
+        //             required_at:date_required,
+        //             description:description,
+        //         },
+        //         success: function (response) {
+        //             if (response.errors) {
+        //                 console.log(errors);
+        //                 // if (response.errors.title) {
+        //                 //     $('#title-error').html(response.errors.title[0]);
+        //                 // }
+
+        //                 // document.getElementById('manual_affected_id').value = manual_affected_id;
+
+
+        //             } else {
+        //                 //    taskcard_reset();
+
+
+        //                 toastr.success('Taskcard has been created.', 'Success', {
+        //                     timeOut: 5000
+        //                 });
+
+        //                 window.location.href = '/purchase-request/'+response.uuid+'/edit';
+        //             }
+        //         }
+        //     });
+        // });
+
+        $('.footer').on('click', '.add-inventory-in', function () {
+            let ref_no = $('input[name=ref-no]').val();
+            let description = $('input[name=remark]').val();
+            let section_code = $('input[name=section_code]').val();
+            let storage_id = $('input[name=item_storage_id]').val();
             let date = $('input[name=date]').val();
-            let date_required = $('input[name=date-required]').val();
-            let description = $('#description').val();
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/purchase-request',
+                url: '/inventory-in',
                 type: 'POST',
                 data: {
-                    number:number,
-                    type_id:type_id,
-                    requested_at:date,
-                    required_at:date_required,
-                    description:description,
+                    number: ref_no,
+                    storage_id: storage_id,
+                    inventoried_at: date,
+                    description: description,
+                    section_code: section_code,
                 },
                 success: function (response) {
+                    console.log(response);
                     if (response.errors) {
                         console.log(errors);
-                        // if (response.errors.title) {
-                        //     $('#title-error').html(response.errors.title[0]);
-                        // }
-
-                        // document.getElementById('manual_affected_id').value = manual_affected_id;
-
-
                     } else {
-                        //    taskcard_reset();
-
-
-                        toastr.success('Taskcard has been created.', 'Success', {
+                        toastr.success('InventoryIn has been created.', 'Success', {
                             timeOut: 5000
                         });
-
-                        window.location.href = '/purchase-request/'+response.uuid+'/edit';
                     }
                 }
             });

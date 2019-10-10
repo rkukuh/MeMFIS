@@ -39,7 +39,7 @@ class InventoryInController extends Controller
      */
     public function store(InventoryInStore $request)
     {
-        //
+        return view('frontend.inventory-in.index');
     }
 
     /**
@@ -50,6 +50,7 @@ class InventoryInController extends Controller
      */
     public function show(InventoryIn $inventoryIn)
     {
+
         return view('frontend.inventory-in.show', [
             'inventoryIn' => $inventoryIn,
         ]);
