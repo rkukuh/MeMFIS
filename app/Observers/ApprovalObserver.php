@@ -65,8 +65,23 @@ class ApprovalObserver
                     ]);
                 }
                 break;
-            case 'App\Models\InventoryOut':
+            case 'App\Models\Mutation':
                     //
+                break;
+            case 'App\Models\InventoryOut':
+                foreach($approval->approvable->items as $item){
+                    FefoOut::create([
+                        'fefoin_id' => 1,
+                        'item_id' => $item->pivot->item_id,
+                        'storage_id' =>  $approval->approvable->storage_id,
+                        'inventoryout_id' => $approval->approvable->id,
+                        'fefoout_at' =>  $approval->approvable->inventoried_at,
+                        'quantity' => $item->pivot->quantity_in_primary_unit,
+                        'serial_number' => $item->pivot->serial_number,
+                        'price' => $item->pivot->purchased_price,
+                        'expired_at' => $item->pivot->expired_at,
+                    ]);
+                }
                 break;
             default:
                     //
