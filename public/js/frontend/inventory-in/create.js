@@ -181,9 +181,9 @@ let InventoryInCreate = {
 
         $('.footer').on('click', '.add-inventory-in', function () {
             let ref_no = $('input[name=ref-no]').val();
-            let description = $('input[name=remark]').val();
+            let description = $('#remark').val();
             let section_code = $('input[name=section_code]').val();
-            let storage_id = $('input[name=item_storage_id]').val();
+            let storage_id = $('#item_storage_id').val();
             let date = $('input[name=date]').val();
 
             $.ajax({
@@ -200,9 +200,8 @@ let InventoryInCreate = {
                     section_code: section_code,
                 },
                 success: function (response) {
-                    console.log(response);
                     if (response.errors) {
-                        console.log(errors);
+                        console.log(errors)
                     } else {
                         toastr.success('InventoryIn has been created.', 'Success', {
                             timeOut: 5000

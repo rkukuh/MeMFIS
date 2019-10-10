@@ -39,7 +39,7 @@ class InventoryInController extends Controller
      */
     public function store(InventoryInStore $request)
     {
-        return view('frontend.inventory-in.index');
+        dd($request->all());
     }
 
     /**
