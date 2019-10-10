@@ -482,6 +482,8 @@
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('js/frontend/quotation/additional/edit.js')}}"></script>
     <script src="{{ asset('js/frontend/quotation/additional/summary.js') }}"></script>
+    
+    <script src="{{ asset('js/frontend/functions/fill-combobox/discount-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/phone.js') }}"></script>
