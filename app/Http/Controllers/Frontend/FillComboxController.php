@@ -8,6 +8,7 @@ use App\Models\Type;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
 use App\Models\Level;
+use App\Models\Promo;
 use App\Models\Vendor;
 use App\Models\Access;
 use App\Models\Project;
@@ -807,6 +808,19 @@ class FillComboxController extends Controller
         $station = station::pluck('name', 'uuid');
 
         return json_encode($station);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function promo()
+    {
+        $promo = Promo::pluck('name', 'uuid');
+
+        return json_encode($promo);
 
     }
 
