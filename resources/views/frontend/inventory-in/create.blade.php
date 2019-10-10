@@ -57,10 +57,10 @@
                                         </label>
 
                                         @component('frontend.common.input.datepicker')
-                                            @slot('id', 'date')
-                                            @slot('text', 'Date')
-                                            @slot('name', 'date')
-                                            @slot('id_error','requested_at')
+                                        @slot('id', 'date')
+                                        @slot('text', 'Date')
+                                        @slot('name', 'date')
+                                        @slot('id_error','requested_at')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -70,11 +70,11 @@
                                             Ref. Doc No. @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select2')
-                                            @slot('text', 'Ref Doc No.')
-                                            @slot('id', 'number')
-                                            @slot('name', 'number')
-                                            @slot('id_error','number')
+                                        @component('frontend.common.input.text')
+                                            @slot('id', 'ref-no')
+                                            @slot('text', 'Ref No.')
+                                            @slot('name', 'ref-no')
+                                            @slot('id_error','ref-no')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -97,10 +97,10 @@
                                         </label>
 
                                         @component('frontend.common.input.select2')
-                                            @slot('text', 'Storage')
-                                            @slot('id', 'item_storage_id')
-                                            @slot('name', 'item_storage_id')
-                                            @slot('id_error', 'item_storage_id')
+                                        @slot('text', 'Storage')
+                                        @slot('id', 'item_storage_id')
+                                        @slot('name', 'item_storage_id')
+                                        @slot('id_error', 'item_storage_id')
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -123,10 +123,10 @@
                                         </label>
 
                                         @component('frontend.common.input.textarea')
-                                            @slot('rows', '5')
-                                            @slot('id', 'remark')
-                                            @slot('name', 'remark')
-                                            @slot('text', 'Remark')
+                                        @slot('rows', '5')
+                                        @slot('id', 'remark')
+                                        @slot('name', 'remark')
+                                        @slot('text', 'Remark')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -219,11 +219,8 @@
 <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
 
-<script src="{{ asset('js/frontend/functions/select2/inventory-in.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/inventory-in.js') }}"></script>
-
 <!-- <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script> -->
+<script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script> -->
 
 <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
