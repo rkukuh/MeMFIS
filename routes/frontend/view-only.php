@@ -105,13 +105,9 @@ Route::group([
 
         Route::view('/gse-tool-returned', 'frontend.gse-tool-returned.index')->name('gse-tool-returned.index');
 
-        Route::view('/gse-tool-returned/general/create', 'frontend.gse-tool-returned.general.create')->name('gse-tool-returned.general.create');
-        Route::view('/gse-tool-returned/general/edit', 'frontend.gse-tool-returned.general.edit')->name('gse-tool-returned.general.edit');
-        Route::view('/gse-tool-returned/general/show', 'frontend.gse-tool-returned.general.show')->name('gse-tool-returned.general.show');
-
-        Route::view('/gse-tool-returned/project/create', 'frontend.gse-tool-returned.project.create')->name('gse-tool-returned.project.create');
-        Route::view('/gse-tool-returned/project/edit', 'frontend.gse-tool-returned.project.edit')->name('gse-tool-returned.project.edit');
-        Route::view('/gse-tool-returned/project/show', 'frontend.gse-tool-returned.project.show')->name('gse-tool-returned.project.show');
+        Route::view('/gse-tool-returned/create', 'frontend.gse-tool-returned.create')->name('gse-tool-returned.create');
+        Route::view('/gse-tool-returned/edit', 'frontend.gse-tool-returned.edit')->name('gse-tool-returned.edit');
+        Route::view('/gse-tool-returned/show', 'frontend.gse-tool-returned.show')->name('gse-tool-returned.show');
 
         /** ATTENDANCE */
 
