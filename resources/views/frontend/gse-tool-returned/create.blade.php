@@ -5,7 +5,7 @@
         <div class="d-flex align-items-center">
             <div class="mr-auto">
                 <h3 class="m-subheader__title m-subheader__title--separator">
-                    GSE/Tool Returned General
+                    GSE/Tool Returned
                 </h3>
                 <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
                     <li class="m-nav__item m-nav__item--home">
@@ -19,7 +19,7 @@
                     <li class="m-nav__item">
                         <a href="{{ route('frontend.gse-tool-returned.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
-                                GSE/Tool Returned General
+                                GSE/Tool Returned
                             </span>
                         </a>
                     </li>
@@ -38,10 +38,10 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.edit')
+                                @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
-                                    GSE/Tool Returned General
+                                    GSE/Tool Returned
                                 </h3>
                             </div>
                         </div>
@@ -63,6 +63,32 @@
                                                 @slot('id_error','date')
                                             @endcomponent
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Ref Document No. @include('frontend.common.label.required')
+                                            </label>
+
+                                            @include('frontend.common.warehouse.index')
+
+                                            @component('frontend.common.input.hidden')
+                                                @slot('id', 'warehouse')
+                                                @slot('name', 'warehouse')
+                                            @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Project No.
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('id', 'project_number')
+                                                @slot('text', 'generate')
+                                            @endcomponent
+                                        </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Storage @include('frontend.common.label.required')
@@ -75,50 +101,54 @@
                                                 @slot('id_error', 'item_storage_id')
                                             @endcomponent
                                         </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        A/C Type
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('id', 'actype')
+                                                        @slot('text', 'Generate')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        A/C Reg
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('id', 'acreg')
+                                                        @slot('text', 'Generate')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Ref Tool Request No. @include('frontend.common.label.required')
+                                                Returned By @include('frontend.common.label.required')
                                             </label>
 
-                                            @include('frontend.common.warehouse.index')
-
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'warehouse')
-                                                @slot('name', 'warehouse')
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', ' Returned By')
+                                                @slot('id', 'returned_by')
+                                                @slot('name', 'returned_by')
+                                                @slot('id_error', 'returned_by')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Location @include('frontend.common.label.required')
+                                                Section Code 
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                               Department
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('id', 'department')
-                                                @slot('text', 'generate')
-                                            @endcomponent
-                                        </div>
-                                        
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                               Loaned To
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('id', 'loaned')
-                                                @slot('text', 'generate')
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'Section Code')
+                                                @slot('id', 'section')
+                                                @slot('name', 'section')
+                                                @slot('id_error', 'section')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -214,15 +244,8 @@
 @push('footer-scripts')
 
     <script src="{{ asset('js/frontend/gse-tool-returned/create.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
-
-    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
-
+    <script src="{{ asset('js/frontend/functions/select2/returned-by.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
 @endpush

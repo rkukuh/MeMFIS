@@ -42,47 +42,60 @@ let GseToolReturnedShow = {
                     }
                 }
             },
-            columns: [{
-                    field: 'id',
-                    title: '#',
-                    sortable: !1,
-                    width: 40
+            columns: [  
+                {
+                    field: '#',
+                    title: 'No',
+                    width:'40',
+                    sortable: 'asc',
+                    filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {   
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
                 },
                 {
-                    field: 'quotation_number',
+                    field: '',
                     title: 'Part Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'customer',
-                    title: 'Item Description',
+                    field: '',
+                    title: 'Serial Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'valid_until',
+                    field: '',
+                    title: 'Tool Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: '',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'status',
+                    field: '',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: 'status',
+                    field: '',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
-                }
+                },
             ]
         });
     }

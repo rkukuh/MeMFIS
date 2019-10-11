@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                             <div class="form-group m-form__group row ">
-                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                <div class="col-sm-3 col-md-3 col-lg-3">
                                     <label class="form-control-label">
                                         Request Qty
                                     </label>
@@ -33,7 +33,7 @@
                                         @slot('id','qty')
                                     @endcomponent
                                 </div>
-                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                <div class="col-sm-3 col-md-3 col-lg-3">
                                     <label class="form-control-label">
                                         Unit
                                     </label>
@@ -44,8 +44,6 @@
                                         @slot('id','unit_id')
                                     @endcomponent
                                 </div>
-                            </div>
-                            <div class="form-group m-form__group row ">
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <label class="form-control-label">
                                         Price
@@ -56,16 +54,6 @@
                                         @slot('id','price')
                                     @endcomponent
                                 </div>
-                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <label class="form-control-label">
-                                        PPN
-                                    </label>
-                                    @component('frontend.common.input.number')
-                                        @slot('text', 'ppn')
-                                        @slot('name','ppn')
-                                        @slot('id','ppn')
-                                    @endcomponent
-                                </div>
                             </div>
                             <div class="form-group m-form__group row ">
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -74,11 +62,11 @@
                                     </label>
 
                                     @component('frontend.common.input.select2')
-                                        @slot('text', 'Discount')
-                                        @slot('name', 'discount-type-po')
-                                        @slot('id', 'discount-type-po')
-                                        @slot('class', 'discount-type-po')
-                                        @slot('id_error', 'discount-type-po')
+                                        @slot('text', 'Promo')
+                                        @slot('name', 'promo-type')
+                                        @slot('id', 'promo-type')
+                                        @slot('class', 'promo-type')
+                                        @slot('id_error', 'promo-type')
                                     @endcomponent
                                 </div>
                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -87,9 +75,9 @@
                                     </label>
                                     @component('frontend.common.input.number')
                                         @slot('text', 'Discount')
-                                        @slot('name', 'discount')
-                                        @slot('id', 'discount')
-                                        @slot('id_error', 'discount')
+                                        @slot('name', 'promo')
+                                        @slot('id', 'promo')
+                                        @slot('id_error', 'promo')
                                     @endcomponent
                                 </div>
                             </div>
