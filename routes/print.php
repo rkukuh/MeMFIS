@@ -187,25 +187,49 @@ Route::get('/jobcard-ad-1page', function () {
     return $pdf->stream();
 });
 
+
+Route::get('/jobcard-ad-2page', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_ad_2page');
+    return $pdf->stream();
+});
+
 Route::get('/jobcard-awl-1page', function () {
     $pdf = \PDF::loadView('frontend/form/jobcard_awl_1page');
     return $pdf->stream();
 });
 
+Route::get('/jobcard-awl-2page', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_awl_2page');
+    return $pdf->stream();
+});
 
 Route::get('/jobcard-cmr-1page', function () {
     $pdf = \PDF::loadView('frontend/form/jobcard_cmr_1page');
     return $pdf->stream();
 });
 
+Route::get('/jobcard-cmr-2page', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_cmr_2page');
+    return $pdf->stream();
+});
 
 Route::get('/jobcard-ea-1page', function () {
     $pdf = \PDF::loadView('frontend/form/jobcard_ea_1page');
     return $pdf->stream();
 });
 
+Route::get('/jobcard-ea-2page', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_ea_2page');
+    return $pdf->stream();
+});
+
 Route::get('/jobcard-sb-1page', function () {
     $pdf = \PDF::loadView('frontend/form/jobcard_sb_1page');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-sb-2page', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_sb_2page');
     return $pdf->stream();
 });
 
