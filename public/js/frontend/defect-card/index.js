@@ -327,7 +327,6 @@ let DefectCard = {
                     sortable: 'asc',
                     filterable: !1,
                 },
-
                 {
                     field: 'created_by',
                     title: 'Created By',
