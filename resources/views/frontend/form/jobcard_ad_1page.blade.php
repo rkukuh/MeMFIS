@@ -119,7 +119,7 @@
     </header>
     <footer style="margin-top:14px;">
         <div class="container">
-          <table width="100%" border="1">
+          <table width="100%">
             <tr>
                 <td valign="top" width="36%">Prepared By : <span>name:timestamp</span></td>
                 <td valign="top" width="35%">Print By : <span>name:timestamp</span></td>
