@@ -1,4 +1,4 @@
-let GseToolReturnedCreate = {
+let GseToolReturnedEdit = {
     init: function () {
         $('.gse_tool_returned_datatable').mDatatable({
             data: {
@@ -222,5 +222,5 @@ let GseToolReturnedCreate = {
 };
 
 jQuery(document).ready(function () {
-    GseToolReturnedCreate.init();
+    GseToolReturnedEdit.init();
 });
