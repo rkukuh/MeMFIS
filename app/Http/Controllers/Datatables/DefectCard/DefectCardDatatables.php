@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Datatables\DefectCard;
 
 use Auth;
 use Carbon\Carbon;
+use App\User;
 use App\Models\Status;
 use App\Models\Project;
-use App\Models\JobCard;
 use App\Models\ListUtil;
 use App\Models\Quotation;
 use App\Models\DefectCard;
@@ -27,10 +27,31 @@ class DefectCardDatatables extends Controller
                         ->get();
 
         foreach($DefectCard as $jobcard){
-            $jobcard->customer_name .= $jobcard->jobcard->quotation->quotationable->customer->name;
-            $jobcard->taskcard_number .= $jobcard->jobcard->jobcardable->number;
-            $jobcard->aircraft .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
+            if($jobcard->approvals->toArray() == []){
+                $conducted_by = "";
+                $conducted_at = "";
 
+            }
+            else{
+                $conducted_by = User::find($jobcard->approvals->last()->conducted_by)->name;
+                $conducted_at = $jobcard->approvals->last()->created_at;
+            }
+
+            $jobcard->customer_name     .= $jobcard->jobcard->quotation->quotationable->customer->name;
+            $jobcard->taskcard_number   .= $jobcard->jobcard->jobcardable->number;
+            $jobcard->aircraft          .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
+
+            //auditable, Technichal Writer request to show this
+            $jobcard->conducted_by      .= $conducted_by;
+            $jobcard->conducted_at      .= $conducted_at;
+
+            $jobcard->create_date       .= $jobcard->audits->first()->created_at;
+            $jobcard->created_by        .= User::find($jobcard->audits->first()->user_id)->name;
+
+            $jobcard->update_date       .= $jobcard->audits->last()->updated_at;
+            $jobcard->updated_by        .= User::find($jobcard->audits->last()->user_id)->name;
+            
+            // get skill
             if(isset($jobcard->jobcard->jobcardable->skills) ){
                 if(sizeof($jobcard->jobcard->jobcardable->skills) == 3){
                     $jobcard->skill .= "ERI";

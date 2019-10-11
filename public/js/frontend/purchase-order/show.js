@@ -17,6 +17,16 @@ let PurchaseOrder = {
                                 dataSet = raw.data;
                             }
 
+                            let subtotal = discount = 0;
+                            $.each(dataSet, function( index, data ) {
+                                subtotal += parseInt(data.pivot.subtotal_after_discount);
+                                discount += parseInt(data.discount);
+                            });
+                            $("#sub_total").html(subtotal);
+                            $("#sub_total").val(subtotal);
+                            $("#total_discount").html(discount);
+                            $("#total_discount").val(discount);
+
                             return dataSet;
                         }
                     }
@@ -84,7 +94,7 @@ let PurchaseOrder = {
                 filterable: !1,
             },
             {
-                field: 'pivot.discount_amount',
+                field: 'discount',
                 title: 'Disc PR',
                 sortable: 'asc',
                 filterable: !1,

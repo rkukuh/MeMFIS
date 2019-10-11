@@ -44,6 +44,17 @@ let goods_received_note = {
             },
             columns: [
                 {
+                    field: '#',
+                    title: 'No',
+                    width:'40',
+                    sortable: 'asc',
+                    filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {   
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
+                },
+                {
                     field: 'code',
                     title: 'P/N',
                     sortable: 'asc',
@@ -169,12 +180,35 @@ let goods_received_note = {
         });
 
         $('.modal-footer').on('click', '.add-item', function () {
+            let serial_numbers = [];
+            $("input[name^=serial_number]").each(function() {
+                serial_numbers.push(this.value);
+            });
+            serial_numbers = serial_numbers.filter(function (el) {
+
+                return el != null && el != "";
+            
+            });
+
             let item_uuid = $("#material").val();
             let exp_date = $("#exp_date_2").val();
             let qty = $("#quantity").val();
             let unit_id = $("#unit_material").val();
             let note = $("#description").val();
 
+            if(serial_numbers.length < qty){
+                $('input[name^="serial_number"]').each(function(i) {
+                    if(this.value == "" || this.value == null){
+                        $(this).css('border', '2px solid red');
+                    }else{
+                        $(this).css('border', '1px solid grey');
+                    }
+                });
+
+                return;
+            }
+
+           
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -259,6 +293,7 @@ let goods_received_note = {
             document.getElementById('uuid').value = $(this).data('uuid');
         });
         $(".modal-footer").on("click", ".update-item", function() {
+            
             let uuid = $("input[name=uuid]").val();
             let exp_date = $("#exp_date").val();
             let qty = $("#qty").val();
@@ -354,4 +389,53 @@ let goods_received_note = {
 
 jQuery(document).ready(function () {
     goods_received_note.init();
+});
+
+
+$("#material").on("change", function () {
+    let item_uuid = $("#material").val();
+    $("#quantity").prop("min", 1);
+    $.ajax({
+        url: '/get-item-po-details/'+po_uuid+'/'+item_uuid,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $("#quantity").val(parseInt(data.pivot.quantity));
+            $("#quantity").prop("max", data.pivot.quantity);
+            $('.clone').remove();
+ 
+            
+            for (let number = 0; number < data.pivot.quantity; number++) {
+                let clone = $(".blueprint").clone();
+                clone.removeClass("blueprint hidden");
+                clone.addClass("clone");
+                $(".serial_number_inputs").after(clone);
+                clone.slideDown("slow",function(){});
+            }
+        }
+    });
+});
+
+$("#quantity").on("change", function () {
+    let qty = $("#quantity").val();
+    let max = $("#quantity").attr("max");
+    $('.clone').remove();
+    if($("#quantity").val() < max){
+        for (let number = 0; number < qty; number++) {
+            let clone = $(".blueprint").clone();
+            clone.removeClass("blueprint hidden");
+            clone.addClass("clone");
+            $(".serial_number_inputs").after(clone);
+            clone.slideDown("slow",function(){});
+        }
+    }else{
+        for (let number = 0; number < max; number++) {
+            let clone = $(".blueprint").clone();
+            clone.removeClass("blueprint hidden");
+            clone.addClass("clone");
+            $(".serial_number_inputs").after(clone);
+            clone.slideDown("slow",function(){});
+        }
+    }
+    
 });

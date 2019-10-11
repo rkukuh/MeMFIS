@@ -8,6 +8,7 @@ use App\Models\Type;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
 use App\Models\Level;
+use App\Models\Promo;
 use App\Models\Vendor;
 use App\Models\Access;
 use App\Models\Project;
@@ -673,6 +674,18 @@ class FillComboxController extends Controller
         return $items;
     }
 
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ItemPODetails(purchaseOrder $purchaseOrder, Item $item)
+    {
+        $items = $purchaseOrder->items->where('code',$item->code)->first();
+
+        return $items;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -816,10 +829,11 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function inventoryIn()
+    public function promo()
     {
-        $number = InventoryIn::pluck('number');
+        $promo = Promo::where('code','like','discount%')->pluck('name', 'uuid');
 
-        return json_encode($number);
+        return json_encode($promo);
+
     }
 }

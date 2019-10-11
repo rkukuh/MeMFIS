@@ -66,21 +66,12 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                            <div class="m-btn-group m-btn-group--pill btn-group" role="group" aria-label="Button group with nested dropdown">
-                                                <a href="{{route('frontend.gse-tool-returned.project.create')}}" class="m-btn btn btn-primary">
-                                                    <span>
-                                                        <i class="la la-plus-circle"></i>
-                                                    <span>Project</span>
-                                                    </span>
-                                                </a>
-                                                <a href="{{route('frontend.gse-tool-returned.general.create')}}" class="btn btn-primary m-btn m-btn--pill-last">
-                                                    <span>
-                                                        <i class="la la-plus-circle"></i>
-                                                    <span>General</span>
-                                                    </span>
-                                                </a>
-                                            </div>
-                                            <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                        @component('frontend.common.buttons.create')
+                                            @slot('text', 'GSE/Tool Returned')
+                                            @slot('href', route('frontend.gse-tool-returned.create') )
+                                        @endcomponent
+                                        
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
                                     </div>
                                 </div>
                             </div>

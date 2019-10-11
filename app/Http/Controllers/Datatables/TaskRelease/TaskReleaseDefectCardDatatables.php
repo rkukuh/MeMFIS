@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Datatables\TaskRelease;
 
+use App\User;
 use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\ListUtil;
@@ -83,6 +84,27 @@ class TaskReleaseDefectCardDatatables extends Controller
             elseif($defectcard->approvals->count()==1){
                 $defectcard->status .= 'Engineer Approved';
             }
+
+            //auditable, Technichal Writer request to show this
+            if($defectcard->approvals->toArray() == []){
+                $conducted_by = "";
+                $conducted_at = "";
+
+            }
+            else{
+                $conducted_by = User::find($defectcard->approvals->last()->conducted_by)->name;
+                $conducted_at = $defectcard->approvals->last()->created_at;
+            }
+
+            $defectcard->conducted_by      .= $conducted_by;
+            $defectcard->conducted_at      .= $conducted_at;
+
+            $defectcard->create_date       .= $defectcard->audits->first()->created_at;
+            $defectcard->created_by        .= User::find($defectcard->audits->first()->user_id)->name;
+
+            $defectcard->update_date       .= $defectcard->audits->last()->updated_at;
+            $defectcard->updated_by        .= User::find($defectcard->audits->last()->user_id)->name;
+
 
         }
 
