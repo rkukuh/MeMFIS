@@ -131,7 +131,7 @@ let RiiRelease = {
                 },
                 {
                     field: 'conducted_by',
-                    title: 'Approved By',
+                    title: 'Released By',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
