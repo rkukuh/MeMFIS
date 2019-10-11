@@ -92,7 +92,7 @@ class OvertimeController extends Controller
     public function show(Overtime $overtime)
     {
         $theOvertime = Overtime::findOrFail($overtime->id);
-        $status_data = $overtime->statuses()->first()->name;
+        // $status_data = $overtime->statuses()->first()->name;
         $employee_data = $overtime->employee()->first()->first_name. " - " . $overtime->employee()->first()->code;
         // $total_in_diff = Carbon::parse($overtime->total,"Asia/Jakarta")->format("%H %I %S");
         $date = $overtime->date;
@@ -101,10 +101,26 @@ class OvertimeController extends Controller
         $start_diff = Carbon::parse($date." ".$start,"Asia/Jakarta");
         $end_diff = Carbon::parse($date." ".$end,"Asia/Jakarta");
         $total_in_diff = $start_diff->diff($end_diff)->format("%H Hours %I Minutes %S Seconds");
+        $approved_by = "-";
+        $remark_note = "-";
+        $job = "-";
+        $is_approved = $overtime->approvals->last();
+        $approval_stat = "Pending";
+        if ($is_approved != null) {
+            if ($is_approved->is_approved == 1) {
+                $approval_stat = "Approved";
+            }else{
+                $approval_stat = "Rejected";
+            }
+            $approved_by = $is_approved->conductedby->first_name. " - " .$is_approved->created_at;
+            $remark_note = $is_approved->note;
+            $job = $is_approved->conductedby->user->roles->first()->name;
+        }
+        $approval_detail = [$approval_stat,$approved_by,$job,$remark_note];
         
         // error_log("WOI ".$overtime->uuid);
         // return view("frontend.overtime.show",["overtime" => $overtime, "employee" => $employee_data]);\
-        return response()->json(["overtime" => $overtime,"status"=>$status_data,"employee" => $employee_data,"total_diff" => $total_in_diff]);
+        return response()->json(["overtime" => $overtime,"employee" => $employee_data,"total_diff" => $total_in_diff,"approval_detail" => $approval_detail]);
     }
 
     /**

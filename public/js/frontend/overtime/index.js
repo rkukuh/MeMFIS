@@ -65,8 +65,8 @@ let Overtime = {
                     title: 'Overtime Number',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        // return '<a data-toggle="modal" data-target="#modal_transaction_overtime" href="/overtime/'+t.uuid+'" data-id="' + t.uuid +'">' + t.uuid + "</a>"
+                    template: (t) => {;
+                        // return '<a data-toggle="modal" data-target="#modal_transaction_overtime" href="/overtime/'+t.uuid+'" data-id="' + t.uuid +'">' + t.uuid + "</a>" 
                         return '<a data-toggle="modal" href="#modal_transaction_overtime" data-id="' + t.uuid +'">' + t.uuid + "</a>"
                         // return '<a onclick="show('+t.uuid+')" data-id="' + t.uuid +'">' + t.uuid + "</a>"
                     }
@@ -107,6 +107,17 @@ let Overtime = {
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
+                    width:150,
+                    template: (t)=>{
+                        if (t.desc) {
+                            data = strtrunc(t.desc, 50);
+                            return (
+                                '<p>' + data + '</p>'
+                            );
+                        }
+
+                        return ''
+                    }
                 },
                 {
                     field: 'status',
@@ -115,7 +126,7 @@ let Overtime = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'isApproved',
                     title: 'Approval',
                     sortable: 'asc',
                     filterable: !1,
@@ -165,9 +176,12 @@ $('#modal_transaction_overtime').on('show.bs.modal', (e) => {
             $("#overtime_start").text(data.overtime.start);
             $("#overtime_end").text(data.overtime.end);
             $("#overtime_desc").text(data.overtime.desc);
-            $("#overtime_status").text(data.status);
+            $("#overtime_status").text(data.approval_detail[0]);
             $("#overtime_total").text(data.total_diff);
-            $("#overtime_created_at").text(data.overtime.created_at);       
+            $("#overtime_created_at").text(data.overtime.created_at); 
+            $("#overtime_approved_by").text(data.approval_detail[1]);
+            $("#overtime_job").text(data.approval_detail[2]);
+            $("#overtime_remark").text(data.approval_detail[3]);
         },
         error: (jqXhr, json, errorThrown) =>{
             let errorsHtml = '';

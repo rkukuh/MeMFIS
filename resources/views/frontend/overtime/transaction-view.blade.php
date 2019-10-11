@@ -27,9 +27,9 @@
                                                 <tr class="text-dark">
                                                     <td valign="top" align="center" width="20%" id="overtime_uuid">Isinya UUID</td>
                                                     <td valign="top" align="center" width="15%" id="overtime_status">Approve</td>
-                                                    <td valign="top" align="center" width="15%">Name;Timestamp</td>
-                                                    <td valign="top" align="center" width="15%">Job Title User approve</td>
-                                                    <td valign="top" align="center" width="35%"></td>
+                                                    <td valign="top" align="center" width="15%" id="overtime_approved_by">Name;Timestamp</td>
+                                                    <td valign="top" align="center" width="15%" id="overtime_job">Job Title User approve</td>
+                                                    <td valign="top" align="center" width="35%" id="overtime_remark"></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -85,8 +85,5 @@
         </div>
     </div>
 </div>
-{{-- @push('footer-scripts')
-    <script src="{{ asset('js/frontend/overtime/show.js')}}"></script>
-@endpush --}}
         
     

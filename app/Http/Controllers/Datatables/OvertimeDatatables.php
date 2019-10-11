@@ -17,7 +17,7 @@ class OvertimeDatatables extends Controller
         $i = 0;
         $overtime = null;
         if ($isAdmin) {
-            $overtime_datas = Overtime::all();
+            $overtime_datas = Overtime::withTrashed()->get();
             $overtime = $this->getAllData($i,$overtime_datas);
             // $uuid = $validated["search-journal-val"];
             // $employee_id = Employee::where("uuid",$uuid)->first()->id;
@@ -129,19 +129,25 @@ class OvertimeDatatables extends Controller
     {
         $overtime = [];
         if (!empty($overtime_datas)) {
+            $isApproved = "";
             foreach($overtime_datas as $od){
                 $employee_data = $od->employee;
                 $formated_start = Carbon::parse($od->start,"Asia/Jakarta")->toTimeString();
                 $formated_end = Carbon::parse($od->end,"Asia/Jakarta")->toTimeString();
                 $formatted_date = Carbon::parse($od->date,"Asia/Jakarta")->toDateString();
                 $status_name = $od->statuses->name;
-                $approvals = $od->approvals->toArray();
-                $isApproved = "Approved";
+                $approvals = $od->approvals->last();
                 // check approvals
-                if (empty($approvals)) {
-                    $isApproved = "Approved";
+                if ($approvals != null) {
+                    // $isApproved = "Approved";
+                    // error_log("HAHA ". $od->id);
+                    if ($approvals->is_approved == 1) {
+                        $isApproved = "Approved";
+                    }else{
+                        $isApproved = "Rejected";
+                    }
                 }else{
-                    $isApproved = "Not Approved";
+                    $isApproved = "Pending";
                 }
 
                 $overtime[$i] = [
@@ -155,7 +161,7 @@ class OvertimeDatatables extends Controller
                     "desc" => $od->desc,
                     "status" => $status_name,
                     "id" => $od->id,
-                    "isApproved"-> $isApproved
+                    "isApproved" => $isApproved
                 ];
                 $i++;
             }   
