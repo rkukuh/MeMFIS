@@ -157,7 +157,7 @@
                               @else
                                 -
                               @endif --}}
-                              Generate dari taskcard
+                              Generate 
                             </td>
                             
                           </tr>
@@ -180,7 +180,7 @@
                               @else
                                 -
                               @endif --}}
-                              Generate dari project
+                              Generate
                             </td>
                           </tr>
                           <tr>
@@ -202,7 +202,7 @@
                               @else
                                 -
                               @endif --}}
-                              Generate dari project
+                              Generate 
                             </td>
                           </tr>
                       </table>
@@ -241,17 +241,15 @@
             <div style="position:relative;">
                 <table width="85%" cellpadding="4" class="table_content">
                     <tr style="background:#d4d7db;">
-                        <td valign="top" align="center" width="20%"><b>Jobcard No.</b></td>
-                        <td valign="top" align="center" width="20%"><b>Skill</b></td>
-                        <td valign="top" align="center" width="21%"><b>Taskcard Type</b></td>
+                        <td valign="top" align="center" width="30%"><b>Jobcard No.</b></td>
+                        <td valign="top" align="center" width="30%"><b>Skill</b></td>
                         <td valign="top" align="center" width="13%"><b>Est. Mhrs</b></td>
                         <td valign="top" align="center" width="13%"><b>Actual Mhrs</b></td>
-                        <td valign="top" align="center" width="13%"><b>RII</b></td>
+                        <td valign="top" align="center" width="14%"><b>RII</b></td>
                     </tr>
                     <tr>
                         <td valign="top" align="center"></td>
                         <td valign="top" align="center">Cabin Maintenance</td>
-                        <td valign="top" align="center">Generate dr Type Taskcard</td>
                         <td valign="top" align="center">0.25</td>
                         <td valign="top" align="center"></td>
                         <td valign="top" align="center">YES</td>
@@ -263,8 +261,8 @@
                         <td valign="top" align="center" width="50%"><b>References</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" align="center" height="5%">lorem</td>
-                        <td valign="top" align="center" height="5%">lorem</td>
+                        <td valign="top" align="center" height="5%">generate</td>
+                        <td valign="top" align="center" height="5%">generate</td>
                     </tr>
                 </table>
                 <table width="100%" cellpadding="4">
@@ -308,8 +306,8 @@
                         <td valign="top" align="center" width="50%"><b>Tool Required / Special Tooling</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" align="center" height="8%">lorem</td>
-                        <td valign="top" align="center" height="8%">lorem</td>
+                        <td valign="top" align="center" height="8%">generate</td>
+                        <td valign="top" align="center" height="8%">generate</td>
                     </tr>
                 </table>
                 <table width="100%" cellpadding="4" class="table_content">
@@ -369,7 +367,7 @@
                                 </div>
                             </span>
                         </td>
-                        <td valign="top" width="50%">Transfer To Defect Card No : <span>Lorem</span></td>
+                        <td valign="top" width="50%">Transfer To Defect Card No : <span>generate</span></td>
                     </tr>
                 </table>
                 <div style="position:absolute; left:659px; top:-20px;">
