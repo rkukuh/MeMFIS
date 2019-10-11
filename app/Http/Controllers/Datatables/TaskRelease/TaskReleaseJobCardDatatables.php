@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Datatables\TaskRelease;
 
 use Carbon\Carbon;
+use App\User;
 use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\ListUtil;
@@ -62,6 +63,27 @@ class TaskReleaseJobCardDatatables extends Controller
             }
 
             $jobcard->actual .= $jobcard->ActualManhour;
+
+            //auditable, Technichal Writer request to show this
+            if($jobcard->approvals->toArray() == []){
+                $conducted_by = "";
+                $conducted_at = "";
+
+            }
+            else{
+                $conducted_by = User::find($jobcard->approvals->last()->conducted_by)->name;
+                $conducted_at = $jobcard->approvals->last()->created_at;
+            }
+
+            $jobcard->conducted_by      .= $conducted_by;
+            $jobcard->conducted_at      .= $conducted_at;
+
+            $jobcard->create_date       .= $jobcard->audits->first()->created_at;
+            $jobcard->created_by        .= User::find($jobcard->audits->first()->user_id)->name;
+
+            $jobcard->update_date       .= $jobcard->audits->last()->updated_at;
+            $jobcard->updated_by        .= User::find($jobcard->audits->last()->user_id)->name;
+
         }
 
         $data = $alldata = json_decode(collect(array_values($JobCards->whereIn('status',['Closed','Released'])->all())));
