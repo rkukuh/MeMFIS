@@ -169,12 +169,35 @@ let goods_received_note = {
         });
 
         $('.modal-footer').on('click', '.add-item', function () {
+            let serial_numbers = [];
+            $("input[name^=serial_number]").each(function() {
+                serial_numbers.push(this.value);
+            });
+            serial_numbers = serial_numbers.filter(function (el) {
+
+                return el != null && el != "";
+            
+            });
+
             let item_uuid = $("#material").val();
             let exp_date = $("#exp_date_2").val();
             let qty = $("#quantity").val();
             let unit_id = $("#unit_material").val();
             let note = $("#description").val();
 
+            if(serial_numbers.length < qty){
+                $('input[name^="serial_number"]').each(function(i) {
+                    if(this.value == "" || this.value == null){
+                        $(this).css('border', '2px solid red');
+                    }else{
+                        $(this).css('border', '1px solid grey');
+                    }
+                });
+
+                return;
+            }
+
+           
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -259,6 +282,7 @@ let goods_received_note = {
             document.getElementById('uuid').value = $(this).data('uuid');
         });
         $(".modal-footer").on("click", ".update-item", function() {
+            
             let uuid = $("input[name=uuid]").val();
             let exp_date = $("#exp_date").val();
             let qty = $("#qty").val();
@@ -366,6 +390,7 @@ $("#material").on("change", function () {
         success: function (data) {
             $("#quantity").val(parseInt(data.pivot.quantity));
             $('.clone').remove();
+ 
             for (let number = 0; number < data.pivot.quantity; number++) {
                 let clone = $(".blueprint").clone();
                 clone.removeClass("blueprint hidden");
