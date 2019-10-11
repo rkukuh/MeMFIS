@@ -6,7 +6,7 @@ let Overtime = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/price-list-item',
+                        url: '/datatables/overtime',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -55,59 +55,59 @@ let Overtime = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'date',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'code',
+                    field: 'uuid',
                     title: 'Overtime Number',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a data-toggle="modal" data-target="#modal_transaction_correction" href="#">' + t.code + "</a>"
+                        return '<a data-toggle="modal" data-target="#modal_transaction_correction" href="#">' + t.uuid + "</a>"
                     }
                 },
                 {
-                    field: '',
+                    field: 'nrp',
                     title: 'NRP',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'employee_name',
                     title: 'Employee Name',
                     sortable: 'asc',
                     filterable: !1,
                 },
                
                 {
-                    field: '',
+                    field: 'start',
                     title: 'Start Time',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'end',
                     title: 'End Time',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'total',
                     title: 'Total',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'desc',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -125,7 +125,7 @@ let Overtime = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="/attendance-correction/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="/overtime/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
                             '</a>' +
                             '<a href="#" data-toggle="modal" data-target="#modal_approve" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +

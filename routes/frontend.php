@@ -71,6 +71,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('leave-period','LeavePeriodController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
+        Route::resource('overtime', 'OvertimeController');
 
         /** CERTIFICATION */
 
