@@ -115,7 +115,7 @@
 </head>
 <body>
     <header id="header">
-        <img src="./img/form/printoutjobcardawl/HeaderJobcardAWL.png" alt=""width="100%">
+        <img src="./img/form/printoutjobcardsb/HeaderJobcardSB.png" alt=""width="100%">
     </header>
     <footer style="margin-top:14px;">
         <div class="container">
@@ -135,7 +135,7 @@
           <li>
             <div class="jobcard-info">
                 <fieldset>
-                    <legend>AWL Taskcard No : 123312323</legend>
+                    <legend>SB Taskcard No : 123312323</legend>
                     <div class="jobcard-info-detail">
                       <table width="80%" cellpadding="3">
                           <tr>
@@ -212,7 +212,7 @@
           </li>
           <li>
             <div class="barcode">
-                <h4 style="margin-left:12px;color:cornflowerblue;">AWL Task No.</h4>
+                <h4 style="margin-left:12px;color:cornflowerblue;">SB Task No.</h4>
                 {!!DNS2D::getBarcodeHTML('jobcard', 'QRCODE',4.5,4.5)!!}
             </div>
           </li>
