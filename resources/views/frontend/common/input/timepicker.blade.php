@@ -18,6 +18,7 @@
                     name="{{ $name or '' }}"
                     class="form-control {{$class or ''}}"
                     style="{{$style or ''}}"
+                    value="{{ $value or null }}"
                     placeholder="{{ $placeholder or 'Select time'}}"
                     readonly {{ $disabled or ''}}>
             </td>
