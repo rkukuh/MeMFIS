@@ -673,6 +673,18 @@ class FillComboxController extends Controller
         return $items;
     }
 
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ItemPODetails(purchaseOrder $purchaseOrder, Item $item)
+    {
+        $items = $purchaseOrder->items->where('code',$item->code)->first();
+
+        return $items;
+    }
+
     /**
      * Display a listing of the resource.
      *

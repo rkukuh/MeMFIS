@@ -355,3 +355,24 @@ let goods_received_note = {
 jQuery(document).ready(function () {
     goods_received_note.init();
 });
+
+
+$("#material").on("change", function () {
+    let item_uuid = $("#material").val();
+    $.ajax({
+        url: '/get-item-po-details/'+po_uuid+'/'+item_uuid,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $("#quantity").val(parseInt(data.pivot.quantity));
+            $('.clone').remove();
+            for (let number = 0; number < data.pivot.quantity; number++) {
+                let clone = $(".blueprint").clone();
+                clone.removeClass("blueprint hidden");
+                clone.addClass("clone");
+                $(".serial_number_inputs").after(clone);
+                clone.slideDown("slow",function(){});
+            }
+        }
+    });
+});
