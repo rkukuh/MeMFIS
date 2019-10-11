@@ -383,14 +383,17 @@ jQuery(document).ready(function () {
 
 $("#material").on("change", function () {
     let item_uuid = $("#material").val();
+    $("#quantity").prop("min", 1);
     $.ajax({
         url: '/get-item-po-details/'+po_uuid+'/'+item_uuid,
         type: 'GET',
         dataType: 'json',
         success: function (data) {
             $("#quantity").val(parseInt(data.pivot.quantity));
+            $("#quantity").prop("max", data.pivot.quantity);
             $('.clone').remove();
  
+            
             for (let number = 0; number < data.pivot.quantity; number++) {
                 let clone = $(".blueprint").clone();
                 clone.removeClass("blueprint hidden");
@@ -400,4 +403,28 @@ $("#material").on("change", function () {
             }
         }
     });
+});
+
+$("#quantity").on("change", function () {
+    let qty = $("#quantity").val();
+    let max = $("#quantity").attr("max");
+    $('.clone').remove();
+    if($("#quantity").val() < max){
+        for (let number = 0; number < qty; number++) {
+            let clone = $(".blueprint").clone();
+            clone.removeClass("blueprint hidden");
+            clone.addClass("clone");
+            $(".serial_number_inputs").after(clone);
+            clone.slideDown("slow",function(){});
+        }
+    }else{
+        for (let number = 0; number < max; number++) {
+            let clone = $(".blueprint").clone();
+            clone.removeClass("blueprint hidden");
+            clone.addClass("clone");
+            $(".serial_number_inputs").after(clone);
+            clone.slideDown("slow",function(){});
+        }
+    }
+    
 });
