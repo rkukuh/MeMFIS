@@ -84,7 +84,9 @@ class InventoryInController extends Controller
      */
     public function update(InventoryInUpdate $request, InventoryIn $inventoryIn)
     {
-        //
+        $inventoryIn->update($request->all());
+
+        return response()->json($inventoryIn);
     }
 
     /**
