@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Frontend\JobCard;
 
 use Auth;
+use App;
+
 use App\User;
 use Validator;
 use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\Status;
 use App\Models\JobCard;
+use iio\libmergepdf\Merger;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
@@ -345,27 +348,81 @@ class JobCardController extends Controller
                 return $pdf->stream();
             }
             elseif($jobcard->jobcardable->type->code == "preliminary"){
+                $m = new Merger();
 
-                $pdf = \PDF::loadView('frontend/form/preliminaryinspection-one',[
-                        'jobCard' => $jobcard,
-                        'username' => $username,
-                        'lastStatus' => $lastStatus,
-                        'dateClosed' => $dateClosed,
-                        'accomplished_by' => $accomplished_by,
-                        'accomplished_at' => $accomplished_at,
-                        'inspected_by' => $inspected_by,
-                        'inspected_at' => $inspected_at,
-                        'rii_by' => $rii_by,
-                        'rii_at' => $rii_at,
-                        'prepared_by' => $prepared_by,
-                        'prepared_at' => $prepared_at,
-                        'rii_status' => $rii_status,
-                        'helpers' => $helpers,
-                        'now' => $now,
-                        'actual_manhours'=> $actual_manhours,
-                        'taskcard' => $taskcard
-                        ]);
-                return $pdf->stream();
+                $view1 = \View::make('frontend.form.preliminaryinspection-one')->with(['jobCard' => $jobcard,
+                'username' => $username,
+                'lastStatus' => $lastStatus,
+                'dateClosed' => $dateClosed,
+                'accomplished_by' => $accomplished_by,
+                'accomplished_at' => $accomplished_at,
+                'inspected_by' => $inspected_by,
+                'inspected_at' => $inspected_at,
+                'rii_by' => $rii_by,
+                'rii_at' => $rii_at,
+                'prepared_by' => $prepared_by,
+                'prepared_at' => $prepared_at,
+                'rii_status' => $rii_status,
+                'helpers' => $helpers,
+                'now' => $now,
+                'actual_manhours'=> $actual_manhours,
+                'taskcard' => $taskcard])->render();
+
+                $view2 = \View::make('frontend.form.preliminaryinspection-two')->with(['jobCard' => $jobcard,
+                'username' => $username,
+                'lastStatus' => $lastStatus,
+                'dateClosed' => $dateClosed,
+                'accomplished_by' => $accomplished_by,
+                'accomplished_at' => $accomplished_at,
+                'inspected_by' => $inspected_by,
+                'inspected_at' => $inspected_at,
+                'rii_by' => $rii_by,
+                'rii_at' => $rii_at,
+                'prepared_by' => $prepared_by,
+                'prepared_at' => $prepared_at,
+                'rii_status' => $rii_status,
+                'helpers' => $helpers,
+                'now' => $now,
+                'actual_manhours'=> $actual_manhours,
+                'taskcard' => $taskcard
+                ])->render();
+
+                $pdf = App::make('dompdf.wrapper');
+                $pdf->loadHTML($view1)->setPaper('a4', 'portrait');
+                $m->addRaw($pdf->output());
+
+                $pdf = App::make('dompdf.wrapper');
+                $pdf->loadHTML($view2)->setPaper('a4', 'portrait');
+                $m->addRaw($pdf->output());
+
+                file_put_contents('storage/Preliminary/'.$jobcard->uuid.'.pdf', $m->merge());
+                $invnoabc = new \PDF;
+                $invnoabc = $jobcard->uuid.'.pdf';
+
+                return response()->file(
+                    public_path('storage/Preliminary/'.$jobcard->uuid.'.pdf')
+                );
+
+                // $pdf = \PDF::loadView('frontend/form/preliminaryinspection-two',[
+                //         'jobCard' => $jobcard,
+                //         'username' => $username,
+                //         'lastStatus' => $lastStatus,
+                //         'dateClosed' => $dateClosed,
+                //         'accomplished_by' => $accomplished_by,
+                //         'accomplished_at' => $accomplished_at,
+                //         'inspected_by' => $inspected_by,
+                //         'inspected_at' => $inspected_at,
+                //         'rii_by' => $rii_by,
+                //         'rii_at' => $rii_at,
+                //         'prepared_by' => $prepared_by,
+                //         'prepared_at' => $prepared_at,
+                //         'rii_status' => $rii_status,
+                //         'helpers' => $helpers,
+                //         'now' => $now,
+                //         'actual_manhours'=> $actual_manhours,
+                //         'taskcard' => $taskcard
+                //         ]);
+                // return $pdf->stream();
             }
         }elseif($jobcard->jobcardable_type == "App\Models\EOInstruction"){
             $eo_additionals = new stdClass;
