@@ -28,6 +28,26 @@ class ReleaseToServiceDatatables extends Controller
             $project->customer_name .= $project->customer->name;
             $quotations = Quotation::where('quotationable_id',$project->id)->get();
                 $project->status .= 'RTS';
+
+            //auditable, Technichal Writer request to show this
+            if($project->approvals->toArray() == []){
+                $conducted_by = "";
+                $conducted_at = "";
+
+            }
+            else{
+                $conducted_by = User::find($project->approvals->last()->conducted_by)->name;
+                $conducted_at = $project->approvals->last()->created_at;
+            }
+
+            $project->conducted_by      .= $conducted_by;
+            $project->conducted_at      .= $conducted_at;
+
+            $project->create_date       .= $project->audits->first()->created_at;
+            $project->created_by        .= User::find($project->audits->first()->user_id)->name;
+
+            $project->update_date       .= $project->audits->last()->updated_at;
+            $project->updated_by        .= User::find($project->audits->last()->user_id)->name;
         }
 
         $data = $alldata = json_decode($alldata);

@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.quotation.index') }}" class="m-nav__link">
+                        <a href="{{ route('ffrontend.goods-received.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Goods Received Note
                             </span>
@@ -159,7 +159,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <label class="form-control-label">
-                                                        Description
+                                                        Remark
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')

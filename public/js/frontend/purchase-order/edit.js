@@ -17,6 +17,17 @@ let PurchaseOrder = {
                                 dataSet = raw.data;
                             }
 
+
+                            let subtotal = discount = 0;
+                            $.each(dataSet, function( index, data ) {
+                                subtotal += parseInt(data.pivot.subtotal_after_discount);
+                                discount += parseInt(data.discount);
+                            });
+                            $("#sub_total").html(subtotal);
+                            $("#sub_total").val(subtotal);
+                            $("#total_discount").html(discount);
+                            $("#total_discount").val(discount);
+
                             return dataSet;
                         }
                     }
@@ -84,7 +95,7 @@ let PurchaseOrder = {
                 filterable: !1,
             },
             {
-                field: 'pivot.discount_amount',
+                field: 'discount',
                 title: 'Disc PR',
                 sortable: 'asc',
                 filterable: !1,
@@ -127,6 +138,7 @@ let PurchaseOrder = {
             }
             ]
         });
+
 
         $('.item_datatable').on('click', '.edit-item', function () {
             $.ajax({
@@ -189,8 +201,8 @@ let PurchaseOrder = {
             let unit_id = $('#unit_id').val();
             let price = $('#price').val();
             let ppn = $('#ppn').val();
-            let discount = $('#discount').val();
-            // let discount_type = $('#discount-type').val();
+            let promo = $('#promo').val();
+            let promo_type = $('#promo-type').val();
             let remark_material = $('#remark_material').val();
 
             $.ajax({
@@ -204,8 +216,8 @@ let PurchaseOrder = {
                     unit_id:unit_id,
                     price:price,
                     ppn:ppn,
-                    // discount:discount,
-                    // discount_type:discount_type,
+                    promo:promo,
+                    promo_type:promo_type,
                     note:remark_material,
                 },
                 success: function(response) {
@@ -227,13 +239,17 @@ let PurchaseOrder = {
                         );
 
                         let table = $(".item_datatable").mDatatable();
-                        let subtotal = 0;
+                        let subtotal = discount = 0;
                         let dataSet = table.originalDataSet;
                         $.each(dataSet, function( index, data ) {
-                            subtotal += data.pivot.subtotal_after_discount;
+                            subtotal += parseInt(data.pivot.subtotal_after_discount);
+                            discount += parseInt(data.discount);
                         });
                         $("#sub_total").html(subtotal);
                         $("#sub_total").val(subtotal);
+                        $("#total_discount").html(discount);
+                        $("#total_discount").val(discount);
+
                         table.originalDataSet = [];
                         table.reload();
 

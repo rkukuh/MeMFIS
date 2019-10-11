@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Datatables\RIIRelease;
 
 use Carbon\Carbon;
+use App\User;
 use App\Models\Status;
 use App\Models\JobCard;
 use App\Models\ListUtil;
@@ -44,6 +45,26 @@ class RIIReleaseJobCardDatatables extends Controller
             }
 
             $Jobcard->actual .= $Jobcard->ActualManhour;
+
+            //auditable, Technichal Writer request to show this
+            if($Jobcard->approvals->toArray() == []){
+                $conducted_by = "";
+                $conducted_at = "";
+
+            }
+            else{
+                $conducted_by = User::find($Jobcard->approvals->last()->conducted_by)->name;
+                $conducted_at = $Jobcard->approvals->last()->created_at;
+            }
+
+            $Jobcard->conducted_by      .= $conducted_by;
+            $Jobcard->conducted_at      .= $conducted_at;
+
+            $Jobcard->create_date       .= $Jobcard->audits->first()->created_at;
+            $Jobcard->created_by        .= User::find($Jobcard->audits->first()->user_id)->name;
+
+            $Jobcard->update_date       .= $Jobcard->audits->last()->updated_at;
+            $Jobcard->updated_by        .= User::find($Jobcard->audits->last()->user_id)->name;
 
         }
 

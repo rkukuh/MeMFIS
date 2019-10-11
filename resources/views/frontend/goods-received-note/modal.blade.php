@@ -70,6 +70,22 @@
                                 @endcomponent
                             </div>
                         </div>
+                        <div class="form-group m-form__group row serial_numbers">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <label class="form-control-label">
+                                    Serial Number
+                                </label>
+                            </div>
+                            <div class="serial_number_inputs">
+
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 blueprint hidden">
+                                @component('frontend.common.input.text')
+                                    @slot('name', 'serial_number[]')
+                                    @slot('required', 'required')
+                                @endcomponent
+                            </div>
+                        </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">

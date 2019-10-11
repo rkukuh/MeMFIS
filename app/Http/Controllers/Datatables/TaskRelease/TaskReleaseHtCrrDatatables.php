@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Datatables\TaskRelease;
 
 use Auth;
 use Carbon\Carbon;
+use App\User;
 use App\Models\Type;
 use App\Models\HtCrr;
 use App\Models\Status;
@@ -69,6 +70,27 @@ class TaskReleaseHtCrrDatatables extends Controller
                     $data->status .= 'Removal Progress';
                 }
             }
+
+            //auditable, Technichal Writer request to show this
+            if($data->approvals->toArray() == []){
+                $conducted_by = "";
+                $conducted_at = "";
+
+            }
+            else{
+                $conducted_by = User::find($data->approvals->last()->conducted_by)->name;
+                $conducted_at = $data->approvals->last()->created_at;
+            }
+
+            $data->conducted_by      .= $conducted_by;
+            $data->conducted_at      .= $conducted_at;
+
+            $data->create_date       .= $data->audits->first()->created_at;
+            $data->created_by        .= User::find($data->audits->first()->user_id)->name;
+
+            $data->update_date       .= $data->audits->last()->updated_at;
+            $data->updated_by        .= User::find($data->audits->last()->user_id)->name;
+
 
         }
 

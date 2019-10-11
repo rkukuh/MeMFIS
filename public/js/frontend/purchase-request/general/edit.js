@@ -158,22 +158,30 @@ let PurchaseRequest = {
                     remark: remark,
                 },
                 success: function(response) {
-                    if (response.title == "Danger") {
-                        toastr.error("Item already exists!", "Error", {
-                            timeOut: 5000
-                        });
-                    } else {
-                        $('#modal_general').modal('hide');
+                    $('#modal_general').modal('hide');
 
-                        toastr.success("Item has been added.", "Success", {
-                            timeOut: 5000
-                        });
+                    $('#modal_general').on('hidden.bs.modal', function (e) {
+                        $(this)
+                        .find("input,textarea")
+                            .val('')
+                            .end()
+                        .find("input[type=checkbox], input[type=radio]")
+                            .prop("checked", "")
+                            .end()
+                        .find("select")
+                            .select2('val','All')
+                            .end();
+                    })
 
-                        let table = $(".item_datatable").mDatatable();
+                    toastr.success("Item has been added.", "Success", {
+                        timeOut: 5000
+                    });
 
-                        table.originalDataSet = [];
-                        table.reload();
-                    }
+                    let table = $(".item_datatable").mDatatable();
+
+                    table.originalDataSet = [];
+                    table.reload();
+
                 }
             });
         });
@@ -237,16 +245,13 @@ let PurchaseRequest = {
             document.getElementById('qty').value = $(this).data('quantity');
             document.getElementById('uuid').value = $(this).data('uuid');
             document.getElementById('remark').value = $(this).data('remark');
-
-            $('.btn-success').addClass('update-item');
-            $('.btn-success').removeClass('add-item');
         });
 
         $(".modal-footer").on("click", ".update-item", function() {
             let uuid = $("input[name=uuid]").val();
-            let quantity = $("input[name=qty]").val();
-            let unit = $("#unit_id").val();
-            let remark = $("#remark").val();
+            let quantity = $("#qty-material").val();
+            let unit_id = $("#unit_material").val();
+            let note = $("#remark-material").val();
 
             $.ajax({
                 headers: {
@@ -256,18 +261,21 @@ let PurchaseRequest = {
                 type: "PUT",
                 data: {
                     quantity: quantity,
-                    unit_id: unit,
-                    note: remark,
+                    unit_id: unit_id,
+                    note: note,
                 },
-                success: function(data) {
-                    if (data.errors) {
+                success: function(response) {
+                    if (response.errors) {
+                        console.log(errors);
                         // if (response.errors.title) {
                         //     $('#title-error').html(response.errors.title[0]);
                         // }
 
                         // document.getElementById('manual_affected_id').value = manual_affected_id;
                     } else {
-                        $('#modal_general').modal('hide');
+                        //    taskcard_reset();
+                        $('#modal_general_update').modal('hide');
+
                         toastr.success(
                             "Item has been updated.",
                             "Success",
@@ -280,9 +288,6 @@ let PurchaseRequest = {
 
                         table.originalDataSet = [];
                         table.reload();
-                        $('.btn-success').removeClass('update-item');
-                        $('.btn-success').addClass('add-item');
-
 
                     }
                 }
