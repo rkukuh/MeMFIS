@@ -182,30 +182,30 @@ Route::get('/purchase-order-doc', function () {
 });
 
 
-Route::get('/nonroutine-ad', function () {
-    $pdf = \PDF::loadView('frontend/form/airworthiness_directive');
+Route::get('/jobcard-ad-1page', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_ad_1page');
     return $pdf->stream();
 });
 
-Route::get('/nonroutine-awl', function () {
-    $pdf = \PDF::loadView('frontend/form/airworthiness_limitations');
-    return $pdf->stream();
-});
-
-
-Route::get('/nonroutine-cmr', function () {
-    $pdf = \PDF::loadView('frontend/form/certification_maintenance_requirement');
+Route::get('/jobcard-awl-1page', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_awl_1page');
     return $pdf->stream();
 });
 
 
-Route::get('/nonroutine-ea', function () {
-    $pdf = \PDF::loadView('frontend/form/ea');
+Route::get('/jobcard-cmr-1page', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_cmr_1page');
     return $pdf->stream();
 });
 
-Route::get('/nonroutine-sb', function () {
-    $pdf = \PDF::loadView('frontend/form/sb');
+
+Route::get('/jobcard-ea-1page', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_ea_1page');
+    return $pdf->stream();
+});
+
+Route::get('/jobcard-sb-1page', function () {
+    $pdf = \PDF::loadView('frontend/form/jobcard_sb_1page');
     return $pdf->stream();
 });
 
