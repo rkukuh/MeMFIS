@@ -118,21 +118,14 @@ class InventoryInDatatables extends Controller
         echo json_encode($result, JSON_PRETTY_PRINT);
     }
 
-    public function getAllItems()
+    public function getItemsByInventoryIn(InventoryIn $inventoryIn)
     {
-        // $items = Item::with('unit', 'categories')
-        //     ->whereHas('categories', function ($query) {
-        //         $query->where('code', '<>', 'tool');
-        //     })->get();
+        $items = InventoryIn::with('items')
+            ->where('uuid', $inventoryIn->uuid)
+            ->first()
+            ->toArray();
 
-        $items = Item::whereHas('inventory_ins')->with('inventory_ins')->get();
-
-        // $items = InventoryIn::whereHas('items')->with('items')->get();
-        foreach ($items as $item) {
-            dd($item->toArray());
-        }
-
-        $data = $alldata = json_decode($items);
+        $data = $alldata = $items['items'];
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

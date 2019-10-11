@@ -70,7 +70,9 @@ class InventoryInController extends Controller
      */
     public function edit(InventoryIn $inventoryIn)
     {
-        return view('frontend.inventory-in.edit');
+        return view('frontend.inventory-in.edit', [
+            'inventoryIn' => $inventoryIn,
+        ]);
     }
 
     /**

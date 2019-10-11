@@ -880,7 +880,7 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'InventoryInDatatables@index')->name('all');
-                Route::get('/items', 'InventoryInDatatables@getAllItems')->name('items');
+                Route::get('/{inventoryIn}/items', 'InventoryInDatatables@getItemsByInventoryIn')->name('items');
             });
         });
 
