@@ -20,13 +20,13 @@ let PurchaseOrder = {
 
                             let subtotal = discount = 0;
                             $.each(dataSet, function( index, data ) {
-                                subtotal += data.pivot.subtotal_after_discount;
-                                discount += data.discount;
+                                subtotal += parseInt(data.pivot.subtotal_after_discount);
+                                discount += parseInt(data.discount);
                             });
                             $("#sub_total").html(subtotal);
                             $("#sub_total").val(subtotal);
-                            $("#grand_total").html(discount);
-                            $("#grand_total").val(discount);
+                            $("#total_discount").html(discount);
+                            $("#total_discount").val(discount);
 
                             return dataSet;
                         }
@@ -242,13 +242,13 @@ let PurchaseOrder = {
                         let subtotal = discount = 0;
                         let dataSet = table.originalDataSet;
                         $.each(dataSet, function( index, data ) {
-                            subtotal += data.pivot.subtotal_after_discount;
-                            discount += data.discount;
+                            subtotal += parseInt(data.pivot.subtotal_after_discount);
+                            discount += parseInt(data.discount);
                         });
                         $("#sub_total").html(subtotal);
                         $("#sub_total").val(subtotal);
-                        $("#grand_total").html(discount);
-                        $("#grand_total").val(discount);
+                        $("#total_discount").html(discount);
+                        $("#total_discount").val(discount);
 
                         table.originalDataSet = [];
                         table.reload();

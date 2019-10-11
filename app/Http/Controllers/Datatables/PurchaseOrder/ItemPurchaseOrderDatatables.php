@@ -20,7 +20,7 @@ class ItemPurchaseOrderDatatables extends Controller
         $purchaseOrders = $purchaseOrder->items;
 
         foreach($purchaseOrders as $purchaseOrder){
-            $purchaseOrder->discount .= $purchaseOrder->pivot->subtotal_after_discount - $purchaseOrder->pivot->subtotal_after_discount;
+            $purchaseOrder->discount .= intval($purchaseOrder->pivot->subtotal_before_discount) - intval($purchaseOrder->pivot->subtotal_after_discount);
             $purchaseOrder->unit_name .= Unit::find($purchaseOrder->pivot->unit_id)->name;
         }
 

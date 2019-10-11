@@ -214,7 +214,37 @@
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'sub_total')
                                                                     @slot('class', 'sub_total')
-                                                                    @slot('text', 'generate semua total ditabel')
+                                                                    @slot('text', '0')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6"></div>
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="m--align-left" style="padding-top:15px">
+                                                                    Total Discount
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'total_discount')
+                                                                    @slot('class', 'total_discount')
+                                                                    @slot('text', '0')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group m-form__group row hidden">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6"></div>
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="m--align-left" style="padding-top:15px">
+                                                                    Total PPN
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'total_ppn')
+                                                                    @slot('class', 'total_ppn')
+                                                                    @slot('text', '0')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -255,9 +285,9 @@
                                                             </div>
                                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'sub_total')
-                                                                    @slot('class', 'sub_total')
-                                                                    @slot('text', 'menghitung nilai total & biaya lainnya')
+                                                                    @slot('id', 'grand_total')
+                                                                    @slot('class', 'grand_total')
+                                                                    @slot('text', '0')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
