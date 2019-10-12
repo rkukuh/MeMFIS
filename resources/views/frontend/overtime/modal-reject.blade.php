@@ -50,6 +50,7 @@
                                     @slot('text','YES')
                                     @slot('id',"btn_reject")
                                     @slot('icon','')
+                                    @slot('type','button')
                                 @endcomponent
                                 @component('frontend.common.buttons.close')
                                     @slot('text','NO')

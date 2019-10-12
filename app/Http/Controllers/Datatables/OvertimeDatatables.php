@@ -31,10 +31,8 @@ class OvertimeDatatables extends Controller
         
         // if empty, then quit.
         if (empty($overtime)) {
-            // error_log("Setop");
             return response()->json($overtime);
         }
-        // error_log("Lanjot");
 
         $data = $alldata = $overtime;
 
@@ -125,6 +123,124 @@ class OvertimeDatatables extends Controller
         echo json_encode($result, JSON_PRETTY_PRINT);
     }
 
+    public function getEmployees()
+    {
+        // error_log("JAROT:".$request->get("pageLength"));
+        $employees_data = Employee::all();
+        $employees = [];
+
+        $i = 0;
+        foreach($employees_data as $ed){
+            $employees[$i] = [
+                'uuid' => $ed->uuid,
+                'first_name' => $ed->first_name,
+                'last_name' => $ed->last_name,
+                'code' => $ed->code
+            ];
+            $i++;
+        }
+
+        // dd($employees);
+        $data = $alldata = $employees;
+
+        $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
+
+        $filter = isset($datatable['query']['generalSearch']) && is_string($datatable['query']['generalSearch'])
+                    ? $datatable['query']['generalSearch'] : '';
+
+        if (! empty($filter)) {
+            $data = array_filter($data, function ($a) use ($filter) {
+                return (boolean)preg_grep("/$filter/i", (array)$a);
+            });
+
+            unset($datatable['query']['generalSearch']);
+        }
+
+        $query = isset($datatable['query']) && is_array($datatable['query']) ? $datatable['query'] : null;
+
+        if (is_array($query)) {
+            $query = array_filter($query);
+
+            foreach ($query as $key => $val) {
+                $data = $this->list_filter($data, [$key => $val]);
+            }
+        }
+
+        $sort  = ! empty($datatable['sort']['sort']) ? $datatable['sort']['sort'] : 'asc';
+        $field = ! empty($datatable['sort']['field']) ? $datatable['sort']['field'] : 'RecordID';
+
+        $meta    = [];
+        $page    = ! empty($datatable['pagination']['page']) ? (int)$datatable['pagination']['page'] : 1;
+        $perpage = ! empty($datatable['pagination']['perpage']) ? (int)$datatable['pagination']['perpage'] : -1;
+
+        $pages = 1;
+        $total = count($data);
+
+        usort($data, function ($a, $b) use ($sort, $field) {
+            if (! isset($a->$field) || ! isset($b->$field)) {
+                return false;
+            }
+
+            if ($sort === 'asc') {
+                return $a->$field > $b->$field ? true : false;
+            }
+
+            return $a->$field < $b->$field ? true : false;
+        });
+
+        if ($perpage > 0) {
+            $pages  = ceil($total / $perpage);
+            $page   = max($page, 1);
+            $page   = min($page, $pages);
+            $offset = ($page - 1) * $perpage;
+
+            if ($offset < 0) {
+                $offset = 0;
+            }
+
+            $data = array_slice($data, $offset, $perpage, true);
+        }
+
+        $meta = [
+            'page'    => $page,
+            'pages'   => $pages,
+            'perpage' => $perpage,
+            'total'   => $total,
+        ];
+
+        if (isset($datatable['requestIds']) && filter_var($datatable['requestIds'], FILTER_VALIDATE_BOOLEAN)) {
+            $meta['rowIds'] = array_map(function ($row) {
+                return $row->RecordID;
+            }, $alldata);
+        }
+
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
+
+        $result = [
+            "meta" => $meta + [
+                    'sort'  => $sort,
+                    'field' => $field,
+                ],
+            "data" => $data
+        ];
+
+        echo json_encode($result, JSON_PRETTY_PRINT);
+    }
+
+    private function list_filter($list, $args = array(), $operator = 'AND')
+    {
+        if (! is_array($list)) {
+            return array();
+        }
+
+        $util = new ListUtil($list);
+
+        return $util->filter($args, $operator);
+    }
+
     private function getAllData($i,$overtime_datas)
     {
         $overtime = [];
@@ -139,8 +255,6 @@ class OvertimeDatatables extends Controller
                 $approvals = $od->approvals->last();
                 // check approvals
                 if ($approvals != null) {
-                    // $isApproved = "Approved";
-                    // error_log("HAHA ". $od->id);
                     if ($approvals->is_approved == 1) {
                         $isApproved = "Approved";
                     }else{

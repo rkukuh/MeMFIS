@@ -114,13 +114,18 @@ class OvertimeController extends Controller
                 $approval_stat = "Rejected";
             }
             $approved_by = $is_approved->conductedby->first_name. " - " .$is_approved->created_at;
-            $remark_note = $is_approved->note;
+
+            $db_note = $is_approved->note;
+            $trimmed_note = preg_replace('/[ \t]+/', ' ', preg_replace('/\s*$^\s*/m', "\n", $db_note));
+            if ( $trimmed_note != "\n") {
+                $remark_note = $trimmed_note;
+            }else{
+                $remark_note = "No specific remark";
+            }
+            
             $job = $is_approved->conductedby->user->roles->first()->name;
         }
         $approval_detail = [$approval_stat,$approved_by,$job,$remark_note];
-        
-        // error_log("WOI ".$overtime->uuid);
-        // return view("frontend.overtime.show",["overtime" => $overtime, "employee" => $employee_data]);\
         return response()->json(["overtime" => $overtime,"employee" => $employee_data,"total_diff" => $total_in_diff,"approval_detail" => $approval_detail]);
     }
 
@@ -181,9 +186,6 @@ class OvertimeController extends Controller
 ;
         $overtime_data->fill($data);
         $overtime_data->save();
-
-        // $request->session()->flash("success", $title . " is successfully updated");
-        // return redirect()->route("blogposts.show",["blogpost" => $blogpost->id]);
         return redirect()->route('frontend.overtime.index');
     }
 
@@ -201,16 +203,11 @@ class OvertimeController extends Controller
     public function approve(Overtime $overtime,Request $request)
     {
         $note = $request->get("note");
-        error_log("Approve:".$note);
-        if ($note != null) {
-            $trimmed_note = preg_replace('/[ \t]+/', ' ', preg_replace('/\s*$^\s*/m', "\n", $note)); 
-            if ($trimmed_note == "") {
-                $note = "No specific remark";
-            }else{
-                $note = $trimmed_note;
-            }
+        $trimmed_note = preg_replace('/[ \t]+/', ' ', preg_replace('/\s*$^\s*/m', "\n", $note));
+        if ($trimmed_note != "") {
+            $note = $trimmed_note;
         }else{
-            $note = "No specific remark";
+            $note = "";
         }    
 
         $overtime->approvals()->save(new Approval([
@@ -230,16 +227,11 @@ class OvertimeController extends Controller
     public function reject(Overtime $overtime, Request $request)
     {
         $note = $request->get("note");
-        error_log("YOWW:".$note);
-        if ($note != null) {
-            $trimmed_note = preg_replace('/[ \t]+/', ' ', preg_replace('/\s*$^\s*/m', "\n", $note)); 
-            if ($trimmed_note == "") {
-                $note = "No specific remark";
-            }else{
-                $note = $trimmed_note;
-            }
+        $trimmed_note = preg_replace('/[ \t]+/', ' ', preg_replace('/\s*$^\s*/m', "\n", $note));
+        if ($trimmed_note != "") {
+            $note = $trimmed_note;
         }else{
-            $note = "No specific remark";
+            $note = null;
         }
         
            

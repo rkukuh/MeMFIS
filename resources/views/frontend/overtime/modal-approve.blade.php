@@ -50,6 +50,7 @@
                                     @slot('id',"btn_approve")
                                     @slot('text','YES')
                                     @slot('icon','')
+                                    @slot('type','button')
                                 @endcomponent
                                 @component('frontend.common.buttons.close')
                                     @slot('text','NO')

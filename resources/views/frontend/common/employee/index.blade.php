@@ -23,7 +23,10 @@
 @include('frontend.common.employee.modal')
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/common/employee.js') }}"></script>
-    {{-- <script src="{{ asset('js/frontend/common/create.js') }}"></script> --}}
+    @if (\Route::current()->getName() != 'frontend.overtime.create')
+        <script src="{{ asset('js/frontend/common/employee.js') }}"></script>
+    @else
+        <script src="{{ asset('js/frontend/overtime/create.js') }}"></script>
+    @endif
     <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush

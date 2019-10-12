@@ -8,13 +8,13 @@ let Employee = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50 ],
             pageLength:5,
-            ajax: "/get-account-codes/",
+            ajax: "/datatables/overtime/getEmployees",
             columns: [
                 {
                     data: "code"
                 },
                 {
-                    data: "name"
+                    data: "first_name"
                 },
                 {
                     data: "Actions"
@@ -25,7 +25,7 @@ let Employee = {
                     targets: -1,
                     orderable: !1,
                     render: function (a, e, t, n) {
-                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-name="' + t.name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        return '<a class="btn btn-primary btn-sm m-btn--hover-brand select-account_code" title="View" data-uuid="' + t.uuid + '" data-code="' + t.code + '" data-first_name="' + t.first_name + '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
                     }
                 },
 
@@ -46,9 +46,10 @@ let Employee = {
         $('.dataTable').on('click', '.select-account_code', function () {
             let uuid = $(this).data('uuid');
             let code = $(this).data('code');
-            let name = $(this).data('name');
+            let name = $(this).data("first_name");
 
-            document.getElementById('account_code').value = uuid;
+            // document.getElementById('account_code').value = uuid;
+            document.getElementById('search-journal-val').value = uuid;
 
             $('.search-journal').html(code + " - " + name);
             $('#modal_account_code').modal('hide');
