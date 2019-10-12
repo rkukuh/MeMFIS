@@ -117,6 +117,8 @@ let InventoryInCreate = {
             ]
         };
 
+        // $('.item_datatable').mDatatable(options);
+
         $('.modal-footer').on('click', '.add', function () {
             let item = document.getElementById('item')
             let itemVal = item.value
@@ -137,7 +139,7 @@ let InventoryInCreate = {
             });
 
             toastr.success('Item has been added.', 'Success', {
-                timeOut: 500,
+                timeOut: 100,
                 onHidden: function () {
                     $('.modal').modal('hide');
                     console.log(dataSet);
@@ -149,23 +151,6 @@ let InventoryInCreate = {
         $('.modal').on('hidden.bs.modal', function () {
             $(this).find("input,textarea,select").val('');
             $(this).find("select2").empty().end();
-        });
-
-        $('.item_datatable').mDatatable(options);
-
-        $(function(){
-            $('input[type="radio"]').click(function(){
-              if ($(this).is(':checked'))
-              {
-                // alert($(this).val());
-                if($(this).val() == 'general'){
-                    $('.project').addClass('hidden');
-                }
-                else if($(this).val() == 'project'){
-                    $('.project').removeClass('hidden');
-                }
-              }
-            });
         });
 
         $('.footer').on('click', '.add-inventory-in', function () {
