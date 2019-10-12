@@ -62,7 +62,7 @@ let InventoryInCreate = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'serial_no',
                     title: 'Serial Number',
                     sortable: 'asc',
                     filterable: !1,
@@ -74,25 +74,25 @@ let InventoryInCreate = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'exp_date',
                     title: 'Expired Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'qty',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'unit_id',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: "description",
+                    field: "remark",
                     title: "Remark",
                 },
                 {
