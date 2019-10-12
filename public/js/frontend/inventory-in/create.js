@@ -1,5 +1,6 @@
 let InventoryInCreate = {
     init: function () {
+        $('.item_datatable').empty();
 
         let dataSet = {
             "meta": {
@@ -15,7 +16,7 @@ let InventoryInCreate = {
         let options = {
             data: {
                 type: 'local',
-                source: dataSet,
+                source: dataSet.data,
                 pageSize: 10,
                 serverPaging: !0,
                 serverSorting: !0
@@ -116,8 +117,6 @@ let InventoryInCreate = {
             ]
         };
 
-        $('.item_datatable').mDatatable(options).destroy();
-
         $('.modal-footer').on('click', '.add', function () {
             let item = document.getElementById('item')
             let itemVal = item.value
@@ -138,7 +137,7 @@ let InventoryInCreate = {
             });
 
             toastr.success('Item has been added.', 'Success', {
-                timeOut: 1000,
+                timeOut: 500,
                 onHidden: function () {
                     $('.modal').modal('hide');
                     console.log(dataSet);
@@ -147,7 +146,12 @@ let InventoryInCreate = {
             });
         });
 
-        // $('.item_datatable').mDatatable(options);
+        $('.modal').on('hidden.bs.modal', function () {
+            $(this).find("input,textarea,select").val('');
+            $(this).find("select2").empty().end();
+        });
+
+        $('.item_datatable').mDatatable(options);
 
         $(function(){
             $('input[type="radio"]').click(function(){
