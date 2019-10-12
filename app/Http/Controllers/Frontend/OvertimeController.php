@@ -12,6 +12,7 @@ use App\Http\Requests\Frontend\OvertimeStore;
 use App\Http\Requests\Frontend\OvertimeUpdate;
 use App\Models\Employee;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class OvertimeController extends Controller
 {
@@ -197,16 +198,64 @@ class OvertimeController extends Controller
         //
     }
 
-    public function approve()
+    public function approve(Overtime $overtime,Request $request)
     {
-        // dd($data);
-        // error_log("MLEBU COI");
-        return response()->json(["test" => "WKWKWK"]);
-        // $overtime->approvals()->save(new Approval([
-        //     'approvable_id' => $overtime->id,
-        //     'conducted_by' => Auth::id(),
-        //     'note' => $request->note,
-        //     'is_approved' => 1
-        // ]));
+        $note = $request->get("note");
+        error_log("Approve:".$note);
+        if ($note != null) {
+            $trimmed_note = preg_replace('/[ \t]+/', ' ', preg_replace('/\s*$^\s*/m', "\n", $note)); 
+            if ($trimmed_note == "") {
+                $note = "No specific remark";
+            }else{
+                $note = $trimmed_note;
+            }
+        }else{
+            $note = "No specific remark";
+        }    
+
+        $overtime->approvals()->save(new Approval([
+            'approvable_id' => $overtime->id,
+            'conducted_by' => Auth::id(),
+            'note' => $note,
+            'is_approved' => 1
+        ]));
+
+        $status = Status::ofOvertime()->where('code','close')->first()->id;
+        $overtime->statuses_id = $status;
+        $overtime->save();
+        
+        return response()->json($overtime);
+    }
+
+    public function reject(Overtime $overtime, Request $request)
+    {
+        $note = $request->get("note");
+        error_log("YOWW:".$note);
+        if ($note != null) {
+            $trimmed_note = preg_replace('/[ \t]+/', ' ', preg_replace('/\s*$^\s*/m', "\n", $note)); 
+            if ($trimmed_note == "") {
+                $note = "No specific remark";
+            }else{
+                $note = $trimmed_note;
+            }
+        }else{
+            $note = "No specific remark";
+        }
+        
+           
+
+        $overtime->approvals()->save(new Approval([
+            'approvable_id' => $overtime->id,
+            'conducted_by' => Auth::id(),
+            'note' => $note,
+            'is_approved' => 0
+        ]));
+
+        
+        $status = Status::ofOvertime()->where('code','close')->first()->id;
+        $overtime->statuses_id = $status;
+        $overtime->save();
+        
+        return response()->json($overtime);
     }
 }

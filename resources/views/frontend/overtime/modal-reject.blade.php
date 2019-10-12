@@ -13,6 +13,7 @@
             </div>
             <div class="modal-body">
                 <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" method="POST" action="#">
+                    @csrf
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -35,9 +36,9 @@
                                 @component('frontend.common.input.textarea')
                                     @slot('text', 'Remark')
                                     @slot('rows', '5')
-                                    @slot('name', 'remark_tool')
-                                    @slot('id', 'remark_tool')
-                                    @slot('id_error', 'remark_tool')
+                                    @slot('name', 'remark_tool_reject')
+                                    @slot('id', 'remark_tool_reject')
+                                    @slot('id_error', 'remark_tool_reject')
                                 @endcomponent
                             </div>
                         </div>
@@ -47,6 +48,7 @@
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
                                     @slot('text','YES')
+                                    @slot('id',"btn_reject")
                                     @slot('icon','')
                                 @endcomponent
                                 @component('frontend.common.buttons.close')

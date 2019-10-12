@@ -67,7 +67,11 @@ let Overtime = {
                     filterable: !1,
                     template: (t) => {;
                         // return '<a data-toggle="modal" data-target="#modal_transaction_overtime" href="/overtime/'+t.uuid+'" data-id="' + t.uuid +'">' + t.uuid + "</a>" 
-                        return '<a data-toggle="modal" href="#modal_transaction_overtime" data-id="' + t.uuid +'">' + t.uuid + "</a>"
+                        // let stringify = JSON.stringify(t);
+                        
+                        return '<a data-toggle="modal" href="#" data-target="#modal_transaction_overtime" data-id="' + t.uuid +'">' + t.uuid + "</a>"
+                        // return "<a data-toggle='modal' href='#' data-target='#modal_transaction_overtime' data-id='"+ stringify +"'>" + t.uuid +"</a>"
+                        // return "<a data-toggle= "
                         // return '<a onclick="show('+t.uuid+')" data-id="' + t.uuid +'">' + t.uuid + "</a>"
                     }
                 },
@@ -144,14 +148,13 @@ let Overtime = {
                             '<a href="#modal_approve" data-target="#modal_approve" data-toggle="modal" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +
                                 '<i class="la la-check"></i>' +
                             '</a>' +
-                            '<a href="#" data-toggle="modal" data-target="#modal_reject" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-id="' + t.uuid + '">' +
+                            '<a href="#modal_reject" data-toggle="modal" data-target="#modal_reject" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Reject" data-id="' + t.uuid + '">' +
                                 '<i class="la la-remove"></i>' +
                             '</a>'
                         );
                     }
                 }
             ]
-            // /overtime/'+t.uuid+'/approve
         });     
 
     }
@@ -160,12 +163,14 @@ let Overtime = {
 $('#modal_transaction_overtime').on('show.bs.modal', (e) => {
 
     //get data-id attribute of the clicked element
-    let uuid = $(e.relatedTarget).data('id');
+    let detail_data = $(e.relatedTarget).data('id');
+    // console.log(detail_data);
+    
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url: '/overtime/' + uuid,
+        url: '/overtime/' + detail_data,
         type: "GET",
         dataType: "json",
         success:(data) => {
@@ -197,16 +202,39 @@ $('#modal_transaction_overtime').on('show.bs.modal', (e) => {
 $('#modal_approve').on('show.bs.modal', (e) => {
     let uuid = $(e.relatedTarget).data('id');
     approve(uuid)
-    .then(datas =>{
-        toastr.success('Overtime has been approved.', 'Approved', {
-                timeOut: 5000
-            }
-        );
-
-        console.log(datas);
+    .then(data =>{
+        console.log(data);
         let table = $('.overtime_datatable').mDatatable();
         table.originalDataSet = [];
         table.reload();
+        toastr.success('Overtime has been approved.', 'Approved', {
+            timeOut: 5000
+        });
+    })
+    .catch(error =>{
+        console.log(error);
+        
+        $.each(errors.error, function (index, value) {
+            toastr.error(value.message, value.title, {
+                "closeButton": true,
+                "timeOut": "0",
+            }
+            );
+        });
+    })
+});
+
+$('#modal_reject').on('show.bs.modal', (e) => {
+    let uuid = $(e.relatedTarget).data('id');
+    reject(uuid)
+    .then(data =>{
+        console.log(data);
+        let table = $('.overtime_datatable').mDatatable();
+        table.originalDataSet = [];
+        table.reload();
+        toastr.success('Overtime has been rejected.', 'Rejected', {
+            timeOut: 5000
+        });
     })
     .catch(error =>{
         console.log(error);
@@ -225,7 +253,7 @@ function approve(uuid) {
     return new Promise((resolve,reject)=>{
         
         $("#btn_approve").on("click",()=>{
-            let note = $.trim($("#remark_tool").val());
+            let note = $("#remark_tool_approve").val();
             // e.preventDefault();
             $.ajax({
                 headers: {
@@ -237,8 +265,38 @@ function approve(uuid) {
                     note: note
                 },
                 success:(data) => {
-                    console.log("masuk sukses");
-                    
+                    resolve(data);
+                },
+                error: (jqXhr, json, errorThrown) =>{
+                    let errorsHtml = '';
+                    let errors = jqXhr.responseJSON;
+                    reject(errors);
+                            // $.each(errors.errors, function (index, value) {
+                            //       $('#kategori-error').html(value);
+                            // });
+                }
+            });
+        });
+    });
+}
+
+function reject(uuid) {
+    return new Promise((resolve,reject)=>{
+        
+        $("#btn_reject").on("click",()=>{
+            let note = $("#remark_tool_reject").val();
+            
+            // e.preventDefault();
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: '/overtime/' + uuid + "/reject",
+                type: "POST",
+                data: {
+                    note: note
+                },
+                success:(data) => {
                     resolve(data);
                 },
                 error: (jqXhr, json, errorThrown) =>{

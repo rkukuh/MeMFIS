@@ -19,14 +19,8 @@ class StatusesOfOvertime extends Seeder
         ]);
 
         Status::create([
-            'code' => 'approved',
-            'name' => 'APPROVED',
-            'of'   => 'overtime',
-        ]);
-
-        Status::create([
-            'code' => 'rejected',
-            'name' => 'REJECTED',
+            'code' => 'close',
+            'name' => 'CLOSE',
             'of'   => 'overtime',
         ]);
     }
