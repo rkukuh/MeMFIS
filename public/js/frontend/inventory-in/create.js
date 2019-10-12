@@ -1,24 +1,21 @@
 let InventoryInCreate = {
     init: function () {
-        $('.item_datatable').mDatatable({
+
+        let dataSet = {
+            "meta": {
+                "page": 1,
+                "pages": 1,
+                "perpage": -1,
+                "total": 56,
+                "sort": "asc",
+                "field": "RecordID"
+            },"data": [] 
+        };
+
+        let options = {
             data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        method: 'GET',
-                        url: '/datatables/item',
-
-                        map: function (raw) {
-                            let dataSet = raw;
-
-                            if (typeof raw.data !== 'undefined') {
-                                dataSet = raw.data;
-                            }
-
-                            return dataSet;
-                        }
-                    }
-                },
+                type: 'local',
+                source: dataSet,
                 pageSize: 10,
                 serverPaging: !0,
                 serverSorting: !0
@@ -46,11 +43,11 @@ let InventoryInCreate = {
                 {
                     field: '#',
                     title: 'No',
-                    width:'40',
+                    width: '40',
                     sortable: 'asc',
                     filterable: !1,
                     textAlign: 'center',
-                    template: function (row, index, datatable) {   
+                    template: function (row, index, datatable) {
                         return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
                 },
@@ -60,7 +57,7 @@ let InventoryInCreate = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/item/'+t.uuid+'">' + t.code + "</a>"
+                        return t.code
                     }
                 },
                 {
@@ -110,14 +107,47 @@ let InventoryInCreate = {
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
                             t.uuid +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                '<i class="la la-trash"></i>' +
+                            '<i class="la la-trash"></i>' +
                             '</a>'
                         );
                     }
                 }
 
             ]
+        };
+
+        $('.item_datatable').mDatatable(options).destroy();
+
+        $('.modal-footer').on('click', '.add', function () {
+            let item = document.getElementById('item')
+            let itemVal = item.value
+            let itemText = document.getElementById('select2-item-container').title
+            let expDate = document.getElementById('exp_date').value
+            let qty = document.getElementById('qty').value
+            let unitId = document.getElementById('unit_id').value
+            let remark = document.getElementById('remark').value
+            let serialNo = document.getElementById('serial_no').value
+
+            dataSet.data.push({
+                code: itemText,
+                exp_date: expDate,
+                qty: qty,
+                unit_id: unitId,
+                remark: remark,
+                serial_no: serialNo
+            });
+
+            toastr.success('Item has been added.', 'Success', {
+                timeOut: 1000,
+                onHidden: function () {
+                    $('.modal').modal('hide');
+                    console.log(dataSet);
+                    $('.item_datatable').mDatatable(options).reload();            
+                }
+            });
         });
+
+        // $('.item_datatable').mDatatable(options);
 
         $(function(){
             $('input[type="radio"]').click(function(){
