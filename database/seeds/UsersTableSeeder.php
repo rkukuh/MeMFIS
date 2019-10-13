@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
             'updated_at' => null,
         ]);
 
-        // YEMIMA 
+        // YEMIMA
 
         $user = User::create([
             'name'      => 'Yemima',
@@ -53,6 +53,69 @@ class UsersTableSeeder extends Seeder
             'code' => 'SU-' . Carbon::now()->timestamp,
             'first_name' => 'Yemima',
             'last_name'  => 'Admin',
+            'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null
+        ]);
+
+        // Dirut
+
+        $user = User::create([
+            'name'      => 'Dirut',
+            'email'     => 'dirut@smartaircraft.id',
+            'password'  => Hash::make('admin'),
+            'is_active' => 1,
+        ]);
+
+        $user->assignRole(
+            Role::where('name', 'admin')->first()
+        );
+
+        $user->employee()->create([
+            'code' => 'SU-' . Carbon::now()->timestamp,
+            'first_name' => 'Direktur Utama',
+            'last_name'  => 'Dummy',
+            'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null
+        ]);
+
+        // Manager
+
+        $user = User::create([
+            'name'      => 'Manager',
+            'email'     => 'manager@smartaircraft.id',
+            'password'  => Hash::make('admin'),
+            'is_active' => 1,
+        ]);
+
+        $user->assignRole(
+            Role::where('name', 'admin')->first()
+        );
+
+        $user->employee()->create([
+            'code' => 'SU-' . Carbon::now()->timestamp,
+            'first_name' => 'Manager',
+            'last_name'  => 'Dummy',
+            'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null
+        ]);
+
+        // Staff
+
+        $user = User::create([
+            'name'      => 'Staff',
+            'email'     => 'staff@smartaircraft.co.id',
+            'password'  => Hash::make('admin'),
+            'is_active' => 1,
+        ]);
+
+        $user->assignRole(
+            Role::where('name', 'employee')->first()
+        );
+
+        $user->employee()->create([
+            'code' => 'SU-' . Carbon::now()->timestamp,
+            'first_name' => 'Staff',
+            'last_name'  => 'Dummy',
             'joined_date' => Carbon::now()->toDateString(),
             'updated_at' => null
         ]);
