@@ -161,33 +161,34 @@ let Overtime = {
 
 $('#modal_transaction_overtime').on('show.bs.modal', (e) => {
     let detail_data = $(e.relatedTarget).data('id');
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        url: '/overtime/' + detail_data,
-        type: "GET",
-        dataType: "json",
-        success:(data) => {
-            $("#overtime_employee").text(data.employee);
-            $("#overtime_uuid").text(data.overtime.uuid);
-            $("#overtime_date").text(data.overtime.date);
-            $("#overtime_start").text(data.overtime.start);
-            $("#overtime_end").text(data.overtime.end);
-            $("#overtime_desc").text(data.overtime.desc);
-            $("#overtime_status").text(data.approval_detail[0]);
-            $("#overtime_total").text(data.total_diff);
-            $("#overtime_created_at").text(data.overtime.created_at); 
-            $("#overtime_approved_by").text(data.approval_detail[1]);
-            $("#overtime_job").text(data.approval_detail[2]);
-            $("#overtime_remark").text(data.approval_detail[3]);
-        },
-        error: (jqXhr, json, errorThrown) =>{
-            let errors = jqXhr.responseJSON;
-            $.each(errors.errors, (index, value) => {
-                $('#kategori-error').html(value);
-            });
-        }
+    let header ={
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    };
+
+    fetch('/overtime/' + detail_data,header)
+    .then(response=>{
+        // this .json is the same as JSON.parse but for fetch method only
+        return response.json();
+    })
+    .then(data => {
+        $("#overtime_employee").text(data.employee);
+        $("#overtime_uuid").text(data.overtime.uuid);
+        $("#overtime_date").text(data.overtime.date);
+        $("#overtime_start").text(data.overtime.start);
+        $("#overtime_end").text(data.overtime.end);
+        $("#overtime_desc").text(data.overtime.desc);
+        $("#overtime_status").text(data.approval_detail[0]);
+        $("#overtime_total").text(data.total_diff);
+        $("#overtime_created_at").text(data.overtime.created_at); 
+        $("#overtime_approved_by").text(data.approval_detail[1]);
+        $("#overtime_job").text(data.approval_detail[2]);
+        $("#overtime_remark").text(data.approval_detail[3]);
+    })
+    .catch(jqXhr =>{
+        let errors = jqXhr.responseJSON;
+        $.each(errors.errors, (index, value) => {
+            $('#kategori-error').html(value);
+        });
     });
 });
 

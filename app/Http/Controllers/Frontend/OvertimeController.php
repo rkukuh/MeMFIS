@@ -113,7 +113,7 @@ class OvertimeController extends Controller
             }else{
                 $approval_stat = "Rejected";
             }
-            $approved_by = $is_approved->conductedby->first_name. " - " .$is_approved->created_at;
+            $approved_by = $is_approved->conductedby->first_name. " at " .$is_approved->created_at;
 
             $db_note = $is_approved->note;
             $trimmed_note = preg_replace('/[ \t]+/', ' ', preg_replace('/\s*$^\s*/m', "\n", $db_note));
@@ -217,7 +217,7 @@ class OvertimeController extends Controller
             'is_approved' => 1
         ]));
 
-        $status = Status::ofOvertime()->where('code','close')->first()->id;
+        $status = Status::ofOvertime()->where('code','closed')->first()->id;
         $overtime->statuses_id = $status;
         $overtime->save();
         
@@ -244,7 +244,7 @@ class OvertimeController extends Controller
         ]));
 
         
-        $status = Status::ofOvertime()->where('code','close')->first()->id;
+        $status = Status::ofOvertime()->where('code','closed')->first()->id;
         $overtime->statuses_id = $status;
         $overtime->save();
         
