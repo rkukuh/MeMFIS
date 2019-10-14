@@ -53,7 +53,6 @@ let Customer = {
         
             });
 
-
             let website_array = [];
             $('#website ').each(function (i) {
                 website_array[i] = $(this).val();

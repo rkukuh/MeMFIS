@@ -5,7 +5,6 @@ let Vendor = {
             let name = $('input[name=name]').val();
             let payment_term =  $('input[name=term_of_payment]').val();
             let account_code = $('#account_code').val();
-            let level = $('select[name="customer-level"]').val();
             let ai = 0;
 
             let phone_array = [];
@@ -23,7 +22,6 @@ let Vendor = {
             let type_phone_array = [];
             $('#type_phone ').each(function (i) {
                 if($(this).is(':checked')){
-                    console.log($(this).val());
                     type_phone_array[i] = $(this).val();
                 }
             });
@@ -44,7 +42,6 @@ let Vendor = {
 
             $('#type_fax ').each(function (i) {
                 if($(this).is(':checked')){
-                    console.log($(this).val());
                     type_fax_array[i] = $(this).val();
                 }
             });
@@ -54,19 +51,6 @@ let Vendor = {
                 return el != null && el != "";
         
             });
-
-
-            let website_array = [];
-            $('#website ').each(function (i) {
-                website_array[i] = $(this).val();
-            });
-            website_array.pop();
-
-            let type_website_array = [];
-            $('select[name^=type_website]').each(function (i) {
-                type_website_array[i] = $(this).val();
-            });
-            type_website_array.pop();
 
             let email_array = [];
             $('input[name^=email_array]').each(function (i) {
@@ -154,7 +138,7 @@ let Vendor = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/customer',
+                url: '/vendor',
                 // cache: false,
                 // processData: false,
                 // contentType: false,
@@ -168,8 +152,6 @@ let Vendor = {
                     type_phone_array: type_phone_array,
                     fax_array: fax_array,
                     type_fax_array: type_fax_array,
-                    website_array: website_array,
-                    type_website_array: type_website_array,
                     email_array: email_array,
                     type_email_array: type_email_array,
                     document_array: document_array,
@@ -180,7 +162,6 @@ let Vendor = {
                     attn_ext_array:attn_ext_array,
                     attn_fax_array:attn_fax_array,
                     attn_email_array:attn_email_array,
-                    level:level,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -207,8 +188,7 @@ let Vendor = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/customer/' + data.uuid + '/edit';
-                        // window.location.href = '/customer';
+                        window.location.href = '/vendor/' + data.uuid + '/edit';
           
 
                     }
