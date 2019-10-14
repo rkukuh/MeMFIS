@@ -18,7 +18,7 @@ class CreateBankAccountsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->string('name');
-            $table->string('swift_code');
+            $table->string('swift_code')->nullable();
             $table->morphs('bank_accountable');
             $table->unsignedBigInteger('bank_id');
             $table->timestamps();
