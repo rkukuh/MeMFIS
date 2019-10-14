@@ -133,5 +133,5 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/item.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/item-uuid.js')}}"></script>
 @endpush

@@ -120,12 +120,7 @@ class InventoryInDatatables extends Controller
 
     public function getItemsByInventoryIn(InventoryIn $inventoryIn)
     {
-        $items = InventoryIn::with('items')
-            ->where('uuid', $inventoryIn->uuid)
-            ->first()
-            ->toArray();
-
-        $data = $alldata = $items['items'];
+        $data = $alldata = json_decode($inventoryIn->items);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

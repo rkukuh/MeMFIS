@@ -57,11 +57,11 @@
                                         </label>
 
                                         @component('frontend.common.input.datepicker')
-                                            @slot('id', 'date')
-                                            @slot('text', 'Date')
-                                            @slot('name', 'date')
-                                            @slot('id_error','requested_at')
-                                            @slot('value', $inventoryIn->inventoried_at)
+                                        @slot('id', 'date')
+                                        @slot('text', 'Date')
+                                        @slot('name', 'date')
+                                        @slot('id_error','requested_at')
+                                        @slot('value', $inventoryIn->inventoried_at)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -72,11 +72,11 @@
                                         </label>
 
                                         @component('frontend.common.input.text')
-                                            @slot('id', 'ref-no')
-                                            @slot('text', 'Ref No.')
-                                            @slot('name', 'ref-no')
-                                            @slot('id_error','ref-no')
-                                            @slot('value', $inventoryIn->number)
+                                        @slot('id', 'ref-no')
+                                        @slot('text', 'Ref No.')
+                                        @slot('name', 'ref-no')
+                                        @slot('id_error','ref-no')
+                                        @slot('value', $inventoryIn->number)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -87,8 +87,8 @@
                                         @include('frontend.common.ref-quotation-workshop.index')
 
                                         @component('frontend.common.input.hidden')
-                                            @slot('id', 'quotation_workshop')
-                                            @slot('name', 'quotation_workshop')
+                                        @slot('id', 'quotation_workshop')
+                                        @slot('name', 'quotation_workshop')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -98,12 +98,14 @@
                                             Storage @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select2')
-                                            @slot('text', 'Storage')
-                                            @slot('id', 'item_storage_id')
-                                            @slot('name', 'item_storage_id')
-                                            @slot('id_error', 'item_storage_id')
-                                        @endcomponent
+                                        <select id="item_storage_id" name="item_storage_id" class="form-control m-select2">
+                                            @foreach ($storages as $storage)
+                                            <option value="{{ $storage->id }}" @if ($storage->id == $inventoryIn->storage_id) selected
+                                                @endif>
+                                                {{ $storage->name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
@@ -111,10 +113,10 @@
                                         </label>
 
                                         @component('frontend.common.input.text')
-                                            @slot('text', 'Section Code')
-                                            @slot('id', 'section_code')
-                                            @slot('name', 'section_code')
-                                            @slot('id_error', 'section_code')
+                                        @slot('text', 'Section Code')
+                                        @slot('id', 'section_code')
+                                        @slot('name', 'section_code')
+                                        @slot('id_error', 'section_code')
                                         @endcomponent
                                     </div>
                                 </div>
@@ -125,11 +127,11 @@
                                         </label>
 
                                         @component('frontend.common.input.textarea')
-                                            @slot('rows', '5')
-                                            @slot('id', 'remark')
-                                            @slot('name', 'remark')
-                                            @slot('text', 'Remark')
-                                            @slot('value', $inventoryIn->description)
+                                        @slot('rows', '5')
+                                        @slot('id', 'remark')
+                                        @slot('name', 'remark')
+                                        @slot('text', 'Remark')
+                                        @slot('value', $inventoryIn->description)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -170,8 +172,8 @@
                                                             </div>
                                                             <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                                                 @component('frontend.common.buttons.create-new')
-                                                                    @slot('text', 'Item')
-                                                                    @slot('data_target', '#modal_item')
+                                                                @slot('text', 'Item')
+                                                                @slot('data_target', '#modal_item')
                                                                 @endcomponent
 
 
@@ -191,9 +193,9 @@
                                         <div class="flex">
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
-                                                    @slot('type','button')
-                                                    @slot('id', 'add-inventory-in')
-                                                    @slot('class', 'add-inventory-in')
+                                                @slot('type','button')
+                                                @slot('id', 'add-inventory-in')
+                                                @slot('class', 'add-inventory-in')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
@@ -216,6 +218,7 @@
 @endsection
 
 @push('footer-scripts')
+
 <script>
     let inventoryin_uuid = '{{ $inventoryIn->uuid }}';
 </script>
@@ -223,14 +226,11 @@
 <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
-
-<script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
 
 <script src="{{ asset('js/frontend/inventory-in/edit.js') }}"></script>
 <script src="{{ asset('js/frontend/inventory-in/form-reset.js') }}"></script>
+
 @endpush

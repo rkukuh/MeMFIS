@@ -7,7 +7,6 @@ let InventoryInCreate = {
                     read: {
                         method: 'GET',
                         url: '/datatables/inventory-in/'+ inventoryin_uuid +'/items',
-
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -128,18 +127,50 @@ let InventoryInCreate = {
             ]
         });
 
-        $(function(){
-            $('input[type="radio"]').click(function(){
-              if ($(this).is(':checked'))
-              {
-                // alert($(this).val());
-                if($(this).val() == 'general'){
-                    $('.project').addClass('hidden');
+        $(".modal-footer").on("click", ".add-item", function () {
+            let item = $("#item").val();
+            let quantity = $("input[name=qty]").val();
+            let exp_date = $("#exp_date").val();
+            let unit = $("#unit_id").val();
+            let remark = $("#remark").val();
+            let serial_no = $("#serial_no").val();
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                url: "/inventory-in/" + inventoryin_uuid + "/item/" + item,
+                type: "POST",
+                data: {
+                    item_id: item,
+                    quantity: quantity,
+                    exp_date: exp_date,
+                    unit_id: unit,
+                    serial_no: serial_no,
+                    remark: remark,
+                },
+                success: function (response) {
+                    $('#modal_item').modal('hide');
+
+                    $('#modal_item').on('hidden.bs.modal', function (e) {
+                        $(this)
+                            .find("input,textarea")
+                            .val('')
+                            .end()
+                            .find("select")
+                            .select2('val', 'All')
+                            .end();
+                    });
+
+                    toastr.success("Item has been added.", "Success", {
+                        timeOut: 5000
+                    });
+
+                    let table = $(".item_datatable").mDatatable();
+
+                    table.originalDataSet = [];
+                    table.reload();
                 }
-                else if($(this).val() == 'project'){
-                    $('.project').removeClass('hidden');
-                }
-              }
             });
         });
 
@@ -154,7 +185,7 @@ let InventoryInCreate = {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url: '/inventory-in',
+                url: '/inventory-in/' + inventoryin_uuid,
                 type: 'PUT',
                 data: {
                     number: ref_no,
