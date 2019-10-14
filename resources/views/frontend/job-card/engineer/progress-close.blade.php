@@ -151,7 +151,7 @@
                                                 Actual. Mhrs
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$taskcard->estimation_manhour}}
+                                                {{ $actual }}
                                             </td>
                                         </tr>
                                         <tr>
