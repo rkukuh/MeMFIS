@@ -18,8 +18,8 @@ class CreatePurchaseRequestsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->unsignedBigInteger('type_id');
-            $table->string('purchase_requestable_type');
-            $table->unsignedBigInteger('purchase_requestable_id');
+            $table->string('purchase_requestable_type')->nullable();;
+            $table->unsignedBigInteger('purchase_requestable_id')->nullable();;
             $table->timestamp('requested_at')->nullable();
             $table->timestamp('required_at')->nullable();
             $table->text('description')->nullable();
