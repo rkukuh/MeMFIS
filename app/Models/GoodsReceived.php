@@ -47,7 +47,7 @@ class GoodsReceived extends MemfisModel
      *
      * @return mixed
      */
-    public function inventoryin()
+    public function inventoryIn()
     {
         return $this->morphOne(InventoryIn::class, 'inventoryinable');
     }

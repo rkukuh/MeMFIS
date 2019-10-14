@@ -44,13 +44,24 @@ let Grn = {
             },
             columns: [
                 {
-                    field: 'received_at',
+                    field: '#',
+                    title: 'No',
+                    width:'40',
+                    sortable: 'asc',
+                    filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {   
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
+                },
+                {
+                    field: '',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'number',
+                    field: '',
                     title: 'GRN Number',
                     sortable: 'asc',
                     filterable: !1,
@@ -59,25 +70,25 @@ let Grn = {
                     }
                 },
                 {
-                    field: 'purchase_order.number',
+                    field: '',
                     title: 'PR Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'purchase_order.purchase_request.number',
+                    field: 'purchase_order.number',
                     title: 'PO Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'vendor.code',
+                    field: '',
                     title: 'Vendor',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'status',
+                    field: '',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -85,6 +96,12 @@ let Grn = {
                 {
                     field: '',
                     title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: '',
+                    title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -103,8 +120,8 @@ let Grn = {
                                 '<a href="/goods-received/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-pencil"></i>' +
                                 '</a>' +
-                                '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-trash"></i>' +
+                                '<a href="inventory-in/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
+                                    '<i class="la la-print"></i>' +
                                 '</a>'
                             );
                         }
