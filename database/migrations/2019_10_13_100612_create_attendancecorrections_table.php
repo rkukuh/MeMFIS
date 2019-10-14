@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOvertimesTable extends Migration
+class CreateAttendancecorrectionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,19 @@ class CreateOvertimesTable extends Migration
      */
     public function up()
     {
-        Schema::create('overtimes', function (Blueprint $table) {
+        Schema::create('attendancecorrections', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->unsignedBigInteger('employee_id')->index();
-            // $table->unsignedBigInteger('approved_by_id')->nullable();
             $table->unsignedBigInteger('statuses_id')->index();
             $table->date("date");
-            $table->time('start');
-            $table->time('end');
-            $table->time("total");
+            $table->time('time');
             $table->text('desc');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('employee_id')
-            ->references('id')->on('employees')
+            ->references('id')->on('employee_attendances')
             ->onUpdate('cascade')
             ->onDelete('restrict');
 
@@ -46,6 +43,6 @@ class CreateOvertimesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('overtimes');
+        Schema::dropIfExists('attendancecorrections');
     }
 }

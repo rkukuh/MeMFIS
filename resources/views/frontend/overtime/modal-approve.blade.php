@@ -12,7 +12,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" method="POST" action="#">
+            <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed">
+                    @csrf
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -23,7 +24,7 @@
                         </div>
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <h5 align="center">Are you sure <br> do you want to approve this transaction ?</h5>
+                                <h5 align="center">Are you sure?<br> do you want to approve this transaction ?</h5>
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
@@ -35,9 +36,9 @@
                                 @component('frontend.common.input.textarea')
                                     @slot('text', 'Remark')
                                     @slot('rows', '5')
-                                    @slot('name', 'remark_tool')
-                                    @slot('id', 'remark_tool')
-                                    @slot('id_error', 'remark_tool')
+                                    @slot('name', 'remark_tool_approve')
+                                    @slot('id', 'remark_tool_approve')
+                                    @slot('id_error', 'remark_tool_approve')
                                 @endcomponent
                             </div>
                         </div>
@@ -46,8 +47,10 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
+                                    @slot('id',"btn_approve")
                                     @slot('text','YES')
                                     @slot('icon','')
+                                    @slot('type','button')
                                 @endcomponent
                                 @component('frontend.common.buttons.close')
                                     @slot('text','NO')
@@ -61,4 +64,7 @@
         </div>
     </div>
 </div>
+{{-- @push('footer-scripts')
+    <script src="{{ asset('js/frontend/overtime/approve.js')}}"></script>
+@endpush --}}
     
