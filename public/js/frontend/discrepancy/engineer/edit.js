@@ -41,16 +41,16 @@ let Discrepancy = {
               });
 
             let helper_array = [];
-            let helper_datatable = $('#helper_datatable').DataTable();
-            let allData = helper_datatable.rows().data();
-            for(let ind = 0 ; ind < allData.length ; ind++){
-                let container = [];
-                container[0] = allData[ind]["code"];
-                container[1] = allData[ind]["helper"];
-                container[2] = allData[ind]["reference"];
-                helper_array.push(container);
-            }
-            helper_array = JSON.stringify(helper_array);
+            // let helper_datatable = $('#helper_datatable').DataTable();
+            // let allData = helper_datatable.rows().data();
+            // for(let ind = 0 ; ind < allData.length ; ind++){
+            //     let container = [];
+            //     container[0] = allData[ind]["code"];
+            //     container[1] = allData[ind]["helper"];
+            //     container[2] = allData[ind]["reference"];
+            //     helper_array.push(container);
+            // }
+            // helper_array = JSON.stringify(helper_array);
 
             $.ajax({
                 headers: {

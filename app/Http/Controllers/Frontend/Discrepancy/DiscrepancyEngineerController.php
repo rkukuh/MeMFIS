@@ -194,8 +194,14 @@ class DiscrepancyEngineerController extends Controller
     {
         $zone = json_decode($request->zone);
         $zones = [];
+        $jobcard = JobCard::find($request->jobcard_id);
+        if(empty($jobcard)){
+            $jobcard = JobCard::where('uuid', $request->jobcard_id)->first();
+        }
+        $request->merge(['jobcard_id' => $jobcard->id]);
 
         $discrepancy->update($request->all());
+
 
         if($zone){
             foreach ($zone as $zone_name ) {
@@ -241,11 +247,15 @@ class DiscrepancyEngineerController extends Controller
             }
         }
 
-        $discrepancy->approvals()->save(new Approval([
-            'approvable_id' => $discrepancy->id,
-            'conducted_by' => Auth::id(),
-            'is_approved' => 1
-        ]));
+        // in case updated again , sehingga approvals jumlahnya sesuai
+        if(sizeof($discrepancy->approvals) == 0){
+            $discrepancy->approvals()->save(new Approval([
+                'approvable_id' => $discrepancy->id,
+                'conducted_by' => Auth::id(),
+                'is_approved' => 1
+            ]));
+        }
+        
 
         return response()->json($discrepancy);
     }

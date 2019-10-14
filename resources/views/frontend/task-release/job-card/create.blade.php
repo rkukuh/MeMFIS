@@ -190,7 +190,11 @@
                                             Accomplishment Notes By
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                           xxx
+                                            @if( $taskrelease->progresses->last()->reason_text !== null)
+                                                {{ $taskrelease->progresses->last()->reason_text }}
+                                            @else
+                                                -
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>

@@ -160,6 +160,19 @@ let PurchaseRequest = {
                 success: function(response) {
                     $('#modal_general').modal('hide');
 
+                    $('#modal_general').on('hidden.bs.modal', function (e) {
+                        $(this)
+                        .find("input,textarea")
+                            .val('')
+                            .end()
+                        .find("input[type=checkbox], input[type=radio]")
+                            .prop("checked", "")
+                            .end()
+                        .find("select")
+                            .select2('val','All')
+                            .end();
+                    })
+
                     toastr.success("Item has been added.", "Success", {
                         timeOut: 5000
                     });
@@ -168,6 +181,7 @@ let PurchaseRequest = {
 
                     table.originalDataSet = [];
                     table.reload();
+
                 }
             });
         });

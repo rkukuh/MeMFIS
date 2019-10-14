@@ -109,7 +109,7 @@
                                         <span class="m--font-accent"><b>{{$total_defectcard}} Item(s)</b></span>
                                     </div>
                                     <div class="col-7">
-                                        <span class="m--font-accent">{{$total_estimation_manhours}}</span>
+                                        <span class="m--font-accent"><b>{{$total_estimation_manhours}}</b></span>
                                     </div>
                                 </div>
                                 {{-- <span>Basic</span>

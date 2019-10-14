@@ -542,17 +542,17 @@
     <script>
         let discrepancy_uuid = '{{$discrepancy->uuid}}';
     </script>
-    <script src="{{ asset('js/frontend/discrepancy/engineer/edit.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/ppc/edit.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
 
     <script src="{{ asset('js/frontend/discrepancy/repeater.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool-uom.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>

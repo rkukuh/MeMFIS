@@ -99,7 +99,7 @@
 @push('footer-scripts')
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>

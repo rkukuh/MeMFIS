@@ -224,7 +224,7 @@
           <tr>
               <td width="5%" align="center" valign="top">Z-05</td>
               <td width="45%" align="left" valign="top">R/H Engine</td>
-              <td width="5%" align="center" valign="top">wri</td>
+              <td width="5%" align="center" valign="top">WRI</td>
               <td width="45%" align="left" valign="top">Wrinkles</td>
           </tr>
           <tr>

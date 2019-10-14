@@ -20,8 +20,6 @@ class DiscrepancyDatatables extends Controller
     public function mechanic()
     {
         $DefectCard = DefectCard::with('jobcard','progresses','approvals')
-        // ->has('approvals', '<=', 1)
-        // ->orWhereDoesntHave('approvals') //? Yang ditampilkan adalah discrepancy yang dibuat mechanic saya. yang perlu di approve engineer
         ->get();
 
         foreach($DefectCard as $jobcard){
@@ -178,8 +176,6 @@ class DiscrepancyDatatables extends Controller
     public function engineer()
     {
         $DefectCard = DefectCard::with('jobcard','progresses','approvals')
-        // ->has('approvals', '<=', 1)
-        // ->orWhereDoesntHave('approvals') //? Yang ditampilkan adalah discrepancy yang dibuat mechanic saya. yang perlu di approve engineer
         ->get();
 
 
@@ -335,7 +331,8 @@ class DiscrepancyDatatables extends Controller
      */
     public function ppc()
     {
-        $DefectCard=DefectCard::with('jobcard','progresses')->wherehas('approvals')->get();
+        $DefectCard = DefectCard::with('jobcard','progresses','approvals')->wherehas('approvals')
+                        ->get();
 
         foreach($DefectCard as $jobcard){
             if(isset($jobcard->jobcard->jobcardable->skills) ){

@@ -331,6 +331,7 @@ class QuotationAdditionalController extends Controller
         $defect_cards = DefectCard::where('quotation_additional_id', $quotation->id)->get();
 
         foreach($defect_cards as $defect_card){
+            // open only when quotation approved
             $defect_card->progresses()->save(new Progress([
                 'status_id' =>  Status::OfDefectCard()->where('code','open')->first()->id,
                 'progressed_by' => Auth::id()
