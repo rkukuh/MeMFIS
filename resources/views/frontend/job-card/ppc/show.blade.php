@@ -166,7 +166,9 @@
                                                 </td>
                                                 <td width="70%" style="text-align:center">
                                                     @if($jobcard->jobcardable->workarea)
-                                                    {{$jobcard->jobcardable->workarea->name}}
+                                                        {{$jobcard->jobcardable->workarea->name}}
+                                                    @else
+                                                        -
                                                     @endif
                                                 </td>
                                             </tr>
@@ -175,7 +177,11 @@
                                                     Sequence
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{$jobcard->jobcardable->sequence}}
+                                                    @if($jobcard->jobcardable->sequence)
+                                                        {{ $jobcard->jobcardable->sequence }}
+                                                    @else
+                                                        -
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr>
@@ -214,6 +220,9 @@
                                                     {{$jobcard->jobcardable->title}}
 
                                                     @elseif(strpos($jobcard->number,'JCPC') !== FALSE)
+                                                    {{$jobcard->jobcardable->title}}
+
+                                                    @elseif(strpos($jobcard->number,'JPRE') !== FALSE)
                                                     {{$jobcard->jobcardable->title}}
 
                                                     @else
