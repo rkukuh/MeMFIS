@@ -84,7 +84,6 @@ let Customer = {
             
             });
 
-
             let document_array = [];
             $('#email ').each(function (i) {
                 document_array[i] = $(this).val();
@@ -144,7 +143,7 @@ let Customer = {
                attn_email_array.push(attn_email_array_row);
             });
             attn_email_array.pop();
-
+            
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

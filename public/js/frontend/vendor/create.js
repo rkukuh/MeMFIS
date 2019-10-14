@@ -133,6 +133,13 @@ let Vendor = {
             });
             attn_email_array.pop();
 
+            //bank account information
+            let bank_name = $('select[name=bank_name]').val();
+            let bank_account_name = $('input[name=bank_account_name]').val();
+            let bank_account_number = $('input[name=bank_account_number]').val();
+            let swift_code = $('input[name=swift_code]').val();
+            let currency = $('select[name=currency]').val();
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -162,6 +169,11 @@ let Vendor = {
                     attn_ext_array:attn_ext_array,
                     attn_fax_array:attn_fax_array,
                     attn_email_array:attn_email_array,
+                    bank_name:bank_name,
+                    bank_account_name:bank_account_name,
+                    bank_account_number:bank_account_number,
+                    swift_code:swift_code,
+                    currency:currency,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -189,7 +201,6 @@ let Vendor = {
                         });
 
                         window.location.href = '/vendor/' + data.uuid + '/edit';
-          
 
                     }
                 }

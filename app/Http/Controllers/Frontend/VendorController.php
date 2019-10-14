@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Fax;
+use App\Models\Bank;
 use App\Models\Type;
 use App\Models\Email;
 use App\Models\Phone;
 use App\Models\Vendor;
 use App\Models\Document;
+use App\Models\BankAccount;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\VendorStore;
 use App\Http\Requests\Frontend\VendorUpdate;
@@ -62,6 +64,18 @@ class VendorController extends Controller
         $request->merge(['attention' => json_encode($attentions)]);
         $request->merge(['code' => "auto-generate"]);
         if ($vendor = Vendor::create($request->all())) {
+
+            if($request->bank_account_name){
+                $bank = Bank::where('uuid',$request->bank_name)->first();
+                $bank_account = new BankAccount([
+                    'number' => $request->bank_account_number,
+                    'name' => $request->bank_account_name,
+                    'swift_code' => $request->swift_code,   
+                    'bank_id' => $bank->id,
+                ]);
+                $vendor->bank_accounts()->save($bank_account);
+            }
+
             if(is_array($request->phone_array)){
                 for ($i=0; $i < sizeof($request->phone_array) ; $i++) {
                     $phone_type = Type::ofPhone()->where('code',$request->type_phone_array[$i])->first();
