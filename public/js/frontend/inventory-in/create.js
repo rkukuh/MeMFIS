@@ -1,6 +1,5 @@
 let InventoryInCreate = {
     init: function () {
-        $('.item_datatable').empty();
 
         let dataSet = {
             "meta": {
@@ -58,7 +57,9 @@ let InventoryInCreate = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return t.code
+                        return (
+                            '<a href="/item/' + t.uuid + '">' + t.code + "</a>"
+                        );
                     }
                 },
                 {
@@ -117,11 +118,8 @@ let InventoryInCreate = {
             ]
         };
 
-        // $('.item_datatable').mDatatable(options);
-
         $('.modal-footer').on('click', '.add', function () {
-            let item = document.getElementById('item')
-            let itemVal = item.value
+            let item = document.getElementById('item').value
             let itemText = document.getElementById('select2-item-container').title
             let expDate = document.getElementById('exp_date').value
             let qty = document.getElementById('qty').value
@@ -130,6 +128,7 @@ let InventoryInCreate = {
             let serialNo = document.getElementById('serial_no').value
 
             dataSet.data.push({
+                uuid: item,
                 code: itemText,
                 exp_date: expDate,
                 qty: qty,
@@ -138,19 +137,28 @@ let InventoryInCreate = {
                 serial_no: serialNo
             });
 
-            toastr.success('Item has been added.', 'Success', {
-                timeOut: 100,
-                onHidden: function () {
-                    $('.modal').modal('hide');
-                    console.log(dataSet);
-                    $('.item_datatable').mDatatable(options).reload();            
-                }
-            });
-        });
+            $('#modal_item').modal('hide');
 
-        $('.modal').on('hidden.bs.modal', function () {
-            $(this).find("input,textarea,select").val('');
-            $(this).find("select2").empty().end();
+            $('#modal_item').on('hidden.bs.modal', function (e) {
+                $(this)
+                    .find("input,textarea")
+                        .val('')
+                        .end()
+                    .find("input[type=checkbox], input[type=radio]")
+                        .prop("checked", "")
+                        .end()
+                    .find("select")
+                        .select2('val', 'All')
+                        .end();
+            });
+
+            toastr.success("Item has been added.", "Success", {
+                timeOut: 300
+            });
+
+            let table = $(".item_datatable").mDatatable(options);
+            table.originalDataSet = dataSet.data;
+            table.reload();
         });
 
         $('.footer').on('click', '.add-inventory-in', function () {
