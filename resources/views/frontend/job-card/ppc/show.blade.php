@@ -66,16 +66,19 @@
                                                 </td>
                                                 <td width="70%" style="text-align:center">
                                                     @if (strpos($jobcard->number,'JBSC') !== FALSE )
-                                                    {{$taskcard->number}}
+                                                    {{$jobcard->jobcardable->number}}
 
                                                     @elseif(strpos($jobcard->number,'JSIP') !== FALSE)
-                                                    {{$taskcard->number}}
+                                                    {{$jobcard->jobcardable->number}}
 
                                                     @elseif(strpos($jobcard->number,'JCPC') !== FALSE)
-                                                    {{$taskcard->number}}
+                                                    {{$jobcard->jobcardable->number}}
+
+                                                    @elseif(strpos($jobcard->number,'JPRE') !== FALSE)
+                                                    {{$jobcard->jobcardable->number}}
 
                                                     @else
-                                                    {{$taskcard->eo_header->number}}
+                                                    {{$jobcard->jobcardable->eo_header->number}}
                                                     @endif
                                                 </td>
                                             </tr>
@@ -108,8 +111,8 @@
                                                     Company Task No
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    @if(isset(json_decode($taskcard->additionals)->internal_number))
-                                                        {{json_decode($taskcard->additionals)->internal_number}}
+                                                    @if(isset(json_decode($jobcard->jobcardable->additionals)->internal_number))
+                                                        {{json_decode($jobcard->jobcardable->additionals)->internal_number}}
                                                     @else
                                                         -
                                                     @endif
@@ -128,8 +131,8 @@
                                                     Inspection Type
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                @if(isset($taskcard->task))
-                                                    {{$taskcard->task->name}}
+                                                @if(isset($jobcard->jobcardable->task))
+                                                    {{$jobcard->jobcardable->task->name}}
                                                 @else
                                                 -
                                                 @endif
@@ -140,10 +143,10 @@
                                                     Skill
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    @if(sizeof($taskcard->skills) == 3)
+                                                    @if(sizeof($jobcard->jobcardable->skills) == 3)
                                                         ERI
-                                                    @elseif(sizeof($taskcard->skills) == 1)
-                                                        {{$taskcard->skills[0]->name}}
+                                                    @elseif(sizeof($jobcard->jobcardable->skills) == 1)
+                                                        {{$jobcard->jobcardable->skills[0]->name}}
                                                     @else
                                                         -
                                                     @endif
@@ -154,7 +157,7 @@
                                                     Est. Mhrs
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{$taskcard->estimation_manhour}}
+                                                    {{$jobcard->jobcardable->estimation_manhour}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -162,7 +165,9 @@
                                                     Work Area
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{$taskcard->workarea->name}}
+                                                    @if($jobcard->jobcardable->workarea)
+                                                    {{$jobcard->jobcardable->workarea->name}}
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr>
@@ -170,7 +175,7 @@
                                                     Sequence
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{$taskcard->sequence}}
+                                                    {{$jobcard->jobcardable->sequence}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -178,7 +183,7 @@
                                                     RII
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    @if($taskcard->is_rii == 1)
+                                                    @if($jobcard->jobcardable->is_rii == 1)
                                                         Yes
                                                     @else
                                                         No
@@ -190,8 +195,8 @@
                                                     Reference
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    @if(isset($taskcard->reference))
-                                                    {{$taskcard->reference}}
+                                                    @if(isset($jobcard->jobcardable->reference))
+                                                    {{$jobcard->jobcardable->reference}}
                                                     @else
                                                     -
                                                     @endif
@@ -203,16 +208,16 @@
                                                 </td>
                                                 <td width="70%" style="text-align:center">
                                                     @if (strpos($jobcard->number,'JBSC') !== FALSE )
-                                                    {{$taskcard->title}}
+                                                    {{$jobcard->jobcardable->title}}
 
                                                     @elseif(strpos($jobcard->number,'JSIP') !== FALSE)
-                                                    {{$taskcard->title}}
+                                                    {{$jobcard->jobcardable->title}}
 
                                                     @elseif(strpos($jobcard->number,'JCPC') !== FALSE)
-                                                    {{$taskcard->title}}
+                                                    {{$jobcard->jobcardable->title}}
 
                                                     @else
-                                                    {{$taskcard->eo_header['title']}}
+                                                    {{$jobcard->jobcardable->eo_header['title']}}
                                                     @endif
                                                 </td>
                                             </tr>
@@ -221,7 +226,7 @@
                                                     Description
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{$taskcard->description}}
+                                                    {{$jobcard->jobcardable->description}}
                                                 </td>
                                             </tr>
                                             @if($helper_quantity != 0)
