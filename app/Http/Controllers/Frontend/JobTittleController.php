@@ -51,7 +51,8 @@ class JobTittleController extends Controller
      */
     public function show(JobTittle $jobTittle)
     {
-        //
+        // TODO: Return error message as JSON
+        return response()->json($jobTittle);
     }
 
     /**

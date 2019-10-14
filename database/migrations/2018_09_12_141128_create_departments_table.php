@@ -21,6 +21,8 @@ class CreateDepartmentsTable extends Migration
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->unsignedBigInteger('type_id')->nullable();
             $table->string('name');
+            $table->bigInteger('maximum_period')->nullable();
+            $table->bigInteger('maximum_holiday')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
