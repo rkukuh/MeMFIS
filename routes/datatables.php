@@ -39,8 +39,6 @@ Route::name('datatables.')->group(function () {
         Route::get('/school-type', 'SchoolTypeDatatables@index')->name('school.index');
         Route::get('/attendance', 'AttendanceDatatables@index')->name('attendance.index');
         Route::get('/overtime', 'OvertimeDatatables@index')->name('overtime.index');
-        Route::get('/overtime/getEmployees', 'OvertimeDatatables@getEmployees')->name('overtime.getEmployees');
-        Route::get('/attendance-correction', 'AttendanceCorrectionDatatables@index')->name('attendance-correction.index');
 
         /** LICENSE */
 

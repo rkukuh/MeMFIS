@@ -32,6 +32,11 @@ class CreateOvertimesTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('restrict');
 
+            // $table->foreign('approved_by_id')
+            // ->references('id')->on('employees')
+            // ->onUpdate('cascade')
+            // ->onDelete('restrict');
+
             $table->foreign('statuses_id')
             ->references('id')->on('statuses')
             ->onUpdate('cascade')
