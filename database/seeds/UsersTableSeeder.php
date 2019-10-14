@@ -119,5 +119,56 @@ class UsersTableSeeder extends Seeder
             'joined_date' => Carbon::now()->toDateString(),
             'updated_at' => null
         ]);
+
+        // Helper 1
+
+        $user = User::create([
+            'name'      => 'Helper 1',
+            'email'     => 'helper1@smartaircraft.co.id',
+            'password'  => Hash::make('helper1'),
+            'is_active' => 1,
+        ]);
+
+        $user->employee()->create([
+            'code' => 'SU-' . Carbon::now()->timestamp,
+            'first_name' => 'Helper 1',
+            'last_name'  => 'Dummy',
+            'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null
+        ]);
+
+        // Helper 2
+
+        $user = User::create([
+            'name'      => 'Helper 2',
+            'email'     => 'helper2@smartaircraft.co.id',
+            'password'  => Hash::make('helper2'),
+            'is_active' => 1,
+        ]);
+
+        $user->employee()->create([
+            'code' => 'SU-' . Carbon::now()->timestamp,
+            'first_name' => 'Helper 2',
+            'last_name'  => 'Dummy',
+            'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null
+        ]);
+
+        // Engineer
+
+        $user = User::create([
+            'name'      => 'Engineer',
+            'email'     => 'engineer@smartaircraft.co.id',
+            'password'  => Hash::make('engineer'),
+            'is_active' => 1,
+        ]);
+
+        $user->employee()->create([
+            'code' => 'SU-' . Carbon::now()->timestamp,
+            'first_name' => 'Engineer',
+            'last_name'  => 'Dummy',
+            'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null
+        ]);
     }
 }
