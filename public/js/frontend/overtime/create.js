@@ -8,7 +8,7 @@ let Employee = {
             serverSide: !0,
             lengthMenu: [5, 10, 25, 50 ],
             pageLength:5,
-            ajax: "/datatables/employee",
+            ajax: "/datatables/overtime/getEmployees",
             columns: [
                 {
                     data: "code"
@@ -49,7 +49,7 @@ let Employee = {
             let name = $(this).data("first_name");
 
             // document.getElementById('account_code').value = uuid;
-            document.getElementById('specific_employee').value = uuid;
+            document.getElementById('search-journal-val').value = uuid;
 
             $('.search-journal').html(code + " - " + name);
             $('#modal_account_code').modal('hide');
