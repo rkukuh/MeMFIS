@@ -4,21 +4,19 @@ namespace App\Models;
 
 use App\MemfisModel;
 
-class Overtime extends MemfisModel
+class AttendanceCorrection extends MemfisModel
 {
     protected $fillable = [
         "uuid",
         "employee_id",
         "statuses_id",
         "date",
-        "start",
-        "end",
-        "total",
+        "time",
         "desc"
     ];
 
     /**
-     * One-to-Many: An employee may have zero or many attendance.
+     * One-to-one: An employee may have zero or many attendance.
      *
      * This function will retrieve the employees of a attendance.
      * See: Employee employee_attendance() method for the inverse
@@ -31,7 +29,7 @@ class Overtime extends MemfisModel
     }
 
     /**
-     * One-to-One: An OVertime have one Status Overtime.
+     * One-to-One: An AttendaceCorrection have one Status Attendance Correction.
      *
      * This function will retrieve Status Attendance of a given Employee.
      * See: Status employee() method for the inverse
@@ -43,7 +41,7 @@ class Overtime extends MemfisModel
         return $this->belongsTo(Status::class);
     }
 
-     /**
+    /**
      * Polymorphic: An entity can have zero or many approvals.
      *
      * This function will get all Overtime's approvals.
