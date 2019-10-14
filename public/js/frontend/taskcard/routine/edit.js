@@ -19,7 +19,7 @@ let TaskCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -281,7 +281,7 @@ let TaskCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -372,7 +372,7 @@ let TaskCard = {
                 pageSize: 10,
                 perpage: 5,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -444,7 +444,7 @@ let TaskCard = {
                 pageSize: 10,
                 perpage: 5,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -777,25 +777,13 @@ let TaskCard = {
 
             let threshold_type = [];
             $('select[name^="threshold_type"]').each(function(i) {
-                // if($(this).val() == 'Select'){
-                    // $(this).siblings(".select2-container").css('border', '5px solid red');
-                    // status = false;
-                // }else{
-                    // $(this).siblings(".select2-container").css('border', '2px grey');
-                    threshold_type[i] = $(this).val();
-                // }
+                threshold_type[i] = $(this).val();
             });
             threshold_type = threshold_type.filter(Boolean);
 
             let repeat_type = [];
             $('select[name^="repeat_type"]').each(function(i) {
-                // if($(this).val() == 'Select'){
-                    // $(this).siblings(".select2-container").css('border', '5px solid red');
-                    // status = false;
-                // }else{
-                    // $(this).siblings(".select2-container").css('border', '2px grey');
-                    repeat_type[i] = $(this).val();
-                // }
+                repeat_type[i] = $(this).val();
             });
             repeat_type = repeat_type.filter(Boolean);
 
@@ -815,7 +803,6 @@ let TaskCard = {
                 sections[i] = entry;
                 i++;
             });
-            console.log(sections);
 
             if (document.getElementById("is_rii").checked) {
                 is_rii = 1;
@@ -859,7 +846,7 @@ let TaskCard = {
             data.append("ata", $('input[name=ata]').val());
             data.append("reference", $('#service_bulletin').val());
             data.append("stringer", JSON.stringify($('#stringer').val()));
-            data.append("station", $('#station').val());
+            data.append("station", JSON.stringify($('#station').val()));
             data.append("section", JSON.stringify(sections));
             data.append("fileInput", document.getElementById('taskcard').files[0]);
             data.append('_method', 'PUT');
@@ -971,4 +958,6 @@ $(document).ready(function () {
 });
 jQuery(document).ready(function () {
     TaskCard.init();
+    console.log($("#effectivity"));
+    console.log($("input [name=effectivity]"));
 });

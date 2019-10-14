@@ -11,8 +11,6 @@ let Workpackage = {
             }
         };
 
-        //
-
         $(".b-t-n").on("click", ".btn-add", function() {
             remove_element();
         });
@@ -35,6 +33,11 @@ let Workpackage = {
         });
 
         $(".nav-tabs").on("click", ".non-routine", function() {
+            let Preliminary = $(".preliminary_datatable").mDatatable();
+
+            Preliminary.originalDataSet = [];
+            Preliminary.reload();
+
             let AdSb = $(".ad-sb_datatable").mDatatable();
 
             AdSb.originalDataSet = [];
@@ -101,6 +104,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".basic_datatable").on("click", ".predecessor", function() {
             if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
@@ -121,6 +125,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".basic_datatable").on("click", ".successor", function() {
             if (successor_datatables_init == true) {
                 successor_datatables_init = false;
@@ -187,10 +192,15 @@ let Workpackage = {
                         table = $(".si_datatable").mDatatable();
                         table.originalDataSet = [];
                         table.reload();
+
+                        table = $(".preliminary_datatable").mDatatable();
+                        table.originalDataSet = [];
+                        table.reload();
                     }
                 }
             });
         });
+
         $(".modal-footer").on("click", ".sequence-intruction", function() {
             triggeruuid = $("input[name=uuid-instruction]").val();
             sequence = $("input[name=sequence-instruction]").val();
@@ -249,6 +259,7 @@ let Workpackage = {
             document.getElementById("uuid").value = triggeruuid;
             document.getElementById("sequence").value = sequence;
         });
+
         $(".basic_datatable").on("click", ".mandatory", function() {
             triggeruuid = $(this).data("uuid");
             mandatory = $(this).data("mandatory");
@@ -332,6 +343,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".sip_datatable").on("click", ".predecessor", function() {
             if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
@@ -352,6 +364,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".sip_datatable").on("click", ".successor", function() {
             if (successor_datatables_init == true) {
                 successor_datatables_init = false;
@@ -380,6 +393,7 @@ let Workpackage = {
             document.getElementById("uuid").value = triggeruuid;
             document.getElementById("sequence").value = sequence;
         });
+
         $(".sip_datatable").on("click", ".tool", function() {
             remove_element()
             if (tool_datatables_init == true) {
@@ -451,6 +465,7 @@ let Workpackage = {
             document.getElementById("uuid").value = triggeruuid;
             document.getElementById("sequence").value = sequence;
         });
+
         $(".cpcp_datatable").on("click", ".predecessor", function() {
             if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
@@ -471,6 +486,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".cpcp_datatable").on("click", ".successor", function() {
             if (successor_datatables_init == true) {
                 successor_datatables_init = false;
@@ -491,6 +507,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".cpcp_datatable").on("click", ".material", function() {
             remove_element()
             if (material_datatables_init == true) {
@@ -582,6 +599,7 @@ let Workpackage = {
             document.getElementById("uuid-instruction").value = triggeruuid;
             document.getElementById("sequence-instruction").value = sequence;
         });
+
         $(".ad-sb_datatable").on("click", ".predecessor-instruction", function() {
             if (predecessor_instruction_datatable_init == true) {
                 predecessor_instruction_datatable_init = false;
@@ -602,6 +620,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".ad-sb_datatable").on("click", ".successor-instruction", function() {
             if (successor_instruction_datatable_init == true) {
                 successor_instruction_datatable_init = false;
@@ -622,6 +641,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".ad-sb_datatable").on("click", ".mandatory", function() {
             triggeruuid = $(this).data("uuid");
             mandatory = $(this).data("mandatory");
@@ -666,6 +686,65 @@ let Workpackage = {
             });
         });
 
+        $("#adsb_datatable").on("click", ".instructions", function() {
+            if (instruction_datatables_init == true) {
+                instruction_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#instruction_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                instruction(triggeruuid);
+                $("#instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+        $(".ad-sb_datatable").on("click", ".material", function() {
+            remove_element()
+            if (material_datatables_init == true) {
+                material_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_material_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                material_tc_eo(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+        $(".ad-sb_datatable").on("click", ".tool", function() {
+            remove_element()
+            if (tool_datatables_init == true) {
+                tool_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                tool_tc_eo(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
         //cmr-awl_datatable taskcard Datatable
         $(".cmr-awl_datatable").on("click", ".sequence", function() {
             triggeruuid = $(this).data("uuid");
@@ -674,6 +753,7 @@ let Workpackage = {
             document.getElementById("uuid-instruction").value = triggeruuid;
             document.getElementById("sequence-instruction").value = sequence;
         });
+
         $(".cmr-awl_datatable").on("click", ".predecessor-instruction", function() {
             if (predecessor_instruction_datatable_init == true) {
                 predecessor_instruction_datatable_init = false;
@@ -694,6 +774,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".cmr-awl_datatable").on("click", ".successor-instruction", function() {
             if (successor_instruction_datatable_init == true) {
                 successor_instruction_datatable_init = false;
@@ -714,6 +795,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".cmr-awl_datatable").on("click", ".mandatory", function() {
             triggeruuid = $(this).data("uuid");
             mandatory = $(this).data("mandatory");
@@ -796,65 +878,8 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".cmr-awl_datatable").on("click", ".tool", function() {
-            remove_element()
-            if (tool_datatables_init == true) {
-                tool_datatables_init = false;
-                triggeruuid = $(this).data("uuid");
-                tool_tc_eo(triggeruuid);
-                $("#m_datatable_tool_taskcard_wp")
-                    .DataTable()
-                    .ajax.reload();
-            } else {
-                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
-                table.destroy();
-                triggeruuid = $(this).data("uuid");
-                tool_tc_eo(triggeruuid);
-                $("#m_datatable_tool_taskcard_wp")
-                    .DataTable()
-                    .ajax.reload();
-            }
-        });
-
-        $("#adsb_datatable").on("click", ".instructions", function() {
-            if (instruction_datatables_init == true) {
-                instruction_datatables_init = false;
-                triggeruuid = $(this).data("uuid");
-                instruction(triggeruuid);
-                $("#instruction_datatable")
-                    .DataTable()
-                    .ajax.reload();
-            } else {
-                let table = $("#instruction_datatable").DataTable();
-                table.destroy();
-                triggeruuid = $(this).data("uuid");
-                instruction(triggeruuid);
-                $("#instruction_datatable")
-                    .DataTable()
-                    .ajax.reload();
-            }
-        });
-
-        $(".ad-sb_datatable").on("click", ".material", function() {
-            remove_element()
-            if (material_datatables_init == true) {
-                material_datatables_init = false;
-                triggeruuid = $(this).data("uuid");
-                material_tc_eo(triggeruuid);
-                $("#m_datatable_material_taskcard_wp")
-                    .DataTable()
-                    .ajax.reload();
-            } else {
-                let table = $("#m_datatable_material_taskcard_wp").DataTable();
-                table.destroy();
-                triggeruuid = $(this).data("uuid");
-                material_tc_eo(triggeruuid);
-                $("#m_datatable_material_taskcard_wp")
-                    .DataTable()
-                    .ajax.reload();
-            }
-        });
-        $(".ad-sb_datatable").on("click", ".tool", function() {
             remove_element()
             if (tool_datatables_init == true) {
                 tool_datatables_init = false;
@@ -894,6 +919,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".eo_datatable").on("click", ".successor-instruction", function() {
             if (successor_instruction_datatable_init == true) {
                 successor_instruction_datatable_init = false;
@@ -914,6 +940,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $("#eo_datatable").on("click", ".instructions", function() {
             if (instruction_datatables_init == true) {
                 instruction_datatables_init = false;
@@ -984,6 +1011,7 @@ let Workpackage = {
             document.getElementById("uuid-instruction").value = triggeruuid;
             document.getElementById("sequence-instruction").value = sequence;
         });
+        
         $(".eo_datatable").on("click", ".material", function() {
             remove_element()
             if (material_datatables_init == true) {
@@ -1003,6 +1031,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".eo_datatable").on("click", ".tool", function() {
             remove_element()
             if (tool_datatables_init == true) {
@@ -1022,26 +1051,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
-        $(".ea_datatable").on("click", ".predecessor-instruction", function() {
-            if (predecessor_instruction_datatable_init == true) {
-                predecessor_instruction_datatable_init = false;
-                triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
-                predecessor_instruction_tc(triggeruuid);
-                $("#predecessor_instruction_datatable")
-                    .DataTable()
-                    .ajax.reload();
-            } else {
-                let table = $("#predecessor_instruction_datatable").DataTable();
-                table.destroy();
-                triggeruuid = $(this).data("tc_uuid");
-                document.getElementById("uuid-predecessor").value = triggeruuid;
-                predecessor_instruction_tc(triggeruuid);
-                $("#predecessor_instruction_datatable")
-                    .DataTable()
-                    .ajax.reload();
-            }
-        });
+
         $(".ea_datatable").on("click", ".material", function() {
             remove_element()
             if (material_datatables_init == true) {
@@ -1061,6 +1071,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".ea_datatable").on("click", ".tool", function() {
             remove_element()
             if (tool_datatables_init == true) {
@@ -1080,6 +1091,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".ea_datatable").on("click", ".successor-instruction", function() {
             if (successor_instruction_datatable_init == true) {
                 successor_instruction_datatable_init = false;
@@ -1100,6 +1112,28 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
+        $(".ea_datatable").on("click", ".predecessor-instruction", function() {
+            if (predecessor_instruction_datatable_init == true) {
+                predecessor_instruction_datatable_init = false;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
+                predecessor_instruction_tc(triggeruuid);
+                $("#predecessor_instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#predecessor_instruction_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
+                predecessor_instruction_tc(triggeruuid);
+                $("#predecessor_instruction_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
         $("#ea_datatable").on("click", ".instructions", function() {
             if (instruction_datatables_init == true) {
                 instruction_datatables_init = false;
@@ -1238,7 +1272,7 @@ let Workpackage = {
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error("Instruction alrady exists!", "Error", {
+                            toastr.error("Instruction already exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
@@ -1287,6 +1321,7 @@ let Workpackage = {
             document.getElementById("uuid").value = triggeruuid;
             document.getElementById("sequence").value = sequence;
         });
+
         $(".si_datatable").on("click", ".predecessor", function() {
             if (predecessor_datatables_init == true) {
                 predecessor_datatables_init = false;
@@ -1307,6 +1342,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".si_datatable").on("click", ".successor", function() {
             if (successor_datatables_init == true) {
                 successor_datatables_init = false;
@@ -1327,6 +1363,7 @@ let Workpackage = {
                     .ajax.reload();
             }
         });
+
         $(".si_datatable").on("click", ".material", function() {
             if (material_datatables_init == true) {
                 material_datatables_init = false;
@@ -1400,6 +1437,138 @@ let Workpackage = {
                         );
 
                         let table = $(".si_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        //Preliminary taskcard Datatable
+        $(".preliminary_datatable").on("click", ".sequence", function() {
+            triggeruuid = $(this).data("uuid");
+            sequence = $(this).data("sequence");
+
+            document.getElementById("uuid").value = triggeruuid;
+            document.getElementById("sequence").value = sequence;
+        });
+
+        $(".preliminary_datatable").on("click", ".predecessor", function() {
+            if (predecessor_datatables_init == true) {
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#predecessor_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        
+        $(".preliminary_datatable").on("click", ".successor", function() {
+            if (successor_datatables_init == true) {
+                successor_datatables_init = false;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
+                successor_tc(triggeruuid);
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#successor_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
+                successor_tc(triggeruuid);
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+        $(".preliminary_datatable").on("click", ".material", function() {
+            if (material_datatables_init == true) {
+                material_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                material_tc_preliminary(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_material_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                material_tc_preliminary(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+        $(".preliminary_datatable").on("click", ".tool", function() {
+            if (tool_datatables_init == true) {
+                tool_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                tool_tc_preliminary(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                tool_tc_preliminary(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+        $(".preliminary_datatable").on("click", ".mandatory", function() {
+            triggeruuid = $(this).data("uuid");
+            mandatory = $(this).data("mandatory");
+            if (mandatory == 0) {
+                is_mandatory = 1;
+            } else if (mandatory == 1) {
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                type: "put",
+                url:
+                    "/workpackage/" +
+                    workPackage_uuid +
+                    "/mandatory/" +
+                    triggeruuid,
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    is_mandatory: is_mandatory
+                },
+                success: function(data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success(
+                            "Mandatory has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $(".preliminary_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();

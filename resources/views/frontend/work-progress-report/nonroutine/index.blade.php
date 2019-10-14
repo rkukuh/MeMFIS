@@ -154,7 +154,6 @@
         </div>
     </div>
     @endif
-
     @if( isset($jobcards["cmr-awl"]) )
     <div class="col-sm-{{$col['non-routine']}} col-md-{{$col['non-routine']}} col-lg-{{$col['non-routine']}}">
         <div class="m-portlet  m-portlet--full-height ">
@@ -344,13 +343,13 @@
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__text">
-                                        {{ $jobcards["cmr-awl"]["done"] / array_sum($jobcards["cmr-awl"]) }}%
+                                        {{ $jobcards["si"]["done"] / array_sum($jobcards["si"]) }}%
                                     </span>		
                                 </div>
                             </div>               	 
                             <div class="m--space-10"></div>
                             <div class="progress m-progress--sm">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $jobcards["cmr-awl"]['done'] / array_sum($jobcards["cmr-awl"]) * 100 }}%;" aria-valuenow="{{ $jobcards["cmr-awl"]['done'] / array_sum($jobcards["cmr-awl"]) * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ $jobcards["si"]['done'] / array_sum($jobcards["si"]) * 100 }}%;" aria-valuenow="{{ $jobcards["si"]['done'] / array_sum($jobcards["si"]) * 100 }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -778,7 +777,7 @@
     </div>
     @endif
 
-    @if( isset($jobcards["htcrr"]) )
+    @if( isset($jobcards["ht-crr"]) )
     <div class="col-sm-{{$col['non-routine']}} col-md-{{$col['non-routine']}} col-lg-{{$col['non-routine']}}">
         <div class="m-portlet  m-portlet--full-height ">
             <div class="m-portlet__head">
@@ -857,13 +856,13 @@
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__text">
-                                        {{ number_format($manhours["ht-crr"]["actual"] / $manhours["ht-crr"]["total"] * 100)  }}%
+                                        {{ number_format($manhours["htcrr"]["actual"] / $manhours["htcrr"]["total"] * 100)  }}%
                                     </span>		
                                 </div>
                             </div>               	 
                             <div class="m--space-10"></div>
                             <div class="progress m-progress--sm">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ number_format($manhours["ht-crr"]["actual"] / $manhours["ht-crr"]["total"] * 100)  }}%;" aria-valuenow="{{ number_format($manhours["ht-crr"]["actual"] / $manhours["ht-crr"]["total"] * 100)  }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: {{ number_format($manhours["htcrr"]["actual"] / $manhours["htcrr"]["total"] * 100)  }}%;" aria-valuenow="{{ number_format($manhours["htcrr"]["actual"] / $manhours["htcrr"]["total"] * 100)  }}" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
                     </div>
@@ -879,12 +878,12 @@
                                 </div>
                                 <div class="col" align="center">
                                     <span class="m-widget15__stats">
-                                        {{ number_format($manhours["ht-crr"]["total"] / 2) }}
+                                        {{ number_format($manhours["htcrr"]["total"] / 2) }}
                                     </span>
                                 </div>
                                 <div class="col" align="right">
                                     <span class="m-widget15__stats">
-                                        {{ number_format($manhours["ht-crr"]["total"]) }} Mhrs
+                                        {{ number_format($manhours["htcrr"]["total"]) }} Mhrs
                                     </span>
                                 </div>
                             </div>			                	 
@@ -899,31 +898,31 @@
                                 <td valign="top" width="30%">Open</td>
                                 <td valign="top" width="2%">:</td>
                                 <td valign="top" width="24%" align="center">{{ $jobcards["ht-crr"]["open"] }} Task ({{ number_format( ($jobcards["ht-crr"]["open"] / array_sum($jobcards["ht-crr"])) * 100, 2) }}%)</td>
-                                <td valign="top" width="24%" align="center">{{ $manhours["ht-crr"]["actual_manhour"]["open"] }} Mhrs ({{ number_format( ( $manhours["ht-crr"]["actual_manhour"]["open"]  /  $manhours["ht-crr"]["estimation_manhour"]["open"] ) * 100, 2) }} %)</td>
+                                <td valign="top" width="24%" align="center">{{ $manhours["htcrr"]["actual_manhour"]["open"] }} Mhrs ({{ number_format( ( $manhours["htcrr"]["actual_manhour"]["open"]  /  $manhours["htcrr"]["estimation_manhour"]["open"] ) * 100, 2) }} %)</td>
                             </tr>
                             <tr>
                                 <td valign="top">Pending</td>
                                 <td valign="top">:</td>
                                 <td valign="top" width="24%" align="center">{{ $jobcards["ht-crr"]["pending"] }} Task ({{ number_format( ($jobcards["ht-crr"]["pending"] / array_sum($jobcards["ht-crr"])) * 100, 2) }}%)</td>
-                                <td valign="top" align="center">{{ $manhours["ht-crr"]["actual_manhour"]["pending"] }} Mhrs ( {{ number_format( ( $manhours["ht-crr"]["actual_manhour"]["pending"]  /  $manhours["ht-crr"]["estimation_manhour"]["pending"] ) * 100, 2) }}%)</td>
+                                <td valign="top" align="center">{{ $manhours["htcrr"]["actual_manhour"]["pending"] }} Mhrs ( {{ number_format( ( $manhours["htcrr"]["actual_manhour"]["pending"]  /  $manhours["htcrr"]["estimation_manhour"]["pending"] ) * 100, 2) }}%)</td>
                             </tr>
                             <tr>
                                 <td valign="top">In Progress</td>
                                 <td valign="top">:</td>
                                 <td valign="top" width="24%" align="center">{{ $jobcards["ht-crr"]["progress"] }} Task ({{ number_format( ($jobcards["ht-crr"]["progress"] / array_sum($jobcards["ht-crr"])) * 100, 2) }}%)</td>
-                                <td valign="top" align="center">{{ $manhours["ht-crr"]["actual_manhour"]["progress"] }} Mhrs ( {{ number_format( ( $manhours["ht-crr"]["actual_manhour"]["progress"]  /  $manhours["ht-crr"]["estimation_manhour"]["progress"] ) * 100, 2) }}%)</td>
+                                <td valign="top" align="center">{{ $manhours["htcrr"]["actual_manhour"]["progress"] }} Mhrs ( {{ number_format( ( $manhours["htcrr"]["actual_manhour"]["progress"]  /  $manhours["htcrr"]["estimation_manhour"]["progress"] ) * 100, 2) }}%)</td>
                             </tr>
                             <tr>
                                 <td valign="top">Waiting for RII</td>
                                 <td valign="top">:</td>
                                 <td valign="top" width="24%" align="center">{{ $jobcards["ht-crr"]["closed"] }} Task ({{ number_format( ($jobcards["ht-crr"]["closed"] / array_sum($jobcards["ht-crr"])) * 100, 2) }}%)</td>
-                                <td valign="top" align="center">{{ $manhours["ht-crr"]["actual_manhour"]["closed"] }} Mhrs ( {{ number_format( ( $manhours["ht-crr"]["actual_manhour"]["closed"]  /  $manhours["ht-crr"]["estimation_manhour"]["closed"] ) * 100, 2) }}%)</td>
+                                <td valign="top" align="center">{{ $manhours["htcrr"]["actual_manhour"]["closed"] }} Mhrs ( {{ number_format( ( $manhours["htcrr"]["actual_manhour"]["closed"]  /  $manhours["htcrr"]["estimation_manhour"]["closed"] ) * 100, 2) }}%)</td>
                             </tr>
                             <tr>
                                 <td valign="top">released</td>
                                 <td valign="top">:</td>
                                 <td valign="top" width="24%" align="center">{{ ($jobcards["ht-crr"]["released"] + $jobcards["ht-crr"]["rii-released"]) }} Task ({{ number_format( (($jobcards["ht-crr"]["released"] + $jobcards["ht-crr"]["rii-released"]) / array_sum($jobcards["ht-crr"])) * 100, 2) }}%)</td>
-                                <td valign="top" align="center">{{ $manhours["ht-crr"]["actual_manhour"]["released"] }} Mhrs ( {{ number_format( ( $manhours["ht-crr"]["actual_manhour"]["released"] + $manhours["ht-crr"]["actual_manhour"]["rii-released"]  )/( $manhours["ht-crr"]["estimation_manhour"]["released"] + $manhours["ht-crr"]["estimation_manhour"]["rii-released"] ) * 100, 2) }}%)</td>
+                                <td valign="top" align="center">{{ $manhours["htcrr"]["actual_manhour"]["released"] }} Mhrs ( {{ number_format( ( $manhours["htcrr"]["actual_manhour"]["released"] + $manhours["htcrr"]["actual_manhour"]["rii-released"]  )/( $manhours["htcrr"]["estimation_manhour"]["released"] + $manhours["htcrr"]["estimation_manhour"]["rii-released"] ) * 100, 2) }}%)</td>
                             </tr>
                         </table>
                     </div>

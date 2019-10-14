@@ -14,9 +14,6 @@ $('.filter').on('change', function () {
     let task_type_id = $('#task_type_id').val();
     let aircrafts = $('#applicability_airplane').val();
     let skills = $('#otr_certification').val();
-    let project_no = $('#project_no').val();
-    let date_issued = $('#date_issued').val();
-    let jc_no = $('#jc_no').val();
     let customer = $('#customer').val();
     let status_jobcard = $('#status_jobcard').val();
 
@@ -32,22 +29,19 @@ $('.filter').on('change', function () {
             task_type_id: task_type_id,
             aircrafts: aircrafts,
             skills: skills,
-            project_no: project_no,
-            date_issued: date_issued,
-            jc_no: jc_no,
             customer: customer,
             status_jobcard: status_jobcard,
         },
         success: function(response) {
-            let table = $('.job_card_datatable').mDatatable();
+            let table = $('.job_card_engineer_datatable').mDatatable();
             table.destroy();
-            table = $('.job_card_datatable').mDatatable({
+            table = $('.job_card_engineer_datatable').mDatatable({
                 data: {
                     type: "local",
                     source: response,
                     pageSize: 10,
                     serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                     serverSorting: !1
                 },
                 layout: {
@@ -115,7 +109,7 @@ $('.filter').on('change', function () {
                                     '<p>' + data + '</p>'
                                 );
                             }
-    
+
                             return ''
                         }
                     },
@@ -137,7 +131,7 @@ $('.filter').on('change', function () {
                                 '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
                             );
                         }
-    
+
                     },
                     {
                         field: '2',
@@ -176,7 +170,7 @@ $('.filter').on('change', function () {
                         overflow: 'visible',
                         template: function (t, e, i) {
                             return (
-                                '<a href="jobcard/'+t.taskcard.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                                '<a href="jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                     '<i class="la la-print"></i>' +
                                 '</a>'
                             );
@@ -191,30 +185,6 @@ $('.filter').on('change', function () {
     });
 });
 
-let dateIssued = {
-    init: function () {
-        $('#date_issued').select2({
-            placeholder: 'Select a date issued '
-        });
-    }
-};
-
-let jcNo = {
-    init: function () {
-        $('#jc_no').select2({
-            placeholder: 'Select a JC Number '
-        });
-    }
-};
-
-let projectNo = {
-    init: function () {
-        $('#project_no').select2({
-            placeholder: 'Select a Project Number '
-        });
-    }
-};
-
 let jobcardStatus = {
     init: function () {
         $('#status_jobcard').select2({
@@ -223,20 +193,12 @@ let jobcardStatus = {
     }
 };
 
-$('select[name="date_issued"]').append('<option value="asc">Ascending</option>');
-$('select[name="jc_no"]').append('<option value="asc">Ascending</option>');
-$('select[name="project_no"]').append('<option value="asc">Ascending</option>');
-
-$('select[name="date_issued"]').append('<option value="desc">Descending</option>');
-$('select[name="jc_no"]').append('<option value="desc">Descending</option>');
-$('select[name="project_no"]').append('<option value="desc">Descending</option>');
-
 $('select[name="status_jobcard"]').append('<option value="23">Open</option>');
 $('select[name="status_jobcard"]').append('<option value="24">On Progress</option>');
 $('select[name="status_jobcard"]').append('<option value="25">Pending/Pause</option>');
 $('select[name="status_jobcard"]').append('<option value="26">Closed</option>');
 $('select[name="status_jobcard"]').append('<option value="27">RELEASED</option>');
-$('select[name="status_jobcard"]').append('<option value="28">RII RELEASED</option>');
+$('select[name="status_jobcard"]').append('<option value="28">WAITING FOR RII</option>');
 
 $(document).ready(function () {
     $.ajax({
@@ -251,12 +213,9 @@ $(document).ready(function () {
             });
         }
     });
-    $('#taskcard_routine_type').select2().trigger('change');
+    $('#taskcard_routine_type').select2();
 });
 
 $(document).ready(function () {
-    dateIssued.init();
-    jcNo.init();
-    projectNo.init();
     jobcardStatus.init();
 });

@@ -11,7 +11,7 @@ let TaskCard = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/discrepancy',
+                        url: '/datatables/discrepancy/engineer',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -24,7 +24,7 @@ let TaskCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -59,7 +59,7 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/defectcard/'+t.uuid+'/">' + t.code + "</a>"
+                        return '<a href="/discrepancy/'+t.uuid+'/">' + t.code + "</a>"
                     }
                 },
                 {
@@ -68,7 +68,7 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/jobcard-ppc/'+t.jobcard.uuid+'">' + t.jobcard.number + "</a>"
+                        return '<a href="/jobcard/'+t.jobcard.uuid+'/edit">' + t.jobcard.number + "</a>"
                     }
                 },
                 {
@@ -81,26 +81,26 @@ let TaskCard = {
                     }
                 },
                 {
-                    field: 'jobcard.quotation.project.customer.name',
+                    field: 'customer_name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.jobcardable.type.name',
+                    field: 'type_name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft.name',
+                    field: 'aircraft',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
 
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_sn',
+                    field: 'aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
@@ -119,6 +119,23 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
+                },
+                {
                     field: 'Status',
                     title: 'Status',
                     sortable: 'asc',
@@ -134,9 +151,14 @@ let TaskCard = {
                                 'Engineer Approved'
                             );
                         }
+                        else if(t.status == "ppc"){
+                            return (
+                                'PPC Approved'
+                            );
+                        }
                         else{
                             return (
-                                'Approved'
+                                ''
                             );
                         }
                     }
@@ -146,18 +168,29 @@ let TaskCard = {
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.created_by + '<br>' + t.create_date
+                    }
+
                 },
                 {
                     field: 'updated_by',
                     title: 'Updated By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.updated_by + '<br>' + t.update_date
+                    }
+
                 },
                 {
-                    field: 'approved_by',
+                    field: '',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.conducted_at
+                    }
                 },
                 {
                     field: 'Actions',
@@ -177,10 +210,9 @@ let TaskCard = {
                                 '</a>'
                             );
                         }
-                        else if(t.status == "engineer"){
+                        else if(t.status == "engineer" || t.status == "ppc"){
                             return ('<a href="/discrepancy-engineer/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Show" data-id="' + t.uuid +'">' +
                             '<i class="la la-eye"></i>');
-
                         }else{
                             return ('');
                         }

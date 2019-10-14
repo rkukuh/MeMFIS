@@ -120,16 +120,12 @@
                                                         Documents library @include('frontend.common.label.optional')
                                                     </label>
 
-                                                    @if (empty($taskCard->document_library))
+                                                    @if (empty($additionals->document_library))
                                                         @include('frontend.common.label.data-info-nodata')
                                                     @else
-                                                        @php
-                                                            $documents = json_decode($taskCard->document_library, TRUE);
-                                                        @endphp
-
-                                                        @foreach ($documents  as $document)
+                                                        @foreach ($additionals->document_library  as $document_library)
                                                             @component('frontend.common.label.badge')
-                                                                @slot('text', $document )
+                                                                @slot('text', $document_library )
                                                             @endcomponent
                                                         @endforeach
                                                     @endif

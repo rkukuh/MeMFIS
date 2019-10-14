@@ -136,4 +136,28 @@ class EOInstruction extends MemfisModel
     {
         return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
     }
+
+    /**
+     * Get the task card's Skill.
+     *
+     * @return string
+     */
+    public function getSkillAttribute()
+    {
+
+        if(isset($this->skills) ){
+            switch (sizeof($this->skills)) {
+                case 3:
+                    $skill = "ERI";
+                    break;
+                case 1:
+                    $skill = $this->skills[0]->name;
+                    break;
+                default:
+                    $skill = '';
+            }
+        }
+
+        return $skill;
+    }
 }

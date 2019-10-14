@@ -190,6 +190,44 @@ let Datatables = {
             ]
         });
 
+        $("#preliminary_datatable").DataTable({
+            dom: '<"top"f>rt<"bottom">pl',
+            responsive: !0,
+            searchDelay: 500,
+            processing: !0,
+            serverSide: !0,
+            lengthMenu: [5, 10, 25, 50],
+            pageLength: 5,
+            ajax: "/datatables/taskcard-preliminary/preliminary/modal",
+            columns: [
+                {
+                    data: "number"
+                },
+                {
+                    data: "title"
+                },
+                {
+                    data: "estimation_manhour"
+                },
+                {
+                    data: "Actions"
+                }
+            ],
+            columnDefs: [
+                {
+                    targets: -1,
+                    orderable: !1,
+                    render: function(a, e, t, n) {
+                        return (
+                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-preliminary" title="Use" data-uuid="' +
+                            t.uuid +
+                            '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        );
+                    }
+                }
+            ]
+        });
+
         $("#si_datatable").DataTable({
             dom: '<"top"f>rt<"bottom">pl',
             responsive: !0,
@@ -354,7 +392,7 @@ let Datatables = {
                 },
                 success: function(data) {
                     if (data.title == "Danger") {
-                        toastr.error("Task card alrady exists!", "Error", {
+                        toastr.error("Task card already exists!", "Error", {
                             timeOut: 5000
                         });
                     } else {
@@ -386,7 +424,7 @@ let Datatables = {
                 },
                 success: function(data) {
                     if (data.title == "Danger") {
-                        toastr.error("Task card alrady exists!", "Error", {
+                        toastr.error("Task card already exists!", "Error", {
                             timeOut: 5000
                         });
                     } else {
@@ -463,6 +501,39 @@ let Datatables = {
                         });
 
                         let table = $(".si_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $("#preliminary_datatable").on("click", ".select-preliminary", function() {
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                type: "post",
+                url: "/workpackage/" + workPackage_uuid + "/taskcard",
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    taskcard: $(this).data("uuid")
+                },
+                success: function(data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        $("#modal_preliminary").modal("hide");
+
+                        toastr.success("Task Card has been added.", "Success", {
+                            timeOut: 5000
+                        });
+
+                        let table = $(".preliminary_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();

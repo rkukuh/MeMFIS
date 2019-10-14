@@ -6,19 +6,17 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
 
-                $('.helper').empty();
-
-                $('.helper').each(function(){
-                        $(this).append('<option value=""> Select a Helper </option>');
+                $('select[name^=helper]').empty();
+                $('select[name^=helper]').each(function(){
+                        $(this).prepend('<option value=""> Select a Helper </option>');
                         $.each(data, function (key, value) {
-                            $('.helper').append(
+                            $(this).append(
                                 '<option value="' + key + '">' + value + '</option>'
                             );
                         });
+                        $(this).val("").select2();
                     }
                 );
-
-                
             }
         });
     };

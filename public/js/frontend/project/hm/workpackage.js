@@ -36,7 +36,7 @@ let Workpackage = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -505,297 +505,298 @@ let Workpackage = {
         });
     }
 };
-function htcrr_tool(triggeruuid) {
-    $("#m_datatable_tool_htcrr").DataTable({
-        "dom": '<"top"f>rt<"bottom">pl',
-        responsive: !0,
-        searchDelay: 500,
-        processing: !0,
-        serverSide: !0,
-        lengthMenu: [5, 10, 25, 50 ],
-        pageLength:5,
-        ajax: "/datatables/project/"+triggeruuid+"/tools",
-        columns: [
-            {
-                data: "name"
-            },
-            {
-                data: "pivot.quantity"
-            },
-            {
-                data: "pivot.unit"
-            },
-            {
-                data: "pivot.note"
-            },
-            {
-                data: "Actions"
-            }
-        ],
-        columnDefs: [
-            {
-                targets: -1,
-                orderable: !1,
-                render: function (a, e, t, n) {
-                      return '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" data-uuid="' + t.uuid + '" href="#"title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
-                }
-            },
+// function htcrr_tool(triggeruuid) {
+//     $("#m_datatable_tool_htcrr").DataTable({
+//         "dom": '<"top"f>rt<"bottom">pl',
+//         responsive: !0,
+//         searchDelay: 500,
+//         processing: !0,
+//         serverSide: !0,
+//         lengthMenu: [5, 10, 25, 50 ],
+//         pageLength:5,
+//         ajax: "/datatables/project/"+triggeruuid+"/tools",
+//         columns: [
+//             {
+//                 data: "name"
+//             },
+//             {
+//                 data: "pivot.quantity"
+//             },
+//             {
+//                 data: "pivot.unit"
+//             },
+//             {
+//                 data: "pivot.note"
+//             },
+//             {
+//                 data: "Actions"
+//             }
+//         ],
+//         columnDefs: [
+//             {
+//                 targets: -1,
+//                 orderable: !1,
+//                 render: function (a, e, t, n) {
+//                       return '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-tool" data-uuid="' + t.uuid + '" href="#"title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+//                 }
+//             },
 
-        ]
-    })
+//         ]
+//     })
 
-    $('<button type="button" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm tool_modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.htcrr-tool-body .dataTables_filter');
+//     $('<button type="button" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm tool_modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.htcrr-tool-body .dataTables_filter');
 
-    $('.paging_simple_numbers').addClass('pull-left');
-    $('.dataTables_length').addClass('pull-right');
-    $('.dataTables_info').addClass('pull-left');
-    $('.dataTables_info').addClass('margin-info');
-    $('.paging_simple_numbers').addClass('padding-datatable');
-
-
-    $('.modal-footer').on('click', '.add-htcrr-tool', function () {
-        let tool = $('#tool').val();
-        let unit_tool = $('#unit_tool').val();
-        let quantity = $('input[name=quantity]').val();
-        let remark_tool = $('#remark_tool').val();
-
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type: 'post',
-            url: '/project-hm/htcrr/'+triggeruuid+'/item/',
-            data: {
-                _token: $('input[name=_token]').val(),
-                item_id: tool,
-                quantity: quantity,
-                unit_id: unit_tool,
-                note: remark_tool,
-            },
-            success: function (data) {
-                if (data.errors) {
-                    // if (data.errors.item_id) {
-                    //     $('#tool-error').html(data.errors.item_id[0]);
-                    // }
-
-                    // if (data.errors.quantity) {
-                    //     $('#quantity-error').html(data.errors.quantity[0]);
-                    // }
-                    // document.getElementById('tool').value = tool;
-                    // document.getElementById('quantity').value = quantity;
-                } else {
-
-                    toastr.success('Tool has been created.', 'Success', {
-                        timeOut: 5000
-                    });
-
-                    // let table = $('.tools_datatable').mDatatable();
-
-                    // table.originalDataSet = [];
-                    // table.reload();
-                    $('#m_datatable_tool_htcrr').DataTable().ajax.reload();
+//     $('.paging_simple_numbers').addClass('pull-left');
+//     $('.dataTables_length').addClass('pull-right');
+//     $('.dataTables_info').addClass('pull-left');
+//     $('.dataTables_info').addClass('margin-info');
+//     $('.paging_simple_numbers').addClass('padding-datatable');
 
 
-                    $('#add_tool_modal').modal('hide');
+//     $('.modal-footer').on('click', '.add-htcrr-tool', function () {
+//         let tool = $('#tool').val();
+//         let unit_tool = $('#unit_tool').val();
+//         let quantity = $('input[name=quantity]').val();
+//         let remark_tool = $('#remark_tool').val();
 
-                }
-            }
-        });
-    });
+//         $.ajax({
+//             headers: {
+//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//             },
+//             type: 'post',
+//             url: '/project-hm/htcrr/'+triggeruuid+'/item/',
+//             data: {
+//                 _token: $('input[name=_token]').val(),
+//                 item_id: tool,
+//                 quantity: quantity,
+//                 unit_id: unit_tool,
+//                 note: remark_tool,
+//             },
+//             success: function (data) {
+//                 if (data.errors) {
+//                     // if (data.errors.item_id) {
+//                     //     $('#tool-error').html(data.errors.item_id[0]);
+//                     // }
 
-    $('.dataTable').on('click', '.delete-tool', function () {
-      let triggeruuiditem = $(this).data('uuid');
-      swal({
-          title: 'Sure want to remove?',
-          type: 'question',
-          confirmButtonText: 'Yes, REMOVE',
-          confirmButtonColor: '#d33',
-          cancelButtonText: 'Cancel',
-          showCancelButton: true,
-      })
-      .then(result => {
-          if (result.value) {
-              $.ajax({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                          'content'
-                      )
-                  },
-                  type: 'DELETE',
-                  url: '/project-hm/htcrr/'+triggeruuid+'/'+triggeruuiditem+'/item',
-                  success: function (data) {
-                      toastr.success('Item has been deleted.', 'Deleted', {
-                          timeOut: 5000
-                      }
-                  );
+//                     // if (data.errors.quantity) {
+//                     //     $('#quantity-error').html(data.errors.quantity[0]);
+//                     // }
+//                     // document.getElementById('tool').value = tool;
+//                     // document.getElementById('quantity').value = quantity;
+//                 } else {
 
-                  $('#m_datatable_tool_htcrr').DataTable().ajax.reload();
+//                     toastr.success('Tool has been created.', 'Success', {
+//                         timeOut: 5000
+//                     });
 
-                  },
-                  error: function (jqXhr, json, errorThrown) {
-                      let errorsHtml = '';
-                      let errors = jqXhr.responseJSON;
+//                     // let table = $('.tools_datatable').mDatatable();
 
-                      $.each(errors.errors, function (index, value) {
-                          $('#delete-error').html(value);
-                      });
-                  }
-              });
-          }
-      });
-    });
-
-    $('.htcrr-tool-body').on('click', '.tool_modal', function () {
-        $('#add_tool_modal').modal('show');
-    });
-
-};
-
-function htcrr_material(triggeruuid) {
-    $("#m_datatable_material_htcrr").DataTable({
-        "dom": '<"top"f>rt<"bottom">pl',
-        responsive: !0,
-        searchDelay: 500,
-        processing: !0,
-        serverSide: !0,
-        lengthMenu: [5, 10, 25, 50 ],
-        pageLength:5,
-        ajax: "/datatables/project/"+triggeruuid+"/materials",
-        columns: [
-            {
-                data: "name"
-            },
-            {
-                data: "pivot.quantity"
-            },
-            {
-                data: "pivot.unit"
-            },
-            {
-                data: "pivot.note"
-            },
-            {
-                data: "Actions"
-            }
-        ],
-        columnDefs: [
-            {
-                targets: -1,
-                orderable: !1,
-                render: function (a, e, t, n) {
-                      return '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-item" data-uuid="' + t.uuid + '" href="#"title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
-                }
-            },
-
-        ]
-    })
-
-    $('<button type="button" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm item_modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.htcrr-item-body .dataTables_filter');
-
-    $('.paging_simple_numbers').addClass('pull-left');
-    $('.dataTables_length').addClass('pull-right');
-    $('.dataTables_info').addClass('pull-left');
-    $('.dataTables_info').addClass('margin-info');
-    $('.paging_simple_numbers').addClass('padding-datatable');
+//                     // table.originalDataSet = [];
+//                     // table.reload();
+//                     $('#m_datatable_tool_htcrr').DataTable().ajax.reload();
 
 
-    $('.modal-footer').on('click', '.add-htcrr-item', function () {
-        let material = $('#material').val();
-        let unit_material = $('#unit_material').val();
-        let quantity = $('input[name=quantity_material]').val();
-        let remark_material = $('#remark_material').val();
+//                     $('#add_tool_modal').modal('hide');
+
+//                 }
+//             }
+//         });
+//     });
+
+//     $('.dataTable').on('click', '.delete-tool', function () {
+//       let triggeruuiditem = $(this).data('uuid');
+//       swal({
+//           title: 'Sure want to remove?',
+//           type: 'question',
+//           confirmButtonText: 'Yes, REMOVE',
+//           confirmButtonColor: '#d33',
+//           cancelButtonText: 'Cancel',
+//           showCancelButton: true,
+//       })
+//       .then(result => {
+//           if (result.value) {
+//               $.ajax({
+//                   headers: {
+//                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+//                           'content'
+//                       )
+//                   },
+//                   type: 'DELETE',
+//                   url: '/project-hm/htcrr/'+triggeruuid+'/'+triggeruuiditem+'/item',
+//                   success: function (data) {
+//                       toastr.success('Item has been deleted.', 'Deleted', {
+//                           timeOut: 5000
+//                       }
+//                   );
+
+//                   $('#m_datatable_tool_htcrr').DataTable().ajax.reload();
+
+//                   },
+//                   error: function (jqXhr, json, errorThrown) {
+//                       let errorsHtml = '';
+//                       let errors = jqXhr.responseJSON;
+
+//                       $.each(errors.errors, function (index, value) {
+//                           $('#delete-error').html(value);
+//                       });
+//                   }
+//               });
+//           }
+//       });
+//     });
+
+//     $('.htcrr-tool-body').on('click', '.tool_modal', function () {
+//         $('#add_tool_modal').modal('show');
+//     });
+
+// };
+
+// function htcrr_material(triggeruuid) {
+//     $("#m_datatable_material_htcrr").DataTable({
+//         "dom": '<"top"f>rt<"bottom">pl',
+//         responsive: !0,
+//         searchDelay: 500,
+//         processing: !0,
+//         serverSide: !0,
+//         lengthMenu: [5, 10, 25, 50 ],
+//         pageLength:5,
+//         ajax: "/datatables/project/"+triggeruuid+"/materials",
+//         columns: [
+//             {
+//                 data: "name"
+//             },
+//             {
+//                 data: "pivot.quantity"
+//             },
+//             {
+//                 data: "pivot.unit"
+//             },
+//             {
+//                 data: "pivot.note"
+//             },
+//             {
+//                 data: "Actions"
+//             }
+//         ],
+//         columnDefs: [
+//             {
+//                 targets: -1,
+//                 orderable: !1,
+//                 render: function (a, e, t, n) {
+//                       return '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete-item" data-uuid="' + t.uuid + '" href="#"title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+//                 }
+//             },
+
+//         ]
+//     })
+
+//     $('<button type="button" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm item_modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.htcrr-item-body .dataTables_filter');
+
+//     $('.paging_simple_numbers').addClass('pull-left');
+//     $('.dataTables_length').addClass('pull-right');
+//     $('.dataTables_info').addClass('pull-left');
+//     $('.dataTables_info').addClass('margin-info');
+//     $('.paging_simple_numbers').addClass('padding-datatable');
 
 
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type: 'post',
-            url: '/project-hm/htcrr/'+triggeruuid+'/item/',
-            data: {
-                _token: $('input[name=_token]').val(),
-                item_id: material,
-                quantity: quantity,
-                unit_id: unit_material,
-                note: remark_material,
-
-            },
-            success: function (data) {
-                if (data.errors) {
-                    // if (data.errors.item_id) {
-                    //     $('#material-error').html(data.errors.item_id[0]);
-                    // }
-
-                    // if (data.errors.quantity) {
-                    //     $('#quantity_item-error').html(data.errors.quantity[0]);
-                    // }
-                    // document.getElementById('material').value = material;
-                    // document.getElementById('quantity').value = quantity;
-
-                } else {
-
-                    toastr.success('Material has been created.', 'Success', {
-                        timeOut: 5000
-                    });
-
-                    $('#m_datatable_material_htcrr').DataTable().ajax.reload();
-
-                    $('#add_material_modal').modal('hide');
-
-                }
-            }
-        });
-    });
-
-    $('.dataTable').on('click', '.delete-item', function () {
-      let triggeruuiditem = $(this).data('uuid');
-      swal({
-          title: 'Sure want to remove?',
-          type: 'question',
-          confirmButtonText: 'Yes, REMOVE',
-          confirmButtonColor: '#d33',
-          cancelButtonText: 'Cancel',
-          showCancelButton: true,
-      })
-      .then(result => {
-          if (result.value) {
-              $.ajax({
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
-                          'content'
-                      )
-                  },
-                  type: 'DELETE',
-                  url: '/project-hm/htcrr/'+triggeruuid+'/'+triggeruuiditem+'/item',
-                  success: function (data) {
-                      toastr.success('Item has been deleted.', 'Deleted', {
-                          timeOut: 5000
-                      }
-                  );
-
-                  $('#m_datatable_material_htcrr').DataTable().ajax.reload();
-
-                  },
-                  error: function (jqXhr, json, errorThrown) {
-                      let errorsHtml = '';
-                      let errors = jqXhr.responseJSON;
-
-                      $.each(errors.errors, function (index, value) {
-                          $('#delete-error').html(value);
-                      });
-                  }
-              });
-          }
-      });
-    });
-
-    $('.htcrr-item-body').on('click', '.item_modal', function () {
-        $('#add_material_modal').modal('show');
-    });
+//     $('.modal-footer-htcrr').on('click', '.add-htcrr-item', function () {
+//         alert('tes');
+//         let material = $('#material').val();
+//         let unit_material = $('#unit_material').val();
+//         let quantity = $('input[name=quantity_material]').val();
+//         let remark_material = $('#remark_material').val();
 
 
+//         $.ajax({
+//             headers: {
+//                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//             },
+//             type: 'post',
+//             url: '/project-hm/htcrr/'+triggeruuid+'/item/',
+//             data: {
+//                 _token: $('input[name=_token]').val(),
+//                 item_id: material,
+//                 quantity: quantity,
+//                 unit_id: unit_material,
+//                 note: remark_material,
 
-};
+//             },
+//             success: function (data) {
+//                 if (data.errors) {
+//                     // if (data.errors.item_id) {
+//                     //     $('#material-error').html(data.errors.item_id[0]);
+//                     // }
+
+//                     // if (data.errors.quantity) {
+//                     //     $('#quantity_item-error').html(data.errors.quantity[0]);
+//                     // }
+//                     // document.getElementById('material').value = material;
+//                     // document.getElementById('quantity').value = quantity;
+
+//                 } else {
+
+//                     toastr.success('Material has been created.', 'Success', {
+//                         timeOut: 5000
+//                     });
+
+//                     $('#m_datatable_material_htcrr').DataTable().ajax.reload();
+
+//                     $('#add_material_modal').modal('hide');
+
+//                 }
+//             }
+//         });
+//     });
+
+//     $('.dataTable').on('click', '.delete-item', function () {
+//       let triggeruuiditem = $(this).data('uuid');
+//       swal({
+//           title: 'Sure want to remove?',
+//           type: 'question',
+//           confirmButtonText: 'Yes, REMOVE',
+//           confirmButtonColor: '#d33',
+//           cancelButtonText: 'Cancel',
+//           showCancelButton: true,
+//       })
+//       .then(result => {
+//           if (result.value) {
+//               $.ajax({
+//                   headers: {
+//                       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+//                           'content'
+//                       )
+//                   },
+//                   type: 'DELETE',
+//                   url: '/project-hm/htcrr/'+triggeruuid+'/'+triggeruuiditem+'/item',
+//                   success: function (data) {
+//                       toastr.success('Item has been deleted.', 'Deleted', {
+//                           timeOut: 5000
+//                       }
+//                   );
+
+//                   $('#m_datatable_material_htcrr').DataTable().ajax.reload();
+
+//                   },
+//                   error: function (jqXhr, json, errorThrown) {
+//                       let errorsHtml = '';
+//                       let errors = jqXhr.responseJSON;
+
+//                       $.each(errors.errors, function (index, value) {
+//                           $('#delete-error').html(value);
+//                       });
+//                   }
+//               });
+//           }
+//       });
+//     });
+
+//     $('.htcrr-item-body').on('click', '.item_modal', function () {
+//         $('#add_material_modal').modal('show');
+//     });
+
+
+
+// };
 
 jQuery(document).ready(function () {
     Workpackage.init();

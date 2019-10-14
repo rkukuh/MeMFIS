@@ -25,7 +25,7 @@ let Htcrr = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -53,14 +53,20 @@ let Htcrr = {
                 sortable: !1,
             },
             {
-                field: 'part_number',
+                field: 'item.code',
                 title: 'P/N',
                 sortable: 'asc',
                 filterable: !1,
             },
+            // {
+            //     field: 'item.name',
+            //     title: 'Title',
+            //     sortable: 'asc',
+            //     filterable: !1,
+            // },
             {
-                field: 'description',
-                title: 'Title',
+                field: 'item.name',
+                title: 'item Description',
                 sortable: 'asc',
                 filterable: !1,
             },
@@ -77,7 +83,7 @@ let Htcrr = {
                 filterable: !1,
             },
             {
-                field: 'estimation_manhour',
+                field: 'installation',
                 title: 'Installation Mhrs Est.',
                 sortable: 'asc',
                 filterable: !1,
@@ -90,6 +96,7 @@ let Htcrr = {
             }
             ]
         });
+
     }
 };
 

@@ -25,27 +25,6 @@
                         <form id="itemform" name="itemform">
                             <div class="m-portlet__body">
                                 <table border="1px" width="100%">
-                                    {{-- <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Total Task Card(s)
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            1000 Item (s)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Total Manhour(s) (included performance factor)
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            500 mhrs
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="100%" colspan="2" style="background-color:beige;padding:10px;font-weight:bold">
-                                            Skill Needed
-                                        </td>
-                                    </tr> --}}
                                     <tr>
                                         <td width="30%" style="background-color:beige;padding:10px;">
                                             Job Card No
@@ -133,7 +112,7 @@
                                             Est.Mhrs
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->actual}}
+                                            {{$taskrelease->jobcardable->estimation_manhour}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -141,7 +120,7 @@
                                             Actual. Mhrs
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->jobcardable->estimation_manhour}}
+                                            {{$taskrelease->ActualManhour}}
                                         </td>
                                     </tr>
                                     <tr>
@@ -159,7 +138,11 @@
                                             Sequence
                                         </td>
                                         <td width="70%" style="text-align:center">
+                                            @if($taskrelease->jobcardable->sequence)
                                             {{$taskrelease->jobcardable->sequence}}
+                                            @else
+                                            -
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -167,7 +150,11 @@
                                             Referencce
                                         </td>
                                         <td width="70%" style="text-align:center">
+                                            @if($taskrelease->jobcardable->reference)
                                             {{$taskrelease->jobcardable->reference}}
+                                            @else
+                                            -
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -183,7 +170,11 @@
                                             Description
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->jobcardable->Description}}
+                                            @if($taskrelease->jobcardable->description)
+                                                {{$taskrelease->jobcardable->description}}
+                                            @else
+                                                -
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -199,7 +190,11 @@
                                             Accomplishment Notes By
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            xxx
+                                            @if( $taskrelease->progresses->last()->reason_text !== null)
+                                                {{ $taskrelease->progresses->last()->reason_text }}
+                                            @else
+                                                -
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>

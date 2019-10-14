@@ -97,7 +97,7 @@
 </div>
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool-uom.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>

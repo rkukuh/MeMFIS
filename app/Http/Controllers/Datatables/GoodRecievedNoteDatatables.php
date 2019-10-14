@@ -16,7 +16,7 @@ class GoodRecievedNoteDatatables extends Controller
      */
     public function index()
     {
-        $items = Item::with('unit', 'journal')->get();
+        $items = Item::with('unit')->get();
 
         $data = $alldata = json_decode($items);
 

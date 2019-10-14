@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="form-group m-form__group row ">
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-4 col-md-4 col-lg-4">
                 <label class="form-control-label">
                     Total Manhours @include('frontend.common.label.required')
                 </label>
@@ -31,9 +31,25 @@
                     @slot('text', $project_htcrr->total_manhours_with_performance_factor)
                     @slot('value', $project_htcrr->total_manhours_with_performance_factor)
                 @endcomponent
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="form-control-label">
+                    Manhours Price List @include('frontend.common.label.required')
+                </label>
+                @component('frontend.common.label.data-info')
+                    @slot('id', 'manhour_price_list')
+                    @slot('name', 'manhour_price_list')
+                    @if(isset($manhour_rate->rate))
+                    @slot('value', $manhour_rate->rate)
+                    @slot('text', $manhour_rate->rate)
+                    @else
+                    @slot('value',0)
+                    @slot('text', '-')
+                    @endif
+                @endcomponent
 
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-4 col-md-4 col-lg-4">
                 <label class="form-control-label">
                     Manhours Rate @include('frontend.common.label.required')
                 </label>

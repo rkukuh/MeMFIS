@@ -97,6 +97,11 @@ class JobCardEngineerController extends Controller
     public function edit(JobCard $jobcard)
     {
         $statuses = Status::ofJobCard()->get();
+        $taskcard = json_decode($jobcard->origin_jobcardable);
+        $helper_quantity = json_decode($jobcard->origin_jobcard_helpers);
+        if($helper_quantity == null ){
+            $helper_quantity = 0;
+        }
         $jobcard = JobCard::where('uuid',$jobcard->uuid)->first();
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;
@@ -149,52 +154,62 @@ class JobCardEngineerController extends Controller
         if ($progresses->count() == 0 and $this->statuses->where('id',$jobcard->progresses->first()->status_id)->first()->code == "open") {
             return view('frontend.job-card.engineer.progress-open', [
                 'jobcard' => $jobcard,
-                'materials' => $jobcard->jobcardable->materials,
-                'tools' => $jobcard->jobcardable->tools,
-                'progresses' => $progresses,
-                'status' => $this->statuses->where('code','open')->first(),
+                'taskcard' => $taskcard,
                 'employees' => $employees,
+                'progresses' => $progresses,
+                'helper_quantity' => $helper_quantity,
+                'tools' => $jobcard->jobcardable->tools,
+                'materials' => $jobcard->jobcardable->materials,
+                'status' => $this->statuses->where('code','open')->first(),
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "progress"){
             return view('frontend.job-card.engineer.progress-resume', [
-                'break' => $this->break,
-                'waiting' => $this->waiting,
-                'other' => $this->other,
-                'accomplished' => $this->accomplished,
                 'jobcard' => $jobcard,
-                'materials' => $jobcard->jobcardable->materials,
-                'tools' => $jobcard->jobcardable->tools,
+                'taskcard' => $taskcard,
+                'break' => $this->break,
+                'other' => $this->other,
+                'waiting' => $this->waiting,
                 'progresses' => $progresses,
-                'pending' => $this->statuses->where('code','pending')->first(),
+                'helper_quantity' => $helper_quantity,
+                'accomplished' => $this->accomplished,
+                'tools' => $jobcard->jobcardable->tools,
+                'materials' => $jobcard->jobcardable->materials,
                 'closed' => $this->statuses->where('code','closed')->first(),
+                'pending' => $this->statuses->where('code','pending')->first(),
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "pending"){
             return view('frontend.job-card.engineer.progress-pause', [
                 'jobcard' => $jobcard,
-                'materials' => $jobcard->jobcardable->materials,
-                'tools' => $jobcard->jobcardable->tools,
+                'taskcard' => $taskcard,
                 'progresses' => $progresses,
+                'helper_quantity' => $helper_quantity,
+                'tools' => $jobcard->jobcardable->tools,
+                'materials' => $jobcard->jobcardable->materials,
                 'open' => $this->statuses->where('code','open')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "closed"){
             return view('frontend.job-card.engineer.progress-close', [
-                'jobcard' => $jobcard,
-                'materials' => $jobcard->jobcardable->materials,
-                'tools' => $jobcard->jobcardable->tools,
-                'progresses' => $progresses,
                 'actual' => $actual,
+                'jobcard' => $jobcard,
+                'taskcard' => $taskcard,
+                'progresses' => $progresses,
+                'helper_quantity' => $helper_quantity,
+                'tools' => $jobcard->jobcardable->tools,
+                'materials' => $jobcard->jobcardable->materials,
             ]);
         }
         else{
             return view('frontend.job-card.engineer.progress-close', [
                 'jobcard' => $jobcard,
-                'materials' => $jobcard->jobcardable->materials,
-                'tools' => $jobcard->jobcardable->tools,
+                'taskcard' => $taskcard,
                 'progresses' => $progresses,
+                'helper_quantity' => $helper_quantity,
+                'tools' => $jobcard->jobcardable->tools,
+                'materials' => $jobcard->jobcardable->materials,
             ]);
         }
     }

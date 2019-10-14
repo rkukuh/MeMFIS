@@ -1,3 +1,13 @@
+$(".htcrr_materials_and_tools").on("click", function(){
+    let table = $('.htcrr_tools_datatable').mDatatable();
+    table.originalDataSet = [];
+    table.reload();
+
+    table = $('.htcrr_materials_datatable').mDatatable();
+    table.originalDataSet = [];
+    table.reload();
+});
+
 $('.action-buttons').on('click', '.add-job-request', function() {
     let total_mhrs  = $('#total_mhrs').html();
     let description = $('#description').val();
@@ -45,21 +55,6 @@ $('.action-buttons').on('click', '.add-job-request', function() {
 
 });
 
-$('#m_accordion_1').on('click', '#m_accordion_6_item_6_head', function () {
-
-    let table = $('.htcrr_tools_datatable').mDatatable();
-    table.originalDataSet = [];
-    table.reload();
-
-});
-
-$('#m_accordion_1').on('click', '#m_accordion_7_item_7_head', function () {
-
-    let table = $('.htcrr_materials_datatable').mDatatable();
-    table.originalDataSet = [];
-    table.reload();
-
-});
 
 let HtCRRMatsToolsDatatables = {
     init: function() {
@@ -84,7 +79,7 @@ let HtCRRMatsToolsDatatables = {
             },
             pageSize: 10,
             serverPaging: !0,
-            serverFiltering: !0,
+            serverFiltering: !1,
             serverSorting: !0
         },
         layout: {
@@ -204,7 +199,7 @@ let HtCRRMatsToolsDatatables = {
             },
             pageSize: 10,
             serverPaging: !0,
-            serverFiltering: !0,
+            serverFiltering: !1,
             serverSorting: !0
         },
         layout: {
@@ -314,7 +309,6 @@ $('.modal-footer').on('click', '.add-item-price', function () {
     let unit_id =$('#unit_id').val();
     let note =$('#note').val();
     let triggerid = $('input[name=uuid]').val();
-    console.log(triggerid);
 
     $.ajax({
         headers: {
@@ -422,6 +416,7 @@ $('.htcrr_materials_datatable').on('click','.edit-item-price', function edit () 
         }
     });
 });
+
 $('.htcrr_tools_datatable').on('click','.edit-item-price', function edit () {
     let triggerid = $(this).data('uuid');
     $("#modal_item_price").val(triggerid);

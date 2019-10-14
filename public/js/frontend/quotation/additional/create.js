@@ -26,7 +26,7 @@ let AdditionalTaskQtnCreate = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -107,7 +107,7 @@ let AdditionalTaskQtnCreate = {
             }
         });
 
-    
+
 
         $('select[name="scheduled_payment_type"]').on('change', function () {
             let type = this.options[this.selectedIndex].innerHTML;
@@ -183,7 +183,7 @@ let AdditionalTaskQtnCreate = {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
                 type: 'post',
-                url: '/quotation-additional/',
+                url: '/quotation-additional',
                 processData: false,
                 contentType: false,
                 data: data,

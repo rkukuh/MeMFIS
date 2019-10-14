@@ -21,7 +21,7 @@ let Aircraft = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -119,10 +119,17 @@ let Aircraft = {
                     filterable: !1,
                 },
                 {
-                    field: 'conducted_by',
+                    field: '',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        if(t.conducted_by){
+                            return t.conducted_by+" "+t.approval_time;
+                        }else{
+                            return "-";
+                        }
+                    }
                 },
                 {
                     field: 'Actions',
@@ -258,9 +265,12 @@ let Aircraft = {
                         },
                         error: function (jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;
-
-                            $.each(errors.errors, function (index, value) {
-                                $('#delete-error').html(value);
+                            $.each(errors.error, function (index, value) {
+                                toastr.error(value.message, value.title, {
+                                    "closeButton": true,
+                                    "timeOut": "0",
+                                }
+                            );
                             });
                         }
                     });

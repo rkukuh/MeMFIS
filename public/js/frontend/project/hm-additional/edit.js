@@ -19,7 +19,7 @@ let AdditionalTaskCreate = (function() {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -116,7 +116,7 @@ let AdditionalTaskCreate = (function() {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -215,7 +215,7 @@ let AdditionalTaskCreate = (function() {
                     },
                     pageSize: 10,
                     serverPaging: !0,
-                    serverFiltering: !0,
+                    serverFiltering: !1,
                     serverSorting: !0
                 },
                 layout: {
@@ -250,7 +250,7 @@ let AdditionalTaskCreate = (function() {
                 },
                 {
                     field: 'description',
-                    title: 'Tool Description',
+                    title: 'Material Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -261,13 +261,13 @@ let AdditionalTaskCreate = (function() {
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'pivot.note',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -294,7 +294,7 @@ let AdditionalTaskCreate = (function() {
                     },
                     pageSize: 10,
                     serverPaging: !0,
-                    serverFiltering: !0,
+                    serverFiltering: !1,
                     serverSorting: !0
                 },
                 layout: {
@@ -340,13 +340,13 @@ let AdditionalTaskCreate = (function() {
                     filterable: !1,
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'unit.name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'pivot.note',
                     title: 'Description',
                     sortable: 'asc',
                     filterable: !1,
@@ -462,8 +462,11 @@ let AdditionalTaskCreate = (function() {
             $('.add-project-additional').on('click', function () {
                 let data = new FormData();
                 data.append("defectcard_uuid", UUID);
+                data.append("title", $("#additional_project_title").val());
+                data.append("performance_factor", $("#performance_factor").val());
+                data.append("estimation_manhour", $("#estimation_manhour").attr('value'));
+                data.append("total_manhour_with_performance_factor", $("#total_manhour").attr('value'));
                 data.append('_method', 'PUT');
-
 
                 $.ajax({
                     headers: {
@@ -546,8 +549,8 @@ jQuery(document).ready(function () {
 });
 
 $('.footer-additional').on('click', '.update-additional-data', function () {
-
     let total_manhours = $("#estimation_manhour").attr('value');
+    let additional_project_title = $("#additional_project_title").val();
     let performance_factor = $("#performance_factor").val();
     let total_manhours_with_performance_factor = total_manhours * performance_factor;
     
@@ -555,11 +558,12 @@ $('.footer-additional').on('click', '.update-additional-data', function () {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        type: 'POST',
-        url: '/project-hm-additional/'+project_uuid+'/additional-store',
+        type: 'PUT',
+        url: '/project-hm-additional/'+project_uuid,
         data:{
             total_manhours: total_manhours,
             performance_factor: performance_factor,
+            title: additional_project_title,
             total_manhours_with_performance_factor:total_manhours_with_performance_factor,
         },
         success: function (data) {

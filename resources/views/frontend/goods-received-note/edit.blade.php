@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.quotation.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.goods-received.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Goods Received Note
                             </span>
@@ -114,10 +114,9 @@
                                                             <label class="form-control-label">
                                                                 Received By @include('frontend.common.label.required')
                                                             </label>
-                                                            @component('frontend.common.input.text')
+                                                            @component('frontend.common.input.select2')
                                                                 @slot('id', 'received-by')
                                                                 @slot('text', 'received-by')
-                                                                @slot('value', $goodsReceived->received_by)
                                                                 @slot('name', 'received-by')
                                                                 @slot('id_error', 'received-by')
                                                             @endcomponent
@@ -186,7 +185,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <label class="form-control-label">
-                                                        Description
+                                                        Remark
                                                     </label>
 
                                                     @component('frontend.common.input.textarea')
@@ -312,6 +311,8 @@
     <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
 
 @endpush

@@ -417,9 +417,9 @@
                                                         Effectivity @include('frontend.common.label.optional')
                                                     </label>
                                                     @component('frontend.common.input.text')
-                                                        @slot('text', 'Effectifity')
-                                                        @slot('id', 'effectifity')
-                                                        @slot('name', 'effectifity')
+                                                        @slot('id', 'effectivity')
+                                                        @slot('text', 'Effectivity')
+                                                        @slot('name', 'effectivity')
                                                         @slot('value', $taskcard->effectivity)
                                                     @endcomponent
                                                 </div>
@@ -477,13 +477,21 @@
                                             <label class="form-control-label">
                                                 Station @include('frontend.common.label.optional')
                                             </label>
-
                                             <select id="station" name="station" class="form-control m-select2" multiple style="width:100%">
-                                                @foreach ( $taskcard->stations as $station)
-                                                    <option value="{{ $station->uuid }}" @if( in_array($station->uuid, $tc_stations) ) selected @endif>
-                                                        {{ $station->name }}
-                                                    </option>
-                                                @endforeach
+                                                @if(isset($taskcard->stations) && sizeof($taskcard->stations) > 0)
+                                                    @foreach ($stations as $station)
+                                                        <option value="{{ $station->name }}"
+                                                            @if(in_array( $station->uuid ,$tc_stations)) selected @endif>
+                                                            {{ $station->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($stations as $station)
+                                                        <option value="{{ $station->name }}">
+                                                            {{ $station->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
@@ -936,9 +944,9 @@
     </script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool-uom.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>

@@ -133,7 +133,7 @@
                                             Est.Mhrs
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->actual}}
+                                            {{$taskrelease->ActualManhour}}
                                         </td>
                                     </tr>
                                     <tr>

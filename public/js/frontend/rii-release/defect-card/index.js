@@ -20,7 +20,7 @@ let RiiRelease = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -67,46 +67,25 @@ let RiiRelease = {
                         }
                 },
                 {
-                    field: 'company',
-                    title: 'Company Task No',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t, e, i) {
-                        if(t.jobcard.jobcardable.additionals){
-                            let company = t.jobcard.jobcardable.additionals;
-                            obj = JSON.parse(company);
-                            // console.log()
-                            return (
-                                obj.internal_number
-                            );
-                        }
-                        else{
-                            return(
-                                ''
-                            );
-                        }
-                    }
-                },
-                {
                     field: 'customer_name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft.name',
+                    field: 'jobcard.quotation.quotationable.aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_register',
+                    field: 'jobcard.quotation.quotationable.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_sn',
+                    field: 'jobcard.quotation.quotationable.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
@@ -130,13 +109,40 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
+                    field: 'created_by',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                     template: function (t, e, i) {
+                        return t.created_by + '<br>' + t.create_date 
+                    }
+                },
+                {
+                    field: 'updated_by',
+                    title: 'Updated By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.updated_by + '<br>' + t.update_date 
+                    }
+                },
+                {
+                    field: 'conducted_by',
+                    title: 'Released By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.conducted_at 
+                    }
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.status == 'RII RELEASED'){
+                        if(t.status == 'Released'){
                             return (
-                                '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="/defectcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
@@ -145,7 +151,7 @@ let RiiRelease = {
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill release" title="Release" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check-circle"></i>' +
                                 '</a>' +
-                                '<a href="jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
+                                '<a href="defectcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
                                     '<i class="la la-external-link"></i>' +
                                 '</a>'
                             );
@@ -174,7 +180,7 @@ let RiiRelease = {
                             )
                         },
                         type: 'PUT',
-                        url: '/riirelease-defectcard/rii-release/' + defectcard_uuid + '/',
+                        url: '/riirelease-defectcard/' + defectcard_uuid + '/',
                         success: function (data) {
                             toastr.success('Defectcard has been released.', 'Deleted', {
                                     timeOut: 5000

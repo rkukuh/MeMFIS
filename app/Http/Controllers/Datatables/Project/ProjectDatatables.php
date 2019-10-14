@@ -29,12 +29,13 @@ class ProjectDatatables extends Controller
                 $project->status .= 'Project Open';
             }elseif(sizeof($project->approvals->toArray()) == 1){
                 $project->status .= 'Project Approved';
-                $project->conducted_by.= User::find($project->approvals[0]->conducted_by)->name;
+                $project->conducted_by.= User::find($project->approvals->first()->conducted_by)->name;
+                $project->approval_time .= $project->approvals->first()->created_at;
 
             }elseif(sizeof($project->approvals->toArray()) == 2){
                 $project->status .= 'Quotation Approved';
-                $project->conducted_by.= User::find($project->approvals[0]->conducted_by)->name;
-
+                $project->conducted_by.= User::find($project->approvals->first()->conducted_by)->name;
+                $project->approval_time .= $project->approvals->first()->created_at;
             }
             else{
                 $project->status .= (sizeof($project->approvals->toArray())).'?'; // *Find bug size of approve
@@ -158,7 +159,7 @@ class ProjectDatatables extends Controller
     {
         $quotation = Quotation::where('quotationable_id',$project->id)->first()->id;
 
-        $defectcards = DefectCard::with('jobcard')
+        $defectcards = DefectCard::with('jobcard','jobcard.jobcardable')
                                 ->whereHas('jobcard', function ($query) use ($quotation){
                                     $query->where('quotation_id', $quotation);
                                 })->where('project_additional_id', null)->get();
@@ -285,7 +286,7 @@ class ProjectDatatables extends Controller
      */
     public function selectedDefectCard(Project $project)
     {
-        $defectcards = DefectCard::with('jobcard')->where('project_additional_id', $project->id)->get();
+        $defectcards = DefectCard::with('jobcard','jobcard.jobcardable')->where('project_additional_id', $project->id)->get();
 
         // RecordID
 

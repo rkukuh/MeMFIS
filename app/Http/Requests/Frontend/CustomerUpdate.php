@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Frontend;
 
-use App\Models\Journal;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -58,11 +57,7 @@ class CustomerUpdate extends FormRequest
      */
     public function withValidator($validator)
     {
-        $validator->after(function ($validator) {
-            $this->merge([
-                'account_code' => optional(Journal::where('uuid', $this->account_code)->first())->id
-            ]);
-        });
+        //
     }
 
     protected function failedValidation(Validator $validator) {

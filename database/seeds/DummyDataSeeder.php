@@ -23,7 +23,6 @@ class DummyDataSeeder extends Seeder
         $this->call(Units::class);
         $this->call(Levels::class);
         $this->call(Statuses::class);
-        $this->call(Journals::class);
         $this->call(Categories::class);
         $this->call(Currencies::class);
 
@@ -31,6 +30,7 @@ class DummyDataSeeder extends Seeder
 
         $this->call(Taxes::class);
         $this->call(Banks::class);
+        $this->call(Storages::class);
         $this->call(Companies::class);
         $this->call(Branches::class);
         $this->call(Manufacturers::class);
@@ -38,7 +38,6 @@ class DummyDataSeeder extends Seeder
         $this->call(Languages::class);
         $this->call(Schools::class);
         $this->call(Employees::class);
-        $this->call(Storages::class);
         $this->call(Items::class);
         $this->call(Licenses::class);
         $this->call(Certifications::class);
@@ -60,6 +59,9 @@ class DummyDataSeeder extends Seeder
         
         $this->call(BankAccounts::class);
 
+        $this->call(Overtimes::class);
+        $this->call(AttendanceCorrections::class);
+
         /** POLYMORPH */
 
         $this->call(Faxes::class);
@@ -79,6 +81,8 @@ class DummyDataSeeder extends Seeder
         $this->call(Progresses::class);
         $this->call(Inspections::class);
         $this->call(Interchanges::class);
+        $this->call(InventoryIns::class);
+        $this->call(InventoryOuts::class);
 
         /** LICENSE */
 
@@ -149,5 +153,10 @@ class DummyDataSeeder extends Seeder
         /** PURCHASE ORDER's ITEMs */
 
         $this->call(PurchaseOrderItems::class);
+
+        /** TRIGGER-ONLY */
+
+        $this->call(FefoIns::class);
+        $this->call(FefoOuts::class);
     }
 }

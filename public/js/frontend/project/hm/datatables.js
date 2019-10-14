@@ -120,6 +120,43 @@ let Datatables = {
                 }
             ]
         });
+        $("#preliminary_datatable").DataTable({
+            dom: '<"top"f>rt<"bottom">pl',
+            responsive: !0,
+            searchDelay: 500,
+            processing: !0,
+            serverSide: !0,
+            lengthMenu: [5, 10, 25, 50],
+            pageLength: 5,
+            ajax: "/datatables/taskcard-preliminary/preliminary/modal",
+            columns: [
+                {
+                    data: "number"
+                },
+                {
+                    data: "title"
+                },
+                {
+                    data: "estimation_manhour"
+                },
+                {
+                    data: "Actions"
+                }
+            ],
+            columnDefs: [
+                {
+                    targets: -1,
+                    orderable: !1,
+                    render: function(a, e, t, n) {
+                        return (
+                            '<a class="btn btn-primary btn-sm m-btn--hover-brand select-preliminary" title="View" data-uuid="' +
+                            t.uuid +
+                            '">\n<span><i class="la la-edit"></i><span>Use</span></span></a>'
+                        );
+                    }
+                }
+            ]
+        });
         $("#adsb_datatable").DataTable({
             dom: '<"top"f>rt<"bottom">pl',
             responsive: !0,
@@ -331,6 +368,9 @@ let Datatables = {
             $("#si_datatable")
                 .DataTable()
                 .ajax.reload();
+            $("#preliminary_datatable")
+                .DataTable()
+                .ajax.reload();
         });
 
         let material_datatables_init = true;
@@ -366,7 +406,7 @@ let Datatables = {
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error("Task card alrady exists!", "Error", {
+                            toastr.error("Task card already exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
@@ -417,7 +457,7 @@ let Datatables = {
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error("Task card alrady exists!", "Error", {
+                            toastr.error("Task card already exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
@@ -468,7 +508,7 @@ let Datatables = {
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error("Task card alrady exists!", "Error", {
+                            toastr.error("Task card already exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
@@ -533,7 +573,6 @@ let Datatables = {
             }
         });
 
-
         $("#si_datatable").on("click", ".select-si", function() {
             let taskcard_uuid = $(this).data("uuid");
             $.ajax({
@@ -560,7 +599,7 @@ let Datatables = {
                         // }
                     } else {
                         if (data.title == "Danger") {
-                            toastr.error("Task card alrady exists!", "Error", {
+                            toastr.error("Task card already exists!", "Error", {
                                 timeOut: 5000
                             });
                         } else {
@@ -583,6 +622,57 @@ let Datatables = {
                 }
             });
         });
+
+        $("#preliminary_datatable").on("click", ".select-preliminary", function() {
+            let taskcard_uuid = $(this).data("uuid");
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                type: "post",
+                url:
+                    "/project-hm/" +
+                    project_uuid +
+                    "/workpackage/" +
+                    workPackage_uuid +
+                    "/taskcard/" +
+                    taskcard_uuid,
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    taskcard: $(this).data("uuid")
+                },
+                success: function(data) {
+                    if (data.errors) {
+                        // if (data.errors.name) {
+                        //     $('#name-error').html(data.errors.name[0]);
+                        //     document.getElementById('name').value = name;
+                        // }
+                    } else {
+                        if (data.title == "Danger") {
+                            toastr.error("Task card already exists!", "Error", {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $("#modal_preliminary").modal("hide");
+
+                            toastr.success(
+                                "Task Card has been added.",
+                                "Success",
+                                {
+                                    timeOut: 5000
+                                }
+                            );
+
+                            let table = $(".preliminary_datatable").mDatatable();
+                            anyChanges = true;
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
+                    }
+                }
+            });
+        });
+
 
         $(".b-t-n").on("click", ".btn-add", function() {
             if ($("#predecessorBtn").length == 0) {
@@ -1263,7 +1353,7 @@ let Datatables = {
                         } else {
                             if (data.title == "Danger") {
                                 toastr.error(
-                                    "Instruction alrady exists!",
+                                    "Instruction already exists!",
                                     "Error",
                                     {
                                         timeOut: 5000
@@ -2153,6 +2243,168 @@ let Datatables = {
                         });
 
                         let table = $(".si_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+         //Preliminary taskcard Datatable
+         $(".preliminary_datatable").on("click", ".predecessor", function() {
+            if (predecessor_datatables_init == true) {
+                predecessor_datatables_init = false;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#predecessor_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-predecessor").value = triggeruuid;
+                predecessor_tc(triggeruuid);
+                $("#predecessor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $(".preliminary_datatable").on("click", ".successor", function() {
+            if (successor_datatables_init == true) {
+                successor_datatables_init = false;
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
+                successor_tc(triggeruuid);
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#successor_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("tc_uuid");
+                document.getElementById("uuid-successor").value = triggeruuid;
+                successor_tc(triggeruuid);
+                $("#successor_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+        $(".preliminary_datatable").on("click", ".material", function() {
+            if (material_datatables_init == true) {
+                material_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                material_tc_preliminary(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $(
+                    "#m_datatable_material_taskcard_wp"
+                ).DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                material_tc_preliminary(triggeruuid);
+                $("#m_datatable_material_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+        $(".preliminary_datatable").on("click", ".tool", function() {
+            if (tool_datatables_init == true) {
+                tool_datatables_init = false;
+                triggeruuid = $(this).data("uuid");
+                tool_tc_preliminary(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#m_datatable_tool_taskcard_wp").DataTable();
+                table.destroy();
+                triggeruuid = $(this).data("uuid");
+                tool_tc_preliminary(triggeruuid);
+                $("#m_datatable_tool_taskcard_wp")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+        $(".preliminary_datatable").on("click", ".sequence", function() {
+            triggeruuid = $(this).data("uuid");
+            sequence = $(this).data("sequence");
+
+            document.getElementById("uuid").value = triggeruuid;
+            document.getElementById("sequence").value = sequence;
+        });
+        $(".preliminary_datatable").on("click", ".mandatory", function() {
+            triggeruuid = $(this).data("uuid");
+            mandatory = $(this).data("mandatory");
+            if (mandatory == 0) {
+                is_mandatory = 1;
+            } else if (mandatory == 1) {
+                is_mandatory = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/mandatory/",
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    is_mandatory: is_mandatory
+                },
+                success: function(data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success(
+                            "Mandatory has been updated.",
+                            "Success",
+                            {
+                                timeOut: 5000
+                            }
+                        );
+
+                        let table = $(".preliminary_datatable").mDatatable();
+
+                        table.originalDataSet = [];
+                        table.reload();
+                    }
+                }
+            });
+        });
+
+        $(".preliminary_datatable").on("click", ".rii", function() {
+            triggeruuid = $(this).data("uuid");
+            rii = $(this).data("rii");
+            if (rii == 0) {
+                is_rii = 1;
+            } else if (rii == 1) {
+                is_rii = 0;
+            }
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                type: "put",
+                url: "/project-hm/" + triggeruuid + "/rii/",
+                data: {
+                    _token: $("input[name=_token]").val(),
+                    is_rii: is_rii
+                },
+                success: function(data) {
+                    if (data.errors) {
+                    } else {
+                        toastr.success("Rii has been updated.", "Success", {
+                            timeOut: 5000
+                        });
+
+                        let table = $(".preliminary_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();

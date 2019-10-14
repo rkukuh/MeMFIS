@@ -270,9 +270,9 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * Many-to-Many: A task card may have zero or many (aircraft) zone.
+     * Many-to-Many: A task card may have zero or many aircraft's zone.
      *
-     * This function will retrieve all the (aircraft) zones of a task card.
+     * This function will retrieve all the aircraft's zones of a task card.
      * See: Zone's taskcards() method for the inverse
      *
      * @return mixed
@@ -308,24 +308,26 @@ class TaskCard extends MemfisModel
     }
 
     /**
-     * Get the task card's item: tool.
+     * Get the task card's Skill.
      *
      * @return string
      */
     public function getSkillAttribute()
     {
+
         if(isset($this->skills) ){
-            if(sizeof($this->skills) == 3){
-                $skill = "ERI";
-            }
-            else if(sizeof($this->skills) == 1){
-                $skill = $this->skills[0]->name;
-            }
-            else{
-                $skill = '';
+            switch (sizeof($this->skills)) {
+                case 3:
+                    $skill = "ERI";
+                    break;
+                case 1:
+                    $skill = $this->skills[0]->name;
+                    break;
+                default:
+                    $skill = '';
             }
         }
-        return collect($skill);
-        // return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
+
+        return $skill;
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend\DefectCard;
 
 use Auth;
+use App;
+use iio\libmergepdf\Merger;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -124,5 +126,43 @@ class DefectCardController extends Controller
     public function destroy(DefectCard $defectCard)
     {
         //
+    }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  \App\Models\JobCard  $jobCard
+     * @return \Illuminate\Http\Response
+     */
+    public function print(DefectCard $defectcard)
+    {
+        // dd($defectcard);
+        $m = new Merger();
+
+        $propose_corrections = $defectcard->propose_corrections->pluck('code')->toArray();
+        if(in_array('other',$propose_corrections)){
+            $other = $defectcard->propose_corrections->where('code','other')->first();
+            $text = $other->pivot->propose_correction_text;
+        }else{
+            $text = "";
+        }
+        $view1 = \View::make('frontend.form.dc_page1')->with(['defectcard' => $defectcard,'propose_corrections'=> $propose_corrections, 'text'=> $text])->render();
+        $view2 = \View::make('frontend.form.dc_page2')->with('defectcard', $defectcard)->render();
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($view1)->setPaper('a4', 'portrait');
+        $m->addRaw($pdf->output());
+
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($view2)->setPaper('a4', 'landscape');
+        $m->addRaw($pdf->output());
+
+        file_put_contents('storage/DefectCard/'.$defectcard->uuid.'.pdf', $m->merge());
+        $invnoabc = new \PDF;
+        $invnoabc = $defectcard->uuid.'.pdf';
+
+        return response()->file(
+            public_path('storage/DefectCard/'.$defectcard->uuid.'.pdf')
+        );
     }
 }

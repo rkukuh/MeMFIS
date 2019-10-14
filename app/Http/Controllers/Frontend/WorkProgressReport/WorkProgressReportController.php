@@ -12,6 +12,7 @@ use App\Models\DefectCard;
 use App\Models\Pivots\ProjectWorkpackage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\HtCrr;
 
 class WorkProgressReportController extends Controller
 {
@@ -61,13 +62,20 @@ class WorkProgressReportController extends Controller
      */
     public function show(Project $project)
     {
-        $jobcards = $statusses_routine = $statusses_non_routine =  $statusses_additionals = $basic =  $sip =  $cpcp =  $additional =  $adsb =  $cmr_awl =  $si =  $ea =  $eo =  $ht_crr = $manhours = [];
-        
+        $jobcards = $statusses_routine = $statusses_non_routine =  $statusses_additionals = $basic =  $sip =  $cpcp =  $additional =  $adsb =  $cmr_awl =  $si =  $ea =  $eo =  $ht_crr = $manhours = $statusses = [];
+        $htcrrs = HtCrr::where('project_id',$project->id)->whereNull('parent_id')->get();
+
         $tat = ProjectWorkpackage::where('project_id', $project->id)->sum('tat');
-        $attention = json_decode($project->quotations->first()->attention);
+        if(isset($project->quotations->first()->attention)){
+            $attention = json_decode($project->quotations->first()->attention);
+        }else{
+            $attention = null;
+        }
+
         if(isset($project->data_htcrr)){
             $tat += json_decode($project->data_htcrr)->tat;
         }
+
 
         $quotation_ids = Quotation::where('quotationable_id', $project->id)->orWhere('parent_id', $project->id)->has('approvals', '>', 1)->pluck('id')->toArray();
         
@@ -81,10 +89,10 @@ class WorkProgressReportController extends Controller
         $jobcard_nonrotine = JobCard::whereIn('quotation_id', $quotation_ids)
                         ->where('jobcardable_type', 'App\Models\EOInstruction')->with('progresses','jobcardable.eo_header.type')
                         ->get();
-                        
+        
         $additionals = DefectCard::whereIn('quotation_additional_id', $quotation_ids)->get();
 
-        $jobcards["routine"] = $jobcards["non_routine"] = $jobcards["additionals"] = 0; 
+        $jobcards["routine"] = $jobcards["non_routine"] = $jobcards["additionals"]  = 0; 
 
         foreach($jobcard_routine as $jobcard){
             $this->actual_manhours($jobcard);
@@ -109,13 +117,20 @@ class WorkProgressReportController extends Controller
             $jobcards["additionals"] += 1;
         }
 
+        foreach($htcrrs as $jobcard){
+            $jobcard->actual_manhours = array_sum($jobcard->actual_manhour);
+            $jobcard->tc_type = "htcrr";
+            $jobcard->of = $jobcard->type->of;
+            $jobcards["non_routine"] += 1;
+        }
+        
+        $jobcard_nonrotine = $jobcard_nonrotine->merge($htcrrs);
         $jobcard_all = $jobcard_routine->merge($jobcard_nonrotine);
         $jobcard_all = $jobcard_all->merge($additionals);
-
-      
+        
         $jobcards["overall"] = $jobcard_all->count(); 
-
-        $jobcards["overall_done"] = $jobcards["routine_done"] = $jobcards["non_routine_done"] = $jobcards["additionals"] = 0;
+        
+        $jobcards["overall_done"] = $jobcards["routine_done"] = $jobcards["non_routine_done"] = $jobcards["additionals"] = $jobcards["htcrr"] = 0;
         
         foreach($jobcard_all as $key => $jobcard){
             $statusses[$key] = $jobcard->progresses->last()->status_id;
@@ -124,9 +139,12 @@ class WorkProgressReportController extends Controller
                 array_push($statusses_routine, $jobcard->progresses->last()->status_id);
             }elseif($jobcard->of == 'taskcard-type-non-routine'){
                 array_push($statusses_non_routine, $jobcard->progresses->last()->status_id);
+            }elseif($jobcard->of == 'htcrr-type'){
+                array_push($statusses_non_routine, $jobcard->progresses->last()->status_id);
             }else{
                 array_push($statusses_additionals, $jobcard->progresses->last()->status_id);
             }
+
 
             switch($jobcard->tc_type){
                 case 'basic':
@@ -159,11 +177,12 @@ class WorkProgressReportController extends Controller
                 case 'awl':
                     array_push($cmr_awl, $jobcard->progresses->last()->status_id);
                     break;
+                case 'htcrr':
+                    array_push($ht_crr, $jobcard->progresses->last()->status_id);
+                    break;
                 case 'additionals':
                     array_push($additional, $jobcard->progresses->last()->status_id);
                     break;
-                default:
-                    array_push($ht_crr, $jobcard->progresses->last()->status_id);
             }
         }
 
@@ -171,7 +190,7 @@ class WorkProgressReportController extends Controller
             if( sizeof($jobcard_all->where("tc_type", $type)->pluck("tc_type")) > 0 ) {
                 $manhours[$type]["actual"] = $jobcard_all->where('tc_type', $type)->sum('actual_manhours');
                 $manhours[$type]["total"] = $jobcard_all->where('tc_type', $type)->sum('estimation_manhour');
-
+                
                 if( $jobcard_all->where('status', "open")->where('tc_type', $type)->sum('estimation_manhour') > 0 ) { 
                     $manhours[$type]["estimation_manhour"]["open"] = $jobcard_all->where('status', "open")->where('tc_type', $type)->sum('estimation_manhour'); 
                 }else{
@@ -266,7 +285,8 @@ class WorkProgressReportController extends Controller
         $this->counting($ht_crr, "ht-crr");
         $this->counting($additional, "additionals");
 
-        if (isset($this->col["routine"])) {
+
+        if (isset($this->col["routine"]) && sizeof(array_unique($this->col["routine"])) !== 0) {
             $this->col["routine"] = 12 / sizeof( array_unique( $this->col["routine"] ) );
         }else{
             $this->col["routine"] = 12;
@@ -455,7 +475,14 @@ class WorkProgressReportController extends Controller
             $container = [];
             $counter = array_count_values($counter);
             foreach($counter as $key => $value ){
-                $counter[Status::find($key)->code] = $value;
+                $code = Status::find($key)->code;
+                if (strpos($code, 'removal-') !== false) {
+                    $code = str_replace('removal-','',$code);
+                }
+                if (strpos($code, 'installation-') !== false) {
+                    $code = str_replace('installation-','',$code);
+                }
+                $counter[$code] = $value;
             }
         
             if( isset($counter["open"]) ){ $container['open'] = $counter["open"]; } else{ $container["open"] = 0; }
@@ -500,6 +527,16 @@ class WorkProgressReportController extends Controller
             
             return;
         }else{
+            // $container = [];
+            // if( isset($counter["open"]) ){ $container['open'] = $counter["open"]; } else{ $container["open"] = 0; }
+            // if( isset($counter["progress"]) ){ $container["progress"] = $counter["progress"]; } else{ $container["progress"] = 0; }
+            // if( isset($counter["pending"]) ){ $container["pending"] = $counter["pending"]; } else{ $container["pending"] = 0; }
+            // if( isset($counter["closed"]) ){ $container["closed"] = $counter["closed"]; } else{ $container["closed"] = 0; }
+            // if( isset($counter["released"]) ){ $container["released"] = $counter["released"]; } else{ $container["released"] = 0; }
+            // if( isset($counter["rii-released"]) ){ $container["rii-released "] = $counter["rii-released"]; } else{ $container["rii-released"] = 0; }
+            // if( $container["released"] > 0 || $container["rii-released"] > 0 ){ $container["done"] = $container["rii-released"] + $container["released"]; } else{ $container["done"] = 0; }
+            // $this->jobcard[$attribute] = $container;
+
             return;
         }
     }

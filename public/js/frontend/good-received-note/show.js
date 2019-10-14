@@ -20,7 +20,7 @@ let goods_received_note_show = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -43,6 +43,17 @@ let goods_received_note_show = {
                 }
             },
             columns: [
+                {
+                    field: '#',
+                    title: 'No',
+                    width:'40',
+                    sortable: 'asc',
+                    filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {   
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
+                },
                 {
                     field: 'code',
                     title: 'P/N',
@@ -79,7 +90,7 @@ let goods_received_note_show = {
                     width: 150,
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'unit_name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,

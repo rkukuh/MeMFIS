@@ -1,7 +1,7 @@
     let TaskcardRoutineTypeSelect2 = {
     init: function () {
         $('#taskcard_routine_type, #taskcard_routine_type_validate').select2({
-            placeholder: 'Select a Taskcard Routine Type '
+            placeholder: 'Select a Taskcard Routine Type'
         });
     }
 };

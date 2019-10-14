@@ -6,6 +6,20 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <style>
+    header {
+      position: fixed;
+      top: 0cm;
+      left: 0cm;
+      right: 0cm;
+      height: 3cm;
+    }
+    footer {
+      position: fixed;
+      bottom: 0cm;
+      left: 0cm;
+      right: 0cm;
+      height: 1.5cm;
+    }
     html,body{
       padding: 0;
       margin: 0;
@@ -30,9 +44,9 @@
     }
 
     #content{
-      margin-top:27px;
+      margin-top:168px;
     }
-    
+
     #content .jobcard-info fieldset legend{
       font-size: 20px;
       font-weight: bold;
@@ -86,42 +100,49 @@
   </style>
 </head>
 <body>
-  
-  <div id="header">
-    <img src="./img/form/printoutpreliminaryinspection/HeaderPreliminaryInspection.jpg" alt=""width="100%">
-  </div>
+
+
+  <header id="header">
+    <img src="./img/form/printoutpreliminaryinspection/HeaderPreliminaryInspection.png" alt=""width="100%">
+  </header>
+  <footer style="margin-top:14px;">
+    <div class="container">
+      <span style="margin-left:6px">Prepared By : {{ $prepared_by }} &nbsp;&nbsp;&nbsp;&nbsp; Printed By : {{ Auth::user()->name }}</span>
+    </div>
+    <img src="./img/form/printoutpreliminaryinspection/FooterPreliminaryInspection.png" width="100%" alt="" >
+  </footer>
 
   <div id="content">
     <ul>
       <li>
         <div class="jobcard-info">
             <fieldset>
-                <legend>Job Card No : 123456789</legend>
+                <legend>Job Card No : {{ $jobCard->number }}</legend>
                 <div class="jobcard-info-detail">
                   <table width="80%" cellpadding="3">
                       <tr>
                         <td width="20%">Issued Date & Time</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">{{ $jobCard->created_at }}</td>
                         <td width="20%">AC/Type</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">{{ $jobCard->quotation->quotationable->aircraft->name }}</td>
                       </tr>
                       <tr>
                         <td width="20%">Project No</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">{{ $jobCard->quotation->quotationable->code }}</td>
                         <td width="20%">Est. Mhrs</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">{{ $taskcard->estimation_manhour }}</td>
                       </tr>
                       <tr>
-                        <td width="20%">Inspection Type</td>
-                        <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="20%"></td>
+                        <td width="1%"></td>
+                        <td width="29%"></td>
                         <td width="20%">Act. Mhrs</td>
                         <td width="1%">:</td>
-                        <td width="29%">Generate</td>
+                        <td width="29%">{{ $jobCard->actual_manhour }}</td>
                       </tr>
                   </table>
                 </div>
@@ -183,88 +204,88 @@
               <td width="45%" align="left" valign="top">Cleanliness</td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-02</td>
+              <td width="45%" align="left" valign="top">R/H fuselage</td>
+              <td width="5%" align="center" valign="top">PPO</td>
+              <td width="45%" align="left" valign="top">Paint peel off/flake</td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-03</td>
+              <td width="45%" align="left" valign="top">R/H MLG wheel well</td>
+              <td width="5%" align="center" valign="top">SCR</td>
+              <td width="45%" align="left" valign="top">Stratches</td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-04</td>
+              <td width="45%" align="left" valign="top">R/H wing</td>
+              <td width="5%" align="center" valign="top">DNT</td>
+              <td width="45%" align="left" valign="top">Dents</td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-05</td>
+              <td width="45%" align="left" valign="top">R/H Engine</td>
+              <td width="5%" align="center" valign="top">WRI</td>
+              <td width="45%" align="left" valign="top">Wrinkles</td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-06</td>
+              <td width="45%" align="left" valign="top">Emoenage</td>
+              <td width="5%" align="center" valign="top">CRA</td>
+              <td width="45%" align="left" valign="top">Cracks</td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-07</td>
+              <td width="45%" align="left" valign="top">L/H Engine</td>
+              <td width="5%" align="center" valign="top">COR</td>
+              <td width="45%" align="left" valign="top">Corrosion</td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-08</td>
+              <td width="45%" align="left" valign="top">L/H Wing</td>
+              <td width="5%" align="center" valign="top">LKG</td>
+              <td width="45%" align="left" valign="top">Leakage (oil, fuel, etc)</td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-09</td>
+              <td width="45%" align="left" valign="top">L/H MLG wheel well</td>
+              <td width="5%" align="center" valign="top">INS</td>
+              <td width="45%" align="left" valign="top">Installation security and safety</td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-10</td>
+              <td width="45%" align="left" valign="top">L/H Fuselage</td>
+              <td width="5%" align="center" valign="top">ODF</td>
+              <td width="45%" align="left" valign="top">Other defect</td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-11</td>
+              <td width="45%" align="left" valign="top">Cockpit</td>
+              <td width="5%" align="center" valign="top"></td>
+              <td width="45%" align="left" valign="top"></td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-12</td>
+              <td width="45%" align="left" valign="top">Cabin</td>
+              <td width="5%" align="center" valign="top"></td>
+              <td width="45%" align="left" valign="top"></td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-13</td>
+              <td width="45%" align="left" valign="top">Lavatory</td>
+              <td width="5%" align="center" valign="top"></td>
+              <td width="45%" align="left" valign="top"></td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-14</td>
+              <td width="45%" align="left" valign="top">Galley</td>
+              <td width="5%" align="center" valign="top"></td>
+              <td width="45%" align="left" valign="top"></td>
           </tr>
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top">Z-15</td>
+              <td width="45%" align="left" valign="top">Cargo</td>
+              <td width="5%" align="center" valign="top"></td>
+              <td width="45%" align="left" valign="top"></td>
           </tr>
       </table>
     </div>
@@ -279,31 +300,32 @@
                       (use attached sheet to write up the discrepency)
                       <div style="position:absolute;top:-6px;left:90px;">
                         <ul>
-                            <li>
-                                <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
-                            </li>
-                            <li style="margin-left:12px;">
-                                <img src="./img/check.png" alt="" width="11"> <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
-                            </li>
+                          <li>
+                              <img @if(sizeof($jobCard->defectcards) <> 0)
+                                  src="./img/check.png"
+                                  @else
+                                  src="./img/check-box-empty.png"
+                                  @endif
+                                  alt="" width="10"> 
+                                  <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
+                          </li>
+                          <li style="margin-left:12px;">
+                              <img @if(sizeof($jobCard->defectcards) == 0)
+                              src="./img/check.png"
+                              @else
+                              src="./img/check-box-empty.png"
+                              @endif
+                              alt="" width="11"> 
+                              <span style="margin-left:6px;font-weight: bold;font-size:13px">NO</span>
+                          </li>
                         </ul>
                       </div>
-                      <span style="position:absolute;top:60px;left:0">Number od discrepencies...............item(s)</span>
+                      <span style="position:absolute;top:60px;left:0">Number of discrepencies {{ sizeof($jobCard->defectcards) }} item(s)</span>
                   </td>
-                  <td width="50%" height="60" valign="top" style="position:relative;">Inspection performed by :</td>
+                  <td width="50%" height="60" valign="top" style="position:relative;">Inspection performed by : {{ $jobCard->progresses->first()->progressedBy->full_name }} </td>
               </tr>
-          </table>
-          <table width="100%" style="margin-top: 4px;">
-                <tr>
-                    <td width="50%">Issued By : Name PPC</td>
-                    <td width="50%" align="right">Page 1/2</td>
-                </tr>
           </table>
       </div>
   </div>
-
-  <div style="position:absolute;bottom:0;">
-    <img src="./img/form/printoutpreliminaryinspection/FooterPreliminaryInspection.jpg" width="100%" alt="" srcset="">
-  </div>
-
 </body>
 </html>

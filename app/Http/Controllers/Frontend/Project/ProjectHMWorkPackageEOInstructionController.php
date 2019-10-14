@@ -60,6 +60,15 @@ class ProjectHMWorkPackageEOInstructionController extends Controller
      */
     public function store(Request $request,Project $project, WorkPackage $workpackage, EOInstruction $instruction)
     {
+        if($workpackage->is_template == 0){
+            $exists = $workpackage->eo_instructions->contains($instruction->id);
+            if($exists){
+                return response()->json(['title' => "Danger"]);
+            }else{
+                $workpackage->eo_instructions()->attach($instruction->id);
+            }
+        }
+
         $project_wokpackage = ProjectWorkPackage::where('project_id',$project->id)->where('workpackage_id',$workpackage->id)->first();
 
         $project_wokpackage_taskcard = ProjectWorkPackageEOInstruction::where('project_workpackage_id',$project_wokpackage->id)->where('eo_instruction_id',$instruction->id)->first();
@@ -69,6 +78,7 @@ class ProjectHMWorkPackageEOInstructionController extends Controller
         }else{
                 $project_wokpackage->eo_instructions()->create([
                 'eo_instruction_id' => $instruction->id,
+                'is_rii' => EOInstruction::find($instruction->id)->is_rii,
             ]);
 
             return response()->json($project_wokpackage);

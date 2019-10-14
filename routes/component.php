@@ -18,6 +18,7 @@ Route::name('component.')->group(function () {
         Route::get('get-tools', 'FillComboxController@tool')->name('get-tool');
         Route::get('get-zones', 'FillComboxController@zone')->name('get-zones');
         Route::get('get-items', 'FillComboxController@item')->name('get-items');
+        Route::get('get-promos', 'FillComboxController@promo')->name('get-promos');
         Route::get('get-items-uuid', 'FillComboxController@itemUUID')->name('get-items-uuid');
         Route::get('get-units', 'FillComboxController@units')->name('get-units');
         Route::get('get-vendors', 'FillComboxController@vendor')->name('get-vendor');
@@ -26,11 +27,14 @@ Route::name('component.')->group(function () {
         Route::get('get-stations', 'FillComboxController@station')->name('get-stations');
         Route::get('get-materials', 'FillComboxController@material')->name('get-material');
         Route::get('get-po-materials/{purchaseOrder}', 'FillComboxController@poMaterial')->name('get-po-material');
+        Route::get('get-item-po-details/{purchaseOrder}/{item}', 'FillComboxController@ItemPODetails')->name('get-item-po-details');
         Route::get('get-aircrafts', 'FillComboxController@aircraft')->name('get-aircrafts');
         Route::get('get-customers', 'FillComboxController@customer')->name('get-customers');
         Route::get('get-taskcards', 'FillComboxController@taskcard')->name('get-taskcards');
         Route::get('get-task-types', 'FillComboxController@taskType')->name('get-task-types');
         Route::get('get-unit-types', 'FillComboxController@unitType')->name('get-unit-types');
+        Route::get('get-item-units/{item}', 'FillComboxController@itemUnits')->name('get-item-units');
+        Route::get('get-item-unit-uuid/{item}', 'FillComboxController@itemUnitUuid')->name('get-item-unit-uuid');
         Route::get('get-work-areas', 'FillComboxController@workArea')->name('get-work-areas');
         Route::get('get-facilities', 'FillComboxController@facility')->name('get-facilities');
         Route::get('get-work-orders', 'FillComboxController@workOrder')->name('get-work-orders');
@@ -40,13 +44,13 @@ Route::name('component.')->group(function () {
         Route::get('get-storages-combobox', 'FillComboxController@storages')->name('get-storages');
         Route::get('get-repeat-types', 'FillComboxController@repeatType')->name('get-repeat-types');
         Route::get('get-categories-item', 'FillComboxController@categories')->name('get-categories');
+        Route::get('get-iterchanges/{item}', 'FillComboxController@iterchange')->name('get-iterchanges');
         Route::get('get-payment-term', 'FillComboxController@paymentTerm')->name('get-payment-term');
         Route::get('get-pr-types', 'FillComboxController@purchaseRequestType')->name('get-pr-types');
-        Route::get('get-accountcodes', 'FillComboxController@accountCodes')->name('get-accountcodes');
         Route::get('get-website-types', 'FillComboxController@websiteType')->name('get-website-types');
         Route::get('get-employees-data', 'FillComboxController@employees')->name('get-employees-data');
+        Route::get('get-employees-uuid', 'FillComboxController@employeeUuid')->name('get-employees-uuid');
         Route::get('get-address-types', 'FillComboxController@addressType')->name('get-address-types');
-        Route::get('get-account-codes', 'AccountCodeController@getJournals')->name('get-account-codes');
         Route::get('get-manufacturers', 'FillComboxController@manufacturer')->name('get-manufacturers');
         Route::get('get-takcard-types', 'FillComboxController@taskcardType')->name('get-takcard-types');
         Route::get('get-customer-level', 'FillComboxController@customerLevel')->name('get-customer-level');

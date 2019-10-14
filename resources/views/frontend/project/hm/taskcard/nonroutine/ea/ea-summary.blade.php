@@ -149,7 +149,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="si_tools_datatable" id="scrolling_both"></div>
+                                            <div class="ea_tools_datatable" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@
                                         </div>
 
                                         <div class="m-accordion__item-content">
-                                            <div class="si_materials_datatable" id="scrolling_both"></div>
+                                            <div class="ea_materials_datatables" id="scrolling_both"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -222,9 +222,10 @@
 @endsection
 
 @push('footer-scripts')
-    <script>
-        let workPackage_uuid = '{{ $workPackage->uuid }}';
-    </script>
-    <script src="{{ asset('js/frontend/workpackage/non-routine/summary.js') }}"></script>
-    <script src="{{ asset('js/frontend/workpackage/item/form-reset.js') }}"></script>
+<script>
+    let workPackage_uuid = '{{ $workPackage->uuid }}';
+    let project_uuid = '{{ $project->uuid }}';
+</script>
+<script src="{{ asset('js/frontend/project/hm/non-routine/summary.js') }}"></script>
+{{-- <script src="{{ asset('js/frontend/project/item/form-reset.js') }}"></script> --}}
 @endpush

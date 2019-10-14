@@ -2,6 +2,7 @@
 
 use App\Models\Type;
 use App\Models\Company;
+use App\Models\Storage;
 use App\Models\Department;
 use Faker\Generator as Faker;
 
@@ -23,5 +24,17 @@ $factory->define(Department::class, function (Faker $faker) {
         'name' => 'Dept. ' . $faker->word,
         'description' => $faker->randomElement([null, $faker->text]),
     ];
+
+});
+
+/** Callbacks */
+
+$factory->afterCreating(Department::class, function ($department, $faker) {
+
+    // Storage
+    
+    if ($faker->boolean) {
+        $department->storages()->save(Storage::get()->random());
+    }
 
 });

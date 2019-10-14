@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Datatables\DefectCard;
 
+use Auth;
 use Carbon\Carbon;
+use App\User;
 use App\Models\Status;
 use App\Models\Project;
-use App\Models\JobCard;
 use App\Models\ListUtil;
 use App\Models\Quotation;
 use App\Models\DefectCard;
@@ -26,10 +27,31 @@ class DefectCardDatatables extends Controller
                         ->get();
 
         foreach($DefectCard as $jobcard){
-            $jobcard->customer_name .= $jobcard->jobcard->quotation->quotationable->customer->name;
-            $jobcard->taskcard_number .= $jobcard->jobcard->jobcardable->number;
-            $jobcard->aircraft .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
+            if($jobcard->approvals->toArray() == []){
+                $conducted_by = "";
+                $conducted_at = "";
 
+            }
+            else{
+                $conducted_by = User::find($jobcard->approvals->last()->conducted_by)->name;
+                $conducted_at = $jobcard->approvals->last()->created_at;
+            }
+
+            $jobcard->customer_name     .= $jobcard->jobcard->quotation->quotationable->customer->name;
+            $jobcard->taskcard_number   .= $jobcard->jobcard->jobcardable->number;
+            $jobcard->aircraft          .= $jobcard->jobcard->quotation->quotationable->aircraft->name;
+
+            //auditable, Technichal Writer request to show this
+            $jobcard->conducted_by      .= $conducted_by;
+            $jobcard->conducted_at      .= $conducted_at;
+
+            $jobcard->create_date       .= $jobcard->audits->first()->created_at;
+            $jobcard->created_by        .= User::find($jobcard->audits->first()->user_id)->name;
+
+            $jobcard->update_date       .= $jobcard->audits->last()->updated_at;
+            $jobcard->updated_by        .= User::find($jobcard->audits->last()->user_id)->name;
+            
+            // get skill
             if(isset($jobcard->jobcard->jobcardable->skills) ){
                 if(sizeof($jobcard->jobcard->jobcardable->skills) == 3){
                     $jobcard->skill .= "ERI";
@@ -42,95 +64,37 @@ class DefectCardDatatables extends Controller
                 }
             }
 
+            $jobcard->actual .= $jobcard->ActualManhour;
 
-            $statuses = Status::ofDefectCard()->get();
-            $defectcard = DefectCard::where('uuid',$jobcard->uuid)->first();
-            foreach($defectcard->helpers as $helper){
-                $helper->userID .= $helper->user->id;
-            }
-            $manhours = 0;
-            foreach($defectcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                $date1 = null;
-                foreach($values as $value){
-                    if($statuses->where('id',$value->status_id)->first()->code <> "open" or $statuses->where('id',$value->status_id)->first()->code <> "released" or $statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
-                        if($jobcard->helpers->where('userID',$key)->first() == null){
-                            if($date1 <> null){
-                                $t1 = Carbon::parse($date1);
-                                $t2 = Carbon::parse($value->created_at);
-                                $diff = $t1->diffInSeconds($t2);
-                                $manhours = $manhours + $diff;
-                            }
-                            $date1 = $value->created_at;
-                        }
-                    }
+            $count_user = $jobcard->progresses->groupby('progressed_by')->count()-1;
 
-                }
-            }
-            $manhours = $manhours/3600;
-            $manhours_break = 0;
-            foreach($defectcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                // dump(sizeOf($values->toArray()));
-                // dump($values);
-                for($i=0; $i<sizeOf($values->toArray()); $i++){
-                    if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
-                        if($defectcard->helpers->where('userID',$key)->first() == null){
-                            if($date1 <> null){
-                                if($i+1 < sizeOf($values->toArray())){
-                                    $t2 = Carbon::parse($values[$i]->created_at);
-                                    $t3 = Carbon::parse($values[$i+1]->created_at);
-                                    $diff = $t2->diffInSeconds($t3);
-                                    $manhours_break = $manhours_break + $diff;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            $manhours_break = $manhours_break/3600;
-            $actual_manhours =number_format($manhours-$manhours_break, 2);
-            $jobcard->actual .= $actual_manhours;
-                // dd($jobcard->progresses);
-            $count_user = $defectcard->progresses->groupby('progressed_by')->count();
-
-            // dd($count_user);
             $status = [];
-            foreach($defectcard->progresses->groupby('progressed_by') as $key => $value){
-                if(Status::ofDefectCard()->where('id',$defectcard->progresses->where('progressed_by',$key)->last()->status_id)->first()->code == "pending"){
-                    array_push($status, 'Pending');
-                }
-            }
 
-            if($jobcard->is_rii == 1 and $jobcard->approvals->count()==4){
+            if($jobcard->is_rii == 1 and $jobcard->approvals->count()== 4){
                 $jobcard->status .= 'Released';
             }
-            elseif($jobcard->is_rii == 1 and $jobcard->approvals->count()==3 and $jobcard->progresses->where('status_id', Status::ofDefectCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() <> $count_user){
-                    $jobcard->status .= 'Waiting for RII';
+            else if($jobcard->is_rii == 1 and $jobcard->approvals->count()== 3){
+                $jobcard->status .= 'Waiting for RII';
             }
-            elseif($jobcard->is_rii == 0 and sizeof($jobcard->approvals)==3){
-                if($jobcard->progresses->where('status_id', Status::ofDefectCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-                    $jobcard->status .= 'Released';
+            elseif($jobcard->is_rii == 0 and $jobcard->approvals->count()== 3){
+                $jobcard->status .= 'Released';
+            }
+            elseif($jobcard->progresses->where('progressed_by',Auth::id())->first() == null){
+                $jobcard->status .= 'Open';
+            }else{
+                if($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','closed')->first()->id){
+                    $jobcard->status .= 'Closed';
+                }
+                elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','pending')->first()->id){
+                    $jobcard->status .= 'Pending';
+                }
+                elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','progress')->first()->id){
+                    $jobcard->status .= 'Progress';
+                }
+                elseif($jobcard->progresses->where('progressed_by',Auth::id())->last()->status_id == Status::ofdefectcard()->where('code','open')->first()->id){
+                    $jobcard->status .= 'Open';
                 }
             }
-            elseif($jobcard->progresses->where('status_id', Status::ofDefectCard()->where('code','closed')->first()->id)->groupby('progressed_by')->count() == $count_user and $count_user <> 0){
-                $jobcard->status .= 'Closed';
-            }
-            elseif(sizeof($status) == $count_user and $count_user <> 0){
-                $jobcard->status .= 'Pending';
-            }
-            elseif(sizeof($status) <> $count_user and $count_user <> 0){
-                $jobcard->status .= 'Progress';
-            }
-            elseif($jobcard->progresses->count()==1){
-                $jobcard->status .= 'Open';
-            }
-            elseif($jobcard->approvals->count()==2){
-                $jobcard->status .= 'PPC Approved';
-            }
-            elseif($jobcard->approvals->count()==1){
-                $jobcard->status .= 'Engineer Approved';
-            }
-
         }
 
         $data = $alldata = json_decode($DefectCard);

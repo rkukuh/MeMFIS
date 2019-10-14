@@ -128,14 +128,16 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Qty Engineer @include('frontend.common.label.required')
+                                                Zone  @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.input.number')
-                                                    @slot('text', 'Engineer Quantity')
-                                                    @slot('id', 'engineer_qty')
-                                                    @slot('name', 'engineer_qty')
-                                                    @slot('id_error', 'engineer_qty')
+                                            @component('frontend.common.input.select2')
+                                                @slot('id', 'zone')
+                                                @slot('text', 'Zone')
+                                                @slot('name', 'zone')
+                                                @slot('id_error', 'zone')
+                                                @slot('multiple','multiple')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -149,32 +151,6 @@
                                                 @slot('id', 'ata')
                                                 @slot('name', 'ata')
                                                 @slot('text', 'ATA')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Qty Helper @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.number')
-                                                    @slot('text', 'Helper Quantity')
-                                                    @slot('id', 'helper_quantity')
-                                                    @slot('name', 'helper_quantity')
-                                                    @slot('id_error', 'helper_quantity')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Area/Zone
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Work Area')
-                                                @slot('id', 'work_area')
-                                                @slot('name', 'work_area')
-                                                @slot('id_error', 'work-area')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -387,6 +363,43 @@
                                 @include('frontend.common.label.datalist')
 
                                 <h3 class="m-portlet__head-text">
+                                    Helper(s) List
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                            <div class="defectcard_helper_datatable" id="scrolling_both"></div>
+                                            <button data-toggle="modal" data-target="#modal_helper" type="button" href="#" 
+                                            class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-md add-helper" title="Add Helper" 
+                                   ><i class="la la-plus-circle"></i> Add Helper</button>
+                                        @component('frontend.common.buttons.delete_repeater')
+                                            @slot('class', 'delete_helper_row')
+                                        @endcomponent
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            @include('frontend.discrepancy.engineer.modal-helper')
+                            <table id="helper_datatable" class="table table-striped table-bordered" width="100%"></table>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
                                     Tool(s) List
                                 </h3>
                             </div>
@@ -467,12 +480,19 @@
 @endpush
 
 @push('footer-scripts')
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('js/frontend/discrepancy/engineer/create.js') }}"></script>
     <script src="{{ asset('js/frontend/discrepancy/form-reset.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/repeater.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/fill-combobox/otr-certification.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/work-area.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/helper.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/zone.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
+
 @endpush

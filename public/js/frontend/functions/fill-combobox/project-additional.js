@@ -7,9 +7,9 @@ $(document).ready(function () {
             success: function (data) {
                 $('select[name="project-additional"]').empty();
 
-                $('select[name="project-additional"]').append(
-                    '<option value=""> Select a Project</option>'
-                );
+                // $('select[name="project-additional"]').append(
+                //     '<option value=""> Select a Project</option>'
+                // );
 
                 $.each(data, function (key, value) {
                     $('select[name="project-additional"]').append(

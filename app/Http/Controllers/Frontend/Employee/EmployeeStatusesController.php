@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\frontend\employee;
 
-use App\Models\status;
+use App\Models\Status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\EmployeeStatusesStore;
 use App\Http\Requests\Frontend\EmployeeStatusesUpdate;

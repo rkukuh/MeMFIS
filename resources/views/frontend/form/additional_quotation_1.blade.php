@@ -373,7 +373,14 @@
         <div class="container">
             <table width="100%" cellpadding="3">
                 <tr>
-                    <td width="50%" rowspan="6" valign="top"><b>Term & Condition</b> <br> - PPN Include/Excluded </td>
+                    <td width="50%" rowspan="6" valign="top"><b>Term & Condition</b><br>
+                        {{-- @if(isset($quotation->term_of_condition))
+                            {{$quotation->term_of_condition}}
+                        @else   
+                            -
+                        @endif --}}
+                        PPN Include
+                    </td>
                     <td width="25%" valign="top" align="left">Total</td>
                     {{-- <td width="25%" valign="top" align="right">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal) }}</td> --}}
                     <td width="25%" valign="top" align="right">Rp. 10000</td>
@@ -421,12 +428,13 @@
             <table style="margin-top:80px;" width="100%">
                 <tr>
                     <td width="50%" align="center">
-                        <b> EDDY SIREGAR</b><br>
-                        Marketing Manager
+                        <b> {{ $username }}</b><br>
                     </td>
                     <td width="50%" align="center">
-                        <b> EDDY SIREGAR </b><br>
-                        Sriwijaya Air
+                        @if(isset($quotation->approvals->last()->note))
+                        <b> {{ $quotation->approvals->last()->note }} </b><br>
+                        @endif
+                        <b> {{ $quotation->quotationable->customer->name }} </b><br>
                     </td>
                 </tr>
             </table>

@@ -108,7 +108,7 @@ let AdditionalTaskQtnEdit = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -230,7 +230,7 @@ let AdditionalTaskQtnEdit = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -330,6 +330,7 @@ let AdditionalTaskQtnEdit = {
                 }
             ]
         });
+        
         $('.defect_card_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -351,7 +352,7 @@ let AdditionalTaskQtnEdit = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -596,6 +597,7 @@ let AdditionalTaskQtnEdit = {
                 }
             });
         });
+
         $('.tools_datatable').on('click','.edit-item-price', function edit () {
             // save_changes_button();
 
@@ -723,6 +725,7 @@ let AdditionalTaskQtnEdit = {
                 }
             });
         });
+
         $('.nav-tabs').on('click', '.items', function () {
 
             let table = $('.materials_datatable').mDatatable();
@@ -742,7 +745,7 @@ jQuery(document).ready(function () {
     AdditionalTaskQtnEdit.init();
 });
 
-$('.action-buttons').on('click', '.discount-htcrr', function () {
+$('.action-buttons').on('click', '.discount-additional', function () {
     let type = $('select[name="discount-type"]').val();
     let discount = $('input[name="discount"').val();
 
@@ -765,7 +768,7 @@ $('.action-buttons').on('click', '.discount-htcrr', function () {
                 //     document.getElementById('name').value = name;
                 // }
             } else {
-                $('#discount').modal('hide');
+                $('#discount_additional').modal('hide');
 
 
                 toastr.success('Discount has been updated.', 'Success', {
@@ -801,7 +804,7 @@ $('.calculate').on('click', function () {
 
 function calculate_total() {
     let value = [];
-    let inputs = $(".charge");
+    let inputs = $(".charges");
     let currency = $("#currency").val();
     let exchange_rate = $("#exchange").val();
     let grandTotal = grandTotalRupiah = 0;

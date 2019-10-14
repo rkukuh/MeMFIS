@@ -26,7 +26,7 @@ let RoutineWorkpackage = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -145,15 +145,11 @@ let RoutineWorkpackage = {
                 template: function (t, e, i) {
                     if(t.sequence){
                         return (
-                            t.sequence+'<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence='+t.sequence+' data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            t.sequence
                         );
                     }else{
                         return (
-                            '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence='+t.sequence+' data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            '-'
                         );
                     }
                 }
@@ -220,7 +216,7 @@ let RoutineWorkpackage = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -339,15 +335,11 @@ let RoutineWorkpackage = {
                 template: function (t, e, i) {
                     if(t.sequence){
                         return (
-                            t.sequence+'<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence='+t.sequence+' data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            t.sequence
                         );
                     }else{
                         return (
-                            '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence='+t.sequence+' data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            '-'
                         );
                     }
                 }
@@ -414,7 +406,7 @@ let RoutineWorkpackage = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -533,15 +525,11 @@ let RoutineWorkpackage = {
                 template: function (t, e, i) {
                     if(t.sequence){
                         return (
-                            t.sequence+'<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence='+t.sequence+' data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            t.sequence
                         );
                     }else{
                         return (
-                            '<button data-toggle="modal" data-target="#taskcard_sequence" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill sequence" title="Sequence" data-sequence='+t.sequence+' data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-file-text-o"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                            '-'
                         );
                     }
                 }

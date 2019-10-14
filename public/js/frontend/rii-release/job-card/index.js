@@ -20,7 +20,7 @@ let RiiRelease = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -134,6 +134,33 @@ let RiiRelease = {
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'created_by',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                     template: function (t, e, i) {
+                        return t.created_by + '<br>' + t.create_date 
+                    }
+                },
+                {
+                    field: 'updated_by',
+                    title: 'Updated By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.updated_by + '<br>' + t.update_date 
+                    }
+                },
+                {
+                    field: 'conducted_by',
+                    title: 'Released By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.conducted_at 
+                    }
                 },
                 {
                     field: 'Actions',

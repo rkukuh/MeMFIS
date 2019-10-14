@@ -134,6 +134,15 @@ let TaskCard = {
 
                                 window.location.href = '/taskcard-si/'+response.uuid+'/edit';
                             }
+                        },
+                        error: function (jqXhr, json, errorThrown) {
+                            let errors = jqXhr.responseJSON;
+                            $.each(errors.error, function (index, value) {
+                                    toastr.error(value.message, value.title, {
+                                        timeOut: 5000
+                                    }
+                                );
+                            });
                         }
                     });
 

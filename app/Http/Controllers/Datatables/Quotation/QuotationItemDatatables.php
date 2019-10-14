@@ -40,7 +40,7 @@ class QuotationItemDatatables extends Controller
 
         foreach($routinematerials as $routinematerial){
             if($routinematerial->item->prices->last() <> null){
-                $routinematerial->unitPrice .= $routinematerial->item->prices->where('level',$quotation->quotationable->customer->levels->last()->id)->last()->amount;
+                $routinematerial->unitPrice .= $routinematerial->item->prices()->where('level', $quotation->quotationable->customer->levels->last()->score)->first()->amount;
             }
             else{
                 $routinematerial->unitPrice .= 0;
@@ -161,7 +161,7 @@ class QuotationItemDatatables extends Controller
 
         foreach($nonroutinematerials as $nonroutinematerial){
             if($nonroutinematerial->item->prices->last() <> null){
-                $nonroutinematerial->unitPrice .= $nonroutinematerial->item->prices->where('level',$quotation->quotationable->customer->levels->last()->id)->last()->amount;
+                $nonroutinematerial->unitPrice .= $nonroutinematerial->item->prices()->where('level', $quotation->quotationable->customer->levels->last()->score)->first()->amount;
             }
             else{
                 $nonroutinematerial->unitPrice .= 0;
@@ -266,7 +266,7 @@ class QuotationItemDatatables extends Controller
     public function htcrr(Quotation $quotation)
     {
         $htcrrmaterials = $materials = [];
-        $htcrrs = HtCrr::whereNull('parent_id')->where('project_id', $quotation->project_id)->get();
+        $htcrrs = HtCrr::whereNull('parent_id')->where('project_id', $quotation->quotationable->id)->get();
         // -Get Items from htcrr
         foreach($htcrrs as $htcrr){
             foreach($htcrr->materials as $material){

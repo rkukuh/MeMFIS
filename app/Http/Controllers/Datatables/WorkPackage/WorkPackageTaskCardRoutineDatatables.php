@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Datatables\WorkPackage;
 
 use App\Models\WorkPackage;
+use App\Models\Pivots\TaskCardWorkPackage;
 use App\Models\ListUtil;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,23 +17,16 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function basic(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type','task')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'Basic');
-                                    })->whereNull('taskcards.deleted_at')
-                                    ->get();
+        $workPackages = TaskCardWorkPackage::with('taskcard','taskcard.type','taskcard.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereHas('taskcard.type', function ($query) {
+                            $query->where('name', 'Basic');
+                        })->whereNull('deleted_at')
+                        ->get();
 
-        foreach($workPackages as $taskcard){
-            if(isset($taskcard->skills) ){
-                if(sizeof($taskcard->skills) == 3){
-                    $taskcard->skill .= "ERI";
-                }
-                else if(sizeof($taskcard->skills) == 1){
-                    $taskcard->skill .= $taskcard->skills[0]->name;
-                }
-                else{
-                    $taskcard->skill .= '';
-                }
+        foreach($workPackages as $workPackage){
+            if(isset($workPackage->taskcard->skills) ){
+                $workPackage->skill .= $workPackage->taskcard->skill;
             }
         }
 
@@ -133,10 +127,12 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function sip(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type','task')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'SIP');
-                                    })->whereNull('taskcards.deleted_at')->get();
+        $workPackages = TaskCardWorkPackage::with('taskcard','taskcard.type','taskcard.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereHas('taskcard.type', function ($query) {
+                            $query->where('name', 'SIP');
+                        })->whereNull('deleted_at')
+                        ->get();
 
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){
@@ -249,10 +245,12 @@ class WorkPackageTaskCardRoutineDatatables extends Controller
      */
     public function cpcp(WorkPackage $workPackage)
     {
-        $workPackages = $workPackage->taskcards()->with('type','task')
-                                    ->whereHas('type', function ($query) {
-                                        $query->where('name', 'CPCP');
-                                    })->whereNull('taskcards.deleted_at')->get();
+        $workPackages = TaskCardWorkPackage::with('taskcard','taskcard.type','taskcard.task')
+                        ->where('workpackage_id',$workPackage->id)
+                        ->whereHas('taskcard.type', function ($query) {
+                            $query->where('name', 'CPCP');
+                        })->whereNull('deleted_at')
+                        ->get();
 
         foreach($workPackages as $taskcard){
             if(isset($taskcard->skills) ){

@@ -1,4 +1,6 @@
 
+let dataSet = [];
+
 let Discrepancy = {
     init: function () {
         $(document).ready(function () {
@@ -12,7 +14,15 @@ let Discrepancy = {
             };
         });
         let simpan = $('.footer').on('click', '.add-discrepancy', function () {
+            let zone = [];
+            i = 0;
+            $("#zone").val().forEach(function(entry) {
+                zone[i] = entry;
+                i++;
+            });
+
             let uuid = $('input[name=uuid]').val();
+            zone = JSON.stringify(zone);
             let engineer_qty = $('input[name=engineer_qty]').val();
             let helper_quantity =  $('input[name=helper_quantity]').val();
             let manhours =  $('input[name=manhours]').val();
@@ -34,6 +44,19 @@ let Discrepancy = {
                 propose.push($(this).val());
               });
 
+
+            let helper_array = [];
+            let helper_datatable = $('#helper_datatable').DataTable();
+            let allData = helper_datatable.rows().data();
+            for(let ind = 0 ; ind < allData.length ; ind++){
+                let container = [];
+                container[0] = allData[ind]["code"];
+                container[1] = allData[ind]["helper"];
+                container[2] = allData[ind]["reference"];
+                helper_array.push(container);
+            }
+            helper_array = JSON.stringify(helper_array);
+
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -44,7 +67,7 @@ let Discrepancy = {
                     _token: $('input[name=_token]').val(),
                     jobcard_id: uuid,
                     engineer_quantity: engineer_qty,
-                    helper_quantity: helper_quantity,
+                    helper_array: helper_array,
                     estimation_manhour: manhours,
                     description: description,
                     complaint: complaint,
@@ -54,6 +77,7 @@ let Discrepancy = {
                     propose: propose,
                     propose_correction_text: other,
                     is_rii:is_rii,
+                    zone:zone,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -106,7 +130,7 @@ let Item = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -172,4 +196,67 @@ let Item = {
 jQuery(document).ready(function() {
     Item.init();
     Discrepancy.init();
+});
+
+let helper = {
+    init: function () {
+        let helper = $('#helper_datatable').DataTable( {
+            data: dataSet,
+            columns: [
+                { 
+                  title: "NIM",
+                  data: "code"
+                },
+                { 
+                  title: "Helper",
+                  data: "helper"
+                },
+                { 
+                  title: "Reference", 
+                  data: "reference"
+                },
+
+            ],
+            searching: false, 
+            paging: false, 
+            info: false,
+            footer: true,
+        } );
+
+        $('.add_helper').on('click', function () {
+            let fname = $("#defectcard_helper option:selected").text();
+            let defectcard_helper = $('#defectcard_helper').val();
+            let reference = $("#reference").val();
+
+            let newRow = [];
+            newRow["code"] = defectcard_helper;
+            newRow["helper"] = fname;
+            newRow["reference"] = reference;
+            helper.row.add( newRow ).draw();
+            
+            $("#reference").val("");
+            $("#defectcard_helper").val("").select2();
+            
+            $("#modal_helper").modal("hide");
+        });
+
+        $('#helper_datatable tbody').on( 'click', 'tr', function () {
+            if ( $(this).hasClass('selected') ) {
+                $(this).removeClass('selected');
+            }
+            else {
+              helper.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        } );
+
+        $('.delete_helper_row').on('click', function () {
+            helper.row('.selected').remove().draw( false );
+        });
+
+    }
+};
+
+jQuery(document).ready(function () {
+    helper.init();
 });

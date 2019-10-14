@@ -7,7 +7,7 @@ let ImportFingerprint = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/leave-period',
+                        url: '/datatables/employee/attendance-file',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -21,7 +21,7 @@ let ImportFingerprint = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -56,22 +56,22 @@ let ImportFingerprint = {
                     }
                 },
                 {
-                    field: 'code',
+                    field: 'imported_date',
                     title: 'Imported Date',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        return '<a href="/leave-period/'+t.uuid+'">' + t.code + "</a>"
-                    }
+                    // template: function (t) {
+                    //     return '<a href="/leave-period/'+t.uuid+'">' + t.code + "</a>"
+                    // }
                 },
                 {
-                    field: 'name',
+                    field: 'filename',
                     title: 'File Name',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'description',
+                    field: 'imported_by',
                     title: 'Import By',
                     sortable: 'asc',
                     filterable: !1,

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use App\MemfisModel;
 
 class DefectCard extends MemfisModel
@@ -53,6 +54,7 @@ class DefectCard extends MemfisModel
     public function helpers()
     {
         return $this->belongsToMany(Employee::class, 'defectcard_employee', 'defectcard_id', 'employee_id')
+                    ->withPivot('additionals')
                     ->withTimestamps();
     }
 
@@ -172,7 +174,79 @@ class DefectCard extends MemfisModel
                     ->withTimestamps();
     }
 
+    /**
+     * Many-to-Many: A defect card may have zero or many aircraft's zone.
+     *
+     * This function will retrieve all the aircraft's zones of a defect card.
+     * See: Zone's defectcards() method for the inverse
+     *
+     * @return mixed
+     */
+    public function zones()
+    {
+        return $this->belongsToMany(Zone::class, 'defectcard_zone', 'defectcard_id', 'zone_id')
+                    ->withTimestamps();
+    }
+
     /*************************************** ACCESSOR ****************************************/
+
+    /**
+     * Get the actual manhour jobcard.
+     *
+     * @return string
+     */
+    public function getActualManhourAttribute()
+    {
+        $statuses = Status::ofDefectCard()->get();
+        foreach($this->helpers as $helper){
+            $helper->userID .= $helper->user->id;
+        }
+
+        $manhours = 0;
+
+        //calculating defect card's actual manhours
+        $manhours = 0;
+        foreach($this->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            $date1 = null;
+            foreach($values as $value){
+                if($statuses->where('id',$value->status_id)->first()->code <> "open" or $statuses->where('id',$value->status_id)->first()->code <> "released" or $statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
+                    if($this->helpers->where('userID',$key)->first() == null){
+                        if($date1 <> null){
+                            $t1 = Carbon::parse($date1);
+                            $t2 = Carbon::parse($value->created_at);
+                            $diff = $t1->diffInSeconds($t2);
+                            $manhours = $manhours + $diff;
+                        }
+                        $date1 = $value->created_at;
+                    }
+                }
+
+            }
+        }
+        $manhours = $manhours/3600;
+        $manhours_break = 0;
+        foreach($this->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
+            for($i=0; $i<sizeOf($values->toArray()); $i++){
+                if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
+                    if($this->helpers->where('userID',$key)->first() == null){
+                        if($date1 <> null){
+                            if($i+1 < sizeOf($values->toArray())){
+                                $t2 = Carbon::parse($values[$i]->created_at);
+                                $t3 = Carbon::parse($values[$i+1]->created_at);
+                                $diff = $t2->diffInSeconds($t3);
+                                $manhours_break = $manhours_break + $diff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        $manhours_break = $manhours_break/3600;
+        $actual_manhours =number_format($manhours-$manhours_break, 2);
+
+        return $actual_manhours;
+    }
 
     /**
      * Get the task card's item: material.
@@ -194,5 +268,27 @@ class DefectCard extends MemfisModel
     public function getToolsAttribute()
     {
         return collect(array_values($this->items->load('unit')->where('categories.0.code', 'tool')->all()));
+    }
+
+    /**
+     * Get the task card's Skill.
+     *
+     * @return string
+     */
+    public function getSkillAttribute()
+    {
+        if(isset($this->skills) ) {
+            if(sizeof($this->skills) == 3){
+                $skill = "ERI";
+            }
+            else if(sizeof($this->skills) == 1){
+                $skill = $this->skills[0]->name;
+            }
+            else{
+                $skill = '';
+            }
+        }
+
+        return $skill;
     }
 }

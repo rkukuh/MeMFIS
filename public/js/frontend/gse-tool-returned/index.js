@@ -24,7 +24,7 @@ let GseToolReturned = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -48,6 +48,17 @@ let GseToolReturned = {
             },
             columns: [
                 {
+                    field: '#',
+                    title: 'No',
+                    width:'40',
+                    sortable: 'asc',
+                    filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {   
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
+                },
+                {
                     field: 'requested_at',
                     title: 'Date',
                     sortable: 'asc',
@@ -63,7 +74,7 @@ let GseToolReturned = {
                 },
                 {
                     field: 'number',
-                    title: 'Ref No.',
+                    title: 'Ref Document',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
@@ -73,17 +84,23 @@ let GseToolReturned = {
                 },
                 {
                     field: 'project.no_wo',
-                    title: 'Warehouse Location',
+                    title: 'Storage',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
                     field: 'project.code',
-                    title: 'Description',
+                    title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
+                },
+                {
+                    field: 'created_by',
+                    title: 'Status',
+                    sortable: 'asc',
+                    filterable: !1,
                 },
                 {
                     field: 'description',
@@ -102,12 +119,6 @@ let GseToolReturned = {
                         return ''
                     }
 
-                },
-                {
-                    field: 'created_by',
-                    title: 'Status',
-                    sortable: 'asc',
-                    filterable: !1,
                 },
                 {
                     field: '',

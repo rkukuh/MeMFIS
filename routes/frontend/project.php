@@ -12,6 +12,7 @@ Route::name('frontend.')->group(function () {
         /** PROJECT */
 
         Route::namespace('Project')->group(function () {
+            Route::post('/project-hm-additional/calculateManhours','ProjectHMAdditionalController@calculateManhours')->name('project-hm-additional.calculateManhours');
 
             Route::resource('project', 'ProjectController');
             Route::post('/project/{project}/approve', 'ProjectController@approve')->name('project.approve');
@@ -31,7 +32,6 @@ Route::name('frontend.')->group(function () {
             Route::post('/project-hm-additional/{project}/destroy','ProjectHMAdditionalController@destroy')->name('project-hm-additional.destroy');
             Route::get('/project-hm-additional/{project}/summary','ProjectHMAdditionalController@summary')->name('project-hm-additional.summary');
             Route::post('/project-hm-additional/{project}/additional-store','ProjectHMAdditionalController@additionalStore')->name('project-hm-additional.store.data');
-
 
             Route::resource('project-workshop', 'ProjectWorkshopController', [
                 'parameters' => ['project-workshop' => 'project']
@@ -56,6 +56,7 @@ Route::name('frontend.')->group(function () {
                     Route::get('/{project}/workpackage/{workPackage}/summary/ad-sb', 'SummaryNonRoutineTaskcardController@adsb')->name('summary.ad-sb');
                     Route::get('/{project}/workpackage/{workPackage}/summary/cmr-awl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('summary.cmr-awl');
                     Route::get('/{project}/workpackage/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('summary.si');
+                    Route::get('/{project}/workpackage/{workPackage}/summary/preliminary', 'SummaryNonRoutineTaskcardController@preliminary')->name('summary.preliminary');
                     Route::get('/{project}/workpackage/{workPackage}/summary/ea', 'SummaryNonRoutineTaskcardController@ea')->name('summary.ea');
                     Route::get('/{project}/workpackage/{workPackage}/summary/eo', 'SummaryNonRoutineTaskcardController@eo')->name('summary.eo');
                     Route::get('/{project}/workpackage/{workPackage}/summary/routine', 'SummaryRoutineTaskcardController@summary')->name('summary.routine');

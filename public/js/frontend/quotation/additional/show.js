@@ -19,14 +19,13 @@ let AdditionalTaskQtnShow = {
                                 dataSet = raw.data;
                             }
 
-                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -50,8 +49,8 @@ let AdditionalTaskQtnShow = {
             },
             columns: [
                 {
-                    field: 'taskcard.number',
-                    title: 'TaskCard',
+                    field: 'defectcard.code',
+                    title: 'DefectCard',
                     sortable: !1,
                 },
                 {
@@ -112,18 +111,6 @@ let AdditionalTaskQtnShow = {
                     width:150,
 
                 },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        );
-                    }
-                }
             ]
         });
 
@@ -141,14 +128,13 @@ let AdditionalTaskQtnShow = {
                                 dataSet = raw.data;
                             }
 
-                            // console.log(dataSet);
                             return dataSet;
                         }
                     }
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -172,8 +158,8 @@ let AdditionalTaskQtnShow = {
             },
             columns: [
                 {
-                    field: 'taskcard.number',
-                    title: 'TaskCard',
+                    field: 'defectcard.code',
+                    title: 'DefectCard',
                     sortable: !1,
                 },
                 {
@@ -234,20 +220,9 @@ let AdditionalTaskQtnShow = {
                     width:150,
 
                 },
-                {
-                    field: 'Actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_item_price" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item-price" title="Edit" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        );
-                    }
-                }
             ]
         });
+        
         $('.defect_card_datatable').mDatatable({
             data: {
                 type: 'remote',
@@ -269,7 +244,7 @@ let AdditionalTaskQtnShow = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -336,8 +311,8 @@ let AdditionalTaskQtnShow = {
                 }
             ]
         });
-        $('.nav-tabs').on('click', '.items', function () {
 
+        $('.nav-tabs').on('click', '.items', function () {
             let table = $('.materials_datatable').mDatatable();
             table.originalDataSet = [];
             table.reload();
@@ -345,8 +320,8 @@ let AdditionalTaskQtnShow = {
             let table2 = $('.tools_datatable').mDatatable();
             table2.originalDataSet = [];
             table2.reload();
-
         });
+
 
     }
 };

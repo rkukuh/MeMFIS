@@ -138,14 +138,18 @@ class QuotationAdditionalController extends Controller
      */
     public function show(Quotation $quotation)
     {
-        $projects = Project::get();
         $attention = json_decode($quotation->attention);
-		$charges = json_decode($quotation->charge);
+        $charges = json_decode($quotation->charge);
+        $data_defectcard = json_decode($quotation->data_defectcard);
+        $total_manhour = $data_defectcard->total_manhour;
         return view('frontend.quotation.additional.show',[
             'charges' => $charges,
             'quotation' => $quotation,
-            'project' => $quotation->project,
+            'attention' => $attention,
+            'total_manhour' => $total_manhour,
             'currencies' => $this->currencies,
+            'data_defectcard' => $data_defectcard,
+            'project' => $quotation->quotationable,
         ]);
     }
 
@@ -228,12 +232,6 @@ class QuotationAdditionalController extends Controller
         $request->merge(['project_id' => $project->id]);
         $request->merge(['customer_id' => $project->customer->id]);
 
-        
-        //TODO change
-        $request->merge(['subtotal' => 0]);
-        $request->merge(['grandtotal' => 0]);
-        $request->merge(['ppn' => 0]);
-
         // dd($request->all());
         $quotation->update($request->all());
 
@@ -273,6 +271,45 @@ class QuotationAdditionalController extends Controller
     public function approve(Quotation $quotation)
     {
         //todo validation scheduled payment amount and progress
+
+        $amount = 0;
+        $error_messages = $work_progress= [];
+        $scheduled_payment_amounts = json_decode($quotation->scheduled_payment_amount);
+        if(empty($scheduled_payment_amounts)){
+            $error_message = array(
+                'message' => "Scheduled payment total hasn't been filled yet",
+                'title' => $quotation->number,
+                'alert-type' => "error"
+            );
+            array_push($error_messages, $error_message);
+            return response()->json(['error' => $error_messages], '403');
+        }
+        foreach($scheduled_payment_amounts as $scheduled_payment_amount){
+            $amount += $scheduled_payment_amount->amount;
+            array_push($work_progress, $scheduled_payment_amount->work_progress);
+        }
+        if(intval($amount) != intval($quotation->grandtotal) ){
+            $error_message = array(
+                'message' => "Scheduled payment total amount not equal with sub total",
+                'title' => $quotation->number,
+                'alert-type' => "error"
+            );
+            array_push($error_messages, $error_message);
+        }
+        if( max($work_progress) != 100){
+
+            $error_message = array(
+                'message' => "Scheduled payment work progress still not 100%",
+                'title' => $quotation->number,
+                'alert-type' => "error"
+            );
+            array_push($error_messages, $error_message);
+        }
+
+        if(sizeof($error_messages) > 0){
+            return response()->json(['error' => $error_messages], '403');
+        }
+
         $quotation->approvals()->save(new Approval([
             'approvable_id' => $quotation->id,
             'conducted_by' => Auth::id(),
@@ -294,6 +331,7 @@ class QuotationAdditionalController extends Controller
         $defect_cards = DefectCard::where('quotation_additional_id', $quotation->id)->get();
 
         foreach($defect_cards as $defect_card){
+            // open only when quotation approved
             $defect_card->progresses()->save(new Progress([
                 'status_id' =>  Status::OfDefectCard()->where('code','open')->first()->id,
                 'progressed_by' => Auth::id()
@@ -361,7 +399,7 @@ class QuotationAdditionalController extends Controller
             }
         }
 
-        $pdf = \PDF::loadView('frontend/form/quotation',[
+        $pdf = \PDF::loadView('frontend/form/additional_quotation_1',[
                 'username' => $username,
                 'quotation' => $quotation,
                 'workpackages' => $workpackages,

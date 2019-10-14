@@ -20,7 +20,7 @@ let TaskRelease = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -74,25 +74,25 @@ let TaskRelease = {
 
                 },
                 {
-                    field: 'quotation.project.customer.name',
+                    field: 'quotation.quotationable.customer.name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft.name',
+                    field: 'quotation.quotationable.aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_register',
+                    field: 'quotation.quotationable.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_sn',
+                    field: 'quotation.quotationable.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
@@ -116,10 +116,54 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
+                },
+                {
                     field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'created_by',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                     template: function (t, e, i) {
+                        return t.created_by + '<br>' + t.create_date 
+                    }
+                },
+                {
+                    field: 'updated_by',
+                    title: 'Updated By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.updated_by + '<br>' + t.update_date 
+                    }
+                },
+                {
+                    field: 'conducted_by',
+                    title: 'Released By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.conducted_at 
+                    }
                 },
                 {
                     field: 'Actions',

@@ -37,9 +37,12 @@
                     Manhours Price List @include('frontend.common.label.required')
                 </label>
                 @component('frontend.common.label.data-info')
-                    @slot('id', 'total_mhrs')
-                    @slot('name', 'total_mhrs')
-                    @slot('text', $project_workpackage->manhour_price_list)
+                    @slot('id', 'manhour_price_list')
+                    @slot('name', 'manhour_price_list')
+                    @if(isset($quotation_workpackage->manhour_rate))
+                    @slot('value', $quotation_workpackage->manhour_rate->rate)
+                    @slot('text', $quotation_workpackage->manhour_rate->rate)
+                    @endif
                 @endcomponent
 
             </div>
@@ -52,8 +55,10 @@
                     @slot('name', 'rate')
                     @slot('id', 'rate')
                     @slot('id_error', 'rate')
-                    @if(isset($job_request))
-                    @slot('value',$job_request->pivot->manhour_rate)
+                    @if(isset($job_request->pivot->manhour_rate_amount))
+                    @slot('value',$job_request->pivot->manhour_rate_amount)
+                    @else
+                    @slot('value', $quotation_workpackage->manhour_rate->rate)
                     @endif
                 @endcomponent
             </div>
@@ -89,17 +94,18 @@
 <div class="tab-content">
     <div class="tab-pane active show" id="m_tabs_1_1" role="tabpanel">
         @include('frontend.quotation.taskcard.routine.index')
-        @include('frontend.quotation.taskcard.routine.basic.modal')
-        @include('frontend.quotation.taskcard.routine.sip.modal')
-        @include('frontend.quotation.taskcard.routine.cpcp.modal')
     </div>
     <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
         @include('frontend.quotation.taskcard.nonroutine.index')
-        @include('frontend.quotation.taskcard.nonroutine.adsb.modal')
-        @include('frontend.quotation.taskcard.nonroutine.cmrawl.modal')
-        @include('frontend.quotation.taskcard.nonroutine.si.modal')
-        @include('frontend.quotation.taskcard.nonroutine.htcrr.modal')
-        @include('frontend.quotation.taskcard.nonroutine.htcrr.workshop-task')
+
     </div>
+
+    @include('frontend.quotation.modal.material.routine')
+    @include('frontend.quotation.modal.tool.routine')
+    @include('frontend.quotation.modal.predecessor')
+    @include('frontend.quotation.modal.successor')
+    @include('frontend.quotation.modal.predecessor-instruction')
+    @include('frontend.quotation.modal.successor-instruction')
+
 </div>
 

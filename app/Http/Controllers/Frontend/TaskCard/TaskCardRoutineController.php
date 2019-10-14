@@ -74,118 +74,43 @@ class TaskCardRoutineController extends Controller
     public function store(TaskCardRoutineStore $request)
     {
         $this->decoder($request);
-        $accesses = $zones = $additionals = [];
+        // $aircrafts = Aircraft::whereIn('id', $request->applicability_airplane)->pluck('id');
+        
+        $checker = [];
+        // get all the taskcard with the same number
+        $taskcards = TaskCard::where('number', $request->number)->get();
+        if(sizeof($taskcards) > 0){
+            // to check all internal number every taskcard
+            foreach($taskcards as $taskcard){
+                $taskcard->additionals = json_decode($taskcard->additionals);
+                $zones = $taskcard->zones()->pluck('name')->toArray();
 
-        $additionals["internal_number"] = $request->additionals->internal_number;
-        $additionals["document_library"] = $request->document_library;
-        $request->merge(['additionals' => json_encode($additionals, true)]);
+                // check if the internal number are the same 
+                if($request->additionals->internal_number == $taskcard->additionals->internal_number){
+                    // TODO : check even they are have the same zone's name but have a diffrent airplane type, it's okay
+                    //check if the zones got any diffrents if yes (not empty), it's okay, if not (empty), then it's identical taskcard
+                    $diff = array_diff( $request->zone , $zones);
+                    array_push($checker, empty($diff));
+                }
+            }  
+        }else{
+            $taskcard = $this->createTaskcard($request);
 
-        if($request->work_area){
-            $request->work_area = Type::firstOrCreate(
-                ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
+            return response()->json($taskcard->original);
+        }
+
+        if(in_array(true, $checker)){
+            $error_message = array(
+                'message' => "a taskcard with same number, company number and zones already exists",
+                'title' => "Taskcard already exists!",
+                'alert-type' => "error"
             );
+            return response()->json(['error' => [$error_message]], '403');
+        }else{
+            $taskcard = $this->createTaskcard($request);
+
+            return response()->json($taskcard->original);
         }
-       
-        if ($taskcard = TaskCard::create($request->all())) {
-            $taskcard->aircrafts()->attach($request->applicability_airplane);
-
-            if($request->access){
-                foreach ($request->access as $access_name ) {
-                    foreach ($request->applicability_airplane as $airplane) {
-                        if(isset($access_name)){
-                            $access = Access::firstOrCreate(
-                                ['name' => $access_name, 'accessable_id' => $airplane, 'accessable_type' => 'App\Models\Aircraft']
-                            );
-                            array_push($accesses, $access->id);
-                        }
-                    }
-                }
-
-                $taskcard->accesses()->attach($accesses);
-
-            }
-
-            if(Type::where('id',$request->skill_id)->where('of','taskcard-skill')->first()->code == 'eri'){
-                $taskcard->skills()->attach(Type::where('code','electrical')->first()->id);
-                $taskcard->skills()->attach(Type::where('code','radio')->first()->id);
-                $taskcard->skills()->attach(Type::where('code','instrument')->first()->id);
-            }
-            else{
-                $taskcard->skills()->attach($request->skill_id);
-            }
-
-            if($request->zone){
-                foreach ($request->zone as $zone_name ) {
-                    foreach ($request->applicability_airplane as $airplane) {
-                        if(isset($zone_name)){
-                            $zone = Zone::firstOrCreate(
-                                ['name' => $zone_name, 'zoneable_id' => $airplane, 'zoneable_type' => 'App\Models\Aircraft']
-                            );
-                            array_push($zones, $zone->id);
-                        }
-                    }
-                }
-
-                $taskcard->zones()->attach($zones);
-
-            }
-
-            if( !empty(json_decode($request->relationship, true)) ) {
-                $taskcard->related_to()->attach(json_decode($request->relationship));
-            }
-
-            if(is_array($request->threshold_type)){
-            for ($i=0; $i < sizeof($request->threshold_type) ; $i++) {
-                if($request->threshold_type[$i] !== "Select Threshold"){
-                    if($request->threshold_amount[$i] == ''){
-                        $request->threshold_amount[$i] = null;
-                    }
-                    $taskcard->thresholds()->save(new Threshold([
-                        'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
-                        'amount' => $request->threshold_amount[$i],
-                        ]));
-                    }
-                }
-            }
-
-            if(is_array($request->repeat_type)){
-            for ($i=0; $i < sizeof($request->repeat_type) ; $i++) {
-                if($request->repeat_type[$i] !== "Select Repeat"){
-                    if($request->repeat_amount[$i] == ''){
-                        $request->repeat_amount[$i] = null;
-                    }
-                    $taskcard->repeats()->save(new Repeat([
-                        'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
-                        'amount' => $request->repeat_amount[$i],
-                        ]));
-                    }
-                }
-            }
-
-            if ($request->hasFile('fileInput')) {
-                $data = $request->input('image');
-                $photo = $request->file('fileInput')->getClientOriginalName();
-                $destination = 'master/taskcard/routine/';
-                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
-            }
-
-            if($request->station){
-                foreach ($request->applicability_airplane as $airplane) {
-                    if(isset($request->station)){
-                        $station = Station::firstOrCreate(
-                            ['name' => $request->station, 'stationable_id' => $airplane, 'stationable_type' => 'App\Models\Aircraft']
-                        );
-                    }
-
-                    $taskcard->stations()->attach($station);
-                }
-            }
-            // dd($taskcard);
-            return response()->json($taskcard);
-        }
-
-        // TODO: Return error message as JSON
-        return false;
     }
 
     /**
@@ -214,6 +139,7 @@ class TaskCardRoutineController extends Controller
             $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
         }
 
+        // dd($this->work_area);
         return view('frontend.task-card.routine.show', [
             'types' => $this->type,
             'tasks' => $this->task,
@@ -239,27 +165,20 @@ class TaskCardRoutineController extends Controller
      */
     public function edit(TaskCard $taskCard)
     {
-        // dd($taskCard->stations);
-        $tc_stations = $aircraft_taskcards = [];
+        $tc_stations = $aircraft_taskcards = $access_taskcards = $zone_taskcards = $relation_taskcards = [];
 
         foreach($taskCard->aircrafts as $i => $aircraft_taskcard){
             $aircraft_taskcards[$i] =  $aircraft_taskcard->id;
         }
 
-        $access_taskcards = [];
-
         foreach($taskCard->accesses as $i => $access_taskcard){
             $access_taskcards[$i] =  $access_taskcard->pivot->access_id;
         }
-
-        $zone_taskcards = [];
 
         foreach($taskCard->zones as $i => $zone_taskcard){
             $zone_taskcards[$i] =  $zone_taskcard->id;
             
         }
-
-        $relation_taskcards = [];
 
         foreach($taskCard->related_to as $i => $relation_taskcard){
             $relation_taskcards[$i] =  $relation_taskcard->pivot->related_to;
@@ -267,15 +186,16 @@ class TaskCardRoutineController extends Controller
 
         $temp = $taskCard->stations->map(function ($stations) {
             return collect($stations->toArray())
-            ->only(['name'])
+            ->only(['uuid'])
             ->all();
         });
-        
         $temp = array_values($temp->toArray());
+
         foreach($temp as $station){
-            array_push($tc_stations, $station["name"]);
+            array_push($tc_stations, $station["uuid"]);
         }
 
+        // dd(in_array("ca05f56a-bf54-467d-962c-88c3d819cffb", $tc_stations));
         return view('frontend.task-card.routine.edit', [
             'tasks' => $this->task,
             'types' => $this->type,
@@ -396,8 +316,7 @@ class TaskCardRoutineController extends Controller
                 }
             }
 
-            $request->station = explode(',', $request->station);
-            if(sizeof($request->station) > 0){
+            if(is_array($request->station) && sizeof($request->station) > 0){
                 $station_array = [];
                 foreach ($request->applicability_airplane as $airplane) {
                     if(isset($request->station)){
@@ -410,7 +329,7 @@ class TaskCardRoutineController extends Controller
                     }
                     $taskCard->stations()->sync($station_array);
                 }
-            }
+        }
 
             if ($request->hasFile('fileInput')) {
                 $data = $request->input('image');
@@ -437,19 +356,141 @@ class TaskCardRoutineController extends Controller
         //
     }
 
-    public function decoder($req){
+    public function decoder($request){
 
-        $req->zone = json_decode($req->zone);
-        $req->access = json_decode($req->access);
-        $req->sections = json_decode($req->sections);
-        $req->additionals = json_decode($req->additionals);
-        $req->repeat_type = json_decode($req->repeat_type);
-        $req->repeat_amount = json_decode($req->repeat_amount);
-        $req->threshold_type = json_decode($req->threshold_type);
-        $req->threshold_amount = json_decode($req->threshold_amount);
-        $req->document_library = json_decode($req->document_library);
-        $req->applicability_airplane = json_decode($req->applicability_airplane);
+        $request->zone = json_decode($request->zone);
+        $request->access = json_decode($request->access);
+        $request->station = json_decode($request->station);
+        $request->sections = json_decode($request->sections);
+        $request->additionals = json_decode($request->additionals);
+        $request->repeat_type = json_decode($request->repeat_type);
+        $request->repeat_amount = json_decode($request->repeat_amount);
+        $request->threshold_type = json_decode($request->threshold_type);
+        $request->threshold_amount = json_decode($request->threshold_amount);
+        $request->document_library = json_decode($request->document_library);
+        $request->applicability_airplane = json_decode($request->applicability_airplane);
 
-        return $req;
+        return $request;
+    }
+
+    /**
+     * create taskcard 
+     */
+
+    public function createTaskcard($request)
+    {
+        $accesses = $zones = $additionals = [];
+
+        $additionals["internal_number"] = $request->additionals->internal_number;
+        $additionals["document_library"] = $request->document_library;
+        $request->merge(['additionals' => json_encode($additionals, true)]);
+
+        if($request->work_area){
+            $request->work_area = Type::firstOrCreate(
+                ['name' => $request->work_area,'code' => strtolower(str_replace(" ","-",$request->work_area) ),'of' => 'work-area' ]
+            );
+        }
+       
+        if ($taskcard = TaskCard::create($request->all())) {
+            $taskcard->aircrafts()->attach($request->applicability_airplane);
+
+            if($request->access){
+                foreach ($request->access as $access_name ) {
+                    foreach ($request->applicability_airplane as $airplane) {
+                        if(isset($access_name)){
+                            $access = Access::firstOrCreate(
+                                ['name' => $access_name, 'accessable_id' => $airplane, 'accessable_type' => 'App\Models\Aircraft']
+                            );
+                            array_push($accesses, $access->id);
+                        }
+                    }
+                }
+
+                $taskcard->accesses()->attach($accesses);
+
+            }
+
+            if(Type::where('id',$request->skill_id)->where('of','taskcard-skill')->first()->code == 'eri'){
+                $taskcard->skills()->attach(Type::where('code','electrical')->first()->id);
+                $taskcard->skills()->attach(Type::where('code','radio')->first()->id);
+                $taskcard->skills()->attach(Type::where('code','instrument')->first()->id);
+            }
+            else{
+                $taskcard->skills()->attach($request->skill_id);
+            }
+
+            if($request->zone){
+                foreach ($request->zone as $zone_name ) {
+                    foreach ($request->applicability_airplane as $airplane) {
+                        if(isset($zone_name)){
+                            $zone = Zone::firstOrCreate(
+                                ['name' => $zone_name, 'zoneable_id' => $airplane, 'zoneable_type' => 'App\Models\Aircraft']
+                            );
+                            array_push($zones, $zone->id);
+                        }
+                    }
+                }
+
+                $taskcard->zones()->attach($zones);
+
+            }
+
+            if( !empty(json_decode($request->relationship, true)) ) {
+                $taskcard->related_to()->attach(json_decode($request->relationship));
+            }
+
+            if(is_array($request->threshold_type)){
+            for ($i=0; $i < sizeof($request->threshold_type) ; $i++) {
+                if($request->threshold_type[$i] !== "Select Threshold"){
+                    if($request->threshold_amount[$i] == ''){
+                        $request->threshold_amount[$i] = null;
+                    }
+                    $taskcard->thresholds()->save(new Threshold([
+                        'type_id' => Type::where('uuid',$request->threshold_type[$i])->first()->id,
+                        'amount' => $request->threshold_amount[$i],
+                        ]));
+                    }
+                }
+            }
+
+            if(is_array($request->repeat_type)){
+            for ($i=0; $i < sizeof($request->repeat_type) ; $i++) {
+                if($request->repeat_type[$i] !== "Select Repeat"){
+                    if($request->repeat_amount[$i] == ''){
+                        $request->repeat_amount[$i] = null;
+                    }
+                    $taskcard->repeats()->save(new Repeat([
+                        'type_id' => Type::where('uuid',$request->repeat_type[$i])->first()->id,
+                        'amount' => $request->repeat_amount[$i],
+                        ]));
+                    }
+                }
+            }
+
+            if ($request->hasFile('fileInput')) {
+                $data = $request->input('image');
+                $photo = $request->file('fileInput')->getClientOriginalName();
+                $destination = 'master/taskcard/routine/';
+                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+            }
+
+            if($request->station){
+                foreach ($request->applicability_airplane as $airplane) {
+                    if(isset($request->station)){
+                        foreach($request->station as $station){
+                            $station = Station::firstOrCreate(
+                                ['name' => $station, 'stationable_id' => $airplane, 'stationable_type' => 'App\Models\Aircraft']
+                            );
+                            $taskcard->stations()->attach($station);
+                        }
+                    }
+                }
+            }
+            return response()->json($taskcard);
+        }else{
+            // TODO: Return error message as JSON
+            return false;
+        }
+
     }
 }

@@ -1,4 +1,4 @@
-let Customer = {
+let Vendor = {
     init: function () {
         $('.vendor_datatable').mDatatable({
             data: {
@@ -20,7 +20,7 @@ let Customer = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -42,18 +42,39 @@ let Customer = {
                     }
                 }
             },
-            columns: [{
-                    field: 'code',
-                    title: 'Code',
+            columns: [
+                {
+                    field: '#',
+                    title: 'No',
+                    width:'40',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t) {
-                        return '<a href="/customer/'+t.uuid+'">' + t.code + "</a>"
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {   
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
                 },
                 {
                     field: 'name',
-                    title: 'Name',
+                    title: 'Vendor Name',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: '',
+                    title: 'Phone',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: '',
+                    title: 'Address',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: '',
+                    title: 'Email',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -74,10 +95,7 @@ let Customer = {
                         return (
                             '<a href="/customer/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-pencil"></i>' +
-                            '</a>' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                            t.uuid +
-                            ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
+                            '</a>'
                         );
                     }
                 }
@@ -127,10 +145,9 @@ let Customer = {
                 }
             });
         });
-
     }
 };
 
 jQuery(document).ready(function () {
-    Customer.init();
+    Vendor.init();
 });

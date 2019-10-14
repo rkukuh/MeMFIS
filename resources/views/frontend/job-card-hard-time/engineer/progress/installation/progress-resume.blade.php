@@ -67,128 +67,128 @@
                                                     <div class="form-group m-form__group row mt-5">
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <table border="1px" width="100%">
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Job Card No
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            CRI No
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->code}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            A/C Type
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->project->aircraft->name}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            A/C Reg
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->project->aircraft_register}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            A/C Serial Number
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->project->aircraft_sn}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Project No
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->project->code}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Item Description
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->description}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Item Part Number
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->part_number}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Position
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->position}}
-                                                                        </td>
-                                                                    </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Job Card No
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->childs->get(0)->code}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        CRI No
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->code}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        A/C Type
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->project->aircraft->name}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        A/C Reg
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->project->aircraft_register}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        A/C Serial Number
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->project->aircraft_sn}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Project No
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->project->code}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Item Description
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->item->description}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Item Part Number
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->item->code}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Position
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->position}}
+                                                                    </td>
+                                                                </tr>
                                                             </table>
                                                             <table class="mt-3" border="1px" width="100%">
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Item S/N Off
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            @component('frontend.common.input.text')
-                                                                                @slot('editable', 'readonly')
-                                                                                @slot('id', 'item_sn_removal')
-                                                                                @slot('name', 'item_sn_removal')
-                                                                                @slot('id_error', 'item_sn_removal')
-                                                                                @slot('value', $htcrr_removal->serial_number)
-                                                                            @endcomponent
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Remark
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            @component('frontend.common.input.textarea')
-                                                                                @slot('rows', '5')
-                                                                                @slot('editable', 'readonly')
-                                                                                @slot('id', 'description_removal')
-                                                                                @slot('name', 'description_removal')
-                                                                                @slot('value', $htcrr_removal->description)
-                                                                            @endcomponent
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            RII
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            @component('frontend.common.input.checkbox')
-                                                                                @slot('id', 'is_rii_removal')
-                                                                                @slot('name', 'is_rii_removal')
-                                                                                @slot('disabled', 'disabled')
-                                                                                @slot('text', 'IS RII?')
-                                                                                @if($htcrr_removal->is_null)
-                                                                                @slot('checked', 'checked')
-                                                                                @endif
-                                                                                @slot('value', 1)
-                                                                                @slot('size', '2')
-                                                                                @slot('style_div', 'margin-top:20px; padding:0;')
-                                                                                @slot('padding_left', '0')
-                                                                            @endcomponent
-                                                                        </td>
-                                                                    </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Item S/N Off
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        @component('frontend.common.input.text')
+                                                                            @slot('editable', 'readonly')
+                                                                            @slot('id', 'item_sn_removal')
+                                                                            @slot('name', 'item_sn_removal')
+                                                                            @slot('id_error', 'item_sn_removal')
+                                                                            @slot('value', $htcrr_removal->serial_number)
+                                                                        @endcomponent
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Remark
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        @component('frontend.common.input.textarea')
+                                                                            @slot('rows', '5')
+                                                                            @slot('editable', 'readonly')
+                                                                            @slot('id', 'description_removal')
+                                                                            @slot('name', 'description_removal')
+                                                                            @slot('value', $htcrr_removal->description)
+                                                                        @endcomponent
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        RII
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        @component('frontend.common.input.checkbox')
+                                                                            @slot('id', 'is_rii_removal')
+                                                                            @slot('name', 'is_rii_removal')
+                                                                            @slot('disabled', 'disabled')
+                                                                            @slot('text', 'IS RII?')
+                                                                            @if($htcrr_installation->is_rii == 1)
+                                                                            @slot('checked', 'checked')
+                                                                            @endif
+                                                                            @slot('value', 1)
+                                                                            @slot('size', '2')
+                                                                            @slot('style_div', 'margin-top:20px; padding:0;')
+                                                                            @slot('padding_left', '0')
+                                                                        @endcomponent
+                                                                    </td>
+                                                                </tr>
                                                             </table>
                                                         </div>
                                                     </div>
@@ -204,7 +204,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group m-form__group row mt-5">
+                                                    <div class="form-group m-form__group row mt-5" hidden>
                                                         <div class="col-lg-6">
                                                             <div class="m-portlet  m-portlet--full-height ">
                                                                 <div class="m-portlet__head">
@@ -403,134 +403,134 @@
                                                     <div class="form-group m-form__group row mt-5">
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <table border="1px" width="100%">
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Job Card No
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            CRI No
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->code}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            A/C Type
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->project->aircraft->name}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            A/C Reg
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->project->aircraft_register}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            A/C Serial Number
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->project->aircraft_sn}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Project No
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->project->code}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Item Description
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->description}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Position
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->position}}
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            RII
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            @component('frontend.common.input.checkbox')
-                                                                                @slot('id', 'is_rii_installation')
-                                                                                @slot('name', 'is_rii_installation')
-                                                                                @slot('disabled', 'disabled')
-                                                                                @slot('text', 'IS RII?')
-                                                                                @if($htcrr_installation->is_null)
-                                                                                @slot('checked', 'checked')
-                                                                                @endif
-                                                                                @slot('value', 1)
-                                                                                @slot('size', '2')
-                                                                                @slot('style_div', 'margin-top:20px; padding:0;')
-                                                                                @slot('padding_left', '0')
-                                                                            @endcomponent
-                                                                        </td>
-                                                                    </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Job Card No
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->childs->get(1)->code}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        CRI No
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->code}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        A/C Type
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->project->aircraft->name}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        A/C Reg
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->project->aircraft_register}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        A/C Serial Number
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->project->aircraft_sn}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Project No
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->project->code}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Item Description
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->item->description}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Position
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        {{$htcrr->position}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        RII
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        @component('frontend.common.input.checkbox')
+                                                                            @slot('id', 'is_rii_installation')
+                                                                            @slot('name', 'is_rii_installation')
+                                                                            @slot('disabled', 'disabled')
+                                                                            @slot('text', 'IS RII?')
+                                                                            @if($htcrr_removal->is_rii == 1)
+                                                                            @slot('checked', 'checked')
+                                                                            @endif
+                                                                            @slot('value', 1)
+                                                                            @slot('size', '2')
+                                                                            @slot('style_div', 'margin-top:20px; padding:0;')
+                                                                            @slot('padding_left', '0')
+                                                                        @endcomponent
+                                                                    </td>
+                                                                </tr>
                                                             </table>
                                                             <table class="mt-3" border="1px" width="100%">
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Item P/N ON
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            @component('frontend.common.input.text')
-                                                                                @slot('id', 'item_pn_installation')
-                                                                                @slot('editable', 'readonly')
-                                                                                @slot('name', 'item_pn_installation')
-                                                                                @slot('id_error', 'item_pn_installation')
-                                                                                @slot('value', $htcrr_installation->part_number)
-                                                                            @endcomponent
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Item S/N ON
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            @component('frontend.common.input.text')
-                                                                                @slot('id', 'item_sn_installation')
-                                                                                @slot('editable', 'readonly')
-                                                                                @slot('name', 'item_sn_installation')
-                                                                                @slot('id_error', 'item_sn_installation')
-                                                                                @slot('value', $htcrr_installation->serial_number)
-                                                                            @endcomponent
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                                                            Remark
-                                                                        </td>
-                                                                        <td width="70%" style="text-align:center">
-                                                                            @component('frontend.common.input.textarea')
-                                                                                @slot('rows', '5')
-                                                                                @slot('editable', 'readonly')
-                                                                                @slot('id', 'description_installation')
-                                                                                @slot('name', 'description_installation')
-                                                                                @slot('value', $htcrr_installation->description)
-                                                                            @endcomponent
-                                                                        </td>
-                                                                    </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Item P/N ON
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        @component('frontend.common.input.text')
+                                                                            @slot('id', 'item_pn_installation')
+                                                                            @slot('editable', 'readonly')
+                                                                            @slot('name', 'item_pn_installation')
+                                                                            @slot('id_error', 'item_pn_installation')
+                                                                            @slot('value', $htcrr_installation->part_number)
+                                                                        @endcomponent
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Item S/N ON
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        @component('frontend.common.input.text')
+                                                                            @slot('id', 'item_sn_installation')
+                                                                            @slot('editable', 'readonly')
+                                                                            @slot('name', 'item_sn_installation')
+                                                                            @slot('id_error', 'item_sn_installation')
+                                                                            @slot('value', $htcrr_installation->serial_number)
+                                                                        @endcomponent
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%" style="background-color:beige;padding:10px;">
+                                                                        Remark
+                                                                    </td>
+                                                                    <td width="70%" style="text-align:center">
+                                                                        @component('frontend.common.input.textarea')
+                                                                            @slot('rows', '5')
+                                                                            @slot('editable', 'readonly')
+                                                                            @slot('id', 'description_installation')
+                                                                            @slot('name', 'description_installation')
+                                                                            @slot('value', $htcrr_installation->description)
+                                                                        @endcomponent
+                                                                    </td>
+                                                                </tr>
                                                             </table>
                                                         </div>
                                                     </div>
@@ -551,7 +551,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group m-form__group row mt-5">
+                                                    <div class="form-group m-form__group row mt-5" hidden>
                                                         <div class="col-lg-6">
                                                             <div class="m-portlet  m-portlet--full-height ">
                                                                 <div class="m-portlet__head">

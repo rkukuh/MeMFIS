@@ -449,6 +449,7 @@
     let currency = '{{  $quotation->currency }}';
     let currencyCode = '{{  $quotation->currency->code }}';
 
+
     function myFunction(object) {
         // var numItems = $('.project').length
 
@@ -575,6 +576,8 @@
 <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/currency.js') }}"></script>
+
+<script src="{{ asset('js/frontend/functions/fill-combobox/discount-type.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/select2/work-order.js') }}"></script>
 

@@ -25,7 +25,7 @@ let NonRoutineWorkpackage = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -111,6 +111,33 @@ let NonRoutineWorkpackage = {
                 }
             },
             {
+                field: 'material',
+                title: 'Material',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                    return (
+                        '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
+                        t.eo_instruction.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                    );
+                }
+
+            },
+            {
+                field: 'tool',
+                title: 'Tool',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                    return (
+                        '<button data-toggle="modal" data-target="#modal_tool_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+                        t.eo_instruction.uuid +
+                        '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                    );
+                }
+            },
+            {
                 field: 'sequence',
                 title: 'Sequence',
                 sortable: 'asc',
@@ -189,7 +216,7 @@ let NonRoutineWorkpackage = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -272,6 +299,33 @@ let NonRoutineWorkpackage = {
                         }
 
                         return ''
+                    }
+                },
+                {
+                    field: 'material',
+                    title: 'Material',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
+                            t.eo_instruction.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                        );
+                    }
+    
+                },
+                {
+                    field: 'tool',
+                    title: 'Tool',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_tool_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+                            t.eo_instruction.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
                     }
                 },
                 {
@@ -352,7 +406,7 @@ let NonRoutineWorkpackage = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -435,6 +489,33 @@ let NonRoutineWorkpackage = {
                         }
 
                         return ''
+                    }
+                },
+                {
+                    field: 'material',
+                    title: 'Material',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
+                            t.eo_instruction.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                        );
+                    }
+    
+                },
+                {
+                    field: 'tool',
+                    title: 'Tool',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_tool_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+                            t.eo_instruction.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
                     }
                 },
                 {
@@ -516,7 +597,7 @@ let NonRoutineWorkpackage = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -602,6 +683,33 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
+                    field: 'material',
+                    title: 'Material',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_material_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill material" title="Material" data-uuid=' +
+                            t.eo_instruction.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i></button>\t\t\t\t\t\t'
+                        );
+                    }
+    
+                },
+                {
+                    field: 'tool',
+                    title: 'Tool',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_tool_routine-si" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill tool" title="Tool" data-uuid=' +
+                            t.eo_instruction.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-wrench"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t'
+                        );
+                    }
+                },
+                {
                     field: 'sequence',
                     title: 'Sequence',
                     sortable: 'asc',
@@ -680,7 +788,7 @@ let NonRoutineWorkpackage = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -871,7 +979,7 @@ let NonRoutineWorkpackage = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {

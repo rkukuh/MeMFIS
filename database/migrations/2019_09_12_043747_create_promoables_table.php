@@ -21,6 +21,11 @@ class CreatePromoablesTable extends Migration
             $table->double('amount');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('promo_id')
+                    ->references('id')->on('promos')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 

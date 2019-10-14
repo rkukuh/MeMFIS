@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Frontend\Item;
 use App\Models\Item;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
+use App\Models\Price;
 use App\Models\Category;
 use App\Models\Manufacturer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\ItemStore;
 use App\Http\Requests\Frontend\ItemUpdate;
-use App\Models\Price;
 
 class ItemController extends Controller
 {

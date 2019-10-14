@@ -248,45 +248,79 @@
                             </table>
                         </div>
                     </div>
+                    @php $additionals = json_decode($jobcard->additionals) @endphp
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <table border="1px" width="100%" style="margin-top:10px">
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Helper
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            @if(isset($jobcard->helpers))
-                                                @foreach($jobcard->helpers as $key => $helper)
-                                                   {{$key + 1}}. {{ $helper->first_name }} <br>
-                                                @endforeach
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="30%" style="background-color:beige;padding:10px;">
-                                            Station
-                                        </td>
-                                        <td width="70%" style="text-align:center">
-                                            @if( isset($jobcard->station) )
+                            <div class="form-group m-form__group row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <table border="1px" width="100%" style="margin-top:10px">
+                                        <tr>
+                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                Helper
+                                            </td>
+                                            <td width="70%" style="text-align:center">
+                                                @if(isset($jobcard->helpers))
+                                                    @foreach($jobcard->helpers as $key => $helper)
+                                                        {{$key + 1}}. {{ $helper->first_name }} <br>
+                                                    @endforeach
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                Station
+                                            </td>
+                                            <td width="70%" style="text-align:center">
+                                                @if( isset($jobcard->station) )
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text', $jobcard->station->name)
+                                                    @endcomponent
+                                                @else 
+                                                    @component('frontend.common.label.data-info-nodata')
+                                                    @endcomponent
+                                                @endif
+                                            </td>
+                                        </tr>
+    ]                               </table>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <table border="1px" width="100%" style="margin-top:10px">
+                                        <tr>
+                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                Weight Change
+                                            </td>
+                                            <td width="70%" style="text-align:center">
                                                 @component('frontend.common.label.data-info')
-                                                    @slot('text', $jobcard->station->name)
+                                                    @if($additionals->weight_change != null)
+                                                        @slot('text', $additionals->weight_change)
+                                                    @else
+                                                        @slot('text', '-')
+                                                    @endif
                                                 @endcomponent
-                                            @else 
-                                                @component('frontend.common.label.data-info-nodata')
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="30%" style="background-color:beige;padding:10px;">
+                                                Center Of Gravity Change
+                                            </td>
+                                            <td width="70%" style="text-align:center">
+                                                @component('frontend.common.label.data-info')
+                                                    @if($additionals->center_of_gravity != null)
+                                                        @slot('text', $additionals->center_of_gravity)
+                                                    @else
+                                                        @slot('text', '-')
+                                                    @endif
                                                 @endcomponent
-                                            @endif
-                                        </td>
-                                    </tr>
-                            </table>
-
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
                             <table border="1px" width="100%" style="margin-top:10px">
                                 <tr>
                                     <td align="center" style="background-color:beige;padding:10px;"><b>ACCOMPLISHMENT RECORD</b></td>
                                 </tr>
                             </table>
-                            @php $additionals = json_decode($jobcard->additionals) @endphp
-
                             <div class="form-group m-form__group row mt-1">
                                 <div class="col-sm-3 col-md-3 col-lg-3">
                                     <div class="form-group m-form__group row mt-3">

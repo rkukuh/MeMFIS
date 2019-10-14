@@ -26,7 +26,7 @@ let JobCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -65,8 +65,14 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'part_number',
+                    field: 'item.code',
                     title: 'Part Number',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'item.name',
+                    title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -89,7 +95,24 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
+                },
+                {
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -128,7 +151,7 @@ let JobCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -167,8 +190,14 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'part_number',
+                    field: 'item.name',
                     title: 'Part Number',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'item.name',
+                    title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -191,7 +220,24 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'unit',
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
+                },
+                {
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -202,7 +248,7 @@ let JobCard = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="/jobcard-hardtime/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'
                         );

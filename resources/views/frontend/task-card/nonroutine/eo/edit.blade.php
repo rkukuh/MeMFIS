@@ -812,6 +812,14 @@
             $('#recurrence').removeAttr("disabled");
             $('#recurrence-select').removeAttr("disabled");
             $('#recurrence-select').select2();
+        }
+
+        // Scheduled Priority *
+        if(view_scheduled_priority_id == "Prior to"){
+            $("#prior_to").removeClass("hidden");
+            $('#prior_to_date').removeAttr("disabled");
+            $('#prior_to_hours').removeAttr("disabled");
+            $('#prior_to_cycle').removeAttr("disabled");
             switch(rdo_Scheduled){
                 case 'date':
                     $("#prior_to_date").prop('checked', true);
@@ -832,19 +840,11 @@
             }
         }
 
-        // Scheduled Priority *
-        if(view_scheduled_priority_id == "Prior to"){
-            $("#prior_to").removeClass("hidden");
-            $('#prior_to_date').removeAttr("disabled");
-            $('#prior_to_hours').removeAttr("disabled");
-            $('#prior_to_cycle').removeAttr("disabled");
-        }
-
 
         });
     </script>
 
-    <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script>
+    <!-- <script src="{{ asset('js/frontend/functions/select2/documents-library.js') }}"></script> -->
 
     <script src="{{ asset('js/frontend/functions/select2/work-area.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/taskcard-non-routine-type.js') }}"></script>
@@ -873,9 +873,9 @@
     <script src="{{ asset('js/frontend/functions/select2/document-library.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool-uom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>

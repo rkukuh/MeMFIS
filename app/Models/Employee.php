@@ -133,6 +133,7 @@ class Employee extends MemfisModel implements HasMedia
     public function defectcards()
     {
         return $this->belongsToMany(DefectCard::class, 'defectcard_employee', 'employee_id', 'defectcard_id')
+                    ->withPivot('additionals')
                     ->withTimestamps();
     }
 
@@ -279,6 +280,19 @@ class Employee extends MemfisModel implements HasMedia
     }
 
     /**
+     * One-to-Many: An employee may have zero or many attendance.
+     *
+     * This function will retrieve the employees of a attendance.
+     * See: EmployeeAttendance employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function employee_attendace()
+    {
+        return $this->hasMany(EmployeeAttendance::class);
+    }
+
+    /**
      * One-to-Many: An Employee have one or many bpjs.
      *
      * This function will retrieve bpjs of a given Employee.
@@ -409,6 +423,9 @@ class Employee extends MemfisModel implements HasMedia
     public function jobcards()
     {
         return $this->belongsToMany(JobCard::class, 'employee_jobcard', 'employee_id', 'jobcard_id')
+                    ->withPivot(
+                        'additionals'
+                    )
                     ->withTimestamps();
     }
 
@@ -560,5 +577,45 @@ class Employee extends MemfisModel implements HasMedia
     public function history()
     {
         return $this->hasMany(EmployeeHistories::class);
+    }
+    
+     /**
+     * One-to-Many: A Employee may have one or many overtime data.
+     *
+     * This function will retrieve all the data of a given overtime id.
+     * See: Overtime employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function overtime()
+    {
+        return $this->hasMany(Overtime::class);
+    }
+    
+    /**
+     * One-to-Many: A Employee may have one or many overtime data.
+     *
+     * This function will retrieve all the data of a given overtime id.
+     * See: Overtime employee() method for the inverse
+     *
+     * @return mixed
+     */
+    public function attendance_correction()
+    {
+        return $this->hasMany(AttendanceCorrection::class);
+    }
+    
+    /*************************************** ACCESSOR ****************************************/
+
+    /**
+     * Get the Employee's full name.
+     *
+     * @return string
+     */
+    public function getFullNameAttribute()
+    {
+        $full_name = $this->first_name." ".$this->last_name;
+        
+        return $full_name;
     }
 }

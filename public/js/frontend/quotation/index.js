@@ -24,7 +24,7 @@ let Quotation = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -68,7 +68,11 @@ let Quotation = {
                     filterable: !1,
                     width: 150,
                     template: function (t) {
-                        return '<a href="/quotation/'+t.uuid+'">' + t.number + "</a>"
+                        if(t.quotation_type == "Quotation Project"){
+                            return '<a href="/quotation/'+t.uuid+'">' + t.number + "</a>"
+                        }else{
+                            return '<a href="/quotation-additional/'+t.uuid+'">' + t.number + "</a>"
+                        }
                     }
                 },
                 {
@@ -177,7 +181,6 @@ let Quotation = {
                                 );
                             }
                             else{
-                                console.log(t.quotation_type);
                                 return (
                                     '<a href="/quotation-additional/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                         '<i class="la la-pencil"></i>' +
@@ -247,13 +250,20 @@ let Quotation = {
         $('.m_datatable').on('click', '.approve', function () {
             let quotation_uuid = $(this).data('id');
 
+
             swal({
                 title: 'Sure want to Approve?',
+                text: "Whose approval (Customer side)?",
                 type: 'question',
+                input: 'text',
+                inputAttributes: {
+                  autocapitalize: 'on'
+                },
                 confirmButtonText: 'Yes, Approve',
                 confirmButtonColor: '#34bfa3',
                 cancelButtonText: 'Cancel',
                 showCancelButton: true,
+                showLoaderOnConfirm: true,
             })
             .then(result => {
                 if (result.value) {
@@ -264,6 +274,9 @@ let Quotation = {
                             )
                         },
                         type: 'POST',
+                        data: {
+                            note:result.value 
+                        },
                         url: '/quotation/' + quotation_uuid + '/approve',
                         success: function (data) {
                             toastr.success('Quotation has been approved.', 'Approved', {

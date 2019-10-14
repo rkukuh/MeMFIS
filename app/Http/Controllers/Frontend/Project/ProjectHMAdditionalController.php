@@ -57,9 +57,16 @@ class ProjectHMAdditionalController extends Controller
      */
     public function store(Project $project,Request $request)
     {
+
+        $data_defectcard = [];
+        $data_defectcard["estimation_manhour"] = $request->estimation_manhour;
+        $data_defectcard["performance_factor"] = $request->performance_factor;
+        $data_defectcard["total_manhour_with_performance_factor"] = $request->total_manhour_with_performance_factor;
+        $data_defectcard = json_encode($data_defectcard, true);
         $parent_id = $project->id;
         $project = $project->replicate();
         $project->parent_id = $parent_id;
+        $project->data_defectcard = $data_defectcard;
         $project->code = DocumentNumber::generate('PJAD-', Project::withTrashed()->count()+1);
         $project->save();
         $defectcard_uuids = explode(",",$request->defectcard_uuid);
@@ -106,7 +113,6 @@ class ProjectHMAdditionalController extends Controller
      */
     public function edit(Project $project)
     {
-
         $project_parent = Project::find($project->parent_id);
         if($project->quotations->toArray() == []){
             $attention = json_decode($project_parent->quotations()->first()->attention);
@@ -133,13 +139,12 @@ class ProjectHMAdditionalController extends Controller
     public function update(Request $request, Project $project)
     {
         $defectcard_uuids = explode(",",$request->defectcard_uuid);
-        foreach($defectcard_uuids as $defectcard_uuid){
-            $defectcard = DefectCard::where('uuid',$defectcard_uuid)->first();
-            $defectcard->project_additional_id = $project->id;
-
-            $defectcard->save();
-
-        }
+        $project->update($request->all());
+        // foreach($defectcard_uuids as $defectcard_uuid){
+        //     $defectcard = DefectCard::where('uuid',$defectcard_uuid)->first();
+        //     $defectcard->project_additional_id = $project->id;
+        //     $defectcard->save();
+        // }
 
         return response()->json($project);
     }
@@ -240,6 +245,24 @@ class ProjectHMAdditionalController extends Controller
         }
 
         return response()->json($project);
+    }
+
+    /**
+     * Get all the selected discrepancy found.
+     * after that sum all the estimation manhour and return
+     * as json and calculate it on client side.
+     */
+    public function calculateManhours(Request $request){
+        $request->uuids = json_decode($request->uuids);
+        if(sizeof($request->uuids) > 1){
+            $estimation_manhour = DefectCard::whereIn('uuid',$request->uuids)->sum('estimation_manhour');
+        }elseif(sizeof($request->uuids) == 1){
+            $estimation_manhour = DefectCard::where('uuid',$request->uuids)->sum('estimation_manhour');
+        }else{
+            $estimation_manhour = 0;
+        }
+
+        return response()->json($estimation_manhour);
     }
 
 }

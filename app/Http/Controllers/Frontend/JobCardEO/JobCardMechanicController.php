@@ -98,6 +98,10 @@ class JobCardMechanicController extends Controller
         foreach($jobcard->helpers as $helper){
             $helper->userID .= $helper->user->id;
         }
+        $helper_quantity = json_decode($jobcard->origin_jobcard_helpers);
+        if($helper_quantity == null ){
+            $helper_quantity = 0;
+        }
 
         // if($jobcard->helpers->where('userID',Auth::id())->first() == null){
         //     return redirect()->route('frontend.jobcard-mechanic.index')->with($this->error_notification);
@@ -117,6 +121,7 @@ class JobCardMechanicController extends Controller
                     'tools' => $jobcard->jobcardable->tools,
                     'progresses' => $progresses,
                     'status' => $this->statuses->where('code','open')->first(),
+                'helper_quantity' => $helper_quantity,
                 ]);
             }else{
                 return redirect()->route('frontend.jobcard.index')->with($this->error_notification);
@@ -135,6 +140,7 @@ class JobCardMechanicController extends Controller
                 'progresses' => $progresses,
                 'pending' => $this->statuses->where('code','pending')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
+                'helper_quantity' => $helper_quantity,
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "pending"){
@@ -146,6 +152,7 @@ class JobCardMechanicController extends Controller
                 'progresses' => $progresses,
                 'open' => $this->statuses->where('code','open')->first(),
                 'closed' => $this->statuses->where('code','closed')->first(),
+                'helper_quantity' => $helper_quantity,
             ]);
         }
         else if($this->statuses->where('id',$progresses->last()->status_id)->first()->code == "closed"){
@@ -155,6 +162,7 @@ class JobCardMechanicController extends Controller
                 'logbooks' => $jobcard->logbooks->pluck('code')->toarray(),
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
+                'helper_quantity' => $helper_quantity,
             ]);
         }
         else{
@@ -164,6 +172,7 @@ class JobCardMechanicController extends Controller
                 'logbooks' => $jobcard->logbooks->pluck('code')->toarray(),
                 'materials' => $jobcard->jobcardable->materials,
                 'tools' => $jobcard->jobcardable->tools,
+                'helper_quantity' => $helper_quantity,
             ]);
         }
 
@@ -191,6 +200,8 @@ class JobCardMechanicController extends Controller
 
                 $additionals['TSN'] = $request->tsn;
                 $additionals['CSN'] = $request->csn;
+                $additionals['weight_change'] = $request->weight_change;
+                $additionals['center_of_gravity'] = $request->center_of_gravity;
 
                 $jobcard->additionals =json_encode($additionals);
                 $jobcard->station_id = $request->station_id;
@@ -204,7 +215,7 @@ class JobCardMechanicController extends Controller
                 return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
             }
         }
-        if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
+        else if($this->statuses->where('uuid',$request->progress)->first()->code == 'pending'){
             $jobcard->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','pending')->first()->id,
                 'reason_id' =>  Type::ofJobCardPauseReason()->where('uuid',$request->pause)->first()->id,
@@ -213,7 +224,14 @@ class JobCardMechanicController extends Controller
             ]));
             return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
         }
-        if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
+        else if($this->statuses->where('uuid',$request->progress)->first()->code == 'progress'){
+            $jobcard->progresses()->save(new Progress([
+                'status_id' =>  $this->statuses->where('code','progress')->first()->id,
+                'progressed_by' => Auth::id()
+            ]));
+            return redirect()->route('frontend.jobcard.index')->with($this->success_notification);
+        }
+        else if($this->statuses->where('uuid',$request->progress)->first()->code == 'closed'){
             $jobcard->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','closed')->first()->id,
                 'reason_id' =>  Type::ofJobCardCloseReason()->where('uuid',$request->accomplishment)->first()->id,

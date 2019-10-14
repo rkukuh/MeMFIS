@@ -26,7 +26,7 @@ let JobCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -61,7 +61,7 @@ let JobCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                            return '<a href="/jobcard-ppc/'+t.uuid+'/edit">' + t.number + "</a>"
+                            return '<a href="/jobcard-ppc/'+t.uuid+'/">' + t.number + "</a>"
                     }
                 },
                 {
@@ -150,6 +150,23 @@ let JobCard = {
                     filterable: !1,
                 },
                 {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
+                },
+                {
                     field: 'status',
                     title: 'Status',
                     sortable: 'asc',
@@ -191,7 +208,7 @@ let JobCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -313,6 +330,23 @@ let JobCard = {
                     title: 'Actual. Mhrs',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
                 },
                 {
                     field: 'status',

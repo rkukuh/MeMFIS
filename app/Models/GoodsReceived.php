@@ -19,9 +19,10 @@ class GoodsReceived extends MemfisModel
         'description',
         'additionals',
         'origin_vendor_coa',
+        'expired_at',
     ];
 
-    protected $dates = ['received_at'];
+    protected $dates = ['received_at','expired_at'];
 
     /*************************************** RELATIONSHIP ****************************************/
 
@@ -39,6 +40,19 @@ class GoodsReceived extends MemfisModel
     }
 
     /**
+     * Polymorphic: An entity can have zero or one inventory in.
+     *
+     * This function will get all TaskCard's quotations.
+     * See: Inventory's inventory() method for the inverse
+     *
+     * @return mixed
+     */
+    public function inventoryIn()
+    {
+        return $this->morphOne(InventoryIn::class, 'inventoryinable');
+    }
+
+    /**
      * Many-to-Many: A GRN may have zero or many item.
      *
      * This function will retrieve all the items of a GRN.
@@ -50,12 +64,14 @@ class GoodsReceived extends MemfisModel
     {
         return $this->belongsToMany(Item::class)
                     ->withPivot(
+                        'serial_number',
                         'quantity',
                         'quantity_unit',
                         'unit_id',
                         'price',
                         'already_received_amount',
-                        'note'
+                        'note',
+                        'expired_at'
                     )
                     ->withTimestamps();
     }

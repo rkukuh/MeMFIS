@@ -22,7 +22,7 @@ let DefectCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -79,25 +79,25 @@ let DefectCard = {
                     }
                 },
                 {
-                    field: 'jobcard.quotation.project.customer.name',
+                    field: 'jobcard.quotation.quotationable.customer.name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft.name',
+                    field: 'jobcard.quotation.quotationable.aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_register',
+                    field: 'jobcard.quotation.quotationable.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_sn',
+                    field: 'jobcard.quotation.quotationable.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
@@ -121,10 +121,54 @@ let DefectCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'progresses.0.status_id',
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
+                },
+                {
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'created_by',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                     template: function (t, e, i) {
+                        return t.created_by + '<br>' + t.create_date 
+                    }
+                },
+                {
+                    field: 'updated_by',
+                    title: 'Updated By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.updated_by + '<br>' + t.update_date 
+                    }
+                },
+                {
+                    field: 'conducted_by',
+                    title: 'Approved By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.conducted_at 
+                    }
                 },
                 {
                     field: 'actions',
@@ -132,7 +176,7 @@ let DefectCard = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="jobcard/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="defectcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'
                         );
@@ -162,7 +206,7 @@ let DefectCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -219,31 +263,31 @@ let DefectCard = {
                     }
                 },
                 {
-                    field: 'jobcard.quotation.project.customer.name',
-                    title: 'Cusromer',
+                    field: 'jobcard.quotation.quotationable.customer.name',
+                    title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft.name',
+                    field: 'jobcard.quotation.quotationable.aircraft.name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_register',
+                    field: 'jobcard.quotation.quotationable.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft_sn',
+                    field: 'jobcard.quotation.quotationable.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.jobcardable.skill.name',
+                    field: 'skill',
                     title: 'Skill',
                     sortable: 'asc',
                     filterable: !1,
@@ -261,10 +305,54 @@ let DefectCard = {
                     filterable: !1,
                 },
                 {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
+                },
+                {
                     field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
+                },
+                {
+                    field: 'created_by',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                     template: function (t, e, i) {
+                        return t.created_by + '<br>' + t.create_date 
+                    }
+                },
+                {
+                    field: 'updated_by',
+                    title: 'Updated By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.updated_by + '<br>' + t.update_date 
+                    }
+                },
+                {
+                    field: 'conducted_by',
+                    title: 'Approved By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.conducted_at 
+                    }
                 },
                 {
                     field: 'actions',
@@ -272,7 +360,7 @@ let DefectCard = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<a href="jobcard/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
+                            '<a href="defectcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
                                 '<i class="la la-print"></i>' +
                             '</a>'
                         );

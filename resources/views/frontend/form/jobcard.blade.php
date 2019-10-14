@@ -63,7 +63,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <fieldset style="width:60%;">
-                    <legend>JC NO : #######</legend>
+                    <legend>JC NO : {{ $jobCard->number }}<legend>
                     <table width="100%">
                         <tr>
                             <td>Issues Date</td>
@@ -73,7 +73,7 @@
                             <!-- <td rowspan="4" style=" text-align: center;">{!!DNS2D::getBarcodeHTML('JO-1151596', 'QRCODE', 7 ,7)!!}</td> -->
                         </tr>
                         <tr>
-                            <td>Issues Date</td>
+                            <td>Prepared Date</td>
                             <td>: Generated</td>
                             <td>Inspection Type</td>
                             <td>: Generated</td>
@@ -168,7 +168,7 @@
                                     <input type="checkbox"> NO
                                 </form>
                             </td>
-                            <td colspan="2">697-769-9</td>
+                            <td colspan="2">@if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif</td>
                         </tr>
                         </tr>
                         <tr class="border">

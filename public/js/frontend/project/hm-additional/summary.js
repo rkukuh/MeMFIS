@@ -24,7 +24,7 @@ let summary = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -59,7 +59,7 @@ let summary = {
             },
             {
                 field: 'description',
-                title: 'Tool Description',
+                title: 'Material Description',
                 sortable: 'asc',
                 filterable: !1,
             },
@@ -70,13 +70,13 @@ let summary = {
                 filterable: !1,
             },
             {
-                field: 'pivot.unit_id',
+                field: 'unit.name',
                 title: 'Unit',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'description',
+                field: 'pivot.note',
                 title: 'Description',
                 sortable: 'asc',
                 filterable: !1,
@@ -103,7 +103,7 @@ let summary = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -149,13 +149,13 @@ let summary = {
                 filterable: !1,
             },
             {
-                field: 'pivot.unit_id',
+                field: 'unit.name',
                 title: 'Unit',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'description',
+                field: 'pivot.note',
                 title: 'Description',
                 sortable: 'asc',
                 filterable: !1,

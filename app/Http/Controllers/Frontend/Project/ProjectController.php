@@ -108,6 +108,33 @@ class ProjectController extends Controller
      */
     public function approve(Project $project)
     {
+        $error_messages = [];
+        $total_manhours = ProjectWorkPackage::where('project_id',$project->id)
+            ->pluck('total_manhours');
+
+        $tat = ProjectWorkPackage::where('project_id',$project->id)
+        ->pluck('tat');
+
+        if(in_array(null, $total_manhours->toArray(), true)){
+            $error_message = array(
+                'message' => "some of workpackage total manhours hasn't been filled yet",
+                'title' => $project->number,
+                'alert-type' => "error"
+            );
+            array_push($error_messages, $error_message);
+            return response()->json(['error' => $error_messages], '403');
+        }
+
+        if(in_array(null, $tat->toArray(), true)){
+            $error_message = array(
+                'message' => "some of workpackage TAT hasn't been calculated yet",
+                'title' => $project->number,
+                'alert-type' => "error"
+            );
+            array_push($error_messages, $error_message);
+            return response()->json(['error' => $error_messages], '403');
+        }
+
         $pw_json = $project->workpackages->toJson();
 
         $pw = ProjectWorkPackage::where('project_id',$project->id)->pluck('id');
@@ -124,7 +151,7 @@ class ProjectController extends Controller
         $pwt = ProjectWorkPackageTaskCard::whereIn('project_workpackage_id',$pw)->get();
         $pwt_json = $pwt->toJson();
 
-        $project->origin_project = $project->toJson();
+        $project->origin_parent_project = $project->toJson();
         $project->origin_project_workpackages = $pw_json;
         $project->origin_project_workpackage_engineers = $pwe_json;
         $project->origin_project_workpackage_facilities = $pwf_json;

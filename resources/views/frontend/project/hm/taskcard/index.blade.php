@@ -17,14 +17,13 @@
     </div>
     <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
         @include('frontend.project.hm.taskcard.nonroutine.index')
+        @include('frontend.project.hm.taskcard.nonroutine.preliminary.modal')
         @include('frontend.project.hm.taskcard.nonroutine.adsb.modal')
         @include('frontend.project.hm.taskcard.nonroutine.cmrawl.modal')
         @include('frontend.project.hm.taskcard.nonroutine.si.modal')
         @include('frontend.project.hm.taskcard.nonroutine.ea.modal')
         @include('frontend.project.hm.taskcard.nonroutine.eo.modal')
         @include('frontend.project.hm.taskcard.nonroutine.modal')
-        @include('frontend.project.hm.modal.material.modal')
-        @include('frontend.project.hm.modal.tool.modal')
     </div>
 </div>
 @push('footer-scripts')

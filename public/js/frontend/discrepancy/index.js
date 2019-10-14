@@ -24,7 +24,7 @@ let TaskCard = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -59,7 +59,7 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/defectcard/'+t.uuid+'/">' + t.code + "</a>"
+                        return '<a href="/discrepancy/'+t.uuid+'/">' + t.code + "</a>"
                     }
                 },
                 {
@@ -68,7 +68,7 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/jobcard-ppc/'+t.jobcard.uuid+'">' + t.jobcard.number + "</a>"
+                        return '<a href="/jobcard/'+t.jobcard.uuid+'/edit">' + t.jobcard.number + "</a>"
                     }
                 },
                 {
@@ -81,19 +81,19 @@ let TaskCard = {
                     }
                 },
                 {
-                    field: 'jobcard.quotation.project.customer.name',
+                    field: 'customer_name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.jobcardable.type.name',
+                    field: 'jc_type',
                     title: 'TC Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'jobcard.quotation.project.aircraft.name',
+                    field: 'aircraft',
                     title: 'A/C',
                     sortable: 'asc',
                     filterable: !1,
@@ -112,6 +112,23 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t) {
+                        if (t.is_rii == 0) {
+                            return (
+                                '<p>No</p>'
+                            );
+                        }else{
+                            return (
+                                '<p>Yes</p>'
+                            );
+                        }
+                    }
+                },
+                {
                     field: 'Status',
                     title: 'Status',
                     sortable: 'asc',
@@ -127,9 +144,14 @@ let TaskCard = {
                                 'Engineer Approved'
                             );
                         }
+                        else if(t.status == "ppc"){
+                            return (
+                                'PPC Approved'
+                            );
+                        }
                         else{
                             return (
-                                'Approved'
+                                ''
                             );
                         }
                     }
@@ -139,27 +161,36 @@ let TaskCard = {
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
+                     template: function (t, e, i) {
+                        return t.created_by + '<br>' + t.create_date 
+                    }
                 },
                 {
                     field: 'updated_by',
                     title: 'Updated By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.updated_by + '<br>' + t.update_date 
+                    }
                 },
                 {
-                    field: 'approved_by',
+                    field: 'conducted_by',
                     title: 'Approved By',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.conducted_at 
+                    }
                 },
                 {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
                     template: function (t, e, i) {
-                        if(t.status == "approved"){
-                            return ('<a href="/discrepancy-ppc/' + t.uuid + '" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Show" data-id="' + t.uuid +'">' +
-                            '<i class="la la-eye"></i>');
+                        if(t.status == "ppc"){
+                            return ('<a href="defectcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Show" data-id="' + t.uuid +'">' +
+                            '<i class="la la-print"></i>');
                         }else{
                             return (
                                 '<a href="/discrepancy-ppc/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +

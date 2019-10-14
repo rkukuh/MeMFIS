@@ -104,6 +104,39 @@ class Status extends MemfisModel
         return $query->where('of', 'quotation');
     }
 
+    /**
+     * Scope a query to only include category of attendance.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAttendance(Builder $query)
+    {
+        return $query->where('of', 'attendance');
+    }
+
+    /**
+     * Scope a query to only include category of overtime.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfOvertime(Builder $query)
+    {
+        return $query->where('of', 'overtime');
+    }
+    
+    /**
+     * Scope a query to only include category of attendance correction.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfAttendanceCorrection(Builder $query)
+    {
+        return $query->where('of', 'attendance-correction');
+    }
+
     /*************************************** RELATIONSHIP ****************************************/
 
     /**

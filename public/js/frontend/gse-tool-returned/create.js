@@ -20,7 +20,7 @@ let GseToolReturnedCreate = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !0
             },
             layout: {
@@ -42,42 +42,55 @@ let GseToolReturnedCreate = {
                     }
                 }
             },
-            columns: [{
-                    field: 'id',
-                    title: '#',
-                    sortable: !1,
-                    width: 40
+            columns: [
+                {
+                    field: '#',
+                    title: 'No',
+                    width:'40',
+                    sortable: 'asc',
+                    filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {   
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
                 },
                 {
-                    field: 'quotation_number',
+                    field: '',
                     title: 'Part Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'customer',
-                    title: 'Item Description',
+                    field: '',
+                    title: 'Serial Number',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'valid_until',
+                    field: '',
+                    title: 'Tool Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: '',
                     title: 'Qty',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: 'status',
+                    field: '',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                 },
                 {
-                    field: 'status',
+                    field: '',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
@@ -90,11 +103,6 @@ let GseToolReturnedCreate = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_tool_request" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-instruction_uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                            t.uuid +
                             '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
                             '</a>'

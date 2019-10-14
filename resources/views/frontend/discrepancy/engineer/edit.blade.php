@@ -137,15 +137,27 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Qty Engineer
+                                                Zone
                                             </label>
 
-                                            @component('frontend.common.input.number')
-                                                @slot('text', 'Engineer Quantity')
-                                                @slot('id', 'engineer_qty')
-                                                @slot('value', $discrepancy->engineer_quantity)
-                                                @slot('name', 'engineer_qty')
-                                                @slot('id_error', 'engineer_qty')
+                                            <select id="zone" name="zone" class="form-control m-select2" multiple style="width:100%">
+                                                @if ($discrepancy->zones->isEmpty())
+                                                    @foreach ($zones as $zone)
+                                                        <option value="{{ $zone->name }}">
+                                                            {{ $zone->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @else
+                                                    @foreach ($zones as $zone)
+                                                        <option value="{{ $zone->name }}"
+                                                            @if(in_array( $zone->id ,$zone_discrepancies)) selected @endif>
+                                                            {{ $zone->name }}
+                                                        </option>
+                                                    @endforeach
+                                                @endif
+                                            </select>
+                                            @component('frontend.common.label.help-text')
+                                                @slot('help_text','You can chose multiple value')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -161,34 +173,6 @@
                                                 @slot('text', 'ATA')
                                                 @slot('value', $discrepancy->ata)
                                             @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Qty Helper
-                                            </label>
-
-                                            @component('frontend.common.input.number')
-                                                @slot('text', 'Helper Quoantity')
-                                                @slot('id', 'helper_quantity')
-                                                @slot('value', $discrepancy->helper_quantity)
-                                                @slot('name', 'helper_quantity')
-                                                @slot('id_error', 'helper_quantity')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Area/Zone
-                                            </label>
-
-                                            @if(isset($discrepancy->jobcard->jobcardable->work_area))
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('text',  $discrepancy->jobcard->jobcardable->work_area)
-                                                @endcomponent
-                                            @else
-                                                @include('frontend.common.label.data-info-nodata')
-                                            @endif
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
@@ -425,6 +409,39 @@
                 </div>
             </div>
             <div class="col-lg-5">
+            <div class="m-portlet">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon m--hide">
+                                    <i class="la la-gear"></i>
+                                </span>
+
+                                @include('frontend.common.label.datalist')
+
+                                <h3 class="m-portlet__head-text">
+                                    Helper(s) List
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet m-portlet--mobile">
+                        <div class="m-portlet__body">
+                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                <div class="row align-items-center">
+                                    <div class="col-xl-12 order-12 order-xl-12 m--align-right">
+                                            <button data-toggle="modal" data-target="#modal_helper" type="button" href="#" 
+                                            class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-md add-helper" title="Add Helper" >
+                                            <i class="la la-plus-circle"></i> Add Helper</button>
+                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            @include('frontend.discrepancy.engineer.modal-helper')
+                            <div class="defectcard_helper_edit_datatable" id="scrolling_both"></div>
+                        </div>
+                    </div>
+                </div>
                 <div class="m-portlet">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
@@ -522,9 +539,14 @@
 @endpush
 
 @push('footer-scripts')
+    <script>
+        let discrepancy_uuid = '{{$discrepancy->uuid}}';
+    </script>
     <script src="{{ asset('js/frontend/discrepancy/engineer/edit.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/otr-certification.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/discrepancy/repeater.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
@@ -535,6 +557,13 @@
     <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/select2/helper.js') }}"></script>
+
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/zone.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/repeater-core.js') }}"></script>
+    <script src="{{ asset('js/frontend/discrepancy/helpers.js') }}"></script>
+
 @endpush

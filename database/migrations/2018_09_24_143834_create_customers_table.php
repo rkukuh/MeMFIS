@@ -20,15 +20,9 @@ class CreateCustomersTable extends Migration
             $table->string('name');
             $table->json('attention')->nullable();
             $table->integer('payment_term')->nullable();
-            $table->unsignedBigInteger('account_code')->nullable();
             $table->timestamp('banned_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            $table->foreign('account_code')
-                    ->references('id')->on('journals')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
 
             $table->index('code');
             $table->index('name');

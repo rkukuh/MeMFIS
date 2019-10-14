@@ -74,6 +74,3 @@
         </fieldset>
     </div>
 </div>
-
-@push('footer-scripts')
-@endpush

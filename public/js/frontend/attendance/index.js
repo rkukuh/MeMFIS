@@ -6,7 +6,7 @@ let Attendance = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/taskcard',
+                        url: '/datatables/attendance',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -20,7 +20,7 @@ let Attendance = {
                 },
                 pageSize: 10,
                 serverPaging: !0,
-                serverFiltering: !0,
+                serverFiltering: !1,
                 serverSorting: !1
             },
             layout: {
@@ -55,55 +55,55 @@ let Attendance = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'nrp',
                     title: 'NRP',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'employee_name',
                     title: 'Employee Name',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'days',
                     title: 'Day Name',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'date',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'in',
                     title: 'In',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'out',
                     title: 'Out',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'late_in',
                     title: 'Late In',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'earlier_out',
                     title: 'Earlier Out',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'overtime',
                     title: 'Overtime',
                     sortable: 'asc',
                     filterable: !1,
@@ -114,12 +114,12 @@ let Attendance = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
+                        // if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
                             return '<a data-toggle="modal" data-target="#modal_transaction_overtime" href="#">' + "Transaction No" + "</a>"
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
-                        }
+                        // }
+                        // else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
+                        //     return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
+                        // }
                     }
 
                 },
@@ -129,12 +129,12 @@ let Attendance = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
+                        // if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
                             return '<a data-toggle="modal" data-target="#modal_transaction_leave" href="#">' + "Transaction No" + "</a>"
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
-                        }
+                        // }
+                        // else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
+                        //     return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
+                        // }
                     }
 
                 },
@@ -144,17 +144,17 @@ let Attendance = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
+                        // if((t.type.code == "basic") || (t.type.code == "sip") || (t.type.code == "cpcp")){
                             return '<a data-toggle="modal" data-target="#modal_transaction_correction" href="#">' + "Transaction No" + "</a>"
-                        }
-                        else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
-                            return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
-                        }
+                        // }
+                        // else if ((t.type.code == "ad") || (t.type.code == "sb") || (t.type.code == "eo") || (t.type.code == "ea") || (t.type.code == "htcrr") || (t.type.code == "cmr") || (t.type.code == "awl")){
+                            // return '<a href="/taskcard-eo/'+t.uuid+'">' + "Propose" + "</a>"
+                        // }
                     }
 
                 },
                 {
-                    field: '',
+                    field: 'statuses_name',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,

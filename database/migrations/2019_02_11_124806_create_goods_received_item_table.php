@@ -17,12 +17,14 @@ class CreateGoodsReceivedItemTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('goods_received_id');
             $table->unsignedBigInteger('item_id');
+            $table->string('serial_number')->nullable();
             $table->double('quantity');
             $table->double('quantity_unit');
             $table->unsignedBigInteger('unit_id');
-            $table->double('price');
-            $table->double('already_received_amount');
+            $table->double('price')->nullable();;
+            $table->double('already_received_amount')->nullable();;
             $table->string('note')->nullable();
+            $table->timestamp('expired_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

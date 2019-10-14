@@ -25,7 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UnitsTableSeeder::class);
         $this->call(LevelsTableSeeder::class);
         $this->call(StatusesTableSeeder::class);
-        $this->call(JournalsTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(CurrenciesTableSeeder::class);
         
@@ -33,6 +32,7 @@ class DatabaseSeeder extends Seeder
         
         $this->call(TaxesTableSeeder::class);
         $this->call(BanksTableSeeder::class);
+        $this->call(StoragesTableSeeder::class);
         $this->call(CompaniesTableSeeder::class);
         $this->call(BranchesTableSeeder::class);
         $this->call(ManufacturersTableSeeder::class);
@@ -40,7 +40,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LanguagesTableSeeder::class);
         $this->call(SchoolsTableSeeder::class);
         $this->call(EmployeesTableSeeder::class);
-        $this->call(StoragesTableSeeder::class);
         $this->call(ItemsTableSeeder::class);
         $this->call(LicensesTableSeeder::class);
         $this->call(CertificationsTableSeeder::class);
@@ -62,6 +61,9 @@ class DatabaseSeeder extends Seeder
         
         $this->call(BankAccountsTableSeeder::class);
 
+        $this->call(OvertimesTableSeeder::class);
+        $this->call(AttendanceCorrectionsTableSeeder::class);
+
         /** POLYMORPH */
 
         $this->call(FaxesTableSeeder::class);
@@ -81,6 +83,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ProgressesTableSeeder::class);
         $this->call(InspectionsTableSeeder::class);
         $this->call(InterchangesTableSeeder::class);
+        $this->call(InventoryInsTableSeeder::class);
+        $this->call(InventoryOutsTableSeeder::class);
 
         /** LICENSE */
 
@@ -149,5 +153,10 @@ class DatabaseSeeder extends Seeder
         /** PURCHASE ORDER's ITEMs */
 
         $this->call(PurchaseOrderItemsTableSeeder::class);
+
+        /** TRIGGER-ONLY */
+
+        $this->call(FefoInsTableSeeder::class);
+        $this->call(FefoOutsTableSeeder::class);
     }
 }

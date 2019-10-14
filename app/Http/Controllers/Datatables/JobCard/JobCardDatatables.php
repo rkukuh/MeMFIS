@@ -34,9 +34,13 @@ class JobCardDatatables extends Controller
             }else if($taskcard->jobcardable_type == "App\Models\EOInstruction"){
                 $taskcard->tc_number .= $taskcard->jobcardable->eo_header->number;
                 $taskcard->tc_title .= $taskcard->jobcardable->eo_header->title;
-                $taskcard->task_name .= "";
+                $taskcard->task_name .= "-";
                 $taskcard->type_name .= $taskcard->jobcardable->eo_header->type->name;
-                $taskcard->skill .= $taskcard->jobcardable->eo_header->skill;
+                if(sizeof($taskcard->jobcardable->skills) > 1){
+                    $taskcard->skill .= $taskcard->jobcardable->skills->first()->name;
+                }else{
+                    $taskcard->skill .= "ERI";
+                }
             }
 
             $count_user = $taskcard->progresses->groupby('progressed_by')->count()-1;
@@ -74,54 +78,7 @@ class JobCardDatatables extends Controller
                 $taskcard->status .= 'Open';
             }
 
-            $statuses = Status::ofJobCard()->get();
-            $jobcard = JobCard::where('uuid',$taskcard->uuid)->first();
-            foreach($jobcard->helpers as $helper){
-                $helper->userID .= $helper->user->id;
-            }
-            $manhours = 0;
-            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                $date1 = null;
-                foreach($values as $value){
-                    if($statuses->where('id',$value->status_id)->first()->code <> "open" or $statuses->where('id',$value->status_id)->first()->code <> "released" or $statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
-                        if($jobcard->helpers->where('userID',$key)->first() == null){
-                            if($date1 <> null){
-                                $t1 = Carbon::parse($date1);
-                                $t2 = Carbon::parse($value->created_at);
-                                $diff = $t1->diffInSeconds($t2);
-                                $manhours = $manhours + $diff;
-                            }
-                            $date1 = $value->created_at;
-                        }
-                    }
-
-                }
-            }
-            $manhours = $manhours/3600;
-            $manhours_break = 0;
-            foreach($jobcard->progresses->groupby('progressed_by')->sortBy('created_at') as $key => $values){
-                // dump(sizeOf($values->toArray()));
-                // dump($values);
-                for($i=0; $i<sizeOf($values->toArray()); $i++){
-                    if($statuses->where('id',$values[$i]->status_id)->first()->code == "pending"){
-                        if($jobcard->helpers->where('userID',$key)->first() == null){
-                            if($date1 <> null){
-                                if($i+1 < sizeOf($values->toArray())){
-                                    $t2 = Carbon::parse($values[$i]->created_at);
-                                    $t3 = Carbon::parse($values[$i+1]->created_at);
-                                    $diff = $t2->diffInSeconds($t3);
-                                    $manhours_break = $manhours_break + $diff;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            // dd('s');
-
-            $manhours_break = $manhours_break/3600;
-            $actual_manhours =number_format($manhours-$manhours_break, 2);
-            $taskcard->actual .= $actual_manhours;
+            $taskcard->actual .= $taskcard->ActualManhour;
 
         }
 
@@ -221,36 +178,27 @@ class JobCardDatatables extends Controller
      */
     public function filter(Request $request)
     {
-        $JobCard = JobCard::with('taskcard');
-
+        $JobCard = JobCard::with('jobcardable','jobcardable.task','jobcardable.aircrafts','jobcardable.skills','jobcardable.type')->first();
+        // dd($JobCard);
         if (!empty($request->task_type_id)) {
-            $JobCard->whereHas('taskcard.task', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable.task', function ($query) use ($request) {
                 $query->where('task_id', $request->task_type_id);
             });
         }
         if (!empty($request->aircrafts)) {
-            $JobCard->whereHas('taskcard.aircrafts', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable.aircrafts', function ($query) use ($request) {
                 $query->whereIn('aircraft_id', $request->aircrafts);
             });
         }
         if (!empty($request->skills)) {
-            $JobCard->whereHas('taskcard.skills', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable.skills', function ($query) use ($request) {
                 $query->where('skill_id', $request->skills);
             });
         }
-        if (!empty($request->project_no)) {
-            $JobCard->orderBy('project_no', $request->project_no);
-        }
         if (!empty($request->taskcard_routine_type)) {
-            $JobCard->whereHas('taskcard.type', function ($query) use ($request) {
+            $JobCard->whereHas('jobcardable.type', function ($query) use ($request) {
                 $query->where('type_id', $request->taskcard_routine_type);
             });
-        }
-        if (!empty($request->date_issued)) {
-            $JobCard->orderBy('created_at', $request->date_issued);
-        }
-        if (!empty($request->jc_no)) {
-            $JobCard->orderBy('number', $request->jc_no);
         }
         if (!empty($request->customer)) {
             $JobCard->whereHas('customer', function ($query) use ($request) {
@@ -400,24 +348,16 @@ class JobCardDatatables extends Controller
     public function material(JobCard $jobcard)
     {
         //TODO API used is API's Datatables Metronic. FIX search Datatables API because not work
-        $taskcard = TaskCard::find($jobcard->taskcard_id);
+        $taskcard = TaskCard::find($jobcard->task_id);
 
         $items =[];
-        if ($taskcard->type->code == "eo"){
-            foreach($taskcard->eo_instructions as $instructions){
-                foreach($instructions->materials as $material){
+
+                foreach($jobcard->jobcardable->materials as $material){
                     $unit_id = $material->pivot->unit_id;
                     $material->unit_name .= Unit::find($unit_id)->name;
                     array_push($items, $material);
                 }
-            }
-        }else{
-            foreach($taskcard->materials as $material){
-                    $unit_id = $material->pivot->unit_id;
-                    $material->unit_name .= Unit::find($unit_id)->name;
-                    array_push($items, $material);
-            }
-        }
+
 
         $data = $alldata = $items;
 
@@ -520,21 +460,13 @@ class JobCardDatatables extends Controller
         $taskcard = TaskCard::find($jobcard->taskcard_id);
 
         $items =[];
-        if ($taskcard->type->code == "eo"){
-            foreach($taskcard->eo_instructions as $instructions){
-                foreach($instructions->tools as $tool){
-                    $unit_id = $tool->pivot->unit_id;
-                    $tool->unit_name .= Unit::find($unit_id)->name;
-                    array_push($items, $tool);
-                }
-            }
-        }else{
-            foreach($taskcard->tools as $tool){
-                $unit_id = $tool->pivot->unit_id;
-                $tool->unit_name .= Unit::find($unit_id)->name;
-                array_push($items, $tool);
-            }
+
+        foreach($jobcard->jobcardable->tools as $tool){
+            $unit_id = $tool->pivot->unit_id;
+            $tool->unit_name .= Unit::find($unit_id)->name;
+            array_push($items, $tool);
         }
+
 
         $data = $alldata = $items;
 

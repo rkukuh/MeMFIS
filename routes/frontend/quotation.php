@@ -21,6 +21,7 @@ Route::name('frontend.')->group(function () {
                 Route::get('/create/{project}','QuotationAdditionalController@create')->name('quotation-additional.create');
                 Route::post('/{quotation}/discount','QuotationAdditionalController@discount')->name('quotation-additional.discount');
                 Route::post('/{quotation}/approve', 'QuotationAdditionalController@approve')->name('quotation.approve');
+                Route::get('/{quotation}/print', 'QuotationAdditionalController@print');
             });
 
             Route::prefix('quotation')->group(function () {
@@ -49,6 +50,7 @@ Route::name('frontend.')->group(function () {
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/adsb', 'SummaryNonRoutineTaskcardController@adsb')->name('quotation.summary.adsb');
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/cmrawl', 'SummaryNonRoutineTaskcardController@cmrawl')->name('quotation.summary.cmrawl');
                 Route::get('/{quotation}/workpackage/{workPackage}/summary/si', 'SummaryNonRoutineTaskcardController@si')->name('quotation.summary.si');
+                Route::get('/{quotation}/workpackage/{workPackage}/summary/preliminary', 'SummaryNonRoutineTaskcardController@preliminary')->name('quotation.summary.preliminary');
 
                 
                 /** QUOTATION's DEFECTCARDs */
