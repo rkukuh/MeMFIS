@@ -34,3 +34,4 @@ $factory->state(Status::class, 'employment', ['of' => 'employment']);
 $factory->state(Status::class, 'defecetcard', ['of' => 'defecetcard']);
 $factory->state(Status::class, 'customer-component-repair', ['of' => 'customer-component-repair']);
 $factory->state(Status::class, 'attendance', ['of' => 'attendance']);
+$factory->state(Status::class, 'overtime', ['of' => 'overtime']);

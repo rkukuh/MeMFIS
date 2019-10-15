@@ -44,24 +44,19 @@ class ItemPurchaseRequestController extends Controller
      */
     public function store(ItemPurchaseRequestStore $request,PurchaseRequest $purchaseRequest,Item $item)
     {
-        // dd($request->all());
-        // if($request->unit_id == "".$item->unit_id.""){
+        $exists = $purchaseRequest->items()->where('item_id',$item->id)->first();
+        if($exists){
+            return response()->json(['title' => "Danger"]);
+        }else{
+            $purchaseRequest->items()->attach($item->id, [
+                'quantity' => $request->quantity,
+                'unit_id' => $request->unit_id,
+                'quantity_unit' => $request->unit_id,
+                'note' => $request->remark
+            ]);
 
-        // }
-        // else{
-        //     // if($qty_uom2 = $item->units->where('uom.unit_id',$request->unit_id)->first() == null){
-        //     //     $validator->errors()->add('quantity', 'UOM have not Declared');
-        //     // }
-        //     $qty_uom2 = $item->units->where('uom.unit_id',$request->unit_id)->first();
-        // }
-        $purchaseRequest->items()->attach($item->id, [
-            'quantity' => $request->quantity,
-            'unit_id' => $request->unit_id,
-            'quantity_unit' => $request->unit_id,
-            'note' => $request->remark
-        ]);
-
-        return response()->json($purchaseRequest);
+            return response()->json($purchaseRequest);
+        }
     }
 
     /**

@@ -124,17 +124,17 @@ Route::group([
 
         /** ATTENDANCE CORRECTION */
 
-        Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
-        Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
-        Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
+        // Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
+        // Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
+        // Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
         Route::view('/attendance-correction/approve', 'frontend.attendance-correction.approve')->name('attendance-correction.approve');
 
         /** OVERTIME */
 
-        Route::view('/overtime', 'frontend.overtime.index')->name('overtime.index');
-        Route::view('/overtime/create', 'frontend.overtime.create')->name('overtime.create');
-        Route::view('/overtime/edit', 'frontend.overtime.edit')->name('overtime.edit');
-        Route::view('/overtime/approve', 'frontend.overtime.approve')->name('overtime.approve');
+        // Route::view('/overtime', 'frontend.overtime.index')->name('overtime.index');
+        // Route::view('/overtime/create', 'frontend.overtime.create')->name('overtime.create');
+        // Route::view('/overtime/edit', 'frontend.overtime.edit')->name('overtime.edit');
+        // Route::view('/overtime/approve', 'frontend.overtime.approve')->name('overtime.approve');
 
         /** PROPOSE LEAVE */
 
