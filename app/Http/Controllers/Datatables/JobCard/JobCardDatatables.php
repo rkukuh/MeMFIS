@@ -24,23 +24,19 @@ class JobCardDatatables extends Controller
 
         foreach($JobCard as $taskcard){
             if($taskcard->jobcardable_type == "App\Models\TaskCard"){
-                $taskcard->tc_number .= $taskcard->jobcardable->number;
-                $taskcard->tc_title .= $taskcard->jobcardable->title;
+                $taskcard->tc_number    .= $taskcard->jobcardable->number;
+                $taskcard->tc_title     .= $taskcard->jobcardable->title;
                 if(isset($taskcard->jobcardable->task_id)){
                     $taskcard->task_name .= $taskcard->jobcardable->task->name;
                 }
-                $taskcard->type_name .= $taskcard->jobcardable->type->name;
-                $taskcard->skill .= $taskcard->jobcardable->skill;
+                $taskcard->type_name    .= $taskcard->jobcardable->type->name;
+                $taskcard->skill        .= $taskcard->jobcardable->skill;
             }else if($taskcard->jobcardable_type == "App\Models\EOInstruction"){
-                $taskcard->tc_number .= $taskcard->jobcardable->eo_header->number;
-                $taskcard->tc_title .= $taskcard->jobcardable->eo_header->title;
-                $taskcard->task_name .= "-";
-                $taskcard->type_name .= $taskcard->jobcardable->eo_header->type->name;
-                if(sizeof($taskcard->jobcardable->skills) > 1){
-                    $taskcard->skill .= $taskcard->jobcardable->skills->first()->name;
-                }else{
-                    $taskcard->skill .= "ERI";
-                }
+                $taskcard->tc_number    .= $taskcard->jobcardable->eo_header->number;
+                $taskcard->tc_title     .= $taskcard->jobcardable->eo_header->title;
+                $taskcard->task_name    .= "-";
+                $taskcard->type_name    .= $taskcard->jobcardable->eo_header->type->name;
+                $taskcard->skill        .= $taskcard->jobcardable->skill;
             }
 
             $count_user = $taskcard->progresses->groupby('progressed_by')->count()-1;

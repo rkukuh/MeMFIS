@@ -142,7 +142,7 @@
                                                     Scheduled Priority
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{App\Models\Type::find($jobcard->jobcardable->eo_header->scheduled_priority_id)->name}} {{$jobcard->jobcardable->eo_header->scheduled_priority_text}}
+                                                    {{$jobcard->jobcardable->eo_header->scheduled_priority_text}} {{$jobcard->jobcardable->eo_header->scheduled_priority_type}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -150,7 +150,7 @@
                                                     Recurrence
                                                 </td>
                                                 <td width="70%" style="text-align:center">
-                                                    {{App\Models\Type::find($jobcard->jobcardable->eo_header->recurrence_id)->name}} {{$jobcard->jobcardable->eo_header->recurrence_amount}}
+                                                    {{$jobcard->jobcardable->eo_header->recurrence_amount}} {{$jobcard->jobcardable->eo_header->recurrence_type}}
                                                 </td>
                                             </tr>
                                             <tr>

@@ -9,6 +9,7 @@ class BankAccount extends MemfisModel
     protected $fillable = [
         'number',
         'name',
+        'swift_code',
         'bank_accountable_type',
         'bank_accountable_id',
         'bank_id',

@@ -18,6 +18,9 @@ class CreateVendorsTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('code');
             $table->string('name');
+            $table->json('attention')->nullable();
+            $table->integer('payment_term')->nullable();
+            $table->timestamp('banned_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
