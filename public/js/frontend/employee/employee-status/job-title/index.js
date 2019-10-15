@@ -113,6 +113,9 @@ let EmployeeJobTittle = {
             $('#name_job_tittle').attr('disabled', true)
             $('#description_job_tittle').attr('disabled', true)
             $('#specification').attr('disabled', true)
+            $('.modal-change-job-tittle').hide()
+            $('#reset-job-tittle').hide()
+            
         }
 
         let enabled = function(){
@@ -120,6 +123,8 @@ let EmployeeJobTittle = {
             $('#name_job_tittle').attr('disabled', false)
             $('#description_job_tittle').attr('disabled', false)
             $('#specification').attr('disabled', false)
+            $('.modal-change-job-tittle').show()
+            $('#reset-job-tittle').show()
         }
 
         let button_reset = $(document).on('click','#reset-job-tittle', function (){

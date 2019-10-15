@@ -111,6 +111,8 @@ let EmploymentStatus = {
             $('#code_statuses').attr('disabled',true)
             $('#name').attr('disabled',true)
             $('#description').attr('disabled',true)
+            $('.modal-change').hide()
+            $('#reset').hide()
         }
 
         let enabled = function(){
@@ -118,6 +120,8 @@ let EmploymentStatus = {
             $('#code_statuses').attr('disabled',false)
             $('#name').attr('disabled',false)
             $('#description').attr('disabled',false)
+            $('.modal-change').show()
+            $('#reset').show()
         }
 
         let button_reset = $(document).on('click','#reset', function (){
