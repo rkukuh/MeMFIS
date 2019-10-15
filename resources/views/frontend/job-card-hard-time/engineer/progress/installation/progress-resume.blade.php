@@ -136,7 +136,7 @@
                                                                         Position
                                                                     </td>
                                                                     <td width="70%" style="text-align:center">
-                                                                        {{$htcrr->position}}
+                                                                        {{$htcrr->is_rii}}
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -179,7 +179,7 @@
                                                                             @slot('name', 'is_rii_removal')
                                                                             @slot('disabled', 'disabled')
                                                                             @slot('text', 'IS RII?')
-                                                                            @if($htcrr_installation->is_rii == 1)
+                                                                            @if($htcrr->is_rii == 1)
                                                                             @slot('checked', 'checked')
                                                                             @endif
                                                                             @slot('value', 1)
@@ -464,7 +464,7 @@
                                                                         Position
                                                                     </td>
                                                                     <td width="70%" style="text-align:center">
-                                                                        {{$htcrr->position}}
+                                                                        {{$htcrr->is_rii}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -477,7 +477,7 @@
                                                                             @slot('name', 'is_rii_installation')
                                                                             @slot('disabled', 'disabled')
                                                                             @slot('text', 'IS RII?')
-                                                                            @if($htcrr_removal->is_rii == 1)
+                                                                            @if($htcrr->is_rii == 1)
                                                                             @slot('checked', 'checked')
                                                                             @endif
                                                                             @slot('value', 1)
