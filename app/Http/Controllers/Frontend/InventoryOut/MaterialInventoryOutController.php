@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\InventoryOut;
 
 use App\Models\InventoryOut;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\InventoryOutStore;
 use App\Http\Requests\Frontend\InventoryOutUpdate;
 
-class InventoryOutController extends Controller
+class MaterialInventoryOutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class InventoryOutController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.inventory-out.material.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class InventoryOutController extends Controller
      */
     public function create()
     {
-        //
+        return view('frontend.inventory-out.material.create');
     }
 
     /**
@@ -48,7 +48,7 @@ class InventoryOutController extends Controller
      */
     public function show(InventoryOut $inventoryOut)
     {
-        //
+        return view('frontend.inventory-out.material.show');
     }
 
     /**
@@ -59,7 +59,7 @@ class InventoryOutController extends Controller
      */
     public function edit(InventoryOut $inventoryOut)
     {
-        //
+        return view('frontend.inventory-out.material.edit');
     }
 
     /**
