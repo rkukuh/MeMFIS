@@ -353,8 +353,7 @@
                         </td>
                         <td width="33%" height="100px" align="center" valign="bottom">
                             <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
-                            <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date &
-                                    Time</span></div>
+                            <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
                         </td>
                         <td width="34%" height="100" align="center" valign="bottom"
                             @if($rii_status==0) style="background:grey" @endif>
