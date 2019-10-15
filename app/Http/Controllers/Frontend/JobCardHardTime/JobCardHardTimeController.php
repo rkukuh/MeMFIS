@@ -6,6 +6,7 @@ use Auth;
 use Validator;
 use App\User;
 use Carbon\Carbon;
+use App\Models\Unit;
 use App\Models\HtCrr;
 use App\Models\Status;
 use Illuminate\Http\Request;
@@ -246,24 +247,40 @@ class JobCardHardTimeController extends Controller
             $prepared_at = "-";
         }
         $actual_manhours = $htcrr->actual_manhours;
-        
+        $tools = $htcrr->tools;
+        $materials = $htcrr->materials;
+
+        if(sizeof($materials) > 0){
+            foreach($materials as $material){
+                $material->unit = Unit::find($material->unit_id)->name;
+            }
+        }
+
+        if(sizeof($tools) > 0){
+            foreach($tools as $tool){
+                $tool->unit = Unit::find($tool->unit_id)->name;
+            }
+        }
+
         $rii_status = $htcrr->is_rii;
         $pdf = \PDF::loadView('frontend/form/jobcard_cri',[
+            'now' => $now,
             'htcrr' => $htcrr,
-            'username' => $username,
-            'lastStatus' => $lastStatus,
-            'dateClosed' => $dateClosed,
-            'accomplished_by' => $accomplished_by,
-            'accomplished_at' => $accomplished_at,
-            'inspected_by' => $inspected_by,
-            'inspected_at' => $inspected_at,
+            'tools' => $tools,
             'rii_by' => $rii_by,
             'rii_at' => $rii_at,
+            'helpers' => $helpers,
+            'username' => $username,
+            'materials' => $materials,
+            'rii_status' => $rii_status,
+            'lastStatus' => $lastStatus,
+            'dateClosed' => $dateClosed,
             'prepared_by' => $prepared_by,
             'prepared_at' => $prepared_at,
-            'rii_status' => $rii_status,
-            'helpers' => $helpers,
-            'now' => $now,
+            'inspected_by' => $inspected_by,
+            'inspected_at' => $inspected_at,
+            'accomplished_by' => $accomplished_by,
+            'accomplished_at' => $accomplished_at,
             'actual_manhours'=> $actual_manhours,
         ]);
     return $pdf->stream();
