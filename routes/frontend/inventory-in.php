@@ -18,6 +18,7 @@ Route::name('frontend.')->group(function () {
             Route::prefix('inventory-in')->group(function () {
                 Route::post('/{inventoryIn}/item/{item}', 'ItemInventoryInController@store')->name('inventory-in.item.store');
                 Route::put('/{inventoryIn}/item/{item}', 'ItemInventoryInController@update')->name('inventory-in.item.update');
+                Route::delete('/{inventoryIn}/item/{item}', 'ItemInventoryInController@destroy')->name('inventory-in.item.destroy');
                 Route::put('/{inventoryIn}/approve', 'InventoryInController@approve')->name('inventory-in.approve');
             });
         });

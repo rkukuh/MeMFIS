@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Datatables\InventoryIn;
 
 use App\User;
 use App\Models\InventoryIn;
-use App\Models\Item;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -120,7 +120,14 @@ class InventoryInDatatables extends Controller
 
     public function getItemsByInventoryIn(InventoryIn $inventoryIn)
     {
-        $data = $alldata = json_decode($inventoryIn->items);
+        $inventoryIns = $inventoryIn->items;
+
+        foreach ($inventoryIns as $inventoryIn) {
+            $inventoryIn->unit_uuid .= Unit::find($inventoryIn->pivot->unit_id)->uuid;
+            $inventoryIn->unit_name .= Unit::find($inventoryIn->pivot->unit_id)->name;
+        }
+
+        $data = $alldata = json_decode($inventoryIns);
 
         $datatable = array_merge(['pagination' => [], 'sort' => [], 'query' => []], $_REQUEST);
 

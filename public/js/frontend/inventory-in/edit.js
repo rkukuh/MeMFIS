@@ -78,7 +78,7 @@ let InventoryInCreate = {
                     filterable: !1,
                 },
                 {
-                    field: 'qty',
+                    field: 'expired_at',
                     title: 'Expired Date',
                     sortable: 'asc',
                     filterable: !1,
@@ -93,12 +93,12 @@ let InventoryInCreate = {
                     }
                 },
                 {
-                    field: 'pivot.unit_id',
+                    field: 'unit_name',
                     title: 'Unit',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return t.pivot.unit_id
+                        return t.unit_name
                     }
                 },
                 {
@@ -112,12 +112,9 @@ let InventoryInCreate = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_item" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-instruction_uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
-                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
-                            t.uuid +
-                            '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
+                            '<button data-toggle="modal" data-target="#modal_item" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-item=' +
+                            t.uuid + ' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-remark=' + t.pivot.note +'>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
                             '</a>'
                         );
@@ -174,7 +171,106 @@ let InventoryInCreate = {
             });
         });
 
-        $('.footer').on('click', '.add-inventory-in', function () {
+        $('.item_datatable').on('click', '.edit-item', function () {
+            let item_uuid = $(this).data('item');
+            let unit_id = $(this).data('unit');
+
+            $.ajax({
+                url: '/get-items-uuid/',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    $('select[name="item"]').empty();
+
+                    $.each(data, function (key, value) {
+                        if (key == item_uuid) {
+                            $('select[name="item"]').append(
+                                '<option value="' + key + '" selected>' + value + '</option>'
+                            );
+                        } else {
+                            $('select[name="item"]').append(
+                                '<option value="' + key + '">' + value + '</option>'
+                            );
+                        }
+
+                    });
+                }
+            });
+            $("#item").attr('disabled', true);
+
+            $.ajax({
+                url: '/get-item-unit-uuid/' + $(this).data('item'),
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+
+                    $('select[name="unit_id"]').empty();
+
+                    $.each(data, function (key, value) {
+                        if (key == unit_id) {
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '" selected>' + value + '</option>'
+                            );
+                        } else {
+                            $('select[name="unit_id"]').append(
+                                '<option value="' + key + '">' + value + '</option>'
+                            );
+                        }
+
+                    });
+                }
+            });
+
+            document.getElementById('qty').value = $(this).data('quantity');
+            document.getElementById('uuid').value = $(this).data('uuid');
+            document.getElementById('remark').value = $(this).data('remark');
+        });
+
+        $('.item_datatable').on('click', '.delete', function () {
+
+            swal({
+                title: 'Sure want to remove?',
+                type: 'question',
+                confirmButtonText: 'Yes, REMOVE',
+                confirmButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                showCancelButton: true,
+            })
+                .then(result => {
+                    if (result.value) {
+                        $.ajax({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                    'content'
+                                )
+                            },
+                            type: 'DELETE',
+                            url: '/inventory-in/' + inventoryin_uuid + '/item/' + $(this).data('uuid'),
+                            success: function (data) {
+                                toastr.success('Item has been deleted.', 'Deleted', {
+                                    timeOut: 5000
+                                }
+                                );
+
+                                let table = $('.item_datatable').mDatatable();
+
+                                table.originalDataSet = [];
+                                table.reload();
+                            },
+                            error: function (jqXhr, json, errorThrown) {
+                                let errors = jqXhr.responseJSON;
+
+                                $.each(errors.errors, function (index, value) {
+                                    $('#delete-error').html(value);
+                                });
+                            }
+                        });
+                    }
+                });
+        });
+
+        $('.footer').on('click', '.update-inventory-in', function () {
             let ref_no = $('input[name=ref-no]').val();
             let description = $('#remark').val();
             let section_code = $('input[name=section_code]').val();

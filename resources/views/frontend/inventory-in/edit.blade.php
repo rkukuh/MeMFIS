@@ -194,8 +194,8 @@
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.submit')
                                                 @slot('type','button')
-                                                @slot('id', 'add-inventory-in')
-                                                @slot('class', 'add-inventory-in')
+                                                @slot('id', 'update-inventory-in')
+                                                @slot('class', 'update-inventory-in')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
