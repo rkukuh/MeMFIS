@@ -413,48 +413,43 @@
                 <tr>
                     <td width="3%" valign="top">Helper </td>
                     <td width="1%" valign="top">:</td>
-                    <td width="96%" valign="top">
-                        @php
-                        $a = sizeof($helpers->toArray());
-                        @endphp
-                        @if($a >0)
-                        @for ($i = 0; $i < $a-1; $i++) {{$helpers[$i]->first_name}},&nbsp; @endfor @for ($i=$a-1; $i < $a; $i++) {{$helpers[$i]->first_name}} @endfor @endif </td> </tr> </table> </div> </div> <div id="content5">
-                            <div class="container">
-                                <div class="head">
-                                    <table width="100%" cellpadding="10">
-                                        <tr>
-                                            <td width="33%" align="center">Accomplished By</td>
-                                            <td width="33%" align="center">Inspected By</td>
-                                            <td width="34%" align="center">RII By</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <div class="body">
-                                    <table width="100%">
-                                        <tr>
-                                            <td width="33%" height="100" align="center" valign="bottom">
-                                                <div style="width:100%;height:20px;text-align:center">
-                                                    {{$accomplished_by}}</div>
-                                                <div style="width:100%;height:20px;text-align:left;padding-left:5px;">
-                                                    Date : <span>{{$accomplished_at}}</span></div>
-                                            </td>
-                                            <td width="33%" height="100" align="center" valign="bottom">
-                                                <div style="width:100%;height:20px;text-align:center">{{$inspected_by}}
-                                                </div>
-                                                <div style="width:100%;height:20px;text-align:left;padding-left:5px;">
-                                                    Date : <span>{{$inspected_at}}</span></div>
-                                            </td>
-                                            <td width="34%" height="100" align="center" valign="bottom" @if($rii_status==0) style="background:grey" @endif>
-                                                @if($rii_status==1)
-                                                <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
-                                                <div style="width:100%;height:20px;text-align:left;padding-left:5px;">
-                                                    Date : <span>{{$rii_at}}</span></div>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
+                    <td width="96%" valign="top">{{ $helpers }} </td>
+                </tr>
+        </div>
+
+        <div id="content5">
+            <div class="container">
+            <div class="head">
+                <table width="100%" cellpadding="10">
+                <tr>
+                    <td width="33%" align="center">Accomplished By</td>
+                    <td width="33%" align="center">Inspected By</td>
+                    <td width="34%" align="center">RII By</td>
+                </tr>
+                </table>
+            </div>
+            <div class="body">
+                <table width="100%">
+                <tr>
+                    <td width="33%" height="100" align="center" valign="bottom">
+                    <div style="width:100%;height:20px;text-align:center">{{$accomplished_by}}</div>
+                    <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$accomplished_at}}</span></div>
+                    </td>
+                    <td width="33%" height="100" align="center" valign="bottom">
+                    <div style="width:100%;height:20px;text-align:center">{{$inspected_by}}</div>
+                    <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>{{$inspected_at}}</span></div>
+                    </td>
+                    <td width="34%" height="100" align="center" valign="bottom" @if($rii_status==0) style="background:grey" @endif>
+                    @if($rii_status==1)
+                    <div style="width:100%;height:20px;text-align:center">{{$rii_by}}</div>
+                    <div style="width:100%;height:20px;text-align:left;padding-left:5px;">
+                        Date : <span>{{$rii_at}}</span></div>
+                    @endif
+                    </td>
+                </tr>
+                </table>
+            </div>
+            </div>
         </div>
 
         <div class="page_break">
