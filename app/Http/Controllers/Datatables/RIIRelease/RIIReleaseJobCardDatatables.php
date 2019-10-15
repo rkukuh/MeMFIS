@@ -27,6 +27,39 @@ class RIIReleaseJobCardDatatables extends Controller
                                             ->get();
 
         foreach($JobCard as $Jobcard){
+            if($Jobcard->jobcardable_type == "App\Models\TaskCard"){
+                $Jobcard->tc_number    .= $Jobcard->jobcardable->number;
+                $Jobcard->tc_title     .= $Jobcard->jobcardable->title;
+                if(isset($Jobcard->jobcardable->task_id)){
+                    $Jobcard->task_name .= $Jobcard->jobcardable->task->name;
+                }
+                $Jobcard->type_name    .= $Jobcard->jobcardable->type->name;
+                $Jobcard->skill        .= $Jobcard->jobcardable->skill;
+                if($Jobcard->jobcardable->additionals <> null){
+                    $addtional = json_decode($Jobcard->jobcardable->additionals);
+                    $Jobcard->company_task .= $addtional->internal_number;
+                }
+                else{
+                    $Jobcard->company_task .= "-";
+    
+                }
+            }else if($Jobcard->jobcardable_type == "App\Models\EOInstruction"){
+                $Jobcard->tc_number    .= $Jobcard->jobcardable->eo_header->number;
+                $Jobcard->tc_title     .= $Jobcard->jobcardable->eo_header->title;
+                $Jobcard->task_name    .= "-";
+                $Jobcard->type_name    .= $Jobcard->jobcardable->eo_header->type->name;
+                $Jobcard->skill        .= $Jobcard->jobcardable->skill;
+
+                if($Jobcard->jobcardable->eo_header->additionals <> null){
+                    $addtional = json_decode($Jobcard->jobcardable->eo_header->additionals);
+                    $Jobcard->company_task .= $addtional->internal_number;
+                }
+                else{
+                    $Jobcard->company_task .= "-";
+    
+                }
+            }
+
             $Jobcard->aircraft_name .= $Jobcard->quotation->quotationable->aircraft->name;
 
             $Jobcard->customer_name .= $Jobcard->quotation->quotationable->customer->name;

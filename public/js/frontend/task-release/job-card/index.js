@@ -50,7 +50,7 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcardable.number',
+                    field: 'tc_number',
                     title: 'TaskCard No',
                     sortable: 'asc',
                     filterable: !1,
