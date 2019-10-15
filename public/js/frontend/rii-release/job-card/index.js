@@ -50,7 +50,7 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcardable.number',
+                    field: 'tc_numberr',
                     title: 'TaskCard No',
                     sortable: 'asc',
                     filterable: !1,
@@ -67,25 +67,10 @@ let RiiRelease = {
                     }
                 },
                 {
-                    field: 'company',
+                    field: 'company_task',
                     title: 'Company Task No',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                        if(t.jobcardable.additionals){
-                            let company = t.jobcardable.additionals;
-                            obj = JSON.parse(company);
-                            // console.log()
-                            return (
-                                obj.internal_number
-                            );
-                        }
-                        else{
-                            return(
-                                ''
-                            );
-                        }
-                    }
                 },
                 {
                     field: 'quotation.project.customer.name',
