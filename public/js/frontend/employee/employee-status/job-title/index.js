@@ -61,7 +61,8 @@ let EmployeeJobTittle = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t) {
-                        return '<a href="/job-tittle/'+t.uuid+'">' + t.code + "</a>"
+                        return '<a id="view-job-tittle" data-toggle="modal" data-target="#modal_job_tittle" href="#" data-uuid=' +
+                            t.uuid +'>'+t.code+'</a>'
                     }
                 },
                 {
@@ -107,6 +108,25 @@ let EmployeeJobTittle = {
             $('#specification-error').html('')
         }
 
+        let disabled = function(){
+            $('#code_job_tittle').attr('disabled', true)
+            $('#name_job_tittle').attr('disabled', true)
+            $('#description_job_tittle').attr('disabled', true)
+            $('#specification').attr('disabled', true)
+            $('.modal-change-job-tittle').hide()
+            $('#reset-job-tittle').hide()
+            
+        }
+
+        let enabled = function(){
+            $('#code_job_tittle').attr('disabled', false)
+            $('#name_job_tittle').attr('disabled', false)
+            $('#description_job_tittle').attr('disabled', false)
+            $('#specification').attr('disabled', false)
+            $('.modal-change-job-tittle').show()
+            $('#reset-job-tittle').show()
+        }
+
         let button_reset = $(document).on('click','#reset-job-tittle', function (){
             reset()
         });
@@ -117,6 +137,7 @@ let EmployeeJobTittle = {
 
         let show = $(document).on('click', '#add-job-tittle', function () {      
             reset()
+            enabled()
             $('.labelModal-Job').children('span').text('Create New');
             $('.modal-change-job-tittle').attr('id','add-job')
         });
@@ -181,6 +202,7 @@ let EmployeeJobTittle = {
 
         let edit = $(document).on('click', '#edit-job-tittle', function () {      
                reset()
+               enabled()
                 $('.labelModal-Job').children('span').text('Edit');
                 $('.modal-change-job-tittle').attr('id','update-job')
                 let triggerid = $(this).data('uuid-job');
@@ -211,6 +233,41 @@ let EmployeeJobTittle = {
                 });
 
             });
+
+            let showView = $(document).on('click', '#view-job-tittle', function () {      
+                reset()
+                disabled()
+                 $('.labelModal-Job').children('span').text('View');
+                 $('.modal-change-job-tittle').attr('id','update-job')
+                 let triggerid = $(this).data('uuid');
+ 
+                 $('#employee_uuid').val(triggerid)
+ 
+                 $.ajax({
+                     headers: {
+                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     },
+                     type: 'get',
+                     url: '/job-tittle/' + triggerid,
+                     success: function (data) {
+                         $('#code_job_tittle').val(data.code)
+                         $('#name_job_tittle').val(data.name)
+                         $('#description_job_tittle').val(data.description)
+                         $('#specification').val(data.specification)
+                     },
+                     error: function (jqXhr, json, errorThrown) {
+                         // this are default for ajax errors
+                         let errorsHtml = '';
+                         let errors = jqXhr.responseJSON;
+     
+                         $.each(errors.errors, function (index, value) {
+                             alert(value);
+                         });
+                     }
+                 });
+ 
+             });
+
 
             let update = $(document).on('click', '#update-job', function () {
                 let code = $('input[name=code_job_tittle]').val()
