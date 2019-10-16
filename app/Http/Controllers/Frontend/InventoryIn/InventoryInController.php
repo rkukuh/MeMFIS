@@ -42,7 +42,6 @@ class InventoryInController extends Controller
     public function store(InventoryInStore $request)
     {
         $request->merge(['number' => DocumentNumber::generate('ININ-', InventoryIn::withTrashed()->count() + 1)]);
-        $request->merge(['received_by' => Auth::id()]);
         $request->merge(['inventoryinable_type' => 'App\Models\InventoryIn']);
         $request->merge(['inventoryinable_id' => InventoryIn::withTrashed()->count()+1]);
 
