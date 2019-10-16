@@ -57,14 +57,27 @@ class PurchaseOrderController extends Controller
 
         $items = PurchaseRequest::find($request->purchase_request_id)->items;
 
-        foreach($items as $item){
-            $purchaseOrder->items()->attach([$item->pivot->item_id => [
-                'quantity'=> $item->pivot->quantity,
-                'quantity_unit' => $item->pivot->quantity_unit,
-                'unit_id' => $item->pivot->unit_id
-                ]
-            ]);
+        $PurchaseOrder = PurchaseOrder::where('purchase_request_id',$request->purchase_request_id)->count();
+        if($PurchaseOrder == 1){
+            foreach($items as $item){
+                $purchaseOrder->items()->attach([$item->pivot->item_id => [
+                    'quantity'=> $item->pivot->quantity,
+                    'quantity_unit' => $item->pivot->quantity_unit,
+                    'unit_id' => $item->pivot->unit_id
+                    ]
+                ]);
+            }
+        }else{
+            foreach($items as $item){
+                $purchaseOrder->items()->attach([$item->pivot->item_id => [
+                    'quantity'=> 0,
+                    'quantity_unit' => 0,
+                    'unit_id' => $item->pivot->unit_id
+                    ]
+                ]);
+            }
         }
+
 
         return response()->json($purchaseOrder);
     }
