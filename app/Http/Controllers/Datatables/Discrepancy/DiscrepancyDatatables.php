@@ -56,17 +56,7 @@ class DiscrepancyDatatables extends Controller
                 $jobcard->aircraft      .= '';
             }
 
-            if(isset($jobcard->jobcard->jobcardable->skills) ){
-                if(sizeof($jobcard->jobcard->jobcardable->skills) == 3){
-                    $jobcard->jobcardSkill .= "ERI";
-                }
-                else if(sizeof($jobcard->jobcard->jobcardable->skills) == 1){
-                    $jobcard->jobcardSkill .= $jobcard->jobcard->jobcardable->skills[0]->name;
-                }
-                else{
-                    $jobcard->jobcardSkill .= '';
-                }
-            }
+            $jobcard->jobcardSkill .= $jobcard->skill;
 
             if(sizeOf($jobcard->approvals) == 0){
                 $jobcard->status .= 'mechanic';
@@ -200,17 +190,8 @@ class DiscrepancyDatatables extends Controller
             $jobcard->create_date       .= $jobcard->audits->first()->created_at;
             $jobcard->update_date       .= $jobcard->audits->last()->updated_at;
 
-            if(isset($jobcard->jobcard->jobcardable->skills) ){
-                if(sizeof($jobcard->jobcard->jobcardable->skills) == 3){
-                    $jobcard->jobcardSkill .= "ERI";
-                }
-                else if(sizeof($jobcard->jobcard->jobcardable->skills) == 1){
-                    $jobcard->jobcardSkill .= $jobcard->jobcard->jobcardable->skills[0]->name;
-                }
-                else{
-                    $jobcard->jobcardSkill .= '';
-                }
-            }
+            $jobcard->jobcardSkill .= $jobcard->skill;
+
 
             if(isset($jobcard->jobcard->jobcardable->eo_header->type->name)){
                 $jobcard->type_name          .= $jobcard->jobcard->jobcardable->eo_header->type->name;
