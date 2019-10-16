@@ -59,7 +59,7 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/discrepancy/'+t.uuid+'/">' + t.code + "</a>"
+                        return '<a href="/discrepancy-mechanic/'+t.uuid+'/edit">' + t.code + "</a>"
                     }
                 },
                 {
@@ -88,7 +88,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'type_name',
+                    field: 'aircraft',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
