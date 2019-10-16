@@ -77,15 +77,15 @@ Route::group([
 
         /** Inventory Out */
 
-        Route::view('/inventory-out/tool', 'frontend.inventory-out.tool.index')->name('inventory-out-tool.index');
-        Route::view('/inventory-out/tool/create', 'frontend.inventory-out.tool.create')->name('inventory-out-tool.create');
-        Route::view('/inventory-out/tool/edit', 'frontend.inventory-out.tool.edit')->name('inventory-out-tool.edit');
-        Route::view('/inventory-out/tool/show', 'frontend.inventory-out.tool.show')->name('inventory-out-tool.show');
+        // Route::view('/inventory-out/tool', 'frontend.inventory-out.tool.index')->name('inventory-out-tool.index');
+        // Route::view('/inventory-out/tool/create', 'frontend.inventory-out.tool.create')->name('inventory-out-tool.create');
+        // Route::view('/inventory-out/tool/edit', 'frontend.inventory-out.tool.edit')->name('inventory-out-tool.edit');
+        // Route::view('/inventory-out/tool/show', 'frontend.inventory-out.tool.show')->name('inventory-out-tool.show');
 
-        Route::view('/inventory-out/material', 'frontend.inventory-out.material.index')->name('inventory-out-material.index');
-        Route::view('/inventory-out/material/create', 'frontend.inventory-out.material.create')->name('inventory-out-material.create');
-        Route::view('/inventory-out/material/edit', 'frontend.inventory-out.material.edit')->name('inventory-out-material.edit');
-        Route::view('/inventory-out/material/show', 'frontend.inventory-out.material.show')->name('inventory-out-material.show');
+        // Route::view('/inventory-out/material', 'frontend.inventory-out.material.index')->name('inventory-out-material.index');
+        // Route::view('/inventory-out/material/create', 'frontend.inventory-out.material.create')->name('inventory-out-material.create');
+        // Route::view('/inventory-out/material/edit', 'frontend.inventory-out.material.edit')->name('inventory-out-material.edit');
+        // Route::view('/inventory-out/material/show', 'frontend.inventory-out.material.show')->name('inventory-out-material.show');
 
         /** Material Request */
 
@@ -124,17 +124,17 @@ Route::group([
 
         /** ATTENDANCE CORRECTION */
 
-        Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
-        Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
-        Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
+        // Route::view('/attendance-correction', 'frontend.attendance-correction.index')->name('attendance-correction.index');
+        // Route::view('/attendance-correction/create', 'frontend.attendance-correction.create')->name('attendance-correction.create');
+        // Route::view('/attendance-correction/edit', 'frontend.attendance-correction.edit')->name('attendance-correction.edit');
         Route::view('/attendance-correction/approve', 'frontend.attendance-correction.approve')->name('attendance-correction.approve');
 
         /** OVERTIME */
 
-        Route::view('/overtime', 'frontend.overtime.index')->name('overtime.index');
-        Route::view('/overtime/create', 'frontend.overtime.create')->name('overtime.create');
-        Route::view('/overtime/edit', 'frontend.overtime.edit')->name('overtime.edit');
-        Route::view('/overtime/approve', 'frontend.overtime.approve')->name('overtime.approve');
+        // Route::view('/overtime', 'frontend.overtime.index')->name('overtime.index');
+        // Route::view('/overtime/create', 'frontend.overtime.create')->name('overtime.create');
+        // Route::view('/overtime/edit', 'frontend.overtime.edit')->name('overtime.edit');
+        // Route::view('/overtime/approve', 'frontend.overtime.approve')->name('overtime.approve');
 
         /** PROPOSE LEAVE */
 

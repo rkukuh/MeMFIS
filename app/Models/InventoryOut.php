@@ -16,6 +16,19 @@ class InventoryOut extends MemfisModel
     /*************************************** RELATIONSHIP ****************************************/
 
     /**
+     * Polymorphic: An entity can have zero or many approvals.
+     *
+     * This function will get all GoodsReceived's approvals.
+     * See: Approvals's approvable() method for the inverse
+     *
+     * @return mixed
+     */
+    public function approvals()
+    {
+        return $this->morphMany(Approval::class, 'approvable');
+    }
+    
+    /**
      * Polymorphic: An entity can have zero or many InventoryIns.
      *
      * This function will get all of the owning inventoryoutable models.

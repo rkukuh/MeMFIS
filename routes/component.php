@@ -38,6 +38,7 @@ Route::name('component.')->group(function () {
         Route::get('get-work-areas', 'FillComboxController@workArea')->name('get-work-areas');
         Route::get('get-facilities', 'FillComboxController@facility')->name('get-facilities');
         Route::get('get-work-orders', 'FillComboxController@workOrder')->name('get-work-orders');
+        Route::get('get-inventory-in', 'FillComboxController@inventoryIn')->name('get-inventory-in');
         Route::get('get-licenses/{id}', 'FillComboxController@licenses')->name('get-licenses');
         Route::get('get-currencies', 'FillComboxController@currencies')->name('get-currencies');
         Route::get('get-recurrences', 'FillComboxController@recurrence')->name('get-recurrences');
@@ -80,6 +81,7 @@ Route::name('component.')->group(function () {
             Route::get('get-purchase-request/{purchaseRequest}', 'FillLabelController@purchaseRequest')->name('get-purchase-request');
             Route::get('get-customer/{customer}', 'FillLabelController@customer')->name('get-customer');
             Route::get('get-project/{project}', 'FillLabelController@project')->name('get-project');
+            Route::get('get-purchase-orderes/{PurchaseOrder}/item/{item}', 'FillLabelController@purchaseOrdered')->name('get-po-item');
         });
 
         Route::prefix('morris')->group(function () {

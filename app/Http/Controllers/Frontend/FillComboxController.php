@@ -28,6 +28,7 @@ use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\EmployeeLicense;
+use App\Models\InventoryIn;
 
 class FillComboxController extends Controller
 {
@@ -835,5 +836,4 @@ class FillComboxController extends Controller
         return json_encode($promo);
 
     }
-
 }

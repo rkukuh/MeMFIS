@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Frontend\InventoryIn;
 
+use Auth;
+use App\Models\Approval;
 use App\Models\InventoryIn;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\InventoryInStore;
 use App\Http\Requests\Frontend\InventoryInUpdate;
+use App\Models\Storage;
 
 class InventoryInController extends Controller
 {
@@ -37,7 +40,13 @@ class InventoryInController extends Controller
      */
     public function store(InventoryInStore $request)
     {
-        //
+        $request->merge(['received_by' => Auth::id()]);
+        $request->merge(['inventoryinable_type' => 'App\Models\InventoryIn']);
+        $request->merge(['inventoryinable_id' => InventoryIn::withTrashed()->count()+1]);
+
+        $inventoryIn = InventoryIn::create($request->all());
+
+        return response()->json($inventoryIn);
     }
 
     /**
@@ -48,7 +57,10 @@ class InventoryInController extends Controller
      */
     public function show(InventoryIn $inventoryIn)
     {
-        return view('frontend.inventory-in.show');
+
+        return view('frontend.inventory-in.show', [
+            'inventoryIn' => $inventoryIn,
+        ]);
     }
 
     /**
@@ -59,7 +71,12 @@ class InventoryInController extends Controller
      */
     public function edit(InventoryIn $inventoryIn)
     {
-        return view('frontend.inventory-in.edit');
+        $storages = Storage::get();
+
+        return view('frontend.inventory-in.edit', [
+            'storages' => $storages,
+            'inventoryIn' => $inventoryIn,
+        ]);
     }
 
     /**
@@ -71,7 +88,9 @@ class InventoryInController extends Controller
      */
     public function update(InventoryInUpdate $request, InventoryIn $inventoryIn)
     {
-        //
+        $inventoryIn->update($request->all());
+
+        return response()->json($inventoryIn);
     }
 
     /**
@@ -83,5 +102,22 @@ class InventoryInController extends Controller
     public function destroy(InventoryIn $inventoryIn)
     {
         $inventoryIn->delete();
+    }
+
+    /**
+     * Approve the specified resource from storage.
+     *
+     * @param  \App\Models\GoodsReceived  $goodsReceived
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(InventoryIn $inventoryIn)
+    {
+        $inventoryIn->approvals()->save(new Approval([
+            'approvable_id' => $inventoryIn->id,
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
+        ]));
+
+        return response()->json($inventoryIn);
     }
 }

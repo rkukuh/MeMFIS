@@ -175,10 +175,15 @@ class Item extends MemfisModel implements HasMedia
      */
     public function inventory_ins()
     {
-        return $this->belongsToMany(InventoryIn::class)
+        return $this->belongsToMany(InventoryIn::class, 'inventoryin_item', 'inventoryin_id', 'inventoryin_id')
                     ->withPivot(
+                        'serial_number',
                         'quantity',
-                        'note'
+                        'quantity_in_primary_unit',
+                        'unit_id',
+                        'purchased_price',
+                        'total',
+                        'description'
                     )
                     ->withTimestamps();
     }
