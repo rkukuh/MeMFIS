@@ -49,9 +49,8 @@ class PurchaseOrderItemUpdate extends FormRequest
         $PurchaseRequest_id = $this->route('purchaseOrder')->purchase_request_id;
         $PurchaseRequest = PurchaseRequest::find($PurchaseRequest_id);
         $quantity_item_pr = $PurchaseRequest->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
-        $quantity_item_po_now = $purchaseOrder->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
 
-        $PurchaseOrders = PurchaseOrder::where('purchase_request_id',$PurchaseRequest_id)->get();
+        $PurchaseOrders = PurchaseOrder::where('purchase_request_id',$PurchaseRequest_id)->wherehas('approvals')->get();
 
         $quantity_item_po = 0;
 
@@ -68,7 +67,7 @@ class PurchaseOrderItemUpdate extends FormRequest
             $quantity_unit = $this->quantity;
         }
 
-        $quantity_validate = $quantity_item_po-$quantity_item_po_now+$quantity_unit;
+        $quantity_validate = $quantity_item_po+$quantity_unit;
 
         if($quantity_validate > $quantity_item_pr){
             $validator->errors()->add('quantity', 'Quantity exceed limit');

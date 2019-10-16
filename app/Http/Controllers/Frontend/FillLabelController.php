@@ -85,17 +85,14 @@ class FillLabelController extends Controller
      */
     public function purchaseOrdered(PurchaseOrder $PurchaseOrder,Item $item)
     {
-        $PurchaseOrders = PurchaseOrder::where('purchase_request_id',$PurchaseOrder->purchase_request_id)->get();
+        $PurchaseOrders = PurchaseOrder::where('purchase_request_id',$PurchaseOrder->purchase_request_id)->wherehas('approvals')->get();
         $quantity_item_po = 0;
-        $quantity_item_po_now = $PurchaseOrder->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
 
         foreach($PurchaseOrders as $PurchaseOrder){
             $quantity_item_po = $quantity_item_po + $PurchaseOrder->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
         }
 
-        $quantity = $quantity_item_po-$quantity_item_po_now;
-
-        return $quantity;
+        return $quantity_item_po;
 
     }
 
