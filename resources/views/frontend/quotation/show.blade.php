@@ -56,56 +56,34 @@
                                             <legend class="w-auto">Project</legend>
                                             <div class="form-group m-form__group row">
                                                 <input type="hidden" id="quotation_uuid" name="quotation_uuid" value="{{ $quotation->uuid }}">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                                            <label class="form-control-label">
-                                                                Work Order @include('frontend.common.label.required')
-                                                            </label>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Work Order @include('frontend.common.label.required')
+                                                        </label>
 
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', $quotation->quotationable->no_wo)
-                                                            @endcomponent
-                                                        </div>
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', $quotation->quotationable->no_wo)
+                                                        @endcomponent
                                                     </div>
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                                            <label class="form-control-label">
-                                                                Project Title
-                                                            </label>
-
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', $quotation->quotationable->title)
-                                                            @endcomponent
-                                                        </div>
+                                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                                        <label class="form-control-label">
+                                                            Project Number
+                                                        </label>
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('id', 'project_number')
+                                                            @slot('text', $quotation->quotationable->code)
+                                                        @endcomponent
                                                     </div>
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <label class="form-control-label">
+                                                            Project Title
+                                                        </label>
 
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', $quotation->quotationable->title)
+                                                        @endcomponent
+                                                    </div>
                                                     <input type="hidden" id="customer_id" name="customer_id">
-
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                                            <label class="form-control-label">
-                                                                Project Number
-                                                            </label>
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('id', 'project_number')
-                                                                @slot('text', 'P-01/HMxxxxx')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                                            <label class="form-control-label">
-                                                                Intruction
-                                                            </label>
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', '..........')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </fieldset>
                                         <div class="form-group m-form__group row">
@@ -322,28 +300,6 @@
 
                                             </div>
                                         </div>
-                                        <div class="form-group m-form__group row">
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Scheduled Payment Type @include('frontend.common.label.required')
-                                                </label>
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('id', 'scheduled_payment_type')
-                                                    {{-- @slot('text','Scheduled payment type')
-                                                    @slot('value','Scheduled payment type') --}}
-                                                @endcomponent
-                                            </div>
-                                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                                <label class="form-control-label">
-                                                    Scheduled Payment @include('frontend.common.label.required')
-                                                </label>
-                                                @component('frontend.common.label.data-info')
-                                                    @slot('id', 'scheduled_payment_amount')
-                                                    {{-- @slot('text','Scheduled payment amount')
-                                                    @slot('value','Scheduled payment amount') --}}
-                                                @endcomponent
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
@@ -365,8 +321,8 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                            @slot('text', $quotation->description)
                                             @slot('id', 'description')
+                                            @slot('text', $quotation->description)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -405,7 +361,7 @@
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        <div class="m--align-left" style="padding-top:15px">
+                                                        <div class="m--align-right" style="padding-top:15px">
                                                             Total Discount
                                                         </div>
                                                     </div>
@@ -426,7 +382,7 @@
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
                                                     </div>
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        <div class="m--align-center" style="padding-top:15px">
+                                                        <div class="m--align-right" style="padding-top:15px">
                                                             Sub Total
                                                         </div>
                                                     </div>
@@ -445,7 +401,7 @@
                                                         <div class="col-sm-5 col-md-5 col-lg-5">
                                                         </div>
                                                         <div class="col-sm-2 col-md-2 col-lg-2">
-                                                            <div class="m--align-center" >
+                                                            <div class="m--align-right" >
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'charge_type')
                                                                     @slot('name', 'charge_type')
@@ -470,12 +426,10 @@
                                                         <div class="col-sm-2 col-md-2 col-lg-2">
                                                             <div class="m--align-left" style="padding-top:15px">
                                                                 <div class="form-group m-form__group row">
-                                                                    <div class="col-sm-6 col-md-6 col-lg-6 m--align-right">
-                                                                            Total in
+                                                                    <div class="col-sm-12 col-md-12 col-lg-12 m--align-right">
+                                                                            Total in {{ $quotation->currency->name }}
                                                                     </div>
-                                                                    <div class="col-sm-6 col-md-6 col-lg-6 m--align-left p-0" id="currency_symbol">
-                                                                            {{ $quotation->currency->name }}
-                                                                    </div>
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -499,11 +453,8 @@
                                                     <div class="col-sm-2 col-md-2 col-lg-2">
                                                         <div class="m--align-left" style="padding-top:15px">
                                                             <div class="form-group m-form__group row">
-                                                                <div class="col-sm-6 col-md-6 col-lg-6 m--align-right">
-                                                                        Total in
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-6 col-lg-6 m--align-left p-0">
-                                                                        Rupiah
+                                                                <div class="col-sm-12 col-md-12 col-lg-12 m--align-right">
+                                                                        Total in Rupiah
                                                                 </div>
                                                             </div>
                                                         </div>

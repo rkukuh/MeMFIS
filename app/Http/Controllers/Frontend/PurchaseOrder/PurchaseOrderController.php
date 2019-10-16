@@ -57,14 +57,27 @@ class PurchaseOrderController extends Controller
 
         $items = PurchaseRequest::find($request->purchase_request_id)->items;
 
-        foreach($items as $item){
-            $purchaseOrder->items()->attach([$item->pivot->item_id => [
-                'quantity'=> $item->pivot->quantity,
-                'quantity_unit' => $item->pivot->quantity_unit,
-                'unit_id' => $item->pivot->unit_id
-                ]
-            ]);
+        $PurchaseOrder = PurchaseOrder::where('purchase_request_id',$request->purchase_request_id)->count();
+        if($PurchaseOrder == 1){
+            foreach($items as $item){
+                $purchaseOrder->items()->attach([$item->pivot->item_id => [
+                    'quantity'=> $item->pivot->quantity,
+                    'quantity_unit' => $item->pivot->quantity_unit,
+                    'unit_id' => $item->pivot->unit_id
+                    ]
+                ]);
+            }
+        }else{
+            foreach($items as $item){
+                $purchaseOrder->items()->attach([$item->pivot->item_id => [
+                    'quantity'=> 0,
+                    'quantity_unit' => 0,
+                    'unit_id' => $item->pivot->unit_id
+                    ]
+                ]);
+            }
         }
+
 
         return response()->json($purchaseOrder);
     }
@@ -154,12 +167,39 @@ class PurchaseOrderController extends Controller
      */
     public function approve(PurchaseOrder $purchaseOrder)
     {
+        $PurchaseOrders = PurchaseOrder::where('purchase_request_id',$purchaseOrder->purchase_request_id)->wherehas('approvals')->get();
+
+        $PurchaseRequest = PurchaseRequest::find($purchaseOrder->purchase_request_id);
+
+        foreach($PurchaseRequest->items as $item){
+            $quantity_item_pr = $PurchaseRequest->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
+
+            $quantity_item_po = 0;
+
+            foreach($PurchaseOrders as $PurchaseOrder){
+                $quantity_item_po = $quantity_item_po + $PurchaseOrder->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
+            }
+
+            if($quantity_item_po > $quantity_item_pr){
+                $status_notification = array(
+                    'status' => "error"
+                );
+
+                return response()->json($status_notification);
+            }
+
+        }
+
         $purchaseOrder->approvals()->save(new Approval([
             'approvable_id' => $purchaseOrder->id,
             'conducted_by' => Auth::id(),
             'is_approved' => 1
         ]));
 
-        return response()->json($purchaseOrder);
+        $status_notification = array(
+            'status' => "success"
+        );
+
+        return response()->json($status_notification);
     }
 }

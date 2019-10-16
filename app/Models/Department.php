@@ -12,6 +12,8 @@ class Department extends MemfisModel
         'parent_id',
         'type_id',
         'name',
+        'maximum_period',
+        'maximum_holiday',
         'description',
     ];
 

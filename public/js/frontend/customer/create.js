@@ -53,7 +53,6 @@ let Customer = {
         
             });
 
-
             let website_array = [];
             $('#website ').each(function (i) {
                 website_array[i] = $(this).val();
@@ -84,7 +83,6 @@ let Customer = {
                 return el != null && el != "";
             
             });
-
 
             let document_array = [];
             $('#email ').each(function (i) {
@@ -145,7 +143,7 @@ let Customer = {
                attn_email_array.push(attn_email_array_row);
             });
             attn_email_array.pop();
-
+            
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

@@ -173,6 +173,27 @@ let NonRoutineWorkpackage = {
                 }
             },
             {
+                field: 'is_rii',
+                title: 'RII',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                        if(t.is_rii == 1){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill disabled" title="Rii" data-uuid='+t.uuid+' data-rii=1' +
+                            ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+                        else if(t.is_rii == 0  || t.is_rii == null){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill disabled" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
+                            ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+
+                }
+            },
+            {
                 field: 'mandatory',
                 title: 'Mandatory',
                 sortable: 'asc',
@@ -364,6 +385,27 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                            if(t.is_rii == 1){
+                                return (
+                                '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill disabled" title="Rii" data-uuid='+t.uuid+' data-rii=1' +
+                                ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                                );
+                            }
+                            else if(t.is_rii == 0  || t.is_rii == null){
+                                return (
+                                '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill disabled" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
+                                ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                                );
+                            }
+    
+                    }
+                },
+                {
                     field: 'mandatory',
                     title: 'Mandatory',
                     sortable: 'asc',
@@ -551,6 +593,27 @@ let NonRoutineWorkpackage = {
                     filterable: !1,
                     template: function (t) {
                         return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-tc_uuid="' + t.eo_instruction.uuid + '" data-toggle="modal" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                    }
+                },
+                {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                            if(t.is_rii == 1){
+                                return (
+                                '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill disabled" title="Rii" data-uuid='+t.uuid+' data-rii=1' +
+                                ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                                );
+                            }
+                            else if(t.is_rii == 0  || t.is_rii == null){
+                                return (
+                                '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill disabled" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
+                                ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                                );
+                            }
+    
                     }
                 },
                 {
@@ -745,6 +808,27 @@ let NonRoutineWorkpackage = {
                     }
                 },
                 {
+                    field: 'is_rii',
+                    title: 'RII',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                            if(t.is_rii == 1){
+                                return (
+                                '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill disabled" title="Rii" data-uuid='+t.uuid+' data-rii=1' +
+                                ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                                );
+                            }
+                            else if(t.is_rii == 0  || t.is_rii == null){
+                                return (
+                                '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill disabled" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
+                                ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                                );
+                            }
+    
+                    }
+                },
+                {
                     field: 'mandatory',
                     title: 'Mandatory',
                     sortable: 'asc',
@@ -933,6 +1017,27 @@ let NonRoutineWorkpackage = {
                 filterable: !1,
                 template: function (t) {
                     return '<button type="button" id="successor" name="successor" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-tc_uuid="' + t.taskcard.uuid + '" data-toggle="modal" data-target="#modal_successor"><i class="la la-plus-circle"></i>\t\t\t\t\t\t</button>'
+                }
+            },
+            {
+                field: 'is_rii',
+                title: 'RII',
+                sortable: 'asc',
+                filterable: !1,
+                template: function (t, e, i) {
+                        if(t.is_rii == 1){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill disabled" title="Rii" data-uuid='+t.uuid+' data-rii=1' +
+                            ' title="Rii"><i class="la la-check-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+                        else if(t.is_rii == 0  || t.is_rii == null){
+                            return (
+                            '<button type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill disabled" title="not Rii" data-uuid='+t.uuid+' data-rii=0' +
+                            ' title="Not Rii"><i class="la la-circle-o"></i></a>\t\t\t\t\t\t\t'
+                            );
+                        }
+
                 }
             },
             {

@@ -136,7 +136,7 @@
                                                                             Position
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->position}}
+                                                                            {{$htcrr->is_rii}}
                                                                         </td>
                                                                     </tr>
                                                             </table>
@@ -176,9 +176,10 @@
                                                                                 @slot('id', 'is_rii_removal')
                                                                                 @slot('name', 'is_rii_removal')
                                                                                 @slot('text', 'IS RII?')
-                                                                                @if($htcrr_removal->is_rii == 1)
+                                                                                @if($htcrr->is_rii == 1)
                                                                                 @slot('checked', 'checked')
                                                                                 @endif
+                                                                                @slot('disabled', 'disabled')
                                                                                 @slot('value', 1)
                                                                                 @slot('size', '2')
                                                                                 @slot('style_div', 'margin-top:20px; padding:0;')
@@ -461,7 +462,7 @@
                                                                             Position
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->position}}
+                                                                            {{$htcrr->is_rii}}
                                                                         </td>
                                                                     </tr>
                                                                     <form method="POST" action="{{route('frontend.jobcard-hardtime-engineer.update',$htcrr->uuid)}}">
@@ -474,7 +475,7 @@
                                                                                 @slot('id', 'is_rii_installation')
                                                                                 @slot('name', 'is_rii_installation')
                                                                                 @slot('text', 'IS RII?')
-                                                                                    @if( $htcrr_removal->is_rii == 1)
+                                                                                    @if( $htcrr->is_rii == 1)
                                                                                         @slot('value', 1)
                                                                                         @slot('checked', 'checked')
                                                                                     @else

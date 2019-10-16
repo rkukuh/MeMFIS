@@ -269,10 +269,10 @@
                         <td valign="top" align="center" width="20%"><b>Actual Mhrs</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" align="center">Cabin Maintenance</td>
-                        <td valign="top" align="center">{{ $jobCard->jobcardable->type->name }}</td>
-                        <td valign="top" align="center">0.25</td>
-                        <td valign="top" align="center"></td>
+                        <td valign="top" align="center">{{ $jobCard->jobcardable->skill }}</td>
+                        <td valign="top" align="center">@if(isset($jobCard->jobcardable->eo_header->type)) {{ $jobCard->jobcardable->eo_header->type->name}} @else - @endif</td>
+                        <td valign="top" align="center">{{ $jobCard->jobcardable->estimation_manhour }}</td>
+                        <td valign="top" align="center">{{ $jobCard->actual_manhour }}</td>
                     </tr>
                 </table>
                 <table width="85%" cellpadding="4" class="table_content">
@@ -281,8 +281,8 @@
                         <td valign="top" align="center" width="50%"><b>References</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" align="center" height="5%">lorem</td>
-                        <td valign="top" align="center" height="5%">lorem</td>
+                        <td valign="top" align="center" height="5%">{{ $taskcard->description }}</td>
+                        <td valign="top" align="center" height="5%">{{ $taskcard->eo_header->reference }}</td>
                     </tr>
                 </table>
                 <table width="100%" cellpadding="4">
@@ -297,127 +297,49 @@
                 <div class="body" style="min-height:120px">
                     <table width="100%" cellpadding="2">
                         <tr>
-                            <td valign="top" width="20%" style="border-left: none;">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Major modification</span>
-                                </div>
+                            <td valign="top" rowspan="2" width="20%" style="border-left: none;">
+                                {{ $jobCard->jobcardable->eo_header->category->name }}
                             </td>
                             <td valign="top" width="20%">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Next check/shop visit</span>
-                                </div>
+                                {{ $eo_additionals->scheduled_priority_text }} {{ $eo_additionals->scheduled_priority_type }}
                             </td>
                             <td valign="top" width="20%">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">One-Time</span>
-                                </div>
+                                {{ $eo_additionals->recurrence_text }} {{ $eo_additionals->recurrence_type }}
                             </td>
                             <td valign="top" width="20%">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">MM</span>
-                                </div>
+                                {{ $eo_additionals->manual_affected }}
                             </td>
-                            <td valign="top" width="20%" style="border-right: none;">Wt Change</td>
+                            <td valign="top" width="20%" style="border-right: none;">Weight Change</td>
                         </tr>
                         <tr>
-                            <td valign="top" width="20%" style="border-left: none;">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Minor modification</span>
-                                </div>
+                            <td valign="top" rowspan="2" width="20%">
+                               
                             </td>
                             <td valign="top" width="20%">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Next heavy maint.visit</span>
-                                </div>
+                                
+                            </td>
+                            <td valign="top" width="20%">
+                                
+                            </td>
+                            <td valign="top" width="20%" style="border-right: none;">@if($eo_additionals->weight_change){{ $eo_additionals->weight_change }}@else - @endif</td>
+                        </tr>
+                        <tr>
+                            <td valign="top" rowspan="2" width="20%">
+                            </td>
+                            <td valign="top" width="20%" >
+                            </td>
+                            <td valign="top" width="20%">
+                            </td>
+                            <td valign="top" width="20%" style="border-right: none;">Center Of Gravity Change</td>
+                        </tr>
+                        <tr>
+                            <td valign="top" width="20%">
                             </td>
                             <td valign="top" width="20%" style="border-bottom: 1px solid  #d4d7db;">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">As require</span>
-                                </div>
-                            </td>
-                            <td valign="top" width="20%">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">IPC</span>
-                                </div>
-                            </td>
-                            <td valign="top" width="20%" style="border-right: none;"></td>
-                        </tr>
-                        <tr>
-                            <td valign="top" width="20%" style="border-left: none;">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Repair/Deviation</span>
-                                </div>
-                            </td>
-                            <td valign="top" width="20%" style="border-bottom: 1px solid  #d4d7db;">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">As schedule by PPC</span>
-                                </div>
-                            </td>
-                            <td valign="top" width="20%">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Repactive(Interval in hrs,</span>
-                                </div>
-                            </td>
-                            <td valign="top" width="20%">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">WOM</span>
-                                </div>
-                            </td>
-                            <td valign="top" width="20%" align="center" style="border-right: none; color:red;border-bottom: 1px solid  #d4d7db;">55,01 <span style="color:black;">lbs</span></td>
-                        </tr>
-                        <tr>
-                            <td valign="top" width="20%" style="border-left: none;">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Inspection</span>
-                                </div>
-                            </td>
-                            <td valign="top" width="20%">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Prior to (date,hrs,cyc)</span>
-                                </div>
-                            </td>
-                            <td valign="top" width="20%">
-                                <div class="checkbox">
-                                    <img src="" alt="" width="10"> <span style="margin-left:18px;">cyc,days,months)</span>
-                                </div>
-                            </td>
-                            <td valign="top" width="20%">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10" style="border-bottom: 1px solid  #d4d7db;"> <span style="margin-left:5px;">OHM</span>
-                                </div>
-                            </td>
-                            <td valign="top" width="20%" style="border-right: none;">CG Charge</td>
-                        </tr>
-                        <tr>
-                            <td valign="top" width="20%" style="border-left: none;">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Maint PRGM change</span>
-                                </div>
                             </td>
                             <td valign="top" width="20%">
                             </td>
-                            <td valign="top" width="20%">
-                            </td>
-                            <td valign="top" width="20%">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Other</span>
-                                </div>
-                            </td>
-                            <td valign="top" width="20%" style="border-right: none;"></td>
-                        </tr>
-                        <tr>
-                            <td valign="top" width="20%" style="border-left: none;">
-                                <div class="checkbox">
-                                    <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">Fleet Standart</span>
-                                </div>
-                            </td>
-                            <td valign="top" width="20%">
-                            </td>
-                            <td valign="top" width="20%">
-                            </td>
-                            <td valign="top" width="20%">
-                            </td>
-                            <td valign="top" width="20%" align="center" style="border-right: none;color:red;border-bottom: 1px solid  #d4d7db;">40.02 <span style="color:black;">%mac</span></td>
+                            <td valign="top" width="20%" style="border-right: none;">@if($eo_additionals->center_of_gravity){{ $eo_additionals->center_of_gravity }}@else - @endif</td>
                         </tr>
                     </table>
                 </div>
@@ -443,24 +365,24 @@
                         <td valign="top" align="center" width="22%" style="border-bottom:none;"><b>STATION</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" align="center" width="3%" style="border-top:none;color:red;">55.01</td>
-                        <td valign="top" align="center" width="3%" style="border-top:none;color:red;">15.01</td>
+                        <td valign="top" align="center" width="3%">@if($eo_additionals->TSN) {{ $eo_additionals->TSN }} @else - @endif</td>
+                        <td valign="top" align="center" width="3%">@if($eo_additionals->CSN) {{ $eo_additionals->CSN }} @else - @endif</td>
                         <td valign="top" align="center" width="24%" style="border-top:none;border-right:none;">
                             <div class="checkbox">
-                                <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">A/C Log Book</span>
+                                <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">A/C Log Book</span>
                             </div>
                         </td>
                         <td valign="top" align="center" width="24%" style="border-top:none;border-left:none;border-right:none;">
                             <div class="checkbox">
-                                <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">ENG. Log Book</span>
+                                <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">ENG. Log Book</span>
                             </div>
                         </td>
                         <td valign="top" align="center" width="24%" style="border-top:none;border-left:none;">
                             <div class="checkbox">
-                                <img src="./img/check-box-empty.png" alt="" width="10"> <span style="margin-left:5px;">APU Log Book</span>
+                                <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">APU Log Book</span>
                             </div>
                         </td>
-                        <td valign="top" align="center" width="22%" style="border-top:none;color:red;">40.02</td>
+                        <td valign="top" align="center" width="22%" style="border-top:none;">@if($jobCard->station) {{ $jobCard->station->name }} @else - @endif</td>
                     </tr>
                 </table>
                 <table width="100%" cellpadding="4" class="table_content">
@@ -517,12 +439,10 @@
                 <table width="100%">
                     <tr>
                         <td width="33%" height="50" align="center" valign="bottom">
-                            <div style="width:100%;height:20px;text-align:center;padding-left:5px;">name : timestamp
-                            </div>
+                            <div style="width:100%;height:20px;text-align:center;padding-left:5px;">{{ $accomplished_by }} : {{ $accomplished_at }}</div>
                         </td>
                         <td width="33%" height="50" align="center" valign="bottom">
-                            <div style="width:100%;height:20px;text-align:center;padding-left:5px;">name :
-                                timestamp</span></div>
+                            <div style="width:100%;height:20px;text-align:center;padding-left:5px;">{{ $inspected_by }} : {{ $inspected_at }}</div>
                         </td>
                         <td width="34%" height="100" align="center" valign="bottom"
                             @if($rii_status==0) style="background:grey" @endif>

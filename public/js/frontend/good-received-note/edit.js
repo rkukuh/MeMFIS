@@ -50,7 +50,7 @@ let goods_received_note = {
                     sortable: 'asc',
                     filterable: !1,
                     textAlign: 'center',
-                    template: function (row, index, datatable) {   
+                    template: function (row, index, datatable) {
                         return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
                 },
@@ -187,7 +187,7 @@ let goods_received_note = {
             serial_numbers = serial_numbers.filter(function (el) {
 
                 return el != null && el != "";
-            
+
             });
 
             let item_uuid = $("#material").val();
@@ -195,20 +195,20 @@ let goods_received_note = {
             let qty = $("#quantity").val();
             let unit_id = $("#unit_material").val();
             let note = $("#description").val();
+            if($(".is_serial_number").is(":checked")) {
+                if(serial_numbers.length < qty){
+                    $('input[name^="serial_number"]').each(function(i) {
+                        if(this.value == "" || this.value == null){
+                            $(this).css('border', '2px solid red');
+                        }else{
+                            $(this).css('border', '1px solid grey');
+                        }
+                    });
 
-            if(serial_numbers.length < qty){
-                $('input[name^="serial_number"]').each(function(i) {
-                    if(this.value == "" || this.value == null){
-                        $(this).css('border', '2px solid red');
-                    }else{
-                        $(this).css('border', '1px solid grey');
-                    }
-                });
-
-                return;
+                    return;
+                }
             }
 
-           
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -220,6 +220,7 @@ let goods_received_note = {
                     quantity: qty,
                     unit_id: unit_id,
                     note: note,
+                    serial_numbers: serial_numbers,
                 },
                 success: function(response) {
                     if (response.errors) {
@@ -293,8 +294,12 @@ let goods_received_note = {
             document.getElementById('uuid').value = $(this).data('uuid');
         });
         $(".modal-footer").on("click", ".update-item", function() {
-            
+            $('input[name^="serial_number"]').each(function() {
+                alert($(this).val());
+            });
             let uuid = $("input[name=uuid]").val();
+            // let serial_number = $("input[name=serial_number[]").val();
+            // alert(serial_number);
             let exp_date = $("#exp_date").val();
             let qty = $("#qty").val();
             let unit_id = $("#unit_id").val();
@@ -391,6 +396,14 @@ jQuery(document).ready(function () {
     goods_received_note.init();
 });
 
+$("#is_serial_number").on("change", function () {
+    if($(this).is(":checked")) {
+        $('.serial_numbers').removeClass("hidden");
+    } else {
+        $('.serial_numbers').addClass("hidden");
+        $('.serial_number_inputs').html('');
+    }
+});
 
 $("#material").on("change", function () {
     let item_uuid = $("#material").val();
@@ -403,8 +416,6 @@ $("#material").on("change", function () {
             $("#quantity").val(parseInt(data.pivot.quantity));
             $("#quantity").prop("max", data.pivot.quantity);
             $('.clone').remove();
- 
-            
             for (let number = 0; number < data.pivot.quantity; number++) {
                 let clone = $(".blueprint").clone();
                 clone.removeClass("blueprint hidden");
@@ -436,6 +447,5 @@ $("#quantity").on("change", function () {
             $(".serial_number_inputs").after(clone);
             clone.slideDown("slow",function(){});
         }
-    }
-    
+        }
 });

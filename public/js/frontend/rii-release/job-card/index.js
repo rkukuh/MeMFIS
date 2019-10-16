@@ -50,7 +50,7 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcardable.number',
+                    field: 'tc_number',
                     title: 'TaskCard No',
                     sortable: 'asc',
                     filterable: !1,
@@ -67,46 +67,31 @@ let RiiRelease = {
                     }
                 },
                 {
-                    field: 'company',
+                    field: 'company_task',
                     title: 'Company Task No',
                     sortable: 'asc',
                     filterable: !1,
-                    template: function (t, e, i) {
-                        if(t.jobcardable.additionals){
-                            let company = t.jobcardable.additionals;
-                            obj = JSON.parse(company);
-                            // console.log()
-                            return (
-                                obj.internal_number
-                            );
-                        }
-                        else{
-                            return(
-                                ''
-                            );
-                        }
-                    }
                 },
                 {
-                    field: 'quotation.project.customer.name',
+                    field: 'customer_name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft.name',
+                    field: 'aircraft_name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_register',
+                    field: 'quotation.quotationable.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_sn',
+                    field: 'quotation.quotationable.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
@@ -146,7 +131,7 @@ let RiiRelease = {
                 },
                 {
                     field: 'updated_by',
-                    title: 'Updated By',
+                    title: 'Released By',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
@@ -155,7 +140,7 @@ let RiiRelease = {
                 },
                 {
                     field: 'conducted_by',
-                    title: 'Released By',
+                    title: 'RII Released By',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
@@ -170,7 +155,7 @@ let RiiRelease = {
                         if(t.status == 'Released'){
                             return (
                                 '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-external-link"></i>' +
+                                    '<i class="la la-print"></i>' +
                                 '</a>'
                             );
                         }else{
@@ -179,7 +164,7 @@ let RiiRelease = {
                                     '<i class="la la-check-circle"></i>' +
                                 '</a>' +
                                 '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-external-link"></i>' +
+                                    '<i class="la la-print"></i>' +
                                 '</a>'
                             );
                         }

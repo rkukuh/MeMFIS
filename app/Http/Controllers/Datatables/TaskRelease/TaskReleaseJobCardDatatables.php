@@ -21,17 +21,41 @@ class TaskReleaseJobCardDatatables extends Controller
     {
         $JobCards = JobCard::with('quotation','quotation.quotationable','quotation.quotationable.customer','quotation.quotationable.aircraft')->get();
         foreach($JobCards as $jobcard){
+            if($jobcard->jobcardable_type == "App\Models\TaskCard"){
+                $jobcard->tc_number    .= $jobcard->jobcardable->number;
+                $jobcard->tc_title     .= $jobcard->jobcardable->title;
+                if(isset($jobcard->jobcardable->task_id)){
+                    $jobcard->task_name .= $jobcard->jobcardable->task->name;
+                }
+                $jobcard->type_name    .= $jobcard->jobcardable->type->name;
+                $jobcard->skill        .= $jobcard->jobcardable->skill;
+                if($jobcard->jobcardable->additionals <> null){
+                    $addtional = json_decode($jobcard->jobcardable->additionals);
+                    $jobcard->company_task .= $addtional->internal_number;
+                }
+                else{
+                    $jobcard->company_task .= "-";
+    
+                }
+            }else if($jobcard->jobcardable_type == "App\Models\EOInstruction"){
+                $jobcard->tc_number    .= $jobcard->jobcardable->eo_header->number;
+                $jobcard->tc_title     .= $jobcard->jobcardable->eo_header->title;
+                $jobcard->task_name    .= "-";
+                $jobcard->type_name    .= $jobcard->jobcardable->eo_header->type->name;
+                $jobcard->skill        .= $jobcard->jobcardable->skill;
+                if($jobcard->jobcardable->eo_header->additionals <> null){
+                    $addtional = json_decode($jobcard->jobcardable->eo_header->additionals);
+                    $jobcard->company_task .= $addtional->internal_number;
+                }
+                else{
+                    $jobcard->company_task .= "-";
+    
+                }
+            }
 
             $jobcard->skill_name .= $jobcard->jobcardable->skill;
 
-            if($jobcard->jobcardable->additionals <> null){
-                $addtional = json_decode($jobcard->jobcardable->additionals);
-                $jobcard->company_task .= $addtional->internal_number;
-            }
-            else{
-                $jobcard->company_task .= "-";
-
-            }
+            
 
             $count_user = $jobcard->progresses->groupby('progressed_by')->count()-1;
 

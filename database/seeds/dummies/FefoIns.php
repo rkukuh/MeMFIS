@@ -12,6 +12,6 @@ class FefoIns extends Seeder
      */
     public function run()
     {
-        //
+        factory(FefoIn::class, config('memfis.dummies.fefo_ins'))->create();
     }
 }

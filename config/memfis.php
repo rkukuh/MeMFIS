@@ -25,6 +25,7 @@ return [
         'goods-received' => 20,
         'htcrr' => 20,
         'inventory_ins' => 20,
+        'fefo_ins' => 100,
         'items' => 20,
         'jobcards' => 20,
         'languages' => 20,
@@ -53,7 +54,7 @@ return [
         'schools' => 20,
         'statuses' => 20,
         'storages' => 20,
-        'taskcards' => [           
+        'taskcards' => [
             'basic' => 20,
             'eo' => 20,
             'si' => 20,

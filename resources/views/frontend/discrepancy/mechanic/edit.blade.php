@@ -128,7 +128,7 @@
 
                                                 @foreach ($skills as $skill)
                                                     <option value="{{ $skill->id }}"
-                                                        @if ($skill->name == "ERI" && sizeof($discrepancy->skills) == 3) selected @elseif($skill->id == $discrepancy->skills[0]->id) selected @endif>
+                                                        @if ($skill->name == "ERI" && sizeof($discrepancy->skills) == 3) selected @elseif($skill->id == $discrepancy->skills->first()->id) selected @endif>
                                                         {{ $skill->name }}
                                                     </option>
                                                 @endforeach
@@ -549,10 +549,10 @@
     <script src="{{ asset('js/frontend/discrepancy/repeater.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material-uom.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit-tool.js') }}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-tool-uom.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
