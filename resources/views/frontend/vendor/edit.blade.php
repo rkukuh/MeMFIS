@@ -59,6 +59,7 @@
                                         @component('frontend.common.input.text')
                                             @slot('text', 'Name')
                                             @slot('name', 'name')
+                                            @slot('value', $vendor->name)
                                         @endcomponent
                                     </div>
 
@@ -68,10 +69,11 @@
                                         </label>
 
                                         @component('frontend.common.input.number')
-                                            @slot('text', 'Term of Payment')
                                             @slot('id', 'term_of_payment')
-                                            @slot('input_append', 'Hari')
+                                            @slot('text', 'Term of Payment')
                                             @slot('name', 'term_of_payment')
+                                            @slot('value', $vendor->payment_term)
+                                            @slot('input_append', 'Hari')
                                             @slot('id_error', 'term_of_payment')
                                         @endcomponent
                                     </div>
@@ -98,86 +100,148 @@
                                             </div>
                                         </div>
                                         <div class="repeaterPhone">
-                                            <div class="repeaterRow">
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-5 col-md-5 col-lg-5">
-                                                        @component('frontend.common.input.text')
-                                                            @slot('name', 'phone_array')
-                                                            @slot('text', 'Phone')
-                                                        @endcomponent
+                                            @if(isset($vendor->phones) && sizeof($vendor->phones) > 0)
+                                                @for($counter = 0 ; $counter < sizeof($vendor->phones); $counter++)
+                                                    <div class="repeaterRow">
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                @component('frontend.common.input.text')
+                                                                    @slot('name', 'phone_array')
+                                                                    @slot('value', $vendor->phones[$counter]->number)
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                @component('frontend.common.input.text')
+                                                                    @slot('name', 'ext')
+                                                                    @slot('value', $vendor->phones[$counter]->ext)
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                                                @if( $vendor->phones[$counter]->type->name === "Company" )
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('text', 'Company')
+                                                                        @slot('name', 'type_phone_'.$counter)
+                                                                        @slot('id', 'type_phone')
+                                                                        @slot('value', 'company')
+                                                                        @slot('checked', 'checked')
+                                                                    @endcomponent
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'type_phone')
+                                                                        @slot('name', 'type_phone_'.$counter)
+                                                                        @slot('text', 'Personal')
+                                                                        @slot('value', 'personal')
+                                                                    @endcomponent
+                                                                @else
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('text', 'Company')
+                                                                        @slot('name', 'type_phone_'.$counter)
+                                                                        @slot('id', 'type_phone')
+                                                                        @slot('value', 'company')
+                                                                    @endcomponent
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'type_phone')
+                                                                        @slot('name', 'type_phone_'.$counter)
+                                                                        @slot('text', 'Personal')
+                                                                        @slot('value', 'personal')
+                                                                        @slot('checked', 'checked')
+                                                                    @endcomponent
+                                                                @endif
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.buttons.delete_repeater')
+                                                                    @slot('class', 'DeleteRow')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.buttons.create_repeater')
+                                                                    @slot('class', 'AddRow')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        @component('frontend.common.input.text')
-                                                            @slot('name', 'ext')
-                                                            @slot('text', 'Ext')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('text', 'Company')
-                                                            @slot('name', 'type_phone_1')
-                                                            @slot('id', 'type_phone')
-                                                            @slot('value', 'company')
-                                                        @endcomponent
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('id', 'type_phone')
-                                                            @slot('name', 'type_phone_1')
-                                                            @slot('text', 'Personal')
-                                                            @slot('value', 'personal')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                        @component('frontend.common.buttons.delete_repeater')
-                                                            @slot('class', 'DeleteRow')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                        @component('frontend.common.buttons.create_repeater')
-                                                            @slot('class', 'AddRow')
-                                                        @endcomponent
+                                                @endfor
+                                            @else
+                                                <div class="repeaterRow">
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                                            @component('frontend.common.input.text')
+                                                                @slot('name', 'phone_array')
+                                                                @slot('text', 'Phone')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2 col-lg-2">
+                                                            @component('frontend.common.input.text')
+                                                                @slot('name', 'ext')
+                                                                @slot('text', 'Ext')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-3 col-lg-3">
+                                                            @component('frontend.common.input.radio')
+                                                                @slot('text', 'Company')
+                                                                @slot('name', 'type_phone_1')
+                                                                @slot('id', 'type_phone')
+                                                                @slot('value', 'company')
+                                                            @endcomponent
+                                                            @component('frontend.common.input.radio')
+                                                                @slot('id', 'type_phone')
+                                                                @slot('name', 'type_phone_1')
+                                                                @slot('text', 'Personal')
+                                                                @slot('value', 'personal')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                            @component('frontend.common.buttons.delete_repeater')
+                                                                @slot('class', 'DeleteRow')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                            @component('frontend.common.buttons.create_repeater')
+                                                                @slot('class', 'AddRow')
+                                                            @endcomponent
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="repeaterRow CopyPhone hidden">
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-5 col-md-5 col-lg-5">
-                                                        @component('frontend.common.input.text')
-                                                            @slot('name', 'phone_array')
-                                                            @slot('text', 'Phone')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-2 col-md-2 col-lg-2">
-                                                        @component('frontend.common.input.text')
-                                                            @slot('name', 'ext')
-                                                            @slot('text', 'Ext')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('text', 'Company')
-                                                            @slot('name', 'type_phone')
-                                                            @slot('id', 'type_phone')
-                                                            @slot('value', 'company')
-                                                        @endcomponent
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('id', 'type_phone')
-                                                            @slot('name', 'type_phone')
-                                                            @slot('text', 'Personal')
-                                                            @slot('value', 'personal')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                        @component('frontend.common.buttons.delete_repeater')
-                                                            @slot('class', 'DeleteRow')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                        @component('frontend.common.buttons.create_repeater')
-                                                            @slot('class', 'AddRow')
-                                                        @endcomponent
+                                            @endif
+                                                <div class="repeaterRow CopyPhone hidden">
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                                            @component('frontend.common.input.text')
+                                                                @slot('name', 'phone_array')
+                                                                @slot('text', 'Phone')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-2 col-md-2 col-lg-2">
+                                                            @component('frontend.common.input.text')
+                                                                @slot('name', 'ext')
+                                                                @slot('text', 'Ext')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-3 col-lg-3">
+                                                            @component('frontend.common.input.radio')
+                                                                @slot('text', 'Company')
+                                                                @slot('name', 'type_phone')
+                                                                @slot('id', 'type_phone')
+                                                                @slot('value', 'company')
+                                                            @endcomponent
+                                                            @component('frontend.common.input.radio')
+                                                                @slot('id', 'type_phone')
+                                                                @slot('name', 'type_phone')
+                                                                @slot('text', 'Personal')
+                                                                @slot('value', 'personal')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                            @component('frontend.common.buttons.delete_repeater')
+                                                                @slot('class', 'DeleteRow')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                            @component('frontend.common.buttons.create_repeater')
+                                                                @slot('class', 'AddRow')
+                                                            @endcomponent
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -186,7 +250,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-5 col-md-5 col-lg-5">
                                                 <label class="form-control-label">
-                                                    Fax 
+                                                    Fax @include('frontend.common.label.optional')
                                                 </label>
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -198,7 +262,98 @@
                                             </div>
                                         </div>
                                         <div class="repeaterFax">
-                                            <div class="repeaterRow">
+                                            @if(isset($vendor->faxes) && sizeof($vendor->faxes) > 0)
+                                                @for($counter=0 ; $counter < sizeof($vendor->faxes); $counter++)
+                                                    <div class="repeaterRow">
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                @component('frontend.common.input.text')
+                                                                    @slot('text', 'fax')
+                                                                    @slot('name', 'fax')
+                                                                    @slot('value', $vendor->faxes[$counter]->number)
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                                                @if( $vendor->faxes[$counter]->type->name === "Company" )
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'type_fax')
+                                                                        @slot('name', 'type_fax_'.$counter))
+                                                                        @slot('text', 'Company')
+                                                                        @slot('value', 'company')
+                                                                        @slot('checked','checked')
+                                                                    @endcomponent
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'type_fax')
+                                                                        @slot('name', 'type_fax_'.$counter))
+                                                                        @slot('text', 'Personal')
+                                                                        @slot('value', 'personal')
+                                                                    @endcomponent
+                                                                @else
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'type_fax')
+                                                                        @slot('name', 'type_fax_'.$counter))
+                                                                        @slot('text', 'Company')
+                                                                        @slot('value', 'company')
+                                                                    @endcomponent
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'type_fax')
+                                                                        @slot('name', 'type_fax_'.$counter))
+                                                                        @slot('text', 'Personal')
+                                                                        @slot('value', 'personal')
+                                                                        @slot('checked','checked')
+                                                                    @endcomponent
+                                                                @endif
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.buttons.delete_repeater')
+                                                                    @slot('class', 'DeleteRow')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.buttons.create_repeater')
+                                                                    @slot('class', 'AddRow')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endfor
+                                            @else
+                                                <div class="repeaterRow">
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                                            @component('frontend.common.input.text')
+                                                                @slot('text', 'fax')
+                                                                @slot('name', 'fax')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-3 col-lg-3">
+                                                            @component('frontend.common.input.radio')
+                                                                @slot('text', 'Company')
+                                                                @slot('name', 'type_fax')
+                                                                @slot('id', 'type_fax')
+                                                                @slot('value', 'company')
+                                                            @endcomponent
+                                                            @component('frontend.common.input.radio')
+                                                                @slot('name', 'type_fax')
+                                                                @slot('id', 'type_fax')
+                                                                @slot('text', 'Personal')
+                                                                @slot('value', 'personal')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                            @component('frontend.common.buttons.delete_repeater')
+                                                                @slot('class', 'DeleteRow')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                            @component('frontend.common.buttons.create_repeater')
+                                                                @slot('class', 'AddRow')
+                                                            @endcomponent
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            <div class="repeaterRow CopyFax hidden">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
                                                         @component('frontend.common.input.text')
@@ -232,40 +387,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="repeaterRow CopyFax hidden">
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-5 col-md-5 col-lg-5">
-                                                            @component('frontend.common.input.text')
-                                                                @slot('text', 'fax')
-                                                                @slot('name', 'fax')
-                                                            @endcomponent
-                                                        </div>
-                                                        <div class="col-sm-3 col-md-3 col-lg-3">
-                                                            @component('frontend.common.input.radio')
-                                                                @slot('text', 'Company')
-                                                                @slot('name', 'type_fax')
-                                                                @slot('id', 'type_fax')
-                                                                @slot('value', 'company')
-                                                            @endcomponent
-                                                            @component('frontend.common.input.radio')
-                                                                @slot('name', 'type_fax')
-                                                                @slot('id', 'type_fax')
-                                                                @slot('text', 'Personal')
-                                                                @slot('value', 'personal')
-                                                            @endcomponent
-                                                        </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                        @component('frontend.common.buttons.delete_repeater')
-                                                            @slot('class', 'DeleteRow')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                        @component('frontend.common.buttons.create_repeater')
-                                                            @slot('class', 'AddRow')
-                                                        @endcomponent
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -274,7 +395,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-5 col-md-5 col-lg-5">
                                                 <label class="form-control-label">
-                                                    Email
+                                                    Email @include('frontend.common.label.optional')
                                                 </label>
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -286,40 +407,97 @@
                                             </div>
                                         </div>
                                         <div class="repeaterEmail">
-                                            <div class="repeaterRow">
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-5 col-md-5 col-lg-5">
-                                                        @component('frontend.common.input.email')
-                                                            @slot('name', 'email_array')
-                                                            @slot('placeholder', 'Email')
-                                                        @endcomponent
+                                            @if(isset($vendor->emails) && sizeof($vendor->emails) > 0)
+                                                @for($counter=0 ; $counter < sizeof($vendor->emails); $counter++)
+                                                    <div class="repeaterRow">
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-5 col-md-5 col-lg-5">
+                                                                @component('frontend.common.input.email')
+                                                                    @slot('name', 'email_array')
+                                                                    @slot('placeholder', 'Email')
+                                                                    @slot('value',$vendor->emails[$counter]->address)
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                                                @if($vendor->emails[$counter]->type->name === "Company")
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'type_email')
+                                                                        @slot('name', 'type_email_'.$counter)
+                                                                        @slot('text', 'Company')
+                                                                        @slot('value', 'company')
+                                                                        @slot('checked','checked')
+                                                                    @endcomponent
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'type_email')
+                                                                        @slot('name', 'type_email_'.$counter)
+                                                                        @slot('text', 'Personal')
+                                                                        @slot('value', 'personal')
+                                                                    @endcomponent
+                                                                @else
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'type_email')
+                                                                        @slot('name', 'type_email_'.$counter)
+                                                                        @slot('text', 'Company')
+                                                                        @slot('value', 'company')
+                                                                    @endcomponent
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'type_email')
+                                                                        @slot('name', 'type_email_'.$counter)
+                                                                        @slot('text', 'Personal')
+                                                                        @slot('value', 'personal')
+                                                                        @slot('checked','checked')
+                                                                    @endcomponent
+                                                                @endif
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.buttons.delete_repeater')
+                                                                    @slot('class', 'DeleteRow')
+                                                                @endcomponent
+                                                            </div>
+                                                            <div class="col-sm-1 col-md-1 col-lg-1">
+                                                                @component('frontend.common.buttons.create_repeater')
+                                                                    @slot('class', 'AddRow')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('text', 'Company')
-                                                            @slot('name', 'type_email')
-                                                            @slot('id', 'type_email')
-                                                            @slot('value', 'company')
-                                                        @endcomponent
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('name', 'type_email')
-                                                            @slot('id', 'type_email')
-                                                            @slot('text', 'Personal')
-                                                            @slot('value', 'personal')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                        @component('frontend.common.buttons.delete_repeater')
-                                                            @slot('class', 'DeleteRow')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-1 col-md-1 col-lg-1">
-                                                        @component('frontend.common.buttons.create_repeater')
-                                                            @slot('class', 'AddRow')
-                                                        @endcomponent
+                                                @endfor
+                                            @else
+                                                <div class="repeaterRow">
+                                                    <div class="form-group m-form__group row">
+                                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                                            @component('frontend.common.input.email')
+                                                                @slot('name', 'email_array')
+                                                                @slot('placeholder', 'Email')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-3 col-lg-3">
+                                                            @component('frontend.common.input.radio')
+                                                                @slot('text', 'Company')
+                                                                @slot('name', 'type_email')
+                                                                @slot('id', 'type_email')
+                                                                @slot('value', 'company')
+                                                            @endcomponent
+                                                            @component('frontend.common.input.radio')
+                                                                @slot('name', 'type_email')
+                                                                @slot('id', 'type_email')
+                                                                @slot('text', 'Personal')
+                                                                @slot('value', 'personal')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                            @component('frontend.common.buttons.delete_repeater')
+                                                                @slot('class', 'DeleteRow')
+                                                            @endcomponent
+                                                        </div>
+                                                        <div class="col-sm-1 col-md-1 col-lg-1">
+                                                            @component('frontend.common.buttons.create_repeater')
+                                                                @slot('class', 'AddRow')
+                                                            @endcomponent
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @endif
                                             <div class="repeaterRow CopyEmail hidden">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
@@ -362,7 +540,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-5 col-md-5 col-lg-5">
                                                 <label class="form-control-label">
-                                                    Document
+                                                    Document @include('frontend.common.label.optional')
                                                 </label>
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">
@@ -421,11 +599,11 @@
                                                                 Select a Document Type
                                                             </option>
 
-                                                            {{-- @foreach ($documents as $document)
+                                                            @foreach ($documents as $document)
                                                             <option value="{{ $document->uuid }}">
                                                                 {{ $document->name }}
                                                             </option>
-                                                            @endforeach --}}
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-1 col-md-1 col-lg-1">
@@ -443,19 +621,46 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <label class="form-control-label">
-                                            Account Code @include('frontend.common.label.required')
-                                        </label>
+                                <div class="col-sm-7 col-md-7 col-lg-7">
+                                    <label class="form-control-label">
+                                        Account Code @include('frontend.common.label.optional')
+                                    </label>
 
-                                        @include('frontend.common.account-code.index')
+                                    <div style="background-color:beige;padding:15px 10px 5px 15px;">
 
-                                        @component('frontend.common.input.hidden')
-                                            @slot('id', 'account_code')
-                                            @slot('name', 'account_code')
-                                        @endcomponent
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-8 col-md-8 col-lg-8">
+                                                @if (isset($vendor->journal))
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('padding', '0')
+                                                    @slot('class', 'search-journal')
+                                                    @slot('text', $vendor->account_code_and_name)
+                                                @endcomponent
+                                                @else
+                                                <div class="search-journal" id="search-journal">
+                                                    Search account code
+                                                </div>
+                                                @endif
+                                            </div>
+
+                                            <div class="col-sm-3 col-md-3 col-lg-3 text-right" style="padding: 0;">
+                                                @component('frontend.common.account-code.button-create')
+                                                    @slot('text', '')
+                                                    @slot('size', 'sm')
+                                                    @slot('icon', 'search')
+                                                    @slot('data_target', '#modal_account_code')
+                                                @endcomponent
+                                            </div>
+                                        </div>
                                     </div>
+
+                                    @include('frontend.common.account-code.modal')
+
+                                    @component('frontend.common.input.hidden')
+                                        @slot('id', 'account_code')
+                                        @slot('name', 'account_code')
+                                        @slot('value', $vendor->account_code)
+                                    @endcomponent
                                 </div>
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
@@ -485,6 +690,7 @@
                                                             @slot('text', 'Bank Account Name')
                                                             @slot('id', 'bank_account_name')
                                                             @slot('name', 'bank_account_name')
+                                                            @slot('value', $vendor->bank_accounts->first()->name)
                                                             @slot('id_error', 'bank_account_name')
                                                         @endcomponent
                                                     </div>
@@ -497,6 +703,7 @@
                                                             @slot('text', 'Bank Account Number')
                                                             @slot('id', 'bank_account_number')
                                                             @slot('name', 'bank_account_number')
+                                                            @slot('value', $vendor->bank_accounts->first()->number)
                                                             @slot('id_error', 'bank_account_number')
                                                         @endcomponent
                                                     </div>
@@ -523,6 +730,7 @@
                                                             @slot('text', 'Swift Code')
                                                             @slot('id', 'swift_code')
                                                             @slot('name', 'swift_code')
+                                                            @slot('value', $vendor->bank_accounts->first()->swift_code)
                                                             @slot('id_error', 'swift_code')
                                                         @endcomponent
                                                     </div>
@@ -536,9 +744,14 @@
                                             Active 
                                         </label><br>
                     
-                                        <span class="m-bootstrap-switch m-bootstrap-switch--pill">
-                                            <input name="isActive" data-switch="true" type="checkbox" data-on-color="success">
-                                        </span>
+                                        @component('frontend.common.input.switch')
+                                            @slot('text', 'Active')
+                                            @slot('name', 'active')
+                                            @slot('id', 'active')
+                                            @if(empty($vendor->banned_at))
+                                            @slot('checked','checked')
+                                            @endif
+                                        @endcomponent
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
@@ -621,11 +834,11 @@
                 </div>
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
-                        <div class="form-group m-form__group row">
-                            <div class="col-sm-12 col-md-12 col-lg-12">
-                                <div class="m-portlet__body">
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <div class="repeaterAttention">
+                        <div class="form-group m-form__group row">                          
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="repeaterAttention">
+                                    @if($attentions)
+                                        @foreach($attentions as $attention)
                                             <div class="repeaterRow">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -635,6 +848,7 @@
 
                                                         @component('frontend.common.input.text')
                                                             @slot('name', 'attn-name')
+                                                            @slot('value', $attention->name)
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -643,7 +857,9 @@
                                                         </label>
 
                                                         @component('frontend.common.input.text')
+                                                            @slot('text', 'Purchasing')
                                                             @slot('name', 'attn-position')
+                                                            @slot('value', $attention->position)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -653,22 +869,26 @@
                                                             Phone
                                                         </label>
 
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('text', 'Phone Number')
-                                                            @slot('name', 'attn-phone')
-                                                            @slot('class', 'attn-phone')
-                                                            @slot('multiple','multiple')
-                                                        @endcomponent
+                                                        <select name="attn-phone" class="form-control attn-phone" multiple>
+                                                            @if(isset($attention->phones))
+                                                                @foreach($attention->phones as $attnPhone)
+                                                                <option value="{{ $attnPhone }}" selected>{{ $attnPhone }}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
                                                     </div>
-                                                    <div class="col-sm-2 col-md-2 col-lg-2 hidden">
+                                                    <div class="col-sm-3 col-md-3 col-lg-3 hidden">
                                                         <label class="form-control-label">
                                                             Extension
                                                         </label>
                                                         @component('frontend.common.input.text')
                                                             @slot('name', 'attn-ext')
                                                             @slot('text', 'Ext')
+                                                            @slot('value', $attention->ext)
                                                         @endcomponent
                                                     </div>
+                                                </div>
+                                                <div class="form-group m-form__group row">
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                                         <label class="form-control-label">
                                                             Fax
@@ -677,6 +897,7 @@
                                                         @component('frontend.common.input.text')
                                                             @slot('text', '+62xxxxxxx / 07777777')
                                                             @slot('name', 'attn-fax')
+                                                            @slot('value', $attention->fax)
                                                         @endcomponent
                                                     </div>
                                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -684,12 +905,13 @@
                                                             Email
                                                         </label>
 
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('text', 'Email Address')
-                                                            @slot('name', 'attn-email')
-                                                            @slot('class', 'attn-email')
-                                                            @slot('multiple','multiple')
-                                                        @endcomponent
+                                                        <select name="attn-email" class="form-control attn-email" multiple>
+                                                            @if(isset($attention->emails))
+                                                                @foreach($attention->emails as $emails)
+                                                                <option value="{{ $emails }}" selected>{{ $emails }}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">
@@ -705,84 +927,170 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="repeaterRow CopyAttention hidden">
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Name
-                                                        </label>
+                                        @endforeach
+                                    @else
 
-                                                        @component('frontend.common.input.text')
-                                                            @slot('text', 'John Wick')
-                                                            @slot('name', 'attn-name')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Position
-                                                        </label>
+                                    <div class="repeaterRow">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Name
+                                                    </label>
 
-                                                        @component('frontend.common.input.text')
-                                                            @slot('text', 'Purchasing')
-                                                            @slot('name', 'attn-position')
-                                                        @endcomponent
-                                                    </div>
+                                                    @component('frontend.common.input.text')
+                                                        @slot('name', 'attn-name')
+                                                    @endcomponent
                                                 </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        <label class="form-control-label">
-                                                            Phone
-                                                        </label>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Position
+                                                    </label>
 
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('text', 'Phone Number')
-                                                            @slot('name', 'attn-phone')
-                                                            @slot('multiple', 'multiple')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-2 col-md-2 col-lg-2 hidden">
-                                                        <label class="form-control-label">
-                                                            Extension
-                                                        </label>
-                                                        @component('frontend.common.input.text')
-                                                            @slot('name', 'attn-ext')
-                                                            @slot('text', 'Ext')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Fax
-                                                        </label>
-
-                                                        @component('frontend.common.input.text')
-                                                            @slot('text', '+62xxxxxxx / 07777777')
-                                                            @slot('name', 'attn-fax')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                                        <label class="form-control-label">
-                                                            Email
-                                                        </label>
-
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('text', 'Email Address')
-                                                            @slot('name', 'attn-email')
-                                                            @slot('multiple', 'multiple')
-                                                        @endcomponent
-                                                    </div>
+                                                    @component('frontend.common.input.text')
+                                                        @slot('name', 'attn-position')
+                                                    @endcomponent
                                                 </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                                        @component('frontend.common.buttons.delete_repeater')
-                                                            @slot('class', 'DeleteRow')
-                                                            @slot('size', 'col-sm-6')
-                                                        @endcomponent
-                                                        @component('frontend.common.buttons.create_repeater')
-                                                            @slot('class', 'AddRow')
-                                                            @slot('size', 'col-sm-6')
-                                                        @endcomponent
-                                                    </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    <label class="form-control-label">
+                                                        Phone
+                                                    </label>
+
+                                                    @component('frontend.common.input.select2')
+                                                        @slot('text', 'Phone Number')
+                                                        @slot('name', 'attn-phone')
+                                                        @slot('class', 'attn-phone')
+                                                        @slot('multiple', 'multiple')
+                                                    @endcomponent
                                                 </div>
+                                                <div class="col-sm-2 col-md-2 col-lg-2 hidden">
+                                                    <label class="form-control-label">
+                                                        Extension
+                                                    </label>
+                                                    @component('frontend.common.input.text')
+                                                        @slot('name', 'attn-ext')
+                                                        @slot('text', 'Ext')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Fax
+                                                    </label>
+
+                                                    @component('frontend.common.input.text')
+                                                        @slot('text', '+62xxxxxxx / 07777777')
+                                                        @slot('name', 'attn-fax')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Email
+                                                    </label>
+
+                                                    @component('frontend.common.input.select2')
+                                                        @slot('text', 'Email Address')
+                                                        @slot('name', 'attn-email')
+                                                        @slot('class', 'attn-email')
+                                                        @slot('multiple', 'multiple')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                    @component('frontend.common.buttons.delete_repeater')
+                                                        @slot('class', 'DeleteRow')
+                                                        @slot('size', 'col-sm-6')
+                                                    @endcomponent
+                                                    @component('frontend.common.buttons.create_repeater')
+                                                        @slot('class', 'AddRow')
+                                                        @slot('size', 'col-sm-6')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    <div class="repeaterRow CopyAttention hidden">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Name
+                                                </label>
+
+                                                @component('frontend.common.input.text')
+                                                    @slot('name', 'attn-name')
+                                                @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Position
+                                                </label>
+
+                                                @component('frontend.common.input.text')
+                                                    @slot('text', 'Purchasing')
+                                                    @slot('name', 'attn-position')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                <label class="form-control-label">
+                                                    Phone
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('text', 'Phone Number')
+                                                    @slot('name', 'attn-phone')
+                                                    @slot('multiple', 'multiple')
+                                                @endcomponent
+                                            </div>
+                                            <div class="col-sm-2 col-md-2 col-lg-2 hidden">
+                                                <label class="form-control-label">
+                                                    Extension
+                                                </label>
+                                                @component('frontend.common.input.text')
+                                                    @slot('name', 'attn-ext')
+                                                    @slot('text', 'Ext')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Fax
+                                                </label>
+
+                                                @component('frontend.common.input.text')
+                                                    @slot('text', '+62xxxxxxx / 07777777')
+                                                    @slot('name', 'attn-fax')
+                                                @endcomponent
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <label class="form-control-label">
+                                                    Email
+                                                </label>
+
+                                                @component('frontend.common.input.select2')
+                                                    @slot('text', 'Email Address')
+                                                    @slot('name', 'attn-email')
+                                                    @slot('multiple', 'multiple')
+                                                @endcomponent
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                                @component('frontend.common.buttons.delete_repeater')
+                                                    @slot('class', 'DeleteRow')
+                                                    @slot('size', 'col-sm-6')
+                                                @endcomponent
+                                                @component('frontend.common.buttons.create_repeater')
+                                                    @slot('class', 'AddRow')
+                                                    @slot('size', 'col-sm-6')
+                                                @endcomponent
                                             </div>
                                         </div>
                                     </div>
