@@ -103,9 +103,20 @@ class ItemPurchaseOrderController extends Controller
         // }
 
 
+        $item = Item::find($item->id);
+        if($request->unit_id <> $item->unit_id){
+            $quantity = $request->quantity;
+            $qty_uom = $item->units->where('uom.unit_id',$request->unit_id)->first()->uom->quantity;
+            $quantity_unit = $qty_uom*$quantity;
+        }
+        else{
+            $quantity_unit = $request->quantity;
+        }
+
         $purchaseOrder->items()->updateExistingPivot($item->id,
                     ['unit_id'=>$request->unit_id,
                     'quantity'=> $request->quantity,
+                    'quantity_unit'=> $quantity_unit,
                     'price'=> $request->price,
                     'subtotal_before_discount'=> $subtotal_before_discount ,
                     'subtotal_after_discount'=> $subtotal_before_discount - $discount_amount,
