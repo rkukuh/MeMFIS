@@ -381,7 +381,7 @@
                                 <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">APU Log Book</span>
                             </div>
                         </td>
-                        <td valign="top" align="center" width="22%" style="border-top:none;color:red;">@if($jobCard->station) {{ $jobCard->station }} @else - @endif</td>
+                        <td valign="top" align="center" width="22%" style="border-top:none;">@if($jobCard->station) {{ $jobCard->station->name }} @else - @endif</td>
                     </tr>
                 </table>
                 <table width="100%" cellpadding="4" class="table_content">
