@@ -48,10 +48,19 @@ class ItemPurchaseRequestController extends Controller
         if($exists){
             return response()->json(['title' => "Danger"]);
         }else{
+            $item = Item::find($item->id);
+            if($request->unit_id <> $item->unit_id){
+                $quantity = $request->quantity;
+                $qty_uom = $item->units->where('uom.unit_id',$request->unit_id)->first()->uom->quantity;
+                $quantity_unit = $qty_uom*$quantity;
+            }
+            else{
+                $quantity_unit = $request->quantity;
+            }
             $purchaseRequest->items()->attach($item->id, [
                 'quantity' => $request->quantity,
                 'unit_id' => $request->unit_id,
-                'quantity_unit' => $request->unit_id,
+                'quantity_unit' => $quantity_unit,
                 'note' => $request->remark
             ]);
 
