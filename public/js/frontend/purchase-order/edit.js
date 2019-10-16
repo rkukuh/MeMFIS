@@ -302,6 +302,9 @@ let PurchaseOrder = {
                 },
                 success: function(response) {
                     if (response.errors) {
+                        if (response.errors.quantity) {
+                            $('#quantity-error').html(response.errors.quantity[0]);
+                        }
                         // if (response.errors.title) {
                         //     $('#title-error').html(response.errors.title[0]);
                         // }

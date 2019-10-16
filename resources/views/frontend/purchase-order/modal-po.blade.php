@@ -31,6 +31,7 @@
                                     @slot('text', 'Request Qty')
                                     @slot('name','qty')
                                     @slot('id','qty')
+                                    @slot('id_error', 'quantity')
                                 @endcomponent
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-3">
