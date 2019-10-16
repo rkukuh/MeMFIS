@@ -194,8 +194,8 @@ let goods_received_note = {
             let exp_date = $("#exp_date_2").val();
             let qty = $("#quantity").val();
             let unit_id = $("#unit_material").val();
-            let note = $("#description").val();
-            if($(".is_serial_number").is(":checked")) {
+            let note = $("#remark").val();
+            if($("#is_serial_number").is(":checked")) {
                 if(serial_numbers.length < qty){
                     $('input[name^="serial_number"]').each(function(i) {
                         if(this.value == "" || this.value == null){
@@ -294,12 +294,8 @@ let goods_received_note = {
             document.getElementById('uuid').value = $(this).data('uuid');
         });
         $(".modal-footer").on("click", ".update-item", function() {
-            $('input[name^="serial_number"]').each(function() {
-                alert($(this).val());
-            });
+
             let uuid = $("input[name=uuid]").val();
-            // let serial_number = $("input[name=serial_number[]").val();
-            // alert(serial_number);
             let exp_date = $("#exp_date").val();
             let qty = $("#qty").val();
             let unit_id = $("#unit_id").val();
