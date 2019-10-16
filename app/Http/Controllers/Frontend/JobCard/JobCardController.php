@@ -431,10 +431,14 @@ class JobCardController extends Controller
             $eo_additionals->scheduled_priority_text = $jobcard->jobcardable->eo_header->scheduled_priority_text;
             $eo_additionals->scheduled_priority_type = $jobcard->jobcardable->eo_header->scheduled_priority_type;
             $eo_additionals->recurrence = Type::find($jobcard->jobcardable->eo_header->recurrence_id)->name;
-            $eo_additionals->recurrence_text = $jobcard->jobcardable->eo_header->recurrence_text;
+            $eo_additionals->recurrence_text = $jobcard->jobcardable->eo_header->recurrence_amount;
             $eo_additionals->recurrence_type = $jobcard->jobcardable->eo_header->recurrence_type;
             $eo_additionals->manual_affected = Type::find($jobcard->jobcardable->eo_header->manual_affected_id)->name;
             $eo_additionals->manual_affected_text = $jobcard->jobcardable->eo_header->manual_affected_text;
+            $eo_additionals->weight_change = json_decode($jobcard->additionals)->weight_change;
+            $eo_additionals->center_of_gravity = json_decode($jobcard->additionals)->center_of_gravity;
+            $eo_additionals->TSN = json_decode($jobcard->additionals)->TSN;
+            $eo_additionals->CSN = json_decode($jobcard->additionals)->CSN;
 
             $rii_status = $jobcard->jobcardable->is_rii;
             if(sizeof($jobcard->helpers) > 0){
