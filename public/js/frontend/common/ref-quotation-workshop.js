@@ -50,9 +50,10 @@ let RefQuotationWorkshop = {
             let code = $(this).data('code');
             let name = $(this).data('name');
 
-            document.getElementById('quotaion_workshop').value = uuid;
+            document.getElementById('quotation_workshop').value = uuid;
 
-            $('.search-quoatation-workshop').html(code + " - " + name);
+            // $('.search-quoatation-workshop').html(code + " - " + name);
+            $('#search-quotation-workshop').html(code);
             $('#modal_quotation_workshop').modal('hide');
         });
     }

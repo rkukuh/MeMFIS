@@ -61,6 +61,19 @@ class InventoryIn extends MemfisModel
     }
 
     /**
+     * One-to-Many: An Inventory In may have one storage.
+     *
+     * This function will retrieve all the GRNs of a storage.
+     * See: Storage's inventory_ins() method for the inverse
+     *
+     * @return mixed
+     */
+    public function storage()
+    {
+        return $this->belongsTo(Storage::class);
+    }
+
+    /**
      * Polymorphic: An entity can have zero or many InventoryIns.
      *
      * This function will get all of the owning inventoryinable models.
@@ -92,7 +105,8 @@ class InventoryIn extends MemfisModel
                         'unit_id',
                         'purchased_price',
                         'total',
-                        'description'
+                        'description',
+                        'expired_at'
                     )
                     ->withTimestamps();
     }

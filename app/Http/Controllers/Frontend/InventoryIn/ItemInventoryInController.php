@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Frontend\InventoryIn;
 
-use Auth;
-use App\Models\Approval;
 use App\Models\InventoryIn;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\InventoryInStore;
 use App\Http\Requests\Frontend\InventoryInUpdate;
-use App\Models\Storage;
+use App\Models\Item;
 
-class InventoryInController extends Controller
+class ItemInventoryInController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +17,9 @@ class InventoryInController extends Controller
      */
     public function index()
     {
-        return view('frontend.inventory-in.index');
+        $items = InventoryIn::with('items')->get();
+
+        return response()->json($items);
     }
 
     /**
@@ -29,22 +29,33 @@ class InventoryInController extends Controller
      */
     public function create()
     {
-        return view('frontend.inventory-in.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Frontend\InventoryInStore  $request
+     * @param  \App\Http\Requests\Frontend\ItemInventoryInStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InventoryInStore $request)
+    public function store(InventoryInStore $request, InventoryIn $inventoryIn, Item $item)
     {
-        $request->merge(['received_by' => Auth::id()]);
-        $request->merge(['inventoryinable_type' => 'App\Models\InventoryIn']);
-        $request->merge(['inventoryinable_id' => InventoryIn::withTrashed()->count()+1]);
+        $exists = $inventoryIn->items()->where('item_id', $item->id)->first();
 
-        $inventoryIn = InventoryIn::create($request->all());
+        if ($exists) {
+            return response()->json(['title' => "Danger"]);
+        }
+
+        $inventoryIn->items()->attach($item->id, [
+                'quantity' => $request->quantity,
+                'unit_id' => $request->unit_id,
+                'quantity_in_primary_unit' => $request->unit_id,
+                'expired_at' => $request->exp_date,
+                'serial_number' => $request->serial_no,
+                'purchased_price' => 0, // ??
+                'total' => 0, // ??
+                'description' => $request->remark
+            ]);
 
         return response()->json($inventoryIn);
     }
@@ -58,9 +69,7 @@ class InventoryInController extends Controller
     public function show(InventoryIn $inventoryIn)
     {
 
-        return view('frontend.inventory-in.show', [
-            'inventoryIn' => $inventoryIn,
-        ]);
+        //
     }
 
     /**
@@ -71,12 +80,7 @@ class InventoryInController extends Controller
      */
     public function edit(InventoryIn $inventoryIn)
     {
-        $storages = Storage::get();
-
-        return view('frontend.inventory-in.edit', [
-            'storages' => $storages,
-            'inventoryIn' => $inventoryIn,
-        ]);
+        //
     }
 
     /**
@@ -86,9 +90,17 @@ class InventoryInController extends Controller
      * @param  \App\Models\InventoryIn  $inventoryIn
      * @return \Illuminate\Http\Response
      */
-    public function update(InventoryInUpdate $request, InventoryIn $inventoryIn)
+    public function update(InventoryInUpdate $request, InventoryIn $inventoryIn, Item $item)
     {
-        $inventoryIn->update($request->all());
+        $inventoryIn->items()->updateExistingPivot($item->id,
+            [
+                'quantity' => $request->quantity,
+                'unit_id' => $request->unit_id,
+                'quantity_unit' => $request->unit_id,
+                'expired_at' => $request->exp_date,
+                'serial_number' => $request->serial_no,
+                'note' => $request->remark
+            ]);
 
         return response()->json($inventoryIn);
     }
@@ -99,24 +111,9 @@ class InventoryInController extends Controller
      * @param  \App\Models\InventoryIn  $inventoryIn
      * @return \Illuminate\Http\Response
      */
-    public function destroy(InventoryIn $inventoryIn)
+    public function destroy(InventoryIn $inventoryIn, Item $item)
     {
-        $inventoryIn->delete();
-    }
-
-    /**
-     * Approve the specified resource from storage.
-     *
-     * @param  \App\Models\GoodsReceived  $goodsReceived
-     * @return \Illuminate\Http\Response
-     */
-    public function approve(InventoryIn $inventoryIn)
-    {
-        $inventoryIn->approvals()->save(new Approval([
-            'approvable_id' => $inventoryIn->id,
-            'conducted_by' => Auth::id(),
-            'is_approved' => 1
-        ]));
+        $inventoryIn->items()->detach($item->id);
 
         return response()->json($inventoryIn);
     }
