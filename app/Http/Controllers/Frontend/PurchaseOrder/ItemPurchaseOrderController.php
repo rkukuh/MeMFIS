@@ -11,8 +11,8 @@ use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\PurchaseOrderStore;
-use App\Http\Requests\Frontend\PurchaseOrderUpdate;
+use App\Http\Requests\Frontend\PurchaseOrderItemStore;
+use App\Http\Requests\Frontend\PurchaseOrderItemUpdate;
 
 class ItemPurchaseOrderController extends Controller
 {
@@ -42,7 +42,7 @@ class ItemPurchaseOrderController extends Controller
      * @param  \App\Http\Requests\Frontend\PurchaseOrderStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PurchaseOrderStore $request)
+    public function store(PurchaseOrderItemStore $request)
     {
         //
     }
@@ -76,7 +76,7 @@ class ItemPurchaseOrderController extends Controller
      * @param  \App\Models\PurchaseOrder  $purchaseOrder
      * @return \Illuminate\Http\Response
      */
-    public function update(PurchaseOrderUpdate $request, PurchaseOrder $purchaseOrder, Item $item)
+    public function update(PurchaseOrderItemUpdate $request, PurchaseOrder $purchaseOrder, Item $item)
     {
         $subtotal_before_discount = $request->quantity*$request->price;
         $promo_type = Promo::where('uuid',$request->promo_type)->first();
