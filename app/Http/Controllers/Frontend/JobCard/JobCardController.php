@@ -573,7 +573,7 @@ class JobCardController extends Controller
                         'eo_additionals'=> $eo_additionals,
                         'taskcard' => $taskcard
                     ]);
-
+                    return $pdf->stream();
                 }
             }
         }

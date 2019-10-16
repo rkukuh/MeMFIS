@@ -242,9 +242,9 @@
                         <td valign="top" align="center" width="20%"><b>Actual Mhrs</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" align="center">Cabin Maintenance</td>
-                        <td valign="top" align="center">@if(isset($jobCard->jobcardable->type)) {{ $jobCard->jobcardable->type->name}} @else - @endif</td>
-                        <td valign="top" align="center">0.25</td>
+                        <td valign="top" align="center">{{ $jobCard->jobcardable->skill }}</td>
+                        <td valign="top" align="center">@if(isset($jobCard->jobcardable->eo_header->type)) {{ $jobCard->jobcardable->eo_header->type->name}} @else - @endif</td>
+                        <td valign="top" align="center">{{ $jobCard->jobcardable->estimation_manhour }}</td>
                         <td valign="top" align="center">{{ $jobCard->actual_manhour }}</td>
                     </tr>
                 </table>
@@ -381,7 +381,7 @@
                                 <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">APU Log Book</span>
                             </div>
                         </td>
-                        <td valign="top" align="center" width="22%" style="border-top:none;color:red;">@if($jobCard->station) {{ $jobCard->station }} @else - @endif</td>
+                        <td valign="top" align="center" width="22%" style="border-top:none;">@if($jobCard->station) {{ $jobCard->station->name }} @else - @endif</td>
                     </tr>
                 </table>
                 <table width="100%" cellpadding="4" class="table_content">

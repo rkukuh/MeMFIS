@@ -50,7 +50,7 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'tc_numberr',
+                    field: 'tc_number',
                     title: 'TaskCard No',
                     sortable: 'asc',
                     filterable: !1,
@@ -73,25 +73,25 @@ let RiiRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.customer.name',
+                    field: 'customer_name',
                     title: 'Customer',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft.name',
+                    field: 'aircraft_name',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_register',
+                    field: 'quotation.quotationable.aircraft_register',
                     title: 'A/C Reg',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'quotation.project.aircraft_sn',
+                    field: 'quotation.quotationable.aircraft_sn',
                     title: 'A/C Serial No',
                     sortable: 'asc',
                     filterable: !1,
@@ -131,7 +131,7 @@ let RiiRelease = {
                 },
                 {
                     field: 'updated_by',
-                    title: 'Updated By',
+                    title: 'Released By',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
@@ -140,7 +140,7 @@ let RiiRelease = {
                 },
                 {
                     field: 'conducted_by',
-                    title: 'Released By',
+                    title: 'RII Released By',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {

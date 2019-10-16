@@ -59,7 +59,7 @@ let TaskCard = {
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/discrepancy/'+t.uuid+'/">' + t.code + "</a>"
+                        return '<a href="/discrepancy-mechanic/'+t.uuid+'/edit">' + t.code + "</a>"
                     }
                 },
                 {
@@ -73,12 +73,12 @@ let TaskCard = {
                     }
                 },
                 {
-                    field: 'jobcard.jobcardable.number',
+                    field: 'tc_number',
                     title: 'Taskcard No',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
-                        return '<a href="/taskcard/'+t.jobcard.jobcardable.uuid+'">' + t.jobcard.jobcardable.number + "</a>"
+                        return '<a href="/taskcard/'+t.tc_uuid+'">' + t.tc_number + "</a>"
                     }
                 },
                 {
@@ -88,7 +88,7 @@ let TaskCard = {
                     filterable: !1,
                 },
                 {
-                    field: 'type_name',
+                    field: 'aircraft',
                     title: 'A/C Type',
                     sortable: 'asc',
                     filterable: !1,

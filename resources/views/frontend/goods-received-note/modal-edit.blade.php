@@ -53,7 +53,7 @@
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
                                     Qty Recieved
                                 </label>
@@ -65,7 +65,7 @@
                                     @slot('id_error', 'qty')
                                 @endcomponent
                             </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
                                     Unit
                                 </label>
@@ -75,6 +75,19 @@
                                     @slot('id', 'unit_id')
                                     @slot('name', 'unit_id')
                                     @slot('id_error', 'unit')
+                                @endcomponent
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                <label class="form-control-label">
+                                    Unit
+                                </label>
+
+                                @component('frontend.common.input.checkbox')
+                                    @slot('id', 'is_serial_number')
+                                    @slot('name', 'is_serial_number')
+                                    @slot('text', 'Include Serial Number')
+                                    @slot('style_div','margin-top:10px')
+                                    @slot('size', '12')
                                 @endcomponent
                             </div>
                         </div>

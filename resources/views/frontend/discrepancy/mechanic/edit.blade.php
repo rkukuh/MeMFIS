@@ -128,7 +128,7 @@
 
                                                 @foreach ($skills as $skill)
                                                     <option value="{{ $skill->id }}"
-                                                        @if ($skill->name == "ERI" && sizeof($discrepancy->skills) == 3) selected @elseif($skill->id == $discrepancy->skills[0]->id) selected @endif>
+                                                        @if ($skill->name == "ERI" && sizeof($discrepancy->skills) == 3) selected @elseif($skill->id == $discrepancy->skills->first()->id) selected @endif>
                                                         {{ $skill->name }}
                                                     </option>
                                                 @endforeach

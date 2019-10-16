@@ -23,6 +23,23 @@ class DiscrepancyDatatables extends Controller
         ->get();
 
         foreach($DefectCard as $jobcard){
+            if($jobcard->jobcard->jobcardable_type == "App\Models\TaskCard"){
+                $jobcard->tc_number    .= $jobcard->jobcard->number;
+                $jobcard->tc_uuid    .= $jobcard->jobcard->uuid;
+                $jobcard->tc_title     .= $jobcard->jobcard->title;
+                if(isset($jobcard->jobcard->task_id)){
+                    $jobcard->task_name .= $jobcard->jobcard->task->name;
+                }
+                // $jobcard->type_name    .= $jobcard->jobcard->type->name;
+                $jobcard->skill        .= $jobcard->jobcard->skill;
+            }else if($jobcard->jobcard->jobcardable_type == "App\Models\EOInstruction"){
+                $jobcard->tc_number    .= $jobcard->jobcard->number;
+                $jobcard->tc_uuid    .= $jobcard->jobcard->uuid;
+                $jobcard->tc_title     .= $jobcard->jobcard->title;
+                $jobcard->task_name    .= "-";
+                // $jobcard->type_name    .= $jobcard->jobcard->type->name;
+                $jobcard->skill        .= $jobcard->jobcard->skill;
+            }
             $jobcard->taskcard_number   .= $jobcard->jobcard->jobcardable->number;
             $jobcard->customer_name     .= $jobcard->jobcard->quotation->quotationable->customer->name;
             $jobcard->aircraft_sn       .= $jobcard->jobcard->quotation->quotationable->aircraft_sn;
@@ -56,17 +73,7 @@ class DiscrepancyDatatables extends Controller
                 $jobcard->aircraft      .= '';
             }
 
-            if(isset($jobcard->jobcard->jobcardable->skills) ){
-                if(sizeof($jobcard->jobcard->jobcardable->skills) == 3){
-                    $jobcard->jobcardSkill .= "ERI";
-                }
-                else if(sizeof($jobcard->jobcard->jobcardable->skills) == 1){
-                    $jobcard->jobcardSkill .= $jobcard->jobcard->jobcardable->skills[0]->name;
-                }
-                else{
-                    $jobcard->jobcardSkill .= '';
-                }
-            }
+            $jobcard->jobcardSkill .= $jobcard->skill;
 
             if(sizeOf($jobcard->approvals) == 0){
                 $jobcard->status .= 'mechanic';
@@ -180,6 +187,23 @@ class DiscrepancyDatatables extends Controller
 
 
         foreach($DefectCard as $jobcard){
+            if($jobcard->jobcard->jobcardable_type == "App\Models\TaskCard"){
+                $jobcard->tc_number    .= $jobcard->jobcard->number;
+                $jobcard->tc_uuid    .= $jobcard->jobcard->uuid;
+                $jobcard->tc_title     .= $jobcard->jobcard->title;
+                if(isset($jobcard->jobcard->task_id)){
+                    $jobcard->task_name .= $jobcard->jobcard->task->name;
+                }
+                // $jobcard->type_name    .= $jobcard->jobcard->type->name;
+                $jobcard->skill        .= $jobcard->jobcard->skill;
+            }else if($jobcard->jobcard->jobcardable_type == "App\Models\EOInstruction"){
+                $jobcard->tc_number    .= $jobcard->jobcard->number;
+                $jobcard->tc_uuid    .= $jobcard->jobcard->uuid;
+                $jobcard->tc_title     .= $jobcard->jobcard->title;
+                $jobcard->task_name    .= "-";
+                // $jobcard->type_name    .= $jobcard->jobcard->type->name;
+                $jobcard->skill        .= $jobcard->jobcard->skill;
+            }
             $jobcard->taskcard_number   .= $jobcard->jobcard->jobcardable->number;
             $jobcard->customer_name     .= $jobcard->jobcard->quotation->quotationable->customer->name;
             $jobcard->aircraft_sn       .= $jobcard->jobcard->quotation->quotationable->aircraft_sn;
@@ -200,17 +224,8 @@ class DiscrepancyDatatables extends Controller
             $jobcard->create_date       .= $jobcard->audits->first()->created_at;
             $jobcard->update_date       .= $jobcard->audits->last()->updated_at;
 
-            if(isset($jobcard->jobcard->jobcardable->skills) ){
-                if(sizeof($jobcard->jobcard->jobcardable->skills) == 3){
-                    $jobcard->jobcardSkill .= "ERI";
-                }
-                else if(sizeof($jobcard->jobcard->jobcardable->skills) == 1){
-                    $jobcard->jobcardSkill .= $jobcard->jobcard->jobcardable->skills[0]->name;
-                }
-                else{
-                    $jobcard->jobcardSkill .= '';
-                }
-            }
+            $jobcard->jobcardSkill .= $jobcard->skill;
+
 
             if(isset($jobcard->jobcard->jobcardable->eo_header->type->name)){
                 $jobcard->type_name          .= $jobcard->jobcard->jobcardable->eo_header->type->name;
