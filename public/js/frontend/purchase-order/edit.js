@@ -219,13 +219,15 @@ let PurchaseOrder = {
         });
 
         $('.item_datatable').on('click', '.edit-item', function () {
+            let item_uuid = $(this).data('uuid');
             $.ajax({
-                url: '/purchase-order/'+po_uuid+'/item/'+ $(this).data('uuid') +'/edit',
+                url: '/purchase-order/'+po_uuid+'/item/'+ item_uuid +'/edit',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
                     $.ajax({
-                        url: '/get-units',
+                        url: '/get-item-unit-uuid/'+item_uuid,
+                        // url: '/get-units',
                         type: 'GET',
                         dataType: 'json',
                         success: function (data2) {
@@ -266,7 +268,7 @@ let PurchaseOrder = {
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('qty').value = data.pivot.quantity;
                     document.getElementById('price').value = data.pivot.price;
-                    document.getElementById('discount').value = data.pivot.discount_value;
+                    // document.getElementById('discount').value = data.pivot.discount_value;
                     document.getElementById('remark_material').value = data.pivot.note;
 
                 }
