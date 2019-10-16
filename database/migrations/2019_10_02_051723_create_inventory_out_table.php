@@ -30,7 +30,6 @@ class CreateInventoryOutTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });
-        });
     }
 
     /**
