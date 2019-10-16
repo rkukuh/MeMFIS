@@ -16,10 +16,20 @@ class CreateInventoryOutTable extends Migration
         Schema::create('inventory_out', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
-            // other columns goes here
-            $table->morphs('inventoryoutable');
+            $table->string('number');
+            $table->unsignedBigInteger('storage_id');
+            $table->timestamp('inventoried_at');
+            $table->nullableMorphs('inventoryoutable');
+            $table->text('description')->nullable();
+            $table->string('section')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('storage_id')
+                ->references('id')->on('storages')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+        });
         });
     }
 
