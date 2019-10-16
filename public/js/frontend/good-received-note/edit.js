@@ -411,15 +411,13 @@ $("#material").on("change", function () {
             $("#quantity").val(parseInt(data.pivot.quantity));
             $("#quantity").prop("max", data.pivot.quantity);
             $('.clone').remove();
-            if($(".is_serial_number").is(":checked")) {
-                for (let number = 0; number < data.pivot.quantity; number++) {
-                    let clone = $(".blueprint").clone();
-                    clone.removeClass("blueprint hidden");
-                    clone.addClass("clone");
-                    $(".serial_number_inputs").after(clone);
-                    clone.slideDown("slow",function(){});
-                }
-            } 
+            for (let number = 0; number < data.pivot.quantity; number++) {
+                let clone = $(".blueprint").clone();
+                clone.removeClass("blueprint hidden");
+                clone.addClass("clone");
+                $(".serial_number_inputs").after(clone);
+                clone.slideDown("slow",function(){});
+            }
         }
     });
 });
@@ -428,23 +426,21 @@ $("#quantity").on("change", function () {
     let qty = $("#quantity").val();
     let max = $("#quantity").attr("max");
     $('.clone').remove();
-    if($(".is_serial_number").is(":checked")) {
-        if($("#quantity").val() < max){
-            for (let number = 0; number < qty; number++) {
-                let clone = $(".blueprint").clone();
-                clone.removeClass("blueprint hidden");
-                clone.addClass("clone");
-                $(".serial_number_inputs").after(clone);
-                clone.slideDown("slow",function(){});
-            }
-        }else{
-            for (let number = 0; number < max; number++) {
-                let clone = $(".blueprint").clone();
-                clone.removeClass("blueprint hidden");
-                clone.addClass("clone");
-                $(".serial_number_inputs").after(clone);
-                clone.slideDown("slow",function(){});
-            }
+    if($("#quantity").val() < max){
+        for (let number = 0; number < qty; number++) {
+            let clone = $(".blueprint").clone();
+            clone.removeClass("blueprint hidden");
+            clone.addClass("clone");
+            $(".serial_number_inputs").after(clone);
+            clone.slideDown("slow",function(){});
         }
-    }
+    }else{
+        for (let number = 0; number < max; number++) {
+            let clone = $(".blueprint").clone();
+            clone.removeClass("blueprint hidden");
+            clone.addClass("clone");
+            $(".serial_number_inputs").after(clone);
+            clone.slideDown("slow",function(){});
+        }
+        }
 });
