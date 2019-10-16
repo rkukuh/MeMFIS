@@ -221,6 +221,14 @@ let PurchaseOrder = {
         $('.item_datatable').on('click', '.edit-item', function () {
             let item_uuid = $(this).data('uuid');
             $.ajax({
+                url: '/label/get-purchase-orderes/'+po_uuid+'/item/'+ item_uuid ,
+                type: 'GET',
+                dataType: 'json',
+                success: function (qty_item) {
+                    document.getElementById('item_quantity_ordered').innerText = qty_item;
+                }
+            });
+            $.ajax({
                 url: '/purchase-order/'+po_uuid+'/item/'+ item_uuid +'/edit',
                 type: 'GET',
                 dataType: 'json',

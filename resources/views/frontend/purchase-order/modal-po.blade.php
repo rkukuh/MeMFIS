@@ -12,13 +12,22 @@
                     <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
-                            <div class="col-sm-12 col-md-12 col-lg-12">
+                            <div class="col-sm-6 col-md-6 col-lg-6">
                                 <label class="form-control-label">
                                     Item
                                 </label>
                                 @component('frontend.common.label.data-info')
                                     @slot('text', 'Item')
                                     @slot('id', 'item_name')
+                                @endcomponent
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Purchase Ordered Items
+                                </label>
+                                @component('frontend.common.label.data-info')
+                                    @slot('text', '0')
+                                    @slot('id', 'item_quantity_ordered')
                                 @endcomponent
                             </div>
                         </div>
@@ -108,6 +117,7 @@
                                 @component('frontend.common.buttons.reset')
                                     @slot('class', 'reset-sequance')
                                 @endcomponent
+                                @include('frontend.common.buttons.close')
                             </div>
                         </div>
                     </div>

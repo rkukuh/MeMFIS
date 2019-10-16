@@ -81,6 +81,7 @@ Route::name('component.')->group(function () {
             Route::get('get-purchase-request/{purchaseRequest}', 'FillLabelController@purchaseRequest')->name('get-purchase-request');
             Route::get('get-customer/{customer}', 'FillLabelController@customer')->name('get-customer');
             Route::get('get-project/{project}', 'FillLabelController@project')->name('get-project');
+            Route::get('get-purchase-orderes/{PurchaseOrder}/item/{item}', 'FillLabelController@purchaseOrdered')->name('get-po-item');
         });
 
         Route::prefix('morris')->group(function () {
