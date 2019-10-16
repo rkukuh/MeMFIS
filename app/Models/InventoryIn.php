@@ -15,6 +15,7 @@ class InventoryIn extends MemfisModel
         'inventoryinable_type',
         'inventoryinable_id',
         'description',
+        'section',
     ];
 
     protected $dates = ['inventoried_at'];
@@ -33,7 +34,7 @@ class InventoryIn extends MemfisModel
     {
         return $this->morphMany(Approval::class, 'approvable');
     }
-    
+
     /**
      * M-M Polymorphic: A branch can be applied to many entities.
      *
