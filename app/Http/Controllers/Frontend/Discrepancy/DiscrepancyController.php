@@ -78,9 +78,11 @@ class DiscrepancyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(DefectCard $discrepancy)
     {
-        return view('frontend.discrepancy.engineer.edit');
+        return view('frontend.discrepancy.engineer.edit',[
+            'discrepancy' => $discrepancy
+        ]);
     }
 
     /**
