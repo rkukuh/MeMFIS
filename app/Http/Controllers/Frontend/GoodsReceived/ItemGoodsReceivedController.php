@@ -9,8 +9,8 @@ use App\Models\PurchaseOrder;
 use App\Models\GoodsReceived;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\GoodsReceivedStore;
-use App\Http\Requests\Frontend\GoodsReceivedUpdate;
+use App\Http\Requests\Frontend\GoodsReceivedItemStore;
+use App\Http\Requests\Frontend\GoodsReceivedItemUpdate;
 
 class ItemGoodsReceivedController extends Controller
 {
@@ -40,7 +40,7 @@ class ItemGoodsReceivedController extends Controller
      * @param  \App\Http\Requests\Frontend\GoodsReceivedStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GoodsReceivedStore $request,GoodsReceived $goodsReceived, Item $item)
+    public function store(GoodsReceivedItemStore $request,GoodsReceived $goodsReceived, Item $item)
     {
         $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
         $goodsReceived->items()->attach([$item->id => [
@@ -86,7 +86,7 @@ class ItemGoodsReceivedController extends Controller
      * @param  \App\Models\GoodsReceived  $goodsReceived
      * @return \Illuminate\Http\Response
      */
-    public function update(GoodsReceivedUpdate $request, GoodsReceived $goodsReceived, Item $item)
+    public function update(GoodsReceivedItemUpdate $request, GoodsReceived $goodsReceived, Item $item)
     {
         // dd($request->all());
         $goodsReceived->items()->updateExistingPivot($item->id,
