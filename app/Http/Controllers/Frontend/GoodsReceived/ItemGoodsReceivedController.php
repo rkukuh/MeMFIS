@@ -119,11 +119,9 @@ class ItemGoodsReceivedController extends Controller
      */
     public function update(GoodsReceivedItemUpdate $request, GoodsReceived $goodsReceived, Item $item)
     {
-        // dd($request->all());
         $goodsReceived->items()->updateExistingPivot($item->id,
         ['unit_id'=>$request->unit_id,
         'quantity'=> $request->quantity,
-        // 'exp_date'=> $request->exp_date,
         'note' => $request->note]);
 
         return response()->json($goodsReceived);
