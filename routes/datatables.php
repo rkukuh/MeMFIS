@@ -920,6 +920,28 @@ Route::name('datatables.')->group(function () {
             });
         });
 
+        /** Inventory Out */
+
+        Route::name('inventory-out.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'inventory-out',
+                'namespace' => 'InventoryOut'
+
+            ], function () {
+
+                /** Material */
+                Route::get('/material', 'InventoryOutMaterialDatatables@index')->name('material.all');
+                Route::get('/material/{inventoryOut}/items', 'InventoryOutMaterialDatatables@getItemsByInventoryOut')->name('material.items');
+
+                /** Tool */
+                Route::get('/tool', 'InventoryOutToolDatatables@index')->name('tools.all');
+                Route::get('/tool/{inventoryOut}/items', 'InventoryOutToolDatatables@getItemsByInventoryOut')->name('tools.items');
+
+            });
+        });
+
         Route::get('/testing', 'UnitDatatables@index')->name('testing.index');
 
 
