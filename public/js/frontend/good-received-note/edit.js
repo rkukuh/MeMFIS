@@ -224,29 +224,33 @@ let goods_received_note = {
                 },
                 success: function(response) {
                     if (response.errors) {
-                        console.log(errors);
+                        // console.log(errors);
                         // if (response.errors.title) {
                         //     $('#title-error').html(response.errors.title[0]);
                         // }
 
                         // document.getElementById('manual_affected_id').value = manual_affected_id;
                     } else {
-                        //    taskcard_reset();
-                        $('#modal_grn_add').modal('hide');
-
-                        toastr.success(
-                            "GRN's Item has been updated.",
-                            "Success",
-                            {
+                        if (response.title == "Danger") {
+                            toastr.error("Item already exists!", "Error", {
                                 timeOut: 5000
-                            }
-                        );
+                            });
+                        } else {
+                            $('#modal_grn_add').modal('hide');
 
-                        let table = $(".purchase_order_datatable").mDatatable();
+                            toastr.success(
+                                "GRN's Item has been updated.",
+                                "Success",
+                                {
+                                    timeOut: 5000
+                                }
+                            );
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            let table = $(".purchase_order_datatable").mDatatable();
 
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
                     }
                 }
             });
@@ -395,14 +399,25 @@ jQuery(document).ready(function () {
 $("#is_serial_number").on("change", function () {
     if($(this).is(":checked")) {
         $('.serial_numbers').removeClass("hidden");
+        $('#unit_material').prop('disabled', true);
     } else {
         $('.serial_numbers').addClass("hidden");
         $('.serial_number_inputs').html('');
+        $('#unit_material').prop('disabled', false);
     }
 });
 
 $("#material").on("change", function () {
+
     let item_uuid = $("#material").val();
+    $.ajax({
+        url: '/label/get-good-received/'+grn_uuid+'/item/'+ item_uuid ,
+        type: 'GET',
+        dataType: 'json',
+        success: function (qty_item) {
+            document.getElementById('item_reciveded').innerText = qty_item;
+        }
+    });
     $("#quantity").prop("min", 1);
     $.ajax({
         url: '/get-item-po-details/'+po_uuid+'/'+item_uuid,

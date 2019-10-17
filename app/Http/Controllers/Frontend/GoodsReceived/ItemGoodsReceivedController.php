@@ -42,47 +42,50 @@ class ItemGoodsReceivedController extends Controller
      */
     public function store(GoodsReceivedItemStore $request,GoodsReceived $goodsReceived, Item $item)
     {
-        if($request->serial_numbers == null){
-            $item = Item::find($item->id);
-            if($request->unit_id <> $item->unit_id){
-                $quantity = $request->quantity;
-                $qty_uom = $item->units->where('uom.unit_id',$request->unit_id)->first()->uom->quantity;
-                $quantity_unit = $qty_uom*$quantity;
-            }
-            else{
-                $quantity_unit = $request->quantity;
-            }
-
-            $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
-            $goodsReceived->items()->attach([$item->id => [
-                'quantity'=> $request->quantity,
-                'already_received_amount'=> 2,// TODO ask whats is it?
-                'unit_id' => $request->unit_id,
-                'quantity_unit' => $quantity_unit,
-                'price' => $price,
-                'note' => $request->note,
-                ]
-            ]);
+        $exists = $goodsReceived->items()->where('item_id',$item->id)->first();
+        if($exists){
+            return response()->json(['title' => "Danger"]);
         }else{
-            foreach($request->serial_numbers as $serial_number){
+            if($request->serial_numbers == null){
                 $item = Item::find($item->id);
+                if($request->unit_id <> $item->unit_id){
+                    $quantity = $request->quantity;
+                    $qty_uom = $item->units->where('uom.unit_id',$request->unit_id)->first()->uom->quantity;
+                    $quantity_unit = $qty_uom*$quantity;
+                }
+                else{
+                    $quantity_unit = $request->quantity;
+                }
 
                 $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
                 $goodsReceived->items()->attach([$item->id => [
-                    'serial_number'=> $serial_number,
-                    'quantity'=> 1,
+                    'quantity'=> $request->quantity,
                     'already_received_amount'=> 2,// TODO ask whats is it?
-                    'unit_id' => $item->unit_id,
-                    'quantity_unit' => 1,
+                    'unit_id' => $request->unit_id,
+                    'quantity_unit' => $quantity_unit,
                     'price' => $price,
                     'note' => $request->note,
                     ]
                 ]);
+            }else{
+                foreach($request->serial_numbers as $serial_number){
+                    $item = Item::find($item->id);
+
+                    $price = $goodsReceived->purchase_order->items->where('pivot.item_id',$item->id)->first()->pivot->price;
+                    $goodsReceived->items()->attach([$item->id => [
+                        'serial_number'=> $serial_number,
+                        'quantity'=> 1,
+                        'already_received_amount'=> 2,// TODO ask whats is it?
+                        'unit_id' => $item->unit_id,
+                        'quantity_unit' => 1,
+                        'price' => $price,
+                        'note' => $request->note,
+                        ]
+                    ]);
+                }
+                return response()->json($goodsReceived);
             }
-            return response()->json($goodsReceived);
         }
-
-
     }
 
     /**
