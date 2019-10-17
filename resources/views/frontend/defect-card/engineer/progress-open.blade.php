@@ -376,6 +376,10 @@
                                                 </td>
                                             </tr>
                                             @endforeach
+                                        @else
+                                            <tr>
+                                                <td colspan="3"><i>No helper</i></td>
+                                            </tr>
                                         @endif
                                     </table>
                                 </div>
@@ -400,18 +404,24 @@
                                                         <td align="center"><b>Off</b></td>
                                                         <td align="center"><b>On</b></td>
                                                     </tr>
-                                                    @foreach($defectcard->materials as $material)
-                                                    <tr>
-                                                        <td style="width:25%">{{ $material->code }}</td>
-                                                        <td style="width:25%">{{ $material->description }}</td>
-                                                        <td>{{ $material->pivot->sn_off }}</td>
-                                                        <td>{{ $material->pivot->sn_on }}</td>
-                                                        <td>{{ $material->pivot->quantity }}</td>
-                                                        <td>{{ $material->unit->name }}</td>
-                                                        <td>{{ $material->pivot->ipc_ref }}</td>
-                                                        <td>{{ $material->pivot->note }}</td>
-                                                    </tr>
-                                                    @endforeach
+                                                    @if(sizeof($defectcard->materials) > 0)
+                                                        @foreach($defectcard->materials as $material)
+                                                        <tr>
+                                                            <td style="width:25%">{{ $material->code }}</td>
+                                                            <td style="width:25%">{{ $material->description }}</td>
+                                                            <td>{{ $material->pivot->sn_off }}</td>
+                                                            <td>{{ $material->pivot->sn_on }}</td>
+                                                            <td>{{ $material->pivot->quantity }}</td>
+                                                            <td>{{ $material->unit->name }}</td>
+                                                            <td>{{ $material->pivot->ipc_ref }}</td>
+                                                            <td>{{ $material->pivot->note }}</td>
+                                                        </tr>
+                                                        @endforeach
+                                                    @else
+                                                        <tr>
+                                                            <td colspan="8" align="center"><i>No material is needed in this defect card.</i></td>
+                                                        </tr>
+                                                    @endif
                                                 </table>
                                             </div>
                                         </div>
@@ -438,18 +448,24 @@
                                                         <td align="center"><b>Off</b></td>
                                                         <td align="center"><b>On</b></td>
                                                     </tr>
-                                                    @foreach($defectcard->tools as $tool)
-                                                    <tr>
-                                                        <td style="width:25%">{{ $tool->code }}</td>
-                                                        <td style="width:25%">{{ $tool->description }}</td>
-                                                        <td>{{ $tool->pivot->sn_off }}</td>
-                                                        <td>{{ $tool->pivot->sn_on }}</td>
-                                                        <td>{{ $tool->pivot->quantity }}</td>
-                                                        <td>{{ $tool->unit->name }}</td>
-                                                        <td>{{ $tool->pivot->ipc_ref }}</td>
-                                                        <td>{{ $tool->pivot->note }}</td>
-                                                    </tr>
-                                                    @endforeach
+                                                    @if(sizeof($defectcard->tools) > 0)
+                                                        @foreach($defectcard->tools as $tool)
+                                                        <tr>
+                                                            <td style="width:25%">{{ $tool->code }}</td>
+                                                            <td style="width:25%">{{ $tool->description }}</td>
+                                                            <td>{{ $tool->pivot->sn_off }}</td>
+                                                            <td>{{ $tool->pivot->sn_on }}</td>
+                                                            <td>{{ $tool->pivot->quantity }}</td>
+                                                            <td>{{ $tool->unit->name }}</td>
+                                                            <td>{{ $tool->pivot->ipc_ref }}</td>
+                                                            <td>{{ $tool->pivot->note }}</td>
+                                                        </tr>
+                                                        @endforeach
+                                                    @else
+                                                        <tr>
+                                                            <td colspan="8" align="center"><i>No tool is needed in this defect card.</i></td>
+                                                        </tr>
+                                                    @endif
                                                 </table>
                                             </div>
                                         </div>
