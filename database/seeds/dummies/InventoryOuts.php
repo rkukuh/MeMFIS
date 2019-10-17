@@ -12,6 +12,6 @@ class InventoryOuts extends Seeder
      */
     public function run()
     {
-        //
+        factory(InventoryOut::class, config('memfis.dummies.inventory_outs'))->create();
     }
 }

@@ -4,7 +4,7 @@
 
     <div class="form-group m-form__group row">
         <div class="col-sm-8 col-md-8 col-lg-8">
-                <div class="search-jobcard" id="search-quoatation-workshop"
+                <div class="search-jobcard" id="search-quotation-workshop"
                 style="line-height:50px;margin-left:9px">
                     {{ $text or 'Search Ref. Quotation Workshop' }}
                 </div>

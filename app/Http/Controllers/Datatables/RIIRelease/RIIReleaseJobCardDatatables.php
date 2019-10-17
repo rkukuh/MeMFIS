@@ -27,6 +27,32 @@ class RIIReleaseJobCardDatatables extends Controller
                                             ->get();
 
         foreach($JobCard as $Jobcard){
+            $Jobcard->company_task .= "-";
+            if($Jobcard->jobcardable_type == "App\Models\TaskCard"){
+                $Jobcard->tc_number    .= $Jobcard->jobcardable->number;
+                $Jobcard->tc_title     .= $Jobcard->jobcardable->title;
+                if(isset($Jobcard->jobcardable->task_id)){
+                    $Jobcard->task_name .= $Jobcard->jobcardable->task->name;
+                }
+                $Jobcard->type_name    .= $Jobcard->jobcardable->type->name;
+                $Jobcard->skill        .= $Jobcard->jobcardable->skill;
+                if($Jobcard->jobcardable->additionals <> null){
+                    $addtional = json_decode($Jobcard->jobcardable->additionals);
+                    $Jobcard->company_task .= $addtional->internal_number;
+                }
+            }else if($Jobcard->jobcardable_type == "App\Models\EOInstruction"){
+                $Jobcard->tc_number    .= $Jobcard->jobcardable->eo_header->number;
+                $Jobcard->tc_title     .= $Jobcard->jobcardable->eo_header->title;
+                $Jobcard->task_name    .= "-";
+                $Jobcard->type_name    .= $Jobcard->jobcardable->eo_header->type->name;
+                $Jobcard->skill        .= $Jobcard->jobcardable->skill;
+
+                if($Jobcard->jobcardable->eo_header->additionals <> null){
+                    $addtional = json_decode($Jobcard->jobcardable->eo_header->additionals);
+                    $Jobcard->company_task .= $addtional->internal_number;
+                }
+            }
+
             $Jobcard->aircraft_name .= $Jobcard->quotation->quotationable->aircraft->name;
 
             $Jobcard->customer_name .= $Jobcard->quotation->quotationable->customer->name;
@@ -47,14 +73,13 @@ class RIIReleaseJobCardDatatables extends Controller
             $Jobcard->actual .= $Jobcard->ActualManhour;
 
             //auditable, Technichal Writer request to show this
-            if($Jobcard->approvals->toArray() == []){
+            if(empty($Jobcard->approvals->get(1))){
                 $conducted_by = "";
                 $conducted_at = "";
-
             }
             else{
-                $conducted_by = User::find($Jobcard->approvals->last()->conducted_by)->name;
-                $conducted_at = $Jobcard->approvals->last()->created_at;
+                $conducted_by = User::find($Jobcard->approvals->get(1)->conducted_by)->name;
+                $conducted_at = $Jobcard->approvals->get(1)->created_at;
             }
 
             $Jobcard->conducted_by      .= $conducted_by;
@@ -64,7 +89,7 @@ class RIIReleaseJobCardDatatables extends Controller
             $Jobcard->created_by        .= User::find($Jobcard->audits->first()->user_id)->name;
 
             $Jobcard->update_date       .= $Jobcard->audits->last()->updated_at;
-            $Jobcard->updated_by        .= User::find($Jobcard->audits->last()->user_id)->name;
+            $Jobcard->updated_by        .= User::find($Jobcard->approvals->get(0)->conducted_by)->name;
 
         }
 

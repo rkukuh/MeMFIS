@@ -27,6 +27,10 @@ class DiscrepancyStore extends FormRequest
     {
         return [
             'propose' => 'required',
+            'zone[]' => 'required',
+            'skill_id' => 'required',
+            'complaint' => 'required',
+            'estimation_manhour' => 'required',
         ];
     }
      /**

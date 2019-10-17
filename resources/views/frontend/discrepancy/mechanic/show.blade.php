@@ -57,7 +57,7 @@
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', '2/12/2012')
+                                                @slot('text', $discrepancy->jobcard->quotation->quotationable->created_at)
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">

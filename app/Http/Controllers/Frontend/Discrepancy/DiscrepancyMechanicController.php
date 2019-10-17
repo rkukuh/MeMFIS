@@ -117,17 +117,6 @@ class DiscrepancyMechanicController extends Controller
      */
     public function show(DefectCard $discrepancy)
     {
-        return view('frontend.discrepancy.mechanic.show');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(DefectCard $discrepancy)
-    {
         $propose_corrections = array();
         foreach($discrepancy->propose_corrections as $i => $defectcard){
             $propose_corrections[$i] =  $defectcard->code;
@@ -142,6 +131,42 @@ class DiscrepancyMechanicController extends Controller
             $zone_discrepancies[$i] =  $zone_taskcard->id;
         }
 
+        $skill = Type::ofTaskCardSkill()->get();
+        
+        return view('frontend.discrepancy.mechanic.show', [
+            'discrepancy' => $discrepancy,
+            'skills' => $skill,
+            'zones' => $this->zones,
+            'zone_discrepancies' => $zone_discrepancies,
+            'propose_corrections' => $propose_corrections,
+            'propose_correction_text' => $propose_correction_text,
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(DefectCard $discrepancy)
+    {
+        $propose_corrections = $zone_discrepancies = array();
+        foreach($discrepancy->propose_corrections as $i => $defectcard){
+            $propose_corrections[$i] =  $defectcard->code;
+        }
+
+        $propose_correction_text = '';
+        foreach($discrepancy->propose_corrections as $i => $defectcard){
+            $propose_correction_text =  $defectcard->pivot->propose_correction_text;
+        }
+
+        if(sizeof($discrepancy->zones)){
+            foreach($discrepancy->zones as $i => $zone_taskcard){
+                $zone_discrepancies[$i] =  $zone_taskcard->id;
+            }
+        }
+        
         $skill = Type::ofTaskCardSkill()->get();
 
         return view('frontend.discrepancy.mechanic.edit', [

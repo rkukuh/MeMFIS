@@ -122,7 +122,7 @@ let RiiRelease = {
                 },
                 {
                     field: 'updated_by',
-                    title: 'Updated By',
+                    title: 'Released By',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {
@@ -131,7 +131,7 @@ let RiiRelease = {
                 },
                 {
                     field: 'conducted_by',
-                    title: 'Released By',
+                    title: 'RII Released By',
                     sortable: 'asc',
                     filterable: !1,
                     template: function (t, e, i) {

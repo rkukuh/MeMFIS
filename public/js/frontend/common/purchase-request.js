@@ -106,18 +106,6 @@ let PurchaseRequest = {
                 {
                     field: "note",
                     title: "Note",
-                },
-                {
-                    field: 'actions',
-                    sortable: !1,
-                    overflow: 'visible',
-                    template: function (t, e, i) {
-                        return (
-                            '<button data-toggle="modal" data-target="#modal_check" type="button" href="#" class="m-badge m-badge--brand m-badge--wide " title="Edit" data-uuid=' +
-                            t.uuid +
-                            '>\t\t\t\t\t\t\tCheck\t\t\t\t\t\t</button>\t\t\t\t\t\t'
-                        );
-                    }
                 }
                 ]
             });
@@ -192,7 +180,6 @@ let PurchaseRequest = {
                 table = $(".item_datatable").mDatatable();
                 table.originalDataSet = [];
                 table.reload();
-                item_datatables_init = true;
             }
         });
     }
