@@ -125,7 +125,8 @@ let InventoryOutCreate = {
         });
 
         $(".modal-footer").on("click", ".add-item", function () {
-            let item = $("#item").val();
+            let material = $("#material").val();
+            console.log(material);
             let quantity = $("input[name=qty]").val();
             let exp_date = $("#exp_date").val();
             let unit = $("#unit_id").val();
@@ -176,20 +177,20 @@ let InventoryOutCreate = {
             let unit_id = $(this).data('unit');
 
             $.ajax({
-                url: '/get-items-uuid/',
+                url: '/get-materials-uuid/',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
 
-                    $('select[name="item"]').empty();
+                    $('select[name="material"]').empty();
 
                     $.each(data, function (key, value) {
                         if (key == item_uuid) {
-                            $('select[name="item"]').append(
+                            $('select[name="material"]').append(
                                 '<option value="' + key + '" selected>' + value + '</option>'
                             );
                         } else {
-                            $('select[name="item"]').append(
+                            $('select[name="material"]').append(
                                 '<option value="' + key + '">' + value + '</option>'
                             );
                         }

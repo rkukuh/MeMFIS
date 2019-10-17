@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Frontend\InventoryOut;
 
 use Auth;
+use App\Models\Employee;
 use App\Models\Storage;
 use App\Models\Approval;
+use App\Models\Item;
 use App\Models\InventoryOut;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\InventoryOutStore;
 use App\Http\Requests\Frontend\InventoryOutUpdate;
 use App\Helpers\DocumentNumber;
-use App\Models\Employee;
 
 class MaterialInventoryOutController extends Controller
 {
@@ -120,6 +121,69 @@ class MaterialInventoryOutController extends Controller
             'conducted_by' => Auth::id(),
             'is_approved' => 1
         ]));
+
+        return response()->json($inventoryOut);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\ItemInventoryOutStore  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function addItem(InventoryOutStore $request, InventoryOut $inventoryOut, Item $item)
+    {
+        $exists = $inventoryOut->items()->where('item_id', $item->id)->first();
+
+        if ($exists) {
+            return response()->json(['title' => "Danger"]);
+        }
+
+        $inventoryOut->items()->attach($item->id, [
+            'quantity' => $request->quantity,
+            'unit_id' => $request->unit_id,
+            'quantity_in_primary_unit' => $request->unit_id,
+            'serial_number' => $request->serial_no,
+            'purchased_price' => 0, // ??
+            'total' => 0, // ??
+            'description' => $request->remark
+        ]);
+
+        return response()->json($inventoryOut);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\Frontend\InventoryInUpdate  $request
+     * @param  \App\Models\InventoryOut  $inventoryOut
+     * @return \Illuminate\Http\Response
+     */
+    public function updateItem(InventoryOutUpdate $request, InventoryOut $inventoryOut, Item $item)
+    {
+        $inventoryOut->items()->updateExistingPivot(
+            $item->id,
+            [
+                'quantity' => $request->quantity,
+                'unit_id' => $request->unit_id,
+                'quantity_unit' => $request->unit_id,
+                'serial_number' => $request->serial_no,
+                'note' => $request->remark
+            ]
+        );
+
+        return response()->json($inventoryOut);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\InventoryOut  $inventoryOut
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteItem(InventoryOut $inventoryOut, Item $item)
+    {
+        $inventoryOut->items()->detach($item->id);
 
         return response()->json($inventoryOut);
     }
