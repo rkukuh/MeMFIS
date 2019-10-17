@@ -152,7 +152,7 @@ class FillComboxController extends Controller
      */
     public function employees()
     {
-        $employees = Employee::selectRaw('id, CONCAT(first_name, " ", middle_name ," ", last_name) as name')
+        $employees = Employee::selectRaw('id, CONCAT(first_name," ", last_name) as name')
                     ->pluck('name', 'id');
 
         return json_encode($employees);
@@ -358,7 +358,7 @@ class FillComboxController extends Controller
      */
     public function vendor()
     {
-        $vendors = Vendor::pluck('code', 'id');
+        $vendors = Vendor::pluck('name', 'id');
 
         return json_encode($vendors);
 

@@ -10,6 +10,7 @@ use App\Models\Phone;
 use App\Models\Vendor;
 use App\Models\Document;
 use App\Models\BankAccount;
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\VendorStore;
 use App\Http\Requests\Frontend\VendorUpdate;
@@ -62,7 +63,7 @@ class VendorController extends Controller
         }
 
         $request->merge(['attention' => json_encode($attentions)]);
-        $request->merge(['code' => "auto-generate"]);
+        $request->merge(['code' => DocumentNumber::generate('VEN-', Vendor::withTrashed()->count()+1)]);
         if ($vendor = Vendor::create($request->all())) {
 
             if($request->bank_account_name){
@@ -70,7 +71,7 @@ class VendorController extends Controller
                 $bank_account = new BankAccount([
                     'number' => $request->bank_account_number,
                     'name' => $request->bank_account_name,
-                    'swift_code' => $request->swift_code,   
+                    'swift_code' => $request->swift_code,
                     'bank_id' => $bank->id,
                 ]);
                 $vendor->bank_accounts()->save($bank_account);
@@ -100,7 +101,7 @@ class VendorController extends Controller
                     }
                 }
             }
-            
+
             if(is_array($request->email_array)){
                 for ($i=0; $i < sizeof($request->email_array) ; $i++) {
                     if(isset($request->email_array[$i])){

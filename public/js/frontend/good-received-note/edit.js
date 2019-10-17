@@ -50,7 +50,7 @@ let goods_received_note = {
                     sortable: 'asc',
                     filterable: !1,
                     textAlign: 'center',
-                    template: function (row, index, datatable) {   
+                    template: function (row, index, datatable) {
                         return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
                 },
@@ -187,15 +187,15 @@ let goods_received_note = {
             serial_numbers = serial_numbers.filter(function (el) {
 
                 return el != null && el != "";
-            
+
             });
 
             let item_uuid = $("#material").val();
             let exp_date = $("#exp_date_2").val();
             let qty = $("#quantity").val();
             let unit_id = $("#unit_material").val();
-            let note = $("#description").val();
-            if($(".is_serial_number").is(":checked")) {
+            let note = $("#remark").val();
+            if($("#is_serial_number").is(":checked")) {
                 if(serial_numbers.length < qty){
                     $('input[name^="serial_number"]').each(function(i) {
                         if(this.value == "" || this.value == null){
@@ -204,11 +204,11 @@ let goods_received_note = {
                             $(this).css('border', '1px solid grey');
                         }
                     });
-    
+
                     return;
                 }
             }
-            
+
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -220,6 +220,7 @@ let goods_received_note = {
                     quantity: qty,
                     unit_id: unit_id,
                     note: note,
+                    serial_numbers: serial_numbers,
                 },
                 success: function(response) {
                     if (response.errors) {
@@ -293,7 +294,7 @@ let goods_received_note = {
             document.getElementById('uuid').value = $(this).data('uuid');
         });
         $(".modal-footer").on("click", ".update-item", function() {
-            
+
             let uuid = $("input[name=uuid]").val();
             let exp_date = $("#exp_date").val();
             let qty = $("#qty").val();
