@@ -116,7 +116,7 @@ let goods_received_note = {
                     overflow: 'visible',
                     template: function (t, e, i) {
                         return (
-                            '<button data-toggle="modal" data-target="#modal_grn" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-expred='+t.code+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
+                            '<button data-toggle="modal" data-target="#modal_grn" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-expred='+t.pivot.expired_at+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
                             t.uuid +
                             '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
@@ -194,8 +194,8 @@ let goods_received_note = {
             let exp_date = $("#exp_date_2").val();
             let qty = $("#quantity").val();
             let unit_id = $("#unit_material").val();
-            let note = $("#description").val();
-            if($(".is_serial_number").is(":checked")) {
+            let note = $("#remark").val();
+            if($("#is_serial_number").is(":checked")) {
                 if(serial_numbers.length < qty){
                     $('input[name^="serial_number"]').each(function(i) {
                         if(this.value == "" || this.value == null){
@@ -224,29 +224,36 @@ let goods_received_note = {
                 },
                 success: function(response) {
                     if (response.errors) {
-                        console.log(errors);
+                        if (response.errors.quantity) {
+                            $('#quantity-error').html(response.errors.quantity[0]);
+                        }
+                        // console.log(errors);
                         // if (response.errors.title) {
                         //     $('#title-error').html(response.errors.title[0]);
                         // }
 
                         // document.getElementById('manual_affected_id').value = manual_affected_id;
                     } else {
-                        //    taskcard_reset();
-                        $('#modal_grn_add').modal('hide');
-
-                        toastr.success(
-                            "GRN's Item has been updated.",
-                            "Success",
-                            {
+                        if (response.title == "Danger") {
+                            toastr.error("Item already exists!", "Error", {
                                 timeOut: 5000
-                            }
-                        );
+                            });
+                        } else {
+                            $('#modal_grn_add').modal('hide');
 
-                        let table = $(".purchase_order_datatable").mDatatable();
+                            toastr.success(
+                                "GRN's Item has been updated.",
+                                "Success",
+                                {
+                                    timeOut: 5000
+                                }
+                            );
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            let table = $(".purchase_order_datatable").mDatatable();
 
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
                     }
                 }
             });
@@ -294,12 +301,8 @@ let goods_received_note = {
             document.getElementById('uuid').value = $(this).data('uuid');
         });
         $(".modal-footer").on("click", ".update-item", function() {
-            $('input[name^="serial_number"]').each(function() {
-                alert($(this).val());
-            });
+
             let uuid = $("input[name=uuid]").val();
-            // let serial_number = $("input[name=serial_number[]").val();
-            // alert(serial_number);
             let exp_date = $("#exp_date").val();
             let qty = $("#qty").val();
             let unit_id = $("#unit_id").val();
@@ -319,11 +322,9 @@ let goods_received_note = {
                 },
                 success: function(response) {
                     if (response.errors) {
-                        console.log(errors);
-                        // if (response.errors.title) {
-                        //     $('#title-error').html(response.errors.title[0]);
-                        // }
-
+                        if (response.errors.quantity) {
+                            $('#qty-error').html(response.errors.quantity[0]);
+                        }
                         // document.getElementById('manual_affected_id').value = manual_affected_id;
                     } else {
                         //    taskcard_reset();
@@ -399,14 +400,35 @@ jQuery(document).ready(function () {
 $("#is_serial_number").on("change", function () {
     if($(this).is(":checked")) {
         $('.serial_numbers').removeClass("hidden");
+        $('#unit_material').prop('disabled', true);
     } else {
         $('.serial_numbers').addClass("hidden");
         $('.serial_number_inputs').html('');
+        $('#unit_material').prop('disabled', false);
+    }
+});
+$("#is_serial_number_edit").on("change", function () {
+    if($(this).is(":checked")) {
+        // $('.serial_numbers').removeClass("hidden");
+        $('#unit_id').prop('disabled', true);
+    } else {
+        // $('.serial_numbers').addClass("hidden");
+        // $('.serial_number_inputs').html('');
+        $('#unit_id').prop('disabled', false);
     }
 });
 
 $("#material").on("change", function () {
+
     let item_uuid = $("#material").val();
+    $.ajax({
+        url: '/label/get-good-received/'+grn_uuid+'/item/'+ item_uuid ,
+        type: 'GET',
+        dataType: 'json',
+        success: function (qty_item) {
+            document.getElementById('item_reciveded').innerText = qty_item;
+        }
+    });
     $("#quantity").prop("min", 1);
     $.ajax({
         url: '/get-item-po-details/'+po_uuid+'/'+item_uuid,

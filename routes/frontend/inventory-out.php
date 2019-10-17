@@ -16,8 +16,13 @@ Route::name('frontend.')->group(function () {
             Route::prefix('inventory-out')->group(function () {
 
                 Route::name('inventory-out-')->group(function () {
-                    Route::resource('tool', 'ToolInventoryOutController');
-                    Route::resource('material', 'MaterialInventoryOutController');
+                    Route::resource('material', 'MaterialInventoryOutController', [
+                        'parameters' => ['material' => 'inventoryOut']
+                    ]);
+
+                    Route::resource('tool', 'ToolInventoryOutController', [
+                        'parameters' => ['tool' => 'inventoryOut']
+                    ]);
                 });
 
             });

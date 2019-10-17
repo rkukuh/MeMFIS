@@ -1,88 +1,131 @@
 let receiving_inspection_report = {
   init: function () {
-      $('.rir_datatable').mDatatable({
-          data: {
-              type: 'remote',
-              source: {
-                  read: {
-                      method: 'GET',
-                      url: '/datatables/customer',
-                      map: function (raw) {
-                          let dataSet = raw;
+    function item(uuid) {
+        $('.rir_datatable').mDatatable({
+            data: {
+                type: 'remote',
+                source: {
+                    read: {
+                        method: 'GET',
+                        url:
+                        "/datatables/purchase-order/item/" +
+                        uuid,
+                        map: function (raw) {
+                            let dataSet = raw;
 
-                          if (typeof raw.data !== 'undefined') {
-                              dataSet = raw.data;
-                          }
+                            if (typeof raw.data !== 'undefined') {
+                                dataSet = raw.data;
+                            }
 
-                          return dataSet;
-                      }
-                  }
-              },
-              pageSize: 10,
-              serverPaging: !0,
+                            return dataSet;
+                        }
+                    }
+                },
+                pageSize: 10,
+                serverPaging: !0,
                 serverFiltering: !1,
-              serverSorting: !1
-          },
-          layout: {
-              theme: 'default',
-              class: '',
-              scroll: false,
-              footer: !1
-          },
-          sortable: !0,
-          filterable: !1,
-          pagination: !0,
-          search: {
-              input: $('#generalSearch')
-          },
-          toolbar: {
-              items: {
-                  pagination: {
-                      pageSizeSelect: [5, 10, 20, 30, 50, 100]
-                  }
-              }
-          },
-          columns: [{
-                  field: 'code',
-                  title: 'Code',
-                  sortable: 'asc',
-                  filterable: !1,
-                  template: function (t) {
-                      return '<a href="/customer/'+t.uuid+'">' + t.code + "</a>"
-                  }
-              },
-              {
-                  field: 'name',
-                  title: 'Name',
-                  sortable: 'asc',
-                  filterable: !1,
-              },
-              {
-                  field: 'payment_term',
-                  title: 'Term of Payment',
-                  sortable: 'asc',
-                  filterable: !1,
-                  template: function (t) {
-                      return t.payment_term+" Hari"
-                  }
-              },
-              {
-                  field: 'Actions',
-                  sortable: !1,
-                  overflow: 'visible',
-                  template: function (t, e, i) {
-                      return (
-                          '<a href="/customer/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-id="' + t.uuid +'">' +
-                              '<i class="la la-pencil"></i>' +
-                          '</a>' +
-                          '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-id=' +
-                          t.uuid +
-                          ' title="Delete"><i class="la la-trash"></i></a>\t\t\t\t\t\t\t'
-                      );
-                  }
-              }
-          ]
-      });
+                serverSorting: !0
+            },
+            layout: {
+                theme: 'default',
+                class: '',
+                scroll: false,
+                footer: !1
+            },
+            sortable: !0,
+            filterable: !1,
+            pagination: !0,
+            search: {
+                input: $('#generalSearch')
+            },
+            toolbar: {
+                items: {
+                    pagination: {
+                        pageSizeSelect: [5, 10, 20, 30, 50, 100]
+                    }
+                }
+            },
+            columns: [
+                {
+                    field: 'code',
+                    title: 'P/N',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: 'name',
+                    title: 'Item Description',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: '',
+                    title: 'Qty PR',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150
+                },
+                {
+                    field: 'pivot.quantity',
+                    title: 'Qty PO',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                },
+                {
+                    field: '',
+                    title: 'Qty',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                },
+                {
+                    field: '',
+                    title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                },
+                {
+                    field: '',
+                    title: 'Remark',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                },
+                {
+                    field: '',
+                    title: 'Expired Date',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                }
+            ]
+        });
+    };
+
+    let item_datatables_init = true;
+
+    $('select[name="purchase_order"]').on('change', function () {
+        let uuid = $('#purchase_order').val();
+        if(item_datatables_init == true){
+            item_datatables_init = false;
+            item(uuid);
+            table = $(".rir_datatable").mDatatable();
+            table.originalDataSet = [];
+            table.reload();
+        }
+        else{
+            let table = $('.rir_datatable').mDatatable();
+            table.destroy();
+            item(uuid);
+            table = $(".rir_datatable").mDatatable();
+            table.originalDataSet = [];
+            table.reload();
+        }
+    });
 
       let remove = $('.rir_datatable').on('click', '.delete', function () {
           let triggerid = $(this).data('id');

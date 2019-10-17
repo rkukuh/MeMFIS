@@ -60,7 +60,7 @@
                                         @slot('id', 'date')
                                         @slot('text', 'Date')
                                         @slot('name', 'date')
-                                        @slot('id_error','requested_at')
+                                        @slot('id_error','inventoried_at')
                                         @slot('value', $inventoryIn->inventoried_at)
                                         @endcomponent
                                     </div>
@@ -117,6 +117,7 @@
                                         @slot('id', 'section_code')
                                         @slot('name', 'section_code')
                                         @slot('id_error', 'section_code')
+                                        @slot('value', $inventoryIn->section)
                                         @endcomponent
                                     </div>
                                 </div>

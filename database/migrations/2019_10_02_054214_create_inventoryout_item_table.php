@@ -17,20 +17,30 @@ class CreateInventoryoutItemTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('inventoryout_id');
             $table->unsignedBigInteger('item_id');
+            $table->string('serial_number')->nullable();
             $table->double('quantity');
-            $table->string('note')->nullable();
+            $table->double('quantity_in_primary_unit');
+            $table->unsignedBigInteger('unit_id');
+            $table->double('purchased_price')->nullable();
+            $table->double('total')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('inventoryout_id')
-                    ->references('id')->on('inventory_out')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('inventory_out')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
 
             $table->foreign('item_id')
-                    ->references('id')->on('items')
-                    ->onUpdate('cascade')
-                    ->onDelete('restrict');
+                ->references('id')->on('items')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('unit_id')
+                ->references('id')->on('units')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

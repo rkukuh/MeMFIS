@@ -72,7 +72,6 @@ Route::name('admin.')->group(function () {
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
         Route::resource('overtime', 'OvertimeController');
-        Route::resource('attendance-correction', 'AttendanceCorrectionController');
 
         /** LICENSE */
 

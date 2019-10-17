@@ -356,6 +356,19 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function purchaseOrder()
+    {
+        $PurchaseOrders = PurchaseOrder::has('approvals')->pluck('number', 'uuid');
+
+        return json_encode($PurchaseOrders);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function vendor()
     {
         $vendors = Vendor::pluck('name', 'id');

@@ -105,7 +105,6 @@ class AuthServiceProvider extends ServiceProvider
         Models\EOInstructionWorkPackageSuccessor::class => Policies\EOInstructionWorkPackageSuccessorPolicy::class,
         Models\EOInstructionWorkPackagePredecessor::class => Policies\EOInstructionWorkPackagePredecessorPolicy::class,
         Models\Overtime::class => Policies\OvertimePolicy::class,
-        Models\AttendanceCorrection::class => Policies\AttendanceCorrectionPolicy::class,
     ];
 
     /**
