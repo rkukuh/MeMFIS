@@ -195,7 +195,6 @@ let Grn = {
                 table = $(".purchase_order_datatable").mDatatable();
                 table.originalDataSet = [];
                 table.reload();
-                item_datatables_init = true;
             }
 
             $('#modal_purchase_order').modal('hide');
