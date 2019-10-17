@@ -57,19 +57,6 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <label class="form-control-label">
-                                                        RIR No
-                                                    </label>
-
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('text', 'PR-2121212')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                                    <label class="form-control-label">
                                                         Purchase Order Number
                                                     </label>
 
