@@ -207,35 +207,35 @@
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'reusable_container')
+                                                                        @slot('value', 'reusable container')
+                                                                        @slot('name', 'type')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Reusable Container')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'carton_box')
+                                                                        @slot('value', 'carton box')
+                                                                        @slot('name', 'type')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Carton Box')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'wooden box')
+                                                                        @slot('value', 'wooden box')
+                                                                        @slot('name', 'type')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Wooden Box')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'unpacked')
+                                                                        @slot('id', 'unpacked')
+                                                                        @slot('name', 'type')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Unpacked')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -243,19 +243,19 @@
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'statisfactory')
+                                                                        @slot('value', 'statisfactory')
+                                                                        @slot('name', 'condition')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Statisfactory')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'unsatisfactory')
+                                                                        @slot('value', 'unsatisfactory')
+                                                                        @slot('name', 'condition')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Unsatisfactory')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -267,8 +267,10 @@
                                                                 If Unsatisfactory Explain
                                                             </label>
 
-                                                            @component('frontend.common.label.data-info')
-                                                            @slot('text', 'Part Number')
+                                                            @component('frontend.common.input.input')
+                                                                @slot('name', 'packing_handling_check')
+                                                                @slot('name', 'packing_handling_check')
+                                                                @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -285,21 +287,21 @@
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'reusable_container')
+                                                                        @slot('value', 'reusable container')
+                                                                        @slot('name', 'preservation_check')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Reusable Container')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'wooden_box')
+                                                                        @slot('value', 'wooden box')
+                                                                        @slot('name', 'preservation_check')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Wooden Box')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -311,8 +313,10 @@
                                                                 If Unsatisfactory Explain
                                                             </label>
 
-                                                            @component('frontend.common.label.data-info')
-                                                            @slot('text', 'Part Number')
+                                                            @component('frontend.common.input.input')
+                                                                @slot('name', 'preservation_check')
+                                                                @slot('name', 'preservation_check')
+                                                                @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -343,25 +347,25 @@
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                        @slot('id', 'invoice')
+                                                                        @slot('name', 'general_document')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Invoice')
-                                                                        @slot('disabled', 'disabled')
+                                                                        @slot('value', 'invoice')
                                                                     @endcomponent
                                                                     @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
+                                                                        @slot('id', 'airway_bill')
                                                                         @slot('name', 'is_stock')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Airway Bill')
-                                                                        @slot('disabled', 'disabled')
+                                                                        @slot('value', 'airway bill')
                                                                     @endcomponent
                                                                     @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                        @slot('id', 'shipping_document')
+                                                                        @slot('name', 'general_document')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Shipping Document')
-                                                                        @slot('disabled', 'disabled')
+                                                                        @slot('value', 'shipping document')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -370,18 +374,18 @@
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                        @slot('id', 'certificate_of_conformity')
+                                                                        @slot('name', 'technical_document')
+                                                                        @slot('value', 'certificate of conformity')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Certificate of Conformity')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
                                                                     @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                        @slot('id', 'arc_aat')
+                                                                        @slot('name', 'technical_document')
+                                                                        @slot('value', 'arc/aat')
                                                                         @slot('size','12')
                                                                         @slot('text', 'ARC/AAT')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -393,8 +397,10 @@
                                                                 If Unsatisfactory Explain
                                                             </label>
 
-                                                            @component('frontend.common.label.data-info')
-                                                            @slot('text', 'Part Number')
+                                                            @component('frontend.common.input.input')
+                                                                @slot('name', 'document_check')
+                                                                @slot('name', 'document_check')
+                                                                @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -429,19 +435,21 @@
                                                         <div class="col-sm-4 col-md-4 col-lg-4">
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'statisfactory')
+                                                                        @slot('value', 'statisfactory')
+                                                                        @slot('name', 'condition')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Statisfactory')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'unsatisfactory')
+                                                                        @slot('value', 'unsatisfactory')
+                                                                        @slot('name', 'condition')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Unsatisfactory')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -449,19 +457,21 @@
                                                         <div class="col-sm-4 col-md-4 col-lg-4">
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'conform')
+                                                                        @slot('value', 'conform')
+                                                                        @slot('name', 'quality')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Conform')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'not_conform')
+                                                                        @slot('value', 'not_conform')
+                                                                        @slot('name', 'quality')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Not Conform')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -469,19 +479,21 @@
                                                         <div class="col-sm-4 col-md-4 col-lg-4">
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'conform')
+                                                                        @slot('value', 'conform')
+                                                                        @slot('name', 'identification')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Conform')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
-                                                                    @component('frontend.common.input.checkbox')
-                                                                        @slot('id', 'is_stock')
-                                                                        @slot('name', 'is_stock')
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                    @component('frontend.common.input.radio')
+                                                                        @slot('id', 'not_conform')
+                                                                        @slot('value', 'not_conform')
+                                                                        @slot('name', 'identification')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Not Conform')
-                                                                        @slot('disabled', 'disabled')
                                                                     @endcomponent
                                                                 </div>
                                                             </div>
@@ -493,24 +505,10 @@
                                                                 If Unsatisfactory Explain
                                                             </label>
 
-                                                            @component('frontend.common.label.data-info')
-                                                            @slot('text', 'Part Number')
-                                                            @endcomponent
-                                                        <div>
-                                                    </div>
-                                                </div>
-                                        </fieldset>
-                                    </div>
-                                </div>
-                                <div class="form-group m-form__group row">
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <fieldset class="border p-2">
-                                            <legend class="w-auto">5. Decision</legend>
-                                                <div class="m-portlet__body">
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', 'Part Number')
+                                                            @component('frontend.common.input.input')
+                                                                @slot('name', 'material_check')
+                                                                @slot('name', 'material_check')
+                                                                @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
                                                     </div>
