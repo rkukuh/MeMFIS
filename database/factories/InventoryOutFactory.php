@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use App\Models\Item;
 use App\Models\Unit;
 use App\Models\Branch;
+use App\Models\Employee;
 use App\Models\Storage;
 use App\Models\InventoryOut;
 use App\Models\GoodsReceived;
@@ -32,6 +33,11 @@ $factory->define(InventoryOut::class, function (Faker $faker) {
             return factory(GoodsReceived::class)->create()->id;
         },
         'section' => null,
+        'received_by' => function () {
+            if (Employee::count()) {
+                return Employee::get()->random()->id;
+            }
+        },
         'description' => $faker->randomElement([null, $faker->sentence]),
     ];
 });

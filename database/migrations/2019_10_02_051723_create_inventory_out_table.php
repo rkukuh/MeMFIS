@@ -22,11 +22,17 @@ class CreateInventoryOutTable extends Migration
             $table->nullableMorphs('inventoryoutable');
             $table->text('description')->nullable();
             $table->string('section')->nullable();
+            $table->unsignedBigInteger('received_by');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('storage_id')
                 ->references('id')->on('storages')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->foreign('received_by')
+                ->references('id')->on('employees')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
         });

@@ -7,6 +7,7 @@ let InventoryOutCreate = {
             let section_code = $('input[name=section_code]').val();
             let storage_id = $('#item_storage_id').val();
             let date = $('input[name=date]').val();
+            let received_by = $('#received-by').val();
 
             $.ajax({
                 headers: {
@@ -20,6 +21,7 @@ let InventoryOutCreate = {
                     inventoried_at: date,
                     description: description,
                     section: section_code,
+                    received_by: received_by
                 },
                 success: function (response) {
                     if (response.errors) {
