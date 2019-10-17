@@ -182,20 +182,7 @@ let PurchaseOrder = {
         let triggeruuid = "";
         let item_uuid = "";
         $("#item_storage_id").on('change', function() {
-            // alert($(this).val());
             item_uuid = $('#item_uuid').val();
-            // alert(item_uuid);
-
-            // $.ajax({
-            //     url: '/datatables/fefo-in/item/'+item_uuid+'/storage/'+ $(this).val(),
-            //     // url: 'item/'+po_uuid+'/storage/'+ $(this).val(),
-            //     type: 'GET',
-            //     dataType: 'json',
-            //     success: function (data) {
-
-            //     }
-            // });
-
             if (item_atatables_init == true) {
                 item_atatables_init = false;
                 triggeruuid = $(this).val();

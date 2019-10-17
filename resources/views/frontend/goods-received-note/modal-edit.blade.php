@@ -1,5 +1,5 @@
 <div class="modal fade" id="modal_grn" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -55,6 +55,15 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
+                                    Recived Items
+                                </label>
+                                @component('frontend.common.label.data-info')
+                                    @slot('text', '0')
+                                    @slot('id', 'item_reciveded_edit')
+                                @endcomponent
+                            </div>
+                            <div class="col-sm-3 col-md-3 col-lg-3">
+                                <label class="form-control-label">
                                     Qty Recieved
                                 </label>
 
@@ -79,15 +88,15 @@
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
-                                    Unit
+                                    Serial Number
                                 </label>
 
                                 @component('frontend.common.input.checkbox')
-                                    @slot('id', 'is_serial_number')
-                                    @slot('name', 'is_serial_number')
-                                    @slot('text', 'Include Serial Number')
+                                    @slot('id', 'is_serial_number_edit')
+                                    @slot('name', 'is_serial_number_edit')
+                                    @slot('text', 'Include')
                                     @slot('style_div','margin-top:10px')
-                                    @slot('size', '12')
+                                    @slot('size', '6')
                                 @endcomponent
                             </div>
                         </div>
