@@ -341,9 +341,12 @@
     <script src="{{ asset('js/frontend/functions/select2/address.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-shipping.js')}}"></script>
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 
 @endpush
