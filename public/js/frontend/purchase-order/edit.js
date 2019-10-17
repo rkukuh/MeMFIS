@@ -123,7 +123,7 @@ let PurchaseOrder = {
                 overflow: 'visible',
                 template: function (t, e, i) {
                     return (
-                        '<button data-toggle="modal" data-target="#modal_check" type="button" href="#" class="m-badge m-badge--brand m-badge--wide" title="Edit" data-uuid=' +
+                        '<button data-toggle="modal" data-target="#modal_check" type="button" href="#" class="m-badge m-badge--brand m-badge--wide check-stock" title="Edit" data-uuid=' +
                         t.uuid +
                         '>\t\t\t\t\t\t\tCheck\t\t\t\t\t\t</button>\t\t\t\t\t\t'+
 
@@ -139,15 +139,90 @@ let PurchaseOrder = {
             ]
         });
 
+        function item(item_uuid, triggeruuid) {
+            $("#item_datatable").DataTable({
+                dom: '<"top"f>rt<"bottom">pl',
+                responsive: !0,
+                searchDelay: 500,
+                processing: !0,
+                serverSide: !0,
+                lengthMenu: [5, 10, 25, 50],
+                pageLength: 5,
+                ajax: '/datatables/fefo-in/item/'+item_uuid+'/storage/'+ triggeruuid,
+                columns: [
+                    {
+                        data: "code"
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "quantity"
+                    },
+                    {
+                        data: "expired_at"
+                    }
+                ]
+            });
+
+            // $('<button type="button" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm item_modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.item-body .dataTables_filter');
+
+            $(".paging_simple_numbers").addClass("pull-left");
+            $(".dataTables_length").addClass("pull-right");
+            $(".dataTables_info").addClass("pull-left");
+            $(".dataTables_info").addClass("margin-info");
+            $(".paging_simple_numbers").addClass("padding-datatable");
+
+            // $(".item-body").on("click", ".item_modal", function() {
+            //     $("#add_modal_material").modal("show");
+            // });
+        }
+
+        let item_atatables_init = true;
+        let triggeruuid = "";
+        let item_uuid = "";
+        $("#item_storage_id").on('change', function() {
+            item_uuid = $('#item_uuid').val();
+            if (item_atatables_init == true) {
+                item_atatables_init = false;
+                triggeruuid = $(this).val();
+                item(item_uuid, triggeruuid);
+                $("#item_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#item_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).val();
+                item(item_uuid, triggeruuid);
+                $("#item_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+        $('.item_datatable').on('click', '.check-stock', function () {
+            document.getElementById('item_uuid').value =  $(this).data('uuid');
+        });
 
         $('.item_datatable').on('click', '.edit-item', function () {
+            let item_uuid = $(this).data('uuid');
             $.ajax({
-                url: '/purchase-order/'+po_uuid+'/item/'+ $(this).data('uuid') +'/edit',
+                url: '/label/get-purchase-orderes/'+po_uuid+'/item/'+ item_uuid ,
+                type: 'GET',
+                dataType: 'json',
+                success: function (qty_item) {
+                    document.getElementById('item_quantity_ordered').innerText = qty_item;
+                }
+            });
+            $.ajax({
+                url: '/purchase-order/'+po_uuid+'/item/'+ item_uuid +'/edit',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
                     $.ajax({
-                        url: '/get-units',
+                        url: '/get-item-unit-uuid/'+item_uuid,
+                        // url: '/get-units',
                         type: 'GET',
                         dataType: 'json',
                         success: function (data2) {
@@ -188,7 +263,7 @@ let PurchaseOrder = {
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('qty').value = data.pivot.quantity;
                     document.getElementById('price').value = data.pivot.price;
-                    document.getElementById('discount').value = data.pivot.discount_value;
+                    // document.getElementById('discount').value = data.pivot.discount_value;
                     document.getElementById('remark_material').value = data.pivot.note;
 
                 }
@@ -222,6 +297,9 @@ let PurchaseOrder = {
                 },
                 success: function(response) {
                     if (response.errors) {
+                        if (response.errors.quantity) {
+                            $('#quantity-error').html(response.errors.quantity[0]);
+                        }
                         // if (response.errors.title) {
                         //     $('#title-error').html(response.errors.title[0]);
                         // }

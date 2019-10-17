@@ -592,19 +592,6 @@ class Employee extends MemfisModel implements HasMedia
         return $this->hasMany(Overtime::class);
     }
     
-    /**
-     * One-to-Many: A Employee may have one or many overtime data.
-     *
-     * This function will retrieve all the data of a given overtime id.
-     * See: Overtime employee() method for the inverse
-     *
-     * @return mixed
-     */
-    public function attendance_correction()
-    {
-        return $this->hasMany(AttendanceCorrection::class);
-    }
-    
     /*************************************** ACCESSOR ****************************************/
 
     /**

@@ -11,8 +11,8 @@ use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Frontend\PurchaseOrderStore;
-use App\Http\Requests\Frontend\PurchaseOrderUpdate;
+use App\Http\Requests\Frontend\PurchaseOrderItemStore;
+use App\Http\Requests\Frontend\PurchaseOrderItemUpdate;
 
 class ItemPurchaseOrderController extends Controller
 {
@@ -42,7 +42,7 @@ class ItemPurchaseOrderController extends Controller
      * @param  \App\Http\Requests\Frontend\PurchaseOrderStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PurchaseOrderStore $request)
+    public function store(PurchaseOrderItemStore $request)
     {
         //
     }
@@ -76,18 +76,19 @@ class ItemPurchaseOrderController extends Controller
      * @param  \App\Models\PurchaseOrder  $purchaseOrder
      * @return \Illuminate\Http\Response
      */
-    public function update(PurchaseOrderUpdate $request, PurchaseOrder $purchaseOrder, Item $item)
+    public function update(PurchaseOrderItemUpdate $request, PurchaseOrder $purchaseOrder, Item $item)
     {
         $subtotal_before_discount = $request->quantity*$request->price;
         $promo_type = Promo::where('uuid',$request->promo_type)->first();
         $discount_amount = $discount_percentage = 0;
-        if($promo_type->code == "discount-percent"){
-            $discount_percentage = $request->promo;
-            $discount_amount = $subtotal_before_discount * ($discount_percentage / 100);
-        }else{
-            $discount_amount = $request->promo;
-            $discount_percentage = $request->promo / $subtotal_before_discount;
-        }
+        //TODO waiting backend
+        // if($promo_type->code == "discount-percent"){
+        //     $discount_percentage = $request->promo;
+        //     $discount_amount = $subtotal_before_discount * ($discount_percentage / 100);
+        // }else{
+        //     $discount_amount = $request->promo;
+        //     $discount_percentage = $request->promo / $subtotal_before_discount;
+        // }
 
         //todo ppn
         // $ppn = $tax_percentage = 0;
@@ -100,28 +101,39 @@ class ItemPurchaseOrderController extends Controller
         //     $tax_type = "exclude";
         //     $tax_percentage = 10;
         // }
-       
+
+
+        $item = Item::find($item->id);
+        if($request->unit_id <> $item->unit_id){
+            $quantity = $request->quantity;
+            $qty_uom = $item->units->where('uom.unit_id',$request->unit_id)->first()->uom->quantity;
+            $quantity_unit = $qty_uom*$quantity;
+        }
+        else{
+            $quantity_unit = $request->quantity;
+        }
 
         $purchaseOrder->items()->updateExistingPivot($item->id,
                     ['unit_id'=>$request->unit_id,
                     'quantity'=> $request->quantity,
+                    'quantity_unit'=> $quantity_unit,
                     'price'=> $request->price,
                     'subtotal_before_discount'=> $subtotal_before_discount ,
                     'subtotal_after_discount'=> $subtotal_before_discount - $discount_amount,
                     'note' => $request->note]);
 
-        if(sizeof($purchaseOrder->promos) > 0){
-            //todo update still not working
-            $purchaseOrder->promos()->sync($promo_type->id,[
-                'value'     => $discount_percentage,
-                'amount'    => $discount_amount
-                ]);
-        }else{
-            $purchaseOrder->promos()->save(Promo::find($promo_type->id), [
-                'value'     => $discount_percentage,
-                'amount'    => $discount_amount
-            ]);
-        }
+        // if(sizeof($purchaseOrder->promos) > 0){
+        //     //todo update still not working
+        //     $purchaseOrder->promos()->sync($promo_type->id,[
+        //         'value'     => $discount_percentage,
+        //         'amount'    => $discount_amount
+        //         ]);
+        // }else{
+        //     $purchaseOrder->promos()->save(Promo::find($promo_type->id), [
+        //         'value'     => $discount_percentage,
+        //         'amount'    => $discount_amount
+        //     ]);
+        // }
 
         // if(sizeof($purchaseOrder->taxes) > 0){
         //     $tax = Tax::where('uuid', $purchaseOrder->taxes->last()->uuid)->update([

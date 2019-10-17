@@ -68,6 +68,19 @@ class Storage extends MemfisModel
     }
 
     /**
+     * One-to-Many: An InventoryIn may have one storage.
+     *
+     * This function will retrieve all the GRNs of a storage.
+     * See: InventoryIn's storage() method for the inverse
+     *
+     * @return mixed
+     */
+    public function inventory_ins()
+    {
+        return $this->hasMany(InventoryIn::class);
+    }
+
+    /**
      * Many-to-Many: An item may have zero or many storage.
      *
      * This function will retrieve the items of a storage.

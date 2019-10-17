@@ -39,8 +39,6 @@ Route::name('datatables.')->group(function () {
         Route::get('/school-type', 'SchoolTypeDatatables@index')->name('school.index');
         Route::get('/attendance', 'AttendanceDatatables@index')->name('attendance.index');
         Route::get('/overtime', 'OvertimeDatatables@index')->name('overtime.index');
-        Route::get('/overtime/getEmployees', 'OvertimeDatatables@getEmployees')->name('overtime.getEmployees');
-        Route::get('/attendance-correction', 'AttendanceCorrectionDatatables@index')->name('attendance-correction.index');
 
         /** LICENSE */
 
@@ -338,7 +336,6 @@ Route::name('datatables.')->group(function () {
                 Route::get('/modal', 'PurchaseOrderDatatables@purchaseOrderModal')->name('modal.index');
                 Route::get('/item/{purchaseOrder}', 'ItemPurchaseOrderDatatables@index')->name('purchase.order.item');
 
-
             });
 
         });
@@ -363,6 +360,40 @@ Route::name('datatables.')->group(function () {
                 Route::get('/item/{purchaseRequest}/project', 'ProjectPurchaseRequestDatatables@pr_item')->name('pr.project.item');
                 Route::get('/{purchase_request}/purchase-request', 'PurchaseRequestDatatables@item')->name('purchase-request');
                 Route::get('/modal', 'PurchaseRequestDatatables@modal')->name('purchase-request.modal');
+
+            });
+
+        });
+
+        /** FEFO IN */
+
+        Route::name('fefo-in.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'fefo-in',
+                'namespace' => 'FefoIn'
+
+            ], function () {
+
+                Route::get('/item/{item}/storage/{storage}', 'ItemFefoInDatatables@index')->name('fefo.in.storage.item');
+
+            });
+
+        });
+
+        /** FEFO OUT */
+
+        Route::name('fefo-out.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'fefo-out',
+                'namespace' => 'FefoOut'
+
+            ], function () {
+
+                Route::get('/item/{item}/storage/{storage}', 'ItemFefoOutDatatables@index')->name('fefo.out.storage.item');
 
             });
 
@@ -883,6 +914,29 @@ Route::name('datatables.')->group(function () {
 
                 /** Master Data */
                 Route::get('/', 'InventoryInDatatables@index')->name('all');
+                Route::get('/{inventoryIn}/items', 'InventoryInDatatables@getItemsByInventoryIn')->name('items');
+            });
+        });
+
+        /** Inventory Out */
+
+        Route::name('inventory-out.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'inventory-out',
+                'namespace' => 'InventoryOut'
+
+            ], function () {
+
+                /** Material */
+                Route::get('/material', 'InventoryOutMaterialDatatables@index')->name('material.all');
+                Route::get('/material/{inventoryOut}/items', 'InventoryOutMaterialDatatables@getItemsByInventoryOut')->name('material.items');
+
+                /** Tool */
+                Route::get('/tool', 'InventoryOutToolDatatables@index')->name('tools.all');
+                Route::get('/tool/{inventoryOut}/items', 'InventoryOutToolDatatables@getItemsByInventoryOut')->name('tools.items');
+
             });
         });
 

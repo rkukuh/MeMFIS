@@ -21,8 +21,9 @@ class CreateInventoryinItemTable extends Migration
             $table->double('quantity');
             $table->double('quantity_in_primary_unit');
             $table->unsignedBigInteger('unit_id');
-            $table->double('purchased_price');
-            $table->double('total');
+            $table->double('purchased_price')->nullable();
+            $table->double('total')->nullable()
+            ;
             $table->string('description')->nullable();
             $table->timestamp('expired_at')->nullable();
             $table->timestamps();

@@ -141,15 +141,24 @@ let PurchaseOrder = {
                         type: 'PUT',
                         url: '/purchase-order/' +  purchase_order_uuid +'/approve',
                         success: function (data) {
-                            toastr.success('Purchase Order has been Approved.', 'Approved', {
-                                timeOut: 5000
-                                }
-                            );
+                            if(data.status == 'error'){
+                                toastr.error("Can't Approve, Quantity exceed limit", 'Dinied', {
+                                    timeOut: 5000
+                                    }
+                                );
 
-                            let table = $('.purchase_order_datatable').mDatatable();
+                            }else{
+                                toastr.success('Purchase Order has been Approved.', 'Approved', {
+                                    timeOut: 5000
+                                    }
+                                );
 
-                            table.originalDataSet = [];
-                            table.reload();
+                                let table = $('.purchase_order_datatable').mDatatable();
+
+                                table.originalDataSet = [];
+                                table.reload();
+
+                            }
                         },
                         error: function (jqXhr, json, errorThrown) {
                             let errors = jqXhr.responseJSON;

@@ -219,7 +219,7 @@
                     <td valign="top" align="center">{{$htcrr->position}}</td>
                     <td valign="top" align="center">{{$htcrr->childs->get(0)->serial_number}}</td>
                     <td valign="top" align="center">{{$htcrr->childs->get(0)->estimation_manhour}}</td>
-                    <td valign="top" align="center">-</td>
+                    <td valign="top" align="center">@if($htcrr->childs->get(0)->actual_manhours) {{$htcrr->childs->get(0)->actual_manhours}} @else - @endif</td>
                 </tr>
             </table>
         </div>
@@ -231,7 +231,7 @@
                 <tr>
                     <td width="18%" valign="top">Remark</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="61%" valign="top">{{$htcrr->childs->get(0)->description}}</td>
+                    <td width="61%" valign="top">@if($htcrr->childs->get(0)->description) {{$htcrr->childs->get(0)->description}} @else - @endif</td>
                     <td width="20%" rowspan="2" valign="top" align="center">
                         <h5 style="margin-top:-2px;">Removal JC No.</h5>
                         <p style="margin-top:-13px;">{{$htcrr->childs->get(0)->code}}</p>
@@ -243,7 +243,7 @@
                 <tr>
                     <td width="18%" valign="top">Accomplishment Notes</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="61%" valign="top">Lorem</td>
+                    <td width="61%" valign="top">@if($htcrr->childs->get(0)->progresses->last())  {{$htcrr->childs->get(0)->progresses->last()->note}} @else - @endif</td>
                 </tr>
             </table>
         </div>
@@ -302,7 +302,7 @@
                     <td valign="top" align="center">{{$htcrr->position}}</td>
                     <td valign="top" align="center">{{$htcrr->childs->get(1)->serial_number}}</td>
                     <td valign="top" align="center">{{$htcrr->childs->get(1)->estimation_manhour}}</td>
-                    <td valign="top" align="center">-</td>
+                    <td valign="top" align="center">@if($htcrr->childs->get(1)->actual_manhours) {{$htcrr->childs->get(1)->actual_manhours}} @else - @endif</td>
                 </tr>
             </table>
         </div>
@@ -314,7 +314,7 @@
                 <tr>
                     <td width="18%" valign="top">Remark</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="61%" valign="top">{{$htcrr->childs->get(1)->description}}</td>
+                    <td width="61%" valign="top">@if($htcrr->childs->get(1)->description) {{$htcrr->childs->get(1)->description}}} @else - @endif</td>
                     <td width="20%" rowspan="2" valign="top" align="center">
                         <h5 style="margin-top:-2px;">Removal JC No.</h5>
                         <p style="margin-top:-13px;">{{$htcrr->childs->get(1)->code}}</p>
@@ -326,7 +326,7 @@
                 <tr>
                     <td width="18%" valign="top">Accomplishment Notes</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="61%" valign="top">Lorem</td>
+                    <td width="61%" valign="top">@if($htcrr->childs->get(1)->progresses->last()) {{$htcrr->childs->get(1)->progresses->last()->note}} @else - @endif</td>
                 </tr>
             </table>
         </div>
@@ -353,8 +353,7 @@
                         </td>
                         <td width="33%" height="100px" align="center" valign="bottom">
                             <div style="width:100%;height:20px;text-align:center">Ibnu Pratama Adi Saputra</div>
-                            <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date &
-                                    Time</span></div>
+                            <div style="width:100%;height:20px;text-align:left;padding-left:5px;">Date : <span>Date & Time</span></div>
                         </td>
                         <td width="34%" height="100" align="center" valign="bottom"
                             @if($rii_status==0) style="background:grey" @endif>
@@ -378,8 +377,16 @@
                     <td align="center" width="50%">Tool(s)</td>
                 </tr>
                 <tr>
-                    <td valign="top" height="23"></td>
-                    <td valign="top" height="23"></td>
+                    <td valign="top" height="23">
+                        @foreach($materials as $material)
+                            {{$material->name}} - {{$material->pivot->quantity}} {{ $material->unit }} <br>
+                        @endforeach
+                    </td>
+                    <td valign="top" height="23">
+                        @foreach($tools as $tools)
+                            {{$tools->name}} - {{$tools->pivot->quantity}} {{ $tools->unit }} <br>
+                        @endforeach
+                    </td>
                 </tr>
             </table>
         </div>

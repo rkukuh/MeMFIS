@@ -75,7 +75,7 @@
                                                                 </label>
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'address')
-                                                                    @slot('text', '..........')
+                                                                    @slot('text', $attention->address)
                                                                 @endcomponent
                                                             </div>
                                                         </div>

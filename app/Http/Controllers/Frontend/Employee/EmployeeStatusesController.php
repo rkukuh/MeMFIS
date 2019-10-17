@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\frontend\employee;
 
-use App\Models\Status;
+use App\Models\status;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\EmployeeStatusesStore;
 use App\Http\Requests\Frontend\EmployeeStatusesUpdate;
@@ -56,7 +56,8 @@ class EmployeeStatusesController extends Controller
      */
     public function show(status $status)
     {
-     
+        // TODO: Return error message as JSON
+        return response()->json($status);
     }
 
     /**
@@ -67,6 +68,7 @@ class EmployeeStatusesController extends Controller
      */
     public function edit(status $status)
     {
+        // TODO: Return error message as JSON
         return response()->json($status);
     }
 
