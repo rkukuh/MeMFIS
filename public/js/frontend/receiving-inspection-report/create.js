@@ -124,48 +124,55 @@ let receiving_inspection_report = {
             }
         });
 
-        let remove = $(".rir_datatable").on("click", ".delete", function() {
-            let triggerid = $(this).data("id");
+        let simpan = $('.action-buttons').on('click', '.add-rir', function () {
+            $('#name-error').html('');
+            $('#simpan').text('Simpan');
 
-            swal({
-                title: "Are you sure?",
-                type: "question",
-                confirmButtonText: "Yes, REMOVE",
-                confirmButtonColor: "#d33",
-                cancelButtonText: "Cancel",
-                showCancelButton: true
-            }).then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                "content"
-                            )
-                        },
-                        type: "DELETE",
-                        url: "/customer/" + triggerid + "",
-                        success: function(data) {
-                            toastr.success(
-                                "Material has been deleted.",
-                                "Deleted",
-                                {
-                                    timeOut: 5000
-                                }
-                            );
-                            let table = $(".customer_datatable").mDatatable();
+            let purchase_order = $('#purchase_order').val();
+            let vendor = $('#vendor').val();
 
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function(jqXhr, json, errorThrown) {
-                            let errorsHtml = "";
-                            let errors = jqXhr.responseJSON;
+            let document = $('input[name=document]').val();
+            let date = $('#date').val();
+            let description = $('#description').val();
 
-                            $.each(errors.errors, function(index, value) {
-                                $("#delete-error").html(value);
-                            });
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/workpackage',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    title: title,
+                    aircraft_id: applicability_airplane,
+                    description: description,
+                    is_template:'1',
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        if (data.errors.aircraft_id) {
+                            $('#applicability-airplane-error').html(data.errors.aircraft_id[0]);
                         }
-                    });
+                        if (data.errors.title) {
+                            $('#title-error').html(data.errors.title[0]);
+                        }
+
+                        // document.getElementById('applicability-airplane').value = applicability-airplane;
+                        // document.getElementById('title').value = title;
+
+                    } else {
+                        // $('#modal_customer').modal('hide');
+
+                        toastr.success('Work Package has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        window.location.href = '/workpackage/'+data.uuid+'/edit';
+                        // let table = $('.m_datatable').mDatatable();
+
+                        // table.originalDataSet = [];
+                        // table.reload();
+                    }
                 }
             });
         });
