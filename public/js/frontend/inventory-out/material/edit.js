@@ -6,7 +6,7 @@ let InventoryOutCreate = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/inventory-out/material/' + inventoryin_uuid + '/items',
+                        url: '/datatables/inventory-out/material/' + inventoryout_uuid + '/items',
                         map: function (raw) {
                             let dataSet = raw;
 

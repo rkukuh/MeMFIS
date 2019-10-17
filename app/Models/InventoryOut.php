@@ -16,7 +16,10 @@ class InventoryOut extends MemfisModel
         'inventoryoutable_id',
         'description',
         'section',
+        'received_by',
     ];
+
+    protected $dates = ['inventoried_at'];
 
     /*************************************** RELATIONSHIP ****************************************/
 
@@ -71,6 +74,19 @@ class InventoryOut extends MemfisModel
     public function storage()
     {
         return $this->belongsTo(Storage::class);
+    }
+
+    /**
+     * One-to-Many: An Inventory Out may have one storage.
+     *
+     * This function will retrieve all the GRNs of a storage.
+     * See: Storage's inventory_outs() method for the inverse
+     *
+     * @return mixed
+     */
+    public function receivedBy()
+    {
+        return $this->belongsTo(Employee::class);
     }
 
     /**

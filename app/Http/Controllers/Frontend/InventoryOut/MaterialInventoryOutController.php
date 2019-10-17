@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\InventoryOutStore;
 use App\Http\Requests\Frontend\InventoryOutUpdate;
 use App\Helpers\DocumentNumber;
+use App\Models\Employee;
 
 class MaterialInventoryOutController extends Controller
 {
@@ -72,9 +73,11 @@ class MaterialInventoryOutController extends Controller
     public function edit(InventoryOut $inventoryOut)
     {
         $storages = Storage::get();
+        $employees = Employee::get();
 
         return view('frontend.inventory-out.material.edit', [
             'storages' => $storages,
+            'employees' => $employees,
             'inventoryOut' => $inventoryOut,
         ]);
     }
