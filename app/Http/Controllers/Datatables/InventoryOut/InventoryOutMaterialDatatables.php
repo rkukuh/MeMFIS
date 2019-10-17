@@ -8,7 +8,7 @@ use App\Models\Unit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class InventoryOutDatatables extends Controller
+class InventoryOutMaterialDatatables extends Controller
 {
     /**
      * Display a listing of the resource.
