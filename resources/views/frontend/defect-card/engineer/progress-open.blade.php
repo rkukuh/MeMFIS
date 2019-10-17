@@ -203,6 +203,9 @@
                                             @slot('text', '1. REMOVE')
                                             @slot('size', '12')
                                             @slot('disabled','disabled')
+                                            @if(in_array('remove',$propose_corrections))
+                                                @slot('checked', 'checked')
+                                            @endif
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-4 col-md-4 col-lg-4">
@@ -213,6 +216,9 @@
                                             @slot('text', '4. REPAIR')
                                             @slot('disabled','disabled')
                                             @slot('size', '12')
+                                            @if(in_array('repair',$propose_corrections))
+                                                @slot('checked', 'checked')
+                                            @endif
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-4 col-md-4 col-lg-4">
@@ -223,6 +229,9 @@
                                             @slot('text', '7. TEST')
                                             @slot('disabled','disabled')
                                             @slot('size', '12')
+                                            @if(in_array('test',$propose_corrections))
+                                                @slot('checked', 'checked')
+                                            @endif
                                         @endcomponent
                                     </div>
                                 </div>
@@ -235,6 +244,9 @@
                                             @slot('text', '2. INSTALL')
                                             @slot('disabled','disabled')
                                             @slot('size', '12')
+                                            @if(in_array('install',$propose_corrections))
+                                                @slot('checked', 'checked')
+                                            @endif
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-4 col-md-4 col-lg-4">
@@ -245,6 +257,9 @@
                                             @slot('text', '5. REPLACE')
                                             @slot('disabled','disabled')
                                             @slot('size', '12')
+                                            @if(in_array('replace',$propose_corrections))
+                                                @slot('checked', 'checked')
+                                            @endif
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-4 col-md-4 col-lg-4">
@@ -255,6 +270,9 @@
                                             @slot('text', '8. SHOP VISIT')
                                             @slot('disabled','disabled')
                                             @slot('size', '12')
+                                            @if(in_array('shop-visit',$propose_corrections))
+                                                @slot('checked', 'checked')
+                                            @endif
                                         @endcomponent
                                     </div>
                                 </div>
@@ -267,6 +285,9 @@
                                             @slot('text', '3. RECTIFICATION')
                                             @slot('disabled','disabled')
                                             @slot('size', '12')
+                                            @if(in_array('rectification',$propose_corrections))
+                                                @slot('checked', 'checked')
+                                            @endif
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-4 col-md-4 col-lg-4">
@@ -277,6 +298,9 @@
                                             @slot('text', '6. NDT')
                                             @slot('disabled','disabled')
                                             @slot('size', '12')
+                                            @if(in_array('ndt',$propose_corrections))
+                                                @slot('checked', 'checked')
+                                            @endif
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-4 col-md-4 col-lg-4">
@@ -289,6 +313,9 @@
                                                     @slot('text', '9. Other')
                                                     @slot('disabled','disabled')
                                                     @slot('size', '12')
+                                                    @if(in_array('other',$propose_corrections))
+                                                        @slot('checked', 'checked')
+                                                    @endif
                                                 @endcomponent
                                             </div>
                                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -298,6 +325,10 @@
                                                     @slot('name', 'other_text')
                                                     @slot('rows', '3')
                                                     @slot('id_error', 'other_text')
+                                                    @if(empty($propose_correction_text))
+                                                        @slot('disabled','disabled')
+                                                    @endif
+                                                    @slot('value', $propose_correction_text)
                                                 @endcomponent
                                             </div>
                                         </div>
@@ -310,7 +341,7 @@
                                         Engineer
                                     </label>
                                     @component('frontend.common.label.data-info')
-                                        @slot('text', 'generated')
+                                        @slot('text', $defectcard->progresses->first()->progressedBy->first_name )
                                     @endcomponent
                                 </div>
                             </div>
@@ -323,7 +354,7 @@
                                                 <td valign="top" width="4%">{{$key + 1}})</td>
                                                 <td valign="top" width="48%">
                                                     <label class="form-control-label">
-                                                    Reference
+                                                        Reference
                                                     </label>
 
                                                     @component('frontend.common.input.text')
@@ -333,7 +364,7 @@
                                                 </td>
                                                 <td valign="top" width="48%">
                                                     <label class="form-control-label">
-                                                    Helper
+                                                        Helper
                                                     </label>
 
                                                     <select name="helper" class="form-control m-select2">
@@ -369,16 +400,18 @@
                                                         <td align="center"><b>Off</b></td>
                                                         <td align="center"><b>On</b></td>
                                                     </tr>
+                                                    @foreach($defectcard->materials as $material)
                                                     <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
+                                                        <td style="width:25%">{{ $material->code }}</td>
+                                                        <td style="width:25%">{{ $material->description }}</td>
+                                                        <td>{{ $material->pivot->sn_off }}</td>
+                                                        <td>{{ $material->pivot->sn_on }}</td>
+                                                        <td>{{ $material->pivot->quantity }}</td>
+                                                        <td>{{ $material->unit->name }}</td>
+                                                        <td>{{ $material->pivot->ipc_ref }}</td>
+                                                        <td>{{ $material->pivot->note }}</td>
                                                     </tr>
+                                                    @endforeach
                                                 </table>
                                             </div>
                                         </div>
@@ -405,16 +438,18 @@
                                                         <td align="center"><b>Off</b></td>
                                                         <td align="center"><b>On</b></td>
                                                     </tr>
+                                                    @foreach($defectcard->tools as $tool)
                                                     <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
+                                                        <td style="width:25%">{{ $tool->code }}</td>
+                                                        <td style="width:25%">{{ $tool->description }}</td>
+                                                        <td>{{ $tool->pivot->sn_off }}</td>
+                                                        <td>{{ $tool->pivot->sn_on }}</td>
+                                                        <td>{{ $tool->pivot->quantity }}</td>
+                                                        <td>{{ $tool->unit->name }}</td>
+                                                        <td>{{ $tool->pivot->ipc_ref }}</td>
+                                                        <td>{{ $tool->pivot->note }}</td>
                                                     </tr>
+                                                    @endforeach
                                                 </table>
                                             </div>
                                         </div>
