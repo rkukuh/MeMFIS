@@ -60,7 +60,8 @@
                                         @slot('id', 'date')
                                         @slot('text', 'Date')
                                         @slot('name', 'date')
-                                        @slot('id_error','requested_at')
+                                        @slot('id_error','inventoried_at')
+                                        @slot('value', $inventoryOut->inventoried_at)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -70,12 +71,14 @@
                                             Storage @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select2')
-                                        @slot('text', 'Storage')
-                                        @slot('id', 'item_storage_id')
-                                        @slot('name', 'item_storage_id')
-                                        @slot('id_error', 'item_storage_id')
-                                        @endcomponent
+                                        <select id="item_storage_id" name="item_storage_id" class="form-control m-select2">
+                                            @foreach ($storages as $storage)
+                                            <option value="{{ $storage->id }}" @if ($storage->id == $inventoryOut->storage_id) selected
+                                                @endif>
+                                                {{ $storage->name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
@@ -87,6 +90,7 @@
                                         @slot('id', 'section_code')
                                         @slot('name', 'section_code')
                                         @slot('id_error', 'section_code')
+                                        @slot('value', $inventoryOut->section)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -101,6 +105,7 @@
                                         @slot('text', 'Ref. Document ')
                                         @slot('name', 'material')
                                         @slot('id_error','material')
+                                        @slot('value', $inventoryOut->number)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -108,12 +113,14 @@
                                             Received By @include('frontend.common.label.required')
                                         </label>
 
-                                        @component('frontend.common.input.select2')
-                                        @slot('id', 'received-by')
-                                        @slot('text', 'Received By')
-                                        @slot('name', 'received-by')
-                                        @slot('id_error','received-by')
-                                        @endcomponent
+                                        <select id="received-by" name="received-by" class="form-control m-select2">
+                                            @foreach ($employees as $employee)
+                                            <option value="{{ $employee->id }}" @if ($employee->id == $inventoryOut->received_by) selected
+                                                @endif>
+                                                {{ $employee->first_name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">
@@ -127,6 +134,7 @@
                                         @slot('id', 'remark')
                                         @slot('name', 'remark')
                                         @slot('text', 'Remark')
+                                        @slot('value', $inventoryOut->description)
                                         @endcomponent
                                     </div>
                                 </div>

@@ -110,7 +110,7 @@ class MaterialInventoryOutController extends Controller
     /**
      * Approve the specified resource from storage.
      *
-     * @param  \App\Models\GoodsReceived  $goodsReceived
+     * @param  \App\Models\InventoryOut  $inventoryOut
      * @return \Illuminate\Http\Response
      */
     public function approve(InventoryOut $inventoryOut)
