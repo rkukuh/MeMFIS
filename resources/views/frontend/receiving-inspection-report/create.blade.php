@@ -275,7 +275,7 @@
                                                             </label>
 
                                                             @component('frontend.common.input.input')
-                                                                @slot('name', 'packing_handling_check')
+                                                                @slot('id', 'packing_handling_check')
                                                                 @slot('name', 'packing_handling_check')
                                                                 @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
@@ -321,8 +321,8 @@
                                                             </label>
 
                                                             @component('frontend.common.input.input')
-                                                                @slot('name', 'preservation_check')
-                                                                @slot('name', 'preservation_check')
+                                                                @slot('id', 'preservation_check_explain')
+                                                                @slot('name', 'preservation_check_explain')
                                                                 @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
@@ -355,21 +355,24 @@
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     @component('frontend.common.input.checkbox')
                                                                         @slot('id', 'invoice')
-                                                                        @slot('name', 'general_document')
+                                                                        @slot('class', 'general_document')
+                                                                        @slot('name', 'general_document[]')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Invoice')
                                                                         @slot('value', 'invoice')
                                                                     @endcomponent
                                                                     @component('frontend.common.input.checkbox')
                                                                         @slot('id', 'airway_bill')
-                                                                        @slot('name', 'is_stock')
+                                                                        @slot('class', 'general_document')
+                                                                        @slot('name', 'general_document[]')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Airway Bill')
                                                                         @slot('value', 'airway bill')
                                                                     @endcomponent
                                                                     @component('frontend.common.input.checkbox')
                                                                         @slot('id', 'shipping_document')
-                                                                        @slot('name', 'general_document')
+                                                                        @slot('class', 'general_document')
+                                                                        @slot('name', 'general_document[]')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Shipping Document')
                                                                         @slot('value', 'shipping document')
@@ -382,14 +385,16 @@
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     @component('frontend.common.input.checkbox')
                                                                         @slot('id', 'certificate_of_conformity')
-                                                                        @slot('name', 'technical_document')
+                                                                        @slot('class', 'technical_document')
+                                                                        @slot('name', 'technical_document[]')
                                                                         @slot('value', 'certificate of conformity')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Certificate of Conformity')
                                                                     @endcomponent
                                                                     @component('frontend.common.input.checkbox')
                                                                         @slot('id', 'arc_aat')
-                                                                        @slot('name', 'technical_document')
+                                                                        @slot('class', 'technical_document')
+                                                                        @slot('name', 'technical_document[]')
                                                                         @slot('value', 'arc/aat')
                                                                         @slot('size','12')
                                                                         @slot('text', 'ARC/AAT')
@@ -405,7 +410,7 @@
                                                             </label>
 
                                                             @component('frontend.common.input.input')
-                                                                @slot('name', 'document_check')
+                                                                @slot('id', 'document_check')
                                                                 @slot('name', 'document_check')
                                                                 @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
@@ -445,7 +450,7 @@
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('id', 'statisfactory')
                                                                         @slot('value', 'statisfactory')
-                                                                        @slot('name', 'condition')
+                                                                        @slot('name', 'condition_material')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Statisfactory')
                                                                     @endcomponent
@@ -454,7 +459,7 @@
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('id', 'unsatisfactory')
                                                                         @slot('value', 'unsatisfactory')
-                                                                        @slot('name', 'condition')
+                                                                        @slot('name', 'condition_material')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Unsatisfactory')
                                                                     @endcomponent
@@ -513,7 +518,7 @@
                                                             </label>
 
                                                             @component('frontend.common.input.input')
-                                                                @slot('name', 'material_check')
+                                                                @slot('id', 'material_check')
                                                                 @slot('name', 'material_check')
                                                                 @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent

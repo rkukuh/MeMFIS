@@ -125,15 +125,46 @@ let receiving_inspection_report = {
         });
 
         let simpan = $('.action-buttons').on('click', '.add-rir', function () {
+            // var x=$("#checkbox").is(":checked");
+
+            // var checkedValue = $('.general_document:checked').val();
+            // console.log($('.general_document').val());
+            // alert($('.check_class').val());
             $('#name-error').html('');
             $('#simpan').text('Simpan');
+
+            let general_document = [];
+            $.each($("input[name='general_document[]']:checked"), function() {
+                general_document.push($(this).val());
+            });
+
+            console.log(general_document);
+
+            let technical_document = [];
+            $.each($("input[name='technical_document[]']:checked"), function() {
+                technical_document.push($(this).val());
+            });
+            console.log(technical_document);
+
 
             let purchase_order = $('#purchase_order').val();
             let vendor = $('#vendor').val();
 
             let document = $('input[name=document]').val();
             let date = $('#date').val();
-            let description = $('#description').val();
+            let status = $('input[name="status"]:checked').val();
+            let type = $('input[name="type"]:checked').val();
+            let condition = $('input[name="condition"]:checked').val();
+            let preservation_check = $('input[name="preservation_check"]:checked').val();
+            let condition_material = $('input[name="condition_material"]:checked').val();
+            let quality = $('input[name="quality"]:checked').val();
+            let identification = $('input[name="identification"]:checked').val();
+            let packing_handling_check = $('#packing_handling_check').val();
+            let preservation_check_explain = $('#preservation_check_explain').val();
+            let document_check = $('#document_check').val();
+            let material_check = $('#material_check').val();
+            let decision = $('#decision').val();
+
 
             $.ajax({
                 headers: {
