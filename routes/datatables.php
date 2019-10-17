@@ -920,6 +920,23 @@ Route::name('datatables.')->group(function () {
             });
         });
 
+        /** Inventory Out */
+
+        Route::name('inventory-out.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'inventory-out',
+                'namespace' => 'InventoryOut'
+
+            ], function () {
+
+                /** Master Data */
+                Route::get('/', 'InventoryOutDatatables@index')->name('all');
+                Route::get('/{inventoryOut}/items', 'InventoryOutDatatables@getItemsByInventoryOut')->name('items');
+            });
+        });
+
         Route::get('/testing', 'UnitDatatables@index')->name('testing.index');
 
 

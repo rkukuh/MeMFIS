@@ -12,7 +12,7 @@ class InventoryOut extends MemfisModel
         'number',
         'storage_id',
         'inventoried_at',
-        'inventoryouable_type',
+        'inventoryoutable_type',
         'inventoryoutable_id',
         'description',
         'section',
