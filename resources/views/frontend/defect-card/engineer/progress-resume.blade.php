@@ -1,7 +1,6 @@
 @extends('frontend.master')
 
 @section('content')
-<form method="POST">
 
     <div class="m-subheader hidden">
         <div class="d-flex align-items-center ">
@@ -478,15 +477,16 @@
                                     <div class="flex">
                                         <div class="action-buttons">
 
-                                            @include('frontend.defect-card.progress.modal-pause')
+                                            @include('frontend.defect-card.engineer.modal-pause')
                                             @component('frontend.common.buttons.pause')
                                                 @slot('data_target', '#modal_pause')
                                             @endcomponent
 
+                                            @include('frontend.defect-card.engineer.modal-close')
                                             @component('frontend.common.buttons.close')
+                                            @slot('data_target', '#modal_close')
                                                 @slot('class', 'ml-2')
                                             @endcomponent
-
 
                                             @include('frontend.common.buttons.back')
                                         </div>
@@ -499,6 +499,13 @@
             </div>
         </div>
     </div>
-</form>
+
 
 @endsection
+
+@push('footer-scripts')
+    <script>
+        let uuid = '{{$defectcard->uuid}}';
+    </script>
+    <script src="{{ asset('js/frontend/defect-card/items.js')}}"></script>
+@endpush
