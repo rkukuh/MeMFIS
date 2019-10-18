@@ -104,6 +104,9 @@ let InventoryOutCreate = {
                 {
                     field: "description",
                     title: "Remark",
+                    template: function (t) {
+                        return t.description
+                    }
                 },
                 {
                     field: 'Actions',
@@ -126,8 +129,7 @@ let InventoryOutCreate = {
 
         $(".modal-footer").on("click", ".add-item", function () {
             let material = $("#material").val();
-            console.log(material);
-            let quantity = $("input[name=qty]").val();
+            let quantity = $("input[name=qty_request]").val();
             let exp_date = $("#exp_date").val();
             let unit = $("#unit_id").val();
             let remark = $("#remark").val();
@@ -137,10 +139,10 @@ let InventoryOutCreate = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: "/inventory-out/material/" + inventoryout_uuid + "/item/" + item,
+                url: "/inventory-out/material/" + inventoryout_uuid + "/item/" + material,
                 type: "POST",
                 data: {
-                    item_id: item,
+                    item_id: material,
                     quantity: quantity,
                     exp_date: exp_date,
                     unit_id: unit,

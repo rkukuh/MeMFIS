@@ -101,10 +101,10 @@
                                         </label>
 
                                         @component('frontend.common.input.text')
-                                        @slot('id', 'material')
+                                        @slot('id', 'ref_no')
                                         @slot('text', 'Ref. Document ')
-                                        @slot('name', 'material')
-                                        @slot('id_error','material')
+                                        @slot('name', 'ref_no')
+                                        @slot('id_error','ref_no')
                                         @slot('value', $inventoryOut->ref_no)
                                         @endcomponent
                                     </div>
