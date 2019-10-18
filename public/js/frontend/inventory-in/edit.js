@@ -113,7 +113,7 @@ let InventoryInCreate = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_item" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-item=' +
-                            t.uuid + ' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-remark=' + t.pivot.note +'>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            t.uuid + ' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-remark=' + t.pivot.description +'>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                                 '<i class="la la-trash"></i>' +
                             '</a>'
@@ -225,6 +225,59 @@ let InventoryInCreate = {
             document.getElementById('qty').value = $(this).data('quantity');
             document.getElementById('uuid').value = $(this).data('uuid');
             document.getElementById('remark').value = $(this).data('remark');
+
+            $('.btn-success').addClass('update-item');
+            $('.btn-success').removeClass('add-item');
+        });
+
+        $(".modal-footer").on("click", ".update-item", function () {
+            let item = $("#item").val();
+            let quantity = $("input[name=qty]").val();
+            let exp_date = $("#exp_date").val();
+            let unit = $("#unit_id").val();
+            let remark = $("#remark").val();
+            let serial_no = $("#serial_no").val();
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                url: "/inventory-in/" + inventoryin_uuid + "/item/" + item,
+                type: "PUT",
+                data: {
+                    item_id: item,
+                    quantity: quantity,
+                    exp_date: exp_date,
+                    unit_id: unit,
+                    serial_no: serial_no,
+                    remark: remark,
+                },
+                success: function (response) {
+                    $('#modal_item').modal('hide');
+
+                    $('#modal_item').on('hidden.bs.modal', function (e) {
+                        $(this)
+                            .find("input,textarea")
+                            .val('')
+                            .end()
+                            .find("select")
+                            .select2('val', 'All')
+                            .end();
+                    });
+
+                    toastr.success("Item has been added.", "Success", {
+                        timeOut: 5000
+                    });
+
+                    let table = $(".item_datatable").mDatatable();
+
+                    table.originalDataSet = [];
+                    table.reload();
+
+                    $('.btn-success').addClass('add-item');
+                    $('.btn-success').removeClass('update-item');
+                }
+            });
         });
 
         $('.item_datatable').on('click', '.delete', function () {

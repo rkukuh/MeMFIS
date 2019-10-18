@@ -144,6 +144,7 @@ class MaterialInventoryOutController extends Controller
             'unit_id' => $request->unit_id,
             'quantity_in_primary_unit' => $request->unit_id,
             'serial_number' => $request->serial_no,
+            'expired_at' => $request->expired_at,
             'purchased_price' => 0, // ??
             'total' => 0, // ??
             'description' => $request->remark
@@ -166,9 +167,10 @@ class MaterialInventoryOutController extends Controller
             [
                 'quantity' => $request->quantity,
                 'unit_id' => $request->unit_id,
-                'quantity_unit' => $request->unit_id,
+                'quantity_in_primary_unit' => $request->unit_id,
                 'serial_number' => $request->serial_no,
-                'note' => $request->remark
+                'expired_at' => $request->expired_at,
+                'description' => $request->remark
             ]
         );
 
