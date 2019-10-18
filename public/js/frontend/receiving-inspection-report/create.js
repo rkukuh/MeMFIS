@@ -124,12 +124,7 @@ let receiving_inspection_report = {
             }
         });
 
-        let simpan = $('.action-buttons').on('click', '.add-rir', function () {
-            // var x=$("#checkbox").is(":checked");
-
-            // var checkedValue = $('.general_document:checked').val();
-            // console.log($('.general_document').val());
-            // alert($('.check_class').val());
+        $('.action-buttons').on('click', '.add-rir', function () {
             $('#name-error').html('');
             $('#simpan').text('Simpan');
 
@@ -138,18 +133,13 @@ let receiving_inspection_report = {
                 general_document.push($(this).val());
             });
 
-            console.log(general_document);
-
             let technical_document = [];
             $.each($("input[name='technical_document[]']:checked"), function() {
                 technical_document.push($(this).val());
             });
-            console.log(technical_document);
-
 
             let purchase_order = $('#purchase_order').val();
             let vendor = $('#vendor').val();
-
             let document = $('input[name=document]').val();
             let date = $('#date').val();
             let status = $('input[name="status"]:checked').val();
@@ -174,19 +164,31 @@ let receiving_inspection_report = {
                 url: '/workpackage',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    title: title,
-                    aircraft_id: applicability_airplane,
-                    description: description,
-                    is_template:'1',
+                    general_document:general_document,
+                    technical_document: technical_document,
+                    purchase_order: purchase_order,
+                    vendor: vendor,
+                    document: document,
+                    status:status,
+                    type:type,
+                    condition:condition,
+                    preservation_check:preservation_check,
+                    condition_material:condition_material,
+                    identification:identification,
+                    packing_handling_check:packing_handling_check,
+                    preservation_check_explain:preservation_check_explain,
+                    document_check:document_check,
+                    material_check:material_check,
+                    decision:decision,
                 },
                 success: function (data) {
                     if (data.errors) {
-                        if (data.errors.aircraft_id) {
-                            $('#applicability-airplane-error').html(data.errors.aircraft_id[0]);
-                        }
-                        if (data.errors.title) {
-                            $('#title-error').html(data.errors.title[0]);
-                        }
+                        // if (data.errors.aircraft_id) {
+                        //     $('#applicability-airplane-error').html(data.errors.aircraft_id[0]);
+                        // }
+                        // if (data.errors.title) {
+                        //     $('#title-error').html(data.errors.title[0]);
+                        // }
 
                         // document.getElementById('applicability-airplane').value = applicability-airplane;
                         // document.getElementById('title').value = title;
@@ -194,11 +196,11 @@ let receiving_inspection_report = {
                     } else {
                         // $('#modal_customer').modal('hide');
 
-                        toastr.success('Work Package has been created.', 'Success', {
+                        toastr.success('RIR has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/workpackage/'+data.uuid+'/edit';
+                        window.location.href = '/rir/'+data.uuid+'/edit';
                         // let table = $('.m_datatable').mDatatable();
 
                         // table.originalDataSet = [];
