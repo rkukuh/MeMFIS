@@ -193,6 +193,15 @@ class DefectCardEngineerController extends Controller
      */
     public function update(Request $request,DefectCard $defectcard)
     {
+        // get all the helper
+
+        // compare if there's any difference
+
+        // delete the olds one
+
+        // insert the new selected helper with additionals 
+        // dump($request->reference);
+        // dd($request->helper);
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             $defectcard->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
