@@ -28,6 +28,7 @@ require('frontend/purchase-order.php');
 require('frontend/purchase-request.php');
 require('frontend/quotation.php');
 require('frontend/rii.php');
+require('frontend/rir.php');
 require('frontend/rts.php');
 require('frontend/task-release.php');
 require('frontend/taskcard.php');
