@@ -322,8 +322,8 @@
                                                 </label>
 
                                                 @component('frontend.common.input.text')
-                                                    @slot('name', 'refrence')
-                                                    @slot('text', 'Refrence')
+                                                    @slot('name', 'reference[]')
+                                                    @slot('text', 'reference')
                                                 @endcomponent
                                             </td>
                                             <td valign="top" width="48%">
@@ -332,7 +332,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.select2')
-                                                    @slot('name', 'helper')
+                                                    @slot('name', 'helper[]')
                                                     @slot('id', 'helper')
                                                 @endcomponent
                                             </td>

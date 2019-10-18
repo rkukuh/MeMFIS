@@ -342,6 +342,7 @@
                                 @endcomponent
                             </div>
                         </div>
+                        <form method="POST" action="{{route('frontend.defectcard-mechanic.update',$defectcard->uuid)}}">
                         <div class="form-group m-form__group row mt-4">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <table class="table " width="100%" cellpadding="4">
@@ -355,7 +356,7 @@
                                                 </label>
 
                                                 @component('frontend.common.input.text')
-                                                    @slot('name', 'refrence')
+                                                    @slot('name', 'reference[]')
                                                     @slot('value', $helper->pivot->additionals)
                                                 @endcomponent
                                             </td>
@@ -473,12 +474,16 @@
                             <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                 <div class="flex">
                                     <div class="action-buttons">
-                                        @include('frontend.common.buttons.execute')
-                                        @include('frontend.common.buttons.back')
+                                            {{method_field('PATCH')}}
+                                            {!! csrf_field() !!}
+                                            <input type="hidden" name="progress" value="{{$status->uuid}}">
+                                            @include('frontend.common.buttons.execute')
+                                            @include('frontend.common.buttons.back')
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>

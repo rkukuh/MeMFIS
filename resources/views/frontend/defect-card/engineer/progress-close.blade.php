@@ -354,9 +354,9 @@
                                                         Reference
                                                     </label>
 
-                                                    @component('frontend.common.input.text')
-                                                        @slot('name', 'refrence')
-                                                        @slot('value', $helper->pivot->additionals)
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('name', 'reference[]')
+                                                        @slot('text', $helper->pivot->additionals)
                                                     @endcomponent
                                                 </td>
                                                 <td valign="top" width="48%">
@@ -364,12 +364,10 @@
                                                         Helper
                                                     </label>
 
-                                                    <select name="helper" class="form-control m-select2">
-                                                        <option value=""> Select a Helper </option>
-                                                        @foreach($employees as $employee)
-                                                            <option value="{{ $employee->code }}" @if($employee->code == $helper->code) selected @endif>{{ $employee->first_name }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('name', 'helper[]')
+                                                        @slot('text', $helper->first_name)
+                                                    @endcomponent
                                                 </td>
                                             </tr>
                                             @endforeach
