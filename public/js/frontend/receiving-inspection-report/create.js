@@ -124,48 +124,88 @@ let receiving_inspection_report = {
             }
         });
 
-        let remove = $(".rir_datatable").on("click", ".delete", function() {
-            let triggerid = $(this).data("id");
+        $('.action-buttons').on('click', '.add-rir', function () {
+            $('#name-error').html('');
+            $('#simpan').text('Simpan');
 
-            swal({
-                title: "Are you sure?",
-                type: "question",
-                confirmButtonText: "Yes, REMOVE",
-                confirmButtonColor: "#d33",
-                cancelButtonText: "Cancel",
-                showCancelButton: true
-            }).then(result => {
-                if (result.value) {
-                    $.ajax({
-                        headers: {
-                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                                "content"
-                            )
-                        },
-                        type: "DELETE",
-                        url: "/customer/" + triggerid + "",
-                        success: function(data) {
-                            toastr.success(
-                                "Material has been deleted.",
-                                "Deleted",
-                                {
-                                    timeOut: 5000
-                                }
-                            );
-                            let table = $(".customer_datatable").mDatatable();
+            let general_document = [];
+            $.each($("input[name='general_document[]']:checked"), function() {
+                general_document.push($(this).val());
+            });
 
-                            table.originalDataSet = [];
-                            table.reload();
-                        },
-                        error: function(jqXhr, json, errorThrown) {
-                            let errorsHtml = "";
-                            let errors = jqXhr.responseJSON;
+            let technical_document = [];
+            $.each($("input[name='technical_document[]']:checked"), function() {
+                technical_document.push($(this).val());
+            });
 
-                            $.each(errors.errors, function(index, value) {
-                                $("#delete-error").html(value);
-                            });
-                        }
-                    });
+            let purchase_order = $('#purchase_order').val();
+            let vendor = $('#vendor').val();
+            let document = $('input[name=document]').val();
+            let date = $('#date').val();
+            let status = $('input[name="status"]:checked').val();
+            let type = $('input[name="type"]:checked').val();
+            let condition = $('input[name="condition"]:checked').val();
+            let preservation_check = $('input[name="preservation_check"]:checked').val();
+            let condition_material = $('input[name="condition_material"]:checked').val();
+            let quality = $('input[name="quality"]:checked').val();
+            let identification = $('input[name="identification"]:checked').val();
+            let packing_handling_check = $('#packing_handling_check').val();
+            let preservation_check_explain = $('#preservation_check_explain').val();
+            let document_check = $('#document_check').val();
+            let material_check = $('#material_check').val();
+            let decision = $('#decision').val();
+
+
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: 'post',
+                url: '/workpackage',
+                data: {
+                    _token: $('input[name=_token]').val(),
+                    general_document:general_document,
+                    technical_document: technical_document,
+                    purchase_order: purchase_order,
+                    vendor: vendor,
+                    document: document,
+                    status:status,
+                    type:type,
+                    condition:condition,
+                    preservation_check:preservation_check,
+                    condition_material:condition_material,
+                    identification:identification,
+                    packing_handling_check:packing_handling_check,
+                    preservation_check_explain:preservation_check_explain,
+                    document_check:document_check,
+                    material_check:material_check,
+                    decision:decision,
+                },
+                success: function (data) {
+                    if (data.errors) {
+                        // if (data.errors.aircraft_id) {
+                        //     $('#applicability-airplane-error').html(data.errors.aircraft_id[0]);
+                        // }
+                        // if (data.errors.title) {
+                        //     $('#title-error').html(data.errors.title[0]);
+                        // }
+
+                        // document.getElementById('applicability-airplane').value = applicability-airplane;
+                        // document.getElementById('title').value = title;
+
+                    } else {
+                        // $('#modal_customer').modal('hide');
+
+                        toastr.success('RIR has been created.', 'Success', {
+                            timeOut: 5000
+                        });
+
+                        window.location.href = '/rir/'+data.uuid+'/edit';
+                        // let table = $('.m_datatable').mDatatable();
+
+                        // table.originalDataSet = [];
+                        // table.reload();
+                    }
                 }
             });
         });
