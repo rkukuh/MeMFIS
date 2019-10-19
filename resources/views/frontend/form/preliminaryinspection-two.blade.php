@@ -154,31 +154,36 @@
       <table width="100%" border="1" cellpadding="5">
           <tr>
               <td width="5%">No.</td>
-              <td width="45%" align="center">Sub Zone Code</td>
-              <td width="5%">Insp. Code</td>
+              <td width="15%" align="center">Sub Zone Code</td>
+              <td width="12%" align="center">Insp. Code</td>
               <td width="45%" align="center">Nature of defect</td>
-              <td width="45%" align="center">Issued Repair Card No. :</td>
+              <td width="20%" align="center">Issued Repair Card No. :</td>
           </tr>
+          <!-- jumlah row discrepancy yang ditampilkan hanya hingga 15 per halaman -->
+          @foreach($defectcard as $key => $data)
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
+              <td width="5%" align="center" valign="top"></td>
+              <td width="15%" align="left" valign="top"> </td>
+              <td width="12%" align="center" valign="top"></td>
+              <td width="45%" align="left" valign="top">{{ $data["complaint"] }}</td>
+              <td width="20%" align="left" valign="top">{{ $data["code"] }}</td>
           </tr>
+          @endforeach
       </table>
     </div>
   </div>
 
+  @if($last)
   <div class="container">
     <div style="height:147px;width:130px;position:relative;bottom:60px;margin-left:72%;">
       <div align="center">
           Inspection performed by:
       </div>
       <div align="center" style="margin-top:70px">
-         Name<br>Date
+         {{ $accomplished_by }}<br>{{ $accomplished_at }}
       </div>
     </div>
   </div>
+  @endif
 </body>
 </html>

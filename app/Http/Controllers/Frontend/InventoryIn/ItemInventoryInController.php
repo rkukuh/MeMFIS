@@ -96,10 +96,10 @@ class ItemInventoryInController extends Controller
             [
                 'quantity' => $request->quantity,
                 'unit_id' => $request->unit_id,
-                'quantity_unit' => $request->unit_id,
+                'quantity_in_primary_unit' => $request->unit_id,
                 'expired_at' => $request->exp_date,
                 'serial_number' => $request->serial_no,
-                'note' => $request->remark
+                'description' => $request->remark
             ]);
 
         return response()->json($inventoryIn);
