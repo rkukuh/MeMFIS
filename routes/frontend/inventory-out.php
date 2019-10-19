@@ -33,6 +33,11 @@ Route::name('frontend.')->group(function () {
                         'parameters' => ['tool' => 'inventoryOut']
                     ]);
 
+                    Route::post('/tool/{inventoryOut}/item/{item}', 'ToolInventoryOutController@addItem')->name('tool.items.store');
+                    Route::put('/tool/{inventoryOut}/item/{item}', 'ToolInventoryOutController@updateItem')->name('tool.items.update');
+                    Route::delete('/tool/{inventoryOut}/item/{item}', 'ToolInventoryOutController@deleteItem')->name('tool.items.destroy');
+                    Route::put('/tool/{inventoryOut}/approve', 'ToolInventoryOutController@approve')->name('tool.approve');
+
                 });
 
             });
