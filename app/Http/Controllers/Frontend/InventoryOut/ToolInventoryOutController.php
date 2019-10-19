@@ -60,7 +60,7 @@ class ToolInventoryOutController extends Controller
      */
     public function show(InventoryOut $inventoryOut)
     {
-        return view('frontend.inventory-out.material.show', [
+        return view('frontend.inventory-out.tool.show', [
             'inventoryOut' => $inventoryOut
         ]);
     }
@@ -76,7 +76,7 @@ class ToolInventoryOutController extends Controller
         $storages = Storage::get();
         $employees = Employee::get();
 
-        return view('frontend.inventory-out.material.edit', [
+        return view('frontend.inventory-out.tool.edit', [
             'storages' => $storages,
             'employees' => $employees,
             'inventoryOut' => $inventoryOut,

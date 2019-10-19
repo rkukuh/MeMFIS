@@ -16,6 +16,7 @@ Route::name('component.')->group(function () {
         Route::get('get-tags', 'FillComboxController@tags')->name('get-tags');
         Route::get('get-employees', 'FillComboxController@employee')->name('get-employee');
         Route::get('get-tools', 'FillComboxController@tool')->name('get-tool');
+        Route::get('get-tools-uuid', 'FillComboxController@toolUuid')->name('get-tool-uuid');
         Route::get('get-zones', 'FillComboxController@zone')->name('get-zones');
         Route::get('get-items', 'FillComboxController@item')->name('get-items');
         Route::get('get-promos', 'FillComboxController@promo')->name('get-promos');

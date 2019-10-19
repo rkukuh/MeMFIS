@@ -5,7 +5,7 @@
                 @include('frontend.common.label.create-new')
 
                 <h5 class="modal-title" id="TitleModalInventoryOut">
-                    Inventory Out Tool
+                    Inventory Out Material
 
                     <small id="instruction" class="m--font-focus"></small>
                 </h5>
