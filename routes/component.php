@@ -16,6 +16,7 @@ Route::name('component.')->group(function () {
         Route::get('get-tags', 'FillComboxController@tags')->name('get-tags');
         Route::get('get-employees', 'FillComboxController@employee')->name('get-employee');
         Route::get('get-tools', 'FillComboxController@tool')->name('get-tool');
+        Route::get('get-tools-uuid', 'FillComboxController@toolUuid')->name('get-tool-uuid');
         Route::get('get-zones', 'FillComboxController@zone')->name('get-zones');
         Route::get('get-items', 'FillComboxController@item')->name('get-items');
         Route::get('get-promos', 'FillComboxController@promo')->name('get-promos');
@@ -26,6 +27,7 @@ Route::name('component.')->group(function () {
         Route::get('get-accesses', 'FillComboxController@access')->name('get-accesses');
         Route::get('get-stations', 'FillComboxController@station')->name('get-stations');
         Route::get('get-materials', 'FillComboxController@material')->name('get-material');
+        Route::get('get-materials-uuid', 'FillComboxController@materialUuid')->name('get-material-uuid');
         Route::get('get-po-materials/{purchaseOrder}', 'FillComboxController@poMaterial')->name('get-po-material');
         Route::get('get-item-po-details/{purchaseOrder}/{item}', 'FillComboxController@ItemPODetails')->name('get-item-po-details');
         Route::get('get-aircrafts', 'FillComboxController@aircraft')->name('get-aircrafts');

@@ -72,16 +72,22 @@ let InventoryOutCreate = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'description',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return t.description
+                    }
                 },
                 {
                     field: 'expired_at',
                     title: 'Expired Date',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return t.pivot.expired_at
+                    }
                 },
                 {
                     field: 'pivot.quantity',
@@ -102,8 +108,11 @@ let InventoryOutCreate = {
                     }
                 },
                 {
-                    field: "description",
+                    field: "pivot.description",
                     title: "Remark",
+                    template: function (t) {
+                        return t.pivot.description
+                    }
                 },
                 {
                     field: 'Actions',
@@ -113,7 +122,7 @@ let InventoryOutCreate = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_item" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-item=' +
-                            t.uuid + ' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-remark=' + t.pivot.note + '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            t.uuid + ' data-date='+ t.pivot.expired_at +' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-serial='+ t.pivot.serial_number +' data-remark=' + t.pivot.description + '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                             '<i class="la la-trash"></i>' +
                             '</a>'
@@ -125,8 +134,8 @@ let InventoryOutCreate = {
         });
 
         $(".modal-footer").on("click", ".add-item", function () {
-            let item = $("#item").val();
-            let quantity = $("input[name=qty]").val();
+            let material = $("#material").val();
+            let quantity = $("input[name=qty_request]").val();
             let exp_date = $("#exp_date").val();
             let unit = $("#unit_id").val();
             let remark = $("#remark").val();
@@ -136,12 +145,12 @@ let InventoryOutCreate = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: "/inventory-out/material/" + inventoryout_uuid + "/item/" + item,
+                url: "/inventory-out/material/" + inventoryout_uuid + "/item/" + material,
                 type: "POST",
                 data: {
-                    item_id: item,
+                    item_id: material,
                     quantity: quantity,
-                    exp_date: exp_date,
+                    expired_at: exp_date,
                     unit_id: unit,
                     serial_no: serial_no,
                     remark: remark,
@@ -176,20 +185,20 @@ let InventoryOutCreate = {
             let unit_id = $(this).data('unit');
 
             $.ajax({
-                url: '/get-items-uuid/',
+                url: '/get-materials-uuid/',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
 
-                    $('select[name="item"]').empty();
+                    $('select[name="material"]').empty();
 
                     $.each(data, function (key, value) {
                         if (key == item_uuid) {
-                            $('select[name="item"]').append(
+                            $('select[name="material"]').append(
                                 '<option value="' + key + '" selected>' + value + '</option>'
                             );
                         } else {
-                            $('select[name="item"]').append(
+                            $('select[name="material"]').append(
                                 '<option value="' + key + '">' + value + '</option>'
                             );
                         }
@@ -222,9 +231,64 @@ let InventoryOutCreate = {
                 }
             });
 
-            document.getElementById('qty').value = $(this).data('quantity');
+            document.getElementById('qty_request').value = $(this).data('quantity');
             document.getElementById('uuid').value = $(this).data('uuid');
-            document.getElementById('remark').value = $(this).data('remark');
+            document.getElementById('item_remark').value = $(this).data('remark');
+            document.getElementById('serial_no').value = $(this).data('serial');
+            document.getElementById('exp_date').value = $(this).data('date');
+
+            $('.btn-success').addClass('update-item');
+            $('.btn-success').removeClass('add-item');
+        });
+
+        $(".modal-footer").on("click", ".update-item", function () {
+            let material = $("#material").val();
+            let quantity = $("input[name=qty_request]").val();
+            let exp_date = $("#exp_date").val();
+            let unit = $("#unit_id").val();
+            let remark = $("#remark").val();
+            let serial_no = $("#serial_no").val();
+
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                },
+                url: "/inventory-out/material/" + inventoryout_uuid + "/item/" + material,
+                type: "PUT",
+                data: {
+                    item_id: material,
+                    quantity: quantity,
+                    expired_at: exp_date,
+                    unit_id: unit,
+                    serial_no: serial_no,
+                    remark: remark,
+                },
+                success: function (response) {
+                    $('#modal_item').modal('hide');
+
+                    $('#modal_item').on('hidden.bs.modal', function (e) {
+                        $(this)
+                            .find("input,textarea")
+                            .val('')
+                            .end()
+                            .find("select")
+                            .select2('val', 'All')
+                            .end();
+                    });
+
+                    toastr.success("Item has been added.", "Success", {
+                        timeOut: 5000
+                    });
+
+                    let table = $(".item_datatable").mDatatable();
+
+                    table.originalDataSet = [];
+                    table.reload();
+
+                    $('.btn-success').addClass('add-item');
+                    $('.btn-success').removeClass('update-item');
+                }
+            });
         });
 
         $('.item_datatable').on('click', '.delete', function () {
@@ -270,7 +334,7 @@ let InventoryOutCreate = {
                 });
         });
 
-        $('.footer').on('click', '.update-inventory-in', function () {
+        $('.footer').on('click', '.update-inventory-out', function () {
             let ref_no = $('input[name=ref-no]').val();
             let description = $('#remark').val();
             let section_code = $('input[name=section_code]').val();
