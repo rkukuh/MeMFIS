@@ -72,10 +72,13 @@ let InventoryOutCreate = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'description',
                     title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
+                    template: function (t) {
+                        return t.description
+                    }
                 },
                 {
                     field: 'expired_at',
@@ -105,10 +108,10 @@ let InventoryOutCreate = {
                     }
                 },
                 {
-                    field: "description",
+                    field: "pivot.description",
                     title: "Remark",
                     template: function (t) {
-                        return t.description
+                        return t.pivot.description
                     }
                 },
                 {
@@ -119,7 +122,7 @@ let InventoryOutCreate = {
                     template: function (t, e, i) {
                         return (
                             '<button data-toggle="modal" data-target="#modal_item" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Edit" data-item=' +
-                            t.uuid + ' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-remark=' + t.pivot.description + '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            t.uuid + ' data-date='+ t.pivot.expired_at +' data-quantity=' + t.pivot.quantity + ' data-unit=' + t.unit_id + ' data-serial='+ t.pivot.serial_number +' data-remark=' + t.pivot.description + '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
                             '\t\t\t\t\t\t\t<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" title="Delete" data-uuid="' + t.uuid + '">' +
                             '<i class="la la-trash"></i>' +
                             '</a>'
@@ -230,7 +233,9 @@ let InventoryOutCreate = {
 
             document.getElementById('qty_request').value = $(this).data('quantity');
             document.getElementById('uuid').value = $(this).data('uuid');
-            document.getElementById('remark').value = $(this).data('remark');
+            document.getElementById('item_remark').value = $(this).data('remark');
+            document.getElementById('serial_no').value = $(this).data('serial');
+            document.getElementById('exp_date').value = $(this).data('date');
 
             $('.btn-success').addClass('update-item');
             $('.btn-success').removeClass('add-item');
