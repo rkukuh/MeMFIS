@@ -216,7 +216,7 @@ let InventoryIn = {
                         type: 'PUT',
                         url: '/inventory-in/' + inventory_uuid + '/approve',
                         success: function (data) {
-                            toastr.success('Inventory has been approved.', 'Approved', {
+                            toastr.success('Inventory in has been approved.', 'Approved', {
                                     timeOut: 5000
                                 }
                             );

@@ -4,8 +4,8 @@
             <div class="modal-header">
                 @include('frontend.common.label.create-new')
 
-                <h5 class="modal-title" id="TitleModalInstruction">
-                    Inventory Out Tool
+                <h5 class="modal-title" id="TitleModalInventoryOut">
+                    Inventory Out Material
 
                     <small id="instruction" class="m--font-focus"></small>
                 </h5>
@@ -96,7 +96,7 @@
 
                                 @component('frontend.common.input.textarea')
                                 @slot('rows', '3')
-                                @slot('id', 'remark')
+                                @slot('id', 'item_remark')
                                 @slot('name', 'remark')
                                 @slot('text', 'Remark')
                                 @slot('required', 'required')
@@ -163,7 +163,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                 @component('frontend.common.buttons.submit')
-                                @slot('class', 'add-instruction')
+                                @slot('class', 'add-item')
                                 @slot('type', 'button')
                                 @endcomponent
                                 @component('frontend.common.buttons.reset')
@@ -183,7 +183,7 @@
 <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/material-uuid.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/serial-number.js')}}"></script>
 @endpush

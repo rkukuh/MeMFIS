@@ -10,14 +10,14 @@
 
         <input
             type="checkbox"
-            id="{{ $id or ''}}"
+            id="{{ $id or '' }}"
             name="{{ $name or '' }}"
-            class="{{ $class or ''}}"
-            style="{{ $style or ''}}"
-            value="{{ $value or ''}}"
-            onclick="{{ $onclik or ''}}"
-            {{ $checked or ''}}
-            {{ $disabled or ''}}
+            class="{{ $class or '' }}"
+            style="{{ $style or '' }}"
+            value="{{ $value or '' }}"
+            onclick="{{ $onclik or '' }}"
+            {{ $checked or '' }}
+            {{ $disabled or '' }}
         >
 
         {{ $text or '' }}
@@ -32,7 +32,7 @@
     style="padding-left: {{ $padding_left or '0' }}"
 >
     <span class="m-form__help">
-    <i class="fa {{$icon or ''}}"></i>
+    <i class="fa {{ $icon or '' }}"></i>
         {{ $help_text or '' }}
     </span>
 </div>

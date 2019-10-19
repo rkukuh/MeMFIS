@@ -9,7 +9,7 @@ let Workshift = {
                 $('#'+this.id+'_break_out').attr('disabled', true)
             }
         });
-    
+
     let create = $('.footer').on('click', '.add-workshift-schedule', function () {
         var code = $('input[name="code"]').val()
         var name = $('input[name="name"]').val()
@@ -23,13 +23,13 @@ let Workshift = {
 
         $("input[name='days']:checked").each(function(){
             days.push(this.value);
- 
+
             if($('#'+this.id+'_in').val() == ''){
                 days_in.push(0)
             }else{
                 days_in.push($('#'+this.id+'_in').val())
             }
-            
+
             if($('#'+this.id+'_break_in').val() == ''){
                 break_in.push(0)
             }else{
@@ -54,7 +54,7 @@ let Workshift = {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: 'post',
-            url: '/workshift/',
+            url: '/workshift',
             data: {
                 _token: $('input[name=_token]').val(),
                 code: code,
@@ -94,7 +94,7 @@ let Workshift = {
         });
     });
 
-    }      
+    }
 };
 
 function checkboxFunction(id){
