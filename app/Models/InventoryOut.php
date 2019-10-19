@@ -107,7 +107,8 @@ class InventoryOut extends MemfisModel
                         'unit_id',
                         'purchased_price',
                         'total',
-                        'description'
+                        'description',
+                        'expired_at'
                     )
                     ->withTimestamps();
     }

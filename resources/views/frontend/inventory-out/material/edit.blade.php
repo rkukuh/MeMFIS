@@ -101,11 +101,11 @@
                                         </label>
 
                                         @component('frontend.common.input.text')
-                                        @slot('id', 'material')
+                                        @slot('id', 'ref_no')
                                         @slot('text', 'Ref. Document ')
-                                        @slot('name', 'material')
-                                        @slot('id_error','material')
-                                        @slot('value', $inventoryOut->number)
+                                        @slot('name', 'ref_no')
+                                        @slot('id_error','ref_no')
+                                        @slot('value', $inventoryOut->ref_no)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -229,13 +229,13 @@
 <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script> -->
 
 <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
 <!-- <script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script> -->
 
-<script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/tool.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/material.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>

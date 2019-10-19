@@ -116,17 +116,22 @@
                                 <td width="20%">Issued Date</td>
                                 <td width="1%">:</td>
                                 <td width="29%">{{$defectcard->created_at}}</td>
+                            </tr>
+                            <tr>
                                 <td width="20%">Project No</td>
                                 <td width="1%">:</td>
                                 <td width="29%">{{$defectcard->jobcard->quotation->quotationable->code}}</td>
+                                <td width="20%">A/C Type</td>
+                                <td width="1%">:</td>
+                                <td width="29%">{{$defectcard->jobcard->quotation->quotationable->aircraft->name}}</td>
                             </tr>
                             <tr>
                                 <td width="20%">Ref. JC No</td>
                                 <td width="1%">:</td>
                                 <td width="29%">{{$defectcard->jobcard->number}}</td>
-                                <td width="20%">A/C Type</td>
+                                <td width="20%">A/C Reg</td>
                                 <td width="1%">:</td>
-                                <td width="29%">{{$defectcard->jobcard->quotation->quotationable->aircraft->name}}</td>
+                                <td width="29%">{{$defectcard->jobcard->quotation->quotationable->aircraft_register}}</td>
                             </tr>
                             <tr>
                                 <td width="20%">Taskcard No.</td>
@@ -138,14 +143,6 @@
                                             {{$defectcard->jobcard->jobcardable->eo_header->number}}
                                         @endif   
                                 </td>
-                                <td width="20%">A/C Reg</td>
-                                <td width="1%">:</td>
-                                <td width="29%">{{$defectcard->jobcard->quotation->quotationable->aircraft_register}}</td>
-                            </tr>
-                            <tr>
-                                <td width="20%">Company Task</td>
-                                <td width="1%">:</td>
-                                <td width="29%">Generate</td>
                                 <td width="20%">A/C S/N</td>
                                 <td width="1%">:</td>
                                 <td width="29%">{{$defectcard->jobcard->quotation->quotationable->aircraft_sn}}</td>
@@ -178,8 +175,8 @@
                 <tr>
                     <td valign="top" align="center">{{$defectcard->skill}}</td>
                     <td valign="top" align="center">{{$defectcard->ata}}</td>
-                    <td valign="top" align="center">-</td>
-                    <td valign="top" align="center">{{$defectcard->sequence}}</td>
+                    <td valign="top" align="center">{{ $zones }}</td>
+                    <td valign="top" align="center">@if($defectcard->sequence) {{$defectcard->sequence}} @else - @endif</td>
                     <td valign="top" align="center">{{$defectcard->engineer_quantity}}</td>
                     <td valign="top" align="center">{{$defectcard->helper_quantity}}</td>
                     <td valign="top" align="center">{{$defectcard->estimation_manhour}}</td>
@@ -199,7 +196,7 @@
                 <tr>
                     <td width="18%" valign="top">Remark</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="81%" valign="top">Lorem</td>
+                    <td width="81%" valign="top">@if($defectcard->description) {{ $defectcard->description }} @else - @endif</td>
                 </tr>
             </table>
         </div>
@@ -322,7 +319,7 @@
                         <div style="position:relative">
                             Customer Sign : 
                             <div style="position:absolute; right:10px;">
-                                <img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">AGREE</span> <br>
+                                <img src="./img/check.png" width="8"> <span style="margin-left:6px;">AGREE</span> <br>
                                 <img src="./img/check-box-empty.png" width="8"> <span style="margin-left:6px;">DISAGREE</span>
                             </div>
                         </div>

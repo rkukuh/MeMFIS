@@ -6,15 +6,15 @@
 
     <input
         type="radio"
-        id="{{ $id or ''}}"
+        id="{{ $id or '' }}"
         name="{{ $name or '' }}"
-        class="{{ $class or ''}}"
-        style="{{ $style or ''}}"
+        class="{{ $class or '' }}"
+        style="{{ $style or '' }}"
         value="{{ $value or '' }}"
         onclick="{{ $onclick or '' }}"
-        {{ $disabled or ''}}
-        {{ $checked or ''}}
-        {{ $required or ''}}
+        {{ $disabled or '' }}
+        {{ $checked or '' }}
+        {{ $required or '' }}
     >
 
     {{ $text or '' }}

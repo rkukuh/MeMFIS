@@ -5,7 +5,7 @@
         name="{{ $name or '' }}"
         class="custom-file-input
                {{ $class or '' }}"
-        style="{{$style or ''}}"
+        style="{{ $style or '' }}"
     >
 
     <label class="custom-file-label"
