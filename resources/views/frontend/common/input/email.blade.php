@@ -4,10 +4,10 @@
     name="{{ $name or '' }}"
     class="form-control m-input
            {{ $class or '' }}"
-    style="{{$style or ''}}"
-    value="{{$value or ''}}"
+    style="{{ $style or '' }}"
+    value="{{ $value or '' }}"
     placeholder="{{ $placeholder or '' }}"
-    {{$editable or ''}}
+    {{ $editable or '' }}
 >
 
 <div class="form-control-feedback text-danger" id="{{ $id_error or '' }}-error"></div>

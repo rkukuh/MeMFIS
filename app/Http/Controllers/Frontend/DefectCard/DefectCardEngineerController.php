@@ -103,6 +103,11 @@ class DefectCardEngineerController extends Controller
      */
     public function edit(DefectCard $defectcard)
     {
+        $zones = $defectcard->zones->pluck('name')->toArray();
+        $zones = join(',', $zones);
+        $created_by = $defectcard->audits->first()->user->name;
+        $employees = Employee::get();
+        $status = Status::find($defectcard->progresses->last()->status_id);
         $this->propose_corrections = array();
         foreach($defectcard->propose_corrections as $i => $defectCard){
             $this->propose_corrections[$i] =  $defectCard->code;
@@ -119,6 +124,10 @@ class DefectCardEngineerController extends Controller
                 'status' => $this->statuses->where('code','open')->first(),
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
+                'zones' => $zones,
+                'status' => $status,
+                'employees' => $employees,
+                'created_by' => $created_by
             ]);
         }
         else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "progress"){
@@ -132,6 +141,10 @@ class DefectCardEngineerController extends Controller
                 'closed' => $this->statuses->where('code','closed')->first(),
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
+                'zones' => $zones,
+                'status' => $status,
+                'employees' => $employees,
+                'created_by' => $created_by
             ]);
         }
         else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "pending"){
@@ -141,6 +154,10 @@ class DefectCardEngineerController extends Controller
                 'closed' => $this->statuses->where('code','closed')->first(),
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
+                'zones' => $zones,
+                'status' => $status,
+                'employees' => $employees,
+                'created_by' => $created_by
             ]);
         }
         else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "closed"){
@@ -148,6 +165,10 @@ class DefectCardEngineerController extends Controller
                 'defectcard' => $defectcard,
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
+                'zones' => $zones,
+                'status' => $status,
+                'employees' => $employees,
+                'created_by' => $created_by
             ]);
         }
         else{
@@ -155,6 +176,10 @@ class DefectCardEngineerController extends Controller
                 'defectcard' => $defectcard,
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
+                'zones' => $zones,
+                'status' => $status,
+                'employees' => $employees,
+                'created_by' => $created_by
             ]);
         }
     }
@@ -168,6 +193,15 @@ class DefectCardEngineerController extends Controller
      */
     public function update(Request $request,DefectCard $defectcard)
     {
+        // get all the helper
+
+        // compare if there's any difference
+
+        // delete the olds one
+
+        // insert the new selected helper with additionals 
+        // dump($request->reference);
+        // dd($request->helper);
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             $defectcard->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,

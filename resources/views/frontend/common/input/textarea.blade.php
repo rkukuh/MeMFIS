@@ -4,9 +4,9 @@
     rows="{{ $rows or '' }}"
     class="form-control m-input m-input--air
            {{ $class or '' }}"
-    style="{{$style or ''}}"
+    style="{{ $style or '' }}"
     placeholder="{{ $placeholder or '' }}"
-    {{$editable or ''}} {{ $disabled or ''}} {{ $required or ''}}>{{$value or ''}}</textarea>
+    {{ $editable or '' }} {{ $disabled or '' }} {{ $required or '' }}>{{ $value or '' }}</textarea>
 
 <div class="form-control-feedback text-danger" id="{{ $id_error or '' }}-error"></div>
 

@@ -167,6 +167,22 @@ class ProjectDatatables extends Controller
                                 // RecordID
 
         foreach($defectcards as $defectcard){
+            if($defectcard->jobcard->jobcardable_type == "App\Models\TaskCard"){
+                $defectcard->tc_number    .= $defectcard->jobcard->number;
+                $defectcard->tc_uuid        .= $defectcard->jobcard->uuid;
+                $defectcard->tc_title     .= $defectcard->jobcard->title;
+                if(isset($defectcard->jobcard->task_id)){
+                    $defectcard->task_name .= $defectcard->jobcard->task->name;
+                }
+                $defectcard->skill        .= $defectcard->jobcard->skill;
+            }else if($defectcard->jobcard->jobcardable_type == "App\Models\EOInstruction"){
+                $defectcard->tc_number    .= $defectcard->jobcard->number;
+                $defectcard->tc_uuid        .= $defectcard->jobcard->uuid;
+                $defectcard->tc_title     .= $defectcard->jobcard->title;
+                $defectcard->task_name    .= "-";
+                $defectcard->skill        .= $defectcard->jobcard->skill;
+            }
+
             $defectcard->RecordID .= $defectcard->uuid;
             $defectcard->taskcard .= $defectcard->jobcard->taskcard;
             if(isset($defectcard->skills) ){
@@ -291,6 +307,21 @@ class ProjectDatatables extends Controller
         // RecordID
 
         foreach($defectcards as $defectcard){
+            if($defectcard->jobcard->jobcardable_type == "App\Models\TaskCard"){
+                $defectcard->tc_number    .= $defectcard->jobcard->number;
+                $defectcard->tc_uuid        .= $defectcard->jobcard->uuid;
+                $defectcard->tc_title     .= $defectcard->jobcard->title;
+                if(isset($defectcard->jobcard->task_id)){
+                    $defectcard->task_name .= $defectcard->jobcard->task->name;
+                }
+                $defectcard->skill        .= $defectcard->jobcard->skill;
+            }else if($defectcard->jobcard->jobcardable_type == "App\Models\EOInstruction"){
+                $defectcard->tc_number    .= $defectcard->jobcard->number;
+                $defectcard->tc_uuid        .= $defectcard->jobcard->uuid;
+                $defectcard->tc_title     .= $defectcard->jobcard->title;
+                $defectcard->task_name    .= "-";
+                $defectcard->skill        .= $defectcard->jobcard->skill;
+            }
             $defectcard->RecordID .= $defectcard->uuid;
             $defectcard->taskcard .= $defectcard->jobcard->taskcard;
             if(isset($defectcard->skills) ){

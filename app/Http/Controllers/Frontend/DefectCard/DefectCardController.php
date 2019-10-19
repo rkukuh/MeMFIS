@@ -136,8 +136,15 @@ class DefectCardController extends Controller
      */
     public function print(DefectCard $defectcard)
     {
-        // dd($defectcard);
         $m = new Merger();
+        $zones = $defectcard->zones->pluck('name')->toArray();
+        $zones = join(',', $zones);
+        
+        if($defectcard->jobcard->jobcardable_type == "App\Models\TaskCard"){
+            $defectcard->company_number    .= json_decode($defectcard->jobcard->jobcardable->additionals)->internal_number;
+        }else if($defectcard->jobcard->jobcardable_type == "App\Models\EOInstruction"){
+            $defectcard->company_number    .= json_decode($defectcard->jobcard->jobcardable->eo_header->additionals)->internal_number;
+        }
 
         $propose_corrections = $defectcard->propose_corrections->pluck('code')->toArray();
         if(in_array('other',$propose_corrections)){
@@ -146,7 +153,7 @@ class DefectCardController extends Controller
         }else{
             $text = "";
         }
-        $view1 = \View::make('frontend.form.dc_page1')->with(['defectcard' => $defectcard,'propose_corrections'=> $propose_corrections, 'text'=> $text])->render();
+        $view1 = \View::make('frontend.form.dc_page1')->with(['defectcard' => $defectcard,'propose_corrections'=> $propose_corrections, 'text'=> $text, 'zones' => $zones])->render();
         $view2 = \View::make('frontend.form.dc_page2')->with('defectcard', $defectcard)->render();
 
         $pdf = App::make('dompdf.wrapper');

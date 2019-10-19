@@ -86,6 +86,9 @@ class DefectCardMechanicController extends Controller
      */
     public function edit(DefectCard $defectcard)
     {
+        $zones = $defectcard->zones->pluck('name')->toArray();
+        $zones = join(',', $zones);
+                                                                                                                                                                                                 
         $this->propose_corrections = array();
         foreach($defectcard->propose_corrections as $i => $defectCard){
             $this->propose_corrections[$i] =  $defectCard->code;
@@ -102,6 +105,7 @@ class DefectCardMechanicController extends Controller
                 'status' => $this->statuses->where('code','open')->first(),
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
+                'zones' => $zones
             ]);
         }
         else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "progress"){
@@ -115,6 +119,7 @@ class DefectCardMechanicController extends Controller
                 'closed' => $this->statuses->where('code','closed')->first(),
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
+                'zones' => $zones
             ]);
         }
         else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "pending"){
@@ -124,6 +129,7 @@ class DefectCardMechanicController extends Controller
                 'closed' => $this->statuses->where('code','closed')->first(),
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
+                'zones' => $zones
             ]);
         }
         else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "closed"){
@@ -131,6 +137,7 @@ class DefectCardMechanicController extends Controller
                 'defectcard' => $defectcard,
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
+                'zones' => $zones
             ]);
         }
         else{
@@ -138,6 +145,7 @@ class DefectCardMechanicController extends Controller
                 'defectcard' => $defectcard,
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
+                'zones' => $zones
             ]);
         }
     }
