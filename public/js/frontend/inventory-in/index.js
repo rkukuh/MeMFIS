@@ -69,15 +69,8 @@ let InventoryIn = {
                     }
                 },
                 {
-                    field: '',
-                    title: 'Inventory In No.',
-                    sortable: 'asc',
-                    filterable: !1,
-                    width: 150,
-                },
-                {
                     field: 'number',
-                    title: 'Ref Doc',
+                    title: 'Inventory In No.',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
@@ -86,13 +79,20 @@ let InventoryIn = {
                     }
                 },
                 {
-                    field: 'storage_id',
+                    field: '',
+                    title: 'Ref Doc',
+                    sortable: 'asc',
+                    filterable: !1,
+                    width: 150,
+                },
+                {
+                    field: 'storage.name',
                     title: 'Storage',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                     template: function (t) {
-                        return t.storage_id
+                        return t.storage.name
                     }
                 },
                 {
