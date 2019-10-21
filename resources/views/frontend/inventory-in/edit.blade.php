@@ -76,7 +76,6 @@
                                         @slot('text', 'Ref No.')
                                         @slot('name', 'ref-no')
                                         @slot('id_error','ref-no')
-                                        @slot('value', $inventoryIn->number)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">

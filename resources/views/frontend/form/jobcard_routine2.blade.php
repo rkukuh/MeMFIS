@@ -158,7 +158,7 @@
       <li>
         <div class="jobcard-info">
             <fieldset>
-                <legend>JC No : {{ $jobCard->number }}</legend>
+                <legend>JC No : {{ $jobcard->number }}</legend>
                 <div class="jobcard-info-detail">
                   <table width="80%" cellpadding="3">
                       <tr>
@@ -282,7 +282,7 @@
           <td colspan="2" height="55" valign="top">
               Accomplishment Record : <br><br>
               <span>
-                {{ $jobCard->progresses->last()->reason_text }}
+                {{ $jobcard->progresses->last()->reason_text }}
             </span>
           </td>
         </tr>
@@ -295,7 +295,7 @@
               <div style="margin-left:100px;margin-top:12px;">
                 <ul>
                     <li>
-                        <img @if(sizeof($jobCard->defectcards) <> 0)
+                        <img @if(sizeof($jobcard->defectcards) <> 0)
                             src="./img/check.png"
                             @else
                             src="./img/check-box-empty.png"
@@ -304,7 +304,7 @@
                             <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                     </li>
                     <li style="margin-left:12px;">
-                        <img @if(sizeof($jobCard->defectcards) == 0)
+                        <img @if(sizeof($jobcard->defectcards) == 0)
                         src="./img/check.png"
                         @else
                         src="./img/check-box-empty.png"
@@ -319,7 +319,7 @@
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
               <span>
-              @if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif
+              @if(sizeof($jobcard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobcard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif
               </span>
           </td>
         </tr>
@@ -329,7 +329,7 @@
           <td width="4%" valign="top">Helper </td>
           <td width="1%" valign="top">:</td>
           <td width="28%" valign="top">{{ $helpers }}</td>
-          <td width="33%" valign="top" align="center">Status : <span>{{ $jobCard->status }}</span></td>
+          <td width="33%" valign="top" align="center">Status : <span>{{ $jobcard->status }}</span></td>
           <td width="34%" valign="top" align="right">Data Close : <span>10-07-1994</span></td>
         </tr>
       </table>
