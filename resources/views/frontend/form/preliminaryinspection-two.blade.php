@@ -109,21 +109,21 @@
       <li>
         <div class="jobcard-info">
           <fieldset>
-                <legend>Job Card No : {{ $jobCard->number }}</legend>
+                <legend>Job Card No : {{ $jobcard->number }}</legend>
                 <div class="jobcard-info-detail">
                   <table width="80%" cellpadding="3">
                       <tr>
                         <td width="20%">Issued Date & Time</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{ $jobCard->created_at }}</td>
+                        <td width="29%">{{ $jobcard->created_at }}</td>
                         <td width="20%">AC/Type</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{ $jobCard->quotation->quotationable->aircraft->name }}</td>
+                        <td width="29%">{{ $jobcard->quotation->quotationable->aircraft->name }}</td>
                       </tr>
                       <tr>
                         <td width="20%">Project No</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{ $jobCard->quotation->quotationable->code }}</td>
+                        <td width="29%">{{ $jobcard->quotation->quotationable->code }}</td>
                         <td width="20%">Est. Mhrs</td>
                         <td width="1%">:</td>
                         <td width="29%">{{ $taskcard->estimation_manhour }}</td>
@@ -134,7 +134,7 @@
                         <td width="29%"></td>
                         <td width="20%">Act. Mhrs</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{ $jobCard->actual_manhour }}</td>
+                        <td width="29%">{{ $jobcard->actual_manhour }}</td>
                       </tr>
                   </table>
                 </div>

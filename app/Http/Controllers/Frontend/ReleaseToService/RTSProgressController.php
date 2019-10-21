@@ -166,7 +166,11 @@ class RTSProgressController extends Controller
             foreach($jobcards as $jobcard){
                 if(sizeof($jobcard->progresses) <> 0){
                     if(Status::where('id',$jobcard->progresses->last()->status_id)->first()->code <> "closed"){
-                        $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
+                        if($jobcard->jobcardable_type == "App\Models\TaskCard"){
+                            $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->number;
+                        }else if($jobcard->jobcardable_type == "App\Models\EOInstruction"){
+                            $taskcard_number = $taskcard_number.", ".$jobcard->jobcardable->eo_header->number;
+                        }
                     }
                 }
             }
@@ -175,7 +179,6 @@ class RTSProgressController extends Controller
         $taskcard_number = substr($taskcard_number, 2);
 
         $request->merge(['exception' => $taskcard_number ]);
-
         $rts = RTS::create($request->all());
 
         if($request->approval <> null){
