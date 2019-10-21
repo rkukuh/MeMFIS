@@ -63,7 +63,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <fieldset style="width:60%;">
-                    <legend>JC NO : {{ $jobCard->jobcardable->eo_header->number }}<legend>
+                    <legend>JC NO : {{ $jobcard->jobcardable->eo_header->number }}<legend>
                     <table width="100%">
                         <tr>
                             <td>Issues Date</td>
@@ -168,7 +168,7 @@
                                     <input type="checkbox"> NO
                                 </form>
                             </td>
-                            <td colspan="2">@if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif</td>
+                            <td colspan="2">@if(sizeof($jobcard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobcard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif</td>
                         </tr>
                         </tr>
                         <tr class="border">

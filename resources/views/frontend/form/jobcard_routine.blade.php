@@ -60,8 +60,8 @@
             <td width="30%" align="left" valign="center">
                 
                     <div class="barcode">
-                      {!!DNS2D::getBarcodeHTML($jobCard->number, 'QRCODE',5,5)!!}
-                      <p style="margin-right:50%"><b>NO : </b> {{ $jobCard->number }}</p>
+                      {!!DNS2D::getBarcodeHTML($jobcard->number, 'QRCODE',5,5)!!}
+                      <p style="margin-right:50%"><b>NO : </b> {{ $jobcard->number }}</p>
                     </div>
       
 
@@ -228,7 +228,7 @@
               <div style="position: absolute;">
                 Accomplishment Record:
                 <span>
-                    {{ $jobCard->progresses->last()->reason_text }}
+                    {{ $jobcard->progresses->last()->reason_text }}
                 </span>
               </div>
               <br>
@@ -244,7 +244,7 @@
                 </div>
                 <br><br>
                 <span><center>
-                        <img @if(sizeof($jobCard->defectcards) <> 0)
+                        <img @if(sizeof($jobcard->defectcards) <> 0)
                             src="./img/check.png"
                             @else
                             src="./img/check-box-empty.png"
@@ -252,7 +252,7 @@
                             alt="" width="10"> 
                             <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                     
-                        <img @if(sizeof($jobCard->defectcards) == 0)
+                        <img @if(sizeof($jobcard->defectcards) == 0)
                         src="./img/check.png"
                         @else
                         src="./img/check-box-empty.png"
@@ -266,14 +266,14 @@
                     Transfer to Detect Card No :
                 </div>
                 <br><br>
-                <span><center>@if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif</center></span> 
+                <span><center>@if(sizeof($jobcard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobcard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif</center></span> 
             </td>
             <td style="position: relative;" width="17%">
                 <div style="position: absolute;">
                     Status : 
                 </div>
                 <br><br>
-                <span><center>{{ $jobCard->status }}</center></span> 
+                <span><center>{{ $jobcard->status }}</center></span> 
             </td>
             <td style="position: relative;" width="22%">
                 <div style="position: absolute;">
