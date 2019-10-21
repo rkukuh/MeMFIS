@@ -167,7 +167,7 @@
             <li>
                 <div class="jobcard-info">
                     <fieldset>
-                        <legend>JC No : {{ $jobCard->number }}</legend>
+                        <legend>EO Taskcard No : {{ $jobCard->jobcardable->eo_header->number }}</legend>
                         <div class="jobcard-info-detail">
                             <table width="80%" cellpadding="3">
                                 <tr>
@@ -251,8 +251,12 @@
                 <tr>
                     <td width="20%" valign="top">Title</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="79%" valign="top">Equipment/Furnishings - Flight/Passenger Compartment -
-                        Observer/Attendant Seat - Change Attachment Of Shoulder Restraint System</td>
+                    <td width="79%" valign="top">{{ $jobCard->jobcardable->eo_header->title }}</td>
+                </tr>
+                <tr>
+                    <td width="20%" valign="top">Description</td>
+                    <td width="1%" valign="top">:</td>
+                    <td width="79%" valign="top">{{ $jobCard->jobcardable->eo_header->description }}</td>
                 </tr>
             </table>
         </div>
@@ -416,9 +420,9 @@
                         <td valign="top" width="50%">Transfer To Defect Card No : <span>@if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif</span></td>
                     </tr>
                 </table>
-                <div style="position:absolute; left:659px; top:-20px;">
+                <div style="position:absolute; left:630px; top:-20px;">
                     <h4 style="margin-left:6px;color:cornflowerblue;">Jobcard No.</h4>
-                    {!!DNS2D::getBarcodeHTML($jobCard->number, 'QRCODE',3.4,3.4)!!}
+                    {!!DNS2D::getBarcodeHTML($jobCard->jobcardable->eo_header->number, 'QRCODE',4.2,4.2)!!}
                 </div>
             </div>
         </div>

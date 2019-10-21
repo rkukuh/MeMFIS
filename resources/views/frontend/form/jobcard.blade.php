@@ -63,7 +63,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <fieldset style="width:60%;">
-                    <legend>JC NO : {{ $jobCard->number }}<legend>
+                    <legend>JC NO : {{ $jobCard->jobcardable->eo_header->number }}<legend>
                     <table width="100%">
                         <tr>
                             <td>Issues Date</td>

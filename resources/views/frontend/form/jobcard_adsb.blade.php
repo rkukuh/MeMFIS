@@ -131,7 +131,7 @@
       <li>
         <div class="jobcard-info">
             <fieldset>
-                <legend>JC No : {{ $jobCard->number }}</legend>
+                <legend>JC No : {{ $jobCard->jobcardable->eo_header->number }}</legend>
                 <div class="jobcard-info-detail">
                   <table width="80%" cellpadding="3">
                       <tr>
@@ -195,7 +195,7 @@
       </li>
       <li>
         <div class="barcode">
-            {!!DNS2D::getBarcodeHTML($jobCard->number, 'QRCODE',4.5,4.5)!!}
+            {!!DNS2D::getBarcodeHTML($jobCard->jobcardable->eo_header->number, 'QRCODE',4.5,4.5)!!}
         </div>
       </li>
     </ul>
