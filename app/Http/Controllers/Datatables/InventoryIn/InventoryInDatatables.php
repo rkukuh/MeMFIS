@@ -17,8 +17,10 @@ class InventoryInDatatables extends Controller
      */
     public function index()
     {
-        $inventories = InventoryIn::with('items', 'approvals')->get();
+        $inventories = InventoryIn::with('storage', 'items', 'approvals')->get();
+
         foreach ($inventories as $inventory) {
+
             if (!empty($inventory->approvals->first())) {
                 $inventory->status .= 'Approved';
 

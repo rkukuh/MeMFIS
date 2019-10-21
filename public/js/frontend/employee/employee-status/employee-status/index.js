@@ -51,7 +51,7 @@ let EmploymentStatus = {
                     sortable: 'asc',
                     filterable: !1,
                     textAlign: 'center',
-                    template: function (row, index, datatable) {   
+                    template: function (row, index, datatable) {
                         return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
                 },
@@ -132,7 +132,7 @@ let EmploymentStatus = {
             reset()
         });
 
-        let show = $(document).on('click', '#add-employment-status', function () {      
+        let show = $(document).on('click', '#add-employment-status', function () {
             reset()
             enabled()
             $('.labelModal').children('span').text('Create New');
@@ -186,16 +186,16 @@ let EmploymentStatus = {
                         table.reload();
                     }
                 }
-            }); 
+            });
         });
 
-        let showView = $(document).on('click', '#view-employee-status', function () {      
+        let showView = $(document).on('click', '#view-employee-status', function () {
             reset()
             disabled()
              $('.labelModal').children('span').text('View')
              $('.modal-change').attr('id','update')
              let triggerid = $(this).data('uuid')
-             
+
              $('#employee_uuid').val(triggerid)
 
              $.ajax({
@@ -214,7 +214,7 @@ let EmploymentStatus = {
                      // this are default for ajax errors
                      let errorsHtml = '';
                      let errors = jqXhr.responseJSON;
- 
+
                      $.each(errors.errors, function (index, value) {
                          alert(value);
                      });
@@ -223,13 +223,13 @@ let EmploymentStatus = {
 
          });
 
-        let edit = $(document).on('click', '#edit-employee-status', function () {      
+        let edit = $(document).on('click', '#edit-employee-status', function () {
                reset()
                enabled()
                 $('.labelModal').children('span').text('Edit')
                 $('.modal-change').attr('id','update')
                 let triggerid = $(this).data('uuid')
-                
+
                 $('#employee_uuid').val(triggerid)
 
                 $.ajax({
@@ -248,7 +248,7 @@ let EmploymentStatus = {
                         // this are default for ajax errors
                         let errorsHtml = '';
                         let errors = jqXhr.responseJSON;
-    
+
                         $.each(errors.errors, function (index, value) {
                             alert(value);
                         });
@@ -262,7 +262,7 @@ let EmploymentStatus = {
                 let name = $('input[name=name]').val()
                 let description = $('#description').val()
                 let triggerid = $('input[name=employee_uuid]').val()
-    
+
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -294,13 +294,13 @@ let EmploymentStatus = {
                             }
                         } else {
                             $('#modal_employment_status').modal('hide');
-    
+
                             toastr.success('Employee status has been updated.', 'Success', {
                                 timeOut: 5000
                             });
-    
+
                             let table = $('.m_datatable_employee_status').mDatatable();
-    
+
                             table.originalDataSet = [];
                             table.reload();
                         }
@@ -310,7 +310,7 @@ let EmploymentStatus = {
 
             $('.m_datatable_employee_status').on('click', '.delete', function () {
                 let uuid = $('#edit-employee-status').data('uuid');
-    
+
                 swal({
                     title: 'Sure want to remove?',
                     type: 'question',
@@ -334,15 +334,15 @@ let EmploymentStatus = {
                                         timeOut: 5000
                                     }
                                 );
-    
+
                                 let table = $('.m_datatable_employee_status').mDatatable();
-    
+
                                 table.originalDataSet = [];
                                 table.reload();
                             },
                             error: function (jqXhr, json, errorThrown) {
                                 let errors = jqXhr.responseJSON;
-    
+
                                 $.each(errors.errors, function (index, value) {
                                     $('#delete-error').html(value);
                                 });
@@ -354,7 +354,7 @@ let EmploymentStatus = {
 
             let refresh_datatable = $(document).on('click', '#m_tab_6_1', function () {
                 let table = $('.m_datatable_employee_status').mDatatable();
-    
+
                         table.originalDataSet = [];
                         table.reload();
             });
