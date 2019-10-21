@@ -76,24 +76,29 @@
                     <td width="59%" valign="top"><span>{{$rts->project->code}}</span></td>
                 </tr>
                 <tr width="100%">
-                    <td width="40%" valign="top">Aircraft Type / MSN</td>
+                    <td width="40%" valign="top">Aircraft Type</td>
                     <td width="1%" valign="top">:</td>
                     <td width="59%" valign="top"><span>{{$rts->project->aircraft->name}}</span></td>
                 </tr>
                 <tr width="100%">
+                    <td width="40%" valign="top">Aircraft Serial Number</td>
+                    <td width="1%" valign="top">:</td>
+                    <td width="59%" valign="top"><span>{{ $rts->project->aircraft_sn }}</span></td>
+                </tr>
+                <tr width="100%">
                     <td width="40%" valign="top">Nasionality / Registration Mark</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="59%" valign="top"><span>generate</span></td>
+                    <td width="59%" valign="top"><span>{{ $rts->project->aircraft_register }}</span></td>
                 </tr>
                 <tr width="100%">
                     <td width="40%" valign="top">Aircarft Total Time</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="59%" valign="top"><span>{{$rts->aircraft_total_time}}</span></td>
+                    <td width="59%" valign="top"><span>{{$rts->aircraft_total_time}} TAT</span></td>
                 </tr>
                 <tr width="100%">
                     <td width="40%" valign="top">Aircarft Total Cycle</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="59%" valign="top"><span>{{$rts->aircraft_total_cycle}}</span></td>
+                    <td width="59%" valign="top"><span>{{$rts->aircraft_total_cycle}} TAC</span></td>
                 </tr>
                 <tr width="100%">
                     <td width="40%" valign="top">Work Performed</td>
