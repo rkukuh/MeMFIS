@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Frontend\JobCardHardTime;
 
 use Auth;
 use Validator;
-use App\Models\Type;
+use App\User;
+use Carbon\Carbon;
+use App\Models\Unit;
 use App\Models\HtCrr;
 use App\Models\Status;
 use Illuminate\Http\Request;
@@ -194,9 +196,92 @@ class JobCardHardTimeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function print(HtCrr $htcrr)
-    {
+    {        
+        $now = Carbon::now();
+
+        $rii_status = $htcrr->is_rii;
+        if(sizeof($htcrr->helpers) > 0){
+            $helpers = join(',', $htcrr->helpers->pluck('full_name'));
+        }else{
+            $helpers = '-';
+        }
+
+        $username = Auth::user()->name;
+        $lastStatus = Status::where('id',$htcrr->progresses->last()->status_id)->first()->name;
+        if($lastStatus == "CLOSED"){
+            $dateClosed = $htcrr->progresses->last()->created_at;
+        }else{
+            $dateClosed = "-";
+        }
+        if(sizeof($htcrr->approvals)==0){
+            $inspected_by = "-";
+            $inspected_at = "-";
+        }
+        else{
+            $inspected_by = User::find($htcrr->approvals->first()->conducted_by)->name;
+            $inspected_at = date('d-M-Y', strtotime($htcrr->approvals->first()->created_at));
+        }
+
+        if(sizeof($htcrr->approvals)==1 or sizeof($htcrr->approvals)==0){
+            $rii_by = "-";
+            $rii_at = "-";
+        }
+        else{
+            $rii_by = User::find($htcrr->approvals->get(1)->conducted_by)->name;
+            $rii_at = date('d-M-Y', strtotime($htcrr->approvals->get(1)->created_at));
+        }
+
+        if(sizeof($htcrr->progresses)>=0 and sizeof($htcrr->progresses)<=1){
+            $accomplished_by = "-";
+            $accomplished_at = "-";
+        }else{
+            $accomplished_by =  User::find($htcrr->progresses->get(1)->progressed_by)->name;
+            $accomplished_at =  date('d-M-Y', strtotime($htcrr->progresses->get(1)->created_at));
+        }
+
+        if(isset($htcrr->approvals->first()->user_id)){
+            $prepared_by = $htcrr->approvals->first()->conductedBy->full_name;
+            $prepared_at = date('d-M-Y', strtotime($htcrr->created_at));
+        }else{
+            $prepared_by = "-";
+            $prepared_at = "-";
+        }
+        $actual_manhours = $htcrr->actual_manhours;
+        $tools = $htcrr->tools;
+        $materials = $htcrr->materials;
+
+        if(sizeof($materials) > 0){
+            foreach($materials as $material){
+                $material->unit = Unit::find($material->unit_id)->name;
+            }
+        }
+
+        if(sizeof($tools) > 0){
+            foreach($tools as $tool){
+                $tool->unit = Unit::find($tool->unit_id)->name;
+            }
+        }
+
+        $rii_status = $htcrr->is_rii;
         $pdf = \PDF::loadView('frontend/form/jobcard_cri',[
+            'now' => $now,
             'htcrr' => $htcrr,
+            'tools' => $tools,
+            'rii_by' => $rii_by,
+            'rii_at' => $rii_at,
+            'helpers' => $helpers,
+            'username' => $username,
+            'materials' => $materials,
+            'rii_status' => $rii_status,
+            'lastStatus' => $lastStatus,
+            'dateClosed' => $dateClosed,
+            'prepared_by' => $prepared_by,
+            'prepared_at' => $prepared_at,
+            'inspected_by' => $inspected_by,
+            'inspected_at' => $inspected_at,
+            'accomplished_by' => $accomplished_by,
+            'accomplished_at' => $accomplished_at,
+            'actual_manhours'=> $actual_manhours,
         ]);
     return $pdf->stream();
     }

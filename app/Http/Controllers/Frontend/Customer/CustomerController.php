@@ -11,6 +11,7 @@ use App\Models\Phone;
 use App\Models\Website;
 use App\Models\Customer;
 use App\Models\Document;
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\CustomerStore;
 use App\Http\Requests\Frontend\CustomerUpdate;
@@ -52,7 +53,7 @@ class CustomerController extends Controller
      */
     public function store(CustomerStore $request)
     {
-        
+
         $attentions = [];
         $level = Level::where('uuid',$request->level)->first();
         for ($person = 0; $person < sizeof($request->attn_name_array); $person++) {
@@ -68,7 +69,7 @@ class CustomerController extends Controller
         }
 
         $request->merge(['attention' => json_encode($attentions)]);
-        $request->merge(['code' => "auto-generate"]);
+        $request->merge(['code' => DocumentNumber::generate('CUS-', Customer::withTrashed()->count()+1)]);
         if ($customer = Customer::create($request->all())) {
             $customer->levels()->attach($level);
 
@@ -110,7 +111,7 @@ class CustomerController extends Controller
                     }
                 }
             }
-            
+
             if(is_array($request->email_array)){
                 for ($i=0; $i < sizeof($request->email_array) ; $i++) {
                     if(isset($request->email_array[$i])){
@@ -217,7 +218,7 @@ class CustomerController extends Controller
         if ($customer->update($request->all())) {
 
             $customer->levels()->attach($level);
-            
+
             if(is_array($request->website_array)){
                 $customer->websites()->delete();
                 for ($i=0; $i < sizeof($request->website_array) ; $i++) {

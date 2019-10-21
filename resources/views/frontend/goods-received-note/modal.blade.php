@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="form-group m-form__group row ">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
                                     Qty Recieved
                                 </label>
@@ -57,7 +57,7 @@
                                     @slot('id_error', 'quantity')
                                 @endcomponent
                             </div>
-                            <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
                                     Unit
                                 </label>
@@ -69,8 +69,21 @@
                                     @slot('id_error', 'unit')
                                 @endcomponent
                             </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <label class="form-control-label">
+                                    Unit
+                                </label>
+
+                                @component('frontend.common.input.checkbox')
+                                    @slot('id', 'is_serial_number')
+                                    @slot('name', 'is_serial_number')
+                                    @slot('text', 'Include Serial Number')
+                                    @slot('style_div','margin-top:10px')
+                                    @slot('size', '12')
+                                @endcomponent
+                            </div>
                         </div>
-                        <div class="form-group m-form__group row serial_numbers">
+                        <div class="form-group m-form__group row serial_numbers hidden">
                             <div class="col-sm-12 col-md-12 col-lg-12">
                                 <label class="form-control-label">
                                     Serial Number
@@ -94,8 +107,8 @@
 
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
-                                    @slot('id', 'description')
-                                    @slot('name', 'description')
+                                    @slot('id', 'remark')
+                                    @slot('name', 'remark')
                                     @slot('text', 'Description')
                                     @slot('required', 'required')
                                 @endcomponent

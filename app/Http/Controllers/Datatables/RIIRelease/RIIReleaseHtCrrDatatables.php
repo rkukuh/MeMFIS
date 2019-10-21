@@ -76,14 +76,13 @@ class RIIReleaseHtCrrDatatables extends Controller
             }
 
             //auditable, Technichal Writer request to show this
-            if($data->approvals->toArray() == []){
+            if(empty($data->approvals->get(1))){
                 $conducted_by = "";
                 $conducted_at = "";
-
             }
             else{
-                $conducted_by = User::find($data->approvals->last()->conducted_by)->name;
-                $conducted_at = $data->approvals->last()->created_at;
+                $conducted_by = User::find($data->approvals->get(1)->conducted_by)->name;
+                $conducted_at = $data->approvals->get(1)->created_at;
             }
 
             $data->conducted_by      .= $conducted_by;
@@ -93,7 +92,7 @@ class RIIReleaseHtCrrDatatables extends Controller
             $data->created_by        .= User::find($data->audits->first()->user_id)->name;
 
             $data->update_date       .= $data->audits->last()->updated_at;
-            $data->updated_by        .= User::find($data->audits->last()->user_id)->name;
+            $data->updated_by        .= User::find($data->approvals->get(0)->conducted_by)->name;
         }
 
         $data = $alldata = json_decode(collect(array_values($HtCrr->whereIn('status',['Waiting for RII','Released'])->all())));

@@ -45,6 +45,12 @@ let TaskCard = {
             },
             columns: [
                 {
+                    field: 'code',
+                    title: 'PN',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'name',
                     title: 'Tool',
                     sortable: 'asc',
@@ -59,6 +65,12 @@ let TaskCard = {
                 {
                     field: 'pivot.unit',
                     title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.note',
+                    title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -110,8 +122,14 @@ let TaskCard = {
             },
             columns: [
                 {
+                    field: 'code',
+                    title: 'PN',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
                     field: 'name',
-                    title: 'Material',
+                    title: 'Tool',
                     sortable: 'asc',
                     filterable: !1,
                 },
@@ -124,6 +142,12 @@ let TaskCard = {
                 {
                     field: 'pivot.unit',
                     title: 'Unit',
+                    sortable: 'asc',
+                    filterable: !1,
+                },
+                {
+                    field: 'pivot.note',
+                    title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
                 },

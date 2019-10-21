@@ -9,10 +9,9 @@ $(document).ready(function () {
                 $('select[name^=helper]').empty();
                 $('select[name^=helper]').each(function(){
                         $(this).prepend('<option value=""> Select a Helper </option>');
+                        let helper = $(this);
                         $.each(data, function (key, value) {
-                            $(this).append(
-                                '<option value="' + key + '">' + value + '</option>'
-                            );
+                           helper.append('<option value="' + key + '">' + value + '</option>');
                         });
                         $(this).val("").select2();
                     }

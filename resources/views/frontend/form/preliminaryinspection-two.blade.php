@@ -152,119 +152,38 @@
   <div id="content3">
     <div class="container">
       <table width="100%" border="1" cellpadding="5">
-          <tr style="background:#f7dd16">
-            <td align="center" colspan="2"><b>ZONE/AREA TO BE INSPECTED</b></td>
-            <td align="center" colspan="2"><b>POINTS OF INSPECTION</b></td>
-          </tr>
           <tr>
-              <td width="5%">Zone Code</td>
-              <td width="45%" align="center">Description</td>
-              <td width="5%">Insp. Code</td>
-              <td width="45%" align="center">Description</td>
+              <td width="5%">No.</td>
+              <td width="15%" align="center">Sub Zone Code</td>
+              <td width="12%" align="center">Insp. Code</td>
+              <td width="45%" align="center">Nature of defect</td>
+              <td width="20%" align="center">Issued Repair Card No. :</td>
           </tr>
+          <!-- jumlah row discrepancy yang ditampilkan hanya hingga 15 per halaman -->
+          @foreach($defectcard as $key => $data)
           <tr>
-              <td width="5%" align="center" valign="top">Z-01</td>
-              <td width="45%" align="left" valign="top">Nose and nose wheel well</td>
-              <td width="5%" align="center" valign="top">CLN</td>
-              <td width="45%" align="left" valign="top">Cleanliness</td>
-          </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-02</td>
-              <td width="45%" align="left" valign="top">R/H fuselage</td>
-              <td width="5%" align="center" valign="top">PPO</td>
-              <td width="45%" align="left" valign="top">Paint peel off/flake</td>
-          </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-03</td>
-              <td width="45%" align="left" valign="top">R/H MLG wheel well</td>
-              <td width="5%" align="center" valign="top">SCR</td>
-              <td width="45%" align="left" valign="top">Stratches</td>
-          </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-04</td>
-              <td width="45%" align="left" valign="top">R/H wing</td>
-              <td width="5%" align="center" valign="top">DNT</td>
-              <td width="45%" align="left" valign="top">Dents</td>
-          </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-05</td>
-              <td width="45%" align="left" valign="top">R/H Engine</td>
-              <td width="5%" align="center" valign="top">wri</td>
-              <td width="45%" align="left" valign="top">Wrinkles</td>
-          </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-06</td>
-              <td width="45%" align="left" valign="top">Emoenage</td>
-              <td width="5%" align="center" valign="top">CRA</td>
-              <td width="45%" align="left" valign="top">Cracks</td>
-          </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-07</td>
-              <td width="45%" align="left" valign="top">L/H Engine</td>
-              <td width="5%" align="center" valign="top">COR</td>
-              <td width="45%" align="left" valign="top">Corrosion</td>
-          </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-08</td>
-              <td width="45%" align="left" valign="top">L/H Wing</td>
-              <td width="5%" align="center" valign="top">LKG</td>
-              <td width="45%" align="left" valign="top">Leakage (oil, fuel, etc)</td>
-          </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-09</td>
-              <td width="45%" align="left" valign="top">L/H MLG wheel well</td>
-              <td width="5%" align="center" valign="top">INS</td>
-              <td width="45%" align="left" valign="top">Installation security and safety</td>
-          </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-10</td>
-              <td width="45%" align="left" valign="top">L/H Fuselage</td>
-              <td width="5%" align="center" valign="top">ODF</td>
-              <td width="45%" align="left" valign="top">Other defect</td>
-          </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-11</td>
-              <td width="45%" align="left" valign="top">Cockpit</td>
               <td width="5%" align="center" valign="top"></td>
-              <td width="45%" align="left" valign="top"></td>
+              <td width="15%" align="left" valign="top"> </td>
+              <td width="12%" align="center" valign="top"></td>
+              <td width="45%" align="left" valign="top">{{ $data["complaint"] }}</td>
+              <td width="20%" align="left" valign="top">{{ $data["code"] }}</td>
           </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-12</td>
-              <td width="45%" align="left" valign="top">Cabin</td>
-              <td width="5%" align="center" valign="top"></td>
-              <td width="45%" align="left" valign="top"></td>
-          </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-13</td>
-              <td width="45%" align="left" valign="top">Lavatory</td>
-              <td width="5%" align="center" valign="top"></td>
-              <td width="45%" align="left" valign="top"></td>
-          </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-14</td>
-              <td width="45%" align="left" valign="top">Galley</td>
-              <td width="5%" align="center" valign="top"></td>
-              <td width="45%" align="left" valign="top"></td>
-          </tr>
-          <tr>
-              <td width="5%" align="center" valign="top">Z-15</td>
-              <td width="45%" align="left" valign="top">Cargo</td>
-              <td width="5%" align="center" valign="top"></td>
-              <td width="45%" align="left" valign="top"></td>
-          </tr>
+          @endforeach
       </table>
     </div>
   </div>
 
+  @if($last)
   <div class="container">
     <div style="height:147px;width:130px;position:relative;bottom:60px;margin-left:72%;">
       <div align="center">
           Inspection performed by:
       </div>
       <div align="center" style="margin-top:70px">
-         Name<br>Date
+         {{ $accomplished_by }}<br>{{ $accomplished_at }}
       </div>
     </div>
   </div>
+  @endif
 </body>
 </html>

@@ -100,14 +100,13 @@ class RIIReleaseDefectCardDatatables extends Controller
             }
 
             //auditable, Technichal Writer request to show this
-            if($defectcard->approvals->toArray() == []){
+            if(empty($defectcard->approvals->get(1))){
                 $conducted_by = "";
                 $conducted_at = "";
-
             }
             else{
-                $conducted_by = User::find($defectcard->approvals->last()->conducted_by)->name;
-                $conducted_at = $defectcard->approvals->last()->created_at;
+                $conducted_by = User::find($defectcard->approvals->get(1)->conducted_by)->name;
+                $conducted_at = $defectcard->approvals->get(1)->created_at;
             }
 
             $defectcard->conducted_by      .= $conducted_by;
@@ -117,7 +116,7 @@ class RIIReleaseDefectCardDatatables extends Controller
             $defectcard->created_by        .= User::find($defectcard->audits->first()->user_id)->name;
 
             $defectcard->update_date       .= $defectcard->audits->last()->updated_at;
-            $defectcard->updated_by        .= User::find($defectcard->audits->last()->user_id)->name;
+            $defectcard->updated_by        .= User::find($defectcard->approvals->get(0)->conducted_by)->name;
         }
 
         $data = $alldata = json_decode(collect(array_values($DefectCard->whereIn('status',['Released','Waiting for RII','RII Released'])->all())));

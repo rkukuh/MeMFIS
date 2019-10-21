@@ -136,7 +136,7 @@
                                                                             Position
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->position}}
+                                                                            {{$htcrr->is_rii}}
                                                                         </td>
                                                                     </tr>
                                                             </table>
@@ -457,7 +457,7 @@
                                                                             Position
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->position}}
+                                                                            {{$htcrr->is_rii}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -469,7 +469,7 @@
                                                                                 @slot('id', 'is_rii')
                                                                                 @slot('name', 'is_rii')
                                                                                 @slot('text', 'IS RII?')
-                                                                                @if($htcrr->position == 1)
+                                                                                @if($htcrr->is_rii == 1)
                                                                                 @slot('checked', 'checked')
                                                                             @endif
                                                                                 @slot('size', '2')

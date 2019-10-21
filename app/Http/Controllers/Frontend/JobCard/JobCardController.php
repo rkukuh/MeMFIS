@@ -210,7 +210,7 @@ class JobCardController extends Controller
 
             $rii_status = $jobcard->jobcardable->is_rii;
             if(sizeof($jobcard->helpers) > 0){
-                $helpers = join(',', $jobcard->helpers->pluck('full_name'));
+                $helpers = join(',', $jobcard->helpers->pluck('full_name')->toArray());
             }else{
                 $helpers = '-';
             }
@@ -350,6 +350,9 @@ class JobCardController extends Controller
             elseif($jobcard->jobcardable->type->code == "preliminary"){
                 $m = new Merger();
 
+                $defectcards = array_chunk($jobcard->defectcards->toArray(),15);
+                $last = false;
+
                 $view1 = \View::make('frontend.form.preliminaryinspection-one')->with(['jobCard' => $jobcard,
                 'username' => $username,
                 'lastStatus' => $lastStatus,
@@ -368,32 +371,39 @@ class JobCardController extends Controller
                 'actual_manhours'=> $actual_manhours,
                 'taskcard' => $taskcard])->render();
 
-                $view2 = \View::make('frontend.form.preliminaryinspection-two')->with(['jobCard' => $jobcard,
-                'username' => $username,
-                'lastStatus' => $lastStatus,
-                'dateClosed' => $dateClosed,
-                'accomplished_by' => $accomplished_by,
-                'accomplished_at' => $accomplished_at,
-                'inspected_by' => $inspected_by,
-                'inspected_at' => $inspected_at,
-                'rii_by' => $rii_by,
-                'rii_at' => $rii_at,
-                'prepared_by' => $prepared_by,
-                'prepared_at' => $prepared_at,
-                'rii_status' => $rii_status,
-                'helpers' => $helpers,
-                'now' => $now,
-                'actual_manhours'=> $actual_manhours,
-                'taskcard' => $taskcard
-                ])->render();
-
                 $pdf = App::make('dompdf.wrapper');
                 $pdf->loadHTML($view1)->setPaper('a4', 'portrait');
                 $m->addRaw($pdf->output());
 
-                $pdf = App::make('dompdf.wrapper');
-                $pdf->loadHTML($view2)->setPaper('a4', 'portrait');
-                $m->addRaw($pdf->output());
+                foreach($defectcards as $key => $defectcard){
+                    if($key + 1 == sizeof($defectcards)){
+                        $last = true;
+                    }
+                   $view2 = \View::make('frontend.form.preliminaryinspection-two')->with(['jobCard' => $jobcard,
+                   'username' => $username,
+                   'lastStatus' => $lastStatus,
+                   'dateClosed' => $dateClosed,
+                   'accomplished_by' => $accomplished_by,
+                   'accomplished_at' => $accomplished_at,
+                   'inspected_by' => $inspected_by,
+                   'inspected_at' => $inspected_at,
+                   'rii_by' => $rii_by,
+                   'rii_at' => $rii_at,
+                   'prepared_by' => $prepared_by,
+                   'prepared_at' => $prepared_at,
+                   'rii_status' => $rii_status,
+                   'helpers' => $helpers,
+                   'now' => $now,
+                   'actual_manhours'=> $actual_manhours,
+                   'taskcard' => $taskcard,
+                   'last' => $last,
+                   'defectcard' => $defectcard
+                   ])->render();
+
+                   $pdf = App::make('dompdf.wrapper');
+                   $pdf->loadHTML($view2)->setPaper('a4', 'portrait');
+                   $m->addRaw($pdf->output());
+                }
 
                 file_put_contents('storage/Preliminary/'.$jobcard->uuid.'.pdf', $m->merge());
                 $invnoabc = new \PDF;
@@ -402,27 +412,6 @@ class JobCardController extends Controller
                 return response()->file(
                     public_path('storage/Preliminary/'.$jobcard->uuid.'.pdf')
                 );
-
-                // $pdf = \PDF::loadView('frontend/form/preliminaryinspection-two',[
-                //         'jobCard' => $jobcard,
-                //         'username' => $username,
-                //         'lastStatus' => $lastStatus,
-                //         'dateClosed' => $dateClosed,
-                //         'accomplished_by' => $accomplished_by,
-                //         'accomplished_at' => $accomplished_at,
-                //         'inspected_by' => $inspected_by,
-                //         'inspected_at' => $inspected_at,
-                //         'rii_by' => $rii_by,
-                //         'rii_at' => $rii_at,
-                //         'prepared_by' => $prepared_by,
-                //         'prepared_at' => $prepared_at,
-                //         'rii_status' => $rii_status,
-                //         'helpers' => $helpers,
-                //         'now' => $now,
-                //         'actual_manhours'=> $actual_manhours,
-                //         'taskcard' => $taskcard
-                //         ]);
-                // return $pdf->stream();
             }
         }elseif($jobcard->jobcardable_type == "App\Models\EOInstruction"){
             $eo_additionals = new stdClass;
@@ -431,10 +420,14 @@ class JobCardController extends Controller
             $eo_additionals->scheduled_priority_text = $jobcard->jobcardable->eo_header->scheduled_priority_text;
             $eo_additionals->scheduled_priority_type = $jobcard->jobcardable->eo_header->scheduled_priority_type;
             $eo_additionals->recurrence = Type::find($jobcard->jobcardable->eo_header->recurrence_id)->name;
-            $eo_additionals->recurrence_text = $jobcard->jobcardable->eo_header->recurrence_text;
+            $eo_additionals->recurrence_text = $jobcard->jobcardable->eo_header->recurrence_amount;
             $eo_additionals->recurrence_type = $jobcard->jobcardable->eo_header->recurrence_type;
             $eo_additionals->manual_affected = Type::find($jobcard->jobcardable->eo_header->manual_affected_id)->name;
             $eo_additionals->manual_affected_text = $jobcard->jobcardable->eo_header->manual_affected_text;
+            $eo_additionals->weight_change = json_decode($jobcard->additionals)->weight_change;
+            $eo_additionals->center_of_gravity = json_decode($jobcard->additionals)->center_of_gravity;
+            $eo_additionals->TSN = json_decode($jobcard->additionals)->TSN;
+            $eo_additionals->CSN = json_decode($jobcard->additionals)->CSN;
 
             $rii_status = $jobcard->jobcardable->is_rii;
             if(sizeof($jobcard->helpers) > 0){
@@ -569,7 +562,7 @@ class JobCardController extends Controller
                         'eo_additionals'=> $eo_additionals,
                         'taskcard' => $taskcard
                     ]);
-
+                    return $pdf->stream();
                 }
             }
         }

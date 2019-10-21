@@ -28,6 +28,7 @@ use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\EmployeeLicense;
+use App\Models\InventoryIn;
 
 class FillComboxController extends Controller
 {
@@ -151,7 +152,7 @@ class FillComboxController extends Controller
      */
     public function employees()
     {
-        $employees = Employee::selectRaw('id, CONCAT(first_name, " ", middle_name ," ", last_name) as name')
+        $employees = Employee::selectRaw('id, CONCAT(first_name," ", last_name) as name')
                     ->pluck('name', 'id');
 
         return json_encode($employees);
@@ -357,7 +358,7 @@ class FillComboxController extends Controller
      */
     public function vendor()
     {
-        $vendors = Vendor::pluck('code', 'id');
+        $vendors = Vendor::pluck('name', 'id');
 
         return json_encode($vendors);
 
@@ -835,5 +836,4 @@ class FillComboxController extends Controller
         return json_encode($promo);
 
     }
-
 }

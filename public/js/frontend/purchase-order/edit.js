@@ -219,13 +219,23 @@ let PurchaseOrder = {
         });
 
         $('.item_datatable').on('click', '.edit-item', function () {
+            let item_uuid = $(this).data('uuid');
             $.ajax({
-                url: '/purchase-order/'+po_uuid+'/item/'+ $(this).data('uuid') +'/edit',
+                url: '/label/get-purchase-orderes/'+po_uuid+'/item/'+ item_uuid ,
+                type: 'GET',
+                dataType: 'json',
+                success: function (qty_item) {
+                    document.getElementById('item_quantity_ordered').innerText = qty_item;
+                }
+            });
+            $.ajax({
+                url: '/purchase-order/'+po_uuid+'/item/'+ item_uuid +'/edit',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
                     $.ajax({
-                        url: '/get-units',
+                        url: '/get-item-unit-uuid/'+item_uuid,
+                        // url: '/get-units',
                         type: 'GET',
                         dataType: 'json',
                         success: function (data2) {
@@ -266,7 +276,7 @@ let PurchaseOrder = {
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('qty').value = data.pivot.quantity;
                     document.getElementById('price').value = data.pivot.price;
-                    document.getElementById('discount').value = data.pivot.discount_value;
+                    // document.getElementById('discount').value = data.pivot.discount_value;
                     document.getElementById('remark_material').value = data.pivot.note;
 
                 }
@@ -300,6 +310,9 @@ let PurchaseOrder = {
                 },
                 success: function(response) {
                     if (response.errors) {
+                        if (response.errors.quantity) {
+                            $('#quantity-error').html(response.errors.quantity[0]);
+                        }
                         // if (response.errors.title) {
                         //     $('#title-error').html(response.errors.title[0]);
                         // }

@@ -35,4 +35,5 @@ require('frontend/view-only.php');
 require('frontend/workpackage.php');
 require('frontend/work-progress-report.php');
 require('frontend/inventory-in.php');
+require('frontend/inventory-out.php');
 require('testing.php');

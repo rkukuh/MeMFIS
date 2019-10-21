@@ -12,9 +12,9 @@
             @endif
             <td style="width: 90%;">
                 <input type="number" id="{{ $id or $name }}" name="{{ $name or '' }}" class="form-control m-input text-right
-                            {{ $class or '' }}" style="{{ $style or ''}}" value="{{ $value or ''}}" placeholder="{{ $placeholder or '' }}"
-                            step="0.1" min="{{ $min or '0'}}" max="{{ $max or ''}}"
-                    {{ $disabled or ''}}>
+                            {{ $class or '' }}" style="{{ $style or '' }}" value="{{ $value or '' }}" placeholder="{{ $placeholder or '' }}"
+                            step="0.1" min="{{ $min or '0'}}" max="{{ $max or '' }}"
+                    {{ $disabled or '' }}>
             </td>
             @if (isset($input_append))
             <td style="width: 5%;">

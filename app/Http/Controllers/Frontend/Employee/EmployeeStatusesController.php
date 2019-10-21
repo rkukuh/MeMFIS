@@ -56,7 +56,8 @@ class EmployeeStatusesController extends Controller
      */
     public function show(status $status)
     {
-     
+        // TODO: Return error message as JSON
+        return response()->json($status);
     }
 
     /**
@@ -67,6 +68,7 @@ class EmployeeStatusesController extends Controller
      */
     public function edit(status $status)
     {
+        // TODO: Return error message as JSON
         return response()->json($status);
     }
 

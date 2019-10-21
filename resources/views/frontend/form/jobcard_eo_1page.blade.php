@@ -127,7 +127,7 @@
             <table width="100%">
                 <tr>
                     <td valign="top" width="36%">Print By : <span>{{ Auth::user()->name }}:{{ $now }}</span></td>
-                    <td valign="top" width="25%">Status : <span>{{ $jobCard->status }}</span></td>
+                    <td valign="top" width="25%">Status : <span>@if($jobCard->status) {{ $jobCard->status }} @else - @endif</span></td>
                     <td valign="top" width="39%">Date Close : <span>{{ $dateClosed }}</span></td>
                 </tr>
             </table>
@@ -242,9 +242,9 @@
                         <td valign="top" align="center" width="20%"><b>Actual Mhrs</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" align="center">Cabin Maintenance</td>
-                        <td valign="top" align="center">@if(isset($jobCard->jobcardable->type)) {{ $jobCard->jobcardable->type->name}} @else - @endif</td>
-                        <td valign="top" align="center">0.25</td>
+                        <td valign="top" align="center">{{ $jobCard->jobcardable->skill }}</td>
+                        <td valign="top" align="center">@if(isset($jobCard->jobcardable->eo_header->type)) {{ $jobCard->jobcardable->eo_header->type->name}} @else - @endif</td>
+                        <td valign="top" align="center">{{ $jobCard->jobcardable->estimation_manhour }}</td>
                         <td valign="top" align="center">{{ $jobCard->actual_manhour }}</td>
                     </tr>
                 </table>
@@ -274,10 +274,10 @@
                                 {{ $jobCard->jobcardable->eo_header->category->name }}
                             </td>
                             <td valign="top" width="20%">
-                                {{ $eo_additionals->scheduled_priority }}
+                                {{ $eo_additionals->scheduled_priority_text }} {{ $eo_additionals->scheduled_priority_type }}
                             </td>
                             <td valign="top" width="20%">
-                                {{ $eo_additionals->recurrence }}
+                                {{ $eo_additionals->recurrence_text }} {{ $eo_additionals->recurrence_type }}
                             </td>
                             <td valign="top" width="20%">
                                 {{ $eo_additionals->manual_affected }}
@@ -285,16 +285,34 @@
                             <td valign="top" width="20%" style="border-right: none;">Weight Change</td>
                         </tr>
                         <tr>
-                            <td valign="top" width="20%">
-                                @if(isset($eo_additionals->scheduled_priority_text) && $eo_additionals->scheduled_priority_text !== "null") {{ $eo_additionals->scheduled_priority_text }} @endif
-                            </td>
-                            <td valign="top" width="20%" style="border-bottom: 1px solid  #d4d7db;">
-                                {{ $eo_additionals->recurrence_text }} {{ $eo_additionals->recurrence_type }}
+                            <td valign="top" rowspan="2" width="20%">
+                               
                             </td>
                             <td valign="top" width="20%">
-                                {{ $eo_additionals->manual_affected_text }}
+                                
+                            </td>
+                            <td valign="top" width="20%">
+                                
+                            </td>
+                            <td valign="top" width="20%" style="border-right: none;">@if($eo_additionals->weight_change){{ $eo_additionals->weight_change }}@else - @endif</td>
+                        </tr>
+                        <tr>
+                            <td valign="top" rowspan="2" width="20%">
+                            </td>
+                            <td valign="top" width="20%" >
+                            </td>
+                            <td valign="top" width="20%">
                             </td>
                             <td valign="top" width="20%" style="border-right: none;">Center Of Gravity Change</td>
+                        </tr>
+                        <tr>
+                            <td valign="top" width="20%">
+                            </td>
+                            <td valign="top" width="20%" style="border-bottom: 1px solid  #d4d7db;">
+                            </td>
+                            <td valign="top" width="20%">
+                            </td>
+                            <td valign="top" width="20%" style="border-right: none;">@if($eo_additionals->center_of_gravity){{ $eo_additionals->center_of_gravity }}@else - @endif</td>
                         </tr>
                     </table>
                 </div>
@@ -305,14 +323,22 @@
                     </tr>
                     <tr>
                         <td valign="top" align="center">
-                            @foreach($jobCard->jobcardable->materials as $material)
-                            {{$material->code}} | {{$material->name}} | {{$material->pivot->quantity}} | {{App\Models\Unit::find($material->pivot->unit_id)->name}}
-                            @endforeach
+                            @if(sizeof($jobCard->jobcardable->materials) > 0)
+                                @foreach($jobCard->jobcardable->materials as $material)
+                                {{$material->code}} | {{$material->name}} | {{$material->pivot->quantity}} | {{App\Models\Unit::find($material->pivot->unit_id)->name}}
+                                @endforeach
+                            @else
+                                -
+                            @endif
                         </td>
                         <td valign="top" align="center">
-                            @foreach($jobCard->jobcardable->tools as $tool)
-                            {{$tool->code}} | {{$tool->name}} | {{$tool->pivot->quantity}} | {{App\Models\Unit::find($tool->pivot->unit_id)->name}}
-                            @endforeach
+                            @if(sizeof($jobCard->jobcardable->tools) > 0)
+                                @foreach($jobCard->jobcardable->tools as $tool)
+                                {{$tool->code}} | {{$tool->name}} | {{$tool->pivot->quantity}} | {{App\Models\Unit::find($tool->pivot->unit_id)->name}}
+                                @endforeach
+                            @else
+                                -
+                            @endif
                         </td>
                     </tr>
                 </table>
@@ -321,9 +347,9 @@
                         <td valign="top" align="center" width="50%" colspan="3"><b>Engineering Approval</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" height="6%">Prepared By</td>
-                        <td valign="top" height="6%">Checked By</td>
-                        <td valign="top" height="6%">Approve By</td>
+                        <td valign="top" rowspan="6" width="6%">Prepared By</td>
+                        <td valign="top" rowspan="6" width="6%">Checked By</td>
+                        <td valign="top" rowspan="6" width="6%">Approve By</td>
                     </tr>
                 </table>
                 <table width="100%" cellpadding="4" class="table_content">
@@ -338,8 +364,8 @@
                         <td valign="top" align="center" width="22%" style="border-bottom:none;"><b>STATION</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" align="center" width="3%">{{ json_decode($jobCard->additionals)->TSN }}</td>
-                        <td valign="top" align="center" width="3%">{{ json_decode($jobCard->additionals)->CSN }}</td>
+                        <td valign="top" align="center" width="3%">@if($eo_additionals->TSN) {{ $eo_additionals->TSN }} @else - @endif</td>
+                        <td valign="top" align="center" width="3%">@if($eo_additionals->CSN) {{ $eo_additionals->CSN }} @else - @endif</td>
                         <td valign="top" align="center" width="24%" style="border-top:none;border-right:none;">
                             <div class="checkbox">
                                 <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">A/C Log Book</span>
@@ -355,7 +381,7 @@
                                 <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">APU Log Book</span>
                             </div>
                         </td>
-                        <td valign="top" align="center" width="22%" style="border-top:none;color:red;">{{ $jobCard->station }}</td>
+                        <td valign="top" align="center" width="22%" style="border-top:none;">@if($jobCard->station) {{ $jobCard->station->name }} @else - @endif</td>
                     </tr>
                 </table>
                 <table width="100%" cellpadding="4" class="table_content">
@@ -386,7 +412,7 @@
                                 </div>
                             </span>
                         </td>
-                        <td valign="top" width="50%">Transfer To Defect Card No : <span>@if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif</span></td>
+                        <td valign="top" width="50%">Transfer To Defect Card No : <span>@if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @else - @endif</span></td>
                     </tr>
                 </table>
                 <div style="position:absolute; left:659px; top:-20px;">
@@ -412,12 +438,10 @@
                 <table width="100%">
                     <tr>
                         <td width="33%" height="50" align="center" valign="bottom">
-                            <div style="width:100%;height:20px;text-align:center;padding-left:5px;">name : timestamp
-                            </div>
+                            <div style="width:100%;height:20px;text-align:center;padding-left:5px;">{{ $accomplished_by }} : {{ $accomplished_at }}</div>
                         </td>
                         <td width="33%" height="50" align="center" valign="bottom">
-                            <div style="width:100%;height:20px;text-align:center;padding-left:5px;">name :
-                                timestamp</span></div>
+                            <div style="width:100%;height:20px;text-align:center;padding-left:5px;">{{ $inspected_by }} : {{ $inspected_at }}</div>
                         </td>
                         <td width="34%" height="100" align="center" valign="bottom"
                             @if($rii_status==0) style="background:grey" @endif>
