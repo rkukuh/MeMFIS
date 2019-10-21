@@ -544,6 +544,7 @@ class JobCardController extends Controller
                         'eo_additionals'=> $eo_additionals,
                         'taskcard' => $taskcard
                     ]);
+                    return $pdf->stream();
                 }else{
                     $pdf = \PDF::loadView('frontend/form/jobcard_sb_2page',[
                             'jobcard' => $jobcard,
@@ -590,7 +591,7 @@ class JobCardController extends Controller
                         'eo_additionals'=> $eo_additionals,
                         'taskcard' => $taskcard
                     ]);
-                return $pdf->stream();
+                    return $pdf->stream();
                 }else{
                     $pdf = \PDF::loadView('frontend/form/jobcard_awl_2page',[
                             'jobcard' => $jobcard,
@@ -637,7 +638,7 @@ class JobCardController extends Controller
                         'actual_manhours'=> $actual_manhours,
                         'taskcard' => $taskcard
                     ]);
-                return $pdf->stream();
+                    return $pdf->stream();
                 }else{
                     $pdf = \PDF::loadView('frontend/form/jobcard_cmr_2page',[
                             'jobcard' => $jobcard,
@@ -659,7 +660,7 @@ class JobCardController extends Controller
                             'actual_manhours'=> $actual_manhours,
                             'taskcard' => $taskcard
                         ]);
-                    return $pdf->stream();
+                return $pdf->stream();
                 }
             }
             elseif(($jobcard->jobcardable->eo_header->type->code == "eo")){
