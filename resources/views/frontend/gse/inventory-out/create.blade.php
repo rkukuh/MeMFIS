@@ -63,29 +63,24 @@
                                                 @slot('id_error','date')
                                             @endcomponent
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Ref Document No. @include('frontend.common.label.required')
                                             </label>
-
-                                            @include('frontend.common.warehouse.index')
+                                            
+                                            @component('frontend.common.input.select2')
+                                            @slot('text', 'Inventory Out')
+                                            @slot('id', 'item_number_id')
+                                            @slot('name', 'item_number_id')
+                                            @slot('id_error', 'item_number_id')
+                                            @endcomponent
+                                            {{-- @include('frontend.common.warehouse.index')
 
                                             @component('frontend.common.input.hidden')
                                                 @slot('id', 'warehouse')
                                                 @slot('name', 'warehouse')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Project No.
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('id', 'project_number')
-                                                @slot('text', 'generate')
-                                            @endcomponent
+                                            @endcomponent --}}
+                                            
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -102,6 +97,43 @@
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Section Code
+                                            </label>
+
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'Section Code')
+                                                @slot('id', 'section')
+                                                @slot('name', 'section')
+                                                @slot('id_error', 'section')
+                                            @endcomponent
+                                        </div>
+                                        {{-- <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Project No.
+                                            </label>
+
+                                            @component('frontend.common.label.data-info')
+                                                @slot('id', 'project_number')
+                                                @slot('text', 'generate')
+                                            @endcomponent
+                                        </div> --}}
+
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Returned By @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', ' Returned By')
+                                                @slot('id', 'returned_by')
+                                                @slot('name', 'returned_by')
+                                                @slot('id_error', 'returned_by')
+                                            @endcomponent
+                                        </div>
+                                        {{-- <div class="col-sm-6 col-md-6 col-lg-6">
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
@@ -124,34 +156,9 @@
                                                     @endcomponent
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Returned By @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', ' Returned By')
-                                                @slot('id', 'returned_by')
-                                                @slot('name', 'returned_by')
-                                                @slot('id_error', 'returned_by')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Section Code
-                                            </label>
-
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'Section Code')
-                                                @slot('id', 'section')
-                                                @slot('name', 'section')
-                                                @slot('id_error', 'section')
-                                            @endcomponent
-                                        </div>
-                                    </div>
+                                   
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                             <label class="form-control-label">
@@ -248,4 +255,8 @@
     <script src="{{ asset('js/frontend/functions/select2/returned-by.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/inventory-out.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/inventory-out.js') }}"></script>
+    
+
 @endpush

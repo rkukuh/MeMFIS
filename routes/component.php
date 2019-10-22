@@ -78,6 +78,7 @@ Route::name('component.')->group(function () {
         Route::get('get-takcard-si-types', 'FillComboxController@taskcardTypeSI')->name('get-takcard-si-types');
         Route::get('get-takcard-preliminary-types', 'FillComboxController@taskcardTypePreliminary')->name('get-takcard-preliminary-types');
         Route::get('get-project-additionals-approved', 'FillComboxController@projectAdditionalApproved')->name('get-project-additional-approved');
+        Route::get('get-inventory-out', 'FillComboxController@inventoryOut')->name('get-inventory-out');
 
         Route::prefix('label')->group(function () {
             Route::get('get-vendors/{vendor}', 'FillLabelController@vendor')->name('get-vendor');

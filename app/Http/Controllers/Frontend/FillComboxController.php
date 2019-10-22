@@ -29,6 +29,7 @@ use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\EmployeeLicense;
 use App\Models\InventoryIn;
+use App\Models\InventoryOut;
 
 class FillComboxController extends Controller
 {
@@ -113,6 +114,19 @@ class FillComboxController extends Controller
         ->pluck('full_name', 'id');
 
         return json_encode($currencies);
+
+    }
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function inventoryOut()
+    {
+        $inventoryout = InventoryOut::pluck('number', 'id');
+
+        return json_encode($inventoryout);
 
     }
 
@@ -879,4 +893,6 @@ class FillComboxController extends Controller
         return json_encode($promo);
 
     }
+
+    
 }
