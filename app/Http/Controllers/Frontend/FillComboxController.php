@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Models\Zone;
 use App\Models\DefectCard;
 use App\Models\Item;
+use App\Models\JobCard;
 use App\Models\Type;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
@@ -34,6 +35,18 @@ use App\Models\InventoryOut;
 
 class FillComboxController extends Controller
 {
+/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobcard()
+    {
+        $jobcards = JobCard::pluck('number', 'id');
+
+        return json_encode($jobcards);
+
+    }
 
     /**
      * Display a listing of the resource.

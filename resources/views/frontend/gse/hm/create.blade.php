@@ -63,20 +63,27 @@
                                                 @slot('id_error','date')
                                             @endcomponent
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Ref Document No. @include('frontend.common.label.required')
                                             </label>
+                                            @component('frontend.common.input.select2')
+                                            @slot('text', 'Job Card')
+                                            @slot('id', 'jc_no')
+                                            @slot('name', 'jc_no')
+                                            @slot('id_error', 'jc_no')
+                                            @endcomponent
 
-                                            @include('frontend.common.warehouse.index')
+                                            {{-- @include('frontend.common.warehouse.index')
 
                                             @component('frontend.common.input.hidden')
                                                 @slot('id', 'warehouse')
                                                 @slot('name', 'warehouse')
-                                            @endcomponent
+                                            @endcomponent --}}
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Project No.
@@ -85,20 +92,6 @@
                                             @component('frontend.common.label.data-info')
                                                 @slot('id', 'project_number')
                                                 @slot('text', 'generate')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Storage @include('frontend.common.label.required')
-                                            </label>
-
-                                            @component('frontend.common.input.select2')
-                                                @slot('text', 'Storage')
-                                                @slot('id', 'item_storage_id')
-                                                @slot('name', 'item_storage_id')
-                                                @slot('id_error', 'item_storage_id')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -129,14 +122,14 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Returned By @include('frontend.common.label.required')
+                                                Storage @include('frontend.common.label.required')
                                             </label>
 
                                             @component('frontend.common.input.select2')
-                                                @slot('text', ' Returned By')
-                                                @slot('id', 'returned_by')
-                                                @slot('name', 'returned_by')
-                                                @slot('id_error', 'returned_by')
+                                                @slot('text', 'Storage')
+                                                @slot('id', 'item_storage_id')
+                                                @slot('name', 'item_storage_id')
+                                                @slot('id_error', 'item_storage_id')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -151,6 +144,21 @@
                                                 @slot('id_error', 'section')
                                             @endcomponent
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Returned By @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', ' Returned By')
+                                                @slot('id', 'returned_by')
+                                                @slot('name', 'returned_by')
+                                                @slot('id_error', 'returned_by')
+                                            @endcomponent
+                                        </div>
+                                    
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -248,4 +256,7 @@
     <script src="{{ asset('js/frontend/functions/select2/returned-by.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/jobcard-number.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/jobcard-number.js') }}"></script>
+
 @endpush
