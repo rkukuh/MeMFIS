@@ -42,7 +42,7 @@ class FillComboxController extends Controller
      */
     public function jobcard()
     {
-        $jobcards = JobCard::pluck('number', 'id');
+        $jobcards = JobCard::pluck('number', 'uuid');
 
         return json_encode($jobcards);
 
