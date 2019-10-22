@@ -115,6 +115,9 @@ class TaskCardEOController extends Controller
      */
     public function show(TaskCard $taskCard)
     {
+        $taskCard->manual_affected = Type::find($taskCard->manual_affected_id)->code;
+        $taskCard->recurrence = Type::find($taskCard->recurrence_id)->code;
+        $taskCard->scheduled_priority = Type::find($taskCard->scheduled_priority_id)->code;
         return view('frontend.task-card.nonroutine.eo.show',[
             'taskcard' => $taskCard,
             'additionals' => json_decode($taskCard->additionals)

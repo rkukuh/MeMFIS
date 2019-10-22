@@ -10,6 +10,7 @@ use App\Models\Phone;
 use App\Models\Website;
 use App\Models\Customer;
 use App\Models\Address;
+use App\Helpers\DocumentNumber;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -38,7 +39,7 @@ class CustomersImport implements ToModel, WithHeadingRow
 
         $customer = Customer::create([
             'name' => $row['name'],
-            'code' => "auto-generate",
+            'code' =>  DocumentNumber::generate('CUS-', Customer::withTrashed()->count()+1),
             'attention' => json_encode($attentions),
             'payment_term' => $row['term_of_payment'],
         ]);

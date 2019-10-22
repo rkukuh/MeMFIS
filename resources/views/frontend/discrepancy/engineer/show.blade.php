@@ -57,7 +57,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', '2/12/2012')
+                                            @slot('text', $discrepancy->jobcard->quotation->quotationable->created_at)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -66,7 +66,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', $discrepancy->jobcard->quotation->quotationable->aircraft->name)
+                                            @slot('text', $discrepancy->jobcard->quotation->quotationable->aircraft->name)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', $discrepancy->sequence)
+                                            @slot('text', $discrepancy->sequence)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -86,7 +86,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text',
+                                            @slot('text',
                                         $discrepancy->jobcard->quotation->quotationable->aircraft_register)
                                         @endcomponent
                                     </div>
@@ -98,7 +98,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', $discrepancy->jobcard->number)
+                                            @slot('text', $discrepancy->jobcard->number)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -107,7 +107,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', $discrepancy->jobcard->quotation->quotationable->aircraft_sn)
+                                            @slot('text', $discrepancy->jobcard->quotation->quotationable->aircraft_sn)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -119,9 +119,9 @@
 
                                         @component('frontend.common.label.data-info')
                                         @if(sizeof($discrepancy->jobcard->jobcardable->skills) == 3)
-                                        @slot('text', 'ERI')
+                                            @slot('text', 'ERI')
                                         @elseif(sizeof($discrepancy->jobcard->jobcardable->skills) == 1)
-                                        @slot('text', $discrepancy->jobcard->jobcardable->skills[0]->name)
+                                            @slot('text', $discrepancy->jobcard->jobcardable->skills[0]->name)
                                         @else
                                         @include('frontend.common.label.data-info-nodata')
                                         @endif
@@ -137,7 +137,7 @@
                                         @else
                                         @foreach ($discrepancy->zones as $zone)
                                         @component('frontend.common.label.badge')
-                                        @slot('text', $zone->name )
+                                            @slot('text', $zone->name )
                                         @endcomponent
                                         @endforeach
                                         @endif
@@ -150,7 +150,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', $discrepancy->ata)
+                                            @slot('text', $discrepancy->ata)
                                         @endcomponent
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -159,7 +159,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', $discrepancy->estimation_manhour)
+                                            @slot('text', $discrepancy->estimation_manhour)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -177,11 +177,11 @@
                                         </label>
 
                                         @component('frontend.common.input.checkbox')
-                                        @slot('id', 'is_rii')
-                                        @slot('name', 'is_rii')
-                                        @slot('text', 'RII?')
+                                            @slot('id', 'is_rii')
+                                            @slot('name', 'is_rii')
+                                            @slot('text', 'RII?')
                                         @if ($discrepancy->is_rii == 1)
-                                        @slot('checked', 'checked')
+                                            @slot('checked', 'checked')
                                         @endif
                                         @endcomponent
                                     </div>
@@ -193,7 +193,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', $discrepancy->complaint)
+                                            @slot('text', $discrepancy->complaint)
                                         @endcomponent
                                     </div>
                                 </div>
@@ -203,129 +203,129 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-4 col-md-4 col-lg-4">
                                             @component('frontend.common.input.checkbox')
-                                            @slot('id', 'remove')
-                                            @slot('name', 'propose[]')
-                                            @slot('value', 'remove')
-                                            @slot('text', '1. REMOVE')
-                                            @slot('size', '12')
+                                                @slot('id', 'remove')
+                                                @slot('name', 'propose[]')
+                                                @slot('value', 'remove')
+                                                @slot('text', '1. REMOVE')
+                                                @slot('size', '12')
                                             @if(in_array('remove',$propose_corrections))
-                                            @slot('checked', 'checked')
+                                                @slot('checked', 'checked')
                                             @endif
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-4 col-md-4 col-lg-4">
                                             @component('frontend.common.input.checkbox')
-                                            @slot('id', 'repair')
-                                            @slot('name', 'propose[]')
-                                            @slot('value', 'repair')
-                                            @slot('text', '4. REPAIR')
+                                                @slot('id', 'repair')
+                                                @slot('name', 'propose[]')
+                                                @slot('value', 'repair')
+                                                @slot('text', '4. REPAIR')
                                             @if(in_array('repair',$propose_corrections))
-                                            @slot('checked', 'checked')
+                                                @slot('checked', 'checked')
                                             @endif
-                                            @slot('size', '12')
+                                                @slot('size', '12')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-4 col-md-4 col-lg-4">
                                             @component('frontend.common.input.checkbox')
-                                            @slot('id', 'test')
-                                            @slot('name', 'propose[]')
-                                            @slot('value', 'test')
-                                            @slot('text', '7. TEST')
+                                                @slot('id', 'test')
+                                                @slot('name', 'propose[]')
+                                                @slot('value', 'test')
+                                                @slot('text', '7. TEST')
                                             @if(in_array('test',$propose_corrections))
-                                            @slot('checked', 'checked')
+                                                @slot('checked', 'checked')
                                             @endif
-                                            @slot('size', '12')
+                                                @slot('size', '12')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-4 col-md-4 col-lg-4">
                                             @component('frontend.common.input.checkbox')
-                                            @slot('id', 'install')
-                                            @slot('name', 'propose[]')
-                                            @slot('value', 'install')
-                                            @slot('text', '2. INSTALL')
+                                                @slot('id', 'install')
+                                                @slot('name', 'propose[]')
+                                                @slot('value', 'install')
+                                                @slot('text', '2. INSTALL')
                                             @if(in_array('install',$propose_corrections))
-                                            @slot('checked', 'checked')
+                                                @slot('checked', 'checked')
                                             @endif
-                                            @slot('size', '12')
+                                                @slot('size', '12')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-4 col-md-4 col-lg-4">
                                             @component('frontend.common.input.checkbox')
-                                            @slot('id', 'replace')
-                                            @slot('name', 'propose[]')
-                                            @slot('value', 'replace')
-                                            @slot('text', '5. REPLACE')
+                                                @slot('id', 'replace')
+                                                @slot('name', 'propose[]')
+                                                @slot('value', 'replace')
+                                                @slot('text', '5. REPLACE')
                                             @if(in_array('replace',$propose_corrections))
-                                            @slot('checked', 'checked')
+                                                @slot('checked', 'checked')
                                             @endif
-                                            @slot('size', '12')
+                                                @slot('size', '12')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-4 col-md-4 col-lg-4">
                                             @component('frontend.common.input.checkbox')
-                                            @slot('id', 'shop_visit')
-                                            @slot('name', 'propose[]')
-                                            @slot('value', 'shop-visit')
-                                            @slot('text', '8. SHOP VISIT')
+                                                @slot('id', 'shop_visit')
+                                                @slot('name', 'propose[]')
+                                                @slot('value', 'shop-visit')
+                                                @slot('text', '8. SHOP VISIT')
                                             @if(in_array('shop-visit',$propose_corrections))
-                                            @slot('checked', 'checked')
+                                                @slot('checked', 'checked')
                                             @endif
-                                            @slot('size', '12')
+                                                @slot('size', '12')
                                             @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-4 col-md-4 col-lg-4">
                                             @component('frontend.common.input.checkbox')
-                                            @slot('id', 'rectification')
-                                            @slot('name', 'propose[]')
-                                            @slot('value', 'rectification')
-                                            @slot('text', '3. RECTIFICATION')
+                                                @slot('id', 'rectification')
+                                                @slot('name', 'propose[]')
+                                                @slot('value', 'rectification')
+                                                @slot('text', '3. RECTIFICATION')
                                             @if(in_array('rectification',$propose_corrections))
-                                            @slot('checked', 'checked')
+                                                @slot('checked', 'checked')
                                             @endif
-                                            @slot('size', '12')
+                                                @slot('size', '12')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-4 col-md-4 col-lg-4">
                                             @component('frontend.common.input.checkbox')
-                                            @slot('id', 'ndt')
-                                            @slot('name', 'propose[]')
-                                            @slot('value', 'ndt')
-                                            @slot('text', '6. NDT')
+                                                @slot('id', 'ndt')
+                                                @slot('name', 'propose[]')
+                                                @slot('value', 'ndt')
+                                                @slot('text', '6. NDT')
                                             @if(in_array('ndt',$propose_corrections))
-                                            @slot('checked', 'checked')
+                                                @slot('checked', 'checked')
                                             @endif
-                                            @slot('size', '12')
+                                                @slot('size', '12')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-4 col-md-4 col-lg-4">
                                             <div class="row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     @component('frontend.common.input.checkbox')
-                                                    @slot('id', 'other')
-                                                    @slot('name', 'propose[]')
-                                                    @slot('value', 'other')
-                                                    @slot('text', '9. Other')
+                                                        @slot('id', 'other')
+                                                        @slot('name', 'propose[]')
+                                                        @slot('value', 'other')
+                                                        @slot('text', '9. Other')
                                                     @if(in_array('other',$propose_corrections))
-                                                    @slot('checked', 'checked')
+                                                        @slot('checked', 'checked')
                                                     @endif
-                                                    @slot('size', '12')
+                                                        @slot('size', '12')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                     @component('frontend.common.input.textarea')
-                                                    @slot('id', 'other_text')
-                                                    @slot('text', 'other_text')
-                                                    @slot('name', 'other_text')
+                                                        @slot('id', 'other_text')
+                                                        @slot('text', 'other_text')
+                                                        @slot('name', 'other_text')
                                                     @if(empty($propose_correction_text))
-                                                    @slot('disabled','disabled')
+                                                        @slot('disabled','disabled')
                                                     @endif
-                                                    @slot('value', $propose_correction_text)
-                                                    @slot('rows', '3')
-                                                    @slot('id_error', 'other_text')
+                                                        @slot('value', $propose_correction_text)
+                                                        @slot('rows', '3')
+                                                        @slot('id_error', 'other_text')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -339,7 +339,7 @@
                                         </label>
 
                                         @component('frontend.common.label.data-info')
-                                        @slot('text', $discrepancy->description)
+                                            @slot('text', $discrepancy->description)
                                         @endcomponent
                                     </div>
 
@@ -469,14 +469,12 @@
     .margin-info {
         margin-left: 5px
     }
-
 </style>
 @endpush
 
 @push('footer-scripts')
 <script>
     let discrepancy_uuid = '{{$discrepancy->uuid}}';
-
 </script>
 <script src="{{ asset('js/frontend/job-card/discrepancy/show.js') }}"></script>
 <script src="{{ asset('js/frontend/discrepancy/helpers.js') }}"></script>

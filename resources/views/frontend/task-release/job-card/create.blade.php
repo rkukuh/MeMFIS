@@ -38,7 +38,11 @@
                                             Task Card No
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->jobcardable->number}}
+                                            @if($taskrelease->jobcardable->number)
+                                                {{$taskrelease->jobcardable->number}}
+                                            @else
+                                                {{$taskrelease->jobcardable->eo_header->number}}
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -70,7 +74,11 @@
                                             Inspection Type
                                         </td>
                                         <td width="70%" style="text-align:center">
+                                            @if($taskrelease->jobcardable->task)
                                             {{$taskrelease->jobcardable->task->name}}
+                                            @else
+                                             -
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -162,7 +170,11 @@
                                             Title
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                            {{$taskrelease->jobcardable->title}}
+                                            @if($taskrelease->jobcardable->title)
+                                                {{$taskrelease->jobcardable->title}}
+                                            @else
+                                                {{$taskrelease->jobcardable->eo_header->title}}
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>
@@ -190,7 +202,11 @@
                                             Accomplishment Notes By
                                         </td>
                                         <td width="70%" style="text-align:center">
-                                           xxx
+                                            @if( $taskrelease->progresses->last()->reason_text !== null)
+                                                {{ $taskrelease->progresses->last()->reason_text }}
+                                            @else
+                                                -
+                                            @endif
                                         </td>
                                     </tr>
                                     <tr>

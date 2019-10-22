@@ -50,7 +50,7 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
-                    field: 'jobcardable.number',
+                    field: 'tc_number',
                     title: 'TaskCard No',
                     sortable: 'asc',
                     filterable: !1,
@@ -139,6 +139,33 @@ let TaskRelease = {
                     filterable: !1,
                 },
                 {
+                    field: 'created_by',
+                    title: 'Created By',
+                    sortable: 'asc',
+                    filterable: !1,
+                     template: function (t, e, i) {
+                        return t.created_by + '<br>' + t.create_date 
+                    }
+                },
+                {
+                    field: 'updated_by',
+                    title: 'Updated By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.updated_by + '<br>' + t.update_date 
+                    }
+                },
+                {
+                    field: 'conducted_by',
+                    title: 'Released By',
+                    sortable: 'asc',
+                    filterable: !1,
+                    template: function (t, e, i) {
+                        return t.conducted_by + '<br>' + t.conducted_at 
+                    }
+                },
+                {
                     field: 'Actions',
                     sortable: !1,
                     overflow: 'visible',
@@ -149,13 +176,13 @@ let TaskRelease = {
                                     '<i class="la la-check-circle"></i>' +
                                 '</a>' +
                                 '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-external-link"></i>' +
+                                    '<i class="la la-print"></i>' +
                                 '</a>'
                             );
                         }else{
                             return (
                                 '<a href="/jobcard/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill show" title="Open Job Card" data-uuid="' + t.uuid + '">' +
-                                    '<i class="la la-external-link"></i>' +
+                                    '<i class="la la-print"></i>' +
                                 '</a>'
                             );
                         }

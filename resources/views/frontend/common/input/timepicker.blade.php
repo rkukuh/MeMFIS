@@ -16,10 +16,11 @@
                     type="text"
                     id="{{ $id or 'm_timepicker_1' }}"
                     name="{{ $name or '' }}"
-                    class="form-control {{$class or ''}}"
-                    style="{{$style or ''}}"
+                    class="form-control {{ $class or '' }}"
+                    style="{{ $style or '' }}"
+                    value="{{ $value or null }}"
                     placeholder="{{ $placeholder or 'Select time'}}"
-                    readonly {{ $disabled or ''}}>
+                    readonly {{ $disabled or '' }}>
             </td>
 
             @if (isset($input_append))

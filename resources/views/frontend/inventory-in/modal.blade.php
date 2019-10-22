@@ -15,7 +15,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="InstructionForm">
+                <form class="m-form m-form--fit m-form--label-align-right m-form--group-seperator-dashed" id="ItemForm">
                     <input type="hidden" class="form-control form-control-danger m-input" name="uuid" id="uuid">
                     <div class="m-portlet__body">
                         <div class="form-group m-form__group row ">
@@ -83,7 +83,7 @@
 
                                 @component('frontend.common.input.textarea')
                                     @slot('rows', '3')
-                                    @slot('id', 'remark')
+                                    @slot('id', 'item_remark')
                                     @slot('name', 'remark')
                                     @slot('text', 'Remark')
                                     @slot('required', 'required')
@@ -114,7 +114,7 @@
                         <div class="flex">
                             <div class="action-buttons">
                                     @component('frontend.common.buttons.submit')
-                                        @slot('class', 'add-instruction')
+                                        @slot('class', 'add-item')
                                         @slot('type', 'button')
                                     @endcomponent
                                     @component('frontend.common.buttons.reset')
@@ -133,5 +133,5 @@
 @push('footer-scripts')
     <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/item.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/item.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/item-uuid.js')}}"></script>
 @endpush

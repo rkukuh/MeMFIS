@@ -28,7 +28,7 @@ class ItemPurchaseRequestStore extends FormRequest
     public function rules()
     {
         return [
-            //
+            'quantity' => 'required|numeric|min:0|not_in:0',
         ];
     }
 

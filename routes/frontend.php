@@ -37,7 +37,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('progress', 'ProgressController');
         Route::resource('threshold', 'ThresholdController');
         Route::resource('inspection', 'InspectionController');
-        Route::resource('inventory-out', 'InventoryOutController');
 
         Route::resource('category-item', 'CategoryItemController', [
             'parameters' => ['category-item' => 'category']
@@ -71,6 +70,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('leave-period','LeavePeriodController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
+        Route::resource('overtime', 'OvertimeController');
 
         /** CERTIFICATION */
 

@@ -69,44 +69,44 @@ let InventoryIn = {
                     }
                 },
                 {
-                    field: 'inventoryinable_id',
+                    field: 'number',
                     title: 'Inventory In No.',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                     template: function (t) {
-                        return '<a href="/inventory-in/' + t.uuid + '">' + t.inventoryinable_id + "</a>"
+                        return '<a href="/inventory-in/' + t.uuid + '">' + t.number + "</a>"
                     }
                 },
                 {
-                    field: 'inventoryinable_type',
+                    field: '',
                     title: 'Ref Doc',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
-                    template: function (t) {
-                        return '<a href="/inventory-in/'+t.uuid+'">' + t.inventoryinable_type + "</a>"
-                    }
                 },
                 {
-                    field: 'storage_id',
+                    field: 'storage.name',
                     title: 'Storage',
                     sortable: 'asc',
                     filterable: !1,
                     width: 150,
                     template: function (t) {
-                        return '<a href="/inventory-in/' + t.uuid + '">' + t.storage_id + "</a>"
+                        return t.storage.name
                     }
                 },
                 {
-                    field: '',
+                    field: 'description',
                     title: 'Remark',
                     sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 150,
+                    template: function (t) {
+                        return t.description
+                    }
                 },
                 {
-                    field: '',
+                    field: 'status',
                     title: 'Status',
                     sortable: 'asc',
                     filterable: !1,
@@ -120,7 +120,7 @@ let InventoryIn = {
                     width: 150
                 },
                 {
-                    field: '',
+                    field: 'conducted_by',
                     title: 'Approve By',
                     sortable: 'asc',
                     filterable: !1,
@@ -151,7 +151,7 @@ let InventoryIn = {
         });
 
         $('.inventory_in_datatable').on('click', '.delete', function () {
-            let inventory_uuid = $(this).data('id');
+            let inventory_uuid = $(this).data('uuid');
 
             swal({
                 title: 'Sure want to remove?',
@@ -177,7 +177,7 @@ let InventoryIn = {
                                 }
                             );
 
-                            let table = $('.m_datatable').mDatatable();
+                            let table = $('.inventory_in_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -216,7 +216,7 @@ let InventoryIn = {
                         type: 'PUT',
                         url: '/inventory-in/' + inventory_uuid + '/approve',
                         success: function (data) {
-                            toastr.success('Inventory has been approved.', 'Approved', {
+                            toastr.success('Inventory in has been approved.', 'Approved', {
                                     timeOut: 5000
                                 }
                             );

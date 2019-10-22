@@ -310,7 +310,37 @@
                                                                 @component('frontend.common.label.data-info')
                                                                     @slot('id', 'sub_total')
                                                                     @slot('class', 'sub_total')
-                                                                    @slot('text', 'generate semua total ditabel')
+                                                                    @slot('text', '0')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group m-form__group row">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6"></div>
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="m--align-left" style="padding-top:15px">
+                                                                    Total Discount
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'total_discount')
+                                                                    @slot('class', 'total_discount')
+                                                                    @slot('text', '0')
+                                                                @endcomponent
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group m-form__group row hidden">
+                                                            <div class="col-sm-6 col-md-6 col-lg-6"></div>
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                <div class="m--align-left" style="padding-top:15px">
+                                                                    Total PPN
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4 col-md-4 col-lg-4">
+                                                                @component('frontend.common.label.data-info')
+                                                                    @slot('id', 'total_ppn')
+                                                                    @slot('class', 'total_ppn')
+                                                                    @slot('text', '0')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -323,18 +353,18 @@
                                                             </div>
                                                             <div class="col-sm-1 col-md-1 col-lg-1">
                                                                 @component('frontend.common.input.checkbox')
-                                                                    @slot('id', 'is_ppn_include')
-                                                                    @slot('name', 'is_ppn_include')
-                                                                    @slot('value', 1.1)
+                                                                    @slot('id', 'is_ppn')
+                                                                    @slot('name', 'is_ppn')
+                                                                    @slot('value', 'include')
                                                                     @slot('text', 'Include')
                                                                     @slot('style_div','margin-top:15px')
                                                                 @endcomponent
                                                             </div>
                                                             <div class="col-sm-1 col-md-1 col-lg-1">
                                                                 @component('frontend.common.input.checkbox')
-                                                                    @slot('id', 'is_ppn_exclude')
-                                                                    @slot('name', 'is_ppn_exclude')
-                                                                    @slot('value', 1.1)
+                                                                    @slot('id', 'is_ppn')
+                                                                    @slot('name', 'is_ppn')
+                                                                    @slot('value', 'exclude')
                                                                     @slot('text', 'Exclude')
                                                                     @slot('style_div','margin-top:15px')
                                                                 @endcomponent
@@ -344,14 +374,14 @@
                                                             <div class="col-sm-6 col-md-6 col-lg-6"></div>
                                                             <div class="col-sm-2 col-md-2 col-lg-2">
                                                                 <div class="m--align-left" style="padding-top:15px">
-                                                                    GrandTotal
+                                                                    Grand Total
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-4 col-md-4 col-lg-4">
                                                                 @component('frontend.common.label.data-info')
-                                                                    @slot('id', 'sub_total')
-                                                                    @slot('class', 'sub_total')
-                                                                    @slot('text', 'menghitung nilai total & biaya lainnya')
+                                                                    @slot('id', 'grand_total')
+                                                                    @slot('class', 'grand_total')
+                                                                    @slot('text', '0')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -411,9 +441,9 @@
         let po_uuid = "{{$purchaseOrder->uuid}}";
     </script>
 
-    <script src="{{ asset('js/frontend/functions/select2/discount-type.js') }}"></script>
-
     <script src="{{ asset('js/frontend/functions/select2/vendor.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/promo.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/promo.js') }}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/customer.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/customer.js') }}"></script>
@@ -434,11 +464,12 @@
     <script src="{{ asset('js/frontend/functions/select2/attn.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/scheduled-payment-type.js') }}"></script>
 
+    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
     <script src="{{ asset('js/frontend/purchase-order/edit.js') }}"></script>
     <script src="{{ asset('js/frontend/purchase-order/form-reset.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/valid-until.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date-shipping.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/by-date.js')}}"></script>
-
+    <script src="{{ asset('assets/metronic/vendors/custom/datatables/datatables.bundle.js') }}"></script>
 @endpush

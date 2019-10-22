@@ -158,21 +158,42 @@ let PurchaseRequest = {
                     remark: remark,
                 },
                 success: function(response) {
-                    if (response.title == "Danger") {
-                        toastr.error("Item already exists!", "Error", {
-                            timeOut: 5000
-                        });
+                    if (response.errors) {
+                        if (response.errors.quantity) {
+                            $('#quantity-error').html(response.errors.quantity[0]);
+                        }
+                        // document.getElementById('account_code').value = account_code;
+
                     } else {
-                        $('#modal_general').modal('hide');
+                        if (response.title == "Danger") {
+                            toastr.error("Task card already exists!", "Error", {
+                                timeOut: 5000
+                            });
+                        } else {
+                            $('#modal_general').modal('hide');
 
-                        toastr.success("Item has been added.", "Success", {
-                            timeOut: 5000
-                        });
+                            $('#modal_general').on('hidden.bs.modal', function (e) {
+                                $(this)
+                                .find("input,textarea")
+                                    .val('')
+                                    .end()
+                                .find("input[type=checkbox], input[type=radio]")
+                                    .prop("checked", "")
+                                    .end()
+                                .find("select")
+                                    .select2('val','All')
+                                    .end();
+                            })
 
-                        let table = $(".item_datatable").mDatatable();
+                            toastr.success("Item has been added.", "Success", {
+                                timeOut: 5000
+                            });
 
-                        table.originalDataSet = [];
-                        table.reload();
+                            let table = $(".item_datatable").mDatatable();
+
+                            table.originalDataSet = [];
+                            table.reload();
+                        }
                     }
                 }
             });
@@ -259,15 +280,18 @@ let PurchaseRequest = {
                     unit_id: unit,
                     note: remark,
                 },
-                success: function(data) {
-                    if (data.errors) {
+                success: function(response) {
+                    if (response.errors) {
+                        console.log(errors);
                         // if (response.errors.title) {
                         //     $('#title-error').html(response.errors.title[0]);
                         // }
 
                         // document.getElementById('manual_affected_id').value = manual_affected_id;
                     } else {
+                        //    taskcard_reset();
                         $('#modal_general').modal('hide');
+
                         toastr.success(
                             "Item has been updated.",
                             "Success",
@@ -280,9 +304,9 @@ let PurchaseRequest = {
 
                         table.originalDataSet = [];
                         table.reload();
+
                         $('.btn-success').removeClass('update-item');
                         $('.btn-success').addClass('add-item');
-
 
                     }
                 }

@@ -156,7 +156,7 @@
                                             <div class="form-group m-form__group row">
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                     <label class="form-control-label">
-                                                        Task Card Attachment @include('frontend.common.label.required')
+                                                        Task Card Attachment @include('frontend.common.label.optional')
                                                     </label>
                                                     @if (empty($taskcard->description))
                                                         @include('frontend.common.label.data-info-nodata')
@@ -230,11 +230,11 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @if( $taskcard->scheduled_priority_id == 144)
+                                                    @if( $taskcard->scheduled_priority == 'next-shop-visit')
                                                         @slot('text', 'Next check / shop visit')
-                                                    @elseif( $taskcard->scheduled_priority_id == 145)
+                                                    @elseif( $taskcard->scheduled_priority == 'next-hm-visit')
                                                         @slot('text', 'Next heavy maintenance visit')
-                                                    @elseif( $taskcard->scheduled_priority_id == 146)
+                                                    @elseif( $taskcard->scheduled_priority == 'by-ppc')
                                                         @slot('text', 'As scheduled by PPC')
                                                     @else
                                                         @slot('text', 'Prior To')
@@ -244,7 +244,7 @@
                                             <div class="col-sm-6 col-md-6 col-lg-6" id="prior_to">
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>
-                                                @if($taskcard->scheduled_priority_id == 147)
+                                                @if($taskcard->scheduled_priority == 'prior-to')
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-10 col-md-10 col-lg-10">
                                                         @component('frontend.common.label.data-info')
@@ -267,9 +267,9 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @if( $taskcard->recurrence_id == 74)
+                                                    @if( $taskcard->recurrence == 'one-time')
                                                         @slot('text', 'One-Time')
-                                                    @elseif( $taskcard->recurrence_id == 75)
+                                                    @elseif( $taskcard->recurrence == 'as-required')
                                                         @slot('text', 'As Required')
                                                     @else
                                                         @slot('text', 'Repetitive')
@@ -280,7 +280,7 @@
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>
 
-                                                @if($taskcard->recurrence_type)
+                                                @if($taskcard->recurrence == 'repetitive')
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-10 col-md-10 col-lg-10">
                                                         @component('frontend.common.label.data-info')
@@ -303,20 +303,20 @@
                                                 </label>
 
                                                 @component('frontend.common.label.data-info')
-                                                    @if( $taskcard->manual_affected_id == 136)
+                                                    @if( $taskcard->manual_affected == 'mm')
                                                         @slot('text', 'MM')
-                                                    @elseif( $taskcard->manual_affected_id == 137)
+                                                    @elseif( $taskcard->manual_affected == 'ipc')
                                                         @slot('text', 'IPC')
-                                                    @elseif( $taskcard->manual_affected_id == 138)
+                                                    @elseif( $taskcard->manual_affected == 'wdm')
                                                         @slot('text', 'WDM')
-                                                    @elseif( $taskcard->manual_affected_id == 139)
+                                                    @elseif( $taskcard->manual_affected == 'ohm')
                                                         @slot('text', 'OHM')
                                                     @else
                                                         @slot('text', 'Other')
                                                     @endif
                                                 @endcomponent
                                             </div>
-                                            @if($taskcard->manual_affected_id == 140)
+                                            @if($taskcard->manual_affected == 'other')
                                             <div class="col-sm-6 col-md-6 col-lg-6" id="note_div">
                                                 <label class="form-control-label" style="margin-top:13px">
                                                 </label>

@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.quotation.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.goods-received.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 Goods Received Note
                             </span>
@@ -230,13 +230,14 @@
 @endsection
 
 @push('footer-scripts')
-
     <script src="{{ asset('js/frontend/good-received-note/create.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/do-date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/employee.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/employee-uuid.js') }}"></script>

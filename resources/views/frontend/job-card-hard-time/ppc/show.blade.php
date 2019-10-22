@@ -171,7 +171,9 @@
                                                                                     @slot('id', 'is_rii')
                                                                                     @slot('name', 'is_rii')
                                                                                     @slot('text', 'IS RII?')
+                                                                                    @if($htcrr->is_rii == 1)
                                                                                     @slot('checked', 'checked')
+                                                                                    @endif
                                                                                     @slot('size', '2')
                                                                                     @slot('style_div', 'margin-top:20px; padding:0;')
                                                                                     @slot('padding_left', '0')
@@ -271,7 +273,9 @@
                                                                                     @slot('id', 'is_rii')
                                                                                     @slot('name', 'is_rii')
                                                                                     @slot('text', 'IS RII?')
+                                                                                    @if($htcrr->is_rii == 1)
                                                                                     @slot('checked', 'checked')
+                                                                                    @endif
                                                                                     @slot('size', '2')
                                                                                     @slot('style_div', 'margin-top:20px; padding:0;')
                                                                                     @slot('padding_left', '0')

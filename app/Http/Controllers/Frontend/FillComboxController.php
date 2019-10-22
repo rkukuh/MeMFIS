@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Zone;
+use App\Models\DefectCard;
 use App\Models\Item;
+use App\Models\JobCard;
 use App\Models\Type;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
 use App\Models\Level;
+use App\Models\Promo;
 use App\Models\Vendor;
 use App\Models\Access;
 use App\Models\Project;
@@ -27,9 +30,37 @@ use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\EmployeeLicense;
+use App\Models\InventoryIn;
+use App\Models\InventoryOut;
 
 class FillComboxController extends Controller
 {
+/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobcard()
+    {
+        $jobcards = JobCard::pluck('number', 'uuid');
+
+        return json_encode($jobcards);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function defectcard()
+    {
+        $defectcards = DefectCard::pluck('code', 'id');
+
+        return json_encode($defectcards);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -114,6 +145,19 @@ class FillComboxController extends Controller
 
     }
 
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function inventoryOut()
+    {
+        $inventoryout = InventoryOut::pluck('number', 'id');
+
+        return json_encode($inventoryout);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -150,7 +194,7 @@ class FillComboxController extends Controller
      */
     public function employees()
     {
-        $employees = Employee::selectRaw('id, CONCAT(first_name, " ", middle_name ," ", last_name) as name')
+        $employees = Employee::selectRaw('id, CONCAT(first_name," ", last_name) as name')
                     ->pluck('name', 'id');
 
         return json_encode($employees);
@@ -354,9 +398,22 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function purchaseOrder()
+    {
+        $PurchaseOrders = PurchaseOrder::has('approvals')->pluck('number', 'uuid');
+
+        return json_encode($PurchaseOrders);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function vendor()
     {
-        $vendors = Vendor::pluck('code', 'id');
+        $vendors = Vendor::pluck('name', 'id');
 
         return json_encode($vendors);
 
@@ -643,7 +700,22 @@ class FillComboxController extends Controller
                 })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
 
         return $items;
-}
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolUuid()
+    {
+        $items = Item::with('categories')
+            ->whereHas('categories', function ($query) {
+                $query->where('code', 'tool');
+            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name', 'uuid');
+
+        return $items;
+    }
 
     /**
      * Display a listing of the resource.
@@ -665,9 +737,36 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function materialUUid()
+    {
+        $items = Item::with('categories')
+            ->whereHas('categories', function ($query) {
+                $query->where('code', 'raw')->orWhere('code', 'cons')->orWhere('code', 'comp')->orWhere('code', 'service')->orWhere('code', 'facility');
+            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name', 'uuid');
+
+        return $items;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function poMaterial(purchaseOrder $purchaseOrder)
     {
         $items = $purchaseOrder->items->pluck('name','uuid');
+
+        return $items;
+    }
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ItemPODetails(purchaseOrder $purchaseOrder, Item $item)
+    {
+        $items = $purchaseOrder->items->where('code',$item->code)->first();
 
         return $items;
     }
@@ -810,4 +909,18 @@ class FillComboxController extends Controller
 
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function promo()
+    {
+        $promo = Promo::where('code','like','discount%')->pluck('name', 'uuid');
+
+        return json_encode($promo);
+
+    }
+
+    
 }

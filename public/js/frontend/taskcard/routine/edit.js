@@ -42,11 +42,12 @@ let TaskCard = {
                     }
                 }
             },
-            columns: [{
-                field: 'code',
-                title: 'PN',
-                sortable: 'asc',
-                filterable: !1,
+            columns: [
+                {
+                    field: 'code',
+                    title: 'PN',
+                    sortable: 'asc',
+                    filterable: !1,
                 },
                 {
                     field: 'name',

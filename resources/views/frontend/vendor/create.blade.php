@@ -493,7 +493,7 @@
                                                             Bank Account Number
                                                         </label>
                                     
-                                                        @component('frontend.common.input.number')
+                                                        @component('frontend.common.input.text')
                                                             @slot('text', 'Bank Account Number')
                                                             @slot('id', 'bank_account_number')
                                                             @slot('name', 'bank_account_number')

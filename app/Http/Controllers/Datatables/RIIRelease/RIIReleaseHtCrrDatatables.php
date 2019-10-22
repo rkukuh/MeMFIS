@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Datatables\RIIRelease;
 
 use Auth;
 use Carbon\Carbon;
+use App\User;
 use App\Models\Type;
 use App\Models\HtCrr;
 use App\Models\Status;
@@ -74,6 +75,24 @@ class RIIReleaseHtCrrDatatables extends Controller
                 }
             }
 
+            //auditable, Technichal Writer request to show this
+            if(empty($data->approvals->get(1))){
+                $conducted_by = "";
+                $conducted_at = "";
+            }
+            else{
+                $conducted_by = User::find($data->approvals->get(1)->conducted_by)->name;
+                $conducted_at = $data->approvals->get(1)->created_at;
+            }
+
+            $data->conducted_by      .= $conducted_by;
+            $data->conducted_at      .= $conducted_at;
+
+            $data->create_date       .= $data->audits->first()->created_at;
+            $data->created_by        .= User::find($data->audits->first()->user_id)->name;
+
+            $data->update_date       .= $data->audits->last()->updated_at;
+            $data->updated_by        .= User::find($data->approvals->get(0)->conducted_by)->name;
         }
 
         $data = $alldata = json_decode(collect(array_values($HtCrr->whereIn('status',['Waiting for RII','Released'])->all())));

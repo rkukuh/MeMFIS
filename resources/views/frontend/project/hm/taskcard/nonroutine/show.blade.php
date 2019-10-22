@@ -170,11 +170,6 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
-                                            @component('frontend.common.buttons.create-new')
-                                                @slot('text', 'Engineering Authorization')
-                                                @slot('class', 'btn-add')
-                                                @slot('data_target', '#modal_ea')
-                                                @endcomponent
                                             @component('frontend.common.buttons.summary')
                                                 @slot('text', 'EA Summary')
                                                 @slot('href', route('frontend.project-hm.summary.ea',['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )
@@ -224,11 +219,6 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-6 order-1 order-xl-2 m--align-right b-t-n">
-                                            @component('frontend.common.buttons.create-new')
-                                                @slot('text', 'Engineer Order')
-                                                @slot('class', 'btn-add')
-                                                @slot('data_target', '#modal_eo')
-                                                @endcomponent
                                             @component('frontend.common.buttons.summary')
                                                 @slot('text', 'EO Summary')
                                                 @slot('href', route('frontend.project-hm.summary.eo',['project' => $project->uuid ,'workPackage' => $workPackage->uuid]) )

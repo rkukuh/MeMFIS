@@ -14,7 +14,7 @@ class InventoryOutObserver
      */
     public function created(InventoryOut $inventoryOut)
     {
-        //
+        $inventoryOut->branches()->attach(1);
     }
 
     /**

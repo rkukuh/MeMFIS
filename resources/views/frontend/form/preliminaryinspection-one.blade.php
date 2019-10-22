@@ -117,21 +117,21 @@
       <li>
         <div class="jobcard-info">
             <fieldset>
-                <legend>Job Card No : {{ $jobCard->number }}</legend>
+                <legend>Job Card No : {{ $jobcard->number }}</legend>
                 <div class="jobcard-info-detail">
                   <table width="80%" cellpadding="3">
                       <tr>
                         <td width="20%">Issued Date & Time</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{ $jobCard->created_at }}</td>
+                        <td width="29%">{{ $jobcard->created_at }}</td>
                         <td width="20%">AC/Type</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{ $jobCard->quotation->quotationable->aircraft->name }}</td>
+                        <td width="29%">{{ $jobcard->quotation->quotationable->aircraft->name }}</td>
                       </tr>
                       <tr>
                         <td width="20%">Project No</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{ $jobCard->quotation->quotationable->code }}</td>
+                        <td width="29%">{{ $jobcard->quotation->quotationable->code }}</td>
                         <td width="20%">Est. Mhrs</td>
                         <td width="1%">:</td>
                         <td width="29%">{{ $taskcard->estimation_manhour }}</td>
@@ -142,7 +142,7 @@
                         <td width="29%"></td>
                         <td width="20%">Act. Mhrs</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{ $jobCard->actual_manhour }}</td>
+                        <td width="29%">{{ $jobcard->actual_manhour }}</td>
                       </tr>
                   </table>
                 </div>
@@ -224,7 +224,7 @@
           <tr>
               <td width="5%" align="center" valign="top">Z-05</td>
               <td width="45%" align="left" valign="top">R/H Engine</td>
-              <td width="5%" align="center" valign="top">wri</td>
+              <td width="5%" align="center" valign="top">WRI</td>
               <td width="45%" align="left" valign="top">Wrinkles</td>
           </tr>
           <tr>
@@ -301,7 +301,7 @@
                       <div style="position:absolute;top:-6px;left:90px;">
                         <ul>
                           <li>
-                              <img @if(sizeof($jobCard->defectcards) <> 0)
+                              <img @if(sizeof($jobcard->defectcards) <> 0)
                                   src="./img/check.png"
                                   @else
                                   src="./img/check-box-empty.png"
@@ -310,7 +310,7 @@
                                   <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                           </li>
                           <li style="margin-left:12px;">
-                              <img @if(sizeof($jobCard->defectcards) == 0)
+                              <img @if(sizeof($jobcard->defectcards) == 0)
                               src="./img/check.png"
                               @else
                               src="./img/check-box-empty.png"
@@ -320,9 +320,9 @@
                           </li>
                         </ul>
                       </div>
-                      <span style="position:absolute;top:60px;left:0">Number of discrepencies {{ sizeof($jobCard->defectcards) }} item(s)</span>
+                      <span style="position:absolute;top:60px;left:0">Number of discrepencies {{ sizeof($jobcard->defectcards) }} item(s)</span>
                   </td>
-                  <td width="50%" height="60" valign="top" style="position:relative;">Inspection performed by : {{ $jobCard->progresses->first()->progressedBy->full_name }} </td>
+                  <td width="50%" height="60" valign="top" style="position:relative;">Inspection performed by : {{ $jobcard->progresses->first()->progressedBy->full_name }} </td>
               </tr>
           </table>
       </div>

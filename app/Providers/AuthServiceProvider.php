@@ -104,6 +104,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\QuotationWorkPackageTaskCardItem::class => Policies\QuotationWorkPackageTaskCardItemPolicy::class,
         Models\EOInstructionWorkPackageSuccessor::class => Policies\EOInstructionWorkPackageSuccessorPolicy::class,
         Models\EOInstructionWorkPackagePredecessor::class => Policies\EOInstructionWorkPackagePredecessorPolicy::class,
+        Models\Overtime::class => Policies\OvertimePolicy::class,
     ];
 
     /**

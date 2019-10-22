@@ -67,13 +67,13 @@ var DatatableAutoColumnHideDemo = function () {
             if(t.pivot){
               if(currency.id == 1){
                 return (t.pivot.description + '<br>' +
-                  '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x ' + IDRformatter.format(t.pivot.manhour_rate_amount) + '<br>' +
+                  '- Manhours Price : ' + t.total_manhours_with_performance_factor + ' x ' + IDRformatter.format(t.pivot.manhour_rate_amount) + '<br>' +
                   '- Facility Price : <br>' +
                   '- Material & Tool Price : ' 
                 );
               }else{
                 return (t.pivot.description + '<br>' +
-                  '- Manhours Price : ' + numberFormat.format(t.total_manhours_with_performance_factor) + ' x ' + ForeignFormatter.format(t.pivot.manhour_rate_amount) + '<br>' +
+                  '- Manhours Price : ' + t.total_manhours_with_performance_factor + ' x ' + ForeignFormatter.format(t.pivot.manhour_rate_amount) + '<br>' +
                   '- Facility Price : <br>' +
                   '- Material & Tool Price : ' 
                 );
@@ -81,24 +81,24 @@ var DatatableAutoColumnHideDemo = function () {
             }else if(t.data_htcrr){
               if(currency.id == 1){
                 return (t.data_htcrr.description + '<br>' +
-                  '- Manhours Price : ' + numberFormat.format(t.data_htcrr.total_manhours_with_performance_factor) + ' x ' + IDRformatter.format(t.data_htcrr.manhour_rate_amount) + '<br>' +
+                  '- Manhours Price : ' + t.data_htcrr.total_manhours_with_performance_factor + ' x ' + IDRformatter.format(t.data_htcrr.manhour_rate_amount) + '<br>' +
                   '- Material & Tool Price : ' 
                 );
               }else{
                 return (t.data_htcrr.description + '<br>' +
-                  '- Manhours Price : ' + numberFormat.format(t.data_htcrr.total_manhours_with_performance_factor) + ' x ' + ForeignFormatter.format(t.data_htcrr.manhour_rate_amount) + '<br>' +
+                  '- Manhours Price : ' + t.data_htcrr.total_manhours_with_performance_factor + ' x ' + ForeignFormatter.format(t.data_htcrr.manhour_rate_amount) + '<br>' +
                   '- Material & Tool Price : ' 
                 );
               }
             }else{
               if(currency.id == 1){
                 return ('not filled yet<br>' +
-                  '- Manhours Price : ' + numberFormat.format(0) + ' x ' + IDRformatter.format(0) + '<br>' +
+                  '- Manhours Price : 0 x ' + IDRformatter.format(0) + '<br>' +
                   '- Material & Tool Price : ' 
                 );
               }else{
                 return ('not filled yet<br>' +
-                  '- Manhours Price : ' + numberFormat.format(0) + ' x ' + ForeignFormatter.format(0) + '<br>' +
+                  '- Manhours Price : 0 x ' + ForeignFormatter.format(0) + '<br>' +
                   '- Material & Tool Price : ' 
                 );
               }

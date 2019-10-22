@@ -15,11 +15,6 @@ $('.filter').on('change', function () {
     let customer = $('#customer').val();
     let status = $('#status').val();
 
-    console.log(date);
-    console.log(project_no);
-    console.log(customer);
-    console.log(status);
-
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

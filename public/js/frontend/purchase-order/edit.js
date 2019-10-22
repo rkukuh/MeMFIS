@@ -17,6 +17,17 @@ let PurchaseOrder = {
                                 dataSet = raw.data;
                             }
 
+
+                            let subtotal = discount = 0;
+                            $.each(dataSet, function( index, data ) {
+                                subtotal += parseInt(data.pivot.subtotal_after_discount);
+                                discount += parseInt(data.discount);
+                            });
+                            $("#sub_total").html(subtotal);
+                            $("#sub_total").val(subtotal);
+                            $("#total_discount").html(discount);
+                            $("#total_discount").val(discount);
+
                             return dataSet;
                         }
                     }
@@ -84,7 +95,7 @@ let PurchaseOrder = {
                 filterable: !1,
             },
             {
-                field: 'pivot.discount_amount',
+                field: 'discount',
                 title: 'Disc PR',
                 sortable: 'asc',
                 filterable: !1,
@@ -112,7 +123,7 @@ let PurchaseOrder = {
                 overflow: 'visible',
                 template: function (t, e, i) {
                     return (
-                        '<button data-toggle="modal" data-target="#modal_check" type="button" href="#" class="m-badge m-badge--brand m-badge--wide" title="Edit" data-uuid=' +
+                        '<button data-toggle="modal" data-target="#modal_check" type="button" href="#" class="m-badge m-badge--brand m-badge--wide check-stock" title="Edit" data-uuid=' +
                         t.uuid +
                         '>\t\t\t\t\t\t\tCheck\t\t\t\t\t\t</button>\t\t\t\t\t\t'+
 
@@ -128,14 +139,90 @@ let PurchaseOrder = {
             ]
         });
 
+        function item(item_uuid, triggeruuid) {
+            $("#item_datatable").DataTable({
+                dom: '<"top"f>rt<"bottom">pl',
+                responsive: !0,
+                searchDelay: 500,
+                processing: !0,
+                serverSide: !0,
+                lengthMenu: [5, 10, 25, 50],
+                pageLength: 5,
+                ajax: '/datatables/fefo-in/item/'+item_uuid+'/storage/'+ triggeruuid,
+                columns: [
+                    {
+                        data: "code"
+                    },
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "quantity"
+                    },
+                    {
+                        data: "expired_at"
+                    }
+                ]
+            });
+
+            // $('<button type="button" class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary btn-sm item_modal" style="margin-left: 60%; color: white;"><span><i class="la la-plus-circle"></i><span>Add</span></span></button>').appendTo('.item-body .dataTables_filter');
+
+            $(".paging_simple_numbers").addClass("pull-left");
+            $(".dataTables_length").addClass("pull-right");
+            $(".dataTables_info").addClass("pull-left");
+            $(".dataTables_info").addClass("margin-info");
+            $(".paging_simple_numbers").addClass("padding-datatable");
+
+            // $(".item-body").on("click", ".item_modal", function() {
+            //     $("#add_modal_material").modal("show");
+            // });
+        }
+
+        let item_atatables_init = true;
+        let triggeruuid = "";
+        let item_uuid = "";
+        $("#item_storage_id").on('change', function() {
+            item_uuid = $('#item_uuid').val();
+            if (item_atatables_init == true) {
+                item_atatables_init = false;
+                triggeruuid = $(this).val();
+                item(item_uuid, triggeruuid);
+                $("#item_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            } else {
+                let table = $("#item_datatable").DataTable();
+                table.destroy();
+                triggeruuid = $(this).val();
+                item(item_uuid, triggeruuid);
+                $("#item_datatable")
+                    .DataTable()
+                    .ajax.reload();
+            }
+        });
+
+        $('.item_datatable').on('click', '.check-stock', function () {
+            document.getElementById('item_uuid').value =  $(this).data('uuid');
+        });
+
         $('.item_datatable').on('click', '.edit-item', function () {
+            let item_uuid = $(this).data('uuid');
             $.ajax({
-                url: '/purchase-order/'+po_uuid+'/item/'+ $(this).data('uuid') +'/edit',
+                url: '/label/get-purchase-orderes/'+po_uuid+'/item/'+ item_uuid ,
+                type: 'GET',
+                dataType: 'json',
+                success: function (qty_item) {
+                    document.getElementById('item_quantity_ordered').innerText = qty_item;
+                }
+            });
+            $.ajax({
+                url: '/purchase-order/'+po_uuid+'/item/'+ item_uuid +'/edit',
                 type: 'GET',
                 dataType: 'json',
                 success: function (data) {
                     $.ajax({
-                        url: '/get-units',
+                        url: '/get-item-unit-uuid/'+item_uuid,
+                        // url: '/get-units',
                         type: 'GET',
                         dataType: 'json',
                         success: function (data2) {
@@ -176,7 +263,7 @@ let PurchaseOrder = {
                     document.getElementById('uuid').value = data.uuid;
                     document.getElementById('qty').value = data.pivot.quantity;
                     document.getElementById('price').value = data.pivot.price;
-                    document.getElementById('discount').value = data.pivot.discount_value;
+                    // document.getElementById('discount').value = data.pivot.discount_value;
                     document.getElementById('remark_material').value = data.pivot.note;
 
                 }
@@ -189,8 +276,8 @@ let PurchaseOrder = {
             let unit_id = $('#unit_id').val();
             let price = $('#price').val();
             let ppn = $('#ppn').val();
-            let discount = $('#discount').val();
-            // let discount_type = $('#discount-type').val();
+            let promo = $('#promo').val();
+            let promo_type = $('#promo-type').val();
             let remark_material = $('#remark_material').val();
 
             $.ajax({
@@ -204,12 +291,15 @@ let PurchaseOrder = {
                     unit_id:unit_id,
                     price:price,
                     ppn:ppn,
-                    // discount:discount,
-                    // discount_type:discount_type,
+                    promo:promo,
+                    promo_type:promo_type,
                     note:remark_material,
                 },
                 success: function(response) {
                     if (response.errors) {
+                        if (response.errors.quantity) {
+                            $('#quantity-error').html(response.errors.quantity[0]);
+                        }
                         // if (response.errors.title) {
                         //     $('#title-error').html(response.errors.title[0]);
                         // }
@@ -227,6 +317,16 @@ let PurchaseOrder = {
                         );
 
                         let table = $(".item_datatable").mDatatable();
+                        let subtotal = discount = 0;
+                        let dataSet = table.originalDataSet;
+                        $.each(dataSet, function( index, data ) {
+                            subtotal += parseInt(data.pivot.subtotal_after_discount);
+                            discount += parseInt(data.discount);
+                        });
+                        $("#sub_total").html(subtotal);
+                        $("#sub_total").val(subtotal);
+                        $("#total_discount").html(discount);
+                        $("#total_discount").val(discount);
 
                         table.originalDataSet = [];
                         table.reload();
@@ -330,6 +430,7 @@ let PurchaseOrder = {
                 exchange_rate.attr("readonly", false);
             }
         });
+
         $('.footer').on('click', '.add-po', function () {
             let number = $('input[name=number]').val();
             let currency = $('#currency').val();

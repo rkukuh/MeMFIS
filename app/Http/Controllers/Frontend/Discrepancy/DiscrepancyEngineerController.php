@@ -194,8 +194,14 @@ class DiscrepancyEngineerController extends Controller
     {
         $zone = json_decode($request->zone);
         $zones = [];
+        $jobcard = JobCard::find($request->jobcard_id);
+        if(empty($jobcard)){
+            $jobcard = JobCard::where('uuid', $request->jobcard_id)->first();
+        }
+        $request->merge(['jobcard_id' => $jobcard->id]);
 
         $discrepancy->update($request->all());
+
 
         if($zone){
             foreach ($zone as $zone_name ) {

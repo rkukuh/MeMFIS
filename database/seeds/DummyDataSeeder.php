@@ -59,6 +59,8 @@ class DummyDataSeeder extends Seeder
         
         $this->call(BankAccounts::class);
 
+        $this->call(Overtimes::class);
+
         /** POLYMORPH */
 
         $this->call(Faxes::class);
