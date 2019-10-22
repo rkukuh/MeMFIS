@@ -63,29 +63,59 @@
                                                 @slot('id_error','date')
                                             @endcomponent
                                         </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
                                                 Ref Document No. @include('frontend.common.label.required')
                                             </label>
-
-                                            @include('frontend.common.warehouse.index')
+                                            @component('frontend.common.input.select2')
+                                            @slot('text', 'Workshop')
+                                            @slot('id', 'item_number_id')
+                                            @slot('name', 'item_number_id')
+                                            @slot('id_error', 'item_number_id')
+                                            @endcomponent
+                                            {{-- @include('frontend.common.warehouse.index')
 
                                             @component('frontend.common.input.hidden')
                                                 @slot('id', 'warehouse')
                                                 @slot('name', 'warehouse')
-                                            @endcomponent
+                                            @endcomponent --}}
                                         </div>
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Project No.
+                                                Workshop
                                             </label>
 
                                             @component('frontend.common.label.data-info')
                                                 @slot('id', 'project_number')
                                                 @slot('text', 'generate')
                                             @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group m-form__group row">
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Part Number
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('id', 'actype')
+                                                        @slot('text', 'Generate')
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Item Description
+                                                    </label>
+
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('id', 'acreg')
+                                                        @slot('text', 'Generate')
+                                                    @endcomponent
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -102,28 +132,16 @@
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <div class="form-group m-form__group row">
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        A/C Type
-                                                    </label>
+                                            <label class="form-control-label">
+                                                Section Code
+                                            </label>
 
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('id', 'actype')
-                                                        @slot('text', 'Generate')
-                                                    @endcomponent
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <label class="form-control-label">
-                                                        A/C Reg
-                                                    </label>
-
-                                                    @component('frontend.common.label.data-info')
-                                                        @slot('id', 'acreg')
-                                                        @slot('text', 'Generate')
-                                                    @endcomponent
-                                                </div>
-                                            </div>
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'Section Code')
+                                                @slot('id', 'section')
+                                                @slot('name', 'section')
+                                                @slot('id_error', 'section')
+                                            @endcomponent
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
@@ -139,18 +157,7 @@
                                                 @slot('id_error', 'returned_by')
                                             @endcomponent
                                         </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Section Code
-                                            </label>
-
-                                            @component('frontend.common.input.text')
-                                                @slot('text', 'Section Code')
-                                                @slot('id', 'section')
-                                                @slot('name', 'section')
-                                                @slot('id_error', 'section')
-                                            @endcomponent
-                                        </div>
+                                       
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -247,5 +254,6 @@
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/returned-by.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/workshop.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
 @endpush

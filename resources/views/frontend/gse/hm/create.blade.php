@@ -74,12 +74,6 @@
                                             @slot('id_error', 'jc_no')
                                             @endcomponent
 
-                                            {{-- @include('frontend.common.warehouse.index')
-
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'warehouse')
-                                                @slot('name', 'warehouse')
-                                            @endcomponent --}}
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
