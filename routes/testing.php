@@ -4,6 +4,27 @@ Route::name('testing.')->group(function () {
 
     Route::group(['prefix' => '_test'], function () {
 
+        Route::get('/po', function () {
+            // $po = App\Models\PurchaseOrder::find(16);
+
+            // foreach ($po->promos as $promo) {
+            //     dump($promo->pivot);
+
+            //     // if ($promo->pivot->promo_id == 19) {
+            //     //     dump($promo->pivot);
+            //     // }
+            // }
+
+            // DB::table('promoables')
+            //         ->where('promoable_type', 'App\Models\PurchaseOrder')
+            //         ->where('promoable_id', 16)
+            //         ->where('promo_id', 19)
+            //         ->update([
+            //             'value' => 99,
+            //             'amount' => 9999
+            //         ]);
+        });
+
         Route::get('/docnum', function () {
 
             echo App\Helpers\DocumentNumber::generate('TC-', App\Models\TaskCard::count());
