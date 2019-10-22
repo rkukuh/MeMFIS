@@ -15,8 +15,6 @@ class ItemObserver
      */
     public function created(Item $item)
     {
-        $item->branches()->attach(1);
-        
         for ($i = 0; $i < Storage::count(); $i++) {
             $item->storages()->attach(Storage::find(($i + 1)));
         }
