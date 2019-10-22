@@ -145,9 +145,7 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'electrical_qty')
                             @slot('input_append', 'person')
-                            @if(!empty($engineer))
-                            @slot('value', $engineer->quantity)
-                            @endif
+                            @slot('value', 0)
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -205,9 +203,7 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'radio_qty')
                             @slot('input_append', 'person')
-                            @if(!empty($engineer))
-                            @slot('value', $engineer->quantity)
-                            @endif
+                            @slot('value', 0)
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -269,9 +265,7 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'instrument_qty')
                             @slot('input_append', 'person')
-                            @if(!empty($engineer))
-                            @slot('value', $engineer->quantity)
-                            @endif
+                            @slot('value', 0)
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -329,9 +323,7 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'cabin_qty')
                             @slot('input_append', 'person')
-                            @if(!empty($engineer))
-                            @slot('value', $engineer->quantity)
-                            @endif
+                            @slot('value', 0)
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -389,9 +381,7 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'runup_qty')
                             @slot('input_append', 'person')
-                            @if(!empty($engineer))
-                            @slot('value', $engineer->quantity)
-                            @endif
+                            @slot('value', 0)
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -448,9 +438,7 @@
                             @slot('name', 'repair_qty')
                             @slot('id_error', 'repair_qty')
                             @slot('input_append', 'person')
-                            @if(!empty($engineer))
-                            @slot('value', $engineer->quantity)
-                            @endif
+                            @slot('value', 0)
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -512,9 +500,7 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'repainting_qty')
                             @slot('input_append', 'person')
-                            @if(!empty($engineer))
-                            @slot('value', $engineer->quantity)
-                            @endif
+                            @slot('value', 0)
                             @slot('min',0)
                         @endcomponent
                     </div>
@@ -572,9 +558,7 @@
                             @slot('class', 'engineer_qty')
                             @slot('id_error', 'ndi_ndt_qty')
                             @slot('input_append', 'person')
-                            @if(!empty($engineer))
-                            @slot('value', $engineer->quantity)
-                            @endif
+                            @slot('value', 0)
                             @slot('min',0)
                         @endcomponent
                     </div>
