@@ -31,6 +31,7 @@ $factory->define(InventoryIn::class, function (Faker $faker) {
 
             return factory(GoodsReceived::class)->create()->id;
         },
+        'section' => null,
         'description' => $faker->randomElement([null, $faker->sentence]),
     ];
 

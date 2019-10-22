@@ -39,8 +39,6 @@ Route::name('datatables.')->group(function () {
         Route::get('/school-type', 'SchoolTypeDatatables@index')->name('school.index');
         Route::get('/attendance', 'AttendanceDatatables@index')->name('attendance.index');
         Route::get('/overtime', 'OvertimeDatatables@index')->name('overtime.index');
-        Route::get('/overtime/getEmployees', 'OvertimeDatatables@getEmployees')->name('overtime.getEmployees');
-        Route::get('/attendance-correction', 'AttendanceCorrectionDatatables@index')->name('attendance-correction.index');
 
         /** LICENSE */
 
@@ -917,6 +915,28 @@ Route::name('datatables.')->group(function () {
                 /** Master Data */
                 Route::get('/', 'InventoryInDatatables@index')->name('all');
                 Route::get('/{inventoryIn}/items', 'InventoryInDatatables@getItemsByInventoryIn')->name('items');
+            });
+        });
+
+        /** Inventory Out */
+
+        Route::name('inventory-out.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'inventory-out',
+                'namespace' => 'InventoryOut'
+
+            ], function () {
+
+                /** Material */
+                Route::get('/material', 'InventoryOutMaterialDatatables@index')->name('material.all');
+                Route::get('/material/{inventoryOut}/items', 'InventoryOutMaterialDatatables@getItemsByInventoryOut')->name('material.items');
+
+                /** Tool */
+                Route::get('/tool', 'InventoryOutToolDatatables@index')->name('tools.all');
+                Route::get('/tool/{inventoryOut}/items', 'InventoryOutToolDatatables@getItemsByInventoryOut')->name('tools.items');
+
             });
         });
 

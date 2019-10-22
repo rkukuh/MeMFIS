@@ -71,9 +71,6 @@ Route::name('frontend.')->group(function () {
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
         Route::resource('overtime', 'OvertimeController');
-        Route::post('overtime/{overtime}/approve', 'OvertimeController@approve')->name("overtime.approve");
-        Route::post('overtime/{overtime}/reject', 'OvertimeController@reject')->name("overtime.reject");
-        Route::resource('attendance-correction', 'AttendanceCorrectionController');
 
         /** CERTIFICATION */
 

@@ -356,6 +356,19 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function purchaseOrder()
+    {
+        $PurchaseOrders = PurchaseOrder::has('approvals')->pluck('number', 'uuid');
+
+        return json_encode($PurchaseOrders);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function vendor()
     {
         $vendors = Vendor::pluck('name', 'id');
@@ -645,7 +658,22 @@ class FillComboxController extends Controller
                 })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
 
         return $items;
-}
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolUuid()
+    {
+        $items = Item::with('categories')
+            ->whereHas('categories', function ($query) {
+                $query->where('code', 'tool');
+            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name', 'uuid');
+
+        return $items;
+    }
 
     /**
      * Display a listing of the resource.
@@ -658,6 +686,21 @@ class FillComboxController extends Controller
                 ->whereHas('categories', function ($query) {
                     $query->where('code', 'raw')->orWhere('code', 'cons')->orWhere('code', 'comp')->orWhere('code', 'service')->orWhere('code', 'facility');
                 })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
+
+        return $items;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function materialUUid()
+    {
+        $items = Item::with('categories')
+            ->whereHas('categories', function ($query) {
+                $query->where('code', 'raw')->orWhere('code', 'cons')->orWhere('code', 'comp')->orWhere('code', 'service')->orWhere('code', 'facility');
+            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name', 'uuid');
 
         return $items;
     }

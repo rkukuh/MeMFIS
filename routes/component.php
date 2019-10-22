@@ -16,6 +16,7 @@ Route::name('component.')->group(function () {
         Route::get('get-tags', 'FillComboxController@tags')->name('get-tags');
         Route::get('get-employees', 'FillComboxController@employee')->name('get-employee');
         Route::get('get-tools', 'FillComboxController@tool')->name('get-tool');
+        Route::get('get-tools-uuid', 'FillComboxController@toolUuid')->name('get-tool-uuid');
         Route::get('get-zones', 'FillComboxController@zone')->name('get-zones');
         Route::get('get-items', 'FillComboxController@item')->name('get-items');
         Route::get('get-promos', 'FillComboxController@promo')->name('get-promos');
@@ -26,6 +27,7 @@ Route::name('component.')->group(function () {
         Route::get('get-accesses', 'FillComboxController@access')->name('get-accesses');
         Route::get('get-stations', 'FillComboxController@station')->name('get-stations');
         Route::get('get-materials', 'FillComboxController@material')->name('get-material');
+        Route::get('get-materials-uuid', 'FillComboxController@materialUuid')->name('get-material-uuid');
         Route::get('get-po-materials/{purchaseOrder}', 'FillComboxController@poMaterial')->name('get-po-material');
         Route::get('get-item-po-details/{purchaseOrder}/{item}', 'FillComboxController@ItemPODetails')->name('get-item-po-details');
         Route::get('get-aircrafts', 'FillComboxController@aircraft')->name('get-aircrafts');
@@ -48,6 +50,7 @@ Route::name('component.')->group(function () {
         Route::get('get-iterchanges/{item}', 'FillComboxController@iterchange')->name('get-iterchanges');
         Route::get('get-payment-term', 'FillComboxController@paymentTerm')->name('get-payment-term');
         Route::get('get-pr-types', 'FillComboxController@purchaseRequestType')->name('get-pr-types');
+        Route::get('get-purchase-order', 'FillComboxController@purchaseOrder')->name('get-purchase-order');
         Route::get('get-website-types', 'FillComboxController@websiteType')->name('get-website-types');
         Route::get('get-employees-data', 'FillComboxController@employees')->name('get-employees-data');
         Route::get('get-employees-uuid', 'FillComboxController@employeeUuid')->name('get-employees-uuid');
@@ -81,7 +84,8 @@ Route::name('component.')->group(function () {
             Route::get('get-purchase-request/{purchaseRequest}', 'FillLabelController@purchaseRequest')->name('get-purchase-request');
             Route::get('get-customer/{customer}', 'FillLabelController@customer')->name('get-customer');
             Route::get('get-project/{project}', 'FillLabelController@project')->name('get-project');
-            Route::get('get-purchase-orderes/{PurchaseOrder}/item/{item}', 'FillLabelController@purchaseOrdered')->name('get-po-item');
+            Route::get('get-purchase-orderes/{PurchaseOrder}/item/{item}', 'FillLabelController@purchaseOrdered')->name('get-qty-po-item');
+            Route::get('get-good-received/{GoodsReceived}/item/{item}', 'FillLabelController@GoodsReceived')->name('get-qty-grn-item');
         });
 
         Route::prefix('morris')->group(function () {
