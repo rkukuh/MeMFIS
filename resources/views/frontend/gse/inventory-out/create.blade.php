@@ -74,12 +74,7 @@
                                             @slot('name', 'item_number_id')
                                             @slot('id_error', 'item_number_id')
                                             @endcomponent
-                                            {{-- @include('frontend.common.warehouse.index')
-
-                                            @component('frontend.common.input.hidden')
-                                                @slot('id', 'warehouse')
-                                                @slot('name', 'warehouse')
-                                            @endcomponent --}}
+                                          
                                             
                                         </div>
                                     </div>

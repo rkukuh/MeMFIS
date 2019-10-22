@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Zone;
+use App\Models\DefectCard;
 use App\Models\Item;
 use App\Models\Type;
 use App\Models\Unit;
@@ -33,6 +34,20 @@ use App\Models\InventoryOut;
 
 class FillComboxController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function defectcard()
+    {
+        $defectcards = DefectCard::pluck('code', 'id');
+
+        return json_encode($defectcards);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
