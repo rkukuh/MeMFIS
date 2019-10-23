@@ -141,7 +141,7 @@
                                                 Scheduled Priority
                                             </td>
                                             <td width="70%" style="text-align:center">
-                                                {{$jobcard->jobcardable->eo_header->scheduled_priority_text}} {{$jobcard->jobcardable->eo_header->scheduled_priority_type}}
+                                                @if($jobcard->jobcardable->eo_header->scheduled_priority_text !== "null") {{ $jobcard->jobcardable->eo_header->scheduled_priority_text }} {{$jobcard->jobcardable->eo_header->scheduled_priority_type}} @else - @endif
                                             </td>
                                         </tr>
                                         <tr>

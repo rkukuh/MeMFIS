@@ -50,7 +50,7 @@
                     @slot('class', 'engineer_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
-                    @slot('value', $engineers_quantity["airframe"])
+                    @slot('value', 0)
                 @endcomponent
             </div>
                 @component('frontend.common.input.hidden')
@@ -110,7 +110,7 @@
                     @slot('id_error', 'powerplant_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
-                    @slot('value', $engineers_quantity["powerplant"])
+                    @slot('value', 0)
                 @endcomponent
             </div>
             @component('frontend.common.input.hidden')
@@ -170,7 +170,7 @@
                     @slot('id_error', 'electrical_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
-                    @slot('value', $engineers_quantity["electrical"])
+                    @slot('value', 0)
                 @endcomponent
             </div>
             @component('frontend.common.input.hidden')
@@ -232,7 +232,7 @@
                         @if(!empty($engineer))
                         @slot('value', $engineer->quantity)
                         @else
-                        @slot('value', $engineers_quantity["radio"])
+                        @slot('value', 0)
                         @endif
                         @slot('min',0)
                     @endcomponent
@@ -294,7 +294,7 @@
                         @slot('id_error', 'instrument_qty')
                         @slot('input_append', 'person')
                         @slot('min',0)
-                        @slot('value', $engineers_quantity["instrument"])
+                        @slot('value', 0)
                     @endcomponent
                 </div>
                 @component('frontend.common.input.hidden')
@@ -354,7 +354,7 @@
                     @slot('id_error', 'cabin_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
-                    @slot('value', $engineers_quantity["cabin"])
+                    @slot('value', 0)
                 @endcomponent
             </div>
             @component('frontend.common.input.hidden')
@@ -475,7 +475,7 @@
                     @if(!empty($engineer))
                     @slot('value', $engineer->quantity)
                     @else
-                    @slot('value', $engineers_quantity["repair"])
+                    @slot('value', 0)
                     @endif
                     @slot('min',0)
                 @endcomponent
@@ -537,7 +537,7 @@
                     @slot('id_error', 'repainting_qty')
                     @slot('input_append', 'person')
                     @slot('min',0)
-                    @slot('value', $engineers_quantity["repainting"])
+                    @slot('value', 0)
                 @endcomponent
             </div>
             @component('frontend.common.input.hidden')
@@ -599,7 +599,7 @@
                     @if(!empty($engineer))
                     @slot('value', $engineer->quantity)
                     @else
-                    @slot('value', $engineers_quantity["ndi-ndt"])
+                    @slot('value', 0)
                     @endif
                     @slot('min',0)
                 @endcomponent

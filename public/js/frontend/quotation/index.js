@@ -309,11 +309,17 @@ let Quotation = {
 
             swal({
                 title: 'Sure want to Approve?',
+                text: "Whose approval (Customer side)?",
                 type: 'question',
+                input: 'text',
+                inputAttributes: {
+                  autocapitalize: 'on'
+                },
                 confirmButtonText: 'Yes, Approve',
                 confirmButtonColor: '#34bfa3',
                 cancelButtonText: 'Cancel',
                 showCancelButton: true,
+                showLoaderOnConfirm: true,
             })
             .then(result => {
                 if (result.value) {
@@ -324,6 +330,9 @@ let Quotation = {
                             )
                         },
                         type: 'POST',
+                        data: {
+                            note:result.value 
+                        },
                         url: '/quotation-additional/' + quotation_uuid + '/approve',
                         success: function (data) {
                             toastr.success('Quotation has been approved.', 'Approved', {
