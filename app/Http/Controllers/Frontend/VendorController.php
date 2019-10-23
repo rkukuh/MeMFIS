@@ -55,7 +55,6 @@ class VendorController extends Controller
             $contact['name']     = $request->attn_name_array[$person];
             $contact['position'] = $request->attn_position_array[$person];
             $contact['phones'] = $request->attn_phone_array[$person];
-            $contact['ext'] = $request->attn_ext_array[$person];
             $contact['fax'] = $request->attn_fax_array[$person];
             $contact['emails'] = $request->attn_email_array[$person];
 
