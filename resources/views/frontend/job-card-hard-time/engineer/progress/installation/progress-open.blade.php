@@ -120,7 +120,7 @@
                                                                             Item Description
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->item->description}}
+                                                                            {{ $htcrr->item->name }}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -454,7 +454,7 @@
                                                                             Item Description
                                                                         </td>
                                                                         <td width="70%" style="text-align:center">
-                                                                            {{$htcrr->item->description}}
+                                                                            {{ $htcrr->item->name }}
                                                                         </td>
                                                                     </tr>
                                                                     <tr>

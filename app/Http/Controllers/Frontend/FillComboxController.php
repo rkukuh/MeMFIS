@@ -850,9 +850,22 @@ class FillComboxController extends Controller
      */
     public function workOrder()
     {
-        $work_order = Project::with('approvals')->whereHas('approvals')->pluck('no_wo','uuid');
+        $projects = Project::with('approvals','quotations')->whereHas('approvals')->get(); 
+        $work_orders = $result = [];
+        
+        foreach($projects as $key => $project){
+            if(sizeof($project->quotations) > 0){
+                foreach($project->quotations as $quotation){
+                    if(sizeof($quotation->approvals) > 0){
+                        $projects[$key] = "";
+                    }
+                };
+            }
+        }
 
-        return json_encode($work_order);
+        $work_orders = $projects->pluck('no_wo','uuid');
+        $work_orders = array_filter($work_orders->toArray());
+        return json_encode($work_orders);
     }
 
     /**

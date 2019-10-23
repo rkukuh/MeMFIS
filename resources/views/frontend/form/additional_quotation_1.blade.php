@@ -125,10 +125,9 @@
                 <div style="font-size:14px;letter-spacing:1px;margin-top:-15px">
                     <table width="100%">
                         <tr>
-                            <td width="20%" valign="top">QN No.</td>
+                            <td width="25%" valign="top">QN No.</td>
                             <td width="1%" valign="top">:</td>
-                            {{-- <td width="79%" valign="top">{{$quotation->number}}</td> --}}
-                            <td width="79%" valign="top">12345</td>
+                            <td width="74%" valign="top">{{$quotation->number}}</td>
                         </tr>
                     </table>
                 </div>
@@ -137,8 +136,7 @@
     </header>
 
     <footer style="margin-top:14px;">
-        {{-- <span style="margin-left:6px">Created By : Name ; {{$quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span><span style="position:absolute; right:20px;" class="num">PAGE </span> --}}
-        <span style="margin-left:6px">Created By : Name ; Timestamp &nbsp;&nbsp;&nbsp; Printed By : admin ; Timestamp</span><span style="position:absolute; right:20px;" class="num">PAGE </span>
+        <span style="margin-left:6px">{{$quotation->created_at}} &nbsp;&nbsp;&nbsp; Printed By : {{$username}} ; {{ date('Y-m-d H:i:s') }}</span><span style="position:absolute; right:20px;" class="num">PAGE </span>
         <img src="./img/form/printoutquotation/FooterQuotation.png" width="100%" alt="" >
     </footer>
 
@@ -161,14 +159,12 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{-- {{$quotation->quotationable->customer->name}} --}}
-                        generate
+                        {{$quotation->quotationable->customer->name}}
                     </td>
                     <td width="33%" rowspan="5" align="center">
-                            <div class="barcode">
-                                {{-- {!!DNS2D::getBarcodeHTML($quotation->number, 'QRCODE',5.6,5.6)!!} --}}
-                                {!!DNS2D::getBarcodeHTML('quotation', 'QRCODE',5.6,5.6)!!}
-                            </div>
+                        <div class="barcode">
+                            {!!DNS2D::getBarcodeHTML($quotation->number, 'QRCODE',5.6,5.6)!!}
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -179,7 +175,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        031-8686481/031-8686482
+                        @if($attention)
+                            {{ $attention->phone }} / {{ $attention->fax }}
+                        @else
+                        -
+                        @endif 
                     </td>
                 </tr>
                 <tr>
@@ -190,7 +190,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        JL. RAYA INDONESIA
+                        @if($attention)
+                            {{ $attention->address }}
+                        @else
+                            -
+                        @endif 
                     </td>
                 </tr>
                 <tr>
@@ -201,12 +205,11 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{-- @if($attention)
+                        @if($attention)
                         {{ $attention->name }}
                         @else
                         -
-                        @endif --}}
-                        generate
+                        @endif 
                     </td>
                 </tr>
                 <tr>
@@ -217,8 +220,7 @@
                         :
                     </td>
                     <td width="23%" valign="top">
-                        {{-- {{$quotation->quotationable->no_wo}} --}}
-                        generate
+                        {{$quotation->quotationable->no_wo}} 
                     </td>
                 </tr>
             </table>
@@ -230,48 +232,39 @@
                 <tr>
                     <th width="14%" valign="top">Date</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->created_at}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{$quotation->created_at}}</td>
                     <th width="14%" valign="top">Project No</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->quotationable->code}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{$quotation->quotationable->code}}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Currency</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->currency->name}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{$quotation->currency->name}}</td>
                     <th width="14%" valign="top">A/C Type</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->quotationable->aircraft->name}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{$quotation->quotationable->aircraft->name}}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Exchange Rate</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->exchange_rate}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{$quotation->exchange_rate}}</td>
                     <th width="14%" valign="top">A/C Reg.</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->quotationable->aircraft_register}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{$quotation->quotationable->aircraft_register}}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Valid Until</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->valid_until}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{$quotation->valid_until}}</td>
                     <th width="14%" valign="top">A/C Serial No.</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->quotationable->aircraft_sn}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{$quotation->quotationable->aircraft_sn}}</td>
                 </tr>
                 <tr>
                     <th width="14%" valign="top">Subject</th>
                     <td width="1%" valign="top">:</td>
-                    {{-- <td width="35%" valign="top">{{$quotation->quotationable->title}}</td> --}}
-                    <td width="35%" valign="top">generate</td>
+                    <td width="35%" valign="top">{{$quotation->quotationable->title}}</td>
                     <td width="14%" valign="top"></td>
                     <td width="1%" valign="top"></td>
                     <td width="35%" valign="top"></td>
@@ -292,31 +285,27 @@
                     </tr>
                 </table>
             </div>
-            {{-- @if(sizeof($quotation->workpackages->toArray()) <= 2) --}}
-            @if(1 <= 2)
+            @if(sizeof($quotation->workpackages->toArray()) <= 2)
                 <div class="body" style="min-height:120px">
             @else
                 <div class="body" style="height: 458px;">
             @endif
                 <table width="100%" cellpadding="4">
-                    {{-- @php
+                     @php
                         $i = 1;
                         $subtotal = $total = 0;
-                        $jobRequest = $workpackages;
+                        $defectcards = $quotation->defectcards;
+                        $data_defectcard = json_decode($quotation->data_defectcard);
                     @endphp
-                    @for($a = 0 ; $a<=3 && $a < sizeof($jobRequest); $a++)
-                    @php
-
-                    @endphp --}}
+                    @for($a = 0 ; $a<=3 && $a < sizeof($defectcards); $a++)
                     <tr>
-                        {{-- <td width="8%" align="center" valign="top">{{$i++}}</td> --}}
-                        <td width="8%" align="center" valign="top">1</td>
+                        <td width="8%" align="center" valign="top">{{$i++}}</td>
                         <td width="42%" align="left" valign="top">
-                            {{-- @if(isset($jobRequest[$a]->pivot->description))
-                                {{$jobRequest[$a]->pivot->description}}
+                            @if(isset($defectcards[$a]->pivot->description))
+                                {{$defectcards[$a]->pivot->description}}
                             @else
                                 No Description
-                            @endif --}}
+                            @endif
                             Additional Defect Card Total <span>12</span> item(s)
                         </td>
                         <td width="16%" align="center" valign="top"></td>
@@ -325,65 +314,61 @@
                     </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
-                        {{-- <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$a]->total_manhours_with_performance_factor}} x {{ number_format($jobRequest[$a]->pivot->manhour_rate) }}</td>
-                        <td width="16%" align="center" valign="top"> {{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->total_manhours_with_performance_factor*$jobRequest[$a]->pivot->manhour_rate) }}</td> --}}
-                        <td width="42%" align="left" valign="top">- Additional Manhours Price :1.250 x $180</td>
-                        <td width="16%" align="center" valign="top"> Rp. 10000</td>
+                        <td width="42%" align="left" valign="top">- Manhours Price :{{$data_defectcard->total_manhour}} x {{ number_format($data_defectcard->manhour_rate) }}</td>
+                        <td width="16%" align="center" valign="top"> {{$quotation->currency->symbol}}. {{ number_format($data_defectcard->total_manhour*$data_defectcard->manhour_rate) }}</td>
 
-                        {{-- @if($jobRequest[$a]->pivot->discount_value == null && $jobRequest[$a]->pivot->discount_type == null) --}}
+                        @if($defectcards[$a]->discount_value == null && $defectcards[$a]->discount_type == null)
                         <td width="17%" align="center" valign="top"></td>
-                        {{-- @else
-                            @if($jobRequest[$a]->pivot->discount_type ==  'amount')
-                            <td width="17%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->pivot->discount_value) }}</td>
-                            @elseif($jobRequest[$a]->pivot->discount_type == 'percentage'){
-                            <td width="17%" align="center" valign="top">{{ $jobRequest[$a]->pivot->discount_value }}%</td>
-                            @endif
-                        @endif --}}
-                        {{-- @if($jobRequest[$a]->pivot->discount_type ==  'amount')
-                            <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->total_manhours_with_performance_factor * $jobRequest[$a]->pivot->manhour_rate + $jobRequest[$a]->facilities_price_amount + $jobRequest[$a]->mat_tool_price - $jobRequest[$a]->pivot->discount_value) }}</td>
-                        @elseif($jobRequest[$a]->pivot->discount_type == 'percentage')
-                            <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->total_manhours_with_performance_factor * $jobRequest[$a]->pivot->manhour_rate + $jobRequest[$a]->facilities_price_amount + $jobRequest[$a]->mat_tool_price - ((($jobRequest[$a]->total_manhours_with_performance_factor * $jobRequest[$a]->pivot->manhour_rate +  $jobRequest[$a]->facilities_price_amount + $jobRequest[$a]->mat_tool_price)*$jobRequest[$a]->pivot->discount_value)/100)) }}</td>
                         @else
-                            <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$a]->total_manhours_with_performance_factor * $jobRequest[$a]->pivot->manhour_rate + $jobRequest[$a]->facilities_price_amount + $jobRequest[$a]->mat_tool_price) }}</td>
-                        @endif --}}
+                            @if($defectcards[$a]->discount_type ==  'amount')
+                            <td width="17%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($defectcards[$a]->discount_value) }}</td>
+                            @elseif($defectcards[$a]->discount_type == 'percentage'){
+                            <td width="17%" align="center" valign="top">{{ $defectcards[$a]->discount_value }}%</td>
+                            @endif
+                        @endif
+                        @if($defectcards[$a]->discount_type ==  'amount')
+                            <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($data_defectcard->total_manhour * $data_defectcard->manhour_rate + $defectcards[$a]->mat_tool_price - $defectcards[$a]->discount_value) }}</td>
+                        @elseif($defectcards[$a]->discount_type == 'percentage')
+                            <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($data_defectcard->total_manhour * $data_defectcard->manhour_rate + $defectcards[$a]->mat_tool_price - ((($data_defectcard->total_manhour * $data_defectcard->manhour_rate  + $defectcards[$a]->mat_tool_price)*$defectcards[$a]->discount_value)/100)) }}</td>
+                        @else
+                            <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($data_defectcard->total_manhour * $data_defectcard->manhour_rate + $defectcards[$a]->mat_tool_price) }}</td>
+                        @endif
                         <td width="17%" align="right" valign="top"></td>
                     </tr>
                     <tr>
                         <td width="8%" align="center" valign="top"></td>
                         <td width="42%" align="left" valign="top">- Additional Material Price</td>
                         <td width="16%" align="center" valign="top">
-                            {{-- @if($jobRequest[$a]->mat_tool_price)
-                                {{$quotation->currency->symbol}}. {{number_format($jobRequest[$a]->mat_tool_price)}}
+                            @if($defectcards[$a]->mat_tool_price)
+                                {{$quotation->currency->symbol}}. {{number_format($defectcards[$a]->mat_tool_price)}}
                             @else
                                 -
-                            @endif --}}
+                            @endif
                             -
                         </td>
                         <td width="17%" align="center" valign="top"></td>
                         <td width="17%" align="right" valign="top"></td>
                     </tr>
-                    {{-- @endfor --}}
+                    @endfor
                 </table>
             </div>
         </div>
     </div>
-    {{-- @if(sizeof($quotation->workpackages->toArray())<=2) --}}
-    @if(1<=2)
+    @if(sizeof($quotation->workpackages->toArray() )<= 2)
     <div id="content4">
         <div class="container">
             <table width="100%" cellpadding="3">
                 <tr>
                     <td width="50%" rowspan="6" valign="top"><b>Term & Condition</b><br>
-                        {{-- @if(isset($quotation->term_of_condition))
+                        @if(isset($quotation->term_of_condition))
                             {{$quotation->term_of_condition}}
                         @else   
                             -
-                        @endif --}}
+                        @endif
                         PPN Include
                     </td>
                     <td width="25%" valign="top" align="left">Total</td>
-                    {{-- <td width="25%" valign="top" align="right">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal) }}</td> --}}
-                    <td width="25%" valign="top" align="right">Rp. 10000</td>
+                    <td width="25%" valign="top" align="right">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal) }}</td>
                 </tr>
                 <tr>
                     <td width="25%" valign="top" align="left">Disc</td>
@@ -391,24 +376,19 @@
                 </tr>
                 <tr>
                     <td width="25%" valign="top" align="left">Delivery Cost</td>
-                    {{-- <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }}</td> --}}
-                    <td width="25%" valign="top" align="right">Rp. 100000</td>
+                    <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }}</td>
                 </tr>
                 <tr>
                     <td width="25%" valign="top" align="left">Other Cost(if available)</td>
-                    {{-- <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }} <hr width="100%"></td> --}}
-                    <td width="25%" valign="top" align="right">Rp. 12322<hr width="100%"></td>
+                    <td width="25%" valign="top" align="right">Rp. {{ number_format($totalCharge) }} <hr width="100%"></td>
                 </tr>
                 <tr>
-                        {{-- <th width="25%" valign="top" align="left">Grand Total in {{ $quotation->currency->name  }}</th>
-                <th width="25%" valign="top" align="right">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal) }}</th> --}}
-                        <th width="25%" valign="top" align="left">Grand Total in USD</th>
-                <th width="25%" valign="top" align="right">1231232</th>
+                    <th width="25%" valign="top" align="left">Grand Total in {{ $quotation->currency->name  }}</th>
+                    <th width="25%" valign="top" align="right">{{ $quotation->currency->symbol }}. {{ number_format($GrandTotal) }}</th>
                 </tr>
                 <tr>
                     <th width="25%" valign="top" align="left">Grand Total in Rupiah</th>
-                    {{-- <th width="25%" valign="top" align="right">Rp. {{ number_format($GrandTotal * $quotation->exchange_rate) }}</th> --}}
-                    <th width="25%" valign="top" align="right">Rp. 12322</th>
+                    <th width="25%" valign="top" align="right">Rp. {{ number_format($GrandTotal * $quotation->exchange_rate) }}</th>
                 </tr>
             </table>
         </div>
@@ -442,7 +422,7 @@
     </div>
     @endif
 
-    {{-- @if(sizeof($quotation->workpackages->toArray())>2)
+    @if(sizeof($quotation->workpackages->toArray()) > 2)
     <div class="page_break">
         <div id="content3-next">
             <div class="container">
@@ -461,15 +441,15 @@
                     <table width="100%" cellpadding="4">
                         @php
                             $i = $a+1;
-                            $jobRequest = $workpackages;
+                            $defectcards = $workpackages;
 
                         @endphp
-                        @for($b = 4 ;$b<(sizeof($jobRequest->toArray())); $b++)
+                        @for($b = 4 ;$b<(sizeof($defectcards->toArray())); $b++)
                         <tr>
                             <td width="8%" align="center" valign="top">{{$i++}}</td>
                             <td width="42%" align="left" valign="top">
-                                @if(isset($jobRequest[$b]->pivot->description))
-                                    {{$jobRequest[$b]->pivot->description}}
+                                @if(isset($defectcards[$b]->pivot->description))
+                                    {{$defectcards[$b]->pivot->description}}
                                 @else
                                     No Description
                                 @endif
@@ -480,32 +460,32 @@
                         </tr>
                         <tr>
                             <td width="8%" align="center" valign="top"></td>
-                            <td width="42%" align="left" valign="top">- Manhours Price :{{$jobRequest[$b]->total_manhours_with_performance_factor}} x {{ number_format($jobRequest[$b]->pivot->manhour_rate)}}</td>
-                            <td width="16%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$b]->total_manhours_with_performance_factor*$jobRequest[$b]->pivot->manhour_rate)}}</td>
+                            <td width="42%" align="left" valign="top">- Manhours Price :{{$defectcards[$b]->total_manhours_with_performance_factor}} x {{ number_format($defectcards[$b]->pivot->manhour_rate)}}</td>
+                            <td width="16%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($defectcards[$b]->total_manhours_with_performance_factor*$defectcards[$b]->pivot->manhour_rate)}}</td>
 
-                            @if($jobRequest[$b]->pivot->discount_value == null && $jobRequest[$b]->pivot->discount_type == null)
+                            @if($defectcards[$b]->pivot->discount_value == null && $defectcards[$b]->pivot->discount_type == null)
                             <td width="17%" align="center" valign="top"></td>
                             @else
-                                @if($jobRequest[$b]->pivot->discount_type ==  'amount')
-                                <td width="17%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$b]->pivot->discount_value) }}</td>
-                                @elseif($jobRequest[$b]->pivot->discount_type == 'percentage'){
-                                <td width="17%" align="center" valign="top">{{ $jobRequest[$b]->pivot->discount_value }}%</td>
+                                @if($defectcards[$b]->pivot->discount_type ==  'amount')
+                                <td width="17%" align="center" valign="top">{{$quotation->currency->symbol}}. {{ number_format($defectcards[$b]->pivot->discount_value) }}</td>
+                                @elseif($defectcards[$b]->pivot->discount_type == 'percentage'){
+                                <td width="17%" align="center" valign="top">{{ $defectcards[$b]->pivot->discount_value }}%</td>
                                 @endif
                             @endif
-                            @if($jobRequest[$b]->pivot->discount_type ==  'amount')
-                                <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$b]->total_manhours_with_performance_factor * $jobRequest[$b]->pivot->manhour_rate + $jobRequest[$b]->facilities_price_amount + $jobRequest[$b]->mat_tool_price - $jobRequest[$b]->pivot->discount_value) }}</td>
-                            @elseif($jobRequest[$a]->pivot->discount_type == 'percentage')
-                                <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$b]->total_manhours_with_performance_factor * $jobRequest[$b]->pivot->manhour_rate + $jobRequest[$b]->facilities_price_amount + $jobRequest[$b]->mat_tool_price - ((($jobRequest[$b]->total_manhours_with_performance_factor * $jobRequest[$b]->pivot->manhour_rate +  $jobRequest[$b]->facilities_price_amount + $jobRequest[$b]->mat_tool_price)*$jobRequest[$b]->pivot->discount_value)/100)) }}</td>
+                            @if($defectcards[$b]->pivot->discount_type ==  'amount')
+                                <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($defectcards[$b]->total_manhours_with_performance_factor * $defectcards[$b]->pivot->manhour_rate + $defectcards[$b]->facilities_price_amount + $defectcards[$b]->mat_tool_price - $defectcards[$b]->pivot->discount_value) }}</td>
+                            @elseif($defectcards[$a]->discount_type == 'percentage')
+                                <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($defectcards[$b]->total_manhours_with_performance_factor * $defectcards[$b]->pivot->manhour_rate + $defectcards[$b]->facilities_price_amount + $defectcards[$b]->mat_tool_price - ((($defectcards[$b]->total_manhours_with_performance_factor * $defectcards[$b]->pivot->manhour_rate +  $defectcards[$b]->facilities_price_amount + $defectcards[$b]->mat_tool_price)*$defectcards[$b]->pivot->discount_value)/100)) }}</td>
                             @else
-                                <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($jobRequest[$b]->total_manhours_with_performance_factor * $jobRequest[$b]->pivot->manhour_rate + $jobRequest[$b]->facilities_price_amount + $jobRequest[$b]->mat_tool_price) }}</td>
+                                <td width="17%" align="right" valign="top">{{$quotation->currency->symbol}}. {{ number_format($defectcards[$b]->total_manhours_with_performance_factor * $defectcards[$b]->pivot->manhour_rate + $defectcards[$b]->facilities_price_amount + $defectcards[$b]->mat_tool_price) }}</td>
                             @endif
                         </tr>
                         <tr>
                             <td width="8%" align="center" valign="top"></td>
                             <td width="42%" align="left" valign="top">- Material Price</td>
                             <td width="16%" align="center" valign="top">
-                                @if($jobRequest[$b]->mat_tool_price)
-                                    {{$quotation->currency->symbol}}. {{number_format($jobRequest[$b]->mat_tool_price)}}
+                                @if($defectcards[$b]->mat_tool_price)
+                                    {{$quotation->currency->symbol}}. {{number_format($defectcards[$b]->mat_tool_price)}}
                                 @else
                                     -
                                 @endif
@@ -517,8 +497,8 @@
                             <td width="8%" align="center" valign="top"></td>
                             <td width="42%" align="left" valign="top">- Facilities Price</td>
                             <td width="16%" align="center" valign="top">
-                                @if($jobRequest[$b]->facilities_price_amount)
-                                    {{$quotation->currency->symbol}}. {{number_format($jobRequest[$b]->facilities_price_amount)}}
+                                @if($defectcards[$b]->facilities_price_amount)
+                                    {{$quotation->currency->symbol}}. {{number_format($defectcards[$b]->facilities_price_amount)}}
                                 @else
                                     -
                                 @endif
@@ -589,7 +569,7 @@
             </div>
         </div>
     </div>
-    @endif --}}
+    @endif
 
 </body>
 </html>
