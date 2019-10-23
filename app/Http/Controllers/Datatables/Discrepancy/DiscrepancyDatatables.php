@@ -30,16 +30,13 @@ class DiscrepancyDatatables extends Controller
                 if(isset($jobcard->jobcard->task_id)){
                     $jobcard->task_name .= $jobcard->jobcard->task->name;
                 }
-                // $jobcard->type_name    .= $jobcard->jobcard->type->name;
-                $jobcard->skill        .= $jobcard->jobcard->skill;
             }else if($jobcard->jobcard->jobcardable_type == "App\Models\EOInstruction"){
                 $jobcard->tc_number    .= $jobcard->jobcard->number;
                 $jobcard->tc_uuid    .= $jobcard->jobcard->uuid;
                 $jobcard->tc_title     .= $jobcard->jobcard->title;
                 $jobcard->task_name    .= "-";
-                // $jobcard->type_name    .= $jobcard->jobcard->type->name;
-                $jobcard->skill        .= $jobcard->jobcard->skill;
             }
+
             $jobcard->taskcard_number   .= $jobcard->jobcard->jobcardable->number;
             $jobcard->customer_name     .= $jobcard->jobcard->quotation->quotationable->customer->name;
             $jobcard->aircraft_sn       .= $jobcard->jobcard->quotation->quotationable->aircraft_sn;
@@ -194,14 +191,12 @@ class DiscrepancyDatatables extends Controller
                 if(isset($jobcard->jobcard->task_id)){
                     $jobcard->task_name .= $jobcard->jobcard->task->name;
                 }
-                // $jobcard->type_name    .= $jobcard->jobcard->type->name;
                 $jobcard->skill        .= $jobcard->jobcard->skill;
             }else if($jobcard->jobcard->jobcardable_type == "App\Models\EOInstruction"){
                 $jobcard->tc_number    .= $jobcard->jobcard->number;
                 $jobcard->tc_uuid    .= $jobcard->jobcard->uuid;
                 $jobcard->tc_title     .= $jobcard->jobcard->title;
                 $jobcard->task_name    .= "-";
-                // $jobcard->type_name    .= $jobcard->jobcard->type->name;
                 $jobcard->skill        .= $jobcard->jobcard->skill;
             }
             $jobcard->taskcard_number   .= $jobcard->jobcard->jobcardable->number;
@@ -350,12 +345,12 @@ class DiscrepancyDatatables extends Controller
                         ->get();
 
         foreach($DefectCard as $jobcard){
-            if(isset($jobcard->jobcard->jobcardable->skills) ){
-                if(sizeof($jobcard->jobcard->jobcardable->skills) == 3){
+            if(isset($jobcard->skills) ){
+                if(sizeof($jobcard->skills) == 3){
                     $jobcard->jobcardSkill .= "ERI";
                 }
-                else if(sizeof($jobcard->jobcard->jobcardable->skills) == 1){
-                    $jobcard->jobcardSkill .= $jobcard->jobcard->jobcardable->skills[0]->name;
+                else if(sizeof($jobcard->skills) == 1){
+                    $jobcard->jobcardSkill .= $jobcard->skills->first()->name;
                 }
                 else{
                     $jobcard->jobcardSkill .= '';
