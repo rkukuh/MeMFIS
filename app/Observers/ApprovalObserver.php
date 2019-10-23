@@ -17,6 +17,7 @@ class ApprovalObserver
      */
     public function created(Approval $approval)
     {
+
         switch ($approval->approvable_type) {
             case 'App\Models\GoodsReceived':
                 $inv_in = $approval->approvable->inventoryIn()->create([
