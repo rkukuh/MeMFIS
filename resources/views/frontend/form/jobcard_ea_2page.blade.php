@@ -440,7 +440,7 @@
             <tr>
                 <td width="5%">Date Close</td>
                 <td width="1%">:</td>
-                <td width="94%">asdasd</td>
+                <td width="94%">{{ $dateClosed }}</td>
             </tr>
         </table>
     </div>
