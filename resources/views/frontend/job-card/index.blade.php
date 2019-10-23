@@ -48,14 +48,14 @@
                     </div>
                     <div class="m-portlet m-portlet--mobile">
                         <div class="m-portlet__body">
-                            <div class="row align-items-center" style="margin-bottom:150px; margin-top:150px;">
+                            <div class="row align-items-center" style="margin-bottom:100px; margin-top:100px;">
                                 <div class="col-xl-12 order-2 order-xl-1">
                                     <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
                                         <div class="col-md-4">
                                             <form method="POST" action="{{route('frontend.jobcard.search')}}">
                                                 {!! csrf_field() !!}
                                                 <div class="m-input-icon m-input-icon--left">
-                                                    <input type="text" class="form-control m-input" id="number" name="number" placeholder="Search...">
+                                                    <input type="text" class="form-control m-input" id="number" name="number" placeholder="Scan Here">
                                                     <span class="m-input-icon__icon m-input-icon__icon--left">
                                                         <span><i class="la la-search"></i></span>
                                                     </span>
@@ -69,12 +69,6 @@
                                                     @endcomponent()
                                                 </div>
                                             </form>
-                                            <div class="d-flex justify-content-end mt-4 search">
-                                                @include('frontend.common.buttons.filter')
-                                            </div>
-                                            <div class="col-lg-12">
-                                                @include('frontend.job-card.filter')
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -83,6 +77,30 @@
                                 <div class="col-xl-12 order-2 order-xl-1">
                                     <div class="form-group m-form__group row align-items-center d-flex justify-content-center">
                                         <div class="col-md-12">
+                                            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                                                <div class="row align-items-center">
+                                                    <div class="col-xl-8 order-2 order-xl-1">
+                                                        <div class="form-group m-form__group row align-items-center">
+                                                            <div class="col-md-4">
+                                                                <div class="m-input-icon m-input-icon--left">
+                                                                    <input type="text" class="form-control m-input" placeholder="Search Jobcard"
+                                                                        id="generalSearch">
+                                                                    <span class="m-input-icon__icon m-input-icon__icon--left">
+                                                                        <span><i class="la la-search"></i></span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            @include('frontend.common.buttons.filter')
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                @include('frontend.job-card.filter')
+                                            </div>
                                             <div class="job_card_engineer_datatable" id="scrolling_both"></div>
 
                                             @include('frontend.job-card.engineer.tool.index')

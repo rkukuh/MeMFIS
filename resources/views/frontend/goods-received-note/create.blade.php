@@ -230,7 +230,6 @@
 @endsection
 
 @push('footer-scripts')
-
     <script src="{{ asset('js/frontend/good-received-note/create.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/do-date.js')}}"></script>

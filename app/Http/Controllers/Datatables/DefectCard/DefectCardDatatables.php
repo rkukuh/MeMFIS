@@ -30,11 +30,18 @@ class DefectCardDatatables extends Controller
             if($jobcard->approvals->toArray() == []){
                 $conducted_by = "";
                 $conducted_at = "";
-
             }
             else{
                 $conducted_by = User::find($jobcard->approvals->last()->conducted_by)->name;
                 $conducted_at = $jobcard->approvals->last()->created_at;
+            }
+
+            if($jobcard->jobcard->jobcardable_type == "App\Models\TaskCard"){
+                $jobcard->tc_number    .= $jobcard->jobcard->jobcardable->number;
+                $jobcard->tc_uuid     .= $jobcard->jobcard->jobcardable->uuid;
+            }else if($jobcard->jobcard->jobcardable_type == "App\Models\EOInstruction"){
+                $jobcard->tc_number    .= $jobcard->jobcard->jobcardable->eo_header->number;
+                $jobcard->tc_uuid     .= $jobcard->jobcard->jobcardable->eo_header->uuid;
             }
 
             $jobcard->customer_name     .= $jobcard->jobcard->quotation->quotationable->customer->name;

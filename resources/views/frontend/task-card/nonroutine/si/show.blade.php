@@ -106,7 +106,7 @@
                                         <div class="form-group m-form__group row">
                                             <div class="col-sm-6 col-md-6 col-lg-6">
                                                 <label class="form-control-label">
-                                                    Work Area @include('frontend.common.label.optional')
+                                                    Work Area @include('frontend.common.label.required')
                                                 </label>
 
                                                 @if (empty($taskCard->work_area))
@@ -149,7 +149,7 @@
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                 <label class="form-control-label">
-                                                    Performance Factor @include('frontend.common.label.required')
+                                                    Performance Factor @include('frontend.common.label.optional')
                                                 </label>
 
                                                 @if (empty($taskCard->performance_factor))
