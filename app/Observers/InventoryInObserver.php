@@ -14,7 +14,7 @@ class InventoryInObserver
      */
     public function created(InventoryIn $inventoryIn)
     {
-        //
+        $inventoryIn->branches()->attach(1);
     }
 
     /**

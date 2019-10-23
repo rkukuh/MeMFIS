@@ -18,6 +18,7 @@ use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Employee;
 use App\Models\TaskCard;
+use App\Models\GoodsReceived;
 use App\Models\Manufacturer;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
@@ -93,6 +94,24 @@ class FillLabelController extends Controller
         }
 
         return $quantity_item_po;
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function GoodsReceived(GoodsReceived $GoodsReceived,Item $item)
+    {
+        $GoodsReceiveds = GoodsReceived::where('purchase_order_id',$GoodsReceived->purchase_order_id)->wherehas('approvals')->get();
+        $quantity_item_recived = 0;
+
+        foreach($GoodsReceiveds as $GoodsReceived){
+            $quantity_item_recived = $quantity_item_recived + $GoodsReceived->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
+        }
+
+        return $quantity_item_recived;
 
     }
 

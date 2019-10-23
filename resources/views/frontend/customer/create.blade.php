@@ -109,7 +109,7 @@
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                 <label class="form-control-label">
-                                                    Type.
+                                                    Type. @include('frontend.common.label.required')
                                                 </label>
                                             </div>
                                             <div class="col-sm-2 col-md-2 col-lg-2">

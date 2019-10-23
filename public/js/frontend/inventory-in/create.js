@@ -15,11 +15,11 @@ let InventoryInCreate = {
                 url: '/inventory-in',
                 type: 'POST',
                 data: {
-                    number: ref_no,
+                    ref_no: ref_no,
                     storage_id: storage_id,
                     inventoried_at: date,
                     description: description,
-                    section_code: section_code,
+                    section: section_code,
                 },
                 success: function (response) {
                     if (response.errors) {

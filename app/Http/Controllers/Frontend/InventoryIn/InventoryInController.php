@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Frontend\InventoryIn;
 
 use Auth;
+use App\Models\Storage;
 use App\Models\Approval;
 use App\Models\InventoryIn;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\InventoryInStore;
 use App\Http\Requests\Frontend\InventoryInUpdate;
-use App\Models\Storage;
+use App\Helpers\DocumentNumber;
 
 class InventoryInController extends Controller
 {
@@ -40,7 +41,7 @@ class InventoryInController extends Controller
      */
     public function store(InventoryInStore $request)
     {
-        $request->merge(['received_by' => Auth::id()]);
+        $request->merge(['number' => DocumentNumber::generate('ININ-', InventoryIn::withTrashed()->count() + 1)]);
         $request->merge(['inventoryinable_type' => 'App\Models\InventoryIn']);
         $request->merge(['inventoryinable_id' => InventoryIn::withTrashed()->count()+1]);
 

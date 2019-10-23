@@ -81,20 +81,96 @@ class UsersTableSeeder extends Seeder
         // Manager
 
         $user = User::create([
-            'name'      => 'Manager',
-            'email'     => 'manager@smartaircraft.id',
+            'name'      => 'Manager Marketing',
+            'email'     => 'manager.marketing@smartaircraft.id',
             'password'  => Hash::make('admin'),
             'is_active' => 1,
         ]);
 
         $user->assignRole(
-            Role::where('name', 'admin')->first()
+            Role::where('name', 'marketing')->first()
         );
 
         $user->employee()->create([
             'code' => 'SU-' . Carbon::now()->timestamp,
             'first_name' => 'Manager',
-            'last_name'  => 'Dummy',
+            'last_name'  => 'Marketing',
+            'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null
+        ]);
+
+        $user = User::create([
+            'name'      => 'Manager HRD',
+            'email'     => 'manager.hrd@smartaircraft.id',
+            'password'  => Hash::make('admin'),
+            'is_active' => 1,
+        ]);
+
+        $user->assignRole(
+            Role::where('name', 'hrd')->first()
+        );
+
+        $user->employee()->create([
+            'code' => 'SU-' . Carbon::now()->timestamp,
+            'first_name' => 'Manager',
+            'last_name'  => 'HRD',
+            'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null
+        ]);
+
+        $user = User::create([
+            'name'      => 'Manager PPC',
+            'email'     => 'manager.ppc@smartaircraft.id',
+            'password'  => Hash::make('admin'),
+            'is_active' => 1,
+        ]);
+
+        $user->assignRole(
+            Role::where('name', 'ppic')->first()
+        );
+
+        $user->employee()->create([
+            'code' => 'SU-' . Carbon::now()->timestamp,
+            'first_name' => 'Manager',
+            'last_name'  => 'PPC',
+            'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null
+        ]);
+
+        $user = User::create([
+            'name'      => 'Manager SCM',
+            'email'     => 'manager.scm@smartaircraft.id',
+            'password'  => Hash::make('admin'),
+            'is_active' => 1,
+        ]);
+
+        $user->assignRole(
+            Role::where('name', 'scm')->first()
+        );
+
+        $user->employee()->create([
+            'code' => 'SU-' . Carbon::now()->timestamp,
+            'first_name' => 'Manager',
+            'last_name'  => 'SCM',
+            'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null
+        ]);
+
+        $user = User::create([
+            'name'      => 'Manager Finance',
+            'email'     => 'manager.finance@smartaircraft.id',
+            'password'  => Hash::make('admin'),
+            'is_active' => 1,
+        ]);
+
+        $user->assignRole(
+            Role::where('name', 'finance')->first()
+        );
+
+        $user->employee()->create([
+            'code' => 'SU-' . Carbon::now()->timestamp,
+            'first_name' => 'Manager',
+            'last_name'  => 'Finance',
             'joined_date' => Carbon::now()->toDateString(),
             'updated_at' => null
         ]);
@@ -120,6 +196,27 @@ class UsersTableSeeder extends Seeder
             'updated_at' => null
         ]);
 
+        // Engineer
+
+        $user = User::create([
+            'name'      => 'Engineer',
+            'email'     => 'engineer@smartaircraft.co.id',
+            'password'  => Hash::make('engineer'),
+            'is_active' => 1,
+        ]);
+
+        $user->assignRole(
+            Role::where('name', 'engineer')->first()
+        );
+
+        $user->employee()->create([
+            'code' => 'SU-' . Carbon::now()->timestamp,
+            'first_name' => 'Engineer',
+            'last_name'  => 'Dummy',
+            'joined_date' => Carbon::now()->toDateString(),
+            'updated_at' => null
+        ]);
+
         // Helper 1
 
         $user = User::create([
@@ -128,6 +225,10 @@ class UsersTableSeeder extends Seeder
             'password'  => Hash::make('helper1'),
             'is_active' => 1,
         ]);
+
+        $user->assignRole(
+            Role::where('name', 'helper')->first()
+        );
 
         $user->employee()->create([
             'code' => 'SU-' . Carbon::now()->timestamp,
@@ -146,6 +247,10 @@ class UsersTableSeeder extends Seeder
             'is_active' => 1,
         ]);
 
+        $user->assignRole(
+            Role::where('name', 'helper')->first()
+        );
+
         $user->employee()->create([
             'code' => 'SU-' . Carbon::now()->timestamp,
             'first_name' => 'Helper 2',
@@ -154,21 +259,5 @@ class UsersTableSeeder extends Seeder
             'updated_at' => null
         ]);
 
-        // Engineer
-
-        $user = User::create([
-            'name'      => 'Engineer',
-            'email'     => 'engineer@smartaircraft.co.id',
-            'password'  => Hash::make('engineer'),
-            'is_active' => 1,
-        ]);
-
-        $user->employee()->create([
-            'code' => 'SU-' . Carbon::now()->timestamp,
-            'first_name' => 'Engineer',
-            'last_name'  => 'Dummy',
-            'joined_date' => Carbon::now()->toDateString(),
-            'updated_at' => null
-        ]);
     }
 }
