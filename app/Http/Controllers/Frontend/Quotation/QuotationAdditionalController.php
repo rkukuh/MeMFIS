@@ -273,10 +273,9 @@ class QuotationAdditionalController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function approve(Quotation $quotation)
+    public function approve(Quotation $quotation, Request $request)
     {
         //todo validation scheduled payment amount and progress
-
         $amount = 0;
         $error_messages = $work_progress= [];
         $scheduled_payment_amounts = json_decode($quotation->scheduled_payment_amount);
@@ -318,6 +317,7 @@ class QuotationAdditionalController extends Controller
         $quotation->approvals()->save(new Approval([
             'approvable_id' => $quotation->id,
             'conducted_by' => Auth::id(),
+            'note' => $request->note,
             'is_approved' => 1
         ]));
 
