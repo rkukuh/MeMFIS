@@ -119,7 +119,12 @@ class DefectCardEngineerController extends Controller
             $this->propose_correction_text =  $defectCard->pivot->propose_correction_text;
         }
 
-        if ($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "open") {
+        $progresses = $defectcard->progresses->where('progressed_by', Auth::id());
+        foreach($progresses as $progress){
+            $progress->status .= Status::where('id',$progress->status_id)->first()->name;
+        }
+
+        if ($progresses->count() == 0 and  $this->statuses->where('id',$defectcard->progresses->first()->status_id)->first()->code == "open") {
             return view('frontend.defect-card.engineer.progress-open', [
                 'defectcard' => $defectcard,
                 'status' => $this->statuses->where('code','open')->first(),
@@ -231,7 +236,14 @@ class DefectCardEngineerController extends Controller
                 }
             }
         }
-        if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
+
+        $progresses = $defectcard->progresses->where('progressed_by',Auth::id());
+        foreach($progresses as $progress){
+            $progress->status .= Status::where('id',$progress->status_id)->first()->name;
+        }
+
+
+        if ($progresses->count() == 0 || $this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             $defectcard->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                 'progressed_by' => Auth::id()
