@@ -140,15 +140,15 @@
             <li>
                 <div class="jobcard-info">
                     <fieldset>
-                        <legend>JC No : {{ $jobCard->number }}</legend>
+                        <legend>JC No : {{ $jobcard->jobcardable->eo_header->number }}</legend>
                         <div class="jobcard-info-detail">
                             <table width="80%" cellpadding="3">
                                 <tr>
                                     <td width="20%">Issued Date</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
-                                        @if($jobCard->created_at)
-                                        {{ date('d-M-Y', strtotime($jobCard->created_at)) }}
+                                        @if($jobcard->created_at)
+                                        {{ date('d-M-Y', strtotime($jobcard->created_at)) }}
                                         @else
                                         -
                                         @endif
@@ -156,8 +156,8 @@
                                     <td width="20%">AC/Type</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
-                                        @if($jobCard->quotation->quotationable->aircraft->name)
-                                        {{$jobCard->quotation->quotationable->aircraft->name}}
+                                        @if($jobcard->quotation->quotationable->aircraft->name)
+                                        {{$jobcard->quotation->quotationable->aircraft->name}}
                                         @else
                                         -
                                         @endif
@@ -170,8 +170,8 @@
                                     <td width="20%">A/C Reg</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
-                                        @if($jobCard->quotation->quotationable->aircraft_register)
-                                        {{$jobCard->quotation->quotationable->aircraft_register}}
+                                        @if($jobcard->quotation->quotationable->aircraft_register)
+                                        {{$jobcard->quotation->quotationable->aircraft_register}}
                                         @else
                                         -
                                         @endif
@@ -180,8 +180,8 @@
                                 <tr>
                                     <td width="20%">Project No</td>
                                     <td width="1%">:</td>
-                                    <td width="29%"> @if($jobCard->quotation->quotationable->code)
-                                        {{$jobCard->quotation->quotationable->code}}
+                                    <td width="29%"> @if($jobcard->quotation->quotationable->code)
+                                        {{$jobcard->quotation->quotationable->code}}
                                         @else
                                         -
                                         @endif
@@ -189,8 +189,8 @@
                                     <td width="20%">A/C S/N</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
-                                        @if($jobCard->quotation->quotationable->aircraft_sn)
-                                        {{$jobCard->quotation->quotationable->aircraft_sn}}
+                                        @if($jobcard->quotation->quotationable->aircraft_sn)
+                                        {{$jobcard->quotation->quotationable->aircraft_sn}}
                                         @else
                                         -
                                         @endif
@@ -223,8 +223,8 @@
                             :
                         </div>
                     </td>
-                    <td width="81%"> @if($jobCard->jobcardable->eo_header->title)
-                        {{$jobCard->jobcardable->eo_header->title}}
+                    <td width="81%"> @if($jobcard->jobcardable->eo_header->title)
+                        {{$jobcard->jobcardable->eo_header->title}}
                         @else
                         -
                         @endif
@@ -241,8 +241,8 @@
                             :
                         </div>
                     </td>
-                    <td width="81%"> @if($jobCard->jobcardable->description)
-                        {{$jobCard->jobcardable->description}}
+                    <td width="81%"> @if($jobcard->jobcardable->description)
+                        {{$jobcard->jobcardable->description}}
                         @else
                         -
                         @endif</td>
@@ -258,8 +258,8 @@
                             :
                         </div>
                     </td>
-                    <td width="81%">@if($jobCard->jobcardable->eo_header->reference)
-                        {{$jobCard->jobcardable->eo_header->reference}}
+                    <td width="81%">@if($jobcard->jobcardable->eo_header->reference)
+                        {{$jobcard->jobcardable->eo_header->reference}}
                         @else
                         -
                         @endif
@@ -283,24 +283,24 @@
                 <table width="100%" cellpadding="10">
                     <tr>
                         <td width="25%" valign="top">
-                            @if(sizeof($jobCard->jobcardable->skills) == 3)
+                            @if(sizeof($jobcard->jobcardable->skills) == 3)
                             @slot('text', 'ERI')
-                            @elseif(sizeof($jobCard->jobcardable->skills) == 1)
-                            @slot('text', $jobCard->jobcardable->skills[0]->name)
+                            @elseif(sizeof($jobcard->jobcardable->skills) == 1)
+                            @slot('text', $jobcard->jobcardable->skills[0]->name)
                             @else
                             @slot('text', '-')
                             @endif
                         </td>
                         <td width="25%" align="center" valign="top">
-                            @if($jobCard->jobcardable->work_area != null)
-                            {{$jobCard->jobcardable->workarea->name}}
+                            @if($jobcard->jobcardable->work_area != null)
+                            {{$jobcard->jobcardable->workarea->name}}
                             @else
                             -
                             @endif
                         </td>
                         <td width="25%" align="center" valign="top">
-                            @if($jobCard->jobcardable->estimation_manhour)
-                            {{$jobCard->jobcardable->estimation_manhour}}
+                            @if($jobcard->jobcardable->estimation_manhour)
+                            {{$jobcard->jobcardable->estimation_manhour}}
                             @else
                             -
                             @endif
@@ -324,14 +324,14 @@
                 <tr>
                     <td height="15%" valign="top">
                         <span>
-                        @foreach($jobCard->jobcardable->materials as $material)
+                        @foreach($jobcard->jobcardable->materials as $material)
                             {{$material->code}} | {{$material->name}} | {{$material->pivot->quantity}} | {{App\Models\Unit::find($material->pivot->unit_id)->name}}
                         @endforeach
                         </span>
                     </td>
                     <td height="15%" valign="top">
                         <span>
-                        @foreach($jobCard->jobcardable->tools as $tool)
+                        @foreach($jobcard->jobcardable->tools as $tool)
                             {{$tool->code}} | {{$tool->name}} | {{$tool->pivot->quantity}} | {{App\Models\Unit::find($tool->pivot->unit_id)->name}}
                         @endforeach
                         </span>
@@ -341,7 +341,7 @@
                     <td colspan="2" height="35" valign="top">
                         Accomplishment Record : <br><br>
                         <span>
-                            {{ $jobCard->progresses->last()->reason_text }}
+                            {{ $jobcard->progresses->last()->reason_text }}
                         </span>
                     </td>
                 </tr>
@@ -354,7 +354,7 @@
                             <div style="margin-left:100px;margin-top:12px;">
                                 <ul>
                                     <li>
-                                        <img @if(sizeof($jobCard->defectcards) <> 0)
+                                        <img @if(sizeof($jobcard->defectcards) <> 0)
                                             src="./img/check.png"
                                             @else
                                             src="./img/check-box-empty.png"
@@ -363,7 +363,7 @@
                                             <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                                     </li>
                                     <li style="margin-left:12px;">
-                                        <img @if(sizeof($jobCard->defectcards) == 0)
+                                        <img @if(sizeof($jobcard->defectcards) == 0)
                                         src="./img/check.png"
                                         @else
                                         src="./img/check-box-empty.png"
@@ -377,7 +377,7 @@
                     </td>
                     <td width="50%" height="35" valign="center">
                         Transfer to Defect Card No : <br><br>
-                        <span>@if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif</span>
+                        <span>@if(sizeof($jobcard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobcard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif</span>
                     </td>
                 </tr>
             </table>
@@ -386,7 +386,7 @@
                     <td width="4%" valign="top">Helper </td>
                     <td width="1%" valign="top">:</td>
                     <td width="28%" valign="top"> {{ $helpers }} </td>
-                    <td width="33%" valign="top" align="center">Status : <span>{{ $jobCard->status }}</span></td>
+                    <td width="33%" valign="top" align="center">Status : <span>{{ $jobcard->status }}</span></td>
                     <td width="34%" valign="top" align="right">Data Close : <span>10-07-1994</span></td>
                 </tr>
             </table>

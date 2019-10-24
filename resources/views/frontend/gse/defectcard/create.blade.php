@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.gse-tool-returned.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.gse.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 GSE/Tool Returned
                             </span>
@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.edit')
+                                @include('frontend.common.label.create-new')
 
                                 <h3 class="m-portlet__head-text">
                                     GSE/Tool Returned
@@ -53,42 +53,45 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Date  
+                                                Date @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                            @component('frontend.common.input.datepicker')
+                                                @slot('id', 'date')
+                                                @slot('text', 'Date')
+                                                @slot('name', 'date')
+                                                @slot('id_error','date')
                                             @endcomponent
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Ref Document No. @include('frontend.common.label.required')
+                                            </label>
+                                            @component('frontend.common.input.select2')
+                                            @slot('text', 'Defect Card')
+                                            @slot('id', 'item_code_id')
+                                            @slot('name', 'item_code_id')
+                                            @slot('id_error', 'item_code_id')
+                                            @endcomponent
+
+                                            {{-- @include('frontend.common.warehouse.index')
+
+                                            @component('frontend.common.input.hidden')
+                                                @slot('id', 'warehouse')
+                                                @slot('name', 'warehouse')
+                                            @endcomponent --}}
                                         </div>
                                     </div>
                                     <div class="form-group m-form__group row">
+                                        
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Ref Document No.  
+                                               Additional Project No.
                                             </label>
 
                                             @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Project No.
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
-                                            @endcomponent
-                                        </div>
-                                    </div>
-                                    <div class="form-group m-form__group row">
-                                        <div class="col-sm-6 col-md-6 col-lg-6">
-                                            <label class="form-control-label">
-                                                Storage  
-                                            </label>
-
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                                @slot('id', 'project_number')
+                                                @slot('text', 'generate')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
@@ -99,7 +102,8 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Generated')
+                                                        @slot('id', 'actype')
+                                                        @slot('text', 'Generate')
                                                     @endcomponent
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-6">
@@ -108,7 +112,8 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Generated')
+                                                        @slot('id', 'acreg')
+                                                        @slot('text', 'Generate')
                                                     @endcomponent
                                                 </div>
                                             </div>
@@ -117,22 +122,44 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Returned By  
+                                                Storage @include('frontend.common.label.required')
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', 'Storage')
+                                                @slot('id', 'item_storage_id')
+                                                @slot('name', 'item_storage_id')
+                                                @slot('id_error', 'item_storage_id')
                                             @endcomponent
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Section Code 
+                                                Section Code
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                            @component('frontend.common.input.text')
+                                                @slot('text', 'Section Code')
+                                                @slot('id', 'section')
+                                                @slot('name', 'section')
+                                                @slot('id_error', 'section')
                                             @endcomponent
                                         </div>
+                                      
+                                    </div>
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 col-md-6 col-lg-6">
+                                            <label class="form-control-label">
+                                                Returned By @include('frontend.common.label.required')
+                                            </label>
+
+                                            @component('frontend.common.input.select2')
+                                                @slot('text', ' Returned By')
+                                                @slot('id', 'returned_by')
+                                                @slot('name', 'returned_by')
+                                                @slot('id_error', 'returned_by')
+                                            @endcomponent
+                                        </div>
+                                   
                                     </div>
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -140,8 +167,11 @@
                                                 Remark
                                             </label>
 
-                                            @component('frontend.common.label.data-info')
-                                                @slot('text', 'Generated')
+                                            @component('frontend.common.input.textarea')
+                                                @slot('rows', '5')
+                                                @slot('id', 'description')
+                                                @slot('name', 'description')
+                                                @slot('text', 'Description')
                                             @endcomponent
                                         </div>
                                     </div>
@@ -183,7 +213,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @include('frontend.gse-tool-returned.modal')
+                                                        @include('frontend.gse.modal')
                                                         <div class="gse_tool_returned_datatable" id="gse_tool_returned_datatable"></div>
                                                     </div>
                                                 </div>
@@ -194,7 +224,16 @@
                                         <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                             <div class="flex">
                                                 <div class="action-buttons">
+                                                    @component('frontend.common.buttons.submit')
+                                                        @slot('type','button')
+                                                        @slot('id', 'add-gse')
+                                                        @slot('class', 'add-gse')
+                                                    @endcomponent
+
+                                                    @include('frontend.common.buttons.reset')
+
                                                     @include('frontend.common.buttons.back')
+
                                                 </div>
                                             </div>
                                         </div>
@@ -213,5 +252,11 @@
 
 @push('footer-scripts')
 
-    <script src="{{ asset('js/frontend/gse-tool-returned/show.js') }}"></script>
+    <script src="{{ asset('js/frontend/gse/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/returned-by.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/storage.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/defectcard.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/defectcard.js') }}"></script>
 @endpush

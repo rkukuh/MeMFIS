@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.gse-tool-returned.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.gse.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 GSE/Tool Returned
                             </span>
@@ -38,7 +38,7 @@
                                     <i class="la la-gear"></i>
                                 </span>
 
-                                @include('frontend.common.label.create-new')
+                                @include('frontend.common.label.edit')
 
                                 <h3 class="m-portlet__head-text">
                                     GSE/Tool Returned
@@ -141,7 +141,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Section Code 
+                                                Section Code
                                             </label>
 
                                             @component('frontend.common.input.text')
@@ -204,7 +204,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @include('frontend.gse-tool-returned.modal')
+                                                        @include('frontend.gse.modal')
                                                         <div class="gse_tool_returned_datatable" id="gse_tool_returned_datatable"></div>
                                                     </div>
                                                 </div>
@@ -217,8 +217,8 @@
                                                 <div class="action-buttons">
                                                     @component('frontend.common.buttons.submit')
                                                         @slot('type','button')
-                                                        @slot('id', 'add-gse-tool-returned')
-                                                        @slot('class', 'add-gse-tool-returned')
+                                                        @slot('id', 'add-gse')
+                                                        @slot('class', 'add-gse')
                                                     @endcomponent
 
                                                     @include('frontend.common.buttons.reset')
@@ -243,7 +243,7 @@
 
 @push('footer-scripts')
 
-    <script src="{{ asset('js/frontend/gse-tool-returned/create.js') }}"></script>
+    <script src="{{ asset('js/frontend/gse/create.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/returned-by.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/storage.js') }}"></script>

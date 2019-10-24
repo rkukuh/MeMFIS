@@ -31,7 +31,7 @@ class Overtime extends MemfisModel
     }
 
     /**
-     * One-to-One: An OVertime have one Status Overtime.
+     * One-to-One: An Employee have one Status Attendance.
      *
      * This function will retrieve Status Attendance of a given Employee.
      * See: Status employee() method for the inverse

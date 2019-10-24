@@ -1,4 +1,4 @@
-let GseToolReturnedEdit = {
+let GseToolReturnedCreate = {
     init: function () {
         $('.gse_tool_returned_datatable').mDatatable({
             data: {
@@ -50,7 +50,7 @@ let GseToolReturnedEdit = {
                     sortable: 'asc',
                     filterable: !1,
                     textAlign: 'center',
-                    template: function (row, index, datatable) {   
+                    template: function (row, index, datatable) {
                         return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
                     }
                 },
@@ -169,7 +169,7 @@ let GseToolReturnedEdit = {
             });
         });
 
-        $('.footer').on('click', '.add-gse-tool-returned', function () {
+        $('.footer').on('click', '.add-gse', function () {
             let received_at = $('input[name=date]').val();
             let received_by = $('#received-by').val();
             let ref_po = $('input[name=ref-po]').val();
@@ -222,5 +222,5 @@ let GseToolReturnedEdit = {
 };
 
 jQuery(document).ready(function () {
-    GseToolReturnedEdit.init();
+    GseToolReturnedCreate.init();
 });

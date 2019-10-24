@@ -9,14 +9,6 @@ Route::name('frontend.')->group(function () {
 
     ], function () {
 
-        /** RII (Receiving Inspection Report) */
-
-        Route::namespace('ReceivingInspectionReport')->group(function () {
-
-            Route::resource('receiving-inspection-report', 'ReceivingInspectionController');
-
-        });
-
         /** RII RELEASE */
 
         Route::namespace('RIIRelease')->group(function () {

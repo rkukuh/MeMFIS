@@ -26,7 +26,7 @@ class EmployeeStatusesController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -43,7 +43,7 @@ class EmployeeStatusesController extends Controller
             'description' => $request->description,
             'of' => 'employment'
         ]);
-     
+
         // TODO: Return error message as JSON
         return response()->json($status);
     }

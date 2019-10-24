@@ -180,7 +180,6 @@ let PurchaseRequest = {
                 table = $(".item_datatable").mDatatable();
                 table.originalDataSet = [];
                 table.reload();
-                item_datatables_init = true;
             }
         });
     }

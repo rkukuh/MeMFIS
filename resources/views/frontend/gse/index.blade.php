@@ -17,7 +17,7 @@
                         -
                     </li>
                     <li class="m-nav__item">
-                        <a href="{{ route('frontend.gse-tool-returned.index') }}" class="m-nav__link">
+                        <a href="{{ route('frontend.gse.index') }}" class="m-nav__link">
                             <span class="m-nav__link-text">
                                 GSE/Tool Returned
                             </span>
@@ -66,18 +66,21 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-4 order-1 order-xl-2 m--align-right">
-                                        @component('frontend.common.buttons.create')
-                                            @slot('text', 'GSE/Tool Returned')
-                                            @slot('href', route('frontend.gse-tool-returned.create') )
-                                        @endcomponent
-                                        
-                                        <div class="m-separator m-separator--dashed d-xl-none"></div>
+                                            <button class="btn m-btn m-btn--custom m-btn--icon m-btn--pill m-btn--air btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                GSE/Tool Returned
+                                            </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">Heavy Maintenance</a>
+                                                <a class="dropdown-item" href="#">Workshop</a>
+                                                <a class="dropdown-item" href="#">Defectcard</a>
+                                                <a class="dropdown-item" href="#">Inventory Out Tool</a>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-lg-12">
-                                @include('frontend.gse-tool-returned.filter')
+                                @include('frontend.gse.filter')
                             </div>
 
                             <div class="gse_tool_returned_datatable" id="scrolling_both"></div>
@@ -90,5 +93,5 @@
 @endsection
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/gse-tool-returned/index.js')}}"></script>
+    <script src="{{ asset('js/frontend/gse/index.js')}}"></script>
 @endpush

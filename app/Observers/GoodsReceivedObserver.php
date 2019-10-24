@@ -14,7 +14,7 @@ class GoodsReceivedObserver
      */
     public function created(GoodsReceived $goodsReceived)
     {
-        //
+        $goodsReceived->branches()->attach(1);
     }
 
     /**

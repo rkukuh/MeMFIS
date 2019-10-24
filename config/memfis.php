@@ -26,6 +26,7 @@ return [
         'htcrr' => 20,
         'inventory_ins' => 20,
         'fefo_ins' => 100,
+        'inventory_outs' => 20,
         'items' => 20,
         'jobcards' => 20,
         'languages' => 20,

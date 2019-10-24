@@ -127,7 +127,7 @@
             <table width="100%">
                 <tr>
                     <td valign="top" width="36%">Print By : <span>{{ Auth::user()->name }}:{{ $now }}</span></td>
-                    <td valign="top" width="25%">Status : <span>@if($jobCard->status) {{ $jobCard->status }} @else - @endif</span></td>
+                    <td valign="top" width="25%">Status : <span>@if($jobcard->status) {{ $jobcard->status }} @else - @endif</span></td>
                     <td valign="top" width="39%">Date Close : <span>{{ $dateClosed }}</span></td>
                 </tr>
             </table>
@@ -140,26 +140,26 @@
             <li>
                 <div class="jobcard-info">
                     <fieldset>
-                        <legend>JC No : {{ $jobCard->number }}</legend>
+                        <legend>EO Taskcard No : {{ $jobcard->jobcardable->eo_header->number }}</legend>
                         <div class="jobcard-info-detail">
                             <table width="80%" cellpadding="3">
                                 <tr>
                                     <td width="20%">Issued Date</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
-                                        @if($jobCard->created_at)
-                                        {{ date('d-M-Y', strtotime($jobCard->created_at)) }}
+                                        @if($jobcard->created_at)
+                                            {{ date('d-M-Y', strtotime($jobcard->created_at)) }}
                                         @else
-                                        -
+                                            -
                                         @endif
                                     </td>
                                     <td width="20%">AC/Type</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
-                                        @if($jobCard->quotation->quotationable->aircraft->name)
-                                        {{$jobCard->quotation->quotationable->aircraft->name}}
+                                        @if($jobcard->quotation->quotationable->aircraft->name)
+                                            {{$jobcard->quotation->quotationable->aircraft->name}}
                                         @else
-                                        -
+                                            -
                                         @endif
                                     </td>
 
@@ -168,8 +168,8 @@
                                     <td width="20%">EO Task No</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
-                                        @if($jobCard->jobcardable->eo_header->number)
-                                        {{$jobCard->jobcardable->eo_header->number}}
+                                        @if($jobcard->jobcardable->eo_header->number)
+                                        {{$jobcard->jobcardable->eo_header->number}}
                                         @else
                                         -
                                         @endif
@@ -177,8 +177,8 @@
                                     <td width="20%">A/C Reg</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
-                                        @if($jobCard->quotation->quotationable->aircraft_register)
-                                        {{$jobCard->quotation->quotationable->aircraft_register}}
+                                        @if($jobcard->quotation->quotationable->aircraft_register)
+                                        {{$jobcard->quotation->quotationable->aircraft_register}}
                                         @else
                                         -
                                         @endif
@@ -188,8 +188,8 @@
                                     <td width="20%">Project No</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
-                                        @if($jobCard->quotation->quotationable->code)
-                                        {{$jobCard->quotation->quotationable->code}}
+                                        @if($jobcard->quotation->quotationable->code)
+                                        {{$jobcard->quotation->quotationable->code}}
                                         @else
                                         -
                                         @endif
@@ -197,8 +197,8 @@
                                     <td width="20%">A/C S/N</td>
                                     <td width="1%">:</td>
                                     <td width="29%">
-                                        @if($jobCard->quotation->quotationable->aircraft_sn)
-                                        {{$jobCard->quotation->quotationable->aircraft_sn}}
+                                        @if($jobcard->quotation->quotationable->aircraft_sn)
+                                        {{$jobcard->quotation->quotationable->aircraft_sn}}
                                         @else
                                         -
                                         @endif
@@ -212,7 +212,7 @@
             <li>
                 <div class="barcode">
                     <h4 style="margin-left:12px;color:cornflowerblue;">EO Task No.</h4>
-                    {!!DNS2D::getBarcodeHTML($jobCard->jobcardable->eo_header->number, 'QRCODE',4.5,4.5)!!}
+                    {!!DNS2D::getBarcodeHTML($jobcard->jobcardable->eo_header->number, 'QRCODE',4.5,4.5)!!}
                 </div>
             </li>
         </ul>
@@ -224,8 +224,12 @@
                 <tr>
                     <td width="20%" valign="top">Title</td>
                     <td width="1%" valign="top">:</td>
-                    <td width="79%" valign="top">Equipment/Furnishings - Flight/Passenger Compartment -
-                        Observer/Attendant Seat - Change Attachment Of Shoulder Restraint System</td>
+                    <td width="79%" valign="top">{{ $jobcard->jobcardable->eo_header->title }}</td>
+                </tr>
+                <tr>
+                    <td width="20%" valign="top">Description</td>
+                    <td width="1%" valign="top">:</td>
+                    <td width="79%" valign="top">{{ $jobcard->jobcardable->eo_header->description }}</td>
                 </tr>
             </table>
         </div>
@@ -236,16 +240,18 @@
             <div style="position:relative;">
                 <table width="85%" cellpadding="4" class="table_content">
                     <tr style="background:#d4d7db;">
-                        <td valign="top" align="center" width="25%"><b>Skill</b></td>
-                        <td valign="top" align="center" width="35%"><b>Taskcard Type</b></td>
-                        <td valign="top" align="center" width="20%"><b>Est. Mhrs</b></td>
-                        <td valign="top" align="center" width="20%"><b>Actual Mhrs</b></td>
+                        <td valign="top" align="center" width="30%"><b>Jobcard No.</b></td>
+                        <td valign="top" align="center" width="30%"><b>Skill</b></td>
+                        <td valign="top" align="center" width="13%"><b>Est. Mhrs</b></td>
+                        <td valign="top" align="center" width="13%"><b>Actual Mhrs</b></td>
+                        <td valign="top" align="center" width="14%"><b>RII</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" align="center">{{ $jobCard->jobcardable->skill }}</td>
-                        <td valign="top" align="center">@if(isset($jobCard->jobcardable->eo_header->type)) {{ $jobCard->jobcardable->eo_header->type->name}} @else - @endif</td>
-                        <td valign="top" align="center">{{ $jobCard->jobcardable->estimation_manhour }}</td>
-                        <td valign="top" align="center">{{ $jobCard->actual_manhour }}</td>
+                        <td valign="top" align="center">{{ $jobcard->number }}</td>
+                        <td valign="top" align="center">{{ $jobcard->jobcardable->skill }}</td>
+                        <td valign="top" align="center">{{ $jobcard->jobcardable->estimation_manhour }}</td>
+                        <td valign="top" align="center">{{ $jobcard->actual_manhour }}</td>
+                        <td valign="top" align="center">@if($jobcard->is_rii) YES @else NO @endif</td>
                     </tr>
                 </table>
                 <table width="85%" cellpadding="4" class="table_content">
@@ -270,49 +276,26 @@
                 <div class="body" style="min-height:120px">
                     <table width="100%" cellpadding="2">
                         <tr>
-                            <td valign="top" rowspan="2" width="20%" style="border-left: none;">
-                                {{ $jobCard->jobcardable->eo_header->category->name }}
+                            <td valign="top" width="20%" style="border-left: none;" >
+                              {{ $jobcard->jobcardable->eo_header->category->name }}
                             </td>
                             <td valign="top" width="20%">
-                                {{ $eo_additionals->scheduled_priority_text }} {{ $eo_additionals->scheduled_priority_type }}
+                              {{ $eo_additionals->scheduled_priority_text }} {{ $eo_additionals->scheduled_priority_type }}
                             </td>
                             <td valign="top" width="20%">
-                                {{ $eo_additionals->recurrence_text }} {{ $eo_additionals->recurrence_type }}
+                              {{ $eo_additionals->recurrence_text }} {{ $eo_additionals->recurrence_type }}
                             </td>
                             <td valign="top" width="20%">
-                                {{ $eo_additionals->manual_affected }}
+                              {{ $eo_additionals->manual_affected }}
                             </td>
-                            <td valign="top" width="20%" style="border-right: none;">Weight Change</td>
-                        </tr>
-                        <tr>
-                            <td valign="top" rowspan="2" width="20%">
-                               
+                            <td valign="top" width="20%" style="border-right: none;">
+                                <span>Wt Change</span>  
+                                <div style="border-bottom: 1px solid  #d4d7db; text-align: center; margin-top: 8px;">@if($eo_additionals->weight_change){{ $eo_additionals->weight_change }}@else - @endif<span style="color:black;">lbs</span>
+                                </div>
+                                <span style="margin-bottom:8px;">CG Charge</span>  
+                                <div style="text-align: center; margin-top:8px;">@if($eo_additionals->center_of_gravity){{ $eo_additionals->center_of_gravity }}@else - @endif<span style="color:black;">%mac</span>
+                                </div>
                             </td>
-                            <td valign="top" width="20%">
-                                
-                            </td>
-                            <td valign="top" width="20%">
-                                
-                            </td>
-                            <td valign="top" width="20%" style="border-right: none;">@if($eo_additionals->weight_change){{ $eo_additionals->weight_change }}@else - @endif</td>
-                        </tr>
-                        <tr>
-                            <td valign="top" rowspan="2" width="20%">
-                            </td>
-                            <td valign="top" width="20%" >
-                            </td>
-                            <td valign="top" width="20%">
-                            </td>
-                            <td valign="top" width="20%" style="border-right: none;">Center Of Gravity Change</td>
-                        </tr>
-                        <tr>
-                            <td valign="top" width="20%">
-                            </td>
-                            <td valign="top" width="20%" style="border-bottom: 1px solid  #d4d7db;">
-                            </td>
-                            <td valign="top" width="20%">
-                            </td>
-                            <td valign="top" width="20%" style="border-right: none;">@if($eo_additionals->center_of_gravity){{ $eo_additionals->center_of_gravity }}@else - @endif</td>
                         </tr>
                     </table>
                 </div>
@@ -322,23 +305,23 @@
                         <td valign="top" align="center" width="50%"><b>Tool Required / Special Tooling</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" align="center">
-                            @if(sizeof($jobCard->jobcardable->materials) > 0)
-                                @foreach($jobCard->jobcardable->materials as $material)
-                                {{$material->code}} | {{$material->name}} | {{$material->pivot->quantity}} | {{App\Models\Unit::find($material->pivot->unit_id)->name}}
-                                @endforeach
-                            @else
-                                -
-                            @endif
+                        <td valign="top" align="center" height="8%">
+                          @if(sizeof($jobcard->jobcardable->materials) > 0)
+                              @foreach($jobcard->jobcardable->materials as $material)
+                              {{$material->code}} | {{$material->name}} | {{$material->pivot->quantity}} | {{App\Models\Unit::find($material->pivot->unit_id)->name}}
+                              @endforeach
+                          @else
+                              -
+                          @endif
                         </td>
-                        <td valign="top" align="center">
-                            @if(sizeof($jobCard->jobcardable->tools) > 0)
-                                @foreach($jobCard->jobcardable->tools as $tool)
-                                {{$tool->code}} | {{$tool->name}} | {{$tool->pivot->quantity}} | {{App\Models\Unit::find($tool->pivot->unit_id)->name}}
-                                @endforeach
-                            @else
-                                -
-                            @endif
+                        <td valign="top" align="center" height="8%">
+                          @if(sizeof($jobcard->jobcardable->tools) > 0)
+                              @foreach($jobcard->jobcardable->tools as $tool)
+                              {{$tool->code}} | {{$tool->name}} | {{$tool->pivot->quantity}} | {{App\Models\Unit::find($tool->pivot->unit_id)->name}}
+                              @endforeach
+                          @else
+                              -
+                          @endif
                         </td>
                     </tr>
                 </table>
@@ -347,9 +330,9 @@
                         <td valign="top" align="center" width="50%" colspan="3"><b>Engineering Approval</b></td>
                     </tr>
                     <tr>
-                        <td valign="top" rowspan="6" width="6%">Prepared By</td>
-                        <td valign="top" rowspan="6" width="6%">Checked By</td>
-                        <td valign="top" rowspan="6" width="6%">Approve By</td>
+                        <td valign="top" height="6%">Prepared By</td>
+                        <td valign="top" height="6%">Checked By</td>
+                        <td valign="top" height="6%">Approve By</td>
                     </tr>
                 </table>
                 <table width="100%" cellpadding="4" class="table_content">
@@ -359,8 +342,7 @@
                     <tr>
                         <td valign="top" align="center" width="3%" style="border-bottom:none;"><b>TSN</b></td>
                         <td valign="top" align="center" width="3%" style="border-bottom:none;"><b>CSN</b></td>
-                        <td valign="top" align="center" width="72%" colspan="3" style="border-bottom:none;"><b>ENTERED
-                                IN</b></td>
+                        <td valign="top" align="center" width="72%" colspan="3" style="border-bottom:none;"><b>ENTERED IN</b></td>
                         <td valign="top" align="center" width="22%" style="border-bottom:none;"><b>STATION</b></td>
                     </tr>
                     <tr>
@@ -368,30 +350,30 @@
                         <td valign="top" align="center" width="3%">@if($eo_additionals->CSN) {{ $eo_additionals->CSN }} @else - @endif</td>
                         <td valign="top" align="center" width="24%" style="border-top:none;border-right:none;">
                             <div class="checkbox">
-                                <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">A/C Log Book</span>
+                                <img @if(in_array('ac-logbook', $jobcard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">A/C Log Book</span>
                             </div>
                         </td>
                         <td valign="top" align="center" width="24%" style="border-top:none;border-left:none;border-right:none;">
                             <div class="checkbox">
-                                <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">ENG. Log Book</span>
+                                <img @if(in_array('ac-logbook', $jobcard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">ENG. Log Book</span>
                             </div>
                         </td>
                         <td valign="top" align="center" width="24%" style="border-top:none;border-left:none;">
                             <div class="checkbox">
-                                <img @if(in_array('ac-logbook', $jobCard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">APU Log Book</span>
+                                <img @if(in_array('ac-logbook', $jobcard->logbooks()->pluck('code')->toArray() ) ) src="./img/check.png" @else src="./img/check-box-empty.png" @endif alt="" width="10"> <span style="margin-left:5px;">APU Log Book</span>
                             </div>
                         </td>
-                        <td valign="top" align="center" width="22%" style="border-top:none;">@if($jobCard->station) {{ $jobCard->station->name }} @else - @endif</td>
+                        <td valign="top" align="center" width="22%" style="border-top:none;">@if($jobcard->station) {{ $jobcard->station->name }} @else - @endif</td>
                     </tr>
                 </table>
-                <table width="100%" cellpadding="4" class="table_content">
+                <table  width="100%" cellpadding="4" class="table_content">
                     <tr>
                         <td valign="top" width="50%">Discrepancy Found :
                             <span>
                                 <div style="margin-left:100px;margin-top:-20px;">
                                     <ul>
-                                        <li>
-                                            <img @if(sizeof($jobCard->defectcards) <> 0)
+                                      <li>
+                                            <img @if(sizeof($jobcard->defectcards) <> 0)
                                                 src="./img/check.png"
                                                 @else
                                                 src="./img/check-box-empty.png"
@@ -400,7 +382,7 @@
                                                 <span style="margin-left:6px;font-weight: bold;font-size:13px">YES</span>
                                         </li>
                                         <li style="margin-left:12px;">
-                                            <img @if(sizeof($jobCard->defectcards) == 0)
+                                            <img @if(sizeof($jobcard->defectcards) == 0)
                                             src="./img/check.png"
                                             @else
                                             src="./img/check-box-empty.png"
@@ -412,12 +394,12 @@
                                 </div>
                             </span>
                         </td>
-                        <td valign="top" width="50%">Transfer To Defect Card No : <span>@if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @else - @endif</span></td>
+                        <td valign="top" width="50%">Transfer To Defect Card No : <span>@if(sizeof($jobcard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobcard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @else - @endif</span></td>
                     </tr>
                 </table>
-                <div style="position:absolute; left:659px; top:-20px;">
+                <div style="position:absolute; left:630px; top:-20px;">
                     <h4 style="margin-left:6px;color:cornflowerblue;">Jobcard No.</h4>
-                    {!!DNS2D::getBarcodeHTML($jobCard->number, 'QRCODE',3.4,3.4)!!}
+                    {!!DNS2D::getBarcodeHTML($jobcard->number, 'QRCODE',4.2,4.2)!!}
                 </div>
             </div>
         </div>
@@ -455,6 +437,16 @@
                 </table>
             </div>
         </div>
+    </div>
+
+    <div class="container" style="margin-top:12px">
+        <table>
+            <tr>
+                <td width="5%">Date Close</td>
+                <td width="1%">:</td>
+                <td width="94%">{{ $dateClosed }}</td>
+            </tr>
+        </table>
     </div>
 </body>
 

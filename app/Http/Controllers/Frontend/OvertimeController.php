@@ -12,7 +12,6 @@ use App\Http\Requests\Frontend\OvertimeStore;
 use App\Http\Requests\Frontend\OvertimeUpdate;
 use App\Models\Employee;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class OvertimeController extends Controller
 {
@@ -92,41 +91,7 @@ class OvertimeController extends Controller
      */
     public function show(Overtime $overtime)
     {
-        $theOvertime = Overtime::findOrFail($overtime->id);
-        // $status_data = $overtime->statuses()->first()->name;
-        $employee_data = $overtime->employee()->first()->first_name. " - " . $overtime->employee()->first()->code;
-        // $total_in_diff = Carbon::parse($overtime->total,"Asia/Jakarta")->format("%H %I %S");
-        $date = $overtime->date;
-        $start = $overtime->start;
-        $end = $overtime->end;
-        $start_diff = Carbon::parse($date." ".$start,"Asia/Jakarta");
-        $end_diff = Carbon::parse($date." ".$end,"Asia/Jakarta");
-        $total_in_diff = $start_diff->diff($end_diff)->format("%H Hours %I Minutes %S Seconds");
-        $approved_by = "-";
-        $remark_note = "-";
-        $job = "-";
-        $is_approved = $overtime->approvals->last();
-        $approval_stat = "Pending";
-        if ($is_approved != null) {
-            if ($is_approved->is_approved == 1) {
-                $approval_stat = "Approved";
-            }else{
-                $approval_stat = "Rejected";
-            }
-            $approved_by = $is_approved->conductedby->first_name. " at " .$is_approved->created_at;
-
-            $db_note = $is_approved->note;
-            $trimmed_note = preg_replace('/[ \t]+/', ' ', preg_replace('/\s*$^\s*/m', "\n", $db_note));
-            if ( $trimmed_note != "\n") {
-                $remark_note = $trimmed_note;
-            }else{
-                $remark_note = "No specific remark";
-            }
-            
-            $job = $is_approved->conductedby->user->roles->first()->name;
-        }
-        $approval_detail = [$approval_stat,$approved_by,$job,$remark_note];
-        return response()->json(["overtime" => $overtime,"employee" => $employee_data,"total_diff" => $total_in_diff,"approval_detail" => $approval_detail]);
+        //
     }
 
     /**
@@ -137,10 +102,9 @@ class OvertimeController extends Controller
      */
     public function edit(Overtime $overtime)
     {
-        $theOvertime = Overtime::findOrFail($overtime->id);
-        $employee_data = $overtime->employee()->first()->code." - ".$overtime->employee()->first()->first_name;
-        $employee_uuid = $overtime->employee()->first()->uuid;
-        return view("frontend.overtime.edit",["overtime" => $overtime,"employee" => $employee_data,"employee_uuid" => $employee_uuid]);
+        // $theOvertime = Overtime::findOrFail($overtime->id);
+        $employee_data = $overtime->employee;
+        return view("frontend.overtime.edit",["overtime" => $overtime,"employee" => $employee_data]);
     }
 
     /**
@@ -186,6 +150,9 @@ class OvertimeController extends Controller
 ;
         $overtime_data->fill($data);
         $overtime_data->save();
+
+        // $request->session()->flash("success", $title . " is successfully updated");
+        // return redirect()->route("blogposts.show",["blogpost" => $blogpost->id]);
         return redirect()->route('frontend.overtime.index');
     }
 
@@ -200,54 +167,8 @@ class OvertimeController extends Controller
         //
     }
 
-    public function approve(Overtime $overtime,Request $request)
+    public function approve(Overtime $overtime, Request $request)
     {
-        $note = $request->get("note");
-        $trimmed_note = preg_replace('/[ \t]+/', ' ', preg_replace('/\s*$^\s*/m', "\n", $note));
-        if ($trimmed_note != "") {
-            $note = $trimmed_note;
-        }else{
-            $note = "";
-        }    
-
-        $overtime->approvals()->save(new Approval([
-            'approvable_id' => $overtime->id,
-            'conducted_by' => Auth::id(),
-            'note' => $note,
-            'is_approved' => 1
-        ]));
-
-        $status = Status::ofOvertime()->where('code','closed')->first()->id;
-        $overtime->statuses_id = $status;
-        $overtime->save();
-        
-        return response()->json($overtime);
-    }
-
-    public function reject(Overtime $overtime, Request $request)
-    {
-        $note = $request->get("note");
-        $trimmed_note = preg_replace('/[ \t]+/', ' ', preg_replace('/\s*$^\s*/m', "\n", $note));
-        if ($trimmed_note != "") {
-            $note = $trimmed_note;
-        }else{
-            $note = null;
-        }
-        
-           
-
-        $overtime->approvals()->save(new Approval([
-            'approvable_id' => $overtime->id,
-            'conducted_by' => Auth::id(),
-            'note' => $note,
-            'is_approved' => 0
-        ]));
-
-        
-        $status = Status::ofOvertime()->where('code','closed')->first()->id;
-        $overtime->statuses_id = $status;
-        $overtime->save();
-        
-        return response()->json($overtime);
+        # code...
     }
 }

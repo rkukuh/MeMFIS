@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Models\Zone;
+use App\Models\DefectCard;
 use App\Models\Item;
+use App\Models\JobCard;
 use App\Models\Type;
 use App\Models\Unit;
 use Spatie\Tags\Tag;
@@ -29,9 +31,36 @@ use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Pivots\EmployeeLicense;
 use App\Models\InventoryIn;
+use App\Models\InventoryOut;
 
 class FillComboxController extends Controller
 {
+/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function jobcard()
+    {
+        $jobcards = JobCard::pluck('number', 'uuid');
+
+        return json_encode($jobcards);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function defectcard()
+    {
+        $defectcards = DefectCard::pluck('code', 'id');
+
+        return json_encode($defectcards);
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -113,6 +142,19 @@ class FillComboxController extends Controller
         ->pluck('full_name', 'id');
 
         return json_encode($currencies);
+
+    }
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function inventoryOut()
+    {
+        $inventoryout = InventoryOut::pluck('number', 'id');
+
+        return json_encode($inventoryout);
 
     }
 
@@ -348,6 +390,19 @@ class FillComboxController extends Controller
         $customers = Customer::pluck('name', 'uuid');
 
         return json_encode($customers);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function purchaseOrder()
+    {
+        $PurchaseOrders = PurchaseOrder::has('approvals')->pluck('number', 'uuid');
+
+        return json_encode($PurchaseOrders);
 
     }
 
@@ -645,7 +700,22 @@ class FillComboxController extends Controller
                 })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
 
         return $items;
-}
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function toolUuid()
+    {
+        $items = Item::with('categories')
+            ->whereHas('categories', function ($query) {
+                $query->where('code', 'tool');
+            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name', 'uuid');
+
+        return $items;
+    }
 
     /**
      * Display a listing of the resource.
@@ -658,6 +728,21 @@ class FillComboxController extends Controller
                 ->whereHas('categories', function ($query) {
                     $query->where('code', 'raw')->orWhere('code', 'cons')->orWhere('code', 'comp')->orWhere('code', 'service')->orWhere('code', 'facility');
                 })->selectRaw('id, CONCAT(code, " | ", name) as name')->pluck('name','id');
+
+        return $items;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function materialUUid()
+    {
+        $items = Item::with('categories')
+            ->whereHas('categories', function ($query) {
+                $query->where('code', 'raw')->orWhere('code', 'cons')->orWhere('code', 'comp')->orWhere('code', 'service')->orWhere('code', 'facility');
+            })->selectRaw('uuid, CONCAT(code, " | ", name) as name')->pluck('name', 'uuid');
 
         return $items;
     }
@@ -765,9 +850,22 @@ class FillComboxController extends Controller
      */
     public function workOrder()
     {
-        $work_order = Project::with('approvals')->whereHas('approvals')->pluck('no_wo','uuid');
+        $projects = Project::with('approvals','quotations')->whereHas('approvals')->get(); 
+        $work_orders = $result = [];
+        
+        foreach($projects as $key => $project){
+            if(sizeof($project->quotations) > 0){
+                foreach($project->quotations as $quotation){
+                    if(sizeof($quotation->approvals) > 0){
+                        $projects[$key] = "";
+                    }
+                };
+            }
+        }
 
-        return json_encode($work_order);
+        $work_orders = $projects->pluck('no_wo','uuid');
+        $work_orders = array_filter($work_orders->toArray());
+        return json_encode($work_orders);
     }
 
     /**
@@ -836,4 +934,6 @@ class FillComboxController extends Controller
         return json_encode($promo);
 
     }
+
+    
 }
