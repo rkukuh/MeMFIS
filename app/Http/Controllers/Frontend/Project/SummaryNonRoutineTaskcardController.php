@@ -458,10 +458,36 @@ class SummaryNonRoutineTaskcardController extends Controller
             }
         }
 
+
+        $adsb  = $workPackage->eo_instructions()->with('eo_header.type')
+        ->whereHas('eo_header.type', function ($query) {
+            $query->where('code', 'ad')->orWhere('code','sb');
+        })->whereNull('eo_instructions.deleted_at')->count();
+
+        $cmrawl  = $workPackage->eo_instructions()->with('eo_header.type')
+        ->whereHas('eo_header.type', function ($query) {
+            $query->where('code', 'cmr')->orWhere('code','awl');
+        })->whereNull('eo_instructions.deleted_at')->count();
+
+        $ea  = $workPackage->eo_instructions()->with('eo_header.type')
+        ->whereHas('eo_header.type', function ($query) {
+            $query->where('code', 'ea');
+        })->whereNull('eo_instructions.deleted_at')->count();
+
+        $eo  = $workPackage->eo_instructions()->with('eo_header.type')
+        ->whereHas('eo_header.type', function ($query) {
+            $query->where('code', 'eo');
+        })->whereNull('eo_instructions.deleted_at')->count();
+
+        $si  = $workPackage->taskcards->load('type')->where('type.code', 'si')->count('uuid');
+        
+        $preliminary = $workPackage->taskcards->load('type')->where('type.code', 'preliminary')->count('uuid');
+        
         $otr = array_count_values($skills);
         $otr["eri"] = $eri;
         $total_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-non-routine')->count('uuid');
         $total_manhour_taskcard  = $workPackage->taskcards->load('type')->where('type.of', 'taskcard-type-non-routine')->sum('estimation_manhour');
+
 
         return view('frontend.project.hm.taskcard.nonroutine.summary',[
             'total_taskcard' => $total_taskcard,
@@ -471,6 +497,9 @@ class SummaryNonRoutineTaskcardController extends Controller
             'cmrawl' => $cmrawl,
             'otr' => $otr,
             'si' => $si,
+            'ea' => $ea,
+            'eo' => $eo,
+            'preliminary' => $preliminary,
         ]);
     }
 
