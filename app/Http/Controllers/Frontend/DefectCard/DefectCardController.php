@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend\DefectCard;
 
 use Auth;
 use App;
+use Carbon\Carbon;
+use App\Models\Status;
 use iio\libmergepdf\Merger;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
@@ -137,6 +139,49 @@ class DefectCardController extends Controller
     public function print(DefectCard $defectcard)
     {
         $m = new Merger();
+
+        $progresses_groups = $defectcard->progresses->groupBy('progressed_by');
+        foreach($progresses_groups as $progresses_group){
+            // dd($progresses_group);
+            
+            $statuses = Status::ofDefectCard()->get();
+            foreach($defectcard->helpers as $helper){
+                $helper->userID .= $helper->user->id;
+            }
+
+            $manhours = 0;
+
+            //calculating defect card's actual manhours
+            $manhours = 0;
+            foreach($progresses_group as $key => $value){
+                $date1 = null;
+                
+                if($statuses->where('id',$value->status_id)->first()->code <> "open" or $statuses->where('id',$value->status_id)->first()->code <> "released" or $statuses->where('id',$value->status_id)->first()->code <> "rii-released"){
+                    if($defectcard->helpers->where('userID',$key)->first() == null){
+                        if($date1 <> null){
+                            $t1 = Carbon::parse($date1);
+                            $t2 = Carbon::parse($value->created_at);
+                            $diff = $t1->diffInSeconds($t2);
+                            $manhours = $manhours + $diff;
+                        }
+                        $date1 = $value->created_at;
+                    }
+                }
+            }
+            $manhours = $manhours/3600;
+
+
+            // calculate break time.
+            $manhours_break = 0;
+
+            $manhours_break     =   $manhours_break/3600;
+            $actual_manhours    =   number_format($manhours-$manhours_break, 2);
+
+            dump($actual_manhours);
+            
+        }
+        dd("break");
+        
         $zones = $defectcard->zones->pluck('name')->toArray();
         $zones = join(',', $zones);
         
