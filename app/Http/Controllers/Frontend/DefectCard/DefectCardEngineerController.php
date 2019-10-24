@@ -199,32 +199,38 @@ class DefectCardEngineerController extends Controller
     {
         // get all the helper
         $helpers_code = $defectcard->helpers->pluck('code')->toArray();
+        $references = $defectcard->helpers->pluck('additionals')->toArray();
         $helpers = $defectcard->helpers;
 
         // compare if there's any difference
-        $old_helper = array_diff($helpers_code, $request->helper);
-        $new_helper = array_diff($request->helper, $helpers_code);
-        $new_helpers = Employee::whereIn('code',$new_helper)->get();
-        $old_helpers = Employee::whereIn('code',$old_helper)->get();
-        if(sizeof($old_helper) > 0){
-            // delete the olds one
-            foreach($old_helpers as $key => $helper){
-                $defectcard->helpers()->updateExistingPivot($helper, ['deleted_at' => Carbon::now()], false);
-            }
-    
-            // insert the new selected helper with additionals
-            foreach($new_helpers as $key => $helper){
-                $reference_key = array_search($helper->code, $request->helper);
-                $defectcard->helpers()->attach($helper,['additionals' => $request->reference[$reference_key]]);
-            }
-        }
+        if($request->helper){
+            $old_helper = array_diff($helpers_code, $request->helper);
+            $new_helper = array_diff($request->helper, $helpers_code);
+            $new_helpers = Employee::whereIn('code',$new_helper)->get();
+            $old_helpers = Employee::whereIn('code',$old_helper)->get();
+            if(sizeof($old_helper) > 0){
+                // delete the olds one
+                foreach($old_helpers as $key => $helper){
+                    $defectcard->helpers()->updateExistingPivot($helper, ['deleted_at' => Carbon::now()], false);
+                }
         
-        // update additionals ( reference )
-        foreach($helpers as $key => $helper){
-            $defectcard->helpers()->updateExistingPivot($helper, array('additionals' => $request->reference[$key]), false);
+                // insert the new selected helper with additionals
+                foreach($new_helpers as $key => $helper){
+                    $reference_key = array_search($helper->code, $request->helper);
+                    $defectcard->helpers()->attach($helper,['additionals' => $request->reference[$reference_key]]);
+                }
+            }
         }
 
-
+        // update additionals ( reference )
+        if(isset($request->reference)){
+            $compare_reference = array_diff($references, $request->reference);
+            if(sizeof($compare_reference) > 0){
+                foreach($helpers as $key => $helper){
+                    $defectcard->helpers()->updateExistingPivot($helper, array('additionals' => $request->reference[$key]), false);
+                }
+            }
+        }
         if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             $defectcard->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
