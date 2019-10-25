@@ -69,7 +69,7 @@ class ReceivingInspectionReportController extends Controller
     public function show(ReceivingInspectionReport $receivingInspectionReport)
     {
         return view('frontend.receiving-inspection-report.show', [
-            'receivingInspectionReport' => $receivingInspectionReport,
+            'receivingInspectionReport' => $receivingInspectionReport
         ]);
     }
 
@@ -82,7 +82,7 @@ class ReceivingInspectionReportController extends Controller
     public function edit(ReceivingInspectionReport $receivingInspectionReport)
     {
         return view('frontend.receiving-inspection-report.edit', [
-            'receivingInspectionReport' => $receivingInspectionReport,
+            'receivingInspectionReport' => $receivingInspectionReport
         ]);
     }
 
