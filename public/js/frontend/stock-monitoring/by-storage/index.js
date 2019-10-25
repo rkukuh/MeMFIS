@@ -58,13 +58,13 @@ let ByStorage = {
                 },
                 {
                     field: '',
-                    title: 'Storage.',
+                    title: 'Item Description',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
                     field: '',
-                    title: 'Item Description',
+                    title: 'Storage.',
                     sortable: 'asc',
                     filterable: !1,
                 },
