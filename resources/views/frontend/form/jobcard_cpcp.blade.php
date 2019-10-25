@@ -157,29 +157,29 @@
       <li>
         <div class="jobcard-info">
             <fieldset>
-                <legend>JC No : {{$jobCard->number}}</legend>
+                <legend>JC No : {{$jobcard->number}}</legend>
                 <div class="jobcard-info-detail">
                   <table width="80%" cellpadding="3">
                       <tr>
                         <td width="20%">Issued Date</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                          @if($jobCard->created_at)
-                            {{ date('d-M-Y', strtotime($jobCard->created_at)) }}
+                          @if($jobcard->created_at)
+                            {{ date('d-M-Y', strtotime($jobcard->created_at)) }}
                           @else
                             -
                           @endif
                         </td>
                         <td width="20%">Inspection Type</td>
                         <td width="1%">:</td>
-                        <td width="29%">{{$jobCard->jobcardable->task->name}}</td>
+                        <td width="29%">{{$jobcard->jobcardable->task->name}}</td>
                       </tr>
                       <tr>
                         <td width="20%">Taskcard No</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                          @if($jobCard->jobcardable->number)
-                          {{$jobCard->jobcardable->number}}
+                          @if($jobcard->jobcardable->number)
+                          {{$jobcard->jobcardable->number}}
                           @else
                             -
                           @endif
@@ -187,8 +187,8 @@
                         <td width="20%">AC/Type</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                          @if($jobCard->quotation->quotationable->aircraft->name)
-                          {{$jobCard->quotation->quotationable->aircraft->name}}
+                          @if($jobcard->quotation->quotationable->aircraft->name)
+                          {{$jobcard->quotation->quotationable->aircraft->name}}
                           @else
                             -
                           @endif
@@ -198,8 +198,8 @@
                         <td width="20%">Project No</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                          @if($jobCard->quotation->quotationable->code)
-                          {{$jobCard->quotation->quotationable->code}}
+                          @if($jobcard->quotation->quotationable->code)
+                          {{$jobcard->quotation->quotationable->code}}
                           @else
                             -
                           @endif
@@ -207,8 +207,8 @@
                         <td width="20%">A/C Reg</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                          @if($jobCard->quotation->quotationable->aircraft_register)
-                          {{$jobCard->quotation->quotationable->aircraft_register}}
+                          @if($jobcard->quotation->quotationable->aircraft_register)
+                          {{$jobcard->quotation->quotationable->aircraft_register}}
                           @else
                             -
                           @endif
@@ -218,8 +218,8 @@
                         <td width="20%">Company Task</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                            @if(isset(json_decode($jobCard->jobcardable->additionals)->internal_number))
-                                {{json_decode($jobCard->jobcardable->additionals)->internal_number}}
+                            @if(isset(json_decode($jobcard->jobcardable->additionals)->internal_number))
+                                {{json_decode($jobcard->jobcardable->additionals)->internal_number}}
                             @else
                                 -
                             @endif
@@ -227,8 +227,8 @@
                         <td width="20%">A/C S/N</td>
                         <td width="1%">:</td>
                         <td width="29%">
-                          @if($jobCard->quotation->quotationable->aircraft_sn)
-                          {{$jobCard->quotation->quotationable->aircraft_sn}}
+                          @if($jobcard->quotation->quotationable->aircraft_sn)
+                          {{$jobcard->quotation->quotationable->aircraft_sn}}
                           @else
                             -
                           @endif
@@ -241,7 +241,7 @@
       </li>
       <li>
         <div class="barcode">
-            {!!DNS2D::getBarcodeHTML($jobCard->number, 'QRCODE',4.5,4.5)!!}
+            {!!DNS2D::getBarcodeHTML($jobcard->number, 'QRCODE',4.5,4.5)!!}
         </div>
       </li>
     </ul>
@@ -262,8 +262,8 @@
             </div>
           </td>
           <td width="81%">
-            @if($jobCard->jobcardable->title)
-              {{$jobCard->jobcardable->title}}
+            @if($jobcard->jobcardable->title)
+              {{$jobcard->jobcardable->title}}
             @else
               -
             @endif
@@ -281,8 +281,8 @@
             </div>
           </td>
           <td width="81%">
-            @if($jobCard->jobcardable->description)
-              {{$jobCard->jobcardable->description}}
+            @if($jobcard->jobcardable->description)
+              {{$jobcard->jobcardable->description}}
             @else
               -
             @endif
@@ -300,8 +300,8 @@
             </div>
           </td>
           <td width="81%">
-            @if($jobCard->jobcardable->reference)
-              {{$jobCard->jobcardable->reference}}
+            @if($jobcard->jobcardable->reference)
+              {{$jobcard->jobcardable->reference}}
             @else
               -
             @endif
@@ -325,24 +325,24 @@
         <table width="100%" cellpadding="10">
           <tr>
             <td width="18%" valign="top">
-                @if(sizeof($jobCard->jobcardable->skills) == 3)
+                @if(sizeof($jobcard->jobcardable->skills) == 3)
                   ERI
-                @elseif(sizeof($jobCard->jobcardable->skills) == 1)
-                  {{$jobCard->jobcardable->skills[0]->name}}
+                @elseif(sizeof($jobcard->jobcardable->skills) == 1)
+                  {{$jobcard->jobcardable->skills[0]->name}}
                 @else
                   -
                 @endif
             </td>
             <td width="47%" align="center" valign="top">
-              @if($jobCard->jobcardable->work_area != null)
-                {{$jobCard->jobcardable->workarea->name}}
+              @if($jobcard->jobcardable->work_area != null)
+                {{$jobcard->jobcardable->workarea->name}}
               @else
                 -
               @endif
             </td>
             <td width="15%" align="center" valign="top">
-              @if($jobCard->jobcardable->estimation_manhour)
-              {{$jobCard->jobcardable->estimation_manhour}}
+              @if($jobcard->jobcardable->estimation_manhour)
+              {{$jobcard->jobcardable->estimation_manhour}}
               @else
                 -
               @endif
@@ -367,7 +367,7 @@
           <td colspan="2" height="55" valign="top">
               Accomplishment Record : <br><br>
               <span>
-                  {{ $jobCard->progresses->last()->reason_text }}
+                  {{ $jobcard->progresses->last()->reason_text }}
               </span>
           </td>
         </tr>
@@ -395,7 +395,7 @@
                   <ul>
                     <li>
                       <img
-                          @if(sizeof($jobCard->defectcards) <> 0)
+                          @if(sizeof($jobcard->defectcards) <> 0)
                           src="./img/check.png"
                           @else
                           src="./img/check-box-empty.png"
@@ -404,7 +404,7 @@
                     </li>
                     <li style="margin-left:12px;">
                       <img
-                          @if(sizeof($jobCard->defectcards) == 0)
+                          @if(sizeof($jobcard->defectcards) == 0)
                           src="./img/check.png"
                           @else
                           src="./img/check-box-empty.png"
@@ -419,7 +419,7 @@
           <td width="50%" height="35" valign="center">
               Transfer to Defect Card No : <br><br>
               <span>
-              @if(sizeof($jobCard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobCard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif
+              @if(sizeof($jobcard->defectcards()->has('approvals','>',1)->pluck('code')) > 0){{ join(',',$jobcard->defectcards()->has('approvals','>',1)->pluck('code')->toArray()) }} @endif
               </span>
           </td>
         </tr>
@@ -434,7 +434,7 @@
           <td width="3%" valign="top">RII </td>
           <td width="1%" valign="top">:</td>
           <td width="46%" valign="top">
-            @if($jobCard->is_rii == '0')
+            @if($jobcard->is_rii == '0')
               No
             @else
               Yes
@@ -498,13 +498,13 @@
             </tr>
           </thead>
           <tbody>
-            @if(empty($jobCard->jobcardable->materials->toArray()))
+            @if(empty($jobcard->jobcardable->materials->toArray()))
                 <tr>
                     <td colspan="5" align="center">empty</td>
                 </tr>
             @endif
             @php $i = 1;  @endphp
-            @foreach($jobCard->jobcardable->materials as $material)
+            @foreach($jobcard->jobcardable->materials as $material)
             <tr>
                 <td align="center" valign="top" width="2%">{{$i++}}</td>
                 <td align="center" valign="top" width="18%">{{$material->code}}</td>
@@ -533,13 +533,13 @@
             </tr>
           </thead>
           <tbody>
-              @if(empty($jobCard->jobcardable->tools->toArray()))
+              @if(empty($jobcard->jobcardable->tools->toArray()))
                   <tr>
                       <td colspan="5" align="center">empty</td>
                   </tr>
               @endif
               @php $i = 1;  @endphp
-              @foreach($jobCard->jobcardable->tools as $tool)
+              @foreach($jobcard->jobcardable->tools as $tool)
               <tr>
                   <td align="center" valign="top" width="2%">{{$i++}}</td>
                   <td align="center" valign="top" width="18%">{{$tool->code}}</td>

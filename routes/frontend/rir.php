@@ -13,7 +13,7 @@ Route::name('frontend.')->group(function () {
 
         Route::namespace('ReceivingInspectionReport')->group(function () {
 
-            Route::resource('receiving-inspection-report', 'ReceivingInspectionController');
+            Route::resource('receiving-inspection-report', 'ReceivingInspectionReportController');
 
         });
 

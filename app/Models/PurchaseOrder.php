@@ -110,7 +110,12 @@ class PurchaseOrder extends MemfisModel
      */
     public function promos()
     {
-        return $this->morphToMany(Promo::class, 'promoable');
+        return $this->morphToMany(Promo::class, 'promoable')
+                    ->withPivot(
+                        'value', 
+                        'amount'
+                    )
+                    ->withTimestamps();
     }
 
     /**

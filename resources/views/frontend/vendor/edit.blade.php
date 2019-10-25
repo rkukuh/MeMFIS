@@ -65,7 +65,7 @@
 
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Term of Payment 
+                                            Term of Payment
                                         </label>
 
                                         @component('frontend.common.input.number')
@@ -669,9 +669,9 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <label class="form-control-label">
-                                                            Bank Name 
+                                                            Bank Name
                                                         </label>
-                                    
+
                                                         @component('frontend.common.input.select2')
                                                             @slot('text', 'Bank Account Name')
                                                             @slot('id', 'bank_name')
@@ -685,7 +685,7 @@
                                                         <label class="form-control-label">
                                                             Bank Account Name
                                                         </label>
-                                    
+
                                                         @component('frontend.common.input.input')
                                                             @slot('text', 'Bank Account Name')
                                                             @slot('id', 'bank_account_name')
@@ -698,7 +698,7 @@
                                                         <label class="form-control-label">
                                                             Bank Account Number
                                                         </label>
-                                    
+
                                                         @component('frontend.common.input.number')
                                                             @slot('text', 'Bank Account Number')
                                                             @slot('id', 'bank_account_number')
@@ -713,7 +713,7 @@
                                                         <label class="form-control-label">
                                                             Currency
                                                         </label>
-                                    
+
                                                         @component('frontend.common.input.select2')
                                                             @slot('id', 'currency')
                                                             @slot('text', 'Currency')
@@ -725,7 +725,7 @@
                                                         <label class="form-control-label">
                                                             Swift Code
                                                         </label>
-                                    
+
                                                         @component('frontend.common.input.text')
                                                             @slot('text', 'Swift Code')
                                                             @slot('id', 'swift_code')
@@ -741,9 +741,9 @@
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-6 col-md-6 col-lg-6">
                                         <label class="form-control-label">
-                                            Active 
+                                            Active
                                         </label><br>
-                    
+
                                         @component('frontend.common.input.switch')
                                             @slot('text', 'Active')
                                             @slot('name', 'active')
@@ -834,7 +834,7 @@
                 </div>
                 <div class="m-portlet m-portlet--mobile">
                     <div class="m-portlet__body">
-                        <div class="form-group m-form__group row">                          
+                        <div class="form-group m-form__group row">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="repeaterAttention">
                                     @if($attentions)
@@ -876,16 +876,6 @@
                                                                 @endforeach
                                                             @endif
                                                         </select>
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3 hidden">
-                                                        <label class="form-control-label">
-                                                            Extension
-                                                        </label>
-                                                        @component('frontend.common.input.text')
-                                                            @slot('name', 'attn-ext')
-                                                            @slot('text', 'Ext')
-                                                            @slot('value', $attention->ext)
-                                                        @endcomponent
                                                     </div>
                                                 </div>
                                                 <div class="form-group m-form__group row">

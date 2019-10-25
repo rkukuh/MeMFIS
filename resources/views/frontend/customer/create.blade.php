@@ -109,7 +109,7 @@
                                             </div>
                                             <div class="col-sm-3 col-md-3 col-lg-3">
                                                 <label class="form-control-label">
-                                                    Type.
+                                                    Type. @include('frontend.common.label.required')
                                                 </label>
                                             </div>
                                             <div class="col-sm-2 col-md-2 col-lg-2">
@@ -119,7 +119,7 @@
                                             <div class="repeaterRow">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
-                                                        @component('frontend.common.input.text')
+                                                        @component('frontend.common.input.number')
                                                             @slot('name', 'phone_array')
                                                             @slot('text', 'Phone')
                                                         @endcomponent
@@ -159,7 +159,7 @@
                                             <div class="repeaterRow CopyPhone hidden">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
-                                                        @component('frontend.common.input.text')
+                                                        @component('frontend.common.input.number')
                                                             @slot('name', 'phone_array')
                                                             @slot('text', 'Phone')
                                                         @endcomponent
@@ -219,7 +219,7 @@
                                             <div class="repeaterRow">
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-5 col-md-5 col-lg-5">
-                                                        @component('frontend.common.input.text')
+                                                        @component('frontend.common.input.number')
                                                             @slot('text', 'fax')
                                                             @slot('name', 'fax')
                                                         @endcomponent

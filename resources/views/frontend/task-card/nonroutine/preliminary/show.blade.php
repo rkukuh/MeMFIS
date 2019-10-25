@@ -74,7 +74,7 @@
                                     <div class="form-group m-form__group row">
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Company Task Number @include('frontend.common.label.required')
+                                                Company Task Number @include('frontend.common.label.optional')
                                             </label>
 
                                             @if (empty($taskCard->additionals))

@@ -385,8 +385,8 @@
                 </tr>
                 @endif
                 <tr>
-                    <th width="25%" valign="top" align="left">Grand Total in USD</th>
-                    <th width="25%" valign="top" align="right">{{ $quotation->currency->symbol }} {{ number_format($subTotal + $totalCharge - $discount, 2) }}</th>
+                    <th width="25%" valign="top" align="left" style="border-top:  2px solid black;">Grand Total in USD</th>
+                    <th width="25%" valign="top" align="right" style="border-top:  2px solid black;">{{ $quotation->currency->symbol }} {{ number_format($subTotal + $totalCharge - $discount, 2) }}</th>
                 </tr>
                 <tr>
                     <th width="25%" valign="top" align="left">Grand Total in Rupiah</th>

@@ -109,12 +109,6 @@ let Vendor = {
             });
             attn_name_array.pop();
 
-            let attn_ext_array = [];
-            $('#attn-ext ').each(function (i) {
-                attn_ext_array[i] = $(this).val();
-            });
-            attn_ext_array.pop();
-
             let attn_fax_array = [];
             $('#attn-fax ').each(function (i) {
                 attn_fax_array[i] = $(this).val();
@@ -166,7 +160,6 @@ let Vendor = {
                     attn_phone_array:attn_phone_array,
                     attn_name_array:attn_name_array,
                     attn_position_array:attn_position_array,
-                    attn_ext_array:attn_ext_array,
                     attn_fax_array:attn_fax_array,
                     attn_email_array:attn_email_array,
                     bank_name:bank_name,
