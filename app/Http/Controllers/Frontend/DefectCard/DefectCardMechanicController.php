@@ -6,6 +6,7 @@ use Auth;
 use Validator;
 use App\Models\Type;
 use App\Models\Status;
+use App\Models\Employee;
 use App\Models\Progress;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
@@ -88,6 +89,9 @@ class DefectCardMechanicController extends Controller
     {
         $zones = $defectcard->zones->pluck('name')->toArray();
         $zones = join(',', $zones);
+        $created_by = $defectcard->audits->first()->user->name;
+        $employees = Employee::get();
+        $status = Status::find($defectcard->progresses->last()->status_id);
                                                                                                                                                                                                  
         $this->propose_corrections = array();
         foreach($defectcard->propose_corrections as $i => $defectCard){
@@ -105,7 +109,10 @@ class DefectCardMechanicController extends Controller
                 'status' => $this->statuses->where('code','open')->first(),
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
-                'zones' => $zones
+                'zones' => $zones,
+                'status' => $status,
+                'employees' => $employees,
+                'created_by' => $created_by
             ]);
         }
         else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "progress"){
@@ -119,7 +126,10 @@ class DefectCardMechanicController extends Controller
                 'closed' => $this->statuses->where('code','closed')->first(),
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
-                'zones' => $zones
+                'zones' => $zones,
+                'status' => $status,
+                'employees' => $employees,
+                'created_by' => $created_by
             ]);
         }
         else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "pending"){
@@ -129,7 +139,11 @@ class DefectCardMechanicController extends Controller
                 'closed' => $this->statuses->where('code','closed')->first(),
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
-                'zones' => $zones
+                'zones' => $zones,
+                'accomplished' => $this->accomplished,
+                'status' => $status,
+                'employees' => $employees,
+                'created_by' => $created_by
             ]);
         }
         else if($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "closed"){
@@ -137,7 +151,11 @@ class DefectCardMechanicController extends Controller
                 'defectcard' => $defectcard,
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
-                'zones' => $zones
+                'zones' => $zones,
+                'status' => $status,
+                'accomplished' => $this->accomplished,
+                'employees' => $employees,
+                'created_by' => $created_by
             ]);
         }
         else{
@@ -145,7 +163,11 @@ class DefectCardMechanicController extends Controller
                 'defectcard' => $defectcard,
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
-                'zones' => $zones
+                'zones' => $zones,
+                'status' => $status,
+                'accomplished' => $this->accomplished,
+                'employees' => $employees,
+                'created_by' => $created_by
             ]);
         }
     }

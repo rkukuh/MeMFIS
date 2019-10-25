@@ -62,8 +62,16 @@ class WorkProgressReportController extends Controller
      */
     public function show(Project $project)
     {
-        $jobcards = $statusses_routine = $statusses_non_routine =  $statusses_additionals = $basic =  $sip =  $cpcp =  $additional =  $adsb =  $cmr_awl =  $si =  $ea =  $eo =  $ht_crr = $manhours = $statusses = [];
+        $jobcards = $statusses_routine = $statusses_non_routine =  $statusses_additionals = $basic =  $sip =  $cpcp =  $additional =  $adsb =  $cmr_awl =  $si =  $ea =  $eo =  $ht_crr = $manhours = $statusses = $defectcards = [];
         $htcrrs = HtCrr::where('project_id',$project->id)->whereNull('parent_id')->get();
+
+        foreach($project->childs as $additionals){
+            if(sizeof($additionals->defectcards) > 0){
+                foreach($additionals->defectcards as $dc){
+                    array_push($defectcards, $dc);
+                }
+            }
+        }
 
         $tat = ProjectWorkpackage::where('project_id', $project->id)->sum('tat');
         if(isset($project->quotations->first()->attention)){
@@ -90,7 +98,8 @@ class WorkProgressReportController extends Controller
                         ->where('jobcardable_type', 'App\Models\EOInstruction')->with('progresses','jobcardable.eo_header.type')
                         ->get();
         
-        $additionals = DefectCard::whereIn('quotation_additional_id', $quotation_ids)->get();
+        // $additionals = DefectCard::whereIn('quotation_additional_id', $quotation_ids)->get();
+        $additionals = $defectcards;
 
         $jobcards["routine"] = $jobcards["non_routine"] = $jobcards["additionals"]  = 0; 
 
@@ -300,6 +309,7 @@ class WorkProgressReportController extends Controller
             $this->col["non-routine"] = 12;
         }
 
+       
         return view('frontend.work-progress-report.show',[
             'col' => $this->col,
             'tat' => $tat,

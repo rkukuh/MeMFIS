@@ -413,7 +413,7 @@ class FillComboxController extends Controller
      */
     public function vendor()
     {
-        $vendors = Vendor::pluck('name', 'id');
+        $vendors = Vendor::pluck('name', 'uuid');
 
         return json_encode($vendors);
 
@@ -850,9 +850,9 @@ class FillComboxController extends Controller
      */
     public function workOrder()
     {
-        $projects = Project::with('approvals','quotations')->whereHas('approvals')->get(); 
+        $projects = Project::with('approvals','quotations')->whereHas('approvals')->get();
         $work_orders = $result = [];
-        
+
         foreach($projects as $key => $project){
             if(sizeof($project->quotations) > 0){
                 foreach($project->quotations as $quotation){
@@ -935,5 +935,5 @@ class FillComboxController extends Controller
 
     }
 
-    
+
 }

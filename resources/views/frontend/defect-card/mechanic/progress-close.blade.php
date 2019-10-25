@@ -355,8 +355,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('name', 'reference[]')
-                                                        @slot('value', $helper->pivot->additionals)
+                                                        @slot('text', $helper->pivot->additionals)
                                                     @endcomponent
                                                 </td>
                                                 <td valign="top" width="48%">
@@ -365,8 +364,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('name', 'helper[]')
-                                                        @slot('text', $helper->first_name)
+                                                        @slot('text', $helper->first_name.' '.$helper->last_name)
                                                     @endcomponent
                                                 </td>
                                             </tr>

@@ -42,10 +42,10 @@ $factory->define(InventoryIn::class, function (Faker $faker) {
 $factory->afterCreating(InventoryIn::class, function ($inventory_in, $faker) {
 
     // Branch
-    
+
     if ($faker->boolean) {
         for ($i = 1; $i <= rand(1, 3); $i++) {
-            $inventory_in->branches()->save(Branch::get()->random());
+            $inventory_in->branches()->attach(Branch::get()->random()->id);
         }
     }
 
