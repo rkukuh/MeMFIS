@@ -68,7 +68,9 @@ class ReceivingInspectionReportController extends Controller
      */
     public function show(ReceivingInspectionReport $receivingInspectionReport)
     {
-        return view('frontend.receiving-inspection-report.show');
+        return view('frontend.receiving-inspection-report.show', [
+            'receivingInspectionReport' => $receivingInspectionReport,
+        ]);
     }
 
     /**
@@ -80,7 +82,7 @@ class ReceivingInspectionReportController extends Controller
     public function edit(ReceivingInspectionReport $receivingInspectionReport)
     {
         return view('frontend.receiving-inspection-report.edit', [
-            'goodsReceived' => $receivingInspectionReport,
+            'receivingInspectionReport' => $receivingInspectionReport,
         ]);
     }
 
@@ -91,7 +93,7 @@ class ReceivingInspectionReportController extends Controller
      * @param  \App\ReceivingInspectionReport  $receivingInspectionReport
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ReceivingInspectionReport $receivingInspectionReport)
+    public function update(ReceivingInspectionReportUpdate $request, ReceivingInspectionReport $receivingInspectionReport)
     {
         dd($request->all());
         $request->merge(['number' => DocumentNumber::generate('RIR-', ReceivingInspectionReport::withTrashed()->count()+1)]);
