@@ -195,6 +195,44 @@ Route::name('datatables.')->group(function () {
 
         });
 
+        /** Receiving Inspection Report */
+
+        Route::name('receiving-inspection-report.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'receiving-inspection-report',
+                'namespace' => 'ReceivingInspectionReport'
+
+            ], function () {
+
+                Route::get('/', 'ReceivingInspectionReportDatatables@index')->name('all');
+                // Route::get('/item/{receivingInspectionReport}', 'ItemReceivingInspectionReportDatatables@index')->name('receiving-inspection-report.item');
+
+
+            });
+
+        });
+
+        /** GOODS RECEIVED NOTE */
+
+        Route::name('ground-support-equiptment.')->group(function () {
+
+            Route::group([
+
+                'prefix'    => 'ground-support-equiptment',
+                'namespace' => 'GroundSupportEquiptment'
+
+            ], function () {
+
+                Route::get('/', 'GroundSupportEquiptmentDatatables@index')->name('all');
+                // Route::get('/item/{goodReceived}', 'ItemGoodsReceivedDatatables@index')->name('good-received.item');
+
+
+            });
+
+        });
+
         /** POSITION */
 
         Route::name('position.')->group(function () {
