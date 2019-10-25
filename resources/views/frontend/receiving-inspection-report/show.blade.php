@@ -242,7 +242,7 @@
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'unpacked')
-                                                                            @slot('id', 'unpacked')
+                                                                            @slot('value', 'unpacked')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Unpacked')

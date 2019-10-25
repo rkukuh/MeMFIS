@@ -105,7 +105,8 @@
                                                     </label>
 
                                                     @component('frontend.common.input.input')
-                                                        @slot('name', 'part')
+                                                        @slot('name', 'document')
+                                                        @slot('id', 'document')
                                                         @slot('placeholder', 'Delivery Document')
                                                     @endcomponent
                                                     </div>
@@ -254,7 +255,7 @@
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'unpacked')
-                                                                            @slot('id', 'unpacked')
+                                                                            @slot('value', 'unpacked')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Unpacked')
@@ -270,7 +271,7 @@
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'statisfactory')
                                                                             @slot('value', 'statisfactory')
-                                                                            @slot('name', 'condition')
+                                                                            @slot('name', 'condition_material')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Statisfactory')
                                                                         @endcomponent
@@ -279,7 +280,7 @@
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'unsatisfactory')
                                                                             @slot('value', 'unsatisfactory')
-                                                                            @slot('name', 'condition')
+                                                                            @slot('name', 'condition_material')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Unsatisfactory')
                                                                         @endcomponent
@@ -341,8 +342,8 @@
                                                             </label>
 
                                                             @component('frontend.common.input.input')
-                                                                @slot('name', 'preservation_check')
-                                                                @slot('name', 'preservation_check')
+                                                                @slot('name', 'preservation_check_explain')
+                                                                @slot('id', 'preservation_check_explain')
                                                                 @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
@@ -572,8 +573,8 @@
                                             <div class="action-buttons">
                                                 @component('frontend.common.buttons.update')
                                                     @slot('type','button')
-                                                    @slot('id', 'update-interchange')
-                                                    @slot('class', 'update-interchange')
+                                                    @slot('id', 'update-rir')
+                                                    @slot('class', 'update-rir')
                                                 @endcomponent
 
                                                 @include('frontend.common.buttons.reset')
