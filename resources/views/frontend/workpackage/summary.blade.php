@@ -137,30 +137,6 @@
                     <div class="m-widget_content">
                         <h3 class="m-widget_content-title">Non Routine Taskcard</h3>
                         <div class="m-widget_content-items">
-                            {{-- <div class="m-widget_content-item">
-                                <span>AD/SB</span>
-                                <span class="m--font-accent">{{$adsb}}</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>CMR/AWL</span>
-                                <span class="m--font-brand">{{$cmrawl}}</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>SI</span>
-                                <span class="m--font-focus">{{$si}}</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>EA</span>
-                                <span class="m--font-focus">{{$ea}}</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>EO</span>
-                                <span class="m--font-focus">{{$eo}}</span>
-                            </div>
-                            <div class="m-widget_content-item">
-                                <span>Total</span>
-                                <span>{{$adsb+$cmrawl+$si+$ea+$eo}}</span>
-                            </div> --}}
 
                             <div class="row align-items-center">
                                 <div class="col-xl-12">
@@ -175,6 +151,10 @@
                                     <div class="m-widget_content-item pl-5">
                                         <span>EO</span>
                                         <span class="m--font-brand">{{$eo}}</span>
+                                    </div>
+                                    <div class="m-widget_content-item pl-5">
+                                        <span>PRELIMINARY</span>
+                                        <span class="m--font-brand">{{$preliminary}}</span>
                                     </div>
                                 </div>
                             </div>

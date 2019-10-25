@@ -463,6 +463,19 @@ class ProjectHMWorkPackageController extends Controller
                 })
                 ->count();
 
+        $ea  = $workPackage->eo_instructions()->with('eo_header.type')
+                ->whereHas('eo_header.type', function ($query) {
+                    $query->where('code', 'ea');
+                })->whereNull('eo_instructions.deleted_at')->count();
+        
+        $eo  = $workPackage->eo_instructions()->with('eo_header.type')
+                ->whereHas('eo_header.type', function ($query) {
+                    $query->where('code', 'eo');
+                })->whereNull('eo_instructions.deleted_at')->count();
+
+        $preliminary = $workPackage->taskcards->load('type')->where('type.code', 'preliminary')->count('uuid');
+
+                
         $total_taskcard  = $workPackage->taskcards->count('uuid');
         $total_manhour_taskcard  = $workPackage->taskcards->sum('estimation_manhour');
 
@@ -477,6 +490,9 @@ class ProjectHMWorkPackageController extends Controller
             'cmrawl' => $cmrawl,
             'otr' => $otr,
             'si' => $si,
+            'ea' => $ea,
+            'eo' => $eo,
+            'preliminary' => $preliminary,
         ]);
     }
 

@@ -335,7 +335,7 @@ class TaskCardRoutineController extends Controller
                 $data = $request->input('image');
                 $photo = $request->file('fileInput')->getClientOriginalName();
                 $destination = 'master/taskcard/routine/';
-                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+                $stat = Storage::disk('public')->putFileAs($destination,$request->file('fileInput'), $photo);
             }
 
             return response()->json($taskCard);
@@ -471,7 +471,7 @@ class TaskCardRoutineController extends Controller
                 $data = $request->input('image');
                 $photo = $request->file('fileInput')->getClientOriginalName();
                 $destination = 'master/taskcard/routine/';
-                $stat = Storage::putFileAs($destination,$request->file('fileInput'), $photo);
+                $stat = Storage::disk('public')->putFileAs($destination,$request->file('fileInput'), $photo);
             }
 
             if($request->station){

@@ -161,12 +161,13 @@ let receiving_inspection_report = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/workpackage',
+                url: '/receiving-inspection-report',
                 data: {
                     _token: $('input[name=_token]').val(),
                     general_document:general_document,
                     technical_document: technical_document,
                     purchase_order: purchase_order,
+                    date: date,
                     vendor: vendor,
                     document: document,
                     status:status,
@@ -174,6 +175,7 @@ let receiving_inspection_report = {
                     condition:condition,
                     preservation_check:preservation_check,
                     condition_material:condition_material,
+                    quality:quality,
                     identification:identification,
                     packing_handling_check:packing_handling_check,
                     preservation_check_explain:preservation_check_explain,
@@ -200,7 +202,7 @@ let receiving_inspection_report = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/rir/'+data.uuid+'/edit';
+                        // window.location.href = '/receiving-inspection-report/'+data.uuid+'/edit';
                         // let table = $('.m_datatable').mDatatable();
 
                         // table.originalDataSet = [];
