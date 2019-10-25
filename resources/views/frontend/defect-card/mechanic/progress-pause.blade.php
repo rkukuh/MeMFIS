@@ -355,20 +355,20 @@
                                                         Reference
                                                     </label>
 
-                                                    @component('frontend.common.input.text')
-                                                        @slot('name', 'reference[]')
-                                                        @slot('value', $helper->pivot->additionals)
-                                                    @endcomponent
-                                                </td>
-                                                <td valign="top" width="48%">
-                                                    <label class="form-control-label">
-                                                        Helper
-                                                    </label>
-
                                                     @component('frontend.common.label.data-info')
-                                                        @slot('name', 'helper[]')
-                                                        @slot('text', $helper->first_name)
+                                                        @slot('name', 'reference[]')
+                                                        @slot('text', $helper->pivot->additionals)
                                                     @endcomponent
+                                            </td>
+                                            <td valign="top" width="48%">
+                                                <label class="form-control-label">
+                                                    Helper
+                                                </label>
+
+                                                @component('frontend.common.label.data-info')
+                                                    @slot('name', 'helper[]')
+                                                    @slot('text', $employee->first_name.' '.$employee->last_name)
+                                                @endcomponent
                                                 </td>
                                             </tr>
                                             @endforeach

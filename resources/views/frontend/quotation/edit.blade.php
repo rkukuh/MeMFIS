@@ -75,6 +75,17 @@
                                                             </select>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                                    <label class="form-control-label">
+                                                        Project Number
+                                                    </label>
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('id', 'project_number')
+                                                        @slot('text', $quotation->quotationable->code)
+                                                    @endcomponent
+                                                </div>
+                                                <div class="col-sm-12 col-md-12 col-lg-12">
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-12 col-md-12 col-lg-12">
                                                             <label class="form-control-label">
@@ -87,30 +98,6 @@
                                                         </div>
                                                     </div>
                                                     <input type="hidden" id="customer_id" name="customer_id" value="{{ $quotation->quotationable->customer->uuid }}">
-
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                                            <label class="form-control-label">
-                                                                Project Number
-                                                            </label>
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('id', 'project_number')
-                                                                @slot('text', $quotation->quotationable->code)
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group m-form__group row">
-                                                        <div class="col-sm-12 col-md-12 col-lg-12">
-                                                            <label class="form-control-label">
-                                                                Intruction
-                                                            </label>
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', '..........')
-                                                            @endcomponent
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -396,6 +383,7 @@
                                                 @slot('type','button')
                                                 @slot('id', 'add-quotation')
                                                 @slot('class', 'add-quotation')
+                                                @slot('text', 'Update Quoatation')
                                             @endcomponent
 
                                             @include('frontend.common.buttons.reset')
