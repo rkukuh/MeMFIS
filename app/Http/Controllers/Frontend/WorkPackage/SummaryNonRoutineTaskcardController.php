@@ -307,7 +307,6 @@ class SummaryNonRoutineTaskcardController extends Controller
             }
         }
 
-        $otr = array_count_values($skills);
 
         $adsb  = $workPackage->eo_instructions()->with('eo_header.type')
         ->whereHas('eo_header.type', function ($query) {

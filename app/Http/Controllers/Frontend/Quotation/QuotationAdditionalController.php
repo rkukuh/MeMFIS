@@ -54,7 +54,7 @@ class QuotationAdditionalController extends Controller
     public function create(Project $project)
     {
         $websites = Type::ofWebsite()->get();
-        $total_manhour = json_decode($project->data_defectcards)->total_manhour_with_performance_factor;
+        $total_manhour = json_decode($project->data_defectcard)->total_manhour_with_performance_factor;
         
         return view('frontend.quotation.additional.create', [
             'project' => $project,
