@@ -1,17 +1,16 @@
-let receiving_inspection_report = {
-    init: function() {
-
-        $(".rir_datatable").mDatatable({
+let goods_received_note = {
+    init: function () {
+        $('.purchase_order_datatable').mDatatable({
             data: {
-                type: "remote",
+                type: 'remote',
                 source: {
                     read: {
-                        method: "GET",
-                        url: "/datatables/purchase-order/item/" + uuid,
-                        map: function(raw) {
+                        method: 'GET',
+                        url: '/datatables/receiving-inspection-report/item/'+grn_uuid,
+                        map: function (raw) {
                             let dataSet = raw;
 
-                            if (typeof raw.data !== "undefined") {
+                            if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
 
@@ -25,8 +24,8 @@ let receiving_inspection_report = {
                 serverSorting: !0
             },
             layout: {
-                theme: "default",
-                class: "",
+                theme: 'default',
+                class: '',
                 scroll: false,
                 footer: !1
             },
@@ -34,7 +33,7 @@ let receiving_inspection_report = {
             filterable: !1,
             pagination: !0,
             search: {
-                input: $("#generalSearch")
+                input: $('#generalSearch')
             },
             toolbar: {
                 items: {
@@ -45,144 +44,136 @@ let receiving_inspection_report = {
             },
             columns: [
                 {
-                    field: "code",
-                    title: "P/N",
-                    sortable: "asc",
+                    field: '#',
+                    title: 'No',
+                    width:'40',
+                    sortable: 'asc',
+                    filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
+                },
+                {
+                    field: 'code',
+                    title: 'P/N',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "name",
-                    title: "Item Description",
-                    sortable: "asc",
+                    field: 'name',
+                    title: 'Item Description',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "",
-                    title: "Qty PR",
-                    sortable: "asc",
+                    field: '',
+                    title: 'Qty PR',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "pivot.quantity",
-                    title: "Qty PO",
-                    sortable: "asc",
+                    field: '',
+                    title: 'Qty PO',
+                    sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 150,
                 },
                 {
-                    field: "",
-                    title: "Qty",
-                    sortable: "asc",
+                    field: 'pivot.quantity',
+                    title: 'Qty',
+                    sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 150,
                 },
                 {
-                    field: "",
-                    title: "Unit",
-                    sortable: "asc",
+                    field: 'unit_name',
+                    title: 'Unit',
+                    sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 150,
                 },
                 {
-                    field: "",
-                    title: "Remark",
-                    sortable: "asc",
+                    field: 'pivot.note',
+                    title: 'Remark',
+                    sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 150,
                 },
                 {
-                    field: "",
-                    title: "Expired Date",
-                    sortable: "asc",
+                    field: 'pivot.expired_at',
+                    title: 'Expired Date',
+                    sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 150,
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_grn" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-expred='+t.pivot.expired_at+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                            t.uuid +
+                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                        );
+                    }
                 }
             ]
         });
-        $('.action-buttons').on('click', '.update-rir', function () {
-            $('#name-error').html('');
-            $('#simpan').text('Simpan');
 
-            let general_document = [];
-            $.each($("input[name='general_document[]']:checked"), function() {
-                general_document.push($(this).val());
-            });
-
-            let technical_document = [];
-            $.each($("input[name='technical_document[]']:checked"), function() {
-                technical_document.push($(this).val());
-            });
-
-            let purchase_order = $('#purchase_order').val();
-            let vendor = $('#vendor').val();
-            let document = $('input[name=document]').val();
-            let date = $('#date').val();
-            let status = $('input[name="status"]:checked').val();
-            let type = $('input[name="type"]:checked').val();
-            let condition = $('input[name="condition"]:checked').val();
-            let preservation_check = $('input[name="preservation_check"]:checked').val();
-            let condition_material = $('input[name="condition_material"]:checked').val();
-            let quality = $('input[name="quality"]:checked').val();
-            let identification = $('input[name="identification"]:checked').val();
-            let packing_handling_check = $('#packing_handling_check').val();
-            let preservation_check_explain = $('#preservation_check_explain').val();
-            let document_check = $('#document_check').val();
-            let material_check = $('#material_check').val();
-            let decision = $('#decision').val();
-
+        $('.footer').on('click', '.update-goods-received', function () {
+            let received_at = $('input[name=date]').val();
+            let received_by = $('#received-by').val();
+            let ref_po = $('input[name=ref-po]').val();
+            let do_no = $('input[name=deliv-number]').val();
+            let do_date = $('input[name=do-date]').val();
+            let warehouse = $('input[name=warehouse]').val();
+            let description = $('#description').val();
+            let vehicle_no = $('input[name=vehicle-no]').val();
+            let container_no = $('input[name=container-no]').val();
 
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: 'post',
-                url: '/workpackage',
+                url: '/receiving-inspection-report/'+grn_uuid,
+                type: 'PUT',
                 data: {
-                    _token: $('input[name=_token]').val(),
-                    general_document:general_document,
-                    technical_document: technical_document,
-                    purchase_order: purchase_order,
-                    vendor: vendor,
-                    document: document,
-                    status:status,
-                    type:type,
-                    condition:condition,
-                    preservation_check:preservation_check,
-                    condition_material:condition_material,
-                    identification:identification,
-                    packing_handling_check:packing_handling_check,
-                    preservation_check_explain:preservation_check_explain,
-                    document_check:document_check,
-                    material_check:material_check,
-                    decision:decision,
+                    received_at:received_at,
+                    received_by:received_by,
+                    vehicle_no:vehicle_no,
+                    container_no:container_no,
+                    purchase_order_id:ref_po,
+                    do_no:do_no,
+                    do_date:do_date,
+                    storage_id:warehouse,
+                    description:description,
                 },
-                success: function (data) {
-                    if (data.errors) {
-                        // if (data.errors.aircraft_id) {
-                        //     $('#applicability-airplane-error').html(data.errors.aircraft_id[0]);
-                        // }
-                        // if (data.errors.title) {
-                        //     $('#title-error').html(data.errors.title[0]);
+                success: function (response) {
+                    if (response.errors) {
+                        // console.log(errors);
+                        // if (response.errors.title) {
+                        //     $('#title-error').html(response.errors.title[0]);
                         // }
 
-                        // document.getElementById('applicability-airplane').value = applicability-airplane;
-                        // document.getElementById('title').value = title;
+                        // document.getElementById('manual_affected_id').value = manual_affected_id;
+
 
                     } else {
-                        // $('#modal_customer').modal('hide');
+                        //    taskcard_reset();
 
-                        toastr.success('RIR has been updated.', 'Success', {
+
+                        toastr.success('GRN has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/rir/'+data.uuid+'/edit';
-                        // let table = $('.m_datatable').mDatatable();
-
-                        // table.originalDataSet = [];
-                        // table.reload();
                     }
                 }
             });
@@ -222,7 +213,7 @@ let receiving_inspection_report = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: '/rir/'+rir_uuid+'/item/'+item_uuid,
+                url: '/receiving-inspection-report/'+grn_uuid+'/item/'+item_uuid,
                 type: "POST",
                 data: {
                     exp_date: exp_date,
@@ -248,7 +239,7 @@ let receiving_inspection_report = {
                                 timeOut: 5000
                             });
                         } else {
-                            $('#modal_rir_add').modal('hide');
+                            $('#modal_grn_add').modal('hide');
 
                             toastr.success(
                                 "GRN's Item has been updated.",
@@ -321,7 +312,7 @@ let receiving_inspection_report = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: '/rir/'+rir_uuid+'/item/'+uuid,
+                url: '/goods-received/'+grn_uuid+'/item/'+uuid,
                 type: "PUT",
                 data: {
                     exp_date: exp_date,
@@ -337,7 +328,7 @@ let receiving_inspection_report = {
                         // document.getElementById('manual_affected_id').value = manual_affected_id;
                     } else {
                         //    taskcard_reset();
-                        $('#modal_rir').modal('hide');
+                        $('#modal_grn').modal('hide');
 
                         toastr.success(
                             "GRN has been updated.",
@@ -375,7 +366,7 @@ let receiving_inspection_report = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/rir/' + rir_uuid + '/item/'+$(this).data('uuid'),
+                        url: '/receiving-inspection-report/' + grn_uuid + '/item/'+$(this).data('uuid'),
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000
@@ -398,9 +389,85 @@ let receiving_inspection_report = {
                 }
             });
         });
+
     }
 };
 
-jQuery(document).ready(function() {
-    receiving_inspection_report.init();
+jQuery(document).ready(function () {
+    goods_received_note.init();
+});
+
+$("#is_serial_number").on("change", function () {
+    if($(this).is(":checked")) {
+        $('.serial_numbers').removeClass("hidden");
+        $('#unit_material').prop('disabled', true);
+    } else {
+        $('.serial_numbers').addClass("hidden");
+        $('.serial_number_inputs').html('');
+        $('#unit_material').prop('disabled', false);
+    }
+});
+$("#is_serial_number_edit").on("change", function () {
+    if($(this).is(":checked")) {
+        // $('.serial_numbers').removeClass("hidden");
+        $('#unit_id').prop('disabled', true);
+    } else {
+        // $('.serial_numbers').addClass("hidden");
+        // $('.serial_number_inputs').html('');
+        $('#unit_id').prop('disabled', false);
+    }
+});
+
+$("#material").on("change", function () {
+
+    let item_uuid = $("#material").val();
+    $.ajax({
+        url: '/label/get-good-received/'+grn_uuid+'/item/'+ item_uuid ,
+        type: 'GET',
+        dataType: 'json',
+        success: function (qty_item) {
+            document.getElementById('item_reciveded').innerText = qty_item;
+        }
+    });
+    $("#quantity").prop("min", 1);
+    $.ajax({
+        url: '/get-item-po-details/'+po_uuid+'/'+item_uuid,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $("#quantity").val(parseInt(data.pivot.quantity));
+            $("#quantity").prop("max", data.pivot.quantity);
+            $('.clone').remove();
+            for (let number = 0; number < data.pivot.quantity; number++) {
+                let clone = $(".blueprint").clone();
+                clone.removeClass("blueprint hidden");
+                clone.addClass("clone");
+                $(".serial_number_inputs").after(clone);
+                clone.slideDown("slow",function(){});
+            }
+        }
+    });
+});
+
+$("#quantity").on("change", function () {
+    let qty = $("#quantity").val();
+    let max = $("#quantity").attr("max");
+    $('.clone').remove();
+    if($("#quantity").val() < max){
+        for (let number = 0; number < qty; number++) {
+            let clone = $(".blueprint").clone();
+            clone.removeClass("blueprint hidden");
+            clone.addClass("clone");
+            $(".serial_number_inputs").after(clone);
+            clone.slideDown("slow",function(){});
+        }
+    }else{
+        for (let number = 0; number < max; number++) {
+            let clone = $(".blueprint").clone();
+            clone.removeClass("blueprint hidden");
+            clone.addClass("clone");
+            $(".serial_number_inputs").after(clone);
+            clone.slideDown("slow",function(){});
+        }
+        }
 });
