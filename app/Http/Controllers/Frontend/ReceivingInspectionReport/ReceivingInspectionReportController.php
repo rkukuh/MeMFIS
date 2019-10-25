@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend\ReceivingInspectionReport;
 
+use Auth;
+use App\Models\Approval;
 use App\ReceivingInspectionReport;
 use App\Helpers\DocumentNumber;
 use App\Http\Requests\Frontend\ReceivingInspectionReportStore;
@@ -121,6 +123,23 @@ class ReceivingInspectionReportController extends Controller
     public function destroy(ReceivingInspectionReport $receivingInspectionReport)
     {
         $receivingInspectionReport->delete();
+
+        return response()->json($receivingInspectionReport);
+    }
+
+    /**
+     * Approve the specified resource from storage.
+     *
+     * @param  \App\Models\ReceivingInspectionReport  $receivingInspectionReport
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(ReceivingInspectionReport $receivingInspectionReport)
+    {
+        $receivingInspectionReport->approvals()->save(new Approval([
+            'approvable_id' => $receivingInspectionReport->id,
+            'conducted_by' => Auth::id(),
+            'is_approved' => 1
+        ]));
 
         return response()->json($receivingInspectionReport);
     }

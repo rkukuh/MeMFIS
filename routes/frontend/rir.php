@@ -14,6 +14,8 @@ Route::name('frontend.')->group(function () {
         Route::namespace('ReceivingInspectionReport')->group(function () {
 
             Route::resource('receiving-inspection-report', 'ReceivingInspectionReportController');
+            Route::put('receiving-inspection-report/{ReceivingInspectionReport}/approve', 'ReceivingInspectionReportController@approve')->name('receiving-inspection-report.approve');
+
 
             Route::name('receiving-inspection-report.')->group(function () {
                 Route::prefix('receiving-inspection-report')->group(function () {
