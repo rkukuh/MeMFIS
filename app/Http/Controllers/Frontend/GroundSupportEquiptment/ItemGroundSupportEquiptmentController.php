@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Frontend\GroundSupportEquiptment;
 
+use App\Iten;
 use App\GroundSupportEquiptment;
 use Illuminate\Http\Request;
-use App\Helpers\DocumentNumber;
-use App\Http\Requests\Frontend\GroundSupportEquiptmentStore;
-use App\Http\Requests\Frontend\GroundSupportEquiptmentUpdate;
 use App\Http\Controllers\Controller;
 
 class GroundSupportEquiptmentController extends Controller
@@ -18,7 +16,7 @@ class GroundSupportEquiptmentController extends Controller
      */
     public function index()
     {
-        return view('frontend.receiving-inspection-report.index');
+        //
     }
 
     /**
@@ -28,7 +26,7 @@ class GroundSupportEquiptmentController extends Controller
      */
     public function create()
     {
-        return view('frontend.receiving-inspection-report.create');
+        //
     }
 
     /**
@@ -37,13 +35,14 @@ class GroundSupportEquiptmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GroundSupportEquiptmentStore $request)
+    public function store(Request $request, GroundSupportEquiptment $groundSupportEquiptment, Item $item)
     {
-        dd($request->all());
-        $request->merge(['number' => DocumentNumber::generate('GSE-', ReceivingInspectionReport::withTrashed()->count()+1)]);
-        $GroundSupportEquiptmentStore = ReceivingInspectionReport::create($request->all());
-
-        return response()->json($GroundSupportEquiptmentStore);
+        $groundSupportEquiptment->items()->attach([$item->pivot->item_id => [
+            'quantity'=> 0,
+            'quantity_unit' => 0,
+            'unit_id' => $item->pivot->unit_id
+            ]
+        ]);
     }
 
     /**
@@ -54,9 +53,7 @@ class GroundSupportEquiptmentController extends Controller
      */
     public function show(GroundSupportEquiptment $groundSupportEquiptment)
     {
-        return view('frontend.receiving-inspection-report.show', [
-            'groundSupportEquiptment' => $groundSupportEquiptment,
-        ]);
+        //
     }
 
     /**
@@ -65,11 +62,9 @@ class GroundSupportEquiptmentController extends Controller
      * @param  \App\GroundSupportEquiptment  $groundSupportEquiptment
      * @return \Illuminate\Http\Response
      */
-    public function edit(GroundSupportEquiptment $groundSupportEquiptment)
+    public function edit(GroundSupportEquiptment $groundSupportEquiptment, Item $item)
     {
-        return view('frontend.receiving-inspection-report.edit', [
-            'groundSupportEquiptment' => $groundSupportEquiptment,
-        ]);
+        return response()->json($groundSupportEquiptment->items->where('pivot.item_id',$item->id)->first());
     }
 
     /**
@@ -79,13 +74,17 @@ class GroundSupportEquiptmentController extends Controller
      * @param  \App\GroundSupportEquiptment  $groundSupportEquiptment
      * @return \Illuminate\Http\Response
      */
-    public function update(GroundSupportEquiptmentUpdate $request, GroundSupportEquiptment $groundSupportEquiptment)
+    public function update(Request $request, GroundSupportEquiptment $groundSupportEquiptment, Item $item)
     {
-        dd($request->all());
-        $request->merge(['number' => DocumentNumber::generate('GSE-', ReceivingInspectionReport::withTrashed()->count()+1)]);
-        $groundSupportEquiptment->update($request->all());
+        $groundSupportEquiptment->items()->updateExistingPivot($item->id,
+                ['unit_id'=>$request->unit_id,
+                'quantity'=> $request->quantity,
+                'quantity_unit'=> $quantity_unit,
+                'note' => $request->note
+                ]);
 
         return response()->json($groundSupportEquiptment);
+
     }
 
     /**
@@ -94,9 +93,9 @@ class GroundSupportEquiptmentController extends Controller
      * @param  \App\GroundSupportEquiptment  $groundSupportEquiptment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GroundSupportEquiptment $groundSupportEquiptment)
+    public function destroy(GroundSupportEquiptment $groundSupportEquiptment, Item $item)
     {
-        $groundSupportEquiptment->delete();
+        $groundSupportEquiptment->items()->detach($item->id);
 
         return response()->json($groundSupportEquiptment);
     }

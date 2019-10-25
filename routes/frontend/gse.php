@@ -15,6 +15,13 @@ Route::name('frontend.')->group(function () {
 
             Route::resource('ground-support-equiptment', 'GroundSupportEquiptmentController');
 
+            Route::name('ground-support-equiptment.')->group(function () {
+                Route::prefix('ground-support-equiptment')->group(function () {
+                    Route::post('/{GroundSupportEquiptment}/item/{item}', 'ItemGroundSupportEquiptmentController@store')->name('item.store');
+                    Route::put('/{GroundSupportEquiptment}/item/{item}', 'ItemGroundSupportEquiptmentController@update')->name('item.update');
+                    Route::delete('/{GroundSupportEquiptment}/item/{item}', 'ItemGroundSupportEquiptmentController@destroy')->name('item.destroy');
+                });
+            });
         });
 
     });
