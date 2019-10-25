@@ -70,10 +70,10 @@
                                                 GSE/Tool Returned
                                             </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Heavy Maintenance</a>
-                                                <a class="dropdown-item" href="#">Workshop</a>
-                                                <a class="dropdown-item" href="#">Defectcard</a>
-                                                <a class="dropdown-item" href="#">Inventory Out Tool</a>
+                                                <a class="dropdown-item" href="{{ route('frontend.ground-support-equiptment.create', 'hm') }}">Heavy Maintenance</a>
+                                                <a class="dropdown-item" href="{{ route('frontend.ground-support-equiptment.create', 'defectcard') }}">Workshop</a>
+                                                <a class="dropdown-item" href="{{ route('frontend.ground-support-equiptment.create', 'workshop') }}">Defectcard</a>
+                                                <a class="dropdown-item" href="{{ route('frontend.ground-support-equiptment.create', 'inventory-out') }}">Inventory Out Tool</a>
                                             </div>
                                     </div>
                                 </div>

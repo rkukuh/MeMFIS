@@ -7,7 +7,7 @@ use App\GroundSupportEquiptment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class GroundSupportEquiptmentController extends Controller
+class ItemGroundSupportEquiptmentController extends Controller
 {
     /**
      * Display a listing of the resource.

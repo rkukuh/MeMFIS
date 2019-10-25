@@ -26,9 +26,20 @@ class GroundSupportEquiptmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($type)
     {
-        return view('frontend.receiving-inspection-report.create');
+        if($type == 'hm'){
+            return view('frontend.gse.hm.create');
+        }
+        else if($type == 'defectcard'){
+            return view('frontend.gse.defectcard.create');
+        }
+        else if($type == 'workshop'){
+            return view('frontend.gse.workshop.create');
+        }
+        else if($type == 'inventory-out'){
+            return view('frontend.gse.inventory-out.create');
+        }
     }
 
     /**
@@ -52,11 +63,24 @@ class GroundSupportEquiptmentController extends Controller
      * @param  \App\GroundSupportEquiptment  $groundSupportEquiptment
      * @return \Illuminate\Http\Response
      */
-    public function show(GroundSupportEquiptment $groundSupportEquiptment)
+    public function show(GroundSupportEquiptment $groundSupportEquiptment, $type)
     {
-        return view('frontend.receiving-inspection-report.show', [
-            'groundSupportEquiptment' => $groundSupportEquiptment,
-        ]);
+        if($type == 'hm'){
+            return view('frontend.gse.hm.show', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
+        else if($type == 'defectcard'){
+            return view('frontend.gse.defectcard.show', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
+        else if($type == 'workshop'){
+            return view('frontend.gse.workshop.show', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
+        else if($type == 'inventory-out'){
+            return view('frontend.gse.inventory-out.show', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
     }
 
     /**
@@ -65,11 +89,24 @@ class GroundSupportEquiptmentController extends Controller
      * @param  \App\GroundSupportEquiptment  $groundSupportEquiptment
      * @return \Illuminate\Http\Response
      */
-    public function edit(GroundSupportEquiptment $groundSupportEquiptment)
+    public function edit(GroundSupportEquiptment $groundSupportEquiptment, $type)
     {
-        return view('frontend.receiving-inspection-report.edit', [
-            'groundSupportEquiptment' => $groundSupportEquiptment,
-        ]);
+        if($type == 'hm'){
+            return view('frontend.gse.hm.edit', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
+        else if($type == 'defectcard'){
+            return view('frontend.gse.defectcard.edit', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
+        else if($type == 'workshop'){
+            return view('frontend.gse.workshop.edit', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
+        else if($type == 'inventory-out'){
+            return view('frontend.gse.inventory-out.edit', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
     }
 
     /**
