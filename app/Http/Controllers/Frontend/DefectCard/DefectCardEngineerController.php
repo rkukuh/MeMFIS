@@ -109,6 +109,7 @@ class DefectCardEngineerController extends Controller
         $created_by = $defectcard->audits->first()->user->name;
         $employees = Employee::get();
         $status = Status::find($defectcard->progresses->last()->status_id);
+        
         $this->propose_corrections = array();
         foreach($defectcard->propose_corrections as $i => $defectCard){
             $this->propose_corrections[$i] =  $defectCard->code;
