@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontend\ReceivingInspectionReport;
 
 use App\ReceivingInspectionReport;
-use Illuminate\Http\Request;
+use App\Helpers\DocumentNumber;
+use App\Http\Requests\Frontend\ReceivingInspectionReportStore;
+use App\Http\Requests\Frontend\ReceivingInspectionReportUpdate;
 use App\Http\Controllers\Controller;
 
 class ReceivingInspectionReportController extends Controller
@@ -34,9 +36,26 @@ class ReceivingInspectionReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReceivingInspectionReportStore $request)
     {
-        //
+        dd($request->all());
+        $request->merge(['number' => DocumentNumber::generate('RIR-', ReceivingInspectionReport::withTrashed()->count()+1)]);
+        $request->merge(['vendor' => Vendor::where('uuid',$request->vendor)->first()->id]);
+        $receivingInspectionReport = ReceivingInspectionReport::create($request->all());
+
+        if(sizeOf($request->general_document) <> 0){
+            foreach($request->general_document as $general_document){
+                $receivingInspectionReport->general_document()->attach($general_document);
+            }
+        }
+
+        if(sizeOf($request->technical_document) <> 0){
+            foreach($request->technical_document as $technical_document){
+                $receivingInspectionReport->technical_document()->attach($technical_document);
+            }
+        }
+
+        return response()->json($receivingInspectionReport);
     }
 
     /**
@@ -58,7 +77,9 @@ class ReceivingInspectionReportController extends Controller
      */
     public function edit(ReceivingInspectionReport $receivingInspectionReport)
     {
-        //
+        return view('frontend.receiving-inspection-report.edit', [
+            'goodsReceived' => $receivingInspectionReport,
+        ]);
     }
 
     /**
@@ -70,7 +91,25 @@ class ReceivingInspectionReportController extends Controller
      */
     public function update(Request $request, ReceivingInspectionReport $receivingInspectionReport)
     {
-        //
+        dd($request->all());
+        $request->merge(['number' => DocumentNumber::generate('RIR-', ReceivingInspectionReport::withTrashed()->count()+1)]);
+        $request->merge(['vendor' => Vendor::where('uuid',$request->vendor)->first()->id]);
+        $receivingInspectionReport->update($request->all());
+
+
+        if(sizeOf($request->general_document) <> 0){
+            foreach($request->general_document as $general_document){
+                $receivingInspectionReport->general_document()->sync($general_document);
+            }
+        }
+
+        if(sizeOf($request->technical_document) <> 0){
+            foreach($request->technical_document as $technical_document){
+                $receivingInspectionReport->technical_document()->sync($technical_document);
+            }
+        }
+
+        return response()->json($receivingInspectionReport);
     }
 
     /**
@@ -81,6 +120,8 @@ class ReceivingInspectionReportController extends Controller
      */
     public function destroy(ReceivingInspectionReport $receivingInspectionReport)
     {
-        //
+        $receivingInspectionReport->delete();
+
+        return response()->json($receivingInspectionReport);
     }
 }

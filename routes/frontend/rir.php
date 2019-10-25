@@ -15,6 +15,14 @@ Route::name('frontend.')->group(function () {
 
             Route::resource('receiving-inspection-report', 'ReceivingInspectionReportController');
 
+            Route::name('receiving-inspection-report.')->group(function () {
+                Route::prefix('receiving-inspection-report')->group(function () {
+                    Route::post('/{ReceivingInspectionReport}/item/{item}', 'ItemReceivingInspectionReportController@store')->name('item.store');
+                    Route::put('/{ReceivingInspectionReport}/item/{item}', 'ItemReceivingInspectionReportController@update')->name('item.update');
+                    Route::delete('/{ReceivingInspectionReport}/item/{item}', 'ItemReceivingInspectionReportController@destroy')->name('item.destroy');
+                });
+            });
+
         });
 
     });
