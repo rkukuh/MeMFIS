@@ -43,7 +43,7 @@ class GSE extends MemfisModel
     /**
      * One-Way: A GSE may have one receiver.
      *
-     * This function will retrieve all the receivers of a GSE.
+     * This function will retrieve the receiver of a GSE.
      *
      * @return mixed
      */
