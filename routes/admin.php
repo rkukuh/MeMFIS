@@ -62,6 +62,7 @@ Route::name('admin.')->group(function () {
         Route::resource('customer', 'CustomerController');
         Route::resource('employee', 'EmployeeController');
         Route::resource('facility', 'FacilityController');
+        Route::resource('overtime', 'OvertimeController');
         Route::resource('workshift', 'WorkshiftController');
         Route::resource('job-tittle', 'JobTittleController');
         Route::resource('leave-type', 'LeaveTypeController');
@@ -71,7 +72,6 @@ Route::name('admin.')->group(function () {
         Route::resource('bank-account', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
-        Route::resource('overtime', 'OvertimeController');
 
         /** LICENSE */
 
