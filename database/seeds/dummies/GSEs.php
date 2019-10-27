@@ -12,6 +12,6 @@ class GSEs extends Seeder
      */
     public function run()
     {
-        //
+        factory(GSE::class, config('memfis.dummies.gse'))->create();
     }
 }

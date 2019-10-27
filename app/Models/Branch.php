@@ -43,6 +43,19 @@ class Branch extends MemfisModel
     /**
      * M-M Polymorphic: A branch can be applied to many entities.
      *
+     * This function will get all the GSEs that are applied by a given branch.
+     * See: GSE's branches() method for the inverse
+     *
+     * @return mixed
+     */
+    public function gses()
+    {
+        return $this->morphedByMany(GSE::class, 'branchable');
+    }
+
+    /**
+     * M-M Polymorphic: A branch can be applied to many entities.
+     *
      * This function will get all the InventoryIns that are applied by a given branch.
      * See: InventoryIn's branches() method for the inverse
      *

@@ -23,6 +23,7 @@ return [
         'employees' => 20,
         'facilities' => 20,
         'goods-received' => 20,
+        'gse' => 20,
         'htcrr' => 20,
         'item-requests' => 20,
         'inventory_ins' => 20,
