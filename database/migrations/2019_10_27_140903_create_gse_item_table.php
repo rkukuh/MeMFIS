@@ -20,7 +20,7 @@ class CreateGseItemTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            // FIXME: General error: 1215 Cannot add foreign key constraint
+            // TODO: General error: 1215 Cannot add foreign key constraint
             // $table->foreign('gse_id')
             //         ->references('id')->on('gse')
             //         ->onUpdate('cascade')
