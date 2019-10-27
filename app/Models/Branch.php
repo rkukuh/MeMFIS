@@ -56,6 +56,19 @@ class Branch extends MemfisModel
     /**
      * M-M Polymorphic: A storage can be filled from many entities.
      *
+     * This function will get all the Projects that are applied by a given branch.
+     * See: Project's branches() method for the inverse
+     *
+     * @return mixed
+     */
+    public function projects()
+    {
+        return $this->morphToMany(Project::class, 'branchable');
+    }
+
+    /**
+     * M-M Polymorphic: A storage can be filled from many entities.
+     *
      * This function will get all the storages that are filled from a given company's branch.
      * See: Storage's branches() method for the inverse
      *

@@ -1,17 +1,16 @@
-let receiving_inspection_report = {
-    init: function() {
-
-        $(".rir_datatable").mDatatable({
+let goods_received_note_show = {
+    init: function () {
+        $('.purchase_order_datatable').mDatatable({
             data: {
-                type: "remote",
+                type: 'remote',
                 source: {
                     read: {
-                        method: "GET",
-                        url: "/datatables/purchase-order/item/" + uuid,
-                        map: function(raw) {
+                        method: 'GET',
+                        url: '/datatables/receiving-inspection-report/item/'+grn_uuid,
+                        map: function (raw) {
                             let dataSet = raw;
 
-                            if (typeof raw.data !== "undefined") {
+                            if (typeof raw.data !== 'undefined') {
                                 dataSet = raw.data;
                             }
 
@@ -25,8 +24,8 @@ let receiving_inspection_report = {
                 serverSorting: !0
             },
             layout: {
-                theme: "default",
-                class: "",
+                theme: 'default',
+                class: '',
                 scroll: false,
                 footer: !1
             },
@@ -34,7 +33,7 @@ let receiving_inspection_report = {
             filterable: !1,
             pagination: !0,
             search: {
-                input: $("#generalSearch")
+                input: $('#generalSearch')
             },
             toolbar: {
                 items: {
@@ -45,66 +44,77 @@ let receiving_inspection_report = {
             },
             columns: [
                 {
-                    field: "code",
-                    title: "P/N",
-                    sortable: "asc",
+                    field: '#',
+                    title: 'No',
+                    width:'40',
+                    sortable: 'asc',
+                    filterable: !1,
+                    textAlign: 'center',
+                    template: function (row, index, datatable) {
+                        return (index + 1) + (datatable.getCurrentPage() - 1) * datatable.getPageSize()
+                    }
+                },
+                {
+                    field: 'code',
+                    title: 'P/N',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "name",
-                    title: "Item Description",
-                    sortable: "asc",
+                    field: 'name',
+                    title: 'Item Description',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "",
-                    title: "Qty PR",
-                    sortable: "asc",
+                    field: '',
+                    title: 'Qty PR',
+                    sortable: 'asc',
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "pivot.quantity",
-                    title: "Qty PO",
-                    sortable: "asc",
+                    field: '',
+                    title: 'Qty PO',
+                    sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 150,
                 },
                 {
-                    field: "",
-                    title: "Qty",
-                    sortable: "asc",
+                    field: 'pivot.quantity',
+                    title: 'Qty',
+                    sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 150,
                 },
                 {
-                    field: "",
-                    title: "Unit",
-                    sortable: "asc",
+                    field: 'unit_name',
+                    title: 'Unit',
+                    sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 150,
                 },
                 {
-                    field: "",
-                    title: "Remark",
-                    sortable: "asc",
+                    field: 'pivot.note',
+                    title: 'Remark',
+                    sortable: 'asc',
                     filterable: !1,
-                    width: 150
+                    width: 150,
                 },
                 {
-                    field: "",
-                    title: "Expired Date",
-                    sortable: "asc",
+                    field: 'pivot.expired_at',
+                    title: 'Expired Date',
+                    sortable: 'asc',
                     filterable: !1,
-                    width: 150
-                }
+                    width: 150,
+                },
             ]
         });
     }
 };
 
-jQuery(document).ready(function() {
-    receiving_inspection_report.init();
+jQuery(document).ready(function () {
+    goods_received_note_show.init();
 });

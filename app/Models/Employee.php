@@ -133,7 +133,8 @@ class Employee extends MemfisModel implements HasMedia
     public function defectcards()
     {
         return $this->belongsToMany(DefectCard::class, 'defectcard_employee', 'employee_id', 'defectcard_id')
-                    ->withPivot('additionals')
+                    ->withPivot('additionals','deleted_at')
+                    ->whereNull('defectcard_employee.deleted_at')
                     ->withTimestamps();
     }
 

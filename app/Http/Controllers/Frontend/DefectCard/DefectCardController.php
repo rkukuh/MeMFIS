@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Frontend\DefectCard;
 
 use Auth;
 use App;
+use Carbon\Carbon;
+use App\Models\Status;
 use iio\libmergepdf\Merger;
 use App\Models\DefectCard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use stdClass;
 
 class DefectCardController extends Controller
 {
@@ -137,6 +140,52 @@ class DefectCardController extends Controller
     public function print(DefectCard $defectcard)
     {
         $m = new Merger();
+        $statuses = Status::ofDefectCard()->get();
+
+        $date_close = $released = [];
+
+        $progresses_groups = $defectcard->progresses->groupBy('progressed_by')->sortBy('created_at');
+        $actual_manhours = [];
+        foreach($progresses_groups as $progresses_group){
+            //calculating defect card's actual manhours
+            $manhours = null;
+            foreach($progresses_group as $key => $progress){
+                $status = $statuses->find($progress->status_id)->code;
+                // dump($status);
+                // close date
+                if($status == "closed"){
+                    $date_close[$progress->progressedBy->id] = $progress->created_at;
+                }
+
+                // close date
+                if($status == "released"){
+                    $temporary = new stdClass();
+                    $temporary->released_at = $progress->created_at;
+                    $temporary->by = $progress->progressedBy->first_name.' '.$progress->progressedBy->last_name;
+                    array_push($released, $temporary);
+                }
+
+                if($status == "progress"){
+                    if( ($key + 1) < sizeof($progresses_group) && isset($progress[$key])){
+                        $t1 = Carbon::parse($progress->created_at);
+                        $t2 = Carbon::parse($progress[$key + 1]->created_at);
+                        $diff = $t1->diffInSeconds($t2);
+                        $manhours = $manhours + $diff;
+                    }else{
+                        $t1 = Carbon::parse($progress->created_at);
+                        $t2 = Carbon::now();
+                        $diff = $t1->diffInSeconds($t2);
+                        $manhours = $manhours + $diff;
+                    }
+                }
+            }
+
+            $manhours = $manhours/3600;
+            $actual_manhours[$progress->progressedBy->id] = $manhours;
+        }
+
+        // dd("break");
+
         $zones = $defectcard->zones->pluck('name')->toArray();
         $zones = join(',', $zones);
         
@@ -153,7 +202,7 @@ class DefectCardController extends Controller
         }else{
             $text = "";
         }
-        $view1 = \View::make('frontend.form.dc_page1')->with(['defectcard' => $defectcard,'propose_corrections'=> $propose_corrections, 'text'=> $text, 'zones' => $zones])->render();
+        $view1 = \View::make('frontend.form.dc_page1')->with(['defectcard' => $defectcard,'propose_corrections'=> $propose_corrections, 'text'=> $text, 'zones' => $zones, 'actual_manhours' => $actual_manhours, 'date_close' => $date_close])->render();
         $view2 = \View::make('frontend.form.dc_page2')->with('defectcard', $defectcard)->render();
 
         $pdf = App::make('dompdf.wrapper');

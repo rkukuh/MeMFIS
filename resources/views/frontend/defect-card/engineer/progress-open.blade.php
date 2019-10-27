@@ -365,7 +365,7 @@
                                                     Helper
                                                 </label>
 
-                                                <select name="helper" class="form-control m-select2">
+                                                <select name="helper[]" class="form-control m-select2">
                                                     <option value=""> Select a Helper </option>
                                                     @foreach($employees as $employee)
                                                         <option value="{{ $employee->code }}" @if($employee->code == $helper->code) selected @endif>{{ $employee->first_name }}</option>
