@@ -11,14 +11,21 @@ class RIR extends MemfisModel
     protected $fillable = [
         'number',
         'rir_date',
-        'purchase_order_id',
-        'vendor_id',
-        'received_by',
         'vehicle_no',
         'delivery_document_number',
+        'status_id',
+        'purchase_order_id',
+        'vendor_id',
+        'packing_type',
+        'packing_condition',
+        'unsatisfactory_packing',
+        'received_by',
+        'received_at',
         'decision',
         'description',
     ];
+
+    protected $dates = ['received_at'];
 
     /*************************************** RELATIONSHIP ****************************************/
 
@@ -46,6 +53,30 @@ class RIR extends MemfisModel
     public function branches()
     {
         return $this->morphToMany(Branch::class, 'branchable');
+    }
+
+    /**
+     * One-Way: An RIR may have one packing condition.
+     *
+     * This function will retrieve the packing condition of an RIR.
+     *
+     * @return mixed
+     */
+    public function packing_condition()
+    {
+        return $this->belongsTo(Type::class, 'packing_condition');
+    }
+
+    /**
+     * One-Way: An RIR may have one packing type.
+     *
+     * This function will retrieve the packing type of an RIR.
+     *
+     * @return mixed
+     */
+    public function packing_type()
+    {
+        return $this->belongsTo(Type::class, 'packing_type');
     }
 
     /**
