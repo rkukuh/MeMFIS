@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRirsTable extends Migration
+class CreateRirTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRirsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rirs', function (Blueprint $table) {
+        Schema::create('rir', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateRirsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rirs');
+        Schema::dropIfExists('rir');
     }
 }
