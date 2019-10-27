@@ -12,6 +12,6 @@ class Mutations extends Seeder
      */
     public function run()
     {
-        //
+        factory(Mutation::class, config('memfis.dummies.mutations'))->create();
     }
 }

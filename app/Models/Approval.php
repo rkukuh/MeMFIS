@@ -25,6 +25,7 @@ class Approval extends MemfisModel
      * - DefectCard's approvals() method for the inverse
      * - GoodsReceive's approvals() method for the inverse
      * - JobCard's approvals() method for the inverse
+     * - Mutation's approvals() method for the inverse
      * - Quotation's approvals() method for the inverse
      * - Overtime's approvals() method for the inverse
      * - Project's approvals() method for the inverse

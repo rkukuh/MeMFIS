@@ -54,6 +54,19 @@ class Branch extends MemfisModel
     }
 
     /**
+     * M-M Polymorphic: A branch can be applied to many entities.
+     *
+     * This function will get all the Mutations that are applied by a given branch.
+     * See: Mutation's branches() method for the inverse
+     *
+     * @return mixed
+     */
+    public function mutations()
+    {
+        return $this->morphedByMany(Mutation::class, 'branchable');
+    }
+
+    /**
      * M-M Polymorphic: A storage can be filled from many entities.
      *
      * This function will get all the Projects that are applied by a given branch.

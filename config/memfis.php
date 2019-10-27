@@ -33,6 +33,7 @@ return [
         'licenses' => 20,
         'levels' => 20,
         'manhours' => 20,
+        'mutations' => 20,
         'positions' => 20,
         'projects' => 20,
         'promos' => 20,

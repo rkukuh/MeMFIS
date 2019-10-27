@@ -14,8 +14,25 @@ class CreateMutationsTable extends Migration
     public function up()
     {
         Schema::create('mutations', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
+            $table->char('uuid', 36)->unique();
+            $table->string('number');
+            $table->unsignedBigInteger('storage_out');
+            $table->unsignedBigInteger('storage_in');
+            $table->timestamp('mutated_at');
+            $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('storage_out')
+                    ->references('id')->on('storages')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+                
+            $table->foreign('storage_in')
+                    ->references('id')->on('storages')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
