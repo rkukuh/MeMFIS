@@ -63,6 +63,7 @@ class DummyDataSeeder extends Seeder
         /** POLYMORPH */
 
         $this->call(GSEs::class);
+        $this->call(RIRs::class);
         $this->call(Faxes::class);
         $this->call(Zones::class);
         $this->call(Emails::class);

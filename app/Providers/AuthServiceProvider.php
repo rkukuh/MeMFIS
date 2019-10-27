@@ -18,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Tax::class => Policies\TaxPolicy::class,
         Models\RTS::class => Policies\RTSPolicy::class,
         Models\GSE::class => Policies\GSEPolicy::class,
+        Models\RIR::class => Policies\RIRPolicy::class,
         Models\User::class => Policies\UserPolicy::class,
         Models\Type::class => Policies\TypePolicy::class,
         Models\Unit::class => Policies\UnitPolicy::class,

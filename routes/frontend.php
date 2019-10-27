@@ -23,6 +23,7 @@ Route::name('frontend.')->group(function () {
         Route::resource('fax', 'FaxController');
         Route::resource('tax', 'TaxController');
         Route::resource('gse', 'GSEController');
+        Route::resource('rir', 'RIRController');
         Route::resource('zone', 'ZoneController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
