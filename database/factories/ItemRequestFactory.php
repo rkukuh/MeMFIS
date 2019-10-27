@@ -19,6 +19,7 @@ $factory->define(ItemRequest::class, function (Faker $faker) {
         'requested_at' => Carbon::now(),
         'storage_id' => Storage::get()->random()->id,
         'received_by' => Employee::get()->random()->id,
+        'section' => null,
         'note' => $faker->randomElement([null, $faker->sentence]),
     ];
 
