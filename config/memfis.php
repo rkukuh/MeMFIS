@@ -24,6 +24,7 @@ return [
         'facilities' => 20,
         'goods-received' => 20,
         'htcrr' => 20,
+        'item-requests' => 20,
         'inventory_ins' => 20,
         'fefo_ins' => 100,
         'inventory_outs' => 20,

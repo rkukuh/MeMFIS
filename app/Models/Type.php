@@ -237,6 +237,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of ItemRequest.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfItemRequest(Builder $query)
+    {
+        return $query->where('of', 'item-request');
+    }
+
+    /**
      * Scope a query to only include type of JobCard close reason.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query

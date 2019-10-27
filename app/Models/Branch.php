@@ -56,6 +56,19 @@ class Branch extends MemfisModel
     /**
      * M-M Polymorphic: A branch can be applied to many entities.
      *
+     * This function will get all the Item Requests that are applied by a given branch.
+     * See: ItemRequest's branches() method for the inverse
+     *
+     * @return mixed
+     */
+    public function item_requests()
+    {
+        return $this->morphedByMany(ItemRequest::class, 'branchable');
+    }
+
+    /**
+     * M-M Polymorphic: A branch can be applied to many entities.
+     *
      * This function will get all the Mutations that are applied by a given branch.
      * See: Mutation's branches() method for the inverse
      *

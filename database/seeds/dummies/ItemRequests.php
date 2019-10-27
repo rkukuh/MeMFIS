@@ -12,6 +12,6 @@ class ItemRequests extends Seeder
      */
     public function run()
     {
-        //
+        factory(ItemRequest::class, config('memfis.dummies.item-requests'))->create();
     }
 }
