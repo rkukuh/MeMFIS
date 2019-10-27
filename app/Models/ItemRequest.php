@@ -6,6 +6,8 @@ use App\MemfisModel;
 
 class ItemRequest extends MemfisModel
 {
+    protected $table = 'requests';
+    
     protected $fillable = [
         'number',
         'requestable_type',

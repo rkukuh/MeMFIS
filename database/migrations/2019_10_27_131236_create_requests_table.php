@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateItemRequestsTable extends Migration
+class CreateRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateItemRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('item_requests', function (Blueprint $table) {
+        Schema::create('requests', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('uuid', 36)->unique();
             $table->string('number');
@@ -51,6 +51,6 @@ class CreateItemRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('item_requests');
+        Schema::dropIfExists('requests');
     }
 }
