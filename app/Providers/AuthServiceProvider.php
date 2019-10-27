@@ -17,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Fax::class => Policies\FaxPolicy::class,
         Models\Tax::class => Policies\TaxPolicy::class,
         Models\RTS::class => Policies\RTSPolicy::class,
+        Models\GSE::class => Policies\GSEPolicy::class,
         Models\User::class => Policies\UserPolicy::class,
         Models\Type::class => Policies\TypePolicy::class,
         Models\Unit::class => Policies\UnitPolicy::class,

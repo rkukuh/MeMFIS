@@ -22,6 +22,7 @@ Route::name('admin.')->group(function () {
 
         Route::resource('fax', 'FaxController');
         Route::resource('tax', 'TaxController');
+        Route::resource('gse', 'GSEController');
         Route::resource('zone', 'ZoneController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
