@@ -133,13 +133,13 @@ let receiving_inspection_report = {
             let material_check = $('#material_check').val();
             let decision = $('#decision').val();
 
-
+            preservation_check
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/workpackage',
+                url: '/receiving-inspection-report',
                 data: {
                     _token: $('input[name=_token]').val(),
                     general_document:general_document,
@@ -147,11 +147,13 @@ let receiving_inspection_report = {
                     purchase_order: purchase_order,
                     vendor: vendor,
                     document: document,
+                    date:date,
                     status:status,
                     type:type,
                     condition:condition,
                     preservation_check:preservation_check,
                     condition_material:condition_material,
+                    quality:quality,
                     identification:identification,
                     packing_handling_check:packing_handling_check,
                     preservation_check_explain:preservation_check_explain,
@@ -178,7 +180,6 @@ let receiving_inspection_report = {
                             timeOut: 5000
                         });
 
-                        window.location.href = '/rir/'+data.uuid+'/edit';
                         // let table = $('.m_datatable').mDatatable();
 
                         // table.originalDataSet = [];
@@ -222,7 +223,7 @@ let receiving_inspection_report = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: '/rir/'+rir_uuid+'/item/'+item_uuid,
+                url: '/receiving-inspection-report/'+rir_uuid+'/item/'+item_uuid,
                 type: "POST",
                 data: {
                     exp_date: exp_date,
@@ -321,7 +322,7 @@ let receiving_inspection_report = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: '/rir/'+rir_uuid+'/item/'+uuid,
+                url: '/receiving-inspection-report/'+rir_uuid+'/item/'+uuid,
                 type: "PUT",
                 data: {
                     exp_date: exp_date,
@@ -375,7 +376,7 @@ let receiving_inspection_report = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/rir/' + rir_uuid + '/item/'+$(this).data('uuid'),
+                        url: '/receiving-inspection-report/' + rir_uuid + '/item/'+$(this).data('uuid'),
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000

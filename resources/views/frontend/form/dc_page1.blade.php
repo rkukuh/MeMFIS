@@ -337,24 +337,26 @@
                     <td width="40%" align="center" rowspan="2">Reference</td>
                     <td width="16%" align="center" rowspan="2">Date</td>
                     <td width="8%" align="center" rowspan="2">Actual Mhrs.</td>
-                    <td width="15%" align="center">ENG</td>
+                    <td width="15%" align="center">MECHANIC</td>
                     <td width="15%" align="center">ENG</td>
                 </tr>
                 <tr style="background: #f7dd16;">
                     <td width="15%" align="center">(Name)</td>
                     <td width="15%" align="center">(Stamp + Sign)</td>
                 </tr>
+                @foreach($defectcard->helpers as $key => $helper)
                 <tr>
-                    <td width="6%" align="center" valign="top"></td>
-                    <td width="40%" valign="top">-</td>
-                    <td width="16%" align="center" valign="top">-</td>
-                    <td width="8%" align="center" valign="top">-</td>
-                    <td width="15%" align="center" valign="top">-</td>
+                    <td width="6%" align="center" valign="top">{{ $key + 1}}</td>
+                    <td width="40%" valign="top">{{ $helper->pivot->additionals }}</td>
+                    <td width="16%" align="center" valign="top">@if(array_key_exists($helper->id, $date_close) && isset($date_close[$helper->id])) {{ $date_close[$helper->id] }} @else - @endif</td>
+                    <td width="8%" align="center" valign="top">@if(array_key_exists($helper->id, $actual_manhours)) {{ number_format($actual_manhours[$helper->id], 2) }} @else - @endif</td>
+                    <td width="15%" align="center" valign="top">{{ $helper->first_name }} {{ $helper->last_name }} </td>
                     <td width="15%" align="center" valign="top">-</td>
                 </tr>
+                @endforeach
                 <tr>
                     <td colspan="3" valign="top"><b>Remark :</b> <br>* <span style="padding-left:1.1em">FOR RII</span> <br> ** <span style="padding-left:.5em">CHECK AS APPLICABLE </span><br> *** OTHER THAN ABOVE MENTIONED, DESCRIBE, SAY</td>
-                    <td valign="top" align="center"><b>Total</b> <div style="padding-top:12px">12012</div></td>
+                    <td valign="top" align="center"><b>Total</b> <div style="padding-top:12px">{{ number_format(array_sum($actual_manhours), 2) }}</div></td>
                     <td colspan="2" valign="top">   
                         <div style="position:relative">
                             <b>RII Item :</b>

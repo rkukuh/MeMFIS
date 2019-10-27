@@ -542,7 +542,7 @@ let Quotation = {
                         document.getElementById("name").value = name;
                     } else {
 
-                        toastr.success('Quotation has been created.', 'Success', {
+                        toastr.success('Quotation has been updated.', 'Success', {
                             timeOut: 5000
                         });
 
