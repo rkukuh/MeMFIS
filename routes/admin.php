@@ -95,6 +95,7 @@ Route::name('admin.')->group(function () {
         Route::resource('quotation', 'QuotationController');
         Route::resource('defectcard', 'DefectCardController');
         Route::resource('workpackage', 'WorkPackageController');
+        Route::resource('item-request', 'ItemRequestController');
         Route::resource('eo-instruction', 'EOInstructionController');
         Route::resource('goods-received', 'GoodsReceivedController');
         Route::resource('purchase-order', 'PurchaseRequestController');

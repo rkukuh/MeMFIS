@@ -110,6 +110,7 @@ class DummyDataSeeder extends Seeder
         $this->call(DefectCards::class);
         $this->call(RTSs::class);
         $this->call(Mutations::class);
+        $this->call(ItemRequests::class);
 
         /** PROJECT'S WORKPACKAGEs */
 

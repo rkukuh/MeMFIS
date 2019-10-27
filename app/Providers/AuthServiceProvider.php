@@ -77,6 +77,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\BankAccount::class => Policies\BankAccountPolicy::class,
         Models\Interchange::class => Policies\InterchangePolicy::class,
         Models\InventoryIn::class => Policies\InventoryInPolicy::class,
+        Models\ItemRequest::class => Policies\ItemRequestPolicy::class,
         Models\InventoryOut::class => Policies\InventoryOutPolicy::class,
         Models\Manufacturer::class => Policies\ManufacturerPolicy::class,
         Models\Certification::class => Policies\CertificationPolicy::class,

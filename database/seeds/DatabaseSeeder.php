@@ -110,6 +110,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DefectCardsTableSeeder::class);
         $this->call(RTSTableSeeder::class);
         $this->call(MutationsTableSeeder::class);
+        $this->call(ItemRequestsTableSeeder::class);
         
         /** PROJECT'S WORKPACKAGEs */
 
