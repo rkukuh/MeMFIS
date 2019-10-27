@@ -11,15 +11,15 @@ class StatusesTableSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(StatusesOfAttendance::class);
         $this->call(StatusesOfCustomerComponentRepair::class);
         $this->call(StatusesOfDefectCard::class);
         $this->call(StatusesOfEmployment::class);
         $this->call(StatusesOfHtCrr::class);
         $this->call(StatusesOfJobCard::class);
         $this->call(StatusesOfMarital::class);
+        $this->call(StatusesOfOvertime::class);
         $this->call(StatusesOfProject::class);
         $this->call(StatusesOfQuotation::class);
-        $this->call(StatusesOfAttendance::class);
-        $this->call(StatusesOfOvertime::class);
     }
 }
