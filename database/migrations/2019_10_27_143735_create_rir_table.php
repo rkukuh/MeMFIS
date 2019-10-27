@@ -14,8 +14,33 @@ class CreateRirTable extends Migration
     public function up()
     {
         Schema::create('rir', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
+            $table->char('uuid', 36)->unique();
+            $table->string('number');
+            $table->timestamp('rir_date');
+            $table->unsignedBigInteger('purchase_order_id');
+            $table->unsignedBigInteger('vendor_id');
+            $table->unsignedBigInteger('received_by');
+            $table->string('vehicle_no');
+            $table->string('delivery_document_number')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('purchase_order_id')
+                    ->references('id')->on('purchase_orders')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('vendor_id')
+                    ->references('id')->on('vendors')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('received_by')
+                    ->references('id')->on('employees')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 

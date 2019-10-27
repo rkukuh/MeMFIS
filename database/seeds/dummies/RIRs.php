@@ -12,6 +12,6 @@ class RIRs extends Seeder
      */
     public function run()
     {
-        //
+        factory(RIR::class, config('memfis.dummies.rirs'))->create();
     }
 }

@@ -55,6 +55,7 @@ return [
             ]
         ],
         'quotations' => 20,
+        'rirs' => 20,
         'schools' => 20,
         'statuses' => 20,
         'storages' => 20,
