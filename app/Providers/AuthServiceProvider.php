@@ -62,6 +62,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\Approval::class => Policies\ApprovalPolicy::class,
         Models\Progress::class => Policies\ProgressPolicy::class,
         Models\Position::class => Policies\PositionPolicy::class,
+        Models\Overtime::class => Policies\OvertimePolicy::class,
         Models\JobTittle::class => Policies\JobTittlePolicy::class,
         Models\LeaveType::class => Policies\LeaveTypePolicy::class,
         Models\Workshift::class => Policies\WorkshiftPolicy::class,
@@ -104,7 +105,6 @@ class AuthServiceProvider extends ServiceProvider
         Models\QuotationWorkPackageTaskCardItem::class => Policies\QuotationWorkPackageTaskCardItemPolicy::class,
         Models\EOInstructionWorkPackageSuccessor::class => Policies\EOInstructionWorkPackageSuccessorPolicy::class,
         Models\EOInstructionWorkPackagePredecessor::class => Policies\EOInstructionWorkPackagePredecessorPolicy::class,
-        Models\Overtime::class => Policies\OvertimePolicy::class,
     ];
 
     /**
