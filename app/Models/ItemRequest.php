@@ -14,7 +14,7 @@ class ItemRequest extends MemfisModel
         'storage_id',
         'received_by',
         'section',
-        'description',
+        'note',
     ];
 
     protected $dates = ['requested_at'];

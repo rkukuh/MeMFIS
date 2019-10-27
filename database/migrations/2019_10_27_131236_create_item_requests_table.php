@@ -23,7 +23,7 @@ class CreateItemRequestsTable extends Migration
             $table->unsignedBigInteger('storage_id');
             $table->unsignedBigInteger('received_by');
             $table->string('section')->nullable();
-            $table->text('description')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
