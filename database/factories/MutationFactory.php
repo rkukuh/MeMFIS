@@ -14,7 +14,7 @@ $factory->define(Mutation::class, function (Faker $faker) {
         'storage_out' => Storage::get()->random()->id,
         'storage_in' => Storage::get()->random()->id,
         'mutated_at' => Carbon::now(),
-        'description' => $faker->randomElement([null, $faker->sentence]),
+        'note' => $faker->randomElement([null, $faker->sentence]),
     ];
 
 });

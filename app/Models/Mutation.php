@@ -11,7 +11,7 @@ class Mutation extends MemfisModel
         'storage_out',
         'storage_in',
         'mutated_at',
-        'description',
+        'note',
     ];
 
     protected $dates = ['mutated_at'];

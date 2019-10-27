@@ -20,7 +20,7 @@ class CreateMutationsTable extends Migration
             $table->unsignedBigInteger('storage_out');
             $table->unsignedBigInteger('storage_in');
             $table->timestamp('mutated_at');
-            $table->text('description')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
