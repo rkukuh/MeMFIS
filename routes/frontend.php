@@ -72,6 +72,10 @@ Route::name('frontend.')->group(function () {
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
 
+        /** TRANSACTION */
+
+        Route::resource('mutation', 'MutationController');
+
         /** CERTIFICATION */
 
         Route::resource('otr-certification', 'OTRCertificationController');

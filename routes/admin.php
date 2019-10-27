@@ -91,6 +91,7 @@ Route::name('admin.')->group(function () {
         Route::resource('project', 'ProjectController');
         Route::resource('jobcard', 'JobCardController');
         Route::resource('taskcard', 'TaskCardController');
+        Route::resource('mutation', 'MutationController');
         Route::resource('quotation', 'QuotationController');
         Route::resource('defectcard', 'DefectCardController');
         Route::resource('workpackage', 'WorkPackageController');

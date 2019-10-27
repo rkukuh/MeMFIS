@@ -60,7 +60,6 @@ class DatabaseSeeder extends Seeder
         $this->call(WorkshiftsTableSeeder::class);
         
         $this->call(BankAccountsTableSeeder::class);
-
         $this->call(OvertimesTableSeeder::class);
 
         /** POLYMORPH */
@@ -110,6 +109,7 @@ class DatabaseSeeder extends Seeder
         $this->call(HtCrrsTableSeeder::class);
         $this->call(DefectCardsTableSeeder::class);
         $this->call(RTSTableSeeder::class);
+        $this->call(MutationsTableSeeder::class);
         
         /** PROJECT'S WORKPACKAGEs */
 
