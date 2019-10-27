@@ -26,9 +26,9 @@ class CreateInventoryInTable extends Migration
             $table->softDeletes();
 
             $table->foreign('storage_id')
-                ->references('id')->on('storages')
-                ->onUpdate('cascade')
-                ->onDelete('restrict');
+                    ->references('id')->on('storages')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
         });
     }
 
