@@ -37,7 +37,7 @@ class ItemRequest extends MemfisModel
     /**
      * One-Way: An Item Request may have one receiver.
      *
-     * This function will retrieve all the receivers of an Item Request.
+     * This function will retrieve the receiver of an Item Request.
      *
      * @return mixed
      */
