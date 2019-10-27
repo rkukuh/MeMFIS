@@ -4,6 +4,7 @@ use App\Models\RIR;
 use App\Models\Vendor;
 use App\Models\Employee;
 use App\Models\PurchaseOrder;
+use App\Models\Status;
 use Faker\Generator as Faker;
 use Illuminate\Support\Carbon;
 
@@ -18,6 +19,7 @@ $factory->define(RIR::class, function (Faker $faker) {
     return [
         'number' => 'RIR-DUM-' . $number,
         'rir_date' => Carbon::now(),
+        'status_id' => Status::ofRIR()->get()->random()->id,
         'purchase_order_id' => function () {
             if (PurchaseOrder::count()) {
                 return PurchaseOrder::get()->random()->id;
@@ -41,6 +43,7 @@ $factory->define(RIR::class, function (Faker $faker) {
         },
         'vehicle_no' => $plate_no,
         'delivery_document_number' => null,
+        'decision' => $faker->randomElement([null, $faker->sentence]),
         'description' => $faker->randomElement([null, $faker->sentence]),
     ];
 

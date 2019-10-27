@@ -16,6 +16,7 @@ class RIR extends MemfisModel
         'received_by',
         'vehicle_no',
         'delivery_document_number',
+        'decision',
         'description',
     ];
 
@@ -69,6 +70,18 @@ class RIR extends MemfisModel
     public function receivedBy()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    /**
+     * One-Way: An RIR may have one Status.
+     *
+     * This function will retrieve the Status of an RIR.
+     *
+     * @return mixed
+     */
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
     }
 
     /**

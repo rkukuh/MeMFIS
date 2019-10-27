@@ -18,14 +18,21 @@ class CreateRirTable extends Migration
             $table->char('uuid', 36)->unique();
             $table->string('number');
             $table->timestamp('rir_date');
+            $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('purchase_order_id');
             $table->unsignedBigInteger('vendor_id');
             $table->unsignedBigInteger('received_by');
             $table->string('vehicle_no');
             $table->string('delivery_document_number')->nullable();
+            $table->text('decision')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('status_id')
+                    ->references('id')->on('statuses')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
 
             $table->foreign('purchase_order_id')
                     ->references('id')->on('purchase_orders')

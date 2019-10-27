@@ -17,7 +17,7 @@ class Status extends MemfisModel
     /******************************************* SCOPE *******************************************/
 
     /**
-     * Scope a query to only include category of attendance.
+     * Scope a query to only include status of attendance.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -28,7 +28,7 @@ class Status extends MemfisModel
     }
 
     /**
-     * Scope a query to only include category of customer's component repair.
+     * Scope a query to only include status of customer's component repair.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -39,7 +39,7 @@ class Status extends MemfisModel
     }
 
     /**
-     * Scope a query to only include category of defect card.
+     * Scope a query to only include status of defect card.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -50,7 +50,7 @@ class Status extends MemfisModel
     }
 
     /**
-     * Scope a query to only include category of employment.
+     * Scope a query to only include status of employment.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -61,7 +61,7 @@ class Status extends MemfisModel
     }
 
     /**
-     * Scope a query to only include category of HTCRR.
+     * Scope a query to only include status of HTCRR.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -72,7 +72,7 @@ class Status extends MemfisModel
     }
 
     /**
-     * Scope a query to only include category of job card.
+     * Scope a query to only include status of job card.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -83,7 +83,7 @@ class Status extends MemfisModel
     }
 
     /**
-     * Scope a query to only include category of marital.
+     * Scope a query to only include status of marital.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -94,7 +94,7 @@ class Status extends MemfisModel
     }
 
     /**
-     * Scope a query to only include category of overtime.
+     * Scope a query to only include status of overtime.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -105,7 +105,7 @@ class Status extends MemfisModel
     }
 
     /**
-     * Scope a query to only include category of project.
+     * Scope a query to only include status of project.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -116,7 +116,7 @@ class Status extends MemfisModel
     }
 
     /**
-     * Scope a query to only include category of quotation.
+     * Scope a query to only include status of quotation.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
@@ -124,6 +124,17 @@ class Status extends MemfisModel
     public function scopeOfQuotation(Builder $query)
     {
         return $query->where('of', 'quotation');
+    }
+
+    /**
+     * Scope a query to only include status of RIR.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIR(Builder $query)
+    {
+        return $query->where('of', 'rir');
     }
 
     /*************************************** RELATIONSHIP ****************************************/
