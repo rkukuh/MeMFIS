@@ -256,7 +256,6 @@ let InventoryInCreate = {
             document.getElementById('qty').value = $(this).data('quantity');
             document.getElementById('uuid').value = $(this).data('uuid');
             document.getElementById('item_remark').value = $(this).data('remark');
-            document.getElementById('serial_no').value = $(this).data('serial');
             document.getElementById('exp_date').value = $(this).data('date');
 
             $('.btn-success').addClass('update-item');
