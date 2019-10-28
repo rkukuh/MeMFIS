@@ -25,7 +25,7 @@ class GSEController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($type)
     {
         if($type == 'hm'){
             return view('frontend.gse.hm.create');
@@ -62,7 +62,7 @@ class GSEController extends Controller
      * @param  \App\Models\GSE  $gSE
      * @return \Illuminate\Http\Response
      */
-    public function show(GSE $gSE)
+    public function show(GSE $gSE, $item)
     {
         if($type == 'hm'){
             return view('frontend.gse.hm.show', [
@@ -88,7 +88,7 @@ class GSEController extends Controller
      * @param  \App\Models\GSE  $gSE
      * @return \Illuminate\Http\Response
      */
-    public function edit(GSE $gSE)
+    public function edit(GSE $gSE, $item)
     {
         if($type == 'hm'){
             return view('frontend.gse.hm.edit', [

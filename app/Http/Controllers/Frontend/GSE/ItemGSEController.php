@@ -35,9 +35,9 @@ class ItemGSEController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, GSE $gse, Item $item)
+    public function store(Request $request, GSE $gSE, Item $item)
     {
-        $gse->items()->attach([$item->pivot->item_id => [
+        $gSE->items()->attach([$item->pivot->item_id => [
             'quantity'=> 0,
             'quantity_unit' => 0,
             'unit_id' => $item->pivot->unit_id
@@ -48,10 +48,10 @@ class ItemGSEController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\GSE  $gse
+     * @param  \App\GSE  $gSE
      * @return \Illuminate\Http\Response
      */
-    public function show(GSE $gse)
+    public function show(GSE $gSE)
     {
         //
     }
@@ -59,44 +59,44 @@ class ItemGSEController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\GSE  $gse
+     * @param  \App\GSE  $gSE
      * @return \Illuminate\Http\Response
      */
-    public function edit(GSE $gse, Item $item)
+    public function edit(GSE $gSE, Item $item)
     {
-        return response()->json($gse->items->where('pivot.item_id',$item->id)->first());
+        return response()->json($gSE->items->where('pivot.item_id',$item->id)->first());
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\GSE  $gse
+     * @param  \App\GSE  $gSE
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, GSE $gse, Item $item)
+    public function update(Request $request, GSE $gSE, Item $item)
     {
-        $gse->items()->updateExistingPivot($item->id,
+        $gSE->items()->updateExistingPivot($item->id,
                 ['unit_id'=>$request->unit_id,
                 'quantity'=> $request->quantity,
                 'quantity_unit'=> $quantity_unit,
                 'note' => $request->note
                 ]);
 
-        return response()->json($gse);
+        return response()->json($gSE);
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\GSE  $gse
+     * @param  \App\GSE  $gSE
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GSE $gse, Item $item)
+    public function destroy(GSE $gSE, Item $item)
     {
-        $gse->items()->detach($item->id);
+        $gSE->items()->detach($item->id);
 
-        return response()->json($gse);
+        return response()->json($gSE);
     }
 }
