@@ -287,14 +287,14 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="row">
+        <div class="row">
             <div class="col-lg-6">
                 <div class="m-portlet  m-portlet--full-height ">
                     <div class="m-portlet__head">
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
                                 <h3 class="m-portlet__head-text">
-                                    Job Card Progress Timeline
+                                    Your Progress Timeline
                                 </h3>
                             </div>
                         </div>
@@ -303,87 +303,24 @@
                         <div class="m-scrollable" data-scrollable="true" data-height="380" data-mobile-height="300">
                             <div class="m-timeline-2">
                                 <div class="m-timeline-2__items  m--padding-top-25 m--padding-bottom-30">
-                                    <div class="m-timeline-2__item">
-                                        <span class="m-timeline-2__item-time">10:00</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-danger"></i>
+                                    @foreach($progresses as $progress)
+                                        <div class="m-timeline-2__item">
+                                            <span class="m-timeline-2__item-time">{{ date_format($progress->created_at,"d/m/Y H:i") }} @if($progress->note) {{ $progress->note }} @endif</span>
+                                            <div class="m-timeline-2__item-cricle">
+                                                <i class="fa fa-genderless m--font-danger"></i>
+                                            </div>
+                                            <div class="m-timeline-2__item-text  m--padding-top-5">
+                                                {{ $progress->status }}
+                                            </div>
                                         </div>
-                                        <div class="m-timeline-2__item-text  m--padding-top-5">
-                                            Lorem ipsum dolor sit amit,consectetur eiusmdd tempor<br>
-                                            incididunt ut labore et dolore magna
-                                        </div>
-                                    </div>
-                                    <div class="m-timeline-2__item m--margin-top-30">
-                                        <span class="m-timeline-2__item-time">12:45</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-success"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text m-timeline-2__item-text--bold">
-                                            AEOL Meeting With
-                                        </div>
-                                        <div class="m-list-pics m-list-pics--sm m--padding-left-20">
-                                            <a href="#"><img src="assets/app/media/img/users/100_4.jpg" title=""></a>
-                                            <a href="#"><img src="assets/app/media/img/users/100_13.jpg" title=""></a>
-                                            <a href="#"><img src="assets/app/media/img/users/100_11.jpg" title=""></a>
-                                            <a href="#"><img src="assets/app/media/img/users/100_14.jpg" title=""></a>
-                                        </div>
-                                    </div>
-                                    <div class="m-timeline-2__item m--margin-top-30">
-                                        <span class="m-timeline-2__item-time">14:00</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-brand"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text m--padding-top-5">
-                                            Make Deposit <a href="#" class="m-link m-link--brand m--font-bolder">USD 700</a> To ESL.
-                                        </div>
-                                    </div>
-                                    <div class="m-timeline-2__item m--margin-top-30">
-                                        <span class="m-timeline-2__item-time">16:00</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-warning"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text m--padding-top-5">
-                                            Lorem ipsum dolor sit amit,consectetur eiusmdd tempor<br>
-                                            incididunt ut labore et dolore magna elit enim at minim<br>
-                                            veniam quis nostrud
-                                        </div>
-                                    </div>
-                                    <div class="m-timeline-2__item m--margin-top-30">
-                                        <span class="m-timeline-2__item-time">17:00</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-info"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text m--padding-top-5">
-                                            Placed a new order in <a href="#" class="m-link m-link--brand m--font-bolder">SIGNATURE MOBILE</a> marketplace.
-                                        </div>
-                                    </div>
-                                    <div class="m-timeline-2__item m--margin-top-30">
-                                        <span class="m-timeline-2__item-time">16:00</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-brand"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text m--padding-top-5">
-                                            Lorem ipsum dolor sit amit,consectetur eiusmdd tempor<br>
-                                            incididunt ut labore et dolore magna elit enim at minim<br>
-                                            veniam quis nostrud
-                                        </div>
-                                    </div>
-                                    <div class="m-timeline-2__item m--margin-top-30">
-                                        <span class="m-timeline-2__item-time">17:00</span>
-                                        <div class="m-timeline-2__item-cricle">
-                                            <i class="fa fa-genderless m--font-danger"></i>
-                                        </div>
-                                        <div class="m-timeline-2__item-text m--padding-top-5">
-                                            Received a new feedback on <a href="#" class="m-link m-link--brand m--font-bolder">FinancePro App</a> product.
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> --}}
+        </div>
     </div>
 @endsection
 
