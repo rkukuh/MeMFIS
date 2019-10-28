@@ -212,7 +212,7 @@
                                         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                             @component('frontend.common.buttons.create-new')
                                                 @slot('text', 'Item')
-                                                @slot('data_target', '#modal_grn_add')
+                                                @slot('data_target', '#modal_rir_add')
                                             @endcomponent
 
                                             <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -221,6 +221,10 @@
                                 </div>
                                 <div class="rir_datatable" id="scrolling_both"></div>
                                 <hr>
+
+                                @include('frontend.rir.modal')
+                                @include('frontend.rir.modal-edit')
+
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <fieldset class="border p-2">
@@ -618,10 +622,25 @@
 @push('footer-scripts')
     <script>
         let uuid = '{{$receivingInspectionReport->uuid}}';
+        let po_uuid = '{{$receivingInspectionReport->purchase_order->uuid}}';
+        let rir_uuid = '{{$receivingInspectionReport->uuid}}';
+
     </script>
 
     <script src="{{ asset('js/frontend/rir/edit.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/vendor.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material-po.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+
 
 @endpush

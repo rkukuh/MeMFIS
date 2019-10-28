@@ -207,14 +207,14 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'RIRDatatables@index')->name('all');
-                // Route::get('/item/{receivingInspectionReport}', 'ItemRIRDatatables@index')->name('rir.item');
+                Route::get('/item/{rir}', 'ItemRIRDatatables@index')->name('rir.item');
 
 
             });
 
         });
 
-        /** GOODS RECEIVED NOTE */
+        /** GROUND DUPPORT EQUIPTMENT */
 
         Route::name('gse.')->group(function () {
 
@@ -226,7 +226,7 @@ Route::name('datatables.')->group(function () {
             ], function () {
 
                 Route::get('/', 'GSEDatatables@index')->name('all');
-                // Route::get('/item/{goodReceived}', 'ItemGSEDatatables@index')->name('good-received.item');
+                Route::get('/item/{gse}', 'ItemGSEDatatables@index')->name('gse.item');
 
 
             });

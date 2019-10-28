@@ -47,7 +47,7 @@ class RIRController extends Controller
         $request->merge(['vendor_id' => Vendor::where('uuid',$request->vendor)->first()->id]);
         $request->merge(['purchase_order_id' => PurchaseOrder::where('uuid',$request->purchase_order)->first()->id]);
         $request->merge(['status_id' => Status::ofRIR()->where('code',$request->status)->first()->id]);
-        $rIR = RIR::create($request->all());
+        $rir = RIR::create($request->all());
 
         return response()->json($rir);
     }
