@@ -35,9 +35,9 @@ class ItemRIRController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,RIR $rir, Item $item)
+    public function store(Request $request,RIR $rIR, Item $item)
     {
-        $rir->items()->attach([$item->pivot->item_id => [
+        $rIR->items()->attach([$item->pivot->item_id => [
             'quantity'=> 0,
             'quantity_unit' => 0,
             'unit_id' => $item->pivot->unit_id
@@ -48,10 +48,10 @@ class ItemRIRController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\RIR  $rir
+     * @param  \App\RIR  $rIR
      * @return \Illuminate\Http\Response
      */
-    public function show(RIR $rir)
+    public function show(RIR $rIR)
     {
         //
     }
@@ -59,44 +59,44 @@ class ItemRIRController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\RIR  $rir
+     * @param  \App\RIR  $rIR
      * @return \Illuminate\Http\Response
      */
-    public function edit(RIR $rir, Item $item)
+    public function edit(RIR $rIR, Item $item)
     {
-        return response()->json($rir->items->where('pivot.item_id',$item->id)->first());
+        return response()->json($rIR->items->where('pivot.item_id',$item->id)->first());
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RIR  $rir
+     * @param  \App\RIR  $rIR
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RIR $rir, Item $item)
+    public function update(Request $request, RIR $rIR, Item $item)
     {
-        $rir->items()->updateExistingPivot($item->id,
+        $rIR->items()->updateExistingPivot($item->id,
                                 ['unit_id'=>$request->unit_id,
                                 'quantity'=> $request->quantity,
                                 'quantity_unit'=> $quantity_unit,
                                 'note' => $request->note
                                 ]);
 
-        return response()->json($rir);
+        return response()->json($rIR);
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\RIR  $rir
+     * @param  \App\RIR  $rIR
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RIR $rir, Item $item)
+    public function destroy(RIR $rIR, Item $item)
     {
-        $rir->items()->detach($item->id);
+        $rIR->items()->detach($item->id);
 
-        return response()->json($rir);
+        return response()->json($rIR);
     }
 }
