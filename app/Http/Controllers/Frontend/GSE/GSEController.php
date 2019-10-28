@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend\GSE;
 
 use App\Models\GSE;
+use App\Helpers\DocumentNumber;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\GSEStore;
 use App\Http\Requests\Frontend\GSEUpdate;
@@ -16,7 +17,7 @@ class GSEController extends Controller
      */
     public function index()
     {
-        //
+        return view('frontend.rir.index');
     }
 
     /**
@@ -26,7 +27,18 @@ class GSEController extends Controller
      */
     public function create()
     {
-        //
+        if($type == 'hm'){
+            return view('frontend.gse.hm.create');
+        }
+        else if($type == 'defectcard'){
+            return view('frontend.gse.defectcard.create');
+        }
+        else if($type == 'workshop'){
+            return view('frontend.gse.workshop.create');
+        }
+        else if($type == 'inventory-out'){
+            return view('frontend.gse.inventory-out.create');
+        }
     }
 
     /**
@@ -37,7 +49,11 @@ class GSEController extends Controller
      */
     public function store(GSEStore $request)
     {
-        //
+        dd($request->all());
+        $request->merge(['number' => DocumentNumber::generate('GSE-', ReceivingInspectionReport::withTrashed()->count()+1)]);
+        $GroundSupportEquiptmentStore = ReceivingInspectionReport::create($request->all());
+
+        return response()->json($GroundSupportEquiptmentStore);
     }
 
     /**
@@ -48,7 +64,22 @@ class GSEController extends Controller
      */
     public function show(GSE $gSE)
     {
-        //
+        if($type == 'hm'){
+            return view('frontend.gse.hm.show', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
+        else if($type == 'defectcard'){
+            return view('frontend.gse.defectcard.show', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
+        else if($type == 'workshop'){
+            return view('frontend.gse.workshop.show', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
+        else if($type == 'inventory-out'){
+            return view('frontend.gse.inventory-out.show', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
     }
 
     /**
@@ -59,7 +90,22 @@ class GSEController extends Controller
      */
     public function edit(GSE $gSE)
     {
-        //
+        if($type == 'hm'){
+            return view('frontend.gse.hm.edit', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
+        else if($type == 'defectcard'){
+            return view('frontend.gse.defectcard.edit', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
+        else if($type == 'workshop'){
+            return view('frontend.gse.workshop.edit', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
+        else if($type == 'inventory-out'){
+            return view('frontend.gse.inventory-out.edit', [
+            'groundSupportEquiptment' => $groundSupportEquiptment]);
+        }
     }
 
     /**
@@ -71,7 +117,11 @@ class GSEController extends Controller
      */
     public function update(GSEUpdate $request, GSE $gSE)
     {
-        //
+        dd($request->all());
+        $request->merge(['number' => DocumentNumber::generate('GSE-', ReceivingInspectionReport::withTrashed()->count()+1)]);
+        $groundSupportEquiptment->update($request->all());
+
+        return response()->json($groundSupportEquiptment);
     }
 
     /**
@@ -82,6 +132,8 @@ class GSEController extends Controller
      */
     public function destroy(GSE $gSE)
     {
-        //
+        $groundSupportEquiptment->delete();
+
+        return response()->json($groundSupportEquiptment);
     }
 }
