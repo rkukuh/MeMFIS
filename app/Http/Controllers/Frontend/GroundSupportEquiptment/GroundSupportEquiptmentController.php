@@ -18,7 +18,7 @@ class GroundSupportEquiptmentController extends Controller
      */
     public function index()
     {
-        return view('frontend.receiving-inspection-report.index');
+        return view('frontend.rir.index');
     }
 
     /**
