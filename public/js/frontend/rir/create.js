@@ -128,32 +128,11 @@ let receiving_inspection_report = {
             $('#name-error').html('');
             $('#simpan').text('Simpan');
 
-            let general_document = [];
-            $.each($("input[name='general_document[]']:checked"), function() {
-                general_document.push($(this).val());
-            });
-
-            let technical_document = [];
-            $.each($("input[name='technical_document[]']:checked"), function() {
-                technical_document.push($(this).val());
-            });
-
             let purchase_order = $('#purchase_order').val();
             let vendor = $('#vendor').val();
             let document = $('input[name=document]').val();
             let date = $('#date').val();
             let status = $('input[name="status"]:checked').val();
-            let type = $('input[name="type"]:checked').val();
-            let condition = $('input[name="condition"]:checked').val();
-            let preservation_check = $('input[name="preservation_check"]:checked').val();
-            let condition_material = $('input[name="condition_material"]:checked').val();
-            let quality = $('input[name="quality"]:checked').val();
-            let identification = $('input[name="identification"]:checked').val();
-            let packing_handling_check = $('#packing_handling_check').val();
-            let preservation_check_explain = $('#preservation_check_explain').val();
-            let document_check = $('#document_check').val();
-            let material_check = $('#material_check').val();
-            let decision = $('#decision').val();
 
 
             $.ajax({
@@ -164,24 +143,11 @@ let receiving_inspection_report = {
                 url: '/rir',
                 data: {
                     _token: $('input[name=_token]').val(),
-                    general_document:general_document,
-                    technical_document: technical_document,
                     purchase_order: purchase_order,
-                    date: date,
+                    rir_date: date,
                     vendor: vendor,
-                    document: document,
+                    delivery_document_number: document,
                     status:status,
-                    type:type,
-                    condition:condition,
-                    preservation_check:preservation_check,
-                    condition_material:condition_material,
-                    quality:quality,
-                    identification:identification,
-                    packing_handling_check:packing_handling_check,
-                    preservation_check_explain:preservation_check_explain,
-                    document_check:document_check,
-                    material_check:material_check,
-                    decision:decision,
                 },
                 success: function (data) {
                     if (data.errors) {
@@ -196,17 +162,12 @@ let receiving_inspection_report = {
                         // document.getElementById('title').value = title;
 
                     } else {
-                        // $('#modal_customer').modal('hide');
 
                         toastr.success('RIR has been created.', 'Success', {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/rir/'+data.uuid+'/edit';
-                        // let table = $('.m_datatable').mDatatable();
-
-                        // table.originalDataSet = [];
-                        // table.reload();
+                        window.location.href = '/rir/'+data.uuid+'/edit';
                     }
                 }
             });

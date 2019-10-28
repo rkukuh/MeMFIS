@@ -61,7 +61,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', 'PR-2121212')
+                                                            @slot('text', $receivingInspectionReport->number)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -74,7 +74,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', 'PR-2121212')
+                                                            @slot('text', $receivingInspectionReport->purchase_order->number)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -88,12 +88,18 @@
                                                             Vendor
                                                         </label>
 
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('id', 'vendor')
-                                                            @slot('text', 'Vendor')
-                                                            @slot('name', 'vendor')
-                                                            @slot('id_error', 'vendor')
-                                                        @endcomponent
+                                                        <select id="vendor" name="vendor" class="form-control m-select2" style="width:100%">
+                                                            <option value="">
+                                                                &mdash; Select a Vendor &mdash;
+                                                            </option>
+
+                                                            @foreach ($vendors as $vendor)
+                                                                <option value="{{ $vendor->uuid }}"
+                                                                    @if ($vendor->uuid == $vendor_uuid) selected @endif>
+                                                                    {{ $vendor->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -107,6 +113,7 @@
                                                     @component('frontend.common.input.input')
                                                         @slot('name', 'document')
                                                         @slot('id', 'document')
+                                                        @slot('value', $receivingInspectionReport->delivery_document_number)
                                                         @slot('placeholder', 'Delivery Document')
                                                     @endcomponent
                                                     </div>
@@ -125,6 +132,7 @@
                                                         @slot('id', 'date')
                                                         @slot('text', 'Date')
                                                         @slot('name', 'date')
+                                                        @slot('value', $receivingInspectionReport->rir_date)
                                                         @slot('id_error', 'date')
                                                     @endcomponent
                                                     </div>
@@ -144,6 +152,9 @@
                                                             @slot('name', 'status')
                                                             @slot('text','Purchase')
                                                             @slot('id','purchase')
+                                                            @if($rir_status == 'purchase')
+                                                                @slot('checked','checked')
+                                                            @endif
                                                             @slot('value','purchase')
                                                         @endcomponent
                                                     </div>
@@ -152,6 +163,9 @@
                                                             @slot('name', 'status')
                                                             @slot('text','Repair')
                                                             @slot('id','repair')
+                                                            @if($rir_status == 'repair')
+                                                                @slot('checked','checked')
+                                                            @endif
                                                             @slot('value','repair')
                                                         @endcomponent
                                                     </div>
@@ -160,6 +174,9 @@
                                                             @slot('name', 'status')
                                                             @slot('text','Serviceable')
                                                             @slot('id','serviceable')
+                                                            @if($rir_status == 'serviceable')
+                                                                @slot('checked','checked')
+                                                            @endif
                                                             @slot('value','serviceable')
                                                         @endcomponent
                                                     </div>
@@ -168,6 +185,9 @@
                                                             @slot('name', 'status')
                                                             @slot('text','Unserviceable')
                                                             @slot('id','unserviceable')
+                                                            @if($rir_status == 'unserviceable')
+                                                                @slot('checked','checked')
+                                                            @endif
                                                             @slot('value','unserviceable')
                                                         @endcomponent
                                                     </div>
@@ -597,12 +617,11 @@
 
 @push('footer-scripts')
     <script>
-        let uuid = '8083d4fc-7c10-4882-bfa3-888cd081a3e5';
+        let uuid = '{{$receivingInspectionReport->uuid}}';
     </script>
 
     <script src="{{ asset('js/frontend/rir/edit.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/vendor.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/vendor.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
 @endpush
