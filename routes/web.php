@@ -17,6 +17,7 @@ require('frontend/defectcard.php');
 require('frontend/discrepancy-found.php');
 require('frontend/employee.php');
 require('frontend/grn.php');
+require('frontend/gse.php');
 require('frontend/htcrr.php');
 require('frontend/facility.php');
 require('frontend/item.php');

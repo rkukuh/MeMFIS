@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\DefectCard;
 
 use Auth;
 use Validator;
+use Carbon\Carbon;
 use App\Models\Type;
 use App\Models\Status;
 use App\Models\Approval;
@@ -108,6 +109,7 @@ class DefectCardEngineerController extends Controller
         $created_by = $defectcard->audits->first()->user->name;
         $employees = Employee::get();
         $status = Status::find($defectcard->progresses->last()->status_id);
+        
         $this->propose_corrections = array();
         foreach($defectcard->propose_corrections as $i => $defectCard){
             $this->propose_corrections[$i] =  $defectCard->code;
@@ -118,7 +120,12 @@ class DefectCardEngineerController extends Controller
             $this->propose_correction_text =  $defectCard->pivot->propose_correction_text;
         }
 
-        if ($this->statuses->where('id',$defectcard->progresses->last()->status_id)->first()->code == "open") {
+        $progresses = $defectcard->progresses->where('progressed_by', Auth::id());
+        foreach($progresses as $progress){
+            $progress->status .= Status::where('id',$progress->status_id)->first()->name;
+        }
+
+        if ($progresses->count() == 0 and  $this->statuses->where('id',$defectcard->progresses->first()->status_id)->first()->code == "open") {
             return view('frontend.defect-card.engineer.progress-open', [
                 'defectcard' => $defectcard,
                 'status' => $this->statuses->where('code','open')->first(),
@@ -155,6 +162,7 @@ class DefectCardEngineerController extends Controller
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
                 'zones' => $zones,
+                'accomplished' => $this->accomplished,
                 'status' => $status,
                 'employees' => $employees,
                 'created_by' => $created_by
@@ -167,6 +175,7 @@ class DefectCardEngineerController extends Controller
                 'propose_correction_text' => $this->propose_correction_text,
                 'zones' => $zones,
                 'status' => $status,
+                'accomplished' => $this->accomplished,
                 'employees' => $employees,
                 'created_by' => $created_by
             ]);
@@ -176,6 +185,7 @@ class DefectCardEngineerController extends Controller
                 'defectcard' => $defectcard,
                 'propose_corrections' => $this->propose_corrections,
                 'propose_correction_text' => $this->propose_correction_text,
+                'accomplished' => $this->accomplished,
                 'zones' => $zones,
                 'status' => $status,
                 'employees' => $employees,
@@ -194,15 +204,47 @@ class DefectCardEngineerController extends Controller
     public function update(Request $request,DefectCard $defectcard)
     {
         // get all the helper
+        $helpers_code = $defectcard->helpers->pluck('code')->toArray();
+        $references = $defectcard->helpers->pluck('additionals')->toArray();
+        $helpers = $defectcard->helpers;
 
         // compare if there's any difference
+        if($request->helper){
+            $old_helper = array_diff($helpers_code, $request->helper);
+            $new_helper = array_diff($request->helper, $helpers_code);
+            $new_helpers = Employee::whereIn('code',$new_helper)->get();
+            $old_helpers = Employee::whereIn('code',$old_helper)->get();
+            if(sizeof($old_helper) > 0){
+                // delete the olds one
+                foreach($old_helpers as $key => $helper){
+                    $defectcard->helpers()->updateExistingPivot($helper, ['deleted_at' => Carbon::now()], false);
+                }
+        
+                // insert the new selected helper with additionals
+                foreach($new_helpers as $key => $helper){
+                    $reference_key = array_search($helper->code, $request->helper);
+                    $defectcard->helpers()->attach($helper,['additionals' => $request->reference[$reference_key]]);
+                }
+            }
+        }
 
-        // delete the olds one
+        // update additionals ( reference )
+        if(isset($request->reference)){
+            $compare_reference = array_diff($references, $request->reference);
+            if(sizeof($compare_reference) > 0){
+                foreach($helpers as $key => $helper){
+                    $defectcard->helpers()->updateExistingPivot($helper, array('additionals' => $request->reference[$key]), false);
+                }
+            }
+        }
 
-        // insert the new selected helper with additionals 
-        // dump($request->reference);
-        // dd($request->helper);
-        if($this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
+        $progresses = $defectcard->progresses->where('progressed_by',Auth::id());
+        foreach($progresses as $progress){
+            $progress->status .= Status::where('id',$progress->status_id)->first()->name;
+        }
+
+
+        if ($progresses->count() == 0 || $this->statuses->where('uuid',$request->progress)->first()->code == 'open'){
             $defectcard->progresses()->save(new Progress([
                 'status_id' =>  $this->statuses->where('code','progress')->first()->id,
                 'progressed_by' => Auth::id()

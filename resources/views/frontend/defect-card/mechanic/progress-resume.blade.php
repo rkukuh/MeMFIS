@@ -357,19 +357,19 @@
                                                         Reference
                                                     </label>
 
-                                                    @component('frontend.common.input.text')
+                                                    @component('frontend.common.label.data-info')
                                                         @slot('name', 'reference[]')
-                                                        @slot('value', $helper->pivot->additionals)
+                                                        @slot('text', $helper->pivot->additionals)
                                                     @endcomponent
-                                                </td>
-                                                <td valign="top" width="48%">
-                                                    <label class="form-control-label">
-                                                        Helper
-                                                    </label>
+                                            </td>
+                                            <td valign="top" width="48%">
+                                                <label class="form-control-label">
+                                                    Helper
+                                                </label>
 
                                                     @component('frontend.common.label.data-info')
                                                         @slot('name', 'helper[]')
-                                                        @slot('text', $helper->first_name)
+                                                        @slot('text', $employee->first_name.' '.$employee->last_name)
                                                     @endcomponent
                                                 </td>
                                             </tr>

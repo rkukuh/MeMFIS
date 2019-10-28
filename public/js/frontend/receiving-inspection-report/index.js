@@ -1,6 +1,6 @@
 let Grn = {
     init: function () {
-        $('.good_recieved_note_datatable').mDatatable({
+        $('.rir_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
@@ -130,8 +130,8 @@ let Grn = {
             ]
         });
 
-        $('.good_recieved_note_datatable').on('click', '.approve', function () {
-            let grn_uuid = $(this).data('uuid');
+        $('.rir_datatable').on('click', '.approve', function () {
+            let rir_uuid = $(this).data('uuid');
 
             swal({
                 title: 'Sure want to approve?',
@@ -150,14 +150,14 @@ let Grn = {
                             )
                         },
                         type: 'PUT',
-                        url: '/goods-received/' +  grn_uuid +'/approve',
+                        url: '/receiving-inspection-report/' +  rir_uuid +'/approve',
                         success: function (data) {
-                            toastr.success('Goods Received has been Approved.', 'Approved', {
+                            toastr.success('Receiving Inspection Report has been Approved.', 'Approved', {
                                 timeOut: 5000
                                 }
                             );
 
-                            let table = $('.good_recieved_note_datatable').mDatatable();
+                            let table = $('.rir_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -174,8 +174,8 @@ let Grn = {
             });
         });
 
-        $('.good_recieved_note_datatable').on('click', '.delete', function () {
-            let grn_uuid = $(this).data('uuid');
+        $('.rir_datatable').on('click', '.delete', function () {
+            let rir_uuid = $(this).data('uuid');
 
             swal({
                 title: 'Sure want to remove?',
@@ -194,14 +194,14 @@ let Grn = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/goods-received/' + grn_uuid ,
+                        url: '/receiving-inspection-report/' + rir_uuid ,
                         success: function (data) {
-                            toastr.success('Goods Received has been deleted.', 'Deleted', {
+                            toastr.success('Receiving Inspection Report has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.good_recieved_note_datatable').mDatatable();
+                            let table = $('.rir_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
