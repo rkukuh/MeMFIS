@@ -583,7 +583,8 @@ function htcrr_tool(triggeruuid) {
     $('.paging_simple_numbers').addClass('padding-datatable');
 
 
-    $('.modal-footer').on('click', '.add-htcrr-tool', function () {
+    $('.modal-footer').on('click', '.add-htcrr-tool', function (e) {
+        e.stopImmediatePropagation();
         let tool = $('#tool').val();
         let unit_tool = $('#unit_tool').val();
         let quantity = $('input[name=quantity]').val();
@@ -729,7 +730,8 @@ function htcrr_material(triggeruuid) {
     $('.paging_simple_numbers').addClass('padding-datatable');
 
 
-    $('.modal-footer').on('click', '.add-htcrr-item', function () {
+    $('.modal-footer').on('click', '.add-htcrr-item', function (e) {
+        e.stopImmediatePropagation();
         let material = $('#material').val();
         let unit_material = $('#unit_material').val();
         let quantity = $('input[name=quantity_material]').val();
