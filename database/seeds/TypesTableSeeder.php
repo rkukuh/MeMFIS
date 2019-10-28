@@ -42,6 +42,7 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfRegulator::class);
         $this->call(TypesOfRIRPackingAndHandlingCheckCondition::class);
         $this->call(TypesOfRIRPackingAndHandlingCheckType::class);
+        $this->call(TypesOfRIRPreservationCheck::class);
         $this->call(TypesOfScheduledPayment::class);
         $this->call(TypesOfSchoolDegree::class);
         $this->call(TypesOfTaskCardEOManualAffected::class);

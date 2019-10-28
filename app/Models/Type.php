@@ -369,6 +369,17 @@ class Type extends MemfisModel
     }
 
     /**
+     * Scope a query to only include type of RIR's Preservation Check.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfRIRPreservationCheck(Builder $query)
+    {
+        return $query->where('of', 'rir-preservation-check');
+    }
+
+    /**
      * Scope a query to only include type of Scheduled Payment.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query

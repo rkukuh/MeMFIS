@@ -19,6 +19,8 @@ class RIR extends MemfisModel
         'packing_type',
         'packing_condition',
         'unsatisfactory_packing',
+        'preservation_check',
+        'unsatisfactory_preservation',
         'received_by',
         'received_at',
         'decision',
@@ -77,6 +79,18 @@ class RIR extends MemfisModel
     public function packing_type()
     {
         return $this->belongsTo(Type::class, 'packing_type');
+    }
+
+    /**
+     * One-Way: An RIR may have one preservation check.
+     *
+     * This function will retrieve the preservation check of an RIR.
+     *
+     * @return mixed
+     */
+    public function preservation_check()
+    {
+        return $this->belongsTo(Type::class, 'preservation_check');
     }
 
     /**

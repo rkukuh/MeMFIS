@@ -40,6 +40,8 @@ $factory->define(RIR::class, function (Faker $faker) {
         'packing_type' => Type::ofRIRPackingAndHandlingCheckType()->get()->random()->id,
         'packing_condition' => Type::ofRIRPackingAndHandlingCheckCondition()->get()->random()->id,
         'unsatisfactory_packing' => null,
+        'preservation_check' => Type::ofRIRPreservationCheck()->get()->random()->id,
+        'unsatisfactory_preservation' => null,
         'received_by' => function () {
             if (Employee::count()) {
                 return Employee::get()->random()->id;
