@@ -11,7 +11,7 @@ Route::name('frontend.')->group(function () {
 
         /** RIR (Receiving Inspection Report) */
 
-        Route::namespace('GroundSupportEquiptment')->group(function () {
+        Route::namespace('GSE')->group(function () {
 
             Route::resource('gse', 'GSEController')->except('create','show','edit');
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\GroundSupportEquiptment;
+namespace App\Http\Controllers\Frontend\GSE;
 
 use App\Iten;
 use App\GroundSupportEquiptment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ItemGroundSupportEquiptmentController extends Controller
+class ItemGSEController extends Controller
 {
     /**
      * Display a listing of the resource.

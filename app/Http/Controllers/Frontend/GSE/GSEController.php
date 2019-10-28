@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Frontend\GSE;
 
 use App\Models\GSE;
 use App\Http\Controllers\Controller;
