@@ -773,7 +773,7 @@
                 </a>
             </li>
             <li class="m-menu__item" aria-haspopup="true" data-menu-submenu-toggle="hover" >
-                <a href="{{ route('frontend.receiving-inspection-report.index') }}" class="m-menu__link m-menu__toggle">
+                <a href="{{ route('frontend.rir.index') }}" class="m-menu__link m-menu__toggle">
                     <i class="m-menu__link-icon flaticon-list-3"></i>
                     <span class="m-menu__link-text">
                         Receiving Inspection Report
@@ -992,7 +992,7 @@
                             </a>
                         </li>
                         <li class="m-menu__item" aria-haspopup="true">
-                            <a href="{{ url('/receiving-inspection-report-doc') }}" class="m-menu__link">
+                            <a href="{{ url('/rir-doc') }}" class="m-menu__link">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot">
                                     <span></span>
                                 </i>
