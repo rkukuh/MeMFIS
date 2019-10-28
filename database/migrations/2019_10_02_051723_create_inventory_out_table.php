@@ -20,9 +20,9 @@ class CreateInventoryOutTable extends Migration
             $table->unsignedBigInteger('storage_id');
             $table->timestamp('inventoried_at');
             $table->nullableMorphs('inventoryoutable');
-            $table->text('description')->nullable();
-            $table->string('section')->nullable();
             $table->unsignedBigInteger('received_by');
+            $table->string('section')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

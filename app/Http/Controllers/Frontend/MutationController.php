@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\ReceivingInspectionReport;
+namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
+use App\Models\Mutation;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\MutationStore;
+use App\Http\Requests\Frontend\MutationUpdate;
 
-class ReceivingInspectionController extends Controller
+class MutationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,7 @@ class ReceivingInspectionController extends Controller
      */
     public function index()
     {
-        return view('frontend.receiving-inspection-report.index');
+        //
     }
 
     /**
@@ -24,16 +26,16 @@ class ReceivingInspectionController extends Controller
      */
     public function create()
     {
-        return view('frontend.receiving-inspection-report.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\MutationStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MutationStore $request)
     {
         //
     }
@@ -41,33 +43,33 @@ class ReceivingInspectionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Mutation  $mutation
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Mutation $mutation)
     {
-        return view('frontend.receiving-inspection-report.show');
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Mutation  $mutation
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Mutation $mutation)
     {
-        return view('frontend.receiving-inspection-report.edit');
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\Frontend\MutationUpdate  $request
+     * @param  \App\Models\Mutation  $mutation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MutationUpdate $request, Mutation $mutation)
     {
         //
     }
@@ -75,10 +77,10 @@ class ReceivingInspectionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Mutation  $mutation
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Mutation $mutation)
     {
         //
     }
