@@ -18,16 +18,19 @@ let PurchaseOrder = {
                             }
 
 
-                            let subtotal = discount = 0;
+                            let subtotal = discount = grandtotal = 0;
                             $.each(dataSet, function( index, data ) {
-                                subtotal += parseInt(data.pivot.subtotal_after_discount);
-                                discount += parseInt(data.discount);
+                                subtotal += parseFloat(data.pivot.subtotal_after_discount);
+                                grandtotal += parseFloat(data.pivot.subtotal_before_discount);
+                                discount += parseFloat(data.discount);
                             });
+                            grandtotal -= discount;
                             $("#sub_total").html(subtotal);
                             $("#sub_total").val(subtotal);
                             $("#total_discount").html(discount);
                             $("#total_discount").val(discount);
-
+                            $("#grand_total").html(grandtotal);
+                            $("#grand_total").val(grandtotal);
                             return dataSet;
                         }
                     }
@@ -95,19 +98,19 @@ let PurchaseOrder = {
                 filterable: !1,
             },
             {
-                field: 'discount',
+                field: 'discount_amount',
                 title: 'Disc PR',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'pivot.discount_percentage',
+                field: 'discount_percentage',
                 title: 'Disc %',
                 sortable: 'asc',
                 filterable: !1,
             },
             {
-                field: 'pivot.subtotal_after_discount',
+                field: 'pivot.subtotal_before_discount',
                 title: 'Total',
                 sortable: 'asc',
                 filterable: !1,
