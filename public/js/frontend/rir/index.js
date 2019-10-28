@@ -6,7 +6,7 @@ let Grn = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/receiving-inspection-report',
+                        url: '/datatables/rir',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -150,7 +150,7 @@ let Grn = {
                             )
                         },
                         type: 'PUT',
-                        url: '/receiving-inspection-report/' +  rir_uuid +'/approve',
+                        url: '/rir/' +  rir_uuid +'/approve',
                         success: function (data) {
                             toastr.success('Receiving Inspection Report has been Approved.', 'Approved', {
                                 timeOut: 5000
@@ -194,7 +194,7 @@ let Grn = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/receiving-inspection-report/' + rir_uuid ,
+                        url: '/rir/' + rir_uuid ,
                         success: function (data) {
                             toastr.success('Receiving Inspection Report has been deleted.', 'Deleted', {
                                     timeOut: 5000
