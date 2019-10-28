@@ -19,7 +19,7 @@ class ReceivingInspectionReportController extends Controller
      */
     public function index()
     {
-        return view('frontend.receiving-inspection-report.index');
+        return view('frontend.rir.index');
     }
 
     /**
@@ -29,7 +29,7 @@ class ReceivingInspectionReportController extends Controller
      */
     public function create()
     {
-        return view('frontend.receiving-inspection-report.create');
+        return view('frontend.rir.create');
     }
 
     /**
@@ -68,7 +68,7 @@ class ReceivingInspectionReportController extends Controller
      */
     public function show(ReceivingInspectionReport $receivingInspectionReport)
     {
-        return view('frontend.receiving-inspection-report.show', [
+        return view('frontend.rir.show', [
             'receivingInspectionReport' => $receivingInspectionReport
         ]);
     }
@@ -81,7 +81,7 @@ class ReceivingInspectionReportController extends Controller
      */
     public function edit(ReceivingInspectionReport $receivingInspectionReport)
     {
-        return view('frontend.receiving-inspection-report.edit', [
+        return view('frontend.rir.edit', [
             'receivingInspectionReport' => $receivingInspectionReport
         ]);
     }

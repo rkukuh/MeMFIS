@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\ReceivingInspectionReport;
+namespace App\Http\Controllers\Frontend\RIR;
 
 use App\Item;
 use App\ReceivingInspectionReport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ItemReceivingInspectionReportController extends Controller
+class ItemRIRController extends Controller
 {
     /**
      * Display a listing of the resource.

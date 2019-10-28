@@ -11,7 +11,7 @@ Route::name('frontend.')->group(function () {
 
         /** RIR (Receiving Inspection Report) */
 
-        Route::namespace('ReceivingInspectionReport')->group(function () {
+        Route::namespace('RIR')->group(function () {
 
             Route::resource('rir', 'RIRController');
             Route::put('rir/{rir}/approve', 'RIRController@approve')->name('rir.approve');
