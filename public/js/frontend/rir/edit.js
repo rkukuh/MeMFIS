@@ -216,8 +216,7 @@ let receiving_inspection_report = {
             // });
 
             let item_uuid = $("#material").val();
-            let aa = $("#exp_date_2").val();
-            alert(aa);
+            let exp_date = $('input[name=exp_date2]').val();
             let qty = $("#quantity").val();
             let unit_id = $("#unit_material").val();
             let note = $("#remark").val();
@@ -242,7 +241,7 @@ let receiving_inspection_report = {
                 url: '/rir/'+rir_uuid+'/item/'+item_uuid,
                 type: "POST",
                 data: {
-                    exp_date: exp_date,
+                    expired_at: exp_date,
                     quantity: qty,
                     unit_id: unit_id,
                     note: note,
