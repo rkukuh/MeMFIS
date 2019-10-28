@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend\RIR;
 
 use App\Item;
-use App\ReceivingInspectionReport;
+use App\RIR;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -35,9 +35,9 @@ class ItemRIRController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,ReceivingInspectionReport $receivingInspectionReport, Item $item)
+    public function store(Request $request,RIR $rir, Item $item)
     {
-        $receivingInspectionReport->items()->attach([$item->pivot->item_id => [
+        $rir->items()->attach([$item->pivot->item_id => [
             'quantity'=> 0,
             'quantity_unit' => 0,
             'unit_id' => $item->pivot->unit_id
@@ -48,10 +48,10 @@ class ItemRIRController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ReceivingInspectionReport  $receivingInspectionReport
+     * @param  \App\RIR  $rir
      * @return \Illuminate\Http\Response
      */
-    public function show(ReceivingInspectionReport $receivingInspectionReport)
+    public function show(RIR $rir)
     {
         //
     }
@@ -59,44 +59,44 @@ class ItemRIRController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ReceivingInspectionReport  $receivingInspectionReport
+     * @param  \App\RIR  $rir
      * @return \Illuminate\Http\Response
      */
-    public function edit(ReceivingInspectionReport $receivingInspectionReport, Item $item)
+    public function edit(RIR $rir, Item $item)
     {
-        return response()->json($receivingInspectionReport->items->where('pivot.item_id',$item->id)->first());
+        return response()->json($rir->items->where('pivot.item_id',$item->id)->first());
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ReceivingInspectionReport  $receivingInspectionReport
+     * @param  \App\RIR  $rir
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ReceivingInspectionReport $receivingInspectionReport, Item $item)
+    public function update(Request $request, RIR $rir, Item $item)
     {
-        $receivingInspectionReport->items()->updateExistingPivot($item->id,
+        $rir->items()->updateExistingPivot($item->id,
                                 ['unit_id'=>$request->unit_id,
                                 'quantity'=> $request->quantity,
                                 'quantity_unit'=> $quantity_unit,
                                 'note' => $request->note
                                 ]);
 
-        return response()->json($receivingInspectionReport);
+        return response()->json($rir);
 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ReceivingInspectionReport  $receivingInspectionReport
+     * @param  \App\RIR  $rir
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReceivingInspectionReport $receivingInspectionReport, Item $item)
+    public function destroy(RIR $rir, Item $item)
     {
-        $receivingInspectionReport->items()->detach($item->id);
+        $rir->items()->detach($item->id);
 
-        return response()->json($receivingInspectionReport);
+        return response()->json($rir);
     }
 }
