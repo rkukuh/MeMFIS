@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\GroundSupportEquiptment;
+namespace App\Http\Controllers\Frontend\GSE;
 
-use App\GroundSupportEquiptment;
-use Illuminate\Http\Request;
+use App\Models\GSE;
 use App\Helpers\DocumentNumber;
-use App\Http\Requests\Frontend\GroundSupportEquiptmentStore;
-use App\Http\Requests\Frontend\GroundSupportEquiptmentUpdate;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\GSEStore;
+use App\Http\Requests\Frontend\GSEUpdate;
 
-class GroundSupportEquiptmentController extends Controller
+class GSEController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +17,7 @@ class GroundSupportEquiptmentController extends Controller
      */
     public function index()
     {
-        return view('frontend.receiving-inspection-report.index');
+        return view('frontend.rir.index');
     }
 
     /**
@@ -45,10 +44,10 @@ class GroundSupportEquiptmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\GSEStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GroundSupportEquiptmentStore $request)
+    public function store(GSEStore $request)
     {
         dd($request->all());
         $request->merge(['number' => DocumentNumber::generate('GSE-', ReceivingInspectionReport::withTrashed()->count()+1)]);
@@ -60,10 +59,10 @@ class GroundSupportEquiptmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\GroundSupportEquiptment  $groundSupportEquiptment
+     * @param  \App\Models\GSE  $gSE
      * @return \Illuminate\Http\Response
      */
-    public function show(GroundSupportEquiptment $groundSupportEquiptment, $type)
+    public function show(GSE $gSE, $item)
     {
         if($type == 'hm'){
             return view('frontend.gse.hm.show', [
@@ -86,10 +85,10 @@ class GroundSupportEquiptmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\GroundSupportEquiptment  $groundSupportEquiptment
+     * @param  \App\Models\GSE  $gSE
      * @return \Illuminate\Http\Response
      */
-    public function edit(GroundSupportEquiptment $groundSupportEquiptment, $type)
+    public function edit(GSE $gSE, $item)
     {
         if($type == 'hm'){
             return view('frontend.gse.hm.edit', [
@@ -112,11 +111,11 @@ class GroundSupportEquiptmentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\GroundSupportEquiptment  $groundSupportEquiptment
+     * @param  \App\Http\Requests\Frontend\GSEUpdate  $request
+     * @param  \App\Models\GSE  $gSE
      * @return \Illuminate\Http\Response
      */
-    public function update(GroundSupportEquiptmentUpdate $request, GroundSupportEquiptment $groundSupportEquiptment)
+    public function update(GSEUpdate $request, GSE $gSE)
     {
         dd($request->all());
         $request->merge(['number' => DocumentNumber::generate('GSE-', ReceivingInspectionReport::withTrashed()->count()+1)]);
@@ -128,10 +127,10 @@ class GroundSupportEquiptmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\GroundSupportEquiptment  $groundSupportEquiptment
+     * @param  \App\Models\GSE  $gSE
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GroundSupportEquiptment $groundSupportEquiptment)
+    public function destroy(GSE $gSE)
     {
         $groundSupportEquiptment->delete();
 

@@ -6,7 +6,7 @@ let goods_received_note_show = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/receiving-inspection-report/item/'+grn_uuid,
+                        url: '/datatables/rir/item/'+grn_uuid,
                         map: function (raw) {
                             let dataSet = raw;
 

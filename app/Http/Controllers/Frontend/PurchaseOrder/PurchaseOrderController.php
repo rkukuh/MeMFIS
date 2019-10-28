@@ -47,7 +47,7 @@ class PurchaseOrderController extends Controller
     {
         $request->merge(['number' => DocumentNumber::generate('PO-', PurchaseOrder::withTrashed()->count()+1)]);
         $request->merge(['purchase_request_id' => PurchaseRequest::where('uuid',$request->purchase_request_id)->first()->id]);
-        $request->merge(['vendor' => Vendor::where('uuid',$request->vendor)->first()->id]);
+        $request->merge(['vendor' => Vendor::where('uuid',$request->vendor_id)->first()->id]);
         $request->merge(['ordered_at' => Carbon::parse($request->ordered_at)]);
         $request->merge(['valid_until' => Carbon::parse($request->valid_until)]);
         $request->merge(['ship_at' => Carbon::parse($request->ship_at)]);

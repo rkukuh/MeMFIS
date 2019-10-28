@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\ReceivingInspectionReport;
+namespace App\Http\Controllers\Frontend\RIR;
 
 use Auth;
+use App\Models\RIR;
 use App\Models\Approval;
-use App\ReceivingInspectionReport;
 use App\Helpers\DocumentNumber;
-use App\Http\Requests\Frontend\ReceivingInspectionReportStore;
-use App\Http\Requests\Frontend\ReceivingInspectionReportUpdate;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\RIRStore;
+use App\Http\Requests\Frontend\RIRUpdate;
 
-class ReceivingInspectionReportController extends Controller
+class RIRController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class ReceivingInspectionReportController extends Controller
      */
     public function index()
     {
-        return view('frontend.receiving-inspection-report.index');
+        return view('frontend.rir.index');
     }
 
     /**
@@ -29,16 +29,16 @@ class ReceivingInspectionReportController extends Controller
      */
     public function create()
     {
-        return view('frontend.receiving-inspection-report.create');
+        return view('frontend.rir.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Frontend\RIRStore  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ReceivingInspectionReportStore $request)
+    public function store(RIRStore $request)
     {
         dd($request->all());
         $request->merge(['number' => DocumentNumber::generate('RIR-', ReceivingInspectionReport::withTrashed()->count()+1)]);
@@ -63,12 +63,12 @@ class ReceivingInspectionReportController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ReceivingInspectionReport  $receivingInspectionReport
+     * @param  \App\Models\RIR  $rIR
      * @return \Illuminate\Http\Response
      */
-    public function show(ReceivingInspectionReport $receivingInspectionReport)
+    public function show(RIR $rIR)
     {
-        return view('frontend.receiving-inspection-report.show', [
+        return view('frontend.rir.show', [
             'receivingInspectionReport' => $receivingInspectionReport
         ]);
     }
@@ -76,12 +76,12 @@ class ReceivingInspectionReportController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ReceivingInspectionReport  $receivingInspectionReport
+     * @param  \App\Models\RIR  $rIR
      * @return \Illuminate\Http\Response
      */
-    public function edit(ReceivingInspectionReport $receivingInspectionReport)
+    public function edit(RIR $rIR)
     {
-        return view('frontend.receiving-inspection-report.edit', [
+        return view('frontend.rir.edit', [
             'receivingInspectionReport' => $receivingInspectionReport
         ]);
     }
@@ -89,11 +89,11 @@ class ReceivingInspectionReportController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ReceivingInspectionReport  $receivingInspectionReport
+     * @param  \App\Http\Requests\Frontend\RIRUpdate  $request
+     * @param  \App\Models\RIR  $rIR
      * @return \Illuminate\Http\Response
      */
-    public function update(ReceivingInspectionReportUpdate $request, ReceivingInspectionReport $receivingInspectionReport)
+    public function update(RIRUpdate $request, RIR $rIR)
     {
         dd($request->all());
         $request->merge(['number' => DocumentNumber::generate('RIR-', ReceivingInspectionReport::withTrashed()->count()+1)]);
@@ -119,10 +119,10 @@ class ReceivingInspectionReportController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ReceivingInspectionReport  $receivingInspectionReport
+     * @param  \App\Models\RIR  $rIR
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReceivingInspectionReport $receivingInspectionReport)
+    public function destroy(RIR $rIR)
     {
         $receivingInspectionReport->delete();
 

@@ -139,7 +139,7 @@ let receiving_inspection_report = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/receiving-inspection-report',
+                url: '/rir',
                 data: {
                     _token: $('input[name=_token]').val(),
                     general_document:general_document,
@@ -223,7 +223,7 @@ let receiving_inspection_report = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: '/receiving-inspection-report/'+rir_uuid+'/item/'+item_uuid,
+                url: '/rir/'+rir_uuid+'/item/'+item_uuid,
                 type: "POST",
                 data: {
                     exp_date: exp_date,
@@ -322,7 +322,7 @@ let receiving_inspection_report = {
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                 },
-                url: '/receiving-inspection-report/'+rir_uuid+'/item/'+uuid,
+                url: '/rir/'+rir_uuid+'/item/'+uuid,
                 type: "PUT",
                 data: {
                     exp_date: exp_date,
@@ -376,7 +376,7 @@ let receiving_inspection_report = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/receiving-inspection-report/' + rir_uuid + '/item/'+$(this).data('uuid'),
+                        url: '/rir/' + rir_uuid + '/item/'+$(this).data('uuid'),
                         success: function (data) {
                             toastr.success('Material has been deleted.', 'Deleted', {
                                     timeOut: 5000

@@ -161,7 +161,7 @@ let receiving_inspection_report = {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'post',
-                url: '/receiving-inspection-report',
+                url: '/rir',
                 data: {
                     _token: $('input[name=_token]').val(),
                     general_document:general_document,
@@ -202,7 +202,7 @@ let receiving_inspection_report = {
                             timeOut: 5000
                         });
 
-                        // window.location.href = '/receiving-inspection-report/'+data.uuid+'/edit';
+                        // window.location.href = '/rir/'+data.uuid+'/edit';
                         // let table = $('.m_datatable').mDatatable();
 
                         // table.originalDataSet = [];

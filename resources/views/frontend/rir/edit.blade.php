@@ -74,7 +74,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Part Number')
+                                                            @slot('text', 'PR-2121212')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -88,8 +88,11 @@
                                                             Vendor
                                                         </label>
 
-                                                        @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Part Number')
+                                                        @component('frontend.common.input.select2')
+                                                            @slot('id', 'vendor')
+                                                            @slot('text', 'Vendor')
+                                                            @slot('name', 'vendor')
+                                                            @slot('id_error', 'vendor')
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -101,8 +104,10 @@
                                                         Delivery Document
                                                     </label>
 
-                                                    @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Part Number')
+                                                    @component('frontend.common.input.input')
+                                                        @slot('name', 'document')
+                                                        @slot('id', 'document')
+                                                        @slot('placeholder', 'Delivery Document')
                                                     @endcomponent
                                                     </div>
                                                 </div>
@@ -116,8 +121,11 @@
                                                         Date
                                                     </label>
 
-                                                    @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Part Number')
+                                                    @component('frontend.common.input.datepicker')
+                                                        @slot('id', 'date')
+                                                        @slot('text', 'Date')
+                                                        @slot('name', 'date')
+                                                        @slot('id_error', 'date')
                                                     @endcomponent
                                                     </div>
                                                 </div>
@@ -182,6 +190,11 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
+                                            @component('frontend.common.buttons.create-new')
+                                                @slot('text', 'Item')
+                                                @slot('data_target', '#modal_grn_add')
+                                            @endcomponent
+
                                             <div class="m-separator m-separator--dashed d-xl-none"></div>
                                         </div>
                                     </div>
@@ -258,7 +271,7 @@
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'statisfactory')
                                                                             @slot('value', 'statisfactory')
-                                                                            @slot('name', 'condition')
+                                                                            @slot('name', 'condition_material')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Statisfactory')
                                                                         @endcomponent
@@ -267,7 +280,7 @@
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'unsatisfactory')
                                                                             @slot('value', 'unsatisfactory')
-                                                                            @slot('name', 'condition')
+                                                                            @slot('name', 'condition_material')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Unsatisfactory')
                                                                         @endcomponent
@@ -282,8 +295,10 @@
                                                                 If Unsatisfactory Explain
                                                             </label>
 
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', 'If Unsatisfactory Explain')
+                                                            @component('frontend.common.input.input')
+                                                                @slot('name', 'packing_handling_check')
+                                                                @slot('name', 'packing_handling_check')
+                                                                @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -326,8 +341,10 @@
                                                                 If Unsatisfactory Explain
                                                             </label>
 
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', 'If Unsatisfactory Explain')
+                                                            @component('frontend.common.input.input')
+                                                                @slot('name', 'preservation_check_explain')
+                                                                @slot('id', 'preservation_check_explain')
+                                                                @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -413,8 +430,10 @@
                                                                 If Unsatisfactory Explain
                                                             </label>
 
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', 'If Unsatisfactory Explain')
+                                                            @component('frontend.common.input.input')
+                                                                @slot('name', 'document_check')
+                                                                @slot('name', 'document_check')
+                                                                @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -519,8 +538,10 @@
                                                                 If Unsatisfactory Explain
                                                             </label>
 
-                                                            @component('frontend.common.label.data-info')
-                                                                @slot('text', 'If Unsatisfactory Explain')
+                                                            @component('frontend.common.input.input')
+                                                                @slot('name', 'material_check')
+                                                                @slot('name', 'material_check')
+                                                                @slot('placeholder', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -539,7 +560,6 @@
                                                                 @slot('name', 'decision')
                                                                 @slot('id', 'decision')
                                                                 @slot('rows', '5')
-                                                                @slot('disabled', 'disabled')
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -551,6 +571,14 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
+                                                @component('frontend.common.buttons.update')
+                                                    @slot('type','button')
+                                                    @slot('id', 'update-rir')
+                                                    @slot('class', 'update-rir')
+                                                @endcomponent
+
+                                                @include('frontend.common.buttons.reset')
+
                                                 @include('frontend.common.buttons.back')
                                             </div>
                                         </div>
@@ -572,10 +600,9 @@
         let uuid = '8083d4fc-7c10-4882-bfa3-888cd081a3e5';
     </script>
 
-    <script src="{{ asset('js/frontend/receiving-inspection-report/show.js')}}"></script>
-
+    <script src="{{ asset('js/frontend/rir/edit.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/vendor.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/vendor.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
 
-    <script src="{{ asset('js/frontend/functions/select2/purchase-order.js')}}"></script>
 @endpush

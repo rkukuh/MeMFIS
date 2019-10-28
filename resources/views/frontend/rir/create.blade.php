@@ -582,7 +582,7 @@
 
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/receiving-inspection-report/create.js')}}"></script>
+    <script src="{{ asset('js/frontend/rir/create.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/vendor.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/vendor.js')}}"></script>
