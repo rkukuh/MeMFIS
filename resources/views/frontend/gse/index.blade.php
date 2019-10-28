@@ -71,8 +71,8 @@
                                             </button>
                                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item" href="{{ route('frontend.gse.create', 'hm') }}">Heavy Maintenance</a>
-                                                <a class="dropdown-item" href="{{ route('frontend.gse.create', 'defectcard') }}">Workshop</a>
-                                                <a class="dropdown-item" href="{{ route('frontend.gse.create', 'workshop') }}">Defectcard</a>
+                                                <a class="dropdown-item" href="{{ route('frontend.gse.create', 'workshop') }}">Workshop</a>
+                                                <a class="dropdown-item" href="{{ route('frontend.gse.create', 'defectcard') }}">Defectcard</a>
                                                 <a class="dropdown-item" href="{{ route('frontend.gse.create', 'inventory-out') }}">Inventory Out Tool</a>
                                             </div>
                                     </div>
