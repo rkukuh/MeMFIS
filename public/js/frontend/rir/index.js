@@ -55,34 +55,25 @@ let Grn = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
-                    title: 'GRN Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<a href="/goods-received/'+t.uuid+'">' + t.number + "</a>"
-                    }
-                },
-                {
-                    field: '',
+                    field: 'purchase_order.number',
                     title: 'PR Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'purchase_order.number',
+                    field: 'purchase_order.purchase_request.number',
                     title: 'PO Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'vendor.name',
                     title: 'Vendor',
                     sortable: 'asc',
                     filterable: !1,
@@ -94,7 +85,7 @@ let Grn = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'created_by',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
