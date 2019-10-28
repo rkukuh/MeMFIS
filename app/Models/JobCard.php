@@ -154,7 +154,7 @@ class JobCard extends MemfisModel
      * Polymorphic: An entity can have zero or many statuses.
      *
      * This function will get all of the jobcard's statuses.
-     * See: Access's accessable() method for the inverse
+     * See: Status's statusable() method for the inverse
      *
      * @return mixed
      */

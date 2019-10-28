@@ -22,6 +22,8 @@ Route::name('admin.')->group(function () {
 
         Route::resource('fax', 'FaxController');
         Route::resource('tax', 'TaxController');
+        Route::resource('gse', 'GSEController');
+        Route::resource('rir', 'RIRController');
         Route::resource('zone', 'ZoneController');
         Route::resource('email', 'EmailController');
         Route::resource('phone', 'PhoneController');
@@ -62,6 +64,7 @@ Route::name('admin.')->group(function () {
         Route::resource('customer', 'CustomerController');
         Route::resource('employee', 'EmployeeController');
         Route::resource('facility', 'FacilityController');
+        Route::resource('overtime', 'OvertimeController');
         Route::resource('workshift', 'WorkshiftController');
         Route::resource('job-tittle', 'JobTittleController');
         Route::resource('leave-type', 'LeaveTypeController');
@@ -71,7 +74,6 @@ Route::name('admin.')->group(function () {
         Route::resource('bank-account', 'BankAccountController');
         Route::resource('manufacturer', 'ManufacturerController');
         Route::resource('certification', 'CertificationController');
-        Route::resource('overtime', 'OvertimeController');
 
         /** LICENSE */
 
@@ -91,9 +93,11 @@ Route::name('admin.')->group(function () {
         Route::resource('project', 'ProjectController');
         Route::resource('jobcard', 'JobCardController');
         Route::resource('taskcard', 'TaskCardController');
+        Route::resource('mutation', 'MutationController');
         Route::resource('quotation', 'QuotationController');
         Route::resource('defectcard', 'DefectCardController');
         Route::resource('workpackage', 'WorkPackageController');
+        Route::resource('item-request', 'ItemRequestController');
         Route::resource('eo-instruction', 'EOInstructionController');
         Route::resource('goods-received', 'GoodsReceivedController');
         Route::resource('purchase-order', 'PurchaseRequestController');

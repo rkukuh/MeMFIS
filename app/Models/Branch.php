@@ -43,6 +43,19 @@ class Branch extends MemfisModel
     /**
      * M-M Polymorphic: A branch can be applied to many entities.
      *
+     * This function will get all the GSEs that are applied by a given branch.
+     * See: GSE's branches() method for the inverse
+     *
+     * @return mixed
+     */
+    public function gses()
+    {
+        return $this->morphedByMany(GSE::class, 'branchable');
+    }
+
+    /**
+     * M-M Polymorphic: A branch can be applied to many entities.
+     *
      * This function will get all the InventoryIns that are applied by a given branch.
      * See: InventoryIn's branches() method for the inverse
      *
@@ -51,6 +64,32 @@ class Branch extends MemfisModel
     public function inventory_ins()
     {
         return $this->morphedByMany(InventoryIn::class, 'branchable');
+    }
+
+    /**
+     * M-M Polymorphic: A branch can be applied to many entities.
+     *
+     * This function will get all the Item Requests that are applied by a given branch.
+     * See: ItemRequest's branches() method for the inverse
+     *
+     * @return mixed
+     */
+    public function item_requests()
+    {
+        return $this->morphedByMany(ItemRequest::class, 'branchable');
+    }
+
+    /**
+     * M-M Polymorphic: A branch can be applied to many entities.
+     *
+     * This function will get all the Mutations that are applied by a given branch.
+     * See: Mutation's branches() method for the inverse
+     *
+     * @return mixed
+     */
+    public function mutations()
+    {
+        return $this->morphedByMany(Mutation::class, 'branchable');
     }
 
     /**
@@ -64,6 +103,19 @@ class Branch extends MemfisModel
     public function projects()
     {
         return $this->morphToMany(Project::class, 'branchable');
+    }
+
+    /**
+     * M-M Polymorphic: A branch can be applied to many entities.
+     *
+     * This function will get all the RIRs that are applied by a given branch.
+     * See: RIR's branches() method for the inverse
+     *
+     * @return mixed
+     */
+    public function rirs()
+    {
+        return $this->morphedByMany(RIR::class, 'branchable');
     }
 
     /**
