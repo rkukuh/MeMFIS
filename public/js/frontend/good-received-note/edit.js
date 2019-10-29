@@ -424,7 +424,6 @@ $("#material").on("change", function () {
     $.ajax({
         url: '/label/get-good-received/'+grn_uuid+'/item/'+ item_uuid ,
         type: 'GET',
-        dataType: 'json',
         success: function (qty_item) {
             document.getElementById('item_reciveded').innerText = qty_item;
         }

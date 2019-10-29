@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Models\RIR;
 use App\Models\Zone;
 use App\Models\Item;
 use App\Models\Type;
@@ -108,10 +109,42 @@ class FillLabelController extends Controller
         $quantity_item_recived = 0;
 
         foreach($GoodsReceiveds as $GoodsReceived){
-            $quantity_item_recived = $quantity_item_recived + $GoodsReceived->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
+            if($item->unit_id == $quantity_item_recived + $GoodsReceived->items()->where('uuid',$item->uuid)->first()->pivot->unit_id){
+                $quantity_item_recived = $quantity_item_recived + $GoodsReceived->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
+            }else{
+                $qty_uom = $item->units->where('uom.unit_id',$request->unit_id)->first()->uom->quantity;
+                $quantity_unit = $qty_uom*$rir->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
+
+                $quantity_item_recived = $quantity_item_recived + $quantity_unit;
+            }
         }
 
-        return $quantity_item_recived;
+        return $quantity_item_recived." ".$item->unit->name;
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function rir(RIR $rir,Item $item)
+    {
+        $rirs = RIR::where('purchase_order_id',$rir->purchase_order_id)->wherehas('approvals')->get();
+        $quantity_item_recived = 0;
+
+        foreach($rirs as $rir){
+            if($item->unit_id == $quantity_item_recived + $rir->items()->where('uuid',$item->uuid)->first()->pivot->unit_id){
+                $quantity_item_recived = $quantity_item_recived + $rir->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
+            }else{
+                $qty_uom = $item->units->where('uom.unit_id',$request->unit_id)->first()->uom->quantity;
+                $quantity_unit = $qty_uom*$rir->items()->where('uuid',$item->uuid)->first()->pivot->quantity_unit;
+
+                $quantity_item_recived = $quantity_item_recived + $quantity_unit;
+            }
+        }
+
+        return $quantity_item_recived." ".$item->unit->name;
 
     }
 
