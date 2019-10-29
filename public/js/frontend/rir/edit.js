@@ -153,8 +153,8 @@ let receiving_inspection_report = {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                type: 'post',
-                url: '/rir',
+                url: '/rir/'+rir_uuid,
+                type: 'PUT',
                 data: {
                     _token: $('input[name=_token]').val(),
                     general_document:general_document,
@@ -164,16 +164,16 @@ let receiving_inspection_report = {
                     document: document,
                     date:date,
                     status:status,
-                    type:type,
-                    condition:condition,
+                    packing_type:type,
+                    packing_condition:condition_material,
                     preservation_check:preservation_check,
-                    condition_material:condition_material,
+                    condition:condition,
                     quality:quality,
                     identification:identification,
-                    packing_handling_check:packing_handling_check,
-                    preservation_check_explain:preservation_check_explain,
-                    document_check:document_check,
-                    material_check:material_check,
+                    unsatisfactory_packing:packing_handling_check,
+                    unsatisfactory_preservation:preservation_check_explain,
+                    unsatisfactory_document:document_check,
+                    unsatisfactory_material:material_check,
                     decision:decision,
                 },
                 success: function (data) {
@@ -205,15 +205,15 @@ let receiving_inspection_report = {
         });
 
         $('.modal-footer').on('click', '.add-item', function () {
-            // let serial_numbers = [];
-            // $("input[name^=serial_number]").each(function() {
-            //     serial_numbers.push(this.value);
-            // });
-            // serial_numbers = serial_numbers.filter(function (el) {
+            let serial_numbers = [];
+            $("input[name^=serial_number]").each(function() {
+                serial_numbers.push(this.value);
+            });
+            serial_numbers = serial_numbers.filter(function (el) {
 
-            //     return el != null && el != "";
+                return el != null && el != "";
 
-            // });
+            });
 
             let item_uuid = $("#material").val();
             let exp_date = $('input[name=exp_date2]').val();
@@ -283,7 +283,7 @@ let receiving_inspection_report = {
                 }
             });
         });
-        $('.purchase_order_datatable').on('click', '.edit-item', function () {
+        $('.rir_datatable').on('click', '.edit-item', function () {
             let description = "";
             document.getElementById('item-label').innerText = $(this).data('item');
             if($(this).data('description') != null){
@@ -340,30 +340,30 @@ let receiving_inspection_report = {
                 url: '/rir/'+rir_uuid+'/item/'+uuid,
                 type: "PUT",
                 data: {
-                    exp_date: exp_date,
+                    expired_at: exp_date,
                     quantity: qty,
                     unit_id: unit_id,
                     note: note,
                 },
                 success: function(response) {
                     if (response.errors) {
-                        if (response.errors.quantity) {
-                            $('#qty-error').html(response.errors.quantity[0]);
-                        }
+                        // if (response.errors.quantity) {
+                        //     $('#qty-error').html(response.errors.quantity[0]);
+                        // }
                         // document.getElementById('manual_affected_id').value = manual_affected_id;
                     } else {
                         //    taskcard_reset();
                         $('#modal_rir').modal('hide');
 
                         toastr.success(
-                            "GRN has been updated.",
+                            "RIR has been updated.",
                             "Success",
                             {
                                 timeOut: 5000
                             }
                         );
 
-                        let table = $(".purchase_order_datatable").mDatatable();
+                        let table = $(".rir_datatable").mDatatable();
 
                         table.originalDataSet = [];
                         table.reload();
@@ -372,7 +372,7 @@ let receiving_inspection_report = {
                 }
             });
         });
-        $('.purchase_order_datatable').on('click', '.delete', function () {
+        $('.rir_datatable').on('click', '.delete', function () {
 
             swal({
                 title: 'Sure want to remove?',
@@ -393,12 +393,12 @@ let receiving_inspection_report = {
                         type: 'DELETE',
                         url: '/rir/' + rir_uuid + '/item/'+$(this).data('uuid'),
                         success: function (data) {
-                            toastr.success('Material has been deleted.', 'Deleted', {
+                            toastr.success('Item RIR has been deleted.', 'Deleted', {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $('.purchase_order_datatable').mDatatable();
+                            let table = $('.rir_datatable').mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();
@@ -419,4 +419,77 @@ let receiving_inspection_report = {
 
 jQuery(document).ready(function() {
     receiving_inspection_report.init();
+});
+
+$("#is_serial_number").on("change", function () {
+    if($(this).is(":checked")) {
+        $('.serial_numbers').removeClass("hidden");
+        $('#unit_material').prop('disabled', true);
+    } else {
+        $('.serial_numbers').addClass("hidden");
+        $('.serial_number_inputs').html('');
+        $('#unit_material').prop('disabled', false);
+    }
+});
+$("#is_serial_number_edit").on("change", function () {
+    if($(this).is(":checked")) {
+        // $('.serial_numbers').removeClass("hidden");
+        $('#unit_id').prop('disabled', true);
+    } else {
+        // $('.serial_numbers').addClass("hidden");
+        // $('.serial_number_inputs').html('');
+        $('#unit_id').prop('disabled', false);
+    }
+});
+
+$("#material").on("change", function () {
+    let item_uuid = $("#material").val();
+    $.ajax({
+        url: '/label/get-rir/'+rir_uuid+'/item/'+ item_uuid ,
+        type: 'GET',
+        success: function (qty_item) {
+            document.getElementById('item_reciveded').innerText = qty_item;
+        }
+    });
+    $("#quantity").prop("min", 1);
+    $.ajax({
+        url: '/get-item-po-details/'+po_uuid+'/'+item_uuid,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $("#quantity").val(parseInt(data.pivot.quantity));
+            $("#quantity").prop("max", data.pivot.quantity);
+            $('.clone').remove();
+            for (let number = 0; number < data.pivot.quantity; number++) {
+                let clone = $(".blueprint").clone();
+                clone.removeClass("blueprint hidden");
+                clone.addClass("clone");
+                $(".serial_number_inputs").after(clone);
+                clone.slideDown("slow",function(){});
+            }
+        }
+    });
+});
+
+$("#quantity").on("change", function () {
+    let qty = $("#quantity").val();
+    let max = $("#quantity").attr("max");
+    $('.clone').remove();
+    if($("#quantity").val() < max){
+        for (let number = 0; number < qty; number++) {
+            let clone = $(".blueprint").clone();
+            clone.removeClass("blueprint hidden");
+            clone.addClass("clone");
+            $(".serial_number_inputs").after(clone);
+            clone.slideDown("slow",function(){});
+        }
+    }else{
+        for (let number = 0; number < max; number++) {
+            let clone = $(".blueprint").clone();
+            clone.removeClass("blueprint hidden");
+            clone.addClass("clone");
+            $(".serial_number_inputs").after(clone);
+            clone.slideDown("slow",function(){});
+        }
+        }
 });

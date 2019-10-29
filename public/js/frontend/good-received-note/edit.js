@@ -192,7 +192,6 @@ let goods_received_note = {
 
             let item_uuid = $("#material").val();
             let exp_date = $('input[name=exp_date2]').val();
-
             let qty = $("#quantity").val();
             let unit_id = $("#unit_material").val();
             let note = $("#remark").val();
@@ -425,7 +424,6 @@ $("#material").on("change", function () {
     $.ajax({
         url: '/label/get-good-received/'+grn_uuid+'/item/'+ item_uuid ,
         type: 'GET',
-        dataType: 'json',
         success: function (qty_item) {
             document.getElementById('item_reciveded').innerText = qty_item;
         }

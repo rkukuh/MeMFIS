@@ -97,7 +97,7 @@
                                 Approved By
                             </th>
                             <th width="50%" align="center">
-                                Recieved By
+                                Received By
                             </th>
                         </tr>
                     </table>
