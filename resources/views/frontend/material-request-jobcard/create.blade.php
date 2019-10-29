@@ -177,7 +177,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-6 col-lg-6">
                                             <label class="form-control-label">
-                                                Recieved By 
+                                                Received By 
                                             </label>
 
                                             @component('frontend.common.input.select2')
