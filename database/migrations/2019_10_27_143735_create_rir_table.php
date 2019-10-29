@@ -28,6 +28,10 @@ class CreateRirTable extends Migration
             $table->text('unsatisfactory_packing')->nullable();
             $table->unsignedBigInteger('preservation_check');
             $table->text('unsatisfactory_preservation')->nullable();
+            $table->unsignedBigInteger('material_condition');
+            $table->unsignedBigInteger('material_identification');
+            $table->unsignedBigInteger('material_quality');
+            $table->text('unsatisfactory_material')->nullable();
             $table->unsignedBigInteger('received_by');
             $table->timestamp('received_at')->nullable();
             $table->text('decision')->nullable();
@@ -61,6 +65,21 @@ class CreateRirTable extends Migration
                     ->onDelete('restrict');
 
             $table->foreign('preservation_check')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('material_condition')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('material_identification')
+                    ->references('id')->on('types')
+                    ->onUpdate('cascade')
+                    ->onDelete('restrict');
+
+            $table->foreign('material_quality')
                     ->references('id')->on('types')
                     ->onUpdate('cascade')
                     ->onDelete('restrict');

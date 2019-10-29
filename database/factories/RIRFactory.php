@@ -49,6 +49,10 @@ $factory->define(RIR::class, function (Faker $faker) {
 
             return factory(Employee::class)->create()->id;
         },
+        'material_condition' => Type::ofRIRMaterialCheckCondition()->get()->random()->id,
+        'material_identification' => Type::ofRIRMaterialCheckIdentification()->get()->random()->id,
+        'material_quality' => Type::ofRIRMaterialCheckQuality()->get()->random()->id,
+        'unsatisfactory_material' => null,
         'received_at' => $faker->randomElement([null, Carbon::now()]),
         'decision' => $faker->randomElement([null, $faker->sentence]),
         'description' => $faker->randomElement([null, $faker->sentence]),
