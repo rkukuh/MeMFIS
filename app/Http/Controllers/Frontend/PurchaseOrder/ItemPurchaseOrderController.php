@@ -127,29 +127,21 @@ class ItemPurchaseOrderController extends Controller
                 ]);
         
         if(sizeof($purchaseOrderItem->promos) > 0){
-            dump("update");
-            dump("purchase order_id ".$purchaseOrder->id);
-            dump("promo type id ".$promo_type->id);
-            dump("percentage".$discount_percentage);
-            dump($purchaseOrderItem->promos->first()->pivot->id);
-            dump("promo_id".$purchaseOrderItem->promos->first()->pivot->promo_id);
             $result = DB::table('promoables')
                     ->where('promoable_type', 'App\Models\Pivots\PurchaseOrderItem')
-                    ->where('promoable_id', $purchaseOrderItem->promos->first()->pivot->id)
+                    ->where('promoable_id', $purchaseOrderItem->promos->first()->pivot->promoable_id)
                     ->where('promo_id', $purchaseOrderItem->promos->first()->pivot->promo_id)
                     ->update([
                         'value' => $discount_percentage,
                         'amount' => $discount_amount,
                         'promo_id' => $promo_type->id
                     ]);
-            dump($result);
         }else{
             $purchaseOrderItem->promos()->save(Promo::find($promo_type->id), [
                 'value'     => $discount_percentage,
                 'amount'    => $discount_amount
             ]);
         }
-        dd("break");
 
         // if(sizeof($purchaseOrder->taxes) > 0){
         //     $tax = Tax::where('uuid', $purchaseOrder->taxes->last()->uuid)->update([
