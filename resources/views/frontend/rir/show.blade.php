@@ -61,7 +61,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', 'PR-2121212')
+                                                            @slot('text', $receivingInspectionReport->number)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -74,7 +74,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Part Number')
+                                                            @slot('text', $receivingInspectionReport->purchase_order->number)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -89,7 +89,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                        @slot('text', 'Part Number')
+                                                            @slot('text', $receivingInspectionReport->vendor->name)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -102,7 +102,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Part Number')
+                                                    @slot('text', $receivingInspectionReport->delivery_document_number)
                                                     @endcomponent
                                                     </div>
                                                 </div>
@@ -117,7 +117,7 @@
                                                     </label>
 
                                                     @component('frontend.common.label.data-info')
-                                                    @slot('text', 'Part Number')
+                                                        @slot('text',  $receivingInspectionReport->rir_date)
                                                     @endcomponent
                                                     </div>
                                                 </div>
@@ -128,39 +128,8 @@
                                                         <label class="form-control-label">
                                                             Status
                                                         </label>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('name', 'status')
-                                                            @slot('text','Purchase')
-                                                            @slot('id','purchase')
-                                                            @slot('value','purchase')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('name', 'status')
-                                                            @slot('text','Repair')
-                                                            @slot('id','repair')
-                                                            @slot('value','repair')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('name', 'status')
-                                                            @slot('text','Serviceable')
-                                                            @slot('id','serviceable')
-                                                            @slot('value','serviceable')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('name', 'status')
-                                                            @slot('text','Unserviceable')
-                                                            @slot('id','unserviceable')
-                                                            @slot('value','unserviceable')
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text',  $receivingInspectionReport->status->name)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -213,7 +182,7 @@
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'reusable_container')
-                                                                            @slot('value', 'reusable container')
+                                                                            @slot('value', 'reusable-container')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Reusable Container')
@@ -222,7 +191,7 @@
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'carton_box')
-                                                                            @slot('value', 'carton box')
+                                                                            @slot('value', 'carton-box')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Carton Box')
@@ -233,7 +202,7 @@
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'wooden box')
-                                                                            @slot('value', 'wooden box')
+                                                                            @slot('value', 'wooden-box')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Wooden Box')
@@ -258,7 +227,7 @@
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'Satisfactory')
                                                                             @slot('value', 'satisfactory')
-                                                                            @slot('name', 'condition')
+                                                                            @slot('name', 'condition_material')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Satisfactory')
                                                                         @endcomponent
@@ -267,7 +236,7 @@
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'unsatisfactory')
                                                                             @slot('value', 'unsatisfactory')
-                                                                            @slot('name', 'condition')
+                                                                            @slot('name', 'condition_material')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Unsatisfactory')
                                                                         @endcomponent
@@ -283,7 +252,7 @@
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'If Unsatisfactory Explain')
+                                                                @slot('text',  $receivingInspectionReport->unsatisfactory_packing)
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -302,7 +271,7 @@
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('id', 'reusable_container')
-                                                                        @slot('value', 'reusable container')
+                                                                        @slot('value', 'reusable-container')
                                                                         @slot('name', 'preservation_check')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Reusable Container')
@@ -311,7 +280,7 @@
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('id', 'wooden_box')
-                                                                        @slot('value', 'wooden box')
+                                                                        @slot('value', 'wooden-box')
                                                                         @slot('name', 'preservation_check')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Wooden Box')
@@ -327,7 +296,7 @@
                                                             </label>
 
                                                             @component('frontend.common.label.data-info')
-                                                                @slot('text', 'If Unsatisfactory Explain')
+                                                                @slot('text',  $receivingInspectionReport->unsatisfactory_preservation)
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -569,9 +538,11 @@
 
 @push('footer-scripts')
     <script>
-        let uuid = '8083d4fc-7c10-4882-bfa3-888cd081a3e5';
-    </script>
+        let uuid = '{{$receivingInspectionReport->uuid}}';
+        let po_uuid = '{{$receivingInspectionReport->purchase_order->uuid}}';
+        let rir_uuid = '{{$receivingInspectionReport->uuid}}';
 
+    </script>
     <script src="{{ asset('js/frontend/rir/show.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/vendor.js')}}"></script>
