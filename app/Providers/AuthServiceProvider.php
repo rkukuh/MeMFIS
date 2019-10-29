@@ -17,6 +17,8 @@ class AuthServiceProvider extends ServiceProvider
         Models\Fax::class => Policies\FaxPolicy::class,
         Models\Tax::class => Policies\TaxPolicy::class,
         Models\RTS::class => Policies\RTSPolicy::class,
+        Models\GSE::class => Policies\GSEPolicy::class,
+        Models\RIR::class => Policies\RIRPolicy::class,
         Models\User::class => Policies\UserPolicy::class,
         Models\Type::class => Policies\TypePolicy::class,
         Models\Unit::class => Policies\UnitPolicy::class,
@@ -62,6 +64,8 @@ class AuthServiceProvider extends ServiceProvider
         Models\Approval::class => Policies\ApprovalPolicy::class,
         Models\Progress::class => Policies\ProgressPolicy::class,
         Models\Position::class => Policies\PositionPolicy::class,
+        Models\Overtime::class => Policies\OvertimePolicy::class,
+        Models\Mutation::class => Policies\MutationPolicy::class,
         Models\JobTittle::class => Policies\JobTittlePolicy::class,
         Models\LeaveType::class => Policies\LeaveTypePolicy::class,
         Models\Workshift::class => Policies\WorkshiftPolicy::class,
@@ -75,6 +79,7 @@ class AuthServiceProvider extends ServiceProvider
         Models\BankAccount::class => Policies\BankAccountPolicy::class,
         Models\Interchange::class => Policies\InterchangePolicy::class,
         Models\InventoryIn::class => Policies\InventoryInPolicy::class,
+        Models\ItemRequest::class => Policies\ItemRequestPolicy::class,
         Models\InventoryOut::class => Policies\InventoryOutPolicy::class,
         Models\Manufacturer::class => Policies\ManufacturerPolicy::class,
         Models\Certification::class => Policies\CertificationPolicy::class,
@@ -104,7 +109,6 @@ class AuthServiceProvider extends ServiceProvider
         Models\QuotationWorkPackageTaskCardItem::class => Policies\QuotationWorkPackageTaskCardItemPolicy::class,
         Models\EOInstructionWorkPackageSuccessor::class => Policies\EOInstructionWorkPackageSuccessorPolicy::class,
         Models\EOInstructionWorkPackagePredecessor::class => Policies\EOInstructionWorkPackagePredecessorPolicy::class,
-        Models\Overtime::class => Policies\OvertimePolicy::class,
     ];
 
     /**

@@ -197,36 +197,36 @@ Route::name('datatables.')->group(function () {
 
         /** Receiving Inspection Report */
 
-        Route::name('receiving-inspection-report.')->group(function () {
+        Route::name('rir.')->group(function () {
 
             Route::group([
 
-                'prefix'    => 'receiving-inspection-report',
-                'namespace' => 'ReceivingInspectionReport'
+                'prefix'    => 'rir',
+                'namespace' => 'RIR'
 
             ], function () {
 
-                Route::get('/', 'ReceivingInspectionReportDatatables@index')->name('all');
-                // Route::get('/item/{receivingInspectionReport}', 'ItemReceivingInspectionReportDatatables@index')->name('receiving-inspection-report.item');
+                Route::get('/', 'RIRDatatables@index')->name('all');
+                Route::get('/item/{rir}', 'ItemRIRDatatables@index')->name('rir.item');
 
 
             });
 
         });
 
-        /** GOODS RECEIVED NOTE */
+        /** GROUND DUPPORT EQUIPTMENT */
 
-        Route::name('ground-support-equiptment.')->group(function () {
+        Route::name('gse.')->group(function () {
 
             Route::group([
 
-                'prefix'    => 'ground-support-equiptment',
-                'namespace' => 'GroundSupportEquiptment'
+                'prefix'    => 'gse',
+                'namespace' => 'GSE'
 
             ], function () {
 
-                Route::get('/', 'GroundSupportEquiptmentDatatables@index')->name('all');
-                // Route::get('/item/{goodReceived}', 'ItemGoodsReceivedDatatables@index')->name('good-received.item');
+                Route::get('/', 'GSEDatatables@index')->name('all');
+                Route::get('/item/{gse}', 'ItemGSEDatatables@index')->name('gse.item');
 
 
             });

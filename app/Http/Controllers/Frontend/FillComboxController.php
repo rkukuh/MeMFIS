@@ -29,6 +29,7 @@ use Illuminate\Http\Request;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
+use App\Models\FefoIn;
 use App\Models\Pivots\EmployeeLicense;
 use App\Models\InventoryIn;
 use App\Models\InventoryOut;
@@ -505,6 +506,21 @@ class FillComboxController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function itemSerialNumber($item)
+    {
+        $serialNumbers = FefoIn::where('item_id', $item)
+                ->whereNotNull('serial_number')
+                ->pluck('serial_number')
+                ->toArray();
+        
+        return json_encode($serialNumbers);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function iterchange(Item $item)
     {
         $interchange = $item->interchanges()->pluck('name', 'uuid');
@@ -932,6 +948,19 @@ class FillComboxController extends Controller
         $promo = Promo::where('code','like','discount%')->pluck('name', 'uuid');
 
         return json_encode($promo);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function taxation()
+    {
+        $taxation = Type::ofTax()->pluck('name', 'uuid');
+
+        return json_encode($taxation);
 
     }
 

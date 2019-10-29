@@ -30,6 +30,7 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfHtCrrCloseReason::class);
         $this->call(TypesOfHtCrrPauseReason::class);
         $this->call(TypesOfHtCrrType::class);
+        $this->call(TypesOfItemRequest::class);
         $this->call(TypesOfJobCardCloseReason::class);
         $this->call(TypesOfJobCardLogBook::class);
         $this->call(TypesOfJobCardPauseReason::class);
@@ -39,6 +40,9 @@ class TypesTableSeeder extends Seeder
         $this->call(TypesOfProjectWorkPackageManhour::class);
         $this->call(TypesOfPurchaseRequest::class);
         $this->call(TypesOfRegulator::class);
+        $this->call(TypesOfRIRPackingAndHandlingCheckCondition::class);
+        $this->call(TypesOfRIRPackingAndHandlingCheckType::class);
+        $this->call(TypesOfRIRPreservationCheck::class);
         $this->call(TypesOfScheduledPayment::class);
         $this->call(TypesOfSchoolDegree::class);
         $this->call(TypesOfTaskCardEOManualAffected::class);

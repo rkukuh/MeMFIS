@@ -41,6 +41,8 @@ $factory->define(InventoryIn::class, function (Faker $faker) {
 
 $factory->afterCreating(InventoryIn::class, function ($inventory_in, $faker) {
 
+    $number = $faker->unixTime();
+
     // Branch
 
     if ($faker->boolean) {
@@ -69,7 +71,7 @@ $factory->afterCreating(InventoryIn::class, function ($inventory_in, $faker) {
             }
 
             $inventory_in->items()->save($item, [
-                'serial_number' => null,
+                'serial_number' => 'SN-DUM-' . $number,
                 'quantity' => rand(1, 10),
                 'quantity_in_primary_unit' => rand(1, 10),
                 'unit_id' => $unit->id,
