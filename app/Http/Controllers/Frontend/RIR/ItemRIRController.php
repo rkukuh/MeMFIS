@@ -122,7 +122,6 @@ class ItemRIRController extends Controller
         $rir->items()->updateExistingPivot($item->id,
                                 ['unit_id'=>$request->unit_id,
                                 'quantity'=> $request->quantity,
-                                'quantity_unit'=> $quantity_unit,
                                 'note' => $request->note,
                                 'expired_at' => $request->expired_at
                                 ]);
