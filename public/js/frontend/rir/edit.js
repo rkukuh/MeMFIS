@@ -443,12 +443,10 @@ $("#is_serial_number_edit").on("change", function () {
 });
 
 $("#material").on("change", function () {
-
     let item_uuid = $("#material").val();
     $.ajax({
         url: '/label/get-rir/'+rir_uuid+'/item/'+ item_uuid ,
         type: 'GET',
-        dataType: 'json',
         success: function (qty_item) {
             document.getElementById('item_reciveded').innerText = qty_item;
         }
