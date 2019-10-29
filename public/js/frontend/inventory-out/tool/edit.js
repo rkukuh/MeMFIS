@@ -206,7 +206,7 @@ let InventoryOutCreate = {
                     });
                 }
             });
-            $("#item").attr('disabled', true);
+            $("#tool").attr('disabled', true);
 
             $.ajax({
                 url: '/get-item-unit-uuid/' + $(this).data('item'),
@@ -371,6 +371,30 @@ let InventoryOutCreate = {
 
 jQuery(document).ready(function () {
     InventoryOutCreate.init();
+});
+
+$("#tool").change(function () {
+
+    let item_uuid = $("#tool").val();
+
+    $.ajax({
+        url: '/get-serial-number/' + item_uuid,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $('select[name="serial_no"]').empty();
+
+            $('select[name="serial_no"]').append(
+                '<option value=""> Select a Serial Number</option>'
+            );
+
+            $.each(data, function (key, value) {
+                $('select[name="serial_no"]').append(
+                    '<option value="' + value + '">' + value + '</option>'
+                );
+            });
+        }
+    });
 });
 
 $("#serial_no").change(function () {
