@@ -29,6 +29,7 @@ use Illuminate\Http\Request;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Http\Controllers\Controller;
+use App\Models\FefoIn;
 use App\Models\Pivots\EmployeeLicense;
 use App\Models\InventoryIn;
 use App\Models\InventoryOut;
@@ -498,6 +499,21 @@ class FillComboxController extends Controller
         $uom = $unit->toArray() + $units->toArray();
 
         return json_encode($uom);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function itemSerialNumber($item)
+    {
+        $serialNumbers = FefoIn::where('item_id', $item)
+                ->whereNotNull('serial_number')
+                ->pluck('serial_number')
+                ->toArray();
+        
+        return json_encode($serialNumbers);
     }
 
     /**
