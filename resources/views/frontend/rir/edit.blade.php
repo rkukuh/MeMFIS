@@ -322,7 +322,7 @@
                                                             @component('frontend.common.input.input')
                                                                 @slot('name', 'packing_handling_check')
                                                                 @slot('name', 'packing_handling_check')
-                                                                @slot('placeholder', 'If Unsatisfactory Explain')
+                                                                @slot('placeholder', $receivingInspectionReport->unsatisfactory_packing)
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -369,6 +369,7 @@
                                                                 @slot('name', 'preservation_check_explain')
                                                                 @slot('id', 'preservation_check_explain')
                                                                 @slot('placeholder', 'If Unsatisfactory Explain')
+                                                                @slot('value',  $receivingInspectionReport->unsatisfactory_preservation)
                                                             @endcomponent
                                                         <div>
                                                     </div>

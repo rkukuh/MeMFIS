@@ -90,6 +90,7 @@ Route::name('component.')->group(function () {
             Route::get('get-project/{project}', 'FillLabelController@project')->name('get-project');
             Route::get('get-purchase-orderes/{PurchaseOrder}/item/{item}', 'FillLabelController@purchaseOrdered')->name('get-qty-po-item');
             Route::get('get-good-received/{GoodsReceived}/item/{item}', 'FillLabelController@GoodsReceived')->name('get-qty-grn-item');
+            Route::get('get-rir/{rir}/item/{item}', 'FillLabelController@rir')->name('get-qty-rir-item');
         });
 
         Route::prefix('morris')->group(function () {

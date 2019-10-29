@@ -446,7 +446,7 @@ $("#material").on("change", function () {
 
     let item_uuid = $("#material").val();
     $.ajax({
-        url: '/label/get-good-received/'+grn_uuid+'/item/'+ item_uuid ,
+        url: '/label/get-rir/'+rir_uuid+'/item/'+ item_uuid ,
         type: 'GET',
         dataType: 'json',
         success: function (qty_item) {
