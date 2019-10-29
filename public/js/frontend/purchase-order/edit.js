@@ -580,7 +580,6 @@ jQuery(document).ready(function () {
         }else{
             $("#taxation").parent().siblings(".tax_amount").addClass("hidden");
             $(".total_tax").addClass("hidden");
-            $("#tax_amount").val(0);
         }
     });
 

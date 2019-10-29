@@ -361,6 +361,8 @@
                                                                 @component('frontend.common.input.number')
                                                                     @slot('id', 'tax_amount')
                                                                     @slot('name', 'tax_amount')
+                                                                    @slot('value', 10)
+                                                                    @slot('disabled', 'disabled')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
