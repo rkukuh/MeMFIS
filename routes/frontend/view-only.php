@@ -54,19 +54,19 @@ Route::group([
 
         /** Material Request */
 
-        Route::view('/material-request-jobcard', 'frontend.material-request-jobcard.index')->name('material-request-jobcard.index');
+        // Route::view('/material-request-jobcard', 'frontend.material-request-jobcard.index')->name('material-request-jobcard.index');
 
-        Route::view('/material-request-jobcard/create', 'frontend.material-request-jobcard.create')->name('material-request-jobcard.create');
-        Route::view('/material-request-jobcard/edit', 'frontend.material-request-jobcard.edit')->name('material-request-jobcard.edit');
-        Route::view('/material-request-jobcard/show', 'frontend.material-request-jobcard.show')->name('material-request-jobcard.show');
+        // Route::view('/material-request-jobcard/create', 'frontend.material-request-jobcard.create')->name('material-request-jobcard.create');
+        // Route::view('/material-request-jobcard/edit', 'frontend.material-request-jobcard.edit')->name('material-request-jobcard.edit');
+        // Route::view('/material-request-jobcard/show', 'frontend.material-request-jobcard.show')->name('material-request-jobcard.show');
 
         /** Tool Request */
 
-        Route::view('/tool-request-jobcard', 'frontend.tool-request-jobcard.index')->name('tool-request-jobcard.index');
+        // Route::view('/tool-request-jobcard', 'frontend.tool-request-jobcard.index')->name('tool-request-jobcard.index');
 
-        Route::view('/tool-request-jobcard/create', 'frontend.tool-request-jobcard.create')->name('tool-request-jobcard.create');
-        Route::view('/tool-request-jobcard/edit', 'frontend.tool-request-jobcard.edit')->name('tool-request-jobcard.edit');
-        Route::view('/tool-request-jobcard/show', 'frontend.tool-request-jobcard.show')->name('tool-request-jobcard.show');
+        // Route::view('/tool-request-jobcard/create', 'frontend.tool-request-jobcard.create')->name('tool-request-jobcard.create');
+        // Route::view('/tool-request-jobcard/edit', 'frontend.tool-request-jobcard.edit')->name('tool-request-jobcard.edit');
+        // Route::view('/tool-request-jobcard/show', 'frontend.tool-request-jobcard.show')->name('tool-request-jobcard.show');
 
         /** Inventory In */
 

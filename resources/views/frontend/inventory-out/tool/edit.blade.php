@@ -234,11 +234,11 @@
 <script src="{{ asset('js/frontend/functions/select2/received-by.js') }}"></script>
 <!-- <script src="{{ asset('js/frontend/functions/fill-combobox/received-by.js') }}"></script> -->
 
-<script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
+<!-- <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/tool-uuid.js') }}"></script>
 
 <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
-<script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script> -->
 
 <script src="{{ asset('js/frontend/inventory-out/tool/edit.js') }}"></script>
 @endpush

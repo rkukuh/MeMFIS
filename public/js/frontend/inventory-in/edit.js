@@ -134,12 +134,34 @@ let InventoryInCreate = {
         });
 
         $(".modal-footer").on("click", ".add-item", function () {
+            let serial_numbers = [];
+            $("input[name^=serial_number]").each(function () {
+                serial_numbers.push(this.value);
+            });
+            serial_numbers = serial_numbers.filter(function (el) {
+
+                return el != null && el != "";
+
+            });
+
             let item = $("#item").val();
             let quantity = $("input[name=qty]").val();
             let exp_date = $("#exp_date").val();
             let unit = $("#unit_id").val();
             let remark = $("#item_remark").val();
-            let serial_no = $("#serial_no").val();
+            if ($("#is_serial_number").is(":checked")) {
+                if (serial_numbers.length < quantity) {
+                    $('input[name^="serial_number"]').each(function (i) {
+                        if (this.value == "" || this.value == null) {
+                            $(this).css('border', '2px solid red');
+                        } else {
+                            $(this).css('border', '1px solid grey');
+                        }
+                    });
+
+                    return;
+                }
+            }
 
             $.ajax({
                 headers: {
@@ -152,7 +174,7 @@ let InventoryInCreate = {
                     quantity: quantity,
                     exp_date: exp_date,
                     unit_id: unit,
-                    serial_no: serial_no,
+                    serial_no: serial_numbers,
                     remark: remark,
                 },
                 success: function (response) {
@@ -181,7 +203,6 @@ let InventoryInCreate = {
         });
 
         $('.item_datatable').on('click', '.edit-item', function () {
-            console.log($(this).data('remark'));
             let item_uuid = $(this).data('item');
             let unit_id = $(this).data('unit');
 
@@ -235,7 +256,6 @@ let InventoryInCreate = {
             document.getElementById('qty').value = $(this).data('quantity');
             document.getElementById('uuid').value = $(this).data('uuid');
             document.getElementById('item_remark').value = $(this).data('remark');
-            document.getElementById('serial_no').value = $(this).data('serial');
             document.getElementById('exp_date').value = $(this).data('date');
 
             $('.btn-success').addClass('update-item');
@@ -372,4 +392,61 @@ let InventoryInCreate = {
 
 jQuery(document).ready(function () {
     InventoryInCreate.init();
+});
+
+$("#is_serial_number").on("change", function () {
+    if ($(this).is(":checked")) {
+        $('.serial_numbers').removeClass("hidden");
+        $('#unit_id').prop('disabled', true);
+    } else {
+        $('.serial_numbers').addClass("hidden");
+        $('.serial_number_inputs').html('');
+        $('#unit_id').prop('disabled', false);
+    }
+});
+$("#is_serial_number_edit").on("change", function () {
+    if ($(this).is(":checked")) {
+        // $('.serial_numbers').removeClass("hidden");
+        $('#unit_id').prop('disabled', true);
+    } else {
+        // $('.serial_numbers').addClass("hidden");
+        // $('.serial_number_inputs').html('');
+        $('#unit_id').prop('disabled', false);
+    }
+});
+
+$("#item").on("change", function () {
+    let item_uuid = $("#item").val();
+
+    $.ajax({
+        url: '/get-item-unit-uuid/' + item_uuid,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            $('select[name="unit_id"]').empty();
+
+            $('select[name="unit_id"]').append(
+                '<option value=""> Select a Unit</option>'
+            );
+
+            $.each(data, function (key, value) {
+                $('select[name="unit_id"]').append(
+                    '<option value="' + key + '">' + value + '</option>'
+                );
+            });
+        }
+    });
+});
+
+$("#qty").on("change", function () {
+    let qty = $("#qty").val();
+    $('.clone').remove();
+    
+    for (let number = 0; number < qty; number++) {
+        let clone = $(".blueprint").clone();
+        clone.removeClass("blueprint hidden");
+        clone.addClass("clone");
+        $(".serial_number_inputs").after(clone);
+        clone.slideDown("slow", function () { });
+    }
 });
