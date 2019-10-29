@@ -25,6 +25,7 @@ class RIR extends MemfisModel
         'material_identification',
         'material_quality',
         'unsatisfactory_material',
+        'unsatisfactory_document',
         'received_by',
         'received_at',
         'decision',
