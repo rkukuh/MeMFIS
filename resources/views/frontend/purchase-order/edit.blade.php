@@ -295,7 +295,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="item_datatable" id="scrolling_both"></div>
-
+                                                        <br>
                                                         @include('frontend.purchase-order.modal-check')
                                                         @include('frontend.purchase-order.modal-po')
 
@@ -329,7 +329,7 @@
                                                                 @endcomponent
                                                             </div>
                                                         </div>
-                                                        <div class="form-group m-form__group row hidden">
+                                                        <div class="form-group m-form__group row total_tax">
                                                             <div class="col-sm-6 col-md-6 col-lg-6"></div>
                                                             <div class="col-sm-2 col-md-2 col-lg-2">
                                                                 <div class="m--align-left" style="padding-top:15px">
@@ -351,22 +351,16 @@
                                                                     PPN
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                @component('frontend.common.input.checkbox')
-                                                                    @slot('id', 'is_ppn')
-                                                                    @slot('name', 'is_ppn')
-                                                                    @slot('value', 'include')
-                                                                    @slot('text', 'Include')
-                                                                    @slot('style_div','margin-top:15px')
+                                                            <div class="col-sm-2 col-md-2 col-lg-2">
+                                                                @component('frontend.common.input.select2')
+                                                                    @slot('id', 'taxation')
+                                                                    @slot('name', 'taxation')
                                                                 @endcomponent
                                                             </div>
-                                                            <div class="col-sm-1 col-md-1 col-lg-1">
-                                                                @component('frontend.common.input.checkbox')
-                                                                    @slot('id', 'is_ppn')
-                                                                    @slot('name', 'is_ppn')
-                                                                    @slot('value', 'exclude')
-                                                                    @slot('text', 'Exclude')
-                                                                    @slot('style_div','margin-top:15px')
+                                                            <div class="col-sm-2 col-md-2 col-lg-2 tax_amount">
+                                                                @component('frontend.common.input.number')
+                                                                    @slot('id', 'tax_amount')
+                                                                    @slot('name', 'tax_amount')
                                                                 @endcomponent
                                                             </div>
                                                         </div>
@@ -439,8 +433,10 @@
 
     <script>
         let po_uuid = "{{$purchaseOrder->uuid}}";
+        let currencyCode = "{{$purchaseOrder->currency->code}}";
     </script>
 
+    <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/vendor.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/promo.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/select2/promo.js') }}"></script>
@@ -452,6 +448,7 @@
     <script src="{{ asset('js/frontend/functions/select2/project.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/scheduled-payment-type.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/project.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/taxation.js') }}"></script>
 
 
     <script src="{{ asset('js/frontend/functions/select2/ref.js') }}"></script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend\PurchaseOrder;
 
 use Auth;
 use Carbon\Carbon;
+use App\Models\Tax;
 use App\Models\Type;
 use App\Models\Vendor;
 use App\Models\Approval;
@@ -136,14 +137,51 @@ class PurchaseOrderController extends Controller
      */
     public function update(PurchaseOrderUpdate $request, PurchaseOrder $purchaseOrder)
     {
-        $request->merge(['ordered_at' => Carbon::parse($request->ordered_at)]);
-        $request->merge(['valid_until' => Carbon::parse($request->valid_until)]);
-        $request->merge(['ship_at' => Carbon::parse($request->ship_at)]);
-        $request->merge(['top_start_at' => Carbon::parse($request->top_start_at)]);
-        $request->merge(['top_type' => Type::where('code',$request->top_type)->first()->id]);
-        $request->merge(['vendor' => Vendor::where('uuid',$request->vendor)->first()->id]);
+        $request->merge([
+            'ordered_at' => Carbon::parse($request->ordered_at),
+            'valid_until' => Carbon::parse($request->valid_until),
+            'ship_at' => Carbon::parse($request->ship_at),
+            'top_start_at' => Carbon::parse($request->top_start_at),
+            'top_type' => Type::where('code',$request->top_type)->first()->id,
+            'vendor' => $request->vendor,
+            
+        ]);
 
         $purchaseOrder->update($request->all());
+        
+        //todo ppn
+        $tax = Type::ofTax()->where('uuid', $request->tax_type)->first();
+        $subtotal_after_discount = $request->total_before_tax;
+        $tax_amount = $tax_percentage = 0;
+        if($tax->code == "include"){
+            $tax_percentage = $request->tax_amount;
+            $tax_amount = $subtotal_after_discount / 1.1 * ($request->tax_amount / 100);
+        }elseif($tax->code == "exclude"){
+            $tax_percentage = $request->tax_amount;
+            $tax_amount = $subtotal_after_discount * ($request->tax_amount / 100);
+        }
+        
+        if(sizeof($purchaseOrder->taxes) > 0){
+            if($tax->code == "none"){
+                $purchaseOrder->taxes()->delete();
+            }else{
+                $tax = Tax::where('uuid', $purchaseOrder->taxes->last()->uuid)->update([
+                    'taxable_type' => 'App\Models\PurchaseOrder',
+                    'taxable_id' => $purchaseOrder->id,
+                    'type_id' => $tax->id,
+                    'percent' => $tax_percentage,
+                    'amount' => $tax_amount
+                ]);
+            }
+        }else{
+            $purchaseOrder->taxes()->save(new Tax([
+                'taxable_type' => 'App\Models\PurchaseOrder',
+                'taxable_id' => $purchaseOrder->id,
+                'type_id' => $tax->id,
+                'percent' => $tax_percentage,
+                'amount' => $tax_amount
+            ]));
+        }
 
         return response()->json($purchaseOrder);
     }

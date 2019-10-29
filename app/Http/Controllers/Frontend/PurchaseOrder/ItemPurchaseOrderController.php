@@ -91,19 +91,6 @@ class ItemPurchaseOrderController extends Controller
             $discount_percentage = $request->promo / $subtotal_before_discount * 100;
         }
 
-        //todo ppn
-        // $ppn = $tax_percentage = 0;
-        // if($tax_type){
-        //     $ppn = $subtotal_before_discount / 1.1 * 0.1;
-        //     $tax_type = "include";
-        //     $tax_percentage = 10;
-        // }else{
-        //     $ppn = $subtotal_before_discount * 0.1;
-        //     $tax_type = "exclude";
-        //     $tax_percentage = 10;
-        // }
-
-
         $item = Item::find($item->id);
         if($request->unit_id <> $item->unit_id){
             $quantity = $request->quantity;
@@ -126,6 +113,7 @@ class ItemPurchaseOrderController extends Controller
                     'note' => $request->note
                 ]);
         
+
         if(sizeof($purchaseOrderItem->promos) > 0){
             $result = DB::table('promoables')
                     ->where('promoable_type', 'App\Models\Pivots\PurchaseOrderItem')
@@ -143,22 +131,6 @@ class ItemPurchaseOrderController extends Controller
             ]);
         }
 
-        // if(sizeof($purchaseOrder->taxes) > 0){
-        //     $tax = Tax::where('uuid', $purchaseOrder->taxes->last()->uuid)->update([
-        //         'taxable_type' => 'App\Models\PurchaseOrder',
-        //         'taxable_id' => $purchaseOrder->id,
-        //         'type_id' => Type::ofTax()->where('code', $request->tax_type)->first()->id,
-        //         'percent' => $request->tax_percentage,
-        //         'amount' => $request->ppn
-        //     ]);
-        // }else{
-        //     $purchaseOrder->taxes()->save(new Tax(['taxable_type' => 'App\Models\PurchaseOrder',
-        //         'taxable_id' => $purchaseOrder->id,
-        //         'type_id' => Type::ofTax()->where('code', $request->tax_type)->first()->id,
-        //         'percent' => $request->tax_percentage,
-        //         'amount' => $request->ppn
-        //     ]));
-        // }
 
         return response()->json($purchaseOrder);
 
