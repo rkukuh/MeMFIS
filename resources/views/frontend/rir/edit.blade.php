@@ -250,7 +250,7 @@
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'reusable_container')
-                                                                            @slot('value', 'reusable container')
+                                                                            @slot('value', 'reusable-container')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Reusable Container')
@@ -259,7 +259,7 @@
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'carton_box')
-                                                                            @slot('value', 'carton box')
+                                                                            @slot('value', 'carton-box')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Carton Box')
@@ -270,7 +270,7 @@
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'wooden box')
-                                                                            @slot('value', 'wooden box')
+                                                                            @slot('value', 'wooden-box')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
                                                                             @slot('text', 'Wooden Box')
@@ -293,11 +293,11 @@
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
-                                                                            @slot('id', 'statisfactory')
-                                                                            @slot('value', 'statisfactory')
+                                                                            @slot('id', 'Satisfactory')
+                                                                            @slot('value', 'satisfactory')
                                                                             @slot('name', 'condition_material')
                                                                             @slot('size','12')
-                                                                            @slot('text', 'Statisfactory')
+                                                                            @slot('text', 'Satisfactory')
                                                                         @endcomponent
                                                                     </div>
                                                                     <div class="row">
@@ -341,7 +341,7 @@
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('id', 'reusable_container')
-                                                                        @slot('value', 'reusable container')
+                                                                        @slot('value', 'reusable-container')
                                                                         @slot('name', 'preservation_check')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Reusable Container')
@@ -350,7 +350,7 @@
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('id', 'wooden_box')
-                                                                        @slot('value', 'wooden box')
+                                                                        @slot('value', 'wooden-box')
                                                                         @slot('name', 'preservation_check')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Wooden Box')
@@ -493,11 +493,11 @@
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                                     @component('frontend.common.input.radio')
-                                                                        @slot('id', 'statisfactory')
-                                                                        @slot('value', 'statisfactory')
+                                                                        @slot('id', 'Satisfactory')
+                                                                        @slot('value', 'satisfactory')
                                                                         @slot('name', 'condition')
                                                                         @slot('size','12')
-                                                                        @slot('text', 'Statisfactory')
+                                                                        @slot('text', 'Satisfactory')
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
@@ -630,6 +630,7 @@
     <script src="{{ asset('js/frontend/rir/edit.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/vendor.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/material-po.js') }}"></script>

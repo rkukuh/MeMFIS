@@ -250,7 +250,7 @@
                                                                     @slot('id', 'is_stock')
                                                                     @slot('name', 'is_stock')
                                                                     @slot('size','12')
-                                                                    @slot('text', 'Statisfactory')
+                                                                    @slot('text', 'Satisfactory')
                                                                 @endcomponent
                                                                 @component('frontend.common.input.checkbox')
                                                                     @slot('id', 'is_stock')
@@ -430,7 +430,7 @@
                                                                     @slot('id', 'is_stock')
                                                                     @slot('name', 'is_stock')
                                                                     @slot('size','12')
-                                                                    @slot('text', 'Statisfactory')
+                                                                    @slot('text', 'Satisfactory')
                                                                 @endcomponent
                                                                 @component('frontend.common.input.checkbox')
                                                                     @slot('id', 'is_stock')
