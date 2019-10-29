@@ -177,72 +177,14 @@
                                                     <hr>
                                                     <div class="form-group m-form__group row mt-5">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <div class="form-group m-form__group row">
-                                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    <div class="row">
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('id', 'reusable_container')
-                                                                            @slot('value', 'reusable-container')
-                                                                            @slot('name', 'type')
-                                                                            @slot('size','12')
-                                                                            @slot('text', 'Reusable Container')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('id', 'carton_box')
-                                                                            @slot('value', 'carton-box')
-                                                                            @slot('name', 'type')
-                                                                            @slot('size','12')
-                                                                            @slot('text', 'Carton Box')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    <div class="row">
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('id', 'wooden box')
-                                                                            @slot('value', 'wooden-box')
-                                                                            @slot('name', 'type')
-                                                                            @slot('size','12')
-                                                                            @slot('text', 'Wooden Box')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('id', 'unpacked')
-                                                                            @slot('value', 'unpacked')
-                                                                            @slot('name', 'type')
-                                                                            @slot('size','12')
-                                                                            @slot('text', 'Unpacked')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text',  $packing_type)
+                                                            @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <div class="form-group m-form__group row">
-                                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    <div class="row">
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('id', 'Satisfactory')
-                                                                            @slot('value', 'satisfactory')
-                                                                            @slot('name', 'condition_material')
-                                                                            @slot('size','12')
-                                                                            @slot('text', 'Satisfactory')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('id', 'unsatisfactory')
-                                                                            @slot('value', 'unsatisfactory')
-                                                                            @slot('name', 'condition_material')
-                                                                            @slot('size','12')
-                                                                            @slot('text', 'Unsatisfactory')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text',  $packing_condition)
+                                                            @endcomponent
                                                         </div>
                                                     </div>
                                                     <div class="form-group m-form__group row">
@@ -267,26 +209,9 @@
                                                 <div class="m-portlet__body">
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <div class="form-group m-form__group row">
-                                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    @component('frontend.common.input.radio')
-                                                                        @slot('id', 'reusable_container')
-                                                                        @slot('value', 'reusable-container')
-                                                                        @slot('name', 'preservation_check')
-                                                                        @slot('size','12')
-                                                                        @slot('text', 'Reusable Container')
-                                                                    @endcomponent
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    @component('frontend.common.input.radio')
-                                                                        @slot('id', 'wooden_box')
-                                                                        @slot('value', 'wooden-box')
-                                                                        @slot('name', 'preservation_check')
-                                                                        @slot('size','12')
-                                                                        @slot('text', 'Wooden Box')
-                                                                    @endcomponent
-                                                                </div>
-                                                            </div>
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text',  $preservation_check)
+                                                            @endcomponent
                                                         </div>
                                                     </div>
                                                     <div class="form-group m-form__group row">
@@ -508,6 +433,7 @@
                                                                 @slot('name', 'decision')
                                                                 @slot('id', 'decision')
                                                                 @slot('rows', '5')
+                                                                @slot('value', $receivingInspectionReport->decision)
                                                                 @slot('disabled', 'disabled')
                                                             @endcomponent
                                                         <div>
