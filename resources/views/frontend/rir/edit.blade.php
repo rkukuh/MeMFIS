@@ -253,6 +253,9 @@
                                                                             @slot('value', 'reusable-container')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
+                                                                            @if($packing_type == 'reusable-container')
+                                                                                @slot('checked','checked')
+                                                                            @endif
                                                                             @slot('text', 'Reusable Container')
                                                                         @endcomponent
                                                                     </div>
@@ -262,6 +265,9 @@
                                                                             @slot('value', 'carton-box')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
+                                                                            @if($packing_type == 'carton-box')
+                                                                                @slot('checked','checked')
+                                                                            @endif
                                                                             @slot('text', 'Carton Box')
                                                                         @endcomponent
                                                                     </div>
@@ -273,6 +279,9 @@
                                                                             @slot('value', 'wooden-box')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
+                                                                            @if($packing_type == 'wooden-box')
+                                                                                @slot('checked','checked')
+                                                                            @endif
                                                                             @slot('text', 'Wooden Box')
                                                                         @endcomponent
                                                                     </div>
@@ -282,6 +291,9 @@
                                                                             @slot('value', 'unpacked')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
+                                                                            @if($packing_type == 'unpacked')
+                                                                                @slot('checked','checked')
+                                                                            @endif
                                                                             @slot('text', 'Unpacked')
                                                                         @endcomponent
                                                                     </div>
@@ -297,6 +309,9 @@
                                                                             @slot('value', 'satisfactory')
                                                                             @slot('name', 'condition_material')
                                                                             @slot('size','12')
+                                                                            @if($packing_condition == 'satisfactory')
+                                                                                @slot('checked','checked')
+                                                                            @endif
                                                                             @slot('text', 'Satisfactory')
                                                                         @endcomponent
                                                                     </div>
@@ -306,6 +321,9 @@
                                                                             @slot('value', 'unsatisfactory')
                                                                             @slot('name', 'condition_material')
                                                                             @slot('size','12')
+                                                                            @if($packing_condition == 'unsatisfactory')
+                                                                                @slot('checked','checked')
+                                                                            @endif
                                                                             @slot('text', 'Unsatisfactory')
                                                                         @endcomponent
                                                                     </div>
@@ -322,7 +340,7 @@
                                                             @component('frontend.common.input.input')
                                                                 @slot('name', 'packing_handling_check')
                                                                 @slot('name', 'packing_handling_check')
-                                                                @slot('placeholder', 'If Unsatisfactory Explain')
+                                                                @slot('placeholder', $receivingInspectionReport->unsatisfactory_packing)
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -344,6 +362,9 @@
                                                                         @slot('value', 'reusable-container')
                                                                         @slot('name', 'preservation_check')
                                                                         @slot('size','12')
+                                                                        @if($preservation_check == 'reusable-container')
+                                                                            @slot('checked','checked')
+                                                                        @endif
                                                                         @slot('text', 'Reusable Container')
                                                                     @endcomponent
                                                                 </div>
@@ -353,6 +374,9 @@
                                                                         @slot('value', 'wooden-box')
                                                                         @slot('name', 'preservation_check')
                                                                         @slot('size','12')
+                                                                        @if($preservation_check == 'wooden-box')
+                                                                            @slot('checked','checked')
+                                                                        @endif
                                                                         @slot('text', 'Wooden Box')
                                                                     @endcomponent
                                                                 </div>
@@ -369,6 +393,7 @@
                                                                 @slot('name', 'preservation_check_explain')
                                                                 @slot('id', 'preservation_check_explain')
                                                                 @slot('placeholder', 'If Unsatisfactory Explain')
+                                                                @slot('value',  $receivingInspectionReport->unsatisfactory_preservation)
                                                             @endcomponent
                                                         <div>
                                                     </div>

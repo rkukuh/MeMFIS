@@ -24,6 +24,11 @@ class PurchaseOrderItem extends Pivot
      */
     public function promos()
     {
-        return $this->morphToMany(Promo::class, 'promoable');
+        return $this->morphToMany(Promo::class, 'promoable')
+                        ->withPivot(
+                            'value', 
+                            'amount'
+                        )
+                        ->withTimestamps();
     }
 }

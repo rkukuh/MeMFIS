@@ -55,7 +55,7 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
-                                    Recived Items
+                                    Received Items
                                 </label>
                                 @component('frontend.common.label.data-info')
                                     @slot('text', '0')
@@ -64,12 +64,12 @@
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
-                                    Qty Recieved
+                                    Qty Received
                                 </label>
 
                                 @component('frontend.common.input.number')
                                     @slot('id', 'qty')
-                                    @slot('text', 'Qty Recieved')
+                                    @slot('text', 'Qty Received')
                                     @slot('name', 'qty')
                                     @slot('id_error', 'qty')
                                 @endcomponent
