@@ -181,7 +181,7 @@
                                             </label>
 
                                             @component('frontend.common.input.select2')
-                                                @slot('text', 'Recieved By')
+                                                @slot('text', 'Received By')
                                                 @slot('id', 'received-by')
                                                 @slot('name', 'received-by')
                                                 @slot('id_error', 'received-by')
