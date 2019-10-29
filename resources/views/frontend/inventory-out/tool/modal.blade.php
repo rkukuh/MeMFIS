@@ -37,7 +37,7 @@
                                     Serial Number
                                 </label>
 
-                                @component('frontend.common.input.select2')
+                                @component('frontend.common.input.text')
                                 @slot('id', 'serial_no')
                                 @slot('text', 'Serial Number')
                                 @slot('name', 'serial_no')
@@ -185,5 +185,8 @@
 <script src="{{ asset('js/frontend/functions/select2/tool.js') }}"></script>
 <script src="{{ asset('js/frontend/functions/fill-combobox/tool-uuid.js') }}"></script>
 
-<script src="{{ asset('js/frontend/functions/select2/serial-number.js')}}"></script>
+<script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+<script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+
+<!-- <script src="{{ asset('js/frontend/functions/select2/serial-number.js')}}"></script> -->
 @endpush

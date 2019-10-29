@@ -142,21 +142,18 @@ class ToolInventoryOutController extends Controller
         $item = Item::find($item->id);
 
         if (!is_null($request->serial_no)) {
-            foreach ($request->serial_no as $serial_number) {
-
                 $inventoryOut->items()->attach([
                     $item->id => [
                         'quantity' => 1,
                         'unit_id' => $item->unit_id,
                         'quantity_in_primary_unit' => 1,
                         'expired_at' => $request->exp_date,
-                        'serial_number' => $serial_number,
+                        'serial_number' => $request->serial_no,
                         'purchased_price' => 0, // ??
                         'total' => 0, // ??
                         'description' => $request->remark
                     ]
                 ]);
-            }
 
             return response()->json($inventoryOut);
         }

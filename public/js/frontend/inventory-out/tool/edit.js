@@ -372,3 +372,14 @@ let InventoryOutCreate = {
 jQuery(document).ready(function () {
     InventoryOutCreate.init();
 });
+
+$("#serial_no").change(function () {
+    if ($("#serial_no").val() !== '') {
+        $("input[name=qty_request]").val(1);
+        $("input[name=qty_request]").prop('disabled', true);
+        $('#unit_id').prop('disabled', true);
+    } else {
+        $("input[name=qty_request]").prop('disabled', false);
+        $('#unit_id').prop('disabled', false);
+    }
+});
