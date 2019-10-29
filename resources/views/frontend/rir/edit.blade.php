@@ -61,7 +61,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', 'PR-2121212')
+                                                            @slot('text', $receivingInspectionReport->number)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -74,7 +74,7 @@
                                                         </label>
 
                                                         @component('frontend.common.label.data-info')
-                                                            @slot('text', 'PR-2121212')
+                                                            @slot('text', $receivingInspectionReport->purchase_order->number)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -88,12 +88,18 @@
                                                             Vendor
                                                         </label>
 
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('id', 'vendor')
-                                                            @slot('text', 'Vendor')
-                                                            @slot('name', 'vendor')
-                                                            @slot('id_error', 'vendor')
-                                                        @endcomponent
+                                                        <select id="vendor" name="vendor" class="form-control m-select2" style="width:100%">
+                                                            <option value="">
+                                                                &mdash; Select a Vendor &mdash;
+                                                            </option>
+
+                                                            @foreach ($vendors as $vendor)
+                                                                <option value="{{ $vendor->uuid }}"
+                                                                    @if ($vendor->uuid == $vendor_uuid) selected @endif>
+                                                                    {{ $vendor->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -107,6 +113,7 @@
                                                     @component('frontend.common.input.input')
                                                         @slot('name', 'document')
                                                         @slot('id', 'document')
+                                                        @slot('value', $receivingInspectionReport->delivery_document_number)
                                                         @slot('placeholder', 'Delivery Document')
                                                     @endcomponent
                                                     </div>
@@ -125,6 +132,7 @@
                                                         @slot('id', 'date')
                                                         @slot('text', 'Date')
                                                         @slot('name', 'date')
+                                                        @slot('value', $receivingInspectionReport->rir_date)
                                                         @slot('id_error', 'date')
                                                     @endcomponent
                                                     </div>
@@ -144,6 +152,9 @@
                                                             @slot('name', 'status')
                                                             @slot('text','Purchase')
                                                             @slot('id','purchase')
+                                                            @if($rir_status == 'purchase')
+                                                                @slot('checked','checked')
+                                                            @endif
                                                             @slot('value','purchase')
                                                         @endcomponent
                                                     </div>
@@ -152,6 +163,9 @@
                                                             @slot('name', 'status')
                                                             @slot('text','Repair')
                                                             @slot('id','repair')
+                                                            @if($rir_status == 'repair')
+                                                                @slot('checked','checked')
+                                                            @endif
                                                             @slot('value','repair')
                                                         @endcomponent
                                                     </div>
@@ -160,6 +174,9 @@
                                                             @slot('name', 'status')
                                                             @slot('text','Serviceable')
                                                             @slot('id','serviceable')
+                                                            @if($rir_status == 'serviceable')
+                                                                @slot('checked','checked')
+                                                            @endif
                                                             @slot('value','serviceable')
                                                         @endcomponent
                                                     </div>
@@ -168,6 +185,9 @@
                                                             @slot('name', 'status')
                                                             @slot('text','Unserviceable')
                                                             @slot('id','unserviceable')
+                                                            @if($rir_status == 'unserviceable')
+                                                                @slot('checked','checked')
+                                                            @endif
                                                             @slot('value','unserviceable')
                                                         @endcomponent
                                                     </div>
@@ -192,7 +212,7 @@
                                         <div class="col-xl-4 order-1 order-xl-2 m--align-right">
                                             @component('frontend.common.buttons.create-new')
                                                 @slot('text', 'Item')
-                                                @slot('data_target', '#modal_grn_add')
+                                                @slot('data_target', '#modal_rir_add')
                                             @endcomponent
 
                                             <div class="m-separator m-separator--dashed d-xl-none"></div>
@@ -201,6 +221,10 @@
                                 </div>
                                 <div class="rir_datatable" id="scrolling_both"></div>
                                 <hr>
+
+                                @include('frontend.rir.modal')
+                                @include('frontend.rir.modal-edit')
+
                                 <div class="form-group m-form__group row">
                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                         <fieldset class="border p-2">
@@ -226,18 +250,24 @@
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'reusable_container')
-                                                                            @slot('value', 'reusable container')
+                                                                            @slot('value', 'reusable-container')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
+                                                                            @if($packing_type == 'reusable-container')
+                                                                                @slot('checked','checked')
+                                                                            @endif
                                                                             @slot('text', 'Reusable Container')
                                                                         @endcomponent
                                                                     </div>
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'carton_box')
-                                                                            @slot('value', 'carton box')
+                                                                            @slot('value', 'carton-box')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
+                                                                            @if($packing_type == 'carton-box')
+                                                                                @slot('checked','checked')
+                                                                            @endif
                                                                             @slot('text', 'Carton Box')
                                                                         @endcomponent
                                                                     </div>
@@ -246,9 +276,12 @@
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
                                                                             @slot('id', 'wooden box')
-                                                                            @slot('value', 'wooden box')
+                                                                            @slot('value', 'wooden-box')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
+                                                                            @if($packing_type == 'wooden-box')
+                                                                                @slot('checked','checked')
+                                                                            @endif
                                                                             @slot('text', 'Wooden Box')
                                                                         @endcomponent
                                                                     </div>
@@ -258,6 +291,9 @@
                                                                             @slot('value', 'unpacked')
                                                                             @slot('name', 'type')
                                                                             @slot('size','12')
+                                                                            @if($packing_type == 'unpacked')
+                                                                                @slot('checked','checked')
+                                                                            @endif
                                                                             @slot('text', 'Unpacked')
                                                                         @endcomponent
                                                                     </div>
@@ -269,11 +305,14 @@
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     <div class="row">
                                                                         @component('frontend.common.input.radio')
-                                                                            @slot('id', 'statisfactory')
-                                                                            @slot('value', 'statisfactory')
+                                                                            @slot('id', 'Satisfactory')
+                                                                            @slot('value', 'satisfactory')
                                                                             @slot('name', 'condition_material')
                                                                             @slot('size','12')
-                                                                            @slot('text', 'Statisfactory')
+                                                                            @if($packing_condition == 'satisfactory')
+                                                                                @slot('checked','checked')
+                                                                            @endif
+                                                                            @slot('text', 'Satisfactory')
                                                                         @endcomponent
                                                                     </div>
                                                                     <div class="row">
@@ -282,6 +321,9 @@
                                                                             @slot('value', 'unsatisfactory')
                                                                             @slot('name', 'condition_material')
                                                                             @slot('size','12')
+                                                                            @if($packing_condition == 'unsatisfactory')
+                                                                                @slot('checked','checked')
+                                                                            @endif
                                                                             @slot('text', 'Unsatisfactory')
                                                                         @endcomponent
                                                                     </div>
@@ -298,7 +340,7 @@
                                                             @component('frontend.common.input.input')
                                                                 @slot('name', 'packing_handling_check')
                                                                 @slot('name', 'packing_handling_check')
-                                                                @slot('placeholder', 'If Unsatisfactory Explain')
+                                                                @slot('placeholder', $receivingInspectionReport->unsatisfactory_packing)
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -317,18 +359,24 @@
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('id', 'reusable_container')
-                                                                        @slot('value', 'reusable container')
+                                                                        @slot('value', 'reusable-container')
                                                                         @slot('name', 'preservation_check')
                                                                         @slot('size','12')
+                                                                        @if($preservation_check == 'reusable-container')
+                                                                            @slot('checked','checked')
+                                                                        @endif
                                                                         @slot('text', 'Reusable Container')
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('id', 'wooden_box')
-                                                                        @slot('value', 'wooden box')
+                                                                        @slot('value', 'wooden-box')
                                                                         @slot('name', 'preservation_check')
                                                                         @slot('size','12')
+                                                                        @if($preservation_check == 'wooden-box')
+                                                                            @slot('checked','checked')
+                                                                        @endif
                                                                         @slot('text', 'Wooden Box')
                                                                     @endcomponent
                                                                 </div>
@@ -345,6 +393,7 @@
                                                                 @slot('name', 'preservation_check_explain')
                                                                 @slot('id', 'preservation_check_explain')
                                                                 @slot('placeholder', 'If Unsatisfactory Explain')
+                                                                @slot('value',  $receivingInspectionReport->unsatisfactory_preservation)
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -469,11 +518,11 @@
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                                     @component('frontend.common.input.radio')
-                                                                        @slot('id', 'statisfactory')
-                                                                        @slot('value', 'statisfactory')
+                                                                        @slot('id', 'Satisfactory')
+                                                                        @slot('value', 'satisfactory')
                                                                         @slot('name', 'condition')
                                                                         @slot('size','12')
-                                                                        @slot('text', 'Statisfactory')
+                                                                        @slot('text', 'Satisfactory')
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
@@ -597,12 +646,27 @@
 
 @push('footer-scripts')
     <script>
-        let uuid = '8083d4fc-7c10-4882-bfa3-888cd081a3e5';
+        let uuid = '{{$receivingInspectionReport->uuid}}';
+        let po_uuid = '{{$receivingInspectionReport->purchase_order->uuid}}';
+        let rir_uuid = '{{$receivingInspectionReport->uuid}}';
+
     </script>
 
-    <script src="{{ asset('js/frontend/receiving-inspection-report/edit.js')}}"></script>
+    <script src="{{ asset('js/frontend/rir/edit.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/select2/vendor.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/vendor.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
+    <script src="{{ asset('js/frontend/functions/datepicker/expired-date.js')}}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/material-po.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/unit-material.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-material.js') }}"></script>
+
+    <script src="{{ asset('js/frontend/functions/select2/unit-item.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit-item-uom.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/select2/unit.js') }}"></script>
+    <script src="{{ asset('js/frontend/functions/fill-combobox/unit.js') }}"></script>
+
 
 @endpush

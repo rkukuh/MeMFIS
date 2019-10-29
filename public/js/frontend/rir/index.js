@@ -6,7 +6,7 @@ let Grn = {
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/receiving-inspection-report',
+                        url: '/datatables/rir',
                         map: function (raw) {
                             let dataSet = raw;
 
@@ -55,34 +55,25 @@ let Grn = {
                     }
                 },
                 {
-                    field: '',
+                    field: 'created_at',
                     title: 'Date',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
-                    title: 'GRN Number',
-                    sortable: 'asc',
-                    filterable: !1,
-                    template: function (t) {
-                        return '<a href="/goods-received/'+t.uuid+'">' + t.number + "</a>"
-                    }
-                },
-                {
-                    field: '',
+                    field: 'purchase_order.number',
                     title: 'PR Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: 'purchase_order.number',
+                    field: 'purchase_order.purchase_request.number',
                     title: 'PO Number',
                     sortable: 'asc',
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'vendor.name',
                     title: 'Vendor',
                     sortable: 'asc',
                     filterable: !1,
@@ -94,7 +85,7 @@ let Grn = {
                     filterable: !1,
                 },
                 {
-                    field: '',
+                    field: 'created_by',
                     title: 'Created By',
                     sortable: 'asc',
                     filterable: !1,
@@ -117,10 +108,10 @@ let Grn = {
                                 '<a href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill approve" title="Approve" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-check"></i>' +
                                 '</a>' +
-                                '<a href="/goods-received/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
+                                '<a href="/rir/' + t.uuid + '/edit" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit" title="Edit" data-uuid="' + t.uuid +'">' +
                                     '<i class="la la-pencil"></i>' +
                                 '</a>' +
-                                '<a href="inventory-in/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
+                                '<a href="/rir/'+t.uuid+'/print" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill print" title="Print" data-id="' + t.uuid +'">' +
                                     '<i class="la la-print"></i>' +
                                 '</a>'
                             );
@@ -150,7 +141,7 @@ let Grn = {
                             )
                         },
                         type: 'PUT',
-                        url: '/receiving-inspection-report/' +  rir_uuid +'/approve',
+                        url: '/rir/' +  rir_uuid +'/approve',
                         success: function (data) {
                             toastr.success('Receiving Inspection Report has been Approved.', 'Approved', {
                                 timeOut: 5000
@@ -194,7 +185,7 @@ let Grn = {
                             )
                         },
                         type: 'DELETE',
-                        url: '/receiving-inspection-report/' + rir_uuid ,
+                        url: '/rir/' + rir_uuid ,
                         success: function (data) {
                             toastr.success('Receiving Inspection Report has been deleted.', 'Deleted', {
                                     timeOut: 5000

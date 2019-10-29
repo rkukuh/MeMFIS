@@ -145,11 +145,16 @@ class JobCardEngineerController extends Controller
         $manhours_break = $manhours_break/3600;
         $actual =number_format($manhours-$manhours_break, 2);
 
-        $progresses = $jobcard->progresses->where('progressed_by',Auth::id());
+        $progresses_groups = $jobcard->progresses->groupBy('progressed_by');
         $employees = Employee::all();
-        foreach($progresses as $progress){
-            $progress->status .= Status::where('id',$progress->status_id)->first()->name;
+        foreach($progresses_groups as $progresses_group){
+            foreach($progresses_group as $progress){
+                $progress->status .= Status::where('id',$progress->status_id)->first()->name;
+            }
         }
+
+        $progresses =  $jobcard->progresses->where('progressed_by', Auth::id());
+
 
         if ($progresses->count() == 0 and $this->statuses->where('id',$jobcard->progresses->first()->status_id)->first()->code == "open") {
             return view('frontend.job-card.engineer.progress-open', [
@@ -157,6 +162,7 @@ class JobCardEngineerController extends Controller
                 'taskcard' => $taskcard,
                 'employees' => $employees,
                 'progresses' => $progresses,
+                'progresses_groups' => $progresses_groups,
                 'helper_quantity' => $helper_quantity,
                 'tools' => $jobcard->jobcardable->tools,
                 'materials' => $jobcard->jobcardable->materials,
@@ -171,6 +177,7 @@ class JobCardEngineerController extends Controller
                 'other' => $this->other,
                 'waiting' => $this->waiting,
                 'progresses' => $progresses,
+                'progresses_groups' => $progresses_groups,
                 'helper_quantity' => $helper_quantity,
                 'accomplished' => $this->accomplished,
                 'tools' => $jobcard->jobcardable->tools,
@@ -184,6 +191,7 @@ class JobCardEngineerController extends Controller
                 'jobcard' => $jobcard,
                 'taskcard' => $taskcard,
                 'progresses' => $progresses,
+                'progresses_groups' => $progresses_groups,
                 'helper_quantity' => $helper_quantity,
                 'tools' => $jobcard->jobcardable->tools,
                 'materials' => $jobcard->jobcardable->materials,
@@ -197,6 +205,7 @@ class JobCardEngineerController extends Controller
                 'jobcard' => $jobcard,
                 'taskcard' => $taskcard,
                 'progresses' => $progresses,
+                'progresses_groups' => $progresses_groups,
                 'helper_quantity' => $helper_quantity,
                 'tools' => $jobcard->jobcardable->tools,
                 'materials' => $jobcard->jobcardable->materials,
@@ -207,6 +216,7 @@ class JobCardEngineerController extends Controller
                 'jobcard' => $jobcard,
                 'taskcard' => $taskcard,
                 'progresses' => $progresses,
+                'progresses_groups' => $progresses_groups,
                 'helper_quantity' => $helper_quantity,
                 'tools' => $jobcard->jobcardable->tools,
                 'materials' => $jobcard->jobcardable->materials,

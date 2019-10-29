@@ -57,14 +57,24 @@
                                                 <div class="form-group m-form__group row">
                                                     <div class="col-sm-12 col-md-12 col-lg-12">
                                                         <label class="form-control-label">
+                                                            RIR No
+                                                        </label>
+
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', $receivingInspectionReport->number)
+                                                        @endcomponent
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                                <div class="form-group m-form__group row">
+                                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                                        <label class="form-control-label">
                                                             Purchase Order Number
                                                         </label>
 
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('id', 'purchase_order')
-                                                            @slot('text', 'Purchase Order')
-                                                            @slot('name', 'purchase_order')
-                                                            @slot('id_error', 'purchase_order')
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', $receivingInspectionReport->purchase_order->number)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -78,11 +88,8 @@
                                                             Vendor
                                                         </label>
 
-                                                        @component('frontend.common.input.select2')
-                                                            @slot('id', 'vendor')
-                                                            @slot('text', 'Vendor')
-                                                            @slot('name', 'vendor')
-                                                            @slot('id_error', 'vendor')
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text', $receivingInspectionReport->vendor->name)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -94,11 +101,8 @@
                                                         Delivery Document
                                                     </label>
 
-                                                    @component('frontend.common.input.input')
-                                                        @slot('name', 'delivery document')
-                                                        @slot('id', 'document')
-                                                        @slot('name', 'document')
-                                                        @slot('placeholder', 'Delivery Document')
+                                                    @component('frontend.common.label.data-info')
+                                                    @slot('text', $receivingInspectionReport->delivery_document_number)
                                                     @endcomponent
                                                     </div>
                                                 </div>
@@ -112,11 +116,8 @@
                                                         Date
                                                     </label>
 
-                                                    @component('frontend.common.input.datepicker')
-                                                        @slot('id', 'date')
-                                                        @slot('text', 'Date')
-                                                        @slot('name', 'date')
-                                                        @slot('id_error', 'date')
+                                                    @component('frontend.common.label.data-info')
+                                                        @slot('text',  $receivingInspectionReport->rir_date)
                                                     @endcomponent
                                                     </div>
                                                 </div>
@@ -127,39 +128,8 @@
                                                         <label class="form-control-label">
                                                             Status
                                                         </label>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group m-form__group row">
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('name', 'status')
-                                                            @slot('text','Purchase')
-                                                            @slot('id','purchase')
-                                                            @slot('value','purchase')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('name', 'status')
-                                                            @slot('text','Repair')
-                                                            @slot('id','repair')
-                                                            @slot('value','repair')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('name', 'status')
-                                                            @slot('text','Serviceable')
-                                                            @slot('id','serviceable')
-                                                            @slot('value','serviceable')
-                                                        @endcomponent
-                                                    </div>
-                                                    <div class="col-sm-3 col-md-3 col-lg-3">
-                                                        @component('frontend.common.input.radio')
-                                                            @slot('name', 'status')
-                                                            @slot('text','Unserviceable')
-                                                            @slot('id','unserviceable')
-                                                            @slot('value','unserviceable')
+                                                        @component('frontend.common.label.data-info')
+                                                            @slot('text',  $receivingInspectionReport->status->name)
                                                         @endcomponent
                                                     </div>
                                                 </div>
@@ -207,72 +177,14 @@
                                                     <hr>
                                                     <div class="form-group m-form__group row mt-5">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <div class="form-group m-form__group row">
-                                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    <div class="row">
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('id', 'reusable_container')
-                                                                            @slot('value', 'reusable container')
-                                                                            @slot('name', 'type')
-                                                                            @slot('size','12')
-                                                                            @slot('text', 'Reusable Container')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('id', 'carton_box')
-                                                                            @slot('value', 'carton box')
-                                                                            @slot('name', 'type')
-                                                                            @slot('size','12')
-                                                                            @slot('text', 'Carton Box')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    <div class="row">
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('id', 'wooden box')
-                                                                            @slot('value', 'wooden box')
-                                                                            @slot('name', 'type')
-                                                                            @slot('size','12')
-                                                                            @slot('text', 'Wooden Box')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('id', 'unpacked')
-                                                                            @slot('id', 'unpacked')
-                                                                            @slot('name', 'type')
-                                                                            @slot('size','12')
-                                                                            @slot('text', 'Unpacked')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text',  $packing_type)
+                                                            @endcomponent
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <div class="form-group m-form__group row">
-                                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    <div class="row">
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('id', 'statisfactory')
-                                                                            @slot('value', 'statisfactory')
-                                                                            @slot('name', 'condition')
-                                                                            @slot('size','12')
-                                                                            @slot('text', 'Statisfactory')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        @component('frontend.common.input.radio')
-                                                                            @slot('id', 'unsatisfactory')
-                                                                            @slot('value', 'unsatisfactory')
-                                                                            @slot('name', 'condition')
-                                                                            @slot('size','12')
-                                                                            @slot('text', 'Unsatisfactory')
-                                                                        @endcomponent
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text',  $packing_condition)
+                                                            @endcomponent
                                                         </div>
                                                     </div>
                                                     <div class="form-group m-form__group row">
@@ -281,10 +193,8 @@
                                                                 If Unsatisfactory Explain
                                                             </label>
 
-                                                            @component('frontend.common.input.input')
-                                                                @slot('id', 'packing_handling_check')
-                                                                @slot('name', 'packing_handling_check')
-                                                                @slot('placeholder', 'If Unsatisfactory Explain')
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text',  $receivingInspectionReport->unsatisfactory_packing)
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -299,26 +209,9 @@
                                                 <div class="m-portlet__body">
                                                     <div class="form-group m-form__group row">
                                                         <div class="col-sm-6 col-md-6 col-lg-6">
-                                                            <div class="form-group m-form__group row">
-                                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    @component('frontend.common.input.radio')
-                                                                        @slot('id', 'reusable_container')
-                                                                        @slot('value', 'reusable container')
-                                                                        @slot('name', 'preservation_check')
-                                                                        @slot('size','12')
-                                                                        @slot('text', 'Reusable Container')
-                                                                    @endcomponent
-                                                                </div>
-                                                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                                                    @component('frontend.common.input.radio')
-                                                                        @slot('id', 'wooden_box')
-                                                                        @slot('value', 'wooden box')
-                                                                        @slot('name', 'preservation_check')
-                                                                        @slot('size','12')
-                                                                        @slot('text', 'Wooden Box')
-                                                                    @endcomponent
-                                                                </div>
-                                                            </div>
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text',  $preservation_check)
+                                                            @endcomponent
                                                         </div>
                                                     </div>
                                                     <div class="form-group m-form__group row">
@@ -327,10 +220,8 @@
                                                                 If Unsatisfactory Explain
                                                             </label>
 
-                                                            @component('frontend.common.input.input')
-                                                                @slot('id', 'preservation_check_explain')
-                                                                @slot('name', 'preservation_check_explain')
-                                                                @slot('placeholder', 'If Unsatisfactory Explain')
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text',  $receivingInspectionReport->unsatisfactory_preservation)
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -416,10 +307,8 @@
                                                                 If Unsatisfactory Explain
                                                             </label>
 
-                                                            @component('frontend.common.input.input')
-                                                                @slot('id', 'document_check')
-                                                                @slot('name', 'document_check')
-                                                                @slot('placeholder', 'If Unsatisfactory Explain')
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -455,18 +344,18 @@
                                                             <div class="form-group m-form__group row">
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                                     @component('frontend.common.input.radio')
-                                                                        @slot('id', 'statisfactory')
-                                                                        @slot('value', 'statisfactory')
-                                                                        @slot('name', 'condition_material')
+                                                                        @slot('id', 'Satisfactory')
+                                                                        @slot('value', 'satisfactory')
+                                                                        @slot('name', 'condition')
                                                                         @slot('size','12')
-                                                                        @slot('text', 'Statisfactory')
+                                                                        @slot('text', 'Satisfactory')
                                                                     @endcomponent
                                                                 </div>
                                                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                                                     @component('frontend.common.input.radio')
                                                                         @slot('id', 'unsatisfactory')
                                                                         @slot('value', 'unsatisfactory')
-                                                                        @slot('name', 'condition_material')
+                                                                        @slot('name', 'condition')
                                                                         @slot('size','12')
                                                                         @slot('text', 'Unsatisfactory')
                                                                     @endcomponent
@@ -524,10 +413,8 @@
                                                                 If Unsatisfactory Explain
                                                             </label>
 
-                                                            @component('frontend.common.input.input')
-                                                                @slot('id', 'material_check')
-                                                                @slot('name', 'material_check')
-                                                                @slot('placeholder', 'If Unsatisfactory Explain')
+                                                            @component('frontend.common.label.data-info')
+                                                                @slot('text', 'If Unsatisfactory Explain')
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -546,6 +433,8 @@
                                                                 @slot('name', 'decision')
                                                                 @slot('id', 'decision')
                                                                 @slot('rows', '5')
+                                                                @slot('value', $receivingInspectionReport->decision)
+                                                                @slot('disabled', 'disabled')
                                                             @endcomponent
                                                         <div>
                                                     </div>
@@ -557,14 +446,6 @@
                                     <div class="col-sm-12 col-md-12 col-lg-12 footer">
                                         <div class="flex">
                                             <div class="action-buttons">
-                                                @component('frontend.common.buttons.submit')
-                                                    @slot('type','button')
-                                                    @slot('id', 'add-rir')
-                                                    @slot('class', 'add-rir')
-                                                @endcomponent
-
-                                                @include('frontend.common.buttons.reset')
-
                                                 @include('frontend.common.buttons.back')
                                             </div>
                                         </div>
@@ -582,13 +463,16 @@
 
 
 @push('footer-scripts')
-    <script src="{{ asset('js/frontend/receiving-inspection-report/create.js')}}"></script>
+    <script>
+        let uuid = '{{$receivingInspectionReport->uuid}}';
+        let po_uuid = '{{$receivingInspectionReport->purchase_order->uuid}}';
+        let rir_uuid = '{{$receivingInspectionReport->uuid}}';
+
+    </script>
+    <script src="{{ asset('js/frontend/rir/show.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/vendor.js')}}"></script>
     <script src="{{ asset('js/frontend/functions/fill-combobox/vendor.js')}}"></script>
 
     <script src="{{ asset('js/frontend/functions/select2/purchase-order.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/fill-combobox/purchase-order.js')}}"></script>
-    <script src="{{ asset('js/frontend/functions/datepicker/date.js')}}"></script>
-
 @endpush

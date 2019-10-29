@@ -20,7 +20,6 @@ $factory->define(RIR::class, function (Faker $faker) {
     return [
         'number' => 'RIR-DUM-' . $number,
         'rir_date' => Carbon::now(),
-        'vehicle_no' => $plate_no,
         'delivery_document_number' => null,
         'status_id' => Status::ofRIR()->get()->random()->id,
         'purchase_order_id' => function () {

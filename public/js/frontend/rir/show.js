@@ -1,12 +1,12 @@
 let goods_received_note_show = {
     init: function () {
-        $('.purchase_order_datatable').mDatatable({
+        $('.rir_datatable').mDatatable({
             data: {
                 type: 'remote',
                 source: {
                     read: {
                         method: 'GET',
-                        url: '/datatables/receiving-inspection-report/item/'+grn_uuid,
+                        url: '/datatables/rir/item/'+rir_uuid,
                         map: function (raw) {
                             let dataSet = raw;
 

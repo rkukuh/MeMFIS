@@ -1,12 +1,12 @@
 <div class="modal fade" id="modal_rir_add" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 @include('frontend.common.label.create-new')
 
                 <h5 class="modal-title" id="TitleModalInstruction">
-                    Good Received Notes
+                    RIR
 
                     <small id="instruction" class="m--font-focus"></small>
                 </h5>
@@ -47,7 +47,7 @@
                         <div class="form-group m-form__group row ">
                             <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
-                                    Recived Items
+                                    Received Items
                                 </label>
                                 @component('frontend.common.label.data-info')
                                     @slot('text', '0')
@@ -56,12 +56,12 @@
                             </div>
                             <div class="col-sm-3 col-md-3 col-lg-3">
                                 <label class="form-control-label">
-                                    Qty Recieved
+                                    Qty Received
                                 </label>
 
                                 @component('frontend.common.input.number')
                                     @slot('id', 'quantity')
-                                    @slot('text', 'Qty Recieved')
+                                    @slot('text', 'Qty Received')
                                     @slot('name', 'quantity')
                                     @slot('id_error', 'quantity')
                                 @endcomponent
