@@ -58,11 +58,12 @@ class DummyDataSeeder extends Seeder
         $this->call(Workshifts::class);
         
         $this->call(BankAccounts::class);
-
         $this->call(Overtimes::class);
 
         /** POLYMORPH */
 
+        $this->call(GSEs::class);
+        $this->call(RIRs::class);
         $this->call(Faxes::class);
         $this->call(Zones::class);
         $this->call(Emails::class);
@@ -110,6 +111,8 @@ class DummyDataSeeder extends Seeder
         $this->call(HtCrrs::class);
         $this->call(DefectCards::class);
         $this->call(RTSs::class);
+        $this->call(Mutations::class);
+        $this->call(ItemRequests::class);
 
         /** PROJECT'S WORKPACKAGEs */
 

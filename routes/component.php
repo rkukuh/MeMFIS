@@ -37,6 +37,7 @@ Route::name('component.')->group(function () {
         Route::get('get-unit-types', 'FillComboxController@unitType')->name('get-unit-types');
         Route::get('get-item-units/{item}', 'FillComboxController@itemUnits')->name('get-item-units');
         Route::get('get-item-unit-uuid/{item}', 'FillComboxController@itemUnitUuid')->name('get-item-unit-uuid');
+        Route::get('get-serial-number/{item}', 'FillComboxController@itemSerialNumber')->name('get-serial-number');
         Route::get('get-work-areas', 'FillComboxController@workArea')->name('get-work-areas');
         Route::get('get-facilities', 'FillComboxController@facility')->name('get-facilities');
         Route::get('get-work-orders', 'FillComboxController@workOrder')->name('get-work-orders');
@@ -81,6 +82,7 @@ Route::name('component.')->group(function () {
         Route::get('get-inventory-out', 'FillComboxController@inventoryOut')->name('get-inventory-out');
         Route::get('get-defectcard', 'FillComboxController@defectcard')->name('get-defectcard');
         Route::get('get-jobcard', 'FillComboxController@jobcard')->name('get-jobcard');
+        Route::get('get-taxation-types', 'FillComboxController@taxation')->name('get-taxation-types');
 
         Route::prefix('label')->group(function () {
             Route::get('get-vendors/{vendor}', 'FillLabelController@vendor')->name('get-vendor');
@@ -89,6 +91,7 @@ Route::name('component.')->group(function () {
             Route::get('get-project/{project}', 'FillLabelController@project')->name('get-project');
             Route::get('get-purchase-orderes/{PurchaseOrder}/item/{item}', 'FillLabelController@purchaseOrdered')->name('get-qty-po-item');
             Route::get('get-good-received/{GoodsReceived}/item/{item}', 'FillLabelController@GoodsReceived')->name('get-qty-grn-item');
+            Route::get('get-rir/{rir}/item/{item}', 'FillLabelController@rir')->name('get-qty-rir-item');
         });
 
         Route::prefix('morris')->group(function () {

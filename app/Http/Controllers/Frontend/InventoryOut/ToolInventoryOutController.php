@@ -139,15 +139,48 @@ class ToolInventoryOutController extends Controller
             return response()->json(['title' => "Danger"]);
         }
 
-        $inventoryOut->items()->attach($item->id, [
-            'quantity' => $request->quantity,
-            'unit_id' => $request->unit_id,
-            'quantity_in_primary_unit' => $request->unit_id,
-            'serial_number' => $request->serial_no,
-            'expired_at' => $request->expired_at,
-            'purchased_price' => 0, // ??
-            'total' => 0, // ??
-            'description' => $request->remark
+        $item = Item::find($item->id);
+
+        if (!is_null($request->serial_no)) {
+                $inventoryOut->items()->attach([
+                    $item->id => [
+                        'quantity' => 1,
+                        'unit_id' => $item->unit_id,
+                        'quantity_in_primary_unit' => 1,
+                        'expired_at' => $request->exp_date,
+                        'serial_number' => $request->serial_no,
+                        'purchased_price' => 0, // ??
+                        'total' => 0, // ??
+                        'description' => $request->remark
+                    ]
+                ]);
+
+            return response()->json($inventoryOut);
+        }
+
+        $quantity_unit = $request->quantity;
+
+        if ($request->unit_id <> $item->unit_id) {
+            $quantity = $request->quantity;
+            $qty_uom = $item->units->where('uom.unit_id', $item->unit_id)->first()->uom->quantity;
+
+            if (!is_null($request->unit_id)) {
+                $qty_uom = $item->units->where('uom.unit_id', $request->unit_id)->first()->uom->quantity;
+            }
+
+            $quantity_unit = $qty_uom * $quantity;
+        }
+
+        $inventoryOut->items()->attach([
+            $item->id => [
+                'quantity' => $request->quantity,
+                'unit_id' => $request->unit_id,
+                'quantity_in_primary_unit' => $quantity_unit,
+                'expired_at' => $request->exp_date,
+                'purchased_price' => 0, // ??
+                'total' => 0, // ??
+                'description' => $request->remark
+            ]
         ]);
 
         return response()->json($inventoryOut);
@@ -167,9 +200,6 @@ class ToolInventoryOutController extends Controller
             [
                 'quantity' => $request->quantity,
                 'unit_id' => $request->unit_id,
-                'quantity_in_primary_unit' => $request->unit_id,
-                'serial_number' => $request->serial_no,
-                'expired_at' => $request->expired_at,
                 'description' => $request->remark
             ]
         );
