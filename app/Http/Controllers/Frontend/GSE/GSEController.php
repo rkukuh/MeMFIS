@@ -59,10 +59,10 @@ class GSEController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\GSE  $gSE
+     * @param  \App\Models\GSE  $gse
      * @return \Illuminate\Http\Response
      */
-    public function show(GSE $gSE, $item)
+    public function show(GSE $gse, $item)
     {
         if($type == 'hm'){
             return view('frontend.gse.hm.show', [
@@ -85,10 +85,10 @@ class GSEController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\GSE  $gSE
+     * @param  \App\Models\GSE  $gse
      * @return \Illuminate\Http\Response
      */
-    public function edit(GSE $gSE, $item)
+    public function edit(GSE $gse, $item)
     {
         if($type == 'hm'){
             return view('frontend.gse.hm.edit', [
@@ -112,10 +112,10 @@ class GSEController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\Frontend\GSEUpdate  $request
-     * @param  \App\Models\GSE  $gSE
+     * @param  \App\Models\GSE  $gse
      * @return \Illuminate\Http\Response
      */
-    public function update(GSEUpdate $request, GSE $gSE)
+    public function update(GSEUpdate $request, GSE $gse)
     {
         dd($request->all());
         $request->merge(['number' => DocumentNumber::generate('GSE-', ReceivingInspectionReport::withTrashed()->count()+1)]);
@@ -127,10 +127,10 @@ class GSEController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\GSE  $gSE
+     * @param  \App\Models\GSE  $gse
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GSE $gSE)
+    public function destroy(GSE $gse)
     {
         $groundSupportEquiptment->delete();
 

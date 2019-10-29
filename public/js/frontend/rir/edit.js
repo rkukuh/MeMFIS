@@ -7,7 +7,7 @@ let receiving_inspection_report = {
                 source: {
                     read: {
                         method: "GET",
-                        url: "/datatables/purchase-order/item/" + uuid,
+                        url: "/datatables/rir/item/" + uuid,
                         map: function(raw) {
                             let dataSet = raw;
 
@@ -66,14 +66,14 @@ let receiving_inspection_report = {
                     width: 150
                 },
                 {
-                    field: "pivot.quantity",
+                    field: "",
                     title: "Qty PO",
                     sortable: "asc",
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "",
+                    field: "pivot.quantity",
                     title: "Qty",
                     sortable: "asc",
                     filterable: !1,
@@ -87,18 +87,33 @@ let receiving_inspection_report = {
                     width: 150
                 },
                 {
-                    field: "",
+                    field: "pivot.note",
                     title: "Remark",
                     sortable: "asc",
                     filterable: !1,
                     width: 150
                 },
                 {
-                    field: "",
+                    field: "pivot.expired_at",
                     title: "Expired Date",
                     sortable: "asc",
                     filterable: !1,
                     width: 150
+                },
+                {
+                    field: 'Actions',
+                    sortable: !1,
+                    overflow: 'visible',
+                    template: function (t, e, i) {
+                        return (
+                            '<button data-toggle="modal" data-target="#modal_rir" type="button" href="#" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill edit-item" title="Item" data-item='+t.code+' data-quantity='+t.pivot.quantity+' data-unit='+t.pivot.unit_id+' data-expred='+t.pivot.expired_at+' data-note='+t.pivot.note+' data-description='+t.description+' data-uuid=' +
+                            t.uuid +
+                            '>\t\t\t\t\t\t\t<i class="la la-pencil"></i>\t\t\t\t\t\t</button>\t\t\t\t\t\t' +
+                            '\t\t\t\t\t\t\t<a class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill delete" href="#" data-uuid=' +
+                            t.uuid +
+                            ' title="Delete"><i class="la la-trash"></i> </a>\t\t\t\t\t\t\t'
+                        );
+                    }
                 }
             ]
         });
@@ -190,18 +205,18 @@ let receiving_inspection_report = {
         });
 
         $('.modal-footer').on('click', '.add-item', function () {
-            let serial_numbers = [];
-            $("input[name^=serial_number]").each(function() {
-                serial_numbers.push(this.value);
-            });
-            serial_numbers = serial_numbers.filter(function (el) {
+            // let serial_numbers = [];
+            // $("input[name^=serial_number]").each(function() {
+            //     serial_numbers.push(this.value);
+            // });
+            // serial_numbers = serial_numbers.filter(function (el) {
 
-                return el != null && el != "";
+            //     return el != null && el != "";
 
-            });
+            // });
 
             let item_uuid = $("#material").val();
-            let exp_date = $("#exp_date_2").val();
+            let exp_date = $('input[name=exp_date2]').val();
             let qty = $("#quantity").val();
             let unit_id = $("#unit_material").val();
             let note = $("#remark").val();
@@ -226,11 +241,11 @@ let receiving_inspection_report = {
                 url: '/rir/'+rir_uuid+'/item/'+item_uuid,
                 type: "POST",
                 data: {
-                    exp_date: exp_date,
+                    expired_at: exp_date,
                     quantity: qty,
                     unit_id: unit_id,
                     note: note,
-                    serial_numbers: serial_numbers,
+                    // serial_numbers: serial_numbers,
                 },
                 success: function(response) {
                     if (response.errors) {
@@ -252,14 +267,14 @@ let receiving_inspection_report = {
                             $('#modal_rir_add').modal('hide');
 
                             toastr.success(
-                                "GRN's Item has been updated.",
+                                "RIR's Item has been updated.",
                                 "Success",
                                 {
                                     timeOut: 5000
                                 }
                             );
 
-                            let table = $(".purchase_order_datatable").mDatatable();
+                            let table = $(".rir_datatable").mDatatable();
 
                             table.originalDataSet = [];
                             table.reload();

@@ -20,7 +20,6 @@ $factory->define(RIR::class, function (Faker $faker) {
     return [
         'number' => 'RIR-DUM-' . $number,
         'rir_date' => Carbon::now(),
-        'vehicle_no' => $plate_no,
         'delivery_document_number' => null,
         'status_id' => Status::ofRIR()->get()->random()->id,
         'purchase_order_id' => function () {
@@ -42,14 +41,6 @@ $factory->define(RIR::class, function (Faker $faker) {
         'unsatisfactory_packing' => null,
         'preservation_check' => Type::ofRIRPreservationCheck()->get()->random()->id,
         'unsatisfactory_preservation' => null,
-        'received_by' => function () {
-            if (Employee::count()) {
-                return Employee::get()->random()->id;
-            }
-
-            return factory(Employee::class)->create()->id;
-        },
-        'received_at' => $faker->randomElement([null, Carbon::now()]),
         'decision' => $faker->randomElement([null, $faker->sentence]),
         'description' => $faker->randomElement([null, $faker->sentence]),
     ];

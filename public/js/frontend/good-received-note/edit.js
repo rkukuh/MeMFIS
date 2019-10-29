@@ -191,7 +191,8 @@ let goods_received_note = {
             });
 
             let item_uuid = $("#material").val();
-            let exp_date = $("#exp_date_2").val();
+            let exp_date = $('input[name=exp_date2]').val();
+
             let qty = $("#quantity").val();
             let unit_id = $("#unit_material").val();
             let note = $("#remark").val();
